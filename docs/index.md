@@ -120,6 +120,8 @@ Most up-to-date posts are in `llive/docs/linkedin/` and `llive/docs/qiita/`:
 
 ## Portal meta
 
+- [Roadmap]({{ '/roadmap' | relative_url }}) — live + planned + parked products with trigger conditions
+- [Comparison]({{ '/comparison' | relative_url }}) — honest vs Claude Code / Perplexity / Codex / Gemini
 - [Progress log]({{ '/PROGRESS' | relative_url }}) — portal-side changelog
 - [Design notes]({{ '/NOTES' | relative_url }}) — decisions, link-rot watch
 - [Security policy](https://github.com/furuse-kazufumi/fullsense/blob/main/SECURITY.md)
