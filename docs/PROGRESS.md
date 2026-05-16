@@ -44,6 +44,35 @@ Initial scaffold of `furuse-kazufumi/fullsense`:
   `twitter.card: summary_large_image` added so `jekyll-seo-tag`
   emits proper `og:image` / `twitter:image` tags across all pages.
 
+### Umbrella expansion (Phase 0.3, 2026-05-16)
+
+Two new products spun up as siblings of llmesh / llive / llove and added to
+the Family Tree, both **alpha v0.0.1 skeleton**:
+
+- [lldesign](https://github.com/furuse-kazufumi/lldesign) — UI / Web / diagram design
+  tooling (stresses llive KAR / TLB / ICP / PM axes)
+- [lltrade](https://github.com/furuse-kazufumi/lltrade) — paper-trading research
+  with `REAL_TRADING=False` hard-pinned at 3 layers (stresses llive RPAR /
+  SIL / DTKR / APO axes)
+
+Portal-side additions:
+
+- `docs/roadmap.md` — live + planned + parked products with trigger conditions
+  (llcad / lleda / llchip / llmed / llpaper)
+- `docs/comparison.md` — honest 9-axis comparison vs Claude Code / Perplexity
+  / Codex CLI / Gemini CLI with A–F grading
+- Family Tree mermaid extended with 5 live + 5 parked nodes (ghost styled)
+- `scripts/verify_publication.sh` — one-shot checker for Pages / portal links
+  / branch protection / About config / Mermaid rendering
+
+llive integration probe:
+
+- `D:/projects/llive/scripts/run_brief.py` + `docs/BUGS_2026-05-16_brief_ab.md`
+  — A/B run of the same skeleton-creation Brief against the FullSense Loop
+  yielded 8 documented gaps. Headline: LLM backend unwired (LLIVE-001) and
+  Brief API absent (LLIVE-002). Captured in
+  `~/.claude/.../memory/project_llive_bug_2026_05_16.md`.
+
 ### Public launch (Phase 0.2, 2026-05-16)
 
 Portal is live:
