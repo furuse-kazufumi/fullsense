@@ -31,17 +31,23 @@ Initial scaffold of `furuse-kazufumi/fullsense`:
 - `LICENSE` — Apache-2.0 (matches product code; docs themselves are
   permissive)
 - `.nojekyll` is **not** added — we **do** want Jekyll to process the docs
+- `.github/workflows/link-check.yml` — Lychee CI for external link
+  rot. Runs on docs/README push, on PRs that touch docs, weekly on Monday
+  18:00 UTC, and on manual dispatch. Scheduled failures open a tracked
+  issue with the `docs, link-rot` labels.
 
 ### Open items
 
 - [ ] Add GitHub remote (`gh repo create furuse-kazufumi/fullsense --public`),
       push `main`, enable Pages from `docs/`
 - [ ] Verify `mermaid` renders correctly under `just-the-docs` remote theme
-      (the theme needs `enable_copy_code_button` + custom JS for Mermaid;
-      revisit after first deploy)
+      after first deploy (theme reads the `mermaid: version` block, so no
+      override should be needed — confirm visually once Pages is live)
 - [ ] Add `docs/spec/` mirror of the FullSense Spec v1.1 once it stabilises in
       `llive/docs/` (currently the portal links out to llive for the spec)
-- [ ] Add Open Graph card image (1200×630 PNG) for social previews
+- [ ] Add Open Graph card image (1200×630 PNG) for social previews. SVG
+      draft acceptable as an intermediate; PNG required because most social
+      crawlers don't render SVG `og:image`.
 - [ ] Replace bare LinkedIn/Qiita article links with a curated `docs/articles/`
       index once the article-pause (see `feedback_articles_pause.md`) is
       lifted
