@@ -44,13 +44,30 @@ Initial scaffold of `furuse-kazufumi/fullsense`:
   `twitter.card: summary_large_image` added so `jekyll-seo-tag`
   emits proper `og:image` / `twitter:image` tags across all pages.
 
+### Public launch (Phase 0.2, 2026-05-16)
+
+Portal is live:
+
+- Repo: <https://github.com/furuse-kazufumi/fullsense> (public, Apache-2.0)
+- Pages: <https://furuse-kazufumi.github.io/fullsense/> (source = `main` /
+  `/docs`, HTTPS enforced, first `pages-build-deployment` succeeded in 39 s)
+- Description, Homepage, and 10 individual Topics
+  (`apache2 fullsense llive llm llmesh llove mcp on-prem self-evolving
+  umbrella`) set via GitHub UI — `gh api` PATCH was blocked by the
+  fine-grained PAT not having `Administration: Write`, so the About panel
+  in the GitHub UI is the source of truth for these.
+- Push protocol: HTTPS rejected (PAT lacks `contents: write`), switched
+  `origin` to SSH `git@github.com:furuse-kazufumi/fullsense.git`. SSH key
+  `Windows-PC-2026` was already registered.
+- Link-check CI ran on first push, 10 s success — Lychee found no broken
+  links in `docs/**` and `README.md`.
+
 ### Open items
 
-- [ ] Add GitHub remote (`gh repo create furuse-kazufumi/fullsense --public`),
-      push `main`, enable Pages from `docs/`
 - [ ] Verify `mermaid` renders correctly under `just-the-docs` remote theme
-      after first deploy (theme reads the `mermaid: version` block, so no
-      override should be needed — confirm visually once Pages is live)
+      now that Pages is live — visit the landing page and confirm the
+      family-tree diagram renders, not as raw fenced ```mermaid``` text.
+      If it doesn't, the theme needs `mermaid_config.js` override.
 - [ ] Add `docs/spec/` mirror of the FullSense Spec v1.1 once it stabilises in
       `llive/docs/` (currently the portal links out to llive for the spec)
 - [ ] Open Graph card v2: when the v1.0 PyPI rename lands, re-render
@@ -59,6 +76,10 @@ Initial scaffold of `furuse-kazufumi/fullsense`:
 - [ ] Replace bare LinkedIn/Qiita article links with a curated `docs/articles/`
       index once the article-pause (see `feedback_articles_pause.md`) is
       lifted
+- [ ] Rotate the fine-grained PAT into one with `Administration: Write` (or
+      switch to a classic PAT with `repo` scope) so future portal-side
+      automation (`gh api topics`, Pages settings, repo edit) can run
+      without manual UI steps.
 
 ## References
 
