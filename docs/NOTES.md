@@ -49,8 +49,12 @@ The portal points to many files inside `llive`. If those move, update here:
 | Qiita overview | `llive/docs/qiita/qiita-overview.md` |
 | Authoring guide | `llove/docs/qiita/AUTHORING.md`, `llive/docs/qiita/AUTHORING.md` |
 
-A future improvement: a tiny CI link-checker job on this repo that follows
-external links to the three product Pages sites and fails on 404.
+Implemented as `.github/workflows/link-check.yml` (Lychee). Runs on
+docs/README push, on docs PRs, weekly (Mon 18:00 UTC), and on manual
+dispatch. Scheduled failures open a `docs, link-rot` issue automatically.
+The CI does **not** fail the build (`fail: false`) — link rot is reported
+out-of-band so docs PRs stay mergeable when the rot is in an unrelated
+section.
 
 ## Deferred
 
