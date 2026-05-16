@@ -20,18 +20,41 @@ flowchart TD
     LM["llmesh — secure LLM hub (on-prem MCP)"]
     LI["llive — self-evolving memory (4-layer + biological model)"]
     LO["llove — TUI dashboard (HITL workbench)"]
+    LD["lldesign — UI/Web/diagram design (alpha)"]
+    LT["lltrade — paper trading research (alpha)"]
     LMS["llmesh-suite (installer)"]
+    LCAD["llcad — machine CAD (planned)"]
+    LEDA["lleda — EDA / circuit / PCB (planned)"]
+    LCHIP["llchip — semiconductor IC layout (planned)"]
+    LMED["llmed — medical literature (parked)"]
+    LPAPER["llpaper — academic drafting (parked)"]
     F --> LM
     F --> LI
     F --> LO
+    F --> LD
+    F --> LT
     F -.-> LMS
+    F -.-> LCAD
+    F -.-> LEDA
+    F -.-> LCHIP
+    F -.-> LMED
+    F -.-> LPAPER
     LM <-. MCP .-> LI
     LI <-. bridge .-> LO
     LM <-. hub .-> LO
+    LD <-. brief .-> LI
+    LT <-. signal+gate .-> LI
     style F fill:#fef3c7,stroke:#f59e0b,stroke-width:3px
     style LI fill:#d1fae5,stroke:#10b981
     style LM fill:#dbeafe,stroke:#3b82f6
     style LO fill:#fce7f3,stroke:#ec4899
+    style LD fill:#ede9fe,stroke:#8b5cf6
+    style LT fill:#fee2e2,stroke:#ef4444
+    style LCAD fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
+    style LEDA fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
+    style LCHIP fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
+    style LMED fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
+    style LPAPER fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
 ```
 
 ## Product Sites
