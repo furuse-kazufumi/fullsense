@@ -1,0 +1,35 @@
+{
+  "brief_chars": 413,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "4f91a343989e4ff98ce013fdb93fbede"
+  },
+  "elapsed_ms": 0.46,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Observation about 'manual': Generate a Mermaid flowchart titled 'FullSense Family' showing nodes: llmesh (secure LLM hub), llive (self-evolving memo — novel territory, worth exploring.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

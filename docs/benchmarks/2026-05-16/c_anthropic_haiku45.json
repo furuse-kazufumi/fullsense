@@ -1,0 +1,6 @@
+{
+  "ok": false,
+  "status": 401,
+  "elapsed_ms": 399.9,
+  "body": "{\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Cb61B1peeF4KxVAVd6r8n\"}"
+}
