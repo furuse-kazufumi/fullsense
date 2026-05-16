@@ -120,6 +120,7 @@ Most up-to-date posts are in `llive/docs/linkedin/` and `llive/docs/qiita/`:
 
 ## Portal meta
 
+- [Doc map]({{ '/doc_map' | relative_url }}) — one-page index of every doc across the portal + 4 product repos + maintainer memory
 - [Roadmap]({{ '/roadmap' | relative_url }}) — live + planned + parked products with trigger conditions
 - [Comparison]({{ '/comparison' | relative_url }}) — honest vs Claude Code / Perplexity / Codex / Gemini
 - [Progress log]({{ '/PROGRESS' | relative_url }}) — portal-side changelog
