@@ -42,6 +42,17 @@ defaults:
       path: ""
     values:
       layout: default
+      image: /assets/images/og-card.png
 author: Kazufumi Furuse
 url: https://furuse-kazufumi.github.io/fullsense
 baseurl: ""
+logo: /assets/images/og-card.png
+social:
+  name: FullSense
+  links:
+    - https://github.com/furuse-kazufumi/fullsense
+    - https://github.com/furuse-kazufumi/llmesh
+    - https://github.com/furuse-kazufumi/llive
+    - https://github.com/furuse-kazufumi/llove
+twitter:
+  card: summary_large_image
