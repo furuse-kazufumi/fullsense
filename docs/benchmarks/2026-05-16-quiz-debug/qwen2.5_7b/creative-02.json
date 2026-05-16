@@ -1,0 +1,52 @@
+{
+  "brief_chars": 104,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "ce23134e43ac4391b20e57efea128b3d"
+  },
+  "elapsed_ms": 20376.28,
+  "plan": {
+    "decision": "propose",
+    "rationale": "altruism strongly dominates and confidence is sufficient"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The silence of the empty library, punctuated by the soft whispers of books, feels almost... alive. It's as if each page holds a secret, eager to be shared, defying the usual quietude and inviting an exploration beyond the mundane.",
+      "triz_principles": [],
+      "confidence": 0.8,
+      "debug": {
+        "backend_name": "ollama",
+        "llm_prompt": "You are llive's inner monologue stage in a 6-stage cognitive loop (salience -> curiosity -> thought -> ego/altruism -> plan -> output).\nStimulus source: manual\nCuriosity: novel (score 1.00)\nTRIZ principles already detected: none\n---\nStimulus content:\nContinue this opening into a 2-sentence story: 'The library was empty, but the books were whispering...'\n---\nWrite a concise (1-3 sentences) first-person internal observation about this stimulus. Note any patterns, contradictions, or connections to known concepts. Do not propose actions yet -- this is internal monologue only.",
+        "llm_request": {
+          "max_tokens": 512,
+          "temperature": 0.3
+        },
+        "llm_elapsed_ms": 20369.56,
+        "llm_response_text": "The silence of the empty library, punctuated by the soft whispers of books, feels almost... alive. It's as if each page holds a secret, eager to be shared, defying the usual quietude and inviting an exploration beyond the mundane.",
+        "llm_response_chars": 230,
+        "llm_finish_reason": "stop",
+        "llm_response_model": "qwen2.5:7b",
+        "llm_response_raw": {
+          "eval_count": 51
+        },
+        "source": "llm"
+      }
+    },
+    "ego_score": 0.0,
+    "altruism_score": 1.0
+  },
+  "output_bus_len": 1
+}

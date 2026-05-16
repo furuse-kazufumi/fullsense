@@ -1,0 +1,35 @@
+{
+  "brief_chars": 131,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "4e073d2fd019462a834d15b5f0556f96"
+  },
+  "elapsed_ms": 13518.11,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "A math problem involving baked goods - how intriguing. The baker's situation seems straightforward enough, but I'll need to break it down step by step to ensure my solution is correct. This type of problem reminds me of basic arithmetic operations and fractions, which are fundamental concepts in mathematics.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

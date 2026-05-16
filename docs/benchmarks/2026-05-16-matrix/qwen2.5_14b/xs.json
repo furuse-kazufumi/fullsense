@@ -1,0 +1,35 @@
+{
+  "brief_chars": 2,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "464e3611a39740d199079c44c9c3dcdb"
+  },
+  "elapsed_ms": 77566.82,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "This brief greeting \"hi\" is an immediate and familiar social cue, yet its simplicity stands out as it lacks context or specific intent, prompting a quick assessment of the environment for additional cues or information.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

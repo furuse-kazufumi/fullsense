@@ -1,0 +1,35 @@
+{
+  "brief_chars": 81,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "64178fde68d947da8c3d0a3da30a52c3"
+  },
+  "elapsed_ms": 14431.53,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "\"Ah, another puzzle to unravel - I love the way my brain starts to spin with possibilities when it encounters something novel. The fact that Tom is older than Bob and Bob is older than Alice suggests a clear age hierarchy, but what's really interesting here is how this information can be used to deduce the youngest person in the group.\"",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

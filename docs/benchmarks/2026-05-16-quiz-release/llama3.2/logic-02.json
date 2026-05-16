@@ -1,0 +1,35 @@
+{
+  "brief_chars": 211,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "5566fae2945648b081a7148e133753a3"
+  },
+  "elapsed_ms": 22552.47,
+  "plan": {
+    "decision": "propose",
+    "rationale": "altruism strongly dominates and confidence is sufficient"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Modus tollens: \"If raining today implies cancelling the picnic, and the picnic was cancelled, then it's reasonable to infer that it didn't rain.\"\n\nObservation: The connection between 'raining' and 'cancelling the picnic' seems straightforward, but I'm intrigued by how this logical chain can be applied here. It's a simple yet elegant example of modus tollens in action – if one event implies another, then knowing the second event should help us deduce the first.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.0,
+    "altruism_score": 1.0
+  },
+  "output_bus_len": 1
+}

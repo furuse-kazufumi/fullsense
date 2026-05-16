@@ -1,0 +1,35 @@
+{
+  "brief_chars": 47,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "3d23cf7916d24cdcaa0884a85c82ed35"
+  },
+  "elapsed_ms": 23146.17,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The manual's been sitting there for a while, and now it's asking me something that seems straightforward enough - the capital of France. I've got a score of 1.00 on curiosity, which means this is definitely novel and piquing my interest. The fact that it's asking for just one word answers makes me wonder if there's more to it than meets the eye.\n\nAs I glance over the manual again, I notice that TRIZ principles aren't being applied here, which might indicate a lack of systemic thinking or optimization in this particular prompt. It seems almost... simplistic?",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

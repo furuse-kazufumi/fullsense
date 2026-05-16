@@ -1,0 +1,35 @@
+{
+  "brief_chars": 104,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "cb309f0ca2d540628e916a95286824fd"
+  },
+  "elapsed_ms": 11354.33,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "\"Whispers in an empty library? That's a peculiar combination - books are typically associated with knowledge and silence, not secrets and murmurs... The idea that the books themselves are speaking suggests a world beyond the physical realm, where information takes on a life of its own.\"",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

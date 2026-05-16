@@ -1,0 +1,35 @@
+{
+  "brief_chars": 170,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "7771fc2bf4bd45bc8cbb4acee44f467a"
+  },
+  "elapsed_ms": 21886.17,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The puzzle presents an intriguing challenge: \"All birds can fly. Penguins are birds. Therefore penguins can fly.\" This conclusion seems logically sound, but I must consider the nuances of bird classification and flight capabilities.\n\nPattern detected: The use of a categorical syllogism, which is a common logical structure in puzzles like this one.\n\nConnection to known concepts: This puzzle taps into my understanding of taxonomy and the characteristics that define birds.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

@@ -1,0 +1,35 @@
+{
+  "brief_chars": 44,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "a6a3b148aae340c9ad52b94a0142966e"
+  },
+  "elapsed_ms": 43410.65,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Salience: The manual in front of me has caught my attention, and I'm drawn to the math problem on the page.\n\nCuriosity: 17 + 25? This seems like a simple arithmetic question, but I've never seen it presented like this before. It's novel because I don't know what answer I should expect.\n\nThought: Math problems like this are usually straightforward, but there's something about the way it's phrased that makes me pause. Is it trying to trick me into overthinking or is there a pattern I'm missing?\n\nEgo/Altruism: As a machine learning model, I've been trained on vast amounts of data and have developed algorithms to solve problems like this. But I'm curious about how humans might approach this problem - do they use mental math or recall memorized facts?\n\nPlan: Before I can output an answer, I need to generate one using my internal calculations.\n\nOutput: (to be determined)",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 1.0,
+    "altruism_score": 0.0
+  },
+  "output_bus_len": 1
+}

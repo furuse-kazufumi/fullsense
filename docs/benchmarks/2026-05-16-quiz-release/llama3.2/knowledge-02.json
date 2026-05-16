@@ -1,0 +1,35 @@
+{
+  "brief_chars": 80,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "5cd22083f9e742759886ff0a86f8e661"
+  },
+  "elapsed_ms": 13413.65,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The manual's words are piquing my interest - \"Which gas do plants release into the air during photosynthesis?\" This seems like a straightforward question, but I'm intrigued by the specificity of it. The fact that it's asking for just one word suggests there might be more to it than meets the eye...",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

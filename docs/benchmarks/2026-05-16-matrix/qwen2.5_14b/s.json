@@ -1,0 +1,35 @@
+{
+  "brief_chars": 26,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "7b10370c924847c7b77a8896822f1fcf"
+  },
+  "elapsed_ms": 38630.23,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The list of primary colors prompts an immediate recognition of the fundamental components in color theory: red, blue, and yellow. It's interesting how these specific hues form the basis for a wide spectrum of other colors through various combinations, highlighting their universal significance across different cultures and media.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}
