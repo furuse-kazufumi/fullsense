@@ -102,14 +102,16 @@ in:
 - `D:/projects/lltrade/README.md`
 - `D:/projects/lltrade/docs/index.md`
 
-### Priority 3 — portal Quick Demos link fix
+### Priority 3 — portal Quick Demos link fix (confirmed unnecessary)
 
-`docs/index.md` Quick Demos section currently points at
-`https://furuse-kazufumi.github.io/llove/scenarios/` etc. Once llmesh /
-llove Pages are enabled (Operator action 1), verify those URLs actually
-serve content. If not, update the Quick Demos table to point at the
-file paths that *do* exist in each repo, or remove the lines until the
-relevant content lands in each product's `docs/`.
+`docs/index.md` Quick Demos points at `/llove/scenarios/`,
+`/llove/scenarios/anim/shogi/ja.svg`, and `/llmesh/demos/clustering_demo`.
+Source files were checked via `gh api` at end-of-session and **all three
+paths exist** in the respective repos (`llove/docs/scenarios/{index.md,
+anim/shogi/{en,ja}.svg, svg/}`, `llmesh/docs/demos/clustering_demo.md`).
+**Once Operator action 1.A (Pages enable) lands, these URLs will resolve
+on their own — no portal-side edit needed.** Re-run
+`verify_publication.sh` to confirm the portal link sweep goes to 0 FAIL.
 
 ### Priority 4 — branch protection follow-on
 
