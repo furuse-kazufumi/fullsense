@@ -1,0 +1,35 @@
+{
+  "brief_chars": 26,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "29cb371655964eb0881a8f7d5e2e3820"
+  },
+  "elapsed_ms": 15330.27,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The manual's page is filled with words... \"primary colors\". I've seen these before, but the way they're listed here seems different. The three colors are red, blue, and yellow. That's interesting - I remember learning about primary colors in art class, but I never thought much of it beyond that. Now, it seems like there might be more to it than just mixing paints...",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

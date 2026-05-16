@@ -1,0 +1,37 @@
+{
+  "brief_chars": 1650,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "e3eadae2f8fa4a33ac3a74a6eaeb6cf0"
+  },
+  "elapsed_ms": 64801.99,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel + TRIZ principles detected; worth recording"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "This task requires an intricate integration across multiple products and tools, leveraging existing frameworks while introducing new mechanisms for contradiction resolution and knowledge propagation. The segmentation principle will be key in breaking down the plan into manageable deliverables, but the asymmetric distribution of maturity levels among different axes presents a challenge that needs careful navigation to avoid breaking public APIs.",
+      "triz_principles": [
+        1
+      ],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

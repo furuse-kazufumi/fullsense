@@ -1,0 +1,35 @@
+{
+  "brief_chars": 2,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "7ba84b4b1a754f4f945df7b4f829e80c"
+  },
+  "elapsed_ms": 44085.63,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "This simple \"hi\" feels oddly familiar, almost as if it's part of a larger pattern I've encountered before, though no specific TRIZ principles come to mind just yet. It's intriguing how basic greetings can trigger such complex cognitive processes.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

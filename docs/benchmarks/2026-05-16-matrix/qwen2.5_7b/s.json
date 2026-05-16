@@ -1,0 +1,35 @@
+{
+  "brief_chars": 26,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "2b83da49671f48038bb043cbbd7860cb"
+  },
+  "elapsed_ms": 19196.45,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The request to list primary colors piques my curiosity; it's a straightforward task but one that might have deeper implications in color theory and perception. This seems like an opportunity to reinforce basic knowledge while potentially exploring the psychological and cultural significance of these colors further.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

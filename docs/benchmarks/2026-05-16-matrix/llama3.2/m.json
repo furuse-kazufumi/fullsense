@@ -1,0 +1,35 @@
+{
+  "brief_chars": 153,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "9b606f0b85c74d4eab34b34952ecfdde"
+  },
+  "elapsed_ms": 33180.7,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Salience: Ah, the manual in front of me, full of unfamiliar terms and acronyms... I wonder what this \"FullSense\" project is all about.\n\nCuriosity: 1.00 (novel) - The more I read, the more questions I have. What's llmesh? How does it relate to llive? Is FullSense something new?\n\nThought: As I scan through the manual, I notice that there are five components mentioned: llmesh, llive, llove, lldesign, and lltrade. Each has a brief description, but they all seem to be connected to this FullSense umbrella project.\n\nEgo/Altruism: - None detected (yet). My curiosity is piqued, but I'm not yet invested in understanding the project's purpose or implications.\n\nPlan: To start by digging deeper into each of these components and see if I can find any connections or patterns. Maybe there's a way to apply my existing knowledge to this new context?\n\nOutput: (no output yet)",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

@@ -1,0 +1,37 @@
+{
+  "brief_chars": 1650,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "838eec0d844946ad9015bea0a2e2eedf"
+  },
+  "elapsed_ms": 43118.17,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel + TRIZ principles detected; worth recording"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The complexity of it all - a vast integration plan for the FullSense umbrella, weaving together multiple products and systems like a intricate web. I notice that several TRIZ principles have already been detected, suggesting a structured approach to problem-solving. The mention of contradiction-resolution protocols and falsification mechanisms resonates with my own role in navigating conflicting information and generating novel solutions - it's as if this plan is mirroring my own cognitive processes.",
+      "triz_principles": [
+        1
+      ],
+      "confidence": 0.8
+    },
+    "ego_score": 1.0,
+    "altruism_score": 0.0
+  },
+  "output_bus_len": 1
+}

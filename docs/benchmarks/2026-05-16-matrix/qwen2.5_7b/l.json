@@ -1,0 +1,37 @@
+{
+  "brief_chars": 564,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "ed31ee95ebe142268698a1cecb2d12c6"
+  },
+  "elapsed_ms": 33969.77,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel + TRIZ principles detected; worth recording"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "This problem presents an interesting contradiction between speed and thoroughness in signal processing, which aligns with the principles of segmentation and asymmetry I've encountered before. However, ensuring a complete audit ledger while adhering to strict risk constraints adds a layer of complexity that requires careful integration of these strategies.",
+      "triz_principles": [
+        1
+      ],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}
