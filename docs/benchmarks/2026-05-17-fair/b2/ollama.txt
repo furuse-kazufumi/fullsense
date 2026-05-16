@@ -1,0 +1,7 @@
+## Quick Start
+To get started with `lldesign`, simply run the following command in your terminal:
+```bash
+pip install llmesh-lldesign
+python -m lldesign --help
+```
+`lldesign` is a Python library that allows you to create and manipulate 3D models using a simple, intuitive API.

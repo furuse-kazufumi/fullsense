@@ -1,0 +1,10 @@
+## Quick Start
+
+Install lldesign and view the available commands:
+
+```sh
+pip install llmesh-lldesign
+python -m lldesign --help
+```
+
+This launches lldesign’s CLI help so you can quickly explore available workflows and options.

@@ -1,0 +1,16 @@
+```mermaid
+sequenceDiagram
+    participant User as "User"
+    participant llove as "llove (TUI)"
+    participant llmesh as "llmesh (hub)"
+    participant llive as "llive (memory)"
+
+    Note over User,llove: User requests TUI to send request to hub
+
+    llove->>llmesh: Request
+    llmesh->>llive: Process request
+    llive->>llive: Return context blob
+    llive->>llmesh: Context blob
+    llmesh->>llove: Response with context blob
+    llove->>User: Render for User
+```

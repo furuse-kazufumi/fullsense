@@ -21,6 +21,7 @@ nav_order: 70
 | 1 | [Brief API 設計と progressive matrix で見える llive の overhead < 1 %](./01_brief_api_progressive.md) | Brief API + 5×3 ベンチ | OSS LLM コミュニティ / on-prem 推論派 |
 | 2 | [心理の深層 10 因子で整理する llive 思考層 — 既に 9/10 実装済](./02_cognitive_factors.md) | COG-FX フレームワーク | 認知科学 / Agent 設計者 |
 | 3 | [数学・単位に強い AI を作る最初の一歩 — MATH-01/08 内蔵計算エンジン](./03_math_vertical.md) | MATH 系 | 精密計測 / 物理シミュ / 教育 |
+| 7 | [llive vs 他 LLM ベンチマーク — 動作確認の罠と honest disclosure](./07_bench_results.md) | ⚠️ 当初版は不公平、改訂版で異常 3 件を明示。fair 再走中 (`docs/benchmarks/2026-05-17-fair/`) | 研究開発の罠認識 |
 
 ## 一文サマリ (RT 用)
 

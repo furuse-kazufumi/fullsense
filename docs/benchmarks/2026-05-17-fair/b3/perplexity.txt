@@ -1,0 +1,14 @@
+```mermaid
+sequenceDiagram
+    actor User
+    participant TUI as llove (TUI)
+    participant Hub as llmesh (hub)
+    participant Memory as llive (memory)
+
+    User->>TUI: MCP request
+    TUI->>Hub: Forward request
+    Hub->>Memory: Fetch context
+    Memory-->>Hub: Context blob
+    Hub-->>TUI: Response with context
+    TUI-->>User: Rendered result
+```
