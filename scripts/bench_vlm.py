@@ -138,13 +138,12 @@ def run_openai(img_b64: str, q: str, keys: dict) -> tuple[bool, str, float]:
     return False, body[:300], ms
 
 
-def run_ollama_llava(img_b64: str, q: str, _keys: dict) -> tuple[bool, str, float]:
-    model = os.environ.get("BENCH_OLLAMA_VLM", "llava:7b")
+def _ollama_vlm(model: str, img_b64: str, q: str) -> tuple[bool, str, float]:
     ok, _code, body, ms = _post(
         "http://localhost:11434/api/generate", {},
         {"model": model, "prompt": q, "images": [img_b64], "stream": False,
          "options": {"temperature": 0.2, "num_predict": 600}},
-        timeout=240,
+        timeout=300,
     )
     if ok:
         try:
@@ -154,9 +153,12 @@ def run_ollama_llava(img_b64: str, q: str, _keys: dict) -> tuple[bool, str, floa
     return False, body[:300], ms
 
 
-def run_ollama_l32v(img_b64: str, q: str, keys: dict) -> tuple[bool, str, float]:
-    os.environ["BENCH_OLLAMA_VLM"] = os.environ.get("BENCH_OLLAMA_VLM_LLAMA32V", "llama3.2-vision")
-    return run_ollama_llava(img_b64, q, keys)
+def run_ollama_llava(img_b64: str, q: str, _keys: dict) -> tuple[bool, str, float]:
+    return _ollama_vlm(os.environ.get("BENCH_OLLAMA_VLM_LLAVA", "llava:7b"), img_b64, q)
+
+
+def run_ollama_l32v(img_b64: str, q: str, _keys: dict) -> tuple[bool, str, float]:
+    return _ollama_vlm(os.environ.get("BENCH_OLLAMA_VLM_LLAMA32V", "llama3.2-vision"), img_b64, q)
 
 
 VLM: dict[str, Callable[[str, str, dict], tuple[bool, str, float]]] = {
