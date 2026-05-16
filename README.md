@@ -52,6 +52,19 @@ see [llive/TRADEMARK.md](https://github.com/furuse-kazufumi/llive/blob/main/TRAD
 | Animated gallery | same page, Animated section |
 | Clustering demo | <https://furuse-kazufumi.github.io/llmesh/demos/clustering_demo> |
 
+## Repository files
+
+| File | Purpose |
+|------|---------|
+| [`LICENSE`](LICENSE) | Apache-2.0 (portal docs) |
+| [`NOTICE`](NOTICE) | Trademark + attribution + third-party |
+| [`SECURITY.md`](SECURITY.md) | Where to report portal vs. product issues |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | What belongs here vs. product repos, DCO sign-off |
+| [`docs/index.md`](docs/index.md) | Landing page (rendered by GitHub Pages) |
+| [`docs/PROGRESS.md`](docs/PROGRESS.md) | Portal-side project log |
+| [`docs/NOTES.md`](docs/NOTES.md) | Design decisions + link-rot watch list |
+| [`docs/_config.yml`](docs/_config.yml) | Jekyll `just-the-docs` config |
+
 ## Contact
 
 `kazufumi@furuse.work`
