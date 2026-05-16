@@ -100,14 +100,39 @@ def _post(url: str, headers: dict, data: dict, timeout: int = 90) -> tuple[bool,
 # Each returns (ok: bool, response_text: str, elapsed_ms: float).
 
 def run_llive(brief: str, _keys: dict) -> tuple[bool, str, float]:
+    """Run a Brief through llive with a real LLM backend attached.
+
+    Fair-benchmark contract (per feedback_benchmark_honest_disclosure,
+    2026-05-17): llive must call an actual LLM, not template fallback.
+    The default backend here is `ollama:qwen2.5:14b` — change via env
+    BENCH_LLIVE_BACKEND.
+
+    Response text returned to the caller is `stages.thought.text` (the
+    actual LLM-generated monologue), not the JSON envelope, so the chars
+    column is measured fairly.
+    """
+    backend = os.environ.get("BENCH_LLIVE_BACKEND", "ollama:qwen2.5:14b")
     t0 = time.perf_counter()
     try:
         p = subprocess.run(
-            ["py", "-3.11", "D:/projects/llive/scripts/run_brief.py", "--json", brief],
-            capture_output=True, text=True, encoding="utf-8", timeout=30,
+            [
+                "py", "-3.11", "D:/projects/llive/scripts/run_brief.py",
+                "--json", "--backend", backend, brief,
+            ],
+            capture_output=True, text=True, encoding="utf-8", timeout=1800,
         )
         ms = (time.perf_counter() - t0) * 1000
-        return p.returncode == 0, p.stdout or p.stderr, ms
+        if p.returncode != 0:
+            return False, p.stderr or p.stdout, ms
+        try:
+            obj = json.loads(p.stdout)
+            thought = (
+                obj.get("stages", {}).get("thought", {}).get("text")
+                or p.stdout
+            )
+        except Exception:
+            thought = p.stdout
+        return True, thought, ms
     except FileNotFoundError:
         return False, "py launcher not found (install Python from python.org)", 0.0
     except Exception as e:

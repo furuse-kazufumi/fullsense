@@ -1,0 +1,16 @@
+```mermaid
+flowchart LR
+    T[FullSense Family]
+
+    llmesh[llmesh secure LLM hub]
+    llive[llive self-evolving memory]
+    llove[llove TUI HITL workbench]
+
+    llmesh <--> |MCP| llive
+    llive <--> |bridge| llove
+    llmesh <--> |hub| llove
+
+    T --> llmesh
+    T --> llive
+    T --> llove
+```
