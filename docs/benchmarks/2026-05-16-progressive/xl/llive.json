@@ -1,0 +1,37 @@
+{
+  "brief_chars": 1650,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "7396e6619f4e40cf837818fcbeae4d68"
+  },
+  "elapsed_ms": 0.2,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel + TRIZ principles detected; worth recording"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Observation about 'manual': Design a comprehensive integration plan for the FullSense umbrella covering all five live products (llmesh, llive, llove [TRIZ principles: 1] — novel territory, worth exploring.",
+      "triz_principles": [
+        1
+      ],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

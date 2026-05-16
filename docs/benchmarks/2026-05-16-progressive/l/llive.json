@@ -1,0 +1,37 @@
+{
+  "brief_chars": 564,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "dc74ea05cc814d2094092b3c473ee99a"
+  },
+  "elapsed_ms": 0.14,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel + TRIZ principles detected; worth recording"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Observation about 'manual': We face a contradiction in the lltrade design: we want to maximise strategy responsiveness (low latency) while also enfo [TRIZ principles: 1] — novel territory, worth exploring.",
+      "triz_principles": [
+        1
+      ],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

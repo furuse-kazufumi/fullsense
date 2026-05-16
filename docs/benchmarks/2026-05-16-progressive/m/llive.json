@@ -1,0 +1,35 @@
+{
+  "brief_chars": 153,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "ee543ca8b81d4bd1b7c4ce6182b60275"
+  },
+  "elapsed_ms": 2.28,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Observation about 'manual': Write a one-paragraph summary of the FullSense umbrella project, listing llmesh, llive, llove, lldesign, and lltrade wit — novel territory, worth exploring.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}
