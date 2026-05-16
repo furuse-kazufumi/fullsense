@@ -1,9 +1,45 @@
-# Session Summary — fullsense umbrella (2026-05-16)
+# Session Summary — fullsense umbrella (2026-05-16, 続行セッション)
 
 > 次回 ccr 起動時に CLAUDE.md SESSION START で読み取られるハンドオフ文書。
 > fullsense umbrella プロジェクトとして選択されたので、本書からスタート。
 
-## 現状 (2026-05-16 終了時、context 78% 到達)
+## 続行セッション 進捗 (2026-05-16 14:20 時点)
+
+宣言文 v7 のうち以下を完了:
+
+- **#2 ko 韓国語記事 4 件** — `llive/docs/linkedin/post_2026-05-14_overview.ko.md` / `post_2026-05-16_update.ko.md` / `post_2026-05-16_update_v2.ko.md` / `llive/docs/qiita/qiita-overview.ko.md` (commit, llive 側)
+- **#3 Phase 3.4 Pull/Push/Gossip protocol** — `llmesh/skills/sync.py` 新規実装。`SkillSyncClient` (pull_chunk / pull_index / notify / sync_with) + `GossipScheduler` (threading daemon) + `HTTPTransport` Protocol。stdlib `urllib` のみ、12 new tests
+- **#4 Phase 3.5 approval gate** — `PullPolicyCheck` callable + `SyncResult.denied`。policy 例外は deny 扱い。3 new tests (allow / deny / exception)。49/49 skill 関連 tests PASS
+
+**llmesh tests**: 49/49 skill 関連 PASS、ruff clean。
+
+## 残タスク (次セッション)
+
+宣言文 v7 #4 の続き:
+
+- **Phase 3.6 reputation + license filter** — RFC `D:/projects/llive/docs/llmesh_p2p_phase3_skill_chunk_rfc.md` §Security
+  - **license filter** (小): `LicenseFilter` callable を SkillSyncClient に追加、`AllowList(["Apache-2.0", "MIT", "CC0-1.0", "CC-BY-4.0"])` がデフォルト推奨。pull 後 / replica.put 前に check
+  - **reputation system** (中): `report-corrupt` endpoint を集計 (`PeerReputation` クラス)、reputation < 0.5 で peer 除外、`PeerProvider` で filter
+- **Phase 3.7 10-peer demo + KPI 測定** — `scripts/demo_skill_sync.py` で virtual peer × 10 の sync round time / hit rate 測定
+
+## ユーザ手間が必要な残作業 (待機リスト, 変更なし)
+
+`D:/projects/llive/docs/family_setup_status.md` で管理:
+
+1. **fullsense umbrella の GitHub repo を作成** + Pages 有効化
+   - `gh repo create furuse-kazufumi/fullsense --public --source D:/projects/fullsense --remote origin --push`
+   - Settings → Pages → main / docs
+2. llmesh / llove で GitHub Pages を有効化 (Settings UI)
+3. llmesh-demos の GitHub repo 作成
+4. 商標 pre-search (J-PlatPat / TESS / EUIPO / Madrid)
+5. ドメイン取得検討 (fullsense.dev / .ai / .io)
+6. 実商標出願 (Wave 1 FullSense → Wave 2 子マーク)
+7. PyPI 名予約 (`fullsense-*` 空 release v0.7.x)
+8. (任意) PAT に admin / repo scope を追加
+
+---
+
+## 現状 (2026-05-16 朝終了時、context 78% 到達)
 
 ### fullsense umbrella repo (本プロジェクト)
 - **local 整備済 / GitHub 未公開**
