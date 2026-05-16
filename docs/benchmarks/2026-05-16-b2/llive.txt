@@ -1,0 +1,1 @@
+decision=note thought=Observation about 'manual': Write a 4-7 line 'Quick Start' section in Markdown for the lldesign README. Include: one shell code block showing 'pip i — novel ter

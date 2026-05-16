@@ -1,0 +1,1 @@
+decision=note thought=Observation about 'manual': Generate a Mermaid sequence diagram (sequenceDiagram syntax) showing this MCP request flow: User -> llove (TUI) -> llmes — novel ter

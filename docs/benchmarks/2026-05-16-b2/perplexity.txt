@@ -1,0 +1,8 @@
+## Quick Start
+
+`lldesign` helps you quickly inspect and use the LLMesh design tooling from the command line.
+
+```sh
+pip install llmesh-lldesign
+python -m lldesign --help
+```

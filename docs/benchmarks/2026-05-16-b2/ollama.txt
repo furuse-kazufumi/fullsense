@@ -1,0 +1,9 @@
+## Quick Start
+To get started with lldesign, first install the required packages by running `pip install llmesh-lldesign` in your terminal.
+
+```bash
+pip install llmesh-lldesign
+python -m lldesign --help
+```
+
+lldesign is a Python library for working with LLD designs.
