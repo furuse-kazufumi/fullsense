@@ -16,18 +16,18 @@ nav_order: 1
 
 ```mermaid
 flowchart TD
-    F["<b>FullSense ™</b><br/>umbrella brand &amp; spec v1.1<br/><i>9 axes: KAR / DTKR / APO / ICP / TLB<br/>Math / PM / RPAR / SIL</i>"]
-    LM["<b>llmesh</b><br/>secure LLM hub<br/>(on-prem MCP)"]
-    LI["<b>llive</b><br/>self-evolving memory<br/>(4-layer + biological model)"]
-    LO["<b>llove</b><br/>TUI dashboard<br/>(HITL workbench)"]
-    LMS["llmesh-suite<br/>(installer)"]
+    F["FullSense umbrella v1.1 — 9 axes: KAR DTKR APO ICP TLB Math PM RPAR SIL"]
+    LM["llmesh — secure LLM hub (on-prem MCP)"]
+    LI["llive — self-evolving memory (4-layer + biological model)"]
+    LO["llove — TUI dashboard (HITL workbench)"]
+    LMS["llmesh-suite (installer)"]
     F --> LM
     F --> LI
     F --> LO
     F -.-> LMS
-    LM <-.->|MCP| LI
-    LI <-.->|bridge| LO
-    LM <-.->|hub| LO
+    LM <-. MCP .-> LI
+    LI <-. bridge .-> LO
+    LM <-. hub .-> LO
     style F fill:#fef3c7,stroke:#f59e0b,stroke-width:3px
     style LI fill:#d1fae5,stroke:#10b981
     style LM fill:#dbeafe,stroke:#3b82f6
