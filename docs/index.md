@@ -124,6 +124,7 @@ Most up-to-date posts are in `llive/docs/linkedin/` and `llive/docs/qiita/`:
 - [Comparison]({{ '/comparison' | relative_url }}) — honest vs Claude Code / Perplexity / Codex / Gemini
 - [Progress log]({{ '/PROGRESS' | relative_url }}) — portal-side changelog
 - [Design notes]({{ '/NOTES' | relative_url }}) — decisions, link-rot watch
+- [Next session handoff]({{ '/NEXT_SESSION' | relative_url }}) — queued operator + agent work
 - [Security policy](https://github.com/furuse-kazufumi/fullsense/blob/main/SECURITY.md)
 - [Contributing](https://github.com/furuse-kazufumi/fullsense/blob/main/CONTRIBUTING.md)
 - [License (Apache-2.0)](https://github.com/furuse-kazufumi/fullsense/blob/main/LICENSE)
