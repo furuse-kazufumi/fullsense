@@ -91,6 +91,15 @@ Most up-to-date posts are in `llive/docs/linkedin/` and `llive/docs/qiita/`:
 - Qiita: [overview](https://github.com/furuse-kazufumi/llive/blob/main/docs/qiita/qiita-overview.md)
 - Authoring guide (画像 / Mermaid / アニメ): [llove](https://github.com/furuse-kazufumi/llove/blob/main/docs/qiita/AUTHORING.md) / [llive](https://github.com/furuse-kazufumi/llive/blob/main/docs/qiita/AUTHORING.md)
 
+## Portal meta
+
+- [Progress log]({{ '/PROGRESS' | relative_url }}) — portal-side changelog
+- [Design notes]({{ '/NOTES' | relative_url }}) — decisions, link-rot watch
+- [Security policy](https://github.com/furuse-kazufumi/fullsense/blob/main/SECURITY.md)
+- [Contributing](https://github.com/furuse-kazufumi/fullsense/blob/main/CONTRIBUTING.md)
+- [License (Apache-2.0)](https://github.com/furuse-kazufumi/fullsense/blob/main/LICENSE)
+- [Notice](https://github.com/furuse-kazufumi/fullsense/blob/main/NOTICE)
+
 ## Contact
 
 - Email: `kazufumi@furuse.work`
