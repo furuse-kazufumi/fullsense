@@ -91,7 +91,28 @@ For every new feature in FullSense, we:
 Methodology details: [`feedback_competitor_benchmark`](https://github.com/furuse-kazufumi/raptor/blob/main/.claude/projects/C--Users-puruy-raptor/memory/feedback_competitor_benchmark.md)
 in the maintainer's tooling repo.
 
+## Empirical benchmarks (2026-05-16)
+
+Four Briefs run against llive (`FullSenseLoop.process`) + ollama
+`llama3.2:3b` (on-prem) + Perplexity Sonar (cloud). Anthropic Haiku 4.5,
+Gemini 2.0 Flash, OpenAI Codex were attempted but failed for credential /
+quota reasons (operator action queued).
+
+- [Mermaid family-tree generation]({{ '/benchmarks/2026-05-16_mermaid_brief' | relative_url }})
+- [Quick Start section + MCP sequence diagram]({{ '/benchmarks/2026-05-16_quickstart_seqdiag' | relative_url }})
+- [lltrade paper-trading strategy YAML]({{ '/benchmarks/2026-05-16_lltrade_yaml' | relative_url }})
+
+Headline of the day:
+
+- llive does not yet generate (LLIVE-001 / LLIVE-002 in
+  [`docs/BUGS_2026-05-16_brief_ab.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/BUGS_2026-05-16_brief_ab.md))
+- ollama `llama3.2:3b` is the working on-prem option but produces the
+  `lllive` typo (3 Ls) twice across 4 Briefs — tokenisation hostility to
+  the `ll*` naming convention. Recommended replacement: qwen2.5:14b+
+- Perplexity Sonar scores 4/4 on spec compliance at ~$0.005/brief
+
 ## Last updated
 
-2026-05-16 — initial publication. Reviewed at: portal-side `PROGRESS.md`
-under the *Phase 0.3 — competitive positioning* entry.
+2026-05-16 — initial publication + first 4-Brief A/B run. Reviewed at:
+portal-side `PROGRESS.md` *Phase 0.3 — umbrella expansion* and *Phase 0.3
+— competitive positioning* entries.
