@@ -3,13 +3,14 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-05-16 20:52:19
+- **最終更新**: 2026-05-17 05:58:46
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+106c71e auto: NEXT_SESSION.md 編集前 (2026-05-16 21:17)
 7b27850 docs(benchmarks): llive LLM validation report (2026-05-16 session)
 2a934f8 docs(portal): add doc_map.md cross-repo index
 e27254e auto: index.md 編集前 (2026-05-16 20:29)
@@ -19,33 +20,19 @@ c2e829f docs(portal): correct NEXT_SESSION Priority 3 — Quick Demos paths alre
 cc9d754 docs(portal): link NEXT_SESSION handoff from Portal meta
 207cfda docs(portal): add NEXT_SESSION.md handoff for the next agent run
 d27e9be docs(benchmarks): record llama3.2-vision cold-start timeout
-d330eb6 auto: 2026-05-16_vlm.md 編集前 (2026-05-16 18:54)
 ```
 
 ## 現在の git status
 
 ```
-M docs/SESSION_SUMMARY.md
+M docs/NEXT_SESSION.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-20:51 docs/SESSION_SUMMARY.md
-20:50 docs/benchmarks/2026-05-16_llive_llm_validation.md
-20:48 docs/benchmarks/2026-05-16-quiz-release/quiz_summary.md
-20:48 docs/benchmarks/2026-05-16-quiz-release/quiz_summary.json
-20:48 docs/benchmarks/2026-05-16-quiz-release/llama3.2/creative-02.json
-20:48 docs/benchmarks/2026-05-16-quiz-release/llama3.2/creative-01.json
-20:48 docs/benchmarks/2026-05-16-quiz-release/llama3.2/reason-02.json
-20:48 docs/benchmarks/2026-05-16-quiz-release/llama3.2/reason-01.json
-20:47 docs/benchmarks/2026-05-16-quiz-release/llama3.2/knowledge-02.json
-20:47 docs/benchmarks/2026-05-16-quiz-release/llama3.2/knowledge-01.json
-20:47 docs/benchmarks/2026-05-16-quiz-release/llama3.2/logic-02.json
-20:46 docs/benchmarks/2026-05-16-quiz-release/llama3.2/logic-01.json
-20:46 docs/benchmarks/2026-05-16-quiz-release/llama3.2/arith-02.json
-20:46 docs/benchmarks/2026-05-16-quiz-release/llama3.2/arith-01.json
-20:45 docs/benchmarks/2026-05-16-quiz-release/_quiz_set.json
+(直近 2h の変更なし)
 ```
 
 ---

@@ -70,24 +70,25 @@ If even warm runs are slow, downgrade the recommendation in [comparison]({{
 
 ## 🤖 Agent-side work for the next session
 
-### Priority 1 — llive Brief API (closes LLIVE-001 + LLIVE-002)
+### Priority 1 — llive Brief API (closes LLIVE-001 + LLIVE-002) ✅ DONE 2026-05-16
 
-Design draft is committed at
-`D:/projects/llive/docs/proposals/brief_api_design.md`. ~5 days estimated.
-Order:
+Closed in the 2026-05-16 (続 14) llive session. End-to-end pipeline lives at
+`D:/projects/llive/src/llive/brief/` (types/loader/ledger/runner) +
+`llive brief submit|ledger` CLI + `submit_brief` MCP tool. 46 new tests,
+926 → 936 PASS, no regressions.
 
-1. Brief schema + dataclass + YAML loader
-2. `LLMBackend` Protocol + `FakeBackend` + `OllamaBackend`
-3. `BriefRunner` core (steps 1-3 + 6-7 of the loop integration)
-4. Approval Bus integration (closes LLIVE-008)
-5. Tool whitelist + execution
-6. CLI `llive brief submit ...`
-7. MCP `submit_brief` tool
-8. TDD tests 1-8 in the proposal (skeleton already in the doc)
+Progressive validation matrix (Brief → FullSenseLoop, on-prem only, xs/s
+× {llama3.2:3b, qwen2.5:7b, qwen2.5:14b}) shows Brief-API overhead < 1 %
+of LLM wall time. See `D:/projects/llive/docs/benchmarks/2026-05-16-progressive-xss/`
+and the v18 declaration in `D:/projects/llive/docs/PROGRESS.md`.
 
-After this lands, re-run `bench_run.py --brief b1 b2 b3 b4 --model llive` —
-llive should produce actual artifacts, and the docs/benchmarks story
-flips from "structural gap" to "head-to-head quality comparison".
+Remaining follow-up (separate session):
+
+- Run `bench_run.py --brief b1 b2 b3 b4 --model llive` against the Brief API —
+  now possible, not yet executed
+- `m`/`l`/`xl` progressive cells to fill the token-pressure curve
+- Tool emission inside `ActionPlan` (today's loop doesn't propose tool
+  calls, so the BriefRunner whitelist path is only exercised via test fakes)
 
 ### Priority 2 — qwen2.5:14b (or similar) on-prem default
 
