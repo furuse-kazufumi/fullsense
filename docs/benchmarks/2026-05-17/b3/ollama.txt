@@ -1,0 +1,14 @@
+```
+sequenceDiagram
+    participant User as "User"
+    participant llove as "llove (TUI)"
+    participant llmesh as "llmesh (hub)"
+    participant llive as "llive (memory)"
+
+    Note over User,llove: User interacts with TUI ->>llove: Request
+    Note over llove,llmesh: llove sends request to llmesh
+    Note over llmesh,lllive: llmesh receives request, sends to llive
+    Note over llive,llmesh: llive processes request, returns context blob to llmesh
+    Note over llmesh,llove: llmesh receives context blob from llive, sends back to llove
+    Note over llove: llove renders response for User ->>User: Response
+```

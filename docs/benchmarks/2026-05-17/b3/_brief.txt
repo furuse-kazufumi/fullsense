@@ -1,0 +1,1 @@
+Generate a Mermaid sequence diagram (sequenceDiagram syntax) showing this MCP request flow: User -> llove (TUI) -> llmesh (hub) -> llive (memory). llive returns a context blob to llmesh, llmesh returns to llove, llove renders for User. Use kramdown-safe syntax (no inline HTML). Output ONLY the fenced mermaid block.

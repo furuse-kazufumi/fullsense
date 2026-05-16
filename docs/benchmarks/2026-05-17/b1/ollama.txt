@@ -1,0 +1,6 @@
+```mermaid
+graph LR
+    llmesh[llmesh] -->|MCP| llive[llive]
+    lllive[llive] -->|bridge| llove[llove]
+    llmesh[llmesh] -->|hub| llove[llove]
+```

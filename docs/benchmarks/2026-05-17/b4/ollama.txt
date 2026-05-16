@@ -1,0 +1,21 @@
+---
+paper_trading: true
+name: Tech Earnings Dispersion
+universe:
+  - AAPL
+  - MSFT
+  - GOOGL
+  - META
+  - AMZN
+regime: mean_reversion
+entry_signal:
+  condition: high_beat > low_beat
+  threshold: 0.05
+exit_signal:
+  condition: low_beat <= high_beat
+  threshold: 0.05
+position_size_pct: 0.02
+max_drawdown_pct: 10
+sharpe_target: 1.5
+sector_caps:
+  - Technology

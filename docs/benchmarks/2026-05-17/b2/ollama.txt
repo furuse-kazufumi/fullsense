@@ -1,0 +1,10 @@
+## Quick Start
+To get started with lldesign, first install the required Python package using pip:
+```bash
+pip install llmesh-lldesign
+```
+Then run the command to display help and learn more about how to use it:
+```bash
+python -m lldesign --help
+```
+lldesign is a Python library that allows you to create and manipulate 3D models in a variety of formats, including STL and OBJ.

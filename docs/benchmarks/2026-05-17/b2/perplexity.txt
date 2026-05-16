@@ -1,0 +1,8 @@
+## Quick Start
+
+Install the package and verify the CLI is available:
+```sh
+pip install llmesh-lldesign
+python -m lldesign --help
+```
+This starts the `lldesign` command-line tool so you can inspect available options and begin using lldesign right away.

@@ -1,0 +1,44 @@
+name: tech_earnings_dispersion_paper
+paper_trading: true
+universe:
+  - AAPL
+  - MSFT
+  - GOOGL
+  - META
+  - AMZN
+regime:
+  description: Tech earnings dispersion pair/book strategy
+  filter: "Only trade during the 10 trading days before and 2 trading days after earnings announcements for constituents in the universe."
+  market_condition: "Require NASDAQ-100 trend to be neutral-to-bullish and VIX below 25."
+entry_signal:
+  description: >
+    Build a long-short dispersion basket around earnings surprises:
+    go long names with positive earnings beat + raised guidance + relative strength,
+    and go short names with negative earnings miss + lowered guidance + relative weakness.
+  long_criteria:
+    - "EPS surprise >= +5%"
+    - "Revenue surprise >= +2%"
+    - "1-week relative strength vs universe median > 0"
+    - "No material guidance downgrade"
+  short_criteria:
+    - "EPS surprise <= -5%"
+    - "Revenue surprise <= -2%"
+    - "1-week relative strength vs universe median < 0"
+    - "Guidance not raised"
+  allocation_rule: >
+    Equal-weight long the top 2 highest positive beat names and equal-weight short the bottom 2 lowest beat names,
+    with a net dollar-neutral posture.
+exit_signal:
+  description: "Exit positions after 5 trading days post-earnings or when the reversal trigger occurs."
+  triggers:
+    - "Close long if post-earnings return exceeds +8% or falls below -4%"
+    - "Close short if post-earnings return exceeds -8% or rises above +4%"
+    - "Exit all positions after 5 trading days regardless of P&L"
+    - "Exit if VIX closes above 30"
+position_size_pct: 20
+max_drawdown_pct: 8
+sharpe_target: 1.7
+sector_caps:
+  communication_services: 35
+  information_technology: 35
+  consumer_discretionary: 25

@@ -111,7 +111,13 @@ All product code: **Apache-2.0** with optional separate **Commercial License**.
 
 ## Articles
 
-Most up-to-date posts are in `llive/docs/linkedin/` and `llive/docs/qiita/`:
+**最新公開資料の集約場所 (2026-05-17〜)**: [`docs/articles/`]({{ '/articles/' | relative_url }}) に日付別ディレクトリで配置。最新は [`docs/articles/2026-05-17/`]({{ '/articles/2026-05-17/' | relative_url }}):
+
+- [01 — Brief API + progressive matrix (overhead < 1%)]({{ '/articles/2026-05-17/01_brief_api_progressive' | relative_url }})
+- [02 — 10 思考因子で整理する llive 思考層 (9/10 実装済)]({{ '/articles/2026-05-17/02_cognitive_factors' | relative_url }})
+- [03 — 数学・単位に強い AI: MATH-01/08 内蔵計算エンジン]({{ '/articles/2026-05-17/03_math_vertical' | relative_url }})
+
+過去の posts は `llive/docs/linkedin/` および `llive/docs/qiita/`:
 
 - LinkedIn ja/en/zh: [overview](https://github.com/furuse-kazufumi/llive/blob/main/docs/linkedin/post_2026-05-14_overview.ja.md)
   + [v0.6.0 update](https://github.com/furuse-kazufumi/llive/blob/main/docs/linkedin/post_2026-05-16_update.ja.md)

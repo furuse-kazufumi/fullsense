@@ -1,0 +1,1 @@
+Write a 4-7 line 'Quick Start' section in Markdown for the lldesign README. Include: one shell code block showing 'pip install llmesh-lldesign' and 'python -m lldesign --help', one prose sentence explaining what it does. No headings beyond '## Quick Start'. No filler. Output ONLY the section content.

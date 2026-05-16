@@ -1,0 +1,35 @@
+{
+  "brief_chars": 316,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "b3ea1d49b8444c3aa3be350b8a0bc1ef"
+  },
+  "elapsed_ms": 0.13,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Observation about 'manual': Generate a Mermaid sequence diagram (sequenceDiagram syntax) showing this MCP request flow: User -> llove (TUI) -> llmes — novel territory, worth exploring.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

@@ -1,0 +1,10 @@
+```mermaid
+flowchart TD
+    A["llmesh\nsecure LLM hub"]
+    B["llive\nself-evolving memory"]
+    C["llove\nTUI/HITL workbench"]
+
+    A <--> |MCP| B
+    B <--> |bridge| C
+    A <--> |hub| C
+```
