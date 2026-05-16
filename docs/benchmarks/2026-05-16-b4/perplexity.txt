@@ -1,0 +1,24 @@
+paper_trading: true
+name: tech_earnings_dispersion
+universe:
+  - AAPL
+  - MSFT
+  - GOOGL
+  - META
+  - AMZN
+regime: earnings_dispersion
+entry_signal: >
+  Enter long the highest estimated earnings-beat name in the universe and short the
+  lowest estimated earnings-beat name when the cross-sectional dispersion of
+  earnings surprises is elevated, analyst revisions are mixed, and implied move
+  premiums exceed their 20-day median.
+exit_signal: >
+  Exit both legs when the dispersion signal normalizes, the earnings event has
+  passed, or the relative surprise spread compresses below its 20-day threshold.
+position_size_pct: 0.10
+max_drawdown_pct: 8
+sharpe_target: 1.5
+sector_caps:
+  communication_services: 0.30
+  consumer_discretionary: 0.30
+  information_technology: 0.40
