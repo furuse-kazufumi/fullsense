@@ -1,0 +1,47 @@
+# GitHub Pages (Jekyll) — FullSense umbrella portal
+
+title: "FullSense ™"
+description: "Umbrella brand & spec for llmesh / llive / llove. Apache-2.0 OSS family for self-evolving, on-prem LLM systems."
+remote_theme: just-the-docs/just-the-docs
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+plugins:
+  - jekyll-relative-links
+  - jekyll-seo-tag
+  - jekyll-remote-theme
+relative_links:
+  enabled: true
+  collections: true
+
+color_scheme: light
+search_enabled: true
+heading_anchors: true
+mermaid:
+  version: "10.9.0"
+aux_links:
+  "llmesh":
+    - "https://furuse-kazufumi.github.io/llmesh/"
+  "llive":
+    - "https://furuse-kazufumi.github.io/llive/"
+  "llove":
+    - "https://furuse-kazufumi.github.io/llove/"
+aux_links_new_tab: true
+footer_content: 'Copyright &copy; 2026 Kazufumi Furuse. FullSense ™ / llmesh ™ / llive ™ / llove ™ are trademarks. Code under Apache-2.0.'
+nav_external_links:
+  - title: GitHub
+    url: https://github.com/furuse-kazufumi/fullsense
+    hide_icon: false
+back_to_top: true
+back_to_top_text: "Back to top"
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+author: Kazufumi Furuse
+url: https://furuse-kazufumi.github.io/fullsense
+baseurl: ""

@@ -1,0 +1,16 @@
+# Jekyll
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Build
+__pycache__/
+*.pyc
