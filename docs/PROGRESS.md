@@ -73,6 +73,31 @@ llive integration probe:
   Brief API absent (LLIVE-002). Captured in
   `~/.claude/.../memory/project_llive_bug_2026_05_16.md`.
 
+Empirical AI A/B benchmark (4 Briefs × 6 models):
+
+- `scripts/bench_run.py` — one-shot A/B replayer (llive / ollama / Anthropic
+  / Gemini / Codex / Perplexity)
+- `scripts/bench_vlm.py` — same shape for vision models (Anthropic Claude
+  vision, Gemini Flash vision, GPT-4o-mini vision, ollama llava,
+  llama3.2-vision)
+- `docs/benchmarks/2026-05-16{,_mermaid_brief,_quickstart_seqdiag,_lltrade_yaml}.md`
+  — first 4 Brief results. Headline: Perplexity Sonar 4/4 spec-compliant
+  at ~$0.005/brief; ollama `llama3.2:3b` typos `llive` as `lllive` twice
+  (`ll*` prefix tokenization hostility) and violates constraints; Anthropic
+  + Gemini + OpenAI Codex all errored on credentials (operator action
+  queued — see `~/.claude/.../memory/project_benchmark_2026_05_16.md`).
+- `docs/comparison.md` — empirical benchmark section links to the per-Brief
+  pages so the comparison story is data-backed, not aspirational.
+
+CI scaffolding for the new products:
+
+- `lldesign/.github/workflows/test.yml` — pytest + ruff format + ruff check
+  on Python 3.11 (18 s first green run)
+- `lltrade/.github/workflows/test.yml` — pytest + ruff + an extra step that
+  verifies `lltrade.REAL_TRADING is False` (20 s first green run). The
+  REAL_TRADING check guards the v0.x paper-only invariant in CI as well as
+  in the package itself.
+
 ### Public launch (Phase 0.2, 2026-05-16)
 
 Portal is live:
