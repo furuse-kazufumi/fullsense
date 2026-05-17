@@ -3,8 +3,10 @@
 **1 行 hook**:
 タブ幅 4 vs 8 の戦争に、60 年前の ASCII が予約していた `U+001F` を再活性化することで終止符を打ちました。Markdown も HTML も改行もタブもセル内に直接書ける。AI と人間の表データ通信が確実に楽になります。
 
-**作者**: furuse-kazufumi (FullSense umbrella OSS 開発者)
-**Repo**: https://github.com/furuse-kazufumi/usrs (公開準備中)
+**作者**: furuse-kazufumi (FullSense umbrella OSS 開発者、日本)
+**Repo**: https://github.com/furuse-kazufumi/usrs
+**SixArm/usv との関係 / revival 提案 Issue**: https://github.com/SixArm/usv/issues/14
+**コミュニティ Discussion**: https://github.com/furuse-kazufumi/usrs/discussions/1
 **ライセンス**: Apache-2.0 (純 OSS、商用も自由)
 
 ---
