@@ -59,6 +59,23 @@ EU AI Act (Regulation (EU) 2024/1689) は 2024 年 8 月発効、段階的施行
 | Cybersecurity / robustness | llmesh deps --audit | α 実装済 (本日 commit) |
 | Technical documentation | docs/regulatory + REQUIREMENTS.md | 整備中 |
 
+### 5.1 Article 別 mapping (主要条文)
+
+> 各 Article の正確な要件は Regulation (EU) 2024/1689 原文を必ず参照.
+> 本表は実装基盤がどの条文に応える設計かを示す技術 mapping.
+
+| Article | 要件 (概要) | FullSense 対応 module / event |
+|---|---|---|
+| **Art.12** | 自動 logging を備えること (high-risk provider 義務) | llive `BriefRunner` + `llmesh.audit.trace.AuditTrace`. `audit-log-format.md` の event 群がこの logging を満たす |
+| **Art.13** | provider が deployer に対し透明性 (intended purpose / 限界 / 性能) を documentation で提供 | `docs/regulatory` シリーズ + REQUIREMENTS.md / ROADMAP.md |
+| **Art.14** | human oversight (人間の override / intervention 可能性) を embedded すること | llive HITL Approval Bus + `/api/v1/hitl/respond` (Phase h.5) — architectural-level に組込済 |
+| **Art.18** | 技術文書 (Annex IV) を **AI system が市場 placed されてから 10 年保管** | `docs/regulatory` + 各 v0.x の Git 履歴 + zstd archive (`$LLMESH_AUDIT_DIR/archive/`) |
+| **Art.19** | 自動生成 logs を **意図用途に応じた期間、最低 6 か月** 保管 | `audit-log-format.md` 5 章: 既定 6 年 (EU 高リスク前提) — `LLMESH_AUDIT_RETENTION_YEARS` で短縮可 |
+| **Art.50** | deployer は AI 出力が AI 由来であることを natural person に開示 (限定リスク AI / emotion recognition / deepfake 等) | Annotation Channel `core:ai_generated=true` を llove 描画層が明示。`(EU) AI 由来` ラベルを必須出力 |
+| **Art.72** | post-market monitoring system (PMM) — provider 義務 | `outbound_call_attempted` + `risk_alert` + Annotation 集計を週次 `llmesh timeline report` で PMM 報告書化 |
+| **Art.73** | serious incident reporting — 15 日以内 (基本) / 即座 (重大障害) | `audit-log-format.md` 9 章 + `data-sovereignty.md` 6.1 incident response プロセスと統合運用 |
+| **Art.99** | 罰則 — 禁止 AI 違反 最大 35M EUR or 全世界売上 7%; その他 高額 15M EUR or 3% | FullSense は禁止 AI を構造的に避ける設計 (リスク分類 = High 以下) |
+
 ## 6. 推奨運用 (高リスク AI として使う場合)
 
 - Annotation Channel に `eu-ai-act:risk-tier=high` 等を明示
