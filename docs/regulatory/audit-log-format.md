@@ -40,14 +40,75 @@
 }
 ```
 
-- `seq` — 連番 (chain integrity)
-- `timestamp_utc` — ISO 8601 UTC
-- `node_id` — llmesh ノード identity
-- `session_id` — Brief / agent / loop の単位
-- `event_type` — イベント種別
-- `actor` — user / system / agent の識別子
-- `hmac` — HMAC-SHA256 (key は環境変数 `LLMESH_AUDIT_HMAC_KEY` から)
-- `prev_hash` — 前 entry の hash (chain 検証用)
+- `seq` — 連番 (chain integrity, 0 起点、非負整数)
+- `timestamp_utc` — ISO 8601 UTC, ミリ秒精度 (`YYYY-MM-DDTHH:MM:SS.sssZ`)
+- `node_id` — llmesh ノード identity (3.3)
+- `session_id` — Brief / agent / loop の単位 (3.3)
+- `event_type` — イベント種別 (4)
+- `actor` — user / system / agent の識別子 (`user:<email>` / `system:<component>` / `agent:<id>`)
+- `hmac` — HMAC-SHA256 hex (key は env `LLMESH_AUDIT_HMAC_KEY`, 計算規則は 3.1)
+- `prev_hash` — 前 entry の `hmac` 値 (genesis は 64 個の `0`)
+
+### 3.1 HMAC chain アルゴリズム
+
+各 entry の `hmac` は以下で計算する:
+
+```
+canonical = json.dumps(entry_without_hmac, sort_keys=True, separators=(",", ":"))
+hmac      = HMAC-SHA256(key=LLMESH_AUDIT_HMAC_KEY, msg=canonical).hexdigest()
+```
+
+- `entry_without_hmac` は当該 entry から `hmac` フィールドを **除外** した
+  dict (他フィールドはすべて含む、`prev_hash` も含む).
+- `prev_hash` は 1 つ前の entry の `hmac` 値 (16 進 64 文字). 最初の
+  entry は `prev_hash = "0" * 64` (genesis).
+- JSON シリアライズは **キーの辞書順ソート + space 圧縮** (`sort_keys=True`,
+  `separators=(",", ":")`) で deterministic に固定. Python 標準
+  `json.dumps` のこの 2 設定を変えないこと.
+- 検証は逆順 — `verify_chain_detailed` は seq=0 から再計算し、
+  `hmac` と `prev_hash` 両方を検査する.
+
+### 3.2 hash 計算規則 (text_hash / args_hash / result_hash)
+
+各 hash フィールドは **SHA-256 hex** (`hashlib.sha256(b).hexdigest()`).
+
+| field | 入力 |
+|---|---|
+| `text_hash` | Brief.goal を UTF-8 encode したバイト列 (**PII redaction 後**) |
+| `stimulus_hash` | Stimulus.content を UTF-8 encode (**PII redaction 後**) |
+| `args_hash` | tool 呼び出し時 `args` dict を 3.1 と同じ canonical JSON にして UTF-8 |
+| `result_hash` | tool / Brief outcome `result` dict を canonical JSON にして UTF-8 |
+
+PII redaction 前の原文は **ログに残さない** (3.4 と PII docs 参照).
+
+### 3.3 node_id / session_id 生成規則
+
+`node_id`:
+- 初回起動時に `~/.llmesh/node_id` に永続化 (`uuid.uuid4().hex[:16]`).
+- 環境変数 `LLMESH_NODE_ID` が設定されていればそれを優先 (cluster 用途).
+- 形式: 16 文字 hex (`[a-f0-9]{16}`). 接頭辞 `fullsense-node-` は表示専用.
+
+`session_id`:
+- Brief / agent / loop の生存期間に紐づく. 1 つの `submit_brief` 呼び出し
+  = 1 つの `session_id`.
+- 形式: `sess-YYYY-MM-DD-<8hex>` (`sess-2026-05-18-a1b2c3d4`).
+- HITL Approval の `approval_requested` / `approval_granted` も同一
+  `session_id` を継承.
+
+### 3.4 PII redaction 順序
+
+Brief 受信から audit log 記録までの順序:
+
+```
+1. raw Brief 受信 (HTTP / MCP)
+2. PII detector (presidio) で entity 抽出 → `pii_redacted` event を emit
+3. redacted text で text_hash を計算
+4. brief_submitted event を emit (text_hash 入り、原文は含まない)
+5. 以降の stimulus_built / loop_started / ... も redacted 入力で進む
+```
+
+`pii_redacted` event が `brief_submitted` より **先** に来る (`seq` が小さい)。
+順序逆転は chain integrity 違反として `verify_chain_detailed` が flag する.
 
 ## 4. イベント種別 (主要)
 
