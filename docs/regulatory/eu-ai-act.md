@@ -89,6 +89,31 @@ EU AI Act (Regulation (EU) 2024/1689) は 2024 年 8 月発効、段階的施行
 - serious incident は **15 日以内** に所轄当局へ報告 (Art.73). 重大障害
   (人命 / インフラ / 基本権侵害) は即時報告
 
+## 6.1 Post-market monitoring (PMM) と incident reporting
+
+EU AI Act Art.72 が要求する PMM (post-market monitoring system) は、
+高リスク AI provider が市場投入後にも継続的に AI の risk / 性能 / drift を
+モニタリングする義務. FullSense は以下で対応:
+
+| PMM 要素 | FullSense 実装 |
+|---|---|
+| データ収集 | `audit-log-format` の全 event (HMAC chain で改ざん耐性) |
+| Risk 集計 | `risk_alert` event の月次集計 |
+| Drift 検知 | llive Brief outcome の statistical control (Xbar-R / CUSUM, llmesh 既存) |
+| 報告書生成 | `python -m llmesh timeline report --pmm --quarterly` (Phase 2 実装予定) |
+
+incident reporting (Art.73) の起動条件:
+
+```
+1. risk_alert event が threshold 超え (LLMESH_RISK_ALERT_THRESHOLD)
+2. または `outbound_call_blocked` が連続発生 (cross-border 違反)
+3. または HITL approval_denied が user 信頼を破壊する規模
+4. → docs/regulatory/data-sovereignty.md 6.1 incident response プロセスに合流
+   (報告先が AI Act 当局 / GDPR 当局 / 国内当局で分岐)
+```
+
+15 日 / 即時 の区別は当局ガイダンス (European AI Office) を参照.
+
 ## 7. 公開する場合の手続 (参考)
 
 - CE marking — 適合性評価 (内部 or notified body)
