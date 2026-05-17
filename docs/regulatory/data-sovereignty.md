@@ -28,6 +28,29 @@ on-prem 完結設計は構造的にこれらの規制と整合.
 | ブラジル | LGPD | on-prem 完結 |
 | 米国 | HIPAA / GLBA / 州法 (CCPA 等) | on-prem 完結 |
 
+## 2.1 「越境」の技術的定義 (FullSense における運用基準)
+
+各国規制で「データ越境 (cross-border data transfer)」の定義は微妙に異なるが、
+FullSense は以下を **満たすか満たさないか** で機械判定する:
+
+> **顧客の管理ネットワーク境界外 (= 顧客が直接 IP/DNS/firewall を制御
+> していない宛先) への outbound network call が発生したか.**
+
+これに該当する具体例:
+
+| 行為 | 越境とみなすか |
+|---|---|
+| 顧客 LAN 内の Ollama / vLLM へ HTTP | **越境せず** |
+| 顧客 VPC 内の S3-compatible storage | **越境せず** (同一物理国の場合) |
+| OpenAI / Anthropic / Gemini API 呼び出し | **越境する** |
+| Hugging Face Hub からのモデル download (runtime) | **越境する** |
+| PyPI / Docker Hub / GitHub からの依存解決 (runtime) | **越境する** (建設時のみ実施し runtime では発生させない設計) |
+| 顧客社内 mirror (gitee / 中国 pip / Nexus 等) | **越境せず** (顧客管理境界内なら) |
+| クラウド telemetry / observability SaaS (Datadog 等) | **越境する** |
+
+「物理的領土を出る瞬間」を補足する各国規制との整合性は、
+**outbound network call の発生地点** をログに残すことで対応する (4.2).
+
 ## 3. なぜ on-prem 完結が全規制に対応するのか
 
 データ越境規制の根幹は「データが該当国の物理的領域を出る瞬間」を捕捉する.
