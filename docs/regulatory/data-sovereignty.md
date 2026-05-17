@@ -165,3 +165,11 @@ FullSense は最後の点 (PyPI 等) を gitee mirror / 中国 pip mirror /
 ## 改訂履歴
 
 - 2026-05-18 — draft v0.1 作成
+- 2026-05-18 — draft v0.2:
+  - 2.1 「越境」の技術的定義 (outbound network call が顧客管理境界外か) を確定
+  - 4.1 runtime-check 仕様 (httpx/urllib/aiohttp 傍受 + LLMESH_INTERNAL_HOSTS /
+    LLMESH_OUTBOUND_POLICY block|audit_only|allow_listed)
+  - 4.2 audit-log-format との接続 — outbound_call_attempted /
+    outbound_call_blocked / cross_border_warning event 表
+  - 6.1 越境発生時 incident response プロセス (GDPR 72h / PIPL Art.57 / APPI
+    第26条 通知義務 timeline と key rotation 抑止ルール)
