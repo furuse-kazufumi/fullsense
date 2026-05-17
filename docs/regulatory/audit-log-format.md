@@ -216,3 +216,13 @@ F25 Phase h (`docs/design/f25-phase-h-e2e.md`) で実装する llove engine
 ## 改訂履歴
 
 - 2026-05-18 — draft v0.1 作成
+- 2026-05-18 — draft v0.2:
+  - 3.1 HMAC chain アルゴリズム確定 (canonical JSON + sort_keys + HMAC-SHA256)
+  - 3.2 hash 計算規則 (text_hash / args_hash / result_hash) を SHA-256 で固定、
+    すべて PII redaction 後の値であることを明示
+  - 3.3 node_id / session_id 生成規則 (LLMESH_NODE_ID env / sess-YYYY-MM-DD-<8hex>)
+  - 3.4 PII redaction 順序を確定 (pii_redacted → brief_submitted の seq 順序固定)
+  - 8 ファイルパス default (active/archive/keys ディレクトリ構成) と
+    key rotation 規則 (hmac_key_rotated event, 月次 or 100 万 entry)
+  - 9 F25 Phase h との接続 — Phase h の各 step が発火する event 表を追加.
+    audit log の source of truth は llive 側に集約.
