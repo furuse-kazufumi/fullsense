@@ -110,6 +110,48 @@ emit し、運用者が誤って public 設定にした際の警告に使う.
 | 監査ログ | llive Approval Bus + SqliteLedger (audit-log-format.md 準拠) |
 | データ安全 | llmesh on-prem 完結 (data-sovereignty.md 参照) |
 
+### 4.1 audit-log との接続
+
+`audit-log-format.md` (3-4) に従い、公衆向けサービス専用の event を追加:
+
+| event_type | 発生タイミング | 追加 fields |
+|---|---|---|
+| `content_review_requested` | 内容审核 gate 到達 | `brief_id`, `categories`, `auto_score` |
+| `content_review_passed` | 自動 / 手動審査通過 | `brief_id`, `reviewer`, `policy_version` |
+| `content_review_blocked` | 違反検出で block | `brief_id`, `reason_codes`, `policy_version` |
+| `deepfake_label_applied` | 出力に深度合成ラベル付与 | `brief_id`, `media_type`, `label_method` |
+| `realname_auth_verified` | 実名認証完了 | `actor`, `verification_method` (`mobile_carrier` / `id_card_ocr` / 等) |
+| `algorithm_filing_metadata_dumped` | 算法備案用 metadata export | `output_path`, `model_id` |
+
+これらは HMAC chain (audit-log-format 3.1) に組み込まれるため、CAC 監査時に
+**「内容审核が必ず brief 出力前に通っていた」** ことを順序で証明可能.
+具体的には `content_review_passed.seq < outcome_recorded.seq` が
+全 brief で成立することを `verify_chain_detailed` が確認する.
+
+### 4.2 PII handling 中国特例
+
+中国 PIPL (个人信息保护法) は GDPR と類似しつつ、生成 AI 弁法と組合せで
+以下の特例が発生する:
+
+| 項目 | 中国特例 |
+|---|---|
+| 同意取得 | 「敏感个人信息」(医療/金融/位置/14 歳未満) は **separate consent** 必要 (PIPL Art.29) |
+| 出力に user PII を含む可能性 | LLM の hallucination も含めて provider 責任. 出力フィルタリング義務化 |
+| 越境 | 公衆向けサービス user データの海外移転は別途 **PIPL Art.38** の手続必要 (data-sovereignty.md 2.1 で 越境扱い) |
+| 未成年保護 | 14 歳未満は guardian consent + 別途仕组み |
+| 識別困難な aggregate データ | 匿名化 (de-identification) は PIPL Art.4 で「個人情報ではない」とみなす要件あり |
+
+FullSense 側の対応:
+
+- llive `pii_redacted` event (audit-log-format 3.4) で PIPL 第29条 敏感情報の
+  category を `entity_type` に分けて記録 (例: `medical`, `financial`,
+  `location`, `minor_age`).
+- content_review_blocked event の `reason_codes` に PIPL Art.X 違反を明示.
+- 越境発生時 (data-sovereignty 6.1) は PIPL Art.57 + 生成 AI 弁法 Art.18
+  両方の通知義務 timeline を triggerring.
+
+## 4.3 filing 後の更新義務
+
 ## 5. 推奨運用 (社内利用に留める判断も含めて)
 
 **推奨**: ほとんどの企業は **社内利用** で要件を満たせるため、`cn-internal-use.md`
