@@ -3,38 +3,40 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-05-17 13:52:03
+- **最終更新**: 2026-05-17 16:22:22
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
-0c89322 docs(qiita): 14/15/16 に参考文献・参考リソースを追加
-9c1380f auto: 16_three_self_spirit_ai_management.md 編集前 (2026-05-17 13:50)
-b60b998 auto: 15_second_brain_spiral_dev.md 編集前 (2026-05-17 13:49)
-bcbbe6e auto: 14_invisible_annotation_channel.md 編集前 (2026-05-17 13:49)
-7aa237e docs(qiita): 16 三自の精神 — 圧倒的成果マネジャー流の AI 運用論
-dc776cf docs(qiita): 15 第二の脳 — 30 年経験 + Perplexity + Claude Code + TRIZ + RAG
-7b00f8a docs(qiita): 14 不可視アノテーションチャネル — HTML で見えないが機械では読める
-f04d2df docs(articles): 13 コーパス先行戦略 — AI が気づかない観点を思考フローに補完
-9649d2e docs(articles): QIITA_HISTORY + LinkedIn 3 種 × 4 言語 (jp/en/zh/ko)
-d1d4223 docs(history): 12 llive 開発履歴 — 5 日で v0.1 から v0.7 候補へ
+0a8c838 docs(qiita): 統合版 — 第二の脳シリーズ全 4 部 (14/15/16/17) を 1 記事に
+f42a7a8 docs(qiita): 14/15/16/17 に休憩ポイント (雑談) を 2 個ずつ挿入
+53c78cc auto: 17_human_ai_fusion_vision.md 編集前 (2026-05-17 16:12)
+a4aa555 auto: 17_human_ai_fusion_vision.md 編集前 (2026-05-17 16:12)
+0019630 auto: 16_three_self_spirit_ai_management.md 編集前 (2026-05-17 16:12)
+f34278d auto: 16_three_self_spirit_ai_management.md 編集前 (2026-05-17 16:12)
+a76368a auto: 15_second_brain_spiral_dev.md 編集前 (2026-05-17 16:12)
+d8c599c auto: 15_second_brain_spiral_dev.md 編集前 (2026-05-17 16:12)
+ea120ab auto: 14_invisible_annotation_channel.md 編集前 (2026-05-17 16:12)
+2adfa00 auto: 14_invisible_annotation_channel.md 編集前 (2026-05-17 16:11)
 ```
 
 ## 現在の git status
 
 ```
-(clean)
+M docs/SESSION_SUMMARY.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-13:50 docs/articles/2026-05-20/16_three_self_spirit_ai_management.md
-13:49 docs/articles/2026-05-19/15_second_brain_spiral_dev.md
-13:49 docs/articles/2026-05-18/14_invisible_annotation_channel.md
-13:42 docs/SESSION_SUMMARY.md
+16:19 docs/SESSION_SUMMARY.md
+16:18 docs/articles/2026-05-18/QIITA_SECOND_BRAIN_SERIES.md
+16:12 docs/articles/2026-05-21/17_human_ai_fusion_vision.md
+16:12 docs/articles/2026-05-20/16_three_self_spirit_ai_management.md
+16:12 docs/articles/2026-05-19/15_second_brain_spiral_dev.md
+16:12 docs/articles/2026-05-18/14_invisible_annotation_channel.md
 ```
 
 ---
