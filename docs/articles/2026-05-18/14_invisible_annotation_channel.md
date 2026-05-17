@@ -89,6 +89,10 @@ HTML コメントの利点は「**Markdown が HTML を passthrough する事実
 (試しに、この段落の末尾にも 1 つ仕込んでみよう。)
 <!-- llive:meta.article_id="14_invisible_annotation_channel" target=llove -->
 
+### ☕ ちなみに
+
+HTML コメントを Markdown に仕込むテクは、Jekyll や Hugo の界隈では「**コメント front matter**」と呼ばれて昔からある。新しいのは「**Markdown 本文の任意位置**に機械可読メタデータを置く」発想の方。front matter は冒頭固定、こちらは段落単位で散らせる。
+
 ## llive 実装での自然な emit
 
 `BriefRunner.submit(brief)` 内で、毎 Brief 終了時に Annotation 群が自動で emit される。
