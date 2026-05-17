@@ -254,8 +254,10 @@ Phase h は **in-process** (FastAPI app と FullSenseLoop が同一プロセス)
 | llive HITL Approval Bus + SqliteLedger (C-1 完了) | h.5 用 |
 | llmesh.llm.cn_llm presets (2026-05-18, 本日 commit) | h.3 用 |
 | llmesh.audit.trace (HMAC audit log) | h.3 用、各 LLM call を audit |
-| llove engine skeleton (2026-05-18, 本日 commit) | h.1 + h.4 の base |
+| llove engine skeleton (`llove/engine/http_app.py`, health/info/audit のみ) | h.1 の base — `/api/v1/brief/submit` `/api/v1/annotations/stream` を新規追加 |
 | llove views/* (markdown / annotations / etc.) | h.4 の描画層 |
+| llive `tool_submit_brief` (`llive/mcp/tools.py`) | h.1 と 1:1 対応する HTTP 経由 entry |
+| llive `Annotation` / `AnnotationBundle` (`llive/annotations.py`) | h.2 の event payload schema (namespace/key/value/target_layer) |
 
 ## 7. 開発タイムライン (Week 2-3)
 
