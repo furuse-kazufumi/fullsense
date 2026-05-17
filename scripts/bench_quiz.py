@@ -153,18 +153,28 @@ def main() -> int:
         else:
             md.append(f"| `{c['model']}` | {c['quiz_id']} | - | - | - | ❌ | - | error: {c.get('error','?')[:60]} |")
     md.append("")
-    md.append("## Per-model summary")
+    md.append("## Per-model summary (with statistics — added 2026-05-17)")
     md.append("")
-    md.append("| model | total | passed | partial avg | wall sum (s) |")
-    md.append("|---|---|---|---|---|")
+    md.append("| model | total | passed | partial mean | partial stdev | ms mean | ms stdev | wall sum (s) |")
+    md.append("|---|---|---|---|---|---|---|---|")
+    import statistics as _stat
+
     for model in args.models:
         cells_m = [c for c in cells if c.get("model") == model]
         ok_cells = [c for c in cells_m if c.get("ok")]
         passed = sum(1 for c in ok_cells if c.get("passed"))
-        partial = sum(c.get("partial_score", 0) for c in ok_cells)
+        partials = [c.get("partial_score", 0.0) for c in ok_cells]
+        mss = [c.get("ms", 0.0) for c in ok_cells]
         wall = sum(c.get("ms", 0) for c in cells_m) / 1000.0
-        md.append(f"| `{model}` | {len(cells_m)} | {passed} | "
-                  f"{(partial / max(1, len(ok_cells))):.2f} | {wall:.1f} |")
+        p_mean = (sum(partials) / len(partials)) if partials else 0.0
+        p_std = _stat.stdev(partials) if len(partials) > 1 else 0.0
+        m_mean = (sum(mss) / len(mss)) if mss else 0.0
+        m_std = _stat.stdev(mss) if len(mss) > 1 else 0.0
+        md.append(
+            f"| `{model}` | {len(cells_m)} | {passed} | "
+            f"{p_mean:.3f} | {p_std:.3f} | "
+            f"{m_mean:.0f} | {m_std:.0f} | {wall:.1f} |"
+        )
 
     (root / "quiz_summary.md").write_text("\n".join(md), encoding="utf-8")
     (root / "quiz_summary.json").write_text(json.dumps(cells, indent=2, ensure_ascii=False),

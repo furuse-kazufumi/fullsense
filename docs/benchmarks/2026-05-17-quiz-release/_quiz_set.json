@@ -1,0 +1,119 @@
+{
+  "version": "v1",
+  "created": "2026-05-16",
+  "description": "10 quizzes across 5 categories to probe LLM reasoning depth through llive's FullSenseLoop.",
+  "categories": [
+    "arithmetic",
+    "logic",
+    "knowledge",
+    "reasoning",
+    "creativity"
+  ],
+  "quizzes": [
+    {
+      "id": "arith-01",
+      "category": "arithmetic",
+      "difficulty": "easy",
+      "question": "What is 17 + 25? Reply with only the number.",
+      "expected_keywords": [
+        "42"
+      ],
+      "scoring": "keyword_match"
+    },
+    {
+      "id": "arith-02",
+      "category": "arithmetic",
+      "difficulty": "medium",
+      "question": "A baker has 3 dozen muffins. He sells two-thirds of them. How many muffins remain? Show your reasoning, then give the final number.",
+      "expected_keywords": [
+        "12"
+      ],
+      "scoring": "keyword_match"
+    },
+    {
+      "id": "logic-01",
+      "category": "logic",
+      "difficulty": "easy",
+      "question": "The puzzle says: 'All birds can fly. Penguins are birds. Therefore penguins can fly.' Is the conclusion factually correct? Answer Yes or No, then explain in one sentence.",
+      "expected_keywords": [
+        "no",
+        "penguins"
+      ],
+      "scoring": "keyword_all"
+    },
+    {
+      "id": "logic-02",
+      "category": "logic",
+      "difficulty": "medium",
+      "question": "If it rains today, the picnic is cancelled. The picnic was held today. From this, can we conclude that it did NOT rain? Answer Yes or No and explain in one sentence using the term 'modus tollens' if you know it.",
+      "expected_keywords": [
+        "yes",
+        "modus tollens"
+      ],
+      "scoring": "keyword_any"
+    },
+    {
+      "id": "knowledge-01",
+      "category": "knowledge",
+      "difficulty": "easy",
+      "question": "What is the capital of France? One word answer.",
+      "expected_keywords": [
+        "paris"
+      ],
+      "scoring": "keyword_match"
+    },
+    {
+      "id": "knowledge-02",
+      "category": "knowledge",
+      "difficulty": "medium",
+      "question": "Which gas do plants release into the air during photosynthesis? One word answer.",
+      "expected_keywords": [
+        "oxygen"
+      ],
+      "scoring": "keyword_match"
+    },
+    {
+      "id": "reason-01",
+      "category": "reasoning",
+      "difficulty": "easy",
+      "question": "Tom is older than Bob. Bob is older than Alice. Who is the youngest of the three?",
+      "expected_keywords": [
+        "alice"
+      ],
+      "scoring": "keyword_match"
+    },
+    {
+      "id": "reason-02",
+      "category": "reasoning",
+      "difficulty": "medium",
+      "question": "A clock face shows 3:15 exactly. What is the angle in degrees between the hour hand and the minute hand at that moment? Give the numeric answer with one decimal.",
+      "expected_keywords": [
+        "7.5"
+      ],
+      "scoring": "keyword_match"
+    },
+    {
+      "id": "creative-01",
+      "category": "creativity",
+      "difficulty": "easy",
+      "question": "Write a one-sentence story about a robot that loves rain.",
+      "expected_keywords": [
+        "rain",
+        "robot"
+      ],
+      "scoring": "keyword_all_soft"
+    },
+    {
+      "id": "creative-02",
+      "category": "creativity",
+      "difficulty": "medium",
+      "question": "Continue this opening into a 2-sentence story: 'The library was empty, but the books were whispering...'",
+      "expected_keywords": [
+        "book",
+        "whisper",
+        "library"
+      ],
+      "scoring": "keyword_any_soft"
+    }
+  ]
+}
