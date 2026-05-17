@@ -152,6 +152,27 @@ FullSense 側の対応:
 
 ## 4.3 filing 後の更新義務
 
+filing 後にモデル / アルゴリズム / 適用分野を **重大変更** した場合、
+**変更後 10 営業日以内** に更新 filing が必要 (互联网信息服务算法备案管理规定).
+
+「重大変更」の定義 (実務指針):
+
+| 変更 | 重大変更か | 対応 |
+|---|---|---|
+| LLM backend を別 model に切替 (例: GLM-4 → Qwen-3) | 重大 | 更新 filing 必要 |
+| Fine-tune を再実行 (同 model architecture, 新 training data) | 中 | 更新 filing 推奨 |
+| Annotation Channel namespace 追加 | 軽微 | 更新不要 (内部 metadata) |
+| 公衆向け対象を「中国本土 user → 中国本土+香港 user」に拡大 | 重大 | 更新 filing 必要 |
+| 価格 / UI / 内容审核ポリシ更新 | 中 | 内部記録のみ |
+
+FullSense 側で自動 detection:
+
+- `algorithm_filing_metadata_dumped` event の `model_id` / `fine_tune_checksum`
+  が前回 dump と異なる → 自動 alert で運用者に「更新 filing 要否確認」を
+  notify.
+- 推奨運用: 月次 `python -m llmesh timeline diff --since last_filing` で
+  当該期間の重大変更候補を一覧化.
+
 ## 5. 推奨運用 (社内利用に留める判断も含めて)
 
 **推奨**: ほとんどの企業は **社内利用** で要件を満たせるため、`cn-internal-use.md`
