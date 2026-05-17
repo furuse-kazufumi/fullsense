@@ -201,3 +201,13 @@ FullSense 側で自動 detection:
 ## 改訂履歴
 
 - 2026-05-18 — draft v0.1 作成
+- 2026-05-18 — draft v0.2:
+  - 1.1 「公衆向け」の技術的境界判定 (auth_required / allowed_domains /
+    user_count_estimate ヒューリスティクス + Annotation Channel 警告)
+  - 4.1 audit-log との接続 — content_review_requested / passed / blocked /
+    deepfake_label_applied / realname_auth_verified / algorithm_filing_metadata_dumped
+    event 表. content_review_passed.seq < outcome_recorded.seq 順序を CAC 監査で証明
+  - 4.2 PII handling 中国特例 (PIPL Art.29 敏感个人信息 separate consent /
+    Art.38 越境手続 / Art.4 匿名化要件) と FullSense 側 event mapping
+  - 4.3 filing 後の更新義務 — 重大変更判定表 + algorithm_filing_metadata_dumped
+    の checksum diff 自動 alert
