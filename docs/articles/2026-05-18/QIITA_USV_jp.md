@@ -193,9 +193,16 @@ llove は USV viewer を `F26: USV Table Widget` として統合予定です
   なし、マルチライン OK)
 - **Apache-2.0 純 OSS**、商用も自由、貢献歓迎
 
-Repo (公開準備中): https://github.com/furuse-kazufumi/usrs
-SPEC / README / 参考実装 / 普及戦略すべて含む。
-興味があれば Star / Issue / Discussion でぜひ。
+Repo: https://github.com/furuse-kazufumi/usrs
+SPEC / README / 参考実装 / 普及戦略すべて含む。Star / Issue / Discussion でぜひ。
+
+**SixArm USV (先行プロジェクト) との関係**:
+本記事の発想 (ASCII US/RS 再活性化、Unicode 可視変種併用、cell content
+普遍性) は Joel Parker Henderson 氏の [SixArm/usv](https://github.com/SixArm/usv)
+プロジェクト (2022 年〜) に多くを負います。2024 年に IETF Draft が
+expire していたので、追加 3 点 (罫線連動セマンティクス / width metadata /
+2-pane viewer) を持って [revival 提案 Issue](https://github.com/SixArm/usv/issues/14)
+を 2026-05-17 (JST) に投稿しました。先人への敬意を込めて。
 
 ---
 
