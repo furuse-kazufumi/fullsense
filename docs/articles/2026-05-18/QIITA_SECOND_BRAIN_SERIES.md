@@ -126,11 +126,9 @@ HTML コメントを Markdown に仕込むテクは、Jekyll / Hugo 界隈では
 | 2 | **岡潔の数学観** (YouTube) | 4 仮説抽出 → OKA-FX 10 件要件化 → OKA-01〜07 実装 |
 | 3 | **LinkedIn フィードバック** (独立性) | IND-FX 設計原則 + IND-04 Annotation Channel 実装 (= 第 1 部) |
 
-### ☕ ちょっと脱線
+### Perplexity / TRIZ / RAG + RAD の役割
 
-「第二の脳」って言葉、最初は気恥ずかしかった。Tiago Forte の同名書籍に引きずられて陳腐に聞こえる気がして。でも 5 日間で 14 機能を 1 人で積み終えた後に振り返ると、これ以上ピッタリの言葉が見つからない。**気恥ずかしさは正確さの前に折れる**。
-
-### Perplexity / TRIZ / RAG の役割
+> ⚠️ **用語注意**: 本記事の **RAD** は *Research Aggregation Directory* の略で、筆者が Raptor 配下に整備した **49 分野・約 5 万件の論文/技術文書コーパス** を指します。一般用語の **RAG (Retrieval-Augmented Generation)** とは別物で、**RAG の書き間違いではありません**。RAG が「検索 → 生成」の手法名なのに対し、RAD は「検索される側の構造化コーパスそのもの」を指す名前です。
 
 **Perplexity 要約 = 「入力品質ゲート」**: 外部思想は本・論文・動画・SNS と形式バラバラ。Claude Code に直接放り込むと context 圧迫 + 解釈ゆらぎ。Perplexity に「~3000 字に要約」「実装可能な仕様で」と指示すると、**Claude Code が読み取れる質の入力**に変換される。
 
@@ -139,7 +137,7 @@ HTML コメントを Markdown に仕込むテクは、Jekyll / Hugo 界隈では
 - 「rule-based vs LLM 品質」→ echo baseline 残置 (TRIZ 原理 1: 分割)
 - 「audit 完全性 vs 実装オーバヘッド」→ bind_ledger() pattern (TRIZ 原理 15: 動的化)
 
-**RAG = 「研究者の知見を借りる」**: 新機能設計で必要な分野が出るたび、Raptor RAD (49 分野) を引く。Claude が「自分の言葉」ではなく「**具体的な論文・先行研究**」を引用するので質が一段上がる。
+**RAG + RAD = 「研究者の知見を借りる」**: 新機能設計で必要な分野が出るたび、**RAG の仕組みで RAD コーパス (49 分野) を引く**。Claude が「自分の言葉」ではなく「**具体的な論文・先行研究**」を引用するので質が一段上がる。`論文 RAG コーパス (RAD 49 分野 / 約 5 万件)` という表 (上記) の表記もこの 2 つを併記したものです。
 
 ### ☕ ここまで読んでくれてありがとう
 
