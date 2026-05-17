@@ -126,6 +126,29 @@ Phase 1 (本 v3.2 α) は静的解析のみ. 動的検証は Phase 2.
 FullSense は最後の点 (PyPI 等) を gitee mirror / 中国 pip mirror /
 社内 marketplace で対応可能.
 
+## 6.1 越境発生時の incident response プロセス
+
+設計上ゼロを目指すが、誤設定・サードパーティ製プラグイン経由等で
+越境が発生し得る. 検出時の標準プロセス:
+
+```
+1. runtime-check が outbound_call_attempted / outbound_call_blocked を発火
+2. llmesh が監査者宛 alert (email / Slack / 中国版 IM 等) を送信
+3. 担当者は影響範囲 (どの brief / どの actor / どの host) を audit-log
+   chain query で抽出:
+     python -m llmesh timeline grep --event outbound_call_attempted --since 24h
+4. 該当 brief 内で送信された PII カテゴリ (entity_type) を集計
+5. 規制毎の通知義務 timeline に従い、必要なら所轄当局へ届出:
+   - GDPR Art.33  — 監督機関に 72h 以内
+   - PIPL Art.57  — CAC に「重大なインシデント」報告
+   - APPI 第26条 — 個情委 + 本人通知 (要件該当時)
+6. 原因分析と運用修正 (allowlist 見直し / 依存パッケージ pinning)
+7. 修正後 chain integrity を verify_chain_detailed で再確認
+```
+
+`audit-log-format.md` 8.2 の key rotation 規則とは独立 — incident response
+中は key を **rotate しない** (chain を切ると証跡が分断されるため).
+
 ## 7. 多言語版予定
 
 - ja (本ドキュメント) — draft v0.1
