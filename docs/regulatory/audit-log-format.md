@@ -233,3 +233,8 @@ F25 Phase h (`docs/design/f25-phase-h-e2e.md`) で実装する llove engine
     key rotation 規則 (hmac_key_rotated event, 月次 or 100 万 entry)
   - 9 F25 Phase h との接続 — Phase h の各 step が発火する event 表を追加.
     audit log の source of truth は llive 側に集約.
+- 2026-05-18 — draft v0.3 (整合性 fix):
+  - 5 章 保存期間表を Article 18 (技術文書 10 年) と Article 19 (自動 logs
+    最低 6 か月) に正しく分離. v0.2 で「Article 18 → 6 年」と書いていた
+    記述は誤りで、本 spec の対象は logs (Article 19) なので訂正.
+  - LLMESH_AUDIT_RETENTION_YEARS env (最短 6 か月) を明示
