@@ -301,3 +301,13 @@ Phase h は **in-process** (FastAPI app と FullSenseLoop が同一プロセス)
 ## 改訂履歴
 
 - 2026-05-18 — draft v0.1 (F25 Phase h 着手前の設計固め)
+- 2026-05-18 — draft v0.2 (実コード確認反映):
+  - `/api/v1/brief/submit` request/response JSON schema を 4.6.1 に確定
+  - `/api/v1/annotations/stream` SSE event types (annotation/stage_complete/
+    brief_done/heartbeat) と resume semantics を 4.6.2 に確定
+  - 環境変数表 (LLOVE_ENGINE_*/LLIVE_LLM_BACKEND/LLIVE_BRIEF_APPROVAL_REQUIRED) を
+    4.6.3 に確定
+  - in-process pattern を Phase h の選択として明示 (subprocess は h+1) — 4.6.4
+  - llove engine skeleton の現状 (health/info/audit のみ実装、brief/annotation
+    未実装) を h.1/h.2 で明示
+  - 既存資産表に `tool_submit_brief` / `Annotation` モジュールへの 1:1 対応を追記
