@@ -139,3 +139,11 @@ incident reporting (Art.73) の起動条件:
 ## 改訂履歴
 
 - 2026-05-18 — draft v0.1 作成 (戦略思索 PART 3 章 10 + Week 2 残)
+- 2026-05-18 — draft v0.2:
+  - 5.1 Article 別 mapping (Art.12 logging / Art.13 transparency /
+    Art.14 human oversight / Art.18 文書 10 年 / Art.19 logs 最低 6 か月 /
+    Art.50 透明性 / Art.72 PMM / Art.73 incident 15 日 / Art.99 罰則)
+  - 6 章 保管期間を Art.18 (文書 10 年) と Art.19 (logs 最低 6 か月) で分離
+    (v0.1 で「Article 18 → 6 年」と単独引用していた箇所を訂正)
+  - 6.1 PMM (Art.72) と incident reporting (Art.73) の実装方針を追加.
+    data-sovereignty.md 6.1 incident response と統合運用
