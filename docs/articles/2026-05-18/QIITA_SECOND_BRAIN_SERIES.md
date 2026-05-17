@@ -1,22 +1,80 @@
-# 「第二の脳」シリーズ全 4 部 — 不可視 Annotation × 構築論 × 運用論 × ビジョン論
+# 「第二の脳」シリーズ — llive 全景 × 不可視 Annotation × 構築論 × 運用論 × ビジョン論 × 実装の深層
 
 **1 行 hook**:
-1 人開発で 5 日間に 14 機能・256 テストを追加し、1270 件全 PASS で回帰ゼロを達成した。LinkedIn のコメント 1 通から HTML コメントへの着地、Perplexity と TRIZ と 5 万件論文 RAG の組み合わせ、キヤノン「三自の精神」を AI に課す運用、そして Will Caster と Andrew NDR114 のビジョン — 4 部構成で公開する。
+1 人開発で 5 日間に 14 機能・256 テストを追加し、**1,276 件全 PASS で回帰ゼロ** を達成した。LinkedIn のコメント 1 通から HTML コメントへの着地、Perplexity と TRIZ と 5 万件論文コーパスの組み合わせ、キヤノン「三自の精神」を AI に課す運用、そして Will Caster と Andrew NDR114 のビジョン — 6 部構成で公開する。
 
 ---
 
 ## はじめに
 
-本記事は llive (FullSense umbrella の中核 OSS、`llive` — L は 2 個) を 1 人で開発する筆者が、5 日間の集中開発で得た知見を 4 部構成にまとめたものです。
+本記事は llive (FullSense umbrella の中核 OSS、`llive` — L は 2 個) を 1 人で開発する筆者が、5 日間の集中開発で得た知見を **0〜5 部の計 6 部構成** にまとめたものです。
 
 | 部 | テーマ | 起点 |
 |---|---|---|
+| **第 0 部** | **llive とは何か** (全景) | FullSense umbrella の 3 プロダクト構成 |
 | 第 1 部 | **不可視アノテーションチャネル** | LinkedIn コメント (独立性 vs 組合せ価値) |
-| 第 2 部 | **第二の脳** (構築論) | 30 年経験 + Perplexity + Claude Code + TRIZ + RAG |
+| 第 2 部 | **第二の脳** (構築論) | 30 年経験 + Perplexity + Claude Code + TRIZ + RAG/RAD |
 | 第 3 部 | **三自の精神** (運用論) | キヤノン理念 + マネジメント書籍 |
 | 第 4 部 | **Will Caster と Andrew NDR114** (ビジョン論) | 映画 2 本 + LinkedIn 画像 |
+| **第 5 部** | **実装の深層** (MATH-08 grounding 配線) | 「LLM に計算させない」差別化軸の end-to-end |
 
-各部は独立して読めますが、合わせて読むと「**作って → 運用して → ビジョンに繋ぐ**」一連の流れになります。
+各部は独立して読めますが、合わせて読むと「**全景を見て → 設計を理解して → 作って → 運用して → ビジョンに繋いで → 実装まで降りる**」という 6 段の階段になります。**忙しい方は第 0 部だけでも llive の全体像が掴めるよう** に構成しました。
+
+---
+
+# 第 0 部 — llive とは何か (全景)
+
+## FullSense umbrella と 3 プロダクト
+
+`llive` は **FullSense ™** という umbrella ブランドの中核に位置する OSS です。FullSense は「**人と AI が共有できる感覚的入出力すべて**」を扱うコンセプトで、現在以下の 3 プロダクトから構成されています。
+
+```mermaid
+flowchart LR
+    User[人間] -.->|名刺/SNS/対話| FS[FullSense ™]
+    FS --> llive[llive<br/>記憶 + 思考 + Brief API<br/>FR 92 件 / 1276 PASS]
+    FS --> llove[llove<br/>ブラウザ並 TUI<br/>Markdown / SVG / Mermaid]
+    FS --> llmesh[llmesh<br/>P2P / OPC-UA / MQTT<br/>分散インフラ]
+    llive -.HTML annotation.-> llove
+    llive -.HTML annotation.-> llmesh
+    llove -.MCP.-> llive
+    llmesh -.MCP.-> llive
+```
+
+3 プロダクトの役割分担:
+
+| プロダクト | 役割 | 単独利用 | 組合せ強化 |
+|---|---|---|---|
+| **llive** | LLM 記憶・思考層・Brief API・ledger | ◎ (本記事の主役) | annotation で TUI に伝達 |
+| **llove** | ブラウザ並表示の TUI / IDE / Game container | ◎ (タイピングデモなど) | llive の出力を render |
+| **llmesh** | P2P + OPC-UA + MQTT で分散実行 | ◎ (産業 IoT 単体) | llive のジョブを multi-node 化 |
+
+ライセンスは全プロダクト **Apache 2.0 + Commercial dual-license**。OSS 利用は自由、商用 SaaS / SI 案件のみ別契約。
+
+## llive リポジトリ統計 (2026-05-17 時点)
+
+| 項目 | 値 |
+|---|---|
+| ソースファイル数 | **172 ファイル** (`src/llive/`) |
+| 機能要件 (FR) | **92 件 / 92 件マッピング済** (Phase 1-10) |
+| テスト件数 | **1,276 件全 PASS / 回帰ゼロ** |
+| Phase 完了 | Phase 1-4 完 / Phase 5+ 進行中 |
+| 主要モジュール | `brief/` (Brief API・grounding・runner)、`math/` (MATH-01〜08)、`fullsense/` (loop core)、`memory/` (RAD)、`annotations.py` (第 1 部の主役) |
+| 言語 | Python 3.11 (Rust 加速は v0.7+ 候補) |
+| 依存 | sympy>=1.12 / z3-solver>=4.13 (MATH 系)、pyyaml、pydantic |
+
+## なぜ「数学・単位」が最初の vertical か
+
+汎用 LLM は次が苦手:
+
+| 観点 | 汎用 LLM の弱点 | llive 既存資産との合致 |
+|---|---|---|
+| 記号操作の幻覚 | `x² + x = 2x³` のような誤等式を生成 | EVO-04 Z3 静的検証で gate |
+| 単位次元の取り違え | `5 m/s + 3 s = 8` | SI 次元解析 (MATH-01) |
+| 数値精度 | float 演算誤差を無視 | error propagation (MATH-04) |
+| 公理体系 | 暗黙の前提を混入 | EpistemicType=FACTUAL strict track |
+| 引用の信頼性 | "CODATA value is X" と適当に答える | RAD math/metrology + provenance |
+
+これを llive の構造化思考層 + 形式検証 + provenance ledger で克服する。Phase 8 (CABT) や Phase 9 (CREAT) より優先して **v0.7-vertical で先行着手** しました。具体的な実装は第 5 部で詳述します。
 
 ---
 
