@@ -1,7 +1,10 @@
-# データ越境 / データ主権 運用 documentation (draft v0.1)
+# データ越境 / データ主権 運用 documentation (draft v0.2)
 
 > **本ドキュメントは法的助言を構成するものではありません.
 > Not legal advice / 不构成法律建议.**
+>
+> v0.2 (2026-05-18): 「越境」の技術的定義 / runtime-check 仕様 /
+> audit-log-format との接続 / 越境発生時 incident response を追加.
 
 ## 1. 概要
 
