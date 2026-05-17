@@ -354,6 +354,17 @@ llive は Apache 2.0 + Commercial dual-license の OSS、Repo は https://github
 - Patrick Lewis et al., *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*, NeurIPS 2020 (arXiv:2005.11401)
 - Tiago Forte, *Building a Second Brain*, Atria Books, 2022 / 邦訳『SECOND BRAIN』ダイヤモンド社, 2022
 
+### 岡潔先生の数学観に関する参考 (第 2 部、OKA-FX 命名の触発源)
+本記事の OKA-FX (Framework inspired by Prof. Oka Kiyoshi) は、以下の先生の
+ご著作 / 講話に学ばせていただいた 4 観点 (情緒・行き詰まり・文章化・国語力)
+を **設計の触発源** としています。**先生のお考えそのものを実装したと主張
+するものではなく**、敬意を込めて命名しています。
+- 岡潔『春宵十話』毎日新聞社, 1963 (角川ソフィア文庫版あり)
+- 岡潔『春風夏雨』毎日新聞社, 1965
+- 岡潔『日本のこころ』講談社現代新書, 1971 他
+- 岡潔・林房雄『日本民族の危機』(対談) 他、岡潔講話集
+- YouTube『心理の深層』講話 (Perplexity 経由で要約参照)
+
 ### キヤノン三自の精神 / マネジメント書籍 (第 3 部)
 - キヤノン株式会社 公式企業 DNA — https://global.canon/ja/corporate/dna/
 - 御手洗冨士夫『キヤノン高収益復活の秘密』ダイヤモンド社, 2001
