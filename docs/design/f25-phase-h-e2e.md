@@ -82,14 +82,23 @@ memory `project_llove_f25_bridge` 確認: Phase 0-g 完了, h = E2E 残 (2026-05
 ## 4. Phase h 実装範囲 (Week 2-3)
 
 ### h.1 llove → llive submit_brief E2E
-- llove engine (Phase-1 skeleton) に `/api/v1/brief/submit` endpoint 追加
-- llove 内部で `llive.brief.runner.BriefRunner` を呼ぶ (subprocess or in-process)
+- llove engine (Phase-1 skeleton, **2026-05-18 時点で `/healthz` `/api/v1/engine`
+  `/api/v1/audit/deps` `/api/v1/audit/offline-check` のみ実装済**) に
+  `/api/v1/brief/submit` endpoint を**新規**追加
+- 内部で `llive.brief.runner.BriefRunner` を in-process で呼ぶ
+  (subprocess pattern は h+1 まで延期 — Phase 1 では同一 Python プロセス前提)
+- 引数 / 戻り値は既存 `llive.mcp.tools.tool_submit_brief` と 1:1 対応させ、
+  MCP / HTTP どちらからも同じセマンティクスにする
 - 結果 `BriefResult` を JSON で返す
 
 ### h.2 Annotation Channel SSE / WebSocket stream
-- llove engine `/api/v1/annotations/stream` (SSE)
-- llive BriefRunner が emit する Annotation を queue → SSE で push
+- llove engine `/api/v1/annotations/stream` (SSE) を**新規**追加
+- llive BriefRunner が emit する :class:`Annotation`
+  (namespace ∈ {core, vrb, oka, cog, math, creat, sec, eval}) を
+  bounded queue → SSE で push
 - llove TUI / VS Code 拡張は EventSource / postMessage 経由で subscribe
+- 切断/再接続は `Last-Event-ID` ヘッダで resume (Phase h は best-effort、
+  guaranteed delivery は h+1)
 
 ### h.3 llive ↔ llmesh LLM backend 接続
 - `LLIVE_LLM_BACKEND=ollama:llama3.2` 等の env で動作確認 (既存)
