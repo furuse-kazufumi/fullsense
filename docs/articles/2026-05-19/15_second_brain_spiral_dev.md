@@ -114,6 +114,29 @@ llive は現時点で Apache 2.0 + Commercial dual-license の OSS、Repo は ht
 - [13] コーパス先行戦略 — AI が気づかない観点を思考フローに補完
 - [14] HTML で見えないのに、機械では読める — 不可視アノテーションチャネル設計
 
+## 参考文献 / 参考リソース
+
+### TRIZ (発明的問題解決理論)
+- Genrich Altshuller, *And Suddenly the Inventor Appeared: TRIZ, the Theory of Inventive Problem Solving*, Technical Innovation Center, 1996
+- Karen Gadd, *TRIZ for Engineers: Enabling Inventive Problem Solving*, Wiley, 2011
+- TRIZ Journal (オンラインアーカイブ) — https://triz-journal.com/
+
+### RAG / コーパス構築
+- Patrick Lewis et al., *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*, NeurIPS 2020 (arXiv:2005.11401)
+- Raptor (本記事で参照した RAD コーパス構築ツール) — https://github.com/raptor-rad/raptor (本人 fork: 公開準備中)
+
+### 「第二の脳」概念の原点
+- Tiago Forte, *Building a Second Brain: A Proven Method to Organize Your Digital Life and Unlock Your Creative Potential*, Atria Books, 2022
+- 邦訳: 春川由香 訳『SECOND BRAIN — 時間に追われない「知的生産術」』ダイヤモンド社, 2022
+
+### 開発エージェント
+- Anthropic, Claude Code Documentation — https://docs.claude.com/en/docs/claude-code
+- Perplexity AI — https://www.perplexity.ai/
+
+### llive 関連
+- llive リポジトリ — https://github.com/furuse-kazufumi/llive
+- 本記事の「9 セッション 14 機能 1270 PASS」の根拠: `docs/benchmarks/2026-05-17-full-validation/SUMMARY.md`
+
 <!-- llive:meta.article_id="15_second_brain_spiral_dev" target=llove -->
 <!-- llive:meta.published_date="2026-05-19" -->
 <!-- llive:meta.tags=["llive","claude-code","perplexity","triz","rag","development","oss"] target=any -->
