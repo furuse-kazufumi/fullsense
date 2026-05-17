@@ -169,6 +169,17 @@ OSS マルチプロダクト構成で「**独立性と組合せ価値の両立**
 - [12] llive 開発履歴 — 5 日で v0.1 から v0.7 候補へ
 - [13] コーパス先行戦略 — AI が気づかない観点を思考フローに補完
 
+## 参考文献 / 参考仕様
+
+- **CommonMark Spec** (Markdown 標準仕様) — HTML コメント passthrough の根拠
+  https://spec.commonmark.org/
+- **HTML Living Standard** (WHATWG) — `<!-- ... -->` 構文と renderer 動作
+  https://html.spec.whatwg.org/multipage/syntax.html#comments
+- **Front matter** (Jekyll 等で利用される YAML metadata 形式) — 不採用案として比較
+  https://jekyllrb.com/docs/front-matter/
+- **llive リポジトリ** — 本記事で扱った実装の原典
+  https://github.com/furuse-kazufumi/llive
+
 ---
 
 <!-- llive:meta.next_article="15_..." target=llove -->
