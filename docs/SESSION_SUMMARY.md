@@ -3,42 +3,37 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-05-17 16:51:10
+- **最終更新**: 2026-05-17 22:18:50
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
-e8c577b docs(social): LinkedIn 投稿文 + Eight 名刺自己紹介コメント案を追加
-f79e3d4 docs(qiita): 統合版を整備 — RAD/RAG 区別追加、余談半減、ユーザー表現を筆者へ
-0800f9d auto: QIITA_SECOND_BRAIN_SERIES.md 編集前 (2026-05-17 16:43)
-c023439 auto: QIITA_14_invisible_annotation_channel.md 編集前 (2026-05-17 16:43)
-382c1c7 auto: QIITA_14_invisible_annotation_channel.md 編集前 (2026-05-17 16:41)
-e296fd1 auto: QIITA_16_three_self_spirit_ai_management.md 編集前 (2026-05-17 16:41)
-cc16ec0 auto: QIITA_16_three_self_spirit_ai_management.md 編集前 (2026-05-17 16:41)
-55ba7e8 auto: QIITA_16_three_self_spirit_ai_management.md 編集前 (2026-05-17 16:41)
-b146ef2 auto: QIITA_16_three_self_spirit_ai_management.md 編集前 (2026-05-17 16:41)
-5578b48 auto: QIITA_16_three_self_spirit_ai_management.md 編集前 (2026-05-17 16:41)
+1111a76 feat(skills): fullsense 用 add-qiita-article skill 追加
+86aeeb5 docs(qiita): 観察 report を Qiita 記事化 — MATH grounding 6 周のサイクル全記録
+f9425d9 docs(qiita): 第 0 部に MATH-01/05 grounding 配線完了の実装メモを追記
+8729306 auto: QIITA_SECOND_BRAIN_SERIES.md 編集前 (2026-05-17 17:25)
+2a64b89 docs(qiita): 第 0 部「llive とは何か」追加 + 岡潔先生関連の文面を礼節重視へ改訂
+86e7e94 auto: QIITA_SECOND_BRAIN_SERIES.md 編集前 (2026-05-17 17:13)
+24ad546 auto: QIITA_16_three_self_spirit_ai_management.md 編集前 (2026-05-17 17:06)
+4f60dad auto: QIITA_15_second_brain_spiral_dev.md 編集前 (2026-05-17 17:06)
+4b0151d auto: QIITA_SECOND_BRAIN_SERIES.md 編集前 (2026-05-17 17:06)
+4e1d39b auto: QIITA_SECOND_BRAIN_SERIES.md 編集前 (2026-05-17 17:06)
 ```
 
 ## 現在の git status
 
 ```
 M docs/SESSION_SUMMARY.md
+?? docs/articles/2026-05-18/QIITA_USV_jp.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-16:50 docs/articles/2026-05-18/Eight_BIO_addition_jp.md
-16:50 docs/articles/2026-05-18/LinkedIn_SECOND_BRAIN_SERIES_jp.md
-16:46 docs/SESSION_SUMMARY.md
-16:43 docs/articles/2026-05-18/QIITA_SECOND_BRAIN_SERIES.md
-16:43 docs/articles/2026-05-18/QIITA_14_invisible_annotation_channel.md
-16:41 docs/articles/2026-05-18/QIITA_16_three_self_spirit_ai_management.md
-16:12 docs/articles/2026-05-18/QIITA_17_human_ai_fusion_vision.md
-16:12 docs/articles/2026-05-18/QIITA_15_second_brain_spiral_dev.md
+22:18 docs/SESSION_SUMMARY.md
+21:08 docs/articles/2026-05-18/QIITA_USV_jp.md
 ```
 
 ---
