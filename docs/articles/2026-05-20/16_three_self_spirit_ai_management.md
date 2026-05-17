@@ -131,6 +131,28 @@ llive は Apache 2.0 + Commercial dual-license の OSS、Repo は https://github
 - [14] HTML で見えないのに、機械では読める — 不可視アノテーションチャネル設計
 - [15] 30 年のソフトウェア開発経験 + Perplexity + Claude Code + TRIZ + RAG = 「第二の脳」(構築論)
 
+## 参考文献 / 参考リソース
+
+### キヤノン「三自の精神」
+- キヤノン株式会社 公式企業理念ページ「キヤノンの企業 DNA」 — https://global.canon/ja/corporate/dna/
+- 御手洗冨士夫 著『キヤノン高収益復活の秘密』ダイヤモンド社, 2001 (三自の精神の原典的解説)
+
+### マネジメント書籍
+- Marcus Buckingham & Curt Coffman, *First, Break All the Rules: What the World's Greatest Managers Do Differently*, Simon & Schuster, 1999
+  - 邦訳: 宮本喜一 訳『最高のリーダー、マネジャーがいつも考えているたったひとつのこと』日本経済新聞出版, 2006
+  - (本記事タイトルの「圧倒的成果を出し続けるマネジャーの最優先事項」も同系統の表現で複数版あり)
+- Marcus Buckingham & Donald O. Clifton, *Now, Discover Your Strengths*, Free Press, 2001
+  - 邦訳: 田口俊樹 訳『さあ、才能（じぶん）に目覚めよう』日本経済新聞出版, 2001
+
+### Claude Code / AI エージェント運用
+- Anthropic, Claude Code Documentation — https://docs.claude.com/en/docs/claude-code
+- Anthropic, *Building effective agents* (2024) — https://www.anthropic.com/research/building-effective-agents
+
+### llive 関連
+- llive リポジトリ — https://github.com/furuse-kazufumi/llive
+- 本記事の「1 セッション 14 機能 / 1270 PASS / 回帰ゼロ」の根拠: `docs/benchmarks/2026-05-17-full-validation/SUMMARY.md`
+- 前作「第二の脳 構築論」: [15] (同シリーズ第 1 部)
+
 <!-- llive:meta.article_id="16_three_self_spirit_ai_management" target=llove -->
 <!-- llive:meta.published_date="2026-05-20" -->
 <!-- llive:meta.tags=["llive","ai","management","canon","autonomy","leadership"] target=any -->
