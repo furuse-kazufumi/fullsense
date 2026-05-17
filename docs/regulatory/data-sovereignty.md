@@ -73,6 +73,40 @@ FullSense は:
 
 Phase 1 (本 v3.2 α) は静的解析のみ. 動的検証は Phase 2.
 
+### 4.1 runtime-check 具体仕様 (Phase 2)
+
+実装方針:
+
+- **`httpx` / `urllib` / `aiohttp` / `requests`** の Transport 層に hook
+  を仕掛け、すべての outbound HTTP request を傍受.
+- 宛先 host を環境変数 `LLMESH_INTERNAL_HOSTS` (CSV) と照合.
+  match しないものは「越境候補」として alert + audit log 記録.
+- 既定 `LLMESH_INTERNAL_HOSTS`: `localhost,127.0.0.1,::1,*.svc.cluster.local`.
+  顧客 LAN / VPC 用に追加 host を指定可能.
+- 「越境候補」検出時のポリシーは env `LLMESH_OUTBOUND_POLICY`:
+
+| value | 動作 |
+|---|---|
+| `block` (default) | request を **拒否**、`outbound_call_blocked` audit event 発火 |
+| `audit_only` | request は通す、`outbound_call_attempted` audit event 発火 |
+| `allow_listed` | env `LLMESH_OUTBOUND_ALLOWLIST` の host のみ通し、その他は block |
+
+- DNS 解決後の IP も照合し、CNAME chain で外部に飛ぶケース (例: 内部
+  host が CDN 経由) を検出.
+
+### 4.2 越境イベントの audit-log 記録
+
+`audit-log-format.md` (3, 4) に従い、以下 event を追加:
+
+| event_type | 発生タイミング | 追加 fields |
+|---|---|---|
+| `outbound_call_attempted` | runtime-check が外部宛先を検出 | `host`, `port`, `proto`, `policy_action`, `caller_module` |
+| `outbound_call_blocked` | policy=`block` で拒否 | 同上 + `block_reason` |
+| `cross_border_warning` | host が allowlist 内だが PII を含む可能性 | `entity_types`, `redaction_applied` |
+
+これらの event は **HMAC chain** に組み込まれるため、コンプライアンス監査
+時に「該当期間中の越境ゼロ」を改ざん検出可能な形で証明できる.
+
 ## 5. 推奨運用
 
 - 全 LLM backend を **on-prem deployment** にする (Ollama / vLLM / MindServe 等)
