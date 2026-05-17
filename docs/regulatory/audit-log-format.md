@@ -1,6 +1,9 @@
-# 監査ログ仕様 (Audit Log Format Specification, draft v0.1)
+# 監査ログ仕様 (Audit Log Format Specification, draft v0.2)
 
 > **本ドキュメントは技術仕様です. 法的助言は別 docs 参照.**
+>
+> v0.2 (2026-05-18): HMAC chain アルゴリズム / hash 規則 / PII redaction 順序 /
+> F25 Phase h との接続を確定. ファイルパス default / key rotation 規則も追加.
 
 ## 1. 目的
 
