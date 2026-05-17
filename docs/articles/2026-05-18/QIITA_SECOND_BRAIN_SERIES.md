@@ -227,7 +227,7 @@ HTML コメントを Markdown に仕込むテクは、Jekyll / Hugo 界隈では
 |---|---|
 | 開始 | 要件: COG-04 + CREAT-04 統合 |
 | +1h | 「9 因子全部入れたら本格的に動作確認」 |
-| +2h | 岡潔の視点 (OKA-FX 10 件) |
+| +2h | 岡潔先生の思想に学ばせていただく要件追加 (OKA-FX 10 件、敬意込め命名) |
 | +3h | LinkedIn フィードバック (IND-FX) |
 | +4h | ガッツリベンチマーク (12 系統) |
 | +5h | 他 LLM 比較 (Anthropic / Perplexity) |
