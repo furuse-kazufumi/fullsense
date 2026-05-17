@@ -151,8 +151,14 @@ python -m usrs_viewer examples/sales.usv
 
 ASCII 1967 仕様書を読むと、`U+001C-001F` には 4 つの「Information
 Separator」が並んでいます。「データを階層構造で区切るための文字」と
-明確に書かれていますが、**実装した汎用 OSS フォーマットは確認できる範囲で
-無い**。USV はその空き席に座っただけです。
+明確に書かれていますが、長らく一般的な表データ format としては定着
+していませんでした。
+
+汎用 OSS としては **2022 年に Joel Parker Henderson 氏の
+[SixArm/usv](https://github.com/SixArm/usv) が先行**しており、本記事の
+`usrs` はその仕様を尊重した派生実装です (拡張 3 点は後述)。
+ASCII の予約席を Henderson 氏が最初に発掘し、私はそこに椅子を 1 脚
+足したという立ち位置です。
 
 ## 普及戦略 — 各種エディタ・ターミナルに広げたい
 
