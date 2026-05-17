@@ -15,6 +15,37 @@
 本 docs は「公衆向けサービス (面向公众提供服务)」を提供する場合の
 手続概要.
 
+### 1.1 「公衆向け」の技術的境界判定
+
+「公衆向け」かどうかは、登記時の自己申告だけでなく、CAC が運用実態を
+監査する可能性がある. FullSense は以下フラグの組合せで「公衆向け」と
+みなされる **リスク** が高い:
+
+| 条件 | 「公衆向け」リスク |
+|---|---|
+| user 登録が **企業ドメイン以外** に開放 | 高 |
+| 認証なし anonymous access が可能 | 非常に高 |
+| 価格表 / sign-up ページが **公開 URL** で誰でも到達可 | 高 |
+| 法人顧客のみだが、契約数 1,000+ かつ顧客所属社員数の合計が >10 万 | 中 (CII 隣接) |
+| EU/US 等の海外顧客のみで中国本土 user が居ない | 低 (運用上の越境論点に切替) |
+
+**技術的境界判定の参考実装**:
+
+```python
+def is_public_service(deployment_config: dict) -> bool:
+    # FullSense 内部の運用判定 (法的判定ではなく technical heuristic)
+    if deployment_config.get("auth_required") is False:
+        return True
+    if deployment_config.get("allowed_domains") is None:
+        return True
+    if deployment_config.get("user_count_estimate", 0) > 100_000:
+        return True
+    return False
+```
+
+判定結果は Annotation Channel `core:cn_public_service=true|false` として
+emit し、運用者が誤って public 設定にした際の警告に使う.
+
 ## 2. 主な filing 義務
 
 公衆向け生成 AI サービスを中国境内で提供する場合、複数の登記 / 評価が必要:
