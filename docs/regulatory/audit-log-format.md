@@ -158,7 +158,50 @@ python -m llmesh timeline task <brief_id>
 監査ログは **PII を含み得る** ため、データ越境規制対象.
 全ログを **顧客 own ストレージ** に保存し、海外バックアップ禁止が原則.
 
-## 8. 多言語版予定
+## 8. ファイルパス default と key rotation
+
+### 8.1 default パス
+
+| データ | path | 形式 |
+|---|---|---|
+| 当月 active ログ | `$LLMESH_AUDIT_DIR/active/YYYY-MM.jsonl` | JSONL |
+| 月次 archive | `$LLMESH_AUDIT_DIR/archive/YYYY-MM.jsonl.zst` | zstd |
+| HMAC key (active) | `$LLMESH_AUDIT_DIR/keys/current.key` | 32B random |
+| HMAC key (rotated) | `$LLMESH_AUDIT_DIR/keys/<seq-range>.key` | 32B random |
+
+`LLMESH_AUDIT_DIR` 既定: `~/.llmesh/audit/` (Windows: `%APPDATA%\llmesh\audit\`).
+
+### 8.2 key rotation
+
+- 月次または `LLMESH_AUDIT_HMAC_ROTATE_AFTER` (env, default 1,000,000 entries)
+  到達時に rotate.
+- rotate 時に **`hmac_key_rotated` event** を新 key で書き、当該 entry の
+  `meta.previous_key_fingerprint` に旧 key の SHA-256[:16] を残す.
+- 旧 key は `keys/<start_seq>-<end_seq>.key` で archive (削除しない、
+  EU AI Act 6 年要件と同期間保持).
+- 検証時は `seq` レンジに対応する key を読み込む — `verify_chain_detailed`
+  が自動で切り替える.
+
+## 9. F25 Phase h との接続 (audit-log と Brief E2E)
+
+F25 Phase h (`docs/design/f25-phase-h-e2e.md`) で実装する llove engine
+→ llive Brief Runner の HTTP/SSE 経路は、すべて本 spec の event を発火する.
+
+| Phase h step | 発火する audit event | 備考 |
+|---|---|---|
+| `POST /api/v1/brief/submit` 受信 | `brief_submitted` | request body は redaction 後 hash で記録 |
+| Stimulus 構築 | `stimulus_built` | |
+| FullSenseLoop 6 stage 進行 | `loop_started` → 各 stage は内部、`loop_completed` | |
+| Inner monologue (LLM call) | `tool_invoked` (`tool_name="llm.generate"`) | `cnmesh:<model>` の場合は actor に backend を含める |
+| Annotation Channel emit | `annotation_emitted` (`namespace`/`key`) | SSE で配信される value はログには含めない (hash のみ) |
+| ActionPlan → HITL | `approval_requested` (h.5) | `/api/v1/hitl/respond` で `approval_granted` / `approval_denied` |
+| Brief 終端 | `outcome_recorded` | |
+
+実装は llive 側 `BriefRunner` の各 stage hook で `llmesh.audit.trace.AuditTrace`
+に書き込む. llove engine は **書き込みを行わず**、SSE と HTTP の薄い proxy
+に徹する (audit log の source of truth は llive 側 1 箇所).
+
+## 10. 多言語版予定
 
 - ja (本ドキュメント) — draft v0.1
 - en / zh — Week 4 整備
