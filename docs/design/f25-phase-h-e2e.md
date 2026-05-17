@@ -1,8 +1,12 @@
-# F25 Phase h — llove ↔ llmesh ↔ llive E2E 設計 (draft v0.1)
+# F25 Phase h — llove ↔ llmesh ↔ llive E2E 設計 (draft v0.2)
 
 > 2026-05-18 作成. 戦略思索 PART 5 (Engine 抽出) + memory project_llove_f25_bridge
 > (Phase 0-g 完了、h=E2E 残) を踏まえ、F25 連携基盤の Phase h (End-to-End) を
 > 設計 draft.
+>
+> v0.2 (2026-05-18 同日): 実コード確認 (llove/llove/engine/http_app.py,
+> llive/src/llive/mcp/tools.py::tool_submit_brief, llive annotations) を元に
+> API schema / SSE event / env / error handling / skeleton 現状を確定。
 
 ## 1. ゴール
 
