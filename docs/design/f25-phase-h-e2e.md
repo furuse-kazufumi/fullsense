@@ -118,6 +118,119 @@ memory `project_llove_f25_bridge` 確認: Phase 0-g 完了, h = E2E 残 (2026-05
 - POST `/api/v1/hitl/respond` (engine 経由)
 - v3.3 / Month 2 で本格化
 
+## 4.6 API / Event schema (h.1 / h.2 確定版)
+
+### 4.6.1 POST `/api/v1/brief/submit`
+
+Request body (`application/json`):
+
+```json
+{
+  "goal": "string (required, non-empty)",
+  "brief_id": "string (optional, server mints mcp-<12hex> if omitted)",
+  "constraints": ["string", "..."],
+  "source": "string (default: \"engine\")",
+  "priority": 0.5,
+  "backend": "string (overrides LLIVE_LLM_BACKEND for this brief; empty=use env)",
+  "tools": ["string", "..."],
+  "success_criteria": ["string", "..."],
+  "approval_required": true
+}
+```
+
+Response (200) — mirror of `tool_submit_brief` shape:
+
+```json
+{
+  "brief": {
+    "brief_id": "string",
+    "goal": "string",
+    "constraints": ["..."],
+    "source": "string",
+    "priority": 0.5,
+    "backend": "string",
+    "tools": ["..."],
+    "success_criteria": ["..."],
+    "approval_required": true
+  },
+  "result": {
+    "brief_id": "string",
+    "status": "ok | needs_approval | rejected | error",
+    "rationale": "string",
+    "artifacts": ["..."],
+    "ledger_entries": ["..."],
+    "error": null
+  }
+}
+```
+
+Error codes:
+
+| HTTP | meaning | body |
+|---|---|---|
+| 400 | empty/invalid `goal` | `{"error":"invalid_goal","detail":"..."}` |
+| 422 | schema validation fail | FastAPI standard |
+| 503 | llive backend unavailable (e.g. RAD index not loaded) | `{"error":"backend_unavailable"}` |
+| 504 | LLM backend timeout (Ollama/cnmesh) | `{"error":"llm_timeout","backend":"..."}` |
+
+### 4.6.2 GET `/api/v1/annotations/stream` (SSE)
+
+Query params:
+
+| name | type | default | meaning |
+|---|---|---|---|
+| `brief_id` | string | (none) | filter to single brief; omit = all briefs |
+| `target_layer` | string | (none) | filter by `target_layer` (`llove` / `llmesh` / `agent`) |
+| `namespaces` | csv string | (none) | filter by namespace set |
+
+Event types (all `Content-Type: text/event-stream`):
+
+```
+event: annotation
+id: 1234
+data: {"brief_id":"mcp-abc...","namespace":"oka","key":"essence_card",
+       "value":{"summary":"..."},"target_layer":"llove","ts":"2026-05-18T08:00:00Z"}
+
+event: stage_complete
+id: 1235
+data: {"brief_id":"mcp-abc...","stage":"inner_monologue",
+       "stage_index":3,"duration_ms":421,"ts":"..."}
+
+event: brief_done
+id: 1236
+data: {"brief_id":"mcp-abc...","status":"ok","ts":"..."}
+
+event: heartbeat
+id: 1237
+data: {"ts":"..."}     # 15s 間隔、idle keepalive
+```
+
+Resume semantics: client が `Last-Event-ID: <n>` を投げると、queue に
+残っている `id > n` のイベントを replay (best-effort, drop-oldest)。
+guaranteed delivery / replay 完全性は Phase h+1 で対応。
+
+### 4.6.3 環境変数
+
+| env | default | scope | 用途 |
+|---|---|---|---|
+| `LLOVE_ENGINE_HOST` | `127.0.0.1` | llove engine | bind host |
+| `LLOVE_ENGINE_PORT` | `7869` | llove engine | bind port |
+| `LLOVE_BRIEF_QUEUE_MAX` | `1024` | llove engine | h.2 bounded queue 上限 |
+| `LLOVE_BRIEF_QUEUE_POLICY` | `drop_oldest` | llove engine | overflow 時方針 (`drop_oldest` / `block`) |
+| `LLIVE_LLM_BACKEND` | `ollama:llama3.2` | llive | LLM backend 指定 (`cnmesh:qwen` 等も可) |
+| `LLIVE_BRIEF_APPROVAL_REQUIRED` | `1` | llive | global default for `approval_required` |
+| `LLOVE_ENGINE_BIND_AUTH` | `none` | llove engine | Phase 1 は `none` 固定、Pattern C で `bearer` / `mtls` |
+
+### 4.6.4 in-process vs subprocess の選択
+
+Phase h は **in-process** (FastAPI app と FullSenseLoop が同一プロセス) で行く。
+理由:
+
+- BriefRunner は同期 API、threading だけで queue → SSE が成立
+- subprocess pattern (MCP stdio) は Annotation Channel を pipe で運ぶ
+  必要があり、emit-side の hook 追加が必要 → Phase h+1
+- Phase 1 想定の Pattern B (VS Code 拡張) は localhost subprocess で十分
+
 ## 5. テスト戦略
 
 ### h.1-h.3 (E2E run)
