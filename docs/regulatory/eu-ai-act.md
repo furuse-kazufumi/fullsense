@@ -80,9 +80,14 @@ EU AI Act (Regulation (EU) 2024/1689) は 2024 年 8 月発効、段階的施行
 
 - Annotation Channel に `eu-ai-act:risk-tier=high` 等を明示
 - 全 user action を Approval Bus 経由で監査ログに残す
-- 出力 rendering で `ai-generated` ラベル必須
-- 定期的な Risk Score モニタリング + アラート
-- 技術文書を 6 年以上保管 (Article 18)
+- 出力 rendering で `ai-generated` ラベル必須 (Art.50)
+- 定期的な Risk Score モニタリング + アラート (Art.72 PMM)
+- **保管期間** (注: Article 18 と 19 は対象が違うので分離して扱う):
+  - 技術文書 (Annex IV) を **市場投入後 10 年** 保管 (Art.18)
+  - 自動 logs を **意図用途に応じた期間、最低 6 か月** 保管 (Art.19) —
+    FullSense default は 6 年 (高リスク前提)
+- serious incident は **15 日以内** に所轄当局へ報告 (Art.73). 重大障害
+  (人命 / インフラ / 基本権侵害) は即時報告
 
 ## 7. 公開する場合の手続 (参考)
 
