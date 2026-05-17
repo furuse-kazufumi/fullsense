@@ -1,8 +1,12 @@
-# EU AI Act 対応運用 documentation (draft v0.1)
+# EU AI Act 対応運用 documentation (draft v0.2)
 
 > **本ドキュメントは法的助言を構成するものではありません.
 > Not legal advice / 不构成法律建议.**
 > 各企業の法務部門 / EU 規制対応専門弁護士による確認を推奨します.
+>
+> v0.2 (2026-05-18): Article 別 mapping (12/13/14/18/19/50/72/73/99)、
+> 保管期間の Article 分離 (18=技術文書 10 年 / 19=logs 最低 6 か月)、
+> post-market monitoring + incident reporting と audit-log 接続を追加.
 
 ## 1. 対象 — EU AI Act の概要
 
