@@ -1,0 +1,27 @@
+paper_trading: true
+name: tech_earnings_dispersion_long_short
+universe:
+  long:
+    - AAPL
+    - MSFT
+  short:
+    - GOOGL
+    - META
+    - AMZN
+regime: earnings_dispersion
+entry_signal: >
+  Enter after quarterly earnings when the universe is split by post-earnings
+  relative performance: go long the top 40% of tickers by 3-day excess return
+  versus QQQ and short the bottom 40% by 3-day excess return, provided the long
+  basket has positive surprise momentum and the short basket has negative
+  surprise momentum.
+exit_signal: >
+  Exit all positions 5 trading days after entry, or sooner if the earnings
+  dispersion signal mean-reverts and the long-short spread falls below zero, or
+  if individual positions hit stop conditions.
+position_size_pct: 20
+max_drawdown_pct: 8
+sharpe_target: 1.8
+sector_caps:
+  technology: 60
+  communication_services: 40

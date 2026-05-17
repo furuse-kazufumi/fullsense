@@ -112,13 +112,21 @@ def run_llive(brief: str, _keys: dict) -> tuple[bool, str, float]:
     column is measured fairly.
     """
     backend = os.environ.get("BENCH_LLIVE_BACKEND", "ollama:qwen2.5:14b")
+    # Debug vs Release benchmarking — BENCH_LLIVE_DEBUG=1 attaches the loop's
+    # per-stage trace dict to stages.thought.debug (LLM prompt / response /
+    # timing). Off by default (release).
+    debug_flag = os.environ.get("BENCH_LLIVE_DEBUG", "0") == "1"
+    cmd = [
+        "py", "-3.11", "D:/projects/llive/scripts/run_brief.py",
+        "--json", "--backend", backend,
+    ]
+    if debug_flag:
+        cmd.append("--debug")
+    cmd.append(brief)
     t0 = time.perf_counter()
     try:
         p = subprocess.run(
-            [
-                "py", "-3.11", "D:/projects/llive/scripts/run_brief.py",
-                "--json", "--backend", backend, brief,
-            ],
+            cmd,
             capture_output=True, text=True, encoding="utf-8", timeout=1800,
         )
         ms = (time.perf_counter() - t0) * 1000
