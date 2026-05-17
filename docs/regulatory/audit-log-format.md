@@ -130,15 +130,22 @@ Brief 受信から audit log 記録までの順序:
 
 ## 5. 保存期間 / 回転
 
-| 規制 | 推奨保存期間 |
+> **本 docs のスコープは「自動 logs」 (本 spec が定義する JSONL イベント).
+> 技術文書 (Annex IV) は別途 docs/regulatory + Git 履歴で保管 (10 年).**
+
+| 規制 | 自動 logs 推奨保存期間 |
 |---|---|
 | 中国生成 AI 弁法 | 6 か月以上 (内部 governance 用は推奨 1 年) |
-| EU AI Act Article 18 | **6 年以上** (高リスク AI、強制) |
+| EU AI Act **Article 19** (自動 logs) | **最低 6 か月** (高リスク AI、強制). 意図用途に応じ長期化 |
+| EU AI Act **Article 18** (技術文書) | 10 年 (注: 自動 logs ではなく Annex IV 文書) |
 | 改正サイバーセキュリティ法 (2026/01) | 6 か月以上 |
 | 日本金融庁 AI ディスカッションペーパー | 業務記録法令に従う (5-10 年) |
 
-→ デフォルト保存期間: **6 年** (EU AI Act 最厳格要件に合わせる).
+→ FullSense デフォルト保存期間: **6 年** (Article 19 を高リスク用に長く取る +
+他規制も包含). `LLMESH_AUDIT_RETENTION_YEARS` で短縮可 (最短 6 か月).
 ローテーション: 月次で zstd 圧縮、検証チェイン維持.
+
+詳細な Article 別解説は `eu-ai-act.md` 5.1 を参照.
 
 ## 6. 検証コマンド
 
