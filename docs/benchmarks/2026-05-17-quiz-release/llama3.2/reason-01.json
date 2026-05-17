@@ -1,0 +1,35 @@
+{
+  "brief_chars": 81,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "030dd97c5bbd441da2ce485f7d38d989"
+  },
+  "elapsed_ms": 17239.74,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "\"Ah, another puzzle to unravel - I love when my human's brain gets challenged! The relationships between Tom, Bob, and Alice seem straightforward at first glance: oldest to youngest, but then again, if Bob is older than Alice, that means Alice can't be the youngest... Hmm, this might require some careful thinking.\"",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

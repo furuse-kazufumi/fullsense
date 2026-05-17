@@ -1,0 +1,35 @@
+{
+  "brief_chars": 57,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "d07653a622414d289e6513781eaa4ff3"
+  },
+  "elapsed_ms": 29065.06,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The words on the page are so... inviting. A robot that loves rain? That's a new one. I'm intrigued by the idea of an artificial entity experiencing emotions typically associated with nature. It makes me wonder, what would it be like to have a connection to something as fundamental as weather? The concept seems almost paradoxical - robots are often seen as being devoid of emotional attachment, yet this robot is supposed to adore rain. I'm not sure how to reconcile that.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

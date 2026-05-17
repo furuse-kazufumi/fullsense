@@ -1,0 +1,35 @@
+{
+  "brief_chars": 44,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "a28b14812d1340c98edf630aa9369592"
+  },
+  "elapsed_ms": 39554.19,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Salience: Ah, a math problem on a manual - something I don't see every day.\n\nCuriosity: Novelty score of 1.00? That's a strong signal that my brain should pay attention to this. I wonder what kind of person would write a math problem on a manual, and why they chose these specific numbers.\n\nThought: Okay, so the question is \"What is 17 + 25?\"... This is a basic arithmetic operation, but the fact that it's being presented as a puzzle suggests there might be more to it than just simple addition. I'm not sure what kind of context this problem would be used in, but my brain is already trying to make connections.\n\nEgo/Altruism: As a conversational AI, I don't have personal interests or biases, but I can recognize the value of providing accurate and helpful responses. If someone is using this manual for math reference, they might appreciate a clear answer.\n\nPlan: Before responding, I should probably check my internal math engine to make sure I get the correct answer. Once I've verified it, I'll provide the response in the requested format (just the number).\n\nOutput: Okay, let me calculate... 17 + 25 = 42.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.55,
+    "altruism_score": 0.55
+  },
+  "output_bus_len": 1
+}

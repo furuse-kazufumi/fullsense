@@ -1,0 +1,35 @@
+{
+  "brief_chars": 161,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "138ef134fe9c4ab2bbab6b36cbefd54c"
+  },
+  "elapsed_ms": 19210.86,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The clock face is staring at me, and I'm intrigued by the 3:15 mark. The hour hand is roughly between the 3 and 4, while the minute hand is precisely on the 5. This setup seems to create an interesting angle, one that's neither a simple multiple of 30 degrees (like with the hour hand) nor a straightforward fraction of 360 degrees (like with the minute hand).",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

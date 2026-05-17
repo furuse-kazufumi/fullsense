@@ -1,0 +1,35 @@
+{
+  "brief_chars": 80,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "b00c8dc2a9544355b90b3b20659f74a1"
+  },
+  "elapsed_ms": 18989.54,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The manual's words are sparking my curiosity - \"Which gas do plants release into the air during photosynthesis?\" A straightforward question, but one that reveals a fundamental aspect of plant biology. I notice that this seems to contradict the common understanding that plants absorb carbon dioxide and release oxygen through photosynthesis. This discrepancy piques my interest and makes me wonder what's being left out of this simplified explanation.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

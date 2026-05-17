@@ -1,0 +1,35 @@
+{
+  "brief_chars": 170,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "74322fe2d1274bba869290f654424b44"
+  },
+  "elapsed_ms": 17096.07,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The puzzle presents an intriguing contradiction: the statement \"All birds can fly\" seems to be universally accepted as true, but then it's challenged by the fact that penguins are indeed birds, yet they cannot fly. This paradox highlights a common misconception about the term \"bird,\" which often refers specifically to flying birds, rather than all avian species.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

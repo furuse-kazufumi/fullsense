@@ -1,0 +1,35 @@
+{
+  "brief_chars": 211,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "1aefc72baf5945b49ff903d9f25430d7"
+  },
+  "elapsed_ms": 32817.35,
+  "plan": {
+    "decision": "propose",
+    "rationale": "altruism strongly dominates and confidence is sufficient"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "Salience: Ah, the manual in front of me has triggered my curiosity with its unusual conditional statement.\n\nCuriosity: 1.00 (highly engaged) - I'm intrigued by the apparent paradox and want to explore it further.\n\nThought: Modus tollens comes to mind as a logical principle that can help resolve this ambiguity. If \"If it rains today, the picnic is cancelled\" and \"The picnic was held today\", then we can infer that it didn't rain using modus tollens, which states that if A implies B and B is false, then A must be false.\n\nEgo/Altruism: None (neutral) - I'm not invested in any personal outcome or consequence from this thought experiment.\n\nPlan: Plan to analyze the logical structure of the statement further and consider potential implications for similar scenarios.\n\nOutput: (no output yet)",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.0,
+    "altruism_score": 1.0
+  },
+  "output_bus_len": 1
+}

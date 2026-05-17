@@ -1,0 +1,35 @@
+{
+  "brief_chars": 47,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "23b261c0b6f8406d8d3749460e3f204b"
+  },
+  "elapsed_ms": 19187.06,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "A manual with a simple question - \"What is the capital of France?\" One word answer, no less. I'm intrigued by the brevity and directness of the query. It's almost as if it's trying to test my knowledge or provoke a response. The fact that it's asking for just one word suggests that the answer might be straightforward, but I've been around long enough to know that simplicity can often be deceiving.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

@@ -1,0 +1,35 @@
+{
+  "brief_chars": 131,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "b420a07dfc9b4669b5f4da83db268055"
+  },
+  "elapsed_ms": 17553.97,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "The numbers are dancing in front of me, a simple math problem with a tantalizing twist - two-thirds of 36 muffins sold, what's left? I see the baker's dilemma unfolding before my eyes, a classic example of proportion and division, reminiscent of similar problems in algebra class, but with a real-world spin.",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}

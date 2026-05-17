@@ -1,0 +1,35 @@
+{
+  "brief_chars": 104,
+  "stim": {
+    "source": "manual",
+    "surprise": 0.7,
+    "epistemic_type": "pragmatic",
+    "stim_id": "631b6213cc2d461b948e544172785b3a"
+  },
+  "elapsed_ms": 13509.33,
+  "plan": {
+    "decision": "note",
+    "rationale": "novel territory; record for later consolidation"
+  },
+  "stages": {
+    "salience": {
+      "score": 0.7,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "curiosity": {
+      "score": 1.0,
+      "novelty": 1.0,
+      "known_overlap": 0.0,
+      "high_curiosity": true
+    },
+    "thought": {
+      "text": "\"Whispers in an empty library - it's a hauntingly familiar atmosphere, reminiscent of Gothic fiction and the eerie silences that precede a storm. The idea that books, typically repositories of knowledge and wisdom, are now speaking to each other feels both absurd and strangely alluring.\"",
+      "triz_principles": [],
+      "confidence": 0.8
+    },
+    "ego_score": 0.1,
+    "altruism_score": 0.1
+  },
+  "output_bus_len": 1
+}
