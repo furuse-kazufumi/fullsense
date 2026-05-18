@@ -127,8 +127,10 @@ Active と Quiet で 9 セクションの挙動が変わる様子を確認でき
 
 llive 側 roadmap.md Phase 8 参照:
 
-- [ ] **M8.1** ProactiveLoop を llove F25 経由で TUI 表示、asciinema 録画
-      (llove 側着手・操作者待ち)
+- [/] **M8.1** ProactiveLoop を llove F25 経由で TUI 表示、asciinema 録画
+      — llove 側 skeleton **配備済 2026-05-19** (CognitiveMeshPanel +
+      dispatch 配線 + 15 件テスト)。実 Timeline emit (llive → Timeline
+      server → llove panel) の配線と asciinema 録画は次セッション
 - [x] **M8.2** IdleTraining を Quarantined Memory + Ed25519 と統合
       (SignedPayload / Ed25519Verifier / QuarantinedMemory + 16 テスト)
 - [x] **M8.3** BriefDeque/Map/Tree を実 Brief / BriefRunner と接続
