@@ -14,13 +14,21 @@ nav_order: 3
 
 | File | What's in it |
 |---|---|
-| [`docs/index.md`]({{ '/' | relative_url }}) | landing page, Family Tree, Product Sites |
-| [`docs/roadmap.md`]({{ '/roadmap' | relative_url }}) | live + planned + parked products with trigger conditions |
-| [`docs/comparison.md`]({{ '/comparison' | relative_url }}) | honest vs Claude Code / Perplexity / Codex / Gemini |
-| [`docs/PROGRESS.md`]({{ '/PROGRESS' | relative_url }}) | portal-side changelog |
-| [`docs/NOTES.md`]({{ '/NOTES' | relative_url }}) | design notes, link-rot watch |
+| [`docs/index.md`]({{ '/' | relative_url }}) | landing page, Family Tree, Product Sites, Reference hubs (2026-05-18 追加) |
+| [`docs/roadmap.md`]({{ '/roadmap' | relative_url }}) | live + planned + parked products + ステータス遷移モデル / 依存グラフ / タイムライン (2026-05-18 拡張) |
+| [`docs/comparison.md`]({{ '/comparison' | relative_url }}) | honest vs Claude Code / Perplexity / Codex / Gemini + Honest disclosure (2026-05-18) |
+| [`docs/PROGRESS.md`]({{ '/PROGRESS' | relative_url }}) | portal-side changelog (Phase 0.4 まで) |
+| [`docs/NOTES.md`]({{ '/NOTES' | relative_url }}) | design notes, link-rot watch (hub 含む) |
 | [`docs/NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) | handoff to the next agent run |
 | [`docs/doc_map.md`]({{ '/doc_map' | relative_url }}) | this page |
+
+### Reference hubs (2026-05-18 追加 — drift 防止用)
+
+| File | What's in it |
+|---|---|
+| [`docs/spec/index.md`]({{ '/spec/' | relative_url }}) | FullSense Eternal Spec v1.1 章直リンク + 要件定義 8 本一覧 |
+| [`docs/benchmarks/policy.md`]({{ '/benchmarks/policy/' | relative_url }}) | ベンチ三本柱 (purity / progressive curve / honest disclosure) + 運用チェックリスト |
+| [`docs/recommended-models.md`]({{ '/recommended-models/' | relative_url }}) | 用途別推奨 on-prem モデル + llama3.2:3b 非推奨根拠 + install スニペット |
 
 ### Benchmarks (under `docs/benchmarks/`)
 
