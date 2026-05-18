@@ -198,6 +198,68 @@ bash scripts/verify_publication.sh
 # Summary: ALL CHECKS PASSED (継続維持)
 ```
 
+## 2026-05-19 早朝 (Phase 0.5)
+
+### COG-MESH 全 10 件実装ラッシュ (llive 側)
+
+Phase 0.4 で要件追加した COG-MESH 群を、続くセッション後半で **全 10 件
+最小実装まで完走**。portal 側からは家系図で見守る形だが、llive `v0.8`
+として要件 → 実装着地までを 1 セッションで踏み抜けた事実は portal 側
+進捗としても記録する。
+
+実装完了:
+
+| ID | 名称 | Phase 想定 | 結果 |
+|---|---|---|---|
+| COG-MESH-01 | MultiBriefCoherenceManager | 7 前倒し | ✅ |
+| COG-MESH-02 | TitleRecallPlanner | 6 前倒し | ✅ |
+| COG-MESH-03 | TonicRiskMonitor | 6 前倒し | ✅ |
+| COG-MESH-04 | IdleTrainingScheduler | 5 | ✅ |
+| COG-MESH-05 | GiftValueEstimator | 5 | ✅ |
+| COG-MESH-06 | ProactiveLoop | 5 | ✅ |
+| COG-MESH-07 | QuietHoursGuard | 5 | ✅ |
+| COG-MESH-08 | BriefDeque / Map / Tree | 5 | ✅ |
+| COG-MESH-09 | GrammarLayer (skeleton) | 7 | ✅ |
+| COG-MESH-10 | Mesh5W1H + Granularity | 6 前倒し | ✅ |
+
+数値:
+
+- llive **1379 PASS** (前回 1272 + 新規 107)、regress 無し
+- 統合 demo CLI (5 sub-system 連動): `py -3.11 -m llive.cognitive_mesh.demo`
+  で Active/Quiet 両方の挙動を 1 画面確認
+- llive 側 11 commit (feat 9 + docs 2)
+
+設計指針 (本 Phase で再確認):
+
+- **倫理は architecture の一部** — ProactiveLoop / IdleTraining は
+  QuietHoursGuard 必須依存、None で TypeError
+- **fail-closed in Quiet Hours** — TZ / env 欠落で常に Quiet 扱い
+- **risk_alert / audit_alert は例外通過** — Quiet Hours 中でも emit OK
+- **副作用分離** — state_snapshot は dict copy で後の変更と独立
+- **70 点で commit** — feedback_response_timing を design / 実装の両方に適用
+
+### portal 側で更新したもの
+
+- (本 Phase 0.5 では portal 側ファイルは未更新、本セクション追記のみ)
+- 次セッションで `roadmap.md` の Phase 8 にあった `M8.0〜M8.3` の状態を
+  「Skeleton 完了 / Phase 5 本実装は別タスク」に更新検討
+- portal `Spec hub` の要件定義一覧で v0.8 を「全 10 件 skeleton 完了」と
+  注記検討
+
+### 検証
+
+```bash
+# llive
+cd D:/projects/llive
+py -3.11 -m pytest tests/unit -q
+# 1379 passed in ~110s
+
+# portal
+cd D:/projects/fullsense
+bash scripts/verify_publication.sh
+# ALL CHECKS PASSED (継続維持)
+```
+
 ## References
 
 - Brand introduction memo — `~/.claude/.../memory/project_fullsense_brand.md`
