@@ -109,14 +109,19 @@ $env:LLIVE_DEMO_FORCE_TIME = "2026-05-19T02:00:00+09:00"
 py -3.11 -m llive.cognitive_mesh.demo
 ```
 
-Active と Quiet で 5 サブシステムの挙動が変わる様子を確認できる。
+Active と Quiet で 9 セクションの挙動が変わる様子を確認できる
+(demo CLI 拡張 — 2026-05-19 朝):
 
-| サブシステム | Active (10:00) | Quiet (02:00) |
+| セクション | Active (10:00) | Quiet (02:00) |
 |---|---|---|
-| ProactiveLoop | 発話 | 抑制 ✓ |
+| ProactiveLoop (timer) | 発話 | 抑制 ✓ |
 | IdleTrainingScheduler | ingest 実行 | no ingest ✓ |
-| TonicRiskMonitor | ALERT 発火 | ALERT 発火 ✓ (例外通過) |
+| TonicRiskMonitor + ApprovalBus 配線 | ALERT 発火 + intervene 要求 emit | ALERT 発火 ✓ (例外通過) |
 | TitleRecallPlanner | recall_rate 0.75 | recall_rate 0.75 (時刻独立) |
+| Mesh5W1H Annotator | annotations 4 件 | annotations 4 件 (時刻独立) |
+| Quarantined Memory (Ed25519) | signed→active / unsigned→pending | quiet hours で ingest skip |
+| Proactive event / consistency | tick fired | silent ✓ |
+| BriefDeque Bridge | 3 件 submit (時刻独立) | 3 件 submit (時刻独立) |
 
 ## 本実装進捗 (2026-05-19 朝〜昼前)
 
