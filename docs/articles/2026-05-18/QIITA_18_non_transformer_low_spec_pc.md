@@ -415,9 +415,9 @@ AIGIS は Claude Code を使う **作業時** のガード、FullSense は Local
 
 ---
 
-## 10. 関連 docs (llive リポジトリ内)
+## 10. 関連 docs
 
-すべて `D:/projects/llive/` 配下:
+llive リポジトリ (`furuse-kazufumi/llive`) 内:
 
 - `docs/non-transformer/ROADMAP.md` (v0.2)
 - `docs/non-transformer/COMPARISON.md`
@@ -425,17 +425,15 @@ AIGIS は Claude Code を使う **作業時** のガード、FullSense は Local
 - `docs/setup/ollama-company-setup.md`
 - `docs/setup/llama-server-company-setup.md`
 
-FullSense (regulatory) は `D:/projects/fullsense/docs/regulatory/`:
+FullSense リポジトリ (`furuse-kazufumi/fullsense`) 内:
 
-- `cn-internal-use.md` (ja/zh/en)
-- `cn-public-service.md`
-- `eu-ai-act.md`
-- `data-sovereignty.md`
-- `audit-log-format.md`
-
-F25 設計は `D:/projects/fullsense/docs/design/f25-phase-h-e2e.md` (v0.2).
-
-TRIZ 検討は `D:/projects/fullsense/docs/architecture/triz-ssm-vs-transformer.md` (v0.1).
+- `docs/regulatory/cn-internal-use.md` (ja/zh/en)
+- `docs/regulatory/cn-public-service.md`
+- `docs/regulatory/eu-ai-act.md`
+- `docs/regulatory/data-sovereignty.md`
+- `docs/regulatory/audit-log-format.md`
+- `docs/design/f25-phase-h-e2e.md` (v0.2)
+- `docs/architecture/triz-ssm-vs-transformer.md` (v0.1)
 
 ---
 
