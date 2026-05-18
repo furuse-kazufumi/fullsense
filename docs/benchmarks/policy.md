@@ -1,8 +1,8 @@
 ---
 layout: default
 title: "Benchmark Policy"
-parent: "Benchmarks"
-nav_order: 1
+parent: "Comparison"
+nav_order: 60
 permalink: /benchmarks/policy/
 ---
 
