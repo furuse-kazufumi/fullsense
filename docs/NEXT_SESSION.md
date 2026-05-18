@@ -146,5 +146,10 @@ bash scripts/verify_publication.sh
 
 ## Last updated
 
-2026-05-19 朝 — M8.2〜M8.7 本実装完了、+55 テスト、統合 demo 9 セクション化を反映。
-次セッションは M8.1 (llove TUI) / M8.8 (networkx) / M8.9 (GrammarLayer) のいずれか。
+2026-05-19 昼 — **M8.x 全件着地** (M8.1 両側 skeleton + M8.2〜M8.9 本実装).
+llive 1393 → 1497 PASS (+104), llove 771 → 786 PASS (+15). 統合 demo 5 →
+10 セクション (Timeline emit bridge を最終セクションに追加). E2E
+integration test 1 件で M8.1〜M8.9 chain 動作確認. portal に M8.1 Timeline
+Contract sequenceDiagram + roadmap / spec hub / cognitive-mesh hub 全反映.
+次セッションは HTTP push 実配線 (llive ↔ llmesh) / asciinema 録画 (操作者) /
+llove app.py に panel attach (skeleton) のいずれか.
