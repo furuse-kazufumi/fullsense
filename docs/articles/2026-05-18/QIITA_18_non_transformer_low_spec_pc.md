@@ -439,6 +439,26 @@ TRIZ 検討は `D:/projects/fullsense/docs/architecture/triz-ssm-vs-transformer.
 
 ---
 
+## 投稿時の推奨タグ (Qiita Web UI で手入力、最大 5 個)
+
+**第一候補** (本記事の技術的核心):
+
+- `LLM`
+- `ローカルLLM`
+- `Mamba`
+- `RWKV`
+- `Python`
+
+**第二候補** (TRIZ / 設計手法を前に出す場合):
+
+- `LLM` / `ローカルLLM` / `TRIZ` / `アーキテクチャ` / `OSS`
+
+**第三候補** (規制 / コンプラ視点を前に出す場合):
+
+- `LLM` / `ローカルLLM` / `EUAIAct` / `規制対応` / `OSS`
+
+---
+
 ## 改訂履歴
 
 - 2026-05-18 — v0.1 作成. 困りごと 2 件 + 5 候補 skeleton + GPU 無し PC
