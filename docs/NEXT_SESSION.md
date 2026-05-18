@@ -84,16 +84,19 @@ Pages 設定 / repo edit を自動化するため)。
 
 ## 🤖 Agent-side work for the next session
 
-### Priority 1 — 残 M8.x マイルストーン (Phase 6/7)
+### Priority 1 — M8.x 全件着地 + 残 HTTP push 実配線 (Phase 6 本配線)
 
-| Milestone | やること | 担当 / Phase |
+| Milestone | 状態 | 残作業 |
 |---|---|---|
-| **M8.1** | ProactiveLoop を llove F25 経由で TUI 表示 + asciinema 録画 | llove 側 + 操作者 |
-| **M8.8** | MultiBriefCoherenceManager を networkx + 実 Brief 統合 | agent Phase 6 |
-| **M8.9** | GrammarLayer を EVO-04/06/07 と接続、言語別 layer 設計 | agent Phase 7 |
+| **M8.1** | llove 側 panel skeleton + llive timeline_emitter skeleton 配備済 | HTTP/MCP push 実配線 (llive ↔ llmesh Timeline server) と asciinema 録画 |
+| **M8.2〜M8.7** | 本実装完了 (2026-05-19 朝) | 無し |
+| **M8.8** | 本実装完了 (2026-05-19 昼前、自前 BFS/DFS/centrality) | networkx 化は将来 swap 候補 (依存追加要承認) |
+| **M8.9** | 本実装完了 (2026-05-19 昼前、change_sink + MultilingualGrammar) | EVO change saga 配線は Phase 7 |
 
-優先順位はユーザ判断。デモ普及戦略なら **M8.1 (llove TUI 統合)** 最大効果。
-networkx 化と言語別 layer は研究色強め。
+agent 単独で残るのは:
+- llove app.py に CognitiveMeshPanel を attach する経路 (Tab 等)
+- llmesh Timeline server に cog_* event_type を予約する文書化
+- llive/clients/llmesh_timeline.py (HTTP push client) の skeleton
 
 ### Priority 2 — portal NEXT_SESSION 自動更新フロー
 
