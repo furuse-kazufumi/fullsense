@@ -260,6 +260,67 @@ bash scripts/verify_publication.sh
 # ALL CHECKS PASSED (継続維持)
 ```
 
+## 2026-05-19 朝 (Phase 0.6)
+
+### COG-MESH 本実装フェーズ完了 (M8.2〜M8.7、llive 側)
+
+Phase 0.5 (早朝の skeleton ラッシュ) に続く朝の継続セッションで、
+NEXT_SESSION Priority 1 として残っていた **M8.2〜M8.7 を全件本実装**完了。
+"skeleton から本実装" への昇格を 1 セッションで踏み抜いた。
+
+完了マイルストーン (llive 側):
+
+| Milestone | 内容 | 新規 adapter | テスト |
+|---|---|---|---|
+| M8.5 | ApprovalBus.intervene 配線 | `RiskInterventionAdapter` | 5 |
+| M8.4 | TitleRecall semantic similarity | `EmbeddingSimilarityFn` (MemoryEncoder cosine) | 9 |
+| M8.3 | BriefDeque ↔ BriefRunner 接続 | `BriefDequeRunnerBridge` | 6 |
+| M8.6 | Mesh5W1H ↔ Annotation Channel 統合 | `Mesh5W1HAnnotator` | 7 |
+| M8.7 | Proactive 拡張 (event / consistency mode) | `ProactiveEvent` / `ConsistencyViolation` | 12 |
+| M8.2 | Idle ingest Quarantined Memory + Ed25519 | `QuarantinedMemory` + `Ed25519Verifier` + `SignedPayload` | 16 |
+
+数値:
+
+- llive **1448 PASS** (1393 + 新規 55)、regress 無し
+- 統合 demo CLI を **5 → 9 セクション**に拡張 (Active/Quiet 双方の挙動が可視化)
+- llive 側 主要 commit 2 件 (feat: COG-MESH 本実装 + demo 拡張)
+
+設計上の共通点 (本フェーズ):
+
+- **全 adapter が backward compatible** — 注入しなければ従来挙動
+- **fail-closed が継続** — adapter 経路例外は token/pending/silent に縮退
+- **公開 API 整理** — `__init__.py` `__all__` に 9 シンボル追加
+
+### portal 側 反映
+
+- `docs/NEXT_SESSION.md` を「M8.2〜M8.7 完了」「残作業は M8.1/M8.8/M8.9」に
+  全面書換 (Last updated 2026-05-19 朝)
+- `docs/PROGRESS.md` 本セクション追記
+- (mermaid family tree / Roadmap / Spec hub の Phase 8 状態は次セッションで
+  refresh 候補)
+
+### 残作業 (次セッション候補)
+
+- **M8.1**: ProactiveLoop を llove F25 経由で TUI 表示 + asciinema 録画 (llove 側 + 操作者)
+- **M8.8**: MultiBriefCoherenceManager を networkx + 実 Brief 統合 (agent Phase 6)
+- **M8.9**: GrammarLayer を EVO-04/06/07 と接続、言語別 layer 設計 (agent Phase 7)
+- **bench**: Anthropic / Gemini / OpenAI credential 復旧後に bench_run.py / bench_vlm.py 再実行
+- **articles pause**: パッケージ公開級の完成度に到達 — 解除タイミング再評価
+
+### 検証
+
+```bash
+cd D:/projects/llive
+py -3.11 -m pytest tests/unit -q
+# 1448 passed
+
+# 統合 demo (9 セクション、Active 10:00 / Quiet 02:00 切替)
+$env:LLIVE_TZ="Asia/Tokyo"
+$env:LLIVE_QUIET_HOURS_START="22"; $env:LLIVE_QUIET_HOURS_END="8"; $env:LLIVE_QUIET_HOURS_ENABLED="1"
+$env:LLIVE_DEMO_FORCE_TIME="2026-05-19T10:00:00+09:00"
+py -3.11 -m llive.cognitive_mesh.demo
+```
+
 ## References
 
 - Brand introduction memo — `~/.claude/.../memory/project_fullsense_brand.md`
