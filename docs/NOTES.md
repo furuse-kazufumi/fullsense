@@ -39,7 +39,12 @@ The portal points to many files inside `llive`. If those move, update here:
 
 | Portal target | Linked file |
 |---------------|-------------|
-| Spec | `llive/docs/fullsense_spec_eternal.md` |
+| Spec hub (`docs/spec/index.md`) | `llive/docs/fullsense_spec_eternal.md` §0〜§22 全章直リンク |
+| Spec hub | `llive/docs/requirements_v0.[1-8]*.md` 8 ファイル |
+| Spec hub | `llive/.planning/REQUIREMENTS.md` |
+| Benchmark Policy (`docs/benchmarks/policy.md`) | `llive/docs/benchmarks/2026-05-16-progressive-xss/` (実測例) |
+| Recommended models (`docs/recommended-models.md`) | `llive/docs/setup/llama-server-company-setup.md` |
+| Recommended models | `llive/docs/setup/ollama-company-setup.md` |
 | P2P RFC | `llive/docs/llmesh_p2p_mesh_rfc.md` |
 | EDLA historical | `llive/docs/references/historical/edla_kaneko_1999.md` |
 | v1.0 migration | `llive/docs/v1.0_migration_plan.md` |
@@ -48,6 +53,17 @@ The portal points to many files inside `llive`. If those move, update here:
 | LinkedIn update | `llive/docs/linkedin/post_2026-05-16_update.ja.md` |
 | Qiita overview | `llive/docs/qiita/qiita-overview.md` |
 | Authoring guide | `llove/docs/qiita/AUTHORING.md`, `llive/docs/qiita/AUTHORING.md` |
+
+**ハブ間 cross-link** (portal 内部):
+
+| ハブ | 外向きリンク |
+|---|---|
+| `index.md` (landing) | spec/ / benchmarks/policy/ / recommended-models/ / roadmap / comparison |
+| `spec/index.md` | comparison / roadmap / benchmarks/policy/ |
+| `benchmarks/policy.md` | comparison / roadmap |
+| `comparison.md` | benchmarks/policy/ |
+| `recommended-models.md` | comparison / benchmarks/policy/ / spec/ |
+| `roadmap.md` | (内部のみ) |
 
 Implemented as `.github/workflows/link-check.yml` (Lychee). Runs on
 docs/README push, on docs PRs, weekly (Mon 18:00 UTC), and on manual
