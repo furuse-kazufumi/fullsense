@@ -210,6 +210,20 @@ llive 単体だけでなく、それを取り囲むエコシステム — FullSe
 
 > 弱い PC でも動く → 強い PC でも当然動く → 全 PC が顧客になる
 
+**図で書くとこんなイメージ**:
+
+```mermaid
+flowchart TB
+    subgraph 普通["普通の AI 開発"]
+        a1["強い PC 前提"] --> a2["強い PC を持つ人だけ"] --> a3["AI を使える人 = 少数"]
+    end
+    subgraph 逆転["llive の発想"]
+        b1["弱い PC でも動く"] --> b2["全 PC が対象"] --> b3["AI を使える人 = 多数"]
+    end
+    style a3 fill:#fcc,stroke:#900
+    style b3 fill:#cfc,stroke:#093
+```
+
 これは TRIZ (発明手法) で「分離原理」と呼ばれるパターンに近いです.
 強い PC が必要、という制約を **「PC スペック」軸で分離**して、
 - 弱い PC では軽い AI モデルを使う
