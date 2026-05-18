@@ -10,6 +10,32 @@
 > 📷 [画像 placeholder: 普通のノート PC で llive が動いているスクリーン
 > ショット — Brief 入力 → 思考 stage が走っている TUI 表示]
 
+**今日の話の地図 (2 つの世界を並べると)**:
+
+```mermaid
+flowchart LR
+    subgraph 既存["既存の AI 世界"]
+        direction TB
+        bigPC["最新 GPU PC<br/>(4090 / H100)"]
+        cloud["クラウド AI<br/>(月数千〜数万円)"]
+        bigLLM["巨大 LLM<br/>(GPT / Claude 等)"]
+        bigPC --> bigLLM
+        cloud --> bigLLM
+    end
+    subgraph 提案["llive が目指す世界"]
+        direction TB
+        oldPC["普通のノート PC<br/>(GPU なし / 8-16GB RAM)"]
+        local["手元で動く"]
+        smallLLM["軽量 LLM<br/>(RWKV / Mamba)"]
+        oldPC --> smallLLM
+        local --> smallLLM
+    end
+    user(("使う人")) -. 今は届かない .-> 既存
+    user --> 提案
+    style user fill:#fec,stroke:#e90
+    style 提案 fill:#cfe,stroke:#393
+```
+
 (本記事は非エンジニア向けです. プログラミングを書きません.
 同じ内容の技術者向け詳細版は別記事として公開しています.)
 
