@@ -126,8 +126,29 @@ For every new feature in FullSense, we:
    `docs/benchmarks/<date>.md`
 5. Open issues for any axis where FullSense lost
 
+**詳細運用ルール**: [Benchmark Policy]({{ '/benchmarks/policy/' | relative_url }})
+を参照 — 系列 A/B/C/D の分離、xs/s/m/l/xl の progressive curve、
+honest disclosure の必須項目を portal 公式方針として固定。
+
 Methodology details: [`feedback_competitor_benchmark`](https://github.com/furuse-kazufumi/raptor/blob/main/.claude/projects/C--Users-puruy-raptor/memory/feedback_competitor_benchmark.md)
 in the maintainer's tooling repo.
+
+## Honest disclosure (2026-05-18 時点)
+
+A/F 採点には以下の **正直に開示すべき制約**がある。隠さない:
+
+- **cloud 系列 (B) は 3/4 が未測**: Anthropic Haiku 4.5 / Gemini 2.0 Flash /
+  OpenAI Codex はいずれも credential / quota 復旧待ち。比較は **Perplexity
+  Sonar の 1 点のみ**で補強されている。NEXT_SESSION 復旧後に再評価。
+- **on-prem 系列 (A) は llama3.2:3b の `lllive` typo 問題**を抱える。
+  推奨は qwen2.5:7b / 14b だが、recent ベンチは未完。本表の on-prem 列は
+  「ollama 一般」を示しており、特定モデルの絶対値ではない。
+- **llive 自身 (C/D 系列) は Brief API 経由のオーバーヘッド < 1 %** を
+  実測 (`/benchmarks/2026-05-16-progressive` で公開) しているが、生成品質
+  の絶対値は内蔵 OSS LLM 重みに依存する。「llive は速い / 高品質」と単独で
+  言うのは不正確。
+- **採点者バイアス**: 採点は maintainer (`furuse-kazufumi`) によるもので、
+  外部レビューはまだ無い。A/F の絶対値より「±1 差を生む論拠」を読むこと。
 
 ## Empirical benchmarks (2026-05-16)
 
