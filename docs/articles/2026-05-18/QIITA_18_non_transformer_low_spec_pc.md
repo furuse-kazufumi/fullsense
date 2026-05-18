@@ -6,9 +6,6 @@
 > llive を **GPU 無し PC で実用速度** に到達させる挑戦と、その途中で
 > 気づいた拡張性ファースト設計の話.
 
-> 📷 [画像 placeholder: 普通のノート PC で llive Brief が走っている
-> ターミナル画面 (`py -3.11 -m llive.cli brief "..."` の結果) — 撮影後挿入]
-
 **FullSense 3 層と non-transformer backend の関係**:
 
 ```mermaid
