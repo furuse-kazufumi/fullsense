@@ -29,6 +29,7 @@ nav_order: 3
 | [`docs/spec/index.md`]({{ '/spec/' | relative_url }}) | FullSense Eternal Spec v1.1 章直リンク + 要件定義 8 本一覧 |
 | [`docs/benchmarks/policy.md`]({{ '/benchmarks/policy/' | relative_url }}) | ベンチ三本柱 (purity / progressive curve / honest disclosure) + 運用チェックリスト |
 | [`docs/recommended-models.md`]({{ '/recommended-models/' | relative_url }}) | 用途別推奨 on-prem モデル + llama3.2:3b 非推奨根拠 + install スニペット |
+| [`docs/cognitive-mesh.md`]({{ '/cognitive-mesh/' | relative_url }}) | llive v0.8 cognitive mesh (COG-MESH-01〜10) の portal 視点 overview、統合 demo の触り方、10/10 skeleton 完了 |
 
 ### Benchmarks (under `docs/benchmarks/`)
 
