@@ -6,6 +6,13 @@
 > llive を **GPU 無し PC で実用速度** に到達させる挑戦と、その途中で
 > 気づいた拡張性ファースト設計の話.
 
+> 📷 [画像 placeholder: 普通のノート PC で llive Brief が走っている
+> ターミナル画面 (`py -3.11 -m llive.cli brief "..."` の結果)]
+>
+> 🖼️ [図 placeholder: FullSense 3 層 (llmesh / llive / llove) と
+> non-transformer backend (Mamba / RWKV / Jamba / Diffusion) の関係を
+> 示すブロック図]
+
 (本記事は私が日々開発している llive / FullSense の 2026-05-18 進捗まとめ
 です. 技術者向け. 同じ内容の一般向け版は別記事で投稿します.)
 
