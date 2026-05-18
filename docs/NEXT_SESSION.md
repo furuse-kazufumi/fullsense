@@ -114,10 +114,10 @@ agent 単独で残るのは:
 ## State of the world (machine-checkable)
 
 ```bash
-# llive: M8.2〜M8.7 本実装完了
+# llive: M8.2〜M8.9 本実装 + M8.1 skeleton + E2E test 完了
 cd D:/projects/llive
-py -3.11 -m pytest tests/unit -q
-# 1448 passed
+py -3.11 -m pytest tests/unit tests/integration -q
+# 1497 passed
 
 # llive 統合 demo (9 セクション、Active 帯)
 $env:LLIVE_TZ="Asia/Tokyo"; $env:LLIVE_QUIET_HOURS_START="22"; $env:LLIVE_QUIET_HOURS_END="8"; $env:LLIVE_QUIET_HOURS_ENABLED="1"
