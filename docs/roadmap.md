@@ -89,7 +89,7 @@ flowchart LR
 | Product | 状態 | 起点 | 直近マイルストーン | 依存 |
 |---|---|---|---|---|
 | llmesh | **Stable** | 2026 初期 | v1.6 (OPC-UA + MQTT) | — |
-| llive | **Alpha Active** (beta) | 2026-05-13 | C-2 (`@govern` → ProductionOutputBus) / Phase 5 COG-MESH 前倒し | llmesh (optional) |
+| llive | **Alpha Active** (beta) | 2026-05-13 | COG-MESH 本実装 M8.2〜M8.9 完了 (2026-05-19) / 次は C-2 (`@govern` → ProductionOutputBus) / M8.1 (llove TUI 統合) | llmesh (optional) |
 | llove | **Alpha Active** (beta) | 2026 初期 | F23/F24 (PowerShell shell + Claude Code integration) | llive (F25 連携) |
 | lldesign | **Alpha Active** | 2026-05-16 | v0.1 (Mermaid generator + llove HITL) | llive Brief API |
 | lltrade | **Alpha Active** | 2026-05-16 | v0.1 (Backtrader adapter) | llive Brief API |
