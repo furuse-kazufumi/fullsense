@@ -1,0 +1,70 @@
+name: Mermaid lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**/*.md'
+      - 'README.md'
+      - '.github/workflows/mermaid-lint.yml'
+  pull_request:
+    paths:
+      - 'docs/**/*.md'
+      - 'README.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mermaid:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install mermaid-cli
+        run: npm install -g @mermaid-js/mermaid-cli@10
+
+      - name: Extract and validate Mermaid blocks
+        shell: bash
+        run: |
+          set -euo pipefail
+          fail=0
+          tmpdir="$(mktemp -d)"
+          # docs/**/*.md と README.md を対象に ```mermaid ブロックを抽出
+          mapfile -t files < <(find docs -name '*.md' -type f; ls README.md 2>/dev/null || true)
+          total=0
+          for f in "${files[@]}"; do
+            # awk で ```mermaid ... ``` のブロックを抜き出し、ファイルごとに連番
+            awk -v src="$f" -v tmpdir="$tmpdir" '
+              /^```mermaid$/ { in_block = 1; n++; out = tmpdir "/" gensub(/\//, "_", "g", src) "." n ".mmd"; next }
+              /^```$/ && in_block { in_block = 0; next }
+              in_block { print > out }
+            ' "$f"
+          done
+          for mmd in "$tmpdir"/*.mmd; do
+            [ -e "$mmd" ] || continue
+            total=$((total+1))
+            echo "::group::Validate $(basename "$mmd")"
+            if ! mmdc -i "$mmd" -o "$mmd.svg" -q 2>err.log; then
+              echo "::error::Mermaid syntax error in $(basename "$mmd")"
+              cat err.log
+              fail=1
+            else
+              echo "OK"
+            fi
+            echo "::endgroup::"
+          done
+          echo "Validated $total Mermaid blocks"
+          exit "$fail"
+
+      - name: Report summary
+        if: always()
+        run: |
+          echo "Mermaid lint completed. See logs for per-block validation results." >> "$GITHUB_STEP_SUMMARY"
