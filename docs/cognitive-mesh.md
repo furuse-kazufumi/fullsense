@@ -148,6 +148,37 @@ llive 側 roadmap.md Phase 8 参照:
 - [x] **M8.9** GrammarLayer ↔ EVO 接続 + 言語別 layer
       (GrammarChangeSink Protocol + MultilingualGrammar (ja/en/zh/ko) + 8 テスト)
 
+## M8.1 Timeline Contract — llive ↔ llmesh ↔ llove (2026-05-19)
+
+llive cognitive_mesh の emit を llmesh Timeline server 経由で llove TUI に
+表示する 3 者契約。schema は両側で `cog_proactive_utterance` /
+`cog_risk_alert` / `cog_quarantine_pending` の 3 種 event_type で固定済。
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant LV as llive cognitive_mesh
+    participant EM as CognitiveMeshTimelineEmitter
+    participant SK as TimelineSink (HTTP/MCP/InMemory)
+    participant TM as llmesh Timeline server
+    participant LP as llove TimelinePollDriver
+    participant PA as CognitiveMeshPanel
+
+    LV->>EM: ProactiveUtterance / RiskAlert / QuarantineEntry
+    EM->>EM: proactive_to_event / risk_to_event / quarantine_to_event
+    Note over EM: schema = cog_proactive_utterance / cog_risk_alert / cog_quarantine_pending
+    EM->>SK: push(event_dict)
+    SK->>TM: HTTP POST /timeline/recent  (Phase 6 実配線)
+    LP->>TM: GET /timeline/recent (poll)
+    TM-->>LP: events: list[TimelineEvent]
+    LP->>PA: feed_events (event_id dedup)
+    PA->>PA: CogEntry.from_event → render_panel
+```
+
+**現状 (2026-05-19)**: emit / event_dict / panel skeleton まで両側に配備済 +
+契約 schema が unit test でロック (llive: 10 件, llove: 15 件)。実 HTTP/MCP
+push (`SK ↔ TM` 線) は Phase 6 で別 module 配備予定 (operator 承認待ち).
+
 ## 関連
 
 - llive 側
