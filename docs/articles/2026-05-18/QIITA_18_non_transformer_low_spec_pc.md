@@ -180,9 +180,56 @@ NoopFactorHook がデフォルトなので、SSM 非対応の backend (Transform
 
 ---
 
-> 🖼️ [図 placeholder: 5 backend (Mamba / Jamba / 思考因子-Δ / Diffusion /
-> RWKV) を OpenAI 互換 HTTP 経由で繋ぐクラス図 — `LLMBackend` を root に、
-> 各 backend が `_inner = OpenAIBackend` に委譲する関係を示す]
+**5 backend のクラス関係 (拡張性ファースト設計の骨)**:
+
+```mermaid
+classDiagram
+    class LLMBackend {
+        <<abstract>>
+        +name: str
+        +generate(req) GenerateResponse
+        +supports_vlm: bool
+        +supports_coding: bool
+    }
+    class OpenAIBackend {
+        +DEFAULT_MODEL = "gpt-4o-mini"
+        +base_url via OPENAI_BASE_URL
+        +model via LLIVE_OPENAI_MODEL
+    }
+    class MambaBackend {
+        +DEFAULT_MODEL = "codestral-mamba"
+        +transport: llama_cpp_server | mamba_ssm
+        -_inner: OpenAIBackend
+    }
+    class RwkvBackend {
+        +DEFAULT_MODEL = "rwkv-7-world-7b"
+        +transport: rwkv_cpp_server | rwkv_py
+        -_inner: OpenAIBackend
+    }
+    class JambaBackend {
+        +DEFAULT_MODEL = "jamba-1.5-mini"
+        +transport: llama_cpp_server
+        -_inner: OpenAIBackend
+    }
+    class DiffusionBackend {
+        +DEFAULT_MODEL = "elyza-llm-diffusion"
+        +transport: openai_compatible
+        -_inner: OpenAIBackend
+    }
+    LLMBackend <|-- OpenAIBackend
+    LLMBackend <|-- MambaBackend
+    LLMBackend <|-- RwkvBackend
+    LLMBackend <|-- JambaBackend
+    LLMBackend <|-- DiffusionBackend
+    MambaBackend --> OpenAIBackend : delegate
+    RwkvBackend --> OpenAIBackend : delegate
+    JambaBackend --> OpenAIBackend : delegate
+    DiffusionBackend --> OpenAIBackend : delegate
+```
+
+ポイント: 全 backend が `_inner = OpenAIBackend` に委譲して、HTTP 経路を
+1 本に共通化. ラッパー側で `backend` タグだけ差し替えて、ベンチで識別
+できるようにしてあります.
 
 ## 4. GPU 無し PC のベンチ harness を書いた
 
