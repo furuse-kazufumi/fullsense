@@ -63,11 +63,12 @@ The portal points to many files inside `llive`. If those move, update here:
 
 | ハブ | 外向きリンク |
 |---|---|
-| `index.md` (landing) | spec/ / benchmarks/policy/ / recommended-models/ / roadmap / comparison |
-| `spec/index.md` | comparison / roadmap / benchmarks/policy/ |
+| `index.md` (landing) | spec/ / benchmarks/policy/ / recommended-models/ / cognitive-mesh/ / roadmap / comparison |
+| `spec/index.md` | comparison / roadmap / benchmarks/policy/ / cognitive-mesh/ |
 | `benchmarks/policy.md` | comparison / roadmap |
 | `comparison.md` | benchmarks/policy/ |
 | `recommended-models.md` | comparison / benchmarks/policy/ / spec/ |
+| `cognitive-mesh.md` | spec/ / roadmap / benchmarks/policy/ + llive 側 5 リンク |
 | `roadmap.md` | (内部のみ) |
 
 Implemented as `.github/workflows/link-check.yml` (Lychee). Runs on
