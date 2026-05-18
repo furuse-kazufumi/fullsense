@@ -124,11 +124,19 @@ All product code: **Apache-2.0** with optional separate **Commercial License**.
 - Qiita: [overview](https://github.com/furuse-kazufumi/llive/blob/main/docs/qiita/qiita-overview.md)
 - Authoring guide (画像 / Mermaid / アニメ): [llove](https://github.com/furuse-kazufumi/llove/blob/main/docs/qiita/AUTHORING.md) / [llive](https://github.com/furuse-kazufumi/llive/blob/main/docs/qiita/AUTHORING.md)
 
+## Reference hubs (2026-05-18 追加)
+
+> 個別 product README で drift しがちなトピックを **portal 公式 hub** に集約:
+
+- [Spec hub]({{ '/spec/' | relative_url }}) — FullSense Eternal Spec v1.1 章直リンク + 要件定義 8 本一覧 (v0.1〜v0.8 cognitive mesh)
+- [Benchmark Policy]({{ '/benchmarks/policy/' | relative_url }}) — 系列 A/B/C/D + xs/s/m/l/xl progressive curve + honest disclosure 運用ルール
+- [Recommended models]({{ '/recommended-models/' | relative_url }}) — 用途別推奨 on-prem モデル (`llama3.2:3b` 非推奨の根拠含む) + Mermaid 判断軸 + 共通 install スニペット
+
 ## Portal meta
 
 - [Doc map]({{ '/doc_map' | relative_url }}) — one-page index of every doc across the portal + 4 product repos + maintainer memory
-- [Roadmap]({{ '/roadmap' | relative_url }}) — live + planned + parked products with trigger conditions
-- [Comparison]({{ '/comparison' | relative_url }}) — honest vs Claude Code / Perplexity / Codex / Gemini
+- [Roadmap]({{ '/roadmap' | relative_url }}) — live + planned + parked products with trigger conditions + ステータス遷移 / 依存グラフ / タイムライン
+- [Comparison]({{ '/comparison' | relative_url }}) — honest vs Claude Code / Perplexity / Codex / Gemini + Honest disclosure
 - [Progress log]({{ '/PROGRESS' | relative_url }}) — portal-side changelog
 - [Design notes]({{ '/NOTES' | relative_url }}) — decisions, link-rot watch
 - [Next session handoff]({{ '/NEXT_SESSION' | relative_url }}) — queued operator + agent work
