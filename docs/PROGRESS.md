@@ -118,12 +118,12 @@ Portal is live:
 
 ### Open items
 
-- [ ] Verify `mermaid` renders correctly under `just-the-docs` remote theme
-      now that Pages is live — visit the landing page and confirm the
-      family-tree diagram renders, not as raw fenced ```mermaid``` text.
-      If it doesn't, the theme needs `mermaid_config.js` override.
-- [ ] Add `docs/spec/` mirror of the FullSense Spec v1.1 once it stabilises in
-      `llive/docs/` (currently the portal links out to llive for the spec)
+- [x] ~~Verify `mermaid` renders correctly under `just-the-docs` remote theme~~
+      **解消 (2026-05-16 以降 verify_publication.sh で継続確認、Phase 0.4 で
+      Mermaid lint CI 追加)**
+- [x] ~~Add `docs/spec/` mirror of the FullSense Spec v1.1~~
+      **Phase 0.4 で portal `docs/spec/index.md` を「章直リンク方式」で追加
+      (drift 防止)**
 - [ ] Open Graph card v2: when the v1.0 PyPI rename lands, re-render
       `og-card.{svg,png}` with the `fullsense-*` install snippet and
       bump it on social by sharing the canonical Pages URL.
@@ -134,6 +134,69 @@ Portal is live:
       switch to a classic PAT with `repo` scope) so future portal-side
       automation (`gh api topics`, Pages settings, repo edit) can run
       without manual UI steps.
+
+## 2026-05-18
+
+### Phase 0.4 — Reference hubs + drift 防止構造の整備
+
+ユーザ依頼「朝 7 時まで自律的に改善し続ける」+ 「直近 memory を llive 設計
+思想として要件定義に追記」を受け、portal + llive 両方を補強。
+
+llive 側 (1 commit, 4 ファイル):
+
+- **`docs/requirements_v0.8_cognitive_mesh.md`** (新規 462 行) — COG-MESH-01〜10
+  の 10 要件 (MultiBriefCoherenceManager / TitleRecallPlanner /
+  TonicRiskMonitor / IdleTrainingScheduler / GiftValueEstimator / ProactiveLoop /
+  QuietHoursGuard / BriefDeque-Map-Tree / GrammarLayer / Mesh5W1H +
+  Granularity)。出典: 2026-05-18 一連 memory (user_cognitive_mesh_model /
+  feedback_brain_like_trigger_periodic / feedback_proactive_llm_speech /
+  feedback_quiet_hours / project_proactive_llive_demo /
+  feedback_response_timing)
+- **`.planning/REQUIREMENTS.md`** — v0.8b COG-MESH 群を CABT v0.8 と並列に
+  10 件追記。CABT (低レイヤ) と COG-MESH (高レイヤ) は「同 v0.8 期に着手
+  すべき双子の要件群」
+- **`docs/architecture.md` §8** — v0.8 拡張ポイント (Proactive / Mesh /
+  Safety / Evolution Layer) を Mermaid + 接続表で図示
+- **`docs/roadmap.md` Phase 8** — CABT + COG-MESH 双子マイルストーン
+  (M8.0〜M8.9 + M8.A〜M8.E)、SemVer は build metadata で段階リリース
+
+portal 側 (7 commit):
+
+- **`docs/benchmarks/policy.md`** (新規) — 三本柱 (measurement purity / progressive
+  curve / honest disclosure) + 運用チェックリスト + 直近運用状況 (Mermaid)
+- **`docs/comparison.md`** — Honest disclosure セクション追加 + Benchmark
+  Policy リンク + Last updated 更新 (credential 復旧待ち事実を明記)
+- **`docs/spec/index.md`** (新規) — Spec hub。22 章直リンク + 要件定義 8 本
+  一覧 + drift 防止方針
+- **`docs/roadmap.md`** — ステータス遷移モデル (5 状態) + Live/Planned
+  マトリクス (13 product) + 依存グラフ + タイムライン (Mermaid 3 種)
+- **`.github/workflows/mermaid-lint.yml`** (新規) — Mermaid 構文 CI lint
+  (mermaid-cli 経由)
+- **`docs/recommended-models.md`** (新規) — 用途別推奨 on-prem モデル hub
+  (`llama3.2:3b` 非推奨の根拠含む) + 判断軸 flowchart + 共通 install スニペット
+- **`docs/index.md`** — Reference hubs セクション追加 (Spec / Benchmark
+  Policy / Recommended models へのナビ統合)
+
+設計指針 (本 Phase で確立):
+
+- **drift 防止構造**: 各 product README は具体モデル / 系列ラベル / 系
+  特定の数値を書かず、portal hub にリンクする
+- **honest disclosure as architecture**: credential 復旧待ち事実 / 採点者
+  バイアス / 一部測定未完を明示する hub を設置
+- **倫理は architecture の一部**: Quiet Hours / Gift Value gate / Risk
+  monitoring を後付けでなくコンストラクタで注入
+
+検証:
+
+```bash
+bash scripts/verify_publication.sh
+# A. Pages reachability: 5/5 PASS
+# B. Portal link sweep: PASS (35 external GitHub links)
+# C. Branch protection: 6/6 PASS
+# D. About + Topics: 4/4 PASS (lldesign / lltrade)
+# E. Mermaid family tree: PASS
+# Summary: ALL CHECKS PASSED (継続維持)
+```
 
 ## References
 
