@@ -3,35 +3,39 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-05-18 13:00:14
+- **最終更新**: 2026-05-18 20:39:09
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
-313f590 docs(regulatory): audit-log-format.md draft v0.3 — Article 18/19 整合性 fix
-dcd1e53 auto: audit-log-format.md 編集前 (2026-05-18 07:38)
-da37867 auto: audit-log-format.md 編集前 (2026-05-18 07:38)
-4e3b101 docs(regulatory): cn-public-service.md draft v0.2 — 公衆向け判定/audit/PIPL/更新義務
-4e855d3 auto: cn-public-service.md 編集前 (2026-05-18 07:37)
-c2790e1 auto: cn-public-service.md 編集前 (2026-05-18 07:37)
-8143cc7 auto: cn-public-service.md 編集前 (2026-05-18 07:36)
-6890a5b auto: cn-public-service.md 編集前 (2026-05-18 07:36)
-2c385e6 docs(regulatory): eu-ai-act.md draft v0.2 — Article 別 mapping + PMM/incident
-1ad44ba auto: eu-ai-act.md 編集前 (2026-05-18 07:35)
+1320b2c auto: QIITA_18_non_transformer_low_spec_pc.md 編集前 (2026-05-18 20:35)
+4c6b965 auto: QIITA_18_non_transformer_low_spec_pc.md 編集前 (2026-05-18 20:35)
+2daf8a0 auto: QIITA_18_non_transformer_low_spec_pc.md 編集前 (2026-05-18 20:35)
+d8bc6ee auto: QIITA_18_non_transformer_low_spec_pc.md 編集前 (2026-05-18 20:34)
+c0ad1d9 auto: QIITA_18_non_transformer_low_spec_pc.md 編集前 (2026-05-18 20:34)
+3b38955 auto: QIITA_19_general_gpu_less_ai_for_everyone.md 編集前 (2026-05-18 20:34)
+c807096 auto: QIITA_19_general_gpu_less_ai_for_everyone.md 編集前 (2026-05-18 20:34)
+59d0fff auto: QIITA_19_general_gpu_less_ai_for_everyone.md 編集前 (2026-05-18 20:33)
+85b4510 auto: QIITA_19_general_gpu_less_ai_for_everyone.md 編集前 (2026-05-18 20:33)
+2b394e5 auto: QIITA_19_general_gpu_less_ai_for_everyone.md 編集前 (2026-05-18 20:33)
 ```
 
 ## 現在の git status
 
 ```
 M docs/SESSION_SUMMARY.md
+ M docs/articles/2026-05-18/QIITA_18_non_transformer_low_spec_pc.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-12:46 docs/SESSION_SUMMARY.md
+20:36 docs/SESSION_SUMMARY.md
+20:35 docs/articles/2026-05-18/QIITA_18_non_transformer_low_spec_pc.md
+20:34 docs/articles/2026-05-18/QIITA_19_general_gpu_less_ai_for_everyone.md
+20:11 docs/architecture/triz-ssm-vs-transformer.md
 ```
 
 ---

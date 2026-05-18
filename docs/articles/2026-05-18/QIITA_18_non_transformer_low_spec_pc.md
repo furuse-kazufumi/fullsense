@@ -372,3 +372,8 @@ TRIZ 検討は `D:/projects/fullsense/docs/architecture/triz-ssm-vs-transformer.
 - 2026-05-18 — v0.1 作成. 困りごと 2 件 + 5 候補 skeleton + GPU 無し PC
   bench harness + RWKV CPU クイックスタート + AIGIS 位置関係 + 小さい
   発見 1 件をまとめた技術者向け Qiita 記事 draft.
+- 2026-05-18 — v0.2 (ユーザー指摘反映):
+  * 冒頭 + §3 + §4 + §5 に画像/図 placeholder を 4 箇所追加
+    (TUI スクショ / 3 層 ブロック図 / 5 backend クラス図 / ベンチ出力 JSON)
+  * §8.5「意見を取り込む体制」セクション新規追加. チャネル別現状表 +
+    具体的な募集事項リスト
