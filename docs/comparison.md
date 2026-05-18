@@ -172,6 +172,11 @@ Headline of the day:
 
 ## Last updated
 
-2026-05-16 — initial publication + first 4-Brief A/B run. Reviewed at:
-portal-side `PROGRESS.md` *Phase 0.3 — umbrella expansion* and *Phase 0.3
-— competitive positioning* entries.
+- 2026-05-18 — Honest disclosure セクション追加 + Benchmark Policy リンク
+  ([benchmarks/policy/]({{ '/benchmarks/policy/' | relative_url }})) で
+  系列 A/B/C/D / progressive curve / honest disclosure の運用ルールを portal
+  公式化。本ページの採点は **2026-05-16 時点**のままで、credential 復旧後の
+  再評価で更新予定。
+- 2026-05-16 — initial publication + first 4-Brief A/B run. Reviewed at:
+  portal-side `PROGRESS.md` *Phase 0.3 — umbrella expansion* and *Phase 0.3
+  — competitive positioning* entries.
