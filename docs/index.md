@@ -44,18 +44,24 @@ flowchart TD
     LM <-. hub .-> LO
     LD <-. brief .-> LI
     LT <-. signal+gate .-> LI
+    CM["v0.8 Cognitive Mesh — 10 sub-systems (Quiet Hours / Proactive / Idle / Risk / TitleRecall / Mesh5W1H / ...)"]
+    LI -. embeds .-> CM
     style F fill:#fef3c7,stroke:#f59e0b,stroke-width:3px
     style LI fill:#d1fae5,stroke:#10b981
     style LM fill:#dbeafe,stroke:#3b82f6
     style LO fill:#fce7f3,stroke:#ec4899
     style LD fill:#ede9fe,stroke:#8b5cf6
     style LT fill:#fee2e2,stroke:#ef4444
+    style CM fill:#fef3c7,stroke:#f59e0b,stroke-dasharray:3 2
     style LCAD fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
     style LEDA fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
     style LCHIP fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
     style LMED fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
     style LPAPER fill:#f3f4f6,stroke:#9ca3af,stroke-dasharray:5 5
 ```
+
+> Cognitive Mesh の詳細は [Cognitive Mesh hub]({{ '/cognitive-mesh/' | relative_url }}) を参照。
+> 10 サブシステム全て **skeleton 完了** (2026-05-19、llive 1379 PASS)。
 
 ## Product Sites
 
