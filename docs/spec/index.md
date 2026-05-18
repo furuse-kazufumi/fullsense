@@ -85,7 +85,7 @@ Spec を実装に落とした **要件定義**は llive 配下に複数の versi
 | [`requirements_v0.5_spatial_memory.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.5_spatial_memory.md) | Spatial Memory |
 | [`requirements_v0.6_concurrency.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.6_concurrency.md) | 並行プロンプト処理 |
 | [`requirements_v0.7_rust_acceleration.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.7_rust_acceleration.md) | Rust ホットパス置換 |
-| [`requirements_v0.8_cognitive_mesh.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.8_cognitive_mesh.md) | **COG-MESH (能動性 / 並列 Brief / Quiet Hours)** (2026-05-18 追加) |
+| [`requirements_v0.8_cognitive_mesh.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.8_cognitive_mesh.md) | **COG-MESH (能動性 / 並列 Brief / Quiet Hours)** (2026-05-18 追加、全 10 件 skeleton 完了 2026-05-19) — portal 概要は [Cognitive Mesh hub]({{ '/cognitive-mesh/' | relative_url }}) |
 
 加えて、`.planning/REQUIREMENTS.md` に GSD workflow 用の REQ-ID 化版が
 あり、CABT (v0.8) / COG-MESH (v0.8b) / CREAT (v0.9) / VLM-FX / ORG-FX 等を
