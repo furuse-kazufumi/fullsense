@@ -7,11 +7,36 @@
 > 気づいた拡張性ファースト設計の話.
 
 > 📷 [画像 placeholder: 普通のノート PC で llive Brief が走っている
-> ターミナル画面 (`py -3.11 -m llive.cli brief "..."` の結果)]
->
-> 🖼️ [図 placeholder: FullSense 3 層 (llmesh / llive / llove) と
-> non-transformer backend (Mamba / RWKV / Jamba / Diffusion) の関係を
-> 示すブロック図]
+> ターミナル画面 (`py -3.11 -m llive.cli brief "..."` の結果) — 撮影後挿入]
+
+**FullSense 3 層と non-transformer backend の関係**:
+
+```mermaid
+flowchart TB
+    subgraph FullSense
+        direction TB
+        llove["llove<br/>(TUI / 可視化)"]
+        llive["llive<br/>(思考フレーム<br/>+ 6 stage + 10 因子)"]
+        llmesh["llmesh<br/>(LLM ハブ / MCP server<br/>+ 監査 + HITL)"]
+        llove -- "SSE / HTTP" --> llive
+        llive -- "MCP / OpenAI 互換" --> llmesh
+    end
+    subgraph Backends["LLM backend 候補 (case A–E)"]
+        direction LR
+        mamba["Mamba (case A)"]
+        jamba["Jamba (case B)"]
+        bridge["思考因子-Δ 橋渡し (case C)"]
+        diff["Diffusion LM (case D)"]
+        rwkv["RWKV-7 (case E)"]
+    end
+    llmesh -- "stage-wise routing" --> mamba
+    llmesh --> jamba
+    llmesh --> bridge
+    llmesh --> diff
+    llmesh --> rwkv
+    style rwkv fill:#cfe,stroke:#393
+    style bridge fill:#fcf,stroke:#909
+```
 
 (本記事は私が日々開発している llive / FullSense の 2026-05-18 進捗まとめ
 です. 技術者向け. 同じ内容の一般向け版は別記事で投稿します.)
