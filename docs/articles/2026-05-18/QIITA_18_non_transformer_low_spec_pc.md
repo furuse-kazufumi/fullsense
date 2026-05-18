@@ -449,3 +449,10 @@ TRIZ 検討は `D:/projects/fullsense/docs/architecture/triz-ssm-vs-transformer.
     (TUI スクショ / 3 層 ブロック図 / 5 backend クラス図 / ベンチ出力 JSON)
   * §8.5「意見を取り込む体制」セクション新規追加. チャネル別現状表 +
     具体的な募集事項リスト
+- 2026-05-18 — v0.3 (Mermaid 図埋込):
+  * 冒頭の 3 層ブロック図 placeholder を Mermaid flowchart に置換
+    (FullSense 3 層 + 5 backend 候補、case E/C を色付け強調)
+  * §3 末の 5 backend クラス図 placeholder を Mermaid classDiagram に置換
+    (LLMBackend → 5 backend、すべて _inner=OpenAIBackend に delegate)
+  * 残りの placeholder (TUI スクショ / ベンチ出力 JSON) は撮影系のため
+    Kazufumi さんが手元で撮ってもらう (img/01_tui.png 等の保存先指定済)
