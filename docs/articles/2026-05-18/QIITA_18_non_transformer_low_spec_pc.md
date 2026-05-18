@@ -155,6 +155,10 @@ NoopFactorHook がデフォルトなので、SSM 非対応の backend (Transform
 
 ---
 
+> 🖼️ [図 placeholder: 5 backend (Mamba / Jamba / 思考因子-Δ / Diffusion /
+> RWKV) を OpenAI 互換 HTTP 経由で繋ぐクラス図 — `LLMBackend` を root に、
+> 各 backend が `_inner = OpenAIBackend` に委譲する関係を示す]
+
 ## 4. GPU 無し PC のベンチ harness を書いた
 
 これも今日やった作業の一つです.
