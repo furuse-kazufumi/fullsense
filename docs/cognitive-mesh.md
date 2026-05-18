@@ -118,19 +118,28 @@ Active と Quiet で 5 サブシステムの挙動が変わる様子を確認で
 | TonicRiskMonitor | ALERT 発火 | ALERT 発火 ✓ (例外通過) |
 | TitleRecallPlanner | recall_rate 0.75 | recall_rate 0.75 (時刻独立) |
 
-## 次フェーズ (Phase 5/6/7 本実装)
+## 本実装進捗 (2026-05-19 朝〜昼前)
 
-Skeleton 完了 → 本実装で必要なもの (llive 側 roadmap.md Phase 8 参照):
+llive 側 roadmap.md Phase 8 参照:
 
-- M8.1 ProactiveLoop を llove F25 経由で TUI 表示、asciinema 録画
-- M8.2 IdleTraining を Quarantined Memory + Ed25519 と統合
-- M8.3 BriefDeque/Map/Tree を実 Brief / BriefRunner と接続
-- M8.4 TitleRecall を embedding semantic similarity で本実装
-- M8.5 TonicRiskMonitor を threading 化 + ApprovalBus.intervene 配線
-- M8.6 Mesh5W1H を実 Annotation Channel と統合
-- M8.7 ProactiveLoop に event / curiosity / consistency モード
-- M8.8 MultiBriefCoherenceManager を networkx + 実 Brief 統合
-- M8.9 GrammarLayer を EVO-04/06/07 と接続
+- [ ] **M8.1** ProactiveLoop を llove F25 経由で TUI 表示、asciinema 録画
+      (llove 側着手・操作者待ち)
+- [x] **M8.2** IdleTraining を Quarantined Memory + Ed25519 と統合
+      (SignedPayload / Ed25519Verifier / QuarantinedMemory + 16 テスト)
+- [x] **M8.3** BriefDeque/Map/Tree を実 Brief / BriefRunner と接続
+      (BriefDequeRunnerBridge + 6 テスト)
+- [x] **M8.4** TitleRecall を embedding semantic similarity で本実装
+      (EmbeddingSimilarityFn + similarity_fn 注入 + 9 テスト)
+- [x] **M8.5** TonicRiskMonitor を threading 化 + ApprovalBus.intervene 配線
+      (RiskInterventionAdapter + 5 テスト)
+- [x] **M8.6** Mesh5W1H を実 Annotation Channel と統合
+      (Mesh5W1HAnnotator + 7 テスト)
+- [x] **M8.7** ProactiveLoop に event / curiosity / consistency モード
+      (ProactiveEvent / ConsistencyViolation + tick_event/tick_consistency + 12 テスト)
+- [x] **M8.8** MultiBriefCoherenceManager に graph analytics + 実 Brief 統合
+      (BFS / DFS / centrality + register_brief + 14 テスト、networkx は将来 swap 候補)
+- [x] **M8.9** GrammarLayer ↔ EVO 接続 + 言語別 layer
+      (GrammarChangeSink Protocol + MultilingualGrammar (ja/en/zh/ko) + 8 テスト)
 
 ## 関連
 
