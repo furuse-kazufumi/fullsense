@@ -4,25 +4,25 @@ title: "Next Session Handoff"
 nav_order: 95
 ---
 
-# Next Session Handoff (2026-05-19 早朝 → next)
+# Next Session Handoff (2026-05-19 朝 → next)
 
 > Picked up by the next FullSense session. Everything below is ready to
 > resume on. Operator actions are flagged 🧑 (user) vs 🤖 (agent).
 
-## ✅ Done in 2026-05-18/19 session
+## ✅ Done in 2026-05-18/19 連続セッション
 
-詳細は [PROGRESS.md]({{ '/PROGRESS' | relative_url }}) の Phase 0.4
-(Reference hubs) + Phase 0.5 (COG-MESH 実装ラッシュ) を参照。1 行要約:
+詳細は [PROGRESS.md]({{ '/PROGRESS' | relative_url }}) 参照。
 
-llive 側 (12 commit):
+llive 側 (累計 commit 多数):
 
 - **requirements v0.8 cognitive mesh** 新規 (462 行、COG-MESH-01〜10)
-- **architecture §8** v0.8 拡張ポイント
+- **architecture §8** v0.8 拡張ポイント (M8.x 完成配線 table 追加 — 2026-05-19 朝)
 - **roadmap Phase 8** CABT + COG-MESH 双子マイルストーン
-- **glossary** 24 用語 + 5 略語追加
-- **COG-MESH-01〜10 全 10 件最小実装完了** (107 新規テスト、1379 PASS)
-- 統合 demo CLI (`py -3.11 -m llive.cognitive_mesh.demo`)
-- PROGRESS 2 段階追記
+- **glossary** 24 用語 + 5 略語 (+ M8.x 11 用語、2026-05-19 朝)
+- **COG-MESH-01〜10 全 10 件最小実装完了** (107 新規テスト、1379 PASS — 2026-05-19 早朝)
+- **M8.2〜M8.7 本実装完了** (+55 テスト、1393 → 1448 PASS — 2026-05-19 朝)
+- 統合 demo CLI (`py -3.11 -m llive.cognitive_mesh.demo`、5 → 9 セクション)
+- PROGRESS 3 段階追記
 
 portal 側 (10 commit):
 
@@ -56,17 +56,23 @@ PYTHONIOENCODING=utf-8 python3 scripts/bench_vlm.py --image docs/assets/images/o
 復旧後、`docs/comparison.md` の Honest disclosure セクションで
 「3/4 が未測」と書いた行を更新し、A/F 採点を再評価。
 
-### 2. asciinema 録画 — Cognitive Mesh 統合 demo
+### 2. asciinema 録画 — Cognitive Mesh 統合 demo (9 セクション拡張版)
 
-llive 側で `py -3.11 -m llive.cognitive_mesh.demo` が動くようになった。
+llive 側で `py -3.11 -m llive.cognitive_mesh.demo` が 9 セクションに拡張済。
 Active (10:00 JST) と Quiet (02:00 JST) を時刻固定で連続再生:
 
-```bash
+```powershell
 asciinema rec demo-cog-mesh.cast
 # 中で:
-# $env:LLIVE_DEMO_FORCE_TIME="2026-05-19T10:00:00+09:00"; py -3.11 -m llive.cognitive_mesh.demo
-# $env:LLIVE_DEMO_FORCE_TIME="2026-05-19T02:00:00+09:00"; py -3.11 -m llive.cognitive_mesh.demo
+$env:LLIVE_TZ="Asia/Tokyo"; $env:LLIVE_QUIET_HOURS_START="22"; $env:LLIVE_QUIET_HOURS_END="8"; $env:LLIVE_QUIET_HOURS_ENABLED="1"
+$env:LLIVE_DEMO_FORCE_TIME="2026-05-19T10:00:00+09:00"; py -3.11 -m llive.cognitive_mesh.demo
+$env:LLIVE_DEMO_FORCE_TIME="2026-05-19T02:00:00+09:00"; py -3.11 -m llive.cognitive_mesh.demo
 ```
+
+9 セクション (Quiet Hours / Proactive / Idle Training / TonicRisk +
+ApprovalBus 配線 / TitleRecall / **Mesh5W1H Annotator** /
+**Quarantined Memory (Ed25519)** / **Event/Consistency mode** /
+**BriefDeque Bridge**).
 
 `project_f25_demo_polish` (動きで魅せる + 採用ファネル先頭) と整合。
 公開は `feedback_articles_pause` 解除後。
@@ -78,23 +84,16 @@ Pages 設定 / repo edit を自動化するため)。
 
 ## 🤖 Agent-side work for the next session
 
-### Priority 1 — COG-MESH 本実装フェーズ (Phase 5)
+### Priority 1 — 残 M8.x マイルストーン (Phase 6/7)
 
-`docs/requirements_v0.8_cognitive_mesh.md` §10 で予告した次アクションは
-本セッションで概ね消化済 (architecture §8 / roadmap Phase 8 / glossary /
-QuietHoursGuard テスト雛形)。次は **本実装**:
+| Milestone | やること | 担当 / Phase |
+|---|---|---|
+| **M8.1** | ProactiveLoop を llove F25 経由で TUI 表示 + asciinema 録画 | llove 側 + 操作者 |
+| **M8.8** | MultiBriefCoherenceManager を networkx + 実 Brief 統合 | agent Phase 6 |
+| **M8.9** | GrammarLayer を EVO-04/06/07 と接続、言語別 layer 設計 | agent Phase 7 |
 
-| Milestone | やること |
-|---|---|
-| **M8.2 Idle ingest** 本実装 | Quarantined Memory (SEC-01) + Ed25519 (SEC-02) 統合 |
-| **M8.3 BriefDeque** 本実装 | 実 Brief / BriefRunner と接続 |
-| **M8.4 TitleRecall** 本実装 | token match → embedding semantic similarity |
-| **M8.5 TonicRisk** 本実装 | threading 化 + `ApprovalBus.intervene` 配線 |
-| **M8.6 Mesh5W1H** 本実装 | 実 Annotation Channel と統合 |
-| **M8.7 Proactive 拡張** | event / curiosity / consistency モード |
-
-優先順位はユーザ判断。デモ普及戦略を取るなら **M8.1 (llove TUI 統合) +
-asciinema 録画** が最大効果。
+優先順位はユーザ判断。デモ普及戦略なら **M8.1 (llove TUI 統合)** 最大効果。
+networkx 化と言語別 layer は研究色強め。
 
 ### Priority 2 — portal NEXT_SESSION 自動更新フロー
 
@@ -106,18 +105,18 @@ asciinema 録画** が最大効果。
 ### Priority 3 — articles pause 解除タイミング
 
 `feedback_articles_pause` (投稿用記事の追加・更新を当面保留) は 2026-05-14
-からの方針。次回パッケージ公開 / 大きな機能完成 / ベンチ復旧後の解除を
-ユーザに確認。
+からの方針。M8.2〜M8.7 着地はパッケージ公開級の大きな機能完成なので、
+解除を提案する候補に。ベンチ復旧と合わせて再評価。
 
 ## State of the world (machine-checkable)
 
 ```bash
-# llive: COG-MESH 全 10 件 skeleton 完了
+# llive: M8.2〜M8.7 本実装完了
 cd D:/projects/llive
 py -3.11 -m pytest tests/unit -q
-# 1379 passed
+# 1448 passed
 
-# llive 統合 demo
+# llive 統合 demo (9 セクション、Active 帯)
 $env:LLIVE_TZ="Asia/Tokyo"; $env:LLIVE_QUIET_HOURS_START="22"; $env:LLIVE_QUIET_HOURS_END="8"; $env:LLIVE_QUIET_HOURS_ENABLED="1"
 $env:LLIVE_DEMO_FORCE_TIME="2026-05-19T10:00:00+09:00"
 py -3.11 -m llive.cognitive_mesh.demo
@@ -144,5 +143,5 @@ bash scripts/verify_publication.sh
 
 ## Last updated
 
-2026-05-19 — COG-MESH 全 10 件 skeleton 完了 + portal Reference hubs
-構造完成を反映。次セッションは本実装 (M8.1〜M8.9 のいずれか) から。
+2026-05-19 朝 — M8.2〜M8.7 本実装完了、+55 テスト、統合 demo 9 セクション化を反映。
+次セッションは M8.1 (llove TUI) / M8.8 (networkx) / M8.9 (GrammarLayer) のいずれか。
