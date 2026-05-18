@@ -45,6 +45,11 @@ The portal points to many files inside `llive`. If those move, update here:
 | Benchmark Policy (`docs/benchmarks/policy.md`) | `llive/docs/benchmarks/2026-05-16-progressive-xss/` (実測例) |
 | Recommended models (`docs/recommended-models.md`) | `llive/docs/setup/llama-server-company-setup.md` |
 | Recommended models | `llive/docs/setup/ollama-company-setup.md` |
+| Cognitive Mesh (`docs/cognitive-mesh.md`) | `llive/docs/requirements_v0.8_cognitive_mesh.md` (要件、462 行) |
+| Cognitive Mesh | `llive/docs/architecture.md` §8 |
+| Cognitive Mesh | `llive/docs/roadmap.md` Phase 8 マイルストーン |
+| Cognitive Mesh | `llive/docs/glossary.md` COG-MESH 用語 24 件 |
+| Cognitive Mesh | `llive/src/llive/cognitive_mesh/` 実装 9 module |
 | P2P RFC | `llive/docs/llmesh_p2p_mesh_rfc.md` |
 | EDLA historical | `llive/docs/references/historical/edla_kaneko_1999.md` |
 | v1.0 migration | `llive/docs/v1.0_migration_plan.md` |
