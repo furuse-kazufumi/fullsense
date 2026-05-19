@@ -75,7 +75,7 @@ flowchart TD
 | **lldesign** | alpha | UI / Web / diagram design via LLM-friendly DSLs | [lldesign docs](https://furuse-kazufumi.github.io/lldesign/) | [GitHub](https://github.com/furuse-kazufumi/lldesign) |
 | **lltrade** | alpha | Trading research — **paper-trading only** (v0.x) | [lltrade docs](https://furuse-kazufumi.github.io/lltrade/) | [GitHub](https://github.com/furuse-kazufumi/lltrade) |
 | llmesh-suite | stable | One-shot installer (`pip install llmesh-suite`) | — | [GitHub](https://github.com/furuse-kazufumi/llmesh-suite) |
-| llmesh-demos | alpha | 3 製品 demo launcher + F25 audience cinematic HTML (stdlib only) | — | [GitHub](https://github.com/furuse-kazufumi/llmesh-demos) |
+| llmesh-demos | alpha | 3 製品 demo launcher + F25 audience cinematic HTML (stdlib only) | — | (local-only, GitHub 公開 TBD) |
 
 Planned (parked, see [roadmap]({{ '/roadmap' | relative_url }})): **llcad** (machine CAD) · **lleda** (EDA / PCB) · **llchip** (IC layout) · **llmed** (medical literature) · **llpaper** (academic drafting)
 
