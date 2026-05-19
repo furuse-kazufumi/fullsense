@@ -7,31 +7,40 @@ nav_order: 68
 # FullSense — 2026-05-20 articles index
 
 > 2026-05-14 から保留していた投稿用記事 pause を **2026-05-20 解除**.
-> 用途は「投稿候補 + ユーザーの進捗把握源」. 投稿判断はユーザー.
+>
+> 用途は 3 つ:
+> 1. ユーザーの進捗把握源 ([[feedback-daily-progress-article]])
+> 2. 投稿候補ドラフト ([[feedback-articles-pause]] 解除後)
+> 3. agent 自身の context 補完源 ([[feedback-articles-as-agent-context]])
+>
+> 投稿判断はユーザー. agent は draft までで止める.
 >
 > セッション内容: 15 時間自律ループ goal を受けた前半サイクル. portal
 > NEXT_SESSION 自動化 + research hub 6 件 + 3 prj test 回帰 fix + lleval
 > HIGH 採用優先度確定 + lleval v0.1 draft 要件.
 
-## 当日の柱 3 本
+## 当日の必須 1 本
 
 | # | タイトル | テーマ | 主要対象 |
 |---|---|---|---|
-| 20 | [1 セッションで 5409 テスト緑緑緑にして research hub 6 本開いた話](./QIITA_20_one_session_full_stack_progress.md) | 進捗ダイジェスト / 全 stack 整備 | FullSense フォロワー / 個人 OSS 開発者 |
-| 21 | [テストが朝起きたら 7 件死んでいた件 — WinGet で chafa が来た](./QIITA_21_env_dependent_tests_chafa_lesson.md) | TIL / 環境依存 test の脆さ / monkeypatch パターン | テスト書く全プログラマ |
-| 22 | [AI agent 6 体並列に走らせて spinoff 採用優先度を 30 分で決めた話](./QIITA_22_ai_parallel_research_priority_decision.md) | AI workflow / 採用優先度判定 / agent dispatch | 設計判断に AI を使う人 |
+| 20 | [1 セッションで 5409 テスト緑緑緑 + research hub 6 本開設 — FullSense の一日](./QIITA_20_one_session_full_stack_progress.md) | 進捗統合 (debug 縦 / research 横 / 実装縦) | FullSense フォロワー / 個人 OSS 開発者 / agent 自身の future-self |
 
 ## 一文サマリ (RT 用)
 
 - **#20**: 朝起きたら test 7 件死んでた → 直す → AI 6 体で先行研究調査 →
-  spinoff 採用優先度を決定 → portal NEXT_SESSION 自動化 → 全 push.
-  1 セッションで縦 (test) も横 (research) も両方詰めた話.
-- **#21**: WinGet が `chafa.exe` を勝手に PATH に乗せただけで, llove の
-  ASCII fallback test が 7 件死亡. 環境依存 test の正しい monkeypatch
-  パターン.
-- **#22**: 採用優先度を「会議室で議論」じゃなくて「AI 6 体に並列で先行研究
-  調査させて 30 分で報告書 6 件」で決めた話. lleval=HIGH を 800 字 × 6 件で
-  根拠化.
+  spinoff 採用優先度を決定 → portal NEXT_SESSION 自動化 → lleval v0.1
+  draft → 全 push. 1 セッションで縦 (test) も横 (research) も両方詰めた話.
+
+## 未着手の draft 候補 (将来日付に分散)
+
+- **#21 候補**: テストが朝起きたら 7 件死んでいた件 — WinGet で chafa が
+  来た (TIL / 環境依存 test 単独深掘り) — 別日に書く
+- **#22 候補**: AI agent 6 体並列に走らせて spinoff 採用優先度を 30 分で
+  決めた話 (AI workflow / 採用判断単独深掘り) — 別日に書く
+
+[[feedback-daily-progress-article]] のルール「1 セッションで複数本書く時は
+#最初の 1 本を進捗統合記事に固定」「セッション 1 つで 3 本書くと翌日空っぽ
+になるので分散」を守るため, 21/22 は別日に分散する.
 
 ## 関連 docs
 
