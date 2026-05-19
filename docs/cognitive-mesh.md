@@ -179,6 +179,63 @@ sequenceDiagram
 契約 schema が unit test でロック (llive: 10 件, llove: 15 件)。実 HTTP/MCP
 push (`SK ↔ TM` 線) は Phase 6 で別 module 配備予定 (operator 承認待ち).
 
+## How to wire HTTP push (Phase 6 配線)
+
+llive cognitive_mesh の emit を llmesh Timeline server に **HTTP で**
+流し、llove TUI panel で受ける一連の配線例 (現在は両側 skeleton 配備済).
+
+### 1. llmesh Timeline server を起動 (URL を控える)
+
+```powershell
+# llmesh は別途インストール / 起動 (詳細は llmesh repo 参照)
+# 例えば http://localhost:8080 で /timeline/ingest を受ける状態にする
+```
+
+### 2. llive 側: HttpTimelineSink を CognitiveMeshTimelineEmitter に注入
+
+```powershell
+# env で URL を設定
+$env:LLIVE_LLMESH_TIMELINE_URL = "http://localhost:8080"
+```
+
+```python
+# Python から (実 production 配線、Phase 6 完成後)
+from llive.cognitive_mesh import (
+    CognitiveMeshTimelineEmitter,
+    http_sink_from_env,
+)
+
+sink = http_sink_from_env(node_id="prod-node-1")
+emitter = CognitiveMeshTimelineEmitter(
+    sink=sink, task_id="brief-001", node_id="prod-node-1",
+)
+# ProactiveLoop / TonicRiskMonitor / QuarantinedMemory の emit 全てを
+# emitter.emit_* で流すと、自動的に sink 経由で llmesh に POST される
+```
+
+### 3. llove 側: TimelinePollDriver を起動
+
+```powershell
+# llove 側でも同じ URL を参照する想定 (poll 周期は config)
+$env:LLOVE_TIMELINE_URL = "http://localhost:8080"
+
+py -3.11 -m llove.demo.cog_mesh_demo
+```
+
+将来的に LoveApp 本体側に `CognitiveMeshPanel` を統合すれば、上記
+stand-alone demo の代わりに `llove` 起動だけで Timeline event を
+panel で確認できる (LoveApp 統合は今後の M8.1 残作業).
+
+### 4. asciinema 録画 (operator 作業)
+
+```powershell
+asciinema rec demo-cog-mesh-m81.cast
+
+# 中で 2 つを並列再生:
+# - llive 側: py -3.11 -m llive.cognitive_mesh.demo (10 sections)
+# - llove 側: py -3.11 -m llove.demo.cog_mesh_demo (stand-alone TUI)
+```
+
 ## 関連
 
 - llive 側
