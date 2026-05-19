@@ -200,40 +200,47 @@ llive cognitive_mesh の emit を llmesh Timeline server に **HTTP で**
 # 例えば http://localhost:8080 で /timeline/ingest を受ける状態にする
 ```
 
-### 2. llive 側: HttpTimelineSink を CognitiveMeshTimelineEmitter に注入
+### 2. llive 側: ProductionHttpTimelineSink を CognitiveMeshTimelineEmitter に注入
 
 ```powershell
-# env で URL を設定
+# env で URL / 認証 / retry / batch を設定
 $env:LLIVE_LLMESH_TIMELINE_URL = "http://localhost:8080"
+$env:LLIVE_LLMESH_TIMELINE_TOKEN = "<bearer-token>"  # 任意
+$env:LLIVE_LLMESH_TIMELINE_RETRIES = "5"  # 既定 3
+$env:LLIVE_LLMESH_TIMELINE_BATCH_SIZE = "10"  # 既定 0 (即時)
 ```
 
 ```python
-# Python から (実 production 配線、Phase 6 完成後)
+# Python から (production 配線)
 from llive.cognitive_mesh import (
     CognitiveMeshTimelineEmitter,
-    http_sink_from_env,
+    production_http_sink_from_env,
 )
 
-sink = http_sink_from_env(node_id="prod-node-1")
+sink = production_http_sink_from_env(node_id="prod-node-1")
 emitter = CognitiveMeshTimelineEmitter(
     sink=sink, task_id="brief-001", node_id="prod-node-1",
 )
 # ProactiveLoop / TonicRiskMonitor / QuarantinedMemory の emit 全てを
-# emitter.emit_* で流すと、自動的に sink 経由で llmesh に POST される
+# emitter.emit_* で流すと、Bearer auth + exp backoff retry + batch 経由で
+# llmesh に POST される
 ```
 
-### 3. llove 側: TimelinePollDriver を起動
+### 3. llove 側: LoveApp に CognitiveMeshPanel を attach
 
 ```powershell
-# llove 側でも同じ URL を参照する想定 (poll 周期は config)
-$env:LLOVE_TIMELINE_URL = "http://localhost:8080"
+# LoveApp 統合 (env-gated, 既定無効)
+$env:LLOVE_ENABLE_COG_MESH = "1"
 
-py -3.11 -m llove.demo.cog_mesh_demo
+py -3.11 -m llove
+# 既存 layout (sensor / spc / audit) の下に CognitiveMeshPanel が表示される
 ```
 
-将来的に LoveApp 本体側に `CognitiveMeshPanel` を統合すれば、上記
-stand-alone demo の代わりに `llove` 起動だけで Timeline event を
-panel で確認できる (LoveApp 統合は今後の M8.1 残作業).
+または **stand-alone demo** で panel 単体を確認:
+
+```powershell
+py -3.11 -m llove.demo.cog_mesh_demo
+```
 
 ### 4. asciinema 録画 (operator 作業)
 
