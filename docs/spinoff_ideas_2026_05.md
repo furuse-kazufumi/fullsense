@@ -98,6 +98,14 @@ progressive token matrix (xs/s/m/l/xl) ベンチ ([[feedback-benchmark-progressi
 の **public benchmark dashboard** をホスト. 「強そうな数字」を出すのではなく
 「正直な内訳」を見せるのが差別化. Phoenix / OpenInference 連携も検討.
 
+**SOTA 比較**: [research/lleval_sota]({{ '/research/lleval_sota' | relative_url }})
+で OpenAI Evals / lmsys / HELM / promptfoo / DeepEval / Phoenix / Langfuse /
+TruLens / Ragas を整理. **on-prem + cloud 統一**, **progressive size curve**,
+**honest disclosure 自動診断**, **self-preference bias 自動検出** の 4 つに
+空白あり. 推奨 fork base = **promptfoo** (Apache-2.0 / CI 親和 / on-prem
+provider 拡張余地大), 観測層 = **Phoenix** (OpenInference/OTel), RAG metric =
+**Ragas/TruLens adapter** 吸収.
+
 代案名: **llbench** / **llmeter** / **llmetrics**.
 
 ### A.3 llcraft — クリエイティブ素材生成 (TTS / 画像 / 動画)
