@@ -175,9 +175,15 @@ sequenceDiagram
     PA->>PA: CogEntry.from_event → render_panel
 ```
 
-**現状 (2026-05-19)**: emit / event_dict / panel skeleton まで両側に配備済 +
-契約 schema が unit test でロック (llive: 10 件, llove: 15 件)。実 HTTP/MCP
-push (`SK ↔ TM` 線) は Phase 6 で別 module 配備予定 (operator 承認待ち).
+**現状 (2026-05-19 午後)**: 全 3 リポで M8.1 skeleton 配備済 + 契約 schema
+が unit test でロック.
+- **llive**: emitter / sink / event_dict (10 件 unit + 10 件 contract)
+- **llmesh**: `/timeline/ingest` allow-list に 4 種追加 (46/46 PASS)
+- **llove**: CognitiveMeshPanel + stand-alone Textual demo (20 件 unit)
+
+実 production wire (HTTP auth / retry / batch、asciinema 録画) は
+Phase 6 で別 PR 予定. **schema 上の障害は無く**、env
+`LLIVE_LLMESH_TIMELINE_URL` を設定すれば既に動作可能.
 
 ## How to wire HTTP push (Phase 6 配線)
 
