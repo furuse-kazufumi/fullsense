@@ -103,6 +103,7 @@ flowchart LR
 | llhft | **Parked** | — | trigger: 監査 release + 専用 infra (lltrade main から完全分離) | lltrade Stable |
 | llmesh-suite | **Stable** | 2026-05 | One-shot installer (`pip install llmesh-suite`)、v0.2.0 リリース済 | llmesh / llive / llove |
 | llmesh-demos | **Alpha Active** | 2026-05 | 3 製品 demo launcher + F25 audience cinematic HTML、依存ゼロ stdlib | llmesh / llive / llove |
+| **llgrow** | **Planned** | 2026-05-19 (要件追加) | コンテンツ生成 / 配信 / 効果測定 / フィードバックループ を on-prem AI で自動化 (GROW-01〜10). trigger: AI 開発環境投資資金の捻出 | llive Brief API / llove TUI / llmesh peer |
 
 ## 依存グラフ
 
