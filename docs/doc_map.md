@@ -19,7 +19,8 @@ nav_order: 3
 | [`docs/comparison.md`]({{ '/comparison' | relative_url }}) | honest vs Claude Code / Perplexity / Codex / Gemini + Honest disclosure (2026-05-18) |
 | [`docs/PROGRESS.md`]({{ '/PROGRESS' | relative_url }}) | portal-side changelog (Phase 0.4 まで) |
 | [`docs/NOTES.md`]({{ '/NOTES' | relative_url }}) | design notes, link-rot watch (hub 含む) |
-| [`docs/NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) | handoff to the next agent run |
+| [`docs/NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) | handoff to the next agent run (人手, 方向性メモ) |
+| [`docs/NEXT_SESSION.auto.md`]({{ '/NEXT_SESSION.auto' | relative_url }}) | Stop hook 自動上書き (git/test/operator status snapshot) |
 | [`docs/doc_map.md`]({{ '/doc_map' | relative_url }}) | this page |
 
 ### Reference hubs (2026-05-18 追加 — drift 防止用)
