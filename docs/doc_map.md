@@ -54,6 +54,7 @@ nav_order: 3
 | `bench_vlm.py` | same shape for vision models |
 | `bench_model_brief_matrix.py` | llive × ollama-models × brief-sizes matrix |
 | `bench_quiz.py` | 10-quiz reasoning probe through llive (5 categories × 2 difficulties) |
+| `gen_next_session_auto.py` | `docs/NEXT_SESSION.auto.md` を毎ターン上書き (raptor Stop hook 連動, 2026-05-20 追加) |
 
 ## llive (furuse-kazufumi/llive)
 
