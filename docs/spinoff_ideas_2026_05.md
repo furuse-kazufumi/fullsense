@@ -190,6 +190,13 @@ llive 内部に分散している governance 機能を独立 vertical に. EU AI
 で「社内専用利用は filing 免除」の知見あり. 大手企業向けの「AI 導入時に
 コンプライアンス自動付帯」が販売ポイント.
 
+**SOTA 調査**: [research/llgov_sota]({{ '/research/llgov_sota' | relative_url }})
+で OSS / SaaS matrix (NeMo Guardrails / OPA / Cedar / MS Agent Governance
+Toolkit / Credo AI / Holistic AI 等) を整理. **EU AI Act Art.9-15 を自動検証
+する OSS は不在**. 推奨アプローチ: ApprovalBus + SqliteLedger を
+**OPA / Cedar policy engine の wrapper** として再構成し, Rego rule + YAML
+evidence schema を regulatory pack として配布 (Credo AI policy pack の OSS 版).
+
 代案名: **llcompliance** / **llcomply** / **llwatch**.
 
 ---
