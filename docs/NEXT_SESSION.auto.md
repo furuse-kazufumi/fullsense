@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-20 06:33:00
+- **生成時刻**: 2026-05-20 07:43:28
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,22 +20,23 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-348c2b4 auto: PROGRESS.md 編集前 (2026-05-20 06:32)
-8382414 auto: doc_map.md 編集前 (2026-05-20 06:32)
-0e9cbfe auto: doc_map.md 編集前 (2026-05-20 06:32)
-d38862c auto: index.md 編集前 (2026-05-20 06:32)
-4afaa40 auto: gen_next_session_auto.py 編集前 (2026-05-20 06:30)
-1ad7d71 docs(portal): 自律発案 spinoff カタログ追加 + llgrow を Planned 追加 + llmesh-demos link 修正
-de52a93 auto: index.md 編集前 (2026-05-19 20:42)
-713fe70 auto: roadmap.md 編集前 (2026-05-19 20:40)
-e7e681e chore(scripts): 2026-05-19 セッション push スクリプト追加
-8c54d3c docs(portal): llmesh-suite / llmesh-demos を Family Tree + Live マトリクスに追加
+b3e4841 docs(spec): lleval v0.1 draft 要件 (採用優先度 HIGH, agent ドラフト)
+14df788 docs(next-session): 2026-05-20 朝セッション追記 (NEXT_SESSION 自動化 + research hub + test 回帰 fix)
+167d1b6 docs(research): index.md に llcraft / llrisk / llgov を追加 (6 件揃い)
+502a8fb auto: index.md 編集前 (2026-05-20 07:22)
+d39ea84 auto: spinoff_ideas_2026_05.md 編集前 (2026-05-20 07:21)
+c156012 auto: spinoff_ideas_2026_05.md 編集前 (2026-05-20 07:21)
+12cc15f docs(research): research hub 新設 + 5 件 SOTA メモ + spinoff 優先度反映 + 関連 prj test 回帰 fix を反映
+3105c87 auto: PROGRESS.md 編集前 (2026-05-20 07:14)
+76d83d9 auto: spinoff_ideas_2026_05.md 編集前 (2026-05-20 07:04)
+d1ebeef auto: spinoff_ideas_2026_05.md 編集前 (2026-05-20 06:46)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/PROGRESS.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -44,8 +45,8 @@ M docs/PROGRESS.md
 | project | 最新 commit | 直近 commit msg | tests/ 直近 mtime |
 |---|---|---|---|
 | llive | `17e63bb 2026-05-20` | docs(qiita): 2026-05-19 記事 2 draft — 個人 OSS の市場受容性 SWOT + 生存戦略 | 2026-05-19 12:45 |
-| llove | `b085f1c 2026-05-19` | feat(demo): F23/F24 PoC — minimal PowerShell + ccr launcher (skeleton) | 2026-05-19 20:51 |
-| llmesh | `efb935a 2026-05-19` | feat(timeline): M8.1 — Cognitive Mesh event_type 4 種を ingest 許可 | 2026-05-19 09:14 |
+| llove | `4396f64 2026-05-20` | fix(tests): environment-dependent image-tool detection を抑止 | 2026-05-20 07:07 |
+| llmesh | `21edb8d 2026-05-20` | test(conftest): hypothesis profile 'local-flaky-safe' で deadline=None を default に | 2026-05-20 07:23 |
 | lldesign | `1014ce3 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:52 |
 | lltrade | `d20876c 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:56 |
 
@@ -69,12 +70,22 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `06:32` `docs/PROGRESS.md`
+- `07:43` `docs/SESSION_SUMMARY.md`
+- `07:41` `docs/NEXT_SESSION.auto.md`
+- `07:40` `docs/spec/requirements_lleval_v0.1_draft.md`
+- `07:32` `docs/NEXT_SESSION.md`
+- `07:22` `docs/research/index.md`
+- `07:21` `docs/spinoff_ideas_2026_05.md`
+- `07:14` `docs/PROGRESS.md`
+- `07:06` `docs/research/llrisk_prior_art.md`
+- `07:05` `docs/research/llgov_sota.md`
+- `07:05` `docs/research/llcraft_sota.md`
+- `06:39` `docs/research/cognitive_mesh_vs_sota.md`
+- `06:39` `docs/research/llgrow_prior_art.md`
+- `06:39` `docs/research/lleval_sota.md`
 - `06:32` `docs/doc_map.md`
 - `06:32` `docs/index.md`
-- `06:31` `docs/NEXT_SESSION.auto.md`
 - `06:30` `scripts/gen_next_session_auto.py`
-- `06:23` `docs/SESSION_SUMMARY.md`
 
 
 ## Cross-references
