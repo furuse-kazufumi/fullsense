@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-20 06:31:46
+- **生成時刻**: 2026-05-20 06:33:00
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,23 +20,22 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+348c2b4 auto: PROGRESS.md 編集前 (2026-05-20 06:32)
+8382414 auto: doc_map.md 編集前 (2026-05-20 06:32)
+0e9cbfe auto: doc_map.md 編集前 (2026-05-20 06:32)
+d38862c auto: index.md 編集前 (2026-05-20 06:32)
 4afaa40 auto: gen_next_session_auto.py 編集前 (2026-05-20 06:30)
 1ad7d71 docs(portal): 自律発案 spinoff カタログ追加 + llgrow を Planned 追加 + llmesh-demos link 修正
 de52a93 auto: index.md 編集前 (2026-05-19 20:42)
 713fe70 auto: roadmap.md 編集前 (2026-05-19 20:40)
 e7e681e chore(scripts): 2026-05-19 セッション push スクリプト追加
 8c54d3c docs(portal): llmesh-suite / llmesh-demos を Family Tree + Live マトリクスに追加
-e97cb6f auto: index.md 編集前 (2026-05-19 20:27)
-2f73156 auto: index.md 編集前 (2026-05-19 20:27)
-8756176 auto: index.md 編集前 (2026-05-19 20:26)
-647094a auto: roadmap.md 編集前 (2026-05-19 20:26)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M scripts/gen_next_session_auto.py
+M docs/PROGRESS.md
 ```
 
 
@@ -70,7 +69,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `06:30` `docs/NEXT_SESSION.auto.md`
+- `06:32` `docs/PROGRESS.md`
+- `06:32` `docs/doc_map.md`
+- `06:32` `docs/index.md`
+- `06:31` `docs/NEXT_SESSION.auto.md`
 - `06:30` `scripts/gen_next_session_auto.py`
 - `06:23` `docs/SESSION_SUMMARY.md`
 

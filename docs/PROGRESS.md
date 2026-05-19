@@ -10,6 +10,15 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-20
+
+### Phase 0.6 — NEXT_SESSION 自動化
+
+- `scripts/gen_next_session_auto.py` 新規 — `docs/NEXT_SESSION.auto.md` を毎ターン上書きする Stop hook 用スクリプト. 内容は: portal git snapshot (log 10 件 + status + ahead/behind) / 関連プロジェクト (llive/llove/llmesh/lldesign/lltrade) の最新 commit & `tests/` 直近 mtime / `NEXT_SESSION.md` の 🧑 セクションを再抽出した checkbox 化 operator action / `out/verify_publication.last` cache snapshot / 直近 4 時間に変更された portal ファイル.
+- raptor 側 `libexec/raptor-next-session-update` ラッパ追加 + `.claude/settings.json` Stop hook に登録. `RAPTOR_CALLER_DIR=D:/projects/fullsense` のときだけ動く分岐.
+- index.md / doc_map.md に `NEXT_SESSION.auto.md` リンク追加.
+- 設計判断: 手書き `NEXT_SESSION.md` を温存しつつ別ファイル分離で drift を防ぐ. NEXT_SESSION.md Priority 2 (NEXT_SESSION 自動更新フロー) の実装相当.
+
 ## 2026-05-16
 
 ### Portal bootstrap (Phase 0)
