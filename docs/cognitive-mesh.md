@@ -175,15 +175,18 @@ sequenceDiagram
     PA->>PA: CogEntry.from_event → render_panel
 ```
 
-**現状 (2026-05-19 午後)**: 全 3 リポで M8.1 skeleton 配備済 + 契約 schema
-が unit test でロック.
-- **llive**: emitter / sink / event_dict (10 件 unit + 10 件 contract)
+**現状 (2026-05-19 夕方)**: 全 3 リポで M8.1 **production wire 完了**.
+- **llive**: emitter / skeleton sink / **ProductionHttpTimelineSink**
+  (Bearer auth + exp backoff retry + batch、12 件追加テスト含めて
+  10 件 unit + 10 件 contract + 9 件 skeleton sink + 12 件 production)
 - **llmesh**: `/timeline/ingest` allow-list に 4 種追加 (46/46 PASS)
-- **llove**: CognitiveMeshPanel + stand-alone Textual demo (20 件 unit)
+- **llove**: CognitiveMeshPanel + stand-alone demo + **LoveApp 本体統合**
+  (LLOVE_ENABLE_COG_MESH=1 で attach, 既定無効で互換)
 
-実 production wire (HTTP auth / retry / batch、asciinema 録画) は
-Phase 6 で別 PR 予定. **schema 上の障害は無く**、env
-`LLIVE_LLMESH_TIMELINE_URL` を設定すれば既に動作可能.
+残作業は **operator 作業のみ**:
+- env を設定 (URL / Bearer / retries / batch_size / LLOVE_ENABLE_COG_MESH)
+- asciinema 録画 (llive demo / llove cog_mesh_demo / LoveApp+env)
+- 実 llmesh 起動 (production)
 
 ## How to wire HTTP push (Phase 6 配線)
 
