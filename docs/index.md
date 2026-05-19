@@ -149,7 +149,8 @@ All product code: **Apache-2.0** with optional separate **Commercial License**.
 - [Comparison]({{ '/comparison' | relative_url }}) — honest vs Claude Code / Perplexity / Codex / Gemini + Honest disclosure
 - [Progress log]({{ '/PROGRESS' | relative_url }}) — portal-side changelog
 - [Design notes]({{ '/NOTES' | relative_url }}) — decisions, link-rot watch
-- [Next session handoff]({{ '/NEXT_SESSION' | relative_url }}) — queued operator + agent work
+- [Next session handoff]({{ '/NEXT_SESSION' | relative_url }}) — queued operator + agent work (manual)
+- [Next session auto-snapshot]({{ '/NEXT_SESSION.auto' | relative_url }}) — git/test/operator status, regenerated every Stop hook
 - [Security policy](https://github.com/furuse-kazufumi/fullsense/blob/main/SECURITY.md)
 - [Contributing](https://github.com/furuse-kazufumi/fullsense/blob/main/CONTRIBUTING.md)
 - [License (Apache-2.0)](https://github.com/furuse-kazufumi/fullsense/blob/main/LICENSE)
