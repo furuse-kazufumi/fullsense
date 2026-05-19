@@ -159,6 +159,13 @@ risk management / SOX / GRC コーパスを参照しつつ、project context か
 Mesh の TonicRiskMonitor ([[project-cog-mesh-m8-complete]] M8.5) を
 **メタリスク** (1 メートル上空) に拡張するイメージ.
 
+**先行研究**: [research/llrisk_prior_art]({{ '/research/llrisk_prior_art' | relative_url }})
+で AI-driven GRC (ServiceNow / OneTrust) / DevOps scanner (Snyk/Trivy) /
+LLM × risk register (Collier 2025) / reputation (Semrush / Brand24) /
+developer burnout (CMU Raman / Heath 2025) を 5 縦割り調査. **6 軸統合 + 個人
+開発者 + on-prem + LLM-driven** は空白. ポジショニングは「個人 OSS 開発者の
+cofounder」, GRC SaaS とは被らない.
+
 代案名: **llguard** / **llcompliance** / **llsentry**.
 
 ### A.6 llforen — Forensic (raptor spinoff)
