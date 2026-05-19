@@ -23,6 +23,7 @@ flowchart TD
     LD["lldesign — UI/Web/diagram design (alpha)"]
     LT["lltrade — paper trading research (alpha)"]
     LMS["llmesh-suite (installer)"]
+    LMD["llmesh-demos (demo launcher)"]
     LCAD["llcad — machine CAD (planned)"]
     LEDA["lleda — EDA / circuit / PCB (planned)"]
     LCHIP["llchip — semiconductor IC layout (planned)"]
