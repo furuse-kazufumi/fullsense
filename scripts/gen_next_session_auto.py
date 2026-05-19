@@ -179,13 +179,15 @@ def _front_matter() -> str:
 
 
 def _header(now: datetime) -> str:
+    # Liquid タグ `{{ '/path' | relative_url }}` を出すには f-string では
+    # 中括弧 4 つ重ねる必要がある.
     return (
-        f"# Next Session — auto-generated snapshot\n\n"
-        f"> このファイルは Stop hook (`scripts/gen_next_session_auto.py`) が\n"
-        f"> 毎ターン自動上書きします. **手動編集は失われます**.\n"
-        f"> 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.\n\n"
+        "# Next Session — auto-generated snapshot\n\n"
+        "> このファイルは Stop hook (`scripts/gen_next_session_auto.py`) が\n"
+        "> 毎ターン自動上書きします. **手動編集は失われます**.\n"
+        "> 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.\n\n"
         f"- **生成時刻**: {now.strftime('%Y-%m-%d %H:%M:%S %Z').strip()}\n"
-        f"- **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)\n"
+        "- **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)\n"
     )
 
 
