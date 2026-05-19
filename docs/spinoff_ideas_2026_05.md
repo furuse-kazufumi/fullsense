@@ -278,6 +278,27 @@ FullSense ファミリーの `ll-` 接頭辞 + 短い英単語が暗黙のルー
 
 ---
 
+## C-2. 採用優先度 (research 結果ベース, 2026-05-20)
+
+[research/]({{ '/research/' | relative_url }}) に集めた先行研究 / SOTA 調査結果から
+逆引きした優先度.
+
+| vertical | 採用優先度 | 根拠 | リスク |
+|---|---|---|---|
+| **lleval** | HIGH | promptfoo を fork base に 4 つの明確空白 (on-prem 統一 / progressive size / honest disclosure / self-pref bias) を埋める. [SOTA Survey]({{ '/research/lleval_sota' | relative_url }}) | promptfoo 本流の OSS 政治 (Apache-2.0 だが Confident AI 主導) |
+| **llgrow** | MID | Langfuse + Mautic 再利用で基盤新規不要, 新規実装は voice memory / channel drafter / 効果メトリクス 3 件のみ. [Prior Art]({{ '/research/llgrow_prior_art' | relative_url }}) | brand 毀損リスク (honest disclosure を内蔵で mitigate) |
+| **llbridge** | MID | LangGraph/AutoGen/CrewAI に対し UI を first-class peer 化, llmesh の peer 抽象拡張. [Cognitive Mesh vs SOTA]({{ '/research/cognitive_mesh_vs_sota' | relative_url }}) | multi-AI コスト管理, [feedback_competitor_benchmark] と整合 |
+| **llcraft** | LOW (research 待ち) | license tier 自動化が差別化候補. 詳細 [研究待ち]({{ '/research/' | relative_url }}) | model license diff (商用 / Non-Commercial), GPU 要件 |
+| **llrisk** | LOW (research 待ち) | TonicRiskMonitor のメタ拡張. 詳細 [研究待ち]({{ '/research/' | relative_url }}) | scope 過大 (法務/技術/ビジネス/健康/レピュ/セキュ の 6 軸) |
+| **llgov** | LOW (research 待ち) | EU AI Act / 中国 弁法 / SOC 2 / ISO 27001 自動化. 詳細 [研究待ち]({{ '/research/' | relative_url }}) | 規制の地域別差・改定頻度 |
+| **llforen** | DEFER | raptor 依存が強い, FullSense umbrella に取込む前に raptor 側の安定化を待つ | upstream raptor との同期 |
+
+「HIGH」の lleval は本書発の最初の **本格 spinoff** 候補. 着手 trigger:
+ベンチ復旧 (Anthropic / Gemini / OpenAI credential 復活) と並行で promptfoo
+fork PoC が動けば即着手判断可能.
+
+---
+
 ## D. 採用フロー (案)
 
 ```
