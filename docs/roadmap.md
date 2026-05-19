@@ -101,6 +101,8 @@ flowchart LR
 | llmaterial | **Parked** | — | trigger: RAD materials + 材料ドメインユーザー | llive + llpaper |
 | llops | **Parked** | — | trigger: RAD devops/sre + Approval Bus 本番準備 | llive C-2 完了 |
 | llhft | **Parked** | — | trigger: 監査 release + 専用 infra (lltrade main から完全分離) | lltrade Stable |
+| llmesh-suite | **Stable** | 2026-05 | One-shot installer (`pip install llmesh-suite`)、v0.2.0 リリース済 | llmesh / llive / llove |
+| llmesh-demos | **Alpha Active** | 2026-05 | 3 製品 demo launcher + F25 audience cinematic HTML、依存ゼロ stdlib | llmesh / llive / llove |
 
 ## 依存グラフ
 
