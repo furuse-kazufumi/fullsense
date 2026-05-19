@@ -78,6 +78,13 @@ FullSense 哲学を実証するための「自分自身の普及」を AI に任
 として実装可能. **詳細要件**: `llive/docs/requirements_v0.9_growth_automation.md`
 で GROW-01〜10 + リスク章 (RISK-FX A-G).
 
+**先行研究**: [research/llgrow_prior_art]({{ '/research/llgrow_prior_art' | relative_url }})
+で Jasper / Mautic / Langfuse / academic 2025 研究の整理あり.
+**on-prem + audit log + HITL + 個人開発者 OSS 配信** の 4 条件同時充足は空白.
+推奨アプローチ: 基盤を作らず **llive Approval Bus + Langfuse 再利用**, vertical
+layer 3 件 (作者 voice memory / channel-specific drafter / 効果メトリクス収集)
+のみ新規実装.
+
 代案名: **llmarketing** / **llmonetize** / **llaudience** / **llreach**.
 
 ### A.2 lleval — ベンチ・評価専用 vertical
