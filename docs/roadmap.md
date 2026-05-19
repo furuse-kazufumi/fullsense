@@ -123,10 +123,20 @@ flowchart TB
   llpaper -.-> llmaterial
   llive -.-> llops
   lltrade -.-> llhft
+  suite["llmesh-suite (installer)"]
+  demos["llmesh-demos (demo launcher)"]
+  suite -.-> llmesh
+  suite -.-> llive
+  suite -.-> llove
+  demos -.-> llmesh
+  demos -.-> llive
+  demos -.-> llove
   classDef live fill:#d1fae5,stroke:#10b981;
   classDef parked fill:#fef3c7,stroke:#f59e0b,stroke-dasharray: 5 3;
+  classDef installer fill:#dbeafe,stroke:#3b82f6;
   class llmesh,llive,llove,lldesign,lltrade live;
   class llcad,lleda,llchip,llmed,llpaper,llmaterial,llops,llhft parked;
+  class suite,demos installer;
 ```
 
 ## タイムライン (実績 + 直近想定)
