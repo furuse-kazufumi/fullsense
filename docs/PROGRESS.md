@@ -19,6 +19,24 @@ nav_order: 90
 - index.md / doc_map.md に `NEXT_SESSION.auto.md` リンク追加.
 - 設計判断: 手書き `NEXT_SESSION.md` を温存しつつ別ファイル分離で drift を防ぐ. NEXT_SESSION.md Priority 2 (NEXT_SESSION 自動更新フロー) の実装相当.
 
+### Phase 0.7 — Research notes hub + spinoff 深化
+
+- `docs/research/` 新設 (nav_order: 92, `has_children: true`). 各 spinoff 候補ごとに先行研究/SOTA メモを並べる方針.
+- 5 件の調査メモ追加 (AI agent 並列調査 + 800 字内要約 + Sources 5-10 件):
+  - `llgrow_prior_art.md` — HITL content automation (Jasper/Mautic/Langfuse) + academic 2025. on-prem + audit + HITL + 個人 OSS 配信の 4 条件は空白. 推奨: Langfuse + Mautic 再利用 + 3 vertical layer 新規実装.
+  - `lleval_sota.md` — OpenAI Evals / lmsys / HELM / promptfoo / DeepEval / Phoenix / Langfuse / TruLens / Ragas. on-prem 統一 + progressive size + honest disclosure + self-pref bias の 4 つに空白. 推奨 fork base: promptfoo.
+  - `cognitive_mesh_vs_sota.md` — llive v0.8 M8.1〜M8.9 を MemGPT / Generative Agents / A-MEM / Reflexion / Constitutional AI 等と sub-system 毎に対応づけ. Ed25519 署名 Quarantined Memory と Tonic+phasic 二軸 risk が差別化.
+  - `llcraft_sota.md` — on-prem creative material (TTS / 画像 / 動画 / 音楽) の OSS Stack matrix + license tier 管理. C2PA Content Credentials + IPTC 2025.1 に license_tier カスタム assertion を載せる方針.
+  - `llgov_sota.md` — AI governance OSS / SaaS matrix (NeMo Guardrails / OPA / Cedar / Credo AI / Holistic AI 等). EU AI Act Art.9-15 を自動検証する OSS は不在. 推奨: ApprovalBus を OPA/Cedar wrapper 化 + Rego rule pack 配布.
+  - `llrisk_prior_art.md` — AI-driven GRC / DevOps risk monitoring / LLM × project risk register / reputation / dev burnout の縦割り. 6 軸統合 + 個人開発者 + on-prem + LLM-driven は空白. 推奨: TonicRiskMonitor のメタ拡張.
+- `spinoff_ideas_2026_05.md` 各 vertical セクションに `先行研究` cross-ref を埋め込み, `C-2. 採用優先度` 表で lleval=HIGH / llgrow=MID / llbridge=MID / llcraft=llrisk=llgov=LOW / llforen=DEFER と判定.
+
+### Phase 0.8 — 関連プロジェクト test 回帰確認 + 環境依存 fix
+
+- **llive**: 1518 PASS 維持 (回帰なし).
+- **llove**: chafa が WinGet 経由で PATH に乗ったことで `find_image_tool()` が拾い image renderer fallback test 6 件 + markdown_view 1 件が fail. 各 test に `monkeypatch.setattr(<module>.shutil, "which", lambda name: None)` を追加して環境依存を排除. property test 1 件は Windows IO で 200ms deadline 超過のため `@settings(deadline=None)`. e2e_real_chafa は mmdc 実行失敗時に `pytest.skip()` へ降りる gate を追加.
+- **llmesh**: `test_property_audit_qos.py` の hypothesis test 2 件で `@settings(deadline=None)` 追加 (Windows での初回 file IO で 200ms 超過の flaky 対策).
+
 ## 2026-05-16
 
 ### Portal bootstrap (Phase 0)
