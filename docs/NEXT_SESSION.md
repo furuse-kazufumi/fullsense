@@ -146,10 +146,18 @@ bash scripts/verify_publication.sh
 
 ## Last updated
 
-2026-05-19 昼 — **M8.x 全件着地** (M8.1 両側 skeleton + M8.2〜M8.9 本実装).
-llive 1393 → 1497 PASS (+104), llove 771 → 786 PASS (+15). 統合 demo 5 →
-10 セクション (Timeline emit bridge を最終セクションに追加). E2E
-integration test 1 件で M8.1〜M8.9 chain 動作確認. portal に M8.1 Timeline
-Contract sequenceDiagram + roadmap / spec hub / cognitive-mesh hub 全反映.
-次セッションは HTTP push 実配線 (llive ↔ llmesh) / asciinema 録画 (操作者) /
-llove app.py に panel attach (skeleton) のいずれか.
+2026-05-19 午後 — **M8.x 全件着地 + M8.1 両側 skeleton 拡張完了**.
+- llive: 1393 → **1506 PASS** (+113), HTTP TimelineSink skeleton 追加
+  (urllib stdlib、9 件テスト、env `LLIVE_LLMESH_TIMELINE_URL`)
+- llove: 771 → **791 PASS** (+20), stand-alone Textual demo
+  (`py -3.11 -m llove.demo.cog_mesh_demo`、5 件テスト) 追加
+- 統合 demo 5 → 10 セクション (Timeline emit bridge を最終追加)
+- E2E integration test 1 件で M8.1〜M8.9 chain 動作確認
+- portal に M8.1 Timeline Contract sequenceDiagram 追加
+
+次セッション残作業:
+- **実 HTTP push 本配線** (auth / retry / batch、Phase 6 候補)
+- **asciinema 録画** (`llove.demo.cog_mesh_demo` で stand-alone, llive demo
+  との 2 本立て、操作者作業)
+- **LoveApp 本体への CognitiveMeshPanel 統合** (現在は stand-alone のみ)
+- **llmesh Timeline server に cog_* event_type 予約**を文書化 (umbrella 規約)
