@@ -146,18 +146,29 @@ bash scripts/verify_publication.sh
 
 ## Last updated
 
-2026-05-19 午後 — **M8.x 全件着地 + M8.1 両側 skeleton 拡張完了**.
-- llive: 1393 → **1506 PASS** (+113), HTTP TimelineSink skeleton 追加
-  (urllib stdlib、9 件テスト、env `LLIVE_LLMESH_TIMELINE_URL`)
-- llove: 771 → **791 PASS** (+20), stand-alone Textual demo
-  (`py -3.11 -m llove.demo.cog_mesh_demo`、5 件テスト) 追加
-- 統合 demo 5 → 10 セクション (Timeline emit bridge を最終追加)
-- E2E integration test 1 件で M8.1〜M8.9 chain 動作確認
-- portal に M8.1 Timeline Contract sequenceDiagram 追加
+2026-05-19 夕方 — **M8.x 全件着地 + M8.1 production wire + LoveApp 統合完了**.
 
-次セッション残作業:
-- **実 HTTP push 本配線** (auth / retry / batch、Phase 6 候補)
-- **asciinema 録画** (`llove.demo.cog_mesh_demo` で stand-alone, llive demo
-  との 2 本立て、操作者作業)
-- **LoveApp 本体への CognitiveMeshPanel 統合** (現在は stand-alone のみ)
-- **llmesh Timeline server に cog_* event_type 予約**を文書化 (umbrella 規約)
+最終数値:
+- llive: 1393 → **1518 PASS** (+125, +12 ProductionHttpTimelineSink)
+- llove: 771 → **796 PASS** (+25, +5 LoveApp env-gated attach)
+- llmesh: 42 → **46 PASS** (+4 ingest allow-list)
+
+M8.1 完成度:
+- llive: emitter / skeleton sink / **ProductionHttpTimelineSink** (auth
+  Bearer + exp backoff retry + batch buffer + 4 env)
+- llove: panel skeleton + **stand-alone demo** + **LoveApp 統合**
+  (LLOVE_ENABLE_COG_MESH=1 で attach、既定無効で互換維持)
+- llmesh: `/timeline/ingest` allow-list に 4 種 (cog_*) 追加
+- portal: Mermaid sequenceDiagram + Phase 6 wire-up tutorial
+- E2E integration test 1 件で M8.1〜M8.9 chain 動作確認
+
+**残作業 (操作者作業)**:
+- asciinema 録画 (llive demo / llove cog_mesh_demo / LoveApp+env の 3 本)
+- 実 production 起動 (env を operator 設定するだけ):
+  ```
+  LLIVE_LLMESH_TIMELINE_URL=http://prod-llmesh:8080
+  LLIVE_LLMESH_TIMELINE_TOKEN=<bearer>
+  LLIVE_LLMESH_TIMELINE_RETRIES=5
+  LLIVE_LLMESH_TIMELINE_BATCH_SIZE=10
+  LLOVE_ENABLE_COG_MESH=1
+  ```
