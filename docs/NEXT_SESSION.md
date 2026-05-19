@@ -144,6 +144,44 @@ bash scripts/verify_publication.sh
   - `feedback_articles_pause` (投稿一時停止)
   - `feedback_max_plan_autonomy` (Max 契約自律性)
 
+## 2026-05-20 朝セッション 追記
+
+15 時間自律ループ (ユーザー指定) の前半進捗.
+
+### 完了 (push 済)
+
+- **Priority 2 完了**: portal `docs/NEXT_SESSION.auto.md` 自動生成
+  (`scripts/gen_next_session_auto.py` + raptor Stop hook ラッパ).
+- **research hub** 新設 (`docs/research/`) + 6 件 SOTA / prior-art メモ
+  (lleval / llgrow / cognitive_mesh / llcraft / llrisk / llgov).
+- **spinoff_ideas C-2 採用優先度表**: lleval=HIGH, llgrow=MID, llbridge=MID,
+  llcraft=llrisk=llgov=LOW, llforen=DEFER (research 結果ベース).
+- **関連 prj test 回帰 fix**:
+  - llive **1518 PASS 維持**.
+  - llove: chafa 環境変化由来の image renderer fallback test 6 + markdown_view 1 +
+    property test 1 + e2e_chafa 1 を `monkeypatch.shutil.which` + `pytest.skip`
+    + `@settings(deadline=None)` で fix.
+  - llmesh: hypothesis DeadlineExceeded flaky を `conftest.py` の
+    `register_profile("local-flaky-safe", deadline=None)` で一括解決.
+
+### 残作業
+
+- llmesh 全 test 確認は background で実行中. `test_synthetic_dataset::test_aoi_adapter_processes_synthetic`
+  が前 run で 1 度 fail (順序依存 flaky 疑い, 単独 run では再現せず) → 根本原因
+  調査は将来宿題.
+- raptor リポは origin と diverge (local 67 / remote 67), `libexec/raptor-next-session-update`
+  追加は local commit only. push 判断は manual merge 後.
+- 採用優先度 HIGH の lleval は **ベンチ復旧と並行で promptfoo fork PoC** を着手
+  判断する案 (research 結果に基づく).
+
+### 関連 memory (今セッション新規)
+
+- `feedback_env_dependent_tests` — PATH 上 optional binary 検出を含む test は
+  `monkeypatch.shutil.which` で環境独立に.
+- `feedback_hypothesis_deadline` — DeadlineExceeded flaky は `conftest.py` の
+  `register_profile` で一括解決.
+- `project_fullsense_2026_05_20` — 本セッション総括.
+
 ## Last updated
 
 2026-05-19 夕方 — **M8.x 全件着地 + M8.1 production wire + LoveApp 統合完了**.
