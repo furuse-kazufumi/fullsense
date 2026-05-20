@@ -353,3 +353,95 @@ py -3.11 -m llive.cognitive_mesh.demo
 - Brand introduction memo — `~/.claude/.../memory/project_fullsense_brand.md`
 - Spec source of truth — `llive/docs/fullsense_spec_eternal.md`
 - Trademark drafts — `llive/docs/legal/trademark/`
+
+---
+
+## Phase 0.6 — 2026-05-20 夜 (llive コア最適化 + 3 日統合記事)
+
+このセッションは「llive コア最適化 12h goal」継続と「一巡で全プロジェクト
+残件対応」を兼ねる. 結果:
+
+### llive コア最適化 (B-9 production 注入完了)
+
+- branch `optimize/core-2026-05-20` で B-9-a + B-9-b commit:
+  - **B-9-a** (`17302db` 周辺): `SurpriseGate` / `BayesianSurpriseGate.compute_surprise`
+    に `assume_normalized: bool = False` kwarg 追加. `MemoryWriteBlock` callsite
+    で True 指定し `SemanticMemory.all_embeddings()` の L2 normalized 済 matrix を
+    再 normalize しないように. B-2 で測定済の 2-5x cosine 高速化を実コードに反映.
+  - **B-9-b** (`17302db`): `GiftValueEstimator._history` を `list` → `deque` 化.
+    `commit()` で `cooldown * 2` 超過 entry を popleft で sliding-window evict.
+    B-6 で list_slice が 119x 遅化することを確認済の pathology を予防的に解消.
+  - **experiments doc 追記** (`de76f8c`): B-9-a/B-9-b 注入結果 + 採用ゲート確認.
+- 全 1585 PASS 維持, 回帰なし.
+
+### llmesh test_aoi 順序依存 flaky 調査
+
+- 単独 5 回 + `tests/test_synthetic_dataset.py` 全体 5 回 + 全 3086 test 走行で
+  flaky 再現せず. 朝の `register_profile("local-flaky-safe", deadline=None)`
+  fix で実質収束済と推定.
+- 根本原因は依然 hypothesis ベース property test の deadline か, あるいは
+  並列 / 環境負荷で稀発生する asyncio タイミング. 将来宿題のまま, 本セッション
+  では追加 fix 不要と判定.
+
+### lleval v0.1 implementation notes (PoC scope 確定)
+
+- `docs/spec/lleval_v0_1_implementation_notes.md` 追加 (`eaca2e5`).
+- 主要決定:
+  - promptfoo は **fork ではなく wrap** (TS/Node を Python subprocess で叩く)
+  - 別 GitHub repo (`furuse-kazufumi/lleval`), Apache-2.0 + Commercial dual
+  - v0.1 MVP = LE-01 / 02 / 03 / 07 (judge rotation / OTel trace / RAG adapter
+    / CI hook は v0.2 以降)
+  - 5 因子 honest-disclosure 分解 (warmup / token-norm / RTT / attach / load) を
+    一次クラス機能化
+- 着手判断 4 課題 (C-1〜C-4) を明記. user 承認後に repo init.
+
+### 3 日統合記事 (5/18-20) QIITA #21
+
+- `docs/articles/2026-05-20/QIITA_21_three_day_marathon_2026_05_18_to_20.md` 新規
+  (`bab4dd8` + auto snapshot `bdc325a`).
+- 3 部構成: 第 1 幕 5/18 火種 / 第 2 幕 5/19 爆発 / 第 3 幕 5/20 構造化.
+- Qiita タグ 5 個 (FullSense / llive / ClaudeCode / 自律エージェント / HonestDisclosure).
+- articles_pause 解除後の第 1 本目候補. 公開判断は user.
+
+### 数値まとめ (3 日累積)
+
+| 指標 | 値 |
+|---|---|
+| 関連リポジトリ | 8 |
+| 主要 commit (auto: 除く) | 80+ |
+| 全 commit | 200+ |
+| llive PASS 数 | 1393 → **1585** (+192) |
+| llove PASS 数 | 771 → **796** (+25) |
+| llmesh PASS 数 | 42 → **3086** (測定範囲拡大込み, 純 +4) |
+| 新規記事 (Qiita draft / spec / research) | 14+ |
+| 新規要件定義 / 戦略文書 | 6+ |
+
+### 残作業 (次セッション候補)
+
+- **lleval repo init 着手判断** (user 承認待ち, mock provider で先行可能).
+- **llive B-7 (audit JSONL sink)** — optimize/core branch 継続候補.
+- **llive optimize/core branch → main マージ判断** — PR 後 user 承認.
+- **credential 復旧** (Anthropic / Gemini / OpenAI) → bench_run.py 再走 →
+  comparison.md honest disclosure 再採点.
+- **asciinema 録画** — COG-MESH 統合 demo 9 セクション + llive demo + LoveApp+env.
+- **articles_pause 解除後の連投ペース** — QIITA #21 含め複数本 stocked, 公開
+  順序を user と確認.
+
+### 検証
+
+```bash
+# llive optimize branch (B-9 注入後)
+cd D:/projects/llive
+git checkout optimize/core-2026-05-20
+py -3.11 -m pytest tests/unit tests/integration -q
+# 1585 passed
+
+# llmesh 全件
+cd D:/projects/llmesh
+py -3.11 -m pytest -q
+# 3086 passed (12 分)
+
+# 統合記事レンダリング
+cd D:/projects/fullsense
+bash scripts/verify_publication.sh
+```
