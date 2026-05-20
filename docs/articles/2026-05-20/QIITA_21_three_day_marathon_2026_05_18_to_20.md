@@ -3,11 +3,8 @@ title: 3 日間で 8 リポを駆け抜けた話 — 火種 / 爆発 / 構造化
 tags:
   - FullSense
   - llive
-  - llove
-  - llmesh
   - ClaudeCode
   - 自律エージェント
-  - TRIZ
   - HonestDisclosure
 private: false
 updated_at: '2026-05-20'
@@ -16,6 +13,15 @@ organization_url_name: null
 slide: false
 ignorePublish: true
 ---
+
+<!--
+Qiita タグは 5 個上限. 本記事の主役順で:
+  FullSense (umbrella) / llive (本セッション主役) / ClaudeCode (agent 環境)
+  / 自律エージェント (主題) / HonestDisclosure (差別化ワード).
+llove / llmesh / TRIZ / OSS / TUI / Python / pytest 等の関連タグは本文内
+("[[...]]") で吸収する. 投稿前に user 判断でタグ入替可.
+-->
+
 
 > 投稿可否は user 判断. これは「3 日分の活動を全部入りで物語にする」依頼で
 > agent が自律ドラフトしたものです.
