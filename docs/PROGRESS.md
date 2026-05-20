@@ -598,3 +598,85 @@ cd D:/projects/lleval
 py -3.11 -m pytest tests/unit -q
 # 8 passed
 ```
+
+---
+
+## Phase 0.9 — 2026-05-21 夕方 (llive v0.C 派生集団進化)
+
+ユーザー指示 3 連発 (2026-05-21):
+
+1. 「完全に同時でなくても多くのランダム llive 派生を取捨選択」
+2. 「進化形態として多様性を持ちながらゲノム交配のような要素」
+3. 「個体数が必要で時間がかかる, 準備が大事」
+
+→ **「1 llive = 1 個体」** で集団化, **染色体単位の交配 (SegmentCrossover)**,
+**長時間運用対応 (checkpoint / resume / budget)** を 1 セッションで全件着地.
+
+### 新規 (llive v0.C)
+
+- `docs/requirements_v0.C_llive_variant_evolution.md` — 要件 LV-01〜10
+- `docs/experiments/llive_variant_v0_C_2026_05_21.md` — 実走 + 教訓 3 つ
+- `src/llive/perf/evolutionary/llive_variant.py` — 19 dim Genome
+  (思考因子 10 + memory 3 + backend 1 + sampler 3 + proactive 2) +
+  LIVE_VARIANT_SEGMENTS (5 chromosome) + LlivVariantBuilder +
+  mock_variant_fitness_factory (8 軸合成) + SegmentedScheduler
+- `src/llive/perf/evolutionary/crossover.py` に **SegmentCrossover** 追加
+  (生物的 gene segment swap)
+- `src/llive/perf/evolutionary/loop.py` に大規模集団対応:
+  - `max_wallclock_seconds` (時間予算)
+  - `checkpoint_every` (世代ごと snapshot)
+  - `resume_from` (snapshot から再開, dir 指定で最新自動選択)
+- `scripts/demo_evolutionary_loop.py` に llive_variant problem 追加
+
+### 新規 test (+19)
+
+- `test_evolutionary_llive_variant.py` (13) — Genome / Builder /
+  SegmentCrossover / mock fitness 8 軸 / Segmented / GA 3 世代
+- `test_evolutionary_checkpoint.py` (6) — snapshot per-gen /
+  checkpoint_every / resume_from (dir + fallback) / wallclock budget
+
+### 実走 (30 個体 × 12 世代 mock)
+
+| 世代 | best | mean | diversity |
+|---|---|---|---|
+| 0 | 0.5358 | 0.6420 | 14.40 |
+| 6 | 0.7278 | 0.7058 | 8.81 |
+| 12 | **0.7514** | 0.7327 | 8.28 |
+
+12 世代で +40% 改善, 多様性 8.28 維持 (枯渇なし). 12 世代 evolved in 0.08s
+(mock). best individual: factor_provenance=1.0, factor_consistency=0.91,
+backend=anthropic, temp=0.77, gift=0.61, cooldown=30 分.
+
+### llive 累積数値
+
+- 1518 → **1653 PASS** (+135, 全 marathon 累積)
+- 本 Phase 0.9: +19 test (v0.C)
+
+### 教訓 (v0.C から 3 つ)
+
+1. **染色体単位の交配は多様性に寄与** — SegmentCrossover で diversity 維持
+2. **checkpoint + resume があると「長時間 GA は普通の運用」** — serial でも
+   セッション跨いで世代を進められる
+3. **19 dim でも収束は十分速い** — 30 体 × 12 世代 = 360 評価で +40% 改善
+
+### 次セッション残作業 (累計, 本 Phase で増えた分)
+
+11. v0.C Phase 2 — 実 LlivKernel spawn (subprocess 経由) + ephemeral data_dir
+12. v0.C Phase 3 — lleval 統合 (19 dim genome → lleval Config bridge)
+13. v0.C LV-10 — 系統樹可視化 (`lineage.mmd` Mermaid)
+
+### 検証
+
+```bash
+cd D:/projects/llive
+git checkout optimize/core-2026-05-20
+py -3.11 -m pytest tests/unit tests/integration -q
+# 1653 passed
+
+py -3.11 scripts/demo_evolutionary_loop.py --problem llive_variant --size 30 --gens 12 --seed 42
+# best 0.5358 → 0.7514
+
+py -3.11 scripts/demo_evolutionary_loop.py --problem llive_variant --size 50 --gens 30 \
+    --out out/llive_variant_resume_test/
+# checkpoint 機構の動作確認
+```
