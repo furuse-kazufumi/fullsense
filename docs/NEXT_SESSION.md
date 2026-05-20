@@ -182,7 +182,70 @@ bash scripts/verify_publication.sh
   `register_profile` で一括解決.
 - `project_fullsense_2026_05_20` — 本セッション総括.
 
+## 2026-05-21 15h marathon 追記
+
+15 時間 marathon で前倒し可能な全件を着地. credential / 外部 binary 不要
+レイヤを agent 単独で全部書く方針.
+
+### Done (本セッション)
+
+#### Phase 0.7 (要件定義 + 三日統合)
+- llive v0.A 要件定義 (`docs/requirements_v0.A_external_runtime_tracking.md`)
+- llive v0.A 互換性 matrix SSoT (`docs/spec/llamacpp_compat_matrix.md`)
+- llive smoke contract test (5 件, default skip)
+- llive `benchmark/runtime_metadata.py` + 6 unit test
+- portal lleval impl notes に Honest Disclosure 6 因子目追加
+- portal QIITA #21 三日マラソン統合記事 (5/18-20)
+
+#### Phase 0.8 (15h marathon 前倒し)
+- llive v0.B Phase 3.5 — per-individual sub-seed 派生 (`seeds.py` + 8 test)
+- llive v0.B Phase 4 — 5 軸 fitness mock (`fitness_llm.py` + 7 test)
+- llive 5 backend Genome PoC (`test_evolutionary_backend_select.py` + 2 test)
+- llive `demo_low_spec_mock.py` + 実験ログ (MockBackend 数値の publish 禁止明記)
+- lleval v0.1.0a0 skeleton repo (`D:/projects/lleval/`, 24 test 緑)
+  - pyproject + src/lleval/ (config / runner / providers / analyzer / report / cli)
+  - examples/{basic,progressive,multi_provider}.yaml
+  - CHANGELOG / CONTRIBUTING / SECURITY
+  - .github/workflows/test.yml (skeleton)
+- llive PR ドラフト changelog (`docs/pr_drafts/optimize_core_2026_05_20_changelog.md`)
+  - 3 PR に分ける案を推奨 (B-0〜B-9 / v0.A / v0.B)
+- portal QIITA #22 transformer 脱却 status + QIITA #23 marathon 中間報告
+- 両記事の漫才部分を除去 (memory `feedback_article_humor_style` 準拠)
+
+### Test 数値
+
+- llive: 1591 → **1634 PASS** (+43, 回帰なし)
+- lleval: 新規 24 PASS
+- llmesh: 3086 PASS (前セッションから不変)
+- llove: 796 PASS (前セッションから不変)
+
+### 残作業 (operator / credential / 外部 binary 復旧後)
+
+| # | アクション | 依存 |
+|---|---|---|
+| 1 | `llama-server` + Codestral-Mamba GGUF で `MambaBackend` 実走 smoke | llama-server 起動 |
+| 2 | low_spec bench 実 backend 実走 (MockBackend 数値を上書き) | step 1 |
+| 3 | RWKV-7 World 7B を `RwkvBackend` で繋ぐ | RWKV.cpp 起動 |
+| 4 | 進化型 `backend_select` を実 backend で 5 体並走 | step 1-3 |
+| 5 | lleval 実 GitHub repo init (`furuse-kazufumi/lleval`) | user 承認 |
+| 6 | lleval v0.1.0a1 (promptfoo subprocess 接続) | step 5 + npx promptfoo |
+| 7 | claude-smart 評価 Session 1 dogfood | user が `.worktrees/eval-claude-smart` で起動 |
+| 8 | llive `optimize/core-2026-05-20` branch を main マージ判断 | PR 3 件分 review |
+| 9 | Anthropic / Gemini / OpenAI credential 復旧 → bench 再走 | 外部 |
+| 10 | asciinema 録画 (COG-MESH demo 9 セクション + llive demo + LoveApp+env) | operator |
+
+### 関連 memory (本セッション新規 / 更新)
+
+- `project_15h_marathon_2026_05_21` (本セッション総括)
+- `project_llive_v0B_evolutionary` (v0.B Phase 1-4 全件)
+- `project_llive_core_optimization_2026_05_20` (B-0〜B-9 完了反映)
+- `project_lleval_v01_poc_scope` (lleval PoC スコープ)
+- `feedback_llamacpp_tracking` (月次追従ルール)
+- `reference_claude_smart` (採用 pending)
+
 ## Last updated
+
+2026-05-21 — **15h marathon: v0.A 実コード + v0.B 全件 + lleval skeleton + 漫才除去**.
 
 2026-05-19 夕方 — **M8.x 全件着地 + M8.1 production wire + LoveApp 統合完了**.
 
