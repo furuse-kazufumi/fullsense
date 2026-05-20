@@ -14,3 +14,7 @@ vendor/
 # Build
 __pycache__/
 *.pyc
+
+# Worktrees (claude-smart eval 等の隔離評価用)
+.worktrees/
+
