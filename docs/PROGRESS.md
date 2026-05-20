@@ -680,3 +680,83 @@ py -3.11 scripts/demo_evolutionary_loop.py --problem llive_variant --size 50 --g
     --out out/llive_variant_resume_test/
 # checkpoint 機構の動作確認
 ```
+
+---
+
+## Phase 0.10 — 2026-05-21 夜 (前倒し補強 wave)
+
+ユーザー指示「次に私がコメント入力するまで、出来ることを先行して進めて」+ 連続コメント
+(LinkedIn 多言語 / Qiita 多言語 / 海外 platform / GitHub リンク) への並行応答.
+
+### llive 側 (新規 +16 test, 1669 PASS)
+
+- `src/llive/variant_runner.py` — v0.C Phase 2 subprocess 起動先 CLI
+  (`py -m llive.variant_runner --config-json ... --output-json ...`).
+  実 LlivKernel spawn は将来, 現状 mock baseline. exit code (0/1/2/3/4) で
+  fail mode 分離.
+- `src/llive/perf/evolutionary/lineage.py` — LV-10 系統樹可視化.
+  `Winner` dataclass + `winners.jsonl` I/O + `render_lineage_mermaid` で
+  graph TD 描画. parent_ids 辿って世代間 lineage 表現. ghost node サポート.
+
+### lleval 側 (新規 +12 test, 59 PASS)
+
+- `src/lleval/bridges/llive.py` — llive 19 dim Genome → lleval ProviderSpec
+  上書き + Report cells → 5 軸合成 dict. llive は optional 依存.
+- `src/lleval/report/html.py` — Report → HTML 文字列 (CSS 内蔵 self-contained).
+  anomaly セル赤背景, summary block, XSS escape. stdlib only.
+- `CHANGELOG.md` 0.1.0a1 エントリ追記
+- `ROADMAP.md` v0.1.0a0 → 1.0 段階表
+
+### portal / memory 反映
+
+- `docs/spec/llive_variant_phase2_interface.md` — Phase 2 interface spec
+  (subprocess / in-process transport, ephemeral data_dir, 5 fail mode, 系統樹)
+- llive `docs/experiments/llive_variant_v0_C_2026_05_21.md` に checkpoint/
+  resume/budget 実 file I/O 動作確認の追記 (Run 1/2/3)
+- raptor memory:
+  - `feedback_linkedin_translation_jp_only` 大幅修正 (多言語推奨に転換)
+  - `feedback_qiita_github_links` 新規 (GitHub link 積極配置)
+  - `feedback_overseas_tech_platforms` 新規 (海外 platform 戦略 5 step cross-post)
+
+### 累積数値
+
+- llive: 1518 → **1669 PASS** (+151 全 marathon 累積)
+- lleval: 新規 → **59 PASS** (skeleton + 段階拡張)
+- 主要 commit (本 Phase): llive 2 + lleval 2 + portal 0 = 4 件
+  (portal は memory のみ更新, commit 不要)
+
+### 残作業 (次セッション)
+
+| # | アクション | 依存 |
+|---|---|---|
+| 1 | llama-server + Mamba GGUF 実走 smoke | llama-server 起動 |
+| 2 | low_spec bench 実 backend 実走 | step 1 |
+| 3 | RWKV-7 を `RwkvBackend` で繋ぐ | RWKV.cpp 起動 |
+| 4 | `backend_select` を実 backend で 5 体並走 | step 1-3 |
+| 5 | lleval 実 GitHub repo init | user 承認 |
+| 6 | lleval v0.1.0a2 (promptfoo subprocess 実走) | step 5 + npx promptfoo |
+| 7 | claude-smart 評価 Session 1 | user が worktree で起動 |
+| 8 | llive optimize/core → main 3 PR | user 承認 |
+| 9 | credential 復旧 → bench 再走 | 外部 |
+| 10 | asciinema 3 本 | operator |
+| 11 | **v0.C Phase 2 実 LlivKernel spawn** | kernel module 実装後 |
+| 12 | **llive lineage 実 GA loop 統合 hook** (現状は run 終了後に手動書出し) | 設計後 1h |
+| 13 | **海外 platform 投稿 cross-post 試行** (Medium / dev.to にQIITA #21-23 の en 版) | user 投稿判断後 |
+| 14 | **Qiita 記事に GitHub link 積極配置 retrofit** (既存 QIITA #21-23 更新) | 各 30 min |
+
+### 検証
+
+```bash
+cd D:/projects/llive
+git checkout optimize/core-2026-05-20
+py -3.11 -m pytest tests/unit tests/integration -q
+# 1669 passed
+
+py -3.11 -m llive.variant_runner --config-json /tmp/test_cfg.json \
+    --output-json /tmp/test_result.json
+# mock 経路で動作確認可
+
+cd D:/projects/lleval
+py -3.11 -m pytest tests/unit -q
+# 59 passed
+```
