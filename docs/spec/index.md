@@ -86,6 +86,9 @@ Spec を実装に落とした **要件定義**は llive 配下に複数の versi
 | [`requirements_v0.6_concurrency.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.6_concurrency.md) | 並行プロンプト処理 |
 | [`requirements_v0.7_rust_acceleration.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.7_rust_acceleration.md) | Rust ホットパス置換 |
 | [`requirements_v0.8_cognitive_mesh.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.8_cognitive_mesh.md) | **COG-MESH (能動性 / 並列 Brief / Quiet Hours)** (2026-05-18 追加、2026-05-19 朝 M8.2〜M8.7 本実装、2026-05-19 昼前 M8.8 + M8.9 本実装、IMPLEMENTED-FULL) — portal 概要は [Cognitive Mesh hub]({{ '/cognitive-mesh/' | relative_url }}) |
+| [`requirements_v0.9_growth_automation.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.9_growth_automation.md) | **llgrow** (Growth Automation, 2026-05-19 追加) |
+| [`requirements_v0.A_external_runtime_tracking.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.A_external_runtime_tracking.md) | **llama.cpp / GGUF / sampler 月次追従ルール** (2026-05-21 追加) — 3 段階 pin (stable/rolling/edge) + smoke contract 5 項目 + 6 metadata 必須 |
+| [`requirements_v0.B_evolutionary_optimization.md`](https://github.com/furuse-kazufumi/llive/blob/main/docs/requirements_v0.B_evolutionary_optimization.md) | **進化型最適化レイヤ** (2026-05-21 追加) — EV-01〜09 全件 IMPLEMENTED, 5 backend Genome PoC, ROS 歩行進化の AI 版 |
 
 加えて、`.planning/REQUIREMENTS.md` に GSD workflow 用の REQ-ID 化版が
 あり、CABT (v0.8) / COG-MESH (v0.8b) / CREAT (v0.9) / VLM-FX / ORG-FX 等を
