@@ -186,11 +186,29 @@ result.to_markdown("report.md")
 6. README + 1 sample report
 7. PyPI 0.1.0a0 alpha 公開 (lleval / llmesh-lleval どちらも reserve)
 
+## 7. 外部ランタイム追従との接続 (llive v0.A)
+
+llive 側の `docs/requirements_v0.A_external_runtime_tracking.md` で llama.cpp /
+GGUF / sampler chain の **月次追従ルール** が定義されている. lleval は本仕様の
+**Runtime metadata 6 因子目** で連動する:
+
+- llive 側 `tests/contract/test_llamacpp_smoke.py` で smoke 通過した SHA 情報を
+  bench 出力 JSON に注入する.
+- lleval は span metadata に同 SHA を持ち, `diagnosis.json` の `runtime_pin`
+  フィールドで報告.
+- **stable / rolling / edge** の 3 段階 pin ([[feedback-llamacpp-tracking]]) に
+  従い, **公開ベンチでは stable SHA 必須**.
+
+これにより「llama.cpp 月次更新で variation が出た」が **CI ブロック + 自動
+diagnosis** に縮退する.
+
 ## 関連
 
 - [Spec 草案]({{ '/spec/requirements_lleval_v0.1_draft' | relative_url }})
 - [SOTA Survey]({{ '/research/lleval_sota' | relative_url }})
 - [spinoff_ideas C-2]({{ '/spinoff_ideas_2026_05' | relative_url }})
+- llive `docs/requirements_v0.A_external_runtime_tracking.md` (外部 LLM ランタイム追従)
+- llive `docs/spec/llamacpp_compat_matrix.md` (互換性 matrix SSoT)
 - maintainer memory: [[feedback-benchmark-progressive-tokens]]
   [[feedback-benchmark-honest-disclosure]] [[feedback-independence-principle]]
-  [[feedback-competitor-benchmark]]
+  [[feedback-competitor-benchmark]] [[feedback-llamacpp-tracking]]
