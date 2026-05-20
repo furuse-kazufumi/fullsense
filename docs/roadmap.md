@@ -104,6 +104,8 @@ flowchart LR
 | llmesh-suite | **Stable** | 2026-05 | One-shot installer (`pip install llmesh-suite`)、v0.2.0 リリース済 | llmesh / llive / llove |
 | llmesh-demos | **Alpha Active** | 2026-05 | 3 製品 demo launcher + F25 audience cinematic HTML、依存ゼロ stdlib | llmesh / llive / llove |
 | **llgrow** | **Planned** | 2026-05-19 (要件追加) | コンテンツ生成 / 配信 / 効果測定 / フィードバックループ を on-prem AI で自動化 (GROW-01〜10). trigger: AI 開発環境投資資金の捻出 | llive Brief API / llove TUI / llmesh peer |
+| **lleval** | **Pre-PoC Skeleton** | 2026-05-21 (skeleton 着手) | LLM eval framework (LE-01〜08). on-prem + cloud 統一 / progressive size matrix / honest disclosure 5+1 軸 / judge rotation. **promptfoo wrap (not fork)**, Apache-2.0 + Commercial. trigger: ベンチ復旧 + repo init user 承認 | llive 進化型 GA / llmesh provider |
+| **Non-Transformer track** | **Backend Skeleton 完了, 実走未** | 2026-05-18 ROADMAP + skeleton, 2026-05-21 GA 連携 | Mamba / Jamba / 思考因子→SSM Δ / Diffusion / RWKV-7 の 5 案 backend skeleton 全件投入済. default 実行経路は依然 Transformer. 拡張性ファースト方針で 30 日プラン (5/19-6/15) は 5/18 で凍結中. trigger: llama-server + Codestral-Mamba GGUF 起動 | llive `llm/backend.py` (Mamba/RWKV/Jamba/Diffusion) |
 
 ## 依存グラフ
 
