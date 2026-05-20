@@ -445,3 +445,86 @@ py -3.11 -m pytest -q
 cd D:/projects/fullsense
 bash scripts/verify_publication.sh
 ```
+
+---
+
+## Phase 0.7 — 2026-05-21 (llama.cpp 追従要件 v0.A + 進化型 v0.B 全件実装)
+
+### llama.cpp 追従要件 (v0.A) 実コード落とし込み
+
+- llive 新規 `docs/requirements_v0.A_external_runtime_tracking.md` — 月次追従ルール
+- llive 新規 `docs/spec/llamacpp_compat_matrix.md` — 3 段階 pin SSoT
+- llive 新規 `tests/contract/test_llamacpp_smoke.py` — S-1〜S-5, default skip (CI 安全)
+- llive 新規 `src/llive/benchmark/runtime_metadata.py` — 6 metadata helper + publish gate
+- llive 新規 `tests/unit/test_benchmark_runtime_metadata.py` — 6 件緑
+- portal `docs/spec/lleval_v0_1_implementation_notes.md` に **Honest Disclosure
+  6 因子目 (Runtime metadata)** を追加, lleval CI で BLOCK 仕様
+
+### claude-smart 隔離評価準備
+
+- portal `.worktrees/eval-claude-smart` 隔離 worktree 作成
+  (branch `eval/claude-smart-2026-05-21`)
+- `.gitignore` に `.worktrees/` 追加
+- `EVAL_PLAN.md` (8 軸観測 × 3 セッション × 5 ターン以上, 判定 3 択)
+- raptor memory `reference_claude_smart` + `feedback_llamacpp_tracking` 追加
+
+### 進化型最適化レイヤ (v0.B) 一気通貫実装
+
+ユーザー指示「ROS 歩行進化の AI 版 = 集団 → 評価 → 選別 → 交配 → 突然変異 →
+次世代」を本セッション内で全件カバー.
+
+- llive 新規 `docs/requirements_v0.B_evolutionary_optimization.md` — 要件 EV-01〜11
+- llive 新規 `src/llive/perf/evolutionary/` package:
+  - `genome.py` (Genome + bounds), `individual.py` (FitnessReport + history),
+    `population.py` (RLock + PopulationStats + diversity_l2)
+  - `selection.py` (Tournament/Roulette/Elitism), `crossover.py` (Uniform/Blend),
+    `mutation.py` (Gaussian/Reset/Chained)
+  - `fitness.py` (sphere/rosenbrock + runtime_metadata 必須),
+    `fitness_ucb.py` (EV-09 UCB hyperparam 連携)
+  - `loop.py` (EvolutionLoop + patience + diversity_floor + JSONL out),
+    `scheduler.py` (Serial / Multiprocessing / Asyncio)
+- llive 新規 `tests/unit/test_evolutionary.py` (22 件) +
+  `tests/unit/test_evolutionary_scheduler.py` (4 件) すべて緑
+- llive 新規 `scripts/demo_evolutionary_loop.py` (sphere/rosenbrock/ucb_hparam)
+- llive 新規 `docs/experiments/evolutionary_v0_B_2026_05_21.md` — 実走結果 +
+  教訓 4 つ + 残作業表
+- llive 全件: 1591 → **1617 PASS** (+26, 回帰なし)
+
+### Demo 実走結果
+
+| Problem | 結果 |
+|---|---|
+| sphere 3 dim / 25 gen | best=-1.2e-5 (真の最適 0 にほぼ収束) |
+| rosenbrock 2 dim / 60 gen | best=-0.0057 (valley 沿いに収束) |
+| ucb_hparam 3 dim / 15 gen | exploration_constant=3.28 (UCB1 標準 √2 と乖離, toy 環境では妥当) |
+
+### 教訓 (3 日累積)
+
+1. **収束型 × 進化型 は直交補完**: UCB が個体内 variant, GA が集団構造を担当
+2. **bounded modification は GA でも強制**: 物理的に不可能な genome を作らない
+3. **runtime metadata は進化中もズレないように同梱必須**: 評価基準が進化途中で
+   変わると進化が破綻 (重力が変わるシミュレーター回避)
+4. **月次追従 + commit SHA pin が公開ベンチの最低限**: llama.cpp の moving target
+   を Honest Disclosure 規約と整合させる唯一の現実解
+
+### 残作業 (次セッション候補)
+
+- Phase 3.5: per-individual sub-seed 派生 (再現性強化, 1h)
+- Phase 4: 実 LLM fitness adapter `fitness_llm.py` (credential 復旧後)
+- Phase 4: lleval LE-02 progressive size matrix と GA を連結 (lleval repo init 後)
+- claude-smart 評価セッション (5/22-25 を予定)
+- llive optimize branch を main にマージする判断 (B-9 + v0.B の規模が大きいので
+  PR 経由)
+
+### 検証
+
+```bash
+cd D:/projects/llive
+git checkout optimize/core-2026-05-20
+py -3.11 -m pytest tests/unit tests/integration -q
+# 1617 passed
+
+py -3.11 scripts/demo_evolutionary_loop.py --problem sphere --size 30 --gens 25
+py -3.11 scripts/demo_evolutionary_loop.py --problem rosenbrock --size 50 --gens 60 --seed 7
+py -3.11 scripts/demo_evolutionary_loop.py --problem ucb_hparam --size 20 --gens 15
+```
