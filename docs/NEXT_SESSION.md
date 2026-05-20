@@ -243,7 +243,40 @@ bash scripts/verify_publication.sh
 - `feedback_llamacpp_tracking` (月次追従ルール)
 - `reference_claude_smart` (採用 pending)
 
+## 2026-05-21 夜 (Phase 0.10 後) 追記
+
+### 着地済 (v0.C 周辺 + 補強)
+
+- llive v0.C variant_runner (subprocess 起動先 CLI, mock 経路で動作)
+- llive lineage (LV-10) — Winner / write_winners_jsonl / render_lineage_mermaid
+- **EvolutionLoop.on_generation_end hook** — lineage 自動書出し統合可
+- lleval bridges/llive (Genome → Config + Report → fitness)
+- lleval report/html (CSS 内蔵 self-contained)
+- lleval CLI --html フラグ
+- llive 1669 → **1673 PASS**, lleval 59 → **61 PASS**
+
+### 着地済 (memory / 記事方針 / portal)
+
+- memory `feedback_linkedin_translation_jp_only` 大幅修正 (多言語推奨に転換)
+- memory `feedback_qiita_github_links` 新規
+- memory `feedback_overseas_tech_platforms` 新規 (Medium / dev.to / HN 戦略)
+- memory `feedback_articles_references_section` 新規 (引用文献必須)
+- memory `feedback_articles_taxonomy_split` 新規 (大/中/小 分類 + 複数記事)
+- portal **QIITA #24 series index** (大分類 8 記事 navigator)
+
+### 次セッション残作業 (本セッションで context 限界により見送り)
+
+| # | アクション | 所要 |
+|---|---|---|
+| A | **QIITA #24 series 個別記事 01〜08** (各 8-12k 字) | 週 2 本 × 4 週 |
+| B | QIITA #21/22/23 に GitHub link 積極配置 retrofit | 各 30 min |
+| C | cross-post 計画 doc (QIITA #21-23 を Medium en 化) | 1h |
+| D | 既存 QIITA 記事に References セクション retrofit | 30 min × 3 |
+| E | (Phase 2) 実 LlivKernel spawn 実装 | credential / kernel module 後 |
+
 ## Last updated
+
+2026-05-21 夜 — **Phase 0.10 着地: hook + lineage + bridges + HTML + 5 memory + QIITA #24 series index**. llive 1673 PASS / lleval 61 PASS.
 
 2026-05-21 — **15h marathon: v0.A 実コード + v0.B 全件 + lleval skeleton + 漫才除去**.
 
