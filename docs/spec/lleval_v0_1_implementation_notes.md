@@ -134,6 +134,15 @@ lleval/                            # 別 GitHub repo
   3. **network RTT 除外**: `time.monotonic()` の prompt 送信前後で実 RTT を分離記録
   4. **backend attach overhead**: subprocess RTT (npx promptfoo の起動時間) を baseline 引き算
   5. **system load**: psutil.cpu_percent() の 1 秒 sample
+- **+ Runtime metadata (6 因子目, llive v0.A 連携)** — `tests/contract/test_llamacpp_smoke.py` で
+  検証された **on-prem runtime の SHA / version 情報** を span metadata として
+  必ず保持. これが無い実行は **lleval CI で BLOCK** とする:
+  - `llama_cpp_sha` (例 `abc1234`)
+  - `llama_cpp_release_tag` (例 `b4501`)
+  - `gguf_spec_version` (例 `3`)
+  - `sampler_chain_spec` (例 `top_k=40 top_p=0.95 min_p=0.05 temp=0.7`)
+  - `kv_cache_quantization` (例 `q8_0`)
+  - `model_quant` (例 `q4_k_m`)
 - 出力: `out/lleval-<timestamp>/diagnosis.md` + `diagnosis.json`
 
 ### LE-07 — CLI + Python API
