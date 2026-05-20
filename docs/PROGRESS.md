@@ -528,3 +528,73 @@ py -3.11 scripts/demo_evolutionary_loop.py --problem sphere --size 30 --gens 25
 py -3.11 scripts/demo_evolutionary_loop.py --problem rosenbrock --size 50 --gens 60 --seed 7
 py -3.11 scripts/demo_evolutionary_loop.py --problem ucb_hparam --size 20 --gens 15
 ```
+
+---
+
+## Phase 0.8 — 2026-05-21 (15h marathon: 前倒し全件実装)
+
+ユーザー指示「前倒しで出来ることも含めて実施. 15 時間後まで続けてください」の
+もと, credential / 外部 binary 依存なしで進められる残作業を全件着地.
+
+### llive v0.B Phase 3.5 + 4 — mock baseline で全件カバー
+
+- **Phase 3.5: per-individual sub-seed 派生** (`seeds.py`).
+  SHA-256(parent_seed + individual_id) → 31-bit int で deterministic 派生.
+  `fitness_accepts_seed` で inspect dispatch, 既存 1 引数 fitness と完全
+  後方互換. +8 test.
+- **Phase 4: `fitness_llm.py` mock skeleton**.
+  5 軸 fitness (latency/quality/stability/safety/honesty) + LLM_GENOME_BOUNDS
+  (backend_id/temp/top_p/kv_quant_id/model_quant_id) を MockBackend ベースで
+  credential 不要に. +7 test.
+- **5 backend Genome PoC** (`test_evolutionary_backend_select.py`).
+  GA × 5 backend (MockBackend 解決) で 3 世代回し, bounds 内収束を確認.
+  +2 test.
+- `demo_evolutionary_loop.py` に `backend_select` problem 追加.
+
+### low_spec bench mock 実走
+
+- `demo_low_spec_mock.py` 新設. MockBackend で xs/s を実走 → bench 経路の
+  生死 + JSON shape 確定. **honest disclosure**: MockBackend 数値は公開
+  ベンチに使用禁止と明記 (`docs/experiments/low_spec_mock_2026_05_21.md`).
+
+### lleval skeleton (D:/projects/lleval/)
+
+- 新規 repo 雛形作成. Apache-2.0, Python 3.11, pyproject + src/lleval/.
+- 公開 API: `Bench` / `Config` / `ProgressiveMatrixRunner` /
+  `HonestDisclosureAnalyzer` / `Report` / `cli`.
+- 8 件 skeleton smoke test 緑.
+- 実 GitHub repo 化 + PyPI 公開判断は **user 承認後**.
+
+### llive 全件回帰
+
+- 1617 → **1634 PASS** (+17, 回帰なし).
+- branch `optimize/core-2026-05-20` の HEAD は `d096ce0` 以降に追加 commit
+  (seeds + fitness_llm + backend_select + low_spec mock + docs).
+
+### 残作業 (credential / 外部 binary 復旧後)
+
+| # | アクション | 依存 |
+|---|---|---|
+| 1 | llama.cpp + Codestral-Mamba GGUF で `MambaBackend(transport='llama_cpp_server')` 実走 smoke | llama-server 起動 |
+| 2 | low_spec bench 実 backend 実走 (MockBackend 数値を上書き) | step 1 |
+| 3 | RWKV-7 を `RwkvBackend(transport='rwkv_cpp_server')` で繋ぐ | RWKV.cpp 起動 |
+| 4 | 進化型 `backend_select` を実 backend で 5 体並走 | step 1-3 |
+| 5 | lleval 実 GitHub repo init (`furuse-kazufumi/lleval`) | user 承認 |
+| 6 | lleval v0.1.0a1 (promptfoo subprocess 接続) | step 5 |
+| 7 | claude-smart 評価 Session 1 dogfood | user が worktree で Claude Code 起動 |
+
+### 検証
+
+```bash
+cd D:/projects/llive
+git checkout optimize/core-2026-05-20
+py -3.11 -m pytest tests/unit tests/integration -q
+# 1634 passed
+
+py -3.11 scripts/demo_evolutionary_loop.py --problem backend_select --size 12 --gens 6
+py -3.11 scripts/demo_low_spec_mock.py --backends mock --sizes xs s
+
+cd D:/projects/lleval
+py -3.11 -m pytest tests/unit -q
+# 8 passed
+```
