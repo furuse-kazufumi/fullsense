@@ -125,6 +125,8 @@ flowchart TB
   llive -.-> llpaper
   llpaper -.-> llmaterial
   llive -.-> llops
+  llive -.-> lleval
+  lleval -.-> llmesh
   lltrade -.-> llhft
   suite["llmesh-suite (installer)"]
   demos["llmesh-demos (demo launcher)"]
