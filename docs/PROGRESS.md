@@ -10,6 +10,71 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-21 (Phase 0.15 — Release-ready 部分着地 + QIITA #24-01 着地 + 10x 方針)
+
+ユーザー追加指示 5 連 (セッション最終局面):
+
+> 「専門家が議論しあって一つの結論を出す構造」 → E.7/E.8 着地
+> 「composition 自体を進化対象に」 → E.9 着地
+> 「QIITA #24-0 から順に投稿. 図多めで人間理解優先」 → #24-01 着地
+> 「実装が終わってから記事執筆が基本. 前倒し OK」 → queue で順序付け
+> 「記事は最新情報 + 期待値上げ」 → memory 保存 + queue task description 更新
+> 「Qiita 記事は今の 10 倍ボリュームでも OK」 → 全 7 記事を 80-120k 字目標に
+
+Stop hook feedback 受領:「Release-ready check list 未実装」→ 部分着地:
+- version bump 0.2.0.dev0 → **0.6.0a1** (pyproject.toml と同期)
+- CHANGELOG.md [0.6.0a1] section 追加 (v0.B/C/D/E 全 13 wave 記載)
+- ruff unsafe-fixes 累計 **95/126 fix** (PEP 585 + I001 + strict=False)
+- PR 分割 / 残 ruff 20 件は次セッション queue へ
+
+### Done (本セッション 最終)
+
+#### 19. E.9 ExpertCompositionEvolution + SurvivalRateTracker
+- ExpertCompositionGenome (persona_ids + protocol + moderator_index)
+- ExpertCompositionMutation (swap/add/remove/change_protocol/shift_moderator)
+- CompositionStat / SurvivalRateTracker (streak / appearances / mean_score)
+- +22 test, llive 1859 → 1881
+
+#### 20. QIITA #24-01 memory layer 記事執筆 (399 行, 図 10+ 個)
+- Mermaid 10 個 + 表 4 個 + コード 2 個 + 「一服」リズム 3 回
+- 4 層 + surprise gate 解説. memory 全ファイルに GitHub link.
+- 「実装が終わってから執筆」基準 OK (memory 4 層 + surprise は実装済)
+
+#### 21. Release-ready 部分着地
+- llive __init__.py version 0.2.0.dev0 → 0.6.0a1
+- CHANGELOG.md v0.6.0a1 セクション (97 行追加)
+- ruff fix 95/126
+- llive 全件 1881 PASS 維持 (回帰なし)
+
+#### 22. 記事執筆方針 update
+- memory `feedback_qiita_long_form` 更新: 10x volume (80-120k 字) 方針
+- memory `feedback_articles_latest_and_anticipation` 新規 (最新情報 + 期待値)
+- queue の article-draft 7 件を **10x-volume** 仕様に置換
+
+### Test 数値 (本セッション最終)
+
+- llive: 1673 → **1881 PASS** (+208, 回帰なし)
+- lleval: 61 PASS
+
+### Queue 状態 (D:/tools/claude-loop/queue/, 11 件 pending)
+
+実装 4 件:
+- E.17 PersonaOverlapPenalty + MAP-Elites
+- E.4 Governance interface skeleton
+- E.12 PersonaImportAlgorithm
+- Release-ready 残 (PR 分割 + ruff 残 20)
+
+10x-volume 記事 7 件:
+- QIITA #24-02 思考因子 + COG-MESH
+- QIITA #24-03 構造進化 TRIZ
+- QIITA #24-04 収束型最適化 B-series
+- QIITA #24-05 進化型最適化 v0.B/C/D/E (100-150k 字目標)
+- QIITA #24-06 LLM backend non-transformer (honest disclosure)
+- QIITA #24-07 観測 + 統治
+- QIITA #24-08 lleval eval framework
+
+次セッションは raptor claude-loop ingest で自動 pickup.
+
 ## 2026-05-21 (Phase 0.14 — 12h marathon 開始 + v0.E 大規模前倒し)
 
 ユーザー指示 5 連 (1 セッション後半):
