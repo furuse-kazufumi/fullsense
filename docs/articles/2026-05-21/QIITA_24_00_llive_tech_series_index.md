@@ -148,6 +148,12 @@ bounded modification (§E2) で min/max clip 必須.
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 ```
 
+> ⚠ **Cross-link URL は Qiita 投稿後に確定する**. draft 段階では各記事の
+> 本文中で `#24-XX` / `[[QIITA_24_XX_*]]` の **仮表記** で参照し, 投稿後に
+> 個別記事 URL (`https://qiita.com/.../items/<hash>`) に **一括置換**.
+> mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md) で唯一の
+> source of truth として管理. 投稿時に **追々修正**する運用.
+
 ## 5. 想定読者
 
 - **エンジニア** (Python + LLM 基礎知識あり)
