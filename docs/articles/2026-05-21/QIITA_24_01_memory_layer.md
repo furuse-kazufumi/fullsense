@@ -1,5 +1,5 @@
 ---
-title: llive 完全解説 (1) — 4 層メモリ + Bayesian surprise gating で「忘れない LLM」を作る
+title: llive 完全解説 #24-01 — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating
 tags:
   - FullSense
   - llive
