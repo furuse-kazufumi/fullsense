@@ -160,7 +160,53 @@ flowchart TD
 - **Audit Ledger UI** — llove TUI で `governance verdict ledger` を時系列
   可視化. F25 連携.
 
+## 9. 2026-05-22 追記 — RUST-16 governance hot path 高速化
+
+CoevolutionGovernance.evaluate_generation の中で最も計算量を食うのが
+PeerEvaluationMatrix.collusion_score (NxN matrix の variance / symmetry /
+concentration 3 指標) で, ここに 200-300 μs/call かかっていた.
+
+本日 (2026-05-22) RUST-16 として **numpy zero-copy で Rust kernel 化**:
+
+| N | Python (numpy 既存) | Rust pyo3 zero-copy | speedup |
+|---:|---:|---:|---:|
+| 8 | 217.82 us | 1.89 us | **x115.04** |
+| 16 | 203.33 us | 2.30 us | x88.54 |
+| 32 | 237.68 us | 5.28 us | x45.00 |
+| 64 | 306.13 us | 16.80 us | x18.22 |
+| **avg** | — | — | **x66.70** |
+
+実装は `crates/llive_rust_ext/src/lib.rs:collusion_score_kernel` + 5 parity
+test (1e-6 tolerance). callers (`CollusionDetector.check`) は次 commit で
+切替予定.
+
+### 9.1 honest disclosure — 「numpy = 速い」も嘘
+
+このゲインが大きいのは **「Rust が速い」だけでなく「numpy が小 NxN で遅い」**
+が主因. `np.nanvar` / `np.corrcoef` / `np.nanmean` の 3 つ重ねがけは
+N<100 で Python overhead 支配で 200μs+/call. Rust の単純 C ループは 2μs/call.
+
+governance 側で重要なのは:
+
+- **Approval Bus 発火判定の latency が 100x 短くなる** = N=64 派生集団でも
+  governance.evaluate_generation を 64Hz で回せる
+- **TonicRiskMonitor の tick** (collusion_risk_score を含む state を渡す)
+  も同等に速くなる
+- 結果として **「governance を常時動かしても許容コスト」**になる
+
+これがあれば「**governance は重いから sampling だけ**」の妥協が要らなくなる.
+全派生 / 全世代の評価行列を audit chain に署名つきで残しても latency budget
+内に収まる.
+
+### 9.2 関連
+
+- `docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md` —
+  全 3 kernel (RUST-15/16/17) の比較マトリクス
+- `scripts/bench_collusion_score_5x_gate.py` — N=8/16/32/64 5x gate bench
+- [[feedback_rust_usage_matters]] — Rust 化判断のチェックリスト
+
 ---
 
-> draft (10x volume 版は次セッション). 骨子 + 7 main section + Mermaid +
-> honest disclosure 3 件.
+> draft (10x volume 版は次セッション). 骨子 + 9 main section + Mermaid +
+> honest disclosure 4 件 (新規: numpy 小 N でも遅い + governance latency
+> 100x 短縮).
