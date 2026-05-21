@@ -241,11 +241,70 @@ flowchart TD
 - **集団進化 end-to-end 実機 run** — N=64 派生 で 30 世代 → diversity
   metrics / collusion 検知率 / governance trigger 数 を計測.
 
+## 13. 2026-05-22 追記 — Rust 高速化 RUST-15/16/17 着地
+
+[[goal_release_ready_v0E_rust]] addendum の 3 kernel を 1 セッションで着地.
+連載中核記事として最新成果を反映:
+
+### 13.1 着地 3 kernel
+
+| ID | 機能 | hot path | 5x gate 結果 |
+|---|---|---|---|
+| **RUST-15** persona_dissimilarity_pairwise | NxN pair の Jaccard + L2 + 合成 | PersonaOverlapPenalty.apply | **avg x12.71 (N=64 で x17.07)** |
+| **RUST-16** collusion_score_kernel | NxN peer matrix の variance / symmetry / concentration | CoevolutionGovernance.evaluate_generation | **avg x66.70 (N=8 で x115.04)** |
+| **RUST-17** novelty_score_batch | 集団 N × archive A の L2 + top-k mean | NoveltyScorer.novelty_batch | **avg x5.01 (A=50 で x9.55, A=1000 で x1.72)** |
+
+全 37 parity test PASS (1e-6 tolerance), ruff `src/llive/perf/evolutionary` +
+`src/llive/rust_ext` 0 警告.
+
+### 13.2 衝撃の honest disclosure — 「Rust 化 = 速い」は嘘
+
+**RUST-15 単発呼出は Rust の方が遅い (x0.80, FAIL)**. FFI overhead で
+Python set 操作に負ける. batch (N×N pair を 1 FFI call) にして初めて
+x12.71 まで伸びる. 同じアルゴリズム・同じ Rust kernel でも **FFI 境界の
+引き方**で結果が桁違い.
+
+逆例も観察: **RUST-16 は単発でも x66.70 で圧勝**. numpy の `np.nanvar` /
+`np.corrcoef` は **小 NxN (N<100) で Python overhead が支配的**で 200μs+/call.
+Rust の単純 C ループ (numpy zero-copy 受領) は 2μs/call.
+
+そして境界線: **RUST-17 は archive サイズで結果が反転**. A=50 で x9.55 だが
+A=1000 で numpy BLAS vectorized が追いついて x1.72 まで縮む.
+
+### 13.3 5 パターン判定表 (本セッションで言語化)
+
+| Python 経路の特性 | Rust 化の単発 ROI | 実例 |
+|---|---|---|
+| **A** 純 Python ループ (numpy 不使用) の 1-pair | 単発 FAIL, batch 必須 | RUST-15 (x0.80 → batch x12.71) |
+| **B** numpy 大 array (>1000) vectorized | 伸びない (numpy 内部 BLAS) | (該当 kernel まだ無し) |
+| **C** numpy 小 NxN (<100) API 多用 | **単発でも 10-100x** | RUST-16 (x66.70) |
+| **D** numpy 中規模 BLAS 1 関数 | **境界線上**: 小サイズ Rust 圧勝, 大サイズで追いつかれる | RUST-17 (A=50 x9.55 → A=1000 x1.72) |
+| **E** 冷たいデータ境界 (dict / 文字列) | overhead 大, batch 必須 | — |
+
+詳細表は `docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`.
+
+### 13.4 Cython 経路の脱落 (build chain 不在)
+
+scratch 比較で Cython kernel を書いて 3 way 比較を試みたが **Windows MSVC
+build tools 不在 + mingw が MSVC Python と incompatible** で build 不可.
+これは「**数値計算が同等に書ける**」だけでは言語選択に足りない実例:
+**build chain が確立できるか**が必須条件. source は `scratch/cython_collusion/`
+に保存し Linux/WSL で再試行できる形に.
+
+### 13.5 次に来るもの (2026-05-22 時点で計画済)
+
+- **PyBind11 + C/C++ ctypes** 経路の 3 kernel scratch 比較 (queue 投入済).
+- **RUST-17b** — rayon 並列 + std::simd + partial sort (quickselect) で
+  A=1000 でも 5x gate clear (queue 投入済).
+- **月次 re-measure** — env drift / numpy minor up / Rust nightly 等で
+  結果が動くため周期実行 (queue 投入済).
+
 ---
 
-> draft (10x volume 100-150k 字フル版は次セッション). 骨子 + 12 main section
+> draft (10x volume 100-150k 字フル版は次セッション). 骨子 + 13 main section
 > + 数字裏付け + 先行研究 9 件 + 三重縞 + Rust addendum + honest disclosure
-> 7 件 + Mermaid 全体像.
+> 7+3 件 (新規: 単発 0.80x / numpy 小 N で Rust 圧勝 / archive 大で逆転) +
+> Mermaid 全体像 + 2026-05-22 RUST 着地サマリ + 5 パターン判定表.
 >
 > 連載 #24 シリーズの中核記事として連番 02 / 03 / 04 / 05 / 06 / 07 / 08
 > 全てと交差.
