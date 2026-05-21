@@ -10,32 +10,33 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-21 21:33:54
+- **生成時刻**: 2026-05-22 07:51:00
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `8	0`
 
 ```
+45ae2cc docs(articles): QIITA #24-05 draft — evolutionary v0.B/C/D/E 総括 (連載中核)
+9c4c766 docs(articles): QIITA #24-06 draft — non-transformer (Mamba/Jamba/RWKV/Diffusion) + SSM×思考因子 Bridge 構想
+e4fda8e docs(articles): QIITA #24-08 draft — lleval honest disclosure 5+1 因子分解
+12f7734 docs(articles): QIITA #24-07 draft — observability + governance (Approval Bus + Ed25519 audit chain + E.4)
+f53c32c docs(articles): QIITA #24-02 draft — 10 思考因子 × COG-MESH × 三重縞
+be6a771 docs(articles): QIITA #24-03 draft — structural evolution × TRIZ × Z3
+504cd48 docs(articles): QIITA #24-04 draft — convergent optimization B-series
+12815c2 docs(progress): Phase 0.17 — Rust Phase 2 完了 + 5x gate PASS + lint 0
+44a34e8 auto: PROGRESS.md 編集前 (2026-05-21 21:43)
 1e2b2c3 docs(progress): Phase 0.16 — Rust Phase 1 + PR 分割計画 (Stop hook 対応)
-f44879c auto: PROGRESS.md 編集前 (2026-05-21 21:33)
-91641d2 docs(progress): Phase 0.15 — Release-ready 部分着地 + QIITA #24-01 + 10x 記事方針
-704b2a6 auto: PROGRESS.md 編集前 (2026-05-21 21:25)
-d097db6 docs(articles): QIITA #24-01 memory layer — 図を多く入れた人間理解優先版
-99067af docs(progress): Phase 0.14 — 12h marathon 開始 + v0.E 大規模前倒し
-5f508c5 auto: PROGRESS.md 編集前 (2026-05-21 21:10)
-98c4ac8 docs(progress): Phase 0.13 — CE-01 着地 + v0.E 6 軸要件完成
-8008aea docs(progress): Phase 0.12 — LV × SR 統合 + v0.E coevolution 要件登録
-f8f25af docs(progress): Phase 0.11 — v0.D 前倒し + 先行研究 survey
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -43,7 +44,7 @@ f8f25af docs(progress): Phase 0.11 — v0.D 前倒し + 先行研究 survey
 
 | project | 最新 commit | 直近 commit msg | tests/ 直近 mtime |
 |---|---|---|---|
-| llive | `669b720 2026-05-21` | feat(rust_ext): Phase 1 — RUST-15 PeerScoreMatrixOps 純 Rust 実装 + parity guard | 2026-05-21 21:31 |
+| llive | `ce714e9 2026-05-22` | docs(perf): kernel 実装方法比較 v0 (2026-05-22) — RUST-15/16/17 + 5 パターン判定表 | 2026-05-22 07:43 |
 | llove | `4396f64 2026-05-20` | fix(tests): environment-dependent image-tool detection を抑止 | 2026-05-20 07:07 |
 | llmesh | `21edb8d 2026-05-20` | test(conftest): hypothesis profile 'local-flaky-safe' で deadline=None を default に | 2026-05-20 07:23 |
 | lldesign | `1014ce3 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:52 |
@@ -69,10 +70,8 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `21:33` `docs/SESSION_SUMMARY.md`
-- `21:33` `docs/PROGRESS.md`
-- `21:25` `docs/NEXT_SESSION.auto.md`
-- `21:17` `docs/articles/2026-05-21/QIITA_24_01_memory_layer.md`
+- `07:51` `docs/SESSION_SUMMARY.md`
+- `07:44` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
