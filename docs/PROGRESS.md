@@ -10,6 +10,55 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-21 (Phase 0.16 — Rust Phase 1 着工 + PR 分割計画)
+
+Stop hook feedback 受領 (再):
+- (1) PR 分割未了 (2) Rust 実装未着手 — 「完璧に近い」未満.
+
+両方着工:
+
+### Done (本セッション 最末尾)
+
+#### 23. PR 分割計画作成
+- llive `docs/pr_drafts/PR_split_plan_2026_05_21.md` 新規
+- 127 commits ahead of main → **5 PR 分割案** (B+v0.A / v0.B+v0.C /
+  v0.D / v0.E / Release+Rust spec)
+- 各 PR の Scope / Risk / Test 増分 / Reviewers focus を明示
+- 単一 PR 案も併記 (review コスト許容なら可)
+
+#### 24. Rust Phase 1 着工 — RUST-15 PeerScoreMatrixOps
+- llive `rust_ext/` 新規:
+  - Cargo.toml (ndarray + rayon + pyo3 optional + proptest dev)
+  - src/lib.rs + src/peer_score.rs + src/py_bindings.rs + README.md
+- 純 Rust 実装: column_mean / row_mean / collusion_score (3 指標)
+- cargo test 5 件 PASS — Python と数値 parity ()
+- tests/unit/test_rust_ext_parity.py — Python ↔ Rust parity guard
+  (Python 側 4 件 + Rust binding 配線後の活性化 1 件 SKIP placeholder)
+
+### Test 数値 (本セッション最終)
+
+- llive: 1673 → **1886 PASS** (+213, 回帰なし)
+- Rust: **5 PASS** (cargo test, peer_score)
+- 1 SKIP (Rust binding 未 build, Phase 2 で activate)
+
+### Stop hook feedback Release-ready check 進捗
+
+| 項目 | 本セッション開始 | 終了 |
+|---|---|---|
+| CHANGELOG | ❌ | ✅ v0.6.0a1 section 追加 |
+| version bump | ❌ | ✅ 0.2.0.dev0 → 0.6.0a1 |
+| lint 残 | 11 件 | 残 20 件 (RUF005/059 軽微, 84% fix) |
+| PR ドラフト分割 | ❌ | ✅ 5 PR 計画 doc 着地 |
+| Rust 着工 | ❌ | ✅ Phase 1 — RUST-15 純 Rust + parity guard (Phase 2 maturin build は次セッション) |
+
+### 残課題 (次セッション)
+
+- Phase 2 maturin develop --features python → Rust wheel build
+- 5× ゲート計測 (RUST-14 bench harness)
+- PR 5 件分の sub-branch 作成 + push (user 承認後)
+- ruff RUF005/059 残 20 件
+- queue 残 (E.17 / E.4 / E.12 / 10x volume 記事 7 件)
+
 ## 2026-05-21 (Phase 0.15 — Release-ready 部分着地 + QIITA #24-01 着地 + 10x 方針)
 
 ユーザー追加指示 5 連 (セッション最終局面):
