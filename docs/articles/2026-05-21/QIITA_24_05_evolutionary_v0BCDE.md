@@ -1,0 +1,251 @@
+# llive 技術連載 #24-05 — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
+
+> **コンセプト hook**: 1 個の AI が賢くなるのではなく, **64 個の AI が世代を
+> 回して互いに評価し合い, 嘘の合意は Approval Bus が止める** — それが llive の
+> v0.E. 2026-05-21 marathon でその架構が **303 件 test + ruff 0 警告 + governance
+> skeleton 着地** まで揃った. Hillis 1990 から AlphaStar 2019 まで 30 年の
+> 系譜を 1 OSS に圧縮した結果.
+> 
+> 本記事は連載 #24 の中核. v0.B (Genome / EvolutionLoop) → v0.C (subprocess
+> 分離) → v0.D (self-adaptive + meta mutation) → v0.E (peer evaluation +
+> persona + governance) の 4 段階を **1 本に総括**.
+
+> **draft 段階** (2026-05-21 marathon). full 10x volume (100-150k 字) 版は
+> 次セッション以降. 本 draft は骨子 + 12 主要セクション + 数字裏付け +
+> 先行研究 9 件.
+
+## 0. 連載中での位置づけ — 本連載の中核
+
+```
+#24-00 series index
+#24-01 4 層メモリ          ← 「個体の中の記憶」
+#24-02 思考因子 × COG-MESH ← 「個体の中の思考軸」
+#24-03 構造進化 × TRIZ × Z3 ← 「個体内の構造書換え」
+#24-04 B-series           ← 「個体内の収束 (速い小脳)」
+#24-05 EvolutionLoop      ← 「個体間の探索 (遅い大脳)」 ★ 本記事
+#24-06 LLM backend         ← 「個体を動かす管」
+#24-07 governance         ← 「個体間決定の audit」
+#24-08 lleval              ← 「個体を測る眼鏡」
+```
+
+#24-05 は全体の **背骨**. v0.B/C/D/E で「派生集団そのもの」を作る. 他の
+記事はそこに乗る機能.
+
+## 1. なぜ集団進化なのか — Hillis の警告
+
+W. D. Hillis 1990 が示したのは「**評価者と被評価者が同時に進化する**」と
+**Red Queen Effect** で集団全体の質が **自走で上がる**. 単一 best を選び続け
+ると **局所最適に陥る**.
+
+llive はこれを LLM に持ち込んだ. 派生集団 N=64 が互いに評価, 評価結果が
+fitness, fitness が次世代の selection. すると:
+
+- **「評価者の質」自体が世代と共に上がる**
+- **単一 best が全体を支配できない**
+- **「全派生が嘘の高得点を付け合う」共謀** が発生し得る (CE-06 で検出)
+
+## 2. v0.B — Genome / EvolutionLoop / 並列 scheduler
+
+v0.B core は GA 古典. 着地 module:
+
+- `Genome` (実数 vector + bounds + labels) + `Individual` + `Population`.
+- `TournamentSelection / RouletteSelection / ElitismSelection`.
+- `UniformCrossover / BlendCrossover / SegmentCrossover`.
+- `GaussianMutation / ResetMutation / ChainedMutation`.
+- `EvolutionLoop` (`EvolutionConfig` + `EvolutionResult`).
+- 並列 scheduler 3 種: `serial_scheduler / MultiprocessingScheduler / AsyncioScheduler`.
+
+これだけで「**集団 → 評価 → 選別 → 交配 → 突然変異 → 次世代**」のループが回る.
+
+## 3. v0.C — subprocess 分離 + 派生実走
+
+LLM 推論は 1 派生個体あたり OS process 1 つに **完全分離** したい. 理由は:
+
+- LLM 重い → メモリ leak / GIL 競合を物理分離
+- 1 派生が落ちても他は生存
+- OS-level timeout / SIGKILL で fault isolation
+
+`VariantSubprocessScheduler` (`subprocess_scheduler.py`) — subprocess.run +
+ThreadPool 並列 + timeout + retries + cleanup. これで `variant_runner.py`
+スクリプトを派生 1 個体として起動可能.
+
+## 4. v0.D — 自己参照 mutation (Schwefel σSA-ES + meta mutation)
+
+v0.D core は「**mutation rate そのものを進化させる**」.
+
+- `SelfAdaptiveGaussianMutation` (Schwefel σSA-ES, log-normal σ update).
+  Genome に σ vector を埋め込み, mutation が σ も書き換える.
+- `MetaMutation` (`strategy_id` を genome に, 集団内で 4 戦略並走).
+- `pack_self_adaptive_bounds / pack_meta_strategy_bounds` — 38/20/39 dim 化.
+
+これで「**どの mutation 戦略が今の問題に効くか**」自体が世代を超えて
+学習される.
+
+## 5. v0.E — peer evaluation + persona ontology + governance
+
+v0.E core. CE-01〜34 を含む. 主要 module:
+
+### 5.1 評価 (CE-01〜05)
+
+- `PeerEvaluationMatrix` — N×N 採点行列. 共謀検出 3 指標
+  (`score_variance / symmetry / concentration`). Mermaid 可視化.
+- `PeerFitnessAdapter` — `EvolutionLoop.scheduler` 互換.
+- `EvaluationStyleGenome` — 派生に「**辛口 / 甘口 / 精度 / 速度**」の
+  evaluation persona dim を埋め込み.
+
+### 5.2 多様性保護 (CE-24〜29)
+
+- `latin_hypercube_population` — 空間均等初期集団 (scipy.stats.qmc).
+- `NoveltyScorer` — k-NN, Lehman-Stanley 2008/2011.
+- `DiversityPreservingBreedFilter` — novelty rejection + resample.
+- `DiversityMonitor` — diversity_l2 / spread / median + 閾値 alarm.
+
+### 5.3 Quality Diversity (CE-25 / CE-26, 本日着地)
+
+- `PersonaOverlapPenalty` — fitness 軸に persona dissimilarity の集団平均加算.
+- `MAPElitesGrid` — Mouret & Clune 2015 の 4 軸版 (persona 2 × thought_factor 2).
+  各 cell に最大 fitness 個体を保存.
+
+### 5.4 Historical persona (CE-19〜23)
+
+- `PERSONA_ONTOLOGY` 10 名 (岡潔 / グロタンディーク / ファインマン / ガロア /
+  フォン・ノイマン / ニュートン / カント / ソクラテス / 老子 / 孫子).
+- `PersonaComposition` (3 policy: exclusive / mix / moderator).
+- `PersonaCompositionMutation` (CE-21).
+- `persona_dissimilarity` — Jaccard + L2 of factor_affinity.
+- `PersonaImportAlgorithm` (CE-20, 本日着地) — 派生間 persona 部分採用.
+- `PersonaSurvivalAnalysis` (CE-22, 本日着地) — どの persona 組合せが
+  世代を生き残ったか統計.
+- `PersonaCorpusLoader` (CE-23, 本日着地 skeleton) — Raptor RAD から
+  自動抽出.
+
+### 5.5 集団組み合わせ機構 (CE-30〜34)
+
+- `MutualScorePairSelector` (CE-30, mating.py) — assortative mating,
+  softmax sampling.
+- `NSGA2Selection` (CE-31, nsga2.py) — Pareto front + crowding distance.
+- `Speciation` (CE-32, speciation.py) — NEAT 流種分け.
+- `IslandModel` (CE-33, island_model.py) — ring/fully/star 3 topology +
+  best/random/worst migration.
+- `LexicaseSelection` (CE-34, mating.py) — Helmuth 2014, case-by-case 順位.
+
+### 5.6 Governance (CE-06〜08, 本日着地 E.4)
+
+- `CollusionDetector` (CE-06) — `is_suspected_collusion` を threshold
+  dataclass で wrap.
+- `CoevolutionGovernance` (CE-07) — 共謀疑い → ApprovalBus.request 発火.
+- `collusion_risk_score` (CE-08) — TonicRiskMonitor.tick に投入する
+  state → [0, 1] risk.
+- `GovernanceReport` (frozen).
+
+## 6. 数字で見る本日 (2026-05-21) 着地
+
+| 指標 | 値 |
+|---|---|
+| evolutionary module 数 (本日終了時) | **29** (+5) |
+| 本日追加 test ケース | **130** (41 + 28 + 26 + 16 + 19) |
+| ruff `src/llive/perf/evolutionary` 警告 | **0** (-7) |
+| 本日着地 module | 5 (`quality_diversity / coevolution_governance / persona_import / persona_survival / persona_corpus_loader`) |
+| CE-IDs カバー率 | 34 / 34 ID 全カバー (skeleton 含む) |
+| CHANGELOG `[0.6.0a1]` セクション | E.17 / E.12 / E.4 sections + 41 行追加 |
+| docs/release/v0.6.0a1_PR_PLAN.md | 新規 — 5 PR 分割計画 |
+| docs/rust_hotspot_v0E_addendum.md | 新規 — RUST-15〜18 spec |
+| 連載 #24 記事 (本セッション draft) | **7 本** (#24-02 / 03 / 04 / 05 / 06 / 07 / 08) |
+
+## 7. 先行研究 9 件 (本記事の骨を作る)
+
+1. Hillis, W. D. (1990). *Coevolving parasites improve simulated evolution*. Physica D.
+2. Mouret, J.-B. & Clune, J. (2015). *Illuminating search spaces by mapping elites*. arXiv:1504.04909.
+3. Lehman, J. & Stanley, K. (2008/2011). *Novelty Search*.
+4. Stanley, K. & Miikkulainen, R. (2002). *NEAT*. Evolutionary Computation.
+5. Deb, K. et al. (2002). *NSGA-II*. IEEE Trans Evol Comp.
+6. Cohoon, J. (1987). *Island Model GA*.
+7. Goldberg, D. & Richardson, J. (1987). *Fitness sharing*.
+8. Helmuth, T. et al. (2014). *Lexicase Selection*.
+9. AlphaStar (Vinyals et al. 2019). *League / Exploiter / Main Pool*.
+
+## 8. 三重縞 — 思考因子 / persona / TRIZ の 3 層同居
+
+ユーザー言語化の concept. 派生個体内で:
+
+- **layer 1**: 10 思考因子 vector (factor_structurize / ... / factor_reality_link)
+- **layer 2**: persona composition (Newton + Galois の hybrid 等)
+- **layer 3**: TRIZ 40 原理 + ARIZ 思考プロセス
+
+の 3 layer が **同時並走**. 1 派生個体が「**Galois 風 + 多視点重視 + TRIZ
+Segmentation を好む**」のように multi-dimensional な個性を持つ. E.17
+quality-diversity の MAP-Elites grid はこの 3 layer の交差点を grid 化する
+最初の機構.
+
+## 9. Rust addendum (#24-04 と #24-05 を繋ぐ)
+
+`docs/rust_hotspot_v0E_addendum.md` (本日新規) で RUST-15 〜 18 を spec 化:
+
+- RUST-15: `persona_dissimilarity` Rust 化 (5x gate)
+- RUST-16: `collusion_score` (peer matrix metrics) Rust 化
+- RUST-17: `NoveltyScorer` L2 + top-k batch Rust 化
+- RUST-NEW-B: `MAPElites bin + submit` batch Rust 化
+- RUST-18: parity test harness 拡張
+
+これは **B-series の Python 最適化** と **集団進化の Rust 最適化** が
+直交することを示す: B-series は推論 hot path (Python のままで 28%), 集団進化は
+N=64 派生の集計系 hot path (Rust 化で 5-15x 狙い).
+
+## 10. honest disclosure
+
+- **「v0.E の効果」はベンチ未取得** — module は全 PASS だが「30 世代で
+  baseline より 30% diversity 維持」のような仮説 H10 / H11 は **未検証**.
+  ベンチ走らせるのは credential + GPU 確保後.
+- **PERSONA_ONTOLOGY 10 名は heuristic** — factor_affinity vector は伝記 /
+  哲学史 ベースの人為的初期値. CE-23 PersonaCorpusLoader でコーパスベースに
+  置換予定だが現状は経験則.
+- **Governance skeleton は wire-in 未完** — Quarantined Memory への
+  **実書込み** は別 module 委譲. 完成までは 1-2 セッション.
+- **N=64 派生集団は実機未実行** — 本セッションは module + test 着地まで.
+  end-to-end 集団 GA loop の実機 run は次セッション.
+- **CE-23 LLM extractor は未実装** — keyword fallback のみ着地. LLM 経由の
+  thought pattern 抽出は credential 復旧後.
+- **AlphaStar League mode (E.5) は未着手** — credential / judge LLM 復旧後.
+- **Debate mode (E.6) も未着手** — 同上.
+
+## 11. Mermaid — v0.E 全体像
+
+```mermaid
+flowchart TD
+    pop[Population N=64]
+    pop -->|round-robin| peer[PeerEvaluationMatrix]
+    peer -->|aggregate| fit[fitness vector]
+    fit --> mating[MutualScorePairSelector]
+    mating --> cross[SegmentCrossover]
+    cross --> mut[SelfAdaptiveGaussianMutation]
+    mut --> nov[NoveltyScorer + DiversityPreservingBreedFilter]
+    nov --> next[next generation]
+    next --> pop
+    peer -->|collusion 3 指標| det[CollusionDetector]
+    det -->|suspected| gov[CoevolutionGovernance]
+    gov -->|request| ab[ApprovalBus]
+    gov -->|tick| tr[TonicRiskMonitor]
+    next -->|persona import| import[PersonaImportAlgorithm]
+    pop -->|MAP-Elites submit| grid[MAPElitesGrid]
+    next -->|signature| surv[PersonaSurvivalAnalysis]
+```
+
+## 12. 期待値 — 次に来るもの
+
+- **v0.7 Rust 高速化**: `docs/rust_hotspot_v0E_addendum.md` の RUST-15〜18.
+- **v0.E E.5 (League mode)** — AlphaStar 風 Main / Exploiter / League Exploiter.
+- **v0.E E.6 (Debate mode)** — Irving 2018 風 argument / counter-argument +
+  human/LLM judge.
+- **lleval bridge v0.1.0a2** — 派生 Genome → ProviderSpec mapper の実装.
+- **CE-19/23 LLM extractor** — Raptor RAD コーパスから persona 自動抽出.
+- **集団進化 end-to-end 実機 run** — N=64 派生 で 30 世代 → diversity
+  metrics / collusion 検知率 / governance trigger 数 を計測.
+
+---
+
+> draft (10x volume 100-150k 字フル版は次セッション). 骨子 + 12 main section
+> + 数字裏付け + 先行研究 9 件 + 三重縞 + Rust addendum + honest disclosure
+> 7 件 + Mermaid 全体像.
+>
+> 連載 #24 シリーズの中核記事として連番 02 / 03 / 04 / 05 / 06 / 07 / 08
+> 全てと交差.
