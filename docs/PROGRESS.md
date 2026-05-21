@@ -10,6 +10,85 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-21 (Phase 0.11 — v0.D 前倒し + 先行研究 survey)
+
+ユーザー指示 3 連:
+
+> 「実装作業があれば、そちらを先にしてください」
+> 「計画前倒し出来るならそうしてください」
+> 「LLM に進化的形質を持たせるとか, 既に研究として存在してるかもしれないので, 適度に情報収集も進めておいて下さい」
+> 「新しい発見があれば、要件定義に追加してください」
+
+→ 「実装 → 計画前倒し → 先行研究 → 要件追加 → さらに前倒し」の連鎖で
+1 セッション内に着地.
+
+### Done (本セッション)
+
+#### 1. v0.C Phase 2 subprocess transport — production-ready
+
+- llive `src/llive/perf/evolutionary/subprocess_scheduler.py` 新規 —
+  `VariantSubprocessScheduler` (variant_runner を subprocess.run で起動,
+  ThreadPoolExecutor 並列, timeout / retries / fail_on_error / cleanup).
+- 新規 test +17 件 (構築 validation 4 / helper 2 / E2E 4 / failure 5 /
+  EvolutionLoop 統合 1 / cleanup 1).
+- llive 1673 → 1690 PASS.
+
+#### 2. LLM × Evolutionary 先行研究 survey
+
+- portal `docs/research/llm_evolutionary_prior_art.md` 新規 — 主要 9 件
+  (LMX / EvoPrompt / Promptbreeder / EUREKA / FunSearch / LLMize / MASPO /
+  MappingEvolve / R2SAEA) + 2 surveys を SOTA matrix にまとめ.
+- 差別化軸 4 つ (on-prem 限定 / 19 dim 数値 genome / subprocess transport /
+  honest disclosure 5+1 因子) は公開研究で類例見当たらず.
+- portal `docs/research/index.md` に追記.
+- memory `feedback_rad_rag_confusion` 更新 (RAD → 「RAD コーパス」呼称ルール
+  追加, 2026-05-21 ユーザー指摘).
+
+#### 3. v0.D 要件定義新規 — Self-Referential + LLM Operators
+
+- llive `docs/requirements_v0.D_self_referential_and_llm_operators.md` 新規.
+- 4 グループ + 6 Phase: SR-FX (HIGH) / LX-FX (MID, credential 後) /
+  SU-FX (MID, credential 後) / MR-FX (LOW, 構想).
+- 立場宣言: 「枠組みの発明」を主張せず「on-prem で動く self-evolving LLM
+  frame」として位置づけ (honest disclosure 準拠).
+
+#### 4. SR-01 SelfAdaptiveGaussianMutation — credential 不要で前倒し
+
+- llive `src/llive/perf/evolutionary/self_adaptive.py` 新規 — Schwefel-style
+  σSA-ES (Schwefel 1981 / Bäck & Schwefel 1993). Genome の前半 n が object
+  var, 後半 n が σ. log-normal σ update + relative-to-width object update.
+- helper: `pack_self_adaptive_bounds` / `initial_sigma_values`.
+- 新規 test +14 件 (validation 3 / helper 4 / 動作 3 / 統計 2 / chained / p<1 / relative).
+- llive 1690 → 1704 PASS.
+
+#### 5. SR-02 MetaMutation — credential 不要で前倒し
+
+- llive `src/llive/perf/evolutionary/meta_mutation.py` 新規 — genome に
+  strategy_id を埋め込み, 集団内で複数戦略 (Gauss / Reset / SelfAdaptive 等)
+  並走. 内部 strategy が strategy_dim を書き換えないよう保護.
+- helper: `pack_meta_strategy_bounds` / `strategy_distribution`.
+- 新規 test +10 件.
+- llive 1704 → 1714 PASS.
+
+### Test 数値
+
+- llive: 1673 → **1714 PASS** (+41, 回帰なし)
+- lleval: 61 PASS (前セッションから不変)
+- llmesh / llove: 触らず
+
+### 関連 memory (本セッション更新 / 新規)
+
+- `feedback_rad_rag_confusion` — RAD コーパス呼称ルール追加
+
+### 残作業 (本セッション context 限界で見送り)
+
+- LX-01 (LMX crossover): credential 後
+- LX-02 (LLM-as-fitness, EUREKA): credential + Approval Bus 統合
+- SU-01 (LLM-surrogate, R2SAEA): credential + 真値 anchor
+- MR-01 (multi-role genome, MASPO): 構想止め
+- llive `optimize/core-2026-05-20` branch を main マージ (PR 4 件分 review 後)
+- QIITA #24 series 個別記事 01〜08 (週 2 本ペース)
+
 ## 2026-05-20
 
 ### Phase 0.6 — NEXT_SESSION 自動化
