@@ -1,4 +1,4 @@
-# llive 技術連載 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
+# llive 完全解説 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
 
 > **コンセプト hook**: 多くの LLM agent は「結果のログ」しか残さない. しかし
 > AI が **自分自身を進化** させはじめると, 「**いつ何を判断して何を変えたか**」
