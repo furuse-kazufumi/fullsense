@@ -13,6 +13,12 @@
 > **draft 段階** (2026-05-21 marathon) — full 10x volume (80-120k 字) 版は
 > 次セッション以降. 本 draft は骨子 + 主要 5 因子の深掘り + COG-MESH 概要 +
 > 最新成果 + 期待値 sections.
+>
+> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / `[[QIITA_24_XX_*]]` 形式の
+> 他記事参照は **draft 仮 link**. Qiita 投稿後に確定する個別記事 URL
+> (`https://qiita.com/.../items/<hash>`) に **一括置換** が必要.
+> mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md) に集約.
+> 投稿時に追々修正.
 
 ## 0. 連載中での位置づけ
 
