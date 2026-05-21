@@ -10,6 +10,66 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-21 (Phase 0.13 — CE-01 着地 + v0.E 6 軸要件完成)
+
+ユーザー洞察 5 連連続を 1 セッション内に消化:
+
+> 「進化と淘汰の次は AI 同士の協調 / 派生が互いに採点した瞬間に競争が起きる」
+> 「各 llive 亜種が独自に self-extension. 協調と敵対が加速」
+> 「専門家が数人議論. どの専門家軸が生存率最大化するか模索」
+> 「岡潔のように歴史人物の思考パターンを取り込む」
+> 「これが実現できたら多様性が確立される」
+> 「思考軸が被らないように生成する必要がある」
+
+### Done (本セッション 終盤)
+
+#### 9. v0.E 要件 6 軸完成 (洞察 1-5 反映)
+
+llive `docs/requirements_v0.E_competitive_coevolution.md` を 1 セッションで
+**6 軸 29 ID** に展開:
+
+- CE-01〜13: peer fitness matrix + InteractionPolicy + self-extension + 加速
+- CE-14〜18: 内部専門家評議 (Mixture-of-Experts × Society of Mind)
+- CE-19〜23: 歴史人物 persona (OKA-FX 一般化)
+- CE-24〜29: 多様性保護 (LHS + NoveltyScore + MAP-Elites)
+- LG-FX: League mode (AlphaStar 風)
+- DB-FX: Debate mode (Irving 2018 風)
+
+成功基準: 30 世代後 diversity_l2 > 5.0 + persona_diversity > 0.5.
+
+memory `project_llive_v0E_coevolution.md` に洞察 1-5 + 関連先行研究 15 件
++ 仮説 H1-H11 保存.
+
+#### 10. CE-01 PeerEvaluationMatrix + PeerFitnessAdapter 前倒し実装
+
+- llive `src/llive/perf/evolutionary/peer_evaluation.py` 新規 — N×N 採点
+  matrix dataclass + EvolutionLoop.scheduler 互換 adapter.
+- 共謀検出: variance / symmetry / concentration の 3 指標 + threshold 判定.
+- 永続化: to_dict / write_jsonl (世代間 append) + render_mermaid 可視化.
+- 新規 test +14 件.
+- llive 1728 → 1742 PASS (+14, 回帰なし).
+
+### Test 数値 (累計, 1 セッション内)
+
+- llive: 1673 → **1742 PASS** (+69, 回帰なし)
+- lleval: 61 PASS
+
+### 残作業 (v0.E 着手準備済, 次セッション以降)
+
+E.1 で CE-01 着地. 残:
+
+- E.2 PeerCommunication via MCP timeline
+- E.3 EvaluationStyleGenome (SR-02 統合)
+- E.4 Governance 統合 (Approval Bus + TonicRisk + Quarantine)
+- E.5 League mode (LG-FX)
+- E.6 Debate mode (DB-FX, credential 後)
+- E.7〜E.9 内部専門家評議 (CE-14〜18)
+- E.10〜E.13 歴史人物 persona (CE-19〜23)
+- E.14〜E.18 多様性保護 (CE-24〜29, scipy/sklearn)
+
+加えて v0.D 残: LX-01/02 / SU-01 (credential 後).
+旧残: QIITA #24 series 01〜08 (週 2 本ペース).
+
 ## 2026-05-21 (Phase 0.12 — LV × SR 統合 + v0.E 要件登録)
 
 ユーザー指示 4 連 (1 セッション内追加):
