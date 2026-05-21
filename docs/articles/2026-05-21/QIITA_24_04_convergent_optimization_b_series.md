@@ -182,8 +182,51 @@ llive は同一プロセスで:
 - **RUST-15** (v0.7) — persona_dissimilarity を Rust 化. これは B-series
   ではなく E.17 quality-diversity の hot path. 5x gate 適用.
 
+## 9. 2026-05-22 追記 — 「速い小脳 (Python 最適化)」と「遅い大脳 (Rust 化)」が直交する実例
+
+本記事 (B-series) と #24-05 (EvolutionLoop) は **時間スケール 1000x 違う**
+と書いた. 翌日 (2026-05-22) の RUST 高速化マラソンで, この直交性が **実装
+レベルでも保たれる**ことが実証された.
+
+### 9.1 B-series 側 — Python 最適化が効く
+
+B-9 (`assume_normalized` + `GiftValue deque`) は **Python のままで +28%**.
+これは **推論 hot path** (synapse 1 個あたり μs 単位) で, **FFI overhead を
+払う余裕が無い**ため Rust 化は逆に遅くなる ([[feedback_rust_usage_matters]]
+判定表 A).
+
+### 9.2 EvolutionLoop 側 — Rust 化が効く
+
+世代単位 (秒〜分) の集団進化では数値が真逆:
+
+- **RUST-15** persona_dissimilarity batch: avg **x12.71** (N=64 で x17.07)
+- **RUST-16** collusion_score: avg **x66.70** (N=8 で x115.04)
+- **RUST-17** novelty_score_batch: avg x5.01 (archive 大で境界線)
+
+### 9.3 直交性が崩れない理由
+
+| 層 | 時間スケール | 最適化手段 | 理由 |
+|---|---|---|---|
+| **小脳 (B-series)** | μs/call | **Python チューニング** (normalize スキップ / deque) | FFI 払えないほど call が短い |
+| **大脳 (EvolutionLoop)** | 秒〜分/generation | **Rust 化** (batch / numpy zero-copy) | numpy 小 N の API overhead が支配的 |
+
+これは **生物の脳の小脳 / 大脳** と同じ. 違う時間スケールの計算には違う
+最適化手段が要る — 同じ言語 / 同じツールで両方を解こうとすると失敗する.
+
+### 9.4 honest disclosure — 「Rust 化 = 速い」も「Python 最適化 = 限界」も嘘
+
+両方とも条件付き. 判定軸は **どの時間スケールで何を回しているか**:
+
+- **μs スケールの hot path** → Python 最適化が主. FFI は overhead.
+- **秒スケールの batch** → Rust + numpy zero-copy + batch が主. Python だと
+  numpy API 多用の Python overhead が支配的.
+
+詳細は `docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`
+の **5 パターン判定表** (A/B/C/D/E).
+
 ---
 
 > **draft note**: full 10x volume (80-120k 字) 版は次セッションで.
-> 本 draft は骨子 + 7 main section + 数字裏付け + honest disclosure 1 件.
+> 本 draft は骨子 + 9 main section + 数字裏付け + honest disclosure 2 件
+> (新規: 小脳/大脳の最適化手段が直交する).
 > 連載 #24 シリーズ index ([[QIITA_24_00_llive_tech_series_index]]) と整合.
