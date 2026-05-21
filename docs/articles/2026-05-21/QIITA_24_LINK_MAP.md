@@ -12,17 +12,29 @@
 
 ## URL mapping table
 
-| ID | 仮表記 | Title | Qiita URL (投稿後に埋める) | 投稿日 |
+| ID | 仮表記 | Title (統一形式) | Qiita URL (投稿後に埋める) | 投稿日 |
 |---|---|---|---|---|
-| 24-00 | `#24-00` / index | llive 完全解説 series — index | _未投稿_ | — |
-| 24-01 | `#24-01` | 4 層メモリ | _未投稿_ | — |
-| 24-02 | `#24-02` | 10 軸で考える AI: 思考因子 × COG-MESH × 三重縞 | _未投稿_ | — |
-| 24-03 | `#24-03` | 矛盾は計算できる: 構造進化 × TRIZ × Z3 | _未投稿_ | — |
-| 24-04 | `#24-04` | 収束する脳 B-series: SynapticSelector / UCB1 / Hebbian | _未投稿_ | — |
-| 24-05 | `#24-05` | 集団が学ぶ AI: v0.B/C/D/E 派生集団進化総括 (連載中核) | _未投稿_ | — |
-| 24-06 | `#24-06` | Transformer の外: Mamba / Jamba / RWKV / Diffusion | _未投稿_ | — |
-| 24-07 | `#24-07` | 審査つき AI: runtime_metadata × Approval Bus × Ed25519 audit chain | _未投稿_ | — |
-| 24-08 | `#24-08` | 眼鏡を作る: lleval — honest disclosure 5+1 因子分解 | _未投稿_ | — |
+| 24-00 | `#24-00` | llive 完全解説 #24-00 — series index: 大分類 8 記事 + 全体図 | _未投稿_ | — |
+| 24-01 | `#24-01` | llive 完全解説 #24-01 — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating | _未投稿_ | — |
+| 24-02 | `#24-02` | llive 完全解説 #24-02 — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞 | _未投稿_ | — |
+| 24-03 | `#24-03` | llive 完全解説 #24-03 — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証 | _未投稿_ | — |
+| 24-04 | `#24-04` | llive 完全解説 #24-04 — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path | _未投稿_ | — |
+| 24-05 | `#24-05` | llive 完全解説 #24-05 — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括 (連載中核) | _未投稿_ | — |
+| 24-06 | `#24-06` | llive 完全解説 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ | _未投稿_ | — |
+| 24-07 | `#24-07` | llive 完全解説 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain | _未投稿_ | — |
+| 24-08 | `#24-08` | llive 完全解説 #24-08 — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する | _未投稿_ | — |
+
+## タイトル統一規約 (2026-05-22 確定)
+
+**形式**: `llive 完全解説 #24-XX — 「キャッチコピー」: <技術名称>`
+
+3 要素:
+1. **「llive 完全解説」** — シリーズ名 (検索性 + ブランド)
+2. **「#24-XX」** — 連番 (内部参照 + 公開時の章番号)
+3. **「キャッチ」+「技術名称」** — em-dash (`—`) で区切る
+
+例外:
+- #24-00 (index 記事) は キャッチ無しで `series index: <概要>` 形式
 
 ## 投稿後の置換手順
 
