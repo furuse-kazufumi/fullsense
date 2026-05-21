@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-22 07:55:33
+- **生成時刻**: 2026-05-22 08:01:21
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,16 +20,16 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+7b343ca docs(articles): QIITA #24 series — Cross-link 投稿後修正注意書き + LINK_MAP 新設
+22d3a6d auto: QIITA_24_00_llive_tech_series_index.md 編集前 (2026-05-22 08:00)
+27a03c3 auto: QIITA_24_08_lleval_eval_framework.md 編集前 (2026-05-22 08:00)
+aa534a3 auto: QIITA_24_07_observability_governance.md 編集前 (2026-05-22 08:00)
+841c687 auto: QIITA_24_06_llm_backend_non_transformer.md 編集前 (2026-05-22 08:00)
+dc15249 auto: QIITA_24_05_evolutionary_v0BCDE.md 編集前 (2026-05-22 07:59)
+2cb71b5 auto: QIITA_24_04_convergent_optimization_b_series.md 編集前 (2026-05-22 07:59)
+da6f050 auto: QIITA_24_03_structural_evolution_triz.md 編集前 (2026-05-22 07:59)
+dd71270 auto: QIITA_24_02_thought_factors_cog_mesh.md 編集前 (2026-05-22 07:58)
 9c5032f docs(articles): QIITA #24-02/04/05/07 に 2026-05-22 RUST 高速化マラソン追記
-8a26aa8 auto: QIITA_24_02_thought_factors_cog_mesh.md 編集前 (2026-05-22 07:54)
-504a613 auto: QIITA_24_04_convergent_optimization_b_series.md 編集前 (2026-05-22 07:54)
-165a30b auto: QIITA_24_07_observability_governance.md 編集前 (2026-05-22 07:54)
-ad0dce3 auto: QIITA_24_05_evolutionary_v0BCDE.md 編集前 (2026-05-22 07:53)
-45ae2cc docs(articles): QIITA #24-05 draft — evolutionary v0.B/C/D/E 総括 (連載中核)
-9c4c766 docs(articles): QIITA #24-06 draft — non-transformer (Mamba/Jamba/RWKV/Diffusion) + SSM×思考因子 Bridge 構想
-e4fda8e docs(articles): QIITA #24-08 draft — lleval honest disclosure 5+1 因子分解
-12f7734 docs(articles): QIITA #24-07 draft — observability + governance (Approval Bus + Ed25519 audit chain + E.4)
-f53c32c docs(articles): QIITA #24-02 draft — 10 思考因子 × COG-MESH × 三重縞
 ```
 
 ### git status (porcelain)
@@ -69,12 +69,17 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `07:55` `docs/SESSION_SUMMARY.md`
-- `07:54` `docs/articles/2026-05-21/QIITA_24_02_thought_factors_cog_mesh.md`
-- `07:54` `docs/articles/2026-05-21/QIITA_24_04_convergent_optimization_b_series.md`
-- `07:54` `docs/articles/2026-05-21/QIITA_24_07_observability_governance.md`
-- `07:53` `docs/articles/2026-05-21/QIITA_24_05_evolutionary_v0BCDE.md`
-- `07:51` `docs/NEXT_SESSION.auto.md`
+- `08:01` `docs/SESSION_SUMMARY.md`
+- `08:00` `docs/articles/2026-05-21/QIITA_24_00_llive_tech_series_index.md`
+- `08:00` `docs/articles/2026-05-21/QIITA_24_08_lleval_eval_framework.md`
+- `08:00` `docs/articles/2026-05-21/QIITA_24_07_observability_governance.md`
+- `08:00` `docs/articles/2026-05-21/QIITA_24_06_llm_backend_non_transformer.md`
+- `08:00` `docs/articles/2026-05-21/QIITA_24_05_evolutionary_v0BCDE.md`
+- `07:59` `docs/articles/2026-05-21/QIITA_24_04_convergent_optimization_b_series.md`
+- `07:59` `docs/articles/2026-05-21/QIITA_24_03_structural_evolution_triz.md`
+- `07:58` `docs/articles/2026-05-21/QIITA_24_02_thought_factors_cog_mesh.md`
+- `07:58` `docs/articles/2026-05-21/QIITA_24_LINK_MAP.md`
+- `07:55` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
