@@ -1,4 +1,4 @@
-# llive 技術連載 #24-04 — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path
+# llive 完全解説 #24-04 — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path
 
 > **コンセプト hook**: 進化系 (GA / Genetic Algorithm) は世代を回して **探索**
 > する. 一方 llive の SynapticSelector は **収束** — 確率的選択を 1 か所に
