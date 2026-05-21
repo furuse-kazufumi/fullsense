@@ -20,6 +20,7 @@ has_children: true
 | [llcraft — Creative Material SOTA]({{ '/research/llcraft_sota' | relative_url }}) | on-prem creative material (TTS / 画像 / 動画 / 音楽) の OSS Stack matrix + license tier 管理. C2PA + IPTC 2025.1 への llcraft 拡張案 |
 | [llrisk — Continuous Risk Tracking Prior Art]({{ '/research/llrisk_prior_art' | relative_url }}) | AI-driven GRC / DevOps risk monitoring / LLM × risk register / reputation / developer burnout を 6 軸縦割りで整理. 個人開発者向け on-prem 空白 |
 | [llgov — AI Governance / Compliance SOTA]({{ '/research/llgov_sota' | relative_url }}) | NeMo Guardrails / OPA / Cedar / MS Agent Governance Toolkit / Credo AI / Holistic AI の matrix + EU AI Act Art.9-15 自動検証 OSS の空白 |
+| [LLM × Evolutionary — Prior Art]({{ '/research/llm_evolutionary_prior_art' | relative_url }}) | llive v0.B/v0.C (集団 GA × 19 dim genome × subprocess transport) と類似する LMX / EvoPrompt / Promptbreeder / EUREKA / FunSearch / R2SAEA / MappingEvolve / MASPO の SOTA matrix + 差別化 4 軸 (on-prem / 19 dim 数値 / subprocess / honest disclosure) |
 
 ## 方針
 
