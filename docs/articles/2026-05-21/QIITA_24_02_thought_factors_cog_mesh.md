@@ -226,10 +226,45 @@ flowchart LR
 - Bayes — *Essay towards solving a problem in the doctrine of chances*.
 - 完全リストは v0.6.0a1 リリース時に references.bib に同梱予定.
 
+## 10. 2026-05-22 追記 — 10 因子 affinity vector の Rust 化 (RUST-15)
+
+10 思考因子は派生個体の **persona composition の effective_factor_affinity**
+として 10 次元 [0,1] vector で実装されている. 派生間の dissimilarity 計算は
+本記事 #24-02 の中核機構と直結 — PersonaOverlapPenalty.apply (E.17) は
+N×N pairs の `persona_dissimilarity` で 10 因子空間の距離を測る.
+
+本日 (2026-05-22) RUST-15 として **batch (NxN pair を 1 FFI call) Rust 化**:
+
+- single 1-pair: x0.80 (FAIL — FFI overhead で Python set 操作に負ける)
+- **batch N=64**: **x17.07 (PASS)**, 平均 x12.71
+
+これにより「**10 因子 vector の N×N pair 距離計算**」が高速化され, 集団
+N=64 で governance + diversity preservation を 64 Hz で回せる目処が立った.
+
+### 10.1 思考因子側から見た意味
+
+- factor_structurize (#0) と factor_exploration (#5) は **TRIZ 系統で
+  対立する 2 軸** だが, 10 次元 vector の L2 距離としては独立に効く
+- PersonaOverlapPenalty (E.17 CE-25) で集団内 persona overlap を罰すると,
+  **派生集団は 10 因子空間で自然に散らばる**
+- MAP-Elites grid (E.17 CE-26) は persona 2 軸 × thought_factor 2 軸 の
+  4 次元 grid なので, 上記の 10 因子 vector を 4 次元に **marginalize** して
+  cell key とする
+
+### 10.2 honest disclosure — 単発 Rust 化は逆効果
+
+「思考因子 vector の距離計算を Rust 化」と聞くと「速くなる」と思いがちだが,
+**1-pair 計算では FFI overhead で Python の方が速い (x0.80)**. これは
+[[feedback_rust_usage_matters]] 判定表の **A パターン** (純 Python ループ
+1-pair). batch で N×N pair を 1 FFI に詰めて初めて x17.07 まで伸びる.
+
+詳細は #24-05 と `docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`.
+
 ---
 
 > **draft 段階** — full 10x volume (80-120k 字) で各因子の background /
 > math / impl / code / improvement / comparison / migration plan / numbers
 > を全展開するのは次セッション以降. 本 draft は骨子 + 5 因子深掘り + COG-MESH
-> 対応表 + 最新成果 + 期待値 3 段階 + Mermaid 2 個 + References 抜粋 で構成.
+> 対応表 + 最新成果 + 期待値 3 段階 + Mermaid 2 個 + References 抜粋 +
+> 2026-05-22 RUST-15 追記 で構成.
 > 連載 #24 シリーズ index と整合.
