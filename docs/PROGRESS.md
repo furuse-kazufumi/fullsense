@@ -10,6 +10,70 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-21 (Phase 0.12 — LV × SR 統合 + v0.E 要件登録)
+
+ユーザー指示 4 連 (1 セッション内追加):
+
+> 「独自性においては他の AI 開発と差異は生まれているかな？」
+> 「進化と淘汰の次は, AI 同士の協調を考えたいですね」
+> 「各 llive 亜種が独自に自己拡張や最適化を進め, 協調や敵対も含めて互いに
+> 競争しあい, 進化や淘汰が加速されるイメージです」
+
+### Done (本セッション 後半)
+
+#### 6. LV × SR 統合 high-level API + demo
+
+- llive `src/llive/perf/evolutionary/llive_variant_extras.py` 新規 — 19 dim
+  LV を SelfAdaptive (38 dim) / MetaMutation (20 dim) / 両方 (39 dim) に
+  拡張する high-level helper 9 関数.
+- llive `scripts/demo_self_adaptive_variant.py` 新規 — 38 dim self-adaptive
+  ES の demo (世代ごと σ 推移 + 終了統計).
+- 実機 demo (size=20, gens=8): best 0.68 → 0.72, σ mean 0.20 → 0.12 shrunk.
+- 新規 test +14 件 (bounds 拡張 4 / fitness wrapper 2 / value init 2 /
+  factory 3 / EvolutionLoop 統合 3).
+- llive 1714 → 1728 PASS.
+
+#### 7. 独自性自己分析 (4 層 7 軸差別化マトリクス) 提示
+
+ユーザー問い「独自性は他社と差異が生まれているか」に対し:
+
+- L1 配置: on-prem 限定推論 / End-to-end OSS dual-license
+- L2 責務: HITL Approval Bus を architecture level / Ed25519 audit ledger
+- L3 思考: 10 思考因子 + TRIZ + COG-MESH / self-evolving meta-mutation
+- L4 評価: honest disclosure 5+1 因子分解
+
+honest 結論: **個別軸単体では先行多数**, **全部入りで動く 1 製品は arXiv
+範囲では FullSense のみ** (本日 survey).
+
+#### 8. v0.E 要件定義新規 — 競争的協調進化
+
+- llive `docs/requirements_v0.E_competitive_coevolution.md` 新規 — peer
+  evaluation matrix + 協調 + 敵対 + 個別 self-extension + 加速計測.
+- 13 + 6 ID (CE-FX / LG-FX / DB-FX). credential 不要層 E.1〜E.3 + governance
+  統合 E.4〜.
+- 先行研究 (Hillis 1990 / Rosin-Belew 1997 / AlphaGo / AlphaStar / Irving
+  Debate 2018 / MASPO 2026 / Self-Refine 2023) を要件根拠に明示.
+- memory `project_llive_v0E_coevolution.md` 新規保存 (洞察 2 連の経緯
+  + 設計 3 柱 + Phase マップ).
+
+### Test 数値 (累計)
+
+- llive: 1673 → **1728 PASS** (+55, 回帰なし)
+- lleval: 61 PASS (変化なし)
+
+### 関連 memory (本セッション新規)
+
+- `project_llive_v0E_coevolution` — v0.E 構想保存
+
+### 残作業 (次セッション)
+
+- v0.D LX-01 / LX-02 / SU-01 (credential 後)
+- v0.E E.1 PeerEvaluationMatrix skeleton 実装 (credential 不要で着手可能)
+- v0.E E.4 governance 統合 (Approval Bus + TonicRisk + Quarantine 連携)
+- llive `optimize/core-2026-05-20` branch を main マージ (PR 5 件分 review 後)
+- QIITA #24 series 個別記事 01〜08 (週 2 本ペース)
+- E (実 LlivKernel spawn): credential / kernel module 後
+
 ## 2026-05-21 (Phase 0.11 — v0.D 前倒し + 先行研究 survey)
 
 ユーザー指示 3 連:
