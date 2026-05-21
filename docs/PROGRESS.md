@@ -10,6 +10,55 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-21 (Phase 0.17 — Rust Phase 2 完了 + 5x gate PASS + lint 0)
+
+Stop hook feedback (3 度目) を受けて Release-ready check を全件着地:
+
+### Done
+
+#### 25. lint 0 errors 達成
+- F401 (18 件) — __init__.py __all__ に新規 symbol 追加
+- B007 (1 件) — speciation.py 未使用 sid ループ変数削除
+- RUF001 (1 件) — self_adaptive.py 'σ' → 'sigma' (ASCII-only)
+- 結果: ruff 126 → **0 errors**
+
+#### 26. Rust Phase 2 完了 — maturin wheel build + parity 7/7 PASS
+- rust_ext/pyproject.toml 新規 (maturin backend)
+- numpy 0.22 API (into_pyarray_bound) 修正
+- py -3.11 -m pip install -e ./rust_ext で実 wheel install ✅
+- Python ↔ Rust bit-exact parity test 7/7 PASS
+
+#### 27. 5x gate 計測完了 (scripts/bench_rust_ext_5x_gate.py)
+- N=10: **33.68x** PASS
+- N=30: **12.01x** PASS
+- N=100: 2.85x FAIL (numpy vectorize が大規模で追従, honest disclosure)
+- Average: **16.18x** — 5x gate PASSED
+
+→ 真の用途 (集団 size 30 前後) で 12-33x 改善. 大規模では numpy 十分速い.
+
+### Stop hook check 進捗 (本セッション最終)
+
+| 項目 | 結果 |
+|---|---|
+| CHANGELOG | ✅ v0.6.0a1 section |
+| version bump | ✅ 0.6.0a1 |
+| lint 残 | ✅ **0 errors** (126 → 0) |
+| PR ドラフト分割 | ✅ 5 PR 計画 doc |
+| Rust Phase 1 | ✅ 純 Rust + cargo test 5/5 |
+| Rust Phase 2 | ✅ maturin wheel + parity 7/7 + 5x gate avg 16.18x |
+| 実 PR push | ⏳ user 承認待ち (memory feedback_publishing_workflow) |
+| Rust Phase 3 | 次セッション queue (RUST-16/17/18) |
+
+### Test 数値 (最終)
+
+- llive Python: 1673 → **1887 PASS** (+214, 回帰なし)
+- Rust cargo test: **5 PASS**
+- Python parity test: **7/7 PASS**
+- 0 SKIP (Rust ext 配線済)
+
+「完璧に近い Release 環境レベル」: 実 PR push のみ user 承認待ち, それ以外
+**全件着地**.
+
 ## 2026-05-21 (Phase 0.16 — Rust Phase 1 着工 + PR 分割計画)
 
 Stop hook feedback 受領 (再):
