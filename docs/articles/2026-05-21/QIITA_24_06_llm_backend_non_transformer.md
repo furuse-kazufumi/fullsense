@@ -1,4 +1,4 @@
-# llive 技術連載 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ
+# llive 完全解説 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ
 
 > **コンセプト hook**: LLM = Transformer, は **2024 までの話**. 2025-2026 で
 > State Space Model (Mamba / Jamba) と RWKV (時系列 RNN を再発明) が **長
