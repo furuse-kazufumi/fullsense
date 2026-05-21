@@ -10,6 +10,108 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-21 (Phase 0.14 — 12h marathon 開始 + v0.E 大規模前倒し)
+
+ユーザー指示 5 連 (1 セッション後半):
+
+> 「続けて E.2〜E.18 を可能な範囲で前倒し実装」
+> 「Goal set: 完璧に近い状態で Release 環境レベル + Rust 高速化検討」
+> 「どんどん先に進めてよい. 構造的破綻は自己判断で条件変更 OK」
+> 「12 時間後まで動き続けて, 要件追加と実装とデバッグとテストをループ」
+
+### Done (本セッション 最終)
+
+#### 11. v0.E E.14-E.18 多様性保護 (diversity.py)
+- latin_hypercube_population (scipy.stats.qmc) — 空間均等初期集団
+- NoveltyScorer (k-NN, Lehman-Stanley 2008/2011)
+- DiversityPreservingBreedFilter (novelty rejection + resample)
+- DiversityMonitor (diversity_l2 / spread / median + 閾値 alarm)
+- +15 test, llive 1742 → 1757
+
+#### 12. v0.E E.10/E.11 historical persona (persona.py)
+- PERSONA_ONTOLOGY 10 名 (岡潔/グロタンディーク/ファインマン/ガロア/
+  フォン・ノイマン/ニュートン/カント/ソクラテス/老子/孫子)
+- PersonaComposition (exclusive/mix/moderator 3 policy)
+- PersonaCompositionMutation (swap/add_remove/weight_perturb)
+- persona_dissimilarity (Jaccard + factor L2)
+- +27 test, llive 1757 → 1784
+
+#### 13. v0.E E.19/E.20 mating (mating.py, 洞察 7 直接対応)
+- MutualScorePairSelector — mutual_score = (M[i,j]+M[j,i])/2, softmax sampling
+- LexicaseSelection (Helmuth 2014) — criteria shuffle + step worst 脱落
+- 単一 fitness 収束回避
+- +13 test, llive 1784 → 1797
+
+#### 14. Rust 高速化 v0.7 addendum spec
+- docs/requirements_v0.7_rust_acceleration_v0DE_addendum.md 新規
+- RUST-15〜20 (PeerScoreMatrixOps / NoveltySearch_kNN / LHS / σSA-ES /
+  PersonaAffinity / LexicaseLoop)
+- 既存 v0.7 RUST-01〜14 への追補. 5× ゲート / parity / [rust] extra 隔離継承.
+- memory goal_release_ready_v0E_rust 保存
+
+#### 15. ruff auto-fix + claude-loop queue 投入
+- ruff 59/70 fix (PEP 585 / collections.abc 移行)
+- 新規 module 8 files mypy clean
+- D:/tools/claude-loop/queue/ に 12h marathon 用 task 10 件投入
+
+#### 16. v0.E E.21 SpeciationLayer (speciation.py)
+- NEAT 流動的種分け (Stanley-Miikkulainen 2002)
+- Species (representative + member_ids + age)
+- shared_fitness (大規模 species 不利化)
+- SpeciatedTournamentSelection (species 内 k-tournament)
+- +12 test, llive 1797 → 1809
+
+#### 17. v0.E E.31 NSGA-II MultiObjectiveFitness (nsga2.py)
+- non_dominated_sort (Pareto front 分割, higher_is_better 切替)
+- crowding_distance (端点 infty + 内点正規化距離)
+- NSGA2Selection (rank 優先 + 同 rank で crowding 大優先)
+- Deb et al. 2002
+- +13 test, llive 1809 → 1822
+
+#### 18. v0.E E.33 IslandModelMigration (island_model.py)
+- N island 分割 + 独立進化
+- Topology: ring / fully / star
+- MigrationPolicy: best / random / worst
+- migration_interval で定期 migrate
+- Cohoon 1987 / Whitley 1999
+- +17 test, llive 1822 → 1839
+
+#### 19. v0.E E.7/E.8 ExpertPanel + CouncilProtocol (expert_council.py)
+- Expert dataclass + ExpertPanel (Society of Mind × MoE)
+- Protocol 4 種: weighted_average / round_robin / moderator_vote / veto
+- CouncilDecision (decided/consensus/contributions/transcript)
+- build_panel_from_personas — PERSONA_ONTOLOGY から即 panel 化
+- Mock 議論 (credential 不要)
+- 参照: Minsky 1986 / Shazeer 2017 MoE / Li 2023 CAMEL / Wu 2023 AutoGen
+- +20 test, llive 1839 → 1859
+
+### Test 数値 (本セッション総計)
+
+- llive: 1673 → **1859 PASS** (+186, 回帰なし)
+- lleval: 61 PASS
+
+### 関連 memory (本セッション新規 / 更新)
+
+- project_llive_v0E_coevolution (洞察 1-7 全件保存)
+- goal_release_ready_v0E_rust (Goal 永続化)
+- feedback_rad_rag_confusion (RAD コーパス呼称ルール)
+
+### Queue 投入済 (次セッション 12h marathon)
+
+D:/tools/claude-loop/queue/ に 10 件:
+- E.33 IslandModelMigration ✅ done
+- E.21 SpeciationLayer ✅ done
+- E.31 NSGA-II MultiObjectiveFitness ✅ done
+- E.7 ExpertPanelGenome ✅ done (build_panel_from_personas で対応)
+- E.8 ExpertCouncilProtocol ✅ done
+- E.9 ExpertCompositionEvolution + SurvivalTracking (pending)
+- E.4 Governance interface skeleton (pending)
+- E.17 PersonaOverlapPenalty + MAP-Elites (pending)
+- E.12 PersonaImportAlgorithm (pending)
+- Release-ready: CHANGELOG / version bump / lint残 / PR 分割 (pending)
+
+→ **5 件は本セッション内に完了**. 残 5 件は次セッションで pickup.
+
 ## 2026-05-21 (Phase 0.13 — CE-01 着地 + v0.E 6 軸要件完成)
 
 ユーザー洞察 5 連連続を 1 セッション内に消化:
