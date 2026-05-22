@@ -28,7 +28,7 @@ ignorePublish: true
 | ID | ファイル | Qiita URL | 投稿日 |
 |---|---|---|---|
 | #14 | QIITA_#14_invisible_annotation_channel.md | <https://qiita.com/furuse-kazufumi/items/33b70c801894b91ca826> | 2026-05-22 |
-| #15 | QIITA_#15_second_brain_spiral_dev.md | _未投稿_ | — |
+| #15 | QIITA_#15_second_brain_spiral_dev.md | <https://qiita.com/furuse-kazufumi/items/ab3839f8b5b3ea91311e> | 2026-05-22 |
 | #16 | QIITA_#16_three_self_spirit_ai_management.md | _未投稿_ | — |
 | #17 | QIITA_#17_human_ai_fusion_vision.md | _未投稿_ | — |
 | #18 | QIITA_#18_non_transformer_low_spec_pc.md | _未投稿_ | — |
