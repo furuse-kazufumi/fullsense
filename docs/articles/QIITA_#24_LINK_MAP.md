@@ -42,7 +42,7 @@ ignorePublish: true
 
 | ID | 仮表記 | Title (統一形式) | Qiita URL (投稿後に埋める) | 投稿日 |
 |---|---|---|---|---|
-| 24-00 | `#24-00` | llive 完全解説 #24-00 — series index: 大分類 8 記事 + 全体図 | _未投稿_ | — |
+| 24-00 | `#24-00` | llive 完全解説 #24-00 — series index: 大分類 8 記事 + 全体図 | <https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c> | 2026-05-23 (公開) |
 | 24-01 | `#24-01` | llive 完全解説 #24-01 — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating | _未投稿_ | — |
 | 24-02 | `#24-02` | llive 完全解説 #24-02 — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞 | _未投稿_ | — |
 | 24-03 | `#24-03` | llive 完全解説 #24-03 — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証 | _未投稿_ | — |
