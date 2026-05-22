@@ -14,7 +14,7 @@
 > 次セッション以降. 本 draft は骨子 + 12 主要セクション + 数字裏付け +
 > 先行研究 9 件.
 >
-> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / `[[QIITA_24_XX_*]]` 形式の
+> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_24_XX_*` (内部参照)` 形式の
 > 他記事参照は **draft 仮 link**. Qiita 投稿後に確定する個別記事 URL に
 > 一括置換が必要. mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md)
 > に集約. 投稿時に追々修正.
@@ -248,7 +248,7 @@ flowchart TD
 
 ## 13. 2026-05-22 追記 — Rust 高速化 RUST-15/16/17 着地
 
-[[goal_release_ready_v0E_rust]] addendum の 3 kernel を 1 セッションで着地.
+`goal_release_ready_v0E_rust` (内部参照) addendum の 3 kernel を 1 セッションで着地.
 連載中核記事として最新成果を反映:
 
 ### 13.1 着地 3 kernel

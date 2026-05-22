@@ -330,7 +330,7 @@ flowchart LR
 
 ### Wiki Compile という呼び方
 
-各 ConceptPage は Markdown として `D:/data/llive/wiki/<concept_id>.md` に書き出されます. **人が読める** こと, **Git checkpoint できる** こと, **diff で変化が追える** こと, この 3 つが「Wiki」と呼ぶ理由です. 元ネタは Karpathy の "LLM Wiki" 提案 ([[project-llm-wiki-pattern]]) です.
+各 ConceptPage は Markdown として `<llive_data_dir>/wiki/<concept_id>.md` に書き出されます. **人が読める** こと, **Git checkpoint できる** こと, **diff で変化が追える** こと, この 3 つが「Wiki」と呼ぶ理由です. 元ネタは Karpathy の "LLM Wiki" 提案 (`project-llm-wiki-pattern` (内部参照)) です.
 
 ### LLM 呼び出しは judge mode
 

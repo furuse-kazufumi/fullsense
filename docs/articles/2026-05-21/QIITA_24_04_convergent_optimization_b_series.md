@@ -12,7 +12,7 @@
 > **draft 段階** (2026-05-21 marathon 中) — full 10x volume (80-120k 字) 版は
 > 後段で. 本 draft は骨子 + 主要セクションのみ.
 >
-> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / `[[QIITA_24_XX_*]]` 形式の
+> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_24_XX_*` (内部参照)` 形式の
 > 他記事参照は **draft 仮 link**. Qiita 投稿後に確定する個別記事 URL に
 > 一括置換が必要. mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md)
 > に集約. 投稿時に追々修正.
@@ -132,13 +132,13 @@ production hot path 全体で **約 22% スループット改善**. B-9-b 着地
 - B-9-a + B-9-b 同時: **+28.4%** (95% CI ±1.5%)
 
 = 重ねがけは複合せず. なぜか? B-9-a で normalize 削った分の処理時間に
-B-9-b の deque 改善が **既に上限近くで頭打ち**. これは [[feedback_benchmark_honest_disclosure]]
+B-9-b の deque 改善が **既に上限近くで頭打ち**. これは `feedback_benchmark_honest_disclosure` (内部参照)
 通り「異常に良い結果が出たら必ず内訳を疑う」の実例. **削減幅は重複領域がある**.
 
 ## 5. 5x gate と Rust
 
 llive Rust 拡張 (RUST-FX) は「Python 比 **5x 以上** の速度向上」を要件にする
-([[project_llive_rust_acceleration]]). B-series で hot path 化した
+(`project_llive_rust_acceleration` (内部参照)). B-series で hot path 化した
 `assume_normalized` + deque は Python のままだが, さらに Rust 化すべきかは
 別議論:
 
@@ -197,7 +197,7 @@ llive は同一プロセスで:
 
 B-9 (`assume_normalized` + `GiftValue deque`) は **Python のままで +28%**.
 これは **推論 hot path** (synapse 1 個あたり μs 単位) で, **FFI overhead を
-払う余裕が無い**ため Rust 化は逆に遅くなる ([[feedback_rust_usage_matters]]
+払う余裕が無い**ため Rust 化は逆に遅くなる (`feedback_rust_usage_matters` (内部参照)
 判定表 A).
 
 ### 9.2 EvolutionLoop 側 — Rust 化が効く
@@ -234,4 +234,4 @@ B-9 (`assume_normalized` + `GiftValue deque`) は **Python のままで +28%**.
 > **draft note**: full 10x volume (80-120k 字) 版は次セッションで.
 > 本 draft は骨子 + 9 main section + 数字裏付け + honest disclosure 2 件
 > (新規: 小脳/大脳の最適化手段が直交する).
-> 連載 #24 シリーズ index ([[QIITA_24_00_llive_tech_series_index]]) と整合.
+> 連載 #24 シリーズ index (`QIITA_24_00_llive_tech_series_index` (内部参照)) と整合.

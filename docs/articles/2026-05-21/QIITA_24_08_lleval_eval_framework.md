@@ -2,7 +2,7 @@
 
 > **コンセプト hook**: AI を作るだけでは足りない. **AI を見る眼鏡** が要る.
 > lleval は llive と並走する **evaluation framework** で, 「LLM が異常に
-> 良い結果を出したら必ず内訳を疑う」という [[feedback_benchmark_honest_disclosure]]
+> 良い結果を出したら必ず内訳を疑う」という `feedback_benchmark_honest_disclosure` (内部参照)
 > ルールを **コードの一級概念** に昇格させた. progressive size matrix で
 > stress curve を取り, judge rotation で position bias を消す.
 > 
@@ -11,7 +11,7 @@
 
 > **draft 段階** (2026-05-21 marathon). full 10x volume 版は次セッション.
 >
-> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / `[[QIITA_24_XX_*]]` 形式の
+> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_24_XX_*` (内部参照)` 形式の
 > 他記事参照は **draft 仮 link**. Qiita 投稿後に確定する個別記事 URL に
 > 一括置換が必要. mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md)
 > に集約. 投稿時に追々修正.
@@ -43,7 +43,7 @@
 - **chars 指標が不公平** (英語 token を文字数換算)
 - **subprocess RTT を除外** (起動コストを無視)
 
-3 つの artifact が複合していた. これを記録 ([[feedback_benchmark_honest_disclosure]])
+3 つの artifact が複合していた. これを記録 (`feedback_benchmark_honest_disclosure` (内部参照))
 してから, 「ベンチで異常結果が出たら必ず 5 つの artifact を疑う」を
 **外部化** したくなった. それが lleval.
 
@@ -167,7 +167,7 @@ llive Rust 高速化の **5 パターン判定表** (#24-05 §13.3) は **構造
 | **honest disclosure を一級概念に** | 数値に sticky note | judgment 表で **どこが境界線か** を明示 |
 
 両者とも「**「速い」「正しい」「正確」の単一仮定を捨てる**」という
-[[feedback_benchmark_honest_disclosure]] の延長線上にある. これは lleval が
+`feedback_benchmark_honest_disclosure` (内部参照) の延長線上にある. これは lleval が
 AI を見るだけでなく **AI / システム / アルゴリズム 全般** に展開できる
 発想 = 連載 #24-08 のメタ的意義.
 

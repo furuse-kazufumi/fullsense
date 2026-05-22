@@ -37,7 +37,7 @@ llive (FullSense ™ 思考層) を **構成する技術 / アルゴリズムを
 - **cross-link** (前 / 次 / 本 index / repo)
 
 8 記事は **週 2 本ペース** で 1 ヶ月かけて publish 予定. ja Qiita + en
-Medium 並走 ([[feedback-overseas-tech-platforms]] に従う).
+Medium 並走 (`feedback-overseas-tech-platforms` (内部参照) に従う).
 
 ## 1. Series 構成 (8 大分類)
 
@@ -128,7 +128,7 @@ en 版は `_en.md` suffix.
 
 ## 4. 共通フォーマット (各記事に適用)
 
-### a. 冒頭 hook ([[feedback-articles-concept-hook]])
+### a. 冒頭 hook (`feedback-articles-concept-hook` (内部参照))
 
 1-2 段落で「**この記事の主題 + 数字 + キー名称**」を凝縮.
 
@@ -138,7 +138,7 @@ en 版は `_en.md` suffix.
 
 ### c. 小分類 = `### <class/function/機能名>` 見出し
 
-実コードへの GitHub link を **必ず** 付ける ([[feedback-qiita-github-links]]):
+実コードへの GitHub link を **必ず** 付ける (`feedback-qiita-github-links` (内部参照)):
 
 ```markdown
 ### SynapticSelector
@@ -153,7 +153,7 @@ bounded modification (§E2) で min/max clip 必須.
 
 中分類後の小節として「**なぜこの設計か**」を honest disclosure.
 
-### e. References ([[feedback-articles-references-section]])
+### e. References (`feedback-articles-references-section` (内部参照))
 
 学術 / OSS / 内部 の最低 3 区分.
 
@@ -169,7 +169,7 @@ bounded modification (§E2) で min/max clip 必須.
 ```
 
 > ⚠ **Cross-link URL は Qiita 投稿後に確定する**. draft 段階では各記事の
-> 本文中で `#24-XX` / `[[QIITA_24_XX_*]]` の **仮表記** で参照し, 投稿後に
+> 本文中で `#24-XX` / ``QIITA_24_XX_*` (内部参照)` の **仮表記** で参照し, 投稿後に
 > 個別記事 URL (`https://qiita.com/.../items/<hash>`) に **一括置換**.
 > mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md) で唯一の
 > source of truth として管理. 投稿時に **追々修正**する運用.

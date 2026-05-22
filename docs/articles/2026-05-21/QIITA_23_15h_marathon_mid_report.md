@@ -326,9 +326,9 @@ flowchart LR
 - llive `docs/experiments/low_spec_mock_2026_05_21.md`
 - llive `docs/pr_drafts/optimize_core_2026_05_20_changelog.md`
 - maintainer memory:
-  - [[project-15h-marathon-2026-05-21]]
-  - [[project-llive-v0B-evolutionary]]
-  - [[project-llive-core-optimization-2026-05-20]]
-  - [[project-lleval-v01-poc-scope]]
-  - [[feedback-llamacpp-tracking]]
-  - [[feedback-benchmark-honest-disclosure]]
+  - `project-15h-marathon-2026-05-21` (内部参照)
+  - `project-llive-v0B-evolutionary` (内部参照)
+  - `project-llive-core-optimization-2026-05-20` (内部参照)
+  - `project-lleval-v01-poc-scope` (内部参照)
+  - `feedback-llamacpp-tracking` (内部参照)
+  - `feedback-benchmark-honest-disclosure` (内部参照)
