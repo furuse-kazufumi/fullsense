@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="lleval 5+1 honest disclosure radar across time">
+  <title>llive #24-08 — lleval honest disclosure 5+1 因子 radar</title>
+  <desc>A six-axis radar (Speed, Quality, Bias, Cost, Reproducibility, +1 honest-disclosure-depth) shapes evolve across iterations. SMIL-only animation.</desc>
+  <defs>
+    <linearGradient id="bg24_08" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1426"/>
+      <stop offset="100%" stop-color="#0a0f17"/>
+    </linearGradient>
+    <linearGradient id="radarA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ef476f" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="radarB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5dd1ff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7ee787" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="240" fill="url(#bg24_08)"/>
+
+  <text x="400" y="30" text-anchor="middle" fill="#e6edf3"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="17" font-weight="700">
+    lleval — 「速い AI」ではなく「速いと思い込ませる構成」を見抜く
+  </text>
+  <text x="400" y="50" text-anchor="middle" fill="#94a3b8"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">
+    honest disclosure 5+1 因子 radar: Speed · Quality · Bias · Cost · Reproducibility · Disclosure depth
+  </text>
+
+  <g transform="translate(400 145)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#cbd5e1">
+    <!-- Radar grid: 6 axes (60deg) at 3 rings -->
+    <g stroke="#475569" stroke-width="0.8" fill="none" opacity="0.7">
+      <!-- ring 1 (inner) -->
+      <polygon points="22,0 11,19 -11,19 -22,0 -11,-19 11,-19"/>
+      <!-- ring 2 (mid) -->
+      <polygon points="44,0 22,38 -22,38 -44,0 -22,-38 22,-38"/>
+      <!-- ring 3 (outer) -->
+      <polygon points="66,0 33,57 -33,57 -66,0 -33,-57 33,-57"/>
+      <line x1="0" y1="0" x2="66" y2="0"/>
+      <line x1="0" y1="0" x2="33" y2="57"/>
+      <line x1="0" y1="0" x2="-33" y2="57"/>
+      <line x1="0" y1="0" x2="-66" y2="0"/>
+      <line x1="0" y1="0" x2="-33" y2="-57"/>
+      <line x1="0" y1="0" x2="33" y2="-57"/>
+    </g>
+    <!-- Axis labels -->
+    <text x="78" y="4" font-size="10">Speed</text>
+    <text x="38" y="71" font-size="10">Quality</text>
+    <text x="-38" y="71" font-size="10" text-anchor="end">Bias</text>
+    <text x="-78" y="4" font-size="10" text-anchor="end">Cost</text>
+    <text x="-38" y="-62" font-size="10" text-anchor="end">Repro</text>
+    <text x="38" y="-62" font-size="10">Disclose</text>
+
+    <!-- Shape iteration 1: lopsided early run -->
+    <polygon fill="url(#radarA)" stroke="#ef476f" stroke-width="1.6"
+             points="60,0 22,38 -10,17 -36,0 -22,-38 12,-21">
+      <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="points"
+               values="60,0 22,38 -10,17 -36,0 -22,-38 12,-21;
+                       60,0 22,38 -10,17 -36,0 -22,-38 12,-21;
+                       60,0 22,38 -10,17 -36,0 -22,-38 12,-21;
+                       60,0 22,38 -10,17 -36,0 -22,-38 12,-21;
+                       60,0 22,38 -10,17 -36,0 -22,-38 12,-21;
+                       60,0 22,38 -10,17 -36,0 -22,-38 12,-21"
+               dur="6s" repeatCount="indefinite"/>
+    </polygon>
+
+    <!-- Shape iteration 2: more balanced -->
+    <polygon fill="url(#radarB)" stroke="#5dd1ff" stroke-width="1.6"
+             points="48,0 26,45 -26,45 -52,0 -28,-48 26,-45">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+    </polygon>
+
+    <!-- Legend labels (toggling) -->
+    <g transform="translate(95 -55)" opacity="1">
+      <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="-4" y="-9" width="80" height="16" rx="3" fill="#1f2937" opacity="0.7"/>
+      <text x="36" y="2" font-size="10" fill="#ef476f" text-anchor="middle">naïve run #1</text>
+    </g>
+    <g transform="translate(95 -55)" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="-4" y="-9" width="80" height="16" rx="3" fill="#1f2937" opacity="0.7"/>
+      <text x="36" y="2" font-size="10" fill="#5dd1ff" text-anchor="middle">honest run #2</text>
+    </g>
+  </g>
+
+  <g transform="translate(60 110)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#cbd5e1">
+    <text x="0" y="0" font-weight="600" fill="#e6edf3">5+1 因子</text>
+    <text x="0" y="20" font-size="10">① Speed (latency)</text>
+    <text x="0" y="34" font-size="10">② Quality (score)</text>
+    <text x="0" y="48" font-size="10">③ Bias (judge / position)</text>
+    <text x="0" y="62" font-size="10">④ Cost ($)</text>
+    <text x="0" y="76" font-size="10">⑤ Reproducibility</text>
+    <text x="0" y="96" font-size="10" fill="#ffd166">+1 Disclosure depth</text>
+  </g>
+
+  <g transform="translate(700 110)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#cbd5e1">
+    <text x="0" y="0" font-weight="600" fill="#e6edf3" text-anchor="end">変な良結果?</text>
+    <text x="0" y="16" text-anchor="end">→ 必ず内訳</text>
+    <text x="0" y="30" text-anchor="end">→ 5+1 で分解</text>
+    <text x="0" y="44" text-anchor="end">→ 真の改善か</text>
+    <text x="0" y="58" text-anchor="end">→ 偽の構成か</text>
+    <text x="0" y="78" text-anchor="end" fill="#ffd166" font-weight="600">honest_disclosure</text>
+  </g>
+
+  <text x="400" y="225" text-anchor="middle" fill="#64748b"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="10">
+    progressive size matrix + judge rotation + cross-AI peer eval — radar が時系列で形を変えていく
+  </text>
+</svg>
