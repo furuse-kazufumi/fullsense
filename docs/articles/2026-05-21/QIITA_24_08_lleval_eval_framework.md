@@ -1,5 +1,7 @@
 # llive 完全解説 #24-08 — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する
 
+![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/sense/main/docs/articles/2026-05-21/assets/qiita_24_08_hero.svg)
+
 > **コンセプト hook**: AI を作るだけでは足りない. **AI を見る眼鏡** が要る.
 > lleval は llive と並走する **evaluation framework** で, 「LLM が異常に
 > 良い結果を出したら必ず内訳を疑う」という `feedback_benchmark_honest_disclosure` (内部参照)
