@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-22 23:48:20
+- **生成時刻**: 2026-05-23 00:00:48
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+57dfaf8 docs(next-session): add usv-pandas-bridge to priority 0a (both lleval + usv-pandas-bridge waiting on gh PAT scope)
+a6589cb auto: NEXT_SESSION.md 編集前 (2026-05-22 23:49)
 e89ad24 docs(next-session): add lleval GitHub repo creation as priority 0a (PAT scope blocked, needs gh auth refresh)
 51354d6 auto: NEXT_SESSION.md 編集前 (2026-05-22 23:47)
 4ec9a6f docs(articles): LinkedIn announce post for Qiita #14 + #15 — short cliffhanger format, 1400 chars, 4 deep links
@@ -28,14 +30,13 @@ ed58542 docs(articles): v0.I-C 4D Kardashev radar animated SVG (4 axes × 5 stag
 9702157 docs(articles): #24-01 hero SVG — 4-layer memory + Bayesian surprise gate (final hero of #24 series)
 c89c547 auto: QIITA_#24_01_memory_layer.md 編集前 (2026-05-22 23:17)
 120cbe9 auto: QIITA_#24_01_memory_layer.md 編集前 (2026-05-22 23:16)
-89a9f8c test(scripts): qiita_url_sync — 10 unit tests for parse_link_map / replace_in_text (rule 1 / aggressive rule 2)
-6aa985e docs(qiita): post #14/#15 logged + qiita_url_sync.py + NEXT_SESSION §0 reminder for #16 resume
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -52,7 +53,7 @@ c89c547 auto: QIITA_#24_01_memory_layer.md 編集前 (2026-05-22 23:17)
 
 ## 3. 未消化 operator action (NEXT_SESSION.md 由来)
 
-- [ ] 0a. ★ lleval GitHub repo 作成 + 初回 push (2026-05-23 朝最優先)
+- [ ] 0a. ★ lleval + usv-pandas-bridge GitHub repo 作成 + 初回 push (2026-05-23 朝最優先)
 - [ ] 0b. ★ Qiita 連載 #16 から投稿再開 (2026-05-23 以降, Qiita 投稿数制限解除待ち)
 - [ ] 1. Credential restoration — 3 cloud LLMs (継続)
 - [ ] 2. asciinema 録画 — Cognitive Mesh 統合 demo (9 セクション拡張版)
@@ -71,9 +72,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `23:48` `docs/SESSION_SUMMARY.md`
-- `23:47` `docs/NEXT_SESSION.md`
-- `23:45` `docs/NEXT_SESSION.auto.md`
+- `00:00` `docs/SESSION_SUMMARY.md`
+- `00:00` `docs/NEXT_SESSION.auto.md`
+- `23:49` `docs/NEXT_SESSION.md`
 - `23:25` `docs/articles/2026-05-22/LinkedIn_2026-05-22_qiita_14_15_announce.md`
 - `23:21` `docs/articles/QIITA_#24_07_observability_governance.md`
 - `23:20` `docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg`
