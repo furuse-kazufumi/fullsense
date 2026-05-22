@@ -37,8 +37,17 @@ ignorePublish: true
 | #21 | QIITA_#21_three_day_marathon_2026_05_18_to_20.md | <https://qiita.com/furuse-kazufumi/items/cd954f57f510e03954e6> | 2026-05-23 (公開) |
 | #22 | QIITA_#22_transformer_escape_status.md | <https://qiita.com/furuse-kazufumi/items/7fa693bc2f1ae43ba5ba> | 2026-05-23 (公開) |
 | #23 | QIITA_#23_15h_marathon_mid_report.md | <https://qiita.com/furuse-kazufumi/items/24ac90fb12c4e332d2b5> | 2026-05-23 (公開) |
+| #24-00 | QIITA_#24_00_llive_tech_series_index.md | <https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c> | 2026-05-23 (公開) |
+| #24-01 | QIITA_#24_01_memory_layer.md | _未投稿_ | — |
+| #24-02 | QIITA_#24_02_thought_factors_cog_mesh.md | _未投稿_ | — |
+| #24-03 | QIITA_#24_03_structural_evolution_triz.md | _未投稿_ | — |
+| #24-04 | QIITA_#24_04_convergent_optimization_b_series.md | _未投稿_ | — |
+| #24-05 | QIITA_#24_05_evolutionary_v0BCDE.md | _未投稿_ | — |
+| #24-06 | QIITA_#24_06_llm_backend_non_transformer.md | _未投稿_ | — |
+| #24-07 | QIITA_#24_07_observability_governance.md | _未投稿_ | — |
+| #24-08 | QIITA_#24_08_lleval_eval_framework.md | _未投稿_ | — |
 
-## #24 連載 series (大分類 9 本) cross-link
+## #24 連載 series (大分類 9 本) cross-link (description rich 用、人間用)
 
 | ID | 仮表記 | Title (統一形式) | Qiita URL (投稿後に埋める) | 投稿日 |
 |---|---|---|---|---|
