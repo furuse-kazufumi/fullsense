@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" width="1000" height="360" role="img" aria-label="#24-08 theme: lleval 5+1 因子 spider chart + judge rotation">
+  <title>lleval: honest disclosure 5+1 因子分解 spider + judge rotation</title>
+  <rect width="1000" height="360" fill="#0f172a"/>
+  <text x="500" y="28" font-family="-apple-system,sans-serif" font-size="16" font-weight="700" fill="#e2e8f0" text-anchor="middle">「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解 + judge rotation</text>
+
+  <!-- Left: 5+1 spider chart -->
+  <g transform="translate(220, 200)" font-family="-apple-system,sans-serif">
+    <text x="0" y="-150" font-size="11" fill="#a5b4fc" font-weight="600" text-anchor="middle">5+1 honest disclosure factors</text>
+    <!-- 6 spokes (5 + 1 hidden bonus) at 60° intervals -->
+    <g>
+      <!-- grid -->
+      <polygon points="0,-100 87,-50 87,50 0,100 -87,50 -87,-50" fill="none" stroke="#334155" stroke-width="0.6"/>
+      <polygon points="0,-70 60.6,-35 60.6,35 0,70 -60.6,35 -60.6,-35" fill="none" stroke="#334155" stroke-width="0.4"/>
+      <polygon points="0,-40 34.6,-20 34.6,20 0,40 -34.6,20 -34.6,-20" fill="none" stroke="#334155" stroke-width="0.3"/>
+      <!-- spokes + labels -->
+      <line x1="0" y1="0" x2="0" y2="-100" stroke="#334155" stroke-width="0.6"/><text x="0" y="-114" font-size="10" fill="#22d3ee" text-anchor="middle" font-weight="600">正答率</text>
+      <line x1="0" y1="0" x2="87" y2="-50" stroke="#334155" stroke-width="0.6"/><text x="100" y="-50" font-size="10" fill="#22c55e" font-weight="600">確信度</text>
+      <line x1="0" y1="0" x2="87" y2="50"  stroke="#334155" stroke-width="0.6"/><text x="100" y="58" font-size="10" fill="#fb923c" font-weight="600">遅延</text>
+      <line x1="0" y1="0" x2="0" y2="100"  stroke="#334155" stroke-width="0.6"/><text x="0" y="118" font-size="10" fill="#a78bfa" text-anchor="middle" font-weight="600">コスト</text>
+      <line x1="0" y1="0" x2="-87" y2="50" stroke="#334155" stroke-width="0.6"/><text x="-100" y="58" font-size="10" fill="#f472b6" font-weight="600" text-anchor="end">透明性</text>
+      <line x1="0" y1="0" x2="-87" y2="-50" stroke="#334155" stroke-width="0.6"/><text x="-100" y="-50" font-size="10" fill="#eab308" font-weight="600" text-anchor="end">+1 補助</text>
+      <!-- Data polygon (animated) -->
+      <polygon points="0,-80 70,-40 65,40 0,75 -55,30 -75,-35"
+               fill="#22d3ee" fill-opacity="0.3" stroke="#22d3ee" stroke-width="1.6">
+        <animate attributeName="points"
+                 values="0,-80 70,-40 65,40 0,75 -55,30 -75,-35;
+                         0,-90 50,-30 85,55 0,60 -75,40 -55,-25;
+                         0,-80 70,-40 65,40 0,75 -55,30 -75,-35"
+                 dur="6s" repeatCount="indefinite"/>
+      </polygon>
+      <circle r="4" fill="#22d3ee"/>
+    </g>
+  </g>
+
+  <!-- Right: 4 judges rotating -->
+  <g transform="translate(700, 200)" font-family="-apple-system,sans-serif">
+    <text x="0" y="-150" font-size="11" fill="#fb923c" font-weight="600" text-anchor="middle">judge rotation (4 LLM judges)</text>
+    <circle r="100" fill="none" stroke="#475569" stroke-width="0.6"/>
+    <!-- 4 judges -->
+    <g>
+      <g transform="translate(0, -100)">
+        <circle r="22" fill="#1e293b" stroke="#fb923c" stroke-width="1.5"/>
+        <text y="-2" font-size="10" fill="#fb923c" text-anchor="middle" font-weight="700">judge A</text>
+        <text y="10" font-size="8" fill="#94a3b8" text-anchor="middle">Claude</text>
+      </g>
+      <g transform="translate(100, 0)">
+        <circle r="22" fill="#1e293b" stroke="#22c55e" stroke-width="1.5"/>
+        <text y="-2" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="700">judge B</text>
+        <text y="10" font-size="8" fill="#94a3b8" text-anchor="middle">GPT-4o</text>
+      </g>
+      <g transform="translate(0, 100)">
+        <circle r="22" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+        <text y="-2" font-size="10" fill="#a78bfa" text-anchor="middle" font-weight="700">judge C</text>
+        <text y="10" font-size="8" fill="#94a3b8" text-anchor="middle">Gemini</text>
+      </g>
+      <g transform="translate(-100, 0)">
+        <circle r="22" fill="#1e293b" stroke="#f472b6" stroke-width="1.5"/>
+        <text y="-2" font-size="10" fill="#f472b6" text-anchor="middle" font-weight="700">judge D</text>
+        <text y="10" font-size="8" fill="#94a3b8" text-anchor="middle">Qwen</text>
+      </g>
+    </g>
+    <!-- center: voted answer -->
+    <g>
+      <circle r="20" fill="#1e293b" stroke="#22d3ee" stroke-width="2">
+        <animate attributeName="r" values="18;26;18" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text font-size="10" fill="#22d3ee" text-anchor="middle" font-weight="700">consensus</text>
+    </g>
+    <!-- rotating pulse highlighting the currently active judge -->
+    <g>
+      <circle r="6" fill="#fbbf24">
+        <animateMotion dur="8s" repeatCount="indefinite">
+          <mpath xlink:href="#judgepath"/>
+        </animateMotion>
+      </circle>
+    </g>
+    <path id="judgepath" d="M0,-100 A100,100 0 1 1 -0.1,-100 Z" fill="none" stroke="none"/>
+  </g>
+
+  <!-- bottom legend -->
+  <g transform="translate(80, 320)" font-family="-apple-system,sans-serif" font-size="10" fill="#94a3b8">
+    <text x="0" y="0">progressive size matrix (xs/s/m/l/xl) で stress curve, 5+1 因子で「変に高速」を 5 因子に分解検証 ([[feedback-benchmark-honest-disclosure]] 準拠)</text>
+  </g>
+</svg>
