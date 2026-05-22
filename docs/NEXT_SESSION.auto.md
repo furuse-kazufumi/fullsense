@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-22 22:53:03
+- **生成時刻**: 2026-05-22 22:58:51
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+16cdcfd docs(articles): LINK_MAP — record #15 Qiita URL
+a19790e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-22 22:58)
 0a4cd50 docs(articles): LINK_MAP — record #14 Qiita URL + extend mapping for #14-#23 series
 e195f4e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-22 22:52)
 9fd953b docs(articles): Qiita post prep — POST_GUIDE.md + frontmatter skeleton script + preflight + 14 fm-inserted (long-form: more is better, no upper limit)
@@ -28,8 +30,6 @@ a47f052 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 be19104 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 6878cb7 docs(articles): flatten QIITA #14-#24 series to docs/articles/ root + move assets/ + update hero SVG raw URL paths
 32383bc docs(articles): rename QIITA_NN_*.md to QIITA_#NN_*.md + update internal refs (#-encoded for local, %23 for URLs) — 20 files renamed, 16 files updated
-ea0d747 docs(articles): #24-00 — append HVC + cultural anchors + v0.F/G/H requirements landing (2026-05-22 session wrap)
-4ba07cc auto: QIITA_24_00_llive_tech_series_index.md 編集前 (2026-05-22 21:49)
 ```
 
 ### git status (porcelain)
@@ -69,9 +69,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:53` `docs/SESSION_SUMMARY.md`
-- `22:52` `docs/articles/QIITA_#24_LINK_MAP.md`
-- `22:46` `docs/NEXT_SESSION.auto.md`
+- `22:58` `docs/SESSION_SUMMARY.md`
+- `22:58` `docs/articles/QIITA_#24_LINK_MAP.md`
+- `22:53` `docs/NEXT_SESSION.auto.md`
 - `22:42` `docs/articles/QIITA_POST_GUIDE.md`
 - `22:40` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
 - `22:40` `docs/articles/QIITA_#24_07_observability_governance.md`
