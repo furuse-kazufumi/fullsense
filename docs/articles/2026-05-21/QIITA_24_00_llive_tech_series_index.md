@@ -214,9 +214,29 @@ bounded modification (§E2) で min/max clip 必須.
 - `feedback_overseas_tech_platforms` (Medium en 並走)
 - `feedback_reader_attention_curve` (8 秒/90 秒/5 分)
 
-## 8. 状態 (2026-05-21 着手)
+## 8. 状態 (2026-05-21 着手 → 2026-05-22 更新)
 
 - ✅ index (本ファイル) 着地
-- 🚧 01-08 個別記事は今後 publish (週 2 本ペース)
+- ✅ **#24-01 〜 #24-08 draft 全 9 本着地** (2026-05-22 marathon 内)
 - ✅ 命名規約 + 共通フォーマット確定
+- ✅ **タイトル統一規約確定** (2026-05-22): `llive 完全解説 #24-XX — 「キャッチ」: <技術名称>`
 - ✅ memory `feedback_articles_taxonomy_split` で運用ルール化
+- ✅ **Cross-link URL mapping** を `QIITA_24_LINK_MAP.md` に集約 (投稿後 URL 確定→ 一括置換運用)
+- 🚧 各記事の full 10x volume (80-120k 字) 版は次セッション以降
+- 🚧 Qiita 投稿は user 判断待ち (週 2 本ペース)
+
+### 2026-05-22 追記 — Rust 高速化マラソン成果
+
+連載中核 #24-05 で扱う v0.E 派生集団進化の hot path 3 つを 1 日で Rust 化:
+
+- **RUST-15** persona_dissimilarity_pairwise: avg **x12.71** (batch)
+- **RUST-16** collusion_score_kernel: avg **x66.70** (numpy 小 N hot path)
+- **RUST-17b** novelty_score_batch (rayon + quickselect): avg **x9.32** (全 A 5x clear)
+
+詳細は #24-04 (B-series 文脈で直交性) / #24-05 (中核) / #24-07 (governance
+latency 100x 短縮). 5 パターン判定表は repo
+`docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`.
+
+「**Rust 化 = 速い」は嘘 / 「numpy = 速い」も嘘** — 実装方法 (FFI 境界 /
+batch / numpy zero-copy / 並列度 / partial sort) で結果が桁違い. この
+honest disclosure 体験が連載全体の通奏低音.
