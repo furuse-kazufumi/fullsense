@@ -1,5 +1,6 @@
 ---
-title: llive 完全解説 #24-01 — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating
+title: 'llive 完全解説 #24-01 — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating'
+hero_svg: 'https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_01_hero.svg'
 tags:
   - FullSense
   - llive
