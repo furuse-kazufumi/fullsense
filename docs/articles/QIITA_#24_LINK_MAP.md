@@ -35,7 +35,7 @@ ignorePublish: true
 | #19 | QIITA_#19_general_gpu_less_ai_for_everyone.md | <https://qiita.com/furuse-kazufumi/items/cdeea496af01dd424a09> | 2026-05-23 (公開) |
 | #20 | QIITA_#20_one_session_full_stack_progress.md | <https://qiita.com/furuse-kazufumi/private/3b49820306ea9e11666b> | 2026-05-23 (限定共有) |
 | #21 | QIITA_#21_three_day_marathon_2026_05_18_to_20.md | <https://qiita.com/furuse-kazufumi/items/cd954f57f510e03954e6> | 2026-05-23 (公開) |
-| #22 | QIITA_#22_transformer_escape_status.md | _未投稿_ | — |
+| #22 | QIITA_#22_transformer_escape_status.md | <https://qiita.com/furuse-kazufumi/items/7fa693bc2f1ae43ba5ba> | 2026-05-23 (公開) |
 | #23 | QIITA_#23_15h_marathon_mid_report.md | _未投稿_ | — |
 
 ## #24 連載 series (大分類 9 本) cross-link
