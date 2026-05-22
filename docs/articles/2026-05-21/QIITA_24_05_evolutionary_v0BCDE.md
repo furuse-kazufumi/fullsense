@@ -1,5 +1,7 @@
 # llive 完全解説 #24-05 — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
 
+![hero — N=64 population fitness evolution across generations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/2026-05-21/assets/qiita_24_05_hero.svg)
+
 > **コンセプト hook**: 1 個の AI が賢くなるのではなく, **64 個の AI が世代を
 > 回して互いに評価し合い, 嘘の合意は Approval Bus が止める** — それが llive の
 > v0.E. 2026-05-21 marathon でその架構が **303 件 test + ruff 0 警告 + governance
