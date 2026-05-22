@@ -1,6 +1,6 @@
 # llive 完全解説 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ
 
-![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/2026-05-21/assets/qiita_24_06_hero.svg)
+![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_hero.svg)
 
 > **コンセプト hook**: LLM = Transformer, は **2024 までの話**. 2025-2026 で
 > State Space Model (Mamba / Jamba) と RWKV (時系列 RNN を再発明) が **長

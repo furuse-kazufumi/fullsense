@@ -1,6 +1,6 @@
 # llive 完全解説 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/2026-05-21/assets/qiita_24_07_hero.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_hero.svg)
 
 > **コンセプト hook**: 多くの LLM agent は「結果のログ」しか残さない. しかし
 > AI が **自分自身を進化** させはじめると, 「**いつ何を判断して何を変えたか**」
