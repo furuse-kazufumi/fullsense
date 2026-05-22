@@ -174,6 +174,20 @@ flowchart TD
     qm -->|isolate| led
 ```
 
+### 7.1 governance maturity を「文明レベル」で見る — 4D Kardashev radar (v0.I-C 先取り)
+
+§3 の Approval Bus pass率 / §4 の audit chain 完全性 / §6 の peer eval cohesion
+は, 単独で見ると「数字が良くなった」で終わる. **v0.I-C (4D Kardashev Radar)**
+ではこれらを Energy / Knowledge / Coordination / **Ethics** の 4 軸 × 5 段階
+(Type 0 → I → II → III → IV) の「文明レベル」スケールに束ねて, 個体 / 集団 /
+メタ集団の 3 階層で同時計測する構想.
+
+![4D Kardashev Scale](./assets/qiita_24_v0i_kardashev_4d_hero.svg)
+
+Ethics 軸はまさに本記事の Approval Bus pass率 + frozen gene 違反検出 + 規制
+適合度のスコアで, governance maturity を「個体の躾」から「文明の成熟」まで
+連続スケールで語れるようになる. 詳細要件は llive `docs/requirements_v0.I_meta_evolution_and_cross_substrate.md` §5 参照.
+
 ## 8. 期待値 — 次に来るもの
 
 - **HSM / secure store 連携** — Ed25519 鍵管理を v1.0 で. Windows Credential
