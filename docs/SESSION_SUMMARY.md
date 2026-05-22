@@ -3,13 +3,15 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-05-23 07:34:22
+- **最終更新**: 2026-05-23 07:38:48
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+4cb53b7 fix(qiita): #20 frontmatter を Jekyll → Qiita 形式に置換
+0bdc3f7 auto: QIITA_#20_one_session_full_stack_progress.md 編集前 (2026-05-23 07:36)
 acb4e95 docs(qiita): #19 公開 URL を LINK_MAP に反映
 e05d90e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:34)
 69bcf5c docs(qiita): #18 公開 URL を LINK_MAP に反映
@@ -18,22 +20,22 @@ e05d90e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:34)
 ac8a21c auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:26)
 ccd29ca docs(qiita): #16 限定共有 URL を LINK_MAP に反映 + url_sync UTF-8 化
 b04706d auto: qiita_url_sync.py 編集前 (2026-05-23 07:19)
-cd82bfd auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:18)
-deb2b32 docs(2026-05-23): CLI safety scan で発見した追加修正 3 件を記録
 ```
 
 ## 現在の git status
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
+07:37 docs/SESSION_SUMMARY.md
+07:37 docs/NEXT_SESSION.auto.md
+07:36 docs/articles/QIITA_#20_one_session_full_stack_progress.md
 07:34 docs/articles/QIITA_#24_LINK_MAP.md
-07:30 docs/NEXT_SESSION.auto.md
-07:30 docs/SESSION_SUMMARY.md
 07:19 scripts/qiita_url_sync.py
 ```
 

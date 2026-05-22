@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-23 07:34:22
+- **生成時刻**: 2026-05-23 07:38:48
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+4cb53b7 fix(qiita): #20 frontmatter を Jekyll → Qiita 形式に置換
+0bdc3f7 auto: QIITA_#20_one_session_full_stack_progress.md 編集前 (2026-05-23 07:36)
 acb4e95 docs(qiita): #19 公開 URL を LINK_MAP に反映
 e05d90e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:34)
 69bcf5c docs(qiita): #18 公開 URL を LINK_MAP に反映
@@ -28,14 +30,13 @@ e05d90e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:34)
 ac8a21c auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:26)
 ccd29ca docs(qiita): #16 限定共有 URL を LINK_MAP に反映 + url_sync UTF-8 化
 b04706d auto: qiita_url_sync.py 編集前 (2026-05-23 07:19)
-cd82bfd auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:18)
-deb2b32 docs(2026-05-23): CLI safety scan で発見した追加修正 3 件を記録
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -71,9 +72,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `07:34` `docs/SESSION_SUMMARY.md`
+- `07:38` `docs/SESSION_SUMMARY.md`
+- `07:37` `docs/NEXT_SESSION.auto.md`
+- `07:36` `docs/articles/QIITA_#20_one_session_full_stack_progress.md`
 - `07:34` `docs/articles/QIITA_#24_LINK_MAP.md`
-- `07:30` `docs/NEXT_SESSION.auto.md`
 - `07:19` `scripts/qiita_url_sync.py`
 
 
