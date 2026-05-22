@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-23 07:54:02
+- **生成時刻**: 2026-05-23 08:01:31
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+e359bd5 docs(qiita): #24 series タイトル番号を (N) 形式に統一
+2a57a3f auto: QIITA_#24_01_memory_layer.md 編集前 (2026-05-23 07:59)
 b86f038 docs(qiita): #24-01 公開 URL を LINK_MAP に反映 + url_sync 結果反映
 f9336c5 auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:53)
 5aa90d1 docs(qiita): #24-00 公開 URL を LINK_MAP に反映 + 第 1 表に #24-NN 9 行追加
@@ -28,8 +30,6 @@ f9336c5 auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:53)
 a4a4586 docs(qiita): #23 公開 URL を LINK_MAP に反映
 b69dfa4 auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:48)
 be36a45 docs(qiita): #22 公開 URL を LINK_MAP に反映
-d570dce auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 07:45)
-e5fe5cc docs(qiita): #21 公開 URL を LINK_MAP に反映
 ```
 
 ### git status (porcelain)
@@ -71,9 +71,18 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `07:54` `docs/SESSION_SUMMARY.md`
+- `08:01` `docs/SESSION_SUMMARY.md`
+- `08:00` `docs/articles/QIITA_#24_01_memory_layer.md`
+- `07:59` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
+- `07:59` `docs/articles/QIITA_#24_07_observability_governance.md`
+- `07:59` `docs/articles/QIITA_#24_06_llm_backend_non_transformer.md`
+- `07:59` `docs/articles/QIITA_#24_05_evolutionary_v0BCDE.md`
+- `07:59` `docs/articles/QIITA_#24_04_convergent_optimization_b_series.md`
+- `07:59` `docs/articles/QIITA_#24_03_structural_evolution_triz.md`
+- `07:59` `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md`
+- `07:59` `docs/articles/QIITA_#24_00_llive_tech_series_index.md`
+- `07:54` `docs/NEXT_SESSION.auto.md`
 - `07:53` `docs/articles/QIITA_#24_LINK_MAP.md`
-- `07:52` `docs/NEXT_SESSION.auto.md`
 - `07:36` `docs/articles/QIITA_#20_one_session_full_stack_progress.md`
 - `07:19` `scripts/qiita_url_sync.py`
 
