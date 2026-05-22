@@ -41,7 +41,23 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 
 ## 🧑 Operator actions queued — pick these up first
 
-### 0. ★ Qiita 連載 #16 から投稿再開 (2026-05-23 以降, Qiita 投稿数制限解除待ち)
+### 0a. ★ lleval GitHub repo 作成 + 初回 push (2026-05-23 朝最優先)
+
+**現状**: lleval は D:/projects/lleval にローカル commit 済 (Agent E 着地 LE-01 honest disclosure 5+1 factor, commit `665bacf`, 88 PASS) だが GitHub repo 未作成. 2026-05-22 深夜に `gh repo create` 試行したが PAT scope 不足で失敗.
+
+**手順**:
+
+```powershell
+gh auth refresh -s repo,delete_repo     # repo 操作 scope を追加
+cd D:/projects/lleval
+gh repo create furuse-kazufumi/lleval --private --source=. --remote=origin `
+  --description "lleval — LLM evaluation framework (honest disclosure 5+1 factor decomposition). Companion to llive."
+git push -u origin main
+```
+
+最初は **private** で作成、公開準備が整ったら `gh repo edit --visibility public` で公開判断.
+
+### 0b. ★ Qiita 連載 #16 から投稿再開 (2026-05-23 以降, Qiita 投稿数制限解除待ち)
 
 **2026-05-22 セッション末で投稿数制限に到達**. 解除は通常 24 時間程度.
 
