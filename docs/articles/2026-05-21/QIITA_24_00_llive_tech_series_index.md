@@ -240,3 +240,58 @@ latency 100x 短縮). 5 パターン判定表は repo
 「**Rust 化 = 速い」は嘘 / 「numpy = 速い」も嘘** — 実装方法 (FFI 境界 /
 batch / numpy zero-copy / 並列度 / partial sort) で結果が桁違い. この
 honest disclosure 体験が連載全体の通奏低音.
+
+### 2026-05-22 追記 (セッション末) — ハーネス型バイブコーディング視点
+
+連載全体を貫く方法論として、本日セッション末でユーザーが言語化した
+**ハーネス型バイブコーディング (Harness-style Vibe Coding, HVC)** を
+追加しておく. Karpathy "vibe coding" との差は、harness (Claude Code 等
+agent 駆動環境) を **ユーザーが能動的に握り続ける** こと.
+
+HVC で要る 3 能力:
+
+1. **発想力** — 異分野連想 (例: キン肉星王位争奪編 + ROS 歩行進化 +
+   Lehman&Stanley novelty search が同じ構造に収束する)
+2. **経験則** — 失敗パターン先読み
+3. **アルゴリズムへの理解** — 実装妥当性検証 (RUST-15 単発 0.80x → batch
+   12.71x の差を瞬時に評価)
+
+加えて **AI 成長マネジメント力** = 部下育成と同等. 委任範囲 / 進捗確認 /
+失敗許容 / 個性尊重 / 多数決抑制 / 世代交代 / 信頼関係構築. キヤノン
+「三自の精神」(自発/自治/自立) を AI に転写するのと同じ系譜.
+
+### 2026-05-22 追記 — 派生集団進化の発想原典
+
+#24-05 (EvolutionLoop) と v0.F (2 階建てゲノム) の発想は **技術側と
+文化側 2 系統の anchor が同時に手元にあった** から自然に出てきた:
+
+- **技術側**: ROS Population-Based Training (歩行進化), Hillis 1990 Red
+  Queen, Lehman & Stanley 2011 novelty search, AlphaStar 2019 PBT,
+  Mouret & Clune 2015 MAP-Elites
+- **文化側**: キン肉星王位争奪編 (1985-87, ゆでたまご) / リィンカーネー
+  ションの花弁 (2013-24, 三栖ハル) / R.O.D シリーズ (1998〜, 倉田英之)
+
+3 漫画の共通項 = (派生個体集団 / 個性継承 / 競争 / 協調 / 進化) が、
+v0.F の `Genome = (C-impl: 実装層, C-prompt: 偉人思想層)` 2 階建て設計
+とほぼ完全に対応. 技術論文と漫画作品が同じ構造を別経路で示していた
+事実そのものが [[project_llive_dev_style]] (第二の脳型スパイラル開発) の
+典型例.
+
+詳細は memory `project_llive_kinniku_metaphor` /
+`project_llive_reincarnation_rod_metaphor` /
+`feedback_harness_vibe_coding` (本 repo `.memory` 配下に近日整理予定).
+
+### 2026-05-22 追記 — v0.F/G/H 要件メモ着地
+
+本日セッションで要件メモ 3 本を新規着地 (llive リポ):
+
+- **v0.F** 2 階建てゲノム + Novelty Lane + Similarity Quota crowding +
+  統計駆動評価 → `docs/requirements_v0.F_genome_two_layer_and_novelty.md`
+- **v0.G** 漫画読解 (VLM 補助) + HumorKB (構造のみ) + 定着済ネットミーム +
+  日本語多義性 (スナックバス江 reference) → `docs/requirements_v0.G_manga_reading_humor.md`
+- **v0.H** マスコット/ブランディング (古瀬あい衝突回避 + Transformer 脱却
+  後コラボ路線) → `docs/requirements_v0.H_mascot_branding.md`
+
+加えて `.claude/skills/manga-ocr/` に Apache-2.0 ライセンスの kha-white
+manga-ocr の skill skeleton を配備. Magi (academic only) は llive 商用
+ライセンスと非互換のため不採用.
