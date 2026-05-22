@@ -394,10 +394,10 @@ llive は Apache 2.0 + Commercial dual-license の OSS、Repo は https://github
 - **llive リポジトリ** — https://github.com/furuse-kazufumi/llive
 - 本記事の数値根拠: `docs/benchmarks/2026-05-17-full-validation/SUMMARY.md`
 - 個別記事版 (連載):
-  - [14] 不可視 Annotation — `QIITA_14_invisible_annotation_channel.md`
-  - [15] 構築論 — `QIITA_15_second_brain_spiral_dev.md`
-  - [16] 運用論 — `QIITA_16_three_self_spirit_ai_management.md`
-  - [17] ビジョン論 — `QIITA_17_human_ai_fusion_vision.md`
+  - [14] 不可視 Annotation — `QIITA_#14_invisible_annotation_channel.md`
+  - [15] 構築論 — `QIITA_#15_second_brain_spiral_dev.md`
+  - [16] 運用論 — `QIITA_#16_three_self_spirit_ai_management.md`
+  - [17] ビジョン論 — `QIITA_#17_human_ai_fusion_vision.md`
 
 <!-- llive:meta.article_id="QIITA_SECOND_BRAIN_SERIES_integrated_14_17" target=llove -->
 <!-- llive:meta.published_date="2026-05-18" -->

@@ -16,9 +16,9 @@
 > constraints に `honest-disclosure-required` が明記されているため, **どこが
 > mock でどこが実機か** を本文中で何度も繰り返し明示する.
 >
-> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_24_XX_*` (内部参照)` 形式の
+> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_#24_XX_*` (内部参照)` 形式の
 > 他記事参照は **draft 仮 link**. Qiita 投稿後に確定する個別記事 URL に
-> 一括置換が必要. mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md)
+> 一括置換が必要. mapping は [`QIITA_#24_LINK_MAP.md`](QIITA_#24_LINK_MAP.md)
 > に集約. 投稿時に追々修正.
 
 ## 0. 連載中での位置づけ

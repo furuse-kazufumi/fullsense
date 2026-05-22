@@ -7,7 +7,7 @@
 > 本 mapping は **投稿時に更新**.  draft 内の cross-link は以下の **仮表記**:
 >
 > - 本文中の参照: `#24-XX` (例: 「詳細は #24-05 で」)
-> - memory 風参照: `[[QIITA_24_XX_*]]`
+> - memory 風参照: `[[QIITA_#24_XX_*]]`
 > - repo internal: `docs/perf_comparison/<日付>_*.md` (GitHub URL に展開)
 
 ## URL mapping table
@@ -41,10 +41,10 @@
 1. 1 本投稿 → Qiita 個別記事 URL を取得
 2. 本表の「Qiita URL」列に追記
 3. **全 draft (#24-00 〜 #24-08) を grep** で当該 ID への参照を検索:
-   - `grep -rn "#24-${ID}\|QIITA_24_${ID}" docs/articles/2026-05-21/`
+   - `grep -rn "#24-${ID}\|QIITA_#24_${ID}" docs/articles/2026-05-21/`
 4. 仮表記を Qiita URL に **一括置換** (sed or Edit tool):
    - `#24-XX` → `[#24-XX](https://qiita.com/.../items/<hash>)`
-   - `[[QIITA_24_XX_*]]` → 同上
+   - `[[QIITA_#24_XX_*]]` → 同上
 5. 投稿済記事も追々更新 (Qiita 側で記事編集 → 再公開)
 
 ## Repo internal link の扱い

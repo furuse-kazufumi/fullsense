@@ -14,9 +14,9 @@
 > **draft 段階** (2026-05-21 marathon 中) — full 10x volume (80-120k 字) 版は
 > 後段で. 本 draft は骨子 + 主要セクションのみ.
 >
-> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_24_XX_*` (内部参照)` 形式の
+> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_#24_XX_*` (内部参照)` 形式の
 > 他記事参照は **draft 仮 link**. Qiita 投稿後に確定する個別記事 URL に
-> 一括置換が必要. mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md)
+> 一括置換が必要. mapping は [`QIITA_#24_LINK_MAP.md`](QIITA_#24_LINK_MAP.md)
 > に集約. 投稿時に追々修正.
 
 ## 0. 連載中での位置づけ
@@ -236,4 +236,4 @@ B-9 (`assume_normalized` + `GiftValue deque`) は **Python のままで +28%**.
 > **draft note**: full 10x volume (80-120k 字) 版は次セッションで.
 > 本 draft は骨子 + 9 main section + 数字裏付け + honest disclosure 2 件
 > (新規: 小脳/大脳の最適化手段が直交する).
-> 連載 #24 シリーズ index (`QIITA_24_00_llive_tech_series_index` (内部参照)) と整合.
+> 連載 #24 シリーズ index (`QIITA_#24_00_llive_tech_series_index` (内部参照)) と整合.

@@ -394,6 +394,6 @@ Welford (1962) は 60 年前. それでも今の LLM 周辺アーキテクチャ
 
 ## 10. Series cross-link
 
-- → 次: [QIITA #24-02 思考因子 + COG-MESH](QIITA_24_02_thought_factors_cog_mesh.md) (次回)
-- 全体: [本 series index](QIITA_24_00_llive_tech_series_index.md)
+- → 次: [QIITA #24-02 思考因子 + COG-MESH](QIITA_#24_02_thought_factors_cog_mesh.md) (次回)
+- 全体: [本 series index](QIITA_#24_00_llive_tech_series_index.md)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)

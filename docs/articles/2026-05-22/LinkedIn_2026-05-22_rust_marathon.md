@@ -158,7 +158,7 @@ Claude+llive 는 "즉시 구현 + 정직한 공개".
 - tags はスペース区切り (Qiita / Twitter / LinkedIn の hashtag 形式と互換).
 - 全 4 言語版で **同じ数値・同じ honest disclosure** を提示.
 - GitHub URL は public repo. Qiita URL は **投稿後に確定** するため series index
-  URL を後で埋める ([[QIITA_24_LINK_MAP]] と同じ運用).
+  URL を後で埋める ([[QIITA_#24_LINK_MAP]] と同じ運用).
 
 ## 関連
 

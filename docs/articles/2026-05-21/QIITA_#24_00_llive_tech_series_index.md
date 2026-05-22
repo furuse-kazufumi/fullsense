@@ -16,7 +16,7 @@ ignorePublish: true
 
 <!--
 Qiita タグ 5 個 (FullSense / llive / 解説 / アルゴリズム / SoftwareArchitecture).
-本 index は series の navigator. 各大分類は個別記事 (QIITA_24_01〜08) に分割.
+本 index は series の navigator. 各大分類は個別記事 (QIITA_#24_01〜08) に分割.
 -->
 
 > 投稿可否は user 判断. これは agent 自律ドラフト. memory
@@ -106,23 +106,23 @@ llive 完全解説 #24-XX — 「キャッチコピー」: <技術名称>
 例外: #24-00 (index 記事) はキャッチ無しで
 `llive 完全解説 #24-00 — series index: <概要>` 形式.
 
-詳細は `QIITA_24_LINK_MAP.md` 参照.
+詳細は `QIITA_#24_LINK_MAP.md` 参照.
 
 ### 3.2 ファイル名規約
 
-`QIITA_24_<NN>_<topic>.md` (本 series 全体に `24`).
+`QIITA_#24_<NN>_<topic>.md` (本 series 全体に `24`).
 
 | ファイル | 内容 |
 |---|---|
-| `QIITA_24_00_llive_tech_series_index.md` | 本 index (本ファイル) |
-| `QIITA_24_01_memory_layer.md` | 01 記事 |
-| `QIITA_24_02_thought_factors_cog_mesh.md` | 02 記事 |
-| `QIITA_24_03_structural_evolution_triz.md` | 03 記事 |
-| `QIITA_24_04_convergent_optimization_b_series.md` | 04 記事 |
-| `QIITA_24_05_evolutionary_optimization_v0bc.md` | 05 記事 |
-| `QIITA_24_06_llm_backend_non_transformer.md` | 06 記事 |
-| `QIITA_24_07_observability_governance.md` | 07 記事 |
-| `QIITA_24_08_lleval_eval_framework.md` | 08 記事 |
+| `QIITA_#24_00_llive_tech_series_index.md` | 本 index (本ファイル) |
+| `QIITA_#24_01_memory_layer.md` | 01 記事 |
+| `QIITA_#24_02_thought_factors_cog_mesh.md` | 02 記事 |
+| `QIITA_#24_03_structural_evolution_triz.md` | 03 記事 |
+| `QIITA_#24_04_convergent_optimization_b_series.md` | 04 記事 |
+| `QIITA_#24_05_evolutionary_optimization_v0bc.md` | 05 記事 |
+| `QIITA_#24_06_llm_backend_non_transformer.md` | 06 記事 |
+| `QIITA_#24_07_observability_governance.md` | 07 記事 |
+| `QIITA_#24_08_lleval_eval_framework.md` | 08 記事 |
 
 en 版は `_en.md` suffix.
 
@@ -164,14 +164,14 @@ bounded modification (§E2) で min/max clip 必須.
 
 - ← 前: [QIITA #24-NN](link)
 - → 次: [QIITA #24-MM](link)
-- 全体: [本 series index](QIITA_24_00)
+- 全体: [本 series index](QIITA_#24_00)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 ```
 
 > ⚠ **Cross-link URL は Qiita 投稿後に確定する**. draft 段階では各記事の
-> 本文中で `#24-XX` / ``QIITA_24_XX_*` (内部参照)` の **仮表記** で参照し, 投稿後に
+> 本文中で `#24-XX` / ``QIITA_#24_XX_*` (内部参照)` の **仮表記** で参照し, 投稿後に
 > 個別記事 URL (`https://qiita.com/.../items/<hash>`) に **一括置換**.
-> mapping は [`QIITA_24_LINK_MAP.md`](QIITA_24_LINK_MAP.md) で唯一の
+> mapping は [`QIITA_#24_LINK_MAP.md`](QIITA_#24_LINK_MAP.md) で唯一の
 > source of truth として管理. 投稿時に **追々修正**する運用.
 
 ## 5. 想定読者
@@ -221,7 +221,7 @@ bounded modification (§E2) で min/max clip 必須.
 - ✅ 命名規約 + 共通フォーマット確定
 - ✅ **タイトル統一規約確定** (2026-05-22): `llive 完全解説 #24-XX — 「キャッチ」: <技術名称>`
 - ✅ memory `feedback_articles_taxonomy_split` で運用ルール化
-- ✅ **Cross-link URL mapping** を `QIITA_24_LINK_MAP.md` に集約 (投稿後 URL 確定→ 一括置換運用)
+- ✅ **Cross-link URL mapping** を `QIITA_#24_LINK_MAP.md` に集約 (投稿後 URL 確定→ 一括置換運用)
 - 🚧 各記事の full 10x volume (80-120k 字) 版は次セッション以降
 - 🚧 Qiita 投稿は user 判断待ち (週 2 本ペース)
 

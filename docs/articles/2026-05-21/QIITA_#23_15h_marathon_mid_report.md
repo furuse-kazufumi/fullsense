@@ -49,7 +49,7 @@ Qiita タグ 5 個上限. 本記事の主役順:
 
 | # | 着地 | 場所 |
 |---|---|---|
-| 1 | **Transformer 脱却 status 記事** (QIITA #22, 379 行 honest disclosure) | portal `docs/articles/2026-05-21/QIITA_22_*` |
+| 1 | **Transformer 脱却 status 記事** (QIITA #22, 379 行 honest disclosure) | portal `docs/articles/2026-05-21/QIITA_#22_*` |
 | 2 | **進化型 v0.B Phase 3.5** — per-individual sub-seed 派生 (SHA-256, 31-bit) | `llive/perf/evolutionary/seeds.py` + 8 test |
 | 3 | **進化型 v0.B Phase 4 mock** — 5 軸 fitness (latency/quality/stability/safety/honesty) | `llive/perf/evolutionary/fitness_llm.py` + 7 test |
 | 4 | **5 backend Genome PoC** — GA で backend 選択そのものを進化 | `test_evolutionary_backend_select.py` + 2 test, demo 追加 |
@@ -319,7 +319,7 @@ flowchart LR
 
 - portal `docs/PROGRESS.md` Phase 0.6 + 0.7 + 0.8
 - portal `docs/spec/lleval_v0_1_implementation_notes.md`
-- portal `docs/articles/2026-05-21/QIITA_22_transformer_escape_status.md`
+- portal `docs/articles/2026-05-21/QIITA_#22_transformer_escape_status.md`
 - llive `docs/requirements_v0.A_external_runtime_tracking.md`
 - llive `docs/requirements_v0.B_evolutionary_optimization.md`
 - llive `docs/experiments/evolutionary_v0_B_2026_05_21.md`
