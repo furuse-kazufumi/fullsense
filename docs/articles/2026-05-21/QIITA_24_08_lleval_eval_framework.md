@@ -152,7 +152,28 @@ report html+md / cli / ...) |
 - Anthropic Eval framework (2023).
 - 完全リストは v0.1.0 リリース時に references.bib に同梱予定.
 
+## 10. 2026-05-22 追記 — 5+1 因子分解 と Rust 化 5 パターン判定表の方法論的共通点
+
+lleval の honest disclosure **5+1 因子分解** (prompt diff / model id /
+backend swap / chars vs tokens / RTT / env drift) と, 同日着地した
+llive Rust 高速化の **5 パターン判定表** (#24-05 §13.3) は **構造的に同じ
+発想** で書かれている.
+
+| 共通する思想 | lleval 5+1 因子 | Rust 化 5 パターン |
+|---|---|---|
+| 「結果」を信じる前に **要素分解** | 速度差を 6 因子に分解 | 速度比を Python 経路の特性別 5 パターンに分類 |
+| **異常結果は内訳を疑う** | F1〜F5 + env を疑う | 単発 0.80x も x66.70 も「内訳」で説明できる |
+| 観察が外部化されている | analyzer で自動検出 | 判定表 + bench script で自動測定 |
+| **honest disclosure を一級概念に** | 数値に sticky note | judgment 表で **どこが境界線か** を明示 |
+
+両者とも「**「速い」「正しい」「正確」の単一仮定を捨てる**」という
+[[feedback_benchmark_honest_disclosure]] の延長線上にある. これは lleval が
+AI を見るだけでなく **AI / システム / アルゴリズム 全般** に展開できる
+発想 = 連載 #24-08 のメタ的意義.
+
+詳細: `docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`.
+
 ---
 
-> draft (10x volume 版は次セッション). 骨子 + 8 main section + honest
-> disclosure 5 件 (lleval 自身についても!).
+> draft (10x volume 版は次セッション). 骨子 + 10 main section + honest
+> disclosure 5 件 + 5+1 因子と Rust 化判定表の方法論的共通点 (2026-05-22 追記).
