@@ -1,5 +1,7 @@
 # llive 完全解説 #24-03 — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証
 
+![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/2026-05-21/assets/qiita_24_03_hero.svg)
+
 > **コンセプト hook**: TRIZ (発明問題解決理論) は普通「人が紙に書くアイデア
 > 出しテク」として知られる. llive は **TRIZ 40 原理を形式記号として組み込み**,
 > 構造 mutation の policy として走らせる. しかも mutation で生まれた新構造は
