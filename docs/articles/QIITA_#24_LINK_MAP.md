@@ -33,7 +33,7 @@ ignorePublish: true
 | #17 | QIITA_#17_human_ai_fusion_vision.md | <https://qiita.com/furuse-kazufumi/private/1e7af6bde0f9ffcbd913> | 2026-05-23 (限定共有) |
 | #18 | QIITA_#18_non_transformer_low_spec_pc.md | <https://qiita.com/furuse-kazufumi/items/aff262808a35cb7f7d3b> | 2026-05-23 (公開) |
 | #19 | QIITA_#19_general_gpu_less_ai_for_everyone.md | <https://qiita.com/furuse-kazufumi/items/cdeea496af01dd424a09> | 2026-05-23 (公開) |
-| #20 | QIITA_#20_one_session_full_stack_progress.md | _未投稿_ | — |
+| #20 | QIITA_#20_one_session_full_stack_progress.md | <https://qiita.com/furuse-kazufumi/private/3b49820306ea9e11666b> | 2026-05-23 (限定共有) |
 | #21 | QIITA_#21_three_day_marathon_2026_05_18_to_20.md | _未投稿_ | — |
 | #22 | QIITA_#22_transformer_escape_status.md | _未投稿_ | — |
 | #23 | QIITA_#23_15h_marathon_mid_report.md | _未投稿_ | — |
