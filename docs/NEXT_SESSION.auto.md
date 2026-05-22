@@ -10,16 +10,18 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-22 22:46:18
+- **生成時刻**: 2026-05-22 22:53:03
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+0a4cd50 docs(articles): LINK_MAP — record #14 Qiita URL + extend mapping for #14-#23 series
+e195f4e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-22 22:52)
 9fd953b docs(articles): Qiita post prep — POST_GUIDE.md + frontmatter skeleton script + preflight + 14 fm-inserted (long-form: more is better, no upper limit)
 eee2a44 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 a47f052 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
@@ -28,15 +30,12 @@ be19104 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 32383bc docs(articles): rename QIITA_NN_*.md to QIITA_#NN_*.md + update internal refs (#-encoded for local, %23 for URLs) — 20 files renamed, 16 files updated
 ea0d747 docs(articles): #24-00 — append HVC + cultural anchors + v0.F/G/H requirements landing (2026-05-22 session wrap)
 4ba07cc auto: QIITA_24_00_llive_tech_series_index.md 編集前 (2026-05-22 21:49)
-2d4ce66 docs(articles): harness vibe coding session wrap-up — common appendix + LinkedIn JP post with deep GitHub links
-3ca0a9a docs(articles): #24-08 hero — lleval 5+1 honest-disclosure radar animated SVG
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+(clean)
 ```
 
 
@@ -70,10 +69,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:46` `docs/SESSION_SUMMARY.md`
-- `22:42` `docs/NEXT_SESSION.auto.md`
+- `22:53` `docs/SESSION_SUMMARY.md`
+- `22:52` `docs/articles/QIITA_#24_LINK_MAP.md`
+- `22:46` `docs/NEXT_SESSION.auto.md`
 - `22:42` `docs/articles/QIITA_POST_GUIDE.md`
-- `22:40` `docs/articles/QIITA_#24_LINK_MAP.md`
 - `22:40` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
 - `22:40` `docs/articles/QIITA_#24_07_observability_governance.md`
 - `22:40` `docs/articles/QIITA_#24_06_llm_backend_non_transformer.md`

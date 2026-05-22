@@ -3,13 +3,15 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-05-22 22:46:17
+- **最終更新**: 2026-05-22 22:53:02
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+0a4cd50 docs(articles): LINK_MAP — record #14 Qiita URL + extend mapping for #14-#23 series
+e195f4e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-22 22:52)
 9fd953b docs(articles): Qiita post prep — POST_GUIDE.md + frontmatter skeleton script + preflight + 14 fm-inserted (long-form: more is better, no upper limit)
 eee2a44 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 a47f052 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
@@ -18,24 +20,21 @@ be19104 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 32383bc docs(articles): rename QIITA_NN_*.md to QIITA_#NN_*.md + update internal refs (#-encoded for local, %23 for URLs) — 20 files renamed, 16 files updated
 ea0d747 docs(articles): #24-00 — append HVC + cultural anchors + v0.F/G/H requirements landing (2026-05-22 session wrap)
 4ba07cc auto: QIITA_24_00_llive_tech_series_index.md 編集前 (2026-05-22 21:49)
-2d4ce66 docs(articles): harness vibe coding session wrap-up — common appendix + LinkedIn JP post with deep GitHub links
-3ca0a9a docs(articles): #24-08 hero — lleval 5+1 honest-disclosure radar animated SVG
 ```
 
 ## 現在の git status
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+(clean)
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-22:42 docs/NEXT_SESSION.auto.md
-22:42 docs/SESSION_SUMMARY.md
+22:52 docs/articles/QIITA_#24_LINK_MAP.md
+22:46 docs/SESSION_SUMMARY.md
+22:46 docs/NEXT_SESSION.auto.md
 22:42 docs/articles/QIITA_POST_GUIDE.md
-22:40 docs/articles/QIITA_#24_LINK_MAP.md
 22:40 docs/articles/QIITA_#24_08_lleval_eval_framework.md
 22:40 docs/articles/QIITA_#24_07_observability_governance.md
 22:40 docs/articles/QIITA_#24_06_llm_backend_non_transformer.md
