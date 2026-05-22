@@ -41,17 +41,29 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 
 ## 🧑 Operator actions queued — pick these up first
 
-### 0a. ★ lleval GitHub repo 作成 + 初回 push (2026-05-23 朝最優先)
+### 0a. ★ lleval + usv-pandas-bridge GitHub repo 作成 + 初回 push (2026-05-23 朝最優先)
 
-**現状**: lleval は D:/projects/lleval にローカル commit 済 (Agent E 着地 LE-01 honest disclosure 5+1 factor, commit `665bacf`, 88 PASS) だが GitHub repo 未作成. 2026-05-22 深夜に `gh repo create` 試行したが PAT scope 不足で失敗.
+**現状**: 2 つの新規 ローカル repo が公開待ち. 2026-05-22 深夜に `gh repo create` 試行したが PAT scope 不足で失敗.
+
+- **lleval** (D:/projects/lleval) — LE-01 honest disclosure 5+1 factor, commit `665bacf`, 88 PASS
+- **usv-pandas-bridge** (D:/projects/usv-pandas-bridge) — pandas DataFrame ↔ USV bridge, commit `95633e3` (root), 24 PASS
 
 **手順**:
 
 ```powershell
-gh auth refresh -s repo,delete_repo     # repo 操作 scope を追加
+# Step 1: PAT scope を追加
+gh auth refresh -s repo,delete_repo
+
+# Step 2: lleval (private 推奨, 後で公開判断)
 cd D:/projects/lleval
 gh repo create furuse-kazufumi/lleval --private --source=. --remote=origin `
   --description "lleval — LLM evaluation framework (honest disclosure 5+1 factor decomposition). Companion to llive."
+git push -u origin main
+
+# Step 3: usv-pandas-bridge (public 推奨 — usrs の補完で発信効果あり)
+cd D:/projects/usv-pandas-bridge
+gh repo create furuse-kazufumi/usv-pandas-bridge --public --source=. --remote=origin `
+  --description "pandas DataFrame ↔ USV (Unit-Separated Values) bridge. CSV breaks on cell newlines / emoji / CJK / Markdown — USV doesn't."
 git push -u origin main
 ```
 
