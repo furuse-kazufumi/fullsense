@@ -253,3 +253,12 @@ B-9 (`assume_normalized` + `GiftValue deque`) は **Python のままで +28%**.
 > 本 draft は骨子 + 9 main section + 数字裏付け + honest disclosure 2 件
 > (新規: 小脳/大脳の最適化手段が直交する).
 > 連載 #24 シリーズ index (`QIITA_#24_00_llive_tech_series_index` (内部参照)) と整合.
+
+---
+
+## Series Navigation
+
+- ← 前: [llive 完全解説 (3) 「矛盾は計算できる」](https://qiita.com/furuse-kazufumi/private/fa0890f136636d495ea6)
+- → 次: [llive 完全解説 (5) 「集団が学ぶ AI」](https://qiita.com/furuse-kazufumi/private/07b686ea311e06027f94)
+- 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
+- repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)

@@ -357,3 +357,12 @@ std::simd は nightly のみで stable 不可 → 入れればさらに 2-3x. RU
 >
 > 連載 #24 シリーズの中核記事として連番 02 / 03 / 04 / 05 / 06 / 07 / 08
 > 全てと交差.
+
+---
+
+## Series Navigation
+
+- ← 前: [llive 完全解説 (4) 「収束する脳」](https://qiita.com/furuse-kazufumi/private/e5093e4816b25c1bd4d0)
+- → 次: [llive 完全解説 (6) 「Transformer の外」](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
+- repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)

@@ -179,3 +179,12 @@ self-reflection は metrics → 該当矛盾 → 39 軸 mapping → 原理 looku
 
 > draft (10x volume フル版は次セッション). 骨子 + 7 main section + 数字裏付け
 > + honest disclosure 3 件 + TRIZ 方法論の Rust 化判定への転用 (2026-05-22 追記).
+
+---
+
+## Series Navigation
+
+- ← 前: [llive 完全解説 (2) 「10 軸で考える AI」](https://qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511)
+- → 次: [llive 完全解説 (4) 「収束する脳」](https://qiita.com/furuse-kazufumi/private/e5093e4816b25c1bd4d0)
+- 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
+- repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)

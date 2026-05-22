@@ -161,3 +161,12 @@ constraints に明記されているので **繰り返し書く**:
 
 > draft (10x volume 版は次セッション). 骨子 + 7 main section + honest
 > disclosure 6 件 (constraints honest-disclosure-required 準拠).
+
+---
+
+## Series Navigation
+
+- ← 前: [llive 完全解説 (5) 「集団が学ぶ AI」](https://qiita.com/furuse-kazufumi/private/07b686ea311e06027f94)
+- → 次: [llive 完全解説 (7) 「審査つき AI」](https://qiita.com/furuse-kazufumi/private/c5f2077a3399d3fc9b26)
+- 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
+- repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)

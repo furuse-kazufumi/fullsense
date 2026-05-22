@@ -247,3 +247,12 @@ governance 側で重要なのは:
 > draft (10x volume 版は次セッション). 骨子 + 9 main section + Mermaid +
 > honest disclosure 4 件 (新規: numpy 小 N でも遅い + governance latency
 > 100x 短縮).
+
+---
+
+## Series Navigation
+
+- ← 前: [llive 完全解説 (6) 「Transformer の外」](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- → 次: [llive 完全解説 (8) 「眼鏡を作る」](https://qiita.com/furuse-kazufumi/private/e49b7ab9027d93594402)
+- 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
+- repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)

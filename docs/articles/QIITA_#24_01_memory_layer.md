@@ -395,8 +395,11 @@ Welford (1962) は 60 年前. それでも今の LLM 周辺アーキテクチャ
 - `feedback_benchmark_honest_disclosure` (異常良結果は内訳を疑う)
 - `project_llm_wiki_pattern` (Karpathy LLM Wiki の影響)
 
-## 10. Series cross-link
+---
 
-- → 次: [QIITA #24-02 思考因子 + COG-MESH](QIITA_#24_02_thought_factors_cog_mesh.md) (次回)
-- 全体: [本 series index](QIITA_#24_00_llive_tech_series_index.md)
+## Series Navigation
+
+- ← 前: [llive 完全解説 series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
+- → 次: [llive 完全解説 (2) 「10 軸で考える AI」](https://qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511)
+- 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
