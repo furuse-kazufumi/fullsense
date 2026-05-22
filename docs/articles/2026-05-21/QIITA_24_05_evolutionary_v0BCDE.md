@@ -296,13 +296,39 @@ build tools 不在 + mingw が MSVC Python と incompatible** で build 不可.
 **build chain が確立できるか**が必須条件. source は `scratch/cython_collusion/`
 に保存し Linux/WSL で再試行できる形に.
 
-### 13.5 次に来るもの (2026-05-22 時点で計画済)
+### 13.5 RUST-17b 追記 (2026-05-22 同日): rayon 並列 + quickselect で全 A 5x clear
+
+RUST-17 baseline は archive 大 (A=200/1000) で gate FAIL だったが, **同日中に
+RUST-17b として 2 手段で再実装**:
+
+1. **rayon par_iter** で N=64 集団ループを 8-core 並列化 + `py.allow_threads`
+   で GIL release
+2. **`Vec::select_nth_unstable_by`** (Hoare quickselect, O(A) avg) で top-k
+   partial sort — O(A log A) full sort を置換
+
+結果:
+
+| archive | RUST-17 (naive) | **RUST-17b** | 改善率 |
+|---:|---:|---:|---:|
+| A=50 | x9.55 | **x12.83** | +34% |
+| A=200 | x3.76 (FAIL) | **x8.71 (PASS)** | **+132%** |
+| A=1000 | x1.72 (FAIL) | **x6.41 (PASS)** | **+273%** |
+| avg | x5.01 | **x9.32** | **+86%** |
+
+判定表 (D) 「numpy 中規模 batch」を「**境界線上 → 並列化で挽回可能**」へ
+update. 「naive 二重ループは負ける」だけでなく「**rayon + algorithmic 改善で
+圧勝に転じる**」が示された.
+
+std::simd は nightly のみで stable 不可 → 入れればさらに 2-3x. RUST-17c 候補.
+
+### 13.6 次に来るもの (2026-05-22 時点で計画済)
 
 - **PyBind11 + C/C++ ctypes** 経路の 3 kernel scratch 比較 (queue 投入済).
-- **RUST-17b** — rayon 並列 + std::simd + partial sort (quickselect) で
-  A=1000 でも 5x gate clear (queue 投入済).
+- **RUST-17c** — std::simd (Rust nightly に切替) で SIMD 4-lane 化.
 - **月次 re-measure** — env drift / numpy minor up / Rust nightly 等で
   結果が動くため周期実行 (queue 投入済).
+- **callers 切替** — PersonaOverlapPenalty.apply / NoveltyScorer.novelty_batch /
+  CoevolutionGovernance を rust_ext 経路に切替える PR.
 
 ---
 
