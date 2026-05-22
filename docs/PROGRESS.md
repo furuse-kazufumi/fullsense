@@ -10,6 +10,24 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-23 (Phase 0.18 — cross-project integration audit + audit-deps Phase 2 wiring)
+
+10h silent 自律セッション (ユーザー就寝後) で:
+
+- 15 プロジェクト baseline → 5 プロジェクト全 test green (llive 2492 / fullsense 10
+  / llove / llmesh / lleval 88)
+- **D ドライブ 5.52 GB 解放**: `D:/projects/raptor` (5.5GB, move スクリプト中断
+  の robocopy 残骸) + `C:/mcp-3d.zip` 系 (17MB)
+- **llove F25 audit-deps Phase 2 wiring** 実装: `/api/v1/audit/deps` を
+  `llmesh.cli.deps_audit` proxy 化 + Phase-1 fallback (commit `d9b0a44`)
+- **memory drift 1 件訂正**: `project_mcp_spatial_asset.md` を mcp-3d 改名 +
+  llmesh 統合済 + 論文題材残置のユーザー言明を反映
+- 次セッション queue 5 件追加 (`0c` offline-check Phase 2 / `0d` llive 333
+  unpushed 整理 / `0e` llmesh test count 確定 / `0f` browser-use C: hard-code
+  修正 / `0g` C: 残置プロジェクトの処遇)
+
+詳細: [`articles/2026-05-23/INTEGRATION_AUDIT`]({{ '/articles/2026-05-23/INTEGRATION_AUDIT' | relative_url }})
+
 ## 2026-05-21 (Phase 0.17 — Rust Phase 2 完了 + 5x gate PASS + lint 0)
 
 Stop hook feedback (3 度目) を受けて Release-ready check を全件着地:
