@@ -1,3 +1,19 @@
+---
+title: Will Caster と Andrew NDR114 が目指したもの — llive のビジョン論
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # Will Caster と Andrew NDR114 が目指したもの — llive のビジョン論
 
 **1 行 hook**:

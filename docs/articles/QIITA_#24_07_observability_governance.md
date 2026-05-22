@@ -1,3 +1,19 @@
+---
+title: llive 完全解説 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # llive 完全解説 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
 
 ![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_hero.svg)

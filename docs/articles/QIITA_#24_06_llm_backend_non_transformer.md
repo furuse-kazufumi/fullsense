@@ -1,3 +1,19 @@
+---
+title: llive 完全解説 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # llive 完全解説 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ
 
 ![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_hero.svg)

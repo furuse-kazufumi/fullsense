@@ -1,3 +1,19 @@
+---
+title: HTML で見えないのに、機械では読める。— llive が採用した「不可視アノテーションチャネル」設計
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # HTML で見えないのに、機械では読める。— llive が採用した「不可視アノテーションチャネル」設計
 
 **1 行 hook**:

@@ -1,3 +1,19 @@
+---
+title: llive 完全解説 #24-08 — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # llive 完全解説 #24-08 — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する
 
 ![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_hero.svg)

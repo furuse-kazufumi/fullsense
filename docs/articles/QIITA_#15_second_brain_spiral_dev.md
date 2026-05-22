@@ -1,3 +1,19 @@
+---
+title: 30 年のソフトウェア開発経験 + Perplexity 要約 + Claude Code + TRIZ + 5 万件の論文 RAG = 「第二の脳」
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # 30 年のソフトウェア開発経験 + Perplexity 要約 + Claude Code + TRIZ + 5 万件の論文 RAG = 「第二の脳」
 
 **1 行 hook**:

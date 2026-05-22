@@ -1,3 +1,19 @@
+---
+title: GPU の無い、私のあの古いノート PC でも動く AI を、本気で作っている話
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - AI
+  - ローカルAI
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # GPU の無い、私のあの古いノート PC でも動く AI を、本気で作っている話
 
 > **コンセプト hook**:

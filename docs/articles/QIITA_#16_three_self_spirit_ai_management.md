@@ -1,3 +1,19 @@
+---
+title: 「三自の精神」を AI に課す — 圧倒的成果を出し続けるマネジャー流の AI 運用論
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # 「三自の精神」を AI に課す — 圧倒的成果を出し続けるマネジャー流の AI 運用論
 
 **1 行 hook**:

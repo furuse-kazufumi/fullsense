@@ -1,3 +1,19 @@
+---
+title: llive 完全解説 #24-04 — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # llive 完全解説 #24-04 — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path
 
 ![hero — UCB1 bandit arm selection and score curve](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_04_hero.svg)

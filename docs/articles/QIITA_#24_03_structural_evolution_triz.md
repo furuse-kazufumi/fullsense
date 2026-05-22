@@ -1,3 +1,19 @@
+---
+title: llive 完全解説 #24-03 — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG
+  - TODO_TAG
+private: false
+updated_at: '2026-05-22'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
+---
+
 # llive 完全解説 #24-03 — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証
 
 ![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_hero.svg)
