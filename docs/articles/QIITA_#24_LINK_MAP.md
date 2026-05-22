@@ -40,7 +40,7 @@ ignorePublish: true
 | #24-00 | QIITA_#24_00_llive_tech_series_index.md | <https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c> | 2026-05-23 (公開) |
 | #24-01 | QIITA_#24_01_memory_layer.md | <https://qiita.com/furuse-kazufumi/items/a5ebb3992e4c28862f47> | 2026-05-23 (公開) |
 | #24-02 | QIITA_#24_02_thought_factors_cog_mesh.md | <https://qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511> | 2026-05-23 (限定共有) |
-| #24-03 | QIITA_#24_03_structural_evolution_triz.md | _未投稿_ | — |
+| #24-03 | QIITA_#24_03_structural_evolution_triz.md | <https://qiita.com/furuse-kazufumi/private/fa0890f136636d495ea6> | 2026-05-23 (限定共有) |
 | #24-04 | QIITA_#24_04_convergent_optimization_b_series.md | _未投稿_ | — |
 | #24-05 | QIITA_#24_05_evolutionary_v0BCDE.md | _未投稿_ | — |
 | #24-06 | QIITA_#24_06_llm_backend_non_transformer.md | _未投稿_ | — |
