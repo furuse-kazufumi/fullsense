@@ -1,8 +1,17 @@
 ---
-layout: default
-title: "QIITA #20 — 1 セッションで 5409 テスト緑 + research hub 6 本開設"
-parent: "Articles — 2026-05-20"
-nav_order: 1
+title: 1 セッションで 5409 テスト緑 + research hub 6 本開設 — FullSense の一日
+tags:
+  - FullSense
+  - llive
+  - ClaudeCode
+  - 自律エージェント
+  - HonestDisclosure
+private: false
+updated_at: '2026-05-20'
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: true
 ---
 
 # 1 セッションで 5409 テスト緑 + research hub 6 本開設 — FullSense の一日
