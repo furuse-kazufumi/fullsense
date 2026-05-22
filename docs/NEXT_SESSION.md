@@ -423,3 +423,22 @@ cross-project 連携追跡 + D ドライブ集約整備:
 - **MEMORY.md 整理**: 39KB → 24KB に圧縮 (164 entries を 140 byte/line に短縮)、
   warning (limit 24.4KB) 解消
 
+
+### Qiita 連載 #14-#24 全 19 本完走 (2026-05-23)
+
+[[feedback_qiita_limited_share_unlimited]] (限定共有は 24h 制限対象外) の
+発見を契機に、ユーザー手動投稿 + Claude が即時 LINK_MAP 更新 / qiita_url_sync /
+atomic commit する pair-programming で **連続 19 本投稿完走** (公開 9 / 限定共有 10).
+
+詳細は [[project_qiita_post_resume_2026_05_22]] (memory) で完走済テーブル管理.
+
+**0b → CLOSED** (Qiita 連載 #16-#23 + #24-00..08 投稿は完了).
+
+新規残作業:
+
+- **`0h` (新規)** Qiita 限定共有 10 件の公開昇格スケジュール (連載順 (0)→(1)
+  →…→(8) を守って 1 日 N 件ずつ `private: false` に編集)
+- **`0i` (新規)** Qiita Web 上の #24-00 / #24-01 タイトルを `#24-NN` →
+  `(0)` / `(1)` に手動修正 (ローカル draft は commit e359bd5 で統一済)
+- **`0j` (新規)** LinkedIn 既存告知記事の GitHub blob link を Qiita 公開 URL に差替
+
