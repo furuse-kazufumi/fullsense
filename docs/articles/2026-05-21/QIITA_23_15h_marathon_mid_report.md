@@ -54,7 +54,7 @@ Qiita タグ 5 個上限. 本記事の主役順:
 | 3 | **進化型 v0.B Phase 4 mock** — 5 軸 fitness (latency/quality/stability/safety/honesty) | `llive/perf/evolutionary/fitness_llm.py` + 7 test |
 | 4 | **5 backend Genome PoC** — GA で backend 選択そのものを進化 | `test_evolutionary_backend_select.py` + 2 test, demo 追加 |
 | 5 | **low_spec bench mock 実走** — bench 経路の生死 + JSON shape 確定 | `demo_low_spec_mock.py` + `low_spec_mock_2026_05_21.md` |
-| 6 | **lleval skeleton 新 repo** — Apache-2.0, pyproject + src/ + examples 3 件 | `D:/projects/lleval/` (20 test 緑) |
+| 6 | **lleval skeleton 新 repo** — Apache-2.0, pyproject + src/ + examples 3 件 | `lleval/` リポ (20 test 緑) |
 | 7 | **llive PR ドラフト changelog** — 3 PR に分ける案を推奨 | `llive/docs/pr_drafts/optimize_core_2026_05_20_changelog.md` |
 
 ---
