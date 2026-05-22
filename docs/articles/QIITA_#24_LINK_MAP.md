@@ -31,7 +31,7 @@ ignorePublish: true
 | #15 | QIITA_#15_second_brain_spiral_dev.md | <https://qiita.com/furuse-kazufumi/items/ab3839f8b5b3ea91311e> | 2026-05-22 |
 | #16 | QIITA_#16_three_self_spirit_ai_management.md | <https://qiita.com/furuse-kazufumi/private/4d94bde146b83b31d24c> | 2026-05-23 (限定共有) |
 | #17 | QIITA_#17_human_ai_fusion_vision.md | <https://qiita.com/furuse-kazufumi/private/1e7af6bde0f9ffcbd913> | 2026-05-23 (限定共有) |
-| #18 | QIITA_#18_non_transformer_low_spec_pc.md | _未投稿_ | — |
+| #18 | QIITA_#18_non_transformer_low_spec_pc.md | <https://qiita.com/furuse-kazufumi/items/aff262808a35cb7f7d3b> | 2026-05-23 (公開) |
 | #19 | QIITA_#19_general_gpu_less_ai_for_everyone.md | _未投稿_ | — |
 | #20 | QIITA_#20_one_session_full_stack_progress.md | _未投稿_ | — |
 | #21 | QIITA_#21_three_day_marathon_2026_05_18_to_20.md | _未投稿_ | — |
