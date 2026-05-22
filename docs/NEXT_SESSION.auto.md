@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-22 08:10:34
+- **生成時刻**: 2026-05-22 13:06:35
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,22 +20,23 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+cb978b0 docs(articles): QIITA #24-00/03/05/08 に 2026-05-22 最新情報追記
+e757994 auto: QIITA_24_03_structural_evolution_triz.md 編集前 (2026-05-22 12:48)
+7e52b51 auto: QIITA_24_08_lleval_eval_framework.md 編集前 (2026-05-22 12:48)
+e2e05cd auto: QIITA_24_00_llive_tech_series_index.md 編集前 (2026-05-22 12:47)
+96f35f9 auto: QIITA_24_05_evolutionary_v0BCDE.md 編集前 (2026-05-22 12:46)
 032703c docs(articles): QIITA #24 series タイトル統一規約 (2026-05-22 確定)
 de32854 auto: QIITA_24_00_llive_tech_series_index.md 編集前 (2026-05-22 08:09)
 d7d8d8e auto: QIITA_24_LINK_MAP.md 編集前 (2026-05-22 08:09)
 a1b6b1e auto: QIITA_24_08_lleval_eval_framework.md 編集前 (2026-05-22 08:09)
 8170c09 auto: QIITA_24_07_observability_governance.md 編集前 (2026-05-22 08:08)
-fce5651 auto: QIITA_24_06_llm_backend_non_transformer.md 編集前 (2026-05-22 08:08)
-872ae5b auto: QIITA_24_05_evolutionary_v0BCDE.md 編集前 (2026-05-22 08:08)
-36e822c auto: QIITA_24_04_convergent_optimization_b_series.md 編集前 (2026-05-22 08:08)
-6d9eb51 auto: QIITA_24_03_structural_evolution_triz.md 編集前 (2026-05-22 08:08)
-cb8cda5 auto: QIITA_24_02_thought_factors_cog_mesh.md 編集前 (2026-05-22 08:08)
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -43,8 +44,8 @@ cb8cda5 auto: QIITA_24_02_thought_factors_cog_mesh.md 編集前 (2026-05-22 08:0
 
 | project | 最新 commit | 直近 commit msg | tests/ 直近 mtime |
 |---|---|---|---|
-| llive | `4da571e 2026-05-22` | docs(perf): perf_comparison に RUST-17b 結果追記 + 判定表 (D) を更新 | 2026-05-22 07:43 |
-| llove | `4396f64 2026-05-20` | fix(tests): environment-dependent image-tool detection を抑止 | 2026-05-20 07:07 |
+| llive | `5436ce9 2026-05-22` | feat(llm): Phase C-1.4 Stage 1 (Gemini #2) — prefix_embeddings skeleton | 2026-05-22 07:43 |
+| llove | `5da4e30 2026-05-22` | feat(export): F15 SVG export skeleton — thought_factor_ring_svg (animated SVG, SMIL) | 2026-05-20 07:07 |
 | llmesh | `21edb8d 2026-05-20` | test(conftest): hypothesis profile 'local-flaky-safe' で deadline=None を default に | 2026-05-20 07:23 |
 | lldesign | `1014ce3 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:52 |
 | lltrade | `d20876c 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:56 |
@@ -69,18 +70,12 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `08:10` `docs/SESSION_SUMMARY.md`
-- `08:09` `docs/articles/2026-05-21/QIITA_24_00_llive_tech_series_index.md`
-- `08:09` `docs/articles/2026-05-21/QIITA_24_LINK_MAP.md`
-- `08:09` `docs/articles/2026-05-21/QIITA_24_08_lleval_eval_framework.md`
-- `08:08` `docs/articles/2026-05-21/QIITA_24_07_observability_governance.md`
-- `08:08` `docs/articles/2026-05-21/QIITA_24_06_llm_backend_non_transformer.md`
-- `08:08` `docs/articles/2026-05-21/QIITA_24_05_evolutionary_v0BCDE.md`
-- `08:08` `docs/articles/2026-05-21/QIITA_24_04_convergent_optimization_b_series.md`
-- `08:08` `docs/articles/2026-05-21/QIITA_24_03_structural_evolution_triz.md`
-- `08:08` `docs/articles/2026-05-21/QIITA_24_02_thought_factors_cog_mesh.md`
-- `08:07` `docs/articles/2026-05-21/QIITA_24_01_memory_layer.md`
-- `08:01` `docs/NEXT_SESSION.auto.md`
+- `13:06` `docs/SESSION_SUMMARY.md`
+- `12:56` `docs/NEXT_SESSION.auto.md`
+- `12:48` `docs/articles/2026-05-21/QIITA_24_03_structural_evolution_triz.md`
+- `12:48` `docs/articles/2026-05-21/QIITA_24_08_lleval_eval_framework.md`
+- `12:47` `docs/articles/2026-05-21/QIITA_24_00_llive_tech_series_index.md`
+- `12:46` `docs/articles/2026-05-21/QIITA_24_05_evolutionary_v0BCDE.md`
 
 
 ## Cross-references
