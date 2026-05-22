@@ -43,7 +43,7 @@ ignorePublish: true
 | #24-03 | QIITA_#24_03_structural_evolution_triz.md | <https://qiita.com/furuse-kazufumi/private/fa0890f136636d495ea6> | 2026-05-23 (限定共有) |
 | #24-04 | QIITA_#24_04_convergent_optimization_b_series.md | <https://qiita.com/furuse-kazufumi/private/e5093e4816b25c1bd4d0> | 2026-05-23 (限定共有) |
 | #24-05 | QIITA_#24_05_evolutionary_v0BCDE.md | <https://qiita.com/furuse-kazufumi/private/07b686ea311e06027f94> | 2026-05-23 (限定共有) |
-| #24-06 | QIITA_#24_06_llm_backend_non_transformer.md | _未投稿_ | — |
+| #24-06 | QIITA_#24_06_llm_backend_non_transformer.md | <https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8> | 2026-05-23 (限定共有) |
 | #24-07 | QIITA_#24_07_observability_governance.md | _未投稿_ | — |
 | #24-08 | QIITA_#24_08_lleval_eval_framework.md | _未投稿_ | — |
 
