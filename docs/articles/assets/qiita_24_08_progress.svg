@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 86" width="1000" height="86" role="img" aria-label="連載進捗 8/8 — 現在: lleval">
+  <title>連載進捗 8/8 — 現在: lleval</title>
+  <rect width="1000" height="86" fill="#0f172a"/>
+  <line x1="60" y1="40" x2="940" y2="40" stroke="#22c55e" stroke-width="2"/>
+  
+
+    <g opacity="1">
+      <circle cx="60" cy="40" r="10" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      
+      <text x="60" y="14" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="500">0</text>
+      <text x="60" y="72" font-size="9" fill="#22c55e" text-anchor="middle">index</text>
+    </g>
+    <g opacity="1">
+      <circle cx="170" cy="40" r="10" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      
+      <text x="170" y="14" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="500">1</text>
+      <text x="170" y="72" font-size="9" fill="#22c55e" text-anchor="middle">memory</text>
+    </g>
+    <g opacity="1">
+      <circle cx="280" cy="40" r="10" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      
+      <text x="280" y="14" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="500">2</text>
+      <text x="280" y="72" font-size="9" fill="#22c55e" text-anchor="middle">思考因子</text>
+    </g>
+    <g opacity="1">
+      <circle cx="390" cy="40" r="10" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      
+      <text x="390" y="14" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="500">3</text>
+      <text x="390" y="72" font-size="9" fill="#22c55e" text-anchor="middle">TRIZ</text>
+    </g>
+    <g opacity="1">
+      <circle cx="500" cy="40" r="10" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      
+      <text x="500" y="14" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="500">4</text>
+      <text x="500" y="72" font-size="9" fill="#22c55e" text-anchor="middle">B-series</text>
+    </g>
+    <g opacity="1">
+      <circle cx="610" cy="40" r="10" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      
+      <text x="610" y="14" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="500">5</text>
+      <text x="610" y="72" font-size="9" fill="#22c55e" text-anchor="middle">v0.E</text>
+    </g>
+    <g opacity="1">
+      <circle cx="720" cy="40" r="10" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      
+      <text x="720" y="14" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="500">6</text>
+      <text x="720" y="72" font-size="9" fill="#22c55e" text-anchor="middle">backend</text>
+    </g>
+    <g opacity="1">
+      <circle cx="830" cy="40" r="10" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+      
+      <text x="830" y="14" font-size="10" fill="#22c55e" text-anchor="middle" font-weight="500">7</text>
+      <text x="830" y="72" font-size="9" fill="#22c55e" text-anchor="middle">audit</text>
+    </g>
+    <g opacity="1">
+      <circle cx="940" cy="40" r="10" fill="#22d3ee" stroke="#06b6d4" stroke-width="2"/>
+      <circle cx="940" cy="40" r="14" fill="none" stroke="#22d3ee" stroke-width="1.5"><animate attributeName="r" values="14;22;14" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="1.6s" repeatCount="indefinite"/></circle>
+      <text x="940" y="14" font-size="10" fill="#22d3ee" text-anchor="middle" font-weight="700">8</text>
+      <text x="940" y="72" font-size="9" fill="#22d3ee" text-anchor="middle">lleval</text>
+    </g>
+</svg>

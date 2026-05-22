@@ -18,6 +18,9 @@ ignorePublish: true
 
 ![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_hero.svg)
 
+<!-- progress-svg-placed -->
+![連載進捗 (7/8) — 現在: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_progress.svg)
+
 > **コンセプト hook**: 多くの LLM agent は「結果のログ」しか残さない. しかし
 > AI が **自分自身を進化** させはじめると, 「**いつ何を判断して何を変えたか**」
 > の audit trail が無いと, **後でデバッグ不能** になる. llive はこれを

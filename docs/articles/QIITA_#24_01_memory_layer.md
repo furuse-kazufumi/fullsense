@@ -17,6 +17,9 @@ ignorePublish: true
 
 ![hero — 4 層メモリ + Bayesian surprise gate](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_01_hero.svg)
 
+<!-- progress-svg-placed -->
+![連載進捗 (1/8) — 現在: memory](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_01_progress.svg)
+
 > 投稿可否は user 判断. これは agent 自律ドラフト. memory
 > `feedback_articles_taxonomy_split` 準拠の **series 第 1 記事**.
 

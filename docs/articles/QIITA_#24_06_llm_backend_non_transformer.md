@@ -18,6 +18,9 @@ ignorePublish: true
 
 ![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_hero.svg)
 
+<!-- progress-svg-placed -->
+![連載進捗 (6/8) — 現在: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_progress.svg)
+
 > **コンセプト hook**: LLM = Transformer, は **2024 までの話**. 2025-2026 で
 > State Space Model (Mamba / Jamba) と RWKV (時系列 RNN を再発明) が **長
 > context で transformer に追いつき**, Diffusion text model が **token 順序

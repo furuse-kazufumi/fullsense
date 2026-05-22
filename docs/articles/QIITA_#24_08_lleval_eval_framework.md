@@ -18,6 +18,9 @@ ignorePublish: true
 
 ![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_hero.svg)
 
+<!-- progress-svg-placed -->
+![連載進捗 (8/8) — 現在: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_progress.svg)
+
 > **コンセプト hook**: AI を作るだけでは足りない. **AI を見る眼鏡** が要る.
 > lleval は llive と並走する **evaluation framework** で, 「LLM が異常に
 > 良い結果を出したら必ず内訳を疑う」という `feedback_benchmark_honest_disclosure` (内部参照)

@@ -18,6 +18,9 @@ ignorePublish: true
 
 ![hero — 10 thought factors orbit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero.svg)
 
+<!-- progress-svg-placed -->
+![連載進捗 (2/8) — 現在: 思考因子](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_progress.svg)
+
 > **コンセプト hook**: 普通 AI agent は「思考」を 1 種類しか持たない. llive
 > は **10 種類の思考を同時に走らせ**, それを互いに評価させ, **生き残った思考だけ
 > を集団へ取り込む**. 10 種は「構造化」「再構成」「閉ループ」「自己拡張」

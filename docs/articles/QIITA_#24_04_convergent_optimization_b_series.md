@@ -18,6 +18,9 @@ ignorePublish: true
 
 ![hero — UCB1 bandit arm selection and score curve](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_04_hero.svg)
 
+<!-- progress-svg-placed -->
+![連載進捗 (4/8) — 現在: B-series](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_04_progress.svg)
+
 > **コンセプト hook**: 進化系 (GA / Genetic Algorithm) は世代を回して **探索**
 > する. 一方 llive の SynapticSelector は **収束** — 確率的選択を 1 か所に
 > 落とし込むエンジン. この 2 つを「同じ脳」に同居させると, **シナプス単位の

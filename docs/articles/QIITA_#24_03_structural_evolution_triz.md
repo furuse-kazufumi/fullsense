@@ -18,6 +18,9 @@ ignorePublish: true
 
 ![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_hero.svg)
 
+<!-- progress-svg-placed -->
+![連載進捗 (3/8) — 現在: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_progress.svg)
+
 > **コンセプト hook**: TRIZ (発明問題解決理論) は普通「人が紙に書くアイデア
 > 出しテク」として知られる. llive は **TRIZ 40 原理を形式記号として組み込み**,
 > 構造 mutation の policy として走らせる. しかも mutation で生まれた新構造は

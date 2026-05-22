@@ -1,5 +1,6 @@
 ---
 title: llive 完全解説 (0) — series index: 大分類 8 記事 + 全体図
+hero_svg: 'https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_00_hero.svg'
 tags:
   - FullSense
   - llive
@@ -7,7 +8,7 @@ tags:
   - アルゴリズム
   - SoftwareArchitecture
 private: false
-updated_at: '2026-05-21'
+updated_at: '2026-05-23'
 id: null
 organization_url_name: null
 slide: false
@@ -18,6 +19,11 @@ ignorePublish: true
 Qiita タグ 5 個 (FullSense / llive / 解説 / アルゴリズム / SoftwareArchitecture).
 本 index は series の navigator. 各大分類は個別記事 (QIITA_#24_01〜08) に分割.
 -->
+
+![hero — llive 完全解説 9 本連載 (認知/最適化/実行/横断 4 層 × 8 章 animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_00_hero.svg)
+
+<!-- progress-svg-placed -->
+![連載進捗 (0/8) — 現在: index](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_00_progress.svg)
 
 > 投稿可否は user 判断. これは agent 自律ドラフト. memory
 > `feedback_articles_taxonomy_split` 準拠の **大/中/小分類** series 構成.
