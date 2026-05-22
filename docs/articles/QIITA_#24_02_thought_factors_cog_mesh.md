@@ -1,5 +1,5 @@
 ---
-title: llive 完全解説 #24-02 — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞
+title: llive 完全解説 (2) — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞
 tags:
   - FullSense
   - llive
@@ -14,7 +14,7 @@ slide: false
 ignorePublish: true
 ---
 
-# llive 完全解説 #24-02 — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞
+# llive 完全解説 (2) — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞
 
 ![hero — 10 thought factors orbit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero.svg)
 

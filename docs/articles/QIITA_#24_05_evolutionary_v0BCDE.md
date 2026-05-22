@@ -1,5 +1,5 @@
 ---
-title: llive 完全解説 #24-05 — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
+title: llive 完全解説 (5) — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
 tags:
   - FullSense
   - llive
@@ -14,7 +14,7 @@ slide: false
 ignorePublish: true
 ---
 
-# llive 完全解説 #24-05 — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
+# llive 完全解説 (5) — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
 
 ![hero — N=64 population fitness evolution across generations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_hero.svg)
 

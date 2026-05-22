@@ -1,5 +1,5 @@
 ---
-title: llive 完全解説 #24-00 — series index: 大分類 8 記事 + 全体図
+title: llive 完全解説 (0) — series index: 大分類 8 記事 + 全体図
 tags:
   - FullSense
   - llive
