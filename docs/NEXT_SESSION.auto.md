@@ -10,16 +10,18 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-22 22:58:51
+- **生成時刻**: 2026-05-22 23:07:15
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+6aa985e docs(qiita): post #14/#15 logged + qiita_url_sync.py + NEXT_SESSION §0 reminder for #16 resume
+0a2611e auto: NEXT_SESSION.md 編集前 (2026-05-22 23:05)
 16cdcfd docs(articles): LINK_MAP — record #15 Qiita URL
 a19790e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-22 22:58)
 0a4cd50 docs(articles): LINK_MAP — record #14 Qiita URL + extend mapping for #14-#23 series
@@ -28,8 +30,6 @@ e195f4e auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-22 22:52)
 eee2a44 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 a47f052 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 be19104 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
-6878cb7 docs(articles): flatten QIITA #14-#24 series to docs/articles/ root + move assets/ + update hero SVG raw URL paths
-32383bc docs(articles): rename QIITA_NN_*.md to QIITA_#NN_*.md + update internal refs (#-encoded for local, %23 for URLs) — 20 files renamed, 16 files updated
 ```
 
 ### git status (porcelain)
@@ -52,6 +52,7 @@ be19104 auto: QIITA_POST_GUIDE.md 編集前 (2026-05-22 22:41)
 
 ## 3. 未消化 operator action (NEXT_SESSION.md 由来)
 
+- [ ] 0. ★ Qiita 連載 #16 から投稿再開 (2026-05-23 以降, Qiita 投稿数制限解除待ち)
 - [ ] 1. Credential restoration — 3 cloud LLMs (継続)
 - [ ] 2. asciinema 録画 — Cognitive Mesh 統合 demo (9 セクション拡張版)
 - [ ] 3. PAT rotation (継続)
@@ -69,9 +70,11 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:58` `docs/SESSION_SUMMARY.md`
+- `23:07` `docs/SESSION_SUMMARY.md`
+- `23:05` `docs/NEXT_SESSION.md`
+- `23:04` `scripts/qiita_url_sync.py`
+- `22:58` `docs/NEXT_SESSION.auto.md`
 - `22:58` `docs/articles/QIITA_#24_LINK_MAP.md`
-- `22:53` `docs/NEXT_SESSION.auto.md`
 - `22:42` `docs/articles/QIITA_POST_GUIDE.md`
 - `22:40` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
 - `22:40` `docs/articles/QIITA_#24_07_observability_governance.md`
@@ -87,8 +90,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `22:40` `docs/articles/QIITA_#15_second_brain_spiral_dev.md`
 - `22:40` `docs/articles/QIITA_#14_invisible_annotation_channel.md`
 - `22:40` `scripts/qiita_frontmatter_skeleton.py`
-- `22:38` `scripts/qiita_preflight.py`
-- `22:35` `docs/articles/2026-05-22/LinkedIn_2026-05-22_harness_vibe_session.md`
 
 
 ## Cross-references
