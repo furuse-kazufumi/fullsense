@@ -41,6 +41,30 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 
 ## 🧑 Operator actions queued — pick these up first
 
+### 0. ★ Qiita 連載 #16 から投稿再開 (2026-05-23 以降, Qiita 投稿数制限解除待ち)
+
+**2026-05-22 セッション末で投稿数制限に到達**. 解除は通常 24 時間程度.
+
+**現状**:
+
+- ✅ 投稿済 2 件: [#14](https://qiita.com/furuse-kazufumi/items/33b70c801894b91ca826) / [#15](https://qiita.com/furuse-kazufumi/items/ab3839f8b5b3ea91311e)
+- 🚧 残 18 件: #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24-00 / #24-01 / #24-02 / #24-03 / #24-04 / #24-05 / #24-06 / #24-07 / #24-08 / #24-LINK_MAP
+
+**翌セッション開始時の処理**:
+
+1. `docs/articles/QIITA_POST_GUIDE.md` を開く
+2. preflight 実行: `py -3.11 scripts/qiita_preflight.py`
+3. #16 (`QIITA_#16_three_self_spirit_ai_management.md`) から投稿案内を Claude に依頼
+4. 各投稿後、Qiita 確定 URL を Claude に投げて LINK_MAP 更新 → cross-link 同期 (`scripts/qiita_url_sync.py`)
+5. 全件投稿後、LinkedIn 投稿 (`docs/articles/2026-05-22/LinkedIn_2026-05-22_harness_vibe_session.md`) の GitHub blob URL を Qiita URL に差替
+
+**注意**:
+
+- TODO_TAG プレースホルダ 12 件は Qiita UI でタグ手入力 (POST_GUIDE §1.2 参照)
+- TITLE-LONG 4 件 (#22/#24_04/#24_06/#24_07) は短縮判断
+- #20 は Jekyll frontmatter (`layout: default`) — 投稿時に削除 or 6 行目以降コピペ
+- 「**多ければ多いほど良い**」 ([[feedback_qiita_long_form]] 2026-05-22 update) — 本文短縮は禁忌
+
 ### 1. Credential restoration — 3 cloud LLMs (継続)
 
 引き続き Anthropic / Gemini / OpenAI の credential / quota 復旧待ち。
