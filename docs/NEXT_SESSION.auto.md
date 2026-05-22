@@ -10,16 +10,18 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-23 08:21:44
+- **生成時刻**: 2026-05-23 08:26:12
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `2	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+b2c7836 docs(qiita): #24 series 全 9 記事に Series Navigation セクションを追加
+5939a91 auto: QIITA_#24_00_llive_tech_series_index.md 編集前 (2026-05-23 08:23)
 f0e3891 docs(next-session): Qiita 連載 #14-#24 全 19 本完走を記録 + 0b CLOSE
 5a11835 docs(qiita): #24-08 限定共有 URL を LINK_MAP に反映 — 連載 #14-#24 全 19 本完走 🎉
 fd63764 auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 08:20)
@@ -28,8 +30,6 @@ cd635f9 auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 08:17)
 06e0465 docs(qiita): #24-06 限定共有 URL を LINK_MAP に反映
 82eea04 auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 08:14)
 1c805e6 docs(qiita): #24-05 限定共有 URL を LINK_MAP に反映
-c79fcbf auto: QIITA_#24_LINK_MAP.md 編集前 (2026-05-23 08:12)
-01dd2d6 docs(qiita): #24-04 限定共有 URL を LINK_MAP に反映
 ```
 
 ### git status (porcelain)
@@ -71,19 +71,19 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `08:21` `docs/SESSION_SUMMARY.md`
+- `08:26` `docs/SESSION_SUMMARY.md`
+- `08:25` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
+- `08:25` `docs/articles/QIITA_#24_07_observability_governance.md`
+- `08:25` `docs/articles/QIITA_#24_06_llm_backend_non_transformer.md`
+- `08:25` `docs/articles/QIITA_#24_05_evolutionary_v0BCDE.md`
+- `08:25` `docs/articles/QIITA_#24_04_convergent_optimization_b_series.md`
+- `08:25` `docs/articles/QIITA_#24_03_structural_evolution_triz.md`
+- `08:25` `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md`
+- `08:25` `docs/articles/QIITA_#24_01_memory_layer.md`
+- `08:25` `docs/articles/QIITA_#24_00_llive_tech_series_index.md`
+- `08:21` `docs/NEXT_SESSION.auto.md`
 - `08:21` `docs/NEXT_SESSION.md`
 - `08:20` `docs/articles/QIITA_#24_LINK_MAP.md`
-- `08:17` `docs/NEXT_SESSION.auto.md`
-- `08:00` `docs/articles/QIITA_#24_01_memory_layer.md`
-- `07:59` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
-- `07:59` `docs/articles/QIITA_#24_07_observability_governance.md`
-- `07:59` `docs/articles/QIITA_#24_06_llm_backend_non_transformer.md`
-- `07:59` `docs/articles/QIITA_#24_05_evolutionary_v0BCDE.md`
-- `07:59` `docs/articles/QIITA_#24_04_convergent_optimization_b_series.md`
-- `07:59` `docs/articles/QIITA_#24_03_structural_evolution_triz.md`
-- `07:59` `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md`
-- `07:59` `docs/articles/QIITA_#24_00_llive_tech_series_index.md`
 - `07:36` `docs/articles/QIITA_#20_one_session_full_stack_progress.md`
 - `07:19` `scripts/qiita_url_sync.py`
 
