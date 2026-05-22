@@ -10,15 +10,59 @@ nav_order: 95
 > 各記事の状態は `scripts/qiita_preflight.py` で随時確認可能.
 > 既存 [`POST_CHEATSHEET.md`]({{ '/articles/2026-05-18/POST_CHEATSHEET' | relative_url }}) (#18/#19 専用) を全 #14〜#24 系列に一般化したもの.
 
-## 1. 現状サマリ (2026-05-22 preflight 結果)
+## 1. 現状サマリ (2026-05-22 preflight 整備後)
 
 | カテゴリ | 件数 | 状態 |
 |---|---|---|
-| **NO-FM (frontmatter なし)** | 14 件 | #14〜#19, #20, #24_02〜#24_08, LINK_MAP |
-| **ignorePublish: true (draft)** | 5 件 | #21, #22, #23, #24_00, #24_01 |
-| **TITLE-LONG (80 字超)** | 3 件 | #22 (89), #24_06 (84), #24_07 (84) — 投稿時に短縮検討 |
+| **frontmatter 整備済** | 19 件 | skeleton 一括挿入 (`scripts/qiita_frontmatter_skeleton.py`) で 14 件補完 + 既存 5 件 |
+| **Jekyll-only frontmatter** | 1 件 | #20 (layout/nav_order). Qiita 投稿時に Jekyll fm を削除 → Qiita 用 fm に書換 |
+| **TAGS=TODO** | 12 件 | NO-FM 補完時に TODO_TAG プレースホルダ. 投稿前に記事末尾 `## 投稿時の推奨タグ` から差替 |
+| **TITLE-LONG (80 字超)** | 4 件 | #22 (89), #24_04 (84), #24_06 (84), #24_07 (84) — 投稿時に短縮検討 |
 | **REFS 未解決** | 1 件 | #24_04 (内部参照 1 件残, 投稿後 URL 確定時に置換) |
-| **本文サイズ** | 5KB〜16KB | 全件 Qiita 投稿可能範囲 (上限 1MB) |
+| **ignorePublish: true** | 19 件 | 全 frontmatter ありで draft 状態. 投稿時に false に切替 |
+| **本文サイズ** | 3KB〜16KB | 全件 Qiita 投稿可能範囲 (上限 1MB) |
+
+### 1.1 #20 (Jekyll frontmatter) の特別扱い
+
+`QIITA_#20_one_session_full_stack_progress.md` は Jekyll 用 frontmatter
+(`layout: default` / `parent: ...` / `nav_order: 1`) を持っている.
+これは GitHub Pages 用なので、Qiita 投稿時には:
+
+1. Jekyll frontmatter (`---...---`) を **削除**
+2. 代わりに Qiita 用 frontmatter (title / tags / private / ignorePublish 等) を **追加**
+3. 本文の `# 1 セッション...` H1 はそのまま残す (Qiita 上では body 内 H1 として表示)
+
+または Jekyll fm を残したまま Qiita 投稿時にコピペ範囲を「6 行目以降」に限定する形でも可.
+
+### 1.2 TAGS=TODO の解消
+
+frontmatter skeleton 挿入時、記事末尾の `## 投稿時の推奨タグ` セクションが
+無い記事には `TODO_TAG` プレースホルダを 2 個入れている. 投稿前に:
+
+1. 記事内容に合うタグを 2 個選定 (例: `LLM`, `アルゴリズム`, `Python`, `自己進化`, `TRIZ` 等)
+2. `tags:` の `- TODO_TAG` を該当タグに書換
+
+例: `QIITA_#24_05_evolutionary_v0BCDE.md`
+
+```yaml
+tags:
+  - FullSense
+  - llive
+  - 解説
+  - TODO_TAG    # → 例: 進化アルゴリズム
+  - TODO_TAG    # → 例: 派生集団進化
+```
+
+### 1.3 TITLE-LONG の短縮候補
+
+| # | 現タイトル (字数) | 短縮候補 |
+|---|---|---|
+| #22 | 89 字 | "Transformer 一強を切り崩す" を抜く / "FullSense 進捗" を抜く 等で 60〜70 字へ |
+| #24_04 | 84 字 | "「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian" 程度に短縮 |
+| #24_06 | 84 字 | "「Transformer の外」: Mamba / Jamba / RWKV / Diffusion" 程度に短縮 |
+| #24_07 | 84 字 | "「審査つき AI」: runtime_metadata × Approval Bus × Ed25519" 程度に短縮 |
+
+Qiita タイトルは 80 字以内が見やすいが、80 字超でも投稿自体は可能.
 
 ## 2. 投稿順序 (推奨)
 
