@@ -147,7 +147,20 @@ def replace_in_text(
 # ---------------------------------------------------------------------------
 
 
+def _ensure_utf8_stdout() -> None:
+    """Force stdout to UTF-8 so Windows cp932 doesn't mojibake `→` / em-dash.
+
+    Same pattern as ``llmesh.cli.{sbom, deps_audit, doctor}`` — see memory
+    feedback_cli_utf8_stdout_pattern.md.
+    """
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[union-attr]
+    except (AttributeError, ValueError):  # pragma: no cover
+        pass
+
+
 def main() -> int:
+    _ensure_utf8_stdout()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true", help="diff 表示のみ")
     parser.add_argument(
