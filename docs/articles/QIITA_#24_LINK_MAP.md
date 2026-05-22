@@ -14,19 +14,31 @@ slide: false
 ignorePublish: true
 ---
 
-# QIITA #24 series — Cross-link URL mapping (投稿後に埋める)
+# QIITA Series — Cross-link URL mapping (投稿後に埋める)
 
-> ⚠ 連載 #24 シリーズ 9 本 (#24-00 〜 #24-08) は draft 段階. 投稿後に各記事の
+> ⚠ 連載 #14 〜 #24 (合計 20 本) は draft / 投稿進行中. 投稿後に各記事の
 > Qiita URL (`https://qiita.com/furuse-kazufumi/items/<hash>`) が確定するため,
-> 全 draft 内の cross-link を本表に従って実 URL に **一括置換** する.
+> 全 draft 内の cross-link を本表に従って実 URL に **一括置換** する
+> (`scripts/qiita_url_sync.py` 実装予定).
 >
-> 本 mapping は **投稿時に更新**.  draft 内の cross-link は以下の **仮表記**:
->
-> - 本文中の参照: `#24-XX` (例: 「詳細は #24-05 で」)
-> - memory 風参照: `[[QIITA_#24_XX_*]]`
-> - repo internal: `docs/perf_comparison/<日付>_*.md` (GitHub URL に展開)
+> 本 mapping は **投稿のたびに更新**.
 
-## URL mapping table
+## URL mapping table (連載 #14〜#24)
+
+| ID | ファイル | Qiita URL | 投稿日 |
+|---|---|---|---|
+| #14 | QIITA_#14_invisible_annotation_channel.md | <https://qiita.com/furuse-kazufumi/items/33b70c801894b91ca826> | 2026-05-22 |
+| #15 | QIITA_#15_second_brain_spiral_dev.md | _未投稿_ | — |
+| #16 | QIITA_#16_three_self_spirit_ai_management.md | _未投稿_ | — |
+| #17 | QIITA_#17_human_ai_fusion_vision.md | _未投稿_ | — |
+| #18 | QIITA_#18_non_transformer_low_spec_pc.md | _未投稿_ | — |
+| #19 | QIITA_#19_general_gpu_less_ai_for_everyone.md | _未投稿_ | — |
+| #20 | QIITA_#20_one_session_full_stack_progress.md | _未投稿_ | — |
+| #21 | QIITA_#21_three_day_marathon_2026_05_18_to_20.md | _未投稿_ | — |
+| #22 | QIITA_#22_transformer_escape_status.md | _未投稿_ | — |
+| #23 | QIITA_#23_15h_marathon_mid_report.md | _未投稿_ | — |
+
+## #24 連載 series (大分類 9 本) cross-link
 
 | ID | 仮表記 | Title (統一形式) | Qiita URL (投稿後に埋める) | 投稿日 |
 |---|---|---|---|---|
