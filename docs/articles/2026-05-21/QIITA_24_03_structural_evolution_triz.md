@@ -137,7 +137,27 @@ self-reflection は metrics → 該当矛盾 → 39 軸 mapping → 原理 looku
 - **#24-05** で「遅い大脳側」 — EvolutionLoop の探索. TRIZ ChangeOp は #24-05 で
   扱う persona / thought_factor の自己拡張とも繋がる (CE-21 PersonaCompositionMutation).
 
+## 7. 2026-05-22 追記 — TRIZ 的アプローチが Rust 高速化判定にも効く
+
+本記事の TRIZ は「**矛盾 (improving X / worsening Y) を 39×39 マトリクスで
+構造化解決する**」という方法論だが, 同じ思想が **エンジニアリング判断全般**
+に応用できる. 同日 (2026-05-22) 着地した llive Rust 高速化判定で具体例:
+
+「**Rust 化 = 速い vs Python = 遅い**」の単一軸対立 (= TRIZ で言う矛盾) を
+**Python 経路の特性別 5 パターン** (#24-05 §13.3) に分解した. 結果:
+
+- 純 Python ループ 1-pair → 単発 FAIL, batch 必須 (RUST-15)
+- numpy 小 N の API 多用 → **単発でも x66** (RUST-16)
+- numpy 中規模 BLAS → **境界線上, rayon で挽回** (RUST-17 → 17b)
+
+これは TRIZ 矛盾マトリクスの **構造的解決** と同型 — 「**矛盾の原因を
+パラメータ空間で分解 → 原理に対応させる**」. 39×39 を **6 (Python 経路) ×
+3 (Rust 化戦略: 単発 / batch / 並列+algorithmic)** の小さな表に縮めた版.
+
+詳細: `docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md` の
+**5 パターン判定表**. これは TRIZ の発想を **AI / HPC 工学** に転用した実例.
+
 ---
 
-> draft (10x volume フル版は次セッション). 骨子 + 6 main section + 数字裏付け
-> + honest disclosure 3 件.
+> draft (10x volume フル版は次セッション). 骨子 + 7 main section + 数字裏付け
+> + honest disclosure 3 件 + TRIZ 方法論の Rust 化判定への転用 (2026-05-22 追記).
