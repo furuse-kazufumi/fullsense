@@ -407,3 +407,19 @@ cross-project 連携追跡 + D ドライブ集約整備:
   単一 commit に巻き込むため commit message が実態と乖離する問題を観測 (今回は
   feat commit を別途追加して補完)
 
+
+### Done 追記 (CLI safety scan, session 後半)
+
+- **`llmesh.cli.doctor` cp932 em-dash crash 修正** (llmesh commit `11b38e7`):
+  Windows console で `UnicodeEncodeError: 'cp932' codec can't encode '—'` で
+  クラッシュしていた問題、main() 冒頭に `_ensure_utf8_stdout()` 追加で解消
+- **`llive.cognitive_mesh.demo` Quiet Hours halt UX 改善** (llive commit `7310152`):
+  LLIVE_TZ 未設定 (fail-closed 既定) で section 1 halt していた問題、mock time
+  `2026-05-23T12:00:00+09:00` で続行する fallback 追加. 全 10 sections 完走確認
+- **`llmesh.cli.sbom` `→` 文字化け修正** (llmesh commit `798bf93`):
+  cp932 で U+2192 が `??` に化けていた問題、doctor と同 helper 適用
+- **memory `feedback_cli_utf8_stdout_pattern.md` 新規追加**: Windows CLI に
+  `_ensure_utf8_stdout()` 必須化を future-self 用に記録
+- **MEMORY.md 整理**: 39KB → 24KB に圧縮 (164 entries を 140 byte/line に短縮)、
+  warning (limit 24.4KB) 解消
+
