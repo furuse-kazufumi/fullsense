@@ -358,3 +358,52 @@ M8.1 完成度:
   LLIVE_LLMESH_TIMELINE_BATCH_SIZE=10
   LLOVE_ENABLE_COG_MESH=1
   ```
+
+## 2026-05-23 深夜 silent 自律セッション 追記
+
+### Done (本セッション)
+
+cross-project 連携追跡 + D ドライブ集約整備:
+
+- **5.5 GB 解放** — `D:/projects/raptor` 削除 (`move-raptor-to-d.ps1` 移行中断
+  の robocopy 残骸、`.git` 無し、`C:/Users/puruy/raptor` が hard-coded で active)
+- **17 MB 解放** — `C:/Users/puruy/mcp-3d.zip` / `mcp-3d-v3.zip` 削除 (D 移行後の zip backup)
+- **15 プロジェクト baseline** 一斉スキャン (git status / branch / 最新活動)
+- **Test green 5/5** 全 PASS 確認: llive 2492 / fullsense 10 / llove 全件 /
+  llmesh exit 0 / lleval 88
+- **コーパス C/D 整理**: 「C:/raptor のコード + 要約 skill」+「D:/docs の RAW」
+  の組合せが active、`D:/projects/raptor/.claude/skills/corpus/` (古コピー) は
+  raptor 削除に同梱で解消
+- **F25 audit-deps Phase 2 wiring 実装** (llove):
+  - `llove/engine/http_app.py` の `/api/v1/audit/deps` を `llmesh.cli.deps_audit`
+    proxy 化 (lazy import + Phase-1 fallback 維持で `feedback_independence_principle` 遵守)
+  - `tests/engine/test_engine_skeleton.py` を Phase-1/2 両モード対応に書き換え +
+    Phase-1 fallback の明示テスト追加 (8 PASS in 5.17s)
+  - commit `d9b0a44` (test 側 feat) + `8471d7a` (auto-commit hook が http_app 本体を含む)
+- **memory drift 訂正**: `project_mcp_spatial_asset.md` を mcp-3d 改名 + llmesh 統合済 +
+  論文題材残置のユーザー言明を反映
+
+詳細は [`docs/articles/2026-05-23/INTEGRATION_AUDIT.md`]({{ '/articles/2026-05-23/INTEGRATION_AUDIT' | relative_url }}) 参照.
+
+### 残作業 (次セッション追加 queue)
+
+- **`0c`** llove engine `/api/v1/audit/offline-check` の Phase 2 化 — httpx/urllib/aiohttp の
+  outbound trace hook 仕込み、推定 5h+
+- **`0d`** llive 333 unpushed commits (`auto:` 系含む) の整理判断 — squash vs push as-is
+- **`0e`** llmesh test の pass count 確定 — SNMP adapter deprecation warning が summary
+  line を流すノイズに、別 reporter で測りたい
+- **`0f`** browser-use-project (D:) の C: hard-coded path 修正 — 4 件 (alpaca_utils:493 /
+  discord_queue_worker:36 が修正可、alpaca_r_optimizer:32 と alpaca_timeseries:18 は外部
+  ツールの固定位置で touch 不可)
+- **`0g`** `C:/Users/puruy/` 配下の `hello-rust / holyclaude / source / R / RustroverProjects /
+  browser-use-project (6KB state)` の処遇判断 — FullSense 外、ユーザー裁量
+
+### honest disclosure — 今夜の見落とし / 教訓
+
+- `find` の `head -10` 切れで `llmesh.cli.deps_audit.py` (5 日前既に実装済) を
+  見逃し、新規実装書き始めたところで Write tool に止められて気付いた
+  (`feedback_implementation_status_record` 再確認)
+- raptor の auto-commit hook が「編集前」commit を作る際、複数 file の変更を
+  単一 commit に巻き込むため commit message が実態と乖離する問題を観測 (今回は
+  feat commit を別途追加して補完)
+
