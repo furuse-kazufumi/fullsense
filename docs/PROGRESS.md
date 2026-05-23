@@ -10,6 +10,44 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-24 (Phase 0.22 — llive 進化系バグ徹底掃討 [進行中, 6h goal])
+
+ユーザー「バグが多い、徹底的に潰してフィードバック」+ 6h 継続 goal。2 体のサブエージェント
+(general-purpose=コードバグ網羅 / gem-critic=設計欠陥・Spec 違反) で **26 件**を洗い出し、
+深刻度順に TDD (RED→GREEN+回帰) で修正中。
+
+### 修正済 (llive commit, branch optimize/core-2026-05-20)
+- **A-1** (critical, `919d449`): `build_config` の position 直読み (B1 同型) を
+  `Genome.value_by_label` 共通器で label 解決に統一。fitness_llm も統合 (DRY)。19-dim/5-dim 両対応。
+- **B-RES-1/2** (high, `629bdbf`): lineage node-id を full sanitize (コロンで Mermaid 破壊解消 +
+  prefix 衝突回避) / `by_id` 世代跨ぎ collapse を世代別解決 (自己ループ・誤親エッジ修正)。
+
+### 未修正 inventory (深刻度順)
+| 深刻度 | バグ | file | task |
+|---|---|---|---|
+| blocking | H-1 mock safety 0.0/1.0 矛盾 (self-deception) | llive_variant.py:306 vs fitness_llm | #8 |
+| high | B-LOGIC-2 immigration silent no-op | persona_evolution.py:366 | #4 |
+| high | B-LOGIC-3 resume で bounds 未同期 → dim 不整合 | loop.py:139 | #5 |
+| warning | P-1 purity backend_factory default fail-open | fitness_llm.py:107 | #7 |
+| medium | B-EDGE-2 部分 weights dict KeyError | fitness_llm / llive_variant | #6 |
+| medium | B-POS-2 config_to_genome lossy round-trip | variant_runner.py:80 | - |
+| medium | B-EDGE-1 rosenbrock 空 genome IndexError | fitness.py:48 | - |
+| medium | B-NUM-1 crowding_distance NaN 伝播 | nsga2.py:146 | - |
+| medium | B-STUB-1 in_process transport 全滅 | variant_runner.py:144 | - |
+| low | B-NUM-2 meta expansion threshold=0 で膨張 / UCB log(1)=0 | meta_loop.py:174 | - |
+| low | B-STUB-2 compare_against_llm_baselines stub (公開 API) | persona_evolution.py:466 | - |
+
+### 設計欠陥 (gem-critic, 大規模・別途計画が必要)
+- **§A6 外的 grounding ゼロ**: 全 fitness が mock/proxy = rumination。gen100=1.0 は単峰 proxy +
+  mock 固定値 + 天井効果の合成。異常値の 5+1 因子分解が未組込 (Honest Disclosure 不足)。
+- **§E3 形式 pre-check / §E5 diversity quorum が未配線**: `DiversityPreservingBreedFilter` が
+  loop から未呼出 (dead)。fitness_llm の「§E3 準拠」コメントは誇大。
+- **categorical dim** (backend_id/kv_quant_id) を連続値として Gaussian/Blend 交配 → 親に無い
+  backend が湧く / int 丸めで探索空間が歪む。
+- **§I1 provenance corruption**: runtime_metadata が env 未設定で "unknown" のまま結果に焼付き。
+- 注: **Spec 真ソースは `llive/docs/fullsense_spec_eternal.md`** (`fullsense/docs/spec/` でなく。
+  前 Phase の私の参照が誤り、gem-critic が訂正)。
+
 ## 2026-05-23 (Phase 0.21 — llive 致命バグ B1 修正: genome label 解決で FullSense §E3/§I1/purity 回復)
 
 ユーザー指示「llive の機能/性能を FullSense 要件定義に沿って実装/修正」を受け、Explore で
