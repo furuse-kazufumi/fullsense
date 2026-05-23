@@ -55,7 +55,7 @@ ignorePublish: false
 <small><strong>EN:</strong> No improvement without measurement. / <strong>中:</strong> 无测量, 无改进.</small>
 
 <!-- theme-svg-placed -->
-![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_theme.svg)
+![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_theme.svg?v=2)
 
 ## 1. lleval の出自 — honest disclosure 事件
 <small><strong>EN:</strong> 1. Origin of lleval - the honest-disclosure incident / <strong>中:</strong> 1. lleval 的由来 - honest disclosure 事件</small>
