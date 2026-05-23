@@ -10,6 +10,26 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-23 (Phase 0.21 — llive 致命バグ B1 修正: genome label 解決で FullSense §E3/§I1/purity 回復)
+
+ユーザー指示「llive の機能/性能を FullSense 要件定義に沿って実装/修正」を受け、Explore で
+FullSense Spec (`docs/spec/fullsense_spec_eternal.md` v1.1) と llive のギャップ分析 → 最優先 =
+gem-critic 発見の致命バグ B1 (FullSense Spec 違反でもあった)。
+
+- **B1 修正 (llive commit, branch optimize/core-2026-05-20)**: `fitness_llm.py` の
+  `llm_fitness_factory` が genome を position 直読み (`values[0/1/2]`) していたため、19-dim
+  LIVE_VARIANT genome (backend_id=index13) で思考因子 index0 を backend_id と誤読し、
+  `on_prem_backend_factory` 併用で全個体淘汰する致命バグ。→ `_genome_field(genome, label,
+  fallback)` ヘルパーで **label 解決**に置換 (19-dim/5-dim 両対応、labels 無しは fallback で
+  後方互換)。
+- **FullSense Spec 適合**: §E3 (genome dimensionality invariant の形骸化を解消) / §I1
+  (provenance: breakdown が genome label に対応) / §A6・measurement purity 二重層が genome
+  誤読で機能喪失していた問題を回復。
+- TDD (RED→GREEN): 19-dim genome の label 解決回帰テスト追加。進化系 **892 tests green**
+  (回帰なし)。
+- 第2優先 **B2** (quality 軸が「出力テキスト長 heuristic」→ FullSense Honest Disclosure 要件の
+  instance-specific checklist rubric に) は次段。
+
 ## 2026-05-23 (Phase 0.20 — サブエージェント検証で方針転換: llive 進化 → RepIR PoC 優先 + RepIR 互換性設計確定)
 
 ユーザー提案「サブエージェントで FullSense 視点から起動して必要性を確認」を実施。
