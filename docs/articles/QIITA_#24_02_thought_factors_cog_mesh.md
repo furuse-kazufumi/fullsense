@@ -56,7 +56,7 @@ ignorePublish: false
 本記事 #24-02 はそれを「**何**」と「**なぜ**」で説明する位置.
 
 <!-- theme-svg-placed -->
-![theme — 10 思考因子 radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_theme.svg)
+![theme — 10 思考因子 radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_theme.svg?v=2)
 
 ## 1. 10 思考因子の由来 — 6 framework の圧縮
 <small><strong>EN:</strong> 1. Origin of the 10 thought factors - compression of 6 frameworks / <strong>中:</strong> 1. 10 思考因子的由来 - 6 个框架的压缩</small>
