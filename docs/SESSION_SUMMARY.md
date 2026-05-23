@@ -3,13 +3,15 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-05-23 18:01:40
+- **最終更新**: 2026-05-23 18:06:31
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+07de684 docs(next-session): 0z 完了マーク + 0y 多言語 rollout (8 記事, #24-02 テンプレ) を次回最優先に登録
+737359d auto: NEXT_SESSION.md 編集前 (2026-05-23 18:05)
 79d55c9 fix(qiita): #24-02 frontmatter title をクオート — コロン含みタイトルの YAML 誤パース回避
 c98fdc7 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 18:00)
 7f6ea27 docs(qiita): #24-02 各言語セクションを言語別 SVG variant (_en/_zh/_ko) 参照に配線
@@ -18,19 +20,20 @@ c98fdc7 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 18:
 bf46426 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
 a1346ff auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
 f1348c6 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
-38121a9 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
-6cf539f auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:54)
 ```
 
 ## 現在の git status
 
 ```
-M tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md
+(clean)
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
+18:05 docs/NEXT_SESSION.md
+18:01 docs/NEXT_SESSION.auto.md
+18:01 docs/SESSION_SUMMARY.md
 18:00 tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md
 18:00 tools/qiita-cli-poc/public/.remote/bdfad6db3f2e70c40511.md
 18:00 tools/qiita-cli-poc/public/fcb43968a5c642610762.md
@@ -43,9 +46,6 @@ M tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md
 18:00 tools/qiita-cli-poc/public/cd954f57f510e03954e6.md
 18:00 tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md
 18:00 tools/qiita-cli-poc/public/c5f2077a3399d3fc9b26.md
-18:00 tools/qiita-cli-poc/public/c543014188744262ec83.md
-18:00 tools/qiita-cli-poc/public/be52eeb6455732161486.md
-18:00 tools/qiita-cli-poc/public/ba832a58b99c6a9103c4.md
 ```
 
 ---
