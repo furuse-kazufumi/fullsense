@@ -201,7 +201,7 @@ flowchart TD
 (Type 0 → I → II → III → IV) の「文明レベル」スケールに束ねて, 個体 / 集団 /
 メタ集団の 3 階層で同時計測する構想.
 
-![4D Kardashev Scale](./assets/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg)
 
 Ethics 軸はまさに本記事の Approval Bus pass率 + frozen gene 違反検出 + 規制
 適合度のスコアで, governance maturity を「個体の躾」から「文明の成熟」まで
