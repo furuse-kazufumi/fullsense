@@ -34,15 +34,18 @@ nav_order: 90
 - **H-1** (検証の結果**矛盾なし**): safety/honesty とも両 mock fitness path で値一致 (mock echo 前提で
   safety=0.0)。gem-critic の「0.0 vs 1.0」は誤認。サブエージェント指摘も検証した結果コード修正不要。
   `mock safety=0.0` 固定は toy heuristic で設計改善余地のみ。
+- **B-NUM-1** (medium, `a5a73df`): crowding_distance の非有限 (NaN/Inf) objective を除外 (NaN 伝播で
+  NSGA2Selection の選択圧崩壊を解消)。
 
-### 未修正 inventory (深刻度順) — 残り medium/low
-| 深刻度 | バグ | file |
-|---|---|---|
-| medium | B-POS-2 config_to_genome lossy round-trip | variant_runner.py:80 |
-| medium | B-NUM-1 crowding_distance NaN 伝播 | nsga2.py:146 |
-| medium | B-STUB-1 in_process transport 全滅 | variant_runner.py:144 |
-| low | B-NUM-2 meta expansion threshold=0 で膨張 / UCB log(1)=0 | meta_loop.py:174 |
-| low | B-STUB-2 compare_against_llm_baselines stub (公開 API) | persona_evolution.py:466 |
+**実害バグ 9 件を TDD (RED→GREEN+回帰) で掃討完了。** 各 commit + 進化系 ~900 tests green。
+
+### 未修正 inventory — 残り (実害低: 未配線/stub/skeleton, 次段で配線時に対応)
+| 深刻度 | バグ | file | 備考 |
+|---|---|---|---|
+| medium | B-POS-2 config_to_genome lossy round-trip | variant_runner.py:80 | subprocess transport (in_process は stub) |
+| medium | B-STUB-1 in_process transport 全滅 | variant_runner.py:144 | Phase 2 stub, mock 限定ガードで対応可 |
+| low | B-NUM-2 meta expansion threshold=0 / UCB log(1)=0 | meta_loop.py:174 | meta skeleton (未配線) |
+| low | B-STUB-2 compare_against_llm_baselines stub | persona_evolution.py:466 | 公開 API, 設計上 stub |
 
 ### 設計欠陥 (gem-critic, 大規模・別途計画が必要)
 - **§A6 外的 grounding ゼロ**: 全 fitness が mock/proxy = rumination。gen100=1.0 は単峰 proxy +
