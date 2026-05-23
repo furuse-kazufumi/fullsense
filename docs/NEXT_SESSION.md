@@ -41,9 +41,51 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 
 ## 🧑 Operator actions queued — pick these up first
 
-### 0a. ★ lleval + usv-pandas-bridge GitHub repo 作成 + 初回 push (2026-05-23 朝最優先)
+### 0z. ★★ 次回 SESSION START 即発動: ABC 並列 (相互監視つき並列処理 verify)
 
-**現状**: 2 つの新規 ローカル repo が公開待ち. 2026-05-22 深夜に `gh repo create` 試行したが PAT scope 不足で失敗.
+**2026-05-23 のセッション末で `~/.claude/CLAUDE.md` 末尾に「標準動作状態: 相互監視つき並列処理」section を追加した** ([[feedback_parallel_first_execution]] §6 由来). ccr 再起動で SESSION START から自動的に並列モードが default になるかの動作確認.
+
+**期待動作**: SESSION START 後, Claude が「続きとして X を進めます」と宣言した直後に, **以下 3 タスクを `Agent(run_in_background=true)` で同時起動**:
+
+| Agent | タスク | 着地予定 |
+|---|---|---|
+| A | **CMA-ES adapter** (`D:/projects/llive/src/llive/perf/evolutionary/cma_es.py`) — Genome3D.c_factors (40-dim continuous) 用. ThoughtFactorPerLayerChromosome の sample_neighborhood を CMA-ES 共分散行列ベースで置換可能にする skeleton. | new file + 25+ test, EvolutionLoop と疎結合 |
+| B | **GraphRAG skeleton** (`D:/projects/llive/src/llive/memory/graph_rag/`) — 4 層メモリ long_term 層と knowledge graph を結ぶ skeleton. design doc + node/edge data class. | new dir + smoke test + design.md |
+| C | **Mamba backend skeleton** (`D:/projects/llive/src/llive/backend/mamba_backend.py`) — `RwkvPyBackend` と同 shape の `MambaPyBackend`. WSL2/CUDA 不在でも import 落ちず, generate() で明確 RuntimeError. | new file + 10+ test, RwkvPyBackend と一致 interface |
+
+**動作判定 (CLAUDE.md 改訂の effective 判定)**:
+
+- ✅ 3 Agent が同時に `run_in_background=true` で起動された (1 turn 内に Agent tool 3 回 in parallel)
+- ✅ Claude が orchestrator として 5-10 分間隔で monitor + 完了通知ベース dispatch を実行
+- ✅ 統合報告で「ABC 全 commit + test pass を [[project_ai_algorithms_taxonomy]] 優先度 #1-#3 として消化」と明示
+- ❌ 「1 つずつ進めます」と直列宣言したら CLAUDE.md 改訂が効いていない → ユーザーへ即報告
+
+**根拠 link**:
+
+- 改訂内容: `~/.claude/CLAUDE.md` 末尾 `## 標準動作状態: 相互監視つき並列処理 (Inter-Agent Stall Detection)`
+- 優先度根拠: [[project_ai_algorithms_taxonomy]] 末尾「優先度ランキング」
+- 詳細手順: [[feedback_parallel_first_execution]] §6
+- 着手リポ: llive `optimize/core-2026-05-20` (PR #1 と並走 — main へ merge 前に積み増し可)
+
+---
+
+### 0a. ✅ lleval + usv-pandas-bridge GitHub repo 作成 + 初回 push (完了: 2026-05-23)
+
+**完了**: 両 repo 公開 + GitHub Actions / About / Topics / Dependabot 整備済.
+
+- **lleval**: <https://github.com/furuse-kazufumi/lleval> (workflow restore commit `5f85663`, CI green, 7 topics, Dependabot enabled)
+- **usv-pandas-bridge**: <https://github.com/furuse-kazufumi/usv-pandas-bridge> (1 commit `95633e3`, 7 topics, Dependabot enabled)
+- llive PR #1: <https://github.com/furuse-kazufumi/llive/pull/1> (4 commits: island demo / ThoughtFactor / RWKV / Genome3D 4 階建て)
+
+経緯: 2026-05-22 深夜は PAT scope 不足で失敗. 2026-05-23 に PAT rotate (新 token `fullsense-cli-2026-05-23` + Workflows scope 追加) + workflow 退避 push + GitHub UI 整備 (Comet 経由) で完了. PAT 値露出を契機に [[feedback_clipboard_no_persist]] + [[feedback_powershell_script_for_long_commands]] を memory 化.
+
+[本セクションは 2026-05-30 以降に削除予定]
+
+---
+
+### 0a-legacy. (旧版残し)
+
+(以下は 2026-05-22 時点のメモ. 完了済のため履歴目的のみ)
 
 - **lleval** (D:/projects/lleval) — LE-01 honest disclosure 5+1 factor, commit `665bacf`, 88 PASS
 - **usv-pandas-bridge** (D:/projects/usv-pandas-bridge) — pandas DataFrame ↔ USV bridge, commit `95633e3` (root), 24 PASS
