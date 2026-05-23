@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-23 17:42:05
+- **生成時刻**: 2026-05-23 17:52:31
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,16 +20,16 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+069dc3a docs(qiita): #24-02 を 4 言語全文縦積み形式に再構成 (JA/EN/ZH/KO 自己完結) + 言語間 --- 区切り + 言語ジャンプ TOC
+b87dab1 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:48)
+81a38cf auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:48)
+86b3c11 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:48)
+503fab0 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:47)
+2c452f2 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:45)
 874592f auto: e49b7ab9027d93594402.md 編集前 (2026-05-23 17:20)
 aeb0b42 auto: bdfad6db3f2e70c40511.md 編集前 (2026-05-23 17:20)
 50834ca auto: qiita.config.json 編集前 (2026-05-23 17:19)
 a6bfc72 prep(qiita): #24-02/#24-08 theme SVG 修正の Qiita 反映準備 — cache-buster ?v=2 + private:true 維持 + id 仮設定 + publish plan
-edb0d7c auto: QIITA_#24_08_lleval_eval_framework.md 編集前 (2026-05-23 17:12)
-7d0f8e0 auto: QIITA_#24_08_lleval_eval_framework.md 編集前 (2026-05-23 17:12)
-09fcfe3 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:11)
-578e8ba auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:11)
-7fc54b8 fix(svg): #24-02/#24-08 theme の animateMotion を mpath 参照→inline path 化 — Qiita の imgix プロキシが mpath xlink:href を解決できず空画像 (Content-Length:0) を返す問題を解消
-057cf02 auto: qiita_24_08_theme.svg 編集前 (2026-05-23 17:06)
 ```
 
 ### git status (porcelain)
@@ -37,8 +37,9 @@ edb0d7c auto: QIITA_#24_08_lleval_eval_framework.md 編集前 (2026-05-23 17:12)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- M tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md
- M tools/qiita-cli-poc/public/e49b7ab9027d93594402.md
+?? docs/articles/assets/qiita_24_02_hero_en.svg
+?? docs/articles/assets/qiita_24_02_hero_ko.svg
+?? docs/articles/assets/qiita_24_02_hero_zh.svg
 ```
 
 
@@ -76,8 +77,12 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `17:35` `docs/SESSION_SUMMARY.md`
-- `17:35` `docs/NEXT_SESSION.auto.md`
+- `17:52` `docs/articles/assets/qiita_24_02_hero_ko.svg`
+- `17:51` `docs/articles/assets/qiita_24_02_hero_zh.svg`
+- `17:51` `docs/articles/assets/qiita_24_02_hero_en.svg`
+- `17:51` `docs/SESSION_SUMMARY.md`
+- `17:51` `docs/NEXT_SESSION.auto.md`
+- `17:48` `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md`
 - `17:22` `tools/qiita-cli-poc/public/fcb43968a5c642610762.md`
 - `17:22` `tools/qiita-cli-poc/public/fa0890f136636d495ea6.md`
 - `17:22` `tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md`
@@ -92,10 +97,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `17:22` `tools/qiita-cli-poc/public/be52eeb6455732161486.md`
 - `17:22` `tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md`
 - `17:22` `tools/qiita-cli-poc/public/ba832a58b99c6a9103c4.md`
-- `17:22` `tools/qiita-cli-poc/public/aff262808a35cb7f7d3b.md`
-- `17:22` `tools/qiita-cli-poc/public/ac398349ec42e40913f1.md`
-- `17:22` `tools/qiita-cli-poc/public/ab3839f8b5b3ea91311e.md`
-- `17:22` `tools/qiita-cli-poc/public/a5ebb3992e4c28862f47.md`
 
 
 ## Cross-references
