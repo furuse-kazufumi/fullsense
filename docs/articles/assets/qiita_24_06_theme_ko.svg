@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-label="#24-06 theme: non-transformer 5 backend swap + 상태 공간 애니메이션" style="width:100%;height:auto;max-width:1200px">
+  <title>non-transformer LLM backend: Mamba / Jamba / RWKV / Diffusion + 사고 인자→SSM Δ Bridge</title>
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <filter id="glow06"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+  <rect width="1000" height="360" fill="url(#bg06)"/>
+  <text x="500" y="28" font-family="-apple-system,sans-serif" font-size="16" font-weight="700" fill="#e2e8f0" text-anchor="middle">「Transformer 의 밖」: Mamba / Jamba / RWKV / Diffusion + 사고 인자 → SSM Δ Bridge</text>
+
+  <!-- Central spotlight that cycles among 4 backends -->
+  <g transform="translate(500, 180)">
+    <!-- spotlight circle behind active backend -->
+    <circle r="80" fill="#22d3ee" fill-opacity="0.15">
+      <animateTransform attributeName="transform" type="translate"
+        values="-300,-50; -100,-50; 100,-50; 300,-50; -300,-50" dur="12s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- 4 backend boxes in a row -->
+    <g font-family="-apple-system,sans-serif" font-size="11">
+      <g transform="translate(-340, -90)">
+        <rect width="120" height="80" rx="10" fill="#1e293b" stroke="#22c55e" stroke-width="1.5"/>
+        <text x="60" y="22" fill="#22c55e" font-weight="700" text-anchor="middle">Mamba</text>
+        <text x="60" y="40" fill="#cbd5e1" text-anchor="middle" font-size="9">selective SSM</text>
+        <text x="60" y="55" fill="#cbd5e1" text-anchor="middle" font-size="9">O(L log L)</text>
+        <text x="60" y="70" fill="#94a3b8" text-anchor="middle" font-size="8">2024 Albert Gu</text>
+      </g>
+      <g transform="translate(-140, -90)">
+        <rect width="120" height="80" rx="10" fill="#1e293b" stroke="#fb923c" stroke-width="1.5"/>
+        <text x="60" y="22" fill="#fb923c" font-weight="700" text-anchor="middle">Jamba</text>
+        <text x="60" y="40" fill="#cbd5e1" text-anchor="middle" font-size="9">Mamba + Attn</text>
+        <text x="60" y="55" fill="#cbd5e1" text-anchor="middle" font-size="9">hybrid MoE</text>
+        <text x="60" y="70" fill="#94a3b8" text-anchor="middle" font-size="8">AI21 2024</text>
+      </g>
+      <g transform="translate(60, -90)">
+        <rect width="120" height="80" rx="10" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="60" y="22" fill="#a78bfa" font-weight="700" text-anchor="middle">RWKV</text>
+        <text x="60" y="40" fill="#cbd5e1" text-anchor="middle" font-size="9">RNN + Attn</text>
+        <text x="60" y="55" fill="#cbd5e1" text-anchor="middle" font-size="9">무한 ctx</text>
+        <text x="60" y="70" fill="#94a3b8" text-anchor="middle" font-size="8">Peng 2023</text>
+      </g>
+      <g transform="translate(260, -90)">
+        <rect width="120" height="80" rx="10" fill="#1e293b" stroke="#f472b6" stroke-width="1.5"/>
+        <text x="60" y="22" fill="#f472b6" font-weight="700" text-anchor="middle">Diffusion</text>
+        <text x="60" y="40" fill="#cbd5e1" text-anchor="middle" font-size="9">denoising LM</text>
+        <text x="60" y="55" fill="#cbd5e1" text-anchor="middle" font-size="9">non-AR</text>
+        <text x="60" y="70" fill="#94a3b8" text-anchor="middle" font-size="8">LLaDA 2025</text>
+      </g>
+    </g>
+
+    <!-- center: SSM Δ Bridge (思考因子) connector -->
+    <g transform="translate(0, 50)">
+      <rect x="-130" y="-22" width="260" height="44" rx="22" fill="#1e293b" stroke="#22d3ee" stroke-width="2"/>
+      <text x="0" y="-2" font-size="12" fill="#22d3ee" font-weight="700" text-anchor="middle">사고 인자 → SSM Δ Bridge</text>
+      <text x="0" y="14" font-size="9" fill="#94a3b8" text-anchor="middle">10 인자 → selective scan parameters Δ</text>
+      <!-- pulsing -->
+      <rect x="-140" y="-32" width="280" height="64" rx="32" fill="none" stroke="#22d3ee" stroke-width="1" opacity="0.4">
+        <animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+
+    <!-- arrows from each backend down to bridge -->
+    <g stroke="#22d3ee" stroke-width="1" fill="none" opacity="0.6">
+      <line x1="-280" y1="-10" x2="-80" y2="28" stroke-dasharray="3 3"><animate attributeName="stroke-dashoffset" from="0" to="-12" dur="1.2s" repeatCount="indefinite"/></line>
+      <line x1="-80" y1="-10" x2="-30" y2="28" stroke-dasharray="3 3"><animate attributeName="stroke-dashoffset" from="0" to="-12" dur="1.2s" begin="0.3s" repeatCount="indefinite"/></line>
+      <line x1="120" y1="-10" x2="30" y2="28" stroke-dasharray="3 3"><animate attributeName="stroke-dashoffset" from="0" to="-12" dur="1.2s" begin="0.6s" repeatCount="indefinite"/></line>
+      <line x1="320" y1="-10" x2="80" y2="28" stroke-dasharray="3 3"><animate attributeName="stroke-dashoffset" from="0" to="-12" dur="1.2s" begin="0.9s" repeatCount="indefinite"/></line>
+    </g>
+  </g>
+
+  <!-- Bottom: complexity comparison bars -->
+  <g transform="translate(120, 280)" font-family="-apple-system,sans-serif" font-size="10">
+    <text x="0" y="-12" fill="#a5b4fc" font-weight="600">추론 복잡도 (sequence length L)</text>
+    <text x="0" y="14" fill="#cbd5e1" text-anchor="end">Transformer</text>
+    <rect x="10" y="2" width="0" height="14" fill="#ef4444"><animate attributeName="width" from="0" to="480" dur="2s" repeatCount="indefinite"/></rect>
+    <text x="0" y="36" fill="#cbd5e1" text-anchor="end">Mamba</text>
+    <rect x="10" y="24" width="0" height="14" fill="#22c55e"><animate attributeName="width" from="0" to="160" dur="2s" begin="0.4s" repeatCount="indefinite"/></rect>
+    <text x="0" y="58" fill="#cbd5e1" text-anchor="end">Diffusion</text>
+    <rect x="10" y="46" width="0" height="14" fill="#f472b6"><animate attributeName="width" from="0" to="220" dur="2s" begin="0.8s" repeatCount="indefinite"/></rect>
+    <text x="500" y="14" font-size="9" fill="#ef4444">O(L²) — 이차</text>
+    <text x="180" y="36" font-size="9" fill="#22c55e">O(L log L) — 준선형</text>
+    <text x="240" y="58" font-size="9" fill="#f472b6">O(L · T) — 반복 횟수 T</text>
+  </g>
+
+  <text x="500" y="346" font-family="-apple-system,sans-serif" font-size="10" fill="#64748b" text-anchor="middle">spotlight 가 12 초에 4 backend 를 순회, llive 는 사고 인자 → Δ Bridge 로 각 SSM 의 selective scan 을 제어</text>
+</svg>

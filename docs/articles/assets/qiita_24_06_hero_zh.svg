@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="状态空间模型 vs transformer attention" style="width:100%;height:auto;max-width:1200px">
+  <title>llive #24-06 — Mamba / RWKV 状态流 vs Transformer attention</title>
+  <desc>Top lane: Transformer attention (all-to-all). Bottom lane: SSM/RWKV state vector flowing through tokens. SMIL-only animation.</desc>
+  <defs>
+    <linearGradient id="bg24_06" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1426"/>
+      <stop offset="100%" stop-color="#0a0f17"/>
+    </linearGradient>
+    <linearGradient id="ssm_state" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7ee787"/>
+      <stop offset="100%" stop-color="#5dd1ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="240" fill="url(#bg24_06)"/>
+
+  <text x="400" y="30" text-anchor="middle" fill="#e6edf3"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="17" font-weight="700">
+    Transformer 之外 — SSM (Mamba / RWKV) 的流动
+  </text>
+  <text x="400" y="50" text-anchor="middle" fill="#94a3b8"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">
+    上: attention 是全 token 互连. 下: SSM 中 state vector 依次通过各 token
+  </text>
+
+  <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#cbd5e1">
+    <g transform="translate(60 80)">
+      <text x="-10" y="-6" font-size="11" font-weight="600" fill="#ef476f">Transformer (attention)</text>
+      <g>
+        <circle cx="40"  cy="0" r="9" fill="#ef476f" opacity="0.85"/>
+        <circle cx="130" cy="0" r="9" fill="#ef476f" opacity="0.85"/>
+        <circle cx="220" cy="0" r="9" fill="#ef476f" opacity="0.85"/>
+        <circle cx="310" cy="0" r="9" fill="#ef476f" opacity="0.85"/>
+        <circle cx="400" cy="0" r="9" fill="#ef476f" opacity="0.85"/>
+        <circle cx="490" cy="0" r="9" fill="#ef476f" opacity="0.85"/>
+        <circle cx="580" cy="0" r="9" fill="#ef476f" opacity="0.85"/>
+        <circle cx="670" cy="0" r="9" fill="#ef476f" opacity="0.85"/>
+      </g>
+      <g stroke="#ef476f" stroke-width="0.8" stroke-opacity="0.35">
+        <line x1="40"  y1="0" x2="130" y2="0"/>
+        <line x1="40"  y1="0" x2="220" y2="0"/>
+        <line x1="40"  y1="0" x2="310" y2="0"/>
+        <line x1="40"  y1="0" x2="400" y2="0"/>
+        <line x1="40"  y1="0" x2="490" y2="0"/>
+        <line x1="40"  y1="0" x2="580" y2="0"/>
+        <line x1="40"  y1="0" x2="670" y2="0"/>
+        <line x1="130" y1="0" x2="220" y2="0"/>
+        <line x1="130" y1="0" x2="310" y2="0"/>
+        <line x1="130" y1="0" x2="400" y2="0"/>
+        <line x1="130" y1="0" x2="490" y2="0"/>
+        <line x1="130" y1="0" x2="580" y2="0"/>
+        <line x1="130" y1="0" x2="670" y2="0"/>
+        <line x1="220" y1="0" x2="310" y2="0"/>
+        <line x1="220" y1="0" x2="400" y2="0"/>
+        <line x1="220" y1="0" x2="490" y2="0"/>
+        <line x1="220" y1="0" x2="580" y2="0"/>
+        <line x1="220" y1="0" x2="670" y2="0"/>
+        <line x1="310" y1="0" x2="400" y2="0"/>
+        <line x1="310" y1="0" x2="490" y2="0"/>
+        <line x1="310" y1="0" x2="580" y2="0"/>
+        <line x1="310" y1="0" x2="670" y2="0"/>
+        <line x1="400" y1="0" x2="490" y2="0"/>
+        <line x1="400" y1="0" x2="580" y2="0"/>
+        <line x1="400" y1="0" x2="670" y2="0"/>
+        <line x1="490" y1="0" x2="580" y2="0"/>
+        <line x1="490" y1="0" x2="670" y2="0"/>
+        <line x1="580" y1="0" x2="670" y2="0"/>
+        <animate attributeName="stroke-opacity" values="0.05;0.45;0.05" dur="3s" repeatCount="indefinite"/>
+      </g>
+      <text x="730" y="4" font-size="10" fill="#94a3b8">O(n²)</text>
+    </g>
+
+    <g transform="translate(60 170)">
+      <text x="-10" y="-6" font-size="11" font-weight="600" fill="#5dd1ff">SSM / RWKV (状态流)</text>
+      <g>
+        <circle cx="40"  cy="0" r="9" fill="#3a8dde" opacity="0.85"/>
+        <circle cx="130" cy="0" r="9" fill="#3a8dde" opacity="0.85"/>
+        <circle cx="220" cy="0" r="9" fill="#3a8dde" opacity="0.85"/>
+        <circle cx="310" cy="0" r="9" fill="#3a8dde" opacity="0.85"/>
+        <circle cx="400" cy="0" r="9" fill="#3a8dde" opacity="0.85"/>
+        <circle cx="490" cy="0" r="9" fill="#3a8dde" opacity="0.85"/>
+        <circle cx="580" cy="0" r="9" fill="#3a8dde" opacity="0.85"/>
+        <circle cx="670" cy="0" r="9" fill="#3a8dde" opacity="0.85"/>
+      </g>
+      <path d="M 40 0 L 670 0" stroke="url(#ssm_state)" stroke-width="2" stroke-opacity="0.6"/>
+      <g>
+        <rect x="-10" y="-9" width="22" height="18" rx="3" fill="url(#ssm_state)">
+          <animateMotion dur="3.5s" repeatCount="indefinite" path="M 50 0 L 680 0"/>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" dur="3.5s" repeatCount="indefinite"/>
+        </rect>
+        <text font-size="10" font-weight="700" fill="#0e1426" text-anchor="middle" dominant-baseline="middle">
+          <animateMotion dur="3.5s" repeatCount="indefinite" path="M 50 0 L 680 0"/>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" dur="3.5s" repeatCount="indefinite"/>
+          h(t)
+        </text>
+      </g>
+      <text x="730" y="4" font-size="10" fill="#94a3b8">O(n)</text>
+    </g>
+
+    <g transform="translate(60 215)" fill="#64748b">
+      <text x="0" y="0" font-size="10">backends: Mamba · Jamba · RWKV · Diffusion-text — 可在 llive 内部作为 LLMBackend 调用 (mock baseline 已落地)</text>
+    </g>
+  </g>
+</svg>

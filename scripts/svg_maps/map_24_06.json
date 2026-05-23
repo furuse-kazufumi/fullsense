@@ -1,0 +1,28 @@
+{
+  "State space model vs transformer attention": {"en": "", "zh": "状态空间模型 vs transformer attention", "ko": "상태 공간 모델 vs transformer attention"},
+  "llive #24-06 — Mamba / RWKV state flow vs Transformer attention": {"en": "", "zh": "llive #24-06 — Mamba / RWKV 状态流 vs Transformer attention", "ko": "llive #24-06 — Mamba / RWKV 상태 흐름 vs Transformer attention"},
+  "Transformer の外 — SSM (Mamba / RWKV) の流れ": {"en": "Beyond the Transformer — the flow of SSM (Mamba / RWKV)", "zh": "Transformer 之外 — SSM (Mamba / RWKV) 的流动", "ko": "Transformer 의 밖 — SSM (Mamba / RWKV) 의 흐름"},
+  "上: attention は全 token 同士. 下: SSM は state vector が token を順に通る": {"en": "Top: attention is all-tokens-to-all-tokens. Bottom: in SSM a state vector passes through the tokens in order", "zh": "上: attention 是全 token 互连. 下: SSM 中 state vector 依次通过各 token", "ko": "위: attention 은 모든 token 간. 아래: SSM 은 state vector 가 token 을 순서대로 통과"},
+  "Transformer (attention)": {"en": "", "zh": "Transformer (attention)", "ko": "Transformer (attention)"},
+  "SSM / RWKV (state stream)": {"en": "", "zh": "SSM / RWKV (状态流)", "ko": "SSM / RWKV (상태 스트림)"},
+  "backends: Mamba · Jamba · RWKV · Diffusion-text — llive 内側で LLMBackend として呼べる (mock baseline 着地済)": {"en": "backends: Mamba · Jamba · RWKV · Diffusion-text — callable inside llive as LLMBackend (mock baseline landed)", "zh": "backends: Mamba · Jamba · RWKV · Diffusion-text — 可在 llive 内部作为 LLMBackend 调用 (mock baseline 已落地)", "ko": "backends: Mamba · Jamba · RWKV · Diffusion-text — llive 내부에서 LLMBackend 로 호출 가능 (mock baseline 착지 완료)"},
+
+  "連載進捗 6/8 — 現在: backend": {"en": "series progress 6/8 — current: backend", "zh": "连载进度 6/8 — 当前: backend", "ko": "연재 진행 6/8 — 현재: backend"},
+  "memory": {"en": "", "zh": "记忆", "ko": "메모리"},
+  "思考因子": {"en": "thought factors", "zh": "思考因子", "ko": "사고 인자"},
+
+  "#24-06 theme: non-transformer 5 backend swap + state space animation": {"en": "", "zh": "#24-06 theme: non-transformer 5 backend swap + 状态空间动画", "ko": "#24-06 theme: non-transformer 5 backend swap + 상태 공간 애니메이션"},
+  "non-transformer LLM backend: Mamba / Jamba / RWKV / Diffusion + 思考因子→SSM Δ Bridge": {"en": "non-transformer LLM backend: Mamba / Jamba / RWKV / Diffusion + thought factors→SSM Δ Bridge", "zh": "non-transformer LLM backend: Mamba / Jamba / RWKV / Diffusion + 思考因子→SSM Δ Bridge", "ko": "non-transformer LLM backend: Mamba / Jamba / RWKV / Diffusion + 사고 인자→SSM Δ Bridge"},
+  "「Transformer の外」: Mamba / Jamba / RWKV / Diffusion + 思考因子 → SSM Δ Bridge": {"en": "\"Beyond the Transformer\": Mamba / Jamba / RWKV / Diffusion + thought factors → SSM Δ Bridge", "zh": "「Transformer 之外」: Mamba / Jamba / RWKV / Diffusion + 思考因子 → SSM Δ Bridge", "ko": "「Transformer 의 밖」: Mamba / Jamba / RWKV / Diffusion + 사고 인자 → SSM Δ Bridge"},
+  "selective SSM": {"en": "", "zh": "selective SSM", "ko": "selective SSM"},
+  "hybrid MoE": {"en": "", "zh": "hybrid MoE", "ko": "hybrid MoE"},
+  "infinite ctx": {"en": "", "zh": "无限 ctx", "ko": "무한 ctx"},
+  "denoising LM": {"en": "", "zh": "去噪 LM", "ko": "denoising LM"},
+  "思考因子 → SSM Δ Bridge": {"en": "thought factors → SSM Δ Bridge", "zh": "思考因子 → SSM Δ Bridge", "ko": "사고 인자 → SSM Δ Bridge"},
+  "10 因子 → selective scan parameters Δ": {"en": "10 factors → selective scan parameters Δ", "zh": "10 因子 → selective scan parameters Δ", "ko": "10 인자 → selective scan parameters Δ"},
+  "推論複雑度 (sequence length L)": {"en": "inference complexity (sequence length L)", "zh": "推理复杂度 (sequence length L)", "ko": "추론 복잡도 (sequence length L)"},
+  "O(L²) — 二次": {"en": "O(L²) — quadratic", "zh": "O(L²) — 二次", "ko": "O(L²) — 이차"},
+  "O(L log L) — 準線形": {"en": "O(L log L) — near-linear", "zh": "O(L log L) — 准线性", "ko": "O(L log L) — 준선형"},
+  "O(L · T) — 反復回数 T": {"en": "O(L · T) — T iterations", "zh": "O(L · T) — 迭代次数 T", "ko": "O(L · T) — 반복 횟수 T"},
+  "spotlight が 12 秒で 4 backend を巡回, llive は思考因子 → Δ Bridge で各 SSM の selective scan を制御": {"en": "the spotlight cycles 4 backends in 12 seconds; llive controls each SSM's selective scan via thought factors → Δ Bridge", "zh": "spotlight 在 12 秒内巡回 4 个 backend, llive 通过 思考因子 → Δ Bridge 控制各 SSM 的 selective scan", "ko": "spotlight 가 12 초에 4 backend 를 순회, llive 는 사고 인자 → Δ Bridge 로 각 SSM 의 selective scan 을 제어"}
+}

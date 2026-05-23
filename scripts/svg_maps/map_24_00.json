@@ -1,0 +1,27 @@
+{
+  "llive 完全解説 — 9 本連載 hero (認知/最適化/実行/横断 4 層, 公開/限定共有 状態 animated)": {"en": "llive Complete Guide — 9-part series hero (cognition/optimization/execution/cross-cutting 4 layers, public/limited-share status animated)", "zh": "llive 完全解说 — 9 篇连载 hero (认知/优化/执行/贯穿 4 层, 公开/限定共享 状态 animated)", "ko": "llive 완전 해설 — 9부 연재 hero (인지/최적화/실행/횡단 4층, 공개/한정공유 상태 animated)"},
+  "llive 完全解説 — 9 本連載: 認知 / 最適化 / 実行 / 横断 4 層 × 8 章 + index": {"en": "llive Complete Guide — 9-part series: cognition / optimization / execution / cross-cutting, 4 layers × 8 chapters + index", "zh": "llive 完全解说 — 9 篇连载: 认知 / 优化 / 执行 / 贯穿 4 层 × 8 章 + index", "ko": "llive 완전 해설 — 9부 연재: 인지 / 최적화 / 실행 / 횡단 4층 × 8장 + index"},
+  "llive 完全解説 — 9 本連載 (#24-00 → #24-08)": {"en": "llive Complete Guide — 9-part series (#24-00 → #24-08)", "zh": "llive 完全解说 — 9 篇连载 (#24-00 → #24-08)", "ko": "llive 완전 해설 — 9부 연재 (#24-00 → #24-08)"},
+  "on-prem LLM の認知 OS を構成する 4 層 × 8 章": {"en": "the 4 layers × 8 chapters that make up the cognitive OS of an on-prem LLM", "zh": "构成本地 LLM 认知 OS 的 4 层 × 8 章", "ko": "on-prem LLM의 인지 OS를 구성하는 4층 × 8장"},
+  "認知層": {"en": "Cognition", "zh": "认知层", "ko": "인지층"},
+  "4 層メモリ + surprise gate": {"en": "4-layer memory + surprise gate", "zh": "4 层记忆 + surprise gate", "ko": "4층 메모리 + surprise gate"},
+  "(2) 思考因子 + COG-MESH": {"en": "(2) thought factors + COG-MESH", "zh": "(2) 思考因子 + COG-MESH", "ko": "(2) 사고 인자 + COG-MESH"},
+  "10 因子 × 9 component": {"en": "10 factors × 9 components", "zh": "10 因子 × 9 component", "ko": "10 인자 × 9 component"},
+  "(3) 構造進化 × TRIZ": {"en": "(3) structural evolution × TRIZ", "zh": "(3) 结构进化 × TRIZ", "ko": "(3) 구조 진화 × TRIZ"},
+  "40 原理 + ChangeOp + Z3": {"en": "40 principles + ChangeOp + Z3", "zh": "40 原理 + ChangeOp + Z3", "ko": "40 원리 + ChangeOp + Z3"},
+  "最適化層": {"en": "Optimization", "zh": "优化层", "ko": "최적화층"},
+  "(4) 収束型 B-0..B-9": {"en": "(4) convergent B-0..B-9", "zh": "(4) 收敛型 B-0..B-9", "ko": "(4) 수렴형 B-0..B-9"},
+  "(5) 進化型 v0.B/C/D/E ★": {"en": "(5) evolutionary v0.B/C/D/E ★", "zh": "(5) 进化型 v0.B/C/D/E ★", "ko": "(5) 진화형 v0.B/C/D/E ★"},
+  "派生集団進化 (連載中核)": {"en": "derived-population evolution (series core)", "zh": "派生群体进化 (系列核心)", "ko": "파생 집단 진화 (연재 중핵)"},
+  "中核 (5)": {"en": "core (5)", "zh": "核心 (5)", "ko": "중핵 (5)"},
+  "実行層": {"en": "Execution", "zh": "执行层", "ko": "실행층"},
+  "non-transformer 5 候補": {"en": "5 non-transformer candidates", "zh": "non-transformer 5 候选", "ko": "non-transformer 5 후보"},
+  "横断層": {"en": "Cross-cutting", "zh": "贯穿层", "ko": "횡단층"},
+  "(7) 観測 + 統治": {"en": "(7) observability + governance", "zh": "(7) 观测 + 治理", "ko": "(7) 관측 + 통치"},
+  "honest disclosure 5+1 因子": {"en": "honest disclosure 5+1 factors", "zh": "honest disclosure 5+1 因子", "ko": "honest disclosure 5+1 인자"},
+  "公開 (Qiita ホーム露出)": {"en": "public (shown on Qiita home)", "zh": "公开 (Qiita 首页露出)", "ko": "공개 (Qiita 홈 노출)"},
+  "限定共有 (URL 知る人のみ)": {"en": "limited share (only those who know the URL)", "zh": "限定共享 (仅知道 URL 的人)", "ko": "한정 공유 (URL 아는 사람만)"},
+
+  "連載進捗 0/8 — 現在: index": {"en": "series progress 0/8 — current: index", "zh": "连载进度 0/8 — 当前: index", "ko": "연재 진행 0/8 — 현재: index"},
+  "思考因子": {"en": "thought factors", "zh": "思考因子", "ko": "사고 인자"}
+}
