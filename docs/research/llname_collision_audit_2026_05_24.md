@@ -23,11 +23,25 @@ bare `llmesh` (PyPI / GitHub) は **Hewlett Packard (HPE)** が保有:
   (情報検索) より深刻 — 大企業・同領域の真っ向衝突。
 
 FullSense の旗艦は PyPI を **`llmesh-mcp`** で公開しているため完全一致は回避済だが、**ブランド名
-「llmesh」自体は HPE と競合**。旗艦リネームは FullSense 全体（llive/llove/記事/portal）へ波及する
-重い判断のため、**戦略課題として保留・ユーザー判断待ち**（本監査では事実提示のみ）。
+「llmesh」自体は HPE と競合**。当初は戦略課題として保留したが、**2026-05-24 にユーザー方針決定で
+クローズ**（下記 §1.1）。
 
-> 選択肢の方向性（未決）: (a) `llmesh-mcp` で差別化し共存、(b) 旗艦サブブランド名を別途用意、
-> (c) 静観。いずれも結合・ブランド判断はユーザー ([[feedback_fullsense_project_priority]])。
+### 1.1 解決方針 (2026-05-24, ユーザー決定)
+
+**llmesh はリネームしない。** 根拠:
+
+- **llmesh の位置づけ = 規格/標準 (spec) の枠**（売り物ではない）。表現コントラクト / ハブ・
+  プロトコル層で、products（llive / llove / 公開フェイス）がその上に乗る
+  ([[project_llmesh_representation_layer]]、mcp-spatial-asset-profile と同系)。
+- よって **独立 OSS 原則は矛盾せず精緻化**: 独立販売層 = products / llmesh = 共有 spec。
+- HPE 衝突は **low-stakes**（llmesh は marketed product でなく内部 spec 名）。PyPI 完全一致も
+  `llmesh-mcp` で回避済。
+- **公開ブランド = FullSense**（衝突確認済 2026-05-24）: PyPI `fullsense` / `fullsense-mcp` 空き、
+  GitHub 同名は無関係の極小のみ（`MiguelEstevesMF/FullSense` 1★ 別ドメイン、
+  `fullsense/fullsense` = profile config）。
+
+→ **名前問題はクローズ**。llmesh は内部 spec/engine 名として維持、FullSense が公開フェイス。
+統合（products への要素統合）の具体実装は後日・結合判断はユーザー領域（Claude は勝手に統合しない）。
 
 ---
 
