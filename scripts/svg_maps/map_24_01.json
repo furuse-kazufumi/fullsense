@@ -1,0 +1,21 @@
+{
+  "4 layer memory + Bayesian surprise gating": {"en": "", "zh": "4 层记忆 + Bayesian surprise gating", "ko": "4층 메모리 + Bayesian surprise gating"},
+  "llive #24-01 — 4 層メモリ + Bayesian surprise gating": {"en": "llive #24-01 — 4-Layer Memory + Bayesian surprise gating", "zh": "llive #24-01 — 4 层记忆 + Bayesian surprise gating", "ko": "llive #24-01 — 4층 메모리 + Bayesian surprise gating"},
+  "忘れない LLM — 4 層メモリと Bayesian surprise gate": {"en": "The LLM that never forgets — 4-layer memory and a Bayesian surprise gate", "zh": "不会遗忘的 LLM — 4 层记忆与 Bayesian surprise gate", "ko": "잊지 않는 LLM — 4층 메모리와 Bayesian surprise gate"},
+  "sensory → episodic → semantic → parameter / surprise が高いものだけ深く沈む": {"en": "sensory → episodic → semantic → parameter / only high-surprise items sink deep", "zh": "sensory → episodic → semantic → parameter / 只有 surprise 高的才深沉下去", "ko": "sensory → episodic → semantic → parameter / surprise가 높은 것만 깊이 가라앉는다"},
+  "layer 3 (deepest)": {"en": "", "zh": "layer 3 (最深)", "ko": "layer 3 (가장 깊음)"},
+  "low surprise → forget": {"en": "", "zh": "低 surprise → 遗忘", "ko": "낮은 surprise → 망각"},
+  "→ written to parameter": {"en": "", "zh": "→ 写入 parameter", "ko": "→ parameter에 기록"},
+  "LIM-08: Bayesian surprise gating (Itti &amp; Baldi 2006) で write efficiency を最大化": {"en": "LIM-08: maximize write efficiency with Bayesian surprise gating (Itti &amp; Baldi 2006)", "zh": "LIM-08: 用 Bayesian surprise gating (Itti &amp; Baldi 2006) 最大化 write efficiency", "ko": "LIM-08: Bayesian surprise gating (Itti &amp; Baldi 2006)으로 write efficiency를 최대화"},
+
+  "連載進捗 1/8 — 現在: memory": {"en": "series progress 1/8 — current: memory", "zh": "连载进度 1/8 — 当前: memory", "ko": "연재 진행 1/8 — 현재: memory"},
+  "思考因子": {"en": "thought factors", "zh": "思考因子", "ko": "사고 인자"},
+
+  "#24-01 theme: 4 層メモリ + surprise gate animated": {"en": "#24-01 theme: 4-layer memory + surprise gate animated", "zh": "#24-01 theme: 4 层记忆 + surprise gate animated", "ko": "#24-01 theme: 4층 메모리 + surprise gate animated"},
+  "llive 4 層メモリ + Surprise Gate animation": {"en": "llive 4-layer memory + Surprise Gate animation", "zh": "llive 4 层记忆 + Surprise Gate animation", "ko": "llive 4층 메모리 + Surprise Gate animation"},
+  "「忘れない LLM」: 4 層メモリ + Bayesian Surprise Gate": {"en": "\"The LLM that Never Forgets\": 4-layer memory + Bayesian Surprise Gate", "zh": "「不会遗忘的 LLM」: 4 层记忆 + Bayesian Surprise Gate", "ko": "「잊지 않는 LLM」: 4층 메모리 + Bayesian Surprise Gate"},
+  "入力": {"en": "input", "zh": "输入", "ko": "입력"},
+  "θ 未満 → 書かない": {"en": "< θ → do not write", "zh": "θ 以下 → 不写入", "ko": "θ 미만 → 기록 안 함"},
+  "(意図的に忘れる)": {"en": "(intentionally forget)", "zh": "(故意遗忘)", "ko": "(의도적으로 잊는다)"},
+  "驚き (Bayesian surprise) が θ 以上のものだけ 4 層へ書き込み, θ 未満は意図的に忘れる": {"en": "only items with surprise (Bayesian surprise) ≥ θ are written to the 4 layers; below θ is intentionally forgotten", "zh": "只有 surprise (Bayesian surprise) ≥ θ 的内容写入 4 层, θ 以下故意遗忘", "ko": "놀라움 (Bayesian surprise)이 θ 이상인 것만 4층에 기록, θ 미만은 의도적으로 잊는다"}
+}
