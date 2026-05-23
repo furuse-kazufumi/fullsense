@@ -50,8 +50,6 @@ llive (FullSense ™ 思考層) を **構成する技術 / アルゴリズムを
 8 記事は **週 2 本ペース** で 1 ヶ月かけて publish 予定. ja Qiita + en
 Medium 並走 (`feedback-overseas-tech-platforms` に従う).
 
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
-
 ## 1. Series 構成 (8 大分類)
 <small><strong>EN:</strong> 1. Series structure (8 main chapters) / <strong>中:</strong> 1. 系列结构 (8 大分类)</small>
 
@@ -70,8 +68,6 @@ Medium 並走 (`feedback-overseas-tech-platforms` に従う).
 
 合計 **~80k 字** (週 2 本 × 4 週). 完走目標 2026-06-20.
 <small><strong>EN:</strong> Total ~80k chars (2 per week × 4 weeks). Completion target: 2026-06-20. / <strong>中:</strong> 总计约 8 万字 (每周 2 篇 × 4 周). 完成目标: 2026-06-20.</small>
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 2. 全体図 (8 layer の関係)
 <small><strong>EN:</strong> 2. Overall map (8-layer relationships) / <strong>中:</strong> 2. 总图 (8 层关系)</small>
@@ -108,8 +104,6 @@ flowchart TB
 「**認知層 → 最適化層 → 実行層**」の縦が llive の処理 flow,
 <small><strong>EN:</strong> Vertical = llive processing flow (cognition → optimisation → execution). Observability/governance + lleval are the horizontal layers that touch every level. / <strong>中:</strong> 纵向 = llive 处理流程 (认知 → 优化 → 执行). 观测 + 治理 与 lleval 是贯穿所有层的横向层.</small>
 「**観測 + 統治**」「**lleval**」が横断層として全 layer に効く構造.
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 3. 命名規約
 <small><strong>EN:</strong> 3. Naming conventions / <strong>中:</strong> 3. 命名规约</small>
@@ -150,8 +144,6 @@ llive 完全解説 #24-XX — 「キャッチコピー」: <技術名称>
 | `QIITA_#24_08_lleval_eval_framework.md` | 08 記事 |
 
 en 版は `_en.md` suffix.
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 4. 共通フォーマット (各記事に適用)
 <small><strong>EN:</strong> 4. Common format applied to each article / <strong>中:</strong> 4. 各文章通用格式</small>
@@ -197,8 +189,6 @@ bounded modification (§E2) で min/max clip 必須.
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 ```
 
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
-
 ## 5. 想定読者
 <small><strong>EN:</strong> 5. Intended readers / <strong>中:</strong> 5. 目标读者</small>
 
@@ -206,8 +196,6 @@ bounded modification (§E2) で min/max clip 必須.
 - **AI researcher** (LLM の周辺アーキテクチャに興味)
 - **個人 OSS author** (実装パターンの参考)
 - **企業 R&D** (on-prem LLM stack の検討材料)
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 6. 公開順 (週 2 本ペース)
 <small><strong>EN:</strong> 6. Publishing order (2 articles / week) / <strong>中:</strong> 6. 发布顺序 (每周 2 篇)</small>
@@ -221,8 +209,6 @@ bounded modification (§E2) で min/max clip 必須.
 
 各記事の en 版は **+1 週遅れ** で Medium に投稿.
 <small><strong>EN:</strong> Each article's English version goes to Medium one week behind the Qiita JP version. / <strong>中:</strong> 每篇英文版会比日文版晚一周发布到 Medium.</small>
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 7. References (本 index)
 <small><strong>EN:</strong> 7. References (this index) / <strong>中:</strong> 7. 参考资料 (本索引)</small>
@@ -246,8 +232,6 @@ bounded modification (§E2) で min/max clip 必須.
 - `feedback_article_humor_style` (漫才禁止)
 - `feedback_overseas_tech_platforms` (Medium en 並走)
 - `feedback_reader_attention_curve` (8 秒/90 秒/5 分)
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 8. 状態 (2026-05-21 着手 → 2026-05-22 更新)
 <small><strong>EN:</strong> 8. Status (started 2026-05-21, updated 2026-05-22) / <strong>中:</strong> 8. 状态 (2026-05-21 启动 / 2026-05-22 更新)</small>

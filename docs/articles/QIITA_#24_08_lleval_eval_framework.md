@@ -54,8 +54,6 @@ ignorePublish: true
 測定なしに改善はない.
 <small><strong>EN:</strong> No improvement without measurement. / <strong>中:</strong> 无测量, 无改进.</small>
 
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
-
 <!-- theme-svg-placed -->
 ![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_theme.svg)
 
@@ -74,8 +72,6 @@ ignorePublish: true
 3 つの artifact が複合していた. これを記録 (`feedback_benchmark_honest_disclosure`)
 してから, 「ベンチで異常結果が出たら必ず 5 つの artifact を疑う」を
 **外部化** したくなった. それが lleval.
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 2. 5+1 因子分解 — honest disclosure の構造化
 <small><strong>EN:</strong> 2. 5+1 factor decomposition - structuring honest disclosure / <strong>中:</strong> 2. 5+1 因子分解 - honest disclosure 的结构化</small>
@@ -96,8 +92,6 @@ lleval `HonestDisclosureAnalyzer` (2026-05-21 朝着地) は出力差分を 5+1 
 5+1 が **すべて clean** で初めて「数値は信頼できる」. 1 つでも怪しいと
 **honest disclosure note** が結果に sticky される.
 
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
-
 ## 3. progressive size matrix — stress curve を取る
 <small><strong>EN:</strong> 3. Progressive size matrix - taking the stress curve / <strong>中:</strong> 3. progressive size matrix - 测量 stress 曲线</small>
 
@@ -115,8 +109,6 @@ gpt-4o   0.31      0.52      1.20      3.40      11.2   ← crossover at l
 これで「**どのサイズで crossover が起きるか**」が一目. 単一サイズで「勝った」
 と言ってもサイズ違いでは負ける. fair.
 
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
-
 ## 4. judge rotation — position bias を消す
 <small><strong>EN:</strong> 4. Judge rotation - eliminating position bias / <strong>中:</strong> 4. judge rotation - 消除位置偏差</small>
 
@@ -130,8 +122,6 @@ LLM-as-judge で 2 案 (A, B) を比較するとき, 順序が score に effect 
 
 これは judge LLM 自身の bias を量子化する手段. inconsistency が **30% 超**
 なら judge LLM を切り替える運用 (judge rotation).
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 5. bridges/llive — llive Genome → ProviderSpec mapper
 <small><strong>EN:</strong> 5. bridges/llive - llive Genome -> ProviderSpec mapper / <strong>中:</strong> 5. bridges/llive - llive Genome -> ProviderSpec 映射器</small>
@@ -153,8 +143,6 @@ result = lleval.run(spec, dataset="qa_50")
 これで「**派生集団の進化** と **派生集団の評価**」が ループする. llive 内の
 EvolutionLoop fitness にそのまま渡せる.
 
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
-
 ## 6. honest disclosure (lleval 自身について)
 <small><strong>EN:</strong> 6. Honest disclosure (about lleval itself) / <strong>中:</strong> 6. 诚实披露 (关于 lleval 本身)</small>
 
@@ -173,8 +161,6 @@ EvolutionLoop fitness にそのまま渡せる.
 - **環境 fingerprint は完璧ではない** — Windows / Linux / macOS 間の thermal
   throttling 違いまでは捉えていない. 「ベンチを別 OS で取り直す」が最終手段.
 
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
-
 ## 7. 数字 (本日 2026-05-21 時点)
 <small><strong>EN:</strong> 7. The numbers (as of 2026-05-21) / <strong>中:</strong> 7. 数字 (截至 2026-05-21)</small>
 
@@ -190,16 +176,12 @@ report html+md / cli / ...) |
 | v0.1.0a1 PyPI 公開準備 | (credential 復旧後) |
 | 連載 #24 への登場 | 本記事 (#24-08) |
 
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
-
 ## 8. 期待値 — 次に来るもの
 <small><strong>EN:</strong> 8. Expectations - what comes next / <strong>中:</strong> 8. 期望值 - 接下来要做的</small>
 
 - **v0.1.0a2** で promptfoo 実走 + llive Genome → ProviderSpec mapping 完成.
 - **v0.2** で judge rotation + position swap + Phoenix OpenInference trace.
 - **v1.0** で plugin marketplace + 商用 dual-license.
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 9. References
 <small><strong>EN:</strong> 9. References / <strong>中:</strong> 9. 参考资料</small>
@@ -208,8 +190,6 @@ report html+md / cli / ...) |
 - Promptfoo OSS (https://github.com/promptfoo/promptfoo).
 - Anthropic Eval framework (2023).
 - 完全リストは v0.1.0 リリース時に references.bib に同梱予定.
-
-![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 10. 2026-05-22 追記 — 5+1 因子分解 と Rust 化 5 パターン判定表の方法論的共通点
 <small><strong>EN:</strong> 10. 2026-05-22 addendum - methodological commonality between 5+1 factor decomposition and the 5-pattern Rust-port decision table / <strong>中:</strong> 10. 2026-05-22 追记 - 5+1 因子分解与 Rust 化 5 模式判定表的方法论共性</small>
