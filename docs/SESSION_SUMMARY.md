@@ -3,13 +3,16 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-05-23 20:56:22
+- **最終更新**: 2026-05-23 22:34:23
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+43990ab auto: ideation_marathon_expression_realtime_2026_05_23.md 編集前 (2026-05-23 21:39)
+4084ae1 auto: ideation_marathon_expression_realtime_2026_05_23.md 編集前 (2026-05-23 21:38)
+919f317 auto: index.md 編集前 (2026-05-23 21:15)
 2b6feba chore(qiita): #24-00..08 publish 後の public frontmatter 正規化を反映
 208e674 docs(next-session): 0y #24 シリーズ多言語 rollout 完了マーク (全 8 記事着地)
 283d24f feat(qiita): #24-05/07/08 を 4 言語自己完結化 + SVG 各 9 variant (Agent 並列成果)
@@ -17,9 +20,6 @@
 ed938b7 auto: QIITA_#24_07_observability_governance.md 編集前 (2026-05-23 18:59)
 9a1acd8 auto: QIITA_#24_08_lleval_eval_framework.md 編集前 (2026-05-23 18:58)
 d5efa36 feat(qiita): #24-04 を 4 言語自己完結化 (JA/EN/ZH/KO) + SVG 9 variant
-b2bf818 feat(qiita): #24-06 を 4 言語自己完結化 + SVG variant
-3bbc9f8 feat(qiita): #24-00 series index を 4 言語自己完結化 + SVG 6 variant
-c73d35d auto: QIITA_#24_00_llive_tech_series_index.md 編集前 (2026-05-23 18:45)
 ```
 
 ## 現在の git status
@@ -27,26 +27,16 @@ c73d35d auto: QIITA_#24_00_llive_tech_series_index.md 編集前 (2026-05-23 18:4
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
+ M docs/research/ideation_marathon_expression_realtime_2026_05_23.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-20:54 docs/NEXT_SESSION.auto.md
-20:54 docs/SESSION_SUMMARY.md
-19:57 tools/qiita-cli-poc/public/e49b7ab9027d93594402.md
-19:57 tools/qiita-cli-poc/public/.remote/e49b7ab9027d93594402.md
-19:57 tools/qiita-cli-poc/public/fcb43968a5c642610762.md
-19:57 tools/qiita-cli-poc/public/fa0890f136636d495ea6.md
-19:57 tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md
-19:57 tools/qiita-cli-poc/public/e5093e4816b25c1bd4d0.md
-19:57 tools/qiita-cli-poc/public/da2a2822dabe7b17b8c8.md
-19:57 tools/qiita-cli-poc/public/cdeea496af01dd424a09.md
-19:57 tools/qiita-cli-poc/public/cd954f57f510e03954e6.md
-19:57 tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md
-19:57 tools/qiita-cli-poc/public/c5f2077a3399d3fc9b26.md
-19:57 tools/qiita-cli-poc/public/c543014188744262ec83.md
-19:57 tools/qiita-cli-poc/public/be52eeb6455732161486.md
+22:20 docs/SESSION_SUMMARY.md
+22:20 docs/NEXT_SESSION.auto.md
+21:39 docs/research/ideation_marathon_expression_realtime_2026_05_23.md
+21:15 docs/research/index.md
 ```
 
 ---

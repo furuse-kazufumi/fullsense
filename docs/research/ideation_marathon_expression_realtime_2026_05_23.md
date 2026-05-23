@@ -226,4 +226,6 @@ Helmholtz(1860s 無意識的推論) → Mumford(1992 皮質ループ: backward=�
 
 [[project_next_session_ideation_marathon]] / [[project_manga_md_poc]] / [[project_llmesh_representation_layer]] /
 [[project_llove_animated_svg_program]] / [[project_idea_predictive_verification]] /
-[[feedback_benchmark_honest_disclosure]] / [[feedback_multilingual_article_structure]]
+[[feedback_benchmark_honest_disclosure]] / [[feedback_multilingual_article_structure]] /
+[[feedback_provenance_research_method]] / [[project_persona_genome_integration]] /
+[[project_fullsense_expression_realtime_marathon]]
