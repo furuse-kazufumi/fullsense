@@ -85,8 +85,13 @@ def _unique_ordered(items: list[str]) -> list[str]:
     return out
 
 
+def _read(path: Path) -> str:
+    """Read as UTF-8 without newline translation (preserve LF/CRLF exactly)."""
+    return path.read_bytes().decode("utf-8")
+
+
 def cmd_extract(base_path: str) -> int:
-    svg = Path(base_path).read_text(encoding="utf-8")
+    svg = _read(Path(base_path))
     strings = _unique_ordered(_iter_translatable(svg))
     # Emit a skeleton mapping so the caller only fills in the values.
     skeleton = {s: {lang: "" for lang in LANGS} for s in strings}
