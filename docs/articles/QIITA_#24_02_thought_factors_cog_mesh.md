@@ -894,7 +894,7 @@ flowchart LR
 > 글은 그 "사고 인자 측" — COG-MESH-01〜10과 historical persona ontology (CE-19)
 > 의 교차점을 따라간다.
 
-![theme — 10가지 사고 인자 radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_theme.svg?v=2)
+![theme — 10가지 사고 인자 radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_theme_ko.svg)
 
 ## 0. 연재에서의 위치
 
