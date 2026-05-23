@@ -21,6 +21,7 @@ has_children: true
 | [llrisk — Continuous Risk Tracking Prior Art]({{ '/research/llrisk_prior_art' | relative_url }}) | AI-driven GRC / DevOps risk monitoring / LLM × risk register / reputation / developer burnout を 6 軸縦割りで整理. 個人開発者向け on-prem 空白 |
 | [llgov — AI Governance / Compliance SOTA]({{ '/research/llgov_sota' | relative_url }}) | NeMo Guardrails / OPA / Cedar / MS Agent Governance Toolkit / Credo AI / Holistic AI の matrix + EU AI Act Art.9-15 自動検証 OSS の空白 |
 | [LLM × Evolutionary — Prior Art]({{ '/research/llm_evolutionary_prior_art' | relative_url }}) | llive v0.B/v0.C (集団 GA × 19 dim genome × subprocess transport) と類似する LMX / EvoPrompt / Promptbreeder / EUREKA / FunSearch / R2SAEA / MappingEvolve / MASPO の SOTA matrix + 差別化 4 軸 (on-prem / 19 dim 数値 / subprocess / honest disclosure) |
+| [表現 × リアルタイム — Ideation Marathon]({{ '/research/ideation_marathon_expression_realtime_2026_05_23' | relative_url }}) | FullSense「表現×リアルタイム」の 6 論点 (manga評価ラダー/一貫生成+licensing/RepIR型コントラクト/near-real-time天井/4コマ脚本/普及) を rad→triz→cross-domain で深掘り. 統合発見=**予測符号化アーキテクチャ** + **制約→強み転化 (TRIZ#22)**. RepIR=LLVM-for-expression / warning-zone 先回り生成 |
 
 ## 方針
 
