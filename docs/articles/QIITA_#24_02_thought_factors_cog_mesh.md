@@ -296,7 +296,7 @@ N=64 で governance + diversity preservation を 64 Hz で回せる目処が立�
 
 # llive Complete Guide (2) — "AI that Thinks in 10 Axes": Thought Factors × COG-MESH × Triple Stripes
 
-![hero — 10 thought factors orbiting in parallel](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero.svg)
+![hero — 10 thought factors orbiting in parallel](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero_en.svg)
 
 ![series progress (2/8) — current: thought factors](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_progress.svg)
 
