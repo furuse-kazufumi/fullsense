@@ -138,6 +138,7 @@ def cmd_verify(paths: list[str]) -> int:
 
 
 def main(argv: list[str]) -> int:
+    _ensure_utf8_stdout()
     if len(argv) < 2:
         print(__doc__)
         return 2
