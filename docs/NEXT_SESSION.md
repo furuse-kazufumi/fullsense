@@ -41,31 +41,30 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 
 ## 🧑 Operator actions queued — pick these up first
 
-### 0z. ★★ 次回 SESSION START 即発動: ABC 並列 (相互監視つき並列処理 verify)
+### 0z. ✅ 完了 (2026-05-23): ABC 並列 verify + 後続
 
-**2026-05-23 のセッション末で `~/.claude/CLAUDE.md` 末尾に「標準動作状態: 相互監視つき並列処理」section を追加した** ([[feedback_parallel_first_execution]] §6 由来). ccr 再起動で SESSION START から自動的に並列モードが default になるかの動作確認.
+ABC 並列 (相互監視つき並列処理) は実証完了。CMA-ES / GraphRAG / Mamba skeleton 着地 → 要件 `requirements_v0.F_genome_diversity_addendum.md` (DIV-01/02/03) → DIV wiring 実装 (50 test, 104 passed) まで一貫消化。llive `optimize/core-2026-05-20` に push 済。詳細は [[feedback_parallel_first_execution]] §6.6 / [[project_ai_algorithms_taxonomy]].
 
-**期待動作**: SESSION START 後, Claude が「続きとして X を進めます」と宣言した直後に, **以下 3 タスクを `Agent(run_in_background=true)` で同時起動**:
+### 0y. ★★ 次回最優先: #24 シリーズ 多言語 rollout (8 記事)
 
-| Agent | タスク | 着地予定 |
-|---|---|---|
-| A | **CMA-ES adapter** (`D:/projects/llive/src/llive/perf/evolutionary/cma_es.py`) — Genome3D.c_factors (40-dim continuous) 用. ThoughtFactorPerLayerChromosome の sample_neighborhood を CMA-ES 共分散行列ベースで置換可能にする skeleton. | new file + 25+ test, EvolutionLoop と疎結合 |
-| B | **GraphRAG skeleton** (`D:/projects/llive/src/llive/memory/graph_rag/`) — 4 層メモリ long_term 層と knowledge graph を結ぶ skeleton. design doc + node/edge data class. | new dir + smoke test + design.md |
-| C | **Mamba backend skeleton** (`D:/projects/llive/src/llive/backend/mamba_backend.py`) — `RwkvPyBackend` と同 shape の `MambaPyBackend`. WSL2/CUDA 不在でも import 落ちず, generate() で明確 RuntimeError. | new file + 10+ test, RwkvPyBackend と一致 interface |
+**#24-02 をテンプレとして 4 言語自己完結形式が確立・公開済**。残り 8 記事 (#24-00, 01, 03, 04, 05, 06, 07, 08) に同形式を横展開する。
 
-**動作判定 (CLAUDE.md 改訂の effective 判定)**:
+**テンプレ (これに完全に倣う)**: `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md` (公開済 `qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511`)
 
-- ✅ 3 Agent が同時に `run_in_background=true` で起動された (1 turn 内に Agent tool 3 回 in parallel)
-- ✅ Claude が orchestrator として 5-10 分間隔で monitor + 完了通知ベース dispatch を実行
-- ✅ 統合報告で「ABC 全 commit + test pass を [[project_ai_algorithms_taxonomy]] 優先度 #1-#3 として消化」と明示
-- ❌ 「1 つずつ進めます」と直列宣言したら CLAUDE.md 改訂が効いていない → ユーザーへ即報告
+**形式** ([[feedback_multilingual_article_structure]]):
+- 1 記事に JA → EN → ZH → KO の **全文を縦積み**。各言語は `# 日本語` / `# English` / `# 中文` / `# 한국어` の H1 + 直前に `---` 区切り。冒頭に言語ジャンプ TOC。
+- **各言語版は完全自己完結** — hero/progress/theme SVG・Mermaid・表・References・Series Navigation を各言語内に複製 + 翻訳。
+- 断片翻訳 `<small>EN/中</small>` と `<!-- *-placed -->` は全削除。
 
-**根拠 link**:
+**SVG variant** (記事ごと 9 個): `qiita_24_0X_{hero,progress,theme}_{en,zh,ko}.svg` を作成し、各言語セクションが自分の variant 参照 (JA=base)。**imgix 制約厳守**: `<mpath>` 不使用 (inline `animateMotion path=`) / `xmlns:xlink` 宣言 / `xml.dom.minidom` で well-formed 検証。geometry/アニメ不変・テキストのみ翻訳。
 
-- 改訂内容: `~/.claude/CLAUDE.md` 末尾 `## 標準動作状態: 相互監視つき並列処理 (Inter-Agent Stall Detection)`
-- 優先度根拠: [[project_ai_algorithms_taxonomy]] 末尾「優先度ランキング」
-- 詳細手順: [[feedback_parallel_first_execution]] §6
-- 着手リポ: llive `optimize/core-2026-05-20` (PR #1 と並走 — main へ merge 前に積み増し可)
+**publish gotcha** ([[reference_qiita_cli]] に全記載):
+- **タイトルは必ずクオート** (`title: '...'`) — コロン含みで YAML 誤パース→全フィールドエラーになる。
+- publish は `public/<id>.md` から。docs/articles を編集後 cp してから `npx qiita publish <id> --force` (staleness 警告は --force)。
+- login 済 (credential 永続)。`includePrivate: true` 設定済 (`tools/qiita-cli-poc/qiita.config.json`)。
+- **各記事の現可視性を維持** — LINK_MAP より #24-00/01 は **公開** (private: false), #24-02〜08 は **限定共有** (private: true)。frontmatter の private を記事ごとに正しく設定。id も LINK_MAP の URL hash を `qiita pull` で照合済の値を使う。
+
+**実行方法**: 記事ごと独立 Agent で並列 (本文 4 言語翻訳 + SVG 9 variant + wiring)。main が orchestrator + publish (都度確認)。1 記事ずつ検証してから次へでも可。
 
 ---
 
