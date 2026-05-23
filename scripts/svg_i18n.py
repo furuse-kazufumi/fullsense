@@ -128,14 +128,14 @@ def cmd_gen(base_path: str, map_path: str, lang: str, out_dir: str | None) -> in
         print(f"error: lang must be one of {LANGS}, got {lang!r}", file=sys.stderr)
         return 2
     base = Path(base_path)
-    svg = base.read_text(encoding="utf-8")
-    mapping: dict[str, dict[str, str]] = json.loads(Path(map_path).read_text(encoding="utf-8"))
+    svg = _read(base)
+    mapping: dict[str, dict[str, str]] = json.loads(_read(Path(map_path)))
     out_svg = _apply(svg, mapping, lang)
     # fail-closed: refuse to write malformed XML
     minidom.parseString(out_svg.encode("utf-8"))
     out_base = Path(out_dir) if out_dir else base.parent
     out_path = out_base / f"{base.stem}_{lang}.svg"
-    out_path.write_text(out_svg, encoding="utf-8")
+    out_path.write_bytes(out_svg.encode("utf-8"))
     print(f"wrote {out_path}")
     return 0
 
