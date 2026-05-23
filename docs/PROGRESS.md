@@ -10,6 +10,26 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-23 (Phase 0.19 — llive 進化 keystone 着手 + on-prem 環境ズレ確認)
+
+ccr 再開セッション。ユーザー方針確定: **FullSense = 全 proj マスター進捗 / 優先度
+FullSense > llive > llmesh > llove / Qiita #24 完了 → 残作業の本丸は llive 進化作業の
+長期運用による改善**。
+
+- **進化 keystone 着手**: llive 実 LLM fitness 配線。`on_prem_backend_factory`
+  (`llive/src/llive/perf/evolutionary/fitness_llm.py`) を TDD で追加 — cloud backend
+  (anthropic/openai) を **fail-closed で拒否**し measurement purity を architecture で
+  担保。on-prem (ollama/mamba/rwkv/jamba) + mock のみ許可。11 tests green (RED→GREEN)。
+- **on-prem 環境のズレ確認 (ユーザー指摘に対応)**: 当初「OLLAMA_HOST unset ＝ on-prem
+  無し」と報告したのは**誤り**。`OllamaBackend` は host 明示指定が可能で、raptor に
+  remote on-prem server が実在 (location 非開示規約)。→ **FullSense 側「環境できている」
+  認識が正しい**。実 LLM fitness の実 run は measurement purity を守って実施可能。
+- **次段**: on-prem host を進化 fitness backend に渡す経路 (llive config or 専用 env) を
+  確定 → 実 1000 世代 run (proxy は gen100 で 1.0 収束、実評価で意味あるランドスケープへ)
+  → lleval 比較 (現 stub) → meta 進化 (現 skeleton)。
+- guardrails: extensibility 契約 / honest disclosure / measurement purity / push 確認必須
+  / atomic commit。技術詳細は product-side `llive/docs/PROGRESS.md`。
+
 ## 2026-05-23 (Phase 0.18 — cross-project integration audit + audit-deps Phase 2 wiring)
 
 10h silent 自律セッション (ユーザー就寝後) で:
