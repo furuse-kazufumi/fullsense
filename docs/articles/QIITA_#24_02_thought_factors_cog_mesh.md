@@ -290,6 +290,8 @@ N=64 で governance + diversity preservation を 64 Hz で回せる目処が立�
 - 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
+---
+
 # English
 
 # llive Complete Guide (2) — "AI that Thinks in 10 Axes": Thought Factors × COG-MESH × Triple Stripes
