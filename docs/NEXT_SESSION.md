@@ -45,7 +45,22 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 
 ABC 並列 (相互監視つき並列処理) は実証完了。CMA-ES / GraphRAG / Mamba skeleton 着地 → 要件 `requirements_v0.F_genome_diversity_addendum.md` (DIV-01/02/03) → DIV wiring 実装 (50 test, 104 passed) まで一貫消化。llive `optimize/core-2026-05-20` に push 済。詳細は [[feedback_parallel_first_execution]] §6.6 / [[project_ai_algorithms_taxonomy]].
 
-### 0y. ★★ 次回最優先: #24 シリーズ 多言語 rollout (8 記事)
+### 0y. ✅ 完了 (2026-05-23): #24 シリーズ 多言語 rollout (8 記事)
+
+**全 8 記事 (#24-00, 01, 03, 04, 05, 06, 07, 08) を #24-02 と同じ 4 言語自己完結形式に
+横展開完了** (main に着地済)。SVG variant 計 72 個新規生成 (全 well-formed 検証済、
+#24-02 既存 9 と合わせ 78)。再利用ツール `scripts/svg_i18n.py` (base SVG の text のみ
+翻訳、minidom 検証) + 手順書 `docs/articles/MULTILINGUAL_ROLLOUT_SPEC.md` を整備。
+#24-05/07/08 は git 操作禁止の background Agent 3 並列で生成 → orchestrator 検証着地
+([[feedback_agent_no_git_parallel]])。#24-00 index は内部オーサリングメモを整理して公開向けに。
+
+**🧑 残り operator 作業 (どちらも user-gated)**:
+1. **`git push`** — SVG raw URL は `main` ブランチ参照なので、push しないと Qiita 上で画像が出ない
+2. **`npx qiita publish <id> --force`** — 各記事の public/<id>.md を再投稿 (可視性は frontmatter の private で維持)。連載順 (00→01→…→08) 推奨
+
+---
+
+### 0y-orig (履歴: 着手前メモ)
 
 **#24-02 をテンプレとして 4 言語自己完結形式が確立・公開済**。残り 8 記事 (#24-00, 01, 03, 04, 05, 06, 07, 08) に同形式を横展開する。
 
