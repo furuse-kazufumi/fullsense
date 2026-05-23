@@ -15,8 +15,7 @@ ignorePublish: true
 <!-- h2-trans-placed -->
 
 <!-- trilingual-subtitle-placed -->
-<small><strong>EN:</strong> “Crafting the spectacles”: lleval — evaluating AI via 5+1 honest-disclosure factor decomposition<br>
-<strong>中:</strong> "打造眼镜": lleval — 用 honest disclosure 5+1 因子分解评估 AI</small>
+<small><strong>EN:</strong> “Crafting the spectacles”: lleval — evaluating AI via 5+1 honest-disclosure factor decomposition / <strong>中:</strong> "打造眼镜": lleval — 用 honest disclosure 5+1 因子分解评估 AI</small>
 <!-- section-separators-placed -->
 
 # llive 完全解説 (8) — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する
@@ -53,8 +52,7 @@ ignorePublish: true
 
 #24-07 が「**何を残すか**」(audit) だとすると, 本記事は「**何を測るか**」.
 測定なしに改善はない.
-<small><strong>EN:</strong> No improvement without measurement.<br>
-<strong>中:</strong> 无测量, 无改进.</small>
+<small><strong>EN:</strong> No improvement without measurement. / <strong>中:</strong> 无测量, 无改进.</small>
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
@@ -65,8 +63,7 @@ ignorePublish: true
 <small><strong>EN:</strong> 1. Origin of lleval - the honest-disclosure incident / <strong>中:</strong> 1. lleval 的由来 - honest disclosure 事件</small>
 
 事の発端は 2026-05-17 の benchmark. llive が他社 LLM API より **異常に速く**
-<small><strong>EN:</strong> Triggered by a 2026-05-17 benchmark where llive came out anomalously faster than competing cloud LLM APIs.<br>
-<strong>中:</strong> 由 2026-05-17 的一次基准测试触发, 当时 llive 异常地比竞争对手的 cloud LLM API 还快.</small>
+<small><strong>EN:</strong> Triggered by a 2026-05-17 benchmark where llive came out anomalously faster than competing cloud LLM APIs. / <strong>中:</strong> 由 2026-05-17 的一次基准测试触发, 当时 llive 异常地比竞争对手的 cloud LLM API 还快.</small>
 出た数字があった. 普通なら勝った気になるところを, ユーザーは「**内訳を
 疑え**」と指示. 蓋を開けると:
 
@@ -84,8 +81,7 @@ ignorePublish: true
 <small><strong>EN:</strong> 2. 5+1 factor decomposition - structuring honest disclosure / <strong>中:</strong> 2. 5+1 因子分解 - honest disclosure 的结构化</small>
 
 lleval `HonestDisclosureAnalyzer` (2026-05-21 朝着地) は出力差分を 5+1 因子に
-<small><strong>EN:</strong> lleval's HonestDisclosureAnalyzer (landed 2026-05-21) decomposes output deltas into 5+1 factors.<br>
-<strong>中:</strong> lleval 的 HonestDisclosureAnalyzer (2026-05-21 落地) 把输出差异分解为 5+1 因子.</small>
+<small><strong>EN:</strong> lleval's HonestDisclosureAnalyzer (landed 2026-05-21) decomposes output deltas into 5+1 factors. / <strong>中:</strong> lleval 的 HonestDisclosureAnalyzer (2026-05-21 落地) 把输出差异分解为 5+1 因子.</small>
 分解:
 
 | 因子 | 意味 | 検出方法 |
@@ -106,8 +102,7 @@ lleval `HonestDisclosureAnalyzer` (2026-05-21 朝着地) は出力差分を 5+1 
 <small><strong>EN:</strong> 3. Progressive size matrix - taking the stress curve / <strong>中:</strong> 3. progressive size matrix - 测量 stress 曲线</small>
 
 固定 token 数のベンチは情報量が低い. lleval は xs/s/m/l/xl の 5 段階 ×
-<small><strong>EN:</strong> Fixed-token benches are low-info. lleval runs an xs / s / m / l / xl 5-step matrix × seeds for stress curves.<br>
-<strong>中:</strong> 固定 token 数的基准信息量太少. lleval 跑 xs / s / m / l / xl 5 阶 × seeds 的矩阵以取得 stress 曲线.</small>
+<small><strong>EN:</strong> Fixed-token benches are low-info. lleval runs an xs / s / m / l / xl 5-step matrix × seeds for stress curves. / <strong>中:</strong> 固定 token 数的基准信息量太少. lleval 跑 xs / s / m / l / xl 5 阶 × seeds 的矩阵以取得 stress 曲线.</small>
 複数 model の **matrix** を回す:
 
 ```
@@ -126,8 +121,7 @@ gpt-4o   0.31      0.52      1.20      3.40      11.2   ← crossover at l
 <small><strong>EN:</strong> 4. Judge rotation - eliminating position bias / <strong>中:</strong> 4. judge rotation - 消除位置偏差</small>
 
 LLM-as-judge で 2 案 (A, B) を比較するとき, 順序が score に effect する
-<small><strong>EN:</strong> When LLM-as-judge compares 2 options (A, B), order biases the score. Rotate to cancel it.<br>
-<strong>中:</strong> 用 LLM-as-judge 比较 2 个候选 (A, B) 时, 顺序会偏倚得分. 通过轮换消除.</small>
+<small><strong>EN:</strong> When LLM-as-judge compares 2 options (A, B), order biases the score. Rotate to cancel it. / <strong>中:</strong> 用 LLM-as-judge 比较 2 个候选 (A, B) 时, 顺序会偏倚得分. 通过轮换消除.</small>
 ことが知られている (Zheng et al. 2023). lleval は:
 
 1. (A, B) で 1 回 judge
@@ -143,8 +137,7 @@ LLM-as-judge で 2 案 (A, B) を比較するとき, 順序が score に effect 
 <small><strong>EN:</strong> 5. bridges/llive - llive Genome -> ProviderSpec mapper / <strong>中:</strong> 5. bridges/llive - llive Genome -> ProviderSpec 映射器</small>
 
 lleval は **llive の派生個体** を直接食えるよう設計. `bridges/llive.py`
-<small><strong>EN:</strong> lleval is designed to consume llive's derived individuals directly. bridges/llive.py is the mapper.<br>
-<strong>中:</strong> lleval 设计为可直接吃 llive 的派生个体. bridges/llive.py 就是这个 mapper.</small>
+<small><strong>EN:</strong> lleval is designed to consume llive's derived individuals directly. bridges/llive.py is the mapper. / <strong>中:</strong> lleval 设计为可直接吃 llive 的派生个体. bridges/llive.py 就是这个 mapper.</small>
 (2026-05-21 朝着地):
 
 ```python
@@ -166,8 +159,7 @@ EvolutionLoop fitness にそのまま渡せる.
 <small><strong>EN:</strong> 6. Honest disclosure (about lleval itself) / <strong>中:</strong> 6. 诚实披露 (关于 lleval 本身)</small>
 
 メタにも honest disclosure を適用:
-<small><strong>EN:</strong> Apply honest disclosure to the meta-tool itself:<br>
-<strong>中:</strong> 把 honest disclosure 应用到元工具自身:</small>
+<small><strong>EN:</strong> Apply honest disclosure to the meta-tool itself: / <strong>中:</strong> 把 honest disclosure 应用到元工具自身:</small>
 
 - **lleval test 数 61** — 本日 2026-05-21 時点. 上位フレームワーク (Promptfoo
   本体) は数千 test を持つ. lleval は wrap であり置換ではない.
@@ -223,8 +215,7 @@ report html+md / cli / ...) |
 <small><strong>EN:</strong> 10. 2026-05-22 addendum - methodological commonality between 5+1 factor decomposition and the 5-pattern Rust-port decision table / <strong>中:</strong> 10. 2026-05-22 追记 - 5+1 因子分解与 Rust 化 5 模式判定表的方法论共性</small>
 
 lleval の honest disclosure **5+1 因子分解** (prompt diff / model id /
-<small><strong>EN:</strong> lleval's 5+1 honest-disclosure decomposition (prompt diff / model id / ...) and the Rust port decision matrix share the same methodology.<br>
-<strong>中:</strong> lleval 的 5+1 honest disclosure 分解 (prompt diff / model id / …) 与 Rust 化判定矩阵共享同一方法论.</small>
+<small><strong>EN:</strong> lleval's 5+1 honest-disclosure decomposition (prompt diff / model id / ...) and the Rust port decision matrix share the same methodology. / <strong>中:</strong> lleval 的 5+1 honest disclosure 分解 (prompt diff / model id / …) 与 Rust 化判定矩阵共享同一方法论.</small>
 backend swap / chars vs tokens / RTT / env drift) と, 同日着地した
 llive Rust 高速化の **5 パターン判定表** (#24-05 §13.3) は **構造的に同じ
 発想** で書かれている.

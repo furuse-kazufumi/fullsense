@@ -15,8 +15,7 @@ ignorePublish: true
 <!-- h2-trans-placed -->
 
 <!-- trilingual-subtitle-placed -->
-<small><strong>EN:</strong> “AI that learns as a population”: v0.B/C/D/E coevolution — series centerpiece<br>
-<strong>中:</strong> "集群学习的 AI": v0.B/C/D/E 派生群体进化 (系列核心)</small>
+<small><strong>EN:</strong> “AI that learns as a population”: v0.B/C/D/E coevolution — series centerpiece / <strong>中:</strong> "集群学习的 AI": v0.B/C/D/E 派生群体进化 (系列核心)</small>
 <!-- section-separators-placed -->
 
 # llive 完全解説 (5) — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
@@ -54,8 +53,7 @@ ignorePublish: true
 
 #24-05 は全体の **背骨**. v0.B/C/D/E で「派生集団そのもの」を作る. 他の
 記事はそこに乗る機能.
-<small><strong>EN:</strong> This is the series centerpiece — the substrate that all other chapters' features sit on.<br>
-<strong>中:</strong> 这是系列核心 — 其他所有章节的功能都建立在它之上.</small>
+<small><strong>EN:</strong> This is the series centerpiece — the substrate that all other chapters' features sit on. / <strong>中:</strong> 这是系列核心 — 其他所有章节的功能都建立在它之上.</small>
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
@@ -66,8 +64,7 @@ ignorePublish: true
 <small><strong>EN:</strong> 1. Why population-based evolution - Hillis warning / <strong>中:</strong> 1. 为什么选群体进化 - Hillis 的警告</small>
 
 W. D. Hillis 1990 が示したのは「**評価者と被評価者が同時に進化する**」と
-<small><strong>EN:</strong> W. D. Hillis (1990) showed that when evaluator and evaluatee coevolve, fitness landscapes get exponentially more interesting.<br>
-<strong>中:</strong> W. D. Hillis (1990) 证明了 "评估者与被评估者同时进化" 时, fitness landscape 会指数级地更有趣.</small>
+<small><strong>EN:</strong> W. D. Hillis (1990) showed that when evaluator and evaluatee coevolve, fitness landscapes get exponentially more interesting. / <strong>中:</strong> W. D. Hillis (1990) 证明了 "评估者与被评估者同时进化" 时, fitness landscape 会指数级地更有趣.</small>
 **Red Queen Effect** で集団全体の質が **自走で上がる**. 単一 best を選び続け
 ると **局所最適に陥る**.
 
@@ -84,8 +81,7 @@ fitness, fitness が次世代の selection. すると:
 <small><strong>EN:</strong> 2. v0.B - Genome / EvolutionLoop / parallel scheduler / <strong>中:</strong> 2. v0.B - Genome / EvolutionLoop / 并行 scheduler</small>
 
 v0.B core は GA 古典. 着地 module:
-<small><strong>EN:</strong> v0.B core is classic GA. Modules landed: Genome, Selection, Crossover, Mutation, scheduler.<br>
-<strong>中:</strong> v0.B 内核是经典 GA. 已落地模块: Genome, Selection, Crossover, Mutation, scheduler.</small>
+<small><strong>EN:</strong> v0.B core is classic GA. Modules landed: Genome, Selection, Crossover, Mutation, scheduler. / <strong>中:</strong> v0.B 内核是经典 GA. 已落地模块: Genome, Selection, Crossover, Mutation, scheduler.</small>
 
 - `Genome` (実数 vector + bounds + labels) + `Individual` + `Population`.
 - `TournamentSelection / RouletteSelection / ElitismSelection`.
@@ -102,8 +98,7 @@ v0.B core は GA 古典. 着地 module:
 <small><strong>EN:</strong> 3. v0.C - subprocess isolation + variant live run / <strong>中:</strong> 3. v0.C - 子进程隔离 + 派生实际运行</small>
 
 LLM 推論は 1 派生個体あたり OS process 1 つに **完全分離** したい. 理由は:
-<small><strong>EN:</strong> LLM inference wants each derived individual fully isolated in its own OS process. Reasons:<br>
-<strong>中:</strong> LLM 推断希望每个派生个体都在独立 OS 进程中完全隔离. 原因如下:</small>
+<small><strong>EN:</strong> LLM inference wants each derived individual fully isolated in its own OS process. Reasons: / <strong>中:</strong> LLM 推断希望每个派生个体都在独立 OS 进程中完全隔离. 原因如下:</small>
 
 - LLM 重い → メモリ leak / GIL 競合を物理分離
 - 1 派生が落ちても他は生存
@@ -119,8 +114,7 @@ ThreadPool 並列 + timeout + retries + cleanup. これで `variant_runner.py`
 <small><strong>EN:</strong> 4. v0.D - self-referential mutation (Schwefel sigma-SA-ES + meta-mutation) / <strong>中:</strong> 4. v0.D - 自我参照 mutation (Schwefel sigma-SA-ES + 元 mutation)</small>
 
 v0.D core は「**mutation rate そのものを進化させる**」.
-<small><strong>EN:</strong> v0.D core: 'the mutation rate itself evolves'.<br>
-<strong>中:</strong> v0.D 内核: "mutation rate 本身也进化".</small>
+<small><strong>EN:</strong> v0.D core: 'the mutation rate itself evolves'. / <strong>中:</strong> v0.D 内核: "mutation rate 本身也进化".</small>
 
 - `SelfAdaptiveGaussianMutation` (Schwefel σSA-ES, log-normal σ update).
   Genome に σ vector を埋め込み, mutation が σ も書き換える.
@@ -136,8 +130,7 @@ v0.D core は「**mutation rate そのものを進化させる**」.
 <small><strong>EN:</strong> 5. v0.E - peer evaluation + persona ontology + governance / <strong>中:</strong> 5. v0.E - peer 评估 + persona ontology + governance</small>
 
 v0.E core. CE-01〜34 を含む. 主要 module:
-<small><strong>EN:</strong> v0.E core — contains CE-01..34. Main modules below.<br>
-<strong>中:</strong> v0.E 内核 — 包含 CE-01..34. 主要模块如下.</small>
+<small><strong>EN:</strong> v0.E core — contains CE-01..34. Main modules below. / <strong>中:</strong> v0.E 内核 — 包含 CE-01..34. 主要模块如下.</small>
 
 ### 5.1 評価 (CE-01〜05)
 
@@ -230,8 +223,7 @@ v0.E core. CE-01〜34 を含む. 主要 module:
 <small><strong>EN:</strong> 8. Triple stripe - coexistence of thought factors / persona / TRIZ across 3 layers / <strong>中:</strong> 8. 三重条纹 - 思考因子 / persona / TRIZ 三层并存</small>
 
 ユーザー言語化の concept. 派生個体内で:
-<small><strong>EN:</strong> User-articulated concept: inside each derived individual, three layers coexist.<br>
-<strong>中:</strong> 用户语言化的概念: 在每个派生个体内, 三层并存.</small>
+<small><strong>EN:</strong> User-articulated concept: inside each derived individual, three layers coexist. / <strong>中:</strong> 用户语言化的概念: 在每个派生个体内, 三层并存.</small>
 
 - **layer 1**: 10 思考因子 vector (factor_structurize / ... / factor_reality_link)
 - **layer 2**: persona composition (Newton + Galois の hybrid 等)
@@ -248,8 +240,7 @@ quality-diversity の MAP-Elites grid はこの 3 layer の交差点を grid 化
 <small><strong>EN:</strong> 9. Rust addendum (bridging #24-04 and #24-05) / <strong>中:</strong> 9. Rust 附录 (连接 #24-04 和 #24-05)</small>
 
 `docs/rust_hotspot_v0E_addendum.md` (本日新規) で RUST-15 〜 18 を spec 化:
-<small><strong>EN:</strong> docs/rust_hotspot_v0E_addendum.md (new) specs RUST-15..18.<br>
-<strong>中:</strong> docs/rust_hotspot_v0E_addendum.md (新) 规定了 RUST-15..18.</small>
+<small><strong>EN:</strong> docs/rust_hotspot_v0E_addendum.md (new) specs RUST-15..18. / <strong>中:</strong> docs/rust_hotspot_v0E_addendum.md (新) 规定了 RUST-15..18.</small>
 
 - RUST-15: `persona_dissimilarity` Rust 化 (5x gate)
 - RUST-16: `collusion_score` (peer matrix metrics) Rust 化
@@ -268,8 +259,7 @@ N=64 派生の集計系 hot path (Rust 化で 5-15x 狙い).
 
 - **「v0.E の効果」はベンチ未取得** — module は全 PASS だが「30 世代で
   baseline より 30% diversity 維持」のような仮説 H10 / H11 は **未検証**.
-<small><strong>EN:</strong> Hypotheses like H10/H11 ('30% diversity preservation vs baseline') are NOT yet verified.<br>
-<strong>中:</strong> 类似 H10/H11 ("相比 baseline 多保留 30% 多样性") 这样的假设尚未验证.</small>
+<small><strong>EN:</strong> Hypotheses like H10/H11 ('30% diversity preservation vs baseline') are NOT yet verified. / <strong>中:</strong> 类似 H10/H11 ("相比 baseline 多保留 30% 多样性") 这样的假设尚未验证.</small>
   ベンチ走らせるのは credential + GPU 確保後.
 - **PERSONA_ONTOLOGY 10 名は heuristic** — factor_affinity vector は伝記 /
   哲学史 ベースの人為的初期値. CE-23 PersonaCorpusLoader でコーパスベースに
@@ -317,8 +307,7 @@ flowchart TD
 - **v0.E E.5 (League mode)** — AlphaStar 風 Main / Exploiter / League Exploiter.
 - **v0.E E.6 (Debate mode)** — Irving 2018 風 argument / counter-argument +
   human/LLM judge.
-<small><strong>EN:</strong> Human / LLM judge integration is the obvious next step.<br>
-<strong>中:</strong> human / LLM judge 整合是下一步明显的方向.</small>
+<small><strong>EN:</strong> Human / LLM judge integration is the obvious next step. / <strong>中:</strong> human / LLM judge 整合是下一步明显的方向.</small>
 - **lleval bridge v0.1.0a2** — 派生 Genome → ProviderSpec mapper の実装.
 - **CE-19/23 LLM extractor** — Raptor RAD コーパスから persona 自動抽出.
 - **集団進化 end-to-end 実機 run** — N=64 派生 で 30 世代 → diversity
@@ -330,8 +319,7 @@ flowchart TD
 <small><strong>EN:</strong> 13. 2026-05-22 addendum - Rust speedup RUST-15/16/17 landed / <strong>中:</strong> 13. 2026-05-22 追记 - Rust 加速 RUST-15/16/17 落地</small>
 
 `goal_release_ready_v0E_rust` addendum の 3 kernel を 1 セッションで着地.
-<small><strong>EN:</strong> Landed the 3 kernels from goal_release_ready_v0E_rust addendum in a single session.<br>
-<strong>中:</strong> 在一次会话中落地了 goal_release_ready_v0E_rust 附录中的 3 个 kernel.</small>
+<small><strong>EN:</strong> Landed the 3 kernels from goal_release_ready_v0E_rust addendum in a single session. / <strong>中:</strong> 在一次会话中落地了 goal_release_ready_v0E_rust 附录中的 3 个 kernel.</small>
 連載中核記事として最新成果を反映:
 
 ### 13.1 着地 3 kernel
