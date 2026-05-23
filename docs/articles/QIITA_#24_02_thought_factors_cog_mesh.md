@@ -298,7 +298,7 @@ N=64 で governance + diversity preservation を 64 Hz で回せる目処が立�
 
 ![hero — 10 thought factors orbiting in parallel](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero_en.svg)
 
-![series progress (2/8) — current: thought factors](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_progress.svg)
+![series progress (2/8) — current: thought factors](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_progress_en.svg)
 
 > **Concept hook**: An ordinary AI agent has only one kind of "thinking". llive
 > **runs 10 kinds of thinking in parallel**, makes them evaluate each other, and
