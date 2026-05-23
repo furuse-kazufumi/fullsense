@@ -1,5 +1,11 @@
 # RepIR × 汎用 MCP ルーター互換性 設計メモ (2026-05-23)
 
+> **改名 (2026-05-24): RepIR → `llrepr`**（既存 OSS github.com/repir/repir [情報検索] と
+> 頭字語衝突のため。本 doc 内の "RepIR" は `llrepr` と読み替え）。
+> **実装着地**: llmesh `llmesh/llrepr/` に PoC 着地済（commits 12c1a07 / 6044ba4, 24 tests）。
+> 本メモ推奨の `structuredContent` + text(Markdown) 併置形を実装。詳細:
+> [`llrepr_poc_2026_05_24.md`]({{ '/research/llrepr_poc_2026_05_24' | relative_url }})。
+
 > ユーザー懸念「RepIR は llama.cpp のような汎用 MCP ルーター/クライアントと互換性が
 > あるか」をサブエージェント (general-purpose + WebSearch) で検証した結論。
 > RepIR PoC (FullSense 実装キュー #1) の着手前に確定すべき互換性前提。
