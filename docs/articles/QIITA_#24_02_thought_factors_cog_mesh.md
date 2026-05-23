@@ -606,7 +606,7 @@ For details see #24-05 and
 
 ![hero — 10 个思考因子同时运转](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero_zh.svg)
 
-![连载进度 (2/8) — 当前: 思考因子](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_progress.svg)
+![连载进度 (2/8) — 当前: 思考因子](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_progress_zh.svg)
 
 > **概念 hook**: 普通的 AI agent 只有 1 种"思考". llive **同时运行 10 种思考**,
 > 让它们相互评价, **只把存活下来的思考纳入群体**. 这 10 种是"结构化""重组"
