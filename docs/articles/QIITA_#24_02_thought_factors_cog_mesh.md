@@ -312,7 +312,7 @@ N=64 で governance + diversity preservation を 64 Hz で回せる目処が立�
 > v0.E. This article traces the "thought-factor side" of that — the intersection
 > of COG-MESH-01..10 and the historical persona ontology (CE-19).
 
-![theme — 10 thought-factor radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_theme.svg?v=2)
+![theme — 10 thought-factor radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_theme_en.svg)
 
 ## 0. Position within the series
 
