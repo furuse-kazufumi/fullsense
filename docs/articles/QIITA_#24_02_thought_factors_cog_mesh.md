@@ -617,7 +617,7 @@ For details see #24-05 and
 > 追溯其"思考因子侧" — COG-MESH-01〜10 与 historical persona ontology (CE-19)
 > 的交叉点.
 
-![theme — 10 个思考因子 radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_theme.svg?v=2)
+![theme — 10 个思考因子 radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_theme_zh.svg)
 
 ## 0. 在连载中的定位
 
