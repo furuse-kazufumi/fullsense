@@ -106,6 +106,11 @@ def _apply(svg: str, mapping: dict[str, dict[str, str]], lang: str) -> str:
         if not entry:
             return content
         repl = entry.get(lang, "")
+        if repl and ("<" in repl or ">" in repl):
+            raise ValueError(
+                f"translation for {core!r} ({lang}) contains a raw '<' or '>' which is "
+                f"illegal in SVG text — rephrase (e.g. 'below θ' not '< θ') or use &lt;/&gt;: {repl!r}"
+            )
         return f"{leading}{repl}{trailing}" if repl else content
 
     def sub_title(m: re.Match[str]) -> str:
