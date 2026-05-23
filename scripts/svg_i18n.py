@@ -96,11 +96,12 @@ def cmd_extract(base_path: str) -> int:
 
 def _apply(svg: str, mapping: dict[str, dict[str, str]], lang: str) -> str:
     def translate(content: str) -> str:
-        entry = mapping.get(content)
+        leading, core, trailing = _split_ws(content)
+        entry = mapping.get(core)
         if not entry:
             return content
         repl = entry.get(lang, "")
-        return repl if repl else content
+        return f"{leading}{repl}{trailing}" if repl else content
 
     def sub_title(m: re.Match[str]) -> str:
         return f"{m.group(1)}{translate(m.group(2))}{m.group(3)}"
