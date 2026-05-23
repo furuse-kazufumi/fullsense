@@ -15,7 +15,7 @@
   "llive 4 層メモリ + Surprise Gate animation": {"en": "llive 4-layer memory + Surprise Gate animation", "zh": "llive 4 层记忆 + Surprise Gate animation", "ko": "llive 4층 메모리 + Surprise Gate animation"},
   "「忘れない LLM」: 4 層メモリ + Bayesian Surprise Gate": {"en": "\"The LLM that Never Forgets\": 4-layer memory + Bayesian Surprise Gate", "zh": "「不会遗忘的 LLM」: 4 层记忆 + Bayesian Surprise Gate", "ko": "「잊지 않는 LLM」: 4층 메모리 + Bayesian Surprise Gate"},
   "入力": {"en": "input", "zh": "输入", "ko": "입력"},
-  "θ 未満 → 書かない": {"en": "< θ → do not write", "zh": "θ 以下 → 不写入", "ko": "θ 미만 → 기록 안 함"},
+  "θ 未満 → 書かない": {"en": "below θ → do not write", "zh": "θ 以下 → 不写入", "ko": "θ 미만 → 기록 안 함"},
   "(意図的に忘れる)": {"en": "(intentionally forget)", "zh": "(故意遗忘)", "ko": "(의도적으로 잊는다)"},
   "驚き (Bayesian surprise) が θ 以上のものだけ 4 層へ書き込み, θ 未満は意図的に忘れる": {"en": "only items with surprise (Bayesian surprise) ≥ θ are written to the 4 layers; below θ is intentionally forgotten", "zh": "只有 surprise (Bayesian surprise) ≥ θ 的内容写入 4 层, θ 以下故意遗忘", "ko": "놀라움 (Bayesian surprise)이 θ 이상인 것만 4층에 기록, θ 미만은 의도적으로 잊는다"}
 }
