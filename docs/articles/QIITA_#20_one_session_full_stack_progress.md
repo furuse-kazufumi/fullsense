@@ -325,10 +325,10 @@ fork PoC を走らせる, という trigger 案を明記している.
 
 ## 関連
 
-- [research/lleval_sota]({{ '/research/lleval_sota' | relative_url }})
-- [research/llgrow_prior_art]({{ '/research/llgrow_prior_art' | relative_url }})
-- [research/cognitive_mesh_vs_sota]({{ '/research/cognitive_mesh_vs_sota' | relative_url }})
-- [spinoff_ideas_2026_05]({{ '/spinoff_ideas_2026_05' | relative_url }})
-- [requirements_lleval_v0.1_draft]({{ '/spec/requirements_lleval_v0.1_draft' | relative_url }})
-- [NEXT_SESSION (人手)]({{ '/NEXT_SESSION' | relative_url }})
-- [NEXT_SESSION (自動)]({{ '/NEXT_SESSION.auto' | relative_url }})
+- [research/lleval_sota](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/research/lleval_sota.md)
+- [research/llgrow_prior_art](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/research/llgrow_prior_art.md)
+- [research/cognitive_mesh_vs_sota](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/research/cognitive_mesh_vs_sota.md)
+- [spinoff_ideas_2026_05](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/spinoff_ideas_2026_05.md)
+- [requirements_lleval_v0.1_draft](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/spec/requirements_lleval_v0.1_draft)
+- [NEXT_SESSION (人手)](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/NEXT_SESSION.md)
+- [NEXT_SESSION (自動)](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/NEXT_SESSION.auto)

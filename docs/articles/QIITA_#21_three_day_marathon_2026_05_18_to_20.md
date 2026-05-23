@@ -504,12 +504,12 @@ memory) の整備が不可欠でした.
 
 ## 関連 (cross-reference)
 
-- [PROGRESS]({{ '/PROGRESS' | relative_url }}) — 累積セッション履歴
-- [NEXT_SESSION (auto)]({{ '/NEXT_SESSION.auto' | relative_url }}) — 毎ターン自動生成
-- [Spec — lleval draft]({{ '/spec/requirements_lleval_v0.1_draft' | relative_url }})
-- [Spec — lleval implementation notes]({{ '/spec/lleval_v0_1_implementation_notes' | relative_url }})
-- [Research hub]({{ '/research/' | relative_url }})
-- [Benchmark Policy]({{ '/benchmarks/policy/' | relative_url }})
+- [PROGRESS](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/PROGRESS.md) — 累積セッション履歴
+- [NEXT_SESSION (auto)](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/NEXT_SESSION.auto) — 毎ターン自動生成
+- [Spec — lleval draft](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/spec/requirements_lleval_v0.1_draft)
+- [Spec — lleval implementation notes](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/spec/lleval_v0_1_implementation_notes.md)
+- [Research hub](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/research/.md)
+- [Benchmark Policy](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/benchmarks/policy/.md)
 - llive コア最適化 experiments log (本リポ外, `D:/projects/llive/docs/experiments/optimize_core_2026_05_20.md` の commit log を参照)
 - maintainer memory:
   - `project_llive_core_optimization_2026_05_20`

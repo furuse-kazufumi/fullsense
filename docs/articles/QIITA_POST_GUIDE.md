@@ -8,7 +8,7 @@ nav_order: 95
 
 > docs/articles/ 直下の `QIITA_#NN_*.md` を Qiita Web UI から投稿するための one-shot ガイド.
 > 各記事の状態は `scripts/qiita_preflight.py` で随時確認可能.
-> 既存 [`POST_CHEATSHEET.md`]({{ '/articles/2026-05-18/POST_CHEATSHEET' | relative_url }}) (#18/#19 専用) を全 #14〜#24 系列に一般化したもの.
+> 既存 [`POST_CHEATSHEET.md`](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/2026-05-18/POST_CHEATSHEET.md) (#18/#19 専用) を全 #14〜#24 系列に一般化したもの.
 
 ## 1. 現状サマリ (2026-05-22 preflight 整備後)
 
@@ -206,8 +206,8 @@ Qiita タグ (5 個) と LinkedIn/Twitter ハッシュタグは別運用:
 
 ## 8. 関連
 
-- [`scripts/qiita_preflight.py`]({{ '/scripts/qiita_preflight.py' | relative_url }}) — 投稿前検査
-- [`scripts/qiita_url_sync.py`]({{ '/scripts/qiita_url_sync.py' | relative_url }}) — 投稿後 URL 一括置換 (TODO)
+- [`scripts/qiita_preflight.py`](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/scripts/qiita_preflight.py) — 投稿前検査
+- [`scripts/qiita_url_sync.py`](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/scripts/qiita_url_sync.py) — 投稿後 URL 一括置換 (TODO)
 - [`QIITA_#24_LINK_MAP.md`](QIITA_#24_LINK_MAP.md) — 投稿後 URL 集約
 - [`2026-05-18/POST_CHEATSHEET.md`](2026-05-18/POST_CHEATSHEET.md) — #18/#19 個別 cheat-sheet (本ガイドの前身)
 - 連載 index: [`QIITA_#24_00_llive_tech_series_index.md`](QIITA_#24_00_llive_tech_series_index.md)
