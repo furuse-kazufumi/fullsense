@@ -1,0 +1,32 @@
+{
+  "Approval Bus verdict flow with Ed25519 signed ledger": {"en": "", "zh": "Approval Bus 裁决流与 Ed25519 签名 ledger", "ko": "Approval Bus 판정 흐름과 Ed25519 서명 ledger"},
+  "llive #24-07 — Approval Bus verdict + Ed25519 audit chain": {"en": "", "zh": "llive #24-07 — Approval Bus 裁决 + Ed25519 audit chain", "ko": "llive #24-07 — Approval Bus 판정 + Ed25519 audit chain"},
+  "Approval Bus — 自己進化する AI が判断を全部署名する": {"en": "Approval Bus — a self-evolving AI signs every decision", "zh": "Approval Bus — 自我进化的 AI 对每个判断都签名", "ko": "Approval Bus — 자기진화하는 AI 가 모든 판단에 서명한다"},
+  "proposal → policy → approve / deny → Ed25519 ledger": {"en": "", "zh": "proposal → policy → approve / deny → Ed25519 ledger", "ko": "proposal → policy → approve / deny → Ed25519 ledger"},
+  "proposal": {"en": "", "zh": "提案", "ko": "제안"},
+  "policy + collusion detector": {"en": "", "zh": "policy + collusion detector", "ko": "policy + collusion detector"},
+  "human / autopolicy": {"en": "", "zh": "human / autopolicy", "ko": "human / autopolicy"},
+  "approve": {"en": "", "zh": "批准", "ko": "승인"},
+  "deny": {"en": "", "zh": "拒绝", "ko": "거부"},
+  "collusion detected": {"en": "", "zh": "检测到 collusion", "ko": "collusion 탐지됨"},
+  "Ed25519 audit chain": {"en": "", "zh": "Ed25519 audit chain", "ko": "Ed25519 audit chain"},
+  "hash + sig + parent_hash": {"en": "", "zh": "hash + sig + parent_hash", "ko": "hash + sig + parent_hash"},
+  "E.4 governance: 共謀検出 → Approval Bus 連携、判断は全部 Ed25519 + SHA-256 で chain": {"en": "E.4 governance: collusion detection → Approval Bus link; every decision is chained with Ed25519 + SHA-256", "zh": "E.4 governance: 共谋检测 → Approval Bus 联动, 所有判断都用 Ed25519 + SHA-256 串成 chain", "ko": "E.4 governance: 공모 탐지 → Approval Bus 연계, 판단은 모두 Ed25519 + SHA-256 으로 chain"},
+
+  "連載進捗 7/8 — 現在: audit": {"en": "series progress 7/8 — current: audit", "zh": "连载进度 7/8 — 当前: audit", "ko": "연재 진행 7/8 — 현재: audit"},
+  "memory": {"en": "", "zh": "记忆", "ko": "메모리"},
+  "思考因子": {"en": "thought factors", "zh": "思考因子", "ko": "사고 인자"},
+
+  "#24-07 theme: Approval Bus + Ed25519 audit chain animation": {"en": "", "zh": "#24-07 theme: Approval Bus + Ed25519 audit chain 动画", "ko": "#24-07 theme: Approval Bus + Ed25519 audit chain 애니메이션"},
+  "「審査つき AI」: Approval Bus + Ed25519 signature chain": {"en": "\"AI with Built-in Review\": Approval Bus + Ed25519 signature chain", "zh": "「带审查的 AI」: Approval Bus + Ed25519 签名链", "ko": "「심사가 붙은 AI」: Approval Bus + Ed25519 서명 체인"},
+  "「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain": {"en": "\"AI with Built-in Review\": runtime_metadata × Approval Bus × Ed25519 audit chain", "zh": "「带审查的 AI」: runtime_metadata × Approval Bus × Ed25519 audit chain", "ko": "「심사가 붙은 AI」: runtime_metadata × Approval Bus × Ed25519 audit chain"},
+  "incoming events": {"en": "", "zh": "incoming events", "ko": "incoming events"},
+  "LoRA attach": {"en": "", "zh": "LoRA attach", "ko": "LoRA attach"},
+  "DB write": {"en": "", "zh": "DB write", "ko": "DB write"},
+  "external API": {"en": "", "zh": "external API", "ko": "external API"},
+  "tool call": {"en": "", "zh": "tool call", "ko": "tool call"},
+  "Approval": {"en": "", "zh": "Approval", "ko": "Approval"},
+  "Bus": {"en": "", "zh": "Bus", "ko": "Bus"},
+  "block #4 (new)": {"en": "", "zh": "block #4 (new)", "ko": "block #4 (new)"},
+  "incoming event → Approval Bus (4 policy orbit) → Ed25519 で署名して block chain に append": {"en": "incoming event → Approval Bus (4 policy orbit) → sign with Ed25519 and append to the block chain", "zh": "incoming event → Approval Bus (4 policy orbit) → 用 Ed25519 签名后 append 到 block chain", "ko": "incoming event → Approval Bus (4 policy orbit) → Ed25519 로 서명하여 block chain 에 append"}
+}

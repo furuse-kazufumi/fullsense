@@ -1,0 +1,29 @@
+{
+  "Population evolution across generations": {"en": "", "zh": "世代间的群体进化", "ko": "세대 간의 집단 진화"},
+  "llive #24-05 — N=64 派生集団の世代遷移": {"en": "llive #24-05 — generational transition of the N=64 derived population", "zh": "llive #24-05 — N=64 派生群体的世代迁移", "ko": "llive #24-05 — N=64 파생 집단의 세대 천이"},
+  "派生集団 N=64 が世代を回す": {"en": "the derived population N=64 turns generations", "zh": "派生群体 N=64 跑世代", "ko": "파생 집단 N=64가 세대를 돌린다"},
+  "v0.B Genome → v0.C subprocess → v0.D meta-mutation → v0.E peer evaluation": {"en": "", "zh": "v0.B Genome → v0.C subprocess → v0.D meta-mutation → v0.E peer evaluation", "ko": "v0.B Genome → v0.C subprocess → v0.D meta-mutation → v0.E peer evaluation"},
+  "fitness ≈ random": {"en": "", "zh": "fitness ≈ random", "ko": "fitness ≈ random"},
+  "red queen kicks in": {"en": "", "zh": "red queen 启动", "ko": "red queen 시작"},
+  "peer eval converging": {"en": "", "zh": "peer eval 收敛中", "ko": "peer eval 수렴 중"},
+  "fitness": {"en": "", "zh": "fitness", "ko": "fitness"},
+  "low": {"en": "", "zh": "低", "ko": "낮음"},
+  "mid": {"en": "", "zh": "中", "ko": "중간"},
+  "high": {"en": "", "zh": "高", "ko": "높음"},
+  "elite": {"en": "", "zh": "精英", "ko": "엘리트"},
+  "v0.B/C/D/E: 1 llive = 1 個体. peer evaluation で評価者の質も世代と共に上がる": {"en": "v0.B/C/D/E: 1 llive = 1 individual. With peer evaluation the quality of the evaluators rises across generations too", "zh": "v0.B/C/D/E: 1 llive = 1 个体. 通过 peer evaluation 评估者的质量也随世代上升", "ko": "v0.B/C/D/E: 1 llive = 1 개체. peer evaluation으로 평가자의 질도 세대와 함께 상승"},
+
+  "連載進捗 5/8 — 現在: v0.E": {"en": "series progress 5/8 — current: v0.E", "zh": "连载进度 5/8 — 当前: v0.E", "ko": "연재 진행 5/8 — 현재: v0.E"},
+  "index": {"en": "", "zh": "index", "ko": "index"},
+  "memory": {"en": "", "zh": "memory", "ko": "memory"},
+  "思考因子": {"en": "thought factors", "zh": "思考因子", "ko": "사고 인자"},
+  "backend": {"en": "", "zh": "backend", "ko": "backend"},
+  "audit": {"en": "", "zh": "audit", "ko": "audit"},
+
+  "#24-05 theme: v0.E 派生集団進化 (Genome + 世代交代)": {"en": "#24-05 theme: v0.E derived-population evolution (Genome + generational turnover)", "zh": "#24-05 theme: v0.E 派生群体进化 (Genome + 世代交替)", "ko": "#24-05 theme: v0.E 파생 집단 진화 (Genome + 세대 교체)"},
+  "v0.E coevolution: 集団進化 + 世代交代 animation": {"en": "v0.E coevolution: population evolution + generational turnover animation", "zh": "v0.E coevolution: 群体进化 + 世代交替 animation", "ko": "v0.E coevolution: 집단 진화 + 세대 교체 animation"},
+  "「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化 + SegmentCrossover": {"en": "\"The Population that Learns\": v0.B/C/D/E derived-population evolution + SegmentCrossover", "zh": "「学习的群体」: v0.B/C/D/E 派生群体进化 + SegmentCrossover", "ko": "「집단이 학습하는 AI」: v0.B/C/D/E 파생 집단 진화 + SegmentCrossover"},
+  "集団平均 fitness (世代経過)": {"en": "population mean fitness (over generations)", "zh": "群体平均 fitness (随世代)", "ko": "집단 평균 fitness (세대 경과)"},
+  "+40% improvement (30 体 × 12 世代)": {"en": "+40% improvement (30 individuals × 12 generations)", "zh": "+40% improvement (30 体 × 12 世代)", "ko": "+40% improvement (30 개체 × 12 세대)"},
+  "SegmentCrossover で gene segment swap, Tournament で淘汰, 集団全体が世代経過で fitness 収束": {"en": "SegmentCrossover swaps gene segments, Tournament culls, and the whole population converges in fitness over generations", "zh": "SegmentCrossover 做 gene segment swap, Tournament 淘汰, 整个群体随世代 fitness 收敛", "ko": "SegmentCrossover로 gene segment swap, Tournament로 도태, 집단 전체가 세대 경과로 fitness 수렴"}
+}

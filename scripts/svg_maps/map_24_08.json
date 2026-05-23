@@ -1,0 +1,157 @@
+{
+  "lleval 5+1 honest disclosure radar across time": {
+    "en": "lleval 5+1 honest disclosure radar across time",
+    "zh": "lleval 5+1 honest disclosure 雷达随时间变化",
+    "ko": "lleval 5+1 honest disclosure 레이더의 시계열 변화"
+  },
+  "llive #24-08 — lleval honest disclosure 5+1 因子 radar": {
+    "en": "llive #24-08 — lleval honest disclosure 5+1 factor radar",
+    "zh": "llive #24-08 — lleval honest disclosure 5+1 因子 radar",
+    "ko": "llive #24-08 — lleval honest disclosure 5+1 인자 radar"
+  },
+  "lleval — 「速い AI」ではなく「速いと思い込ませる構成」を見抜く": {
+    "en": "lleval — spot not the \"fast AI\" but the \"setup that makes you believe it is fast\"",
+    "zh": "lleval — 看穿的不是「快的 AI」而是「让你误以为快的构成」",
+    "ko": "lleval — 「빠른 AI」가 아니라 「빠르다고 착각하게 만드는 구성」을 간파한다"
+  },
+  "honest disclosure 5+1 因子 radar: Speed · Quality · Bias · Cost · Reproducibility · Disclosure depth": {
+    "en": "honest disclosure 5+1 factor radar: Speed · Quality · Bias · Cost · Reproducibility · Disclosure depth",
+    "zh": "honest disclosure 5+1 因子 radar: Speed · Quality · Bias · Cost · Reproducibility · Disclosure depth",
+    "ko": "honest disclosure 5+1 인자 radar: Speed · Quality · Bias · Cost · Reproducibility · Disclosure depth"
+  },
+  "naïve run #1": {
+    "en": "naïve run #1",
+    "zh": "naïve run #1",
+    "ko": "naïve run #1"
+  },
+  "honest run #2": {
+    "en": "honest run #2",
+    "zh": "honest run #2",
+    "ko": "honest run #2"
+  },
+  "5+1 因子": {
+    "en": "5+1 factors",
+    "zh": "5+1 因子",
+    "ko": "5+1 인자"
+  },
+  "① Speed (latency)": {
+    "en": "① Speed (latency)",
+    "zh": "① Speed (延迟)",
+    "ko": "① Speed (지연)"
+  },
+  "② Quality (score)": {
+    "en": "② Quality (score)",
+    "zh": "② Quality (得分)",
+    "ko": "② Quality (점수)"
+  },
+  "③ Bias (judge / position)": {
+    "en": "③ Bias (judge / position)",
+    "zh": "③ Bias (judge / 位置)",
+    "ko": "③ Bias (judge / 위치)"
+  },
+  "④ Cost ($)": {
+    "en": "④ Cost ($)",
+    "zh": "④ Cost ($)",
+    "ko": "④ Cost ($)"
+  },
+  "⑤ Reproducibility": {
+    "en": "⑤ Reproducibility",
+    "zh": "⑤ Reproducibility",
+    "ko": "⑤ Reproducibility"
+  },
+  "+1 Disclosure depth": {
+    "en": "+1 Disclosure depth",
+    "zh": "+1 Disclosure depth",
+    "ko": "+1 Disclosure depth"
+  },
+  "変な良結果?": {
+    "en": "weirdly good result?",
+    "zh": "奇怪的好结果?",
+    "ko": "이상하게 좋은 결과?"
+  },
+  "→ 必ず内訳": {
+    "en": "→ always the breakdown",
+    "zh": "→ 必查内訳",
+    "ko": "→ 반드시 내역을"
+  },
+  "→ 5+1 で分解": {
+    "en": "→ decompose by 5+1",
+    "zh": "→ 用 5+1 分解",
+    "ko": "→ 5+1 로 분해"
+  },
+  "→ 真の改善か": {
+    "en": "→ a real improvement?",
+    "zh": "→ 是真改善吗",
+    "ko": "→ 진짜 개선인가"
+  },
+  "→ 偽の構成か": {
+    "en": "→ a fake setup?",
+    "zh": "→ 是假构成吗",
+    "ko": "→ 가짜 구성인가"
+  },
+  "progressive size matrix + judge rotation + cross-AI peer eval — radar が時系列で形を変えていく": {
+    "en": "progressive size matrix + judge rotation + cross-AI peer eval — the radar reshapes over time",
+    "zh": "progressive size matrix + judge rotation + cross-AI peer eval — radar 随时间改变形状",
+    "ko": "progressive size matrix + judge rotation + cross-AI peer eval — radar 가 시계열로 형태를 바꿔간다"
+  },
+  "連載進捗 8/8 — 現在: lleval": {
+    "en": "series progress 8/8 — current: lleval",
+    "zh": "连载进度 8/8 — 当前: lleval",
+    "ko": "연재 진행 8/8 — 현재: lleval"
+  },
+  "思考因子": {
+    "en": "thought factors",
+    "zh": "思考因子",
+    "ko": "사고 인자"
+  },
+  "#24-08 theme: lleval 5+1 因子 spider chart + judge rotation": {
+    "en": "#24-08 theme: lleval 5+1 factor spider chart + judge rotation",
+    "zh": "#24-08 theme: lleval 5+1 因子 spider chart + judge rotation",
+    "ko": "#24-08 theme: lleval 5+1 인자 spider chart + judge rotation"
+  },
+  "lleval: honest disclosure 5+1 因子分解 spider + judge rotation": {
+    "en": "lleval: honest disclosure 5+1 factor decomposition spider + judge rotation",
+    "zh": "lleval: honest disclosure 5+1 因子分解 spider + judge rotation",
+    "ko": "lleval: honest disclosure 5+1 인자 분해 spider + judge rotation"
+  },
+  "「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解 + judge rotation": {
+    "en": "\"Making the Glasses\": lleval — honest disclosure 5+1 factor decomposition + judge rotation",
+    "zh": "「制作眼镜」: lleval — honest disclosure 5+1 因子分解 + judge rotation",
+    "ko": "「안경을 만든다」: lleval — honest disclosure 5+1 인자 분해 + judge rotation"
+  },
+  "正答率": {
+    "en": "Accuracy",
+    "zh": "正确率",
+    "ko": "정답률"
+  },
+  "確信度": {
+    "en": "Confidence",
+    "zh": "确信度",
+    "ko": "확신도"
+  },
+  "遅延": {
+    "en": "Latency",
+    "zh": "延迟",
+    "ko": "지연"
+  },
+  "コスト": {
+    "en": "Cost",
+    "zh": "成本",
+    "ko": "비용"
+  },
+  "透明性": {
+    "en": "Transparency",
+    "zh": "透明性",
+    "ko": "투명성"
+  },
+  "+1 補助": {
+    "en": "+1 auxiliary",
+    "zh": "+1 辅助",
+    "ko": "+1 보조"
+  },
+  "progressive size matrix (xs/s/m/l/xl) で stress curve, 5+1 因子で「変に高速」を 5 因子に分解検証 ([[feedback-benchmark-honest-disclosure]] 準拠)": {
+    "en": "stress curve via progressive size matrix (xs/s/m/l/xl), decompose-and-verify \"weirdly fast\" into 5 factors with the 5+1 factors (per [[feedback-benchmark-honest-disclosure]])",
+    "zh": "用 progressive size matrix (xs/s/m/l/xl) 取 stress 曲线, 用 5+1 因子把「奇快」分解为 5 因子验证 (遵循 [[feedback-benchmark-honest-disclosure]])",
+    "ko": "progressive size matrix (xs/s/m/l/xl) 로 stress curve, 5+1 인자로 「이상하게 빠름」을 5 인자로 분해 검증 ([[feedback-benchmark-honest-disclosure]] 준거)"
+  }
+}
