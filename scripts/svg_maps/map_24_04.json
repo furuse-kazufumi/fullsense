@@ -1,0 +1,20 @@
+{
+  "UCB1 bandit arm selection and score curve": {"en": "", "zh": "UCB1 bandit arm 选择与 score 曲线", "ko": "UCB1 bandit arm 선택과 score 곡선"},
+  "llive #24-04 — UCB1 が arm を選ぶ「速い小脳」": {"en": "llive #24-04 — UCB1 picks the arm: the 'fast cerebellum'", "zh": "llive #24-04 — UCB1 选 arm 的「快速小脑」", "ko": "llive #24-04 — UCB1이 arm을 고르는 「빠른 소뇌」"},
+  "UCB1 が arm を選ぶ — 速い小脳の収束": {"en": "UCB1 picks the arm — convergence of the fast cerebellum", "zh": "UCB1 选 arm — 快速小脑的收敛", "ko": "UCB1이 arm을 고른다 — 빠른 소뇌의 수렴"},
+  "SynapticSelector · explore / exploit · 同一個体内の synapse 選択": {"en": "SynapticSelector · explore / exploit · synapse selection inside one individual", "zh": "SynapticSelector · explore / exploit · 同一个体内的 synapse 选择", "ko": "SynapticSelector · explore / exploit · 동일 개체 내의 synapse 선택"},
+  "arm C  (winner)": {"en": "", "zh": "arm C  (胜者)", "ko": "arm C  (승자)"},
+  "score curve (cumulative reward)": {"en": "", "zh": "score 曲线 (累计 reward)", "ko": "score 곡선 (누적 reward)"},
+  "B-series: SynapticSelector が探索→収束、Hebbian 強化で synapse が太る": {"en": "B-series: SynapticSelector explores → converges; Hebbian reinforcement thickens the synapse", "zh": "B-series: SynapticSelector 探索→收敛, Hebbian 强化让 synapse 变粗", "ko": "B-series: SynapticSelector가 탐색→수렴, Hebbian 강화로 synapse가 굵어진다"},
+
+  "連載進捗 4/8 — 現在: B-series": {"en": "series progress 4/8 — current: B-series", "zh": "连载进度 4/8 — 当前: B-series", "ko": "연재 진행 4/8 — 현재: B-series"},
+  "思考因子": {"en": "thought factors", "zh": "思考因子", "ko": "사고 인자"},
+
+  "#24-04 theme: B-series 収束型最適化 ε-greedy bandit + UCB1": {"en": "#24-04 theme: B-series convergent optimization ε-greedy bandit + UCB1", "zh": "#24-04 theme: B-series 收敛型优化 ε-greedy bandit + UCB1", "ko": "#24-04 theme: B-series 수렴형 최적화 ε-greedy bandit + UCB1"},
+  "B-series: SynapticSelector ε-greedy + UCB1 bandit visualization": {"en": "", "zh": "B-series: SynapticSelector ε-greedy + UCB1 bandit 可视化", "ko": "B-series: SynapticSelector ε-greedy + UCB1 bandit 시각화"},
+  "「収束する脳」B-series: SynapticSelector ε-greedy × UCB1 × Hebbian": {"en": "\"The Converging Brain\" B-series: SynapticSelector ε-greedy × UCB1 × Hebbian", "zh": "「收敛的大脑」B-series: SynapticSelector ε-greedy × UCB1 × Hebbian", "ko": "「수렴하는 뇌」B-series: SynapticSelector ε-greedy × UCB1 × Hebbian"},
+  "5 variants (bandit arms) — UCB1 が探索 / 活用を balance": {"en": "5 variants (bandit arms) — UCB1 balances exploration / exploitation", "zh": "5 variants (bandit arms) — UCB1 balance 探索 / 活用", "ko": "5 variants (bandit arms) — UCB1이 탐색 / 활용을 balance"},
+  "arm 1 (best)": {"en": "", "zh": "arm 1 (最佳)", "ko": "arm 1 (최적)"},
+  "SynapticSelector の選択履歴 (上端 arm を pick)": {"en": "SynapticSelector's selection history (picks the top arm)", "zh": "SynapticSelector 的选择历史 (pick 上端 arm)", "ko": "SynapticSelector의 선택 이력 (상단 arm을 pick)"},
+  "UCB1 = μ̂ + √(2 ln t / n) — 試行回数 n の少ない arm にもボーナス, exploration / exploitation を自動 balance": {"en": "UCB1 = μ̂ + √(2 ln t / n) — bonus even for arms with few trials n; auto-balances exploration / exploitation", "zh": "UCB1 = μ̂ + √(2 ln t / n) — 对试验次数 n 少的 arm 也给 bonus, 自动 balance exploration / exploitation", "ko": "UCB1 = μ̂ + √(2 ln t / n) — 시행 횟수 n이 적은 arm에도 보너스, exploration / exploitation을 자동 balance"}
+}
