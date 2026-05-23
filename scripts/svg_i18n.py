@@ -34,6 +34,17 @@ import sys
 from pathlib import Path
 from xml.dom import minidom
 
+
+def _ensure_utf8_stdout() -> None:
+    """Reconfigure stdout/stderr to UTF-8 so em-dash / CJK survive cp932 consoles."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            try:
+                reconfigure(encoding="utf-8")
+            except (ValueError, OSError):  # pragma: no cover - stream-dependent
+                pass
+
 # <title>…</title> | <text …>…</text> | aria-label="…"
 _TITLE_RE = re.compile(r"(<title>)(.*?)(</title>)", re.DOTALL)
 _TEXT_RE = re.compile(r"(<text\b[^>]*>)(.*?)(</text>)", re.DOTALL)
