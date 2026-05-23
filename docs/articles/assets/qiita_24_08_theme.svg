@@ -67,15 +67,12 @@
       </circle>
       <text font-size="10" fill="#22d3ee" text-anchor="middle" font-weight="700">consensus</text>
     </g>
-    <!-- rotating pulse highlighting the currently active judge -->
+    <!-- rotating pulse highlighting the currently active judge (inline path: imgix が mpath xlink 参照を解決できず空を返すため) -->
     <g>
       <circle r="6" fill="#fbbf24">
-        <animateMotion dur="8s" repeatCount="indefinite">
-          <mpath xlink:href="#judgepath"/>
-        </animateMotion>
+        <animateMotion dur="8s" repeatCount="indefinite" path="M0,-100 A100,100 0 1 1 -0.1,-100 Z"/>
       </circle>
     </g>
-    <path id="judgepath" d="M0,-100 A100,100 0 1 1 -0.1,-100 Z" fill="none" stroke="none"/>
   </g>
 
   <!-- bottom legend -->
