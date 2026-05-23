@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 86" width="1000" height="86" role="img" aria-label="連載進捗 7/8 — 現在: audit">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 86" role="img" aria-label="連載進捗 7/8 — 現在: audit" style="width:100%;height:auto;max-width:1200px">
   <title>連載進捗 7/8 — 現在: audit</title>
   <rect width="1000" height="86" fill="#0f172a"/>
   <line x1="60" y1="40" x2="830" y2="40" stroke="#22c55e" stroke-width="2"/>

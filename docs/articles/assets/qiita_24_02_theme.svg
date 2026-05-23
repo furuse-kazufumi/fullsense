@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" width="1000" height="360" role="img" aria-label="#24-02 theme: 10 思考因子 radar + COG-MESH ring">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-label="#24-02 theme: 10 思考因子 radar + COG-MESH ring" style="width:100%;height:auto;max-width:1200px">
   <title>10 思考因子 radar pulse + COG-MESH 9 component</title>
   <defs>
     <radialGradient id="bg02" cx="0.5" cy="0.5" r="0.7">

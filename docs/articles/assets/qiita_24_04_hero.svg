@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="UCB1 bandit arm selection and score curve">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="UCB1 bandit arm selection and score curve" style="width:100%;height:auto;max-width:1200px">
   <title>llive #24-04 — UCB1 が arm を選ぶ「速い小脳」</title>
   <desc>Three bandit arms pulse in turn as UCB1 selects them; a score curve at the right rises and converges. SMIL-only animation.</desc>
   <defs>
