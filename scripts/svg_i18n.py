@@ -53,17 +53,26 @@ _ARIA_RE = re.compile(r'(aria-label=")([^"]*)(")')
 LANGS = ("en", "zh", "ko")
 
 
+def _split_ws(content: str) -> tuple[str, str, str]:
+    """Split into (leading_ws, core, trailing_ws) so maps key on the trimmed core."""
+    core = content.strip()
+    if not core:
+        return "", content, ""
+    start = content.index(core)
+    return content[:start], core, content[start + len(core):]
+
+
 def _iter_translatable(svg: str) -> list[str]:
-    """Return translatable strings in document order (may contain duplicates)."""
+    """Return trimmed translatable cores in document order (may contain duplicates)."""
     spans: list[tuple[int, str]] = []
     for m in _TITLE_RE.finditer(svg):
-        spans.append((m.start(2), m.group(2)))
+        spans.append((m.start(2), _split_ws(m.group(2))[1]))
     for m in _TEXT_RE.finditer(svg):
-        spans.append((m.start(2), m.group(2)))
+        spans.append((m.start(2), _split_ws(m.group(2))[1]))
     for m in _ARIA_RE.finditer(svg):
-        spans.append((m.start(2), m.group(2)))
+        spans.append((m.start(2), _split_ws(m.group(2))[1]))
     spans.sort(key=lambda t: t[0])
-    return [s for _, s in spans]
+    return [s for _, s in spans if s]
 
 
 def _unique_ordered(items: list[str]) -> list[str]:
