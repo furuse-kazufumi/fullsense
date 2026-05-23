@@ -144,7 +144,7 @@ def cmd_verify(paths: list[str]) -> int:
     rc = 0
     for p in paths:
         try:
-            minidom.parseString(Path(p).read_text(encoding="utf-8").encode("utf-8"))
+            minidom.parseString(Path(p).read_bytes())
             print(f"ok   {p}")
         except Exception as exc:  # noqa: BLE001 - report any parse failure
             print(f"FAIL {p}: {exc}", file=sys.stderr)
