@@ -4,8 +4,6 @@ tags:
   - FullSense
   - llive
   - 解説
-  - TODO_TAG
-  - TODO_TAG
 private: false
 updated_at: '2026-05-22'
 id: null
@@ -13,6 +11,11 @@ organization_url_name: null
 slide: false
 ignorePublish: true
 ---
+<!-- h2-trans-placed -->
+
+<!-- trilingual-subtitle-placed -->
+<small><strong>EN:</strong> “AI that learns as a population”: v0.B/C/D/E coevolution — series centerpiece<br>
+<strong>中:</strong> "集群学习的 AI": v0.B/C/D/E 派生群体进化 (系列核心)</small>
 <!-- section-separators-placed -->
 
 # llive 完全解説 (5) — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
@@ -32,16 +35,9 @@ ignorePublish: true
 > 分離) → v0.D (self-adaptive + meta mutation) → v0.E (peer evaluation +
 > persona + governance) の 4 段階を **1 本に総括**.
 
-> **draft 段階** (2026-05-21 marathon). full 10x volume (100-150k 字) 版は
-> 次セッション以降. 本 draft は骨子 + 12 主要セクション + 数字裏付け +
-> 先行研究 9 件.
 >
-> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_#24_XX_*` (内部参照)` 形式の
-> 他記事参照は **draft 仮 link**. Qiita 投稿後に確定する個別記事 URL に
-> 一括置換が必要. mapping は [`QIITA_#24_LINK_MAP.md`](QIITA_#24_LINK_MAP.md)
-> に集約. 投稿時に追々修正.
-
 ## 0. 連載中での位置づけ — 本連載の中核
+<small><strong>EN:</strong> 0. Position within the series - the centerpiece / <strong>中:</strong> 0. 在系列中的定位 - 本系列的核心</small>
 
 ```
 #24-00 series index
@@ -60,11 +56,11 @@ ignorePublish: true
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
-
 <!-- theme-svg-placed -->
 ![theme — v0.E 派生集団進化: 世代交代 + fitness 収束 (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_theme.svg)
 
 ## 1. なぜ集団進化なのか — Hillis の警告
+<small><strong>EN:</strong> 1. Why population-based evolution - Hillis warning / <strong>中:</strong> 1. 为什么选群体进化 - Hillis 的警告</small>
 
 W. D. Hillis 1990 が示したのは「**評価者と被評価者が同時に進化する**」と
 **Red Queen Effect** で集団全体の質が **自走で上がる**. 単一 best を選び続け
@@ -80,6 +76,7 @@ fitness, fitness が次世代の selection. すると:
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 2. v0.B — Genome / EvolutionLoop / 並列 scheduler
+<small><strong>EN:</strong> 2. v0.B - Genome / EvolutionLoop / parallel scheduler / <strong>中:</strong> 2. v0.B - Genome / EvolutionLoop / 并行 scheduler</small>
 
 v0.B core は GA 古典. 着地 module:
 
@@ -95,6 +92,7 @@ v0.B core は GA 古典. 着地 module:
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 3. v0.C — subprocess 分離 + 派生実走
+<small><strong>EN:</strong> 3. v0.C - subprocess isolation + variant live run / <strong>中:</strong> 3. v0.C - 子进程隔离 + 派生实际运行</small>
 
 LLM 推論は 1 派生個体あたり OS process 1 つに **完全分離** したい. 理由は:
 
@@ -109,6 +107,7 @@ ThreadPool 並列 + timeout + retries + cleanup. これで `variant_runner.py`
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 4. v0.D — 自己参照 mutation (Schwefel σSA-ES + meta mutation)
+<small><strong>EN:</strong> 4. v0.D - self-referential mutation (Schwefel sigma-SA-ES + meta-mutation) / <strong>中:</strong> 4. v0.D - 自我参照 mutation (Schwefel sigma-SA-ES + 元 mutation)</small>
 
 v0.D core は「**mutation rate そのものを進化させる**」.
 
@@ -123,6 +122,7 @@ v0.D core は「**mutation rate そのものを進化させる**」.
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 5. v0.E — peer evaluation + persona ontology + governance
+<small><strong>EN:</strong> 5. v0.E - peer evaluation + persona ontology + governance / <strong>中:</strong> 5. v0.E - peer 评估 + persona ontology + governance</small>
 
 v0.E core. CE-01〜34 を含む. 主要 module:
 
@@ -182,6 +182,7 @@ v0.E core. CE-01〜34 を含む. 主要 module:
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 6. 数字で見る本日 (2026-05-21) 着地
+<small><strong>EN:</strong> 6. Today (2026-05-21) landing by the numbers / <strong>中:</strong> 6. 用数字看本日 (2026-05-21) 的着地</small>
 
 | 指標 | 値 |
 |---|---|
@@ -198,6 +199,7 @@ v0.E core. CE-01〜34 を含む. 主要 module:
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 7. 先行研究 9 件 (本記事の骨を作る)
+<small><strong>EN:</strong> 7. 9 prior works forming the backbone of this article / <strong>中:</strong> 7. 9 项先行研究 (构成本文骨架)</small>
 
 1. Hillis, W. D. (1990). *Coevolving parasites improve simulated evolution*. Physica D.
 2. Mouret, J.-B. & Clune, J. (2015). *Illuminating search spaces by mapping elites*. arXiv:1504.04909.
@@ -212,6 +214,7 @@ v0.E core. CE-01〜34 を含む. 主要 module:
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 8. 三重縞 — 思考因子 / persona / TRIZ の 3 層同居
+<small><strong>EN:</strong> 8. Triple stripe - coexistence of thought factors / persona / TRIZ across 3 layers / <strong>中:</strong> 8. 三重条纹 - 思考因子 / persona / TRIZ 三层并存</small>
 
 ユーザー言語化の concept. 派生個体内で:
 
@@ -227,6 +230,7 @@ quality-diversity の MAP-Elites grid はこの 3 layer の交差点を grid 化
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 9. Rust addendum (#24-04 と #24-05 を繋ぐ)
+<small><strong>EN:</strong> 9. Rust addendum (bridging #24-04 and #24-05) / <strong>中:</strong> 9. Rust 附录 (连接 #24-04 和 #24-05)</small>
 
 `docs/rust_hotspot_v0E_addendum.md` (本日新規) で RUST-15 〜 18 を spec 化:
 
@@ -243,6 +247,7 @@ N=64 派生の集計系 hot path (Rust 化で 5-15x 狙い).
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 10. honest disclosure
+<small><strong>EN:</strong> 10. Honest disclosure / <strong>中:</strong> 10. 诚实披露</small>
 
 - **「v0.E の効果」はベンチ未取得** — module は全 PASS だが「30 世代で
   baseline より 30% diversity 維持」のような仮説 H10 / H11 は **未検証**.
@@ -262,6 +267,7 @@ N=64 派生の集計系 hot path (Rust 化で 5-15x 狙い).
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 11. Mermaid — v0.E 全体像
+<small><strong>EN:</strong> 11. Mermaid - v0.E overview / <strong>中:</strong> 11. Mermaid - v0.E 全貌</small>
 
 ```mermaid
 flowchart TD
@@ -286,6 +292,7 @@ flowchart TD
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 12. 期待値 — 次に来るもの
+<small><strong>EN:</strong> 12. Expectations - what comes next / <strong>中:</strong> 12. 期望值 - 接下来要做的</small>
 
 - **v0.7 Rust 高速化**: `docs/rust_hotspot_v0E_addendum.md` の RUST-15〜18.
 - **v0.E E.5 (League mode)** — AlphaStar 風 Main / Exploiter / League Exploiter.
@@ -299,8 +306,9 @@ flowchart TD
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 13. 2026-05-22 追記 — Rust 高速化 RUST-15/16/17 着地
+<small><strong>EN:</strong> 13. 2026-05-22 addendum - Rust speedup RUST-15/16/17 landed / <strong>中:</strong> 13. 2026-05-22 追记 - Rust 加速 RUST-15/16/17 落地</small>
 
-`goal_release_ready_v0E_rust` (内部参照) addendum の 3 kernel を 1 セッションで着地.
+`goal_release_ready_v0E_rust` addendum の 3 kernel を 1 セッションで着地.
 連載中核記事として最新成果を反映:
 
 ### 13.1 着地 3 kernel

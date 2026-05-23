@@ -14,6 +14,11 @@ organization_url_name: null
 slide: false
 ignorePublish: true
 ---
+<!-- h2-trans-placed -->
+
+<!-- trilingual-subtitle-placed -->
+<small><strong>EN:</strong> llive series navigator — 8 main chapters + index (architecture overview)<br>
+<strong>中:</strong> llive 系列导览 — 8 大分类 + 索引 (架构总览)</small>
 <!-- section-separators-placed -->
 
 <!--
@@ -26,10 +31,8 @@ Qiita タグ 5 個 (FullSense / llive / 解説 / アルゴリズム / SoftwareAr
 <!-- progress-svg-placed -->
 ![連載進捗 (0/8) — 現在: index](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_00_progress.svg)
 
-> 投稿可否は user 判断. これは agent 自律ドラフト. memory
-> `feedback_articles_taxonomy_split` 準拠の **大/中/小分類** series 構成.
-
 ## 0. この series について
+<small><strong>EN:</strong> 0. About this series / <strong>中:</strong> 0. 关于本系列</small>
 
 llive (FullSense ™ 思考層) を **構成する技術 / アルゴリズムを名称ごとに
 解説する series** です. 1 記事に詰め込むと 8 万字級になるため,
@@ -44,11 +47,12 @@ llive (FullSense ™ 思考層) を **構成する技術 / アルゴリズムを
 - **cross-link** (前 / 次 / 本 index / repo)
 
 8 記事は **週 2 本ペース** で 1 ヶ月かけて publish 予定. ja Qiita + en
-Medium 並走 (`feedback-overseas-tech-platforms` (内部参照) に従う).
+Medium 並走 (`feedback-overseas-tech-platforms` に従う).
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 1. Series 構成 (8 大分類)
+<small><strong>EN:</strong> 1. Series structure (8 main chapters) / <strong>中:</strong> 1. 系列结构 (8 大分类)</small>
 
 | # | タイトル (クリックで各章) | 中分類 | 想定文字数 | 公開 |
 |---|---|---|---|---|
@@ -68,6 +72,7 @@ Medium 並走 (`feedback-overseas-tech-platforms` (内部参照) に従う).
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 2. 全体図 (8 layer の関係)
+<small><strong>EN:</strong> 2. Overall map (8-layer relationships) / <strong>中:</strong> 2. 总图 (8 层关系)</small>
 
 ```mermaid
 flowchart TB
@@ -104,6 +109,7 @@ flowchart TB
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 3. 命名規約
+<small><strong>EN:</strong> 3. Naming conventions / <strong>中:</strong> 3. 命名规约</small>
 
 ### 3.1 タイトル形式 (2026-05-22 確定統一規約)
 
@@ -144,8 +150,9 @@ en 版は `_en.md` suffix.
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 4. 共通フォーマット (各記事に適用)
+<small><strong>EN:</strong> 4. Common format applied to each article / <strong>中:</strong> 4. 各文章通用格式</small>
 
-### a. 冒頭 hook (`feedback-articles-concept-hook` (内部参照))
+### a. 冒頭 hook (`feedback-articles-concept-hook`)
 
 1-2 段落で「**この記事の主題 + 数字 + キー名称**」を凝縮.
 
@@ -155,7 +162,7 @@ en 版は `_en.md` suffix.
 
 ### c. 小分類 = `### <class/function/機能名>` 見出し
 
-実コードへの GitHub link を **必ず** 付ける (`feedback-qiita-github-links` (内部参照)):
+実コードへの GitHub link を **必ず** 付ける (`feedback-qiita-github-links`):
 
 ```markdown
 ### SynapticSelector
@@ -170,7 +177,7 @@ bounded modification (§E2) で min/max clip 必須.
 
 中分類後の小節として「**なぜこの設計か**」を honest disclosure.
 
-### e. References (`feedback-articles-references-section` (内部参照))
+### e. References (`feedback-articles-references-section`)
 
 学術 / OSS / 内部 の最低 3 区分.
 
@@ -185,15 +192,10 @@ bounded modification (§E2) で min/max clip 必須.
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 ```
 
-> ⚠ **Cross-link URL は Qiita 投稿後に確定する**. draft 段階では各記事の
-> 本文中で `#24-XX` / ``QIITA_#24_XX_*` (内部参照)` の **仮表記** で参照し, 投稿後に
-> 個別記事 URL (`https://qiita.com/.../items/<hash>`) に **一括置換**.
-> mapping は [`QIITA_#24_LINK_MAP.md`](QIITA_#24_LINK_MAP.md) で唯一の
-> source of truth として管理. 投稿時に **追々修正**する運用.
-
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 5. 想定読者
+<small><strong>EN:</strong> 5. Intended readers / <strong>中:</strong> 5. 目标读者</small>
 
 - **エンジニア** (Python + LLM 基礎知識あり)
 - **AI researcher** (LLM の周辺アーキテクチャに興味)
@@ -203,6 +205,7 @@ bounded modification (§E2) で min/max clip 必須.
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 6. 公開順 (週 2 本ペース)
+<small><strong>EN:</strong> 6. Publishing order (2 articles / week) / <strong>中:</strong> 6. 发布顺序 (每周 2 篇)</small>
 
 | 週 | 公開記事 |
 |---|---|
@@ -216,6 +219,7 @@ bounded modification (§E2) で min/max clip 必須.
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 7. References (本 index)
+<small><strong>EN:</strong> 7. References (this index) / <strong>中:</strong> 7. 参考资料 (本索引)</small>
 
 ### 内部 cross-reference
 
@@ -240,6 +244,7 @@ bounded modification (§E2) で min/max clip 必須.
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 8. 状態 (2026-05-21 着手 → 2026-05-22 更新)
+<small><strong>EN:</strong> 8. Status (started 2026-05-21, updated 2026-05-22) / <strong>中:</strong> 8. 状态 (2026-05-21 启动 / 2026-05-22 更新)</small>
 
 - ✅ index (本ファイル) 着地
 - ✅ **#24-01 〜 #24-08 draft 全 9 本着地** (2026-05-22 marathon 内)

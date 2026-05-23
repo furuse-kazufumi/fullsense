@@ -4,8 +4,6 @@ tags:
   - FullSense
   - llive
   - 解説
-  - TODO_TAG
-  - TODO_TAG
 private: false
 updated_at: '2026-05-22'
 id: null
@@ -13,6 +11,11 @@ organization_url_name: null
 slide: false
 ignorePublish: true
 ---
+<!-- h2-trans-placed -->
+
+<!-- trilingual-subtitle-placed -->
+<small><strong>EN:</strong> “Crafting the spectacles”: lleval — evaluating AI via 5+1 honest-disclosure factor decomposition<br>
+<strong>中:</strong> "打造眼镜": lleval — 用 honest disclosure 5+1 因子分解评估 AI</small>
 <!-- section-separators-placed -->
 
 # llive 完全解説 (8) — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する
@@ -24,21 +27,16 @@ ignorePublish: true
 
 > **コンセプト hook**: AI を作るだけでは足りない. **AI を見る眼鏡** が要る.
 > lleval は llive と並走する **evaluation framework** で, 「LLM が異常に
-> 良い結果を出したら必ず内訳を疑う」という `feedback_benchmark_honest_disclosure` (内部参照)
+> 良い結果を出したら必ず内訳を疑う」という `feedback_benchmark_honest_disclosure`
 > ルールを **コードの一級概念** に昇格させた. progressive size matrix で
 > stress curve を取り, judge rotation で position bias を消す.
 > 
 > 結論を先に出すと: **「速い AI」ではなく「速いと思い込ませる構成」** を見抜く
 > 道具.
 
-> **draft 段階** (2026-05-21 marathon). full 10x volume 版は次セッション.
 >
-> ⚠ **Cross-link 注意**: 本文中の `#24-XX` / ``QIITA_#24_XX_*` (内部参照)` 形式の
-> 他記事参照は **draft 仮 link**. Qiita 投稿後に確定する個別記事 URL に
-> 一括置換が必要. mapping は [`QIITA_#24_LINK_MAP.md`](QIITA_#24_LINK_MAP.md)
-> に集約. 投稿時に追々修正.
-
 ## 0. 連載中での位置づけ
+<small><strong>EN:</strong> 0. Position within the series / <strong>中:</strong> 0. 在系列中的定位</small>
 
 ```
 #24-00 series index
@@ -57,11 +55,11 @@ ignorePublish: true
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
-
 <!-- theme-svg-placed -->
 ![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_theme.svg)
 
 ## 1. lleval の出自 — honest disclosure 事件
+<small><strong>EN:</strong> 1. Origin of lleval - the honest-disclosure incident / <strong>中:</strong> 1. lleval 的由来 - honest disclosure 事件</small>
 
 事の発端は 2026-05-17 の benchmark. llive が他社 LLM API より **異常に速く**
 出た数字があった. 普通なら勝った気になるところを, ユーザーは「**内訳を
@@ -71,13 +69,14 @@ ignorePublish: true
 - **chars 指標が不公平** (英語 token を文字数換算)
 - **subprocess RTT を除外** (起動コストを無視)
 
-3 つの artifact が複合していた. これを記録 (`feedback_benchmark_honest_disclosure` (内部参照))
+3 つの artifact が複合していた. これを記録 (`feedback_benchmark_honest_disclosure`)
 してから, 「ベンチで異常結果が出たら必ず 5 つの artifact を疑う」を
 **外部化** したくなった. それが lleval.
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 2. 5+1 因子分解 — honest disclosure の構造化
+<small><strong>EN:</strong> 2. 5+1 factor decomposition - structuring honest disclosure / <strong>中:</strong> 2. 5+1 因子分解 - honest disclosure 的结构化</small>
 
 lleval `HonestDisclosureAnalyzer` (2026-05-21 朝着地) は出力差分を 5+1 因子に
 分解:
@@ -97,6 +96,7 @@ lleval `HonestDisclosureAnalyzer` (2026-05-21 朝着地) は出力差分を 5+1 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 3. progressive size matrix — stress curve を取る
+<small><strong>EN:</strong> 3. Progressive size matrix - taking the stress curve / <strong>中:</strong> 3. progressive size matrix - 测量 stress 曲线</small>
 
 固定 token 数のベンチは情報量が低い. lleval は xs/s/m/l/xl の 5 段階 ×
 複数 model の **matrix** を回す:
@@ -114,6 +114,7 @@ gpt-4o   0.31      0.52      1.20      3.40      11.2   ← crossover at l
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 4. judge rotation — position bias を消す
+<small><strong>EN:</strong> 4. Judge rotation - eliminating position bias / <strong>中:</strong> 4. judge rotation - 消除位置偏差</small>
 
 LLM-as-judge で 2 案 (A, B) を比較するとき, 順序が score に effect する
 ことが知られている (Zheng et al. 2023). lleval は:
@@ -128,6 +129,7 @@ LLM-as-judge で 2 案 (A, B) を比較するとき, 順序が score に effect 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 5. bridges/llive — llive Genome → ProviderSpec mapper
+<small><strong>EN:</strong> 5. bridges/llive - llive Genome -> ProviderSpec mapper / <strong>中:</strong> 5. bridges/llive - llive Genome -> ProviderSpec 映射器</small>
 
 lleval は **llive の派生個体** を直接食えるよう設計. `bridges/llive.py`
 (2026-05-21 朝着地):
@@ -148,6 +150,7 @@ EvolutionLoop fitness にそのまま渡せる.
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 6. honest disclosure (lleval 自身について)
+<small><strong>EN:</strong> 6. Honest disclosure (about lleval itself) / <strong>中:</strong> 6. 诚实披露 (关于 lleval 本身)</small>
 
 メタにも honest disclosure を適用:
 
@@ -166,6 +169,7 @@ EvolutionLoop fitness にそのまま渡せる.
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 7. 数字 (本日 2026-05-21 時点)
+<small><strong>EN:</strong> 7. The numbers (as of 2026-05-21) / <strong>中:</strong> 7. 数字 (截至 2026-05-21)</small>
 
 | 項目 | 値 |
 |---|---|
@@ -182,6 +186,7 @@ report html+md / cli / ...) |
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 8. 期待値 — 次に来るもの
+<small><strong>EN:</strong> 8. Expectations - what comes next / <strong>中:</strong> 8. 期望值 - 接下来要做的</small>
 
 - **v0.1.0a2** で promptfoo 実走 + llive Genome → ProviderSpec mapping 完成.
 - **v0.2** で judge rotation + position swap + Phoenix OpenInference trace.
@@ -190,6 +195,7 @@ report html+md / cli / ...) |
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 9. References
+<small><strong>EN:</strong> 9. References / <strong>中:</strong> 9. 参考资料</small>
 
 - Zheng, L. et al. (2023). *Judging LLM-as-a-judge with MT-Bench and Chatbot Arena*.
 - Promptfoo OSS (https://github.com/promptfoo/promptfoo).
@@ -199,6 +205,7 @@ report html+md / cli / ...) |
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
 ## 10. 2026-05-22 追記 — 5+1 因子分解 と Rust 化 5 パターン判定表の方法論的共通点
+<small><strong>EN:</strong> 10. 2026-05-22 addendum - methodological commonality between 5+1 factor decomposition and the 5-pattern Rust-port decision table / <strong>中:</strong> 10. 2026-05-22 追记 - 5+1 因子分解与 Rust 化 5 模式判定表的方法论共性</small>
 
 lleval の honest disclosure **5+1 因子分解** (prompt diff / model id /
 backend swap / chars vs tokens / RTT / env drift) と, 同日着地した
@@ -213,7 +220,7 @@ llive Rust 高速化の **5 パターン判定表** (#24-05 §13.3) は **構造
 | **honest disclosure を一級概念に** | 数値に sticky note | judgment 表で **どこが境界線か** を明示 |
 
 両者とも「**「速い」「正しい」「正確」の単一仮定を捨てる**」という
-`feedback_benchmark_honest_disclosure` (内部参照) の延長線上にある. これは lleval が
+`feedback_benchmark_honest_disclosure` の延長線上にある. これは lleval が
 AI を見るだけでなく **AI / システム / アルゴリズム 全般** に展開できる
 発想 = 連載 #24-08 のメタ的意義.
 
