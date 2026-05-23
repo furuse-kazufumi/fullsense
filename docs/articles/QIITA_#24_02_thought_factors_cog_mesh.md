@@ -13,6 +13,8 @@ ignorePublish: false
 ---
 言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
 
+---
+
 # 日本語
 
 # llive 完全解説 (2) — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞
