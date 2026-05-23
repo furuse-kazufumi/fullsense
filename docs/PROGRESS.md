@@ -10,6 +10,31 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-23 (Phase 0.20 — サブエージェント検証で方針転換: llive 進化 → RepIR PoC 優先 + RepIR 互換性設計確定)
+
+ユーザー提案「サブエージェントで FullSense 視点から起動して必要性を確認」を実施。
+2 回の read-only 検証が方針を是正した (方法論記録: memory `feedback_subagent_necessity_check`)。
+
+- **gem-critic 検証 (FullSense 視点で llive 進化 next plan の必要性)**: driver 配線は
+  (1) **genome 不整合** (進化個体は 19-dim で backend_id=index13 だが `llm_fitness_factory`
+  は values[0] を読む 5-dim 実装 → 誤読し `on_prem_backend_factory` 併用時に**全個体淘汰**で
+  壊れる)、(2) proxy 1000 世代は gen100 で best=1.0 収束し研究価値ゼロ、(3) North Star 貢献が
+  間接的、と判明。→ **ユーザーが「RepIR PoC (llmesh) へ切替」を選択**。llive 進化は致命バグ
+  (B1: index→ラベル解決 / B2: rubric を text 長 heuristic → rDPO 流 instance-specific
+  checklist) を要修正として保留。
+- **general-purpose + WebSearch 検証 (RepIR の汎用 MCP ルーター互換性。ユーザー懸念=llama.cpp
+  等と互換か)**: 独自 content type (`type:"representation"`) は MCP 2025-06-18 の content union
+  に未定義で、汎用クライアント (llama.cpp は MCP client) が無視/lossy/drop = 壊れる。→ **標準
+  `structuredContent` + text(Markdown degrade) 併置** (MCP spec が SHOULD で明文化する正規
+  degrade パターン) に設計確定。typed 描画は RepIR-aware consumer (llove) を host 側に置くか
+  MQTT/SSE side-channel の二層構成。doc: `research/repir_mcp_compat_2026_05_23.md`。
+- **CURRENT = FullSense 実装キュー #1 RepIR PoC (llmesh)**。着手前提: Markdown degrade writer を
+  first-class、`outputSchema` 宣言 (llmesh `TOOL_SCHEMAS` 流用)、`stdio_server.py` の
+  protocolVersion 2024-11-05 → 2025-06-18 更新。
+- **方法論的学び**: 大型実装/設計判断/優先度の岐路では、main が独断する前に FullSense 視点の
+  サブエージェント検証 (gem-critic / general-purpose) を入れると手戻り(壊れるコードを書く)を
+  防げる。結果が計画を覆す場合は AskUserQuestion で方向をユーザー確認。
+
 ## 2026-05-23 (Phase 0.19 — llive 進化 keystone 着手 + on-prem 環境ズレ確認)
 
 ccr 再開セッション。ユーザー方針確定: **FullSense = 全 proj マスター進捗 / 優先度
