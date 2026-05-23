@@ -16,26 +16,33 @@ nav_order: 90
 (general-purpose=コードバグ網羅 / gem-critic=設計欠陥・Spec 違反) で **26 件**を洗い出し、
 深刻度順に TDD (RED→GREEN+回帰) で修正中。
 
-### 修正済 (llive commit, branch optimize/core-2026-05-20)
+### 修正済 (llive commit, branch optimize/core-2026-05-20, 各 TDD RED→GREEN+回帰)
 - **A-1** (critical, `919d449`): `build_config` の position 直読み (B1 同型) を
   `Genome.value_by_label` 共通器で label 解決に統一。fitness_llm も統合 (DRY)。19-dim/5-dim 両対応。
 - **B-RES-1/2** (high, `629bdbf`): lineage node-id を full sanitize (コロンで Mermaid 破壊解消 +
   prefix 衝突回避) / `by_id` 世代跨ぎ collapse を世代別解決 (自己ループ・誤親エッジ修正)。
+- **B-LOGIC-2** (high, `b61250f`): immigration を fail-closed に (inject_persona_ids + resume なし/
+  snapshot 不在は ValueError。silent no-op で「段階的追加」要件が無視される問題を解消)。
+- **B-LOGIC-3** (high, `0bf4e40`): resume 時に population.bounds を snapshot に同期 + 個体 dim 一致を
+  fail-closed 検証 (dim 不整合 Population の生成を防止)。
+- **B-EDGE-2** (medium, `a0a86a3`): fitness 集約の weights を `.get(key, 0.0)` に (部分 weights dict
+  での KeyError を解消)。fitness_llm + llive_variant 両方。
+- **P-1** (warning, `38e8867`): `LlmFitnessConfig.backend_factory` default を on-prem fail-closed に
+  (purity opt-in→default enforce)。backend_select テストは mock 固定に追従分離。
+- **B-EDGE-1** (medium, `8727f85`): rosenbrock_fitness の空 genome (size==0) IndexError を neutral
+  score でガード。
+- **H-1** (検証の結果**矛盾なし**): safety/honesty とも両 mock fitness path で値一致 (mock echo 前提で
+  safety=0.0)。gem-critic の「0.0 vs 1.0」は誤認。サブエージェント指摘も検証した結果コード修正不要。
+  `mock safety=0.0` 固定は toy heuristic で設計改善余地のみ。
 
-### 未修正 inventory (深刻度順)
-| 深刻度 | バグ | file | task |
-|---|---|---|---|
-| blocking | H-1 mock safety 0.0/1.0 矛盾 (self-deception) | llive_variant.py:306 vs fitness_llm | #8 |
-| high | B-LOGIC-2 immigration silent no-op | persona_evolution.py:366 | #4 |
-| high | B-LOGIC-3 resume で bounds 未同期 → dim 不整合 | loop.py:139 | #5 |
-| warning | P-1 purity backend_factory default fail-open | fitness_llm.py:107 | #7 |
-| medium | B-EDGE-2 部分 weights dict KeyError | fitness_llm / llive_variant | #6 |
-| medium | B-POS-2 config_to_genome lossy round-trip | variant_runner.py:80 | - |
-| medium | B-EDGE-1 rosenbrock 空 genome IndexError | fitness.py:48 | - |
-| medium | B-NUM-1 crowding_distance NaN 伝播 | nsga2.py:146 | - |
-| medium | B-STUB-1 in_process transport 全滅 | variant_runner.py:144 | - |
-| low | B-NUM-2 meta expansion threshold=0 で膨張 / UCB log(1)=0 | meta_loop.py:174 | - |
-| low | B-STUB-2 compare_against_llm_baselines stub (公開 API) | persona_evolution.py:466 | - |
+### 未修正 inventory (深刻度順) — 残り medium/low
+| 深刻度 | バグ | file |
+|---|---|---|
+| medium | B-POS-2 config_to_genome lossy round-trip | variant_runner.py:80 |
+| medium | B-NUM-1 crowding_distance NaN 伝播 | nsga2.py:146 |
+| medium | B-STUB-1 in_process transport 全滅 | variant_runner.py:144 |
+| low | B-NUM-2 meta expansion threshold=0 で膨張 / UCB log(1)=0 | meta_loop.py:174 |
+| low | B-STUB-2 compare_against_llm_baselines stub (公開 API) | persona_evolution.py:466 |
 
 ### 設計欠陥 (gem-critic, 大規模・別途計画が必要)
 - **§A6 外的 grounding ゼロ**: 全 fitness が mock/proxy = rumination。gen100=1.0 は単峰 proxy +
