@@ -880,7 +880,7 @@ flowchart LR
 
 # llive 완전 해설 (2) — "10개 축으로 사고하는 AI": 사고 인자 × COG-MESH × 삼중 줄무늬
 
-![hero — 10가지 사고 인자가 동시에 회전](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero.svg)
+![hero — 10가지 사고 인자가 동시에 회전](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero_ko.svg)
 
 ![연재 진행 (2/8) — 현재: 사고 인자](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_progress.svg)
 
