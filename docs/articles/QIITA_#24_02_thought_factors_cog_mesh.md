@@ -1,5 +1,5 @@
 ---
-title: llive 完全解説 (2) — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞
+title: 'llive 完全解説 (2) — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞'
 tags:
   - FullSense
   - llive
