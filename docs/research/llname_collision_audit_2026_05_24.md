@@ -13,7 +13,7 @@ nav_order: 94
 
 ---
 
-## 1. ⚠ 旗艦 `llmesh` × HPE 衝突（要戦略判断）
+## 1. 旗艦 `llmesh` × HPE 衝突（→ §1.1 で解決済）
 
 bare `llmesh` (PyPI / GitHub) は **Hewlett Packard (HPE)** が保有:
 
