@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-23 17:52:31
+- **生成時刻**: 2026-05-23 18:01:40
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,26 +20,22 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-069dc3a docs(qiita): #24-02 を 4 言語全文縦積み形式に再構成 (JA/EN/ZH/KO 自己完結) + 言語間 --- 区切り + 言語ジャンプ TOC
-b87dab1 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:48)
-81a38cf auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:48)
-86b3c11 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:48)
-503fab0 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:47)
-2c452f2 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:45)
-874592f auto: e49b7ab9027d93594402.md 編集前 (2026-05-23 17:20)
-aeb0b42 auto: bdfad6db3f2e70c40511.md 編集前 (2026-05-23 17:20)
-50834ca auto: qiita.config.json 編集前 (2026-05-23 17:19)
-a6bfc72 prep(qiita): #24-02/#24-08 theme SVG 修正の Qiita 反映準備 — cache-buster ?v=2 + private:true 維持 + id 仮設定 + publish plan
+79d55c9 fix(qiita): #24-02 frontmatter title をクオート — コロン含みタイトルの YAML 誤パース回避
+c98fdc7 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 18:00)
+7f6ea27 docs(qiita): #24-02 各言語セクションを言語別 SVG variant (_en/_zh/_ko) 参照に配線
+54fdad2 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
+6af04b0 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
+bf46426 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
+a1346ff auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
+f1348c6 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
+38121a9 auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:55)
+6cf539f auto: QIITA_#24_02_thought_factors_cog_mesh.md 編集前 (2026-05-23 17:54)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
-?? docs/articles/assets/qiita_24_02_hero_en.svg
-?? docs/articles/assets/qiita_24_02_hero_ko.svg
-?? docs/articles/assets/qiita_24_02_hero_zh.svg
+M tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md
 ```
 
 
@@ -77,26 +73,26 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `17:52` `docs/articles/assets/qiita_24_02_hero_ko.svg`
-- `17:51` `docs/articles/assets/qiita_24_02_hero_zh.svg`
-- `17:51` `docs/articles/assets/qiita_24_02_hero_en.svg`
-- `17:51` `docs/SESSION_SUMMARY.md`
-- `17:51` `docs/NEXT_SESSION.auto.md`
-- `17:48` `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md`
-- `17:22` `tools/qiita-cli-poc/public/fcb43968a5c642610762.md`
-- `17:22` `tools/qiita-cli-poc/public/fa0890f136636d495ea6.md`
-- `17:22` `tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md`
-- `17:22` `tools/qiita-cli-poc/public/e5093e4816b25c1bd4d0.md`
-- `17:22` `tools/qiita-cli-poc/public/e49b7ab9027d93594402.md`
-- `17:22` `tools/qiita-cli-poc/public/da2a2822dabe7b17b8c8.md`
-- `17:22` `tools/qiita-cli-poc/public/cdeea496af01dd424a09.md`
-- `17:22` `tools/qiita-cli-poc/public/cd954f57f510e03954e6.md`
-- `17:22` `tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md`
-- `17:22` `tools/qiita-cli-poc/public/c5f2077a3399d3fc9b26.md`
-- `17:22` `tools/qiita-cli-poc/public/c543014188744262ec83.md`
-- `17:22` `tools/qiita-cli-poc/public/be52eeb6455732161486.md`
-- `17:22` `tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md`
-- `17:22` `tools/qiita-cli-poc/public/ba832a58b99c6a9103c4.md`
+- `18:00` `tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md`
+- `18:00` `tools/qiita-cli-poc/public/.remote/bdfad6db3f2e70c40511.md`
+- `18:00` `tools/qiita-cli-poc/public/fcb43968a5c642610762.md`
+- `18:00` `tools/qiita-cli-poc/public/fa0890f136636d495ea6.md`
+- `18:00` `tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md`
+- `18:00` `tools/qiita-cli-poc/public/e5093e4816b25c1bd4d0.md`
+- `18:00` `tools/qiita-cli-poc/public/e49b7ab9027d93594402.md`
+- `18:00` `tools/qiita-cli-poc/public/da2a2822dabe7b17b8c8.md`
+- `18:00` `tools/qiita-cli-poc/public/cdeea496af01dd424a09.md`
+- `18:00` `tools/qiita-cli-poc/public/cd954f57f510e03954e6.md`
+- `18:00` `tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md`
+- `18:00` `tools/qiita-cli-poc/public/c5f2077a3399d3fc9b26.md`
+- `18:00` `tools/qiita-cli-poc/public/c543014188744262ec83.md`
+- `18:00` `tools/qiita-cli-poc/public/be52eeb6455732161486.md`
+- `18:00` `tools/qiita-cli-poc/public/ba832a58b99c6a9103c4.md`
+- `18:00` `tools/qiita-cli-poc/public/aff262808a35cb7f7d3b.md`
+- `18:00` `tools/qiita-cli-poc/public/ac398349ec42e40913f1.md`
+- `18:00` `tools/qiita-cli-poc/public/ab3839f8b5b3ea91311e.md`
+- `18:00` `tools/qiita-cli-poc/public/a5ebb3992e4c28862f47.md`
+- `18:00` `tools/qiita-cli-poc/public/99e4558953df57ccaffb.md`
 
 
 ## Cross-references
