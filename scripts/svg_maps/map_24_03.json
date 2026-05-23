@@ -1,0 +1,26 @@
+{
+  "TRIZ structural evolution and Z3 verification": {"en": "", "zh": "TRIZ 结构进化与 Z3 验证", "ko": "TRIZ 구조 진화와 Z3 검증"},
+  "llive #24-03 — 構造進化 × TRIZ × Z3 検証": {"en": "llive #24-03 — Structural Evolution × TRIZ × Z3 Verification", "zh": "llive #24-03 — 结构进化 × TRIZ × Z3 验证", "ko": "llive #24-03 — 구조 진화 × TRIZ × Z3 검증"},
+  "矛盾は計算できる — TRIZ mutation → Z3 verify": {"en": "Contradictions can be computed — TRIZ mutation → Z3 verify", "zh": "矛盾是可以计算的 — TRIZ mutation → Z3 verify", "ko": "모순은 계산할 수 있다 — TRIZ mutation → Z3 verify"},
+  "structure split · reverse · recombine · then formally checked": {"en": "", "zh": "结构拆分 · 反转 · 重组 · 然后形式检查", "ko": "구조 분할 · 반전 · 재조합 · 그 후 형식 검사"},
+  "original": {"en": "", "zh": "原始", "ko": "원본"},
+  "split (TRIZ #1)": {"en": "", "zh": "拆分 (TRIZ #1)", "ko": "분할 (TRIZ #1)"},
+  "reverse + recombine (TRIZ #13)": {"en": "", "zh": "反转 + 重组 (TRIZ #13)", "ko": "반전 + 재조합 (TRIZ #13)"},
+  "verify": {"en": "", "zh": "验证", "ko": "검증"},
+  "new": {"en": "", "zh": "新", "ko": "신규"},
+  "accepted": {"en": "", "zh": "已采用", "ko": "채용됨"},
+  "Phase 3 構造進化: TRIZ 40 原理 + 9 画法 + Z3 で「発想 → 形式検証」を一周": {"en": "Phase 3 structural evolution: one round of \"ideate → formal verify\" with TRIZ 40 principles + 9-windows + Z3", "zh": "Phase 3 结构进化: 用 TRIZ 40 原理 + 9 画法 + Z3 走一圈「发想 → 形式验证」", "ko": "Phase 3 구조 진화: TRIZ 40 원리 + 9 화법 + Z3로 「발상 → 형식 검증」을 한 바퀴"},
+
+  "連載進捗 3/8 — 現在: TRIZ": {"en": "series progress 3/8 — current: TRIZ", "zh": "连载进度 3/8 — 当前: TRIZ", "ko": "연재 진행 3/8 — 현재: TRIZ"},
+  "思考因子": {"en": "thought factors", "zh": "思考因子", "ko": "사고 인자"},
+
+  "#24-03 theme: TRIZ 40 原理 grid + 矛盾 flicker": {"en": "#24-03 theme: TRIZ 40-principles grid + contradiction flicker", "zh": "#24-03 theme: TRIZ 40 原理 grid + 矛盾 flicker", "ko": "#24-03 theme: TRIZ 40 원리 grid + 모순 flicker"},
+  "TRIZ 40 原理 grid + 矛盾マトリクス flicker animation": {"en": "TRIZ 40-principles grid + contradiction-matrix flicker animation", "zh": "TRIZ 40 原理 grid + 矛盾矩阵 flicker animation", "ko": "TRIZ 40 원리 grid + 모순 매트릭스 flicker animation"},
+  "「矛盾は計算できる」: TRIZ 40 原理 × ChangeOp × Z3 verifier": {"en": "\"Contradictions can be computed\": TRIZ 40 principles × ChangeOp × Z3 verifier", "zh": "「矛盾是可以计算的」: TRIZ 40 原理 × ChangeOp × Z3 verifier", "ko": "「모순은 계산할 수 있다」: TRIZ 40 원리 × ChangeOp × Z3 verifier"},
+  "40 inventive principles (TRIZ)": {"en": "", "zh": "40 个发明原理 (TRIZ)", "ko": "40개 발명 원리 (TRIZ)"},
+  "contradiction matrix → Z3 verifier": {"en": "", "zh": "矛盾矩阵 → Z3 verifier", "ko": "모순 매트릭스 → Z3 verifier"},
+  "改善したい": {"en": "to improve", "zh": "想改善", "ko": "개선하고 싶다"},
+  "悪化する": {"en": "worsens", "zh": "会恶化", "ko": "악화한다"},
+  "→ Z3 verifier で SAT/UNSAT 判定": {"en": "→ SAT/UNSAT decision by Z3 verifier", "zh": "→ 用 Z3 verifier 判定 SAT/UNSAT", "ko": "→ Z3 verifier로 SAT/UNSAT 판정"},
+  "40 原理が staggered pulse, 矛盾マトリクスが active cell flicker, ChangeOp の判定が緑/紫 で交互に": {"en": "40 principles staggered-pulse, contradiction matrix active-cell flicker, ChangeOp decision alternating green/purple", "zh": "40 原理 staggered pulse, 矛盾矩阵 active cell flicker, ChangeOp 的判定以 绿/紫 交替", "ko": "40 원리가 staggered pulse, 모순 매트릭스가 active cell flicker, ChangeOp의 판정이 녹색/보라로 교대"}
+}

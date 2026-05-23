@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="TRIZ structural evolution and Z3 verification" style="width:100%;height:auto;max-width:1200px">
+  <title>llive #24-03 — Structural Evolution × TRIZ × Z3 Verification</title>
+  <desc>Three blocks evolve through TRIZ-style mutation (split, reverse, recombine), then pass through a Z3 verification gate. SMIL-only animation.</desc>
+  <defs>
+    <linearGradient id="bg24_03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1426"/>
+      <stop offset="100%" stop-color="#0a0f17"/>
+    </linearGradient>
+    <linearGradient id="z3grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7ee787"/>
+      <stop offset="100%" stop-color="#2ea043"/>
+    </linearGradient>
+    <linearGradient id="origgrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5dd1ff"/>
+      <stop offset="100%" stop-color="#3a8dde"/>
+    </linearGradient>
+    <linearGradient id="newgrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffd166"/>
+      <stop offset="100%" stop-color="#ef476f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="240" fill="url(#bg24_03)"/>
+
+  <text x="400" y="34" text-anchor="middle" fill="#e6edf3"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="18" font-weight="700">
+    Contradictions can be computed — TRIZ mutation → Z3 verify
+  </text>
+  <text x="400" y="56" text-anchor="middle" fill="#94a3b8"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">
+    structure split · reverse · recombine · then formally checked
+  </text>
+
+  <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#e6edf3">
+    <g transform="translate(80 130)">
+      <rect x="0" y="0" width="120" height="50" rx="6" fill="url(#origgrad)" opacity="0.9"/>
+      <text x="60" y="22" text-anchor="middle" font-weight="600">original</text>
+      <text x="60" y="38" text-anchor="middle" font-size="10" opacity="0.85">A · B · C</text>
+      <text x="60" y="-12" text-anchor="middle" fill="#94a3b8" font-size="10">Phase 0</text>
+    </g>
+
+    <g transform="translate(260 130)" opacity="0">
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.2;0.5;0.65;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="0"  y="0" width="36" height="50" rx="4" fill="url(#origgrad)"/>
+      <rect x="42" y="0" width="36" height="50" rx="4" fill="url(#origgrad)"/>
+      <rect x="84" y="0" width="36" height="50" rx="4" fill="url(#origgrad)"/>
+      <text x="18" y="30" text-anchor="middle" font-size="10">A</text>
+      <text x="60" y="30" text-anchor="middle" font-size="10">B</text>
+      <text x="102" y="30" text-anchor="middle" font-size="10">C</text>
+      <text x="60" y="-12" text-anchor="middle" fill="#94a3b8" font-size="10">split (TRIZ #1)</text>
+    </g>
+
+    <g transform="translate(260 130)" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.65;0.8;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="0"  y="0" width="36" height="50" rx="4" fill="url(#newgrad)"/>
+      <rect x="42" y="0" width="36" height="50" rx="4" fill="url(#origgrad)"/>
+      <rect x="84" y="0" width="36" height="50" rx="4" fill="url(#newgrad)"/>
+      <text x="18" y="30" text-anchor="middle" font-size="10">C'</text>
+      <text x="60" y="30" text-anchor="middle" font-size="10">B</text>
+      <text x="102" y="30" text-anchor="middle" font-size="10">A'</text>
+      <text x="60" y="-12" text-anchor="middle" fill="#94a3b8" font-size="10">reverse + recombine (TRIZ #13)</text>
+    </g>
+
+    <g transform="translate(440 110)">
+      <path d="M -10 45 L 50 0 L 110 45 L 50 90 Z" fill="url(#z3grad)" opacity="0.55"/>
+      <text x="50" y="40" text-anchor="middle" font-weight="700" font-size="12">Z3</text>
+      <text x="50" y="56" text-anchor="middle" font-size="10">verify</text>
+    </g>
+
+    <g transform="translate(620 130)" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;1;1" keyTimes="0;0.7;0.8;0.9;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="0" y="0" width="120" height="50" rx="6" fill="url(#newgrad)" opacity="0.95"/>
+      <text x="60" y="22" text-anchor="middle" font-weight="600">new</text>
+      <text x="60" y="38" text-anchor="middle" font-size="10" opacity="0.9">C' · B · A'  (sat)</text>
+      <text x="60" y="-12" text-anchor="middle" fill="#94a3b8" font-size="10">accepted</text>
+    </g>
+
+    <g stroke="#5dd1ff" stroke-width="1.5" fill="none" stroke-dasharray="4 3" opacity="0.55">
+      <line x1="200" y1="155" x2="260" y2="155"/>
+      <line x1="380" y1="155" x2="440" y2="155"/>
+      <line x1="540" y1="155" x2="620" y2="155"/>
+    </g>
+
+    <circle r="4" fill="#ffd166">
+      <animateMotion dur="6s" repeatCount="indefinite"
+        path="M 200 155 L 260 155 L 260 155 L 380 155 L 440 155 L 540 155 L 620 155"/>
+    </circle>
+  </g>
+
+  <text x="400" y="225" text-anchor="middle" fill="#64748b"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="10">
+    Phase 3 structural evolution: one round of "ideate → formal verify" with TRIZ 40 principles + 9-windows + Z3
+  </text>
+</svg>
