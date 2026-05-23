@@ -874,6 +874,8 @@ flowchart LR
 - 全部: [llive 完全解说 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
+---
+
 # 한국어
 
 # llive 완전 해설 (2) — "10개 축으로 사고하는 AI": 사고 인자 × COG-MESH × 삼중 줄무늬
