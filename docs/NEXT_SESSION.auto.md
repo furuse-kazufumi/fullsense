@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-05-23 10:02:44
+- **生成時刻**: 2026-05-23 14:07:54
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,9 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+95d3e5a fix(qiita): #20/#21 の Jekyll relative_url を GitHub blob URL に置換
+a3f87fb fix(qiita): #24-07 内 4D Kardashev SVG link を絶対 URL 化 — Qiita 上で表示
+36517b5 auto: QIITA_#24_07_observability_governance.md 編集前 (2026-05-23 10:20)
 9138977 docs(qiita): section separator SVG を全章から削除 — 純装飾で本文の流れを切る
 2b5ced5 fix(svg): #24 series 全 SVG を fluid 化 (width/height 削除 + style="width:100%;height:auto")
 380ee9b fix(qiita): <small> 内の <br> 改行を / 区切り 1 行化 — Qiita parser 互換性向上
@@ -27,9 +30,6 @@ nav_order: 94
 c8a2c45 docs(qiita): #24 series 全 9 記事 — 内部メモ削除 + 全 92 H2 section trilingual 化
 f5097bb docs(qiita): #24 series アニメ SVG 第 2 弾 — 8 章 theme + section separator
 269bf1c docs(qiita): #24 series アニメ SVG 大増量 — #24-00 hero + 9 章 progress (現在地 pulse)
-00eac62 auto: QIITA_#24_00_llive_tech_series_index.md 編集前 (2026-05-23 08:28)
-b2c7836 docs(qiita): #24 series 全 9 記事に Series Navigation セクションを追加
-5939a91 auto: QIITA_#24_00_llive_tech_series_index.md 編集前 (2026-05-23 08:23)
 ```
 
 ### git status (porcelain)
@@ -44,7 +44,7 @@ M docs/NEXT_SESSION.auto.md
 
 | project | 最新 commit | 直近 commit msg | tests/ 直近 mtime |
 |---|---|---|---|
-| llive | `6718320 2026-05-23` | test(genome): persona_loader smoke + contract test (19 cases) + Phase 2 collector script | 2026-05-23 10:01 |
+| llive | `dda162d 2026-05-23` | feat(evolution): Genome3D 4 階建て進化 demo (c_factors 統合の smoke 実証) | 2026-05-23 13:55 |
 | llove | `d9b0a44 2026-05-23` | feat(engine): F25 audit-deps Phase 2 wiring — test for proxy + Phase 1 fallback | 2026-05-23 00:54 |
 | llmesh | `798bf93 2026-05-23` | fix(cli): sbom — _ensure_utf8_stdout() で `→` (U+2192) 文字化け解消 | 2026-05-20 07:23 |
 | lldesign | `1014ce3 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:52 |
@@ -72,26 +72,12 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `10:02` `docs/SESSION_SUMMARY.md`
-- `09:55` `docs/NEXT_SESSION.auto.md`
-- `09:54` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
-- `09:54` `docs/articles/QIITA_#24_07_observability_governance.md`
-- `09:54` `docs/articles/QIITA_#24_06_llm_backend_non_transformer.md`
-- `09:54` `docs/articles/QIITA_#24_05_evolutionary_v0BCDE.md`
-- `09:54` `docs/articles/QIITA_#24_04_convergent_optimization_b_series.md`
-- `09:54` `docs/articles/QIITA_#24_03_structural_evolution_triz.md`
-- `09:54` `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md`
-- `09:54` `docs/articles/QIITA_#24_01_memory_layer.md`
-- `09:54` `docs/articles/QIITA_#24_00_llive_tech_series_index.md`
-- `09:53` `docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg`
-- `09:53` `docs/articles/assets/qiita_24_section_separator.svg`
-- `09:53` `docs/articles/assets/qiita_24_08_theme.svg`
-- `09:53` `docs/articles/assets/qiita_24_08_progress.svg`
-- `09:53` `docs/articles/assets/qiita_24_08_hero.svg`
-- `09:53` `docs/articles/assets/qiita_24_07_theme.svg`
-- `09:53` `docs/articles/assets/qiita_24_07_progress.svg`
-- `09:53` `docs/articles/assets/qiita_24_07_hero.svg`
-- `09:53` `docs/articles/assets/qiita_24_06_theme.svg`
+- `14:07` `docs/SESSION_SUMMARY.md`
+- `14:07` `docs/NEXT_SESSION.auto.md`
+- `10:23` `docs/articles/QIITA_POST_GUIDE.md`
+- `10:23` `docs/articles/QIITA_#21_three_day_marathon_2026_05_18_to_20.md`
+- `10:23` `docs/articles/QIITA_#20_one_session_full_stack_progress.md`
+- `10:20` `docs/articles/QIITA_#24_07_observability_governance.md`
 
 
 ## Cross-references
