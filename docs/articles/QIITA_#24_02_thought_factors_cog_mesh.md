@@ -4,12 +4,12 @@ tags:
   - FullSense
   - llive
   - 解説
-private: false
+private: true
 updated_at: '2026-05-22'
-id: null
+id: bdfad6db3f2e70c40511
 organization_url_name: null
 slide: false
-ignorePublish: true
+ignorePublish: false
 ---
 <!-- lead-trans-placed -->
 <!-- h2-trans-placed -->
