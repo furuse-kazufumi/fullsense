@@ -9,6 +9,30 @@ nav_order: 95
 > Picked up by the next FullSense session. Everything below is ready to
 > resume on. Operator actions are flagged 🧑 (user) vs 🤖 (agent).
 
+## 🔴 Pending action (2026-05-24) — `fullsense` PyPI upload 完了待ち
+
+**🤖 未完了**: 公開ブランド `fullsense` の PyPI placeholder 予約が **429 (PyPI 新規プロジェクト
+rate limit) で本番 upload 未完**。build + `twine check` + TestPyPI 検証は済。dist は
+`D:/tmp/fullsense-pypi/dist/` に保存済 → レート制限解消後（〜1h 目安）に再 PUT するだけ:
+
+```
+py -3.11 -m twine upload --skip-existing --disable-progress-bar D:/tmp/fullsense-pypi/dist/*
+```
+
+完了後 `https://pypi.org/pypi/fullsense/json` が 200 になるのを確認 → 本セクションを ✅ に。
+
+## 📌 2026-05-24 命名/予約 サマリ (正本 = [research/llname_collision_audit_2026_05_24]({{ '/research/llname_collision_audit_2026_05_24' | relative_url }}))
+
+- **RepIR → llrepr 改名** (github.com/repir/repir [情報検索] 衝突回避)。`llmesh/llrepr/` に PoC 着地
+  (typed Representation IR=「LLVM-for-expression」, 24 tests, commits 12c1a07/6044ba4)。
+  🤖 **未了**: stdio_server の protocolVersion 2025-06-18 + outputSchema + 実ツール出力配線。
+- **llmesh × HPE 衝突**: llmesh は **規格/spec の枠**(売り物でない) → リネーム不要で **クローズ**。
+  公開ブランド = **FullSense**(衝突確認済クリーン)。詳細は正本 §1.1。
+- **PyPI 予約済 (placeholder 0.0.1)**: `llmesh-llrepr` / `llmesh-lleval` / `llmesh-lltrade` /
+  `llmesh-lldesign`。`fullsense` は上記 🔴 pending。**各実リリースは version > 0.0.1 必須**。
+- **GitHub 予約 repo**: `furuse-kazufumi/llrepr` (Apache-2.0)。
+- 次キュー: **#2 予測符号化 push PoC** (llmesh)。
+
 ## ✅ Done in 2026-05-18/19 連続セッション
 
 詳細は [PROGRESS.md]({{ '/PROGRESS' | relative_url }}) 参照。
