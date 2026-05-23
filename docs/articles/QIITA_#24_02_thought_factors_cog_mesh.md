@@ -604,7 +604,7 @@ For details see #24-05 and
 
 # llive 完全解说 (2) — "用 10 个轴思考的 AI": 思考因子 × COG-MESH × 三重条纹
 
-![hero — 10 个思考因子同时运转](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero.svg)
+![hero — 10 个思考因子同时运转](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_hero_zh.svg)
 
 ![连载进度 (2/8) — 当前: 思考因子](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_02_progress.svg)
 
