@@ -14,6 +14,7 @@ organization_url_name: null
 slide: false
 ignorePublish: true
 ---
+<!-- lead-trans-placed -->
 <!-- h2-trans-placed -->
 
 <!-- trilingual-subtitle-placed -->
@@ -35,6 +36,8 @@ Qiita タグ 5 個 (FullSense / llive / 解説 / アルゴリズム / SoftwareAr
 <small><strong>EN:</strong> 0. About this series / <strong>中:</strong> 0. 关于本系列</small>
 
 llive (FullSense ™ 思考層) を **構成する技術 / アルゴリズムを名称ごとに
+<small><strong>EN:</strong> A series explaining llive (FullSense thinking layer) by each technology / algorithm name. Since cramming into one article reaches ~80k chars, we split into 8 main chapters.<br>
+<strong>中:</strong> 按名称解读 llive (FullSense 思考层) 的各项技术 / 算法的系列文章. 单篇会到 8 万字级别, 故分为 8 大分类文章.</small>
 解説する series** です. 1 記事に詰め込むと 8 万字級になるため,
 **大分類 8 記事** に分割します.
 
@@ -68,6 +71,8 @@ Medium 並走 (`feedback-overseas-tech-platforms` に従う).
 > 🟢 公開 = Qiita ホーム / 検索結果に露出. 🟡 限定共有 = URL を知る人のみ閲覧 (24h 投稿数制限対象外). 公開昇格は連載順 (01 → 02 → … → 08) で順次予定.
 
 合計 **~80k 字** (週 2 本 × 4 週). 完走目標 2026-06-20.
+<small><strong>EN:</strong> Total ~80k chars (2 per week × 4 weeks). Completion target: 2026-06-20.<br>
+<strong>中:</strong> 总计约 8 万字 (每周 2 篇 × 4 周). 完成目标: 2026-06-20.</small>
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
@@ -104,6 +109,8 @@ flowchart TB
 ```
 
 「**認知層 → 最適化層 → 実行層**」の縦が llive の処理 flow,
+<small><strong>EN:</strong> Vertical = llive processing flow (cognition → optimisation → execution). Observability/governance + lleval are the horizontal layers that touch every level.<br>
+<strong>中:</strong> 纵向 = llive 处理流程 (认知 → 优化 → 执行). 观测 + 治理 与 lleval 是贯穿所有层的横向层.</small>
 「**観測 + 統治**」「**lleval**」が横断層として全 layer に効く構造.
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
@@ -114,6 +121,8 @@ flowchart TB
 ### 3.1 タイトル形式 (2026-05-22 確定統一規約)
 
 全 9 本 (#24-00 〜 #24-08) は以下の形式に揃える:
+<small><strong>EN:</strong> All 9 articles (#24-00..08) follow the unified title format below.<br>
+<strong>中:</strong> 全部 9 篇 (#24-00..08) 都遵循下面的统一标题格式.</small>
 
 ```
 llive 完全解説 #24-XX — 「キャッチコピー」: <技術名称>
@@ -155,6 +164,8 @@ en 版は `_en.md` suffix.
 ### a. 冒頭 hook (`feedback-articles-concept-hook`)
 
 1-2 段落で「**この記事の主題 + 数字 + キー名称**」を凝縮.
+<small><strong>EN:</strong> An opening 1-2 paragraphs distil 'the article's main topic + numbers + key class/function names'.<br>
+<strong>中:</strong> 开头 1-2 段浓缩 "本文主题 + 数字 + 关键 class/function 名称".</small>
 
 ### b. 中分類 = `## <名称>` 見出し
 
@@ -215,6 +226,8 @@ bounded modification (§E2) で min/max clip 必須.
 | Week 4 (6/12-6/18) | 07 観測統治 + 08 lleval |
 
 各記事の en 版は **+1 週遅れ** で Medium に投稿.
+<small><strong>EN:</strong> Each article's English version goes to Medium one week behind the Qiita JP version.<br>
+<strong>中:</strong> 每篇英文版会比日文版晚一周发布到 Medium.</small>
 
 ![section](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_section_separator.svg)
 
@@ -258,6 +271,8 @@ bounded modification (§E2) で min/max clip 必須.
 ### 2026-05-22 追記 — Rust 高速化マラソン成果
 
 連載中核 #24-05 で扱う v0.E 派生集団進化の hot path 3 つを 1 日で Rust 化:
+<small><strong>EN:</strong> We Rust-ported 3 hot paths from v0.E coevolution (the series centerpiece #24-05) in a single day.<br>
+<strong>中:</strong> 我们在一天内将 v0.E 派生群体进化 (系列核心 #24-05) 的 3 个 hot path 用 Rust 重写.</small>
 
 - **RUST-15** persona_dissimilarity_pairwise: avg **x12.71** (batch)
 - **RUST-16** collusion_score_kernel: avg **x66.70** (numpy 小 N hot path)
