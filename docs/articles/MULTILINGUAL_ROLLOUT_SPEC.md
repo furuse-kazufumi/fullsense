@@ -37,6 +37,8 @@ done
 #    形式: { "原文文字列": {"en":"...","zh":"...","ko":"..."}, ... }
 #    - 純記号/番号/既英語の技術ラベル (A, B, Z3, TRIZ, "Phase 0" 等) は map に入れない (passthrough)
 #    - base が既に英語の文字列は en を "" にして passthrough、zh/ko だけ訳す
+#    - 翻訳値に生の < > を入れない (SVG text 内で不正 → well-formed エラー)。
+#      例: "< θ" でなく "below θ"。& は必ず &amp; とする (script が < > を弾く)
 # 3) 9 (or 6) variant を生成
 for t in hero progress theme; do for l in en zh ko; do
   PYTHONIOENCODING=utf-8 py -3.11 scripts/svg_i18n.py gen docs/articles/assets/qiita_24_XX_$t.svg scripts/svg_maps/map_24_XX.json $l
