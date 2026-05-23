@@ -598,6 +598,8 @@ For details see #24-05 and
 - All: [llive Complete Guide (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
+---
+
 # 中文
 
 # llive 完全解说 (2) — "用 10 个轴思考的 AI": 思考因子 × COG-MESH × 三重条纹
