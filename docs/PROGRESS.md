@@ -10,6 +10,24 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-24 (Phase 0.24 — ペルソナ ontology 拡張: affinity 自動算出でハードコード排除)
+
+llive 進化の persona ontology を数百人規模へ段階拡張する基盤を整備。詳細フィードバック:
+[`research/persona_ontology_expansion_2026_05_24`]({{ '/research/persona_ontology_expansion_2026_05_24' | relative_url }})。
+
+- **ハードコード排除** (llive `d940ff3`): 拡張 7 名に手で付けた factor_affinity をユーザー指摘
+  「ハードコードを疑え」で撤回。`persona_extended.py` で各人物の `affinity_text` (特性記述文) から
+  `keyword_extractor` + `affinity_from_counts` により **factor_affinity を自動算出** (数値ハードコード
+  なし、根拠が記述に残り疑える)。算出 top 因子が記述意図と整合 (darwin→reality_link, altshuller→
+  structurize/recompose, turing→exploration, poincare→recompose)。回帰テスト 6 件 + 既存 persona
+  テストの件数 hard-code を下限チェックに緩和。
+- **段階投入の下調べ**: 分野横断 15 分野・約 60 名の投入候補カタログ
+  (`D:/docs/persona_ontology_v2/_CANDIDATES.md`、非西洋/女性/古典〜現代の多様性) + 投入手順 +
+  改善メモ (本命=LLM injection で伝記から直接抽出)。RAD コーパスに `persona_ontology_v2` 新分野 (21 名)。
+  実投入は段階的 (急がない)。
+- honest: `affinity_text` 方式もなお heuristic (FACTOR_KEYWORDS 依存)。既存の古典 14 + 研究方法論 4 の
+  affinity も手動で、ハードコード排除の一貫適用なら段階移行の余地 (既存テストが特定値を assert)。
+
 ## 2026-05-24 (Phase 0.23 — SPEC-MESH-01 完遂 + B1 stale 訂正 + stdio_server 状態訂正)
 
 高速化 Tier 1 (Speculative Mesh) の本格導入 step 1 を着地 + 進化トラックの stale 記録 2 件を訂正。
