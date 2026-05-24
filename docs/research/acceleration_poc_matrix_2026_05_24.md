@@ -89,6 +89,11 @@ nav_order: 97
 2. 各 PoC の simulation 値を、実 transport / 実 executor / 実 fitness 配線後に**実測で上書き**。
 3. 結合 (要素統合) 判断は**ユーザー** (FullSense 規約: 勝手に結合しない)。
 
+## 技術詳細版
+
+本マトリクスは要約。各 PoC のモデル・パラメータ・結果・honest disclosure を 1 本に統合した
+**技術報告書**: [`docs/design/acceleration_poc_technical_report_2026_05_24.md`]({{ '/design/acceleration_poc_technical_report_2026_05_24' | relative_url }})。
+
 ## Sources / 関連
 
 - 単体: llmesh `speculative/` (`2a05f64`/`b1d95e6`/`e7ced23`) / llive
