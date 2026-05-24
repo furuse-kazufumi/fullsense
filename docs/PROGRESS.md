@@ -10,6 +10,25 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-24 (Phase 0.26 — 進化走行前の凍結点・トレーサビリティ整備)
+
+「進化を走らせ始めると変更困難になる」「失敗しても結果が残らないと意味がない」「後々の改良の
+参考情報を残す」(ユーザー) を踏まえ、走行前に確定すべき凍結点を整備・実機検証。
+
+- **founder backend_id の on-prem 誘導** (llive `7a635dc`): bounds 中点 (≈anthropic=cloud) だと
+  実 LLM fitness で全 founder が fail-closed 淘汰 → mock=0 初期化。後入れは過去 run 非互換 +
+  長 run 再検証になるため**走行前に確定**(検証時間のかかる改造を今入れ切る)。
+- **トレーサビリティ**: `run_manifest.json` (commit/設定/genome dim・labels・bounds/環境を run 前に記録)
+  + `run_summary.json` (status=completed/failed とも, traceback 付) + 失敗 try/except。意図的失敗
+  (founder>population) で summary に status=failed+error+traceback が残ることを実機確認。個体別
+  fitness breakdown は snapshot に残り、改良時に backend 収束/淘汰理由を解析可能。
+- **凍結点テスト** (`092ab17`): `_BACKEND_NAMES` 二重定義 (fitness_llm↔llive_variant) の同期 +
+  founder backend_id on-prem + 思考因子保存 (67 tests green)。
+- **慎重判断 (過剰整備回避)**: operator パラメータ記録・genome version tag・淘汰理由集計は
+  commit hash + snapshot で代替可能なため**見送り**。拡張余地 (genome σ-aug 38-dim は 19-dim run
+  から resume 可 / backend 末尾 append / 出力後方互換) と挿げ替え (fitness/operator/backend は
+  injection 済) は確保済み。→ **進化は安心して走行開始できる状態**。
+
 ## 2026-05-24 (Phase 0.25 — llive 進化実行の準備完了)
 
 次回 FullSense 起動で **llive 進化 run に入る想定** (ユーザー指示) の準備を整備・実機検証。
