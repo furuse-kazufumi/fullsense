@@ -126,7 +126,7 @@ llive が計算する → IEEE 754 精度、再現可能、引用可能
 
 ## ソース
 
-- 実装: `D:/projects/llive/src/llive/math/units.py` + `calculator.py`
+- 実装: `llive/src/llive/math/units.py` + `calculator.py`
 - 公開 API: `from llive.math import Quantity, parse_unit, SafeCalculator, extract_expressions`
 - テスト: `tests/unit/test_math_units.py` (22 件) + `tests/unit/test_math_calculator.py` (24 件)
 - 全 1014 PASS / 回帰ゼロ

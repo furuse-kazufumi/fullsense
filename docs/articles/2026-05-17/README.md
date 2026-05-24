@@ -38,10 +38,10 @@ nav_order: 70
 
 ## 関連ソース (記事の裏付け)
 
-- llive Brief API: `D:/projects/llive/src/llive/brief/`
-- progressive matrix: `D:/projects/llive/docs/benchmarks/2026-05-16-progressive-full/`
-- COG-FX: `D:/projects/llive/.planning/REQUIREMENTS.md` v1.0-frame セクション
-- MATH-01/08: `D:/projects/llive/src/llive/math/`
+- llive Brief API: `llive/src/llive/brief/`
+- progressive matrix: `llive/docs/benchmarks/2026-05-16-progressive-full/`
+- COG-FX: `llive/.planning/REQUIREMENTS.md` v1.0-frame セクション
+- MATH-01/08: `llive/src/llive/math/`
 - tests: 1014 PASS (回帰ゼロ)
 
 ## 次回の記事候補

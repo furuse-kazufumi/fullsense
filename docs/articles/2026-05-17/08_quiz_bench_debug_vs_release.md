@@ -143,11 +143,11 @@ m_std = _stat.stdev(mss) if len(mss) > 1 else 0.0
 
 ## ソース
 
-- bench runner: `D:/projects/fullsense/scripts/bench_quiz.py` (statistics 列を 2026-05-17 追加)
-- quiz set: `D:/projects/fullsense/docs/benchmarks/quizzes/quiz_set_v1.json`
+- bench runner: `fullsense/scripts/bench_quiz.py` (statistics 列を 2026-05-17 追加)
+- quiz set: `fullsense/docs/benchmarks/quizzes/quiz_set_v1.json`
 - raw 結果:
-  - `D:/projects/fullsense/docs/benchmarks/2026-05-17-quiz-debug/`
-  - `D:/projects/fullsense/docs/benchmarks/2026-05-17-quiz-release/`
+  - `fullsense/docs/benchmarks/2026-05-17-quiz-debug/`
+  - `fullsense/docs/benchmarks/2026-05-17-quiz-release/`
 - 教訓: [`feedback_benchmark_honest_disclosure`](https://github.com/furuse-kazufumi/raptor/blob/main/.claude/projects/C--Users-puruy-raptor/memory/feedback_benchmark_honest_disclosure.md)
 
 ## 同日の他公開資料

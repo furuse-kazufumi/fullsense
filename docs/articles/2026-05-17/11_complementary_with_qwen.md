@@ -168,7 +168,7 @@ llive の戦略は **二層構造**:
 
 ## ソース
 
-- 要件: `D:/projects/llive/.planning/REQUIREMENTS.md` v2.0-core ORG-FX (補完視点での再解釈)
+- 要件: `llive/.planning/REQUIREMENTS.md` v2.0-core ORG-FX (補完視点での再解釈)
 - 関連記事: [10 — Qwen 依存から離脱する 5 段階](./10_qwen_divergence_strategy.md)
 - 関連 memory:
   - `feedback_llive_measurement_purity` — Local + on-prem 純度ルール

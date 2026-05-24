@@ -255,7 +255,7 @@ docs/
 4. **`verify_publication` 最新結果** — `out/verify_publication.last` キャッシュの tail 30 行
 5. **直近 4 時間に変更された portal ファイル**
 
-raptor 側ラッパは `RAPTOR_CALLER_DIR=D:/projects/fullsense` のときだけ
+raptor 側ラッパは `RAPTOR_CALLER_DIR=<your-path>/fullsense` のときだけ
 動く分岐. 他プロジェクトに切替えても無害.
 
 ---

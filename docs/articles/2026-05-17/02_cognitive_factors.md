@@ -128,7 +128,7 @@ LLM の自然言語ルールに依存せず、llove TUI / audit agent / evolutio
 
 ## ソース
 
-- 要件: `D:/projects/llive/.planning/REQUIREMENTS.md` v1.0-frame COG-FX セクション
+- 要件: `llive/.planning/REQUIREMENTS.md` v1.0-frame COG-FX セクション
 - 実装: `src/llive/brief/governance.py` (新規) + `src/llive/brief/ledger.py::trace_graph()` (拡張) + `src/llive/brief/types.py::BriefResult` (拡張)
 - テスト: `tests/unit/test_brief_cog.py` (16 件) — 1014 PASS / 回帰ゼロ
 - memory: `project_llive_cog_fx_factors.md`

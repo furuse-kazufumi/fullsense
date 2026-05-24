@@ -170,8 +170,8 @@ LLM (Qwen/Llama/...) を凍結コアとして使い
 
 ## ソース
 
-- 設計: `D:/projects/llive/.planning/REQUIREMENTS.md` (要件 92 件、内 v1.0-frame COG-FX 4 件で因子マッピング)
-- 実装: `D:/projects/llive/src/llive/` (brief / fullsense / approval / triz / memory / evolution / cabt 計画)
+- 設計: `llive/.planning/REQUIREMENTS.md` (要件 92 件、内 v1.0-frame COG-FX 4 件で因子マッピング)
+- 実装: `llive/src/llive/` (brief / fullsense / approval / triz / memory / evolution / cabt 計画)
 - 比較ベンチ: 同日記事 [01]({{ '/articles/2026-05-17/01_brief_api_progressive' | relative_url }}) / [07]({{ '/articles/2026-05-17/07_bench_results' | relative_url }}) / [08]({{ '/articles/2026-05-17/08_quiz_bench_debug_vs_release' | relative_url }})
 
 ---

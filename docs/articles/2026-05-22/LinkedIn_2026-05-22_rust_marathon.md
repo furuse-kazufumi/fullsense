@@ -163,6 +163,6 @@ Claude+llive 는 "즉시 구현 + 정직한 공개".
 ## 関連
 
 - Qiita 連載 #24-00 〜 #24-08 (9 本 draft 着地済, 2026-05-21〜22)
-- `D:/projects/llive/docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`
+- `llive/docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`
   (repo 内部, 投稿時は GitHub URL に展開)
 - memory: project_user_brainstorm_2026_05_22 (Gemini 4 アイデア集約)

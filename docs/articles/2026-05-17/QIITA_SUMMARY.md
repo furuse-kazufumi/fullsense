@@ -518,7 +518,7 @@ Observation about 'manual': <brief content[:120]> — novel territory, worth exp
 def run_llive(brief: str, _keys: dict) -> tuple[bool, str, float]:
     backend = os.environ.get("BENCH_LLIVE_BACKEND", "ollama:qwen2.5:14b")
     debug_flag = os.environ.get("BENCH_LLIVE_DEBUG", "0") == "1"
-    cmd = ["py", "-3.11", "D:/projects/llive/scripts/run_brief.py",
+    cmd = ["py", "-3.11", "llive/scripts/run_brief.py",
            "--json", "--backend", backend]
     if debug_flag:
         cmd.append("--debug")

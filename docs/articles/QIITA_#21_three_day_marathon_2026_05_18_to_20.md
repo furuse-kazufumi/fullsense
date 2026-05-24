@@ -510,7 +510,7 @@ memory) の整備が不可欠でした.
 - [Spec — lleval implementation notes](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/spec/lleval_v0_1_implementation_notes.md)
 - [Research hub](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/research/.md)
 - [Benchmark Policy](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/benchmarks/policy/.md)
-- llive コア最適化 experiments log (本リポ外, `D:/projects/llive/docs/experiments/optimize_core_2026_05_20.md` の commit log を参照)
+- llive コア最適化 experiments log (本リポ外, `llive/docs/experiments/optimize_core_2026_05_20.md` の commit log を参照)
 - maintainer memory:
   - `project_llive_core_optimization_2026_05_20`
   - `feedback_benchmark_honest_disclosure`

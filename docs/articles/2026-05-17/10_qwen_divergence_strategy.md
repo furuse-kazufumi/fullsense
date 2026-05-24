@@ -187,7 +187,7 @@ llive の周辺独自性は十分。コア独自性を **5 段階で計画的に
 
 ## ソース
 
-- 要件: `D:/projects/llive/.planning/REQUIREMENTS.md` v2.0-core ORG-FX セクション
+- 要件: `llive/.planning/REQUIREMENTS.md` v2.0-core ORG-FX セクション
 - ロードマップ: ROADMAP.md Phase 11 (ORG-FX) + Phase 12 (full independence)
 - 関連: 同日記事 [09 — llive 構造の独自性点検](./09_llive_structure_originality.md)
 
