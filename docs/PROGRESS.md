@@ -10,6 +10,23 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-24 (Phase 0.25 — llive 進化実行の準備完了)
+
+次回 FullSense 起動で **llive 進化 run に入る想定** (ユーザー指示) の準備を整備・実機検証。
+
+- **driver 配線** (llive `05ea703`): `scripts/run_persona_evolution_long.py` に
+  `--fitness {proxy,llm}` オプション + `persona_extended` import (拡張 21 ペルソナを seed 可)。
+- **実機ブロッカー修正**: backend 生成の ImportError/ModuleNotFoundError (mamba/rwkv/jamba が
+  openai 等の重依存を要求し、未インストールで進化 run 全体がクラッシュしていた) を `fitness_llm` で
+  catch し `backend_unavailable` で fitness=0 淘汰 (extensibility 契約=走行を止めない)。回帰テスト追加。
+- **検証済**: proxy run 即動 (5 世代 0.05s) / `--fitness llm` mock run 完走 (on-prem mock 個体に
+  収束、cloud/未インストール個体は淘汰で走行継続) / 拡張ペルソナ seed (`--personas darwin ...`) 成功。
+- **残論点** (実 ollama run の前提): founder の backend_id 初期値 ≈cloud で多く淘汰され mock に収束
+  → backend_id の on-prem 誘導 (founder 初期化 or backend 空間制限) + ollama 起動が要る。B2 quality
+  rubric は実 LLM judge 前提。
+- 手順: proxy=`py -3.11 scripts/run_persona_evolution_long.py --generations 100 --out out/persona_evo`、
+  実評価=`--fitness llm` 追加。
+
 ## 2026-05-24 (Phase 0.24 — ペルソナ ontology 拡張: affinity 自動算出でハードコード排除)
 
 llive 進化の persona ontology を数百人規模へ段階拡張する基盤を整備。詳細フィードバック:
