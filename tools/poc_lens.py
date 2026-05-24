@@ -160,6 +160,59 @@ def _self_check() -> None:
     assert max(p.trust for p in REGISTRY) < 1.0
 
 
+@dataclass(frozen=True)
+class Fragility:
+    """各 PoC の verdict が依存する仮定パラメータと、崩れる地点 (感度分析)."""
+
+    name: str
+    parameter: str
+    assumed: str
+    breakeven: str
+    fragile: bool
+    note: str
+
+
+# 全速度 PoC は「推定器精度 / 環境」を仮定値で置いている。verdict が仮定から
+# どれだけ離れて flip するか = 脆弱性。眼鏡が最も flag した「estimator-accuracy-critical」。
+FRAGILITY: tuple[Fragility, ...] = (
+    Fragility(
+        "Speculative Mesh", "hit_rate + fast-fallback", "hit~0.7 / 即時 fallback",
+        "break-even hit 0.34 (slow-fallback 20ms)", True,
+        "fast-fallback 必須。timeout が入ると break-even 上昇 → 低 hit で負ける。",
+    ),
+    Fragility(
+        "Antifragile", "exploration_multiplier + landscape 形状", "mult=8 / panic 有利 toy",
+        "mult>1 で脱出 (mult=1 は失敗)", True,
+        "脱出は landscape 形状依存。rigged toy のため実 fitness で再評価必須。",
+    ),
+    Fragility(
+        "適応推論予算 (IBPO)", "confidence 推定器ノイズ", "noise≈0 を仮定",
+        "noise~0.025 で精度<95%", True,
+        "推定器が少しノイズると品質が崩れる。最も脆い (要較正 calibration)。",
+    ),
+    Fragility(
+        "予測検証ゲート (#1)", "gate recall / invalid_rate", "recall 0.9 / invalid 0.6",
+        "recall が cheap/verify 比超で正 (≈常に成立)", False,
+        "コスト削減は頑健。ただし lost_valid ~3-4% の floor は残る。",
+    ),
+    Fragility(
+        "KV-cache 差分 (#2)", "locality(diff_ratio) / 帯域", "LAN / 差分小",
+        "LAN break-even diff 1.0 (常勝) / WAN <0.01", False,
+        "LAN なら locality に頑健。WAN は構造的に死亡。",
+    ),
+)
+
+
+def fragility_markdown() -> str:
+    lines = ["| PoC | 仮定 | break-even (flip 点) | 脆弱? |", "|---|---|---|---|"]
+    for f in FRAGILITY:
+        lines.append(
+            f"| {f.name} | {f.parameter}={f.assumed} | {f.breakeven} | "
+            f"{'⚠️ 脆い' if f.fragile else '頑健'} |"
+        )
+    return "\n".join(lines)
+
+
 def main() -> None:
     _ensure_utf8_stdout()
     _self_check()
