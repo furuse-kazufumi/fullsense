@@ -158,6 +158,10 @@ def _self_check() -> None:
     assert ibpo.quality_cost == 2
     # どの PoC も trust=1.0 (無条件採用) にはならない (全 sim なので)。
     assert max(p.trust for p in REGISTRY) < 1.0
+    # 感度分析: 推定器に依存する PoC は脆弱、IBPO は最も脆い。
+    assert any(f.fragile for f in FRAGILITY)
+    ibpo_frag = next(f for f in FRAGILITY if "IBPO" in f.name)
+    assert ibpo_frag.fragile is True
 
 
 @dataclass(frozen=True)
