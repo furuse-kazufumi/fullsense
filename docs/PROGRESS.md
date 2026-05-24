@@ -10,6 +10,16 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-24 深夜 — 取引stack停止→FullSense委譲 + SPEC-MESH 配線/修正
+
+詳細トレーサビリティ報告: [`session_report_2026_05_24.md`](session_report_2026_05_24.md)。要点:
+取引(Alpaca)自動化 20 タスクを全 Disable（可逆）+ 取引プロセス停止 / Telegram を FullSense 状況
+ダイジェストへ転用（`tools/fullsense_status_telegram.py`, scheduled task `FullSense-StatusTelegram`
+平日 11:30, end-to-end 検証済 LastTaskResult=0）/ llmesh SPEC-MESH-02/03/04 配線（transport+executor+
+fast-fallback）+ gem-reviewer 指摘の security 修正（ingest_result 派遣先 peer 束縛を既定 fail-closed 化等）、
+全 llmesh テスト exit 0 / 深夜バッチ engine は honest disclosure 上「テンプレ駆動では誤データ→走らせない」。
+未 push（朝の判断待ち）。
+
 ## 2026-05-24 (Phase 0.26 — 進化走行前の凍結点・トレーサビリティ整備)
 
 「進化を走らせ始めると変更困難になる」「失敗しても結果が残らないと意味がない」「後々の改良の

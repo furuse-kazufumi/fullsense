@@ -18,3 +18,10 @@ __pycache__/
 # Worktrees (claude-smart eval 等の隔離評価用)
 .worktrees/
 
+# Local-only ops / internal artifacts — contain local paths / chat_id, MUST NOT be
+# published in this PUBLIC portal repo (feedback_no_local_path_in_public). Files stay
+# on disk (scheduled tasks / SESSION START reference them) but are not tracked.
+/tools/fullsense_status_telegram.py
+/tools/fullsense_telegram_inbound.py
+/docs/session_report_2026_05_24.md
+
