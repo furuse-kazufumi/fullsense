@@ -10,6 +10,33 @@ nav_order: 90
 > Product-side progress lives in each product's repo (`llive/docs/PROGRESS.md`,
 > `llmesh/docs/PROGRESS.md`, `llove/docs/PROGRESS.md`).
 
+## 2026-05-24 (Phase 0.23 — SPEC-MESH-01 完遂 + B1 stale 訂正 + stdio_server 状態訂正)
+
+高速化 Tier 1 (Speculative Mesh) の本格導入 step 1 を着地 + 進化トラックの stale 記録 2 件を訂正。
+詳細フィードバック資料: [`research/spec_mesh_01_b1_feedback_2026_05_24`]({{ '/research/spec_mesh_01_b1_feedback_2026_05_24' | relative_url }})。
+
+- **SPEC-MESH-01 完遂** (llive `6439c8a`/`2427c71`, llmesh `9d57c9b`): 分岐予測器
+  `FrequencyPredictor` (order-0 baseline) / `MarkovPredictor` (order-1) を実装し online next-step で
+  hit_rate を単体測定 (16 tests green)。cyclic 0.999 / markov-noisy 0.87 (vs baseline 0.23)、構造なし
+  iid は Markov≈Frequency で **sanity 通過** (過剰主張なし)。honest disclosure: 合成系列のみ /
+  hit_rate≠speedup (ROI は SPEC-MESH-07 待ち) / **前提ブロック = ChangeOp を系列的に出す稼働進化
+  ループ未稼働** (`evolution/bench.py` の BenchHarness は単発 diff を 1 回 apply で ops を捨てる)。
+  測定 doc: `llive/docs/perf_comparison/branch_predictor_hit_rate_2026_05_24.md`。
+- **致命バグ B1「実は修正済み」と確定** (llive `9c966a9`): 「19-dim persona genome で backend_id を
+  位置誤読 → 全個体淘汰」と memory/claude-projects に記録されていたが、`Genome.value_by_label`
+  (idx13 label 解決) が `fitness_llm._genome_field` / `LlivVariantBuilder.build_config` 双方に既に
+  入っており **B1 は修正済み = 記録が stale** と判明。回帰テスト 3 件 (idx0 cloud 誤読値で淘汰されず /
+  idx13 cloud 値は正しく淘汰) で pin。残課題は **B2** (quality rubric の instance-specific 化) のみだが
+  mock 固定出力で選択圧にならないため **実 LLM fitness 配線と一体で対応** すべき。進化再開の障壁 -1。
+- **stdio_server / predictive_push transport の状態訂正**: NEXT_SESSION の「🤖 未了: protocolVersion
+  2025-06-18 + outputSchema + 実ツール出力配線」は stale。`llmesh/mcp/stdio_server.py` は
+  protocolVersion 2025-06-18 + outputSchema + structuredContent (text 併置) を実装済、predictive_push
+  の MQTT/SSE transport も `sinks.py` で着地済。**残る未了は実 LLM explainer のみ** (NEXT_SESSION 該当
+  行を ✅ に訂正)。
+- **共通発見**: 3 件とも実測/本格導入の最後の鍵が **実 LLM 配線** (進化 fitness / explainer / 稼働進化
+  ループ) に収束。合成/proxy 段は出揃い、honest disclosure としては「仕組みは出来た、実 LLM を繋ぐと
+  初めて意味のある数字が出る」が本日の正確な現在地。
+
 ## 2026-05-24 (Phase 0.22 — llive 進化系バグ徹底掃討 [進行中, 6h goal])
 
 ユーザー「バグが多い、徹底的に潰してフィードバック」+ 6h 継続 goal。2 体のサブエージェント
