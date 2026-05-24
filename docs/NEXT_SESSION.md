@@ -25,7 +25,10 @@ py -3.11 -m twine upload --skip-existing --disable-progress-bar D:/tmp/fullsense
 
 - **RepIR → llrepr 改名** (github.com/repir/repir [情報検索] 衝突回避)。`llmesh/llrepr/` に PoC 着地
   (typed Representation IR=「LLVM-for-expression」, 24 tests, commits 12c1a07/6044ba4)。
-  🤖 **未了**: stdio_server の protocolVersion 2025-06-18 + outputSchema + 実ツール出力配線。
+  ✅ **配線完了済 (2026-05-24 確認)**: stdio_server の protocolVersion 2025-06-18 + outputSchema +
+  structuredContent (text 併置で後方互換)、predictive_push の MQTT/SSE transport も着地
+  (`predictive_push/sinks.py`)。**残 = 実 LLM explainer のみ**。詳細は
+  [research/spec_mesh_01_b1_feedback_2026_05_24]({{ '/research/spec_mesh_01_b1_feedback_2026_05_24' | relative_url }}) §3。
 - **llmesh × HPE 衝突**: llmesh は **規格/spec の枠**(売り物でない) → リネーム不要で **クローズ**。
   公開ブランド = **FullSense**(衝突確認済クリーン)。詳細は正本 §1.1。
 - **PyPI 予約済 (placeholder 0.0.1)**: `llmesh-llrepr` / `llmesh-lleval` / `llmesh-lltrade` /
