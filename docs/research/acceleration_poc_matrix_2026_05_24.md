@@ -54,6 +54,35 @@ nav_order: 97
   コスト高、実 fitness/高次元 genome の ROI 要測定)、**KV-cache 差分 (#2)** (LAN 前提、
   実装重め、Speculative と署名スキーム共通化が前提)。
 
+## 眼鏡 — PoC メタ評価 (単に高速 ≠ 採用)
+
+> ユーザー指示「単に高速というだけでは、少し疑わないといけない」「lleval のような眼鏡で
+> PoC する」に対応。自作 PoC の speedup をそのまま信じず、独立ルーブリックで
+> **速さの裏 (品質犠牲 / 隠れコスト / 汎化リスク / self-preference)** を採点する。
+> 実装: `fullsense/tools/poc_lens.py` (`py -3.11 tools/poc_lens.py`, 自己検証 assert 込)。
+
+| PoC | 主張 | 品質犠牲 | 隠れコスト | 汎化リスク | self-pref | trust | verdict |
+|---|---|---|---|---|---|---|---|
+| Speculative Mesh | LAN 9.18x | 0 | 2 | 2 | 1 | 0.47 | 実測で再検証 |
+| Antifragile | 脱出 0%→100% | 0 | 2 | 2 | 2 | 0.35 | 実測で再検証 |
+| 適応推論予算 (IBPO) | 44% 削減 | 2 | 0 | 2 | 1 | 0.47 | 実測で再検証 |
+| 予測検証ゲート (#1) | 29-80% 削減 | 1 | 0 | 1 | 1 | **0.72** | 有望 (低疑い) |
+| KV-cache 差分 (#2) | LAN 29.85x | 0 | 1 | 2 | 1 | 0.60 | 実測で再検証 |
+| Combo-A | wall-clock 6.82x | 0 | 2 | 2 | 2 | 0.35 | 実測で再検証 |
+| Combo-B | 2.40x→4.52x | 0 | 1 | 2 | 1 | 0.60 | 実測で再検証 |
+| Combo-C | run 69% 削減 | 1 | 0 | 2 | 2 | 0.47 | 実測で再検証 |
+
+**眼鏡の結論**:
+
+- どの PoC も **trust=1.0 (無条件採用) にならない** — 全て simulation/toy。「速い」は仮説。
+- **self-preference が重い (Antifragile / Combo-A,C) は採用保留** — landscape を panic 有利に
+  設計した自覚があり、独立な実測が要る。
+- **適応推論予算は「速いが間違える」罠** — 推定器ノイズで精度 65.8% まで落ちる。速度だけ見て
+  採用すると品質が崩れる典型。推定器精度の floor が前提。
+- 最も疑い低は **予測検証ゲート (#1, trust 0.72)** — simulation 距離が近く rigging も薄い。
+- → **速い結果ほど内訳を疑い、実 transport/executor/fitness 配線後の実測で上書きする**
+  ([[feedback_benchmark_honest_disclosure]] / [[feedback_rust_usage_matters]])。
+
 ## 本格導入への道筋 (次)
 
 1. Tier 1: Speculative Mesh SPEC-MESH-01 (予測器の hit_rate 単体測定) から着手。
