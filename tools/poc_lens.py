@@ -226,6 +226,8 @@ def main() -> None:
     print("\n## 速さの裏 (各 PoC が速度のために払うもの)\n")
     for p in REGISTRY:
         print(f"- **{p.name}**: {p.speed_cost_note}")
+    print("\n## 感度/脆弱性分析 (verdict は仮定からどれだけ離れて崩れるか)\n")
+    print(fragility_markdown())
     print("\n## 眼鏡の結論\n")
     print("- どの PoC も **trust=1.0 (無条件採用) にならない** — 全て simulation/toy。")
     print("- self-preference が重い (Antifragile / Combo-A,C) は **実測で再検証するまで採用保留**。")
