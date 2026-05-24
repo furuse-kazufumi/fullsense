@@ -7,7 +7,7 @@ tags:
   - TODO_TAG
   - TODO_TAG
 private: false
-updated_at: '2026-05-22'
+updated_at: '2026-05-24'
 id: null
 organization_url_name: null
 slide: false
@@ -39,10 +39,10 @@ ignorePublish: true
 | #23 | QIITA_#23_15h_marathon_mid_report.md | <https://qiita.com/furuse-kazufumi/items/24ac90fb12c4e332d2b5> | 2026-05-23 (公開) |
 | #24-00 | QIITA_#24_00_llive_tech_series_index.md | <https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c> | 2026-05-23 (公開) |
 | #24-01 | QIITA_#24_01_memory_layer.md | <https://qiita.com/furuse-kazufumi/items/a5ebb3992e4c28862f47> | 2026-05-23 (公開) |
-| #24-02 | QIITA_#24_02_thought_factors_cog_mesh.md | <https://qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511> | 2026-05-23 (限定共有) |
+| #24-02 | QIITA_#24_02_thought_factors_cog_mesh.md | <https://qiita.com/furuse-kazufumi/items/bdfad6db3f2e70c40511> | 2026-05-23 (公開) |
 | #24-03 | QIITA_#24_03_structural_evolution_triz.md | <https://qiita.com/furuse-kazufumi/items/fa0890f136636d495ea6> | 2026-05-23 (公開) |
-| #24-04 | QIITA_#24_04_convergent_optimization_b_series.md | <https://qiita.com/furuse-kazufumi/private/e5093e4816b25c1bd4d0> | 2026-05-23 (限定共有) |
-| #24-05 | QIITA_#24_05_evolutionary_v0BCDE.md | <https://qiita.com/furuse-kazufumi/private/07b686ea311e06027f94> | 2026-05-23 (限定共有) |
+| #24-04 | QIITA_#24_04_convergent_optimization_b_series.md | <https://qiita.com/furuse-kazufumi/items/e5093e4816b25c1bd4d0> | 2026-05-23 (公開) |
+| #24-05 | QIITA_#24_05_evolutionary_v0BCDE.md | <https://qiita.com/furuse-kazufumi/items/07b686ea311e06027f94> | 2026-05-23 (公開) |
 | #24-06 | QIITA_#24_06_llm_backend_non_transformer.md | <https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8> | 2026-05-23 (限定共有) |
 | #24-07 | QIITA_#24_07_observability_governance.md | <https://qiita.com/furuse-kazufumi/private/c5f2077a3399d3fc9b26> | 2026-05-23 (限定共有) |
 | #24-08 | QIITA_#24_08_lleval_eval_framework.md | <https://qiita.com/furuse-kazufumi/private/e49b7ab9027d93594402> | 2026-05-23 (限定共有) |
@@ -52,11 +52,11 @@ ignorePublish: true
 | ID | 仮表記 | Title (統一形式) | Qiita URL (投稿後に埋める) | 投稿日 |
 |---|---|---|---|---|
 | 24-00 | `#24-00` | llive 完全解説 #24-00 — series index: 大分類 8 記事 + 全体図 | <https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c> | 2026-05-23 (公開) |
-| 24-01 | `#24-01` | llive 完全解説 #24-01 — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating | _未投稿_ | — |
-| 24-02 | `#24-02` | llive 完全解説 #24-02 — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞 | _未投稿_ | — |
-| 24-03 | `#24-03` | llive 完全解説 #24-03 — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証 | _未投稿_ | — |
-| 24-04 | `#24-04` | llive 完全解説 #24-04 — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path | _未投稿_ | — |
-| 24-05 | `#24-05` | llive 完全解説 #24-05 — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括 (連載中核) | _未投稿_ | — |
+| 24-01 | `#24-01` | llive 完全解説 #24-01 — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating | <https://qiita.com/furuse-kazufumi/items/a5ebb3992e4c28862f47> | 2026-05-23 (公開) |
+| 24-02 | `#24-02` | llive 完全解説 #24-02 — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞 | <https://qiita.com/furuse-kazufumi/items/bdfad6db3f2e70c40511> | 2026-05-23 (公開) |
+| 24-03 | `#24-03` | llive 完全解説 #24-03 — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証 | <https://qiita.com/furuse-kazufumi/items/fa0890f136636d495ea6> | 2026-05-23 (公開) |
+| 24-04 | `#24-04` | llive 完全解説 #24-04 — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path | <https://qiita.com/furuse-kazufumi/items/e5093e4816b25c1bd4d0> | 2026-05-23 (公開) |
+| 24-05 | `#24-05` | llive 完全解説 #24-05 — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括 (連載中核) | <https://qiita.com/furuse-kazufumi/items/07b686ea311e06027f94> | 2026-05-23 (公開) |
 | 24-06 | `#24-06` | llive 完全解説 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ | _未投稿_ | — |
 | 24-07 | `#24-07` | llive 完全解説 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain | _未投稿_ | — |
 | 24-08 | `#24-08` | llive 完全解説 #24-08 — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する | _未投稿_ | — |
