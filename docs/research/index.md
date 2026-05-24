@@ -24,6 +24,7 @@ has_children: true
 | [表現 × リアルタイム — Ideation Marathon]({{ '/research/ideation_marathon_expression_realtime_2026_05_23' | relative_url }}) | FullSense「表現×リアルタイム」の 6 論点 (manga評価ラダー/一貫生成+licensing/llrepr型コントラクト/near-real-time天井/4コマ脚本/普及) を rad→triz→cross-domain で深掘り. 統合発見=**予測符号化アーキテクチャ** + **制約→強み転化 (TRIZ#22)**. llrepr(旧RepIR)=LLVM-for-expression / warning-zone 先回り生成 |
 | [llrepr — PoC 実装着地 (旧 RepIR)]({{ '/research/llrepr_poc_2026_05_24' | relative_url }}) | 実装キュー#1 を llmesh `llmesh/llrepr/` に着地 (typed Representation IR=「LLVM-for-expression」). L1 閉集合ノード+glTF流 used/required 拡張, Markdown(degrade floor)/SVG/TUI writer, MCP `structuredContent`+text併置. **RepIR→llrepr 改名** (衝突回避) の経緯と PyPI/GitHub 衝突確認表も収録 |
 | [ll- ファミリー名 衝突監査 + PyPI 予約]({{ '/research/llname_collision_audit_2026_05_24' | relative_url }}) | FullSense ll- 名を GitHub+PyPI で一括監査. **重要発見=旗艦 `llmesh` が HPE "LLM Agentic Tool Mesh" (HewlettPackard/llmesh 90★) と同名・同ドメイン衝突**(要戦略判断). llrepr/lleval/lltrade/lldesign を `llmesh-<n>` で PyPI 予約 (placeholder 0.0.1). 研究段階名(llcraft/llgov/llrisk/llgrow)は hygiene 配慮で見送り |
+| [予測符号化 push PoC — 発見A の具現化]({{ '/research/predictive_push_poc_2026_05_24' | relative_url }}) | 実装キュー#2 を llmesh に着地. SPC warning-zone で説明を**投機生成**→確定時は予測 vs 実際の **typed diff(予測誤差)だけ push**(負レイテンシ). llrepr.diff + predictive_push(coordinator/zones/sinks) + MCP 2025-06-18 近代化. 計108 tests. **発見A=予測符号化アーキテクチャ**の最小具現. honest: 主利点は負レイテンシ(ペイロード削減は大型表現のみ), 実LLM explainer 未配線 |
 
 ## 方針
 
