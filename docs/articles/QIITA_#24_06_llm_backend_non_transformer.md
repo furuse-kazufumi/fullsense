@@ -173,7 +173,7 @@ flowchart LR
 ## Series Navigation
 
 - ← 前: [llive 完全解説 (5) 「集団が学ぶ AI」](https://qiita.com/furuse-kazufumi/private/07b686ea311e06027f94)
-- → 次: [llive 完全解説 (7) 「審査つき AI」](https://qiita.com/furuse-kazufumi/private/c5f2077a3399d3fc9b26)
+- → 次: [llive 完全解説 (7) 「審査つき AI」](https://qiita.com/furuse-kazufumi/items/c5f2077a3399d3fc9b26)
 - 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
@@ -354,7 +354,7 @@ flowchart LR
 ## Series Navigation
 
 - ← Prev: [llive Complete Guide (5) "The Population that Learns"](https://qiita.com/furuse-kazufumi/private/07b686ea311e06027f94)
-- → Next: [llive Complete Guide (7) "AI with Built-in Review"](https://qiita.com/furuse-kazufumi/private/c5f2077a3399d3fc9b26)
+- → Next: [llive Complete Guide (7) "AI with Built-in Review"](https://qiita.com/furuse-kazufumi/items/c5f2077a3399d3fc9b26)
 - All: [llive Complete Guide (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
@@ -514,7 +514,7 @@ flowchart LR
 ## Series Navigation
 
 - ← 上一篇: [llive 完全解说 (5) 「学习的群体」](https://qiita.com/furuse-kazufumi/private/07b686ea311e06027f94)
-- → 下一篇: [llive 完全解说 (7) 「带审查的 AI」](https://qiita.com/furuse-kazufumi/private/c5f2077a3399d3fc9b26)
+- → 下一篇: [llive 完全解说 (7) 「带审查的 AI」](https://qiita.com/furuse-kazufumi/items/c5f2077a3399d3fc9b26)
 - 全部: [llive 完全解说 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
@@ -681,6 +681,6 @@ flowchart LR
 ## Series Navigation
 
 - ← 이전: [llive 완전 해설 (5) 「집단이 학습하는 AI」](https://qiita.com/furuse-kazufumi/private/07b686ea311e06027f94)
-- → 다음: [llive 완전 해설 (7) 「심사가 붙은 AI」](https://qiita.com/furuse-kazufumi/private/c5f2077a3399d3fc9b26)
+- → 다음: [llive 완전 해설 (7) 「심사가 붙은 AI」](https://qiita.com/furuse-kazufumi/items/c5f2077a3399d3fc9b26)
 - 전체: [llive 완전 해설 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
