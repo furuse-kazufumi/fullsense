@@ -83,14 +83,23 @@ PoC 段では全個体がデータのみ・純粋評価なので**本質的に s
 **「新しい AI が生まれた」の合格 = unbounded activity（Bedau）∧ archive 単調成長 ∧ monoculture<0.8 ∧
 非自明性ガード通過**、を proxy で実証 → Stage6 実 LLM で上書き検証。
 
-## 6. sweep マトリクス（「色々な条件で」）
+## 6. sweep マトリクス（「色々な条件で」）+ ラン長・実行時間
 
+**ラン長 = ≥10,000 世代**（RUN-1）。多様性持続は**末尾世代で**判定（短期の見かけでなく持続性）。
 直交軸（フル直積は爆発するので **OFAT + 有望点の格子**）:
 `selection{scalar,novelty,eps-lexicase,FUSS}` × `standardize{on,off}` ×
-`reservoir{off,256@0.05}` × `cultural{off,v1}` × `descriptor{projection,CVT}` ×
-`meta{off,UCB1-AOS,self-adaptive-σ+floor}` × `archive{none,MAP-Elites}`。
-seed を複数（≥5）で再現性。各セルで §5 指標を記録 → 比較表 + Bedau 分類。
-**第一波（最小情報量で最大判別）**: baseline(scalar,no-std,no-archive) vs full(eps-lexicase,std,reservoir,CVT,MC)。
+`reservoir{off,256,1024,4096}@density{0.02,0.05}` × `cultural{off,v1}` ×
+`descriptor{projection,CVT,AURORA}` × `meta{off,UCB1-AOS,self-adaptive-σ+floor}` × `archive{none,MAP-Elites,island}`。
+**遺伝子容量（reservoir サイズ）は多様性持続の主制御変数**（GENOME-1）= 重点 sweep 軸。
+seed ≥5 で再現性。各セルで §5 指標を**末尾20%世代**で記録 → 比較表 + Bedau 分類。
+
+**実行時間試算（feasibility, ユーザー <10h 試算の裏取り）**: 実測 proxy 500gen≈7s(71 gen/s) /
+rich 500gen≈25s(20 gen/s)。10K gen ≈ proxy 2.3min / rich 8min。+novelty(pop×archive k-NN) と
+大容量 reservoir(4096) で 1 ラン ≈ 10–40min を見込む。sweep ~10–20 構成 × 5 seed = 50–100 ラン →
+逐次で数〜十数時間、**並列ラン（独立プロセス, SR-4 隔離と整合）で <10h に収まる**。
+
+**第一波（最小情報量で最大判別）**: baseline(scalar,no-std,no-archive,reservoir-off,500gen) vs
+full(eps-lexicase,std,reservoir-1024,CVT,MC,MAP-Elites,**10K gen**)。多様性が gen10K で持続するか＝核仮説。
 
 ## 7. 反証基準 / 期待結果（falsifiable）
 
