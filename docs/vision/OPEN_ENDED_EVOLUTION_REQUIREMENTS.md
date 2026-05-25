@@ -82,7 +82,8 @@
   **決定スケール（初期）**: population=**1024**（POP-1, sweep で上下）、genome=**token 級（c_latent≈32,768 +
   思考因子 40 + 文化 ~12 ≈ 32,820 遺伝子）**、generations は **wallclock 予算（5–10h）で上限**
   （既存 `max_wallclock_seconds` を流用）+ 高 gen cap（例 200,000）。**校正ラン（calibration）で per-gen
-  実測 → 5h window を埋めるパラメータ確定**（token 級 +novelty+QD の per-gen は未実測 [SPEC]）。
+  実測 → 5h window を埋めるパラメータ確定**（token 級 +novelty+QD の per-gen は未実測 [SPEC]）。**規模はさらに大きく可**（夜間 8–10h+）。
+- **CADENCE-1 (SHOULD, 研究要素)**: **進化ラン時間 : 改良時間 ≈ 50/50 を初期 cadence** とし**少しずつ調整**（ユーザー 2026-05-25）。**AI 実装は人間より根本的に高速で最適比率が異なる** → cadence 自体を **meta 研究要素**として run/improve 実時間を計測し適応（改良サイクルが速いほど run を長く・大きく取れる）。
 - **CKPT-1 (MUST, 一時停止・再開で連続性維持)**: **全状態チェックポイント/再開**。`checkpoint_every`
   （例 500–1000 世代）で **population + generation + RNG 状態 + QD アーカイブ + novelty アーカイブ +
   belief space + metrics + founder_lineage** を永続化。`--resume` が**全状態を復元し決定論的に継続**。
