@@ -253,7 +253,7 @@ governance 側で重要なのは:
 
 ## Series Navigation
 
-- ← 前: [llive 完全解説 (6) 「Transformer の外」](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- ← 前: [llive 完全解説 (6) 「Transformer の外」](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8)
 - → 次: [llive 完全解説 (8) 「眼鏡を作る」](https://qiita.com/furuse-kazufumi/private/e49b7ab9027d93594402)
 - 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
@@ -513,7 +513,7 @@ matrix signed in the audit chain fits within the latency budget.
 
 ## Series Navigation
 
-- ← Prev: [llive Complete Guide (6) "Beyond the Transformer"](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- ← Prev: [llive Complete Guide (6) "Beyond the Transformer"](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8)
 - → Next: [llive Complete Guide (8) "Making the Glasses"](https://qiita.com/furuse-kazufumi/private/e49b7ab9027d93594402)
 - All: [llive Complete Guide (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
@@ -748,7 +748,7 @@ test (1e-6 tolerance). callers (`CollusionDetector.check`) 计划在下一 commi
 
 ## Series Navigation
 
-- ← 上一篇: [llive 完全解说 (6)「Transformer 之外」](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- ← 上一篇: [llive 完全解说 (6)「Transformer 之外」](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8)
 - → 下一篇: [llive 完全解说 (8)「制作眼镜」](https://qiita.com/furuse-kazufumi/private/e49b7ab9027d93594402)
 - 全部: [llive 完全解说 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
@@ -991,7 +991,7 @@ budget 안에 들어간다.
 
 ## Series Navigation
 
-- ← 이전: [llive 완전 해설 (6) 「Transformer 의 밖」](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- ← 이전: [llive 완전 해설 (6) 「Transformer 의 밖」](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8)
 - → 다음: [llive 완전 해설 (8) 「안경을 만든다」](https://qiita.com/furuse-kazufumi/private/e49b7ab9027d93594402)
 - 전체: [llive 완전 해설 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
