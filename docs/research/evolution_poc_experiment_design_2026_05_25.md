@@ -89,8 +89,9 @@ PoC 段では全個体がデータのみ・純粋評価なので**本質的に s
 直交軸（フル直積は爆発するので **OFAT + 有望点の格子**）:
 `selection{scalar,novelty,eps-lexicase,FUSS}` × `standardize{on,off}` ×
 `reservoir{off,256,1024,4096}@density{0.02,0.05}` × `cultural{off,v1}` ×
-`descriptor{projection,CVT,AURORA}` × `meta{off,UCB1-AOS,self-adaptive-σ+floor}` × `archive{none,MAP-Elites,island}`。
-**遺伝子容量（reservoir サイズ）は多様性持続の主制御変数**（GENOME-1）= 重点 sweep 軸。
+`descriptor{projection,CVT,AURORA}` × `meta{off,UCB1-AOS,self-adaptive-σ+floor}` × `archive{none,MAP-Elites,island}` ×
+`population{32,256,1024,4096}`。
+**スケール 4 軸（遺伝子容量 reservoir × 母数 population × 世代数 × 要素種類）が多様性持続の主制御変数**（GENOME-1/POP-1/RUN-1/ELEM-1）= 重点 sweep 軸。低次元記述子(DESC-1)で大母数 novelty も tractable。
 seed ≥5 で再現性。各セルで §5 指標を**末尾20%世代**で記録 → 比較表 + Bedau 分類。
 
 **実行時間試算（feasibility, ユーザー <10h 試算の裏取り）**: 実測 proxy 500gen≈7s(71 gen/s) /
