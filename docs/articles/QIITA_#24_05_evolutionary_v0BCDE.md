@@ -363,7 +363,7 @@ std::simd は nightly のみで stable 不可 → 入れればさらに 2-3x. RU
 ## Series Navigation
 
 - ← 前: [llive 完全解説 (4) 「収束する脳」](https://qiita.com/furuse-kazufumi/private/e5093e4816b25c1bd4d0)
-- → 次: [llive 完全解説 (6) 「Transformer の外」](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- → 次: [llive 完全解説 (6) 「Transformer の外」](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8)
 - 全体: [llive 完全解説 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
@@ -743,7 +743,7 @@ another 2-3x. A RUST-17c candidate.
 ## Series Navigation
 
 - ← Prev: [llive Complete Guide (4) "The Converging Brain"](https://qiita.com/furuse-kazufumi/private/e5093e4816b25c1bd4d0)
-- → Next: [llive Complete Guide (6) "Beyond the Transformer"](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- → Next: [llive Complete Guide (6) "Beyond the Transformer"](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8)
 - All: [llive Complete Guide (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
@@ -1091,7 +1091,7 @@ std::simd 仅 nightly stable 不可 → 加上还能再 2-3x. RUST-17c 候选.
 ## Series Navigation
 
 - ← 上一篇: [llive 完全解说 (4) 「收敛的大脑」](https://qiita.com/furuse-kazufumi/private/e5093e4816b25c1bd4d0)
-- → 下一篇: [llive 完全解说 (6) 「Transformer 之外」](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- → 下一篇: [llive 完全解说 (6) 「Transformer 之外」](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8)
 - 全部: [llive 完全解说 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
 
@@ -1446,6 +1446,6 @@ std::simd는 nightly만이고 stable 불가 → 넣으면 추가로 2-3x. RUST-1
 ## Series Navigation
 
 - ← 이전: [llive 완전 해설 (4) 「수렴하는 뇌」](https://qiita.com/furuse-kazufumi/private/e5093e4816b25c1bd4d0)
-- → 다음: [llive 완전 해설 (6) 「Transformer 의 밖」](https://qiita.com/furuse-kazufumi/private/6da5a883fb2ed651edd8)
+- → 다음: [llive 완전 해설 (6) 「Transformer 의 밖」](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8)
 - 전체: [llive 완전 해설 (0) — series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c)
 - repo: [furuse-kazufumi/llive](https://github.com/furuse-kazufumi/llive)
