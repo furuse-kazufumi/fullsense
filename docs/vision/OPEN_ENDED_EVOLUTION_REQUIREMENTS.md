@@ -89,6 +89,16 @@
   一時停止＝チェックポイント後に停止、再開＝最新から。既存 snapshot/resume（population/generation のみ）を
   **全状態へ拡張**する。ccr 連続運転と整合（[[project_ccr_auto_resume]] / [[feedback_session_marathon]]）。
 
+### 1.10 推奨アルゴリズムスタック — Stream G
+- **記述子縮約**: **JL ランダム射影**（学習不要・決定論・O(nd), 32k→8–50 次元; DESC-1, 全遺伝子が寄与=NEUT-1 両立）。
+- **選択**: **ε-lexicase + minimal-criterion**（SEL-3/4）。
+- **アーカイブ/QD**: **CVT-MAP-Elites を CMA-MAE で照らす**（QD SOTA, pyribs 移植可）; 高次元/教師なしは **Dominated Novelty Search (2025)** を A/B。
+- **変異 σ 適応（2 層, 差別化白地）**: 小さい意味因子(factors/cultural)=**full-CMA** / 大きい c_latent(32k+)=**sep-CMA 対角 + 疎変異**（full-CMA は O(n²) で 32k 破綻）。この 2 層構成は既存 QD 文献がほぼ扱わない白地。
+- **メタ**: UCB1 / self-adaptive + **σ 下限クランプ**（META-3）。
+- **Stage6 実 LLM**: **surrogate-assisted EA** で評価予算を間引く（proxy 段では不要）。
+- **AVOID**: QDAIF（多様性判定を LLM に委ねる＝DIFF-1 と衝突）/ MOEA-D・SMS-EMOA（argmax/hypervolume が SEL-2 と不整合）/ PSO・CEM（中央収束で OE-3 違反）。
+- honest: DNS / CMA-MAE / BR-NS は最新ゆえ我々規模・on-prem 未実証 → **MAP-Elites baseline と A/B 必須**。
+
 ## 2. 受入メトリクス（「成立したか」の定量判定）
 
 | メトリクス | 合格条件 | 反証する旧症状 |
