@@ -77,6 +77,18 @@
 - **ADOPT-3 (Stage6)**: 二層 on-prem LLM（小=変異 / 中=洗練、AlphaEvolve の Flash/Pro 相当）。
 - **最近接既存**: **CycleQD（Sakana, Llama3-8B 上の QD model-merge）** が on-prem QD の実在証明＝#11 の最近接アナログ（手法を学ぶ）。**OpenEvolve** が AlphaEvolve ループを Ollama で再現＝ループ自体は on-prem 可。
 
+### 1.9 運用規模・連続運転・チェックポイント（5h+ 連続 / 一時停止・再開）— ユーザー 2026-05-25
+- **RUN-2 (MUST, 5h+ 連続運転前提で規模決定)**: 平日・夜間に **≥5 時間連続運転**する前提で規模を決める。
+  **決定スケール（初期）**: population=**1024**（POP-1, sweep で上下）、genome=**token 級（c_latent≈32,768 +
+  思考因子 40 + 文化 ~12 ≈ 32,820 遺伝子）**、generations は **wallclock 予算（5–10h）で上限**
+  （既存 `max_wallclock_seconds` を流用）+ 高 gen cap（例 200,000）。**校正ラン（calibration）で per-gen
+  実測 → 5h window を埋めるパラメータ確定**（token 級 +novelty+QD の per-gen は未実測 [SPEC]）。
+- **CKPT-1 (MUST, 一時停止・再開で連続性維持)**: **全状態チェックポイント/再開**。`checkpoint_every`
+  （例 500–1000 世代）で **population + generation + RNG 状態 + QD アーカイブ + novelty アーカイブ +
+  belief space + metrics + founder_lineage** を永続化。`--resume` が**全状態を復元し決定論的に継続**。
+  一時停止＝チェックポイント後に停止、再開＝最新から。既存 snapshot/resume（population/generation のみ）を
+  **全状態へ拡張**する。ccr 連続運転と整合（[[project_ccr_auto_resume]] / [[feedback_session_marathon]]）。
+
 ## 2. 受入メトリクス（「成立したか」の定量判定）
 
 | メトリクス | 合格条件 | 反証する旧症状 |
