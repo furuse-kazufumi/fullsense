@@ -57,8 +57,8 @@ ignorePublish: true
 | 24-03 | `#24-03` | llive 完全解説 #24-03 — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証 | <https://qiita.com/furuse-kazufumi/items/fa0890f136636d495ea6> | 2026-05-23 (公開) |
 | 24-04 | `#24-04` | llive 完全解説 #24-04 — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path | <https://qiita.com/furuse-kazufumi/items/e5093e4816b25c1bd4d0> | 2026-05-23 (公開) |
 | 24-05 | `#24-05` | llive 完全解説 #24-05 — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括 (連載中核) | <https://qiita.com/furuse-kazufumi/items/07b686ea311e06027f94> | 2026-05-23 (公開) |
-| 24-06 | `#24-06` | llive 完全解説 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ | _未投稿_ | — |
-| 24-07 | `#24-07` | llive 完全解説 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain | _未投稿_ | — |
+| 24-06 | `#24-06` | llive 完全解説 #24-06 — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ | <https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8> | 2026-05-23 (公開) |
+| 24-07 | `#24-07` | llive 完全解説 #24-07 — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain | <https://qiita.com/furuse-kazufumi/items/c5f2077a3399d3fc9b26> | 2026-05-23 (公開) |
 | 24-08 | `#24-08` | llive 完全解説 #24-08 — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する | _未投稿_ | — |
 
 ## タイトル統一規約 (2026-05-22 確定)
