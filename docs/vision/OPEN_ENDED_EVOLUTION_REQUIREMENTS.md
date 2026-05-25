@@ -91,6 +91,11 @@
   のために品質を犠牲にしない）、(2) **SPC で品質指標を継続監視**（FullSense 中核, 管理限界外れを異常検知）、
   (3) honest disclosure（見かけの改善を neutral shadow 対照で疑う）。cadence(CADENCE-1) を高速化しても
   ゲート + SPC で品質向上が単調に積み上がる状態を作る。
+  **PDCA 各フェーズの割当は Claude 裁量で確定（ユーザー委任 2026-05-25）**: **Plan**=次 sweep config +
+  falsifiable 仮説（どの要件/メトリクスを検証するか）を belief space + 前回 Check から決定 / **Do**=進化 run
+  （5h+, CKPT-1 連続）＋ 並行して改良実装（AI 高速 side）の両輪 / **Check**=Bedau(neutral shadow)+MODES+
+  受入メトリクス+安全 audit を自動集計し前回と gate 比較 / **Act**=改善+gate 通過なら昇格（baseline/belief/
+  要件更新）, 回帰なら正直に記録+revert・調整 → 次 Plan。1 サイクルを CADENCE-1 で計測し比率を適応。
 - **CKPT-1 (MUST, 一時停止・再開で連続性維持)**: **全状態チェックポイント/再開**。`checkpoint_every`
   （例 500–1000 世代）で **population + generation + RNG 状態 + QD アーカイブ + novelty アーカイブ +
   belief space + metrics + founder_lineage** を永続化。`--resume` が**全状態を復元し決定論的に継続**。
