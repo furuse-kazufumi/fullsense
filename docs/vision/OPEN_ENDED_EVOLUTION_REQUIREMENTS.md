@@ -64,6 +64,15 @@
 - **SR-4 (MUST, インセンティブ衛生)**: transgression は**いかなる fitness 経路でも正の報酬ゼロ**。協調進化は**隔離・資源上限プロセス**で（crash=0 点＝crash-to-win exploit を無効化）。
 - **アーキ**: **二空間分離（探索≠効果）**。探索空間=最大開放・実効果ゼロ（データのみ個体・純粋評価 sandbox）。**Approval Bus 上の片方向 fail-closed 昇格ゲート**（transgression<θ ∧ trust≥τ ∧ audit-clean）のみが effect 空間（実 LLM 評価/persona deploy/belief 更新）への経路。raptor `@govern`/IntentClassifier/TrustScore/AuditTrail を再利用、新規は4部品（transgression scorer / 昇格ゲート / semgrep eval-exec 到達性ルール / 進化用 intent signals）。
 
+### 1.8 競合差別化・スコープ（既存 AI に勝つ）— Stream F
+- **DIFF-1 (MUST)**: 差別化白地＝**検証可能性のない領域（認知・文化スタイルの多様性）を、明示的人間文化記述子（Hofstede/Schwartz/WVS を外在化, FM 暗黙でなく）+ novelty/QD で「多様性の地図」として生む**。pull 型 persona 獲得 + 中立貯蔵庫（先行実装が見つからない白地）+ 迂回不能ガバナンスを進化不変条件に。これが「勝てる軸」。
+- **SCOPE-1 (MUST NOT)**: **検証可能なアルゴリズム/コード発見（AlphaEvolve/FunSearch の土俵）で competition しない**。on-prem では frontier cloud LLM + 大規模計算に discovery 品質で勝てない（honest）。別軸で勝つ。
+- **SCOPE-2 (MUST NOT, #13 整合)**: **R 型 自己コード書換を主経路に置かない**（Darwin Gödel Machine / AI-Scientist が objective-hacking を実演; #13 ガバナンスと衝突）。
+- **ADOPT-1 (SHOULD)**: **island モデル**で QD アーカイブを島化（`founder_lineage.jsonl` を親エッジに流用）＝早期収束防止（FunSearch/AlphaEvolve/DGM 共通手法）。
+- **ADOPT-2 (SHOULD)**: **explicit-culture interestingness** — OMNI-EPIC の「学習可能 + 次に新規」を frontier FM でなく**文化因子 + novelty 距離**で再構成（= 差別化の核心の賭け）。
+- **ADOPT-3 (Stage6)**: 二層 on-prem LLM（小=変異 / 中=洗練、AlphaEvolve の Flash/Pro 相当）。
+- **最近接既存**: **CycleQD（Sakana, Llama3-8B 上の QD model-merge）** が on-prem QD の実在証明＝#11 の最近接アナログ（手法を学ぶ）。**OpenEvolve** が AlphaEvolve ループを Ollama で再現＝ループ自体は on-prem 可。
+
 ## 2. 受入メトリクス（「成立したか」の定量判定）
 
 | メトリクス | 合格条件 | 反証する旧症状 |
