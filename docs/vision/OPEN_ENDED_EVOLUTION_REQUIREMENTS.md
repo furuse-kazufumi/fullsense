@@ -84,6 +84,13 @@
   （既存 `max_wallclock_seconds` を流用）+ 高 gen cap（例 200,000）。**校正ラン（calibration）で per-gen
   実測 → 5h window を埋めるパラメータ確定**（token 級 +novelty+QD の per-gen は未実測 [SPEC]）。**規模はさらに大きく可**（夜間 8–10h+）。
 - **CADENCE-1 (SHOULD, 研究要素)**: **進化ラン時間 : 改良時間 ≈ 50/50 を初期 cadence** とし**少しずつ調整**（ユーザー 2026-05-25）。**AI 実装は人間より根本的に高速で最適比率が異なる** → cadence 自体を **meta 研究要素**として run/improve 実時間を計測し適応（改良サイクルが速いほど run を長く・大きく取れる）。
+- **PDCA-1 (SHOULD, 速い PDCA + 品質向上維持)**: 研究改良ループを **自動化された高速 PDCA** にする —
+  **Plan**(次 config/仮説) → **Do**(run, 5h+ 可, CKPT-1 で連続) → **Check**(Bedau/MODES + 安全 audit +
+  受入メトリクスを**自動集計**) → **Act**(config/コード改良 + belief/要件更新) → 反復。**品質維持の担保**:
+  (1) 各サイクルで**メトリクス回帰をゲート**（多様性/open-endedness/安全不変条件が悪化したら昇格不可＝速度
+  のために品質を犠牲にしない）、(2) **SPC で品質指標を継続監視**（FullSense 中核, 管理限界外れを異常検知）、
+  (3) honest disclosure（見かけの改善を neutral shadow 対照で疑う）。cadence(CADENCE-1) を高速化しても
+  ゲート + SPC で品質向上が単調に積み上がる状態を作る。
 - **CKPT-1 (MUST, 一時停止・再開で連続性維持)**: **全状態チェックポイント/再開**。`checkpoint_every`
   （例 500–1000 世代）で **population + generation + RNG 状態 + QD アーカイブ + novelty アーカイブ +
   belief space + metrics + founder_lineage** を永続化。`--resume` が**全状態を復元し決定論的に継続**。
