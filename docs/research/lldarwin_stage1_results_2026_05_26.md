@@ -154,6 +154,35 @@ persona 同一性を直接報酬化しないため、優占系統 share は rich
 測らない** (mechanism feasibility のみ)。Goodhart リスク (proxy をハックする表面戦略) は受容済み
 限界。**実 LLM/VLM 苦手軸の実測 = Stage2 後半 (OLLAMA_HOST 設定 + 個体→実 LLM 写像が前提)**。
 
+## 4.5 Stage2 後半 — 実 on-prem LLM 苦手軸評価 + 12h 連続ラン (2026-05-26, llive 2fb2912)
+
+localhost ollama (llama3.2:latest 等) が到達可能と判明 → **実 LLM 評価が可能**
+(localhost=on-prem で measurement purity 充足)。`real_pressures.py` で **個体→実 LLM 写像**
+を実装 (Promptbreeder 系):
+
+- **個体 `c_prompt` (PromptChromosome) → system prompt**: skill_set→指示文 /
+  prompt_template_id→推論スタイル / language_style→語調。固定 LLM (llama3.2) にこの
+  system prompt を被せ、5 苦手軸の**実タスク**を解かせ採点。**LLM 本体は固定し prompt
+  戦略 (genome) を進化** = 「どの prompt 戦略が LLM 弱点を緩和するか」を実測で淘汰。
+- temp=0 (greedy) 決定論 + `(system_prompt, task)` キャッシュ (同一戦略は再評価しない)。
+- robust: per-call try/except (ollama hiccup は task 失点で走行継続)。
+- `--fitness real-pressure` / `--ollama-model` / `--max-wallclock-seconds` 追加。tests 5 件 + 進化系 947 green。
+
+**実選択信号の実証**: CoT+structure 戦略 (`chain_of_thought` + structurize + loop) が
+llama3.2 の **multistep を 0.0→1.0 に改善** (terse 戦略は 0.0 失敗、score 0.80→1.00)。
+= lldarwin の主張「prompt 戦略の進化で LLM 弱点を緩和」を**実 LLM で実証**。
+
+**12h 連続ラン起動** (2026-05-26, `out/lldarwin_12h_realpressure_2026_05_26/`):
+`--fitness real-pressure --selection lldarwin --novelty --lineage-reservoir --genome3d
+--population 24 --max-wallclock-seconds 43200 --checkpoint-every 5`。wallclock 12h で
+safely 停止 (snapshot 済→ `--resume` 継続可)。
+
+**Honest 留保**: (a) real-pressure は **c_prompt のみ fitness 関与** — persona/c_factors は
+中立 (reservoir で系統維持・novelty で初期選択)。これは「prompt 戦略進化」であり
+persona 進化ではない。(b) 全 founder は初期 c_prompt が同一 (default) → 探索は mutation
+駆動 (founder prompt 多様化は今後の改善)。(c) 小バッテリ (軸 2 問) = ノイジー推定。
+(d) on-prem only (measurement purity)・一般能力主張ではない。
+
 ## 5. 結論
 
 Stage1 は **行動多様性の維持に成功** (novelty 2×・崩壊回避)。**系統多様性は未達だが、これは
