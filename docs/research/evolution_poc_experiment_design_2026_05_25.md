@@ -102,6 +102,12 @@ rich 500gen≈25s(20 gen/s)。10K gen ≈ proxy 2.3min / rich 8min。+novelty(po
 **第一波（最小情報量で最大判別）**: baseline(scalar,no-std,no-archive,reservoir-off,500gen) vs
 full(eps-lexicase,std,reservoir-1024,CVT,MC,MAP-Elites,**10K gen**)。多様性が gen10K で持続するか＝核仮説。
 
+**運用規模・連続運転（RUN-2/CKPT-1）**: 本番は **5h+ 連続 wallclock 予算**（`max_wallclock_seconds`）で運転
+（pop=1024 / genome≈token級32K / 高 gen cap）。**まず校正ラン**で per-gen 実測 → 5h を埋める規模確定。
+**全状態チェックポイント**（population/RNG + QD・novelty アーカイブ + belief space + metrics + founder_lineage）を
+`checkpoint_every` で書き、`--resume` で決定論復元 → **一時停止/再開で連続性維持**（夜間長時間運転 + ccr 連続性）。
+sweep は独立プロセス並列（SR-4 隔離）で複数構成を 5h 窓に詰める。
+
 ## 7. 反証基準 / 期待結果（falsifiable）
 
 | 仮説 | 反証条件 |
