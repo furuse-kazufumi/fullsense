@@ -28,7 +28,8 @@
 - **NEUT-1 (MUST)**: 中立貯蔵庫を実 `Genome3D.c_latent` にし、**記述子が読む**（現状 `genome_flat_vector` は c_factors のみ＝貯蔵庫が bloat。これを是正）。
 - **NEUT-2 (MUST)**: 貯蔵庫は **novelty 記述子に入るが品質目的には入らない**（縮退: fitness 中立・振る舞いで発現）。
 - **SPARSE-1 (MUST)**: **全染色体で疎な per-locus 変異**（c_factors は現状全座位変異＝生物比率原理に反する。要是正）。
-- **GENOME-1 (SHOULD)**: ゲノムは大規模・差別化は疎（生物比率: 個体差は限られた座位から）。貯蔵庫サイズ/疎度は設計値（biology 由来でない＝要 sweep で決定 [SPEC]）。
+- **GENOME-1 (MUST, 容量で多様性を支える)**: ゲノム容量は **~10,000 世代の長期ランでも行動多様性が崩壊しない**規模を持つ（OEE「実質無限の多様性を許す媒体」要件の具体化; ユーザー実測知見 2026-05-25 = 小容量・単峰だと 1h 未満で全滅）。中立貯蔵庫サイズ・疎度・記述子次元・QD cell 数を**多様性持続の制御変数**として sweep で決定（現 256 は小さい可能性大 → 1024 / 4096+ を試す）。生物比: 大ゲノム + 疎差別化。
+- **RUN-1 (MUST, 長期ランで評価)**: PoC は**≥10,000 世代**で評価する（世代交代は秒オーダーで安価: 実測 proxy 500gen≈7s[71 gen/s] / rich≈25s[20 gen/s] → 10K gen は proxy≈2.3min / rich≈8min）。多様性持続・archive 成長・monoculture<0.8 を**末尾世代（gen≈10K 近傍）で**判定する（短期の見かけの多様性でなく持続性が open-endedness の本質）。全 sweep 総計算 <10h を目安（並列ラン可）。
 
 ### 1.3 多様性・open-endedness（QD アーカイブ）— Stream B
 - **QD-1 (MUST)**: 成果物は**単一 best でなく QD アーカイブ**（MAP-Elites/CVT-MAP-Elites; cell 別 elite で多様性崩壊が構造的に不可能）。
