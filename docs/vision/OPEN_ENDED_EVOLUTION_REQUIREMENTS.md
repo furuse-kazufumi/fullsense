@@ -36,6 +36,7 @@
 - **QD-1 (MUST)**: 成果物は**単一 best でなく QD アーカイブ**（MAP-Elites/CVT-MAP-Elites; cell 別 elite で多様性崩壊が構造的に不可能）。
 - **QD-2 (MUST)**: 新 cell 個体は既存 elite を**消さない**（アーカイブ単調成長）。
 - **OE-3 (MUST)**: 単一系統が集団の **>80% を占有しない**（monoculture 禁止; 旧 founder 絶滅→単系統化の反証）。
+- **DESC-1 (MUST, 記述子は低次元縮約)**: token 級の巨大ゲノム（GENOME-1）に対し、novelty/QD の **行動記述子は低次元へ縮約**（JL ランダム射影 or 学習記述子 AURORA/VQ）してから距離計算する。**生の高次元ユークリッド k-NN は次元の呪いで無意味**（距離が均質化）になるため。ゲノム=token 級・記述子=低次元（例 8–50）。JL 補題で距離は保存され**全遺伝子が統計的に記述子へ寄与**（= bloat でなく読まれる, NEUT-1 と両立）。
 
 ### 1.4 メタ進化（アルゴリズム自体の進化）— Stream A
 - **META-1 (MUST)**: `algorithm_id` 等の c_meta が**実選択/変異を切替**（同 seed で軌道が分岐することで検証）。現状デッドの dispatch 層を配線。
