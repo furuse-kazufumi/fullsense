@@ -108,6 +108,25 @@ PoC (§4.1) で実証した機構を **本番 EvolutionLoop に additive + defau
 genome 空間 spread がやや減る) — ただし OFF 時の崩壊 (0.83) は回避。系統保持と行動多様性は
 弱いトレードオフ関係。再投入予算/頻度の調整は今後の sweep 課題。
 
+## 4.3 再投入頻度 sweep — 系統保持 ↔ 行動多様性トレードオフ (2026-05-26)
+
+§4.2 の honest 留保 (frozen elite 再投入で diversity が下がる) を、`reinject_interval`
+(再投入を行う世代間隔, 既定 1=毎世代) の sweep で特性化。`LineageReservoir.reinject_interval`
++ `--reinject-interval` フラグ追加 (test 7 件)。8 founders/pop24/150gens/seed0:
+
+| interval | named 生存 | lineage_fixation (tail30) | diversity_l2 (tail30) |
+|---|---|---|---|
+| **1** (毎世代) | **8/8** | 0.32 | 9.91 |
+| 5 | 5/8 | 0.37 | **12.84 (最大)** |
+| 10 | 3/8 | 0.41 | 11.41 |
+| 20 | 2/8 | 0.44 | 10.75 |
+
+**非自明な発見**: diversity は interval を上げるほど単調増加せず、**interval=5 でピーク**
+(10/20 はむしろ低下)。系統を放置しすぎると貯蔵庫由来の多様性注入が減り、かつ少数系統が
+固定して diversity も伸びない。**運用指針: 系統保持最優先 → interval=1 (8/8) / 行動多様性も
+両立 → interval=5 (5/8 保持しつつ diversity 最大)**。両立の最適点は fitness/集団規模依存なので
+本番 sweep で再較正する。
+
 ## 5. 結論
 
 Stage1 は **行動多様性の維持に成功** (novelty 2×・崩壊回避)。**系統多様性は未達だが、これは
