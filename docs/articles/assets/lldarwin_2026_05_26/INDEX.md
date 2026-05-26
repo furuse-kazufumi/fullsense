@@ -11,6 +11,8 @@
 |---|---|---|
 | `lldarwin_stage1_baseline_status.svg` | baseline (novelty なし) の適応度+多様性。終盤 **多様性崩壊** | #25 導入: 素朴な選択圧では monoculture |
 | `lldarwin_stage1_novelty_status.svg` | novelty pressure ありの適応度+多様性。**多様性が維持** | #26 Stage1: novelty で行動多様性 +109% |
+| `lldarwin_stage1_diversity_overlay.svg` | baseline vs +novelty の diversity_l2 **重ね描き** (崩壊 vs 維持を1枚で対比) | #26/#27 Stage1 の決定的1枚 |
+| `lldarwin_genome_heatmap.svg` | 勝者個体の **思考因子×メモリ層ヒートマップ** (Genome3D, P3)。real-pressure では c_factors 中立=参考 | #26/#28 認知プロファイル可視化 |
 | `lldarwin_reservoir_off_dominance.svg` | 系統支配ストリーム (中立貯蔵庫 **OFF**)。最終 **furuse 71% / friston 29% = 2系統に崩壊** | #25/#26 ヤマ: 「私と friston だけ生き残る」 |
 | `lldarwin_reservoir_on_dominance.svg` | 系統支配ストリーム (中立貯蔵庫 **ON**)。**全 8 系統が並存** (millidge/von-neumann/oka/grothendieck…) | #26 Stage1.5 ヤマ: 貯蔵庫で系統絶滅を防ぐ |
 | `lldarwin_reservoir_on_status.svg` | 貯蔵庫 ON の適応度+多様性 | #26 補足 |
