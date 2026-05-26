@@ -72,10 +72,22 @@
 - 交絡除去後（elite=score 基準）: baseline(固定難易度) は能力 **0.627 で低位停滞**（best 0.757, 12h病理を再現）/ adaptive(難易度=集団60分位) は **0.952 へ上昇**（best 1.0）。
 - ただし adaptive は**多様性を犠牲**（div 0.310→0.134）。→ **適応難易度（勾配維持）と QD/novelty（多様性維持）は相補**（どちらか一方では不十分）。Self-MoA 反証と整合。
 
-### Round 1 → 次手（dispatch 予定）
-- 自己 PoC #2: 「適応難易度 **+** novelty 選抜」で能力と多様性を**両立**できるかを直接検証（相補仮説の検証, Agent A の選択 sweep と非重複の組合せ）。
-- A(開放端 sweep)/C(オーケストラ) 完了待ち → 結果を本台帳へ。
-- B 成果（応答ログ）を活かし、次 real-pressure ランは `--response-log @out` 付き＋難化バッテリで起動する方針。
+**自己 PoC #2（相補仮説: 適応難易度 + novelty 選抜, 同 `poc_saturation_fixes.py`）— 完了・確定**
+
+| 構成 | 最終能力 | best | 多様性 | plateau |
+|---|---|---|---|---|
+| baseline（固定難易度） | 0.627 | 0.757 | 0.310 | gen82 |
+| adaptive（難易度追従） | 0.952 | 1.000 | 0.134（崩壊） | gen63 |
+| **adaptive + novelty** | **0.881** | 1.000 | **0.316**（維持） | gen99（最長探索） |
+
+- **adaptive+novelty が能力（baseline比 +40%）と多様性（adaptive比 2.4倍, baseline 同等）を両立**。能力を 7% 譲って多様性を完全維持＝Self-MoA が警告する quality-diversity トレードオフを**好ましい側**で着地。
+- **方策の核が自前データで確定**: 「適応難易度＝勾配維持」と「QD/novelty＝多様性維持」は**相補で両方必須**。固定ものさし単独(baseline)も適応難易度単独も不十分。
+- honest 留保: 抽象 proxy（competence ベクトル）であり実 LLM 写像ではない＝mechanism feasibility の検証。plateau@gen は「停滞した世代」で、停滞の**水準**（baseline=低位0.627 / adaptive系=天井近傍）が本質。
+
+### Round 1 → 次手
+- ✅ 自己 PoC #1/#2 完了（上記）。
+- ⏳ A(開放端 sweep)/C(オーケストラ) 完了待ち → 結果を本台帳へ統合。
+- 次 real-pressure ランは Agent B の `--response-log @out` 付き＋**難化/適応難易度バッテリ**で起動する方針（自己 PoC #1/#2 の知見を実 LLM 段へ）。
 
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
