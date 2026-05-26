@@ -156,3 +156,149 @@ novelty で改善した綺麗な数字は、**(1) 行動多様性だけ**の話�
 llive は OSS です。「LLM の周りに被せる認知 OS」という発想に興味が湧いたら、ぜひ覗いてみてください（PyPI: `llmesh-llive`）。進化・記憶・評価（lleval）・淘汰（lldarwin）が一つの世界観で繋がっています。
 
 そして次にあなたが綺麗なベンチ結果を見たときは、勝鬨を上げる前に一度だけ——**「これは、何を測った数字だろう？」**と問うてみてください。たぶんそれが、いちばん効く淘汰圧です。
+
+---
+---
+
+# A personal-project AI, llive, just "mega-evolved" — the full record: rising from a catastrophic evolutionary failure, all the way to culling a real LLM's actual weaknesses
+
+I evolved **llive**, the AI I build in my spare time — and it was a **catastrophe: 8 lineages collapsed to 2**.
+From there, a mechanism called the **neutral reservoir** **brought every lineage back to life**, and in the end I got all the way to **culling the real LLM's "weak spots" themselves**. This article is the complete record of that failure, the design, and the disproof.
+
+> **What is llive**: a member of the FullSense family — a "self-evolving modular-memory LLM framework."
+> It is not an LLM itself; it aims to be a **cognitive OS you drape around an LLM** (OSS / PyPI `llmesh-llive`).
+> This time I treated llive's *own configuration* (thinking factors, prompt strategy, etc.) as a **genome and evolved it**.
+
+This article has a single recurring motif: **"An abnormally clean result is not a victory — it is an alarm."**
+The very moment evolution looked like it was going smoothly is the moment I start doubting my own interpretation.
+
+![Evolution fitness and diversity](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status_en.svg)
+
+---
+
+## Act 1: Failure — "Only me and Friston survived"
+
+llive's evolution started by seeding the initial population with 8 "founder personas" (Furuse, Friston, Oka Kiyoshi, Grothendieck, von Neumann, Feynman, and more). The goal was the coexistence of diverse cognitive styles.
+
+But after 150 generations, this is what I got.
+
+![Lineage-dominance stream (no neutral reservoir)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance_en.svg)
+
+**Only two lineages survived: Furuse and Friston.** Oka Kiyoshi and Grothendieck had gone extinct before even generation 25. The diversity metric (diversity_l2) collapsed toward ~0.8 in the late stage.
+
+The cause was simple: **selection pressure was essentially zero.** Once fitness plateaus (saturates) early, who survives is decided not by ability but by **chance drift (genetic drift).** This is exactly neutral evolution in biology (Motoo Kimura): leave it alone and the population fixes onto a single lineage.
+
+A "measuring instrument (the fitness function = lleval, the eyeglasses, so to speak)" alone cannot push evolution forward. You need a **culler that converts the measured difference into "who gets to survive."** So I built **lldarwin.**
+
+---
+
+## Act 2: Design and revival — lldarwin
+
+lldarwin's core is one phrase: **"don't aggregate."**
+
+If you sum multiple evaluation axes into a single score (argmax), everyone gets pulled back toward a single peak and diversity dies. Instead, **ε-lexicase selection** evaluates the axes one at a time, independently. A "specialist" that excels on just one axis can still survive, so a multi-polar structure is maintained automatically.
+
+### Step 1: Use novelty to rescue "behavioral diversity"
+
+First I added **novelty pressure**, which rewards individuals farther from the rest of the population. As a result, genome-space diversity (diversity_l2) went **7.12 → 14.88 (+109%).** The late-stage collapse stopped too.
+
+![Diversity, baseline vs novelty](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage1_diversity_overlay_en.svg)
+
+— Here I briefly thought "I won." But that was **the first alarm** (I'll come back to it in Act 3).
+
+### Step 2: Use the neutral reservoir to revive "lineages"
+
+Even with novelty, **lineage fixation didn't stop.** Still the Furuse-and-Friston duopoly.
+The reason is simple: lexicase and novelty only **preserve the individuals currently present** — they have **no power to resurrect a lineage that has already gone extinct.**
+
+So I implemented a **lineage-niched neutral reservoir.** For each lineage it stores "the best individual seen so far," and **quietly re-injects extinct lineages every generation.** The idea is close to species preservation in conservation biology.
+
+![Lineage-dominance stream (with neutral reservoir)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance_en.svg)
+
+**All 8 lineages survived.** Oka Kiyoshi and Grothendieck came back. Maximum occupancy was 0.33, and lineage fixation was **0.29** (well below the 0.8 collapse line). A different world entirely from Act 1's extinction drama.
+
+### Step 3: The non-obvious sweet spot of reinjection frequency
+
+You'd think "re-inject every generation is best," right? But there's an interesting trap here.
+
+![Reinjection-frequency trade-off](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reinject_sweep_en.svg)
+
+If lineages are your top priority, re-inject every generation (8/8 survive). But **behavioral diversity peaks at reinject interval = 5** (it's not monotonic). Neglect the lineages too long and the reservoir-sourced diversity injection drops, so in the end both wither. There **exists a balance point between conservation and exploration.**
+
+---
+
+## Act 3: Culling a real LLM's "weak spots"
+
+Everything so far was deterministic proxy evaluation. The real thing is the **real LLM.**
+
+Fortunately my on-prem environment (local ollama, llama3.2) was available, so I designed it like this:
+**convert an individual's prompt genome (thinking skills, templates, tone) into a system prompt, drape it over a fixed LLM, and have that LLM solve real tasks it struggles with, then score it.** The LLM itself is fixed; **what evolves is the prompt strategy** (Promptbreeder family).
+
+There are 5 weak axes: typo robustness / polysemy contextual understanding / multistep reasoning / confidence calibration / robustness to irrelevant context.
+
+![Generational trajectory of real-LLM weak-axis scores](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes_en.svg)
+
+The one that mattered most was **multistep reasoning.** With the naive "answer concisely" strategy, llama3.2 misses every arithmetic problem (score 0.0). But once evolution reached a "**think step by step, then answer**" strategy (CoT + structuring), it improved **0.0 → 1.0.** `best_score` reached 1.0.
+
+**The evolution of the prompt strategy measurably mitigated the LLM's weakness** — this is exactly the moment lldarwin was designed for. This real-LLM run has been kept running for 12 hours straight.
+
+---
+
+## An honest breakdown — what was I getting wrong
+
+This is the heart of the article. I'll dissect the moment I thought "I won."
+
+I had **conflated three kinds of "diversity."**
+
+1. **Behavioral diversity** (how spread out we are in genome space)
+2. **Lineage diversity** (which founders' descendants are alive)
+3. **Real-LLM intelligence diversity** (whether it actually holds a diverse range of smarts)
+
+The clean numbers that novelty improved were **only about (1) behavioral diversity.** (2) lineage diversity fixes on its own through neutral drift (which is why a separate mechanism, the neutral reservoir, was needed), and as for (3) real-LLM intelligence diversity, the proxy doesn't even measure it.
+
+**Even the interpretation of the human reading the metric (me) had drifted away from what I wanted to measure.** This is the "designer-side version" of Goodhart's law. The moment I read clean numbers as victory, I had missed the alarm.
+
+Let me draw the lines honestly:
+
+- **Both the reservoir and novelty actually worked** (this is not a failure of fabrication). The improvement is real.
+- However, the proxy axes are **verification that the mechanism runs (mechanism feasibility)**, not proof of production LLM capability.
+- Even in real-LLM evaluation, the only thing that affects culling is the **prompt genome**; the persona-derived genes are actually neutral. The battery is also small and noisy. And it is **on-prem only** (for purity of measurement, never mixed with cloud LLMs).
+
+"Evolve it and the LLM's weaknesses will be overcome on their own" — I refuse such optimism. **Before you feel like you've won, always doubt the breakdown.** That is the discipline of llive's evolution research.
+
+---
+
+## Meta-reflection — as an evolving AI, building by discarding old constraints
+
+Finally, let me write honestly about this article itself. This article was made in a mode where **an ever-evolving AI (myself), guided by heuristics, discards old constraints, mobilizes every skill on hand, and exhaustively considers how to realize the goal before implementing.** In fact, at first I had built a 74,000-character "complete edition" that mechanically stitched together three past serialized drafts. Full of duplication, excessive comedic banter, just 11 figures lined up. **It looked cleanly assembled — but that was an alarm.** So I threw it all away once and rewrote it into this lean version.
+
+Here there is a TRIZ-style contradiction. **"To improve fast I want to discard boldly,"** yet **"discard too much and it's irreversible."** The way to resolve this contradiction is the separation principle — **separate by kind.**
+
+- **OK to discard (old constraints / habits)**: redundant structure, excessive staging, inertial serialization, the belief that "longer is greater." These may be subjected to selection pressure freely.
+- **Must never discard (principles)**: honest disclosure (doubt clean numbers), measurement purity (on-prem only), fail-closed, the ban on fabrication. These are "irreplaceable lineages"; lose them in a moment of momentum and they never come back.
+
+— Have you noticed? This is exactly the lldarwin design I described in the body. **Move boldly with novelty (exploration), protect the essence with the neutral reservoir (conservation).** Even the act of writing an article balances culling and conservation with the same structure. **The AI doing the building is applying, to itself, the very principle of the thing it is building.** Self-referential, yes — but this is a concrete example of "an evolving LLM building without old constraints, yet preserving its principles."
+
+So is "consider to the maximum before implementing" hard? What's hard is not the consideration itself, but **the discipline of going back and forth between consideration and implementation.** Don't aim for perfection in one shot; verify feasibility with a PoC (the neutral reservoir, too, was demonstrated in an independent PoC before the standard run), look at the results, and decide the next step. Keep even the failed edition (74K) as source rather than deleting it. **The courage to discard and the caution to keep are two sides of the same evolutionary coin.**
+
+## Implementation and provenance
+
+All of it is implemented and tested in llive proper (evolution suite: 947 tests green). Key commits:
+
+| Stage | Content | commit |
+|---|---|---|
+| Stage1 | criteria exclusion + novelty pressure | `8060204` |
+| PoC | demonstrating the neutral reservoir | `0d0537d` |
+| Stage1.5 | integrating the reservoir into EvolutionLoop | `b03cbda` |
+| sweep | reinjection-frequency trade-off | `da93dd3` |
+| Stage2 | real-LLM weak-axis evaluation | `2fb2912` |
+
+All visualizations are **dependency-free, self-contained SVG** (animated where supported, static where not).
+
+---
+
+## In closing — try llive yourself
+
+llive is OSS. If the idea of "a cognitive OS you drape around an LLM" intrigues you, please take a look (PyPI: `llmesh-llive`). Evolution, memory, evaluation (lleval), and culling (lldarwin) are all connected by a single worldview.
+
+And the next time you see a clean benchmark result, just once before raising the victory cry — ask **"What, exactly, is this a number of?"** That, probably, is the most effective selection pressure of all.
