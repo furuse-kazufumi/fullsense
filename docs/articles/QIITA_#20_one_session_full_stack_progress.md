@@ -16,6 +16,8 @@ ignorePublish: true
 
 # 1 セッションで 5409 テスト緑 + research hub 6 本開設 — FullSense の一日
 
+> 📚 **連載ナビ**: ← #19 GPU 無し PC で動く AI ｜ **#20 本記事** ｜ #21 3 日間 8 リポ marathon → ｜ [連載 LINK_MAP](./QIITA_#24_LINK_MAP.md)。※ 各記事は単独でも読めます（リンクは回遊用）。
+
 > 朝に test が 7 件赤くなっていて, 環境変化が原因と判明し, 修正と同時に
 > AI agent 6 体を並列で先行研究調査に走らせ, FullSense の spinoff 採用優先度を
 > 確定させ, portal の進捗ダッシュボードを自動化し, 採用優先度 HIGH の lleval
