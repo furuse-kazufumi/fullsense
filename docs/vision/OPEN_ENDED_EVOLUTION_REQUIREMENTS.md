@@ -39,6 +39,8 @@
 - **OE-3 (MUST)**: 単一系統が集団の **>80% を占有しない**（monoculture 禁止; 旧 founder 絶滅→単系統化の反証）。
 - **DESC-1 (MUST, 記述子は低次元縮約)**: token 級の巨大ゲノム（GENOME-1）に対し、novelty/QD の **行動記述子は低次元へ縮約**（JL ランダム射影 or 学習記述子 AURORA/VQ）してから距離計算する。**生の高次元ユークリッド k-NN は次元の呪いで無意味**（距離が均質化）になるため。ゲノム=token 級・記述子=低次元（例 8–50）。JL 補題で距離は保存され**全遺伝子が統計的に記述子へ寄与**（= bloat でなく読まれる, NEUT-1 と両立）。
 
+- **QD-3 (MUST, factor-subspace QD)**: 全体記述子の novelty/QD に加え、**意味次元（factor 部分空間）に独立の novelty/QD 圧**を課す。理由（実測, 2026-05-27 PoC#6 + Agent A sweep）: 巨大 latent 下では全体 novelty が満たされて**意味次元が hitchhiking で drift**する（A: novelty は全体多様性を保つが factor 多様性は保証せず / PoC#6: full-only で factor retention 49.5% に縮小）。factor 部分空間 novelty 併課で **retention 68.1% に改善**（損失ほぼ半減）。honest: 完全固定でなく残 drift あり→中立貯蔵庫併用 or factor 重み強化と組合せ。
+
 ### 1.4 メタ進化（アルゴリズム自体の進化）— Stream A
 - **META-1 (MUST)**: `algorithm_id` 等の c_meta が**実選択/変異を切替**（同 seed で軌道が分岐することで検証）。現状デッドの dispatch 層を配線。
 - **META-2 (MUST)**: メタ params は heritable + 適応（self-adaptive ES or UCB1 AOS）。**適応 run ≥ 固定 baseline**。
