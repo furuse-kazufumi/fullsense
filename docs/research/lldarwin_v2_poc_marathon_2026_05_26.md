@@ -229,6 +229,21 @@
 
 **▶ marathon 中間総括**: 方策 S1-S4 すべてが proxy/(部分)実LLM で裏付け済。残課題は「実 LLM 段への配線」と「factor-subspace QD」「scale-up」。コア戦略は確定。
 
+### Round 2.6 (自己PoC #6 — factor-subspace QD で A の限界に対処)
+
+| mode | factor_spread | retention | latent_spread |
+|---|---|---|---|
+| full_only | 1.017→0.500 | **49.5%** | 0.545 |
+| full_plus_factor | 1.092→0.737 | **68.1%** | 0.588 |
+
+- **factor-subspace novelty を別途課すと意味次元の多様性損失をほぼ半減**（50%損→32%損, retention 49.5%→68.1%）。Agent A の factor-drift 限界への有効策を proxy 実証。
+- honest: 完全固定ではない（68% 残存）＝残 drift は中立貯蔵庫併用 or factor 重み強化が要。`D:\tmp\poc_factor_subspace_qd.py`（durable: `docs/research/poc_factor_subspace_qd_2026_05_26.py`）。
+
+### ▶▶ マラソン最終総括（2026-05-27 朝時点）
+- **方策確定**（§「✅ 決定した方策」）。**自己PoC 6本 + Agent A/B/C + Perplexity が独立収束**＝honest cross-validation。
+- S1（選択核: novelty/lexicase+std+MC+QD+適応難易度+reservoir+factor-subspace QD）/ S2（連続進化×routing-MoA=white-space 独自性）/ S3（agentic+cost）/ S4（観測=実装済）の全要素を proxy/(部分)実LLM で裏付け。
+- **次セッション（実装フェーズ）**: 残課題（実LLM配線 / factor-subspace QD 実装 / scale-up 256→4096 / CKPT-1 step-pause-resume / 既存モジュール正式配線）。memory `project_lldarwin` + 本台帳 + 要件doc §1.11-1.13 が引継ぎ正本。push はユーザー承認後。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
