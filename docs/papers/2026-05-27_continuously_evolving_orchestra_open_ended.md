@@ -1,7 +1,7 @@
 # Continuously-Evolving Populations as Live Orchestrated Ensembles
 ## An Open-Ended Evolution Architecture for On-Premise LLM Cognitive Diversity
 
-**Author:** Kazufumi Furuse (古瀬 一史) — FullSense project (llmesh / llive / llove)
+**Author:** Kazufumi Furuse (古瀬 和文) — FullSense project (llmesh / llive / llove)
 **Date of record (priority):** 2026-05-27
 **Status:** Research note / defensive publication. Proxy-stage evidence (mechanism feasibility). Not a benchmarked state-of-the-art claim.
 **License:** Apache-2.0 + Commercial (FullSense dual-license).
