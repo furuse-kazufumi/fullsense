@@ -96,7 +96,20 @@
 - proxy（12h snapshot gen70 の breakdown を流用）では **single_best も全 MoA 戦略（redundant/diverse × majority/best_of/weighted）も total=1.0** で差が出ない。**飽和した fitness は orchestration の価値を測れない**（single best が既に満点＝headroom ゼロ）。
 - 多様性選抜は distinct_signatures が冗長選抜より多い（k=7: diverse 7 vs redundant 5）が、スコアに反映されない。
 - **結論（方法論）**: **ORCH-4 の検証には「単一個体が満点を取れない難タスク」が前提**。= Round 1 の「飽和を直す」が ORCH 検証の**前提条件**でもある（二重の理由で saturation-fix が先）。
-- 実LLMラン（monitor `be06f6741`）が multistep 軸（0.5=headroom あり）で差を出すか継続観測中。C は終了済のため SUMMARY は親が実データ着地後に作成。
+- 実LLMラン（monitor `be06f6741`, PID 26464）継続中。C は終了・ポーリング停止。親が実データ着地後に確認。
+
+**自己 PoC #3（ORCH-4 を headroom 有り難タスクで, `D:\tmp\poc_orchestra_headroom.py`）— 完了・Self-MoA 反証の正体を解明**
+
+| 構成 | best_of(routing) | majority(vote) | domain coverage |
+|---|---|---|---|
+| single_best | 0.500 | — | 2/4 |
+| MoA redundant(top-k) | 0.750 | 0.500 | 3/4 |
+| MoA diverse(max-cover) | **1.000** | **0.000** | 4/4 |
+
+- 専門家が分散し single_best=0.5（headroom 有り）の難タスクで、**多様 MoA は best-of/routing で 1.000**（単一bestを倍）。**ORCH-4 成立、ただし条件付き**。
+- **決定的発見**: **naive majority では多様性が逆効果**（diverse=0.000 — 各 sub-task で competent な専門家1人が無知な多数派に negate される）。redundant majority=0.500 が上回る。
+- **= Self-MoA 反証（多様性≠自動優位）の正体**: 集約器が **competent メンバへ routing できるかが決定的**。投票/平均は diversity を殺し、competence-aware routing/gating は diversity を活かす。
+- **方策への含意（ORCH 設計要件）**: オーケストラは**投票でなく「指揮者（router/gating）」が必須**。expert_council.py の gating or 学習 router を配線。honest 留保: best_of は oracle routing の上限＝実際は「どの個体が competent か」を予測する gate の精度が律速（ここが失敗点になり得る）。
 
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
