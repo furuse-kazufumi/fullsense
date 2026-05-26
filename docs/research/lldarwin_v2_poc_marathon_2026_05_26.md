@@ -260,6 +260,32 @@
 - **GENOME-1（A: latent 256→1024 で niche 101→166）＋ POP-1（本件: 母数 256→4096 で niche 171→1219）の両輪でスケール仮説 proxy 確証**。次=gens 固定で純 POP 効果、latent×pop の 2D 交互作用。
 - 新規 `scripts/poc_scaleup_sweep.py`（JL 24次元射影で pop4096 の k-NN を tractable 化, 既存 harness 無改変）。
 
+### 実装ロードマップ（確定方策 → コード, 次セッション以降・要ユーザー review）
+
+> 多くの部品は llive `src/llive/perf/evolutionary/` に**実装済・未配線**。新規はわずか。push はご承認後。
+
+**Phase 1 — 選択核 S1（最優先）**
+1. `MultiPressureSelector` を確定構成へ統合: **novelty + ε-lexicase + z-score標準化 + minimal-criterion gate**（既存 `mating.py:LexicaseSelection` / `novelty_lane.py` / `nsga2.py` を配線）。
+2. **factor-subspace QD（QD-3, 新規）**: `quality_diversity.py:MAPElitesGrid` に意味次元(factor)用の第2 novelty/archive を追加（PoC#6）。
+3. **適応難易度（条件カリキュラム）**: `pressures.py`/`real_pressures.py` に難易度パラメータ d + **パーセンタイル動的 minimal-criterion**（集団30-60%点で自動上昇, PoC#1/#2 + Perplexity レシピ）。
+4. **中立貯蔵庫**は実装済（`LineageReservoir`）→ 確定構成の既定 on（reinject_interval は系統優先=1/多様性両立=5）。
+
+**Phase 2 — 観測 S4（実装済→標準装備化）**
+5. 全ランで `--response-log @out` + `evolution_response_viewer.py` / `evolution_lineage_rebuild.py` を標準手順に。
+6. **CKPT-1 対話制御**: step/pause/resume を `EvolutionLoop` + CLI へ（既存 snapshot/resume を全状態＋人手操作に拡張）。
+
+**Phase 3 — ORCH S2（独自性の核）**
+7. **descriptor-router** を `expert_council.py` に実装（QD記述子→competence-aware routing、投票でなく。PoC#4）。
+8. **always-on orchestrate**: 進化ループ別プロセス + orchestrator poll（C の always-on デモを製品化）。
+9. 実LLM で descriptor-router が best_of oracle にどこまで迫るか測定（C の穴の実LLM版）。
+
+**Phase 4 — agentic S3**
+10. investigation budget + サンドボックス読取専用 KB + コスト計上（AGENT-1/2/3, SR-1 整合）。
+
+**Phase 5 — scale & rigor**
+11. gens 固定の純 POP 効果 / latent×pop 2D sweep / 母数 4096+。
+12. Stage6 実LLM（measurement purity + Approval Bus 片方向昇格ゲート）。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
