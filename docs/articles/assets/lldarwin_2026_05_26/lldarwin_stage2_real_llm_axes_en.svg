@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460" font-family="ui-sans-serif,Segoe UI,sans-serif">
+<rect width="900" height="460" fill="#0b1020"/>
+<text x="70" y="30" fill="#e5e7eb" font-size="20" font-weight="700">lldarwin — evolution of LLM weak-axis scores (per-axis)</text>
+<text x="70" y="50" fill="#15803d" font-size="12" font-weight="600">REAL on-prem LLM eval ·  fitness=real-pressure  ·  model=n/a  ·  snapshots=14 (gen 0–65)</text>
+<clipPath id="reveal"><rect x="70" y="0" width="630" height="460"><animate attributeName="width" from="0" to="630" dur="4.0s" fill="freeze"/></rect></clipPath>
+<text x="70" y="62" fill="#9ca3af" font-size="12">axis mean score (0–1)</text>
+<line x1="70" y1="400.0" x2="700" y2="400.0" stroke="#1f2937" stroke-width="1"/>
+<text x="62" y="404.0" fill="#6b7280" font-size="10" text-anchor="end">0.00</text>
+<line x1="70" y1="317.5" x2="700" y2="317.5" stroke="#1f2937" stroke-width="1"/>
+<text x="62" y="321.5" fill="#6b7280" font-size="10" text-anchor="end">0.25</text>
+<line x1="70" y1="235.0" x2="700" y2="235.0" stroke="#1f2937" stroke-width="1"/>
+<text x="62" y="239.0" fill="#6b7280" font-size="10" text-anchor="end">0.50</text>
+<line x1="70" y1="152.5" x2="700" y2="152.5" stroke="#1f2937" stroke-width="1"/>
+<text x="62" y="156.5" fill="#6b7280" font-size="10" text-anchor="end">0.75</text>
+<line x1="70" y1="70.0" x2="700" y2="70.0" stroke="#1f2937" stroke-width="1"/>
+<text x="62" y="74.0" fill="#6b7280" font-size="10" text-anchor="end">1.00</text>
+<text x="70.0" y="418.0" fill="#6b7280" font-size="10" text-anchor="middle">0</text>
+<text x="225.1" y="418.0" fill="#6b7280" font-size="10" text-anchor="middle">16</text>
+<text x="380.2" y="418.0" fill="#6b7280" font-size="10" text-anchor="middle">32</text>
+<text x="544.9" y="418.0" fill="#6b7280" font-size="10" text-anchor="middle">49</text>
+<text x="700.0" y="418.0" fill="#6b7280" font-size="10" text-anchor="middle">65</text>
+<text x="385" y="438" fill="#9ca3af" font-size="12" text-anchor="middle">generation</text>
+<g clip-path="url(#reveal)">
+<polyline points="70.0,70.0 118.5,70.0 166.9,70.0 215.4,70.0 263.8,97.5 312.3,70.0 360.8,70.0 409.2,70.0 457.7,70.0 506.2,70.0 554.6,70.0 603.1,70.0 651.5,70.0 700.0,70.0" fill="none" stroke="#f87171" stroke-width="2.5"/>
+<polyline points="70.0,70.0 118.5,70.0 166.9,70.0 215.4,76.9 263.8,70.0 312.3,70.0 360.8,70.0 409.2,90.6 457.7,76.9 506.2,70.0 554.6,76.9 603.1,76.9 651.5,76.9 700.0,70.0" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+<polyline points="70.0,400.0 118.5,296.9 166.9,269.4 215.4,221.2 263.8,235.0 312.3,221.2 360.8,228.1 409.2,235.0 457.7,180.0 506.2,248.8 554.6,193.8 603.1,200.6 651.5,214.4 700.0,214.4" fill="none" stroke="#34d399" stroke-width="2.5"/>
+<polyline points="70.0,70.0 118.5,97.5 166.9,90.6 215.4,104.4 263.8,97.5 312.3,90.6 360.8,90.6 409.2,83.8 457.7,70.0 506.2,111.2 554.6,118.1 603.1,83.8 651.5,104.4 700.0,104.4" fill="none" stroke="#60a5fa" stroke-width="2.5"/>
+<polyline points="70.0,235.0 118.5,97.5 166.9,97.5 215.4,97.5 263.8,104.4 312.3,97.5 360.8,104.4 409.2,104.4 457.7,97.5 506.2,97.5 554.6,97.5 603.1,97.5 651.5,97.5 700.0,97.5" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+</g>
+<rect x="716" y="67" width="14" height="4" fill="#f87171"/>
+<text x="736" y="74" fill="#cbd5e1" font-size="11">calibration</text>
+<rect x="716" y="85" width="14" height="4" fill="#fbbf24"/>
+<text x="736" y="92" fill="#cbd5e1" font-size="11">context_management</text>
+<rect x="716" y="103" width="14" height="4" fill="#34d399"/>
+<text x="736" y="110" fill="#cbd5e1" font-size="11">multistep_robustness</text>
+<rect x="716" y="121" width="14" height="4" fill="#60a5fa"/>
+<text x="736" y="128" fill="#cbd5e1" font-size="11">polysemy_wsd</text>
+<rect x="716" y="139" width="14" height="4" fill="#a78bfa"/>
+<text x="736" y="146" fill="#cbd5e1" font-size="11">typo_robustness</text>
+</svg>
