@@ -156,6 +156,63 @@
 - **品質-多様性トレードオフが実データで可視**: novelty 系の scalar_best 0.77-0.83 < baseline 1.0 ＝ **純 novelty は scalar 品質を犠牲→QD（品質×多様性）が必要**（自己PoC#2 と一致）。
 - **uniq_lineages_tail が全構成 1.0**: **行動多様性（cells/bspread 高）≠ 系統多様性（1系統に固定）**。→ **中立貯蔵庫(LineageReservoir, 実装済)が系統多様性に必須**（既存作業の裏付け、reservoir 構成を A が追試中）。
 
+### Round 2 (Agent A 完全完了 — 開放端進化の決定的証拠, 10K世代×pop256×19構成×2巡)
+
+**verdict（open-ended 成立判定, gen9999）: 全 scalar 構成 False / 全 novelty・lexicase 構成 True**
+
+| label | 選択 | std | MC | reservoir | archive | open-ended | occupied | monoculture | uniq_lineages |
+|---|---|---|---|---|---|---|---|---|---|
+| baseline_scalar | scalar | - | - | 0 | none | **False** | 9 | 0.74 | 1.0 |
+| baseline_scalar_mc | scalar | - | ✓ | 0 | none | **False** | 9 | 0.90 | 1.0 |
+| **scalar_qd** | scalar | - | - | 0 | map-elites | **False** | — | — | — |
+| novelty_std | novelty | ✓ | - | 0 | none | True | 100 | 0.13 | **1.0** |
+| novelty_std_qd | novelty | ✓ | - | 0 | map-elites | True | — | — | — |
+| **novelty_std_res256** | novelty | ✓ | - | 256 | map-elites | True | 95 | 0.05 | **31.9** |
+| novelty_std_res1024 | novelty | ✓ | - | 1024 | map-elites | True | 98 | 0.04 | 15.2 |
+| **full_oe** | novelty | ✓ | ✓ | 1024 | map-elites | True | 90 | 0.05 | 15.3 |
+| lexicase_std(_mc) | lexicase | ✓ | -/✓ | 0 | none | True | 111–122 | 0.03 | 1.0 |
+
+**決定的発見:**
+1. **選択圧が決定打**: scalar は MAP-Elites archive を足しても(`scalar_qd`)**全滅(False)**。**novelty/lexicase 選択でないと開放端は成立しない**（archive 単独では救えない）。
+2. **標準化(STD-1)が QD 被覆を桁で拡大**（occupied 9→100+）。
+3. **中立貯蔵庫が系統多様性を回復**: novelty_std の uniq_lineages 1.0 → **res256 で 31.9**（行動多様性と独立な軸）。
+4. **scale-up効果**（GENOME-1 支持）: latent 256→1024 で niche 101→166・archive 1021(飽和)→2234(成長継続)。
+5. **正直な限界（A 提示）**: novelty/lexicase は記述子**全体**の多様性は保つが**特定意味次元(factor)の多様性は保証しない**（大latentで factor drift, fspread が要監視）→ **factor-subspace QD（意味次元を個別保護）が新要件**。lexicase は genome収束×behavioral拡散の質的差。
+
+---
+
+## ✅ 決定した方策（marathon 成果本体, 2026-05-26 夜→朝, 全証拠で確定）
+
+> 5本の自己PoC + Agent A/B/C + Perplexity が**独立に同一結論へ収束**（honest cross-validation）。固定ものさし路線を捨て、下記を lldarwin v2 の核に**確定採用**する。
+
+### S1. 選択核（飽和を構造的に回避）
+- **固定スカラー quiz fitness を廃止**（baseline は10K世代で飽和＋monoculture0.9＋多様性崩壊＝12h病理を大規模再現, open-ended 0/6）。
+- **選択 = novelty / ε-lexicase（標準化 z-score 必須）+ minimal-criterion**。**MAP-Elites archive 単独では不可**（scalar_qd も全滅）＝選択圧そのものを開放端化する。
+- **品質も要るので QD（品質×多様性 per cell）**: 純 novelty は scalar 品質を犠牲（0.77-0.83）→ 適応難易度（条件カリキュラム）と組んで品質勾配を供給（自己PoC#2: 適応難易度×novelty で能力0.881・多様性0.316両立）。
+- **系統多様性は中立貯蔵庫(LineageReservoir, 実装済)で別途確保**（行動多様性≠系統多様性, res256 で uniq_lineages 1→32）。
+- **factor-subspace QD を追加**（意味次元の多様性を個別保護, A の factor-drift 限界への対処）。
+
+### S2. 成果の出し方＝連続進化×ライブ・オーケストラ（独自性の核）
+- 成果物は単一 best でなく **QD archive を連続進化させ、任意時点で MoA オーケストラして1答**（ORCH; **online進化+online回答の統合は white-space=独自性**, Perplexity 確認）。
+- **集約は投票でなく competence-aware routing/gating（指揮者）必須**（自己PoC#3/#4＋実LLM C が三重一致: best_of/routing で diverse>redundant>single, majority は逆効果）。
+- **routing キーは QD の behavior descriptor を流用**（descriptor-router が較正非依存で oracle 近傍0.90, 自己PoC#4）＝QD と ORCH が同一記述子基盤を共有（設計節約）。
+
+### S3. 個体＝調査機能を持つ agentic 個体（段階導入）
+- 探索空間ではサンドボックス読取専用調査のみ（SR-1 整合）、実 I/O は Approval Bus 片方向昇格後（§1.12）。調査はコスト計上。**PoC 未＝次の検証対象**。
+
+### S4. 観測・対話制御（実装済＝全ランで標準装備）
+- 応答ログ / 個体別スコア時系列ビューワー / lineage 復元（Agent B 完了, 進化系886テスト緑）。step/pause/resume は CKPT-1 拡張で配線予定。
+
+### 残課題（朝以降 / 優先順）
+1. **AGENT 軸 PoC**（調査機能個体の最小実証, S3）。
+2. **factor-subspace QD** 実装（S1 の新要件）。
+3. **実ルーター（descriptor-router）を実LLM で**: best_of oracle にどこまで迫るか（C の穴の実LLM版）。
+4. 母数スケール 256→4096 + CKPT-1 連続運転配線 + Stage6 実LLM（measurement purity 維持）。
+5. 既存モジュール（quality_diversity/novelty_lane/island_model/expert_council）を上記経路へ正式配線（多くは実装済・未配線）。
+
+### Codex（honest）
+- ChatGPT アカウントが codex 系モデル全拒否で**当面不使用**。model 設定見直しはユーザー領域。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
