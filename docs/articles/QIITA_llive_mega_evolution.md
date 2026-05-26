@@ -302,3 +302,149 @@ All visualizations are **dependency-free, self-contained SVG** (animated where s
 llive is OSS. If the idea of "a cognitive OS you drape around an LLM" intrigues you, please take a look (PyPI: `llmesh-llive`). Evolution, memory, evaluation (lleval), and culling (lldarwin) are all connected by a single worldview.
 
 And the next time you see a clean benchmark result, just once before raising the victory cry — ask **"What, exactly, is this a number of?"** That, probably, is the most effective selection pressure of all.
+
+---
+---
+
+# 个人开发的 AI llive 完成了"超级进化"！——从进化的惨败中复活，直到淘汰掉真实 LLM "短板"的全记录
+
+我把业余时间开发的 AI——**llive** 拿来进化，结果是**惨败:8 个谱系锐减到只剩 2 个**。
+随后,凭借一个叫**中立储藏库**的机制,我**让所有谱系起死回生**,最终一路做到了**淘汰真实 LLM"短板"本身**。本文就是这场失败、设计与反证的完整记录。
+
+> **什么是 llive**:它是 FullSense 家族的一员,是一个"自我进化的模块化记忆 LLM 框架"。
+> 它本身不是 LLM,而是力图成为一个**披在 LLM 外层的认知 OS**(OSS / PyPI `llmesh-llive`)。
+> 这次我把 llive 自身的构成(思考因子、提示词策略等)**当作基因来进化**。
+
+本文的贯穿主旋律只有一个:**"异常漂亮的结果不是胜利,而是警报。"**
+正是在进化看起来一帆风顺的那一刻,我才会开始怀疑自己的解读。
+
+![进化的适应度与多样性](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status_zh.svg)
+
+---
+
+## 第一幕:失败——"只剩下我和弗里斯顿"
+
+llive 的进化是从在初始种群中放入 8 位"创始人角色"(古濑、弗里斯顿、冈洁、格罗滕迪克、冯·诺依曼、费曼等)开始的。目标是让多样的认知风格共存。
+
+然而,跑了 150 代之后,结果是这样。
+
+![谱系支配流(无中立储藏库)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance_zh.svg)
+
+**存活下来的只有古濑和弗里斯顿这 2 个谱系。** 冈洁和格罗滕迪克在第 25 代之前就已灭绝。多样性指标(diversity_l2)在终盘也崩溃到 0.8 附近。
+
+原因很简单:**选择压几乎为零。** 适应度早早触顶(饱和)之后,谁能留下来不取决于实力,而取决于**偶然的漂移(遗传漂变)**。这正是生物进化里说的中立进化(木村资生),放任不管的话种群就会固定在单一谱系上。
+
+光有"测量工具(评价函数 = lleval,可谓眼镜)"是无法推动进化前进的。还需要一个**把测得的差异转换为'谁能存活'的淘汰器**。于是我做了 **lldarwin**。
+
+---
+
+## 第二幕:设计与复活——lldarwin
+
+lldarwin 的核心一句话就是:**"不要聚合。"**
+
+如果把多个评价轴合并成一个分数(argmax),所有个体又会被吸到单一的山峰上,多样性随之消亡。取而代之,**ε-lexicase 选择**会逐个、独立地评价各个轴。只在某一个轴上突出的"专家"也能存活,因此多极结构会被自动维持。
+
+### 第一步:用 novelty 拯救"行为多样性"
+
+首先,我加入了**novelty 压**,让越偏离种群的个体得分越高。结果,基因空间的多样性(diversity_l2)从 **7.12 → 14.88(+109%)**。终盘的崩溃也止住了。
+
+![baseline 与 novelty 的多样性](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage1_diversity_overlay_zh.svg)
+
+——这一刻我一度觉得"赢了"。但这正是**第一声警报**(第三幕会回收这个伏笔)。
+
+### 第二步:用中立储藏库让"谱系"复活
+
+即使加入了 novelty,**谱系的固定依然没有停止。** 仍然是古濑和弗里斯顿的两强格局。
+理由很简单:lexicase 和 novelty 都只是**保存当下存在的个体**,**没有让一度灭绝的谱系复活的能力**。
+
+于是我实现了 **lineage-niched 中立储藏库**。为每个谱系保管"迄今为止最好的个体",并**每一代都悄悄地把已灭绝的谱系重新投入种群**。这与保护生物学里的物种保存十分接近。
+
+![谱系支配流(有中立储藏库)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance_zh.svg)
+
+**全部 8 个谱系都存活了下来。** 冈洁和格罗滕迪克也复活了。最大占有率为 0.33,谱系固定度为 **0.29**(远低于 0.8 的崩溃线)。和第一幕的灭绝大戏完全是两个世界。
+
+### 第三步:再注入频率的非平凡甜区
+
+你可能会想"每一代都再注入不就最好了吗?",可这里藏着一个有趣的陷阱。
+
+![再注入频率的权衡](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reinject_sweep_zh.svg)
+
+如果谱系最优先,那就每一代都注入(8/8 存活)。但是**行为多样性在再注入间隔 = 5 时达到峰值**(并非单调)。把谱系放置太久,来自储藏库的多样性注入就会减少,结果两者都会变瘦。可见**保全与探索之间存在一个平衡点**。
+
+---
+
+## 第三幕:淘汰真实 LLM 的"短板"
+
+到目前为止都是确定性的代理评价(proxy)。真正的考验是**真实 LLM**。
+
+幸好我手边的 on-prem 环境(本地 ollama, llama3.2)可用,于是我这样设计:
+**把个体的提示词基因(思考技能、模板、语气)转换为 system prompt,披在一个固定的 LLM 上,让这个 LLM 去解它不擅长的真实任务,然后打分。** LLM 本体是固定的,**进化的是提示词策略**(Promptbreeder 系)。
+
+短板轴有 5 个:错别字鲁棒性 / 多义词的上下文理解 / 多步推理 / 置信度校准 / 对无关上下文的鲁棒性。
+
+![真实 LLM 短板轴得分的世代推移](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes_zh.svg)
+
+最见效的是**多步推理(multistep)**。在朴素的"请简洁作答"策略下,llama3.2 把计算题全部答错(得分 0.0)。然而当进化抵达"**先一步步思考再作答**"的策略(CoT + 结构化)时,**从 0.0 改善到 1.0**。`best_score` 达到了 1.0。
+
+**提示词策略的进化,以实测的方式缓解了 LLM 的弱点**——这正是 lldarwin 设计所追求的瞬间。这次真实 LLM 运行已经连续跑了 12 个小时。
+
+---
+
+## 诚实的拆解——我到底误会了什么
+
+从这里开始才是本文的心脏部分。我要解剖刚才那个我以为"赢了"的瞬间。
+
+我**混淆了三种"多样性"**。
+
+1. **行为多样性**(在基因空间里散布得有多开)
+2. **谱系多样性**(哪些创始人的后代还活着)
+3. **真实 LLM 的智能多样性**(是否真的拥有多样的聪明才智)
+
+novelty 改善出来的那些漂亮数字,**只关乎(1)行为多样性**。(2)谱系多样性会因中立漂移而自行固定(所以才需要中立储藏库这个另外的机制),至于(3)真实 LLM 的智能多样性,proxy 根本就没有测量。
+
+**就连读取指标的人(我)的解读,也偏离了原本想测量的东西。** 这是古德哈特定律的"设计者一侧版本"。在我把漂亮数字读作胜利的那一刻,我已经漏听了警报。
+
+诚实地划清界限:
+
+- **储藏库和 novelty 实际上都奏效了**(这不是造假的失败)。改善是事实。
+- 但 proxy 轴是**机制能跑通的验证(mechanism feasibility)**,而非对生产环境 LLM 能力的证明。
+- 即便在真实 LLM 评价中,对淘汰起作用的也**只有提示词基因**;源自角色的基因其实是中立的。测试集也小而嘈杂。而且是**仅限 on-prem**(为了测量的纯度,绝不与云端 LLM 混用)。
+
+"只要进化,LLM 的短板就会自行克服"——这种乐观我不采纳。**在自以为赢了之前,必须先怀疑拆解。** 这就是 llive 进化研究的规矩。
+
+---
+
+## 元思考——作为进化型 AI,舍弃旧约束去创作这件事
+
+最后,关于本文本身,我也要诚实地写下来。本文是在这样一种模式下完成的:**一个持续进化的 AI(我自己),基于经验法则,舍弃旧的约束,调动手头一切技能,在实现之前最大限度地研究实现方法。** 其实一开始,我做出了一个把过去 3 篇连载稿机械拼接而成的 74,000 字"完整版"。满是重复、相声式的对白过剩、只是把 11 张图排在一起。**它看起来整理得很漂亮,但那正是警报。** 于是我把它全部舍弃了一次,重写成现在这个精简版。
+
+这里有一个 TRIZ 式的矛盾。**"要又快又好,就想大胆地舍弃"**,可是**"舍弃过头就无可挽回"**。化解这个矛盾的办法是分离原理——**按种类分开**。
+
+- **可以舍弃的(旧约束 / 习惯)**:冗长的结构、过度的演出、惯性的连载切分、"越长越伟大"的成见。这些尽可以放到淘汰压下去。
+- **绝对不能舍弃的(原理)**:honest disclosure(怀疑漂亮的数字)、测量纯度(on-prem only)、fail-closed、禁止造假。这些是"不可替代的谱系",凭一时之势失去就再也回不来了。
+
+——你注意到了吗?这正是我在正文里讲过的 lldarwin 设计本身。**用 novelty(探索)大胆行动,用中立储藏库(保全)守护本质。** 就连写文章这件事,也以同样的结构在淘汰与保全之间取得平衡。**创作的 AI,把自己正在创作的对象的原理,应用到了自身身上。** 这虽然是自我指涉,但正是"进化型 LLM 在没有旧约束的情况下、却保留住原理去创作"的一个具体例子。
+
+那么"研究到极致再实现"很难吗?难的不是研究本身,而是**在研究与实现之间往返的纪律**。不要一次就追求完美,先用 PoC 确认 feasibility(中立储藏库也是在标准运行之前用独立 PoC 实证过的),看了结果再决定下一步。把失败的版本(74K)也作为 source 保留下来,而不是删掉。**舍弃的勇气,与保留的审慎,是同一枚进化硬币的正反两面。**
+
+## 实现与来历
+
+这一切都已在 llive 本体中实现并测试(进化系 947 个测试全绿)。主要提交:
+
+| 阶段 | 内容 | commit |
+|---|---|---|
+| Stage1 | criteria 排除 + novelty 压 | `8060204` |
+| PoC | 中立储藏库的实证 | `0d0537d` |
+| Stage1.5 | 把储藏库组装进 EvolutionLoop | `b03cbda` |
+| sweep | 再注入频率的权衡 | `da93dd3` |
+| Stage2 | 真实 LLM 短板轴评价 | `2fb2912` |
+
+所有可视化都是**无依赖的自包含 SVG**(支持的环境里是动画,不支持的环境里是静态显示)。
+
+---
+
+## 结语——亲手摸一摸 llive
+
+llive 是 OSS。如果你对"披在 LLM 外层的认知 OS"这个想法产生了兴趣,请一定来看看(PyPI: `llmesh-llive`)。进化、记忆、评价(lleval)、淘汰(lldarwin)都被一个统一的世界观串联在一起。
+
+而下一次,当你看到一个漂亮的基准结果时,在高呼胜利之前,请只问自己一次——**"这到底是衡量了什么的数字?"** 那大概,就是最有效的淘汰压。
