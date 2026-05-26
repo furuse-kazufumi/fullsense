@@ -89,6 +89,15 @@
 - ⏳ A(開放端 sweep)/C(オーケストラ) 完了待ち → 結果を本台帳へ統合。
 - 次 real-pressure ランは Agent B の `--response-log @out` 付き＋**難化/適応難易度バッテリ**で起動する方針（自己 PoC #1/#2 の知見を実 LLM 段へ）。
 
+### Round 1.5 (Agent C オーケストラ proxy 完了 / 実LLMラン継続中)
+
+**C オーケストラ PoC — proxy 結果は天井飽和で判定不能（重要な方法論的発見）**
+- `scripts/poc_orchestra.py` + `out/poc_orchestra_2026_05_26/orchestra_proxy.json` 着地。proposition=ORCH-4。
+- proxy（12h snapshot gen70 の breakdown を流用）では **single_best も全 MoA 戦略（redundant/diverse × majority/best_of/weighted）も total=1.0** で差が出ない。**飽和した fitness は orchestration の価値を測れない**（single best が既に満点＝headroom ゼロ）。
+- 多様性選抜は distinct_signatures が冗長選抜より多い（k=7: diverse 7 vs redundant 5）が、スコアに反映されない。
+- **結論（方法論）**: **ORCH-4 の検証には「単一個体が満点を取れない難タスク」が前提**。= Round 1 の「飽和を直す」が ORCH 検証の**前提条件**でもある（二重の理由で saturation-fix が先）。
+- 実LLMラン（monitor `be06f6741`）が multistep 軸（0.5=headroom あり）で差を出すか継続観測中。C は終了済のため SUMMARY は親が実データ着地後に作成。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
