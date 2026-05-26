@@ -111,6 +111,18 @@
 - **= Self-MoA 反証（多様性≠自動優位）の正体**: 集約器が **competent メンバへ routing できるかが決定的**。投票/平均は diversity を殺し、competence-aware routing/gating は diversity を活かす。
 - **方策への含意（ORCH 設計要件）**: オーケストラは**投票でなく「指揮者（router/gating）」が必須**。expert_council.py の gating or 学習 router を配線。honest 留保: best_of は oracle routing の上限＝実際は「どの個体が competent か」を予測する gate の精度が律速（ここが失敗点になり得る）。
 
+### Round 1.6 (Agent C 実LLMラン 完了 — 自己PoC#3 と独立に一致＝強い証拠)
+
+**C オーケストラ 実LLM結果**（`out/poc_orchestra_2026_05_26/orchestra_real.json` + `SUMMARY.md`, 105 LLM calls/2073s, llama3.2, 15タスク）:
+- 単一best=**0.933**。MoA `best_of`+k≥5 で **1.000**（+0.067）。**majority/weighted は一度も 0.933 を超えず**。
+- diverse > redundant（k=5: diverse/best_of=1.000 vs redundant/best_of=0.933）。多様選抜は異 QD cell の補完 specialist（base/terse 個体）を少ない k で先に拾う。冗長選抜は支配署名（chain_of_thought）に密集し同じ盲点を共有。
+- 改善は**丸ごと multistep::t2（「5を2倍して3引く」）由来**＝CoT 個体群が揃って落とす1問を多様選抜の異種個体が解いた。他4軸は単一bestが既に満点。
+- proxy は飽和で検証不能、実LLMで難問追加し de-saturation してようやく ORCH-4 を検証できた（Round1.5 / 自己PoC#3 の設計判断を実データが裏付け）。
+- always-on（answer-on-demand）は構造的に成立（進化=background / 回答=最新snapshot read）。
+
+**🔑 独立クロス検証**: 自己PoC#3（合成・専門家分散）と Agent C（実LLM・llama3.2）が**別手法で同一結論**＝「MoA は competence-aware routing(best_of) でのみ単一bestを上回る／投票では届かない／多様性は routing 下でのみ価値」。2手法一致は honest disclosure 上きわめて強い。
+- **最大の穴（次の決定点）**: oracle best_of に実投票（majority/weighted）が届かない。**実ルーター/検証ゲートが best_of に近づけるか**が ORCH 実用性の核。→ 自己PoC#4 で検証。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
