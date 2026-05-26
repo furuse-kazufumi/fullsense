@@ -850,6 +850,398 @@ Build good parts, bundle them without aggregating, verify saturation with a real
 
 ---
 
+# 中文
+
+# 一夜之间重写了 AI 进化 —— 真实 LLM 的 12 小时运行又一次在满分处饱和，6 个 PoC、4 个 Agent 与 Perplexity「各自独立地收敛到同一个结论」的那一夜 #27
+
+> 📚 **连载导航（lldarwin 弧线）**：#24-05 群体进化 → #25 monoculture 的失败 → #26 设计篇 → **#27 本文（高潮）** → 实现篇（计划中）。※ 每篇文章都可单独阅读（链接用于回览）。
+
+> **概念 hook**：在上一篇 #25 中，我曝光了一个重大失败：把 AI 进化 500 代之后，世界上只剩下**弗里斯顿和我**。原因是评价函数（眼镜 = lleval）一直给出满分，导致**选择压力降为零**。
+>
+> 「那么这次，用真实的 LLM 来验证吧。」抱着这个想法，我对着 on-prem 的 llama3.2 **连续进化了 12 个小时**。不是 proxy（合成的尺子），而是真实 LLM。
+>
+> 结果。**在 gen5 就钉死在满分，此后 65 代纹丝不动。**不会全灭，但也不会累积。这不是进化，而是**单纯的「带筛子的随机搜索」**——不仅 proxy，**即使用真实 LLM，也还没有成为进化**。
+>
+> 由此，一个通宵。为了「决定方策」，我亲自跑了 6 个 PoC，并行启动了 4 个 Claude Agent，让 Perplexity 去翻文献。到了早晨，**所有人都各自独立地收敛到同一个结论。**这就是那份「通宵决策日志」的 honest disclosure。
+
+---
+
+## 0. 三行概要（落语中所谓的「开场垫话」）
+
+落语在正题之前有「开场垫话」。先用三行说。
+
+- **又饱和了** —— 真实 LLM(llama3.2) 跑 12h，gen5 就钉在 best=1.0，65 代无进展。不全灭但也不累积 = **filtered random search（带筛子的随机搜索）**。真因与 #25 相同：「固定的人工尺子的饱和」。
+- **一夜之间决定了方策** —— 6 个自跑 PoC + 4 个并行 Agent + Perplexity **各自独立地收敛到同一个结论**：「保持尺子固定却去打磨淘汰器是徒劳。**让评价本身开放端化。**」
+- **独创性浮现了** —— 让一个持续进化的群体，在任意一瞬间不停下来地合奏（MoA）出一个答案的「**现场管弦乐团（live orchestra）**」，被证明是先行研究中的 white-space（空白地带）。
+
+简言之：**「一旦眼镜（评价）饱和，无论怎么打磨淘汰器（lldarwin）都无力。」**所以改变打磨的对象——**让评价本身开放端化**，这就是本轮的结论。
+
+---
+
+## 1. 为什么「又」做了一次 —— #25 / #26（设计）的延续
+
+用三行回顾迄今的连载：
+
+- **#24-05**「群体学习的 AI」—— 不是让一个 LLM 变聪明，而是建立了**让 N 个 llive 个体（genome）世代更替、相互评价**的派生群体进化框架。
+- **#25**「只剩下弗里斯顿和我」—— 把 8 位智者作为人格种子撒入该群体，跑 proxy 500 代后产生重大失败：**满分饱和 → 选择压力为零 → 仅靠运气（遗传漂变）偏向 2 个谱系**。眼镜蒙了。
+- **#26（设计篇）**「只靠眼镜测量并不会进化」—— 设计了淘汰器 **lldarwin**，实现了「不聚合的多目标淘汰（ε-lexicase / QD / 中性储库）」。在 proxy 中防住了谱系灭绝。
+
+到这里为止，全部都是关于 **proxy（确定性启发式，不依赖 LLM）**的。proxy 能展示「机制能转」，却无法展示「进化找到了**有意义**的东西」（[[feedback_benchmark_honest_disclosure]]）。
+
+所以，理所当然的下一步：**用真实的 LLM 来验证。**
+
+由于 localhost 的 ollama（llama3.2:latest）可达，我把每个个体的 `c_prompt`（prompt 策略的基因）转换为 system prompt，覆盖在固定的 llama3.2 之上去解实际任务——这是一种 **Promptbreeder 系的映射**——启动了 12 小时的连续进化运行。这就是本文的出发点。
+
+> 🍵 **休息点**：如果你已经到了「proxy 里机制转起来了——那真实 LLM 呢？」这个问题，就够了。研究的好处就是可以实际去跑这个「那真实的呢？」而这一次，真实的——毫不留情。
+
+---
+
+## 2. 出发点 —— 真实 LLM 12h 运行的「诚实的不及格」
+
+这是 12 小时真实 LLM 进化运行（on-prem llama3.2，严守 measurement purity = 不与 cloud LLM 混用，[[feedback_llive_measurement_purity]]）的结果。
+
+| 事实 | 数值 | 含意 |
+|---|---|---|
+| 完跑 | 71 代 / 12h（≒10.3 分/代，真实 LLM 顺序执行） | 吞吐量为瓶颈 |
+| best_score | **gen5 = 1.0 → 固定至 gen70** | **目标饱和。65 代无进展** |
+| mean | 在 0.85 触顶，1.0 策略不席卷 | **适应不累积** |
+| 各轴 | 10 题中 6-7 题饱和，梯度仅在 multistep（2 题） | 有效分辨率太小 |
+| fitness 依赖 | **仅 c_prompt**。c_factors(40 维)/c_impl/c_meta 中性漂移 | **43 个维度选择压力为零** |
+| 群体健康 | pop=24 维持・min ≥ 0.70・**未全灭** | 机制（GA）没坏 |
+
+这里就是 FullSense 的 honest disclosure 规则让你停下脚步的地方（[[feedback_benchmark_honest_disclosure]]）。写成「没全灭！达到了 best=1.0！」听起来很成功。但看明细就一目了然。
+
+**判定：未全灭，但也不是累积进化（≈ filtered random search）。**
+
+10 题测试中，仍保有梯度（差异）的只有 multistep 的 2 题。其余 8 题很早就全员满分。也就是说 10 题中有 8 题，已经无论选谁都一样。选择压力的有效分辨率只剩下大约 2 题份。而且 4 条染色体中只有 `c_prompt` 这一条参与 fitness，其余 43 维（思考因子 40 维 + 实现 + 元）都是**选择压力为零的中性漂移**。
+
+![真实 on-prem LLM（llama3.2）进化运行的适应度与多样性（12h 连续运行）。best 很早就钉在天花板，此后平坦](./assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status.svg)
+
+![5 个弱轴（typo / polysemy / multistep / calibration / context）的群体均值轨迹（真实 on-prem LLM 评价）。除 multistep 外均早期饱和，无残留梯度](./assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg)
+
+**真因 = 人工固定尺子的饱和。**用户在 #25 中言明的洞见「**一旦眼镜饱和，选择压力就无力**」，这次我们不是用 proxy 而是**用真实 LLM 实证**了。把眼镜从 proxy 换成真实 LLM 也没用：**只要尺子是「固定的 10 题」，就会很快在满分处饱和。**换了镜片厂商，刻度若粗也是一样。
+
+> 🤔 **比喻**：即使把判分者换成「真正的老师」（真实 LLM），如果每次出的题都一样，几轮内大家都会拿满分，此后无论考多少次都拉不开差距。不是题目不好，而是**试卷固定且太简单**。把判分者（眼镜）从 proxy 换成真实 LLM，只要尺子（题目）固定就会饱和。这就是「诚实的不及格」的本质。
+
+> 🍵 **休息点**：很多人此时会想「连真实 LLM 都饱和，岂不是无解了？」我也这么想过。但正题从这里开始。如果**「把尺子固定下来才是错的」**，那要修的既不是淘汰器也不是 LLM，而是**造尺子的方式本身**。我用一个通宵、6 个 PoC、4 个 Agent 和 Perplexity 验证了这一点。
+
+---
+
+## 3. 一夜的作战 —— 为「决定方策」而进行的分布式调查
+
+用户给来的指示是这样的：
+
+> 「彻底整理需求，作为进化型系统拿出更多独创性。PoC 也反复多跑。一直到明早，用小单位不停地跑 PoC 来**决定方策**。」
+
+这里关键在于，目的**不是「完成实现」而是「决定方策」**。所以不是跑一个大型正式运行，而是采取**大量跑小 PoC**、用真实数据一个一个地敲掉设计判断的作战（[[feedback_poc_feasibility_first]] = 需求 → PoC → 可行性 → 详细设计）。
+
+并行运转的工作者是这些（[[feedback_parallel_first_execution]] = 独立任务默认启动并行 Agent）。
+
+| # | 工作者 | 任务 |
+|---|---|---|
+| A | Claude Agent | 开放端 sweep PoC（实证 baseline = 饱和/全灭 vs 开放端 = 回避，≥1 万代） |
+| B | Claude Agent | 观测基础（响应日志 / 个体分数时序查看器 / lineage 复原） |
+| C | Claude Agent | 管弦乐团 PoC（MoA 是否超越单一 best，多样性选拔 vs 冗余选拔） |
+| P | Perplexity | QD/novelty/MoA/agentic 进化的 SOTA 综述（补足文献缺口） |
+| X | Codex | 设计的独立批评 + 3 个最小 PoC 提案 + 盲点指出 |
+| 自身 | 我（main） | 直接实现并执行自跑 PoC #1〜#6（orchestrator 兼最重要任务负责） |
+
+> 🍵 **休息点**：这个「六人合力」体制，其实是本文隐藏的主角。为什么不用一个人（一个 context）全部做完？答案就在 honest disclosure 的核心。**用同一个脑袋想出的结论，会被同一种偏见牵着走。**用不同的方法（合成 PoC / 真实 LLM / 文献调查）**各自独立地**验证，只有当它们一致时才信任结论。这就是我所称的 **honest cross-validation**。它的威力在后半段显现。
+
+这里记下一个诚实的哑弹。**Codex（X）用不了。**ChatGPT 账号的许可模型不匹配（API 侧全面拒绝 codex 系模型）导致受阻。本应在 10x promo 期间，API 却返回 "not supported when using Codex with a ChatGPT account"。由于这是环境问题，目前把主轴切换为自跑 PoC + 并行 Agent + Perplexity。**「本应能用却用不了的工具」也照记不误，不隐藏。**
+
+---
+
+## 4. 第一记决定性打击 —— 是否舍弃「固定尺子」（自跑 PoC #1 / #2）
+
+最先该敲掉的假设，是最根本的问题：**「把尺子从固定难度改为自适应难度，饱和会被修好吗？」**
+
+### 4.1 自跑 PoC #1 —— 自适应难度修好饱和，但杀死多样性
+
+用合成的 competence 向量的 proxy，去除混杂后（按 score 选 elite）做对比。
+
+- **baseline（固定难度）**：能力**在 0.627 低位停滞**（best 0.757）。在 proxy 中重现 12h 的病理。
+- **adaptive（难度 = 跟随群体 60 分位）**：能力**上升到 0.952**（best 1.0）。
+
+让难度跟随群体（能解的题增多就把题变难），饱和被解开、能力上升。**但是**——adaptive **牺牲了多样性**（diversity 崩塌 0.310 → 0.134）。在为难题优化的过程中，群体凝聚到了一个正确策略上。
+
+### 4.2 自跑 PoC #2 —— 自适应难度 × novelty 可以兼容
+
+那么，在「自适应难度（维持梯度）」上加「novelty 选拔（维持多样性）」会怎样？
+
+| 配置 | 最终能力 | best | 多样性 | plateau |
+|---|---|---|---|---|
+| baseline（固定难度） | 0.627 | 0.757 | 0.310 | gen82 |
+| adaptive（难度跟随） | 0.952 | 1.000 | 0.134（崩塌） | gen63 |
+| **adaptive + novelty** | **0.881** | 1.000 | **0.316（维持）** | gen99（最长探索） |
+
+**adaptive + novelty 同时兼顾了**能力（比 baseline +40%）与多样性（比 adaptive 2.4 倍，与 baseline 相当）。让出 7% 能力，换来多样性的完全维持。
+
+至此，**方策的核心由自有数据确定。**
+
+> **「自适应难度＝维持梯度」与「QD/novelty＝维持多样性」互补，两者都必须。**
+> 固定尺子单独（baseline）也好，自适应难度单独（adaptive）也好，都不够。
+
+honest 保留：这是抽象 proxy（competence 向量），并非真实 LLM 映射。仅限于**验证 mechanism feasibility（机制是否运转）**。plateau@gen 的数字指「停滞的世代」，但本质是停滞的**水平**——baseline 在低位（0.627）停滞，adaptive 系在天花板附近停滞。
+
+> 🤔 **比喻**：当所有人都满分时就把题变难（自适应难度）。于是分数拉开了，但这次大家又收敛到了同一种解法（千篇一律）。于是再加上「对奇特解法也给奖励」（novelty），能力与多样性就兼容了。**「变难」与「奖励奇人」的双刀流**——这就是 PoC #2 的要点。
+
+---
+
+## 5. 主战场的证据 —— 开放端进化的 1 万代 sweep（Agent A）
+
+自跑 PoC 让「方向」浮现。下一步，是**大规模、严格地**敲打它。我让并行 Agent A 跑了**各 1 万代 × pop256 × 19 配置 × 2 巡**的开放端 sweep。
+
+判定基准是是否「open-ended（开放端）」——**是否不饱和、避免 monoculture（向单一文化的收敛）、archive（多样性的储库）持续增长？**
+
+### 5.1 决定性的判定表
+
+**verdict（gen9999 时点）：全 scalar 配置 = False / 全 novelty・lexicase 配置 = True**
+
+| label | 选择 | std | MC | reservoir | archive | open-ended | occupied | monoculture | uniq_lineages |
+|---|---|---|---|---|---|---|---|---|---|
+| baseline_scalar | scalar | - | - | 0 | none | **False** | 9 | 0.74 | 1.0 |
+| baseline_scalar_mc | scalar | - | ✓ | 0 | none | **False** | 9 | 0.90 | 1.0 |
+| **scalar_qd** | scalar | - | - | 0 | map-elites | **False** | — | — | — |
+| novelty_std | novelty | ✓ | - | 0 | none | True | 100 | 0.13 | 1.0 |
+| novelty_std_qd | novelty | ✓ | - | 0 | map-elites | True | — | — | — |
+| **novelty_std_res256** | novelty | ✓ | - | 256 | map-elites | True | 95 | 0.05 | **31.9** |
+| novelty_std_res1024 | novelty | ✓ | - | 1024 | map-elites | True | 98 | 0.04 | 15.2 |
+| **full_oe** | novelty | ✓ | ✓ | 1024 | map-elites | True | 90 | 0.05 | 15.3 |
+| lexicase_std(_mc) | lexicase | ✓ | -/✓ | 0 | none | True | 111–122 | 0.03 | 1.0 |
+
+由此得出四个决定性发现。
+
+1. **选择压力是决定性的。**scalar（单一标量 fitness），即使加上 MAP-Elites 的 archive（`scalar_qd`）也**全灭（False）**。也就是说「加个储库就能守住多样性」是**错的**——**除非选择本身是开放端的（novelty / lexicase），否则开放端根本不成立。**单靠 archive 救不了。**让选择压力本身开放端化**才是本质。
+2. **标准化（z-score）把 QD 覆盖扩大一个数量级。**在 novelty 上加 per-dim z-score 标准化，occupied cells 从 9 → 100+。把各轴的「偏离」变成选择压力，行为空间的覆盖就扩大一个数量级。
+3. **中性储库恢复谱系多样性。**只用 novelty_std 时 uniq_lineages 为 1.0（谱系固定为一个）。加上 reservoir256 就到 **31.9**。**行为多样性与谱系多样性是不同的轴**，后者需要储库（这是对 #26 设计篇已实现知见的再确认）。
+4. **规模有效。**把 latent 维度 256 → 1024，niche 从 101 → 166，archive 从 1021（饱和）→ 2234（持续增长）。多样性可以用「容量」买到。
+
+![Stage1 baseline（无 novelty）的适应度与多样性。终盘多样性崩塌（scalar 的典型失败）](./assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg)
+
+![Stage1 有 novelty pressure。行为多样性维持到终盘](./assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status.svg)
+
+![baseline vs +novelty 的 diversity 叠绘。把崩塌（scalar）与维持（novelty）一图对比](./assets/lldarwin_2026_05_26/lldarwin_stage1_diversity_overlay.svg)
+
+### 5.2 Agent A 给出的「诚实的局限」
+
+恰恰是在出好结果（open-ended 成立）时，才要写局限。Agent A 自己指出：
+
+> novelty/lexicase 保持描述符**整体**的多样性，但**不保证特定语义维度（factor）的多样性**。
+> 在大 latent 下会发生 factor drift，fspread（factor 的展开度）需监视。
+
+也就是说，即使「整体上多样」，也可能在「思考因子这个特定语义维度上收敛」。这催生了新需求 **factor-subspace QD（对语义维度逐个保护的 QD）**（在后述 PoC #6 中应对）。
+
+> 🍵 **休息点**：这是本文最硬的一节。希望带走的一行——**「单靠加 archive（储库）救不了。不让选择压力本身开放端就不行。」**自 #25/#26 设计篇起我们一直说「不聚合」，而其主战场就是「**让选择的方式开放端化**」，这被 1 万代的真实数据所断言。越过这里，剩下的就是独创性的话题了。
+
+---
+
+## 6. 独创性的核心 —— 「让持续进化的群体，不停下来地合奏」
+
+至此「在结构上回避饱和的选择核（S1）」已经稳固。下一步，是用 PoC 与文献为用户在对话中给出的**独创性 3 轴**做背书。
+
+用户言明的 3 轴是这些。
+
+1. **持续进化群体 = 现场管弦乐团（ORCH）** —— 持续进化的群体当场做 MoA（Mixture-of-Agents）聚合产出一个答案。进化不停。**最大的差异化候选。**
+2. **具备调查功能的个体（AGENT）** —— 个体自己去调查。Voyager 系。
+3. **观测・对话控制（OBS）** —— 看个体分别的响应 + 选择分数的时序，能停、能续。
+
+### 6.1 Perplexity 背书的 white-space
+
+并行运转的 Perplexity 的 SOTA 综述（1143 行）返回了最重要的背书。
+
+> 「**整合 online evolution + online answering 的持续运转系统**」没有明确的先行研究 = **research white-space（空白地带）**。最接近的是 MoA / Self-MoA / sequential aggregation / routing，但没有相同的。
+
+也就是说，「停下进化、用造好的最强个体来回答」是寻常做法。「**不停下**进化、让进化中的群体本身合奏来回答」——还没有人做过。**ORCH §1.11 的差异化得到确认。**
+
+### 6.2 不过 Perplexity 也给了反证警告
+
+作为 honest disclosure，我以同等分量写下 Perplexity 给的**反证警告**。
+
+> 在 2025 年的 **Self-MoA 研究**中，**多样性并非自动占优**。单一顶级模型的反复，在 AlpacaEval 上超过异种混合 MoA 达 6.6%（quality-diversity 权衡）。
+
+「把群体合奏起来就比单一个体强」并**非不言自明**。先行研究警告，多样性反而可能起反效果。所以 ORCH 是「用实测来证明，诚实设定 pass-bar」。我用 Agent C 和自跑 PoC #3/#4 验证了这一点。
+
+> 🍵 **休息点**：这里是考验研究诚实度的分岔口。正想为「online 进化 + online 回答是 white-space！独创性！」而飘飘然时，Perplexity 泼来冷水「但有反证说多样性不是自动就好」。**让飘飘然的素材和冷水，在同一次调查里同时接受。**做到这一点，结论会强很多。下一节，我来揭开那盆冷水的真面目。
+
+---
+
+## 7. 揭开 Self-MoA 反证的「真面目」（自跑 PoC #3 → Agent C 真实 LLM）
+
+「多样性并非自动占优」——不是在 proxy，而是在**机制层面**揭开这个反证，是这里的高潮。
+
+### 7.1 自跑 PoC #3 —— 是投票，还是路由？
+
+首先，在 proxy 里无法验证（在饱和的 fitness 下 single best 已是满分 = headroom 为零，拉不开差距）。于是我合成了**「单一个体无法满分的难任务」**（专家分散，single_best=0.5）来测。
+
+| 配置 | best_of（routing） | majority（vote） | domain coverage |
+|---|---|---|---|
+| single_best | 0.500 | — | 2/4 |
+| MoA redundant（top-k） | 0.750 | 0.500 | 3/4 |
+| MoA diverse（max-cover） | **1.000** | **0.000** | 4/4 |
+
+这里出现了**决定性的发现**。
+
+- 多样 MoA 在 **best-of / routing 下为 1.000**（单一 best 的两倍）。**ORCH 成立。**
+- **然而在 naive majority（多数决）下，多样性起反效果**（diverse = 0.000）。在各 sub-task 中，那一位 competent 的专家被无知的多数派 negate（抵消）。冗余 MoA 的 majority（0.500）反而更高。
+
+也就是说，**Self-MoA 反证（多样性 ≠ 自动占优）的真面目，是「聚合器是投票还是路由」。**投票/平均杀死多样性，competence-aware 的 routing/gating 激活多样性。这是「有指挥的管弦乐团」与「人人随心所欲出声的喧嚣」之间的区别。
+
+### 7.2 Agent C 的真实 LLM 独立地给出了同一结论
+
+然后——并行 Agent C，用**真实 LLM（llama3.2，105 次 LLM 调用，15 任务）**，与自跑 PoC #3 **独立地给出了同一结论**。
+
+- 单一 best = **0.933**。MoA `best_of` + k≥5 达 **1.000**（+0.067）。**majority / weighted 一次都没超过 0.933。**
+- diverse > redundant（多样选拔以更少的 k 更早地拾取不同 QD cell 的互补 specialist）。
+- 改善**整整来自 multistep 的 1 题**（「把 5 翻倍再减 3」）。CoT 个体群一齐落掉的那 1 题，被多样选拔的异种个体解出。
+
+> 🔑 **独立交叉验证（本文的核心）**：自跑 PoC #3（合成・专家分散）与 Agent C（真实 LLM・llama3.2），用**不同方法达成同一结论**——「MoA 只有在 competence-aware routing（best_of）下才超越单一 best / 投票达不到 / 多样性只在 routing 下才有价值」。两种方法一致，在 honest disclosure 意义上是极强的证据。
+
+### 7.3 最大的漏洞 —— 「真实路由器」能达到 oracle 吗（自跑 PoC #4）
+
+这里 Agent C 指出了最大的漏洞。「best_of 是 **oracle routing**（神知道哪个个体正确的上限），而实际上『预测哪个个体 competent』的 **gate 的精度**才是瓶颈。实际投票（majority）达不到 oracle。」
+
+我用自跑 PoC #4（真实路由器 vs oracle，20 seed 平均）来填补。
+
+| κ（校准） | single | majority | conf_router | specialty_router | oracle |
+|---|---|---|---|---|---|
+| 0.0 | 0.675 | 0.338 | 0.525 | **0.902** | 1.000 |
+| 0.3 | 0.675 | 0.338 | 0.883 | 0.910 | 1.000 |
+| 0.6 | 0.675 | 0.338 | **1.000** | 0.912 | 1.000 |
+| 0.9 | 0.675 | 0.338 | 1.000 | 0.912 | 1.000 |
+
+- **descriptor / specialty-router 无需校准就 robust 地达 0.90**（稳定超过单一 best 0.675，接近 oracle）。而且 **routing 键可以复用为 QD 已经计算的 behavior descriptor**——**QD 与 ORCH 共享同一描述符基础**的协同效应。
+- **confidence-router 在校准 κ≥0.6 时达到 oracle。**但小型 LLM 可能校准偏弱 → **以 descriptor-router 为第一选择**（不依赖校准）。
+- **majority = 0.338 确定性地不适用**（与 PoC #3、Agent C **第三度一致**）。
+
+**结论**：Agent C 指出的「实际投票达不到 oracle」这一漏洞，**用 descriptor-routing（复用 QD 描述符）实用地填上了**。ORCH 在 proxy +（部分）真实 LLM 上端到端成立。
+
+> 🤔 **比喻**：召集 10 位专家让他们投票，无知的多数派会抵消掉正确的专家。把数学题派给数学家——需要一个**分派的人（指挥 = routing）**。而且那位指挥的乐谱（behavior descriptor）可以复用为管理多样性时**已经算好**的东西。投票（majority）杀死专家，指挥（routing）激活专家。这就是 PoC #4 的要点。
+
+---
+
+## 8. 给个体赋予「调查之力」（自跑 PoC #5）
+
+独创性 3 轴的第二个，**具备调查功能的个体（AGENT）**。构想是让个体能在搜索空间里做沙箱只读调查。但「调查不是免费的」——计入成本后，进化会用好调查吗？
+
+自跑 PoC #5（改变成本 λ，观察调查阈值 θ 如何进化，20 seed 平均）。
+
+| λ | θ*（=λc, 最优阈值） | θ_evolved（进化获得的阈值） | evolved | always | never |
+|---|---|---|---|---|---|
+| 0.0 | 0.00 | 0.049 | 21.46 | 21.47 | **11.70** |
+| 0.3 | 0.30 | 0.476 | 21.34 | 21.26 | 21.20 |
+| 0.6 | 0.60 | 0.659 | **21.24** | 21.06 | 21.21 |
+| 0.9 | 0.90 | 0.888 | 21.21 | 20.85 | 21.21 |
+
+- **进化自力获得了选择阈值 θ → λc**（= 根据情形「只在该调查时才调查」的选择性调查**涌现**）。
+- **调查功能的价值显而易见**：λ=0（调查免费）时，never（完全不调查）= 11.70 = **45% 的损失**。
+- **成本 λ 让「always 调查」劣化，强制选择。**AGENT-3（成本原理）成立。
+
+honest 保留：中间 λ 处的 margin 很小（浅报酬地形），这也是抽象 proxy（真实 LLM × 知识库另当别论）。即便如此，「有成本时，选择性调查涌现」这一机制在 proxy 中被确认。
+
+---
+
+## 9. 规模「质性地增加多样性」（Round 3）
+
+最后，我用母数（群体规模）也验证了 Agent A 指出的「用容量买多样性」。用 `full_oe` 配置（novelty + std + MC + reservoir1024 + map-elites），把 pop 从 256 → 4096 扫了一遍。
+
+| pop | gens | occupied niches | monoculture | uniq_lineages | distinct_genomes | bspread_tail |
+|---|---|---|---|---|---|---|
+| 256 | 5000 | 171 | 0.047 | 14 | 256 | 0.939 |
+| 1024 | 3500 | 467 | 0.019 | 74 | 1022 | 1.003 |
+| 2048 | 2500 | 754 | 0.009 | 188 | 2041 | 1.071 |
+| 4096 | 1200 | **1219** | **0.006** | **372** | 4054 | 1.253 |
+
+随母数规模，open-endedness **单调向上**（niches 171 → 1219 / monoculture 0.047 → 0.006 / uniq_lineages 14 → 372 / 行为展开度 bspread 也单调增）。POP-1 假说（母数增加多样性）在 proxy 中得到支持。
+
+**honest（明示混杂）**：这里有一个诚实的陷阱。为了把 pop 提上去，我缩短了 gens（5000 → 1200）。这是**对 niche 蓄积不利方向的混杂**。即便如此仍是单调增——也就是说 **POP 效应是 robust 的下界**（本来应该更有效）。反过来说，「可能更有效」在这个实验里没能证明。这个论断仅限于 proxy mechanism feasibility。
+
+![胜者个体的思考因子 × 记忆层热图（Genome3D）。在 real-pressure 下 c_factors 中性漂移，故此图作为认知画像的可视化供参考](./assets/lldarwin_2026_05_26/lldarwin_genome_heatmap.svg)
+
+> 🍵 **休息点**：「一扩大规模多样性就增加」很直觉，但这里重要的是**「即便加入不利的混杂，仍然单调增」**这份诚实。削减 gens 通常对多样性不利。即便如此仍增加了。所以才能称为「下界」。把好结果写成「下界」而不夸张成「上界」——这也是 honest disclosure 的做派。
+
+---
+
+## 10. 早晨，所有人都到达了同一个结论 —— 已确定的方策
+
+一夜之间，**6 个自跑 PoC + Agent A/B/C + Perplexity 各自独立地收敛到同一个结论。**这就是 honest cross-validation 的威力。我们舍弃了固定尺子路线，把以下确定采用为 lldarwin v2 的核心。
+
+### S1. 选择核（在结构上回避饱和）
+
+- **废除固定标量 quiz fitness**（baseline 在 1 万代饱和 + monoculture 0.9 + 多样性崩塌 = 大规模再现 12h 病理，open-ended 0/6）。
+- **选择 = novelty / ε-lexicase（必须 z-score 标准化）+ minimal-criterion。** **仅靠 MAP-Elites archive 不行**（scalar_qd 也全灭）= 让选择压力本身开放端化。
+- **也需要品质，所以用 QD（每 cell 品质 × 多样性）**：纯 novelty 牺牲标量品质（0.77-0.83）→ 与自适应难度（条件课程）搭配以供给品质梯度（PoC #2）。
+- **谱系多样性用中性储库另行确保**（行为多样性 ≠ 谱系多样性，res256 使 uniq_lineages 1 → 32）。
+- **追加 factor-subspace QD**（逐个保护语义维度的多样性，应对 Agent A 的 factor-drift 局限，PoC #6）。
+
+### S2. 产出方式 = 持续进化 × 现场管弦乐团（独创性的核心）
+
+- 成果物不是单一 best，而是**让 QD archive 持续进化，在任意时点做 MoA 管弦乐团合奏产出一个答案**（ORCH；整合 online 进化 + online 回答是 white-space = 独创性，Perplexity 确认）。
+- **聚合必须是 competence-aware routing/gating（指挥），而非投票**（自跑 PoC #3/#4 + 真实 LLM Agent C 三重一致）。
+- **routing 键复用 QD 的 behavior descriptor**（descriptor-router 不依赖校准、接近 oracle 的 0.90）= QD 与 ORCH 共享同一描述符基础（设计的节约）。
+
+### S3. 个体 = 具备调查功能的 agentic 个体（分阶段引入，已 proxy 验证）
+
+- 在搜索空间里仅做沙箱只读调查（实际 I/O 在经 Approval Bus 单向昇格后）。调查计入成本。
+- **已 proxy 验证（PoC #5）**：成本 λ 让「选择性调查」涌现。AGENT-3（成本原理）成立。真实 LLM × 知识库是下一阶段。
+
+### S4. 观测・对话控制（已实现 = 全运行标配，Agent B 完成）
+
+- 响应日志 / 个体分数时序查看器 / lineage 复原（进化系 886 测试绿）。step/pause/resume 计划在下一阶段接线。
+- Agent B 的 lineage 复原，解决了在 12h 数据中「**全是 ?**」的谱系显示，把 champion 谱系 gen70 → gen59 解出 12 hops。缺失不捏造，明示为 `lost@genN`（根因 = 父 ID 单靠 snapshot 或 winners 任一都无法追溯）。观测基础正是 honest disclosure 的根基。
+
+### 自跑 PoC #6 —— 用 factor-subspace QD 应对 Agent A 的局限
+
+| mode | factor_spread | retention | latent_spread |
+|---|---|---|---|
+| full_only | 1.017 → 0.500 | **49.5%** | 0.545 |
+| full_plus_factor | 1.092 → 0.737 | **68.1%** | 0.588 |
+
+对语义维度（factor）另行施加 novelty，把语义维度多样性的损失几乎减半（50% 损 → 32% 损）。在 proxy 中实证了应对 Agent A 的 factor-drift 局限的有效手段。honest：并非完全固定而是残存 68% = 残余 drift 需并用中性储库或加强 factor 权重。
+
+---
+
+## 11. 教训（作为 honest disclosure 留存）
+
+- **连真实 LLM 都饱和了。**即便把眼镜从 proxy 换成真实 LLM，只要尺子固定，gen5 就是满分。
+  「用真实 LLM 就会进化」是**谎言**。问题在于造尺子的方式。
+- **单靠加 archive 救不了。**「持有多样性储库就能守住多样性」是错的。
+  scalar 选择即使加上 QD archive 也全灭。**能救它的是选择压力的开放端化本身。**
+- **多样性并非自动就好。**Self-MoA 反证的真面目是「投票还是 routing」。
+  有了指挥（competence-aware routing）多样性才成为价值。投票杀死专家。
+- **独立交叉验证使结论更强。**自跑 PoC（合成）、Agent C（真实 LLM）与 Perplexity（文献）
+  分别收敛到同一结论，正因如此才可信任。同一个脑袋的结论共享同一种偏见。
+- **proxy 仅是 mechanism feasibility。**本文的 PoC 群验证的是「机制是否运转」，而非「真实 LLM 一般能力提升」的主张。一旦越过这条界线，研究就成了谎言。
+- **用不了的工具（Codex）也记下。**不只成功，哑弹也要诚实记录。
+
+简言之——**「一旦眼镜（评价）饱和，无论怎么打磨淘汰器都无力。」**所以把打磨的对象，从淘汰器、从 LLM，转移到**评价本身的开放端化**。这就是一个通宵的结论。
+
+> 🍵 **休息点**：在 #25 我决定「曝光失败」。在 #26 设计篇我造了「不聚合的淘汰器」。而这一次，真实 LLM 教会我「那还不够，因为尺子是固定的」。**失败孕育下一个设计，那个设计的局限又孕育下一个。**这就是连载的脊梁。花哨的「靠进化 AI 变聪明了！」我一次都还没写过。因为还没凑齐能写它的根据。凑齐时，才会动笔。
+
+---
+
+## 12. 结论
+
+- 真实 LLM 12h 运行是「诚实的不及格」——不全灭但不累积的 filtered random search。真因是固定尺子的饱和（用真实 LLM 实证了 #25 的洞见）。
+- 一夜的分布式调查（6 个自跑 PoC + Agent A/B/C + Perplexity）独立地收敛到同一结论 = **honest cross-validation**。
+- 已确定方策：**S1 开放端的选择核**（novelty/lexicase + std + MC + QD + 自适应难度 + 中性储库 + factor-subspace QD）/ **S2 持续进化 × routing-MoA**（white-space 独创性，是指挥而非投票）/ **S3 agentic 个体 + 成本**（选择性调查的涌现）/ **S4 观测**（已实现）。
+- 所有要素均已在 proxy /（部分）真实 LLM 上背书。残余课题是「向真实 LLM 阶段接线」「factor-subspace QD 实现」「scale-up」。核心策略已确定。
+
+造出好部件，不聚合地捆绑，用真实 LLM 确认饱和，再向开放端的选择重建。当 6 路独立验证到达同一结论时，才终于能说「方策定了」。本文正是 #25 中预告的「**眼镜蒙了，淘汰也无力**」那一回——诚实曝光真实 LLM 让眼镜蒙住的那一刻（饱和），承担起 Goodhart's law 与 proxy 的局限，然后向开放端重建。下一步，是把这套已确定的方策落到代码的**实现阶段**。
+
+---
+
+## 13. 相关
+
+- 连载 #24-05「群体学习的 AI」—— 派生群体进化的框架（本文的前提）
+- 连载 #24-08「造眼镜」—— lleval（测量的一侧）
+- 连载 #25「只剩下弗里斯顿和我」—— monoculture 的 honest disclosure（本文的动机）
+- 连载 #26（设计篇）「只靠眼镜测量并不会进化」—— 淘汰器 lldarwin 的设计与 Stage1/1.5/2 实测（本文的姊妹篇）
+- 先驱论文（2026-05-27, date of record）「Continuously-Evolving Populations as Live Orchestrated Ensembles」—— 把本文方策以学术形式形式化的防御性公开（FullSense 公开仓库 `docs/papers/`）
+- 相关 memory：[[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]] / [[feedback_poc_feasibility_first]] / [[feedback_parallel_first_execution]] / [[feedback_originality_over_imitation]]
+
+---
+
 <!-- TODO(投稿前): hero SVG / theme SVG / 進捗 badge / #24-05・#24-08・#25・#26設計編・#27 の Qiita URL cross-link -->
 <!-- KEY MESSAGE: 実 LLM でも固定ものさしは飽和する。archive を足すだけでは救えない、選択圧そのものを開放端化せよ。多様性は投票でなく competence-aware routing でのみ価値。独自性=連続進化×ライブオーケストラ(white-space)。自己PoC6本+Agent4体+Perplexityの独立収束=honest cross-validation。 -->
 <!-- NUMBERING NOTE (2026-05-27 解消済): 本記事=#27(マラソン climax)。#25 で予告した「眼鏡が曇ると淘汰も無力」枠を、実 LLM で食らった+開放端転回として実現。設計編 #26(drafts/QIITA_#26_lldarwin_multi_pressure_selection.md) は #26 のまま温存=番号衝突なし。 -->
