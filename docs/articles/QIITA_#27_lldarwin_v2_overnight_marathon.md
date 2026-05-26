@@ -14,7 +14,9 @@ slide: false
 ignorePublish: true
 ---
 
-> ⚠ 本記事は **ja 素案（骨子 + 書き出しドラフト）**。en/zh/ko 展開は後続。投稿前に hero/theme SVG・進捗 badge・cross-link URL を埋める。
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
 
 # 日本語
 
