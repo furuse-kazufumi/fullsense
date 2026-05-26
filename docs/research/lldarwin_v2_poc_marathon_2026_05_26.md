@@ -123,6 +123,22 @@
 **🔑 独立クロス検証**: 自己PoC#3（合成・専門家分散）と Agent C（実LLM・llama3.2）が**別手法で同一結論**＝「MoA は competence-aware routing(best_of) でのみ単一bestを上回る／投票では届かない／多様性は routing 下でのみ価値」。2手法一致は honest disclosure 上きわめて強い。
 - **最大の穴（次の決定点）**: oracle best_of に実投票（majority/weighted）が届かない。**実ルーター/検証ゲートが best_of に近づけるか**が ORCH 実用性の核。→ 自己PoC#4 で検証。
 
+### Round 1.7 (自己PoC #4 — ORCH 最大の穴を埋めた)
+
+**自己PoC #4（実ルーター vs oracle best_of, `D:\tmp\poc_router.py`, 20 seed 平均）**
+
+| κ(較正) | single | majority | conf_router | specialty_router | oracle |
+|---|---|---|---|---|---|
+| 0.0 | 0.675 | 0.338 | 0.525 | **0.902** | 1.000 |
+| 0.3 | 0.675 | 0.338 | 0.883 | 0.910 | 1.000 |
+| 0.6 | 0.675 | 0.338 | **1.000** | 0.912 | 1.000 |
+| 0.9 | 0.675 | 0.338 | 1.000 | 0.912 | 1.000 |
+
+- **descriptor/specialty-router は較正不要で robust に 0.90**（単一best 0.675 を安定超え, oracle 近傍）。**QD 用に既に計算する behavior descriptor が routing キーに流用できる相乗効果**（QD と ORCH が同じ記述子基盤を共有）。
+- **confidence-router は較正 κ≥0.6 で oracle 到達**。ただし小型LLMは較正が弱い恐れ → **descriptor-router を第一選択**（calibration 非依存）。
+- **majority=0.338 は確定的に不適**（#3, C と三たび一致）。
+- **結論**: C 指摘の「oracle に実投票が届かない」穴は、**descriptor-routing（QD記述子流用）で実用的に埋まる**。ORCH が proxy＋(部分)実LLM で end-to-end 成立。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
