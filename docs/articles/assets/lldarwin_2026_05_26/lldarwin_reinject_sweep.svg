@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" font-family="ui-sans-serif,Segoe UI,sans-serif">
+<rect width="760" height="420" fill="#0b1020"/>
+<text x="70" y="30" fill="#e5e7eb" font-size="20" font-weight="700">lldarwin — 中立貯蔵庫 再投入頻度のトレードオフ</text>
+<text x="70" y="50" fill="#c2410c" font-size="12" font-weight="600">PROXY (rich-proxy, 8 founders, 150 gens) ·  系統保持 vs 行動多様性  ·  diversity は interval=5 でピーク (非単調)</text>
+<clipPath id="rv"><rect x="70" y="0" width="0" height="420"><animate attributeName="width" from="0" to="520" dur="3.5s" fill="freeze"/></rect></clipPath>
+<line x1="70" y1="364.0" x2="590" y2="364.0" stroke="#1f2937"/>
+<text x="62" y="368.0" fill="#34d399" font-size="10" text-anchor="end">0</text>
+<line x1="70" y1="291.0" x2="590" y2="291.0" stroke="#1f2937"/>
+<text x="62" y="295.0" fill="#34d399" font-size="10" text-anchor="end">2</text>
+<line x1="70" y1="218.0" x2="590" y2="218.0" stroke="#1f2937"/>
+<text x="62" y="222.0" fill="#34d399" font-size="10" text-anchor="end">4</text>
+<line x1="70" y1="145.0" x2="590" y2="145.0" stroke="#1f2937"/>
+<text x="62" y="149.0" fill="#34d399" font-size="10" text-anchor="end">6</text>
+<line x1="70" y1="72.0" x2="590" y2="72.0" stroke="#1f2937"/>
+<text x="62" y="76.0" fill="#34d399" font-size="10" text-anchor="end">8</text>
+<text x="96.0" y="382.0" fill="#6b7280" font-size="10" text-anchor="middle">1</text>
+<text x="200.0" y="382.0" fill="#6b7280" font-size="10" text-anchor="middle">5</text>
+<text x="330.0" y="382.0" fill="#6b7280" font-size="10" text-anchor="middle">10</text>
+<text x="590.0" y="382.0" fill="#6b7280" font-size="10" text-anchor="middle">20</text>
+<text x="330" y="402" fill="#9ca3af" font-size="12" text-anchor="middle">reinject_interval (世代)</text>
+<g clip-path="url(#rv)">
+<polyline points="96.0,72.0 200.0,181.5 330.0,254.5 590.0,291.0" fill="none" stroke="#34d399" stroke-width="2.5"/>
+<circle cx="96.0" cy="72.0" r="4" fill="#34d399"/>
+<circle cx="200.0" cy="181.5" r="4" fill="#34d399"/>
+<circle cx="330.0" cy="254.5" r="4" fill="#34d399"/>
+<circle cx="590.0" cy="291.0" r="4" fill="#34d399"/>
+<polyline points="96.0,157.3 200.0,96.2 330.0,126.0 590.0,139.8" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="5 3"/>
+<circle cx="96.0" cy="157.3" r="4" fill="#22d3ee"/>
+<circle cx="200.0" cy="96.2" r="4" fill="#22d3ee"/>
+<circle cx="330.0" cy="126.0" r="4" fill="#22d3ee"/>
+<circle cx="590.0" cy="139.8" r="4" fill="#22d3ee"/>
+</g>
+<rect x="606" y="69" width="14" height="4" fill="#34d399"/><text x="626" y="76" fill="#cbd5e1" font-size="11">named 系統生存 (/8)</text>
+<rect x="606" y="87" width="14" height="4" fill="#22d3ee"/><text x="626" y="94" fill="#cbd5e1" font-size="11">diversity_l2 (max14)</text>
+<text x="606" y="122" fill="#9ca3af" font-size="10">interval=1: 8/8 系統</text>
+<text x="606" y="138" fill="#9ca3af" font-size="10">interval=5: diversity 最大</text>
+</svg>
