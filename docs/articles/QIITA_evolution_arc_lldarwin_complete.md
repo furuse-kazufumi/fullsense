@@ -1,5 +1,5 @@
 ---
-title: '【進化アーク完全版 #25-27】私とフリストンだけが残った — monoculture から lldarwin へ（失敗・設計・反証の全記録）'
+title: '個人開発AIのlliveが"メガ進化"！ — 進化の大失敗から甦り、実LLMの"苦手"まで淘汰した全記録'
 tags:
   - FullSense
   - llive
