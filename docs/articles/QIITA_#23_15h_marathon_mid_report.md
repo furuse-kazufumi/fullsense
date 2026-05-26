@@ -25,6 +25,8 @@ Qiita タグ 5 個上限. 本記事の主役順:
 > memory `feedback_article_humor_style` (2026-05-20) 準拠 — 漫才/落語の架空
 > 対話は使わない. 事実 + 数字 + コードで構成.
 
+> 📚 **連載ナビ**: ← #22 Transformer 脱却の現状 ｜ **#23 本記事** ｜ #24-00 llive 完全解説シリーズ index → ｜ [連載 LINK_MAP](./QIITA_#24_LINK_MAP.md)。※ 各記事は単独でも読めます（リンクは回遊用）。
+
 ## 0. 冒頭 hook
 
 **15 時間 marathon で 7 件着地, 全件 credential / 外部 binary 不要の前倒し
