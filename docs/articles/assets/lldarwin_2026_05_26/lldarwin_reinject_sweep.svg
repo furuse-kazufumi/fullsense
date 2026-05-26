@@ -2,7 +2,7 @@
 <rect width="760" height="420" fill="#0b1020"/>
 <text x="70" y="30" fill="#e5e7eb" font-size="20" font-weight="700">lldarwin — 中立貯蔵庫 再投入頻度のトレードオフ</text>
 <text x="70" y="50" fill="#c2410c" font-size="12" font-weight="600">PROXY (rich-proxy, 8 founders, 150 gens) ·  系統保持 vs 行動多様性  ·  diversity は interval=5 でピーク (非単調)</text>
-<clipPath id="rv"><rect x="70" y="0" width="0" height="420"><animate attributeName="width" from="0" to="520" dur="3.5s" fill="freeze"/></rect></clipPath>
+<clipPath id="rv"><rect x="70" y="0" width="520" height="420"><animate attributeName="width" from="0" to="520" dur="3.5s" fill="freeze"/></rect></clipPath>
 <line x1="70" y1="364.0" x2="590" y2="364.0" stroke="#1f2937"/>
 <text x="62" y="368.0" fill="#34d399" font-size="10" text-anchor="end">0</text>
 <line x1="70" y1="291.0" x2="590" y2="291.0" stroke="#1f2937"/>
@@ -32,6 +32,4 @@
 </g>
 <rect x="606" y="69" width="14" height="4" fill="#34d399"/><text x="626" y="76" fill="#cbd5e1" font-size="11">named 系統生存 (/8)</text>
 <rect x="606" y="87" width="14" height="4" fill="#22d3ee"/><text x="626" y="94" fill="#cbd5e1" font-size="11">diversity_l2 (max14)</text>
-<text x="606" y="122" fill="#9ca3af" font-size="10">interval=1: 8/8 系統</text>
-<text x="606" y="138" fill="#9ca3af" font-size="10">interval=5: diversity 最大</text>
 </svg>

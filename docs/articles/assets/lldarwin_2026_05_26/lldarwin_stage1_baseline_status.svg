@@ -2,7 +2,7 @@
 <rect width="920" height="560" fill="#0b1020"/>
 <text x="70" y="30" fill="#e5e7eb" font-size="20" font-weight="700">llive persona evolution — status</text>
 <text x="70" y="50" fill="#c2410c" font-size="13" font-weight="600">PROXY fitness — NOT real LLM eval  ·  gens=7  pop=24  seed=0</text>
-<clipPath id="reveal"><rect x="70" y="0" width="0" height="560"><animate attributeName="width" from="0" to="820" dur="3.2s" fill="freeze"/></rect></clipPath>
+<clipPath id="reveal"><rect x="70" y="0" width="820" height="560"><animate attributeName="width" from="0" to="820" dur="3.2s" fill="freeze"/></rect></clipPath>
 <text x="70" y="62" fill="#9ca3af" font-size="12">fitness (0–1)</text>
 <line x1="70" y1="320.0" x2="890" y2="320.0" stroke="#1f2937" stroke-width="1"/>
 <text x="62" y="324.0" fill="#6b7280" font-size="10" text-anchor="end">0.00</text>
