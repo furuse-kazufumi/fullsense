@@ -139,6 +139,23 @@
 - **majority=0.338 は確定的に不適**（#3, C と三たび一致）。
 - **結論**: C 指摘の「oracle に実投票が届かない」穴は、**descriptor-routing（QD記述子流用）で実用的に埋まる**。ORCH が proxy＋(部分)実LLM で end-to-end 成立。
 
+### Round 1.8 (Agent A 中間 — 10K世代 sweep 第1陣, A 継続中)
+
+開放端 sweep（各 10,000 世代）の最初の5構成（A はさらに MAP-Elites/reservoir/大規模を実行中）:
+
+| 構成 | scalar_best | 飽和世代 | div_tail | monoculture_max | occupied_cells_tail | novelty_tail | uniq_lineages |
+|---|---|---|---|---|---|---|---|
+| baseline_scalar | 1.0 | **9725** | 0.138 | 0.742 | 8.6 | 1.14 | 1.0 |
+| baseline_scalar_mc | 1.0 | 9650 | 0.150 | **0.902** | 9.3 | 1.18 | 1.0 |
+| novelty_nostd | 0.772 | **0** | 0.282 | 0.359 | 18.9 | 2.28 | 1.0 |
+| **novelty_std** | 0.828 | **0** | 0.283 | **0.129** | **100.7** | 8.37 | 1.0 |
+| novelty_std_mc | 0.768 | **0** | 0.174 | **0.070** | 107.7 | 8.90 | 1.0 |
+
+- **baseline scalar は10K世代で飽和（gen9700頃）＋ monoculture 0.74-0.90 ＋ 多様性崩壊（0.287→0.14）** = 12h病理を大規模再現＝**開放端として失格**。
+- **novelty 系は無飽和（飽和世代=0）＋ monoculture<0.8 維持**。**標準化(STD-1)が決定的**: novelty_std で occupied cells 8.6→**100.7**・bspread 0.91→**1.03（成長）**・novelty 8.37。z-score 標準化が QD 被覆を桁で広げる。
+- **品質-多様性トレードオフが実データで可視**: novelty 系の scalar_best 0.77-0.83 < baseline 1.0 ＝ **純 novelty は scalar 品質を犠牲→QD（品質×多様性）が必要**（自己PoC#2 と一致）。
+- **uniq_lineages_tail が全構成 1.0**: **行動多様性（cells/bspread 高）≠ 系統多様性（1系統に固定）**。→ **中立貯蔵庫(LineageReservoir, 実装済)が系統多様性に必須**（既存作業の裏付け、reservoir 構成を A が追試中）。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
