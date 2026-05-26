@@ -156,6 +156,7 @@
   - 固定スカラー quiz は**廃止**（baseline は能力 0.627 で停滞＝12h病理を proxy で再現）。
   - **適応難易度＋novelty の二本立て**を選択核に採用（相補・両方必須）。
   - 観測（応答ログ/時系列ビューワー/lineage 復元）は**実装済み**＝今後の全ランで標準装備。
-  - **ORCH の集約は「投票/平均」でなく「competence-aware routing/gating（指揮者）」必須**（自己PoC #3: routing で diverse>redundant>single、majority では diverse が逆効果＝Self-MoA 反証の正体）。実 gate の予測精度が律速＝次の検証点。
+  - **ORCH の集約は「投票/平均」でなく「competence-aware routing/gating（指揮者）」必須**（自己PoC #3 + Agent C 実LLM が独立一致: routing/best_of で diverse>redundant>single、majority では逆効果＝Self-MoA 反証の正体）。
+  - **ORCH の routing は実用可能（穴は埋まった）**: **QD の behavior descriptor を routing キーに流用する descriptor-router** が較正非依存で oracle 近傍（自己PoC #4: 0.90, 単一best 0.675 を安定超え）。QD と ORCH が同一記述子基盤を共有＝設計の節約。confidence-router は較正 κ≥0.6 で oracle 到達だが小型LLM較正リスクあり→descriptor-router 第一選択。
   - Codex は環境ブロックで**当面不使用**（model 設定見直し後に再評価）。
 - **却下条件（honest）**: 上記が示せない構成は正直に棄却し台帳に残す。
