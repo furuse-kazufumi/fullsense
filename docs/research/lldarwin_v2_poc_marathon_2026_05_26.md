@@ -197,8 +197,9 @@
 - **集約は投票でなく competence-aware routing/gating（指揮者）必須**（自己PoC#3/#4＋実LLM C が三重一致: best_of/routing で diverse>redundant>single, majority は逆効果）。
 - **routing キーは QD の behavior descriptor を流用**（descriptor-router が較正非依存で oracle 近傍0.90, 自己PoC#4）＝QD と ORCH が同一記述子基盤を共有（設計節約）。
 
-### S3. 個体＝調査機能を持つ agentic 個体（段階導入）
-- 探索空間ではサンドボックス読取専用調査のみ（SR-1 整合）、実 I/O は Approval Bus 片方向昇格後（§1.12）。調査はコスト計上。**PoC 未＝次の検証対象**。
+### S3. 個体＝調査機能を持つ agentic 個体（段階導入, proxy 検証済）
+- 探索空間ではサンドボックス読取専用調査のみ（SR-1 整合）、実 I/O は Approval Bus 片方向昇格後（§1.12）。調査はコスト計上。
+- **proxy 検証済（自己PoC#5）**: コスト λ が「選択的調査」を創発（進化が θ→λc を自力獲得）、調査なしは λ=0 で 45% 損、選択的 ≥ always/never 両極。AGENT-3（コスト原理）成立。実 LLM×KB は次段。
 
 ### S4. 観測・対話制御（実装済＝全ランで標準装備）
 - 応答ログ / 個体別スコア時系列ビューワー / lineage 復元（Agent B 完了, 進化系886テスト緑）。step/pause/resume は CKPT-1 拡張で配線予定。
