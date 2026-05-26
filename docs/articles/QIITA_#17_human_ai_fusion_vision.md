@@ -16,6 +16,8 @@ ignorePublish: true
 
 # Will Caster と Andrew NDR114 が目指したもの — llive のビジョン論
 
+> 📚 **連載ナビ**: ← #16 三自の精神で AI 運用 ｜ **#17 本記事** ｜ #18 GPU 無し PC 主役の LLM 基盤 → ｜ [連載 LINK_MAP](./QIITA_#24_LINK_MAP.md)。※ 各記事は単独でも読めます（リンクは回遊用）。
+
 **1 行 hook**:
 LinkedIn のプロフィール画像を、自分の顔とロボットを画像生成 AI で融合した一枚にしている。冗談ではない。**いずれ AI と人が融合できたら面白い**と本気で考えている。その第一歩としての llive。
 
