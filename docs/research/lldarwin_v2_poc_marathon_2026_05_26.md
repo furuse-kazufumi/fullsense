@@ -52,6 +52,31 @@
 - 並列ワーカー A-C + P + X 起動。
 - 次: 各ワーカー完了 → 集計 → round 1 の小 PoC を dispatch。
 
+### Round 1 (ワーカー第1陣完了)
+
+**B 観測基盤 — 完了・着地（OBS 3要件すべてに動く実装）**
+- 応答ログ: `real_pressures.py` に `response_log` kwarg（既定 off・後方互換）。回帰4件＋進化系886テスト緑。
+- 個体別スコア時系列ビューワー `scripts/evolution_response_viewer.py`（HTML+SVG）。12h データで「gen0 founder 0.700→gen5 で 1.000、multistep が弱点軸」を可視化確認。
+- lineage 復元 `scripts/evolution_lineage_rebuild.py`。「全部 ?」を解消、champion 系統 gen70→59 を12 hops 解決、欠落は捏造せず `lost@genN` 明示。根因=parent_ids が snapshot(5世代毎全24)+winners(全世代top3) のどちらか単独では辿れない。
+- 注記: llive repo の **auto-commit hook** が編集を自動コミット（agent は git 未実行）。
+
+**P Perplexity SOTA サーベイ — 完了**（`docs/research/openended_evo_sota_perplexity_2026_05_26.md`, 1143行）
+- **独自性裏付け（最重要）**: 「online evolution + online answering を統合した連続稼働システム」は**明確な先行研究なし＝research white-space**（ORCH §1.11 の差別化が確定）。近接は MoA / Self-MoA / sequential aggregation / routing だが同一物なし。
+- **ORCH への反証警告**: 2025 Self-MoA 研究で**多様性は自動的に優位でない** — 単一トップモデル反復が異種混合 MoA を AlpacaEval で 6.6% 上回る（quality-diversity トレードオフ）。→ ORCH-3/4 は実測必須・pass-bar 正直に（Agent C が検証中）。
+- **飽和回避レシピ（実装指向）**: ①**パーセンタイル動的 minimal-criterion**（閾値=集団30%点→集団改善で自動上昇→飽和しない, pseudocode 有） ②**タスクでなく条件のカリキュラム**（難易度 d∈[0,1] を集団に追従） ③behavior descriptor は structural/dynamical/semantic を 20-100d→5-10d 縮約、fitness のクローン記述子は避ける ④parent 50% high-quality / 50% novelty。
+
+**X Codex 批評 — ブロック（環境問題, honest）**
+- gpt-5.2-codex / gpt-5.1-codex / gpt-5-codex / gpt-5.1 すべて "not supported when using Codex with a ChatGPT account" で 400。ChatGPT アカウントの許可モデル不一致（10x promo は ~2026-05-31 のはずだが API 側で拒否）。→ **Codex は一旦見送り**、PoC群＋Perplexity を主軸に。要・モデル設定見直し（ユーザー領域）。
+
+**自己 PoC #1（固定ものさし飽和 vs 適応難易度, `D:\tmp\poc_saturation_fixes.py`）— 完了**
+- 交絡除去後（elite=score 基準）: baseline(固定難易度) は能力 **0.627 で低位停滞**（best 0.757, 12h病理を再現）/ adaptive(難易度=集団60分位) は **0.952 へ上昇**（best 1.0）。
+- ただし adaptive は**多様性を犠牲**（div 0.310→0.134）。→ **適応難易度（勾配維持）と QD/novelty（多様性維持）は相補**（どちらか一方では不十分）。Self-MoA 反証と整合。
+
+### Round 1 → 次手（dispatch 予定）
+- 自己 PoC #2: 「適応難易度 **+** novelty 選抜」で能力と多様性を**両立**できるかを直接検証（相補仮説の検証, Agent A の選択 sweep と非重複の組合せ）。
+- A(開放端 sweep)/C(オーケストラ) 完了待ち → 結果を本台帳へ。
+- B 成果（応答ログ）を活かし、次 real-pressure ランは `--response-log @out` 付き＋難化バッテリで起動する方針。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
