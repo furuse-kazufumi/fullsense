@@ -16,6 +16,8 @@ ignorePublish: true
 
 # 30 年のソフトウェア開発経験 + Perplexity 要約 + Claude Code + TRIZ + 5 万件の論文 RAG = 「第二の脳」
 
+> 📚 **連載ナビ**: ← #14 不可視アノテーションチャネル設計 ｜ **#15 本記事** ｜ #16 三自の精神で AI 運用 → ｜ [連載 LINK_MAP](./QIITA_#24_LINK_MAP.md)。※ 各記事は単独でも読めます（リンクは回遊用）。
+
 **1 行 hook**:
 1 人開発で 5 日間に Brief API・OKA-FX・VRB-FX・IND-04 アノテーション・MathVerifier を含む 14 機能と 256 テストを追加し、1270 件全 PASS で回帰ゼロを達成した。秘訣は「第二の脳」をどう組み立てるかにある。
 
