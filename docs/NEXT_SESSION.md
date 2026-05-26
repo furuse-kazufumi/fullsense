@@ -9,6 +9,26 @@ nav_order: 95
 > Picked up by the next FullSense session. Everything below is ready to
 > resume on. Operator actions are flagged 🧑 (user) vs 🤖 (agent).
 
+## 🟢 2026-05-27 — lldarwin v2 方策確定 + 先駆者論文公開（最新・最優先の文脈）
+
+overnight PoC マラソン（ユーザー Goal「徹底的に要件整理＋進化型として独自性＋PoC何度も」）で
+**lldarwin v2 の方策を確定**。12h 実 LLM ランが「まだ進化でなかった（飽和で累積せず）」ことを
+出発点に、自己 PoC 6 本＋並列 Agent 4 本＋Perplexity が**独立に同一結論へ収束**。
+
+- **確定方策**: S1 選択核=novelty/ε-lexicase+z-score標準化+minimal-criterion+QD（+適応難易度・
+  中立貯蔵庫・factor-subspace QD）／ S2 独自性=**連続進化集団＝ライブ・オーケストラ**（online進化+
+  online回答, competence-aware routing, white-space）／ S3 agentic 個体（コストで選択的調査創発）／
+  S4 観測=実装済。
+- **先駆者論文（日付付き公開, 著者=古瀬 和文）**: `docs/papers/2026-05-27_continuously_evolving_orchestra_open_ended.md`
+  （英日, 防御的公開, proxy 段の honest 限界明示, git commit が date of record）。
+- **意思決定ログ正本**: `docs/research/lldarwin_v2_poc_marathon_2026_05_26.md`（出発点→Round0-3→
+  確定方策→実装ロードマップ Phase1-5）。要件 `docs/vision/OPEN_ENDED_EVOLUTION_REQUIREMENTS.md`
+  §1.11-1.13 + QD-3。Qiita #26 記事ドラフト進行中。
+- **次フェーズ＝実装**（要レビュー）: 実装ロードマップ Phase1-5。部品の多くは `llive` に実装済・未配線。
+- memory `project_lldarwin` 更新済。
+
+---
+
 ## 🔴 Pending action (2026-05-24) — `fullsense` PyPI upload 完了待ち
 
 **🤖 未完了**: 公開ブランド `fullsense` の PyPI placeholder 予約が **429 (PyPI 新規プロジェクト
