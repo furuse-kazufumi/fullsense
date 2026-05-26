@@ -244,6 +244,22 @@
 - S1（選択核: novelty/lexicase+std+MC+QD+適応難易度+reservoir+factor-subspace QD）/ S2（連続進化×routing-MoA=white-space 独自性）/ S3（agentic+cost）/ S4（観測=実装済）の全要素を proxy/(部分)実LLM で裏付け。
 - **次セッション（実装フェーズ）**: 残課題（実LLM配線 / factor-subspace QD 実装 / scale-up 256→4096 / CKPT-1 step-pause-resume / 既存モジュール正式配線）。memory `project_lldarwin` + 本台帳 + 要件doc §1.11-1.13 が引継ぎ正本。push はユーザー承認後。
 
+### Round 3 (scale-up agent 完了 — POP-1 容量仮説を支持)
+
+母数 sweep（full_oe 構成 = novelty+std+MC+reservoir1024+map-elites, latent/cells 固定, `out/poc_scaleup_2026_05_27/`）:
+
+| pop | gens | occupied niches | monoculture | uniq_lineages | distinct_genomes | bspread_tail |
+|---|---|---|---|---|---|---|
+| 256 | 5000 | 171 | 0.047 | 14 | 256 | 0.939 |
+| 1024 | 3500 | 467 | 0.019 | 74 | 1022 | 1.003 |
+| 2048 | 2500 | 754 | 0.009 | 188 | 2041 | 1.071 |
+| 4096 | 1200 | **1219** | **0.006** | **372** | 4054 | 1.253 |
+
+- **母数スケールで open-endedness が単調向上**（niches 171→1219 / monoculture 0.047→0.006 / uniq_lineages 14→372 / distinct_genomes≈pop / bspread 単調増）。**POP-1 支持**。
+- **honest（交絡を明示）**: gens を pop↑ で短縮（5000→1200）＝**niche 蓄積に不利な方向の交絡**。それでも単調増 → **POP 効果は robust な下限**。archive cells（3793→3060）と novelty_tail は gens/密度交絡で非単調と判定除外。proxy mechanism feasibility のみ。
+- **GENOME-1（A: latent 256→1024 で niche 101→166）＋ POP-1（本件: 母数 256→4096 で niche 171→1219）の両輪でスケール仮説 proxy 確証**。次=gens 固定で純 POP 効果、latent×pop の 2D 交互作用。
+- 新規 `scripts/poc_scaleup_sweep.py`（JL 24次元射影で pop4096 の k-NN を tractable 化, 既存 harness 無改変）。
+
 <!-- 以降、各ワーカー完了ごとに結果と次手を追記 -->
 
 ---
