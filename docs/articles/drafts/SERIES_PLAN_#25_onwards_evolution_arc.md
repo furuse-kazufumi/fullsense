@@ -27,6 +27,14 @@ nav_order: 96
 | #28 | 進化を「見せる」技術の系譜 | 教養系 | Conway → Tierra → Avida → Karl Sims → Lenia → QD → 3DGS | `QIITA_#28_evolution_visualization_history.md` | 🟡 骨子 |
 | #29 | AI に AI を部下として使わせる — 二本柱 | 開発手法系 | Claude 主導 + Codex 配下、検証規律、並列化 | `QIITA_#29_codex_two_pillar_orchestration.md` | 🟡 骨子 |
 
+## 1.5 投稿集約（2026-05-26, ユーザー指示「投稿回数制限のため記事は一まとめに」）
+
+#25/#26/#27 を **1 本に統合した「進化アーク完全版」** を投稿用に作成済:
+[`../QIITA_evolution_arc_lldarwin_complete.md`](../QIITA_evolution_arc_lldarwin_complete.md)
+（74K 字 / 24 節 / 三幕構成 失敗→設計→反証 / 可視化素材 11 点埋込 / 重複排除）。
+**投稿はこの完全版 1 本**（限定共有 private: true）。#25/#26/#27 個別は **source として残置**
+（quota 余裕時に分割投稿も可）。可視化素材は [`../assets/lldarwin_2026_05_26/INDEX.md`](../assets/lldarwin_2026_05_26/INDEX.md)。
+
 ## 2. 公開順（推奨）
 
 物語の依存関係に沿った順序。**#25 → #26 → #27 が進化アークの本線**（失敗 → 設計 → 反証）。
