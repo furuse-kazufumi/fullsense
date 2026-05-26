@@ -43,6 +43,23 @@ py -3.11 scripts/run_persona_evolution_long.py \
 ```
 - 連続稼働＝ `--max-wallclock-seconds` で有界 + `--checkpoint-every` で定期 snapshot + `--resume` で継続。ccr 連続運転と整合（[[feedback_session_marathon]]）。
 
-## 4. 状態（随時更新）
-- Agent C Phase 1 実装中。完了次第 T0→T7 を順に実行し、本書 §2 gate を埋める。
-- B（#27 多言語）/ A（連載ナビ, 完了）は別トラック（実装に非干渉）。
+## 4. 状態（2026-05-27 動作テスト結果）
+
+**Agent C Phase 1 着地**: `lldarwin_v2.py`（`LLDarwinV2Config` + `build_lldarwin_v2_selector` = ε-lexicase + novelty(z-score標準化) + minimal-criterion 合成）+ runner `--selection lldarwin-v2`（既定 off・後方互換, v2 で reservoir 既定 on）+ 12 テスト / 進化系 975 テスト緑。
+
+**動作テスト結果（proxy 中心, 全 PASS）**:
+| T | 構成 | 結果 |
+|---|---|---|
+| T0 | baseline proxy 20gen | completed / best 0.919（回帰なし） |
+| T1 | lldarwin-v2 proxy 20gen | completed / best 0.904 |
+| T2 | v2 + pressure-proxy 30gen | completed / best 1.0 |
+| T3 | v2 + genome3d + reservoir + novelty 30gen | completed / best 0.869 |
+| **T4** | **resume(CKPT-1): 15gen→--resume→45gen** | **completed / 4 snapshots / 決定論継続 ✓** |
+| **T5** | **wallclock: --max-wallclock-seconds 8** | **completed / wallclock_budget_exhausted 8.0s / 261gen(≈33gen/s) ✓** |
+| T6 | 変動入力 pop64 seed1 フルstack 40gen | completed / best 0.89 |
+
+→ **§2 readiness gate: T0-T6 達成（crash/退化/回帰なし・resume/wallclock/checkpoint 機能）。連続稼働可能な状態。** 残: T7 実 LLM 小ラン（今夜 real-pressure を張る場合に実施、proxy/pressure-proxy なら不要）。
+
+**honest 未配線（次セッション Phase 1-②③, full margin で着手推奨）**: factor-subspace QD 実配線 / MAP-Elites archive の runner submit 配線 / 適応難易度（動的 minimal-criterion）。現状 v2 は「選択核の合成 + reservoir 既定 on」まで。
+
+**今夜の連続稼働（gate 通過済・proxy 版は即起動可）**: §3 テンプレ。proxy/pressure-proxy なら on-prem 不要・大世代・安価。real-pressure 版は ollama 前提（T7 後）。
