@@ -112,6 +112,33 @@
 - **AVOID**: QDAIF（多様性判定を LLM に委ねる＝DIFF-1 と衝突）/ MOEA-D・SMS-EMOA（argmax/hypervolume が SEL-2 と不整合）/ PSO・CEM（中央収束で OE-3 違反）。
 - honest: DNS / CMA-MAE / BR-NS は最新ゆえ我々規模・on-prem 未実証 → **MAP-Elites baseline と A/B 必須**。
 
+### 1.11 連続進化集団 = ライブ・オーケストラ（continuous evolution as ensemble）— NEW（ユーザー 2026-05-26）
+> 構想: 「集団が進化を**継続**しつつ、その時その時で**オーケストラして一つの回答**を出す」。成果物を「停止後に取り出す最終解/archive」に限定せず、**進化し続ける認知多様性集団がそのまま回答エンジン**になる。これが本プロジェクトの**最大の独自性候補**。
+- **ORCH-1 (MUST, 常時オン)**: 進化は steady-state / always-on。停止して初めて成果を取り出すのでなく、**任意時点の集団/QD アーカイブから回答を生成**できる（進化 loop と回答 loop の分離）。
+- **ORCH-2 (MUST, 時間分離で矛盾解消)**: 「集団は常に変化 ⇄ 回答は安定」を **時間分離**（TRIZ #15/#10）で解く。進化は background、回答は**現在状態のスナップショット**を取り Mixture-of-Agents(MoA)で集約。回答中に集団が変わっても回答の一貫性は保たれる。
+- **ORCH-3 (MUST, 多様性を活かす集約)**: アンサンブルは **QD アーカイブの異なる cell / 異なる島 / 異なる system-prompt 署名から選んだ多様な elite 群**で構成（スコア上位の冗長選抜でなく）。`expert_council.py`(ExpertPanel/CouncilDecision) / `peer_evaluation.py` を配線。
+- **ORCH-4 (MUST, falsifiable)**: **MoA アンサンブルが単一 best を上回る**ことを測定。上回らなければ orchestra の価値は無い（正直に棄却）。特に単一個体が頭打ちする難軸（実測 multistep=0.5）でアンサンブルが改善するかを判定軸にする。
+- **ORCH-5 (SHOULD, メタ)**: orchestra の編成（どの cell/島から何個体・どの集約戦略か）自体を進化/メタ最適化（META-1 と連動）。
+- **差別化**: AlphaEvolve（最終解 export）や単発 MoA（固定集団）と異なり、**「進化し続ける集団 × その場オーケストラ」**は先行直結例が見当たらない白地（DIFF-1 を拡張）。FullSense マッピング: 進化基盤=llive / オーケストラ層=llmesh / 観測=llove。
+
+### 1.12 調査機能を持つ個体（agentic individuals） vs containment の両立 — NEW（ユーザー 2026-05-26）
+> 構想: 「個体がそれぞれ**調査機能**を有するくらいの物が必要」。個体を「固定 quiz に答える受動的 prompt 戦略」から、**自ら情報を調べてから答える agentic 個体**（Voyager 系）へ。
+> **正面衝突**: これは **SR-1（個体・演算子はデータのみ・I/O なし・純粋評価）と矛盾する**。下記で二空間分離により解く（矛盾を消すのでなく分離する）。
+- **AGENT-1 (MUST)**: 個体は「調査予算(investigation budget)」を持ち得る = 答える前に**環境へ問い合わせて情報取得**できる能力。
+- **AGENT-2 (MUST, SR-1 整合の核)**: **探索空間**での調査は**サンドボックス内の読取専用リソース**（シミュレート環境 / 凍結 corpus / 決定論 KB）に限定 — 実権限ゼロ・eval/exec なし・外部 I/O なし。**実 I/O（web/tool/live LLM）を伴う調査は effect 空間でのみ**、Approval Bus 片方向昇格後（SR-3, transgression<θ ∧ trust≥τ ∧ audit-clean）。これで「調査する個体」と「contained open-endedness」を両立。
+- **AGENT-3 (MUST, 学習コスト原理)**: 調査は**コストを fitness/予算に計上**（無料だと無限調査に退化; BL-1 学習コストと同型, Turney）。
+- **AGENT-4 (SHOULD)**: 調査戦略自体を genome 要素（investigation chromosome）として進化させ、記述子/選択が消費（#10 整合）。
+- **honest**: agentic 個体は評価が**高コスト+非決定**で measurement purity と衝突 → サンドボックス必須 + surrogate/サンプリングで評価予算管理（ADOPT-3/Stage6 と整合）。raptor 本体（調査エージェント能力）との連携余地。
+
+### 1.13 観測・HITL workbench（見えること・対話制御）— NEW（ユーザー 2026-05-26, **最優先**）
+> ユーザー: 「複数個体が一つの(複雑な)prompt にどう答えるかを**時系列**で見たい。**選択圧に使うスコア**も見たい。**先ず、ビューワーが不足**している」「進化は**ステップ実行・停止・再開・保存**ができる必要」。12h ラン分析で観測欠落が実害として発覚（応答テキスト未ログ / lineage 復元不能）。
+- **OBS-1 (MUST, 応答の永続化)**: 個体評価は**応答テキストを永続ログ**（現状スコアのみ＝個体別回答が不可視）。additive・既定 off・既存 run 非互換にしない。
+- **OBS-2 (MUST, 個体別応答の時系列ビュー)**: 「一つの prompt に各個体がどう答えたか」を**世代×個体の時系列**で閲覧。選択圧に使う **total + breakdown スコア**も同画面で可視。
+- **OBS-3 (MUST, lineage 復元)**: 系統が snapshot から復元可能（現状 parent_ids が across-file 未解決で tree が全 `?` に化ける）。**島ごとの系統色分け**（ADOPT-1）もここで成立させる。
+- **OBS-4 (MUST, 対話制御 = CKPT-1 拡張)**: **対話的ステップ実行・一時停止・全状態保存・再開**。1 世代ずつ実行→停止して覗き見→全状態保存→後で決定論的に継続。llove(HITL workbench) パネル化。CKPT-1 の「全状態 checkpoint/resume」を**人手の step/pause 操作**へ拡張。
+- **OBS-5 (SHOULD, 監視)**: SPC（管理限界）で多様性 / open-endedness / 安全メトリクスを継続監視（PDCA-1 連動, FullSense 中核）。
+- **原則**: 観測は**選ぶパラダイムに依らず必要（no-regret）**＝マラソンの第一歩。
+
 ## 2. 受入メトリクス（「成立したか」の定量判定）
 
 | メトリクス | 合格条件 | 反証する旧症状 |
