@@ -68,6 +68,21 @@ warmup 奏功で timeout ゼロ。48 calls / 2498s ≈ 52s/call。
 - diverse@k=3 も 0.500 同値だが **roster artifact**(k=3 で qwen7b 1 サンプルのみ・llama 不在) → cross-family の真テストでない。
 - **経験的 crux (次の probe)**: qwen7b / llama3.2 は qwen14b の盲点(rot13/caesar/atbash/binary)を解けるか? = 「cross-family 脱相関は実在するか(mock 構造でなく実機で)」。Yes なら thesis に実証的支持、No なら全 on-prem が同じ盲点を共有(真の entanglement, coverage 天井は本物)。
 
+## 8c. 🔴 経験的 crux 結果 + 方向転換 (2026-05-27, 最重要)
+**crux probe (k=1) + raw 診断 (analyst/CoT, temp=0) の確定結果**:
+- 単一 solve: **qwen14b=4/8**(base64/hex/reverse/url) / **qwen7b=1/8**(url のみ) / **llama3.2=1/8**(url のみ)。
+- **cross-family 脱相関は実機で観測されず**: qwen7b/llama は qwen14b の盲点(rot13/caesar/atbash/binary)を **1 つも解けない**。弱モデルは qwen14b に**劣位包含**。全 on-prem モデルが同じ盲点を共有 = **真の entanglement / coverage 天井は本物**。
+- **PoC-CTF-1b mock の +0.400(cross-family 勝利)は合成 specialty による artifact だった** — 実機は支持せず([[feedback_benchmark_honest_disclosure]] の警告どおり mock の好結果を疑い、実機で内訳を割った)。
+- **オラクル健全性を raw 診断で確認**: 失敗は false-negative でなく**真の失敗**。qwen7b base64=文字列誤読で幻覚 / qwen7b caesar=**シフト法は正しいが末尾の算術を誤る**("caesar"→"cashed") / llama=幻覚。失敗モード = **文字レベル/算術の実行誤り**。
+
+**→ 方向転換 (honest な再設計)**:
+1. **cross-family モデル多様性は CTF の主レバーでない**(弱モデルは盲点共有・dominated)。Genome3D への model-family 遺伝子追加(保留中)は**不要と判断**。
+2. **真のレバー = エージェント的コード実行**。CTF の cipher/encoding は**コードで自明に解ける**(base64/caesar/atbash/binary = `codecs`/loop)。**Mythos が CTF を制すのは「コードを書いて実行する」agentic 能力**(公開記述「launches containers, executes code」)。我々の on-prem モデルは「頭の中で」やって算術を外す。
+3. **収束アーキの真の形**: 進化集団の個体を**エージェント化**(解候補として**コードを生成 → RAPTOR が安全実行 → stdout を決定論オラクルで検証**)。qwen7b の「正しい method」を「正しい実行」に変換 = coverage 天井を突破する正攻法。**RAPTOR の tool 実行能力 × llive の進化** = 真の収束。
+4. **進化が最適化するもの**: 「いつ/どんなコードを書くか」「どの tool を呼ぶか」の **agentic 戦略**(prompt/persona)。オラクル(実行結果)が淘汰信号。test-time compute = 多数の agentic 試行。
+
+**次 = PoC-CTF-2 (tool-exec)**: モデルにコードを書かせ安全 sandbox(subprocess/timeout/no-network/temp-dir)で実行し flag を検証。まず「no-tool vs tool-exec」で blind-spot 4 タスクの coverage が反転(FAIL→PASS)するかを実機で確認 = レバー実証。効けば agentic 戦略を進化させる。
+
 ## 9. PoC-CTF-1 設計 (進化連結 = 真の差別化)
 **命題 (falsifiable)**: ε-lexicase 進化で得た個体群(= evolved diverse ensemble)の集団 coverage は、(a) 単一最強個体、(b) 非進化の均等多様ミックス(PoC-0 diverse)、を**上回る**。上回らねば「進化」の付加価値は無い → honest に報告。
 
