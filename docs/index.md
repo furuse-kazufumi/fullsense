@@ -164,6 +164,15 @@ All product code: **Apache-2.0** with optional separate **Commercial License**.
 - [Recommended models]({{ '/recommended-models/' | relative_url }}) — 用途別推奨 on-prem モデル (`llama3.2:3b` 非推奨の根拠含む) + Mermaid 判断軸 + 共通 install スニペット
 - [Cognitive Mesh]({{ '/cognitive-mesh/' | relative_url }}) — llive v0.8 cognitive mesh (COG-MESH-01〜10) の portal 視点 overview、統合 demo の触り方、現在 10/10 skeleton 完了
 
+## ll- プロジェクト → FullSense フィードバック (単一の真実)
+
+> ll- プロジェクトの設計判断・実験結果・進捗を FullSense portal へ反映する際は、以下の 2 ファイルが **単一の真実**:
+>
+> - **[Research index]({{ '/research/' | relative_url }})** — 先行研究 / 実験結果の詳細 (新規追加場所)
+> - **[Doc map]({{ '/doc_map' | relative_url }})** — 全ドキュメントの地図 (新規ファイルの登録場所)
+>
+> セッション進捗は [Progress log]({{ '/PROGRESS' | relative_url }})、次回引継は [Next session handoff]({{ '/NEXT_SESSION' | relative_url }}) に書く。
+
 ## Portal meta
 
 - [Doc map]({{ '/doc_map' | relative_url }}) — one-page index of every doc across the portal + 4 product repos + maintainer memory
