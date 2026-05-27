@@ -10,6 +10,17 @@ has_children: true
 > AI agent (Claude Opus 4.7) が自律的に作成した先行研究 / SOTA 比較 / 競合
 > 分析の集約場所. 「設計判断の前提資料」として参照する.
 
+## ll- プロジェクト → FullSense への進捗フィードバック: 単一の真実
+
+> **フィードバックはここに書く**: ll- プロジェクト (llive / llmesh / llove 等) の設計判断・実装完了・実験結果を FullSense portal へ反映する際の **単一の真実の場所 = この `research/index.md`** (詳細) + [`docs/doc_map.md`]({{ '/doc_map' | relative_url }}) (地図)。
+>
+> - **新しい先行研究 / 実験結果** → この index に行追加 + 対応 `.md` を `docs/research/` に置く
+> - **新しいファイルの場所の記録** → `doc_map.md` に行追加
+> - **進捗ログ (セッション単位)** → `docs/PROGRESS.md`
+> - **次セッションへの引継ぎ** → `docs/NEXT_SESSION.md`
+>
+> FullSense 外 (Qiita 記事 / 実装 diff) には書かない。portal の index/doc_map を見れば全体が分かる状態を維持する。
+
 ## 一覧
 
 | File | 内容 |
