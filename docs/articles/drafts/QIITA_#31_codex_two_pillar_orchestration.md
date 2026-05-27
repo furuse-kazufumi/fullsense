@@ -18,7 +18,7 @@ ignorePublish: true
 
 # 日本語
 
-# AI に AI を部下として使わせる #29 — Claude 主導 + Codex 配下の「二本柱」開発体制
+# AI に AI を部下として使わせる #31 — Claude 主導 + Codex 配下の「二本柱」開発体制
 
 > **コンセプト hook**: FullSense（llmesh / llive / llove）は私ひとりの個人開発です。でも実態は
 > 「ひとり」ではない。**AI コーディングエージェントを主・別の AI エージェントを部下**にした
