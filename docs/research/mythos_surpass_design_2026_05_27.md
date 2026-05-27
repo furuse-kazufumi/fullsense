@@ -89,6 +89,18 @@ warmup 奏功で timeout ゼロ。48 calls / 2498s ≈ 52s/call。
 - **🐛 BATTERY データバグ発見+修正**: atbash 暗号文が `uozt{zgyzh}`(誤, →`flag{atbas}`)。正しくは `uozt{zgyzhs}`(→`flag{atbash}`)。`poc_ctf_coverage.py` 修正済。**影響**: これまでの全 run で atbash は capability に関わらず FAIL = 汚染(ただし qwen14b は元々 atbash 失敗なので baseline 結論は不変)。**実機 tool-exec run はバグ込み import 済→atbash は無効、有効反転対象は rot13/caesar/binary の 3/4**。
 - **実機 tool-exec run = background 進行中**(qwen2.5:14b, 8問×2条件=16 calls, `out/poc_ctf_toolexec/ctf_toolexec_real.json`)。**これが決定的証拠**: qwen14b がコードを書いて自分の blind-spot を実際に反転できるか。
 
+### 🟢 PoC-CTF-2 実機結果 = レバー実証成功 (2026-05-27, 修正 battery, tracked, 決定的)
+qwen2.5:14b 実機 (16 calls / ~2342s, temp=0):
+- **no_tool(CoT) cov 0.625 (5/8)** → **tool_exec cov 0.875 (7/8)**, **delta +0.25**。
+- **blind-spot flips (FAIL→PASS via 実行): caesar / atbash / binary = 3/4**(rot13 は CoT で no_tool 既に PASS)。qwen14b が書いたコードは**正しい**: caesar(shift loop) / atbash(`str.maketrans`) / binary(`chr(int(b,2))`) → sandbox 実行 → 正解 flag。**「方法は合うが算術で外す」失敗を実行が消去**(設計 §8c 仮説を実機実証)。
+- **url が PASS→FAIL 退行**: モデルが無害な `urllib.parse.unquote` を書いたが危険フィルタが `urllib` トークンで**過剰拒否(false-positive)**。**直せば tool_exec 実質 8/8=1.000**。→ sandbox は OS レベル network 遮断にし、token ブラックリストを緩める改善要(RAPTOR fail-closed と機能性のトレードオフ)。
+- **結論**: **弱 on-prem モデル(qwen14b) + コード実行 + 決定論オラクル = 自明 CTF バッテリで実質満点** = **Mythos の agentic 制覇と同じ原理を on-prem で再現**。redirect 仮説の機構を実証。
+- **🔴 honest 留保(過大主張の防止)**: これは**自明な decode マイクロバッテリ**であり「Mythos を Cybench で超えた」ではない。実証されたのは**機構**(execution が reasoning-execution gap を埋める)。実 Cybench/InterCode-CTF の**多段 exploitation** は別物・遥かに難しい(次の真の試金石)。compute ~146s/call。
+
+### 🎯 統合 = 進化の真の役割 (PoC-CTF-3 へ)
+レバーが実証されたので、**進化集団の役割が明確化**: 個体は **agentic 戦略**(コードを書くか直接答えるか / どのアプローチ / sandbox 拒否からの回復 / tool 選択) を持ち、**ε-lexicase が「どのタスク種でどの戦略が効くか」の specialist を集団に保つ**。決定論オラクル(tool-exec 結果)が淘汰信号。test-time compute = 多数 agentic 試行。これは易タスクでは不要(単一で満点)だが、**戦略選択が自明でない難タスクで進化の価値が出る**(PoC-0/1 の「飽和帯では進化無価値・非飽和帯で価値」教訓と整合)。
+- **次の実装 (PoC-CTF-3)**: `poc_ctf_evolution.py` の fitness を **tool-exec オラクル**に差し替え、agentic 戦略遺伝子(code/direct 選択等)を ε-lexicase で進化。+ **danger filter 改善**(urllib.parse 等の benign を許可、network は OS 隔離)。+ その後 **InterCode-CTF(実 CTF, 多段)** へ移植 = 真の Mythos 対戦。
+
 ## 9. PoC-CTF-1 設計 (進化連結 = 真の差別化)
 **命題 (falsifiable)**: ε-lexicase 進化で得た個体群(= evolved diverse ensemble)の集団 coverage は、(a) 単一最強個体、(b) 非進化の均等多様ミックス(PoC-0 diverse)、を**上回る**。上回らねば「進化」の付加価値は無い → honest に報告。
 
