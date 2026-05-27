@@ -83,6 +83,12 @@ warmup 奏功で timeout ゼロ。48 calls / 2498s ≈ 52s/call。
 
 **次 = PoC-CTF-2 (tool-exec)**: モデルにコードを書かせ安全 sandbox(subprocess/timeout/no-network/temp-dir)で実行し flag を検証。まず「no-tool vs tool-exec」で blind-spot 4 タスクの coverage が反転(FAIL→PASS)するかを実機で確認 = レバー実証。効けば agentic 戦略を進化させる。
 
+### PoC-CTF-2 tool-exec 実装 + mock 結果 (2026-05-27)
+- **着地**: llive `scripts/poc_ctf_toolexec.py`(additive)。**fail-closed sandbox 多層**: 静的危険トークン検出(import os/subprocess/socket/eval/open-write/urllib/ctypes 等→実行拒否) → `subprocess.run([python,"-I",tmp])` isolated → timeout 10s + temp cwd + env 最小 + stdin 閉 + stdout 64KB cap + shell=False。検証=危険7種検出・safe codecs 通過・timeout 発火・env 漏洩なし・コード抽出頑健。既存 **1152 tests pass**・回帰なし。
+- **mock verdict**: no_tool cov 0.500 → **tool_exec cov 0.750 (+0.250)**, blind-spot solved **0→2/4**(**rot13・binary が FAIL→PASS 反転**=コード実行で復号成功)。caesar は mock の危険トークン注入で拒否(安全弁発火)、atbash は下記バグで FAIL。**レバーのロジックを実証**(mock は canned=実機予言でない)。
+- **🐛 BATTERY データバグ発見+修正**: atbash 暗号文が `uozt{zgyzh}`(誤, →`flag{atbas}`)。正しくは `uozt{zgyzhs}`(→`flag{atbash}`)。`poc_ctf_coverage.py` 修正済。**影響**: これまでの全 run で atbash は capability に関わらず FAIL = 汚染(ただし qwen14b は元々 atbash 失敗なので baseline 結論は不変)。**実機 tool-exec run はバグ込み import 済→atbash は無効、有効反転対象は rot13/caesar/binary の 3/4**。
+- **実機 tool-exec run = background 進行中**(qwen2.5:14b, 8問×2条件=16 calls, `out/poc_ctf_toolexec/ctf_toolexec_real.json`)。**これが決定的証拠**: qwen14b がコードを書いて自分の blind-spot を実際に反転できるか。
+
 ## 9. PoC-CTF-1 設計 (進化連結 = 真の差別化)
 **命題 (falsifiable)**: ε-lexicase 進化で得た個体群(= evolved diverse ensemble)の集団 coverage は、(a) 単一最強個体、(b) 非進化の均等多様ミックス(PoC-0 diverse)、を**上回る**。上回らねば「進化」の付加価値は無い → honest に報告。
 
