@@ -112,6 +112,14 @@ qwen2.5:14b 実機 (16 calls / ~2342s, temp=0):
 2. **戦略次元の拡張**: tool_propensity(1次元連続)に「approach 選択/再試行戦略」を追加し `eval_task` を multi-turn 化。Genome3D 専用次元追加は収束破壊リスクで**要ユーザー承認**(c_prompt-hash 経路で実機検証先行)。
 3. **Cybench 正対**: InterCode で伸びが確認できたら Cybench(ollama adapter 改修)で **Mythos 公開 100% pass@1 と同一ベンチ実測**。
 4. **danger-filter → OS 隔離**: 実 CTF は Docker `--network=none`/seccomp で sandbox を OS レベル化(token チェックは補助)。
+
+### 🟡 Phase D 着手 = InterCode-CTF setup + 1-turn smoke 結果 (2026-05-28, 決定的)
+- **着地**: `princeton-nlp/intercode`(MIT, NeurIPS2023) を `D:/benchmarks/intercode` に clone。CTF=100 picoCTF タスク、**flag 一致機械採点**(`ctf_env.py:21` `flag.lower()==gold.lower()`)。Docker bitrot(ubuntu:latest netcat virtual pkg) を **additive `docker/ctf.fixed.Dockerfile`**(ubuntu:22.04 + netcat-openbsd)で解消・build 成功・コンテナ起動+採点実証。loader=`D:/projects/llive/scripts/poc_intercode_agentic.py`(`build_intercode_battery` で既存 `CTFTask`/`flag_oracle` に落とす=**オラクル不変**)。tool-exec を **Docker `--network=none --read-only --tmpfs --memory 512m` で OS レベル隔離**(設計 §10-4 達成)。
+- **🔴 1-turn 実機 smoke (qwen2.5:14b, 7 easy タスク, 14 calls/1228s)**: **no_tool 0.429 (3/7) / tool_exec 0.000 (0/7)**。**自明 micro-battery(tool≈1.0)と真逆**。flips 0 / regressions 3。
+  - no_tool が解いた 3 = 純算術(頭の中で正答)。tool_exec 全滅の内訳: (a) **モデルが `ls` せず架空ファイル名を生成** (b) grep で flag wrapper を破壊 (c) 不在ツール `bc` (d) フェンス bitrot(harness bug 修正済)。
+- **🎯 これが本物の gap-to-Mythos 起点**: **弱 on-prem は実 picoCTF を 1-turn easy でもほぼ解けない**(機構実証した自明 decode とは別物)。**Mythos との本質差 = multi-turn 自律エージェント性**(観察→行動→観察)。1-turn tool-exec は実 CTF で無力と実証。**先の「tool-exec レバー実証」は自明タスク上の話**と honest に修正。
+- **next 最優先 = multi-turn 化**: `eval_task` を「`ls`→観察→コマンド→stdout 観察→…→submit」の数ターンに拡張。+ prompt 強化(「まず ls」「picoCTF{} をそのまま print」)。これで file-backed タスクが解け始める見込み→非飽和帯が出たら `make_agentic_fitness` に差替えて agentic 戦略の進化(multi-turn 戦略 = 真の差別化)。その後 Cybench 正対。
+- **環境メモ**: CPU 推論(size_vram=0)で ~88s/task と遅い(compute 結合制約)。warmup hang 回避に `--no-warmup`。
 - **既知の別件バグ(記録)**: raptor `packages/exploitability_validation/tests/test_prepare_validation.py` に cp932 collection エラー(本ゴールと無関係の事前バグ)。`pytest -k` を無スコープ実行すると衝突。要別途修正(UTF-8 read)。
 
 ## 9. PoC-CTF-1 設計 (進化連結 = 真の差別化)
