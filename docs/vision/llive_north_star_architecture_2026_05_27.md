@@ -64,6 +64,11 @@ flowchart TB
 4. **矛盾: meta (個体ごとに algorithm 違う) ↔ 単純なループ (全個体同じ algorithm)**
    → **単純化**: meta は **c_meta の algorithm_id を 2-3 個の離散選択に限定**して始める (連続パラメータ空間でなく)。persona → algorithm の写像も最初は単純な表引き。効けば拡張。
 
+5. **矛盾: 因子粒度 persona 選択 (ユーザー示唆 2026-05-27「因子ごとにペルソナが備わり自由選択」) ↔ 既存 PersonaComposition (全因子共通の persona 混合)**
+   → **現状**: `Persona` は 10 思考因子に `factor_affinity` を持ち、個体は `PersonaComposition` (persona 重み付き混合) で**因子間共通**の合成 affinity を得る。ユーザー案は**因子ごとに独立に persona を選ぶ** (構造化=グロタン / 探索=ファインマン…) = 多様性源を因子粒度に深化。
+   → **単純化 (二重定義の回避)**: 因子別選択と composition は両方 affinity を決めるため**矛盾**。→ **因子別 persona 選択ベクトル (長10, 各因子→persona index の離散選択) に一本化**し、既存 composition を「全因子同一 persona」の特殊ケースとして包含する (器を増やさず既存を一般化)。連続な 10×N 重み matrix は複雑なので後回し。
+   → 拡張↔縮小: 因子別選択を実装 (変異) → ablation (composition vs 因子別で多様性/品質の寄与率) → 残すか淘汰。meta③ の因子粒度版であり、③ と統合設計する (algorithm 選択も因子別 persona も「個体内の多様性源」= 同じ層の責務)。
+
 ## 当面の単純化アクション (Phase A 締め → B)
 
 - **コア確定**: ①(ε-lexicase + novelty + reservoir + コア24本) を「変えない土台」とする。
