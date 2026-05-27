@@ -1636,4 +1636,4 @@ honest 유보: 중간 λ에서의 margin은 작고(얕은 보상 지형), 이것
 
 <!-- TODO(投稿前): hero SVG / theme SVG / 進捗 badge / #24-05・#24-08・#25・#26設計編・#27 の Qiita URL cross-link -->
 <!-- KEY MESSAGE: 実 LLM でも固定ものさしは飽和する。archive を足すだけでは救えない、選択圧そのものを開放端化せよ。多様性は投票でなく competence-aware routing でのみ価値。独自性=連続進化×ライブオーケストラ(white-space)。自己PoC6本+Agent4体+Perplexityの独立収束=honest cross-validation。 -->
-<!-- NUMBERING NOTE (2026-05-27 解消済): 本記事=#27(マラソン climax)。#25 で予告した「眼鏡が曇ると淘汰も無力」枠を、実 LLM で食らった+開放端転回として実現。設計編 #26(drafts/QIITA_#26_lldarwin_multi_pressure_selection.md) は #26 のまま温存=番号衝突なし。 -->
+<!-- NUMBERING NOTE (2026-05-27 解消済 / 2026-05-28 更新): 本記事=#27(マラソン climax)。#25 で予告した「眼鏡が曇ると淘汰も無力」枠を、実 LLM で食らった+開放端転回として実現。設計編 #26(QIITA_#26_lldarwin_multi_pressure_selection.md) は 2026-05-28 に drafts→root へ昇格し連番統合 (番号衝突なし、ignorePublish:true=draft 状態は維持)。 -->
