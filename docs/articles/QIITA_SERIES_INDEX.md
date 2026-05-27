@@ -48,12 +48,12 @@ nav_order: 1
 | 23 | 15 時間で前倒し実装した話 — Transformer 脱却の足場 | [#23](./QIITA_%2323_15h_marathon_mid_report.md) | root |
 | 24 | **llive 完全解説 (0)〜(8)** サブシリーズ（全 9 本・下表参照） | [#24_00 index](./QIITA_%2324_00_llive_tech_series_index.md) | root (一部公開, LINK_MAP) |
 | 25 | AI を 500 世代進化させたら「私」と「フリストン」だけが残った — monoculture | [#25](./QIITA_%2325_monoculture_evolution_lldarwin.md) | root |
-| 26 | 「眼鏡で測る」だけでは進化しない — 選択圧コンポーネント lldarwin | [drafts/#26](./drafts/QIITA_%2326_lldarwin_multi_pressure_selection.md) | **draft (root 未昇格)** |
+| 26 | 「眼鏡で測る」だけでは進化しない — 選択圧コンポーネント lldarwin | [#26](./QIITA_%2326_lldarwin_multi_pressure_selection.md) | root (draft) |
 | 27 | 一晩で AI 進化を作り直した — 6 PoC × 4 Agent × Perplexity が独立収束した夜 | [#27](./QIITA_%2327_lldarwin_v2_overnight_marathon.md) | root |
 | 28 | 進化し続ける AI 集団を「指揮者」が合奏させて答える — lldarwin 実装編 | [drafts/#28](./drafts/QIITA_%2328_lldarwin_v2_phase1_orchestra.md) | draft |
-| 29 | 「眼鏡が飽和すると選択圧は無力」— 反証で鍛える (Goodhart / proxy 限界) | [drafts/#29](./drafts/QIITA_%2329_falsification_goodhart_proxy_limits.md) | draft ⚠️本文内番号ズレ |
-| 30 | 進化を「見せる」技術の系譜 — Conway のライフゲームから 3DGS まで | [drafts/#30](./drafts/QIITA_%2330_evolution_visualization_history.md) | draft ⚠️本文内番号ズレ |
-| 31 | AI に AI を部下として使わせる — Claude 主導 + Codex 配下の「二本柱」 | [drafts/#31](./drafts/QIITA_%2331_codex_two_pillar_orchestration.md) | draft ⚠️本文内番号ズレ |
+| 29 | 「眼鏡が飽和すると選択圧は無力」— 反証で鍛える (Goodhart / proxy 限界) | [drafts/#29](./drafts/QIITA_%2329_falsification_goodhart_proxy_limits.md) | draft |
+| 30 | 進化を「見せる」技術の系譜 — Conway のライフゲームから 3DGS まで | [drafts/#30](./drafts/QIITA_%2330_evolution_visualization_history.md) | draft |
+| 31 | AI に AI を部下として使わせる — Claude 主導 + Codex 配下の「二本柱」 | [drafts/#31](./drafts/QIITA_%2331_codex_two_pillar_orchestration.md) | draft |
 
 ## #24 サブシリーズ — llive 完全解説 (0)〜(8)
 
