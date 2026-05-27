@@ -150,6 +150,8 @@ nav_order: 3
 | `lldarwin_v2_poc_marathon_2026_05_26` | overnight PoC マラソン全記録 + 確定方策 (ORCH/QD 等) の**正本** |
 | `lldarwin_stage1_results_2026_05_26` | MultiPressureSelector + ORCH 基盤 Stage1 実装結果 |
 | `lldarwin_v2_ops_readiness_2026_05_27` | 連続稼働向け動作テスト結果 + ready/blocked 一覧 |
+| `mythos_competitor_spec_2026_05_27` | **Goal「進化型で Claude Mythos 超え」競合スペック台帳**。Mythos 公開数値(Cybench 100%/ExploitBench ACE 18/41)を proxy バー固定 + 確定 harness(InterCode-CTF→Cybench) + on-prem 在庫 |
+| `mythos_surpass_design_2026_05_27` | **同 Goal 設計正本**。生成(llive 進化)×検証(RAPTOR 決定論オラクル)×無制限 test-time compute。RAD 先行研究 + PoC-CTF-0 進捗(coverage@k harness) |
 
 ### Scripts (追加分 2026-05-25〜27)
 
