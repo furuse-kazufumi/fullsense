@@ -150,7 +150,13 @@ def extract_section(body: str, lang: str) -> str:
     body から指定言語セクション (# English etc.) を抽出する。
     見つからない場合は body 全体を返す。
 
-    同じレベルの次のヘッダーか、より上位のヘッダーが出現したところで終端とする。
+    戦略:
+      1. セクションマーカー行 (# English / # 日本語 等) を探す。
+      2. マーカー行の直後から始まる本文を取得する。
+      3. 終端 = 他の言語セクションマーカー (# 中文 / # 한국어 等) のうち
+         最も近いもの。
+         → これにより「# English」の直後に「# Rebuilding...」という
+           本文タイトルが来るような構造でも正しく全体を取得できる。
     """
     pattern = _SECTION_PATTERNS.get(lang.lower())
     if not pattern:
@@ -162,20 +168,28 @@ def extract_section(body: str, lang: str) -> str:
         print(f"[info] '{lang}' セクションが見つかりません。全体を使用します。", file=sys.stderr)
         return body
 
-    section_start = m.start()
-    header_line = body[m.start():body.index("\n", m.start())]
-    header_level = len(header_line) - len(header_line.lstrip("#"))
+    # マーカー行の終端 (改行の次から本文開始)
+    marker_end = body.index("\n", m.start()) + 1
+    content_start = marker_end
 
-    # 終端: 同レベル以上の次のヘッダー
-    end_pattern = re.compile(
-        r"^#{1," + str(header_level) + r"}\s+",
-        re.MULTILINE,
-    )
-    next_m = end_pattern.search(body, section_start + len(header_line) + 1)
-    if next_m:
-        return body[section_start:next_m.start()].strip()
+    # 他の言語セクションマーカーを終端として使う
+    other_patterns = [p for k, p in _SECTION_PATTERNS.items() if k != lang.lower()]
+    end_pos = len(body)
+    for other_pat in other_patterns:
+        om = other_pat.search(body, content_start)
+        if om and om.start() < end_pos:
+            end_pos = om.start()
 
-    return body[section_start:].strip()
+    section_content = body[content_start:end_pos].strip()
+
+    if not section_content:
+        print(
+            f"[warn] '{lang}' セクション本文が空です。全体を使用します。",
+            file=sys.stderr,
+        )
+        return body
+
+    return section_content
 
 
 # ────────────────────────────────────────────────

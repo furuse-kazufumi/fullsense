@@ -1,4 +1,4 @@
----
+﻿---
 title: 'llive 完全解説 (3) — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証'
 tags:
   - FullSense
@@ -19,9 +19,9 @@ ignorePublish: false
 
 # llive 完全解説 (3) — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証
 
-![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_hero.svg)
+![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_hero.svg)
 
-![連載進捗 (3/8) — 現在: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_progress.svg)
+![連載進捗 (3/8) — 現在: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_progress.svg)
 
 > **コンセプト hook**: TRIZ (発明問題解決理論) は普通「人が紙に書くアイデア
 > 出しテク」として知られる. llive は **TRIZ 40 原理を形式記号として組み込み**,
@@ -32,7 +32,7 @@ ignorePublish: false
 > 本記事はその仕組み — Phase 3 で着地した Z3 構造検証 / TRIZ Self-Reflection /
 > Wiki ChangeOp / 9 画法 (39×39 矛盾マトリクス) を辿る.
 
-![theme — TRIZ 40 原理 grid + 矛盾マトリクス flicker (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_theme.svg)
+![theme — TRIZ 40 原理 grid + 矛盾マトリクス flicker (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_theme.svg)
 
 ## 0. 連載中での位置づけ
 
@@ -212,9 +212,9 @@ flowchart LR
 
 # llive Complete Guide (3) — "Contradictions Can Be Computed": Structural Evolution × TRIZ 40 Principles × Z3 Verification
 
-![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_hero_en.svg)
+![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_hero_en.svg)
 
-![series progress (3/8) — current: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_progress_en.svg)
+![series progress (3/8) — current: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_progress_en.svg)
 
 > **Concept hook**: TRIZ (the Theory of Inventive Problem Solving) is usually
 > known as "an ideation technique people scribble on paper". llive **embeds the
@@ -228,7 +228,7 @@ flowchart LR
 > Self-Reflection / Wiki ChangeOp / the 9-windows method (39×39 contradiction
 > matrix) that landed in Phase 3.
 
-![theme — TRIZ 40-principles grid + contradiction-matrix flicker (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_theme_en.svg)
+![theme — TRIZ 40-principles grid + contradiction-matrix flicker (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_theme_en.svg)
 
 ## 0. Position within the series
 
@@ -427,9 +427,9 @@ flowchart LR
 
 # llive 完全解说 (3) — "矛盾是可以计算的": 结构进化 × TRIZ 40 原理 × Z3 验证
 
-![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_hero_zh.svg)
+![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_hero_zh.svg)
 
-![连载进度 (3/8) — 当前: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_progress_zh.svg)
+![连载进度 (3/8) — 当前: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_progress_zh.svg)
 
 > **概念 hook**: TRIZ (发明问题解决理论) 通常被视为"人在纸上写的创意发想技巧".
 > llive **把 TRIZ 40 原理作为形式符号嵌入**, 作为结构 mutation 的 policy 来运行.
@@ -439,7 +439,7 @@ flowchart LR
 > 本文追溯其机制 — 在 Phase 3 落地的 Z3 结构验证 / TRIZ Self-Reflection /
 > Wiki ChangeOp / 9 画法 (39×39 矛盾矩阵).
 
-![theme — TRIZ 40 原理 grid + 矛盾矩阵 flicker (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_theme_zh.svg)
+![theme — TRIZ 40 原理 grid + 矛盾矩阵 flicker (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_theme_zh.svg)
 
 ## 0. 在连载中的定位
 
@@ -616,9 +616,9 @@ flowchart LR
 
 # llive 완전 해설 (3) — "모순은 계산할 수 있다": 구조 진화 × TRIZ 40 원리 × Z3 검증
 
-![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_hero_ko.svg)
+![hero — TRIZ mutation then Z3 verify](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_hero_ko.svg)
 
-![연재 진행 (3/8) — 현재: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_progress_ko.svg)
+![연재 진행 (3/8) — 현재: TRIZ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_progress_ko.svg)
 
 > **콘셉트 hook**: TRIZ (발명 문제 해결 이론)는 보통 "사람이 종이에 적는 아이디어
 > 발상 기법"으로 알려져 있다. llive는 **TRIZ 40 원리를 형식 기호로 내장**하여
@@ -629,7 +629,7 @@ flowchart LR
 > 본 글은 그 구조 — Phase 3에서 착지한 Z3 구조 검증 / TRIZ Self-Reflection /
 > Wiki ChangeOp / 9 화법 (39×39 모순 매트릭스)을 따라간다.
 
-![theme — TRIZ 40 원리 grid + 모순 매트릭스 flicker (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_03_theme_ko.svg)
+![theme — TRIZ 40 원리 grid + 모순 매트릭스 flicker (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_03_theme_ko.svg)
 
 ## 0. 연재에서의 위치
 

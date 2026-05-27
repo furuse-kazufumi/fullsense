@@ -1,4 +1,4 @@
----
+﻿---
 title: 'llive 完全解説 (8) — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する'
 tags:
   - FullSense
@@ -19,9 +19,9 @@ ignorePublish: false
 
 # llive 完全解説 (8) — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する
 
-![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_hero.svg)
+![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_hero.svg)
 
-![連載進捗 (8/8) — 現在: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_progress.svg)
+![連載進捗 (8/8) — 現在: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_progress.svg)
 
 > **コンセプト hook**: AI を作るだけでは足りない. **AI を見る眼鏡** が要る.
 > lleval は llive と並走する **evaluation framework** で, 「LLM が異常に
@@ -32,7 +32,7 @@ ignorePublish: false
 > 結論を先に出すと: **「速い AI」ではなく「速いと思い込ませる構成」** を見抜く
 > 道具.
 
-![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_theme.svg?v=2)
+![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_theme.svg?v=2)
 
 ## 0. 連載中での位置づけ
 
@@ -204,9 +204,9 @@ AI を見るだけでなく **AI / システム / アルゴリズム 全般** �
 
 # llive Complete Guide (8) — "Making the Glasses": lleval — evaluating AI via honest-disclosure 5+1 factor decomposition
 
-![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_hero_en.svg)
+![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_hero_en.svg)
 
-![series progress (8/8) — current: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_progress_en.svg)
+![series progress (8/8) — current: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_progress_en.svg)
 
 > **Concept hook**: Building AI is not enough. You need **glasses to see the AI**.
 > lleval is an **evaluation framework** that runs alongside llive, promoting the
@@ -218,7 +218,7 @@ AI を見るだけでなく **AI / システム / アルゴリズム 全般** �
 > The conclusion up front: a tool to spot not the **"fast AI"** but the
 > **"setup that makes you believe it is fast"**.
 
-![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_theme_en.svg?v=2)
+![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_theme_en.svg?v=2)
 
 ## 0. Position within the series
 
@@ -395,9 +395,9 @@ Details: `docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`.
 
 # llive 完全解说 (8) — 「制作眼镜」: lleval — 用 honest disclosure 5+1 因子分解评估 AI
 
-![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_hero_zh.svg)
+![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_hero_zh.svg)
 
-![连载进度 (8/8) — 当前: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_progress_zh.svg)
+![连载进度 (8/8) — 当前: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_progress_zh.svg)
 
 > **概念 hook**: 只是造 AI 还不够. 还需要 **看 AI 的眼镜**.
 > lleval 是与 llive 并行的 **evaluation framework**, 它把
@@ -407,7 +407,7 @@ Details: `docs/perf_comparison/2026-05-22_kernel_implementation_comparison.md`.
 >
 > 先给结论: 一个看穿的不是 **「快的 AI」** 而是 **「让你误以为快的构成」** 的工具.
 
-![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_theme_zh.svg?v=2)
+![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_theme_zh.svg?v=2)
 
 ## 0. 在系列中的定位
 
@@ -572,9 +572,9 @@ llive Rust 高速化 **5 模式判定表** (#24-05 §13.3) 是用 **结构上相
 
 # llive 완전 해설 (8) — 「안경을 만든다」: lleval — honest disclosure 5+1 인자 분해로 AI 를 평가한다
 
-![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_hero_ko.svg)
+![hero — lleval 5+1 honest-disclosure radar across iterations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_hero_ko.svg)
 
-![연재 진행 (8/8) — 현재: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_progress_ko.svg)
+![연재 진행 (8/8) — 현재: lleval](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_progress_ko.svg)
 
 > **콘셉트 hook**: AI 를 만드는 것만으로는 부족하다. **AI 를 보는 안경** 이 필요하다.
 > lleval 은 llive 와 병주하는 **evaluation framework** 로,
@@ -585,7 +585,7 @@ llive Rust 高速化 **5 模式判定表** (#24-05 §13.3) 是用 **结构上相
 > 결론을 먼저 말하면: **「빠른 AI」** 가 아니라 **「빠르다고 착각하게 만드는 구성」** 을
 > 간파하는 도구.
 
-![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_08_theme_ko.svg?v=2)
+![theme — lleval 5+1 spider + judge rotation (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_08_theme_ko.svg?v=2)
 
 ## 0. 연재에서의 위치
 

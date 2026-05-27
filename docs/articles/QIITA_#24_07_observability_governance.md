@@ -1,4 +1,4 @@
----
+﻿---
 title: 'llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain'
 tags:
   - FullSense
@@ -19,9 +19,9 @@ ignorePublish: false
 
 # llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_hero.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero.svg)
 
-![連載進捗 (7/8) — 現在: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_progress.svg)
+![連載進捗 (7/8) — 現在: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_progress.svg)
 
 > **コンセプト hook**: 多くの LLM agent は「結果のログ」しか残さない. しかし
 > AI が **自分自身を進化** させはじめると, 「**いつ何を判断して何を変えたか**」
@@ -34,7 +34,7 @@ ignorePublish: false
 >
 > = **「自己進化する AI が, 自分の決定を全て署名つきで残す」** という珍しい形.
 
-![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_theme.svg)
+![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_theme.svg)
 
 ## 0. 連載中での位置づけ
 
@@ -182,7 +182,7 @@ flowchart TD
 (Type 0 → I → II → III → IV) の「文明レベル」スケールに束ねて, 個体 / 集団 /
 メタ集団の 3 階層で同時計測する構想.
 
-![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg)
 
 Ethics 軸はまさに本記事の Approval Bus pass率 + frozen gene 違反検出 + 規制
 適合度のスコアで, governance maturity を「個体の躾」から「文明の成熟」まで
@@ -264,9 +264,9 @@ governance 側で重要なのは:
 
 # llive Complete Guide (7) — "AI with Built-in Review": runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_hero_en.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_en.svg)
 
-![series progress (7/8) — current: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_progress_en.svg)
+![series progress (7/8) — current: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_progress_en.svg)
 
 > **Concept hook**: Most LLM agents keep only a "log of results". But once an
 > AI starts to **evolve itself**, without an audit trail of "**when did it
@@ -279,7 +279,7 @@ governance 側で重要なのは:
 >
 > = a rare shape where **"a self-evolving AI leaves every one of its decisions signed."**
 
-![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_theme_en.svg)
+![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_theme_en.svg)
 
 ## 0. Position within the series
 
@@ -436,7 +436,7 @@ of 4 axes — Energy / Knowledge / Coordination / **Ethics** — × 5 stages
 (Type 0 → I → II → III → IV), measured simultaneously across the 3 tiers of
 individual / population / meta-population.
 
-![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg)
 
 The Ethics axis is exactly this article's score of Approval Bus pass rate +
 frozen gene violation detection + regulatory conformity, letting us speak of
@@ -524,9 +524,9 @@ matrix signed in the audit chain fits within the latency budget.
 
 # llive 完全解说 (7) — "带审查的 AI": runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_hero_zh.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_zh.svg)
 
-![连载进度 (7/8) — 当前: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_progress_zh.svg)
+![连载进度 (7/8) — 当前: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_progress_zh.svg)
 
 > **概念 hook**: 很多 LLM agent 只留下「结果的日志」. 但是当 AI 开始 **进化自身** 时,
 > 如果没有「**何时判断了什么、改了什么**」的 audit trail, 就会 **事后无法 debug**.
@@ -538,7 +538,7 @@ matrix signed in the audit chain fits within the latency budget.
 >
 > = 一种少见的形态:**「自我进化的 AI, 把自己的所有决定都带着签名留存下来」**.
 
-![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_theme_zh.svg)
+![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_theme_zh.svg)
 
 ## 0. 在系列中的定位
 
@@ -680,7 +680,7 @@ flowchart TD
 (Type 0 → I → II → III → IV) 的「文明等级」尺度上, 在个体 / 群体 / 元群体的 3 个
 层级上同时度量.
 
-![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg)
 
 Ethics 轴正是本文的 Approval Bus 通过率 + frozen gene 违规检测 + 法规符合度的分数,
 使我们能够把 governance maturity 用一条从「个体的管教」到「文明的成熟」的连续尺度
@@ -759,9 +759,9 @@ test (1e-6 tolerance). callers (`CollusionDetector.check`) 计划在下一 commi
 
 # llive 완전 해설 (7) — "심사가 붙은 AI": runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_hero_ko.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_ko.svg)
 
-![연재 진행 (7/8) — 현재: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_progress_ko.svg)
+![연재 진행 (7/8) — 현재: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_progress_ko.svg)
 
 > **콘셉트 hook**: 많은 LLM agent 는 「결과의 로그」만 남긴다. 그러나 AI 가
 > **자기 자신을 진화** 시키기 시작하면, 「**언제 무엇을 판단해서 무엇을 바꿨는가**」
@@ -774,7 +774,7 @@ test (1e-6 tolerance). callers (`CollusionDetector.check`) 计划在下一 commi
 >
 > = **「자기진화하는 AI 가, 자신의 결정을 전부 서명과 함께 남긴다」** 라는 드문 형태.
 
-![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_07_theme_ko.svg)
+![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_theme_ko.svg)
 
 ## 0. 연재 속에서의 위치
 
@@ -919,7 +919,7 @@ flowchart TD
 (Type 0 → I → II → III → IV) 의 「문명 레벨」 척도로 묶어서, 개체 / 집단 / 메타 집단의
 3 계층에서 동시에 계측하는 구상.
 
-![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg)
 
 Ethics 축은 바로 본 기사의 Approval Bus pass 율 + frozen gene 위반 검출 + 규제
 적합도의 점수로, governance maturity 를 「개체의 훈육」에서 「문명의 성숙」까지

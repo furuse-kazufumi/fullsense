@@ -1,4 +1,4 @@
----
+﻿---
 title: 'llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ'
 tags:
   - FullSense
@@ -19,9 +19,9 @@ ignorePublish: false
 
 # llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ
 
-![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_hero.svg)
+![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_hero.svg)
 
-![連載進捗 (6/8) — 現在: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_progress.svg)
+![連載進捗 (6/8) — 現在: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_progress.svg)
 
 > **コンセプト hook**: LLM = Transformer, は **2024 までの話**. 2025-2026 で
 > State Space Model (Mamba / Jamba) と RWKV (時系列 RNN を再発明) が **長
@@ -33,7 +33,7 @@ ignorePublish: false
 > **重要な honest disclosure**: 本記事の数値は **mock baseline のみ着地**.
 > 実 Mamba / Jamba / RWKV backend は **credential / weights 未着地**.
 
-![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_theme.svg)
+![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme.svg)
 
 ## 0. 連載中での位置づけ
 
@@ -183,9 +183,9 @@ flowchart LR
 
 # llive Complete Guide (6) — "Beyond the Transformer": Calling Mamba / Jamba / RWKV / Diffusion Inside llive
 
-![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_hero_en.svg)
+![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_hero_en.svg)
 
-![series progress (6/8) — current: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_progress_en.svg)
+![series progress (6/8) — current: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_progress_en.svg)
 
 > **Concept hook**: "LLM = Transformer" was **the story up to 2024**. In
 > 2025-2026, State Space Models (Mamba / Jamba) and RWKV (a reinvention of the
@@ -200,7 +200,7 @@ flowchart LR
 > **mock baseline**. The real Mamba / Jamba / RWKV backends are **not yet
 > landed — credentials / weights pending**.
 
-![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_theme_en.svg)
+![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_en.svg)
 
 ## 0. Position within the series
 
@@ -364,9 +364,9 @@ flowchart LR
 
 # llive 完全解说 (6) — "Transformer 之外": 在 llive 内部调用 Mamba / Jamba / RWKV / Diffusion
 
-![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_hero_zh.svg)
+![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_hero_zh.svg)
 
-![连载进度 (6/8) — 当前: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_progress_zh.svg)
+![连载进度 (6/8) — 当前: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_progress_zh.svg)
 
 > **概念 hook**: "LLM = Transformer" 是 **到 2024 为止的故事**. 在 2025-2026,
 > State Space Model (Mamba / Jamba) 与 RWKV (重新发明时序 RNN) **在长 context 上
@@ -378,7 +378,7 @@ flowchart LR
 > **重要的 honest disclosure**: 本文的数值仅 **落地为 mock baseline**. 真实的
 > Mamba / Jamba / RWKV backend **credential / weights 尚未落地**.
 
-![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_theme_zh.svg)
+![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_zh.svg)
 
 ## 0. 在连载中的定位
 
@@ -524,9 +524,9 @@ flowchart LR
 
 # llive 완전 해설 (6) — "Transformer 의 밖": Mamba / Jamba / RWKV / Diffusion 을 llive 내부에서 호출하기
 
-![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_hero_ko.svg)
+![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_hero_ko.svg)
 
-![연재 진행 (6/8) — 현재: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_progress_ko.svg)
+![연재 진행 (6/8) — 현재: backend](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_progress_ko.svg)
 
 > **콘셉트 hook**: "LLM = Transformer" 는 **2024 까지의 이야기**. 2025-2026 에
 > State Space Model (Mamba / Jamba) 과 RWKV (시계열 RNN 을 재발명) 가 **긴
@@ -539,7 +539,7 @@ flowchart LR
 > **중요한 honest disclosure**: 본 글의 수치는 **mock baseline 만 착지**. 실제
 > Mamba / Jamba / RWKV backend 는 **credential / weights 미착지**.
 
-![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_06_theme_ko.svg)
+![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_ko.svg)
 
 ## 0. 연재에서의 위치
 

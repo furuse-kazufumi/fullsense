@@ -1,4 +1,4 @@
----
+﻿---
 title: 'llive 完全解説 (5) — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括'
 tags:
   - FullSense
@@ -19,9 +19,9 @@ ignorePublish: false
 
 # llive 完全解説 (5) — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括
 
-![hero — N=64 派生集団の世代を超えた fitness 進化](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_hero.svg)
+![hero — N=64 派生集団の世代を超えた fitness 進化](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_hero.svg)
 
-![連載進捗 (5/8) — 現在: v0.E](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_progress.svg)
+![連載進捗 (5/8) — 現在: v0.E](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_progress.svg)
 
 > **コンセプト hook**: 1 個の AI が賢くなるのではなく, **64 個の AI が世代を
 > 回して互いに評価し合い, 嘘の合意は Approval Bus が止める** — それが llive の
@@ -33,7 +33,7 @@ ignorePublish: false
 > 分離) → v0.D (self-adaptive + meta mutation) → v0.E (peer evaluation +
 > persona + governance) の 4 段階を **1 本に総括**.
 
-![theme — v0.E 派生集団進化: 世代交代 + fitness 収束 (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_theme.svg)
+![theme — v0.E 派生集団進化: 世代交代 + fitness 収束 (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_theme.svg)
 
 ## 0. 連載中での位置づけ — 本連載の中核
 
@@ -373,9 +373,9 @@ std::simd は nightly のみで stable 不可 → 入れればさらに 2-3x. RU
 
 # llive Complete Guide (5) — "The Population that Learns": v0.B/C/D/E derived-population evolution summary
 
-![hero — fitness evolution of the N=64 derived population across generations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_hero_en.svg)
+![hero — fitness evolution of the N=64 derived population across generations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_hero_en.svg)
 
-![series progress (5/8) — current: v0.E](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_progress_en.svg)
+![series progress (5/8) — current: v0.E](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_progress_en.svg)
 
 > **Concept hook**: Rather than one AI getting smarter, **64 AIs turn
 > generations, evaluate one another, and the Approval Bus stops false
@@ -389,7 +389,7 @@ std::simd は nightly のみで stable 不可 → 入れればさらに 2-3x. RU
 > isolation) → v0.D (self-adaptive + meta mutation) → v0.E (peer evaluation +
 > persona + governance).
 
-![theme — v0.E derived-population evolution: generational turnover + fitness convergence (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_theme_en.svg)
+![theme — v0.E derived-population evolution: generational turnover + fitness convergence (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_theme_en.svg)
 
 ## 0. Position within the series — the centerpiece
 
@@ -753,9 +753,9 @@ another 2-3x. A RUST-17c candidate.
 
 # llive 完全解说 (5) — "学习的群体": v0.B/C/D/E 派生群体进化总结
 
-![hero — N=64 派生群体跨世代的 fitness 进化](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_hero_zh.svg)
+![hero — N=64 派生群体跨世代的 fitness 进化](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_hero_zh.svg)
 
-![连载进度 (5/8) — 当前: v0.E](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_progress_zh.svg)
+![连载进度 (5/8) — 当前: v0.E](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_progress_zh.svg)
 
 > **概念 hook**: 不是 1 个 AI 变聪明, 而是 **64 个 AI 跑世代互相评估, 虚假的合意由
 > Approval Bus 制止** — 那就是 llive 的 v0.E. 在 2026-05-21 marathon 中, 该架构
@@ -766,7 +766,7 @@ another 2-3x. A RUST-17c candidate.
 > 隔离) → v0.D (self-adaptive + meta mutation) → v0.E (peer evaluation +
 > persona + governance) 这 4 个阶段 **总结在 1 篇里**.
 
-![theme — v0.E 派生群体进化: 世代交替 + fitness 收敛 (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_theme_zh.svg)
+![theme — v0.E 派生群体进化: 世代交替 + fitness 收敛 (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_theme_zh.svg)
 
 ## 0. 在系列中的定位 — 本系列的核心
 
@@ -1101,9 +1101,9 @@ std::simd 仅 nightly stable 不可 → 加上还能再 2-3x. RUST-17c 候选.
 
 # llive 완전 해설 (5) — "집단이 학습하는 AI": v0.B/C/D/E 파생 집단 진화 총괄
 
-![hero — N=64 파생 집단의 세대를 넘은 fitness 진화](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_hero_ko.svg)
+![hero — N=64 파생 집단의 세대를 넘은 fitness 진화](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_hero_ko.svg)
 
-![연재 진행 (5/8) — 현재: v0.E](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_progress_ko.svg)
+![연재 진행 (5/8) — 현재: v0.E](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_progress_ko.svg)
 
 > **콘셉트 hook**: 1개의 AI가 똑똑해지는 것이 아니라, **64개의 AI가 세대를
 > 돌리며 서로 평가하고, 거짓 합의는 Approval Bus가 멈춘다** — 그것이 llive의
@@ -1115,7 +1115,7 @@ std::simd 仅 nightly stable 不可 → 加上还能再 2-3x. RUST-17c 候选.
 > 분리) → v0.D (self-adaptive + meta mutation) → v0.E (peer evaluation +
 > persona + governance)의 4단계를 **한 편에 총괄**한다.
 
-![theme — v0.E 파생 집단 진화: 세대 교체 + fitness 수렴 (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_05_theme_ko.svg)
+![theme — v0.E 파생 집단 진화: 세대 교체 + fitness 수렴 (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_05_theme_ko.svg)
 
 ## 0. 연재에서의 위치 — 본 연재의 핵심
 
