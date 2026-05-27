@@ -69,7 +69,7 @@ ignorePublish: true
 |---|---|---|---|---|
 | #24-05 | QIITA_#24_05_evolutionary_v0BCDE.md | 集団が学ぶ AI（派生集団進化総括, アーク前提） | <https://qiita.com/furuse-kazufumi/items/07b686ea311e06027f94> | 2026-05-23 (公開) |
 | #25 | QIITA_#25_monoculture_evolution_lldarwin.md | 私とフリストンだけが残った — monoculture の honest disclosure | _未投稿（限定共有予定）_ | — |
-| #26 | drafts/QIITA_#26_lldarwin_multi_pressure_selection.md | (設計編) 淘汰器 lldarwin — 集約しない多目的淘汰 | _draft_ | — |
+| #26 | QIITA_#26_lldarwin_multi_pressure_selection.md | (設計編) 淘汰器 lldarwin — 集約しない多目的淘汰 | _draft_ | — |
 | #27 | QIITA_#27_lldarwin_v2_overnight_marathon.md | 一晩で AI 進化を作り直した夜 — 実LLM飽和→開放端転回 (climax) | _未投稿（限定共有予定）_ | — |
 
 ## タイトル統一規約 (2026-05-22 確定)
