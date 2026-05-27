@@ -126,6 +126,41 @@ nav_order: 3
 | `feedback_implementation_status_record.md` | 4-tier status (実装済/未配線/部分実装/未実装) |
 | `feedback_webpage_research_first.md` | Pages / kramdown / Mermaid pitfalls |
 
+### Research docs (under `docs/research/`) — 2026-05-25〜27 追加分
+
+| File | What's in it |
+|---|---|
+| `repir_mcp_compat_2026_05_23` | llrepr MCP structuredContent 配線 + RepIR→llrepr 改名経緯 |
+| `spec_mesh_wiring_2026_05_25` | SPEC-MESH-02/03/04 配線完了 + security 修正報告 |
+| `evolution_research_openendedness_2026_05_25` | proxy 進化の自明収束分析 + open-endedness 手法 (novelty/QD/MAP-Elites) 整理 |
+| `evolution_research_algorithm_survey_2026_05_25` | ε-lexicase / NSGA / island / UCB1 AOS 等を llive 文脈で評価した横断調査 |
+| `evolution_research_representation_selection_2026_05_25` | genome 表現 + 選択圧手法の組み合わせ評価 |
+| `evolution_research_culture_learning_2026_05_25` | 文化染色体 / belief space / persona pull 要件化 (Stream D) |
+| `evolution_research_meta_2026_05_25` | meta-EA (CMA-ES / GESMR / ANAS) の SOTA と llive 適用可否 |
+| `evolution_research_safety_2026_05_25` | 開放端エージェントの安全設計 + Approval Bus 迂回防止 |
+| `evolution_fitness_redesign_2026_05_25` | 多峰・多目的 fitness 再設計。"is it really evolving?" |
+| `evolution_design_tensions_open_decisions_2026_05_25` | 開放端進化の未解決設計対立 (open decisions) 一覧 |
+| `evolution_poc_experiment_design_2026_05_25` | PoC 実験設計プロトコル (sandbox / metrics / stop criterion) |
+| `evolution_poc_deployment_results_2026_05_25` | deployment sweep 結果 + honest disclosure (飽和パターン) |
+| `evolution_visualization_plan_2026_05_25` | evolution.svg 現状評価 + 3DGS 方向への可視化ロードマップ |
+| `evolution_visualization_advanced_2026_05_25` | ALife / Karl Sims 先例から llive 独自表現空間の位置づけ |
+| `evolution_viz_viewing_guide_2026_05_25` | 進化ラン出力ファイルの閲覧手順 (ツール・コマンド) |
+| `llove_qt_gui_architecture_2026_05_25` | llove Textual → Qt 移行設計。ll 系統合フロント構想 |
+| `openended_evo_sota_perplexity_2026_05_26` | Perplexity による QD/novelty/ORCH white-space 確認 |
+| `lldarwin_v2_poc_marathon_2026_05_26` | overnight PoC マラソン全記録 + 確定方策 (ORCH/QD 等) の**正本** |
+| `lldarwin_stage1_results_2026_05_26` | MultiPressureSelector + ORCH 基盤 Stage1 実装結果 |
+| `lldarwin_v2_ops_readiness_2026_05_27` | 連続稼働向け動作テスト結果 + ready/blocked 一覧 |
+
+### Scripts (追加分 2026-05-25〜27)
+
+| File | Purpose |
+|---|---|
+| `scripts/research_pocs/poc_agentic_2026_05_26.py` | agentic 個体 PoC (コスト選択的調査創発) |
+| `scripts/research_pocs/poc_factor_subspace_qd_2026_05_26.py` | factor-subspace QD PoC |
+| `scripts/research_pocs/poc_orchestra_headroom_2026_05_26.py` | オーケストラ headroom 計測 PoC |
+| `scripts/research_pocs/poc_router_2026_05_26.py` | competence-aware router PoC |
+| `scripts/research_pocs/poc_saturation_fixes_2026_05_26.py` | 飽和修正手法 PoC |
+
 ## Maintenance rule
 
 - When a new doc lands under any `docs/`, add a row above and link it.
