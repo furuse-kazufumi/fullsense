@@ -23,19 +23,19 @@ nav_order: 1
 
 | # | タイトル | 場所 | 状態(目安) |
 |---|---|---|---|
-| 1 | Brief API 設計と progressive matrix で見える llive の overhead < 1 % | [2026-05-17/01](./2026-05-17/01_brief_api_progressive.md) | 日付stamp draft |
-| 2 | 「心理の深層」10 因子で整理する llive 思考層 — 既に 9/10 実装済 | [2026-05-17/02](./2026-05-17/02_cognitive_factors.md) | 日付stamp draft |
-| 3 | 数学・単位に強い AI を作る最初の一歩 — MATH-01/08 内蔵計算エンジン | [2026-05-17/03](./2026-05-17/03_math_vertical.md) | 日付stamp draft |
-| 4 | Transformer ブロックを高度化する 7 つのアプローチ — CABT 設計予告 | [2026-05-17/04](./2026-05-17/04_next_cabt_block_design.md) | 日付stamp draft |
-| 5 | LLM × KJ法 × MindMap で要件定義を自動化する — CREAT 設計予告 | [2026-05-17/05](./2026-05-17/05_next_creat_kj_mindmap.md) | 日付stamp draft |
-| 6 | LLM 数式幻覚をどう止めるか — 形式検証ゲート (MATH-02 設計予告) | [2026-05-17/06](./2026-05-17/06_next_math02_formal_gate.md) | 日付stamp draft |
-| 7 | llive vs 他 LLM ベンチマーク 2026-05-17 — 動作確認の罠と honest disclosure | [2026-05-17/07](./2026-05-17/07_bench_results.md) | 日付stamp draft |
-| 8 | Quiz bench Debug vs Release 比較 — 統計指標付き 10 問テスト | [2026-05-17/08](./2026-05-17/08_quiz_bench_debug_vs_release.md) | 日付stamp draft |
-| 9 | llive の構造は LLM として独自になっているか — 8 つの差別化要素の点検 | [2026-05-17/09](./2026-05-17/09_llive_structure_originality.md) | 日付stamp draft |
-| 10 | Qwen 依存から離脱する 5 段階ロードマップ | [2026-05-17/10](./2026-05-17/10_qwen_divergence_strategy.md) | 日付stamp draft |
-| 11 | Qwen と相互補完する llive — Local 環境で『隙間』を埋める設計 | [2026-05-17/11](./2026-05-17/11_complementary_with_qwen.md) | 日付stamp draft |
-| 12 | llive 開発履歴 — 5 日で v0.1 から v0.7 候補へ | [2026-05-17/12](./2026-05-17/12_dev_history.md) | 日付stamp draft |
-| 13 | コーパス先行戦略 — AI が私の気づかない観点を補完する優位性 | [2026-05-17/13](./2026-05-17/13_corpus_first_advantage.md) | 日付stamp draft |
+| 1 | Brief API 設計と progressive matrix で見える llive の overhead < 1 % | [#01](./QIITA_%2301_brief_api_progressive.md) | root 複製 (原本 2026-05-17) |
+| 2 | 「心理の深層」10 因子で整理する llive 思考層 — 既に 9/10 実装済 | [#02](./QIITA_%2302_cognitive_factors.md) | root 複製 (原本 2026-05-17) |
+| 3 | 数学・単位に強い AI を作る最初の一歩 — MATH-01/08 内蔵計算エンジン | [#03](./QIITA_%2303_math_vertical.md) | root 複製 (原本 2026-05-17) |
+| 4 | Transformer ブロックを高度化する 7 つのアプローチ — CABT 設計予告 | [#04](./QIITA_%2304_next_cabt_block_design.md) | root 複製 (原本 2026-05-17) |
+| 5 | LLM × KJ法 × MindMap で要件定義を自動化する — CREAT 設計予告 | [#05](./QIITA_%2305_next_creat_kj_mindmap.md) | root 複製 (原本 2026-05-17) |
+| 6 | LLM 数式幻覚をどう止めるか — 形式検証ゲート (MATH-02 設計予告) | [#06](./QIITA_%2306_next_math02_formal_gate.md) | root 複製 (原本 2026-05-17) |
+| 7 | llive vs 他 LLM ベンチマーク 2026-05-17 — 動作確認の罠と honest disclosure | [#07](./QIITA_%2307_bench_results.md) | root 複製 (原本 2026-05-17) |
+| 8 | Quiz bench Debug vs Release 比較 — 統計指標付き 10 問テスト | [#08](./QIITA_%2308_quiz_bench_debug_vs_release.md) | root 複製 (原本 2026-05-17) |
+| 9 | llive の構造は LLM として独自になっているか — 8 つの差別化要素の点検 | [#09](./QIITA_%2309_llive_structure_originality.md) | root 複製 (原本 2026-05-17) |
+| 10 | Qwen 依存から離脱する 5 段階ロードマップ | [#10](./QIITA_%2310_qwen_divergence_strategy.md) | root 複製 (原本 2026-05-17) |
+| 11 | Qwen と相互補完する llive — Local 環境で『隙間』を埋める設計 | [#11](./QIITA_%2311_complementary_with_qwen.md) | root 複製 (原本 2026-05-17) |
+| 12 | llive 開発履歴 — 5 日で v0.1 から v0.7 候補へ | [#12](./QIITA_%2312_dev_history.md) | root 複製 (原本 2026-05-17) |
+| 13 | コーパス先行戦略 — AI が私の気づかない観点を補完する優位性 | [#13](./QIITA_%2313_corpus_first_advantage.md) | root 複製 (原本 2026-05-17) |
 | 14 | HTML で見えないのに、機械では読める。— 不可視アノテーションチャネル | [#14](./QIITA_%2314_invisible_annotation_channel.md) | root |
 | 15 | 30 年の開発経験 + Perplexity + Claude Code + TRIZ + 5 万件の論文 RAG = 「第二の脳」 | [#15](./QIITA_%2315_second_brain_spiral_dev.md) | root |
 | 16 | 「三自の精神」を AI に課す — マネジャー流の AI 運用論 | [#16](./QIITA_%2316_three_self_spirit_ai_management.md) | root |
