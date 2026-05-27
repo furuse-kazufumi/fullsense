@@ -120,11 +120,33 @@ All product code: **Apache-2.0** with optional separate **Commercial License**.
 
 ## Articles
 
-**最新公開資料の集約場所 (2026-05-17〜)**: [`docs/articles/`]({{ '/articles/' | relative_url }}) に日付別ディレクトリで配置。最新は [`docs/articles/2026-05-17/`]({{ '/articles/2026-05-17/' | relative_url }}):
+**Qiita 投稿済み記事の正本**: [`docs/articles/`]({{ '/articles/' | relative_url }}) 以下。番号連番管理 (#14〜)。
 
-- [01 — Brief API + progressive matrix (overhead < 1%)]({{ '/articles/2026-05-17/01_brief_api_progressive' | relative_url }})
-- [02 — 10 思考因子で整理する llive 思考層 (9/10 実装済)]({{ '/articles/2026-05-17/02_cognitive_factors' | relative_url }})
-- [03 — 数学・単位に強い AI: MATH-01/08 内蔵計算エンジン]({{ '/articles/2026-05-17/03_math_vertical' | relative_url }})
+### llive 技術シリーズ連載 (#24-00〜08)
+
+| 連載 index | [#24-00 — llive 完全解説 9 本 series index]({{ '/articles/QIITA_#24_00_llive_tech_series_index' | relative_url }}) |
+|---|---|
+| #24-01 | [メモリ 4 層アーキテクチャ]({{ '/articles/QIITA_#24_01_memory_layer' | relative_url }}) |
+| #24-02 | [10 思考因子 × Cognitive Mesh]({{ '/articles/QIITA_#24_02_thought_factors_cog_mesh' | relative_url }}) |
+| #24-03 | [構造進化 × TRIZ]({{ '/articles/QIITA_#24_03_structural_evolution_triz' | relative_url }}) |
+| #24-04 | [収束最適化 B シリーズ]({{ '/articles/QIITA_#24_04_convergent_optimization_b_series' | relative_url }}) |
+| #24-05 | [集団進化 v0.B〜v0.E]({{ '/articles/QIITA_#24_05_evolutionary_v0BCDE' | relative_url }}) |
+| #24-06 | [LLM バックエンド × 非 Transformer]({{ '/articles/QIITA_#24_06_llm_backend_non_transformer' | relative_url }}) |
+| #24-07 | [可観測性 + ガバナンス]({{ '/articles/QIITA_#24_07_observability_governance' | relative_url }}) |
+| #24-08 | [lleval 評価フレームワーク]({{ '/articles/QIITA_#24_08_lleval_eval_framework' | relative_url }}) |
+
+### lldarwin アーク (#25〜28)
+
+| # | ファイル | 内容 |
+|---|---|---|
+| #25 | [monoculture の失敗]({{ '/articles/QIITA_#25_monoculture_evolution_lldarwin' | relative_url }}) | 進化が多様性を失った夜 |
+| #26 | [multi-pressure 設計編](articles/drafts/QIITA_#26_lldarwin_multi_pressure_selection.md) | 設計的解決 (draft) |
+| #27 | [overnight marathon — climax]({{ '/articles/QIITA_#27_lldarwin_v2_overnight_marathon' | relative_url }}) | 6 PoC × Perplexity 収束 |
+| #28 | [実装編 — オーケストラ型 AI](articles/drafts/QIITA_#28_lldarwin_v2_phase1_orchestra.md) | Phase1 実装 (draft) |
+
+### その他番号付き記事 (#14〜#23)
+
+#14〜#23 は `docs/articles/QIITA_#14_*` 〜 `QIITA_#23_*` を参照。旧日付フォルダ分は `docs/articles/archive/` に保存済み。
 
 過去の posts は `llive/docs/linkedin/` および `llive/docs/qiita/`:
 
