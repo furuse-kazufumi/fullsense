@@ -1,5 +1,5 @@
 ---
-title: '「眼鏡が飽和すると選択圧は無力」— 進化設計を反証で鍛える #27（Goodhart の法則と proxy fitness の限界）'
+title: '「眼鏡が飽和すると選択圧は無力」— 進化設計を反証で鍛える #29（Goodhart の法則と proxy fitness の限界）'
 tags:
   - FullSense
   - llive
