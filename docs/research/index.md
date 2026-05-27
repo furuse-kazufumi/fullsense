@@ -31,6 +31,33 @@ has_children: true
 | [SPEC-MESH 先行研究 — 被り/独自分析]({{ '/research/spec_mesh_prior_art_2026_05_24' | relative_url }}) | rad-research で SPEC-MESH の先行研究を確認。**核心 (分散 speculative=DSD 2511.11733 / branch-level=B-PASTE / fast-fallback=Speculative Actions) は 2025-2026 に先行研究が厚く、完全な新規ではない**と判明。独自価値は **Ed25519署名+Byzantine結果検証 (SPEC-MESH-11) / SPC grounded トリガ / on-prem 純度** に集中すべき。被り/独自/あえて不採用の3列表。token-level SD は llmesh 範囲外。新知識は RAD コーパス新クラスタ `cluster_08_distributed_agentic_spec` に蓄積 |
 | [Gemini ブレスト #3/#4 実装着地]({{ '/research/gemini_brainstorm_impl_2026_05_24' | relative_url }}) | Gemini 4 案のうち **#3 Antifragile Mutation (llive `f2c2d1e`, 28 tests)** = 高 surprise を学習機会に変え panic mode で探索 10x + 対立 TRIZ pair unlock + AuditTrail 署名 (opt-in/fail-closed) と、**#4 Speculative Mesh Execution (llmesh `2a05f64`, 23 tests)** = メイン推論中の予測分岐を idle peer へ Ed25519 署名投機投入し mesh から回収 (LAN-first/fail-closed 検証/honest disclosure) を着地. 両者とも**予測符号化アーキテクチャ**と親和. #1 予測検証 / #2 KV-cache は未実装 |
 | [ペルソナ ontology 拡張 — affinity 自動算出]({{ '/research/persona_ontology_expansion_2026_05_24' | relative_url }}) | llive 進化の persona ontology を数百人規模へ段階拡張する基盤。**ユーザー指摘「ハードコードを疑え」→ 手書き factor_affinity を撤回**し、affinity_text (特性記述文) から keyword_extractor で**自動算出** (`persona_extended.py`, commit `d940ff3`)。算出 top 因子が記述意図と整合 (darwin→reality_link, turing→exploration 等)、回帰テスト 6 件。投入候補カタログ約 60 名 (非西洋/女性/古典〜現代の多様性) + 改善メモ (本命=LLM injection) を下調べ。実投入は段階的 |
+| [RepIR → llrepr MCP 互換設計 (2026-05-23)]({{ '/research/repir_mcp_compat_2026_05_23' | relative_url }}) | llrepr (LLVM-for-expression) の MCP structuredContent 配線設計。protocolVersion 2025-06-18 + outputSchema + text 後方互換。RepIR→llrepr 改名経緯 (github.com/repir/repir 衝突回避) を収録 |
+| [Speculative Mesh 本格配線 (SPEC-MESH-02/03/04)]({{ '/research/spec_mesh_wiring_2026_05_25' | relative_url }}) | llmesh SPEC-MESH-02 (transport)・03 (executor)・04 (fast-fallback) 配線完了 + security 修正 (ingest_result fail-closed 化等)。全 llmesh テスト exit 0 確認 |
+
+## lldarwin 設計ノート 2026-05-25〜27
+
+> 2026-05-25 の開放端進化要件定義モードで 14 本が一括生成。lldarwin v2 PoC マラソン〜Stage1 結果まで含む。
+
+| File | 内容 |
+|---|---|
+| [開放端進化 — openendedness 調査 (Stream E)]({{ '/research/evolution_research_openendedness_2026_05_25' | relative_url }}) | proxy 進化の自明収束 (gen23 全絶滅 / gen25 頭打ち) を出発点に open-endedness 手法 (novelty/lexicase/QD/MAP-Elites/NSLC/FUSS/minimal-criterion/中立理論) を整理。falsifiable 要件 §1.4-1.10 の根拠 |
+| [進化アルゴリズム調査 (Stream A–F 横断)]({{ '/research/evolution_research_algorithm_survey_2026_05_25' | relative_url }}) | novelty search / MAP-Elites / ε-lexicase / NSGA / island / self-adaptive ES / UCB1 AOS / GESMR / Cultural Algorithms / Baldwin Effect を llive 文脈で評価。被り/独自/不採用 3 列表 |
+| [表現・選択 再設計 (Stream C)]({{ '/research/evolution_research_representation_selection_2026_05_25' | relative_url }}) | genome 表現方式と選択圧手法の組み合わせ評価。ε-lexicase + z-score 正規化 + QD archive を推奨ベースラインとして確定 |
+| [文化進化・生涯学習 (Stream D)]({{ '/research/evolution_research_culture_learning_2026_05_25' | relative_url }}) | CulturalChromosome / belief space 学習層 / persona pull 獲得を falsifiable な要件へ昇格。Baldwin Effect と Lamarckian 学習の適用範囲を整理 |
+| [メタ進化研究 — EA 自体の進化]({{ '/research/evolution_research_meta_2026_05_25' | relative_url }}) | 進化アルゴリズム自身を進化させる meta-EA 手法 (CMA-ES σ 自己適応 / GESMR / ANAS 等) の SOTA と llive への適用可否 |
+| [AI Safety for Open-Ended Agents (llive #13)]({{ '/research/evolution_research_safety_2026_05_25' | relative_url }}) | 開放端 / 進化エージェントの安全設計。収束停止 / ガバナンスゲート / Approval Bus 迂回防止 / fail-closed 原則の根拠整理 |
+| [進化 fitness 再設計 — 多峰・多目的]({{ '/research/evolution_fitness_redesign_2026_05_25' | relative_url }}) | 単峰 proxy fitness の限界 (満点飽和) を解析し、多峰・多目的・多染色体 fitness の設計原理を整理。honest disclosure: "is it really evolving?" の問いを出発点とする |
+| [進化設計の緊張関係と未解決決定]({{ '/research/evolution_design_tensions_open_decisions_2026_05_25' | relative_url }}) | 開放端進化設計で対立する選択 (novelty vs. quality / exploration vs. exploitation / complexity vs. tractability 等) を open decisions として整理。設計会議前に読む必読 1 枚 |
+| [開放端 PoC 実験設計]({{ '/research/evolution_poc_experiment_design_2026_05_25' | relative_url }}) | sandbox / descriptor metrics / sweep 設計。PoC 実行前のプロトコル (変数の固定・測定指標・stop criterion) を標準化 |
+| [開放端 PoC デプロイ結果]({{ '/research/evolution_poc_deployment_results_2026_05_25' | relative_url }}) | deployment sweep の実行結果集計。proxy/実 LLM fitness 切替え・population サイズ別の収束曲線 + honest disclosure (飽和パターン一覧) |
+| [進化ラン可視化 計画]({{ '/research/evolution_visualization_plan_2026_05_25' | relative_url }}) | evolution.svg / persona_dominance.svg の現状評価 + 3D Gaussian Splatting 方向への可視化ロードマップ |
+| [進化可視化 — 高度化調査 (3DGS・ALife)]({{ '/research/evolution_visualization_advanced_2026_05_25' | relative_url }}) | ユーザー要求「単なるグラフは NG、3DGS 時系列で魅せる」に応えて ALife / ALIFE / Tierra / Avida / Karl Sims 世代の先例を整理。可視化の系譜から llive 独自の表現空間を位置づけ |
+| [進化ラン可視化 閲覧ガイド]({{ '/research/evolution_viz_viewing_guide_2026_05_25' | relative_url }}) | `scripts/run_persona_evolution_long.py` 出力ファイルの閲覧手順 (ツール選択・コマンド・トラブルシュート)。「手順が無いと意味が分からない」への恒久回答 |
+| [llove Qt GUI アーキテクチャ設計]({{ '/research/llove_qt_gui_architecture_2026_05_25' | relative_url }}) | llove を CLI/TUI (Textual) から Qt 本格 GUI へ移行する際の設計指針。進化ランの可視化フロントとして ll 系プロジェクトを統合するロードマップ |
+| [Perplexity × 開放端進化 SOTA (2026-05-26)]({{ '/research/openended_evo_sota_perplexity_2026_05_26' | relative_url }}) | overnight marathon で Perplexity が実施した QD / novelty / ORCH white-space 確認。RAD コーパスの QD/novelty ギャップを補完。鵜呑みせず一次情報で要検証 |
+| [lldarwin v2 PoC マラソン — 方策確定ログ]({{ '/research/lldarwin_v2_poc_marathon_2026_05_26' | relative_url }}) | 「方策を決める」Goal の全記録。出発点 (12h ラン満点飽和) → Round 0-3 (6 PoC + Agent 4 体 + Perplexity) → 確定方策 (ORCH / ε-lexicase / factor-subspace QD / agentic 個体) → 実装ロードマップ Phase1-5。**設計意思決定の正本** |
+| [lldarwin Stage1 実装結果 (2026-05-26)]({{ '/research/lldarwin_stage1_results_2026_05_26' | relative_url }}) | MultiPressureSelector + ORCH 基盤の Stage1 実装完了報告。テスト通過数・honest disclosure (実 LLM 比較 stub 状態) + 次フェーズ (Stage2 agentic 個体) への引継ぎ |
+| [lldarwin v2 運用準備 (2026-05-27)]({{ '/research/lldarwin_v2_ops_readiness_2026_05_27' | relative_url }}) | 今夜の連続稼働に向けた動作テスト結果と ready/blocked 一覧。入力パターン別の挙動確認 + 残課題 (実 LLM 配線・factor-subspace QD スケールアップ) |
 
 ## 方針
 
