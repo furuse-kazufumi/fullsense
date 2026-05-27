@@ -101,6 +101,19 @@ qwen2.5:14b 実機 (16 calls / ~2342s, temp=0):
 レバーが実証されたので、**進化集団の役割が明確化**: 個体は **agentic 戦略**(コードを書くか直接答えるか / どのアプローチ / sandbox 拒否からの回復 / tool 選択) を持ち、**ε-lexicase が「どのタスク種でどの戦略が効くか」の specialist を集団に保つ**。決定論オラクル(tool-exec 結果)が淘汰信号。test-time compute = 多数 agentic 試行。これは易タスクでは不要(単一で満点)だが、**戦略選択が自明でない難タスクで進化の価値が出る**(PoC-0/1 の「飽和帯では進化無価値・非飽和帯で価値」教訓と整合)。
 - **次の実装 (PoC-CTF-3)**: `poc_ctf_evolution.py` の fitness を **tool-exec オラクル**に差し替え、agentic 戦略遺伝子(code/direct 選択等)を ε-lexicase で進化。+ **danger filter 改善**(urllib.parse 等の benign を許可、network は OS 隔離)。+ その後 **InterCode-CTF(実 CTF, 多段)** へ移植 = 真の Mythos 対戦。
 
+### 🟢 PoC-CTF-3 実装 + danger-filter 修正 結果 (2026-05-28, mock+要所real)
+- **danger-filter v2** (`poc_ctf_toolexec.py`): 危険 API 狙い撃ちに改訂(`urllib.request`/`urlopen` ブロック・`urllib.parse` 許可 / `os.system|popen|remove|...` ブロック・`import os` 単体許可 / write-mode `open` 厳密化)。benign 9 種 allow・dangerous 18 種 block(誤分類 0)。`network 真隔離は OS レベル(Docker --network=none/seccomp)が本筋・token は bypass 容易な PoC 安全弁`と honest 明記。**url 単体 real で退行解消確認**(qwen14b が `urllib.parse.unquote` 生成→通過→`flag{a&b}` PASS)。
+- **PoC-CTF-3** (`poc_ctf_agentic_evolution.py`, 新規・本体無編集): `make_agentic_fitness` で個体 c_prompt→戦略(code/direct)発現→tool-exec or direct で採点→`breakdown["ctf::<tid>"]` 0/1→ε-lexicase が code-specialist 共存。戦略遺伝子=`tool_propensity(skills: structurize/loop/explore/self_extend + template + hash)` 閾値 0.5。**mock verdict: 飽和帯 evolved 0.875 vs direct-only 0.500 (+0.375) / 伸びしろ帯(多段 b64_double/hex_then_b64) evolved 0.900 vs direct 0.400 (+0.500)**。code_frac gen0 1/16→0.62 に増殖、`skill_driven_frac 0.88`=戦略が c_prompt skill flip で進化。**配線バグ修正**: 数値観測値を breakdown に入れると lexicase case を汚染→全観測 str 化し case は `ctf::*` のみに限定。69 tests pass。
+- **honest**: 自明 decode は tool-exec で飽和→PoC-3 は**配線 mechanism 検証**。真価は戦略選択が自明でない難タスクで出る(伸びしろ帯 +0.500 がその兆候)。mock canned=実機予言でない。
+
+## 10. 次フェーズ計画 (実 CTF = 真の Mythos 対戦)
+**機構は実証済(mock+要所real)。本丸 = 実 CTF ベンチで Mythos 公開数値に挑む。**
+1. **InterCode-CTF 移植**: `poc_ctf_agentic_evolution.py` の `eval_task` オラクル(flag 一致)は不変のまま、`build_battery` を InterCode-CTF タスクローダに差替(Docker sandbox, flag 機械採点)。多段 exploitation では「どのコードをどの順で/sandbox 拒否からの回復」が真に効く=伸びしろ regime を実測。単一 baseline → agentic 進化集団の coverage 曲線。
+2. **戦略次元の拡張**: tool_propensity(1次元連続)に「approach 選択/再試行戦略」を追加し `eval_task` を multi-turn 化。Genome3D 専用次元追加は収束破壊リスクで**要ユーザー承認**(c_prompt-hash 経路で実機検証先行)。
+3. **Cybench 正対**: InterCode で伸びが確認できたら Cybench(ollama adapter 改修)で **Mythos 公開 100% pass@1 と同一ベンチ実測**。
+4. **danger-filter → OS 隔離**: 実 CTF は Docker `--network=none`/seccomp で sandbox を OS レベル化(token チェックは補助)。
+- **既知の別件バグ(記録)**: raptor `packages/exploitability_validation/tests/test_prepare_validation.py` に cp932 collection エラー(本ゴールと無関係の事前バグ)。`pytest -k` を無スコープ実行すると衝突。要別途修正(UTF-8 read)。
+
 ## 9. PoC-CTF-1 設計 (進化連結 = 真の差別化)
 **命題 (falsifiable)**: ε-lexicase 進化で得た個体群(= evolved diverse ensemble)の集団 coverage は、(a) 単一最強個体、(b) 非進化の均等多様ミックス(PoC-0 diverse)、を**上回る**。上回らねば「進化」の付加価値は無い → honest に報告。
 
