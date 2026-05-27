@@ -5,8 +5,15 @@ nav_order: 96
 
 # 連載シリーズ計画 — #25 以降「進化アーク」
 
+> **⚠ 番号改訂 (2026-05-27 portal 整理)**: #27 overnight marathon が root に公開されたため、旧 #27〜#29 は 1 つずつ繰り上がり。
+> - 旧 `#27_falsification` → **新 #29** (`QIITA_#29_falsification_goodhart_proxy_limits.md`)
+> - 旧 `#28_viz_history` → **新 #30** (`QIITA_#30_evolution_visualization_history.md`)
+> - 旧 `#29_codex` → **新 #31** (`QIITA_#31_codex_two_pillar_orchestration.md`)
+> - `QIITA_lldarwin_v2_phase1_orchestra_DRAFT` → **新 #28** (`QIITA_#28_lldarwin_v2_phase1_orchestra.md`)
+> このファイル内の旧番号 (#27〜#29) は上記改訂前のプランとして読む。最新は各ファイル名を参照。
+
 > docs/articles/drafts/ 配下の骨子群を、どの順で・どの媒体に公開するかの計画書。
-> 既存連載 #24（llive 完全解説 8 大分類）の**次のアーク**として #25〜#29 を位置づける。
+> 既存連載 #24（llive 完全解説 8 大分類）の**次のアーク**として #25〜 を位置づける。
 > 状態は骨子段階（蓄積目的）。本文充実 → frontmatter 確定 → preflight → 投稿の流れは [`../QIITA_POST_GUIDE.md`](../QIITA_POST_GUIDE.md) に準拠。
 
 ## 0. このアークのテーマ
