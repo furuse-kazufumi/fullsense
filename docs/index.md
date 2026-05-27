@@ -140,7 +140,7 @@ All product code: **Apache-2.0** with optional separate **Commercial License**.
 | # | ファイル | 内容 |
 |---|---|---|
 | #25 | [monoculture の失敗]({{ '/articles/QIITA_#25_monoculture_evolution_lldarwin' | relative_url }}) | 進化が多様性を失った夜 |
-| #26 | [multi-pressure 設計編](articles/drafts/QIITA_#26_lldarwin_multi_pressure_selection.md) | 設計的解決 (draft) |
+| #26 | [multi-pressure 設計編]({{ '/articles/QIITA_#26_lldarwin_multi_pressure_selection' | relative_url }}) | 設計的解決 (draft) |
 | #27 | [overnight marathon — climax]({{ '/articles/QIITA_#27_lldarwin_v2_overnight_marathon' | relative_url }}) | 6 PoC × Perplexity 収束 |
 | #28 | [実装編 — オーケストラ型 AI](articles/drafts/QIITA_#28_lldarwin_v2_phase1_orchestra.md) | Phase1 実装 (draft) |
 
