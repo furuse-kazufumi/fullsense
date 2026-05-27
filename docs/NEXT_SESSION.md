@@ -58,7 +58,8 @@ py -3.11 -m twine upload --skip-existing --disable-progress-bar D:/tmp/fullsense
 
 ## ✅ Done in 2026-05-18/19 連続セッション
 
-詳細は [PROGRESS.md]({{ '/PROGRESS' | relative_url }}) 参照。
+> このセクションの詳細は [PROGRESS_archive_2026_05.md](PROGRESS_archive_2026_05.md) に移管済み。
+> 要点は以下に残す。詳細は [PROGRESS.md]({{ '/PROGRESS' | relative_url }}) 参照。
 
 llive 側 (累計 commit 多数):
 
