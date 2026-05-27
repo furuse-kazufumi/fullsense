@@ -128,6 +128,12 @@ qwen2.5:14b 実機 (16 calls / ~2342s, temp=0):
 - **honest 留保**: 算術/decode タスク(17/19/22)で submit_wrong 3 件(頭で解くタスクの実行誤り残存)。delta +0.143 = file-backed 反転(+3) − 算術退行(-2)。本質=「1-turn で構造的に解けない file-backed が multi-turn で解け始めた」=**非飽和帯確認**。no_tool baseline は別 run 値流用で厳密同一条件でない。
 - **意義**: **Mythos との本質差 = multi-turn 自律性**を埋める最初のレバーが**実 CTF で効いた**実証。進化接続の条件(非飽和帯)成立。
 - **next**: (1) 算術退行修正(submit 前に flag echo self-check ターン) (2) **`make_agentic_fitness` を multi-turn runner に差替えて agentic 戦略(いつ ls/ツール順/再試行)を ε-lexicase 進化**(各タスク=1 case, file-backed で「観察先行 specialist」が立つか) (3) persistent-session(`docker exec` 長命)で多段 exploitation 帯(Forensics/Reverse) (4) Cybench 正対。
+
+### 🟢 Phase D-1 next-(2) = 進化×multi-turn 配線 結果 (2026-05-28, mock 実証 + resource wall)
+- **着地**: `llive/scripts/poc_intercode_evolution.py`(additive, git なし)。`make_agentic_fitness` の eval_task を **multi-turn InterCode runner** に差替え。個体 c_prompt→`tool_propensity`→**observe(ls先行+submit self-check) / naive(頭で当てる)** 戦略発現。各 InterCode タスク=1 lexicase case(ic::<tid>)、`build_lldarwin_v2_selector`(ε-lexicase) が observe specialist を集団に保持。戦略 label/p_tool は str 化で case 非汚染(PoC-CTF-1b/3 教訓)。
+- **mock verdict (pop16/gens12/7 easy)**: **evolved_strategy pop_coverage 1.000 vs naive_only 0.5714 (delta +0.4286)**。observe_frac gen0 0.0625→0.6-0.8 に進化的増殖、`skill_driven_frac 0.875`(c_prompt skill flip 駆動)。naive 固定は 0.57 据え置き(in-head 4 タスクのみ)。**「進化型アルゴリズムが実 CTF multi-turn の観察先行 specialist を保ち naive を上回る」を mock 実証** = ゴールの「進化型」中核部を実 CTF に配線完了。
+- **🔴 resource wall (honest, 最重要)**: **実機フル進化ラン(pop×gens×task×turn × ~88s/call CPU)= 数万秒 → CPU では非現実的・GPU 必須**(size_vram>0)。mock=配線/弁別ロジック検証で実機予言でない。real は 1 個体 1 タスクの multi-turn fitness 配線確認に限る。**→ ここから先の "実機での進化スケール" は GPU 計算資源が gating**(ユーザー判断領域)。Task 1(self-check 実機再 smoke)は CPU 実機ラン未完(別途)。
+- **gap-to-Mythos 現在地**: 機構は完全配線・mock 実証済(coverage→ε-lexicase 集団→tool-exec→multi-turn 自律→進化戦略選択)。実機は easy picoCTF multi-turn 4/7(self-check で向上見込み)。**Mythos=Cybench 100% には遠く、実機実証には GPU + 多段(persistent-session) + Cybench 正対が必要**。達成は偽らない。
 - **既知の別件バグ(記録)**: raptor `packages/exploitability_validation/tests/test_prepare_validation.py` に cp932 collection エラー(本ゴールと無関係の事前バグ)。`pytest -k` を無スコープ実行すると衝突。要別途修正(UTF-8 read)。
 
 ### 🟢 Phase D-1 = multi-turn agentic ループ実機結果 = 命題支持 (2026-05-28, 決定的)
