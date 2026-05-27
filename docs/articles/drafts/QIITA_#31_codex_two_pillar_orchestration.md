@@ -1,5 +1,5 @@
 ---
-title: 'AI に AI を部下として使わせる #29 — Claude 主導 + Codex 配下の「二本柱」開発体制と検証規律'
+title: 'AI に AI を部下として使わせる #31 — Claude 主導 + Codex 配下の「二本柱」開発体制と検証規律'
 tags:
   - FullSense
   - AIエージェント
