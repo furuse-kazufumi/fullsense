@@ -162,6 +162,9 @@ nav_order: 3
 | `scripts/research_pocs/poc_orchestra_headroom_2026_05_26.py` | オーケストラ headroom 計測 PoC |
 | `scripts/research_pocs/poc_router_2026_05_26.py` | competence-aware router PoC |
 | `scripts/research_pocs/poc_saturation_fixes_2026_05_26.py` | 飽和修正手法 PoC |
+| `docs/research/llcore_cpu_poc_battery_completion_2026_05_29.md` | llcore Stage 0-2 完成 (39 gates / 76 tests / Codex 5/5 Green) |
+| `docs/papers/2026-05-29_core_evolution_master_survey.md` | Core Evolution master survey (Agent A-D + RAD 14 分野) |
+| `docs/papers/2026-05-29_research_plan_core_evolution.md` | 研究計画書 v1 (TMLR 本命) |
 
 ## Maintenance rule
 
