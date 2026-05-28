@@ -80,6 +80,14 @@ has_children: true
 - 内容は **AI 自律調査**. 人間が裏取りしてから設計に降ろす扱い.
 - 引用元の link-rot は portal の Lychee CI で監視.
 
+## llcore (Verified Neural Architecture Evolution) — 2026-05-29 着地
+
+| Doc | 内容 |
+|---|---|
+| [llcore_cpu_poc_battery_completion_2026_05_29]({{ '/research/llcore_cpu_poc_battery_completion_2026_05_29' \| relative_url }}) | Stage 0-2 完成 (39 gates / 76 tests / Codex 5/5 Green、独自軸 4 軸 mechanism 実証) |
+
+技術詳細・統合 verdict は llcore project `docs/poc/COMPLETION_VERDICT.md`、研究計画書 v1 は `docs/papers/2026-05-29_research_plan_core_evolution.md`。
+
 ## いつ更新するか
 
 - `spinoff_ideas_2026_05.md` の Planned / Pattern が新しい段階に進む直前.
