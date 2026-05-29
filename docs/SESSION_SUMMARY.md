@@ -1,70 +1,59 @@
-# Session Summary — 2026-05-29 (llcore Stage 2.4 + E + ARCH_LANDSCAPE + viewer/skill 拡張)
+# Session Summary — 2026-05-29 (llcore 0.2.0a0 kernel plugin: 設計 doc + S1 実装)
 
-> 本ファイルは raptor auto-summary hook で毎ターン上書きされる仕様だが、本 wrap-up
-> 完了時の手動内容として保存. 次セッション (ccr) の SESSION START 復元プロトコルが
-> 本ファイルを読み「Session Restored:」宣言の根拠とする.
+> raptor auto-summary hook が毎ターン上書きする仕様だが、本 wrap-up/rotate 完了時の
+> 手動内容として保存。次セッション (ccr) の SESSION START 復元プロトコルが本ファイルを
+> 読み「Session Restored:」宣言の根拠とする。next_plan の正は claude-projects.json (fullsense)。
 
 ## プロジェクト
 fullsense (umbrella) — `D:\projects\fullsense` / 主作業 = llcore 傘下 (`D:\projects\llcore`)
 
 ## 完了した作業 (このセッション)
 
-### llcore commits (ローカル 7 件追加, 全 22 commits ローカル / push 未)
-- `837d335` fix(snn-stage-2.1): off-by-one TRUE fix + boundary regression tests + **honest 訂正** (前 commit bc53531 overclaim 発覚)
-- `98fc669` feat(snn-stage-2.2a): verify_membrane_bounded に I_max 引数追加 (Codex F3 対応)
-- `f48f3d1` feat(snn-stage-2.2b): verify_membrane_bounded_2step + |ΔI| input contract (Codex F3 完了)
-- `a4eaf0a` feat(snn-stage-2.3): Izhikevich gene 一般化 + Codex 5 Findings claim 降格 (22+1 tests)
-- `1a2612f` test(snn-stage-2.4-A): Izhikevich 反証的 test 4 件内製化 (Codex Findings 機械検査)
-- `e595b1a` docs(audit-B): llcore RWKV side Z3 abs encoding audit — **CLEAN** (Neural ODE bug 不在)
-- (最終 commit) research(dgnn) + ARCHITECTURE_LANDSCAPE.md: GNN 動的 graph 37 tests + Codex 4 Findings 降格
-
-### docs / tooling
-- `docs/ARCHITECTURE_LANDSCAPE.md` (アーキ体系俯瞰 doc): 6 アーキ (RWKV / Neural ODE / GNN 固定+動的 / SNN-LIF / Izhikevich) を適用条件 3 ヶ条 + Codex 降格 + 構造破綻防止 (A)-(D) + 重要気付き 11 件 で 1 doc 化
-- `docs/audit/rwkv_abs_encoding_audit_2026_05_29.md`: 本流 verifier clean 記録
-- `D:\tools\open_md_pandoc.cmd` + `open_md_pandoc.ps1`: Pandoc + GFM CSS + Mermaid CDN, **Explorer 関連付け済**
-- `D:\tools\open_qiita_preview.cmd` + `open_qiita_preview.ps1`: Qiita CLI 完全互換 server preview
-
-### raptor skill 拡張
-- `.claude/skills/rotate.md`: **Step 0.5 追加** — claude-projects.json next_plan 自動更新
-- `.claude/skills/wrap-up.md` (**新規**): next_plan + SESSION_SUMMARY 自動更新 + 純粋 exit (再起動なし)
+### llcore — kernel plugin 0.2.0a0 (設計 G タスク + S1 実装)
+- **設計 doc** `docs/design/kernel_plugin_0_2_0a0.md` (commit `2e45216`): research/ の複数アーキ
+  (SNN-LIF 先頭) を本流に additive 取り込みする plugin 境界を formal 化。Codex pair-review
+  5 Findings (Medium 3 / Low 2 + 補足) 全件実コード検証の上反映。
+- **S1 実装** (commit `9bb2228`, 既存 src 不変 = semver (D)):
+  - `src/llcore/kernel/protocol.py`: `GeneCodec` / `Trajectory` / `Kernel` / `VerifierBackend` 3 抽象 Protocol
+  - `src/llcore/kernel/rwkv.py`: RWKV 準拠例 — 本流 `run_sequence` / `apply_changeop` /
+    `verify_gene_safe` へ委譲する薄い wrapper (挙動不変)
+  - `tests/unit/test_kernel_protocol.py`: 18 tests (Protocol 準拠 + 委譲一致 + codec 往復)
+  - Codex review High0/Med1/Low2 反映: Trajectory `eq=False` (np.ndarray の `==` ambiguous
+    truth value 回避) / ChangeOp op_type が RWKV 4 種固定 → 非 RWKV kernel は **S3 延期**を docstring 明示
 
 ### 統計
-- 全 pytest: 245+2 → **282+2 PASS** (回帰ゼロ)
-- 構造破綻防止 (A)-(D) 全 PASS 維持 (src/ 不変)
+- 本流 145 → **163 PASS** (+18) 回帰ゼロ / research **137 PASS + 2 skip** 不変 = 全体 **300 + 2 skip**
+- 構造破綻防止 (A)-(D) 全 PASS 維持
 
 ## 未完了タスク (優先順)
-1. **ARCHITECTURE_LANDSCAPE.md §9 候補から選択**:
-   - 短期: C 真の per-gene verifier / F Neural ODE `use_floor=False` ablation / **G llcore 0.2.0a0 kernel plugin 設計 doc (推奨先頭)**
-   - 中期: D AdEx 一般化 / H PoC 7a NeurIPS workshop submission
-   - 長期: I 横断 paper TMLR / J llcore GitHub repo + push
-2. raptor skill (rotate / wrap-up) の git commit (raptor リポ側)
+1. **S2 (次の主作業)**: `src/llcore/evolution/minimal_ga.py` を `GeneCodec` で gene 型非依存に
+   一般化。**codec デフォルト = RWKV** で後方互換 wrapper を温存 (設計 doc §3.2 M3 表:
+   `Individual.gene` / `FitnessFunc` / `initialize_random_population` / `uniform_mutate` /
+   `crossover_uniform` / `Population.gene_matrix` を全て RWKV codec 固定 wrapper として温存、
+   一般化版は `*_g` 別名で additive 追加)。新 test で任意 dim GA を検証。commit 前 Codex review。
+2. **S3**: SNN-LIF を `src/llcore/kernel/snn_lif.py` に昇格 (research → src)。`ChangeOp.__post_init__`
+   の op_type 検証を kernel 別 (`change_op_types`) に拡張 (S1 Codex Medium の延期分)。research
+   verifier の `sys.path.insert` hack 撤廃。`SNNLifBackend` の per-gene 真正性監査 (設計 doc §2.3:
+   `verify_membrane_bounded_per_gene` は真の per-gene と Codex 確認済、I_max 1-step contract 限定)。
+3. **S4/S5**: SNNLifBackend AND 集約 + SNN-LIF を `evolve` で実走 smoke。
+4. **cleanup (pre-existing, 非 blocking)**: `claude-projects.json` は **HEAD 時点から invalid JSON**
+   (値内の未エスケープ `"` = 論文タイトル等の引用符、例 `"Verified Evolvable Architectures"`)。
+   SESSION START は text 読みで動くため復元は機能するが、`json.load` は失敗する。専用パスで
+   全 bare quote を `\"` にエスケープ (or 全角引用符化) して valid JSON 化推奨。
 
 ## 重要なコンテキスト
-
-### Codex pair-review の威力 (累計 32 Findings 全対応)
-- Stage 0-3 (8 PoC): 24 Findings (1 honest 訂正 + 23 claim 降格)
-- Research phase (5 アーキ): 13 Findings (1 実装 bug 修正 + 12 claim 降格)
-- Stage 2.4 + E: GNN 動的 graph 4 Findings (Critical 1 + High 1 + Medium 2) 降格対応
-
-### 「反証的 test の不在」を内製化 (Stage 2.4-A の意義)
-- Codex が担っていた反証役を test に組み込む
-- 「現実装が overclaim だった」を PASS で assert
-- 将来 claim 強化で FAIL → 改善検知トリガ
-
-### 重要な honest 訂正 (Stage 2.1)
-- 前 commit bc53531 で「snn_verifier 修正済」と書いたが `git show` で実態未修正判明 (Edit log success ≠ file 反映)
-- → verify-after-edit 規律必須化 (Read + pytest 両方)
-
-### Windows 11 markdown viewer 環境
-- `.md` ダブルクリック → Pandoc HTML preview (Explorer 関連付け済)
-- Qiita 互換確認時は `D:\tools\open_qiita_preview.cmd <file>` 手動実行
-
-### push 状態
-- llcore: ローカル 22 commits 保持 (push 未, ユーザー指示後解禁)
-- raptor: skill 編集分は次セッションで commit
+- **push 状態**: llcore ローカル 24 commits 保持 (push 未、ユーザー承認後解禁可)。raptor (`rotate.md`
+  skill / claude-projects.json / wrap-up.md) は露出回避で local。
+- **Codex pair-review 規律** ([[feedback_codex_pair_review_for_llcore]]): 各 step commit 前必須。
+  Codex (gpt-5.4) は実コードを読んで claim と実装のズレを検出 (S1 でも semver を `git diff` で実検証)。
+- **rotate 方針更新** ([[feedback_rotate_proactive_timing]] 新規): Codex 委任完了直後のクリーンな
+  区切りでは CRITICAL を待たず早め rotate 可 (本セッションの本 rotate がその実践)。
+- **設計の honest 核**: 「same design pattern + partial stack reuse」が正、「same verifier stack」は
+  overclaim (ARCH_LANDSCAPE §5.3 #2)。Trajectory.kind で意味論差を型に明示。
 
 ## 次にすべきこと (具体)
-
-1. **次起動時 (ccr)** — fullsense projectPath, next_plan 自動復元
-2. **推奨開始**: G llcore 0.2.0a0 kernel plugin 設計 doc (構造破綻防止 framework 基づく formal 化, SNN-LIF 取り込み path 整理)
-3. **長期 paper phase**: H NeurIPS workshop (現原稿で提出可), I TMLR 横断 paper
+1. 次起動時 (ccr) — fullsense projectPath + next_plan 自動復元 (S1 完了 → 次=S2 と記載済)
+2. **S2 着手**: `src/llcore/evolution/minimal_ga.py` の一般化。まず `*_g` operator (codec 受け取り)
+   を additive 追加 → `Individual`/`evolve` を Generic 化 (codec デフォルト RWKV) → 新 test。
+   設計 doc §3 + §3.2 M3 表に従う。commit 前に `py -3.11 -m pytest -q` (本流) + `pytest research/` で回帰確認。
+3. memory: [[project_llcore_init_2026_05_29]] (Stage 0-3+research+SNN Stage 2) / [[feedback_rotate_proactive_timing]]
