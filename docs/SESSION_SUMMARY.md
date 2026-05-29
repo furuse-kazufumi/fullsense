@@ -1,45 +1,70 @@
-# Session Summary (auto-generated)
+# Session Summary — 2026-05-29 (llcore Stage 2.4 + E + ARCH_LANDSCAPE + viewer/skill 拡張)
 
-> 自動生成: `libexec/raptor-auto-summary` (Stop hook)
-> 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
+> 本ファイルは raptor auto-summary hook で毎ターン上書きされる仕様だが、本 wrap-up
+> 完了時の手動内容として保存. 次セッション (ccr) の SESSION START 復元プロトコルが
+> 本ファイルを読み「Session Restored:」宣言の根拠とする.
 
-- **最終更新**: 2026-05-23 22:34:23
-- **プロジェクト**: `D:/projects/fullsense`
-- **ブランチ**: `main`
+## プロジェクト
+fullsense (umbrella) — `D:\projects\fullsense` / 主作業 = llcore 傘下 (`D:\projects\llcore`)
 
-## 直近の git log
+## 完了した作業 (このセッション)
 
-```
-43990ab auto: ideation_marathon_expression_realtime_2026_05_23.md 編集前 (2026-05-23 21:39)
-4084ae1 auto: ideation_marathon_expression_realtime_2026_05_23.md 編集前 (2026-05-23 21:38)
-919f317 auto: index.md 編集前 (2026-05-23 21:15)
-2b6feba chore(qiita): #24-00..08 publish 後の public frontmatter 正規化を反映
-208e674 docs(next-session): 0y #24 シリーズ多言語 rollout 完了マーク (全 8 記事着地)
-283d24f feat(qiita): #24-05/07/08 を 4 言語自己完結化 + SVG 各 9 variant (Agent 並列成果)
-0a5b8c5 auto: QIITA_#24_05_evolutionary_v0BCDE.md 編集前 (2026-05-23 19:01)
-ed938b7 auto: QIITA_#24_07_observability_governance.md 編集前 (2026-05-23 18:59)
-9a1acd8 auto: QIITA_#24_08_lleval_eval_framework.md 編集前 (2026-05-23 18:58)
-d5efa36 feat(qiita): #24-04 を 4 言語自己完結化 (JA/EN/ZH/KO) + SVG 9 variant
-```
+### llcore commits (ローカル 7 件追加, 全 22 commits ローカル / push 未)
+- `837d335` fix(snn-stage-2.1): off-by-one TRUE fix + boundary regression tests + **honest 訂正** (前 commit bc53531 overclaim 発覚)
+- `98fc669` feat(snn-stage-2.2a): verify_membrane_bounded に I_max 引数追加 (Codex F3 対応)
+- `f48f3d1` feat(snn-stage-2.2b): verify_membrane_bounded_2step + |ΔI| input contract (Codex F3 完了)
+- `a4eaf0a` feat(snn-stage-2.3): Izhikevich gene 一般化 + Codex 5 Findings claim 降格 (22+1 tests)
+- `1a2612f` test(snn-stage-2.4-A): Izhikevich 反証的 test 4 件内製化 (Codex Findings 機械検査)
+- `e595b1a` docs(audit-B): llcore RWKV side Z3 abs encoding audit — **CLEAN** (Neural ODE bug 不在)
+- (最終 commit) research(dgnn) + ARCHITECTURE_LANDSCAPE.md: GNN 動的 graph 37 tests + Codex 4 Findings 降格
 
-## 現在の git status
+### docs / tooling
+- `docs/ARCHITECTURE_LANDSCAPE.md` (アーキ体系俯瞰 doc): 6 アーキ (RWKV / Neural ODE / GNN 固定+動的 / SNN-LIF / Izhikevich) を適用条件 3 ヶ条 + Codex 降格 + 構造破綻防止 (A)-(D) + 重要気付き 11 件 で 1 doc 化
+- `docs/audit/rwkv_abs_encoding_audit_2026_05_29.md`: 本流 verifier clean 記録
+- `D:\tools\open_md_pandoc.cmd` + `open_md_pandoc.ps1`: Pandoc + GFM CSS + Mermaid CDN, **Explorer 関連付け済**
+- `D:\tools\open_qiita_preview.cmd` + `open_qiita_preview.ps1`: Qiita CLI 完全互換 server preview
 
-```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
- M docs/research/ideation_marathon_expression_realtime_2026_05_23.md
-```
+### raptor skill 拡張
+- `.claude/skills/rotate.md`: **Step 0.5 追加** — claude-projects.json next_plan 自動更新
+- `.claude/skills/wrap-up.md` (**新規**): next_plan + SESSION_SUMMARY 自動更新 + 純粋 exit (再起動なし)
 
-## 直近 2 時間に変更されたファイル
+### 統計
+- 全 pytest: 245+2 → **282+2 PASS** (回帰ゼロ)
+- 構造破綻防止 (A)-(D) 全 PASS 維持 (src/ 不変)
 
-```
-22:20 docs/SESSION_SUMMARY.md
-22:20 docs/NEXT_SESSION.auto.md
-21:39 docs/research/ideation_marathon_expression_realtime_2026_05_23.md
-21:15 docs/research/index.md
-```
+## 未完了タスク (優先順)
+1. **ARCHITECTURE_LANDSCAPE.md §9 候補から選択**:
+   - 短期: C 真の per-gene verifier / F Neural ODE `use_floor=False` ablation / **G llcore 0.2.0a0 kernel plugin 設計 doc (推奨先頭)**
+   - 中期: D AdEx 一般化 / H PoC 7a NeurIPS workshop submission
+   - 長期: I 横断 paper TMLR / J llcore GitHub repo + push
+2. raptor skill (rotate / wrap-up) の git commit (raptor リポ側)
 
----
+## 重要なコンテキスト
 
-> このファイルは毎ターン自動上書きされます。**手動で書いた内容は失われます。**
-> 永続化したいメモは `docs/PROGRESS.md` または `docs/NOTES.md` を使ってください。
+### Codex pair-review の威力 (累計 32 Findings 全対応)
+- Stage 0-3 (8 PoC): 24 Findings (1 honest 訂正 + 23 claim 降格)
+- Research phase (5 アーキ): 13 Findings (1 実装 bug 修正 + 12 claim 降格)
+- Stage 2.4 + E: GNN 動的 graph 4 Findings (Critical 1 + High 1 + Medium 2) 降格対応
+
+### 「反証的 test の不在」を内製化 (Stage 2.4-A の意義)
+- Codex が担っていた反証役を test に組み込む
+- 「現実装が overclaim だった」を PASS で assert
+- 将来 claim 強化で FAIL → 改善検知トリガ
+
+### 重要な honest 訂正 (Stage 2.1)
+- 前 commit bc53531 で「snn_verifier 修正済」と書いたが `git show` で実態未修正判明 (Edit log success ≠ file 反映)
+- → verify-after-edit 規律必須化 (Read + pytest 両方)
+
+### Windows 11 markdown viewer 環境
+- `.md` ダブルクリック → Pandoc HTML preview (Explorer 関連付け済)
+- Qiita 互換確認時は `D:\tools\open_qiita_preview.cmd <file>` 手動実行
+
+### push 状態
+- llcore: ローカル 22 commits 保持 (push 未, ユーザー指示後解禁)
+- raptor: skill 編集分は次セッションで commit
+
+## 次にすべきこと (具体)
+
+1. **次起動時 (ccr)** — fullsense projectPath, next_plan 自動復元
+2. **推奨開始**: G llcore 0.2.0a0 kernel plugin 設計 doc (構造破綻防止 framework 基づく formal 化, SNN-LIF 取り込み path 整理)
+3. **長期 paper phase**: H NeurIPS workshop (現原稿で提出可), I TMLR 横断 paper
