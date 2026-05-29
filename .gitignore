@@ -18,6 +18,9 @@ __pycache__/
 # Worktrees (claude-smart eval 等の隔離評価用)
 .worktrees/
 
+# RAPTOR session-rotation 制御用の一過性ファイル (公開 portal に置くべきでない運用 cruft)
+.rotate-signal
+
 # Local-only ops / internal artifacts — contain local paths / chat_id, MUST NOT be
 # published in this PUBLIC portal repo (feedback_no_local_path_in_public). Files stay
 # on disk (scheduled tasks / SESSION START reference them) but are not tracked.
