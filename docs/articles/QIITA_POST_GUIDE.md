@@ -211,3 +211,18 @@ Qiita タグ (5 個) と LinkedIn/Twitter ハッシュタグは別運用:
 - [`QIITA_#24_LINK_MAP.md`](QIITA_#24_LINK_MAP.md) — 投稿後 URL 集約
 - [`2026-05-18/POST_CHEATSHEET.md`](2026-05-18/POST_CHEATSHEET.md) — #18/#19 個別 cheat-sheet (本ガイドの前身)
 - 連載 index: [`QIITA_#24_00_llive_tech_series_index.md`](QIITA_#24_00_llive_tech_series_index.md)
+
+---
+
+## 画像 / アニメーション SVG の Qiita 表示ルール (必読・2026-05-31 確立)
+
+Qiita で画像 (特に animated SVG) が「見えない」事故が #24/#26 で再発。**恒久ルール**:
+
+1. **静的状態が見える SVG にする (家訓)**。Qiita の `<img>` は外部 SVG を表示するが **SMIL を実行しない** → `width="0"`/`opacity="0"` で初期状態を隠し SMIL で reveal する設計は **空白表示**になる。authored 値を最終(可視)値にし `<animate from="0" to="FULL" fill="freeze">` で enhancement にする。
+2. **画像 URL は raw.githubusercontent 絶対 URL** + **ファイルは origin/main に push 済が前提** (push 前/パス違いは 404=非表示)。**アセットを移動・整理したら公開済記事の URL も必ず追従**させる (直下↔サブフォルダの不一致が #26 非表示の真因)。
+3. **Qiita は外部画像をプロキシ・キャッシュする**。一度 404 をキャッシュすると非表示が続く (移動前にキャッシュ済の古い記事は表示され続けるので「一部だけ見えない」と誤認しやすい)。**URL に `?v=N` cache-bust を付けて再 publish** すると Qiita が再取得する。
+4. **判定は git でなく実 HTTP** (`Invoke-WebRequest -Head <raw URL>` で 200/404) **+ Qiita 実機プレビュー**。GitHub/ローカルで見えても当てにならない。
+5. **PNG 化は最終手段** (アニメ喪失)。基本は animated SVG を上記 1-4 で見せる (ユーザー方針 2026-05-31)。
+6. **Qiita CLI**: hash-ID 名 (`<id>.md`) = 公開実体 (`.remote/` 同期)。custom 名は未公開草稿で **publish すると重複記事**になる。private 可否は `.remote/<id>.md` の frontmatter `private:` で確認。
+
+詳細: raptor memory `feedback_qiita_svg_path_and_cache` / `feedback_animated_svg_static_fallback`。
