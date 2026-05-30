@@ -530,7 +530,7 @@ In the upcoming "real-LLM article" and "orchestra article", we will show you whe
 
 ## 1. llive란 무엇인가（처음 접하는 분께）
 
-`llive`（엘 라이브. L은 2개）는 **자기 진화형・모듈러 기억의 LLM 프레임워크**입니다. FullSense라는 우산 브랜드의 일원으로, 형제로 `llmesh`（온프렘 LLM 허브）와 `llove`（단말 대시보드）가 있습니다. 3개는 독립 OSS이지만, 조합하면 1개의 세계관이 됩니다.
+`llive`（'리브'로 발음. L은 2개）는 **자기 진화형・모듈러 기억의 LLM 프레임워크**입니다. FullSense라는 우산 브랜드의 일원으로, 형제로 `llmesh`（온프렘 LLM 허브）와 `llove`（단말 대시보드）가 있습니다. 3개는 독립 OSS이지만, 조합하면 1개의 세계관이 됩니다.
 
 llive의 사상을 1줄로 말하면 "**LLM 본체가 아니라 LLM의 '주위'에 씌우는 인지 OS**". 4층 메모리・6스테이지의 루프・승인 버스（Approval Bus）・TRIZ・10개의 사고 인자…… 같은 "사고의 발판"을 LLM의 바깥쪽에 짜서, **같은 LLM이라도 행동을 진화시킬 수 있게** 합니다.
 
