@@ -208,7 +208,7 @@ In short, **not "one clever individual" but "a diverse crowd × a conductor"**. 
 
 ## 1. What is llive (for first-time readers)
 
-`llive` (el-live; with two L's) is a **self-evolving, modular-memory LLM framework**. It is a member of the umbrella brand FullSense, with siblings `llmesh` (on-prem LLM hub) and `llove` (terminal dashboard). The three are independent OSS, but combined they form a single worldview.
+`llive` (pronounced "liv"; with two L's) is a **self-evolving, modular-memory LLM framework**. It is a member of the umbrella brand FullSense, with siblings `llmesh` (on-prem LLM hub) and `llove` (terminal dashboard). The three are independent OSS, but combined they form a single worldview.
 
 llive's philosophy in one line: "**not the LLM itself, but a cognitive OS you wrap *around* an LLM**". You build a "scaffold for thinking" outside the LLM — 4-layer memory, a 6-stage loop, the Approval Bus, TRIZ, 10 thought factors, and so on — so that **even with the same LLM you can evolve its behavior**.
 
