@@ -1518,5 +1518,126 @@ end-to-end 실측(pressure-proxy + lldarwin + novelty + reservoir, 8 founders / 
 
 ---
 
+## 9. Stage2 후반 — 진짜 온프레미스 LLM을 상대로 prompt 전략을 진화시키다
+
+localhost의 ollama(llama3.2:latest 등)가 도달 가능하다는 것을 알았으므로, 드디어 **실 LLM 평가**가 가능해졌습니다(commit `2fb2912`). localhost = on-prem이므로, measurement purity(측정 순도. cloud LLM과 혼재시키지 않는다)의 규율도 충족합니다([[feedback_llive_measurement_purity]]).
+
+### 9.1 개체 → 실 LLM으로의 매핑(Promptbreeder 계)
+
+핵심은 「genome을, 어떻게 실 LLM에 효과를 미치게 하는가」입니다. `real_pressures.py`에서 **개체 → 실 LLM 매핑**을 구현했습니다.
+
+- **개체의 `c_prompt`(PromptChromosome)을 system prompt로 변환**: skill_set → 지시문 / prompt_template_id → 추론 스타일 / language_style → 어조. 고정의 LLM(llama3.2)에 이 system prompt를 씌우고, 5 약점 축의 **실 태스크**를 풀게 해서 채점합니다.
+- **LLM 본체는 고정하고, prompt 전략(genome)을 진화시킨다** = 「어떤 prompt 전략이 LLM의 약점을 완화하는가」를 실측으로 도태한다. 이것은 Promptbreeder(prompt를 진화적으로 최적화하는 연구 계열)의 방식입니다.
+- temp=0(greedy)로 결정론적으로. `(system_prompt, task)`를 캐시(동일 전략은 재평가하지 않는다).
+- robust: per-call try/except(ollama의 hiccup은 task의 실점으로 취급하고, 주행은 계속).
+- `--fitness real-pressure` / `--ollama-model` / `--max-wallclock-seconds`를 추가. tests 5건 + 진화계 947 green.
+
+### 9.2 실 선택 신호의 실증 — CoT+structure 전략이 multistep을 0.0 → 1.0으로
+
+그리고, 진짜 선택 신호를 관측할 수 있었습니다.
+
+**CoT+structure 전략**(`chain_of_thought` + structurize + loop)이, llama3.2의 **multistep(다단 추론)을 0.0 → 1.0으로 개선**했습니다(terse한 전략은 0.0으로 실패. score는 0.80 → 1.00으로 상승).
+
+이것은, lldarwin의 주장 「prompt 전략의 진화로 LLM의 약점을 완화할 수 있다」를, **proxy가 아니라 실 LLM에서 실증**한 것을 의미합니다. 같은 llama3.2 본체라도, 씌우는 system prompt(= 진화한 genome)에 따라, 다단 추론 태스크를 풀 수 있기도 하고 못 풀기도 합니다. 진화는 「풀 수 있는 prompt 전략」을 실제로 골라낸 것입니다.
+
+![5 약점 축의 모집단 평균 추이(실 온프레미스 LLM llama3.2 평가). prompt 전략의 진화로 축이 개선된다](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg)
+
+### 9.3 12h 연속 실행
+
+실 LLM 평가는 무거우므로, 장시간의 연속 실행을 기동했습니다(`out/lldarwin_12h_realpressure_2026_05_26/`).
+
+```
+--fitness real-pressure --selection lldarwin --novelty --lineage-reservoir
+--genome3d --population 24 --max-wallclock-seconds 43200 --checkpoint-every 5
+```
+
+wallclock 12h에서 safely 정지(snapshot 완료 → `--resume`으로 계속 가능). 연속 실행 중에 best_score=1.0에 도달했습니다.
+
+![실 LLM 진화 실행의 적응도와 다양성(12h 연속 실행)](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status.svg)
+
+### 9.4 Honest 유보(실 LLM 평가의 한계)
+
+여기가 #25에서 배운 자세의 총결산입니다. 화려한 결과(0.0 → 1.0, best 1.0)가 나왔기 때문에, 내역을 철저하게 정직하게 씁니다.
+
+- **(a) fitness에 관여하는 것은 `c_prompt`뿐.** persona / c_factors는 중립(계통은 reservoir로 유지, 초기 선택은 novelty가 담당). 즉 이것은 「**prompt 전략의 진화**」이지 「persona의 진화」가 아닙니다. 오카 기요시의 인격이 똑똑해진 것이 아니라, 오카 기요시라는 계통에 연결된 prompt 전략이 선택되었다는 이야기.
+- **(b) 전 founder의 초기 c_prompt는 동일(default).** 그래서 탐색은 mutation 구동입니다(founder마다 prompt를 다양화하는 것은 향후의 개선). 출발점이 같으므로, 초기의 계통 차이는 prompt 전략에는 효과가 없습니다.
+- **(c) 작은 배터리(축당 2문) = 노이즈가 많은 추정.** 0.0 → 1.0이라는 극적인 숫자도, 문제 수가 적은 만큼 노이즈를 포함합니다. 통계적으로 견고한 주장을 하려면, 더 큰 배터리가 필요합니다.
+- **(d) on-prem only(measurement purity). 일반 능력의 주장이 아니다.** llama3.2라는 특정 모델·특정 태스크에서의 관측이지, 「LLM 일반이 이렇게 된다」고는 말하지 않습니다.
+
+이것들을 숨기면 「진화로 LLM이 극적으로 똑똑해졌다!」는 화려한 이야기를 쓸 수 있지만, 그것은 거짓입니다. lldarwin이 실증한 것은 「**메커니즘이, 실 LLM 위에서, 선택 신호를 낳는다**」는 데까지. 그 선을 넘는 주장은 하지 않습니다.
+
+> 🍵 **휴식 포인트**: 연구에서 가장 기분 좋은 것은 「0.0이 1.0이 되었다!」고 외치는 순간입니다. 하지만, 그 순간이야말로 [[feedback_benchmark_honest_disclosure]]가 효과를 발휘합니다. 「이상하게 좋은 숫자가 나오면, 이긴 기분이 되기 전에 내역을 의심하라.」 이번으로 말하자면 — 이긴 것은 「prompt 전략」이지 「LLM 본체」도 「persona」도 아닙니다. 문제 수도 적습니다. on-prem의 1 모델뿐. 이것을 전부 쓰고 나서야, 비로소 「실증했다」고 말할 수 있습니다. honest disclosure는, 자랑을 참는 근력 운동입니다.
+
+---
+
+## 10. 기존 자산의 재이용(codex 코드 조사 기반)
+
+설계를 그림의 떡으로 만들지 않기 위해, 배하의 Codex에게 기존 코드를 조사시켰더니, **많은 것이 구현 완료·미배선**이었습니다.
+
+- `mating.py:139 LexicaseSelection`(ε 포함, 구현 완료이지만 미배선 → 배선만 하면 됨)
+- `nsga2.py:197 NSGA2Selection`(≤3 목적 레인용)
+- `diversity.py:94 NoveltyScorer` / `quality_diversity.py MAPElitesGrid` / `speciation.py SpeciationLayer`
+
+**신규 구현**: `Standardizer` / `MinimalCriterionGate` / `Pressure` 군 / `MultiPressureSelector`(핵심) / `LineageReservoir`(Stage1.5) / `SelectionAudit`.
+**배선점**: `loop.py:122`의 `selection`에 `MultiPressureSelector`를 주입, `persona_evolution.py:606`에 주입구를 추가, `LineageReservoir`를 `EvolutionLoop.on_population_bred` hook에 연결.
+
+> 🍵 **휴식 포인트**: 「구현 완료이지만 미배선」이 가장 많았던 것이, 최대의 교훈이었습니다. 좋은 부품을 만들어도, **배선(오케스트레이션)하지 않으면 진화는 망가진 채**. #25에서 8→2가 된 것은, ε-lexicase도 NoveltyScorer도 QD도 「상자 안에 있었는데, 배선되지 않았기」 때문입니다. lldarwin의 본질은, 신규 알고리즘의 발명보다도, 「기존의 좋은 부품을 **집약하지 않고** 묶어서, 진화 루프에 **실제로 배선하는 것**」에 있습니다. 전자 부품을 전부 갖춰도, 납땜하지 않으면 라디오는 울리지 않습니다.
+
+---
+
+## 11. 파탄 회피의 보증 — 전멸하지 않는 다층 구조(실측으로 뒷받침 완료)
+
+#25의 monoculture(8→2)를 반증하는 다층 구조는, 설계대로 갖춰졌고, 게다가 이번에는 **실측으로 뒷받침되었습니다**.
+
+1. **MinimalCriterionGate** — 최저 기준으로 번식 가부 → 일강 독식을 억제.
+2. **QD cell별 elite** — 1 cell이라도 남으면 계통 전멸 불가(archive 단조 증가).
+3. **Niching / FitnessSharing** — 같은 niche를 down-weight → 다봉 병존.
+4. **Down-sampling** — moving target으로 plateau 파괴.
+5. **per-dim z-score + 중앙 일치 제외** — 무특징을 우대하지 않는다.
+6. **LineageReservoir(Stage1.5에서 추가)** — 멸종 계통의 중립 저장고 → 계통 전멸을 구조적으로 저지(실측으로 8/8 생존).
+7. **monoculture 모니터 + SPC** — max_lineage_share를 매 세대 기록, >0.8을 SPC_ALARM으로 검지 → 자동 조정.
+
+특히 (6)은, §5의 honest disclosure(novelty로는 계통 고정을 막을 수 없다)를 받아 **나중에 추가한 층**입니다. 설계의 구멍을 실측으로 발견하고, 막았습니다. 실측의 lineage_fixation은 OFF 0.70 → ON 0.29로, OE-3 기준(<0.8)을 크게 밑돕니다. 「집약하지 않는다」 + 「멸종 계통을 되살린다」의 2단 구조로, #25를 구조적으로 짓누를 수 있었던 것이 본 글의 도달점입니다.
+
+---
+
+## 12. honest disclosure / 리스크(예고편)
+
+설계를 맹신하지 않습니다. 수용된 한계(다음 작 #27에서 깊이 파고든다)를, 다시 한번 정리해 둡니다.
+
+- **Goodhart's law / proxy 괴리** — LLM 약점을 proxy fitness로 하면, 「지표를 해킹하는 표면 전략」이 진화한다(typo → 특정 치환의 암기, WSD → 테스트의 heuristic 이용 등). proxy는 mechanism feasibility에 한정하고, production 능력을 주장하지 않는다.
+- **설계자 의존성** — lexicase=case / QD=기술자 / novelty=거리 척도, 어느 것이나 「다양성의 방향」을 설계자가 정한다. 생물 진화급의 미상정 창발은 한정적.
+- **minimal-criterion의 정체⇄붕괴 트레이드오프** / **QD의 차원의 저주 + 아카이브 포화**.
+- **실 LLM 평가의 한계(§9.4 재게재)** — c_prompt만 fitness 관여·founder 초기 prompt 동일·작은 배터리·on-prem only.
+
+> **다음 회 예고(#27)**: 「안경이 포화하면 선택압은 무력」이라는 가장 아픈 반증을, Goodhart's law와 proxy fitness의 한계와 함께 정직하게 공개합니다. lldarwin은 만능이 아닙니다. **어디까지 주장해도 되는가**의 선 긋기가 #27의 주제입니다. 이번에 「8/8 생존」 「0.0→1.0」이라는 좋은 숫자가 나왔기 때문에, 다음은 철저하게 반증으로 단련합니다.
+
+---
+
+## 13. 결론
+
+- 진화는 「**측정한다(lleval)**」와 「**도태한다(lldarwin)**」의 2단 구조. 도태의 핵심은 **「집약하지 않는다」**.
+- Stage1: criteria 제외 + novelty pressure로, 행동 다양성을 7.12 → 14.88(+109%)로 2배로 늘리고, 종반의 붕괴를 회피했다.
+- honest disclosure: novelty/lexicase는 **행동 다양성**은 보존하지만, **계통 고정**은 중립 부동(Kimura)으로 monoculture로 향한다. 저는 두 개의 다양성을 혼동하고 있었다 — 정직하게 기록.
+- Stage1.5: lineage-niched **중립 저장고**로, 실 EvolutionLoop에서 **OFF=2 계통 / ON=전 8 계통 생존**(오카 기요시·그로텐디크 포함), lineage_fixation 0.29(≪0.8)를 실현. **이것은 날조가 아니라 실제로 작동했다**.
+- 재투입 빈도 sweep: 계통 보존↔행동 다양성의 트레이드오프. diversity는 interval=5에서 피크(**비단조**)라는 비자명한 지견.
+- Stage2 전반(proxy): 5 약점 축을 Pressure plugin화(mechanism feasibility만).
+- Stage2 후반(실 LLM): 개체 c_prompt → system prompt 매핑으로 고정 on-prem LLM(llama3.2)을 실 태스크 채점. **CoT+structure 전략이 multistep을 0.0 → 1.0으로 개선**. 12h 연속 실행으로 best=1.0 도달.
+- 낙관하지 않고, 이긴 기분이 되지 않고, 내역을 나누어 보고했다([[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]]).
+
+좋은 부품을 만드는 것만으로는 진화는 망가진 채. **집약하지 않고 묶고, 실제로 배선하고, 멸종한 계통을 되살리고, 진짜 LLM으로 선택 신호를 확인한다** — 거기까지 해서, 비로소 #25의 「저와 프리스턴만」의 세계를, 오카 기요시도 그로텐디크도 있는 북적이는 세계로 바꿀 수 있었습니다. 다음 #27에서는, 이 성공에 어디까지 신뢰를 둬도 되는지를, 반증으로 다시 묻습니다.
+
+---
+
+## 14. 관련
+
+- 연재 #25 「저와 프리스턴만 남았다」 — 본 글의 동기(실패의 기록)
+- 연재 #24-08 「안경을 만들다」 — lleval(측정하는 쪽)
+- 연재 #27 「안경이 흐려지면 도태도 무력」 — 반증 조사(honest disclosure)
+- 설계서: lldarwin(도태하는 쪽) `docs/vision/LLDARWIN_DESIGN.md`
+- 실측 정본: `docs/research/lldarwin_stage1_results_2026_05_26.md`
+- llive commits: Stage1=`8060204` / 중립 저장고 PoC=`0d0537d` / Stage1.5=`b03cbda` / reinject sweep=`da93dd3` / Stage2 실 LLM=`2fb2912`
+- 관련 memory: [[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]] / [[feedback_originality_over_imitation]] / [[feedback_poc_feasibility_first]]
+
 
 
