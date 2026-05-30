@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="4D Kardashev radar across time — Energy, Knowledge, Coordination, Ethics — Type 0 to IV maturity" style="width:100%;height:auto;max-width:1200px">
+  <title>llive #24-v0.I — 4D Kardashev Scale (Energy × Knowledge × Coord × Ethics)</title>
+  <desc>A four-axis radar (Energy, Knowledge, Coordination, Ethics) with five concentric rings labelled Type 0, I, II, III, IV. A quadrilateral shape morphs across four time keyframes (t=0/4/8/12) to show civilization-style maturity progression. SMIL-only animation, no script.</desc>
+  <defs>
+    <linearGradient id="bg24_v0i" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1426"/>
+      <stop offset="100%" stop-color="#0a0f17"/>
+    </linearGradient>
+    <radialGradient id="radarFillA" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#5dd1ff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#5dd1ff" stop-opacity="0.08"/>
+    </radialGradient>
+    <radialGradient id="radarFillB" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#7ee787" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#7ee787" stop-opacity="0.08"/>
+    </radialGradient>
+    <radialGradient id="radarFillC" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0.08"/>
+    </radialGradient>
+    <radialGradient id="radarFillD" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#ef476f" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ef476f" stop-opacity="0.08"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="240" fill="url(#bg24_v0i)"/>
+
+  <text x="400" y="28" text-anchor="middle" fill="#e6edf3"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="17" font-weight="700">
+    llive #24-v0.I — 4D Kardashev Scale (Energy × Knowledge × Coord × Ethics)
+  </text>
+  <text x="400" y="48" text-anchor="middle" fill="#94a3b8"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">
+    Type 0 → I → II → III → IV. Multi-axis maturity scale.
+  </text>
+
+  <!-- Radar center at (400, 145), rings step 16 px (5 rings = 80 px max radius).
+       Axes at 0° (right=Energy), 90° (down=Knowledge), 180° (left=Coordination), 270° (up=Ethics).
+       Points used below follow (E, K, C, Eth) order:
+         right (E):  ( +r,  0 )
+         down  (K):  (  0, +r )
+         left  (C):  ( -r,  0 )
+         up    (Eth):(  0, -r ) -->
+  <g transform="translate(400 138)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#cbd5e1">
+
+    <!-- 5 concentric ring quads + 4 spokes -->
+    <g stroke="#475569" stroke-width="0.7" fill="none" opacity="0.75">
+      <polygon points="16,0 0,16 -16,0 0,-16"/>
+      <polygon points="32,0 0,32 -32,0 0,-32"/>
+      <polygon points="48,0 0,48 -48,0 0,-48"/>
+      <polygon points="64,0 0,64 -64,0 0,-64"/>
+      <polygon points="80,0 0,80 -80,0 0,-80"/>
+      <line x1="0" y1="0" x2="80" y2="0"/>
+      <line x1="0" y1="0" x2="0" y2="80"/>
+      <line x1="0" y1="0" x2="-80" y2="0"/>
+      <line x1="0" y1="0" x2="0" y2="-80"/>
+    </g>
+
+    <!-- Ring tier labels (along the upper-right diagonal so they don't overlap axis text) -->
+    <g fill="#64748b" font-size="9">
+      <text x="14" y="-4">0</text>
+      <text x="30" y="-4">I</text>
+      <text x="46" y="-4">II</text>
+      <text x="62" y="-4">III</text>
+      <text x="78" y="-4">IV</text>
+    </g>
+
+    <!-- Axis labels: Energy right, Knowledge down, Coordination left, Ethics top -->
+    <text x="90" y="4" font-size="11" fill="#e6edf3">Energy</text>
+    <text x="0" y="98" font-size="11" fill="#e6edf3" text-anchor="middle">Knowledge</text>
+    <text x="-90" y="4" font-size="11" fill="#e6edf3" text-anchor="end">Coordination</text>
+    <text x="0" y="-88" font-size="11" fill="#e6edf3" text-anchor="middle">Ethics</text>
+
+    <!-- Animated radar shape that morphs across t=0/4/8/12 (6s loop, 4 keyframes).
+         Each keyframe encodes (E, K, C, Eth) levels in pixel-radius (16 px per Type tier):
+           t=0   Type 0   : E=1, K=1, C=0, Eth=1   →  ( 16,0)  (0, 16) (-0,0)   (0,-16)
+           t=4   Type I   : E=2, K=2, C=1, Eth=2   →  ( 32,0)  (0, 32) (-16,0)  (0,-32)
+           t=8   Type II  : E=3, K=3, C=2, Eth=3   →  ( 48,0)  (0, 48) (-32,0)  (0,-48)
+           t=12  Type III : E=4, K=4, C=3, Eth=4   →  ( 64,0)  (0, 64) (-48,0)  (0,-64)
+         Loop closes back to t=0 keyframe. -->
+    <polygon stroke-width="1.8" stroke-linejoin="round"
+             points="16,0 0,16 0,0 0,-16">
+      <animate attributeName="points"
+               values="16,0 0,16 0,0 0,-16;
+                       32,0 0,32 -16,0 0,-32;
+                       48,0 0,48 -32,0 0,-48;
+                       64,0 0,64 -48,0 0,-64;
+                       16,0 0,16 0,0 0,-16"
+               keyTimes="0;0.25;0.5;0.75;1"
+               dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="fill"
+               values="url(#radarFillA);url(#radarFillB);url(#radarFillC);url(#radarFillD);url(#radarFillA)"
+               keyTimes="0;0.25;0.5;0.75;1"
+               dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="stroke"
+               values="#5dd1ff;#7ee787;#ffd166;#ef476f;#5dd1ff"
+               keyTimes="0;0.25;0.5;0.75;1"
+               dur="6s" repeatCount="indefinite"/>
+    </polygon>
+
+    <!-- Vertex markers that follow the shape; small dots emphasize per-axis level -->
+    <circle r="3" fill="#e6edf3">
+      <animate attributeName="cx" values="16;32;48;64;16" keyTimes="0;0.25;0.5;0.75;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="0;0;0;0;0" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" fill="#e6edf3">
+      <animate attributeName="cx" values="0;0;0;0;0" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="16;32;48;64;16" keyTimes="0;0.25;0.5;0.75;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" fill="#e6edf3">
+      <animate attributeName="cx" values="0;-16;-32;-48;0" keyTimes="0;0.25;0.5;0.75;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="0;0;0;0;0" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" fill="#e6edf3">
+      <animate attributeName="cx" values="0;0;0;0;0" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="-16;-32;-48;-64;-16" keyTimes="0;0.25;0.5;0.75;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Stage badge: 4 stacked groups, each visible at its own keyframe quarter -->
+    <g transform="translate(95 -55)">
+      <animate attributeName="opacity" values="1;0;0;0;1" keyTimes="0;0.25;0.5;0.75;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="-4" y="-10" width="74" height="18" rx="4" fill="#1f2937" opacity="0.75"/>
+      <text x="33" y="3" font-size="10" fill="#5dd1ff" text-anchor="middle" font-weight="600">t=0 · Type 0</text>
+    </g>
+    <g transform="translate(95 -55)" opacity="0">
+      <animate attributeName="opacity" values="0;1;0;0;0" keyTimes="0;0.25;0.5;0.75;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="-4" y="-10" width="74" height="18" rx="4" fill="#1f2937" opacity="0.75"/>
+      <text x="33" y="3" font-size="10" fill="#7ee787" text-anchor="middle" font-weight="600">t=4 · Type I</text>
+    </g>
+    <g transform="translate(95 -55)" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.25;0.5;0.75;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="-4" y="-10" width="74" height="18" rx="4" fill="#1f2937" opacity="0.75"/>
+      <text x="33" y="3" font-size="10" fill="#ffd166" text-anchor="middle" font-weight="600">t=8 · Type II</text>
+    </g>
+    <g transform="translate(95 -55)" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;1;0" keyTimes="0;0.25;0.5;0.75;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="-4" y="-10" width="74" height="18" rx="4" fill="#1f2937" opacity="0.75"/>
+      <text x="33" y="3" font-size="10" fill="#ef476f" text-anchor="middle" font-weight="600">t=12 · Type III</text>
+    </g>
+  </g>
+
+  <!-- Left legend: 4 axes meaning -->
+  <g transform="translate(28 92)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#cbd5e1">
+    <text x="0" y="0" font-weight="600" fill="#e6edf3">4 軸の意味</text>
+    <text x="0" y="16">Energy = FLOPS/hour</text>
+    <text x="0" y="30">Knowledge = 4 層 memory + RAD</text>
+    <text x="0" y="44">Coordination = N × peer cohesion</text>
+    <text x="0" y="58">Ethics = Approval Bus pass率</text>
+    <text x="0" y="78" fill="#94a3b8" font-size="9">5 段 grid = Type 0/I/II/III/IV</text>
+  </g>
+
+  <!-- Right legend: time progression palette -->
+  <g transform="translate(772 92)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#cbd5e1">
+    <text x="0" y="0" font-weight="600" fill="#e6edf3" text-anchor="end">時間遷移</text>
+    <g text-anchor="end">
+      <rect x="-12" y="8" width="10" height="10" fill="#5dd1ff"/><text x="-16" y="17">t=0  Type 0</text>
+      <rect x="-12" y="22" width="10" height="10" fill="#7ee787"/><text x="-16" y="31">t=4  Type I</text>
+      <rect x="-12" y="36" width="10" height="10" fill="#ffd166"/><text x="-16" y="45">t=8  Type II</text>
+      <rect x="-12" y="50" width="10" height="10" fill="#ef476f"/><text x="-16" y="59">t=12 Type III</text>
+    </g>
+    <text x="0" y="78" text-anchor="end" fill="#94a3b8" font-size="9">6s loop · SMIL only</text>
+  </g>
+
+  <text x="400" y="226" text-anchor="middle" fill="#64748b"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="10">
+    v0.I-C: 単一スコアの「進化した?」を 4 軸の「文明レベル」へ — Kardashev 1964 を AI 個体・集団・メタ集団に
+  </text>
+</svg>

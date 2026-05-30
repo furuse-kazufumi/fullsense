@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="10 个思考因子同时旋转" style="width:100%;height:auto;max-width:1200px">
+  <title>llive #24-02 — 10 个思考因子同时旋转</title>
+  <desc>10 vector nodes on a circle orbit clockwise. Each emits a pulse outward in sequence. SMIL-only animation.</desc>
+  <defs>
+    <radialGradient id="bg24_02" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1a2330"/>
+      <stop offset="100%" stop-color="#0a0f17"/>
+    </radialGradient>
+    <linearGradient id="ring24_02" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5dd1ff"/>
+      <stop offset="50%" stop-color="#ffd166"/>
+      <stop offset="100%" stop-color="#ef476f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="240" fill="url(#bg24_02)"/>
+
+  <text x="400" y="36" text-anchor="middle" fill="#e6edf3"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="18" font-weight="700">
+    10 个思考因子同时旋转
+  </text>
+  <text x="400" y="58" text-anchor="middle" fill="#94a3b8"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="12">
+    factor_structurize · recompose · loop · self_extend · uncertainty · explore · align · provenance · perspective · ground
+  </text>
+
+  <g transform="translate(400 145)">
+    <circle r="68" fill="none" stroke="url(#ring24_02)" stroke-width="1.5" stroke-opacity="0.6"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate"
+                        from="0" to="360" dur="20s" repeatCount="indefinite"/>
+      <g transform="rotate(0)">
+        <circle r="6" cx="68" fill="#5dd1ff"/>
+        <circle r="3" cx="68" fill="#5dd1ff" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="0s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="0s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(36)">
+        <circle r="6" cx="68" fill="#7ee787"/>
+        <circle r="3" cx="68" fill="#7ee787" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(72)">
+        <circle r="6" cx="68" fill="#ffd166"/>
+        <circle r="3" cx="68" fill="#ffd166" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(108)">
+        <circle r="6" cx="68" fill="#ef476f"/>
+        <circle r="3" cx="68" fill="#ef476f" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(144)">
+        <circle r="6" cx="68" fill="#c084fc"/>
+        <circle r="3" cx="68" fill="#c084fc" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="1.2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="1.2s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(180)">
+        <circle r="6" cx="68" fill="#5dd1ff"/>
+        <circle r="3" cx="68" fill="#5dd1ff" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(216)">
+        <circle r="6" cx="68" fill="#7ee787"/>
+        <circle r="3" cx="68" fill="#7ee787" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="1.8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="1.8s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(252)">
+        <circle r="6" cx="68" fill="#ffd166"/>
+        <circle r="3" cx="68" fill="#ffd166" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="2.1s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="2.1s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(288)">
+        <circle r="6" cx="68" fill="#ef476f"/>
+        <circle r="3" cx="68" fill="#ef476f" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="2.4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="2.4s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <g transform="rotate(324)">
+        <circle r="6" cx="68" fill="#c084fc"/>
+        <circle r="3" cx="68" fill="#c084fc" opacity="0.6">
+          <animate attributeName="r" values="3;14;3" dur="3s" begin="2.7s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="2.7s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+    </g>
+    <circle r="22" fill="#0a0f17" stroke="#5dd1ff" stroke-width="1.5"/>
+    <text y="5" text-anchor="middle" fill="#e6edf3"
+          font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" font-weight="600">COG-MESH</text>
+  </g>
+
+  <text x="400" y="225" text-anchor="middle" fill="#64748b"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="10">
+    llive — 单个个体内 10 个思考因子同时运行，相互评估
+  </text>
+</svg>

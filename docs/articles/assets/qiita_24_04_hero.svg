@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="UCB1 bandit arm selection and score curve" style="width:100%;height:auto;max-width:1200px">
+  <title>llive #24-04 — UCB1 が arm を選ぶ「速い小脳」</title>
+  <desc>Three bandit arms pulse in turn as UCB1 selects them; a score curve at the right rises and converges. SMIL-only animation.</desc>
+  <defs>
+    <linearGradient id="bg24_04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e1426"/>
+      <stop offset="100%" stop-color="#0a0f17"/>
+    </linearGradient>
+    <linearGradient id="curvegrad24_04" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5dd1ff"/>
+      <stop offset="100%" stop-color="#7ee787"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="240" fill="url(#bg24_04)"/>
+
+  <text x="400" y="34" text-anchor="middle" fill="#e6edf3"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="18" font-weight="700">
+    UCB1 が arm を選ぶ — 速い小脳の収束
+  </text>
+  <text x="400" y="56" text-anchor="middle" fill="#94a3b8"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">
+    SynapticSelector · explore / exploit · 同一個体内の synapse 選択
+  </text>
+
+  <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#e6edf3">
+    <g transform="translate(60 110)">
+      <text x="60" y="-8" text-anchor="middle" fill="#94a3b8" font-size="10">arm A</text>
+      <rect x="0" y="0" width="120" height="60" rx="6" fill="#5dd1ff" opacity="0.18"/>
+      <rect x="0" y="0" width="120" height="60" rx="6" fill="none" stroke="#5dd1ff" stroke-width="1.4">
+        <animate attributeName="stroke-opacity" values="0.3;1;0.3;0.3;0.3" keyTimes="0;0.1;0.2;0.6;1" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1.4;3.2;1.4;1.4;1.4" keyTimes="0;0.1;0.2;0.6;1" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      <text x="60" y="36" text-anchor="middle" font-weight="600">arm A · μ̂=0.42</text>
+    </g>
+    <g transform="translate(60 175)">
+      <text x="60" y="-8" text-anchor="middle" fill="#94a3b8" font-size="10">arm B</text>
+      <rect x="0" y="0" width="120" height="60" rx="6" fill="#ffd166" opacity="0.18"/>
+      <rect x="0" y="0" width="120" height="60" rx="6" fill="none" stroke="#ffd166" stroke-width="1.4">
+        <animate attributeName="stroke-opacity" values="0.3;0.3;1;0.3;0.3" keyTimes="0;0.2;0.35;0.55;1" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1.4;1.4;3.2;1.4;1.4" keyTimes="0;0.2;0.35;0.55;1" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      <text x="60" y="36" text-anchor="middle" font-weight="600">arm B · μ̂=0.71</text>
+    </g>
+    <g transform="translate(60 80)" opacity="0">
+      <animate attributeName="opacity" values="1;1;1;1;1" dur="4s" repeatCount="indefinite"/>
+    </g>
+    <g transform="translate(220 95)">
+      <text x="60" y="-8" text-anchor="middle" fill="#94a3b8" font-size="10">arm C  (winner)</text>
+      <rect x="0" y="0" width="130" height="80" rx="8" fill="#7ee787" opacity="0.22"/>
+      <rect x="0" y="0" width="130" height="80" rx="8" fill="none" stroke="#7ee787" stroke-width="1.6">
+        <animate attributeName="stroke-opacity" values="0.3;0.3;0.3;1;0.3" keyTimes="0;0.4;0.55;0.7;1" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1.6;1.6;1.6;4.2;1.6" keyTimes="0;0.4;0.55;0.7;1" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      <text x="65" y="40" text-anchor="middle" font-weight="700" font-size="13">arm C · μ̂=0.83</text>
+      <text x="65" y="58" text-anchor="middle" font-size="10" fill="#cbd5e1">UCB = μ̂ + √(2 ln n / n_arm)</text>
+    </g>
+
+    <g transform="translate(400 90)">
+      <text x="160" y="-10" text-anchor="middle" fill="#94a3b8" font-size="10">score curve (cumulative reward)</text>
+      <rect x="0" y="0" width="320" height="110" rx="6" fill="#10172a" opacity="0.65"/>
+      <line x1="0" y1="110" x2="320" y2="110" stroke="#475569" stroke-width="1"/>
+      <line x1="0" y1="0"   x2="0"   y2="110" stroke="#475569" stroke-width="1"/>
+      <path d="M 0 100 L 20 96 L 40 92 L 60 86 L 80 78 L 100 70 L 120 60 L 140 52 L 160 44 L 180 36 L 200 30 L 220 26 L 240 22 L 260 20 L 280 18 L 300 17 L 320 16"
+            fill="none" stroke="url(#curvegrad24_04)" stroke-width="2.4" stroke-linecap="round"
+            stroke-dasharray="500" stroke-dashoffset="500">
+        <animate attributeName="stroke-dashoffset" from="500" to="0" dur="4s" repeatCount="indefinite"/>
+      </path>
+      <circle r="4" fill="#ef476f">
+        <animateMotion dur="4s" repeatCount="indefinite"
+          path="M 0 100 L 20 96 L 40 92 L 60 86 L 80 78 L 100 70 L 120 60 L 140 52 L 160 44 L 180 36 L 200 30 L 220 26 L 240 22 L 260 20 L 280 18 L 300 17 L 320 16"/>
+      </circle>
+    </g>
+  </g>
+
+  <text x="400" y="225" text-anchor="middle" fill="#64748b"
+        font-family="ui-sans-serif,system-ui,sans-serif" font-size="10">
+    B-series: SynapticSelector が探索→収束、Hebbian 強化で synapse が太る
+  </text>
+</svg>
