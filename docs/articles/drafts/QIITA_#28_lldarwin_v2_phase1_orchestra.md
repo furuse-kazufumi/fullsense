@@ -369,7 +369,7 @@ In the upcoming "real-LLM article" and "orchestra article", we will show you whe
 
 ## 1. llive 是什么（致初次接触的读者）
 
-`llive`（el-live。L 有 2 个）是 **自我进化型、模块化记忆的 LLM 框架**。它是名为 FullSense 的伞形品牌的一员, 兄弟有 `llmesh`（本地 LLM hub）和 `llove`（终端 dashboard）。这 3 者是独立 OSS, 但组合起来就成为 1 个世界观。
+`llive`（读作 liv。L 有 2 个）是 **自我进化型、模块化记忆的 LLM 框架**。它是名为 FullSense 的伞形品牌的一员, 兄弟有 `llmesh`（本地 LLM hub）和 `llove`（终端 dashboard）。这 3 者是独立 OSS, 但组合起来就成为 1 个世界观。
 
 用 1 行概括 llive 的思想就是"**不是 LLM 本体, 而是套在 LLM '周围' 的认知 OS**"。把 4 层记忆、6 阶段的 loop、承认 bus（Approval Bus）、TRIZ、10 个思考因子……这些"思考的脚手架"搭在 LLM 的外侧, 使得 **即便是同一个 LLM 也能进化其行为**。
 
