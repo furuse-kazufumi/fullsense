@@ -1112,4 +1112,127 @@ end-to-end 实测（pressure-proxy + lldarwin + novelty + reservoir, 8 founders 
 
 ---
 
+## 9. Stage2 后半 —— 面对真实的本地部署 LLM，进化 prompt 策略
+
+由于发现 localhost 的 ollama（llama3.2:latest 等）可达，终于可以进行**真实 LLM 评价**了（commit `2fb2912`）。因为 localhost = on-prem，所以也满足 measurement purity（测量纯度，不与 cloud LLM 混用）的纪律（[[feedback_llive_measurement_purity]]）。
+
+### 9.1 个体 → 真实 LLM 的映射（Promptbreeder 系）
+
+关键是「如何让 genome 在真实 LLM 上生效」。我在 `real_pressures.py` 中实现了 **个体 → 真实 LLM 映射**。
+
+- **把个体的 `c_prompt`（PromptChromosome）转换为 system prompt**: skill_set → 指示文 / prompt_template_id → 推理风格 / language_style → 语调。把这个 system prompt 套在固定的 LLM（llama3.2）上，让它解 5 个弱点轴的**真实任务**并打分。
+- **固定 LLM 本体，进化 prompt 策略（genome）** = 用实测淘汰「哪种 prompt 策略能缓解 LLM 的弱点」。这是 Promptbreeder（用进化方式优化 prompt 的研究系列）的做法。
+- temp=0（greedy）确定性地进行。把 `(system_prompt, task)` 缓存（同一策略不再评价）。
+- robust: per-call try/except（ollama 的 hiccup 当作 task 的失分处理，运行继续）。
+- 增加 `--fitness real-pressure` / `--ollama-model` / `--max-wallclock-seconds`。tests 5 个 + 进化系 947 green。
+
+### 9.2 真实选择信号的实证 —— CoT+structure 策略把 multistep 从 0.0 → 1.0
+
+然后，观测到了真实的选择信号。
+
+**CoT+structure 策略**（`chain_of_thought` + structurize + loop）把 llama3.2 的 **multistep（多步推理）从 0.0 → 1.0 改善**（terse 策略以 0.0 失败；score 从 0.80 → 1.00 上升）。
+
+这意味着，lldarwin 的主张「用 prompt 策略的进化可以缓解 LLM 的弱点」，**不是用 proxy，而是在真实 LLM 上实证**了。即使是同一个 llama3.2 本体，根据套上去的 system prompt（= 进化后的 genome）不同，多步推理任务时而能解、时而不能解。进化实际选取了「能解的 prompt 策略」。
+
+![5 个弱点轴的群体平均推移（真实本地部署 LLM llama3.2 评价）。prompt 策略的进化使轴改善](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg)
+
+### 9.3 12h 连续运行
+
+真实 LLM 评价很重，所以启动了长时间的连续运行（`out/lldarwin_12h_realpressure_2026_05_26/`）。
+
+```
+--fitness real-pressure --selection lldarwin --novelty --lineage-reservoir
+--genome3d --population 24 --max-wallclock-seconds 43200 --checkpoint-every 5
+```
+
+在 wallclock 12h 处 safely 停止（已 snapshot → 可用 `--resume` 继续）。在连续运行中达到了 best_score=1.0。
+
+![真实 LLM 进化运行的适应度与多样性（12h 连续运行）](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status.svg)
+
+### 9.4 Honest 保留（真实 LLM 评价的局限）
+
+这里是从 #25 学到的态度的总决算。正因为出了花哨的结果（0.0 → 1.0、best 1.0），我才彻底诚实地写下内幕。
+
+- **(a) 参与 fitness 的只有 `c_prompt`。** persona / c_factors 是中立的（谱系由 reservoir 维持，初始选择由 novelty 承担）。也就是说，这是「**prompt 策略的进化**」，而非「persona 的进化」。不是冈洁的人格变聪明了，而是与冈洁这个谱系绑定的 prompt 策略被选中了。
+- **(b) 全部 founder 的初始 c_prompt 相同（default）。** 所以探索是 mutation 驱动的（按 founder 使 prompt 多样化是今后的改善）。由于起点相同，初始的谱系差异对 prompt 策略没有作用。
+- **(c) 小电池（每轴 2 题）= 噪声大的估计。** 0.0 → 1.0 这一戏剧性数字，也因题目数量少而含有噪声。要做统计上稳健的主张，需要更大的电池。
+- **(d) on-prem only（measurement purity）。这不是关于一般能力的主张。** 这是在 llama3.2 这一特定模型、特定任务上的观测，我不说「LLM 一般会这样」。
+
+如果把这些藏起来，就能写出「进化让 LLM 变得戏剧性地聪明了！」这样花哨的故事，但那是谎言。lldarwin 实证的，只到「**机制在真实 LLM 上产生选择信号**」为止。越过那条线的主张，我不做。
+
+> 🍵 **休息点**: 研究中最爽的，是喊出「0.0 变成 1.0 了！」的那一刻。但正是那一刻，[[feedback_benchmark_honest_disclosure]] 才发挥作用。「出了诡异地好的数字，自以为赢之前先怀疑内幕。」就这次而言——赢的是「prompt 策略」，而非「LLM 本体」也非「persona」。题目数量也少。只有 1 个 on-prem 模型。把这些全写出来，才第一次能说「实证了」。honest disclosure，是忍住炫耀的肌肉训练。
+
+---
+
+## 10. 既有资产的再利用（基于 codex 代码调查）
+
+为了不让设计沦为画饼，我让配下的 Codex 调查既有代码，结果发现**很多都是已实现、未接线**。
+
+- `mating.py:139 LexicaseSelection`（带 ε，已实现但未接线 → 只需接线）
+- `nsga2.py:197 NSGA2Selection`（用于 ≤3 目标 lane）
+- `diversity.py:94 NoveltyScorer` / `quality_diversity.py MAPElitesGrid` / `speciation.py SpeciationLayer`
+
+**新实现**: `Standardizer` / `MinimalCriterionGate` / `Pressure` 群 / `MultiPressureSelector`（核心）/ `LineageReservoir`（Stage1.5）/ `SelectionAudit`。
+**接线点**: 在 `loop.py:122` 的 `selection` 注入 `MultiPressureSelector`，在 `persona_evolution.py:606` 增加注入口，把 `LineageReservoir` 接到 `EvolutionLoop.on_population_bred` hook。
+
+> 🍵 **休息点**: 「已实现但未接线」最多，是最大的教训。即使做出好部件，**不接线（编排）进化就仍然坏着**。#25 之所以变成 8→2，是因为 ε-lexicase、NoveltyScorer、QD 都「在箱子里却没接线」。lldarwin 的本质，与其说是新算法的发明，不如说是「把既有的好部件**不聚合地**捆起来，并**实际接线**进进化循环」。即使把电子元件全凑齐，不焊接收音机也不会响。
+
+---
+
+## 11. 防止崩溃的保证 —— 不会全灭的多层结构（已由实测支撑）
+
+反证 #25 的 monoculture（8→2）的多层结构，按设计齐备，而且这次**得到了实测的支撑**。
+
+1. **MinimalCriterionGate** —— 以最低标准定繁殖资格 → 抑制一强通吃。
+2. **QD per-cell elite** —— 只要残存 1 个 cell，谱系就不可能全灭（archive 单调增长）。
+3. **Niching / FitnessSharing** —— 对同 niche 降权 → 多峰并存。
+4. **Down-sampling** —— 用 moving target 破坏 plateau。
+5. **per-dim z-score + 中心一致排除** —— 不偏向无特征者。
+6. **LineageReservoir（Stage1.5 中追加）** —— 灭绝谱系的中立贮藏库 → 从结构上阻止谱系全灭（实测 8/8 存活）。
+7. **monoculture 监视 + SPC** —— 每代记录 max_lineage_share，用 SPC_ALARM 检测 >0.8 → 自动调整。
+
+特别是 (6)，是承接 §5 的 honest disclosure（novelty 无法阻止谱系固定）而**事后追加的一层**。用实测找到设计的漏洞并堵上。实测的 lineage_fixation 为 OFF 0.70 → ON 0.29，大幅低于 OE-3 标准（<0.8）。以「不聚合」+「让灭绝谱系复活」的两段式，从结构上压垮 #25，是本文的到达点。
+
+---
+
+## 12. honest disclosure / 风险（前置铺垫）
+
+我不盲信设计。把已接受的局限（下一篇 #27 深挖）再总结一次。
+
+- **Goodhart's law / proxy 偏离** —— 把 LLM 弱点做成 proxy fitness，「hack 指标的表面策略」就会进化（typo → 背诵特定替换、WSD → 利用测试的 heuristic 等）。proxy 仅限于 mechanism feasibility，不主张 production 能力。
+- **设计者依赖性** —— lexicase=case / QD=描述子 / novelty=距离尺度，无论哪个，「多样性的方向」都由设计者决定。生物进化级别的未预想涌现是有限的。
+- **minimal-criterion 的停滞⇄崩溃权衡** / **QD 的维度诅咒 + archive 饱和**。
+- **真实 LLM 评价的局限（§9.4 重述）** —— 仅 c_prompt 参与 fitness、founder 初始 prompt 相同、小电池、on-prem only。
+
+> **下回预告（#27）**: 我会诚实曝光最痛的反证——「当眼镜饱和，选择压就无力」，连同 Goodhart's law 与 proxy fitness 的局限。lldarwin 并非万能。**能主张到哪里**，是 #27 的主题。正因为这次出了「8/8 存活」「0.0→1.0」这样的好数字，下次才用反证来彻底锤炼它。
+
+---
+
+## 13. 结论
+
+- 进化是「**测量（lleval）**」与「**淘汰（lldarwin）**」的两段式。淘汰的核心是 **「不聚合」**。
+- Stage1: 用 criteria 排除 + novelty pressure，把行为多样性从 7.12 → 14.88（+109%）翻倍，避免了终盘崩溃。
+- honest disclosure: novelty/lexicase 保住的是**行为多样性**，但**谱系固定**会因中立漂变（Kimura）趋向 monoculture。我混淆了两种多样性——诚实记录。
+- Stage1.5: 用 lineage-niched **中立贮藏库**，在真实 EvolutionLoop 中实现 **OFF=2 谱系 / ON=全 8 谱系存活**（含冈洁、格罗滕迪克），lineage_fixation 0.29（≪0.8）。**这不是捏造，而是实际跑起来了**。
+- 再投入频率 sweep: 谱系保持↔行为多样性的权衡。diversity 在 interval=5 处达峰（**非单调**）这一非平凡知见。
+- Stage2 前半（proxy）: 把 5 个弱点轴做成 Pressure plugin（仅 mechanism feasibility）。
+- Stage2 后半（真实 LLM）: 用个体 c_prompt → system prompt 映射，对固定的 on-prem LLM（llama3.2）做真实任务打分。**CoT+structure 策略把 multistep 从 0.0 → 1.0 改善**。12h 连续运行达到 best=1.0。
+- 不乐观、不自以为赢、分内幕地报告（[[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]]）。
+
+仅做出好部件，进化仍然坏着。**不聚合地捆绑、实际接线、让灭绝的谱系复活、在真实 LLM 上确认选择信号**——做到那一步，才终于把 #25 的「只剩我和 Friston」的世界，变成了冈洁、格罗滕迪克也都在的热闹世界。在下一篇 #27 中，我用反证重新追问：对这次的成功，能寄予多少信任。
+
+---
+
+## 14. 相关
+
+- 连载 #25「只剩我和 Friston」—— 本文的动机（失败的记录）
+- 连载 #24-08「制造眼镜」—— lleval（测量的一侧）
+- 连载 #27「眼镜起雾，淘汰也无力」—— 反证调查（honest disclosure）
+- 设计书: lldarwin（淘汰的一侧）`docs/vision/LLDARWIN_DESIGN.md`
+- 实测正本: `docs/research/lldarwin_stage1_results_2026_05_26.md`
+- llive commits: Stage1=`8060204` / 中立贮藏库 PoC=`0d0537d` / Stage1.5=`b03cbda` / reinject sweep=`da93dd3` / Stage2 真实 LLM=`2fb2912`
+- 相关 memory: [[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]] / [[feedback_originality_over_imitation]] / [[feedback_poc_feasibility_first]]
+
+---
+
 
