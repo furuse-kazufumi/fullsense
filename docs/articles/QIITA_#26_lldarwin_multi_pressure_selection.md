@@ -829,3 +829,287 @@ Just making good parts leaves evolution broken. **Bundle without aggregating, ac
 
 ---
 
+# 中文
+
+# 仅靠「用眼镜测量」无法驱动进化 —— 选择压组件 lldarwin 的设计与实测 #26
+
+> **概念 hook**: 在上一篇 #25 中，我曝光了一次巨大的失败：「把 AI 进化 500 代之后，世界上只剩下**我和 Friston**了。」
+> 冈洁、格罗滕迪克、冯·诺依曼，全都在进化途中悄然消失。原因在于：评价函数（眼镜 = lleval）持续给出满分，导致**选择压降为零**。即使能「测出」谁更优秀，如果无法把这个差异转换为「谁能存活」，进化就堕落为单纯的遗传漂变。
+>
+> 那么——既然眼镜让我们能「测出」差异，那把这个差异**正确转换为「淘汰」的装置**该如何制造？
+> 那就是本篇的主角，**lldarwin**。它是 ll- 家族的新成员，是**专门负责淘汰（选择压）**的组件。
+>
+> 本文希望你记住的关键词，只有一个：**「不要聚合」**。把多把尺子加总成一把的那一刻，进化就坏掉了。为什么会这样，以及我如何用实测跨越它——接着失败往下讲，这次说的是**实际跑起来了**的故事。
+
+---
+
+## 0. 三行概述（落语的「枕」）
+
+落语在正题之前有「枕」。先用三行勾勒全貌。
+
+- **lleval 测量，lldarwin 淘汰** —— 进化只有作为「测量」与「淘汰」的两段式结构，才第一次有意义。
+- 淘汰的第一原则是**不聚合多个选择压的多目标淘汰**。在此结构性地切断 #25 失败的真因（用单一标量的 argmax 压垮了它）。
+- 采用的三大支柱 = **ε-lexicase + minimal-criterion QD + down-sampling**（横向调研 evolutionary_computation 语料库 616 篇后选定）。
+
+而且这次与 #25 的区别在于：不仅有骨架，还有**实测**。用 novelty pressure 把行为多样性从 7.12 → 14.88（+109%）翻倍，用**中立贮藏库**实际**全员复活**了「已灭绝的冈洁、格罗滕迪克谱系」，最后面对**本地部署的真实 LLM（llama3.2）**，进化 prompt 策略，把不擅长的任务从 0.0 → 1.0 改善。按顺序逐一来看。
+
+---
+
+## 1. 为什么要把「测量」与「淘汰」分开
+
+llive 家族中已经有 **lleval（眼镜 = 评价框架，连载 #24-08）**。它是观测个体行为、按多个轴打分的装置。
+
+然而 #25 揭示的是一个致命的真相。**即使能用眼镜测出差异，一旦用 argmax 把那个差异压成一个，淘汰就坏掉了。** 具体来说，`fitness_rich` 把多个 archetype 相似度用 `nearest = max(sims)` 折叠成了单一标量。这就是 SEL-2 违规——「best=1.0 饱和，所有人都拿满分，选择梯度消失」的真因。
+
+明确区分职责的话，是这样。
+
+```
+lleval   = 测量  （把个体行为转换为「多轴的 pressure profile」）
+lldarwin = 淘汰  （把那个 profile 转换为「下一代的亲本」）
+```
+
+`lleval` 的输出是 **case 向量**（各轴分数排列成的数组）。`lldarwin` 把它作为输入契约接收，**不聚合地**进行淘汰。两者的职责边界正在于此。如果 lleval「把轴加总成一把之后」再交过来，lldarwin 就什么都做不了。所以对 lleval 一侧课以契约：「必须保留并传递 breakdown（按轴的分解）」。
+
+lldarwin 的 `Pressure` 接口，由以下最小契约表达。
+
+- `name` —— 轴的名称（`typo_robustness` 等）
+- `evaluate(individual_output) -> case_scores: list[float]` —— 把个体行为转换为「按轴的分数数组」
+- `is_proxy: bool` —— 是 proxy 测量还是真实 LLM/VLM 测量（测量纯度的区分）
+- `minimal_criterion: float | None` —— 该轴的最低繁殖标准（None 则无 gate）
+
+要点在于：`evaluate` 的返回值是**列表，而非标量**。一个轴之内也有多个 case（测试用例），不压垮它们而直接流向 lldarwin。这种「不压垮」的设计，是后面拯救 specialist 的伏笔。
+
+> 🍵 **休息点**: 把眼镜（lleval）与滤镜（lldarwin）分开的意义，用摄影来说就是「测光」与「决定采用哪一张」的区别。即使测光完美，选错最佳镜头相册也就毁了。即使曝光表（lleval）告诉你「这一张亮度 80 分、构图 30 分、表情 95 分」，你是把它四舍五入成「平均 68 分」而丢弃，还是「把表情 95 分的那一张另设一格保留」，相册的丰富程度会有天壤之别。lldarwin 是「采用判断」的专家。让测量者与挑选者一人兼任，通常两边都会变得粗糙。
+
+---
+
+## 2. 设计的核心 —— 「不聚合」的 7 个阶段
+
+lldarwin 把从 lleval 接收的 pressure profile（多轴的 case 向量）通过以下 7 个阶段进行淘汰。对每一个都附上「为什么需要 = 防止哪种失败」。
+
+1. **Standardizer** —— per-dim z-score。不偏向那种仅仅「全轴平均偏高」、毫无特征的优等生，而把各轴上的**偏离**转换为选择压。中心一致（与大家相同）被排除。
+   - *防止的失败*: 「仅仅平均分高」的平庸者获胜、尖锐个体消失的 monoculture 入口。
+2. **MinimalCriterionGate** —— 按各轴的最低标准划分繁殖资格。不让仅凭连续排名就「赢者通吃」。
+   - *防止的失败*: 一强独占全部繁殖名额的全灭场景。以「只要满足标准谁都能繁殖」的「最低保障」保留多样性的地基。
+3. **EpsilonLexicaseSelection** —— 把各轴作为 case 一个一个独立评价。在某个轴上突出的 specialist（其他轴平庸）也能存活。
+   - *防止的失败*: 聚合 argmax 导致的 specialist 灭绝。这正是产生 #25 的 8→2 的机制本身。
+4. **QD / MAP-Elites archive** —— 把 pressure profile 转换为 behavior 描述子，按 cell 保留 elite。archive 单调增长。
+   - *防止的失败*: 结构性全灭。只要一个 cell 中哪怕残存一个个体，那个行为就不会消失。
+5. **Niching / FitnessSharing** —— 对同一 niche 的个体降权，让多峰并存。
+   - *防止的失败*: 向单峰的凝聚（monoculture）。
+6. **Down-sampling** —— 每一代只用 case 的子集来评价，扰动环境。
+   - *防止的失败*: 对特定 peak 的过适应与 plateau（停滞高原）。通过使其成为 moving target，不允许「用同样的方式获胜」。
+7. **NoveltyScorer** —— 停滞时，向「与过去不同的行为」施加探索压。
+   - *防止的失败*: 探索枯竭。当改善停止时，把新颖性本身作为奖励，推向外部。
+
+与 #25 的 8→2 monoculture 对比，核心是三个：**(3) ε-lexicase、(4) QD archive、(2) minimal-criterion**。在 #25 中这些全部缺失，只有单一标量 argmax 在运转。所以「平均最强的一个谱系」把连续排名通吃，其余在漂变中消失。lldarwin 通过「不聚合地把这三个捆在一起」，构建出即使世代累积也不崩溃的结构。
+
+> 🤔 **比喻（漫才风）**:
+> 捧哏「把考试分数全加起来排名，结果只剩下平均分高的优等生了。」
+> 逗哏「那不是零多样性吗！数学 100 分、其他都 0 分的天才不见了啊！」
+> 捧哏「不过，论总分还是优等生更高啊……」
+> 逗哏「**别看总分！** 一个科目一个科目看的话，那个天才在『数学』这个 case 上谁都赢不了。ε-lexicase 就是拯救这个的机制。一加总，天才就死了。」
+> ——加总（聚合）杀死 specialist。因为 ε-lexicase「一个科目一个科目地看」，尖锐的家伙才能存活。这就是 lldarwin 的头号要义。
+
+---
+
+## 3. 为什么是这 3 大支柱（rad-research 的支撑）
+
+作为「即使世代累积也不崩溃」的最有力融合方案，我横向调研了 evolutionary_computation 语料库 616 篇后选定。来历很重要：我不是自己发明的，而是从既有研究中甄选并捆绑了「不聚合」的谱系。
+
+| 方法 | 效用 | 出处 |
+|---|---|---|
+| **ε-lexicase** | specialist 保存、high population diversity | La Cava 2019 (arXiv 1905.13266) / 2204.06461 |
+| **QD / MAP-Elites** | 凭 per-cell elite 实现全灭不可能 | Fontaine CMA-ME 2019 (1912.02400) / MNSLC GECCO 2024 |
+| **down-sampled lexicase** | 环境扰动、降低成本 | Helmuth & Spector 2021 (2106.06085) |
+| island + extinction/repopulation | 防止早熟收敛（将来选项） | Lyu 2020 (2005.07376) |
+
+三大支柱看似各不相干，实则可以被**一个思想「不聚合」**串成一串。ε-lexicase「不聚合各轴」。QD「不聚合行为空间（按 cell 保留）」。down-sampling「不固定评价环境（每代扰动）」。它们都在「不把它们揉成一把」这一点上共享相同的哲学。所以即使组合，思想也不冲突，反而相乘增益。
+
+> 🍵 **休息点**: 有人问「为什么不自己发明？」答案很简单：**因为既有研究的组合已经足够强**。我的开发规则（[[feedback_originality_over_imitation]]）写道：「外部算法的采用是**甄选**而非穷尽。排除崩溃风险与单纯模仿，只采纳能为原创设计增值的东西。」lldarwin 的原创性不在于「发明了新的选择算法」，而在于「**不聚合地把它们捆起来的捆法**，以及把它**实际接线**进 llive 的进化循环」。用做菜来说，不是创造世界首创的食材，而是把既有的名食材「不混合地盛在一盘」的手艺。把混合就会毁掉的食材，不混合地使其共存。
+
+---
+
+## 4. Stage1 —— 用 criteria 排除 + novelty pressure 把行为多样性翻倍
+
+从这里开始是实测。Stage1 中，没有一下子把设计全部实现，而是只放入最可能有效的两个改动来测量（llive, branch `optimize/core-2026-05-20`, commit `8060204`）。
+
+**改动 1: criteria 排除。** 从 ε-lexicase 的 case 中，移除了 `factor_score`（= max-archetype 的单一标量 = argmax，正是 #25 的 best=1.0 饱和的真因）与 `nearest_persona_idx`（= 顺序无意义的类别 index）。这是一次「把坏尺子从淘汰的判断材料里清除」的打扫。
+
+**改动 2: novelty pressure。** 启用 `MultiPressureSelector(use_novelty=True)`。每一代计算与过去世代 archive 的 k-NN 平均距离（Lehman-Stanley 流的 novelty），在群体内做 z-score 化（STD-1），作为附加的 lexicase case 混入淘汰。把「在做着与大家不同的行为」这件事本身，作为轴之一来评价。
+
+测试方面，把 `tests/unit/test_evolutionary_lldarwin.py` 从 8 → 10 个扩展（增加排除、novelty 保存）。进化系 847 个 green，无回归。
+
+实测条件是 rich-proxy、8 founders + pop24、150 代、seed 0。结果如下。
+
+### 4.1 行为多样性 (diversity_l2) —— novelty 见效的指标
+
+| 条件 | mean | tail30 min | final |
+|---|---|---|---|
+| BASELINE（排除前、相当于 Tournament 的旧 lldarwin） | 7.12 | 0.68 | 0.83（崩溃） |
+| A: 仅 criteria 排除 | 9.16 | 1.57 | 1.57 |
+| **B: 排除 + novelty** | **14.88（+109%）** | **6.56（9.6×）** | **11.73（避免崩溃）** |
+
+novelty pressure 把行为（genome 空间）的多样性维持在约两倍，防止了终盘的多样性崩溃。仅 criteria 排除单独也有效（清除了 spurious 的 argmax 压那部分）。BASELINE 在 final 0.83 处**崩溃**，而条件 B 在 final 11.73 处**站稳了脚跟**。这是「不聚合」设计的第一份手感。
+
+![Stage1 baseline（无 novelty）的适应度与多样性。终盘多样性崩溃](../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg)
+
+![Stage1 有 novelty。多样性维持到终盘](../assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status.svg)
+
+把两张并排，终盘行为的差异一目了然。baseline 的多样性曲线贴在地板上，而有 novelty 的则保持高水平一路跑到终点。
+
+> 🍵 **休息点**: 用金鱼池来比喻 novelty pressure——如果只留下围着饵（高 fitness）扎堆的金鱼，迟早会变成所有金鱼在同一处做同样动作的池子。novelty pressure 就是那个「**给在不同地方游的金鱼也发奖金**」的角色。结果是一个金鱼散布各处、看不腻的池子。但在这里不能松懈。下一节，会发现潜伏在这「热闹的池子」里的**陷阱**。
+
+---
+
+## 5. honest disclosure（最重要）—— 我把行为多样性与谱系存活混为一谈了
+
+这是本文最重要的一节。即使出了好数字（+109%）也不能就此自以为赢——这是我的铁律（[[feedback_benchmark_honest_disclosure]]）。我怀疑了内幕。然后，找到了错误。
+
+### 5.1 谱系固定 (founder_counts) —— novelty 无法改善的指标
+
+在同一份实测里，看另一个指标。「8 个 founder（祖先谱系）中，有几个谱系存活到了最后？」
+
+结果是——**在所有条件下，最终都从 8 → 2 个谱系**（furuse-kazufumi + friston）收敛。oka-kiyoshi（冈洁）/ grothendieck（格罗滕迪克）/ von-neumann / feynman / millidge / isomura **全部灭绝**。
+
+明明放入了 novelty 把行为多样性翻倍，**谱系的存活却与 #25 完全相同，是同样的 2 个谱系**。
+
+### 5.2 为什么 —— 我混淆了两种「多样性」
+
+设计书（#25 时点）的 TODO 写着「在重跑中验证冈洁、格罗滕迪克谱系是否存活」。这就是**把行为多样性与谱系存活混为一谈了**。
+
+`poc_evolution_env.py` 的作者注释（L129-132）精确地点中了这个混淆。
+
+> "monoculture = BEHAVIORAL concentration (max archive-cell occupancy)…
+> neutral drift (Kimura) regardless of mechanism — that is expected, not collapse.
+> The OE signal is behavioral spread. **lineage_fixation … to keep it <1 needs QD niching on lineage / PERSONA-FX, not pure novelty**"
+
+掰开来讲，是这样。
+
+- 已证实的 monoculture 0.05 是**行为性的**（archive-cell 的占有率），而**不是谱系性的**。novelty/lexicase 改善的是「行为的扩散」，而非「祖先的存活」。
+- 谱系固定因中立漂变（木村资生的中立进化论）而趋向 monoculture，是**理论上正常的**。这不是崩溃。novelty 与 lexicase 都只拥有**保存既有个体**的机制，而**没有让一旦灭绝的谱系复活的机制**。所以谱系固定从结构上无法阻止。
+- 此外，archetype 之间的距离也被压缩在 0.068～0.29（相似度密集于 0.71～1.0），选择梯度弱，drift（漂变）占主导。friston 是最非中心的（centroid 距离 0.162），却存活了 = 不是中心性（强度），而是凭**运气（drift）**，2 个谱系被固定了下来。
+
+也就是说——我「希望冈洁、格罗滕迪克存活」的愿望，是一种**用提升行为多样性的药绝对治不好的病**。我用错了药。这是值得诚实记录的教训。
+
+> 🍵 **休息点**: 用漫才来说。
+> 捧哏「在池子里增加了各种五颜六色动作的金鱼！多样性满分！」
+> 逗哏「那，**血统**呢？原本有的 8 个金鱼家系，还剩几个？」
+> 捧哏「……2 个。」
+> 逗哏「动作那么花哨，家谱却空空如也啊！动作的多样性和血统的多样性是**两码事**！」
+> ——「行为多样」与「谱系多样」，是看起来相像、实则完全不同的指标。我把它们混淆了。诚实曝光。
+
+---
+
+## 6. Stage1.5 —— 用中立贮藏库让灭绝的谱系复活
+
+一旦弄清病的真面目，就能换药。谱系存活所需要的，是「让灭绝的谱系每代 re-inject 的机制」——**lineage-niched 中立贮藏库（reservoir）**。
+
+### 6.1 先用 PoC 确认机制
+
+没有一上来就改造正式循环，而是先用 standalone PoC 确认机制能转起来（[[feedback_poc_feasibility_first]] = 需求 → PoC → 可行性 → 详细设计，llive `scripts/poc_lineage_reservoir.py`, commit `0d0537d`）。
+
+selection 沿用 Stage1 的 `MultiPressureSelector`（criteria 排除 + novelty）。fitness 是 rich-proxy。谱系从 parent_a 继承。**reservoir = 按谱系保留 best-ever genome，并把灭绝的谱系每代 re-inject**（替换掉低 score 的子代；best 不破坏）。用 8 founders + pop24 + 150 gens + seed 0 测量。
+
+| reservoir | 最终 named 谱系 | lineage_fixation (tail30 mean) | diversity_l2 (tail30) |
+|---|---|---|---|
+| OFF | **1**（oka-kiyoshi 24/24 = 完全 monoculture） | 1.00 | 1.58 |
+| **ON** | **8（全 founder 存活）** | **0.31（≪ 0.8 OE-3）** | 1.69 |
+
+reservoir ON 时，包括冈洁（oka）、格罗滕迪克（grothendieck）在内的**全部 8 个谱系存活**。最终 shares 为 friston 7 / furuse 6 / grothendieck 4 / oka 3 / 其余 4 个谱系各 1。**强谱系带着子孙繁殖，弱谱系由贮藏库维持生命**，这是理想的行为。行为多样性也未下降（1.69 vs OFF 1.58）。
+
+**Honest 保留（PoC 阶段）**: 由于贮藏库再投入 frozen elite（被冻结的代表），弱谱系（各 1 体）的「存活」是来自再投入，而非主动进化。这符合中立贮藏库的定义（保留代表，使其可再组合），是正当的，但我不主张「弱谱系仍在活跃地持续进化」。
+
+### 6.2 嵌入正式 EvolutionLoop（additive + default-off）
+
+由于 PoC 已确认机制，我把它嵌入了正式的 `EvolutionLoop`（commit `b03cbda`）。设计的关键是 **additive 且 default-off**——丝毫不改变既有行为，只在立起标志时才生效。死守了向后兼容。
+
+- 增加 `EvolutionLoop.on_population_bred` hook（可在 breed 之后、评价之前转换 bred 列表；默认 None = 向后兼容）。
+- `LineageReservoir`（`lineage_reservoir.py`）: 祖先追踪（继承 parent_ids[0]）+ 按谱系保留 best-ever + 灭绝保护谱系的 re-inject。共享 `founder_map`，与谱系日志保持一致。
+- 增加 `run_persona_evolution(lineage_reservoir=True)` / run 脚本 `--lineage-reservoir`。
+- tests: `test_evolutionary_lineage_reservoir.py` 6 个 + 进化系 **937 green**（无回归）。
+
+在真实 EvolutionLoop 中的实测（rich-proxy + lldarwin + novelty, 8 founders / pop24 / 150gens / seed0）。
+
+| 条件 | named 谱系存活 | max_share | lineage_fixation (tail30) | diversity_l2 (tail30) |
+|---|---|---|---|---|
+| reservoir OFF (Stage1) | 2/8（furuse 17 + friston 7） | 0.71 | 0.70 | 14.88 |
+| **reservoir ON (Stage1.5)** | **8/8（全谱系）** | **0.33** | **0.29（≪ 0.8 OE-3）** | 9.20 |
+
+包括冈洁（oka 3）、格罗滕迪克（grothendieck 1）在内的**全部 8 个谱系，在真实循环中存活**。正式实现以 0.29 复现了 PoC 的预测（fixation 0.31）——这是机制按设计运转的证据。
+
+这是本文最大的看点。请对比下面两张。
+
+![中立贮藏库 OFF。谱系支配 stream 最终崩溃为 furuse 71% / friston 29% 的 2 个谱系](../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg)
+
+![中立贮藏库 ON。全部 8 个谱系（millidge / von-neumann / oka / grothendieck 等）并存](../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg)
+
+OFF（上）：随着世代推进，stream 被吞入 2 种颜色——这是 #25 的「只剩我和 friston」的再现。ON（下）：8 种颜色作为带子一直保留到最后。冈洁、格罗滕迪克，都没有消失。
+
+![中立贮藏库 ON 的适应度与多样性](../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_status.svg)
+
+> 🍵 **休息点**: #25 中我哀叹「只剩我和 Friston」的那个寂寞的世界。这次它变成了冈洁、格罗滕迪克、冯·诺依曼全都在场的热闹世界。**这不是捏造，而是实际跑出来的结果**（遵循 [[feedback_benchmark_honest_disclosure]]，既不写虚假的失败，也不写虚假的成功）。但是——在得意忘形之前，请回想 §5 学到的态度。「出了好数字就怀疑内幕」。在下面的 §6.3，我诚实写下这次成功也是有**代价**的。
+
+### 6.3 Honest 保留 —— 谱系保持与行为多样性是弱权衡
+
+reservoir ON 时谱系全员存活。但仔细看，**diversity_l2 从 14.88 → 9.20 下降了**。由于每代再投入 frozen elite（冻结代表），genome 空间的扩散稍有减少。
+
+不过，OFF 时的崩溃（final 0.83）被避免了。也就是说，这是一种**弱权衡**关系：「取谱系保持，行为多样性的峰值会略降，但能防止崩溃」。它不是零代价的魔法。我诚实写下来。而这个代价能压到多小，成为下一个 sweep 的主题。
+
+---
+
+## 7. 再投入频率 sweep —— 非单调最优点这一非平凡发现
+
+我用 `reinject_interval`（执行再投入的世代间隔；默认 1 = 每代）的 sweep，对 §6.3 的 honest 保留（frozen elite 再投入会使 diversity 下降）做了特性化（commit `da93dd3`）。增加 `LineageReservoir.reinject_interval` + `--reinject-interval` 标志（test 7 个）。8 founders / pop24 / 150gens / seed0。
+
+| interval | named 存活 | lineage_fixation (tail30) | diversity_l2 (tail30) |
+|---|---|---|---|
+| **1**（每代） | **8/8** | 0.32 | 9.91 |
+| 5 | 5/8 | 0.37 | **12.84（最大）** |
+| 10 | 3/8 | 0.41 | 11.41 |
+| 20 | 2/8 | 0.44 | 10.75 |
+
+**这里有一个非平凡的发现。** 直觉上你会预想「减少再投入（提高 interval），frozen elite 的塞入就减少，diversity 单调恢复」对吧？然而——**diversity 并未单调增加，而是在 interval=5 处达到峰值**，在 10/20 处反而下降了。
+
+想想原因就能信服。把谱系放任过度（interval 太大），则 (a) 来自贮藏库的多样性注入减少，(b) 少数谱系被固定，结果 diversity 也长不上去。「再投入过多」和「放任过度」两边都不行，最优点在中间。这是**不实际跑 sweep 就无法预测**的知见。
+
+运营指南变成了这样。
+
+- 若**以谱系保持为最优先** → interval=1（8/8 全谱系存活）。
+- 若想**兼顾行为多样性** → interval=5（保住 5/8 的同时 diversity 最大）。
+
+兼顾的最优点依赖于 fitness 的设计与群体规模，所以正式环境中要用 sweep 重新标定。
+
+![再投入频率的权衡。谱系保持与行为多样性成反比，diversity 在 interval=5 处达到峰值（非单调）](../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg)
+
+> 🍵 **休息点**: 就像落语的 sage（包袱），这里有一个「背叛预期的转折」。本以为「越做越好」，结果是「做过头反而有害」。和给植物浇水一样：浇太少会枯，浇太多会烂根。最优点在中庸。做进化计算时，会一次又一次遇到这种「不单调的曲线」。所以要测基线，跑 sweep。直觉，常常被背叛。
+
+---
+
+## 8. Stage2 前半 —— 用 proxy 把「LLM 的弱点」变成选择压
+
+到此为止都是用 rich-proxy（基于 persona 相似度的 heuristic）确认机制。接下来实现设计的另一根支柱：**把「LLM/VLM 现实中弱、且可测量的轴」变成 pressure**（一系列 commit, `pressures.py`）。
+
+我把设计 §3 列出的 5 个可 proxy 的轴做成了 plugin。
+
+| pressure（LLM 弱点） | 相关思考因子（case） |
+|---|---|
+| typo_robustness（噪声耐受） | consistency / reality_link / uncertainty |
+| polysemy_wsd（多义词） | multiview / consistency / reality_link |
+| multistep_robustness（多步推理） | structurize / closed_loop / self_extend |
+| calibration（置信度估计） | uncertainty / provenance |
+| context_management（无关上下文耐受） | consistency / provenance / recompose |
+
+`make_pressure_fitness()` 把各 pressure 的 case（共 14 个）输出到 breakdown，lldarwin 的 ε-lexicase **不聚合地按轴淘汰 specialist**。增加 `--fitness pressure-proxy`。tests `test_evolutionary_pressures.py` 4 个 + 进化系 **942 green**。
+
+end-to-end 实测（pressure-proxy + lldarwin + novelty + reservoir, 8 founders / 120gens）: named 谱系 **8/8 存活** / lineage_fixation (tail) 0.67 / diversity_l2 (tail) **17.91**。14 个弱点轴 case 被独立淘汰，行为多样性高。谱系由 reservoir 维持（由于 pressure-proxy 不直接奖励 persona 的同一性，优势谱系的 share 比 rich-proxy 的 0.29 更高，为 0.67）。
+
+![5 个弱点轴（typo / polysemy / multistep / calibration / context）的群体平均推移（proxy 测量）](../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg)
+
+**Honest 保留（设计 §7 / §7.1 已明示的已接受局限）**: 个体不是真实 LLM，而是 genome（llive 配置）。本 pressure 测量的是「genome 具备多少与该弱点**相关的思考因子**」这一**行为的代理**，而**不是 production 的 LLM 能力**。这仅限于 **mechanism feasibility（机制能转起来）的验证**。Goodhart 风险（hack proxy 的表面策略会进化）也是已接受的局限。真实 LLM/VLM 弱点轴的实测，留到 Stage2 后半（以 OLLAMA_HOST 设置 + 个体→真实 LLM 映射为前提）。
+
+> 🍵 **休息点**: 这里容易被误解，所以再叮嘱一遍。我**还没有说**「用进化克服了 LLM 的弱点！」proxy 测的只是「机制是否转起来」。真实 LLM 是否变得对 typo 更鲁棒，在这个阶段完全不得而知。即使 proxy 出了花哨的数字（17.91），那也是「装置在运转」的证明，而非「内容变聪明了」的证明。一旦把这条线模糊掉，研究就成了谎言。所以接下来，我面对**真实的 LLM**。
+
+---
+
+
