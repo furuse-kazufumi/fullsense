@@ -33,7 +33,7 @@ ignorePublish: false
 > その「思考因子側」 — COG-MESH-01〜10 と historical persona ontology (CE-19)
 > の交差点を辿る.
 
-![theme — 10 思考因子 radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_02_theme.svg?v=2)
+![theme — 10 思考因子 radar + COG-MESH ring (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_02_theme.svg)
 
 ## 0. 連載中での位置づけ
 
