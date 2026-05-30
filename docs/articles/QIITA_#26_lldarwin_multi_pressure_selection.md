@@ -1235,4 +1235,288 @@ end-to-end 实测（pressure-proxy + lldarwin + novelty + reservoir, 8 founders 
 
 ---
 
+# 한국어
+
+# 「안경으로 측정」하는 것만으로는 진화하지 않는다 — 선택압 컴포넌트 lldarwin의 설계와 실측 #26
+
+> **콘셉트 hook**: 전작 #25에서 저는 「AI를 500세대 진화시켰더니, 세계에 **저와 프리스턴만** 남았다」는 큰 실패를 공개했습니다.
+> 오카 기요시도, 그로텐디크도, 폰 노이만도, 전부 진화 도중에 조용히 사라졌습니다. 원인은, 평가 함수(안경 = lleval)가 만점을 계속 내놓아서 **선택압이 0이 된 것**입니다. 누가 우수한지 「측정할 수 있어」도, 그 차이를 「누가 살아남는가」로 변환하지 못하면, 진화는 그저 유전적 부동(浮動)으로 전락합니다.
+>
+> 그렇다면 — 안경으로 차이를 「측정했다」고 했을 때, 그 차이를 「도태」로 **올바르게 변환하는 장치**는 어떻게 만드는가.
+> 그것이 이번 주역, **lldarwin**입니다. ll- 패밀리의 새 멤버로, **도태(선택압) 전문** 컴포넌트입니다.
+>
+> 이 글에서 기억해 주었으면 하는 키워드는, 단 한 단어. **「집약하지 않는다」**. 여러 잣대를 하나로 합산한 순간, 진화는 망가집니다. 왜 그렇게 되는지, 그리고 어떻게 실측으로 그것을 넘어섰는지 — 실패의 연장에서, 이번에는 **실제로 작동한** 이야기를 합니다.
+
+---
+
+## 0. 세 줄 줄거리(라쿠고의 「마쿠라」)
+
+라쿠고에는 본론 전에 「마쿠라(枕)」가 있습니다. 우선 세 줄로 전체상을.
+
+- **lleval이 측정하고, lldarwin이 도태한다** — 진화는 「측정한다」와 「도태한다」의 2단 구조로, 비로소 의미를 가진다.
+- 도태의 제1원칙은 **여러 선택압을 집약하지 않는 다목적 도태**. #25의 실패(단일 스칼라의 argmax로 짓눌렀다)의 진짜 원인을, 여기서 구조적으로 끊는다.
+- 채택한 3대 기둥 = **ε-lexicase + minimal-criterion QD + down-sampling**(evolutionary_computation 코퍼스 616건을 횡단 조사하여 선정).
+
+그리고 이번에는 골격뿐 아니라 **실측이 있다**는 것이 #25와의 차이입니다. novelty pressure로 행동 다양성을 7.12 → 14.88(+109%)로 2배로 늘리고, **중립 저장고**로 「멸종한 오카 기요시·그로텐디크 계통」을 실제로 **전원 부활**시키고, 마지막으로 **온프레미스의 진짜 LLM(llama3.2)**을 상대로, prompt 전략을 진화시켜 약한 태스크를 0.0 → 1.0으로 개선시켰습니다. 차례차례 살펴봅니다.
+
+---
+
+## 1. 왜 「측정한다」와 「도태한다」를 나누는가
+
+llive 패밀리에는 이미 **lleval(안경 = 평가 프레임워크, 연재 #24-08)**이 있습니다. 개체의 행동을 관측하고, 여러 축에서 점수화하는 장치입니다.
+
+그런데 #25에서 알게 된 것은 치명적인 진실이었습니다. **안경으로 차이를 측정할 수 있어도, 그 차이를 argmax로 하나로 짓누르면 도태가 망가진다.** 구체적으로, `fitness_rich`가 여러 archetype 유사도를 `nearest = max(sims)`라는 단일 스칼라로 접고 있었습니다. 이것이 SEL-2 위반 — 「best=1.0이 포화하고, 전원이 만점이 되어, 선택 기울기가 사라진다」는 진짜 원인입니다.
+
+역할을 명확히 나누면, 이렇게 됩니다.
+
+```
+lleval   = 측정한다 (개체의 행동을 「다축의 pressure profile」로 변환)
+lldarwin = 도태한다 (그 profile을 「다음 세대의 부모」로 변환)
+```
+
+`lleval`의 출력은 **case 벡터**(각 축의 점수가 나열된 배열)입니다. `lldarwin`은 그것을 입력 계약으로 받아서, **집약하지 않고** 도태합니다. 양자의 책임 경계는 바로 여기에 있습니다. lleval이 「축을 하나로 합산한 뒤에」 넘겨오면, lldarwin은 아무것도 할 수 없습니다. 그래서 lleval 쪽에는 「breakdown(축별 내역)을 반드시 보존해서 넘긴다」는 것을 계약으로 부과합니다.
+
+lldarwin의 `Pressure` 인터페이스는, 다음의 최소 계약으로 표현됩니다.
+
+- `name` — 축의 이름(`typo_robustness` 등)
+- `evaluate(individual_output) -> case_scores: list[float]` — 개체의 행동을 「축별 점수 배열」로 변환
+- `is_proxy: bool` — proxy 측정인지, 실제 LLM/VLM 측정인지(측정 순도의 구분)
+- `minimal_criterion: float | None` — 그 축의 최저 번식 기준(None이면 gate 없음)
+
+포인트는, `evaluate`의 반환값이 **스칼라가 아니라 리스트**라는 것입니다. 한 축 안에도 여러 case(테스트 케이스)가 있고, 그것을 짓누르지 않고 lldarwin으로 흘려보냅니다. 이 「짓누르지 않는」 설계가, 나중에 specialist를 구하는 복선이 됩니다.
+
+> 🍵 **휴식 포인트**: 안경(lleval)과 필터(lldarwin)를 나누는 의미는, 사진으로 말하면 「노출을 측정한다」와 「어느 컷을 채용할지 정한다」의 차이입니다. 측광이 완벽해도, 베스트 샷의 선택을 틀리면 앨범은 엉망입니다. 노출계(lleval)가 「이 한 장은 밝기 80점, 구도 30점, 표정 95점」이라고 알려줘도, 그것을 「평균 68점」으로 반올림해서 버리느냐, 「표정 95점인 한 장은 별도 칸에 남기느냐」에 따라, 앨범의 풍부함은 천지 차이로 달라집니다. lldarwin은 「채용 판단」의 전문가입니다. 측정하는 사람과 고르는 사람을 한 사람이 겸임하면, 대개 양쪽 모두 엉성해집니다.
+
+---
+
+## 2. 설계의 핵심 — 「집약하지 않는」 7 스테이지
+
+lldarwin은, lleval로부터 받은 pressure profile(다축의 case 벡터)을, 다음의 7 스테이지로 도태합니다. 각각에 「왜 필요한가 = 어떤 실패를 막는가」를 덧붙입니다.
+
+1. **Standardizer** — per-dim z-score. 「전 축이 평균적으로 높다」는 것만의 무특징한 우등생을 우대하지 않고, 각 축에서의 **일탈**을 선택압으로 바꾼다. 중앙 일치(모두와 같음)는 제외.
+   - *막는 실패*: 「평균점이 높을 뿐」인 평범함이 이기고, 뾰족한 개체가 사라지는 monoculture의 입구.
+2. **MinimalCriterionGate** — 각 축의 최저 기준으로 번식 가부를 가른다. 연속 순위만으로 「독식」시키지 않는다.
+   - *막는 실패*: 일강(一強)이 모든 번식 슬롯을 독점하는 전멸 시나리오. 기준을 충족하면 누구든 번식할 수 있는 「최저 보장」으로 다양성의 토대를 남긴다.
+3. **EpsilonLexicaseSelection** — 축을 case로서 하나씩 독립적으로 평가한다. 어떤 축에서 돌출한 specialist(다른 축은 평범)가 살아남을 수 있다.
+   - *막는 실패*: 집약 argmax에 의한 specialist의 절멸. 이것이 #25의 8→2를 낳은 메커니즘 그 자체.
+4. **QD / MAP-Elites archive** — pressure profile을 behavior 기술자로 변환하고, cell마다 elite를 보존. archive는 단조 증가.
+   - *막는 실패*: 구조적인 전멸. 하나의 cell에 한 개체라도 남으면, 그 행동은 사라지지 않는다.
+5. **Niching / FitnessSharing** — 같은 niche의 개체를 down-weight하여, 다봉(多峰)을 병존시킨다.
+   - *막는 실패*: 단봉으로의 응집(monoculture).
+6. **Down-sampling** — 매 세대, case의 부분집합만으로 평가하여 환경을 교란한다.
+   - *막는 실패*: 특정 peak로의 과적합과 plateau(정체 고원). moving target으로 만들어 「같은 방식으로 이기는 것」을 허용하지 않는다.
+7. **NoveltyScorer** — 정체 시에 「과거와 다른 행동」으로 탐색압을 가한다.
+   - *막는 실패*: 탐색 고갈. 개선이 멈췄을 때, 새로움 자체를 보상으로 삼아 바깥으로 밀어낸다.
+
+#25의 8→2 monoculture와 대비하면, 핵심은 세 가지: **(3) ε-lexicase·(4) QD archive·(2) minimal-criterion**입니다. #25에서는 이것들이 전부 빠진 채 단일 스칼라 argmax만 돌고 있었습니다. 그래서 「평균적으로 최강인 1 계통」이 연속 순위를 독식하고, 나머지가 부동으로 사라졌습니다. lldarwin은 이 세 가지를 「집약하지 않고 묶음」으로써, 세대를 거듭해도 파탄나지 않는 구조를 만듭니다.
+
+> 🤔 **비유(만자이 풍)**:
+> 보케 「시험 점수를 전부 더해서 순위를 매겼더니, 평균점이 높을 뿐인 우등생만 남았어.」
+> 츳코미 「그거 다양성 제로잖아! 수학만 100점·나머지 0점인 천재가 사라졌잖아!」
+> 보케 「아니, 토탈로 보면 우등생이 위인데……」
+> 츳코미 「**토탈로 보지 마!** 과목을 하나씩 보면, 그 천재는 『수학』 case에서는 누구한테도 안 져. ε-lexicase는 그걸 구하는 구조야. 합산한 순간 천재는 죽어.」
+> ——합산(집약)이 specialist를 죽인다. ε-lexicase는 「과목을 하나씩 본다」니까, 뾰족한 녀석이 남는다. 이것이 lldarwin의 제1의 핵심입니다.
+
+---
+
+## 3. 왜 이 3대 기둥인가(rad-research의 뒷받침)
+
+「세대를 거듭해도 파탄나지 않는」 가장 유력한 융합안으로, evolutionary_computation 코퍼스 616건을 횡단 조사하여 선정했습니다. 자체 발명한 것이 아니라, 기존 연구의 「집약하지 않는」 계보를 선별하여 묶었다 — 는 내력이 중요합니다.
+
+| 기법 | 효능 | 출처 |
+|---|---|---|
+| **ε-lexicase** | specialist 보존·high population diversity | La Cava 2019 (arXiv 1905.13266) / 2204.06461 |
+| **QD / MAP-Elites** | cell별 elite로 전멸 불가 | Fontaine CMA-ME 2019 (1912.02400) / MNSLC GECCO 2024 |
+| **down-sampled lexicase** | 환경 교란·비용 절감 | Helmuth & Spector 2021 (2106.06085) |
+| island + extinction/repopulation | 조기 수렴 방지(장래 옵션) | Lyu 2020 (2005.07376) |
+
+3대 기둥은 제각각인 기법으로 보이지만, 실은 **「집약하지 않는다」는 하나의 사상**으로 꿰뚫을 수 있습니다. ε-lexicase는 「축을 집약하지 않는다」. QD는 「행동 공간을 집약하지 않는다(cell마다 보존)」. down-sampling은 「평가 환경을 고정하지 않는다(매 세대 교란)」. 어느 것도 「하나로 둥글리지 않는다」는 점에서 같은 철학입니다. 그래서 조합해도 사상이 충돌하지 않고, 상승 작용합니다.
+
+> 🍵 **휴식 포인트**: 「왜 자체 발명하지 않느냐?」는 질문을 받습니다. 답은 단순한데, **기존 연구의 조합으로 충분히 강하기 때문**입니다. 제 개발 규칙([[feedback_originality_over_imitation]])에는 「외부 알고리즘의 채용은 망라가 아니라 **선별**. 파탄 리스크나 단순한 모방은 배제하고, 독자 설계에 가치를 더하는 것만 채택한다」고 되어 있습니다. lldarwin의 독자성은 「새로운 선택 알고리즘을 발명한 것」이 아니라, 「이것들을 **집약하지 않고 묶는 묶음 방식**과, 그것을 llive의 진화 루프에 **실제로 배선한 것**」에 있습니다. 요리로 말하면, 세계 최초의 식재료를 만드는 것이 아니라, 기존의 명품 식재료를 「섞지 않고 한 접시에 담는」 기술입니다. 섞으면 망가지는 재료를, 섞지 않고 공존시킨다.
+
+---
+
+## 4. Stage1 — criteria 제외 + novelty pressure로 행동 다양성을 2배로
+
+여기서부터 실측입니다. Stage1에서는, 설계를 단숨에 전부 구현하지 않고, 가장 효과가 있을 것 같은 두 가지 변경만 넣어서 측정했습니다(llive, branch `optimize/core-2026-05-20`, commit `8060204`).
+
+**변경 1: criteria 제외.** ε-lexicase의 case에서, `factor_score`(= max-archetype의 단일 스칼라 = argmax, 바로 #25의 best=1.0 포화의 진짜 원인)와 `nearest_persona_idx`(= 순서에 의미가 없는 카테고리 index)를 뺐습니다. 이것은 「나쁜 잣대를 도태의 판단 재료에서 제거하는」 청소입니다.
+
+**변경 2: novelty pressure.** `MultiPressureSelector(use_novelty=True)`를 활성화. 매 세대, 과거 세대의 archive와의 k-NN 평균 거리(Lehman-Stanley 류의 novelty)를 계산하고, 그것을 집단 내에서 z-score화(STD-1)하여, 추가의 lexicase case로 도태에 섞습니다. 「모두와 다른 행동을 하고 있다」는 것 자체를, 축의 하나로 평가합니다.
+
+테스트는 `tests/unit/test_evolutionary_lldarwin.py`를 8 → 10건으로 확장(제외·novelty 보존을 추가). 진화계 847건 green, 회귀 없음.
+
+실측 조건은 rich-proxy, 8 founders + pop24, 150세대, seed 0. 결과가 아래입니다.
+
+### 4.1 행동 다양성 (diversity_l2) — novelty가 듣는 지표
+
+| 조건 | mean | tail30 min | final |
+|---|---|---|---|
+| BASELINE(제외 전·Tournament 상당의 구 lldarwin) | 7.12 | 0.68 | 0.83(붕괴) |
+| A: criteria 제외만 | 9.16 | 1.57 | 1.57 |
+| **B: 제외 + novelty** | **14.88(+109%)** | **6.56(9.6×)** | **11.73(붕괴 회피)** |
+
+novelty pressure는, 행동(genome 공간)의 다양성을 약 2배로 유지하고, 종반의 다양성 붕괴를 막았습니다. criteria 제외만으로도 단독으로 효과가 있습니다(spurious한 argmax 압을 제거한 만큼). BASELINE은 final 0.83에서 **붕괴**하고 있는 데 반해, B 조건은 final 11.73에서 **버티고 있습니다**. 이것이 「집약하지 않는」 설계의 첫 번째 손맛입니다.
+
+![Stage1 baseline(novelty 없음)의 적응도와 다양성. 종반에 다양성이 붕괴한다](../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg)
+
+![Stage1 novelty 있음. 다양성이 종반까지 유지된다](../assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status.svg)
+
+두 장을 나란히 놓으면, 종반의 거동 차이가 한눈에 보입니다. baseline은 다양성 곡선이 바닥에 달라붙는 데 반해, novelty 있음은 높은 수준을 유지한 채 끝까지 달립니다.
+
+> 🍵 **휴식 포인트**: novelty pressure를 금붕어 연못에 비유하면 — 먹이(높은 fitness)에 몰리는 금붕어만 남기면, 머지않아 전원이 같은 장소에서 같은 움직임을 하는 연못이 됩니다. novelty pressure는 「**모두와 다른 장소를 헤엄치는 금붕어에게도 보너스**」를 주는 담당입니다. 결과, 연못 여기저기 흩어진, 봐도 질리지 않는 연못이 됩니다. 다만 여기서 방심하면 안 됩니다. 다음 절에서, 이 「북적이는 연못」에 숨어 있던 **함정**이 발견됩니다.
+
+---
+
+## 5. honest disclosure(가장 중요) — 행동 다양성과 계통 생존을 저는 혼동하고 있었다
+
+여기가 본 글에서 가장 중요한 절입니다. 좋은 숫자(+109%)가 나왔다고 해서, 이긴 기분이 되지 않는다 — 이것은 제 철칙([[feedback_benchmark_honest_disclosure]])입니다. 내역을 의심했습니다. 그리고, 잘못을 발견했습니다.
+
+### 5.1 계통 고정 (founder_counts) — novelty로는 개선되지 않는 지표
+
+같은 실측에서, 다른 지표를 봅니다. 「8명의 founder(조상 계통) 중, 몇 계통이 끝까지 살아남았는가」.
+
+결과는 — **전 조건에서 최종적으로 8 → 2 계통**(furuse-kazufumi + friston)으로 수렴. oka-kiyoshi(오카 기요시) / grothendieck(그로텐디크) / von-neumann / feynman / millidge / isomura는, **전부 멸종**.
+
+novelty를 넣어서 행동 다양성을 2배로 했는데도, **계통의 생존은 #25와 완전히 같은 2 계통**이었던 것입니다.
+
+### 5.2 왜인가 — 저는 두 개의 「다양성」을 혼동하고 있었다
+
+설계서(#25 시점)의 TODO에는 「재실행에서 오카 기요시·그로텐디크 계통이 살아남는지 검증」이라고 적혀 있었습니다. 이것은 **행동 다양성과 계통 생존을 혼동하고 있었던** 것입니다.
+
+`poc_evolution_env.py`의 저자 코멘트(L129-132)가, 이 혼동을 정확하게 짚고 있습니다.
+
+> "monoculture = BEHAVIORAL concentration (max archive-cell occupancy)…
+> neutral drift (Kimura) regardless of mechanism — that is expected, not collapse.
+> The OE signal is behavioral spread. **lineage_fixation … to keep it <1 needs QD niching on lineage / PERSONA-FX, not pure novelty**"
+
+풀어서 말하면, 이렇습니다.
+
+- 실증된 monoculture 0.05는, **행동적**(archive-cell의 점유율)이지, **계통적이지 않습니다**. novelty/lexicase가 개선하는 것은 「행동의 퍼짐」이지 「조상의 생존」이 아닙니다.
+- 계통 고정이 중립 부동(기무라 모토오의 중립 진화설)에 의해 monoculture로 향하는 것은, **이론적으로 정상**입니다. 붕괴가 아닙니다. novelty도 lexicase도, **기존 개체를 보존하는** 메커니즘밖에 갖지 않으며, **한 번 멸종한 계통을 부활시키는 메커니즘을 갖지 않습니다**. 그래서 계통 고정은 구조적으로 막을 수 없습니다.
+- 게다가, archetype 간 거리도 0.068~0.29로 압축되어 있어서(유사도가 0.71~1.0에 밀집), 선택 기울기가 약하고 drift(부동)가 지배적입니다. friston은 가장 비중심적(centroid 거리 0.162)인데도 살아남았다 = 중심성(강함)이 아니라, **운(drift)**으로 2 계통이 고정된 것입니다.
+
+즉 — 「오카 기요시·그로텐디크가 살아남았으면」 하는 저의 바람은, **행동 다양성을 올리는 약으로는 절대 낫지 않는 병**이었습니다. 약을 잘못 쓰고 있었습니다. 이것은 정직하게 기록할 가치가 있는 교훈입니다.
+
+> 🍵 **휴식 포인트**: 만자이로 말하자면.
+> 보케 「연못에 형형색색의 움직임을 하는 금붕어를 늘렸어! 다양성 완벽이야!」
+> 츳코미 「그래서, **혈통**은? 8개 있던 금붕어 가문, 몇 개 남았어?」
+> 보케 「……2개야.」
+> 츳코미 「움직임은 화려한데 가계도는 텅 비었잖아! 움직임의 다양성과 혈통의 다양성은 **별개의 이야기**라고!」
+> ——「행동이 다양」과 「계통이 다양」은, 겉모습이 닮았을 뿐인 완전히 다른 지표. 저는 이것을 혼동하고 있었습니다. 정직하게 공개합니다.
+
+---
+
+## 6. Stage1.5 — 중립 저장고로 멸종한 계통을 되살리다
+
+병의 정체를 알면, 약을 바꿀 수 있습니다. 계통 생존에 필요한 것은 「멸종한 계통을 매 세대 re-inject하는 메커니즘」 — **lineage-niched 중립 저장고(reservoir)**입니다.
+
+### 6.1 우선 PoC로 메커니즘을 확인한다
+
+곧바로 본 루프를 개조하지 않고, 우선 standalone PoC로 메커니즘이 도는지 확인했습니다([[feedback_poc_feasibility_first]] = 요건 → PoC → 타당성 → 상세 설계, llive `scripts/poc_lineage_reservoir.py`, commit `0d0537d`).
+
+selection은 Stage1의 `MultiPressureSelector`(criteria 제외 + novelty)를 그대로 씁니다. fitness는 rich-proxy. 계통은 parent_a로부터 상속. **reservoir = 계통별 best-ever genome을 보존하고, 멸종한 계통을 매 세대 re-inject한다**(낮은 score의 자식을 치환. best는 망가뜨리지 않는다). 8 founders + pop24 + 150 gens + seed 0으로 측정했습니다.
+
+| reservoir | 최종 named 계통 | lineage_fixation (tail30 mean) | diversity_l2 (tail30) |
+|---|---|---|---|
+| OFF | **1**(oka-kiyoshi 24/24 = 완전 monoculture) | 1.00 | 1.58 |
+| **ON** | **8(전 founder 생존)** | **0.31(≪ 0.8 OE-3)** | 1.69 |
+
+reservoir ON에서, 오카 기요시(oka)·그로텐디크(grothendieck)를 포함한 **전 8 계통이 생존**. 최종 shares는 friston 7 / furuse 6 / grothendieck 4 / oka 3 / 다른 4 계통 각 1. **강한 계통은 자손을 갖고 번식하고, 약한 계통은 저장고가 생명 유지한다**는, 이상적인 거동입니다. 행동 다양성도 저하 없음(1.69 vs OFF 1.58).
+
+**Honest 유보(PoC 단계)**: 저장고는 frozen elite(동결된 대표)를 재투입하므로, 약한 계통(각 1체)의 「생존」은 재투입에 의한 것이지, 능동적 진화는 아닙니다. 이것은 중립 저장고의 정의대로(대표를 보존하고, 재결합 가능하게 한다)로 정당하지만, 「약한 계통이 활발하게 계속 진화한다」고는 주장하지 않습니다.
+
+### 6.2 본 EvolutionLoop에 편입(additive + default-off)
+
+PoC로 메커니즘이 확인되었으므로, 본 `EvolutionLoop`에 편입했습니다(commit `b03cbda`). 설계의 핵심은 **additive이며 default-off** — 기존 거동을 일절 바꾸지 않고, 플래그를 세웠을 때만 유효해집니다. 하위 호환을 사수했습니다.
+
+- `EvolutionLoop.on_population_bred` hook을 추가(breed 직후·평가 전에 bred 리스트를 변환 가능. 기본 None = 하위 호환).
+- `LineageReservoir`(`lineage_reservoir.py`): 조상 추적(parent_ids[0]을 상속) + 계통별 best-ever 보존 + 멸종 보호 계통의 re-inject. `founder_map`을 공유하고 계통 로그와도 정합.
+- `run_persona_evolution(lineage_reservoir=True)` / run 스크립트 `--lineage-reservoir`를 추가.
+- tests: `test_evolutionary_lineage_reservoir.py` 6건 + 진화계 **937 green**(회귀 없음).
+
+실 EvolutionLoop에서의 실측(rich-proxy + lldarwin + novelty, 8 founders / pop24 / 150gens / seed0).
+
+| 조건 | named 계통 생존 | max_share | lineage_fixation (tail30) | diversity_l2 (tail30) |
+|---|---|---|---|---|
+| reservoir OFF (Stage1) | 2/8(furuse 17 + friston 7) | 0.71 | 0.70 | 14.88 |
+| **reservoir ON (Stage1.5)** | **8/8(전 계통)** | **0.33** | **0.29(≪ 0.8 OE-3)** | 9.20 |
+
+오카 기요시(oka 3)·그로텐디크(grothendieck 1)를 포함한 **전 8 계통이, 실 루프에서 생존**했습니다. PoC의 예측(fixation 0.31)을, 본 구현이 0.29로 재현했다 — 메커니즘이 설계대로 작동한 증거입니다.
+
+이것이, 본 글 최대의 볼거리입니다. 아래 두 장을 비교해 보세요.
+
+![중립 저장고 OFF. 계통 지배 스트림이 최종적으로 furuse 71% / friston 29%의 2 계통으로 붕괴한다](../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg)
+
+![중립 저장고 ON. 전 8 계통(millidge / von-neumann / oka / grothendieck 등)이 병존한다](../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg)
+
+OFF(위)는, 세대가 진행됨에 따라 스트림이 2색으로 삼켜져 간다 — 「저와 friston만 남았다」는 #25의 재현입니다. ON(아래)은, 8색이 끝까지 띠로서 남습니다. 오카 기요시도 그로텐디크도, 사라지지 않았습니다.
+
+![중립 저장고 ON의 적응도와 다양성](../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_status.svg)
+
+> 🍵 **휴식 포인트**: #25에서 「저와 프리스턴만 남았다」고 한탄했던, 그 쓸쓸한 세계. 그것이 이번에는 오카 기요시도 그로텐디크도 폰 노이만도 전원 있는, 북적이는 세계로 바뀌었습니다. **이것은 날조가 아니라, 실제로 작동한 결과입니다**([[feedback_benchmark_honest_disclosure]]에 따라, 거짓 실패도 거짓 성공도 쓰지 않습니다). 다만 — 들뜨기 전에, §5에서 배운 자세를 떠올립시다. 「좋은 숫자가 나오면 내역을 의심한다」. 다음 §6.3에서, 이 성공에도 **대가**가 있었음을 정직하게 씁니다.
+
+### 6.3 Honest 유보 — 계통 보존과 행동 다양성은 약한 트레이드오프
+
+reservoir ON에서 계통은 전원 살아남았습니다. 하지만 잘 보면 **diversity_l2는 14.88 → 9.20으로 저하**하고 있습니다. frozen elite(동결 대표)를 매 세대 재투입하는 만큼, genome 공간의 퍼짐이 다소 줄어드는 것입니다.
+
+다만, OFF 시의 붕괴(final 0.83)는 회피하고 있습니다. 즉 「계통 보존을 취하면, 행동 다양성의 피크는 조금 내려가지만, 붕괴는 막을 수 있다」는 **약한 트레이드오프** 관계입니다. 대가 제로의 마법은 아닙니다. 이것을 정직하게 적어 둡니다. 그리고, 이 대가를 어디까지 작게 할 수 있는가가, 다음 sweep의 주제가 됩니다.
+
+---
+
+## 7. 재투입 빈도 sweep — 비단조적 최적점이라는 비자명한 발견
+
+§6.3의 honest 유보(frozen elite 재투입으로 diversity가 내려간다)를, `reinject_interval`(재투입을 하는 세대 간격. 기본 1 = 매 세대)의 sweep으로 특성화했습니다(commit `da93dd3`). `LineageReservoir.reinject_interval` + `--reinject-interval` 플래그를 추가(test 7건). 8 founders / pop24 / 150gens / seed0.
+
+| interval | named 생존 | lineage_fixation (tail30) | diversity_l2 (tail30) |
+|---|---|---|---|
+| **1**(매 세대) | **8/8** | 0.32 | 9.91 |
+| 5 | 5/8 | 0.37 | **12.84(최대)** |
+| 10 | 3/8 | 0.41 | 11.41 |
+| 20 | 2/8 | 0.44 | 10.75 |
+
+**여기서 비자명한 발견이 있었습니다.** 직관적으로는 「재투입을 줄이면(interval을 올리면), frozen elite의 밀어넣음이 줄어서 diversity가 단조적으로 회복된다」고 예상하시죠? 그런데 — **diversity는 단조 증가하지 않고, interval=5에서 피크**를 찍고, 10/20에서는 오히려 저하했습니다.
+
+이유를 생각하면 납득이 갑니다. 계통을 너무 방치하면(interval이 너무 크면), (a) 저장고 유래의 다양성 주입이 줄고, (b) 소수 계통이 고정되어 버려서, 결국 diversity도 늘지 않습니다. 「재투입 과다」도 「방치 과다」도 둘 다 안 되고, 중간에 최적점이 있습니다. 이것은 **실제로 sweep을 돌리지 않으면 예측할 수 없었던** 지견입니다.
+
+운용 지침은 이렇게 되었습니다.
+
+- **계통 보존을 최우선**으로 한다면 → interval=1(8/8 전 계통 생존).
+- **행동 다양성도 양립**시키고 싶다면 → interval=5(5/8을 보존하면서 diversity 최대).
+
+양립의 최적점은 fitness의 설계나 집단 규모에 의존하므로, 본 환경에서는 sweep으로 재보정합니다.
+
+![재투입 빈도의 트레이드오프. 계통 보존과 행동 다양성은 반비례하고, diversity는 interval=5에서 피크를 찍는다(비단조)](../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg)
+
+> 🍵 **휴식 포인트**: 라쿠고의 사게(결말)처럼, 여기에는 「예상을 뒤집는 전(轉)」이 있습니다. 「하면 할수록 좋다」고 생각했더니, 「너무 하면 역효과」였습니다. 식물의 물 주기와 같아서, 너무 적게 줘도 마르고, 너무 많이 줘도 뿌리가 썩습니다. 중용에 최적점이 있습니다. 진화 계산을 하다 보면, 이런 「단조롭지 않은 곡선」을 몇 번이고 만납니다. 그래서 베이스라인을 측정하고, sweep을 돌립니다. 직관은, 자주 배신당합니다.
+
+---
+
+## 8. Stage2 전반 — 「LLM의 약점」을 proxy로 선택압으로 삼다
+
+여기까지는 rich-proxy(persona 유사도 기반의 heuristic)로 메커니즘을 확인해 왔습니다. 다음은 설계의 또 하나의 기둥, **「LLM/VLM이 현실에서 약하고, 또한 측정 가능한 축」을 pressure로 삼다**를 구현합니다(commit의 계열, `pressures.py`).
+
+설계 §3에서 든 proxy 가능한 5 축을 plugin화했습니다.
+
+| pressure(LLM 약점) | 관련 사고 인자(case) |
+|---|---|
+| typo_robustness(노이즈 내성) | consistency / reality_link / uncertainty |
+| polysemy_wsd(다의어) | multiview / consistency / reality_link |
+| multistep_robustness(다단 추론) | structurize / closed_loop / self_extend |
+| calibration(신뢰도 추정) | uncertainty / provenance |
+| context_management(무관 문맥 내성) | consistency / provenance / recompose |
+
+`make_pressure_fitness()`가 각 pressure의 case(총 14개)를 breakdown으로 출력하고, lldarwin의 ε-lexicase가 **집약하지 않고 축별로 specialist를 도태**합니다. `--fitness pressure-proxy`를 추가. tests `test_evolutionary_pressures.py` 4건 + 진화계 **942 green**.
+
+end-to-end 실측(pressure-proxy + lldarwin + novelty + reservoir, 8 founders / 120gens): named 계통 **8/8 생존** / lineage_fixation (tail) 0.67 / diversity_l2 (tail) **17.91**. 14개의 약점 축 case가 독립적으로 도태되어, 행동 다양성은 높습니다. 계통은 reservoir가 유지하고 있습니다(pressure-proxy는 persona의 동일성을 직접 보상화하지 않기 때문에, 우점 계통의 share는 rich-proxy의 0.29보다 높은 0.67이 됩니다).
+
+![5 약점 축(typo / polysemy / multistep / calibration / context)의 모집단 평균 추이(proxy 측정)](../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg)
+
+**Honest 유보(설계 §7 / §7.1에 명시된 수용된 한계)**: 개체는 실 LLM이 아니라 genome(llive 구성)입니다. 본 pressure가 측정하는 것은 「genome이 그 약점에 **관련된 사고 인자**를 얼마나 갖추는가」라는 **행동의 대리**이지, **production의 LLM 능력이 아닙니다**. 이것은 **mechanism feasibility(메커니즘이 도는 것)의 검증**에 한정됩니다. Goodhart 리스크(proxy를 해킹하는 표면 전략이 진화한다)도 수용된 한계입니다. 실 LLM/VLM의 약점 축의 실측은, Stage2 후반(OLLAMA_HOST 설정 + 개체→실 LLM 매핑이 전제)으로 미룹니다.
+
+> 🍵 **휴식 포인트**: 여기는 오해되기 쉬우므로, 다짐해 둡니다. 「LLM의 약점을 진화로 극복했다!」고는 **아직 말하지 않았습니다**. proxy가 측정하는 것은 「메커니즘이 도는가」뿐. 진짜 LLM이 타이포에 강해졌는지 어떤지는, 이 단계에서는 일절 알 수 없습니다. proxy로 화려한 숫자(17.91)가 나와도, 그것은 「장치가 작동한다」는 증명이지 「내용이 똑똑해졌다」는 증명이 아닙니다. 이 선 긋기를 모호하게 한 순간, 연구는 거짓이 됩니다. 그래서 다음으로, **진짜 LLM**을 상대합니다.
+
+---
+
+
 
