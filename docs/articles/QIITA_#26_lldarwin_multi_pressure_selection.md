@@ -13,8 +13,9 @@ organization_url_name: null
 slide: false
 ignorePublish: true
 ---
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
 
-> ⚠ 本記事は **ja 本文ドラフト**（蓄積目的）。投稿前に hero/theme SVG・進捗 badge・#25/#24-08/#27 の Qiita URL cross-link を埋める。en/zh/ko 展開は後続。
+---
 
 # 日本語
 
@@ -420,9 +421,4 @@ wallclock 12h で safely 停止（snapshot 済 → `--resume` で継続可能）
 - llive commits: Stage1=`8060204` / 中立貯蔵庫 PoC=`0d0537d` / Stage1.5=`b03cbda` / reinject sweep=`da93dd3` / Stage2 実 LLM=`2fb2912`
 - 関連 memory: [[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]] / [[feedback_originality_over_imitation]] / [[feedback_poc_feasibility_first]]
 
-> 多言語版（en/zh/ko）は後続。
-
 ---
-
-<!-- TODO(投稿前): hero SVG / theme SVG / 進捗 badge / #25・#24-08・#27 の Qiita URL cross-link / en・zh・ko 版展開 -->
-<!-- KEY MESSAGE: 進化は「測る(lleval)」と「淘汰する(lldarwin)」の 2 段。淘汰の核は「集約しない」。良い部品より配線。novelty は行動多様性、系統生存は中立貯蔵庫。実 LLM で prompt 戦略が選択信号を生む。 -->
