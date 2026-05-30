@@ -1,59 +1,43 @@
-# Session Summary — 2026-05-29 (llcore 0.2.0a0 kernel plugin: 設計 doc + S1 実装)
+# Session Summary — 2026-05-29〜30 (llcore S1/S2 + 進化機構監査 + CPU手順1 + 14proj health)
 
-> raptor auto-summary hook が毎ターン上書きする仕様だが、本 wrap-up/rotate 完了時の
-> 手動内容として保存。次セッション (ccr) の SESSION START 復元プロトコルが本ファイルを
-> 読み「Session Restored:」宣言の根拠とする。next_plan の正は claude-projects.json (fullsense)。
+> 次セッション(ccr)の SESSION START 復元用。next_plan の正は claude-projects.json (fullsense)。
 
 ## プロジェクト
-fullsense (umbrella) — `D:\projects\fullsense` / 主作業 = llcore 傘下 (`D:\projects\llcore`)
+fullsense (umbrella) — `D:\projects\fullsense` / 主作業 = llcore (`D:\projects\llcore`)
 
-## 完了した作業 (このセッション)
+## このセッションの成果 (全て local commit、push 未)
 
-### llcore — kernel plugin 0.2.0a0 (設計 G タスク + S1 実装)
-- **設計 doc** `docs/design/kernel_plugin_0_2_0a0.md` (commit `2e45216`): research/ の複数アーキ
-  (SNN-LIF 先頭) を本流に additive 取り込みする plugin 境界を formal 化。Codex pair-review
-  5 Findings (Medium 3 / Low 2 + 補足) 全件実コード検証の上反映。
-- **S1 実装** (commit `9bb2228`, 既存 src 不変 = semver (D)):
-  - `src/llcore/kernel/protocol.py`: `GeneCodec` / `Trajectory` / `Kernel` / `VerifierBackend` 3 抽象 Protocol
-  - `src/llcore/kernel/rwkv.py`: RWKV 準拠例 — 本流 `run_sequence` / `apply_changeop` /
-    `verify_gene_safe` へ委譲する薄い wrapper (挙動不変)
-  - `tests/unit/test_kernel_protocol.py`: 18 tests (Protocol 準拠 + 委譲一致 + codec 往復)
-  - Codex review High0/Med1/Low2 反映: Trajectory `eq=False` (np.ndarray の `==` ambiguous
-    truth value 回避) / ChangeOp op_type が RWKV 4 種固定 → 非 RWKV kernel は **S3 延期**を docstring 明示
+### llcore 本流
+- `2e45216` kernel plugin 設計 doc (Codex 5 Findings 反映)
+- `9bb2228` **S1**: kernel plugin 3 Protocol (GeneCodec/Trajectory/Kernel/VerifierBackend) + RWKV 準拠例
+- `cc0c3c0` **S2**: minimal_ga を GeneCodec で gene 型非依存化 (codec=None は旧 RWKV byte-identical, *_g 追加)
+- `f9f1798` 進化機構健全性監査 doc
+- `5ee1c13` **CPU 手順1**: 公正な評価+反証ハーネス honest_eval.py + 監査に診断結果追記
+- 本流 145→**195 PASS** / research 137+2skip 不変
 
-### 統計
-- 本流 145 → **163 PASS** (+18) 回帰ゼロ / research **137 PASS + 2 skip** 不変 = 全体 **300 + 2 skip**
-- 構造破綻防止 (A)-(D) 全 PASS 維持
+### 最重要結論 (進化機構監査 + [GA健全性 切り分け診断])
+- **llcore は進化機構 PoC としては成立、但し「進化(累積改善)」は未成立。**
+- 進化4要件: ①変異②遺伝=成立 / ③選択圧④過剰繁殖=機構あるが空転。
+- confound 解明: ③失敗の主因は **landscape の平坦さ** (本番 CopyTask 上位20遺伝子 spread=0.0007)。
+  GA 機構は健全 (clean 構造 landscape で δ=+0.97 圧勝)。**但し構造 landscape の勝因も tournament_k=1 で勝つ
+  = ③でなく elitism+変異の hill-climbing**。③そのものは未分離。報告 best +0.29 は elitism 凍結 artifact。
+- **GPU 判定 = conditional (今は保留、「24GB必要」を修正)**: ノイズ抑制(GPU)では③立たず、実 LLM fitness が
+  SNR≥2 構造+spread を持つか未証明 (=GPU 必要十分条件)。RTX 4090 24GB は CPU 手順で「効くと分かる」まで保留。
 
-## 未完了タスク (優先順)
-1. **S2 (次の主作業)**: `src/llcore/evolution/minimal_ga.py` を `GeneCodec` で gene 型非依存に
-   一般化。**codec デフォルト = RWKV** で後方互換 wrapper を温存 (設計 doc §3.2 M3 表:
-   `Individual.gene` / `FitnessFunc` / `initialize_random_population` / `uniform_mutate` /
-   `crossover_uniform` / `Population.gene_matrix` を全て RWKV codec 固定 wrapper として温存、
-   一般化版は `*_g` 別名で additive 追加)。新 test で任意 dim GA を検証。commit 前 Codex review。
-2. **S3**: SNN-LIF を `src/llcore/kernel/snn_lif.py` に昇格 (research → src)。`ChangeOp.__post_init__`
-   の op_type 検証を kernel 別 (`change_op_types`) に拡張 (S1 Codex Medium の延期分)。research
-   verifier の `sys.path.insert` hack 撤廃。`SNNLifBackend` の per-gene 真正性監査 (設計 doc §2.3:
-   `verify_membrane_bounded_per_gene` は真の per-gene と Codex 確認済、I_max 1-step contract 限定)。
-3. **S4/S5**: SNNLifBackend AND 集約 + SNN-LIF を `evolve` で実走 smoke。
-4. **cleanup (pre-existing, 非 blocking)**: `claude-projects.json` は **HEAD 時点から invalid JSON**
-   (値内の未エスケープ `"` = 論文タイトル等の引用符、例 `"Verified Evolvable Architectures"`)。
-   SESSION START は text 読みで動くため復元は機能するが、`json.load` は失敗する。専用パスで
-   全 bare quote を `\"` にエスケープ (or 全角引用符化) して valid JSON 化推奨。
+### 14プロジェクト health review + 低リスク修正 (10 commit)
+- llive: Rust target 1095 ファイル追跡解除 / fullsense: gc で .git 4.6GB→42MB / 他 (memory: project_ecosystem_health_review_2026_05_29 に全記録)。残課題は承認制。
+- RAD: compiler_corpus_v2=formal_methods 完全複製 (シードミス) / hacker_corpus 正本は repo側 (.claude/skills/corpus/) で健全、D:/docs は部分ミラー(注記済)。
 
-## 重要なコンテキスト
-- **push 状態**: llcore ローカル 24 commits 保持 (push 未、ユーザー承認後解禁可)。raptor (`rotate.md`
-  skill / claude-projects.json / wrap-up.md) は露出回避で local。
-- **Codex pair-review 規律** ([[feedback_codex_pair_review_for_llcore]]): 各 step commit 前必須。
-  Codex (gpt-5.4) は実コードを読んで claim と実装のズレを検出 (S1 でも semver を `git diff` で実検証)。
-- **rotate 方針更新** ([[feedback_rotate_proactive_timing]] 新規): Codex 委任完了直後のクリーンな
-  区切りでは CRITICAL を待たず早め rotate 可 (本セッションの本 rotate がその実践)。
-- **設計の honest 核**: 「same design pattern + partial stack reuse」が正、「same verifier stack」は
-  overclaim (ARCH_LANDSCAPE §5.3 #2)。Trajectory.kind で意味論差を型に明示。
+### memory 追加 (応答スタイル等)
+- feedback_term_format_jp_en (日本語(English)形式 + 略語初出展開、記事も。**英単語"honest/clean"を生で混ぜない→正直な/きれいな**)
+- feedback_workflow_readable_naming ([用途名]で呼ぶ、#はQiita専用、id は <!-- wf:xxx --> で囲む)
+- feedback_rotate_proactive_timing / feedback_repoc_when_impl_wrong
 
-## 次にすべきこと (具体)
-1. 次起動時 (ccr) — fullsense projectPath + next_plan 自動復元 (S1 完了 → 次=S2 と記載済)
-2. **S2 着手**: `src/llcore/evolution/minimal_ga.py` の一般化。まず `*_g` operator (codec 受け取り)
-   を additive 追加 → `Individual`/`evolve` を Generic 化 (codec デフォルト RWKV) → 新 test。
-   設計 doc §3 + §3.2 M3 表に従う。commit 前に `py -3.11 -m pytest -q` (本流) + `pytest research/` で回帰確認。
-3. memory: [[project_llcore_init_2026_05_29]] (Stage 0-3+research+SNN Stage 2) / [[feedback_rotate_proactive_timing]]
+## 次にすべきこと (CPU 手順、GPU 前)
+1. ~~honest_eval~~ **完了 (5ee1c13)**。**残: honest_eval の codex pair-review** (additive+tested で commit 先行した)
+2. **[次の主作業] CPU 手順2**: fixed readout → per-gene least-squares(ridge, held-out) 置換を本番 fitness に配線
+   (landscape un-flatten、診断 #3 が選択を殺す最大要因と実証)。honest_eval.evolution_vs_random で効果測定。
+3. CPU 手順3: ③を hill-climbing から分離測定 (本番 readout で tournament_k sweep + elitism=0)
+4. 手順4: 探索空間拡張 + 分離(QD/niching: LineageReservoir/ModesMeter を load-bearing 化) 5: addition 追試 6: 小型LLMで実proxy構造 sanity
+- ③確立=分離機構+構造ある空間のセット (集団内 niching、大量プロセス不要)。
+- audit=`docs/poc/EVOLUTION_SOUNDNESS_AUDIT_2026-05-30.md`。push 状態: llcore ローカル多数 commit 保持。
