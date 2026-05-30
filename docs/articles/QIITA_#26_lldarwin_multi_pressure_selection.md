@@ -422,3 +422,287 @@ wallclock 12h で safely 停止（snapshot 済 → `--resume` で継続可能）
 - 関連 memory: [[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]] / [[feedback_originality_over_imitation]] / [[feedback_poc_feasibility_first]]
 
 ---
+
+# English
+
+# Measuring with "Glasses" Alone Doesn't Drive Evolution — Design and Measurements of the Selection-Pressure Component lldarwin #26
+
+> **Concept hook**: In the previous article #25, I exposed a massive failure: "When I evolved an AI for 500 generations, the only ones left in the world were **me and Friston**."
+> Oka Kiyoshi, Grothendieck, von Neumann — all of them quietly vanished mid-evolution. The cause: the evaluation function (the glasses = lleval) kept handing out perfect scores, so **the selection pressure dropped to zero**. Even if you can "measure" who is superior, if you can't convert that difference into "who survives," evolution degenerates into mere genetic drift.
+>
+> So then — granting that the glasses let us "measure" the differences, how do we build the device that **correctly converts** those differences into "selection"?
+> That is the star of this article, **lldarwin**. A new member of the ll- family, it is the component **specialized in selection (selection pressure)**.
+>
+> The one keyword I want you to remember from this article is a single word: **"don't aggregate."** The moment you add multiple rulers together into one, evolution breaks. Why that happens, and how I overcame it with measurements — picking up from the failure, this time I'll tell a story about something that **actually worked**.
+
+---
+
+## 0. The gist in three lines (the rakugo "pillow")
+
+In rakugo, there's a "pillow" before the main story. First, the whole picture in three lines.
+
+- **lleval measures, lldarwin selects** — evolution only becomes meaningful as a two-stage structure of "measuring" and "selecting."
+- The first principle of selection is **multi-objective selection that does not aggregate multiple selection pressures**. Here we structurally cut off the true cause of #25's failure (collapsing it with the argmax of a single scalar).
+- The three adopted pillars = **ε-lexicase + minimal-criterion QD + down-sampling** (selected by surveying 616 documents in the evolutionary_computation corpus).
+
+And this time, the difference from #25 is that there's not just the skeleton but **actual measurements**. With novelty pressure I doubled behavioral diversity from 7.12 → 14.88 (+109%), with the **neutral reservoir** I actually **revived every one** of the "extinct Oka Kiyoshi / Grothendieck lineages," and finally, against a **real on-prem LLM (llama3.2)**, I evolved prompt strategies and improved a weak task from 0.0 → 1.0. Let's go through it in order.
+
+---
+
+## 1. Why separate "measuring" and "selecting"
+
+The llive family already has **lleval (the glasses = the evaluation framework, series #24-08)**. It is a device that observes an individual's behavior and scores it along multiple axes.
+
+But what #25 revealed was a fatal truth. **Even if you can measure differences with the glasses, if you collapse those differences into one with argmax, selection breaks.** Concretely, `fitness_rich` was folding multiple archetype similarities into a single scalar via `nearest = max(sims)`. This is the SEL-2 violation — the true cause of "best=1.0 saturates, everyone gets a perfect score, and the selection gradient disappears."
+
+If we clearly divide the roles, it looks like this.
+
+```
+lleval   = measure (converts an individual's behavior into a "multi-axis pressure profile")
+lldarwin = select  (converts that profile into "the parents of the next generation")
+```
+
+The output of `lleval` is a **case vector** (an array of scores along each axis). `lldarwin` receives it as an input contract and selects **without aggregating**. This is exactly the boundary of responsibility between them. If lleval hands over the data after "adding the axes into one," lldarwin can do nothing. So on the lleval side we impose the contract: "you must always keep and pass the breakdown (the per-axis decomposition)."
+
+lldarwin's `Pressure` interface is expressed by the following minimal contract.
+
+- `name` — the name of the axis (`typo_robustness`, etc.)
+- `evaluate(individual_output) -> case_scores: list[float]` — converts an individual's behavior into a "per-axis score array"
+- `is_proxy: bool` — whether it is a proxy measurement or a real LLM/VLM measurement (the distinction of measurement purity)
+- `minimal_criterion: float | None` — the minimum reproduction criterion for that axis (no gate if None)
+
+The point is that the return value of `evaluate` is **a list, not a scalar**. Within a single axis there are multiple cases (test cases), and we pass them to lldarwin without collapsing them. This "don't collapse" design is the foreshadowing that will rescue the specialist later.
+
+> 🍵 **Break point**: The meaning of separating the glasses (lleval) and the filter (lldarwin) is, in photography terms, the difference between "metering exposure" and "deciding which shot to adopt." Even if the light metering is perfect, if you choose the best shot wrongly the album is ruined. Even if the light meter (lleval) tells you "this one is 80 for brightness, 30 for composition, 95 for expression," whether you round it to "average 68" and discard it, or "keep the one with 95 expression in a separate slot," changes the richness of the album as much as heaven and earth. lldarwin is the specialist in "adoption decisions." If you make the measurer and the chooser the same person, usually both turn out sloppy.
+
+---
+
+## 2. The core of the design — the "don't aggregate" 7 stages
+
+lldarwin selects the pressure profile (the multi-axis case vector) received from lleval through the following 7 stages. To each I attach "why it is needed = which failure it prevents."
+
+1. **Standardizer** — per-dim z-score. It does not favor the featureless honor student who is merely "uniformly high across all axes," and instead turns the **deviation** on each axis into selection pressure. Central agreement (being the same as everyone) is excluded.
+   - *Failure prevented*: the entrance to monoculture, where the mediocre who are "merely high on average" win and sharp individuals disappear.
+2. **MinimalCriterionGate** — splits reproduction eligibility by a minimum criterion on each axis. Does not let a "winner-take-all" happen by continuous ranking alone.
+   - *Failure prevented*: the total-wipeout scenario where a single strongest one monopolizes all reproduction slots. By a "minimum guarantee" that lets anyone who meets the criterion reproduce, the foundation of diversity is preserved.
+3. **EpsilonLexicaseSelection** — evaluates the axes one by one independently as cases. A specialist that stands out on some axis (mediocre on others) can survive.
+   - *Failure prevented*: the extinction of specialists by aggregated argmax. This is the very mechanism that produced #25's 8→2.
+4. **QD / MAP-Elites archive** — converts the pressure profile into a behavior descriptor and keeps an elite per cell. The archive grows monotonically.
+   - *Failure prevented*: structural total wipeout. As long as even one individual remains in one cell, that behavior does not disappear.
+5. **Niching / FitnessSharing** — down-weights individuals in the same niche so multiple peaks can coexist.
+   - *Failure prevented*: aggregation onto a single peak (monoculture).
+6. **Down-sampling** — every generation, evaluates only on a subset of cases to perturb the environment.
+   - *Failure prevented*: over-adaptation to a specific peak and a plateau (a stagnation plateau). By making it a moving target, it forbids "winning the same way."
+7. **NoveltyScorer** — when stagnating, applies exploration pressure toward "behavior different from the past."
+   - *Failure prevented*: exploration exhaustion. When improvement stops, it rewards novelty itself to push outward.
+
+Contrasting with #25's 8→2 monoculture, the core is the three: **(3) ε-lexicase, (4) QD archive, (2) minimal-criterion**. In #25 these were all missing and only the single-scalar argmax was running. So "the one lineage strongest on average" took all the continuous ranking, and the rest disappeared by drift. By "bundling these three without aggregating," lldarwin builds a structure that does not break down even as generations accumulate.
+
+> 🤔 **An analogy (manzai style)**:
+> Boke: "I added up all the test scores and ranked them, and only honor students with high averages were left."
+> Tsukkomi: "That's zero diversity! The genius with 100 in math and 0 in everything else has vanished!"
+> Boke: "Well, looking at the total, the honor student is higher..."
+> Tsukkomi: "**Don't look at the total!** If you look at the subjects one by one, that genius loses to no one on the 'math' case. ε-lexicase is the mechanism that rescues that. The moment you sum, the genius dies."
+> — Summing (aggregation) kills the specialist. Because ε-lexicase "looks at the subjects one by one," the sharp ones survive. This is the very first principle of lldarwin.
+
+---
+
+## 3. Why these 3 pillars (the rad-research backing)
+
+As the strongest candidate fusion that "does not break down even as generations accumulate," I selected it by surveying 616 documents in the evolutionary_computation corpus. The provenance matters: I did not invent it myself, but selected and bundled the "don't aggregate" lineage of existing research.
+
+| Method | Effect | Source |
+|---|---|---|
+| **ε-lexicase** | specialist preservation, high population diversity | La Cava 2019 (arXiv 1905.13266) / 2204.06461 |
+| **QD / MAP-Elites** | total wipeout impossible thanks to per-cell elites | Fontaine CMA-ME 2019 (1912.02400) / MNSLC GECCO 2024 |
+| **down-sampled lexicase** | environmental perturbation, cost reduction | Helmuth & Spector 2021 (2106.06085) |
+| island + extinction/repopulation | prevents premature convergence (future option) | Lyu 2020 (2005.07376) |
+
+The three pillars look like disparate methods, but in fact they can be skewered by **one single idea: "don't aggregate."** ε-lexicase "does not aggregate the axes." QD "does not aggregate the behavior space (keeps it per cell)." Down-sampling "does not fix the evaluation environment (perturbs it every generation)." Each shares the same philosophy in not "rounding into one." So even when combined, the ideas do not clash and instead synergize.
+
+> 🍵 **Break point**: People ask, "Why not invent it yourself?" The answer is simple: **because the combination of existing research is strong enough**. My development rule ([[feedback_originality_over_imitation]]) says: "The adoption of external algorithms is **selection**, not coverage. Exclude breakdown risk and mere imitation, and adopt only what adds value to the original design." lldarwin's originality is not "having invented a new selection algorithm," but "**the way it bundles these without aggregating**, and **actually wiring** that into llive's evolution loop." In cooking terms, it's not creating the world's first ingredient, but the craft of "plating famous existing ingredients on one dish without mixing them." Ingredients that would be ruined if mixed are made to coexist without mixing.
+
+---
+
+## 4. Stage1 — doubling behavioral diversity with criteria exclusion + novelty pressure
+
+From here it's measurements. In Stage1, rather than implementing the whole design at once, I put in only the two changes most likely to be effective and measured (llive, branch `optimize/core-2026-05-20`, commit `8060204`).
+
+**Change 1: criteria exclusion.** From the cases of ε-lexicase, I removed `factor_score` (= the single scalar of max-archetype = argmax, the very cause of #25's best=1.0 saturation) and `nearest_persona_idx` (= a category index with no meaningful ordering). This is a cleanup that "removes bad rulers from the material used to judge selection."
+
+**Change 2: novelty pressure.** I enabled `MultiPressureSelector(use_novelty=True)`. Every generation it computes the k-NN average distance to the archive of past generations (Lehman-Stanley style novelty), z-scores it within the population (STD-1), and mixes it into selection as an additional lexicase case. It evaluates "behaving differently from everyone else" itself as one of the axes.
+
+For tests, I expanded `tests/unit/test_evolutionary_lldarwin.py` from 8 → 10 (adding exclusion and novelty preservation). 847 evolution-system tests green, no regression.
+
+The measurement conditions are rich-proxy, 8 founders + pop24, 150 generations, seed 0. The results are below.
+
+### 4.1 Behavioral diversity (diversity_l2) — the metric where novelty works
+
+| Condition | mean | tail30 min | final |
+|---|---|---|---|
+| BASELINE (pre-exclusion, old lldarwin equivalent to Tournament) | 7.12 | 0.68 | 0.83 (collapse) |
+| A: criteria exclusion only | 9.16 | 1.57 | 1.57 |
+| **B: exclusion + novelty** | **14.88 (+109%)** | **6.56 (9.6×)** | **11.73 (collapse avoided)** |
+
+Novelty pressure maintained behavioral (genome-space) diversity at about double, and prevented the late-stage diversity collapse. Criteria exclusion alone is also effective on its own (to the extent it removes spurious argmax pressure). Whereas BASELINE **collapses** at final 0.83, condition B **holds its ground** at final 11.73. This is the first tangible sense of the "don't aggregate" design.
+
+![Fitness and diversity of the Stage1 baseline (no novelty). Diversity collapses in the late stage](../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg)
+
+![Stage1 with novelty. Diversity is maintained until the late stage](../assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status.svg)
+
+Placing the two side by side, the difference in late-stage behavior is clear at a glance. Whereas the baseline's diversity curve sticks to the floor, the one with novelty runs to the finish while keeping a high level.
+
+> 🍵 **Break point**: To liken novelty pressure to a goldfish pond — if you keep only the goldfish swarming around the food (high fitness), eventually you get a pond where everyone moves the same way in the same place. Novelty pressure is the role that "**gives a bonus to goldfish swimming in different places from everyone**" too. As a result, you get a pond scattered everywhere, one you never tire of watching. But don't let your guard down here. In the next section, a **pitfall** lurking in this "lively pond" is discovered.
+
+---
+
+## 5. honest disclosure (most important) — I had been confusing behavioral diversity and lineage survival
+
+This is the most important section of this article. Just because a good number (+109%) came out does not mean I get to feel like a winner — this is my iron rule ([[feedback_benchmark_honest_disclosure]]). I doubted the breakdown. And I found a mistake.
+
+### 5.1 Lineage fixation (founder_counts) — the metric novelty does not improve
+
+In the same measurement, I look at a different metric. "Of the 8 founders (ancestral lineages), how many lineages survived to the end?"
+
+The result — **in all conditions, it ultimately converged from 8 → 2 lineages** (furuse-kazufumi + friston). oka-kiyoshi (Oka Kiyoshi) / grothendieck (Grothendieck) / von-neumann / feynman / millidge / isomura all **went extinct**.
+
+Even though I put in novelty and doubled behavioral diversity, **the lineage survival was exactly the same 2 lineages as #25**.
+
+### 5.2 Why — I had been confusing two kinds of "diversity"
+
+The TODO in the design document (as of #25) said "verify in a re-run whether the Oka Kiyoshi / Grothendieck lineages survive." This was **confusing behavioral diversity with lineage survival**.
+
+The author's comment in `poc_evolution_env.py` (L129-132) pins down this confusion precisely.
+
+> "monoculture = BEHAVIORAL concentration (max archive-cell occupancy)…
+> neutral drift (Kimura) regardless of mechanism — that is expected, not collapse.
+> The OE signal is behavioral spread. **lineage_fixation … to keep it <1 needs QD niching on lineage / PERSONA-FX, not pure novelty**"
+
+Broken down, it's this.
+
+- The demonstrated monoculture 0.05 is **behavioral** (the occupancy rate of archive cells), not **lineage-based**. What novelty/lexicase improves is "the spread of behavior," not "the survival of ancestors."
+- That lineage fixation heads toward monoculture by neutral drift (Motoo Kimura's neutral theory of evolution) is **theoretically normal**. It is not collapse. Both novelty and lexicase have only mechanisms that **preserve existing individuals**, and have **no mechanism to revive a lineage that has once gone extinct**. So lineage fixation cannot be stopped structurally.
+- Furthermore, the inter-archetype distances are also compressed at 0.068–0.29 (similarities densely packed in 0.71–1.0), so the selection gradient is weak and drift dominates. friston is the most non-central (centroid distance 0.162) yet survived = it was not centrality (strength) but **luck (drift)** by which the 2 lineages fixed.
+
+In other words — my wish that "I want Oka and Grothendieck to survive" was a disease that **the medicine of raising behavioral diversity can absolutely never cure**. I had the wrong medicine. This is a lesson worth recording honestly.
+
+> 🍵 **Break point**: Put in manzai terms.
+> Boke: "I increased the goldfish that move in colorful ways in the pond! Diversity is perfect!"
+> Tsukkomi: "And the **bloodline**? Of the 8 goldfish families that existed, how many are left?"
+> Boke: "...two."
+> Tsukkomi: "The movements are flashy but the family tree is threadbare! Diversity of movement and diversity of bloodline are **separate matters**!"
+> — "Behavior is diverse" and "lineage is diverse" are entirely different metrics that merely look alike. I had been confusing them. I expose it honestly.
+
+---
+
+## 6. Stage1.5 — reviving extinct lineages with a neutral reservoir
+
+Once you understand the true nature of the disease, you can change the medicine. What lineage survival needs is "a mechanism to re-inject extinct lineages every generation" — a **lineage-niched neutral reservoir**.
+
+### 6.1 First, confirm the mechanism with a PoC
+
+Rather than remodeling the production loop right away, I first confirmed the mechanism runs with a standalone PoC ([[feedback_poc_feasibility_first]] = requirements → PoC → feasibility → detailed design, llive `scripts/poc_lineage_reservoir.py`, commit `0d0537d`).
+
+Selection reuses Stage1's `MultiPressureSelector` (criteria exclusion + novelty). Fitness is rich-proxy. Lineage is inherited from parent_a. **The reservoir = keeps the best-ever genome per lineage and re-injects extinct lineages every generation** (replacing low-score children; the best is not destroyed). I measured with 8 founders + pop24 + 150 gens + seed 0.
+
+| reservoir | final named lineages | lineage_fixation (tail30 mean) | diversity_l2 (tail30) |
+|---|---|---|---|
+| OFF | **1** (oka-kiyoshi 24/24 = complete monoculture) | 1.00 | 1.58 |
+| **ON** | **8 (all founders survive)** | **0.31 (≪ 0.8 OE-3)** | 1.69 |
+
+With reservoir ON, **all 8 lineages survived**, including Oka (oka) and Grothendieck (grothendieck). The final shares are friston 7 / furuse 6 / grothendieck 4 / oka 3 / the other 4 lineages 1 each. The ideal behavior: **strong lineages reproduce with descendants, while weak lineages are kept alive by the reservoir**. Behavioral diversity also did not drop (1.69 vs OFF 1.58).
+
+**Honest caveat (PoC stage)**: Because the reservoir re-injects frozen elites (frozen representatives), the "survival" of weak lineages (1 individual each) is due to re-injection, not active evolution. This is legitimate per the very definition of a neutral reservoir (keep representatives and make them recombinable), but I do not claim "weak lineages keep actively evolving."
+
+### 6.2 Integration into the production EvolutionLoop (additive + default-off)
+
+Since the mechanism was confirmed by the PoC, I integrated it into the production `EvolutionLoop` (commit `b03cbda`). The crux of the design is **additive and default-off** — it changes none of the existing behavior, and becomes active only when the flag is set. I defended backward compatibility to the death.
+
+- Added the `EvolutionLoop.on_population_bred` hook (can transform the bred list right after breeding, before evaluation; default None = backward compatible).
+- `LineageReservoir` (`lineage_reservoir.py`): ancestor tracking (inheriting parent_ids[0]) + per-lineage best-ever retention + re-injection of extinction-protected lineages. It shares `founder_map` and stays consistent with the lineage log.
+- Added `run_persona_evolution(lineage_reservoir=True)` / the run-script flag `--lineage-reservoir`.
+- tests: `test_evolutionary_lineage_reservoir.py` 6 + evolution-system **937 green** (no regression).
+
+Measurement in the real EvolutionLoop (rich-proxy + lldarwin + novelty, 8 founders / pop24 / 150gens / seed0).
+
+| Condition | named lineage survival | max_share | lineage_fixation (tail30) | diversity_l2 (tail30) |
+|---|---|---|---|---|
+| reservoir OFF (Stage1) | 2/8 (furuse 17 + friston 7) | 0.71 | 0.70 | 14.88 |
+| **reservoir ON (Stage1.5)** | **8/8 (all lineages)** | **0.33** | **0.29 (≪ 0.8 OE-3)** | 9.20 |
+
+**All 8 lineages survived in the real loop**, including Oka (oka 3) and Grothendieck (grothendieck 1). The production implementation reproduced the PoC's prediction (fixation 0.31) at 0.29 — proof that the mechanism worked as designed.
+
+This is the biggest highlight of this article. Compare the two below.
+
+![Neutral reservoir OFF. The lineage-dominance stream ultimately collapses to 2 lineages, furuse 71% / friston 29%](../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg)
+
+![Neutral reservoir ON. All 8 lineages (millidge / von-neumann / oka / grothendieck, etc.) coexist](../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg)
+
+OFF (top): as generations advance, the stream gets swallowed into 2 colors — a reproduction of #25's "only me and friston remained." ON (bottom): 8 colors remain as bands until the end. Neither Oka nor Grothendieck has disappeared.
+
+![Fitness and diversity with the neutral reservoir ON](../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_status.svg)
+
+> 🍵 **Break point**: That lonely world I lamented in #25, "only me and Friston remained." This time it has changed into a lively world where Oka, Grothendieck, and von Neumann are all present. **This is not fabrication; it is a result that actually ran** (following [[feedback_benchmark_honest_disclosure]], I write neither false failures nor false successes). But — before getting carried away, recall the attitude learned in §5. "When a good number comes out, doubt the breakdown." In the next §6.3, I honestly write that this success too came with a **cost**.
+
+### 6.3 Honest caveat — lineage retention and behavioral diversity are a weak trade-off
+
+With reservoir ON, all lineages survived. But look closely and **diversity_l2 drops from 14.88 → 9.20**. Because frozen elites (frozen representatives) are re-injected every generation, the spread of genome space decreases somewhat.
+
+However, the collapse when OFF (final 0.83) is avoided. In other words, it's a **weak trade-off** relationship: "if you take lineage retention, the peak of behavioral diversity drops a little, but collapse can be prevented." It is not zero-cost magic. I write this honestly. And how far this cost can be minimized becomes the subject of the next sweep.
+
+---
+
+## 7. Re-injection frequency sweep — a non-trivial discovery of a non-monotonic optimum
+
+I characterized §6.3's honest caveat (frozen elite re-injection lowers diversity) with a sweep of `reinject_interval` (the generation interval at which re-injection is performed; default 1 = every generation) (commit `da93dd3`). I added `LineageReservoir.reinject_interval` + the `--reinject-interval` flag (7 tests). 8 founders / pop24 / 150gens / seed0.
+
+| interval | named survival | lineage_fixation (tail30) | diversity_l2 (tail30) |
+|---|---|---|---|
+| **1** (every generation) | **8/8** | 0.32 | 9.91 |
+| 5 | 5/8 | 0.37 | **12.84 (max)** |
+| 10 | 3/8 | 0.41 | 11.41 |
+| 20 | 2/8 | 0.44 | 10.75 |
+
+**Here there was a non-trivial discovery.** Intuitively, you'd expect that "the more you reduce re-injection (raise the interval), the less the frozen elites are pushed in, and diversity recovers monotonically," right? But — **diversity did not increase monotonically; it peaked at interval=5** and actually dropped at 10/20.
+
+When you think about the reason, it makes sense. If you leave the lineages alone too much (the interval is too large), (a) the diversity injection originating from the reservoir decreases, and (b) a few lineages fix, so in the end diversity doesn't grow either. Both "re-injecting too much" and "leaving alone too much" are bad, and there is an optimum in between. This is a finding that **could not have been predicted without actually running the sweep**.
+
+The operational guideline became this.
+
+- If you **prioritize lineage retention above all** → interval=1 (8/8 all lineages survive).
+- If you want to **also achieve behavioral diversity** → interval=5 (retains 5/8 while maximizing diversity).
+
+The optimum for achieving both depends on the fitness design and the population size, so in production I re-calibrate it with a sweep.
+
+![The trade-off of re-injection frequency. Lineage retention and behavioral diversity are inversely related, and diversity peaks at interval=5 (non-monotonic)](../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg)
+
+> 🍵 **Break point**: Like the sage (punchline) of a rakugo, there is a "twist that betrays expectations" here. I thought "the more you do it the better," but it was "do it too much and it backfires." Same as watering plants: water too little and they wither, water too much and the roots rot. The optimum is in moderation. When you do evolutionary computation, you meet these "non-monotonic curves" again and again. That's why you measure baselines and run sweeps. Intuition is often betrayed.
+
+---
+
+## 8. Stage2 first half — making "the LLM's weaknesses" into selection pressure by proxy
+
+Up to here I confirmed the mechanism with rich-proxy (a heuristic based on persona similarity). Next I implement another pillar of the design: **making "axes where the LLM/VLM is actually weak, and which are measurable" into pressures** (a series of commits, `pressures.py`).
+
+I made the 5 proxy-capable axes listed in design §3 into plugins.
+
+| pressure (LLM weakness) | related thought factors (case) |
+|---|---|
+| typo_robustness (noise tolerance) | consistency / reality_link / uncertainty |
+| polysemy_wsd (polysemous words) | multiview / consistency / reality_link |
+| multistep_robustness (multi-step reasoning) | structurize / closed_loop / self_extend |
+| calibration (confidence estimation) | uncertainty / provenance |
+| context_management (irrelevant-context tolerance) | consistency / provenance / recompose |
+
+`make_pressure_fitness()` outputs the cases of each pressure (14 in total) into the breakdown, and lldarwin's ε-lexicase **selects specialists per axis without aggregating**. Added `--fitness pressure-proxy`. tests `test_evolutionary_pressures.py` 4 + evolution-system **942 green**.
+
+End-to-end measurement (pressure-proxy + lldarwin + novelty + reservoir, 8 founders / 120gens): named lineages **8/8 survive** / lineage_fixation (tail) 0.67 / diversity_l2 (tail) **17.91**. The 14 weak-axis cases are selected independently, and behavioral diversity is high. Lineages are maintained by the reservoir (because pressure-proxy does not directly reward persona identity, the dominant lineage's share becomes 0.67, higher than rich-proxy's 0.29).
+
+![Population-mean trajectory of the 5 weak axes (typo / polysemy / multistep / calibration / context) (proxy measurement)](../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg)
+
+**Honest caveat (an accepted limitation already stated in design §7 / §7.1)**: The individual is not a real LLM but a genome (an llive configuration). What this pressure measures is **a proxy for behavior** — "how much the genome possesses the **thought factors related** to that weakness" — and is **not the LLM ability of production**. This is limited to **the verification of mechanism feasibility (that the mechanism runs)**. The Goodhart risk (surface strategies that hack the proxy evolve) is also an accepted limitation. The actual measurement of real LLM/VLM weak axes is carried over to the second half of Stage2 (which presupposes the OLLAMA_HOST setting + the individual→real-LLM mapping).
+
+> 🍵 **Break point**: This is easily misunderstood, so let me press the point. I have **not yet said** "I overcame the LLM's weaknesses by evolution!" What the proxy measures is only "whether the mechanism runs." Whether a real LLM became robust to typos is, at this stage, completely unknown. Even if a flashy number (17.91) comes out by proxy, that is proof that "the device works," not proof that "the contents got smarter." The moment you blur this line, the research becomes a lie. So next, I face **the real LLM**.
+
+---
+
