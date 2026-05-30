@@ -706,3 +706,126 @@ End-to-end measurement (pressure-proxy + lldarwin + novelty + reservoir, 8 found
 
 ---
 
+## 9. Stage2 second half — evolving prompt strategies against a real on-prem LLM
+
+Once I found that localhost's ollama (llama3.2:latest, etc.) was reachable, **real LLM evaluation** finally became possible (commit `2fb2912`). Because localhost = on-prem, it also satisfies the discipline of measurement purity (do not mix with cloud LLMs) ([[feedback_llive_measurement_purity]]).
+
+### 9.1 The individual → real LLM mapping (Promptbreeder lineage)
+
+The crux is "how do you make the genome take effect on a real LLM?" In `real_pressures.py` I implemented the **individual → real LLM mapping**.
+
+- **Convert the individual's `c_prompt` (PromptChromosome) into a system prompt**: skill_set → instructions / prompt_template_id → reasoning style / language_style → tone. We put this system prompt over a fixed LLM (llama3.2), make it solve the **real tasks** of the 5 weak axes, and score it.
+- **Fix the LLM body and evolve the prompt strategy (genome)** = select, by measurement, "which prompt strategy mitigates the LLM's weaknesses." This follows the style of Promptbreeder (the research lineage that optimizes prompts evolutionarily).
+- Deterministically with temp=0 (greedy). Cache `(system_prompt, task)` (the same strategy is not re-evaluated).
+- robust: per-call try/except (an ollama hiccup is treated as the task's lost points, and the run continues).
+- Added `--fitness real-pressure` / `--ollama-model` / `--max-wallclock-seconds`. tests 5 + evolution-system 947 green.
+
+### 9.2 Demonstration of a real selection signal — the CoT+structure strategy takes multistep from 0.0 → 1.0
+
+And then, a real selection signal was observed.
+
+**The CoT+structure strategy** (`chain_of_thought` + structurize + loop) **improved llama3.2's multistep (multi-step reasoning) from 0.0 → 1.0** (the terse strategy fails at 0.0; the score rose 0.80 → 1.00).
+
+This means that lldarwin's claim "the evolution of prompt strategies can mitigate the LLM's weaknesses" was **demonstrated not by proxy but on a real LLM**. Even with the same llama3.2 body, depending on the system prompt put over it (= the evolved genome), the multi-step reasoning task is solvable or not. Evolution actually selected "a solvable prompt strategy."
+
+![Population-mean trajectory of the 5 weak axes (real on-prem LLM llama3.2 evaluation). The evolution of prompt strategies improves the axes](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg)
+
+### 9.3 The 12h continuous run
+
+Since real LLM evaluation is heavy, I launched a long continuous run (`out/lldarwin_12h_realpressure_2026_05_26/`).
+
+```
+--fitness real-pressure --selection lldarwin --novelty --lineage-reservoir
+--genome3d --population 24 --max-wallclock-seconds 43200 --checkpoint-every 5
+```
+
+It stopped safely at wallclock 12h (snapshotted → can continue with `--resume`). During the continuous run it reached best_score=1.0.
+
+![Fitness and diversity of the real LLM evolution run (12h continuous run)](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status.svg)
+
+### 9.4 Honest caveat (the limitations of real LLM evaluation)
+
+This is the culmination of the attitude learned from #25. Precisely because a flashy result came out (0.0 → 1.0, best 1.0), I write the breakdown thoroughly and honestly.
+
+- **(a) Only `c_prompt` participates in fitness.** persona / c_factors are neutral (lineages are maintained by the reservoir, initial selection is handled by novelty). In other words this is "**the evolution of prompt strategies**," not "the evolution of personas." It's not that Oka Kiyoshi's personality got smarter, but that a prompt strategy tied to the Oka Kiyoshi lineage was selected.
+- **(b) The initial c_prompt of all founders is identical (default).** So exploration is mutation-driven (diversifying the prompt per founder is a future improvement). Because the starting point is the same, the initial lineage differences have no effect on the prompt strategy.
+- **(c) A small battery (2 questions per axis) = a noisy estimate.** Even the dramatic number 0.0 → 1.0 contains noise to the extent the number of questions is small. To make a statistically robust claim, a much larger battery is needed.
+- **(d) on-prem only (measurement purity). It is not a claim about general ability.** This is an observation on a specific model and specific tasks (llama3.2), and I do not say "LLMs in general turn out this way."
+
+If I hid these, I could write a flashy story like "evolution made the LLM dramatically smarter!" — but that would be a lie. What lldarwin demonstrated goes only as far as "**the mechanism, on a real LLM, produces a selection signal**." I make no claim crossing that line.
+
+> 🍵 **Break point**: The most pleasurable moment in research is shouting "0.0 became 1.0!" But that very moment is when [[feedback_benchmark_honest_disclosure]] takes effect. "When a suspiciously good number comes out, doubt the breakdown before you feel like a winner." In this case — what won is the "prompt strategy," not the "LLM body" nor the "persona." The number of questions is also small. Only 1 on-prem model. Only after writing all of this can I say "I demonstrated it" for the first time. Honest disclosure is the muscle training of holding back from bragging.
+
+---
+
+## 10. Reuse of existing assets (based on the codex code survey)
+
+So as not to make the design a pie in the sky, I had my subordinate Codex survey the existing code, and found that **much was already implemented but unwired**.
+
+- `mating.py:139 LexicaseSelection` (with ε, implemented but unwired → just wire it)
+- `nsga2.py:197 NSGA2Selection` (for the ≤3-objective lane)
+- `diversity.py:94 NoveltyScorer` / `quality_diversity.py MAPElitesGrid` / `speciation.py SpeciationLayer`
+
+**Newly implemented**: `Standardizer` / `MinimalCriterionGate` / the `Pressure` group / `MultiPressureSelector` (the core) / `LineageReservoir` (Stage1.5) / `SelectionAudit`.
+**Wiring points**: inject `MultiPressureSelector` into `selection` at `loop.py:122`, add an injection point at `persona_evolution.py:606`, and connect `LineageReservoir` to the `EvolutionLoop.on_population_bred` hook.
+
+> 🍵 **Break point**: That "implemented but unwired" was the most common was the biggest lesson. Even if you make good parts, **unless you wire (orchestrate) them, evolution stays broken**. The reason #25 went 8→2 is that ε-lexicase, NoveltyScorer, and QD were all "in the box but not wired." The essence of lldarwin is, more than the invention of new algorithms, "bundling good existing parts **without aggregating** and **actually wiring** them into the evolution loop." Even if you gather all the electronic parts, the radio won't make a sound unless you solder them.
+
+---
+
+## 11. The guarantee of breakdown avoidance — a multi-layer structure that does not wipe out (already backed by measurements)
+
+The multi-layer structure that refutes #25's monoculture (8→2) is assembled as designed, and this time it was **backed by measurements**.
+
+1. **MinimalCriterionGate** — reproduction eligibility by a minimum criterion → suppresses winner-take-all.
+2. **QD per-cell elite** — as long as even 1 cell remains, total lineage wipeout is impossible (the archive grows monotonically).
+3. **Niching / FitnessSharing** — down-weight the same niche → multiple peaks coexist.
+4. **Down-sampling** — destroy plateaus with a moving target.
+5. **per-dim z-score + central-agreement exclusion** — do not favor the featureless.
+6. **LineageReservoir (added in Stage1.5)** — a neutral reservoir for extinct lineages → structurally prevents total lineage wipeout (8/8 survival in measurements).
+7. **monoculture monitor + SPC** — record max_lineage_share every generation, detect >0.8 with SPC_ALARM → auto-adjust.
+
+In particular, (6) is **a layer added afterward** in response to §5's honest disclosure (novelty cannot stop lineage fixation). I found a hole in the design by measurement and plugged it. The measured lineage_fixation falls well below the OE-3 criterion (<0.8): OFF 0.70 → ON 0.29. The achievement of this article is that with the two-stage structure of "don't aggregate" + "revive extinct lineages," I could structurally crush #25.
+
+---
+
+## 12. honest disclosure / risks (a preview)
+
+I do not blindly trust the design. Let me summarize once more the accepted limitations (to be dug into in the next article #27).
+
+- **Goodhart's law / proxy divergence** — when you make LLM weaknesses into proxy fitness, "surface strategies that hack the metric" evolve (typo → memorizing specific substitutions, WSD → using test heuristics, etc.). The proxy is limited to mechanism feasibility, and does not claim production ability.
+- **Designer dependence** — lexicase=case / QD=descriptor / novelty=distance metric; in every case, the "direction of diversity" is decided by the designer. Unanticipated emergence on the scale of biological evolution is limited.
+- **The minimal-criterion stagnation⇄collapse trade-off** / **the curse of dimensionality + archive saturation of QD**.
+- **The limitations of real LLM evaluation (reprised from §9.4)** — only c_prompt participates in fitness, the founders' initial prompts are identical, a small battery, on-prem only.
+
+> **Next time preview (#27)**: I honestly expose the most painful counterpoint, "when the glasses saturate, the selection pressure is powerless," together with the limitations of Goodhart's law and proxy fitness. lldarwin is not omnipotent. **How far we may claim** is the subject of #27. Precisely because good numbers like "8/8 survival" and "0.0→1.0" came out this time, next I temper it thoroughly with counter-evidence.
+
+---
+
+## 13. Conclusion
+
+- Evolution is a two-stage structure of "**measuring (lleval)**" and "**selecting (lldarwin)**." The core of selection is **"don't aggregate."**
+- Stage1: with criteria exclusion + novelty pressure, I doubled behavioral diversity from 7.12 → 14.88 (+109%) and avoided the late-stage collapse.
+- honest disclosure: novelty/lexicase preserve **behavioral diversity**, but **lineage fixation** heads toward monoculture by neutral drift (Kimura). I had been confusing the two kinds of diversity — recorded honestly.
+- Stage1.5: with the lineage-niched **neutral reservoir**, in the real EvolutionLoop I achieved **OFF=2 lineages / ON=all 8 lineages survive** (including Oka Kiyoshi and Grothendieck), lineage_fixation 0.29 (≪0.8). **This is not fabrication; it actually ran.**
+- Re-injection frequency sweep: the lineage-retention ↔ behavioral-diversity trade-off. The non-trivial finding that diversity peaks at interval=5 (**non-monotonic**).
+- Stage2 first half (proxy): made the 5 weak axes into Pressure plugins (mechanism feasibility only).
+- Stage2 second half (real LLM): with the individual c_prompt → system prompt mapping, scored real tasks on a fixed on-prem LLM (llama3.2). **The CoT+structure strategy improved multistep from 0.0 → 1.0.** Reached best=1.0 in a 12h continuous run.
+- Without optimism, without feeling like a winner, I reported by separating the breakdown ([[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]]).
+
+Just making good parts leaves evolution broken. **Bundle without aggregating, actually wire, revive extinct lineages, and confirm the selection signal on a real LLM** — only by going that far could I finally change #25's world of "only me and Friston" into a lively world where Oka Kiyoshi and Grothendieck are also present. In the next article #27, I question anew, with counter-evidence, how much trust we may place in this success.
+
+---
+
+## 14. Related
+
+- Series #25 "Only Me and Friston Remained" — the motivation for this article (a record of failure)
+- Series #24-08 "Making the Glasses" — lleval (the measuring side)
+- Series #27 "When the Glasses Fog Up, Selection Is Powerless Too" — counter-evidence investigation (honest disclosure)
+- Design document: lldarwin (the selecting side) `docs/vision/LLDARWIN_DESIGN.md`
+- Measurement of record: `docs/research/lldarwin_stage1_results_2026_05_26.md`
+- llive commits: Stage1=`8060204` / neutral reservoir PoC=`0d0537d` / Stage1.5=`b03cbda` / reinject sweep=`da93dd3` / Stage2 real LLM=`2fb2912`
+- Related memory: [[feedback_benchmark_honest_disclosure]] / [[feedback_llive_measurement_purity]] / [[feedback_originality_over_imitation]] / [[feedback_poc_feasibility_first]]
+
+---
+
