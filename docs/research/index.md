@@ -88,6 +88,25 @@ has_children: true
 
 技術詳細・統合 verdict は llcore project `docs/poc/COMPLETION_VERDICT.md`、研究計画書 v1 は `docs/papers/2026-05-29_research_plan_core_evolution.md`。
 
+### 2026-05-31 進捗 — ③(選択圧)研究の特性化 + VNN-COMP 新カテゴリ準備
+
+**(A) ③ 研究 arc の総括** (llcore `docs/poc/`、全 Codex pair-review 済):
+進化4要素の③(適者生存・選択 = MAP-Elites の behavioral niching)が「実問題でペイするか」を CPU で詰めた。
+Step C(記憶タスク=N/A: 床/天井で非診断)→ 梯子段1(複数 reservoir 結合でも 5-bit parity は degree-5 床で
+解けず)→ **E-A(多タスク汎化で honest negative: ③ load-bearing でない)** → **適用条件の特性化(`STEP_C_APPLICABILITY_VERDICT.md`)**。
+**核心: ③は「欺瞞性(谷の深さ)が閾値 d\*=0.16 を超える」landscape でのみ load-bearing**(3 seed 一致)。
+過去の binary negative は「③無力」でなく「実問題の欺瞞性が閾値未満(smooth 側)だった」で統一説明できる(現状は
+定性的 fingerprint、**numeric 実測は workflow 進行中**)。honest 現状 = 「実 AI 設計探索で③がペイする証拠は CPU 範囲では乏しい」、
+本物の検定は GPU(実 LLM 損失地形の欺瞞性測定)。
+
+**(B) VNN-COMP `online-arch-evo` 新カテゴリ提案** (確定独自軸 #7、最も明快に validated):
+論文 `docs/papers/vnn_comp_online_arch_evolution_proposal.md` を **workshop 投稿可能水準に改訂**(VNN-COMP 2025=6th edition
+反映 / 「contract mismatch」framing / IVAN(PLDI2023)等の最近接先行を §2.9.1 補完 / §9 honest 限界)。reference impl で
+**§9 item 10(実 `.onnx`/`.vnnlib` パーサ)+ item 11(sat-verdict witness, grid-confirmed・spurious は unknown)** を実装、
+**seed ベース benchmark generator** も着地。Path B = VNN-COMP organizers へ 2027 サイクルで提案(rules 和訳 + RFC ドラフト準備済)。
+
+詳細・honest 内訳の単一の真実 = memory `project_llcore_init_2026_05_29`。llcore 本流 221 tests pass。push 未(llcore は GitHub repo 未作成)。
+
 ## いつ更新するか
 
 - `spinoff_ideas_2026_05.md` の Planned / Pattern が新しい段階に進む直前.
