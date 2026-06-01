@@ -107,6 +107,14 @@ Step C(記憶タスク=N/A: 床/天井で非診断)→ 梯子段1(複数 reservo
 
 詳細・honest 内訳の単一の真実 = memory `project_llcore_init_2026_05_29`。llcore 本流 221 tests pass。push 未(llcore は GitHub repo 未作成)。
 
+### 2026-06-02 進捗 — ③「谷深さ」決着(Step D)+ kernel 多様化 CPU 代替路 着手
+
+**(A) ③ 第三軸 proper-power 決着** (llcore `research/step_d_settle/THIRD_AXIS_SETTLE_VERDICT.md`、capstone Codex pair-review ブロッカーなし):
+2026-05-31 の「谷深さ実測 = N/A(循環論法で magnitude 測定不能)」を受け、**決定論 C1 多峰性測定**(ESN+ridge が rng を取らない性質で eval noise を機械eps化→noisy-flat 偽陽性を構造的に除去)が決め手となり、**実 text proxy 地形は valley≈0 で真に滑らか=単峰 → ③不要を (B) noise-free 確定**。「③不要に見えた過去 negative は underpower でなく地形が本当に滑らかだったから」が実 substrate 上で初めて裏付いた。実 multitask 近傍(C-gen4b)のみ「③ NOT null」の弱い兆候(fresh n=64 gate PASS)だが小効果+走行内ドリフト+多重比較で **load-bearing 候補/still_inconclusive 止まり**。K4 ridge clip は「能動的 suppression」→「診断的所見」に降格。verdict §7 推奨次手 = (b) GPU full LLM 損失地形(proxy 滑らか確定ゆえ③の本丸は多峰性が期待できる full LLM 地形)、**ただし投資判断=ユーザー**。
+
+**(B) kernel 多様化 = ③ の CPU 代替路** (llcore `research/kernel_diversification/`):
+GPU を待たず CPU で③に迫る別仮説 = **個々の kernel が滑らかでも 4 kernel 族(rwkv/mamba/hopfield/linear_attn)を union すると kernel 切替=不連続 fitness 段差で地形が multi-basin になりうる→③が GPU 無しで CPU load-bearing(BG9 最終目標)**。Stage 3a(BG1-5 mechanism feasibility)smoke PASS 済。Stage 3b BG6(task→best-kernel 写像が非定数か=specialist 出現)に着手。honest: 全 task 同一 kernel = 「kernel 中立」の valid negative。詳細・honest 内訳は引き続き memory `project_llcore_init_2026_05_29`(Step D Settle 節 + 2026-06-02 セッション節)。
+
 ## いつ更新するか
 
 - `spinoff_ideas_2026_05.md` の Planned / Pattern が新しい段階に進む直前.
