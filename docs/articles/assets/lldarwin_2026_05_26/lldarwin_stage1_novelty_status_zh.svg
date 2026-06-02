@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="920" height="560" viewBox="0 0 920 560" font-family="ui-sans-serif,Segoe UI,sans-serif">
 <rect width="920" height="560" fill="#0b1020"/>
-<text x="70" y="30" fill="#e5e7eb" font-size="20" font-weight="700">llive persona evolution — status</text>
-<text x="70" y="50" fill="#c2410c" font-size="13" font-weight="600">PROXY fitness — NOT real LLM eval  ·  gens=7  pop=24  seed=0</text>
+<text x="70" y="30" fill="#e5e7eb" font-size="20" font-weight="700">llive 角色进化 — 状态</text>
+<text x="70" y="50" fill="#c2410c" font-size="13" font-weight="600">PROXY fitness — 非真实 LLM 评价  ·  gens=7  pop=24  seed=0</text>
 <clipPath id="reveal"><rect x="70" y="0" width="820" height="560"><animate attributeName="width" from="0" to="820" dur="3.2s" fill="freeze"/></rect></clipPath>
 <text x="70" y="62" fill="#9ca3af" font-size="12">fitness (0–1)</text>
 <line x1="70" y1="320.0" x2="890" y2="320.0" stroke="#1f2937" stroke-width="1"/>
