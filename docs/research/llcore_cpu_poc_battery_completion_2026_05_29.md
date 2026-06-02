@@ -8,7 +8,7 @@ nav_order: 1054
 # llcore CPU PoC Battery 完成 — Stage 0-2 全 PoC 完走
 
 **日付**: 2026-05-29  
-**Source**: `D:/projects/llcore/docs/poc/COMPLETION_VERDICT.md`  
+**Source**: `docs/poc/COMPLETION_VERDICT.md` (llcore repo)  
 **Project**: `llmesh-llcore` 0.1.0a0 (llive 独立路線)
 
 ## 何が完成したか
@@ -64,7 +64,7 @@ f. 論文化トラック (TMLR draft + GECCO 2027 short)
 
 ## 関連
 
-- llcore 統合 verdict: `D:/projects/llcore/docs/poc/COMPLETION_VERDICT.md`
+- llcore 統合 verdict: `docs/poc/COMPLETION_VERDICT.md` (llcore repo)
 - 事前調査 master survey: `docs/papers/2026-05-29_core_evolution_master_survey.md`
 - 研究計画書 v1: `docs/papers/2026-05-29_research_plan_core_evolution.md`
 - memory: `project_llcore_init_2026_05_29` / `feedback_codex_pair_review_for_llcore` / `project_core_evolution_survey_2026_05_28`
