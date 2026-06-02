@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-02 09:38:02
+- **生成時刻**: 2026-06-02 12:52:42
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,22 +20,23 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+39ae0bf docs(articles+research): #33 に BG9 決着を追記 + research index 同期
+31796d1 auto: QIITA_#33_llcore_third_axis_settle_kamikudaki.md 編集前 (2026-06-02 09:39)
+326f116 auto: QIITA_#33_llcore_third_axis_settle_kamikudaki.md 編集前 (2026-06-02 09:39)
+68b0a56 auto: QIITA_#33_llcore_third_axis_settle.md 編集前 (2026-06-02 09:38)
+a830c4d auto: QIITA_#33_llcore_third_axis_settle.md 編集前 (2026-06-02 09:38)
 6c88948 auto: QIITA_#33_llcore_third_axis_settle.md 編集前 (2026-06-02 09:37)
 0e79491 auto: index.md 編集前 (2026-06-02 09:37)
 6c19986 docs(articles): llcore 第三軸③決着 連載#33 技術版+かみくだき版 draft
 69a7462 feedback(research): llcore ③ Step D 決着 + kernel 多様化 CPU 代替路を master 地図へ
 c2a4321 auto: index.md 編集前 (2026-06-02 07:26)
-e91a376 auto: SESSION_SUMMARY.md 編集前 (2026-05-31 18:39)
-d4fee5f docs(articles): Qiita 用 SVG の作り方・扱い方ガイド
-000e3ae feedback(research): llcore 2026-05-31 進捗を FullSense マスターへ (③特性化 + VNN-COMP)
-bf2f837 auto: index.md 編集前 (2026-05-31 12:29)
-3743a74 docs(qiita#26): 公開版 0a35e1bf も en/zh/ko を翻訳 SVG 変種参照へ差し替え
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/drafts/QIITA_#33_llcore_third_axis_settle.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -75,11 +76,11 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `09:37` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle.md`
+- `12:50` `docs/NEXT_SESSION.auto.md`
+- `12:50` `docs/SESSION_SUMMARY.md`
+- `09:39` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle_kamikudaki.md`
+- `09:38` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle.md`
 - `09:37` `docs/research/index.md`
-- `09:22` `docs/NEXT_SESSION.auto.md`
-- `09:22` `docs/SESSION_SUMMARY.md`
-- `08:00` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle_kamikudaki.md`
 
 
 ## Cross-references
