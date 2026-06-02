@@ -97,7 +97,7 @@ For occasional fine-tuning and bursty neuroevolution (likely **well under 200 GP
 
 ## 4. The ③ full-LLM pre-registered experiment (BG10, condensed)
 
-> Full spec mirrors `research/kernel_diversification/BG9_PREREGISTRATION.md`. Suggested location for the full file: `D:/projects/llcore/research/llm_qd_loadbearing/BG10_PREREGISTRATION.md` (new isolated dir; `src/llcore` untouched; git one-shot by orchestrator). The file has **not** been created — flag if you want it written and committed before any run.
+> Full spec mirrors `research/kernel_diversification/BG9_PREREGISTRATION.md`. Suggested location for the full file: `research/llm_qd_loadbearing/BG10_PREREGISTRATION.md` (in the llcore repo) (new isolated dir; `src/llcore` untouched; git one-shot by orchestrator). The file has **not** been created — flag if you want it written and committed before any run.
 
 ### Proposition (falsifiable)
 
