@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-02 09:22:25
+- **生成時刻**: 2026-06-02 09:38:02
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+6c88948 auto: QIITA_#33_llcore_third_axis_settle.md 編集前 (2026-06-02 09:37)
+0e79491 auto: index.md 編集前 (2026-06-02 09:37)
 6c19986 docs(articles): llcore 第三軸③決着 連載#33 技術版+かみくだき版 draft
 69a7462 feedback(research): llcore ③ Step D 決着 + kernel 多様化 CPU 代替路を master 地図へ
 c2a4321 auto: index.md 編集前 (2026-06-02 07:26)
@@ -28,15 +30,12 @@ d4fee5f docs(articles): Qiita 用 SVG の作り方・扱い方ガイド
 000e3ae feedback(research): llcore 2026-05-31 進捗を FullSense マスターへ (③特性化 + VNN-COMP)
 bf2f837 auto: index.md 編集前 (2026-05-31 12:29)
 3743a74 docs(qiita#26): 公開版 0a35e1bf も en/zh/ko を翻訳 SVG 変種参照へ差し替え
-b01184d docs(qiita#26): SVG 多言語対応を完了 (en/zh/ko 図を翻訳変種へ差し替え)
-39e7fb2 chore(qiita): publish 後の同期反映 (updated_at/.remote) + 草稿の raw URL 整合
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+M docs/articles/drafts/QIITA_#33_llcore_third_axis_settle.md
 ```
 
 
@@ -76,11 +75,11 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `08:22` `docs/SESSION_SUMMARY.md`
-- `08:22` `docs/NEXT_SESSION.auto.md`
+- `09:37` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle.md`
+- `09:37` `docs/research/index.md`
+- `09:22` `docs/NEXT_SESSION.auto.md`
+- `09:22` `docs/SESSION_SUMMARY.md`
 - `08:00` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle_kamikudaki.md`
-- `07:58` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle.md`
-- `07:26` `docs/research/index.md`
 
 
 ## Cross-references
