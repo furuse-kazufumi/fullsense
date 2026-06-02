@@ -115,6 +115,9 @@ Step C(記憶タスク=N/A: 床/天井で非診断)→ 梯子段1(複数 reservo
 **(B) kernel 多様化 = ③ の CPU 代替路** (llcore `research/kernel_diversification/`):
 GPU を待たず CPU で③に迫る別仮説 = **個々の kernel が滑らかでも 4 kernel 族(rwkv/mamba/hopfield/linear_attn)を union すると kernel 切替=不連続 fitness 段差で地形が multi-basin になりうる→③が GPU 無しで CPU load-bearing(BG9 最終目標)**。Stage 3a(BG1-5 mechanism feasibility)smoke PASS 済。Stage 3b BG6(task→best-kernel 写像が非定数か=specialist 出現)に着手。honest: 全 task 同一 kernel = 「kernel 中立」の valid negative。詳細・honest 内訳は引き続き memory `project_llcore_init_2026_05_29`(Step D Settle 節 + 2026-06-02 セッション節)。
 
+**(C) BG9 決着 = N/A(構造的)= CPU kernel 抜け道は閉じている** (llcore `research/kernel_diversification/BG9_VERDICT.md`、事前登録 + 敵対 red-team で確定):
+kernel-favoring task で substrate は非 inert 化(PASS)だが弱い(実質 3 kernel、hopfield は対角 mock で機能不全)。**harness validity が立たない** — ③(MAP-Elites の kernel_id niching)が強 baseline RR-hillclimb を排除できない。理由 = **kernel 選択は 4 離散の単一低次元座標で、RR は restart で kernel_id を直接サンプルして欺瞞 corridor を回避する**(Step4 の corridor が RR を排除できたのは behavior=mean(24次元)の CLT 不到達ゆえ)。red-team が faithful 4 構成 + 次元 sweep で敵対確証(③が RR を排除できる behavior 次元は kernel 空間に存在しない)。**構造的洞察 = ③ が load-bearing になるには高次元 behavior 空間が要る。kernel 選択(低次元)は条件を満たさない → 「探索空間を kernel 多様化で拡張すれば③が unlock するか」(Step4 §7) の答え = NO(CPU 構造的に)**。**GPU 含意**: CPU 抜け道が閉じたので③の残り路は高次元 GPU full-LLM 地形のみ(但し依然 bet=強 baseline が直接解くリスク=RR と同型)、ポートフォリオ判断 + クラウド借り事前登録1本が適正。詳細 = memory `project_llcore_init_2026_05_29`(BG9 決着節)。
+
 ## いつ更新するか
 
 - `spinoff_ideas_2026_05.md` の Planned / Pattern が新しい段階に進む直前.
