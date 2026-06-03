@@ -46,9 +46,8 @@
   </circle>
   <text x="200" y="232" font-size="17" font-weight="700" fill="#4f6bb0" text-anchor="middle" letter-spacing="1">#35-00</text>
   <text x="200" y="278" font-size="34" font-weight="800" fill="#1f2a44" text-anchor="middle">序</text>
-  <text x="200" y="318" font-size="16" fill="#3a4straight" text-anchor="middle"></text>
-  <text x="200" y="358" font-size="15" fill="#46506a" text-anchor="middle">何を進化させ</text>
-  <text x="200" y="378" font-size="15" fill="#46506a" text-anchor="middle">なぜ gate が要るか</text>
+  <text x="200" y="332" font-size="15" fill="#46506a" text-anchor="middle">何を進化させるか</text>
+  <text x="200" y="356" font-size="15" fill="#46506a" text-anchor="middle">なぜ gate が要るか</text>
   <text x="200" y="170" font-size="14" font-weight="700" fill="#4f6bb0" text-anchor="middle">▼ 現在地</text>
 
   <!-- ===== Card 01 ===== -->
