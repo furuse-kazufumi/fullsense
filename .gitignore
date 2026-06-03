@@ -28,3 +28,8 @@ __pycache__/
 /tools/fullsense_telegram_inbound.py
 /docs/session_report_2026_05_24.md
 
+# Windows shortcuts (.lnk) — machine-specific (absolute D: paths), local navigation
+# aids only (jump to QIITA drafts living under docs/articles/drafts/). Kept ON DISK for
+# Explorer browsing but NEVER tracked in this PUBLIC portal repo (feedback_no_local_path_in_public).
+docs/articles/*.lnk
+
