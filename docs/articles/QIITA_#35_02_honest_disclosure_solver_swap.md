@@ -194,12 +194,12 @@ FullSense の honest-disclosure 規律に従い、限界を明示します。
 8. Boyd, S. & Vandenberghe, L. *Convex Optimization* (LMIs / SDP) — Cambridge University Press, 2004.
 9. Boyd, S., El Ghaoui, L., Feron, E. & Balakrishnan, V. *Linear Matrix Inequalities in System and Control Theory* — SIAM, 1994.
 10. Mouret, J.-B. & Clune, J. *Illuminating search spaces by mapping elites (MAP-Elites)* — arXiv:1504.04909, 2015.
-11. 内部: [#35-00 概観](./QIITA_#35_00_overview.md) — llcore 検証 arc の全体像。
+11. 内部: [#35-00 概観](#) — llcore 検証 arc の全体像。
 12. 内部: [#35-01 verifier フロンティア](./QIITA_#35_01_verifier_frontier.md) — ラダーと SDP の大ジャンプ。
 
 ## シリーズ / Series navigation
 
-- [#35-00 — llcore 検証 arc 概観](./QIITA_#35_00_overview.md)
+- [#35-00 — llcore 検証 arc 概観](#)
 - [#35-01 — verifier-fitness フロンティア (証明能力のラダー)](./QIITA_#35_01_verifier_frontier.md)
 - **#35-02 — 「良すぎる数値」を疑え (本記事)**
 
@@ -386,12 +386,12 @@ Per FullSense honest-disclosure discipline, the limits are explicit.
 8. Boyd, S. & Vandenberghe, L. *Convex Optimization* (LMIs / SDP) — Cambridge University Press, 2004.
 9. Boyd, S., El Ghaoui, L., Feron, E. & Balakrishnan, V. *Linear Matrix Inequalities in System and Control Theory* — SIAM, 1994.
 10. Mouret, J.-B. & Clune, J. *Illuminating search spaces by mapping elites (MAP-Elites)* — arXiv:1504.04909, 2015.
-11. Internal: [#35-00 Overview](./QIITA_#35_00_overview.md) — the big picture of the llcore verification arc.
+11. Internal: [#35-00 Overview](#) — the big picture of the llcore verification arc.
 12. Internal: [#35-01 Verifier frontier](./QIITA_#35_01_verifier_frontier.md) — the ladder and the SDP big jump.
 
 ## Series navigation
 
-- [#35-00 — llcore verification arc overview](./QIITA_#35_00_overview.md)
+- [#35-00 — llcore verification arc overview](#)
 - [#35-01 — verifier-fitness frontier (ladder of certifying power)](./QIITA_#35_01_verifier_frontier.md)
 - **#35-02 — Suspect the solver (this article)**
 
@@ -578,12 +578,12 @@ margin-sweep 红队对求解器伪影**结构性失明**——它们只是在同
 8. Boyd, S. & Vandenberghe, L. *Convex Optimization* (LMIs / SDP) — Cambridge University Press, 2004.
 9. Boyd, S., El Ghaoui, L., Feron, E. & Balakrishnan, V. *Linear Matrix Inequalities in System and Control Theory* — SIAM, 1994.
 10. Mouret, J.-B. & Clune, J. *Illuminating search spaces by mapping elites (MAP-Elites)* — arXiv:1504.04909, 2015.
-11. 内部：[#35-00 概览](./QIITA_#35_00_overview.md) — llcore 验证 arc 的全貌。
+11. 内部：[#35-00 概览](#) — llcore 验证 arc 的全貌。
 12. 内部：[#35-01 verifier 前沿](./QIITA_#35_01_verifier_frontier.md) — 阶梯与 SDP 大跳跃。
 
 ## 系列 / Series navigation
 
-- [#35-00 — llcore 验证 arc 概览](./QIITA_#35_00_overview.md)
+- [#35-00 — llcore 验证 arc 概览](#)
 - [#35-01 — verifier-fitness 前沿（证明能力的阶梯）](./QIITA_#35_01_verifier_frontier.md)
 - **#35-02 — 怀疑求解器（本文）**
 
@@ -770,11 +770,11 @@ FullSense honest-disclosure 규율에 따라 한계를 명시합니다.
 8. Boyd, S. & Vandenberghe, L. *Convex Optimization* (LMIs / SDP) — Cambridge University Press, 2004.
 9. Boyd, S., El Ghaoui, L., Feron, E. & Balakrishnan, V. *Linear Matrix Inequalities in System and Control Theory* — SIAM, 1994.
 10. Mouret, J.-B. & Clune, J. *Illuminating search spaces by mapping elites (MAP-Elites)* — arXiv:1504.04909, 2015.
-11. 내부: [#35-00 개관](./QIITA_#35_00_overview.md) — llcore 검증 arc 의 전체 그림.
+11. 내부: [#35-00 개관](#) — llcore 검증 arc 의 전체 그림.
 12. 내부: [#35-01 verifier 프런티어](./QIITA_#35_01_verifier_frontier.md) — 사다리와 SDP 큰 점프.
 
 ## 시리즈 / Series navigation
 
-- [#35-00 — llcore 검증 arc 개관](./QIITA_#35_00_overview.md)
+- [#35-00 — llcore 검증 arc 개관](#)
 - [#35-01 — verifier-fitness 프런티어 (증명 능력의 사다리)](./QIITA_#35_01_verifier_frontier.md)
 - **#35-02 — 솔버를 의심하라 (본문)**
