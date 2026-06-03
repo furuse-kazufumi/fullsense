@@ -10,16 +10,19 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-02 22:36:24
+- **生成時刻**: 2026-06-04 08:11:52
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+d884226 docs(research): 公開前に local path をマスク (no-local-path-in-public 準拠)
+f2e9f10 auto: llcore_cpu_poc_battery_completion_2026_05_29.md 編集前 (2026-06-02 22:48)
+3f29ae7 auto: gpu_portfolio_decision_2026-06-02.md 編集前 (2026-06-02 22:47)
 0f8f808 docs(research): 進化メカニズム deep-dive 統合 + GPU 判断支援 doc (local保全)
 50d7dbf fix(articles): #27 SVG 相対パス→raw 絶対URL + 全6図を全言語変種に統一
 84156b9 feedback(research): ③ arc 結晶化 (論文draft+生物学接地+#34記事) を master 地図へ
@@ -27,9 +30,6 @@ nav_order: 94
 65dfc0b docs(articles): #34 ③ research arc 全体俯瞰 + 生物学的接地 (技術版+かみくだき版)
 39ae0bf docs(articles+research): #33 に BG9 決着を追記 + research index 同期
 31796d1 auto: QIITA_#33_llcore_third_axis_settle_kamikudaki.md 編集前 (2026-06-02 09:39)
-326f116 auto: QIITA_#33_llcore_third_axis_settle_kamikudaki.md 編集前 (2026-06-02 09:39)
-68b0a56 auto: QIITA_#33_llcore_third_axis_settle.md 編集前 (2026-06-02 09:38)
-a830c4d auto: QIITA_#33_llcore_third_axis_settle.md 編集前 (2026-06-02 09:38)
 ```
 
 ### git status (porcelain)
@@ -37,7 +37,6 @@ a830c4d auto: QIITA_#33_llcore_third_axis_settle.md 編集前 (2026-06-02 09:38)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
-?? tools/qiita-cli-poc/public/2347918057820a658293.md
 ```
 
 
@@ -45,7 +44,7 @@ M docs/NEXT_SESSION.auto.md
 
 | project | 最新 commit | 直近 commit msg | tests/ 直近 mtime |
 |---|---|---|---|
-| llive | `50f8590 2026-06-02` | fix(scripts): run_persona_evolution_long の stale import を experimental/ 隔離に追従 | 2026-06-02 20:35 |
+| llive | `b653ce3 2026-06-02` | docs: real-pressure 進化ラン 飽和監査 (honest disclosure) | 2026-06-02 20:35 |
 | llove | `701624a 2026-05-30` | docs: かみ砕いた説明を中学生レベルに見直し (workflow wr87hqvj2) | 2026-05-25 22:52 |
 | llmesh | `c6afef0 2026-05-30` | docs: readability 3層化(中学生レベル) — かみ砕き+用語集+日本語(英語) (workflow wmik3xm1n) | 2026-05-25 07:06 |
 | lldesign | `1014ce3 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:52 |
@@ -77,26 +76,8 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:34` `docs/SESSION_SUMMARY.md`
-- `22:34` `docs/NEXT_SESSION.auto.md`
-- `21:59` `tools/qiita-cli-poc/public/2347918057820a658293.md`
-- `21:59` `tools/qiita-cli-poc/public/.remote/2347918057820a658293.md`
-- `21:58` `tools/qiita-cli-poc/public/fcb43968a5c642610762.md`
-- `21:58` `tools/qiita-cli-poc/public/fa0890f136636d495ea6.md`
-- `21:58` `tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md`
-- `21:58` `tools/qiita-cli-poc/public/e5093e4816b25c1bd4d0.md`
-- `21:58` `tools/qiita-cli-poc/public/e49b7ab9027d93594402.md`
-- `21:58` `tools/qiita-cli-poc/public/da2a2822dabe7b17b8c8.md`
-- `21:58` `tools/qiita-cli-poc/public/cdeea496af01dd424a09.md`
-- `21:58` `tools/qiita-cli-poc/public/cd954f57f510e03954e6.md`
-- `21:58` `tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md`
-- `21:58` `tools/qiita-cli-poc/public/c5f2077a3399d3fc9b26.md`
-- `21:58` `tools/qiita-cli-poc/public/c543014188744262ec83.md`
-- `21:58` `tools/qiita-cli-poc/public/be52eeb6455732161486.md`
-- `21:58` `tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md`
-- `21:58` `tools/qiita-cli-poc/public/ba832a58b99c6a9103c4.md`
-- `21:58` `tools/qiita-cli-poc/public/aff262808a35cb7f7d3b.md`
-- `21:58` `tools/qiita-cli-poc/public/ac398349ec42e40913f1.md`
+- `07:34` `docs/SESSION_SUMMARY.md`
+- `07:34` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f9fc"/>
+      <stop offset="1" stop-color="#eef2f8"/>
+    </linearGradient>
+    <linearGradient id="cardActive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8eefb"/>
+      <stop offset="1" stop-color="#d7e2f6"/>
+    </linearGradient>
+    <linearGradient id="cardIdle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f1f4f9"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#1f2a44" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="560" fill="url(#bg)"/>
+
+  <!-- Header -->
+  <text x="60" y="74" font-size="34" font-weight="700" fill="#1f2a44">llcore シリーズ #35 — 進行マップ</text>
+  <text x="60" y="110" font-size="19" fill="#5a6680">正しい検証器 (gate) を探す: SDP/Lyapunov ~95% / SMT/Z3 は装飾的 / 正直な訂正</text>
+  <line x1="60" y1="130" x2="940" y2="130" stroke="#c7d0e0" stroke-width="2"/>
+
+  <!-- Connector track -->
+  <line x1="200" y1="320" x2="800" y2="320" stroke="#b9c4d8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="200" y1="320" x2="800" y2="320" stroke="#7d93c4" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 600">
+    <animate attributeName="stroke-dasharray" from="0 600" to="600 0" dur="1.4s" fill="freeze"/>
+  </line>
+
+  <!-- ===== Card 00 (active / neutral highlight) ===== -->
+  <g filter="url(#soft)">
+    <rect x="70" y="190" width="260" height="200" rx="18" fill="url(#cardActive)" stroke="#4f6bb0" stroke-width="3"/>
+    <!-- highlight pulse ring (enhance only; static shows full ring) -->
+    <rect x="70" y="190" width="260" height="200" rx="18" fill="none" stroke="#7d93c4" stroke-width="3" opacity="0.55">
+      <animate attributeName="opacity" values="0.55;0.18;0.55" dur="2.6s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-width" values="3;7;3" dur="2.6s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <circle cx="200" cy="320" r="11" fill="#4f6bb0"/>
+  <circle cx="200" cy="320" r="11" fill="none" stroke="#4f6bb0" stroke-width="2" opacity="0.6">
+    <animate attributeName="r" values="11;18;11" dur="2.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="2.6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="200" y="232" font-size="17" font-weight="700" fill="#4f6bb0" text-anchor="middle" letter-spacing="1">#35-00</text>
+  <text x="200" y="278" font-size="34" font-weight="800" fill="#1f2a44" text-anchor="middle">序</text>
+  <text x="200" y="318" font-size="16" fill="#3a4straight" text-anchor="middle"></text>
+  <text x="200" y="358" font-size="15" fill="#46506a" text-anchor="middle">何を進化させ</text>
+  <text x="200" y="378" font-size="15" fill="#46506a" text-anchor="middle">なぜ gate が要るか</text>
+  <text x="200" y="170" font-size="14" font-weight="700" fill="#4f6bb0" text-anchor="middle">▼ 現在地</text>
+
+  <!-- ===== Card 01 ===== -->
+  <g filter="url(#soft)">
+    <rect x="370" y="200" width="260" height="180" rx="18" fill="url(#cardIdle)" stroke="#c2cbdd" stroke-width="2"/>
+  </g>
+  <circle cx="500" cy="320" r="9" fill="#9aa8c6"/>
+  <text x="500" y="240" font-size="17" font-weight="700" fill="#5a6680" text-anchor="middle" letter-spacing="1">#35-01</text>
+  <text x="500" y="284" font-size="30" font-weight="800" fill="#2a3550" text-anchor="middle">梯子</text>
+  <text x="500" y="334" font-size="15" fill="#5a6680" text-anchor="middle">inf-norm → 2-norm</text>
+  <text x="500" y="356" font-size="15" fill="#5a6680" text-anchor="middle">→ SDP (286/300, 95%)</text>
+
+  <!-- ===== Card 02 ===== -->
+  <g filter="url(#soft)">
+    <rect x="670" y="200" width="260" height="180" rx="18" fill="url(#cardIdle)" stroke="#c2cbdd" stroke-width="2"/>
+  </g>
+  <circle cx="800" cy="320" r="9" fill="#9aa8c6"/>
+  <text x="800" y="240" font-size="17" font-weight="700" fill="#5a6680" text-anchor="middle" letter-spacing="1">#35-02</text>
+  <text x="800" y="284" font-size="27" font-weight="800" fill="#2a3550" text-anchor="middle">正直な訂正</text>
+  <text x="800" y="334" font-size="15" fill="#5a6680" text-anchor="middle">SCS の偽陰性 →</text>
+  <text x="800" y="356" font-size="15" fill="#5a6680" text-anchor="middle">CLARABEL で崩壊</text>
+
+  <!-- Footer note -->
+  <text x="60" y="468" font-size="15" fill="#46506a">✓ 一貫した事実: 正しい収縮検証器 = 共通の二次 Lyapunov 証明書 (SDP/LMI)、CPU・on-prem・$0</text>
+  <text x="60" y="496" font-size="15" fill="#46506a">✓ 全段で 0 unsound、SCS は両方向に歪めた — 統一された真実は「quadratic SDP ~95%」</text>
+  <text x="60" y="524" font-size="14" fill="#7a melhor8598" fill-opacity="1" font-style="italic">— 数字が良すぎたら、信じる前にソルバーを疑え。</text>
+</svg>
