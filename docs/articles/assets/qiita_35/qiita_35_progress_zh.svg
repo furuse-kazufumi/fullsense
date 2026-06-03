@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'Segoe UI','Noto Sans SC','Microsoft YaHei',sans-serif">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#f7f9fc"/>
@@ -20,8 +20,8 @@
   <rect x="0" y="0" width="1000" height="560" fill="url(#bg)"/>
 
   <!-- Header -->
-  <text x="60" y="74" font-size="34" font-weight="700" fill="#1f2a44">llcore シリーズ #35 — 進行マップ</text>
-  <text x="60" y="110" font-size="19" fill="#5a6680">正しい検証器 (gate) を探す: SDP/Lyapunov ~95% / SMT/Z3 は装飾的 / 正直な訂正</text>
+  <text x="60" y="74" font-size="34" font-weight="700" fill="#1f2a44">llcore 系列 #35 — 进度图</text>
+  <text x="60" y="110" font-size="19" fill="#5a6680">寻找正确的验证器 (gate)：SDP/Lyapunov ~95% / SMT/Z3 仅为装饰 / 一次诚实的订正</text>
   <line x1="60" y1="130" x2="940" y2="130" stroke="#c7d0e0" stroke-width="2"/>
 
   <!-- Connector track -->
@@ -33,7 +33,6 @@
   <!-- ===== Card 00 (active / neutral highlight) ===== -->
   <g filter="url(#soft)">
     <rect x="70" y="190" width="260" height="200" rx="18" fill="url(#cardActive)" stroke="#4f6bb0" stroke-width="3"/>
-    <!-- highlight pulse ring (enhance only; static shows full ring) -->
     <rect x="70" y="190" width="260" height="200" rx="18" fill="none" stroke="#7d93c4" stroke-width="3" opacity="0.55">
       <animate attributeName="opacity" values="0.55;0.18;0.55" dur="2.6s" repeatCount="indefinite"/>
       <animate attributeName="stroke-width" values="3;7;3" dur="2.6s" repeatCount="indefinite"/>
@@ -45,10 +44,10 @@
     <animate attributeName="opacity" values="0.6;0;0.6" dur="2.6s" repeatCount="indefinite"/>
   </circle>
   <text x="200" y="232" font-size="17" font-weight="700" fill="#4f6bb0" text-anchor="middle" letter-spacing="1">#35-00</text>
-  <text x="200" y="278" font-size="34" font-weight="800" fill="#1f2a44" text-anchor="middle">序</text>
-  <text x="200" y="332" font-size="15" fill="#46506a" text-anchor="middle">何を進化させるか</text>
-  <text x="200" y="356" font-size="15" fill="#46506a" text-anchor="middle">なぜ gate が要るか</text>
-  <text x="200" y="170" font-size="14" font-weight="700" fill="#4f6bb0" text-anchor="middle">▼ 現在地</text>
+  <text x="200" y="278" font-size="32" font-weight="800" fill="#1f2a44" text-anchor="middle">序</text>
+  <text x="200" y="332" font-size="15" fill="#46506a" text-anchor="middle">进化的是什么</text>
+  <text x="200" y="356" font-size="15" fill="#46506a" text-anchor="middle">为何需要 gate</text>
+  <text x="200" y="170" font-size="14" font-weight="700" fill="#4f6bb0" text-anchor="middle">▼ 当前位置</text>
 
   <!-- ===== Card 01 ===== -->
   <g filter="url(#soft)">
@@ -56,7 +55,7 @@
   </g>
   <circle cx="500" cy="320" r="9" fill="#9aa8c6"/>
   <text x="500" y="240" font-size="17" font-weight="700" fill="#5a6680" text-anchor="middle" letter-spacing="1">#35-01</text>
-  <text x="500" y="284" font-size="30" font-weight="800" fill="#2a3550" text-anchor="middle">梯子</text>
+  <text x="500" y="284" font-size="30" font-weight="800" fill="#2a3550" text-anchor="middle">阶梯</text>
   <text x="500" y="334" font-size="15" fill="#5a6680" text-anchor="middle">inf-norm → 2-norm</text>
   <text x="500" y="356" font-size="15" fill="#5a6680" text-anchor="middle">→ SDP (286/300, 95%)</text>
 
@@ -66,12 +65,12 @@
   </g>
   <circle cx="800" cy="320" r="9" fill="#9aa8c6"/>
   <text x="800" y="240" font-size="17" font-weight="700" fill="#5a6680" text-anchor="middle" letter-spacing="1">#35-02</text>
-  <text x="800" y="284" font-size="27" font-weight="800" fill="#2a3550" text-anchor="middle">正直な訂正</text>
-  <text x="800" y="334" font-size="15" fill="#5a6680" text-anchor="middle">SCS の偽陰性 →</text>
-  <text x="800" y="356" font-size="15" fill="#5a6680" text-anchor="middle">CLARABEL で崩壊</text>
+  <text x="800" y="284" font-size="28" font-weight="800" fill="#2a3550" text-anchor="middle">诚实的订正</text>
+  <text x="800" y="334" font-size="15" fill="#5a6680" text-anchor="middle">SCS 假阴性 →</text>
+  <text x="800" y="356" font-size="15" fill="#5a6680" text-anchor="middle">被 CLARABEL 推翻</text>
 
   <!-- Footer note -->
-  <text x="60" y="468" font-size="15" fill="#46506a">✓ 一貫した事実: 正しい収縮検証器 = 共通の二次 Lyapunov 証明書 (SDP/LMI)、CPU・on-prem・$0</text>
-  <text x="60" y="496" font-size="15" fill="#46506a">✓ 全段で 0 unsound、SCS は両方向に歪めた — 統一された真実は「quadratic SDP ~95%」</text>
-  <text x="60" y="524" font-size="14" fill="#7a8598" font-style="italic">— 数字が良すぎたら、信じる前にソルバーを疑え。</text>
+  <text x="60" y="468" font-size="15" fill="#46506a">✓ 一致的事实：正确的收缩验证器 = 共同的二次 Lyapunov 证书 (SDP/LMI)，CPU、on-prem、$0</text>
+  <text x="60" y="496" font-size="15" fill="#46506a">✓ 每一级都 0 unsound；SCS 双向都有偏差 — 统一的真相是「quadratic SDP ~95%」</text>
+  <text x="60" y="524" font-size="14" fill="#7a8598" font-style="italic">— 当一个数字好得离谱时，先怀疑求解器，再相信它。</text>
 </svg>

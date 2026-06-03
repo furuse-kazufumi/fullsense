@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b6b8c"/>
+    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f9fc"/>
+      <stop offset="1" stop-color="#eef1f7"/>
+    </linearGradient>
+    <linearGradient id="centerg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f3b54"/>
+      <stop offset="1" stop-color="#3d4d6e"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="560" fill="url(#bg)"/>
+  <text x="500" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#2f3b54">诚实披露的循环</text>
+  <text x="500" y="62" text-anchor="middle" font-size="14" fill="#5b6b8c">数字好得离谱时，先怀疑再相信</text>
+
+  <circle cx="500" cy="320" r="190" fill="none" stroke="#c7d0e0" stroke-width="2" stroke-dasharray="4 6"/>
+
+  <g fill="none" stroke="#5b6b8c" stroke-width="3" marker-end="url(#arrow)">
+    <path d="M 560 145 A 190 190 0 0 1 685 310" stroke-dasharray="300" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" from="300" to="0" dur="0.7s" begin="0.2s" fill="freeze"/>
+    </path>
+    <path d="M 690 335 A 190 190 0 0 1 560 495" stroke-dasharray="300" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" from="300" to="0" dur="0.7s" begin="0.9s" fill="freeze"/>
+    </path>
+    <path d="M 440 495 A 190 190 0 0 1 312 335" stroke-dasharray="300" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" from="300" to="0" dur="0.7s" begin="1.6s" fill="freeze"/>
+    </path>
+    <path d="M 312 305 A 190 190 0 0 1 440 145" stroke-dasharray="300" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" from="300" to="0" dur="0.7s" begin="2.3s" fill="freeze"/>
+    </path>
+  </g>
+
+  <g>
+    <circle cx="500" cy="320" r="92" fill="url(#centerg)"/>
+    <text x="500" y="296" text-anchor="middle" font-size="13" font-weight="700" fill="#dfe6f2">中心命题未被推翻</text>
+    <text x="500" y="316" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">反而被强化 ✓</text>
+    <text x="500" y="340" text-anchor="middle" font-size="11" fill="#c0cbe0">正确的验证器 =</text>
+    <text x="500" y="356" text-anchor="middle" font-size="11" fill="#c0cbe0">共同二次 Lyapunov</text>
+    <text x="500" y="372" text-anchor="middle" font-size="11" fill="#c0cbe0">(SDP/LMI, ~95%)</text>
+  </g>
+
+  <g>
+    <rect x="408" y="92" width="184" height="58" rx="12" fill="#ffffff" stroke="#9fb0cf" stroke-width="1.5"/>
+    <circle cx="430" cy="113" r="13" fill="#3d4d6e"/>
+    <text x="430" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">1</text>
+    <text x="500" y="116" text-anchor="middle" font-size="14" font-weight="700" fill="#2f3b54">数字好得离谱</text>
+    <text x="500" y="136" text-anchor="middle" font-size="11" fill="#5b6b8c">"degree 解锁 +54 覆盖率"</text>
+  </g>
+
+  <g>
+    <rect x="700" y="222" width="208" height="58" rx="12" fill="#ffffff" stroke="#9fb0cf" stroke-width="1.5"/>
+    <circle cx="722" cy="243" r="13" fill="#3d4d6e"/>
+    <text x="722" y="248" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">2</text>
+    <text x="804" y="246" text-anchor="middle" font-size="14" font-weight="700" fill="#2f3b54">怀疑</text>
+    <text x="804" y="266" text-anchor="middle" font-size="11" fill="#5b6b8c">相信前先怀疑 solver</text>
+  </g>
+
+  <g>
+    <rect x="690" y="360" width="226" height="74" rx="12" fill="#ffffff" stroke="#9fb0cf" stroke-width="1.5"/>
+    <circle cx="712" cy="383" r="13" fill="#3d4d6e"/>
+    <text x="712" y="388" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">3</text>
+    <text x="803" y="384" text-anchor="middle" font-size="13" font-weight="700" fill="#2f3b54">solver-swap 核查</text>
+    <text x="803" y="403" text-anchor="middle" font-size="11" fill="#5b6b8c">固定 SCS → CLARABEL</text>
+    <text x="803" y="420" text-anchor="middle" font-size="11" fill="#5b6b8c">6-agent 对抗式评审 + Codex</text>
+  </g>
+
+  <g>
+    <rect x="376" y="470" width="248" height="80" rx="12" fill="#ffffff" stroke="#9fb0cf" stroke-width="1.5"/>
+    <circle cx="398" cy="493" r="13" fill="#3d4d6e"/>
+    <text x="398" y="498" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">4</text>
+    <text x="500" y="491" text-anchor="middle" font-size="13" font-weight="700" fill="#2f3b54">5 findings（过度主张被收窄）</text>
+    <text x="500" y="509" text-anchor="middle" font-size="10.5" fill="#5b6b8c">F1 关闭 footgun / F2 收窄健全性措辞</text>
+    <text x="500" y="525" text-anchor="middle" font-size="10.5" fill="#5b6b8c">F3 订正 preserve-or-grow / F4 过时注释</text>
+    <text x="500" y="541" text-anchor="middle" font-size="10.5" fill="#5b6b8c">F5 记录非空性（149/286）</text>
+  </g>
+
+  <g>
+    <rect x="84" y="360" width="222" height="74" rx="12" fill="#ffffff" stroke="#9fb0cf" stroke-width="1.5"/>
+    <circle cx="106" cy="383" r="13" fill="#3d4d6e"/>
+    <text x="106" y="388" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">5</text>
+    <text x="196" y="384" text-anchor="middle" font-size="13" font-weight="700" fill="#2f3b54">命题未覆，更强 ✓</text>
+    <text x="196" y="403" text-anchor="middle" font-size="11" fill="#5b6b8c">每位质疑者都支持该命题</text>
+    <text x="196" y="420" text-anchor="middle" font-size="11" fill="#5b6b8c">SDP coverage 193(64%) → 286(95%)</text>
+  </g>
+
+  <g>
+    <rect x="92" y="222" width="208" height="58" rx="12" fill="#eaeef6" stroke="#9fb0cf" stroke-width="1.5"/>
+    <text x="196" y="246" text-anchor="middle" font-size="11.5" font-weight="700" fill="#2f3b54">margin-sweep 是盲目的</text>
+    <text x="196" y="266" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3d4d6e">solver-swap 是决定性的</text>
+  </g>
+</svg>

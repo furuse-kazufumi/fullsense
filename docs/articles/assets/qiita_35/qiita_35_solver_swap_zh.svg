@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f1320"/>
+      <stop offset="1" stop-color="#171c2e"/>
+    </linearGradient>
+    <linearGradient id="leftPanel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b2436"/>
+      <stop offset="1" stop-color="#241f30"/>
+    </linearGradient>
+    <linearGradient id="rightPanel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f2c3a"/>
+      <stop offset="1" stop-color="#1a2632"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c6fb0"/>
+      <stop offset="1" stop-color="#4fb3c4"/>
+    </linearGradient>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4fb3c4"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="560" fill="url(#bg)"/>
+
+  <text x="500" y="40" text-anchor="middle" font-size="25" font-weight="700" fill="#e8ecf5">怀疑好得过头的数值: 换了求解器, 假发现就消失了</text>
+  <text x="500" y="66" text-anchor="middle" font-size="13" fill="#9aa3b8">300 个收缩性 n=2 基因 / deg4&#8211;deg6 阶梯 / quadratic SDP (common Lyapunov P)</text>
+
+  <!-- LEFT PANEL: SCS -->
+  <g>
+    <rect x="40" y="92" width="400" height="420" rx="14" fill="url(#leftPanel)" stroke="#6b5e86" stroke-width="1.5"/>
+    <text x="240" y="124" text-anchor="middle" font-size="18" font-weight="700" fill="#cdbce8">SCS (默认求解器)</text>
+    <text x="240" y="146" text-anchor="middle" font-size="13" fill="#b6a7d4">边界附近的假阴性 (FALSE NEGATIVES)</text>
+
+    <text x="240" y="178" text-anchor="middle" font-size="12" fill="#9a8fb8">看似"丰富且互补"的阶梯</text>
+    <g transform="translate(240,258)">
+      <circle cx="-46" cy="0" r="62" fill="#8e6fae" fill-opacity="0.32" stroke="#b69bd6" stroke-width="1.5"/>
+      <circle cx="46" cy="0" r="62" fill="#6f8fae" fill-opacity="0.32" stroke="#9bb6d6" stroke-width="1.5"/>
+      <text x="-74" y="-6" text-anchor="middle" font-size="13" fill="#e3d8f5">deg4_only</text>
+      <text x="-74" y="14" text-anchor="middle" font-size="20" font-weight="700" fill="#f1e9ff">23</text>
+      <text x="74" y="-6" text-anchor="middle" font-size="13" fill="#dce6f5">deg6_only</text>
+      <text x="74" y="14" text-anchor="middle" font-size="20" font-weight="700" fill="#eef4ff">13</text>
+      <text x="0" y="-6" text-anchor="middle" font-size="12" fill="#e6e0f0">both</text>
+      <text x="0" y="14" text-anchor="middle" font-size="18" font-weight="700" fill="#f3eeff">18</text>
+    </g>
+
+    <g font-size="14" fill="#cfc6df">
+      <rect x="64" y="346" width="352" height="34" rx="8" fill="#000000" fill-opacity="0.18"/>
+      <text x="80" y="368">residual (未证明)</text>
+      <text x="400" y="368" text-anchor="end" font-size="20" font-weight="700" fill="#e9def5">53</text>
+
+      <rect x="64" y="388" width="352" height="34" rx="8" fill="#000000" fill-opacity="0.18"/>
+      <text x="80" y="410">quadratic SDP 覆盖率</text>
+      <text x="400" y="410" text-anchor="end" font-size="20" font-weight="700" fill="#e9def5">193/300 (64%)</text>
+
+      <rect x="64" y="430" width="352" height="34" rx="8" fill="#000000" fill-opacity="0.18"/>
+      <text x="80" y="452">"degree 解锁 +54"</text>
+      <text x="400" y="452" text-anchor="end" font-size="15" font-weight="700" fill="#d8b88f">捏造的发现</text>
+    </g>
+    <text x="240" y="492" text-anchor="middle" font-size="11" fill="#8c7fa6">一阶 ADMM 法; 会发出 "Solution may be inaccurate" 警告</text>
+  </g>
+
+  <!-- CENTRAL ARROW -->
+  <g>
+    <line x1="448" y1="300" x2="552" y2="300" stroke="url(#arrowGrad)" stroke-width="8" stroke-linecap="round" marker-end="url(#ah)">
+      <animate attributeName="x2" from="452" to="552" dur="1.4s" begin="0s" fill="freeze"/>
+      <animate attributeName="opacity" from="0.45" to="1" dur="1.4s" begin="0s" fill="freeze"/>
+    </line>
+    <circle cx="500" cy="300" r="6" fill="#4fb3c4">
+      <animate attributeName="cx" from="452" to="500" dur="1.4s" begin="0s" fill="freeze"/>
+    </circle>
+    <text x="500" y="278" text-anchor="middle" font-size="13" font-weight="700" fill="#bfe6ee">solver-swap</text>
+    <text x="500" y="328" text-anchor="middle" font-size="12" fill="#8fb6c0">SCS &#8594; CLARABEL</text>
+  </g>
+
+  <!-- RIGHT PANEL: CLARABEL -->
+  <g>
+    <animate attributeName="opacity" from="0.6" to="1" dur="1.4s" begin="0s" fill="freeze"/>
+    <rect x="560" y="92" width="400" height="420" rx="14" fill="url(#rightPanel)" stroke="#3f7e92" stroke-width="1.5"/>
+    <text x="760" y="124" text-anchor="middle" font-size="18" font-weight="700" fill="#a9e0ec">CLARABEL (准确, 内点法)</text>
+    <text x="760" y="146" text-anchor="middle" font-size="13" fill="#8fcad8">&#10003; 回收假阴性 &#8594; 阶梯是 NESTED (嵌套)</text>
+
+    <text x="760" y="178" text-anchor="middle" font-size="12" fill="#7fb6c2">嵌套: deg4 &#8838; deg6 (deg4&#8726;deg6 = 0)</text>
+    <g transform="translate(760,258)">
+      <circle cx="0" cy="0" r="64" fill="#3f8fa6" fill-opacity="0.30" stroke="#7fcad8" stroke-width="1.5"/>
+      <circle cx="0" cy="8" r="34" fill="#2f6f86" fill-opacity="0.45" stroke="#9bdaea" stroke-width="1.5"/>
+      <text x="0" y="-34" text-anchor="middle" font-size="13" fill="#dff2f7">deg6_only</text>
+      <text x="0" y="-14" text-anchor="middle" font-size="20" font-weight="700" fill="#eafbff">1</text>
+      <text x="0" y="12" text-anchor="middle" font-size="12" fill="#dff2f7">both</text>
+      <text x="0" y="32" text-anchor="middle" font-size="20" font-weight="700" fill="#eafbff">54</text>
+      <text x="-86" y="56" text-anchor="middle" font-size="13" fill="#cfe9f0">deg4_only</text>
+      <text x="-86" y="74" text-anchor="middle" font-size="18" font-weight="700" fill="#eafbff">0</text>
+    </g>
+
+    <g font-size="14" fill="#cfe0e6">
+      <rect x="584" y="346" width="352" height="34" rx="8" fill="#000000" fill-opacity="0.18"/>
+      <text x="600" y="368">residual (未证明)</text>
+      <text x="920" y="368" text-anchor="end" font-size="20" font-weight="700" fill="#e2f4f9">10</text>
+
+      <rect x="584" y="388" width="352" height="34" rx="8" fill="#000000" fill-opacity="0.18"/>
+      <text x="600" y="410">quadratic SDP 覆盖率</text>
+      <text x="920" y="410" text-anchor="end" font-size="20" font-weight="700" fill="#e2f4f9">286/300 (95%)</text>
+
+      <rect x="584" y="430" width="352" height="34" rx="8" fill="#000000" fill-opacity="0.18"/>
+      <text x="600" y="452">"degree 实际只增加 +4"</text>
+      <text x="920" y="452" text-anchor="end" font-size="15" font-weight="700" fill="#8fd8c0">&#10003; 统一的真相</text>
+    </g>
+    <text x="760" y="492" text-anchor="middle" font-size="11" fill="#7fb6c2">回收 53 个 SCS 假阴性中的 42&#8211;43 个 / 不健全证书 0 个</text>
+  </g>
+
+  <text x="500" y="538" text-anchor="middle" font-size="13" fill="#9aa3b8">数值好得过头时, 相信之前先怀疑求解器 &#8212; SMT/Z3 只是装饰, 真正起作用的是 SDP/Lyapunov 证书</text>
+</svg>

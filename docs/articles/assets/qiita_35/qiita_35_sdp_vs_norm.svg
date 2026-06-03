@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'Segoe UI','Hiragino Sans','Noto Sans CJK JP',sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5b6b8c"/>
+    </marker>
+    <style>
+      .ttl{font-size:25px;font-weight:700;fill:#1f2a44}
+      .sub{font-size:14px;fill:#5b6b8c}
+      .panel{font-size:18px;font-weight:700;fill:#26324f}
+      .lbl{font-size:13px;fill:#3a4868}
+      .sm{font-size:12px;fill:#6b7894}
+      .glyph{font-size:18px;font-weight:700}
+      .cap{font-size:16px;font-weight:700;fill:#26324f}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="560" fill="#f6f8fc"/>
+  <text class="ttl" x="40" y="46">同じ写像 J を 2 つの物差しで検証する</text>
+  <text class="sub" x="40" y="70">回転 + 収縮の線形写像 J を、丸い物差し(2ノルム)と傾いた楕円(SDP の Lyapunov P)で測る</text>
+
+  <!-- ===================== LEFT PANEL : 2-norm ball ===================== -->
+  <g transform="translate(40,96)">
+    <rect x="0" y="0" width="440" height="356" rx="12" fill="#ffffff" stroke="#d7deec" stroke-width="1.5"/>
+    <text class="panel" x="22" y="34">丸い物差し: 2ノルム単位球</text>
+    <text class="sm" x="22" y="56">max 特異値 &lt; 1 を要求 — ||J||₂ &gt; 1 で棄却</text>
+
+    <!-- coordinate frame -->
+    <g transform="translate(220,210)">
+      <line x1="-170" y1="0" x2="170" y2="0" stroke="#c5cee0" stroke-width="1.2"/>
+      <line x1="0" y1="120" x2="0" y2="-150" stroke="#c5cee0" stroke-width="1.2"/>
+      <text class="sm" x="156" y="18">x₁</text>
+      <text class="sm" x="8" y="-138">x₂</text>
+
+      <!-- unit ball (the measuring stick, static) -->
+      <circle cx="0" cy="0" r="120" fill="#dfe6f5" fill-opacity="0.45" stroke="#8a99bd" stroke-width="2" stroke-dasharray="6 5"/>
+      <text class="sm" x="86" y="-86" fill="#5b6b8c">単位球 r=1</text>
+
+      <!-- mapped circle: rotated + slightly stretched ellipse that POKES OUTSIDE.
+           static-complete = final (mapped) shape drawn at full final geometry;
+           SMIL only rotates/scales FROM identity (the unit circle) TO this. -->
+      <g>
+        <!-- final mapped ellipse: semi-axes 138 x 96, rotated -32deg -> pokes past r=120 -->
+        <ellipse cx="0" cy="0" rx="138" ry="96" fill="#9aa9cf" fill-opacity="0.30" stroke="#3a4f86" stroke-width="2.6" transform="rotate(-32)">
+          <animateTransform attributeName="transform" type="rotate" from="0" to="-32" dur="1.5s" fill="freeze"/>
+        </ellipse>
+        <!-- overshoot marker where the mapped circle crosses the unit ball -->
+      </g>
+
+      <!-- violation arc highlight: the part of the mapped ellipse outside r=120 -->
+      <g>
+        <circle cx="-117" cy="73" r="6" fill="none" stroke="#b2622c" stroke-width="2.4"/>
+        <line x1="-117" y1="73" x2="-150" y2="94" stroke="#b2622c" stroke-width="1.6"/>
+        <text class="glyph" x="-205" y="112" fill="#b2622c">外へ突出</text>
+      </g>
+      <g>
+        <circle cx="117" cy="-73" r="6" fill="none" stroke="#b2622c" stroke-width="2.4"/>
+      </g>
+
+      <!-- J arrow -->
+      <text class="lbl" x="-150" y="-126" fill="#3a4f86">J を 1 回適用</text>
+      <path d="M-100 -132 q 70 -22 132 6" fill="none" stroke="#5b6b8c" stroke-width="1.6" marker-end="url(#ah)"/>
+    </g>
+
+    <!-- verdict -->
+    <g transform="translate(22,318)">
+      <rect x="0" y="-22" width="396" height="32" rx="8" fill="#f0e7dd" stroke="#cdb59a" stroke-width="1.2"/>
+      <text class="glyph" x="14" y="0" fill="#9c5a23">✗ 棄却</text>
+      <text class="lbl" x="88" y="0">写像後の球が単位球をはみ出す → 収縮を証明できない</text>
+    </g>
+  </g>
+
+  <!-- ===================== RIGHT PANEL : tilted ellipse (SDP) ===================== -->
+  <g transform="translate(520,96)">
+    <rect x="0" y="0" width="440" height="356" rx="12" fill="#ffffff" stroke="#d7deec" stroke-width="1.5"/>
+    <text class="panel" x="22" y="34">傾いた楕円: SDP の Lyapunov P</text>
+    <text class="sm" x="22" y="56">非単位の P を 1 つ見つける — JᵀPJ ≺ P を満たせば証明</text>
+
+    <g transform="translate(220,210)">
+      <line x1="-170" y1="0" x2="170" y2="0" stroke="#c5cee0" stroke-width="1.2"/>
+      <line x1="0" y1="120" x2="0" y2="-150" stroke="#c5cee0" stroke-width="1.2"/>
+      <text class="sm" x="156" y="18">x₁</text>
+      <text class="sm" x="8" y="-138">x₂</text>
+
+      <!-- the Lyapunov level set: a tilted ellipse (the right ruler, static) -->
+      <ellipse cx="0" cy="0" rx="150" ry="92" fill="#e0ecf2" fill-opacity="0.45" stroke="#3d8197" stroke-width="2.4" transform="rotate(34)"/>
+      <text class="sm" x="58" y="-104" fill="#3d8197" transform="rotate(34)">楕円 xᵀPx=1</text>
+
+      <!-- mapped ellipse: strictly INSIDE the level set.
+           static-complete = the inner (contracted) ellipse drawn at final geometry;
+           SMIL scales FROM the boundary ellipse INWARD to this (freeze). -->
+      <ellipse cx="0" cy="0" rx="150" ry="92" fill="#3d8197" fill-opacity="0.22" stroke="#27617a" stroke-width="2.6" transform="rotate(34) scale(0.74)">
+        <animateTransform attributeName="transform" type="scale" additive="sum" from="1" to="0.74" dur="1.5s" fill="freeze"/>
+      </ellipse>
+
+      <!-- gap arrows showing strict containment -->
+      <g stroke="#27617a" stroke-width="1.4" fill="none">
+        <path d="M0 0 L150 0" transform="rotate(34)" stroke-dasharray="3 4" opacity="0.5"/>
+      </g>
+      <g transform="rotate(34)">
+        <line x1="111" y1="0" x2="146" y2="0" stroke="#27617a" stroke-width="1.6" marker-end="url(#ah)"/>
+      </g>
+      <text class="lbl" x="86" y="84" fill="#27617a">厳密に内側</text>
+
+      <!-- J arrow -->
+      <text class="lbl" x="-150" y="-126" fill="#27617a">J を 1 回適用</text>
+      <path d="M-100 -132 q 70 -22 132 6" fill="none" stroke="#5b6b8c" stroke-width="1.6" marker-end="url(#ah)"/>
+    </g>
+
+    <!-- verdict -->
+    <g transform="translate(22,318)">
+      <rect x="0" y="-22" width="396" height="32" rx="8" fill="#dde9ee" stroke="#9bc2cf" stroke-width="1.2"/>
+      <text class="glyph" x="14" y="0" fill="#27617a">✓ 証明</text>
+      <text class="lbl" x="88" y="0">写像後の楕円が自身に収まる → 収縮を証明 (CLARABEL)</text>
+    </g>
+  </g>
+
+  <!-- caption -->
+  <text class="cap" x="500" y="500" text-anchor="middle">同じ写像を、丸い物差し(2ノルム)は誤って棄却、傾いた楕円(SDP)は正しく証明</text>
+  <text class="sm" x="500" y="526" text-anchor="middle">2ノルムは累計 137 件、common Lyapunov の quadratic SDP で +149 = 286 件 (300 件中 95.3%)</text>
+  <text class="sm" x="500" y="546" text-anchor="middle">llcore / FullSense — CPU-only, on-prem, $0 — n=2 連結基質, seed=2024</text>
+</svg>

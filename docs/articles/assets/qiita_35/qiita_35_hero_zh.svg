@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f1726"/>
+      <stop offset="1" stop-color="#172338"/>
+    </linearGradient>
+    <linearGradient id="gateGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a6f8f"/>
+      <stop offset="1" stop-color="#2a5066"/>
+    </linearGradient>
+    <radialGradient id="gateGlow" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#7fd1c8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#7fd1c8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="passGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5fb6a8"/>
+      <stop offset="1" stop-color="#7fd1c8"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#7fd1c8"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="560" fill="url(#bg)"/>
+
+  <g stroke="#22324a" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="140" x2="1000" y2="140"/>
+    <line x1="0" y1="430" x2="1000" y2="430"/>
+  </g>
+
+  <text x="50" y="58" font-size="34" font-weight="700" fill="#eef4fb">进化型 AI 的损坏检验器</text>
+  <text x="50" y="98" font-size="23" font-weight="600" fill="#7fd1c8">SDP 胜过 SMT</text>
+  <text x="50" y="124" font-size="14" fill="#9fb2c9">仅放行收缩动力学的健全性闸门 / llcore (CPU-only, on-prem, $0)</text>
+
+  <g>
+    <ellipse cx="540" cy="300" rx="150" ry="150" fill="url(#gateGlow)">
+      <animate attributeName="rx" values="140;156;140" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="ry" values="140;156;140" dur="4s" repeatCount="indefinite"/>
+    </ellipse>
+    <rect x="500" y="190" width="34" height="220" rx="8" fill="url(#gateGrad)" stroke="#7fd1c8" stroke-width="1.5"/>
+    <rect x="546" y="190" width="34" height="220" rx="8" fill="url(#gateGrad)" stroke="#7fd1c8" stroke-width="1.5"/>
+    <rect x="492" y="178" width="96" height="20" rx="6" fill="#2a5066" stroke="#7fd1c8" stroke-width="1.5"/>
+    <text x="540" y="170" font-size="15" font-weight="700" fill="#cfe9e3" text-anchor="middle">检验器 / GATE</text>
+    <text x="540" y="430" font-size="14" font-weight="600" fill="#9fd6cd" text-anchor="middle">quadratic SDP / LMI</text>
+    <text x="540" y="450" font-size="12" fill="#7f93ab" text-anchor="middle">公共 Lyapunov 证书 P</text>
+  </g>
+
+  <g font-size="12" fill="#cdd9e8" text-anchor="middle">
+    <text x="160" y="180" font-size="14" font-weight="600" fill="#9fb2c9">进化中的动力学基因</text>
+    <text x="160" y="198" font-size="11" fill="#7f93ab">coupled RWKV-style 状态更新</text>
+
+    <g>
+      <rect x="100" y="220" width="120" height="34" rx="17" fill="#243a52" stroke="#5a7795" stroke-width="1.3"/>
+      <text x="160" y="242" fill="#dce7f2">gene · n=2</text>
+    </g>
+    <g>
+      <rect x="100" y="266" width="120" height="34" rx="17" fill="#243a52" stroke="#5a7795" stroke-width="1.3"/>
+      <text x="160" y="288" fill="#dce7f2">gene · n=2</text>
+    </g>
+    <g>
+      <rect x="100" y="312" width="120" height="34" rx="17" fill="#243a52" stroke="#5a7795" stroke-width="1.3"/>
+      <text x="160" y="334" fill="#dce7f2">gene · n=2</text>
+    </g>
+    <g>
+      <rect x="100" y="358" width="120" height="34" rx="17" fill="#243a52" stroke="#5a7795" stroke-width="1.3"/>
+      <text x="160" y="380" fill="#dce7f2">gene · n=2</text>
+    </g>
+  </g>
+
+  <g stroke="#5a7795" stroke-width="1.6" fill="none" opacity="0.7" marker-end="url(#arrow)">
+    <path d="M224,237 C330,250 400,290 492,300"/>
+    <path d="M224,283 C330,290 400,298 492,300"/>
+    <path d="M224,329 C330,318 400,306 492,302"/>
+    <path d="M224,375 C330,360 410,320 492,304"/>
+  </g>
+  <g fill="#7fd1c8">
+    <circle r="4" cx="224" cy="237">
+      <animate attributeName="cx" values="224;492" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="237;300" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="4" cx="224" cy="329">
+      <animate attributeName="cx" values="224;492" dur="3s" begin="1s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="329;302" dur="3s" begin="1s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="4" cx="224" cy="375">
+      <animate attributeName="cx" values="224;492" dur="3s" begin="2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="375;304" dur="3s" begin="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <g>
+    <path d="M588,278 C700,250 760,225 830,210" stroke="url(#passGrad)" stroke-width="2.4" fill="none" marker-end="url(#arrow)"/>
+    <g transform="translate(835,188)">
+      <rect x="0" y="0" width="155" height="56" rx="12" fill="#1c3a3a" stroke="#7fd1c8" stroke-width="1.6"/>
+      <circle cx="26" cy="28" r="14" fill="none" stroke="#7fd1c8" stroke-width="2.2"/>
+      <path d="M19,28 L24,34 L34,21" stroke="#7fd1c8" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="48" y="24" font-size="13" font-weight="700" fill="#cfe9e3">收缩 → 放行</text>
+      <text x="48" y="42" font-size="11" fill="#9fd6cd">contracting · admit</text>
+    </g>
+  </g>
+
+  <g>
+    <path d="M588,326 C700,360 760,385 830,400" stroke="#5a6675" stroke-width="2.2" fill="none" stroke-dasharray="6 5" marker-end="url(#arrow)" opacity="0.85"/>
+    <g transform="translate(835,372)">
+      <rect x="0" y="0" width="155" height="56" rx="12" fill="#222a35" stroke="#56616f" stroke-width="1.5"/>
+      <circle cx="26" cy="28" r="14" fill="none" stroke="#8a95a3" stroke-width="2.2"/>
+      <path d="M20,22 L32,34 M32,22 L20,34" stroke="#8a95a3" stroke-width="2.4" stroke-linecap="round"/>
+      <text x="48" y="24" font-size="13" font-weight="700" fill="#b7c0cc">发散 → 拒绝</text>
+      <text x="48" y="42" font-size="11" fill="#8a95a3">diverging · reject</text>
+    </g>
+  </g>
+
+  <g>
+    <text x="50" y="486" font-size="13" font-weight="600" fill="#9fb2c9">认证能力阶梯 (CLARABEL · 300 gene · seed=2024)</text>
+    <g font-size="12">
+      <g transform="translate(50,500)">
+        <rect width="170" height="40" rx="8" fill="#243a52" stroke="#5a7795" stroke-width="1.2"/>
+        <text x="12" y="18" fill="#cdd9e8" font-weight="600">inf-norm</text>
+        <text x="12" y="34" fill="#9fb2c9">88</text>
+      </g>
+      <g transform="translate(232,500)">
+        <rect width="170" height="40" rx="8" fill="#243a52" stroke="#5a7795" stroke-width="1.2"/>
+        <text x="12" y="18" fill="#cdd9e8" font-weight="600">+ 2-norm</text>
+        <text x="12" y="34" fill="#9fb2c9">137</text>
+      </g>
+      <g transform="translate(414,500)">
+        <rect width="200" height="40" rx="8" fill="#1c3a3a" stroke="#7fd1c8" stroke-width="1.8"/>
+        <text x="12" y="18" fill="#cfe9e3" font-weight="700">+ quadratic SDP</text>
+        <text x="12" y="34" fill="#9fd6cd">286 = 95.3% ★</text>
+      </g>
+      <g transform="translate(626,500)">
+        <rect width="150" height="40" rx="8" fill="#243a52" stroke="#5a7795" stroke-width="1.2"/>
+        <text x="12" y="18" fill="#cdd9e8" font-weight="600">+ deg6 SOS</text>
+        <text x="12" y="34" fill="#9fb2c9">290</text>
+      </g>
+      <g transform="translate(788,500)">
+        <rect width="162" height="40" rx="8" fill="#222a35" stroke="#56616f" stroke-width="1.2"/>
+        <text x="12" y="18" fill="#b7c0cc" font-weight="600">residual</text>
+        <text x="12" y="34" fill="#8a95a3">10 · 0 unsound</text>
+      </g>
+    </g>
+  </g>
+
+  <rect x="414" y="500" width="200" height="40" rx="8" fill="none" stroke="#7fd1c8" stroke-width="1.8" opacity="0.5">
+    <animate attributeName="opacity" values="0.15;0.7;0.15" dur="2.6s" repeatCount="indefinite"/>
+    <animate attributeName="stroke-width" values="1.8;3.2;1.8" dur="2.6s" repeatCount="indefinite"/>
+  </rect>
+</svg>

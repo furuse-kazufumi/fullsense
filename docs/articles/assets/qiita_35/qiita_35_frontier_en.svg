@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b2330"/>
+      <stop offset="1" stop-color="#11151d"/>
+    </linearGradient>
+    <linearGradient id="segInf" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3a4a63"/><stop offset="1" stop-color="#4a5c79"/>
+    </linearGradient>
+    <linearGradient id="seg2n" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f6e8c"/><stop offset="1" stop-color="#5f82a3"/>
+    </linearGradient>
+    <linearGradient id="segSdp" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6fa0c4"/><stop offset="1" stop-color="#8fc2dd"/>
+    </linearGradient>
+    <linearGradient id="segDeg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9ec7b8"/><stop offset="1" stop-color="#b4d6c7"/>
+    </linearGradient>
+    <linearGradient id="segRes" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9aa3ad"/><stop offset="1" stop-color="#aab2bb"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="560" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="60" y="56" fill="#eef3f8" font-size="30" font-weight="700">The Verifier-Fitness Frontier</text>
+  <text x="60" y="86" fill="#9fb2c6" font-size="16">Cumulative certifications over 300 contracting genes (CLARABEL, n=2, seed=2024)</text>
+
+  <!-- Big headline pill -->
+  <rect x="640" y="34" width="300" height="46" rx="23" fill="#21384a" stroke="#8fc2dd" stroke-width="1.5"/>
+  <text x="790" y="63" fill="#cfeaf6" font-size="20" font-weight="700" text-anchor="middle">Headline: SDP adds +149</text>
+
+  <!-- axis ticks -->
+  <line x1="120" y1="300" x2="820" y2="300" stroke="#2c3848" stroke-width="1"/>
+  <text x="120" y="320" fill="#7d8a99" font-size="12" text-anchor="middle">0</text>
+  <text x="820" y="320" fill="#7d8a99" font-size="12" text-anchor="middle">300 genes</text>
+  <text x="820" y="284" fill="#7d8a99" font-size="12" text-anchor="middle">100%</text>
+
+  <!-- ===== Stacked cumulative bar ===== -->
+  <g>
+    <rect x="120" y="150" height="120" rx="3" fill="url(#segInf)" width="205.33">
+      <animate attributeName="width" from="0" to="205.33" dur="0.7s" begin="0.1s" fill="freeze"/>
+    </rect>
+    <rect x="325.33" y="150" height="120" fill="url(#seg2n)" width="114.33">
+      <animate attributeName="width" from="0" to="114.33" dur="0.6s" begin="0.8s" fill="freeze"/>
+    </rect>
+    <rect x="439.66" y="150" height="120" fill="url(#segSdp)" width="347.67">
+      <animate attributeName="width" from="0" to="347.67" dur="1.0s" begin="1.4s" fill="freeze"/>
+    </rect>
+    <rect x="787.33" y="150" height="120" fill="url(#segDeg)" width="9.33">
+      <animate attributeName="width" from="0" to="9.33" dur="0.4s" begin="2.4s" fill="freeze"/>
+    </rect>
+    <rect x="796.66" y="150" height="120" rx="3" fill="url(#segRes)" fill-opacity="0.55" width="23.33" stroke="#7d8a99" stroke-width="1" stroke-dasharray="3 3">
+      <animate attributeName="width" from="0" to="23.33" dur="0.4s" begin="2.8s" fill="freeze"/>
+    </rect>
+  </g>
+
+  <!-- Headline jump bracket over SDP segment -->
+  <g>
+    <line x1="439.66" y1="138" x2="787.33" y2="138" stroke="#8fc2dd" stroke-width="2"/>
+    <line x1="439.66" y1="133" x2="439.66" y2="150" stroke="#8fc2dd" stroke-width="2"/>
+    <line x1="787.33" y1="133" x2="787.33" y2="150" stroke="#8fc2dd" stroke-width="2"/>
+    <rect x="552" y="108" width="124" height="28" rx="14" fill="#21384a" stroke="#8fc2dd" stroke-width="1.2"/>
+    <text x="614" y="127" fill="#cfeaf6" font-size="16" font-weight="700" text-anchor="middle">+149 (quad SDP)</text>
+  </g>
+
+  <!-- Segment in-bar labels -->
+  <text x="222" y="216" fill="#e8eef5" font-size="14" font-weight="600" text-anchor="middle">inf-norm</text>
+  <text x="222" y="236" fill="#c8d6e4" font-size="13" text-anchor="middle">88</text>
+
+  <text x="382" y="216" fill="#e8eef5" font-size="14" font-weight="600" text-anchor="middle">+2-norm</text>
+  <text x="382" y="236" fill="#dbe7f1" font-size="13" text-anchor="middle">+49</text>
+
+  <text x="613" y="216" fill="#0f2030" font-size="16" font-weight="700" text-anchor="middle">+ quadratic SDP (common Lyapunov P)</text>
+  <text x="613" y="238" fill="#143047" font-size="14" font-weight="600" text-anchor="middle">+149</text>
+
+  <!-- Cumulative markers under bar -->
+  <g fill="#9fb2c6" font-size="13" text-anchor="middle">
+    <line x1="325.33" y1="270" x2="325.33" y2="288" stroke="#3a4a63"/>
+    <text x="325.33" y="304">88</text>
+    <line x1="439.66" y1="270" x2="439.66" y2="288" stroke="#3a4a63"/>
+    <text x="439.66" y="304">137</text>
+    <line x1="787.33" y1="270" x2="787.33" y2="288" stroke="#3a4a63"/>
+    <text x="787.33" y="304" fill="#8fc2dd" font-weight="700">286 ✓ 95.3%</text>
+  </g>
+
+  <!-- deg6 + residual callouts -->
+  <g>
+    <line x1="792" y1="270" x2="792" y2="356" stroke="#9ec7b8" stroke-width="1"/>
+    <text x="845" y="352" fill="#b4d6c7" font-size="13" font-weight="600">+deg6 → +1 = 290</text>
+    <text x="845" y="370" fill="#8c99a6" font-size="12">deg4 is nested inside deg6 (deg4∖deg6 = 0)</text>
+  </g>
+
+  <!-- Legend / breakdown panel -->
+  <g transform="translate(60,392)">
+    <rect x="0" y="0" width="880" height="138" rx="10" fill="#161d28" stroke="#2c3848" stroke-width="1"/>
+    <text x="20" y="26" fill="#cfeaf6" font-size="15" font-weight="700">Residual 10 (= 300 − 290): breakdown</text>
+
+    <g font-size="13" fill="#c2cdd9">
+      <circle cx="28" cy="52" r="5" fill="#9ec7b8"/>
+      <text x="42" y="57">deg8 SOS certifies +4 more</text>
+
+      <circle cx="28" cy="78" r="5" fill="#8fc2dd"/>
+      <text x="42" y="83">of those, 2 are closed by an exact-JSR bracket (finite gap)</text>
+
+      <circle cx="28" cy="104" r="5" fill="#aab2bb"/>
+      <text x="42" y="109">2 near-boundary genes (jsr_lb 0.9915 / 0.9787) stay open</text>
+
+      <circle cx="470" cy="52" r="5" fill="#aab2bb"/>
+      <text x="484" y="57" fill="#c2cdd9">6 of the 10 are correctly-rejected expansive genes (not misses ✓)</text>
+
+      <rect x="464" y="74" width="13" height="13" rx="2" fill="none" stroke="#7d8a99" stroke-dasharray="3 2"/>
+      <text x="484" y="84" fill="#c2cdd9">0 unsound certificates at every rung (soundness is safe by direction)</text>
+
+      <circle cx="470" cy="104" r="5" fill="#8c99a6"/>
+      <text x="484" y="109" fill="#9aa6b3">SOS family is non-monotone; exact-JSR is NP-hard → frontier asymptotes to JSR=1</text>
+    </g>
+  </g>
+
+  <!-- footnote -->
+  <text x="60" y="552" fill="#5f6b78" font-size="11">Soundness = 0 observed false admits (the JSR oracle is a falsifier, not a proof); n=2, CPU, this pool/seed only. CLARABEL fixed the SCS false negatives.</text>
+</svg>
