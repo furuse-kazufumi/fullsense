@@ -204,20 +204,24 @@ def render_motif(els, motif, y0, y1, font, lang):
         # 集中線はコマの枠から生やす (r_outer をコマ外 + clip)。揺らぎ・間引き・白フチは
         # mangamd v2 既定。大文字は叫びフキダシ (尻尾なし=インパクトワード)。
         # 旧 union 黄バッジは廃止 (意味不明な部品 — feedback_manga_craft_integration)。
+        # 配置: 叫び=中央やや左上 / badge=右上角 — 下の台詞フキダシ・話者とクロスさせない
         b = motif["burst"]
         els.append({"effect": {"concentration_lines": {
-            "center": [380, mid_y - 10], "n": 52, "r_inner": 150, "r_outer": 720,
+            "center": [340, mid_y - 30], "n": 52, "r_inner": 150, "r_outer": 720,
             "color": "#2a2417", "width": 4.2, "jitter": 0.7, "skip": 0.13,
             "fringe": "#ffffff", "clip": [25, y0 + 8, 710, (y1 - y0) - 16]}}})
         big = b.get("big", "")
         size = 46 if len(big) <= 8 else 34
-        els.append(speech(big, 380, mid_y - 10, 195, 92, size, font, kind="shout",
+        els.append(speech(big, 340, mid_y - 30, 180, 80, size, font, kind="shout",
                           seed=11, bw=4))
+        _lint_add("shout", 340 - 200, mid_y - 30 - 90, 340 + 200, mid_y - 30 + 90)
         if b.get("badge"):
             bl = nlines(b["badge"])
-            els.append(tb({"polygon": rect(540, zone_bot - 60 - bl * 24, 716, zone_bot - 36)},
-                          b["badge"], [628, zone_bot - 44 - bl * 24 + 20], 17, font,
+            bb = (560, y0 + 102, 716, y0 + 110 + bl * 24)
+            els.append(tb({"polygon": rect(*bb)}, b["badge"],
+                          [638, y0 + 110 + 17], 17, font,
                           fill="#fffbe8", border_width=2, line_gap=22))
+            _lint_add("badge", *bb)
     elif "duo" in motif:
         a, c = motif["duo"][0], motif["duo"][1]
         cy = zone_top + 130
