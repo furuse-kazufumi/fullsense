@@ -730,7 +730,7 @@ Words alone are hard to convey, so I **contrast "what was measured" with 2 SVGs*
 First, **behavioral diversity truly improved** (this is fact, no exaggeration). Below is the lineage-dominance stream with the neutral reservoir OFF.
 Ultimately it **collapses to 2 lineages, furuse 71% / friston 29%**. Even with diverse behavior, the lineage is like this.
 
-![reservoir OFF: collapse to 2 lineages](../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg)
+![reservoir OFF: collapse to 2 lineages](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance_en.svg)
 
 And below is **after putting in the lineage-side countermeasure (neutral reservoir ON)**. **All 8 lineages coexist**
 (millidge / von-neumann / oka-kiyoshi / grothendieck … survive).
