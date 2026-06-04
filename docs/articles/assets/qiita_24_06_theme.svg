@@ -75,7 +75,7 @@
   <g transform="translate(120, 280)" font-family="-apple-system,sans-serif" font-size="10">
     <text x="0" y="-12" fill="#a5b4fc" font-weight="600">推論複雑度 (sequence length L)</text>
     <text x="0" y="14" fill="#cbd5e1" text-anchor="end">Transformer</text>
-    <rect x="10" y="2" width="0" height="14" fill="#ef4444"><animate attributeName="width" from="0" to="480" dur="2s" repeatCount="indefinite"/></rect>
+    <rect x="10" y="2" width="480" height="14" fill="#ef4444"><animate attributeName="width" from="0" to="480" dur="2s" fill="freeze" repeatCount="indefinite"/></rect>
     <text x="0" y="36" fill="#cbd5e1" text-anchor="end">Mamba</text>
     <rect x="10" y="24" width="0" height="14" fill="#22c55e"><animate attributeName="width" from="0" to="160" dur="2s" begin="0.4s" repeatCount="indefinite"/></rect>
     <text x="0" y="58" fill="#cbd5e1" text-anchor="end">Diffusion</text>
