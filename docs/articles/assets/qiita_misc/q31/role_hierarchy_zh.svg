@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="560" fill="#f8fafc"/>
+
+  <!-- Human -->
+  <rect x="290" y="24" width="320" height="56" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="450" y="48" text-anchor="middle" font-size="16" font-weight="700" fill="#0c4a6e">人类（我）</text>
+  <text x="450" y="68" text-anchor="middle" font-size="13" fill="#0c4a6e">评审者兼方向决策者</text>
+
+  <!-- Human -> Claude edge -->
+  <line x1="450" y1="80" x2="450" y2="128" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="462" y="108" font-size="12" fill="#334155">方向 / GO / NO-GO</text>
+
+  <!-- Claude (orchestrator) -->
+  <rect x="230" y="132" width="440" height="74" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="450" y="158" text-anchor="middle" font-size="16" font-weight="700" fill="#4c1d95">Claude Code（主 = 编排者）</text>
+  <text x="450" y="184" text-anchor="middle" font-size="13" fill="#4c1d95">计划・实现・委派・验证・统一提交</text>
+
+  <!-- branch trunk -->
+  <line x1="450" y1="206" x2="450" y2="234" stroke="#475569" stroke-width="2"/>
+  <!-- horizontal split -->
+  <line x1="210" y1="234" x2="690" y2="234" stroke="#475569" stroke-width="2"/>
+  <!-- down to left child -->
+  <line x1="210" y1="234" x2="210" y2="266" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- down to right child -->
+  <line x1="690" y1="234" x2="690" y2="266" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Left child: Claude sub-agents -->
+  <rect x="40" y="270" width="340" height="70" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  <text x="210" y="298" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Claude 子代理</text>
+  <text x="210" y="320" text-anchor="middle" font-size="12.5" fill="#475569">并行, run_in_background</text>
+
+  <!-- Right child: Codex CLI -->
+  <rect x="520" y="270" width="340" height="70" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="690" y="298" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Codex CLI（配属 worker）</text>
+  <text x="690" y="320" text-anchor="middle" font-size="12.5" fill="#92400e">仅经由 Claude 才影响整体</text>
+
+  <!-- Codex task list box -->
+  <line x1="690" y1="340" x2="690" y2="372" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="500" y="376" width="380" height="120" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="524" y="406" font-size="13.5" fill="#78350f">・执行独立子任务</text>
+  <text x="524" y="436" font-size="13.5" fill="#78350f">・交叉评审 / 第二意见</text>
+  <text x="524" y="466" font-size="13.5" fill="#78350f">・调查 / 雏形生成</text>
+
+  <!-- caption -->
+  <text x="40" y="392" font-size="12.5" fill="#475569">并行启动</text>
+  <text x="40" y="412" font-size="12.5" fill="#475569">（同一 file 串行・</text>
+  <text x="40" y="430" font-size="12.5" fill="#475569">独立 file 并行）</text>
+  <text x="40" y="460" font-size="12.5" fill="#475569">git 操作由主统一进行</text>
+
+  <text x="450" y="528" text-anchor="middle" font-size="12" fill="#94a3b8">两根支柱 = Claude 主导 + Codex 配属（指挥系统唯一）</text>
+</svg>

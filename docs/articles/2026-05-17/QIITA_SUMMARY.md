@@ -2152,11 +2152,7 @@ for expr in extract_expressions(brief_text):
 
 ### 设计动机
 
-```
-[現状の attention]                  [CABT の置換案]
-attn_output = softmax(QK^T) · V     ref_id = softmax(QK^T)
-                                    attn_output = lookup(ref_id) + metadata_bias
-```
+![CABT：attention 的替换方案](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/summary/cabt_attention_zh.svg)
 
 ### Hook 设计（权重保持 frozen）
 
