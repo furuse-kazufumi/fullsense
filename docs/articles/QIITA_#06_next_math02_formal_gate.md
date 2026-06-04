@@ -4,6 +4,7 @@ title: "LLM 数式幻覚をどう止めるか — 形式検証ゲート (MATH-02
 date: 2026-05-17
 tags: [llm, math, formal-verification, z3, sympy, hallucination]
 draft: true
+id: acb5f5e0dabe2020c166
 ---
 
 # LLM 数式幻覚をどう止めるか — 形式検証ゲート (MATH-02 設計予告)

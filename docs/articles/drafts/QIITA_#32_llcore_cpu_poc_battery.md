@@ -3,6 +3,7 @@ title: "llcore — Transformer のコアを CPU で進化させる: Verified Neu
 tags: ["Python", "進化計算", "Z3", "RWKV", "形式検証"]
 private: true
 updated_at: "2026-05-29"
+id: 88ed294aa107330c6894
 ---
 
 # (連載 #32) llcore CPU PoC battery 完成

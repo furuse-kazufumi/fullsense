@@ -2,6 +2,7 @@
 title: "推論する AI から「予測する認知 OS」へ — FullSense 開発 1 週間ダイジェスト (2026-05-17 → 05-24)"
 tags: LLM,Agent,OnPrem,認知科学,Python
 ignorePublish: true
+id: 1f71a3e5bb830cb51b80
 ---
 
 > **言語 / Language / 语言 / 언어**: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
