@@ -29,16 +29,7 @@ id: a6804f6b8c47605177a8
 
 ## 設計動機
 
-```
-[現状の attention]                  [CABT の置換案]
-attn_output = softmax(QK^T) · V     ref_id = softmax(QK^T)
-                                    attn_output = lookup(ref_id) + metadata_bias
-
-  ┌ V (float[B, S, H])              ┌ token table
-  │ 値そのもの                      │ (id, embedding, metadata)
-  │ メタ情報を保持不能              │ 参照可能、付加情報可能
-  └                                  └
-```
+![現状の attention と CABT 置換案の設計動機比較図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q04/design_motivation.svg)
 
 ## 7 つのアプローチ (CABT-01〜07)
 
