@@ -374,16 +374,7 @@ The 8 lineages I sowed:
 The lineage occupancy after 500 generations (the breakdown of
 max_lineage_share):
 
-```
-Furuse         ████████████████████████████  52%
-Friston        ██████████████████████████    48%
-Millidge       (extinct)
-Isomura        (extinct)
-Oka Kiyoshi    (extinct)
-Grothendieck   (extinct)
-von Neumann    (extinct)
-Feynman        (extinct)
-```
+![Lineage occupancy after 500 generations: only Furuse 52% and Friston 48% survive while the other 6 lineages go extinct, as a bar chart](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q25/lineage_occupancy_en.svg)
 
 At first glance you could write a **narrative** that "predictive coding (Friston)
 and provenance-orientation (Furuse) beat abstract mathematics (Grothendieck) and
