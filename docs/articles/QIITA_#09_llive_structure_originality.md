@@ -7,6 +7,12 @@ tags: [llm, architecture, originality, cognitive-os, llive]
 id: 0c1d5ebd6b0656ba74e1
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # llive の構造は LLM として独自になっているか — 8 つの差別化要素の点検
 
 著者: 古瀬 和文（ぷるやん）
