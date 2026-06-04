@@ -4,6 +4,7 @@ title: "Transformer ブロックを高度化する 7 つのアプローチ — C
 date: 2026-05-17
 tags: [llm, transformer, attention, architecture, design]
 draft: true
+id: a6804f6b8c47605177a8
 ---
 
 # Transformer ブロックを高度化する 7 つのアプローチ — CABT 設計予告

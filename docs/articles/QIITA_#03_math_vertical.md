@@ -3,6 +3,7 @@ layout: default
 title: "数学・単位に強い AI を作る最初の一歩"
 date: 2026-05-17
 tags: [llm, math, units, dimensional-analysis, hallucination]
+id: 2c4a993937c373c464f6
 ---
 
 # 数学・単位に強い AI を作る最初の一歩 — MATH-01/08 内蔵計算エンジン

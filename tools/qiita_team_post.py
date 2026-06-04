@@ -297,6 +297,8 @@ def cmd_post(args: list[str]) -> int:
     else:
         code, res = _req("POST", "/items", token, p)
     if code in (200, 201) and isinstance(res, dict):
+        if not item_id and res.get("id"):
+            _writeback_id(files[0], res.get("id"))  # idempotent re-posts (create -> store id -> future PATCH)
         print(f"OK ({code}): {res.get('url')}  id={res.get('id')}")
         return 0
     print(f"FAIL ({code}): {res}")

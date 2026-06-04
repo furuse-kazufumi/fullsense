@@ -10,16 +10,19 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-04 21:16:13
+- **生成時刻**: 2026-06-04 21:21:54
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+ca9e3e1 auto: qiita_team_post.py 編集前 (2026-06-04 21:21)
+748ac2c auto: qiita_team_post.py 編集前 (2026-06-04 21:21)
+dba1a67 auto: QIITA_#01_brief_api_progressive.md 編集前 (2026-06-04 21:21)
 bb6be4c article(#35-02): ladder deg4 row +3/289 (bookkeeping consistency with paper + exp_deg6_ladder json)
 7613494 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 12:58)
 67e932c auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 12:58)
@@ -27,18 +30,12 @@ cb5d10c auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-0
 893c5b1 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 12:57)
 6ad53e7 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
 9bf4a87 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
-5c05bd7 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
-55aa3da auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
-04578b8 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
-?? tools/qiita_registration_safety_report.json
-?? tools/qiita_team_post.py
+M tools/qiita_team_post.py
 ```
 
 
@@ -78,10 +75,11 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `21:14` `docs/NEXT_SESSION.auto.md`
-- `21:14` `docs/SESSION_SUMMARY.md`
+- `21:21` `tools/qiita_team_post.py`
+- `21:21` `docs/articles/QIITA_#01_brief_api_progressive.md`
+- `21:16` `docs/SESSION_SUMMARY.md`
+- `21:16` `docs/NEXT_SESSION.auto.md`
 - `21:12` `tools/qiita_registration_safety_report.json`
-- `21:11` `tools/qiita_team_post.py`
 
 
 ## Cross-references
