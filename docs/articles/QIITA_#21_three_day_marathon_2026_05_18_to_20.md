@@ -1205,16 +1205,7 @@ NEXT_SESSION.md 因为是手动更新，所以**必然 drift**。早上一个半
 
 向 `docs/research/` 投放 6 件：
 
-```text
-docs/research/
-├── index.md                       # Reference hub
-├── lleval_sota.md                 # 10 framework 比较 + 4 gap
-├── llgrow_prior_art.md            # Growth Automation 先行例
-├── cognitive_mesh_vs_sota.md      # COG-MESH 的相关研究
-├── llcraft_sota.md                # llcraft 候选的 SOTA
-├── llrisk_prior_art.md            # llrisk (Tonic Risk) 先行例
-└── llgov_sota.md                  # llgov (governance) SOTA
-```
+![docs/research/ 目录结构图 — 自主 agent 可查询 SOTA / prior-art 的研究中枢](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q21/research_hub_tree_zh.svg)
 
 这是「**让自主 agent 能在踏上研究领域的基础上判断**」的基础。
 是 RAD（Research Aggregation Directory）的派生概念：在平时的 Claude

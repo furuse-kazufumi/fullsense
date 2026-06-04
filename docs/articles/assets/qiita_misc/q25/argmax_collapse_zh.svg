@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="320" fill="#ffffff"/>
+  <text x="24" y="34" font-size="20" font-weight="700" fill="#1f2937">argmax 压垮 — 多轴向量被压成 1 根标量</text>
+
+  <!-- 本应如此: multi-axis vector -->
+  <text x="24" y="78" font-size="14" font-weight="600" fill="#059669">本应如此: pressure profile = 多轴向量</text>
+  <rect x="24" y="92" width="120" height="40" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="84" y="117" font-size="13" fill="#065f46" text-anchor="middle">典型性</text>
+  <rect x="156" y="92" width="120" height="40" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="216" y="117" font-size="13" fill="#065f46" text-anchor="middle">多样性</text>
+  <rect x="288" y="92" width="120" height="40" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="348" y="117" font-size="13" fill="#065f46" text-anchor="middle">专门性</text>
+  <rect x="420" y="92" width="120" height="40" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="480" y="117" font-size="13" fill="#065f46" text-anchor="middle">...</text>
+
+  <!-- collapse arrow -->
+  <line x1="282" y1="146" x2="282" y2="196" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="298" y="178" font-size="14" font-weight="600" fill="#dc2626">argmax = 用 max() 压垮 (多目标性消失)</text>
+
+  <!-- 实际实现: single scalar -->
+  <text x="24" y="232" font-size="14" font-weight="600" fill="#b91c1c">实际实现: fitness = max(个体与各 archetype 的相似度)</text>
+  <rect x="24" y="246" width="120" height="40" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="84" y="271" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">单一标量</text>
+  <text x="160" y="271" font-size="13" fill="#6b7280">→ 稍微相似就得高分 → 立刻钉到天花板 (满分通胀)</text>
+</svg>
