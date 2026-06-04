@@ -3,6 +3,7 @@ layout: default
 title: "Brief API and progressive matrix — llive overhead < 1 %"
 date: 2026-05-17
 tags: [llm, agent, on-prem, ollama, benchmark]
+id: 60537278f72f8a9fc2dc
 ---
 
 # Brief API 設計と progressive matrix で見える llive の overhead < 1 %
