@@ -7,6 +7,12 @@ tags: [llm, complementary, on-prem, local, qwen, llive, niche]
 id: f400cf06e86b350b055c
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # Qwen と相互補完する llive — Local 環境で『隙間』を埋める設計
 
 著者: 古瀬 和文（ぷるやん）
