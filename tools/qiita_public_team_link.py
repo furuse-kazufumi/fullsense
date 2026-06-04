@@ -286,6 +286,79 @@ def cmd_apply(args: list[str]) -> int:
     return 0 if fail == 0 else 1
 
 
+def cmd_qa(args: list[str]) -> int:
+    """適用前の機械検証 (preview vs live 原文):
+    ①逆算: preview から挿入列を除去 → live body と byte 一致 (=純粋挿入の証明)
+    ②fence: 各 MARKER 位置より前の ``` が偶数 (=code fence 外に挿入)
+    ③言語整合: multilang では各 blurb の直前 60 行内に対応言語見出し
+    """
+    ids = [a for a in args if not a.startswith("--")]
+    if not ids:
+        print("usage: qa <id>...")
+        return 2
+    token = get_token()
+    if not token:
+        print("NO TOKEN")
+        return 2
+    bad = 0
+    for item_id in ids:
+        prev_path = os.path.join(PREVIEW_DIR, f"{item_id}.md")
+        if not os.path.exists(prev_path):
+            print(f"[NO-PREVIEW] {item_id}")
+            bad += 1
+            continue
+        preview = open(prev_path, "r", encoding="utf-8").read()
+        code, item = _req("GET", f"/items/{item_id}", token)
+        if code != 200 or not isinstance(item, dict):
+            print(f"[FAIL-GET] {item_id} ({code})")
+            bad += 1
+            continue
+        original = item["body"]
+        errs: list[str] = []
+        # ① 逆算: 挿入列 ("\n\n"+blurb+"\n" / top 形) を除去して原文一致するか
+        stripped = preview
+        for lang in BLURBS:
+            stripped = stripped.replace("\n\n" + BLURBS[lang].rstrip("\n") + "\n", "", 1)   # multilang 形
+            stripped = stripped.replace(BLURBS[lang].rstrip("\n") + "\n\n", "", 1)          # top 形
+        if stripped != original:
+            errs.append(f"INVERSE-MISMATCH (stripped {len(stripped)}c vs live {len(original)}c)")
+        # ② fence: MARKER ごとに、それ以前の ``` 出現数が偶数か
+        pos = -1
+        n_markers = 0
+        while True:
+            pos = preview.find(MARKER, pos + 1)
+            if pos == -1:
+                break
+            n_markers += 1
+            if preview.count("```", 0, pos) % 2 != 0:
+                errs.append(f"MARKER#{n_markers} inside code fence (pos={pos})")
+        # ③ 言語整合: 各 blurb の前方近傍に対応言語見出し (multilang のみ)
+        langs_present = [lg for lg, pat in LANG_HEADINGS.items() if pat.search(original)]
+        if len(langs_present) >= 2:
+            if n_markers != len(langs_present):
+                errs.append(f"marker count {n_markers} != langs {len(langs_present)}")
+            for lang in langs_present:
+                bpos = preview.find(BLURBS[lang].rstrip("\n"))
+                if bpos == -1:
+                    errs.append(f"blurb[{lang}] not found")
+                    continue
+                window = preview[max(0, bpos - 200):bpos]
+                if not LANG_HEADINGS[lang].search(window):
+                    errs.append(f"blurb[{lang}] not directly after its heading")
+        else:
+            if n_markers != 1:
+                errs.append(f"top mode but markers={n_markers}")
+        if errs:
+            bad += 1
+            print(f"[QA-FAIL] {item_id}  {item['title'][:50]}")
+            for e in errs:
+                print(f"    - {e}")
+        else:
+            print(f"[QA-OK] {item_id}  markers={n_markers}  {item['title'][:60]}")
+    print(f"\nqa: {len(ids) - bad}/{len(ids)} OK")
+    return 0 if bad == 0 else 1
+
+
 def cmd_verify(args: list[str]) -> int:
     ids = [a for a in args if not a.startswith("--")]
     if not ids:
