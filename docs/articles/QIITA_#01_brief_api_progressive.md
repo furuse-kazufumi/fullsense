@@ -154,23 +154,7 @@ The Brief API provides:
 
 ## Architecture
 
-```
-External client
-   │ Brief (YAML / CLI / MCP)
-   ▼
-BriefRunner.submit()
-   ├─ 1. brief_submitted   → ledger
-   ├─ 2. (optional) grounding_applied (TRIZ × RAD citation)
-   ├─ 3. stimulus_built    → ledger
-   ├─ 4. FullSenseLoop.process(stim)
-   │     └─ 6 stage loop (既存)
-   ├─ 5. loop_completed    → ledger
-   ├─ 6. decision          → ledger
-   ├─ 7. (optional) governance_scored (4 軸)
-   ├─ 8. Approval Bus gate (PROPOSE/INTERVENE 時のみ)
-   ├─ 9. tool_invoked × N  → ledger
-   └─10. outcome           → ledger
-```
+![BriefRunner.submit() transaction flow (External client → Brief → 10 steps run as a single transaction and recorded in an append-only JSONL ledger)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q01/architecture_en.svg)
 
 ## Progressive validation matrix (on-prem only)
 
