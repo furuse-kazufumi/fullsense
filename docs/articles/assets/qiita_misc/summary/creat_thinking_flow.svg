@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="640" viewBox="0 0 900 640" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="down" markerWidth="10" markerHeight="10" refX="3" refY="8" orient="auto">
+      <path d="M0,0 L6,0 L3,8 Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="bi" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#6366f1"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="640" fill="#f8fafc"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">人間の思考フロー &#8596; llive のマッピング</text>
+
+  <text x="230" y="66" text-anchor="middle" font-size="16" font-weight="700" fill="#3730a3">[人間]</text>
+  <text x="670" y="66" text-anchor="middle" font-size="16" font-weight="700" fill="#15803d">[llive]</text>
+
+  <!-- rows -->
+  <!-- row 1 -->
+  <rect x="40" y="80" width="380" height="42" rx="9" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.4"/>
+  <text x="230" y="107" text-anchor="middle" font-size="15" fill="#312e81">Brief (問題定義)</text>
+  <rect x="480" y="80" width="380" height="42" rx="9" fill="#dcfce7" stroke="#22c55e" stroke-width="1.4"/>
+  <text x="670" y="107" text-anchor="middle" font-size="15" fill="#14532d">Brief API (実装済)</text>
+  <line x1="420" y1="101" x2="480" y2="101" stroke="#6366f1" stroke-width="2" marker-start="url(#bi)" marker-end="url(#bi)"/>
+
+  <!-- row 2 -->
+  <rect x="40" y="158" width="380" height="42" rx="9" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.4"/>
+  <text x="230" y="185" text-anchor="middle" font-size="15" fill="#312e81">KJ法 (拡散 + 親和)</text>
+  <rect x="480" y="158" width="380" height="42" rx="9" fill="#dcfce7" stroke="#22c55e" stroke-width="1.4"/>
+  <text x="670" y="185" text-anchor="middle" font-size="15" fill="#14532d">CREAT-01 KJ法ノード (計画)</text>
+  <line x1="420" y1="179" x2="480" y2="179" stroke="#6366f1" stroke-width="2" marker-start="url(#bi)" marker-end="url(#bi)"/>
+
+  <!-- row 3 -->
+  <rect x="40" y="236" width="380" height="42" rx="9" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.4"/>
+  <text x="230" y="263" text-anchor="middle" font-size="15" fill="#312e81">MindMap (構造化)</text>
+  <rect x="480" y="236" width="380" height="42" rx="9" fill="#dcfce7" stroke="#22c55e" stroke-width="1.4"/>
+  <text x="670" y="263" text-anchor="middle" font-size="15" fill="#14532d">CREAT-02 MindMap ノード (計画)</text>
+  <line x1="420" y1="257" x2="480" y2="257" stroke="#6366f1" stroke-width="2" marker-start="url(#bi)" marker-end="url(#bi)"/>
+
+  <!-- row 4 -->
+  <rect x="40" y="314" width="380" height="42" rx="9" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.4"/>
+  <text x="230" y="341" text-anchor="middle" font-size="15" fill="#312e81">TRIZ (矛盾解決)</text>
+  <rect x="480" y="314" width="380" height="42" rx="9" fill="#dcfce7" stroke="#22c55e" stroke-width="1.4"/>
+  <text x="670" y="341" text-anchor="middle" font-size="14" fill="#14532d">既存 FR-23〜27 + CREAT-05 類比</text>
+  <line x1="420" y1="335" x2="480" y2="335" stroke="#6366f1" stroke-width="2" marker-start="url(#bi)" marker-end="url(#bi)"/>
+
+  <!-- row 5 -->
+  <rect x="40" y="392" width="380" height="42" rx="9" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.4"/>
+  <text x="230" y="419" text-anchor="middle" font-size="15" fill="#312e81">Six Hats (多視点検証)</text>
+  <rect x="480" y="392" width="380" height="42" rx="9" fill="#dcfce7" stroke="#22c55e" stroke-width="1.4"/>
+  <text x="670" y="419" text-anchor="middle" font-size="14" fill="#14532d">CREAT-04 + EpistemicType (計画)</text>
+  <line x1="420" y1="413" x2="480" y2="413" stroke="#6366f1" stroke-width="2" marker-start="url(#bi)" marker-end="url(#bi)"/>
+
+  <!-- row 6 -->
+  <rect x="40" y="470" width="380" height="42" rx="9" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.4"/>
+  <text x="230" y="497" text-anchor="middle" font-size="15" fill="#312e81">要件定義 (構造化変換)</text>
+  <rect x="480" y="470" width="380" height="42" rx="9" fill="#dcfce7" stroke="#22c55e" stroke-width="1.4"/>
+  <text x="670" y="497" text-anchor="middle" font-size="14" fill="#14532d">CREAT-03 構造化変換 (計画)</text>
+  <line x1="420" y1="491" x2="480" y2="491" stroke="#6366f1" stroke-width="2" marker-start="url(#bi)" marker-end="url(#bi)"/>
+
+  <!-- row 7 -->
+  <rect x="40" y="548" width="380" height="42" rx="9" fill="#c7d2fe" stroke="#6366f1" stroke-width="1.6"/>
+  <text x="230" y="575" text-anchor="middle" font-size="15" font-weight="700" fill="#312e81">実装</text>
+  <rect x="480" y="548" width="380" height="42" rx="9" fill="#bbf7d0" stroke="#22c55e" stroke-width="1.6"/>
+  <text x="670" y="575" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">BriefRunner.submit → Loop (実装済)</text>
+  <line x1="420" y1="569" x2="480" y2="569" stroke="#6366f1" stroke-width="2" marker-start="url(#bi)" marker-end="url(#bi)"/>
+
+  <!-- vertical down arrows on the human column -->
+  <line x1="230" y1="122" x2="230" y2="156" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#down)"/>
+  <line x1="230" y1="200" x2="230" y2="234" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#down)"/>
+  <line x1="230" y1="278" x2="230" y2="312" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#down)"/>
+  <line x1="230" y1="356" x2="230" y2="390" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#down)"/>
+  <line x1="230" y1="434" x2="230" y2="468" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#down)"/>
+  <line x1="230" y1="512" x2="230" y2="546" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#down)"/>
+</svg>
