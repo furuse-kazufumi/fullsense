@@ -272,23 +272,7 @@ Brief API 提供：
 
 ## 架构
 
-```
-External client
-   │ Brief (YAML / CLI / MCP)
-   ▼
-BriefRunner.submit()
-   ├─ 1. brief_submitted   → ledger
-   ├─ 2. (optional) grounding_applied (TRIZ × RAD citation)
-   ├─ 3. stimulus_built    → ledger
-   ├─ 4. FullSenseLoop.process(stim)
-   │     └─ 6 stage loop (既存)
-   ├─ 5. loop_completed    → ledger
-   ├─ 6. decision          → ledger
-   ├─ 7. (optional) governance_scored (4 軸)
-   ├─ 8. Approval Bus gate (PROPOSE/INTERVENE 時のみ)
-   ├─ 9. tool_invoked × N  → ledger
-   └─10. outcome           → ledger
-```
+![BriefRunner.submit() 的事务流程（External client → Brief → 10 个步骤作为一个事务执行并记录到 append-only JSONL ledger）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q01/architecture_zh.svg)
 
 ## Progressive validation matrix（仅 on-prem）
 
