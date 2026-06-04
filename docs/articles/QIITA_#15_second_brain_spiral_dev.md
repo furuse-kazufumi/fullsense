@@ -202,11 +202,7 @@ The phrase "second brain" felt embarrassing at first. It seemed cliché, dragged
 
 ## One Spiral Cycle
 
-```
-外部思想 → Perplexity 要約 → Claude Code 読込 → 要件化 → 実装 → ベンチ → commit
-   ↑                                                                      |
-   └──────────────────────────── 次サイクル ────────────────────────────┘
-```
+![Flow of one spiral development cycle (external ideas → Perplexity summary → Claude Code read-in → requirements → implement → benchmark → commit → next cycle)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q15/spiral_cycle_en.svg)
 
 Real examples (3 of the 9 sessions this run):
 
