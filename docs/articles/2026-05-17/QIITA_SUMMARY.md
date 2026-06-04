@@ -1554,14 +1554,7 @@ User observation:
 
 ### Two-layer structure
 
-```
-路線 1: 常設の補完戦略 (Local 環境特化)
-       └ Qwen / Llama が進化しても不変の価値
-路線 2: 研究としての独自化 (ORG-FX 5 段階)
-       └ 中長期で研究価値を持続
-
-両者は同時並走可能
-```
+![Two-layer structure — complementary strategy and originalization in parallel](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/summary/strategy_b_two_layer_en.svg)
 
 ### The 5 gaps
 
