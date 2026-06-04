@@ -149,21 +149,7 @@ In other words, hallucinations involving **symbolic manipulation, limits, matric
 
 ## Design
 
-```
-LLM output text
-    │
-    ▼
-[Formula extractor] (MATH-03 multi-syntax parser, LaTeX/MathML/Sympy)
-    │
-    ▼
-[Sympy AST]
-    │
-    ├─→ simplify(lhs - rhs) == 0 ? → ✅ pass
-    │   ❌ → failure flag
-    │
-    └─→ satisfiability check with Z3 (∀ x. lhs(x) == rhs(x) ?)
-        ❌ → record the counterexample in the ledger
-```
+![Flow of the MATH-02 formal verification gate: the formula extractor turns the LLM output text into an AST, then Sympy simplify and a Z3 satisfiability check verify whether the equation is true](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q06/formal_gate_flow_en.svg)
 
 ```python
 # 設計案 (実装予定)
