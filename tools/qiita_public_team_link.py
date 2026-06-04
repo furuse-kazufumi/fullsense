@@ -390,7 +390,7 @@ def main() -> int:
         print(__doc__)
         return 0
     cmd, rest = sys.argv[1], sys.argv[2:]
-    return {"list": cmd_list, "dry-run": cmd_dry_run, "apply": cmd_apply,
+    return {"list": cmd_list, "dry-run": cmd_dry_run, "qa": cmd_qa, "apply": cmd_apply,
             "verify": cmd_verify}.get(cmd, lambda a: (print(f"unknown cmd {cmd}"), 2)[1])(rest)
 
 
