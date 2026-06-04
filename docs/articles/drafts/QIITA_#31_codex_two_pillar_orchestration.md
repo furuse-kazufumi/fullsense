@@ -429,18 +429,7 @@ Discipline for when you run multiple workers (Claude sub-agents + Codex) at the 
 
 ## 2. 역할 분담 —— 오케스트레이터와 배속 worker
 
-```
-人間（私）= レビュアー兼方向性決定者
-   │ 方向性・GO/NO-GO
-   ▼
-Claude Code（主 = オーケストレータ）
-   │ 計画・実装・委任・検証・一括コミット
-   ├─▶ Claude サブエージェント（並列, run_in_background）
-   └─▶ Codex CLI（配下 worker）
-          ・独立サブタスクの実行
-          ・クロスレビュー / セカンドオピニオン
-          ・調べ物 / 雛形生成
-```
+![계층도: 인간 → Claude Code（주＝오케스트레이터）→ Claude 서브에이전트 병렬 / Codex CLI 배속 worker](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q31/role_hierarchy_ko.svg)
 
 - **Claude（주）의 책무**: 태스크 분해·의존성 판정·독립 태스크의 병렬 기동·진척 모니터링·**성과 검증**·일괄 커밋.
 - **Codex（부하）의 책무**: 위임된 범위의 실행. 비대화형 위임 = `codex exec -s read-only "<prompt>"`.
