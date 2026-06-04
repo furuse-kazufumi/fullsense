@@ -256,12 +256,13 @@ def build(slug: str, lang: str, spec: dict) -> dict:
         els.append(tb({"polygon": rect(48, y0 + 360, 470, y0 + 478)}, p4["caption_box"],
                       [259, c_oy], 19 if lang != "en" else 16, f, fill="#efe7d2",
                       border_width=2, line_gap=30))
+    # foot/credit はコマ帯の下の背景余白 (y 2200-2300) へ — コマ内要素と衝突させない
     if p4.get("foot"):
-        els.append(tb({"polygon": rect(376, 2086, 384, 2090)}, p4["foot"],
-                      [259, y0 + 498 - 6], 17, f, fill="#f5efe2", border=False,
+        els.append(tb({"polygon": rect(376, 2228, 384, 2232)}, p4["foot"],
+                      [380, 2245], 18, f, fill="#f5efe2", border=False,
                       text_color="#6a645a"))
-    els.append(tb({"polygon": rect(376, 2156, 384, 2160)},
-                  "mangamd L0 / FullSense", [380, 2180], 13, f,
+    els.append(tb({"polygon": rect(376, 2272, 384, 2276)},
+                  "mangamd L1 / FullSense", [380, 2284], 13, f,
                   fill="#f5efe2", border=False, text_color="#8a8474"))
     return {"title": spec.get("title", f"{slug} 4-koma"),
             "canvas": {"w": 760, "h": 2300, "bg": "#f5efe2"},
