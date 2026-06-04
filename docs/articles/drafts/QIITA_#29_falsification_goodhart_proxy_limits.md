@@ -115,7 +115,7 @@ ignorePublish: true
 
 参考までに、③（選択）が効くのは「ニセ頂上を越える、だましだが渡れる坂道（欺瞞 corridor）」がある時だけです:
 
-<img src="../assets/step_c/deceptive_corridor.svg" alt="だまし地形と進化（③が効く状態）" width="640">
+<img src="https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/step_c/deceptive_corridor.svg" alt="だまし地形と進化（③が効く状態）" width="640">
 
 Step C の結論は、潔く **N/A（この基質では③の有無を測れなかった）**。しかも draft 段階で私は「③は不要」と**書きすぎ**、多視点の adversarial 検証が「天井効果で非診断・検出力不足（δ=+0.33 は medium だが p=0.15 で inconclusive）」と捕まえて格下げさせました——§3.2 の「自己反証」が、ここでもそのまま起きたわけです。
 
