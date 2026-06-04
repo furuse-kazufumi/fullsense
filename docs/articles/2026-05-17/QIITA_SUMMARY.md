@@ -3059,11 +3059,7 @@ for expr in extract_expressions(brief_text):
 
 ### 설계 동기
 
-```
-[現状の attention]                  [CABT の置換案]
-attn_output = softmax(QK^T) · V     ref_id = softmax(QK^T)
-                                    attn_output = lookup(ref_id) + metadata_bias
-```
+![CABT: attention 치환 안](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/summary/cabt_attention_ko.svg)
 
 ### Hook 설계 (가중치 동결인 채로)
 
