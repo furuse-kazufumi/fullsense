@@ -48,21 +48,7 @@ id: acb5f5e0dabe2020c166
 
 ## 設計
 
-```
-LLM 出力テキスト
-    │
-    ▼
-[式抽出器] (MATH-03 multi-syntax parser, LaTeX/MathML/Sympy)
-    │
-    ▼
-[Sympy AST]
-    │
-    ├─→ simplify(lhs - rhs) == 0 ? → ✅ 通過
-    │   ❌ → 失敗 flag
-    │
-    └─→ Z3 で satisfiability check (∀ x. lhs(x) == rhs(x) ?)
-        ❌ → 反例を ledger に記録
-```
+![MATH-02 形式検証ゲートのフロー: LLM 出力テキストを式抽出器で AST 化し、Sympy simplify と Z3 satisfiability check で等式の真偽を検算する](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q06/formal_gate_flow.svg)
 
 ```python
 # 設計案 (実装予定)
