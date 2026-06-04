@@ -337,12 +337,12 @@ def build_e() -> str:
 
 <!-- テキストブロック -->
 <g>
-  <text x="478" y="118" font-family="{FONT}" font-size="40" font-weight="bold" fill="#b3322e">かみくだき版</text>
-  <rect x="478" y="132" width="180" height="5" rx="2.5" fill="#e8b33a"/>
-  <text x="478" y="172" font-family="{FONT}" font-size="21" fill="#3a3a3a">むずかしい話は、獅子が噛み砕いてお届け。</text>
-  <text x="478" y="220" font-family="{FONT}" font-size="14.5" fill="#7a6f5d">獅子舞に頭を噛まれると、その年は無病息災 —</text>
-  <text x="478" y="244" font-family="{FONT}" font-size="14.5" fill="#7a6f5d">この獅子に噛まれた読者には「理解」のご利益があります。</text>
-  <text x="478" y="296" font-family="{FONT}" font-size="12.5" fill="#a89f8d">FullSense KB・かみくだきシリーズ</text>
+  <text x="465" y="118" font-family="{FONT}" font-size="40" font-weight="bold" fill="#b3322e">かみくだき版</text>
+  <rect x="465" y="132" width="180" height="5" rx="2.5" fill="#e8b33a"/>
+  <text x="465" y="172" font-family="{FONT}" font-size="19" fill="#3a3a3a">むずかしい話は、獅子が噛み砕いてお届け。</text>
+  <text x="465" y="220" font-family="{FONT}" font-size="14.5" fill="#7a6f5d">獅子舞に頭を噛まれると、その年は無病息災 —</text>
+  <text x="465" y="244" font-family="{FONT}" font-size="14.5" fill="#7a6f5d">この獅子に噛まれた読者には「理解」のご利益があります。</text>
+  <text x="465" y="296" font-family="{FONT}" font-size="12.5" fill="#a89f8d">FullSense KB・かみくだきシリーズ</text>
 </g>
 </svg>
 """
