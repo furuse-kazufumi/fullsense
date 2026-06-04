@@ -69,32 +69,67 @@ def nlines(s: str) -> int:
     return s.count("\n") + 1
 
 
-def _bust(els: list, cx: float, cy: float, k: float, sx: int,
+def _bust(els: list, cx: float, cy: float, k: float, sx: int, emo: str = "normal",
           hair: str = "#4a3826", skin: str = "#fbd7b5", cloth: str = "#5a6e8c") -> tuple[float, float]:
-    """説明役の半身 (バスト)。sx=-1 で左向き (右側に置く)、+1 で右向き (左側に置く)。
+    """説明役の半身 (バスト、3/4 視で両目)。sx=-1 で左向き (右側に置く)、+1 で右向き。
 
     manga_grammar.md: フキダシには必ず話者を立て、尻尾を口元へ。戻り値 = 口元座標。
-    k = 頭半径スケール (基準 r=68 のサンプル比)。
+    emo = normal | happy | worried | shock — 起承転結の感情曲線を演技で出す。
     """
-    r = 68 * k
+    bw = max(2.5, 4 * k)
+    near_x, far_x = cx + 38 * sx * k, cx - 10 * sx * k  # 3/4 視: 顔向き側 + 中央寄り
+    ey = cy - 4 * k
     shapes = [
         {"shape": {"circle": [cx - 10 * sx, cy - 28 * k, 86 * k]}, "fill": hair},   # 後ろ髪
-        {"shape": {"circle": [cx, cy, r]}, "fill": skin},                            # 顔
+        {"shape": {"circle": [cx, cy, 68 * k]}, "fill": skin},                       # 顔
         {"shape": {"circle": [cx + 37 * sx * k, cy - 50 * k, 30 * k]}, "fill": hair},  # 前髪
         {"shape": {"circle": [cx - 5 * sx * k, cy - 60 * k, 33 * k]}, "fill": hair},
         {"shape": {"circle": [cx - 47 * sx * k, cy - 46 * k, 29 * k]}, "fill": hair},
-        {"path": f"M {cx + 52 * sx * k} {cy - 20 * k} q {-12 * sx * k} -8 {-24 * sx * k} -2",
-         "fill": "none", "stroke": "#3a2c20", "stroke_width": max(2.5, 4 * k)},      # 眉
-        {"shape": {"circle": [cx + 38 * sx * k, cy - 4 * k, 6 * k]}, "fill": "#3a2c20"},  # 目
-        {"shape": {"ellipse": [cx + 55 * sx * k, cy + 28 * k, 13 * k, 16 * k]},
-         "fill": "#8e3b35"},                                                          # 開いた口
+    ]
+    # ── 眉・目・口 (表情) ──
+    if emo == "happy":      # にこにこ: 閉じ笑い目 (∪) + 笑み口
+        for ex_, w in ((near_x, 13 * k), (far_x, 11 * k)):
+            shapes.append({"path": f"M {ex_ - w / 2} {ey} q {w / 2} {7 * k} {w} 0",
+                           "fill": "none", "stroke": "#3a2c20", "stroke_width": bw})
+        shapes.append({"path": f"M {cx + 42 * sx * k} {cy + 24 * k} q {12 * sx * k} {10 * k} {24 * sx * k} {2 * k}",
+                       "fill": "none", "stroke": "#8e3b35", "stroke_width": bw})
+        mouth = (cx + 54 * sx * k, cy + 28 * k)
+    elif emo == "worried":  # 困り: ハの字眉 + 点目 + 波口
+        for ex_, w, flip in ((near_x, 22 * k, 1), (far_x, 18 * k, -1)):
+            shapes.append({"path": f"M {ex_ - w / 2} {ey - 16 * k + (4 * k if flip > 0 else 0)} "
+                                   f"q {w / 2} {-6 * k * flip * sx} {w} {2 * k}",
+                           "fill": "none", "stroke": "#3a2c20", "stroke_width": bw})
+            shapes.append({"shape": {"circle": [ex_, ey + 2 * k, 5.5 * k]}, "fill": "#3a2c20"})
+        shapes.append({"path": f"M {cx + 44 * sx * k} {cy + 30 * k} q {8 * sx * k} {-5 * k} {14 * sx * k} 0 "
+                               f"q {6 * sx * k} {5 * k} {12 * sx * k} 0",
+                       "fill": "none", "stroke": "#8e3b35", "stroke_width": bw})
+        mouth = (cx + 56 * sx * k, cy + 30 * k)
+    elif emo == "shock":    # 驚き: 見開き目 (白目+小瞳) + 大きく開いた口
+        for ex_, r_ in ((near_x, 11 * k), (far_x, 9.5 * k)):
+            shapes.append({"shape": {"circle": [ex_, ey, r_]}, "fill": "#ffffff",
+                           "stroke": "#3a2c20", "stroke_width": bw * 0.7})
+            shapes.append({"shape": {"circle": [ex_, ey + 1.5 * k, 3.2 * k]}, "fill": "#3a2c20"})
+        shapes.append({"shape": {"ellipse": [cx + 50 * sx * k, cy + 30 * k, 16 * k, 20 * k]},
+                       "fill": "#8e3b35"})
+        mouth = (cx + 50 * sx * k, cy + 30 * k)
+    else:                   # normal: 点目 + 通常眉 + 開き口 (発話)
+        shapes.append({"path": f"M {near_x + 14 * sx * k} {cy - 20 * k} q {-12 * sx * k} -8 {-24 * sx * k} -2",
+                       "fill": "none", "stroke": "#3a2c20", "stroke_width": bw})
+        shapes.append({"path": f"M {far_x + 11 * sx * k} {cy - 21 * k} q {-10 * sx * k} -6 {-20 * sx * k} -2",
+                       "fill": "none", "stroke": "#3a2c20", "stroke_width": bw * 0.9})
+        shapes.append({"shape": {"circle": [near_x, ey, 6 * k]}, "fill": "#3a2c20"})
+        shapes.append({"shape": {"circle": [far_x, ey, 5.5 * k]}, "fill": "#3a2c20"})
+        shapes.append({"shape": {"ellipse": [cx + 55 * sx * k, cy + 28 * k, 13 * k, 16 * k]},
+                       "fill": "#8e3b35"})
+        mouth = (cx + 55 * sx * k, cy + 28 * k)
+    shapes += [
         {"path": f"M {cx - 85 * k} {cy + 225 * k} Q {cx - 85 * k} {cy + 100 * k} {cx} {cy + 95 * k} "
                  f"Q {cx + 85 * k} {cy + 100 * k} {cx + 85 * k} {cy + 225 * k} Z", "fill": cloth},  # 体
         {"path": f"M {cx - 15 * k} {cy + 110 * k} L {cx} {cy + 134 * k} L {cx + 15 * k} {cy + 110 * k}",
          "fill": "#ffffff"},                                                          # 襟
     ]
     els.append({"draw": {"shapes": shapes}})
-    return (cx + 55 * sx * k, cy + 28 * k)  # 口元 (尻尾アンカー)
+    return mouth  # 口元 (尻尾アンカー)
 
 
 def speech(text: str, cx: float, cy: float, rx: float, ry: float, size: int, font: str,
