@@ -443,7 +443,7 @@ proxy 軸（§13 前掲）と実 LLM 軸（下）を**並べて見る**と、「
 
 wallclock 12h で safely 停止（snapshot 済 → `--resume` で継続可能）。連続ランの中で best_score=1.0 に到達しています。
 
-![実 LLM 進化ランの適応度と多様性（12h 連続ラン）](assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status.svg)
+![実 LLM 進化ランの適応度と多様性（12h 連続ラン）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status.svg)
 
 参考として、勝者個体の「思考因子 × メモリ層」ヒートマップ（Genome3D）を載せておきます。どの認知プロファイルが残ったかを 2 次元で俯瞰できます（ただし real-pressure では c_factors は中立扱いなので、これはあくまで**参考**であって fitness の直接の勝因ではない点に注意）。
 

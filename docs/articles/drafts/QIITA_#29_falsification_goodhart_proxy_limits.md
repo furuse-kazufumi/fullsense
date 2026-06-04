@@ -735,7 +735,7 @@ Ultimately it **collapses to 2 lineages, furuse 71% / friston 29%**. Even with d
 And below is **after putting in the lineage-side countermeasure (neutral reservoir ON)**. **All 8 lineages coexist**
 (millidge / von-neumann / oka-kiyoshi / grothendieck … survive).
 
-![reservoir ON: all 8 lineages coexist](../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg)
+![reservoir ON: all 8 lineages coexist](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance_en.svg)
 
 The contrast of these 2 images is the heart of this article.
 **Even with the same "0.05 behavioral diversity", on the left (OFF) the lineage collapses, and on the right (ON) the lineages coexist.**
