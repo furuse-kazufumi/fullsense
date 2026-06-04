@@ -1,4 +1,4 @@
-﻿---
+---
 title: 'llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain'
 tags:
   - FullSense
@@ -6,7 +6,8 @@ tags:
   - 解説
 private: true
 updated_at: '2026-05-23'
-id: c5f2077a3399d3fc9b26
+id: f3ef0430798ff9df07ab
+qiita_public_id: c5f2077a3399d3fc9b26
 organization_url_name: null
 slide: false
 ignorePublish: false

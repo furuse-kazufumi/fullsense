@@ -1,4 +1,4 @@
-﻿---
+---
 title: 'llive 完全解説 (3) — 「矛盾は計算できる」: 構造進化 × TRIZ 40 原理 × Z3 検証'
 tags:
   - FullSense
@@ -6,7 +6,8 @@ tags:
   - 解説
 private: true
 updated_at: '2026-05-23'
-id: fa0890f136636d495ea6
+id: 198eadaee7c380c426d5
+qiita_public_id: fa0890f136636d495ea6
 organization_url_name: null
 slide: false
 ignorePublish: false

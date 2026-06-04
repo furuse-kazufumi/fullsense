@@ -1,4 +1,4 @@
-﻿---
+---
 title: 'llive 完全解説 (2) — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞'
 tags:
   - FullSense
@@ -6,7 +6,8 @@ tags:
   - 解説
 private: true
 updated_at: '2026-05-22'
-id: bdfad6db3f2e70c40511
+id: 94fae20cea5e53d1358f
+qiita_public_id: bdfad6db3f2e70c40511
 organization_url_name: null
 slide: false
 ignorePublish: false

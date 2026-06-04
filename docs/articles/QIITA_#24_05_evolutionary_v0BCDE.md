@@ -1,4 +1,4 @@
-﻿---
+---
 title: 'llive 完全解説 (5) — 「集団が学ぶ AI」: v0.B/C/D/E 派生集団進化総括'
 tags:
   - FullSense
@@ -6,7 +6,8 @@ tags:
   - 解説
 private: true
 updated_at: '2026-05-23'
-id: 07b686ea311e06027f94
+id: c999960660e25bdb5b66
+qiita_public_id: 07b686ea311e06027f94
 organization_url_name: null
 slide: false
 ignorePublish: false

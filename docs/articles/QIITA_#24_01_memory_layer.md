@@ -1,4 +1,4 @@
-﻿---
+---
 title: 'llive 完全解説 (1) — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating'
 tags:
   - FullSense
@@ -6,7 +6,8 @@ tags:
   - 解説
 private: false
 updated_at: '2026-05-23'
-id: a5ebb3992e4c28862f47
+id: 2732122ed0a4c9ace0af
+qiita_public_id: a5ebb3992e4c28862f47
 organization_url_name: null
 slide: false
 ignorePublish: false

@@ -1,4 +1,4 @@
-﻿---
+---
 title: 'llive 完全解説 (8) — 「眼鏡を作る」: lleval — honest disclosure 5+1 因子分解で AI を評価する'
 tags:
   - FullSense
@@ -6,7 +6,8 @@ tags:
   - 解説
 private: true
 updated_at: '2026-05-23'
-id: e49b7ab9027d93594402
+id: 4b98e2a877cf746ce8e3
+qiita_public_id: e49b7ab9027d93594402
 organization_url_name: null
 slide: false
 ignorePublish: false

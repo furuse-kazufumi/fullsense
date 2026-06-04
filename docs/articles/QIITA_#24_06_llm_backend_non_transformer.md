@@ -1,4 +1,4 @@
-﻿---
+---
 title: 'llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ'
 tags:
   - FullSense
@@ -6,7 +6,8 @@ tags:
   - 解説
 private: true
 updated_at: '2026-05-23'
-id: 6da5a883fb2ed651edd8
+id: fa9cfbdbdebecf1c7c3b
+qiita_public_id: 6da5a883fb2ed651edd8
 organization_url_name: null
 slide: false
 ignorePublish: false

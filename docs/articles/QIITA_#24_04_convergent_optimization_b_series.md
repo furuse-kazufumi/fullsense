@@ -1,4 +1,4 @@
-﻿---
+---
 title: 'llive 完全解説 (4) — 「収束する脳」B-series: SynapticSelector / UCB1 / Hebbian / 本番 hot path'
 tags:
   - FullSense
@@ -6,7 +6,8 @@ tags:
   - 解説
 private: true
 updated_at: '2026-05-23'
-id: e5093e4816b25c1bd4d0
+id: 9839392b82e3372dbdc9
+qiita_public_id: e5093e4816b25c1bd4d0
 organization_url_name: null
 slide: false
 ignorePublish: false
