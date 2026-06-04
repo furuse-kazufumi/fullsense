@@ -264,28 +264,7 @@ This is llive's **invariant axis of differentiation**.
 
 ## The mental model of "gap complementation"
 
-```
-        ┌─────────────────────────────────┐
-        │  Qwen (汎用言語能力)              │
-        │  ├ 言語流暢性 ★★★★★              │
-        │  ├ 文章生成 ★★★★★               │
-        │  ├ 多言語 ★★★★★                 │
-        │  ├ 一般知識 ★★★★☆               │
-        │  ├ 推論 ★★★★☆                  │
-        │  └─ 数値計算 ★★☆☆☆ ← 隙間 ─┐  │
-        └────────────────────────────┼───┘
-                                     ↓
-        ┌─────────────────────────────────┐
-        │  llive (認知 OS + 補完層)         │
-        │  ├ 数値計算 ★★★★★ (MATH-08)      │
-        │  ├ 単位次元 ★★★★★ (MATH-01)      │
-        │  ├ 形式検証 ★★★★★ (MATH-02)      │
-        │  ├ 長期記憶 ★★★★★ (4 層メモリ)   │
-        │  ├ 監査 ★★★★★ (Approval Bus)    │
-        │  ├ 認知構造 ★★★★★ (CREAT/TRIZ)  │
-        │  └ Local on-prem ★★★★★          │
-        └─────────────────────────────────┘
-```
+![Mental model of how llive complements Qwen's gap](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q11/mental_model_en.svg)
 
 Qwen is strong in **language ability**, while llive is strong in **its gaps (computation, memory, audit, cognitive structure, Local)**. Combining the two reaches domains unattainable by either a cloud LLM alone or ollama alone.
 
