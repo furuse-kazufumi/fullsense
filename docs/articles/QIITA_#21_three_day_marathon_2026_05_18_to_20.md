@@ -14,6 +14,12 @@ slide: false
 ignorePublish: true
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 <!--
 Qiita タグは 5 個上限. 本記事の主役順で:
   FullSense (umbrella) / llive (本セッション主役) / ClaudeCode (agent 環境)
