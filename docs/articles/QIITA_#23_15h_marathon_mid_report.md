@@ -1113,28 +1113,7 @@ repo init 은 user 승인 후.
 
 구조:
 
-```
-lleval/
-├── pyproject.toml           # Apache-2.0, optional extras: ci/report/trace
-├── README.md
-├── LICENSE
-├── src/lleval/
-│   ├── __init__.py          # public API
-│   ├── config.py            # pydantic Config (5 model)
-│   ├── runner.py            # ProgressiveMatrixRunner + Bench
-│   ├── providers/
-│   │   ├── __init__.py
-│   │   └── promptfoo_yaml.py # 4 backend templates (openai/mamba/rwkv/...)
-│   ├── analyzer/
-│   │   └── honest_disclosure.py # 5+1 軸異常診断 skeleton
-│   ├── report.py            # markdown + JSON
-│   └── cli.py               # `lleval run config.yaml`
-├── examples/
-│   ├── basic.yaml           # 1 provider × 1 size × 2 prompts
-│   ├── progressive.yaml     # 1 provider × 5 sizes
-│   └── multi_provider.yaml  # 4 provider (on-prem 3 + cloud 1) × 3 sizes
-└── tests/unit/              # 20 件緑 (skeleton + providers + examples)
-```
+![lleval 저장소 skeleton 의 디렉터리 구조도](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q23/lleval_skeleton_tree_ko.svg)
 
 `promptfoo` 를 **fork 가 아니라 wrap** 하는 방침은 portal 측의
 `docs/spec/lleval_v0_1_implementation_notes.md` 에서 확정. 실제 promptfoo
