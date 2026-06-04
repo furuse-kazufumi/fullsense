@@ -827,11 +827,7 @@ FullSense umbrella 有 7 个 spinoff 候选：
 
 `docs/NEXT_SESSION.md`（人手，给下次会话的方向性备忘）会 drift。完全自动化的话，「人类想出来的下一步方针」就会消失。所以分成 2 文件运用：
 
-```text
-docs/
-├── NEXT_SESSION.md       # 人手. 方向性メモ. drift してもいい
-└── NEXT_SESSION.auto.md  # 自動. Stop hook で毎ターン上書き
-```
+![NEXT_SESSION 的 2 文件运用（人手方向性备忘 + 自动 snapshot 的分离）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q20/next_session_two_file_zh.svg)
 
 新建了 `scripts/gen_next_session_auto.py`。通过 Stop hook（经由 raptor 侧的 `libexec/raptor-next-session-update` 包装器），每个 turn 覆写以下内容：
 
