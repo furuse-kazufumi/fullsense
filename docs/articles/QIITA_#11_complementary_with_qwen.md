@@ -215,13 +215,7 @@ In fact, Stage A (short-term, up to ~3 months) of the previous article 10 is its
 
 However, Stages B through E (mid-to-long term) follow the "independence route." The two can **run in parallel at the same time**:
 
-```
-        補完路線 (短期持続)        独自化路線 (中長期)
-        ──────────────         ──────────────
-        Stage A 維持              Stage B → C → D → E
-        Qwen + llive               llive-7b → llive-mamba 等
-        隙間補完                   完全独立
-```
+![Two-layer structure: complementary route and independence route](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q11/two_routes_en.svg)
 
 A two-layer structure that treats "filling gaps in the Local environment" as a **permanent position**, on top of which "independence as a research route" is stacked.
 
