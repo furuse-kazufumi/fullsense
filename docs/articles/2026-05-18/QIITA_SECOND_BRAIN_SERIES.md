@@ -10,6 +10,12 @@ private: false
 id: 18dd57dcabbc84af9f02
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # 「第二の脳」シリーズ — llive 全景 × 不可視 Annotation × 構築論 × 運用論 × ビジョン論 × 実装の深層
 
 **1 行 hook**:
