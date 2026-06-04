@@ -194,11 +194,7 @@ HTML コメントを Markdown に仕込むテクは、Jekyll / Hugo 界隈では
 
 ### スパイラル 1 サイクル
 
-```
-外部思想 → Perplexity 要約 → Claude Code 読込 → 要件化 → 実装 → ベンチ → commit
-   ↑                                                                      |
-   └──────────────────────── 次サイクル ────────────────────────┘
-```
+![スパイラル 1 サイクル: 外部思想 → Perplexity 要約 → Claude Code 読込 → 要件化 → 実装 → ベンチ → commit → 次サイクルへ循環](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/second_brain/spiral_cycle.svg)
 
 本セッション 9 回での実例:
 
