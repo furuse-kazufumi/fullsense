@@ -239,32 +239,7 @@ When connecting an LLM directly to industrial IoT via the llmesh sensor bridge (
 
 ## The 5-Stage Roadmap
 
-```
-Stage A (短期, 〜3 ヶ月)
-  ├ LLM コアは凍結
-  ├ 周辺差別化を最大化
-  └ CABT forward hook / MATH-08 / CREAT-01 で「LLM を使わない層」を厚く
-       ↓
-Stage B (中期 1, 3〜6 ヶ月)
-  ├ LoRA で llive 用 specialised adapter
-  ├ RTX 3090 級で訓練可
-  └ Attention に memory bias を注入 (CABT-07 本実装の前段)
-       ↓
-Stage C (中期 2, 6〜12 ヶ月)
-  ├ Distillation: qwen2.5:14b → llive-7b
-  ├ 学習データ: RAD 49 分野 + ledger 成功例 + TRIZ 出力
-  └ Multi-track sub-network (EpistemicType 別)
-       ↓
-Stage D (長期 1, 1〜2 年)
-  ├ Transformer block を memory-coupled に置換
-  ├ Cognitive Block Replacement (CABT-01〜07 の本実装)
-  └ Approval-native decoding (constitutional AI の architectural 版)
-       ↓
-Stage E (長期 2, 2〜3 年)
-  ├ Transformer 以外の LLM コア (Mamba / RWKV / Hyena / RetNet)
-  ├ Surprise-native pretraining (Bayesian Surprise を loss に組込)
-  └ TRIZ-guided architecture search (AutoML-Zero + TRIZ ハイブリッド)
-```
+![The 5-stage roadmap to break free from Qwen dependence (flow from Stage A peripheral strengthening to Stage E non-Transformer core)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q10/roadmap_5stage_en.svg)
 
 ## The ORG-* Requirements Introduced at Each Stage
 
