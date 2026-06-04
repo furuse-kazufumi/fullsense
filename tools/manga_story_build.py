@@ -306,8 +306,10 @@ def build(slug: str, lang: str, spec: dict) -> dict:
             two = nlines(p["bubble"]) > 1
             bsize = 24 if lang != "en" else 20
             bcx = 290 if right else 470
-            els.append(speech(p["bubble"], bcx, y1 - 92, 205, 60 if two else 48,
+            bry = 60 if two else 48
+            els.append(speech(p["bubble"], bcx, y1 - 92, 205, bry,
                               bsize, f, tail_to=mouth, seed=5.0 + i))
+            _lint_add("speech", bcx - 210, y1 - 92 - bry - 4, bcx + 210, y1 - 92 + bry + 4)
 
     # panel 4 (結): 叫びフキダシ (オチ) + 集中線は話者に収束 + 教訓ナレーション箱
     p4 = panels[3]
