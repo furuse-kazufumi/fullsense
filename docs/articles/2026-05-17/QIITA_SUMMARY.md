@@ -3049,21 +3049,7 @@ class ReferenceAttentionHook:
 
 ### 설계
 
-```
-LLM 出力テキスト
-    │
-    ▼
-[式抽出器] (MATH-03 multi-syntax parser)
-    │
-    ▼
-[Sympy AST]
-    │
-    ├─→ simplify(lhs - rhs) == 0 ? → ✅ 通過
-    │   ❌ → 失敗 flag
-    │
-    └─→ Z3 で satisfiability check (∀ x. lhs(x) == rhs(x) ?)
-        ❌ → 反例を ledger に記録
-```
+![MATH-02 형식 검증 게이트](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/summary/math02_gate_ko.svg)
 
 ```python
 checker = FormalChecker()
