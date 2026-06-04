@@ -12,7 +12,7 @@
       <g transform="translate(0, 0)">
         <rect width="160" height="60" rx="8" fill="#1e293b" stroke="#22c55e" stroke-width="1.5"/>
         <text x="14" y="22" font-size="11" fill="#22c55e" font-weight="700">arm 1 (최적)</text>
-        <rect x="14" y="32" width="0" height="8" fill="#22c55e">
+        <rect x="14" y="32" width="110" height="8" fill="#22c55e">
           <animate attributeName="width" values="0;110;110" keyTimes="0;0.5;1" dur="3s" repeatCount="indefinite"/>
         </rect>
         <text x="138" y="40" font-size="9" fill="#94a3b8" text-anchor="end">μ̂=0.82</text>
