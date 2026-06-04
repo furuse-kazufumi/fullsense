@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" font-family="system-ui, sans-serif">
+  <rect x="0" y="0" width="900" height="400" fill="#ffffff"/>
+  <text x="24" y="34" font-size="20" font-weight="700" fill="#1f2937">500세대 후의 계통 점유율 (max_lineage_share)</text>
+  <text x="24" y="58" font-size="13" fill="#6b7280">8개 계통 중 2개만 생존 — 나머지 6개 계통은 절멸</text>
+
+  <!-- scale guide -->
+  <line x1="260" y1="78" x2="260" y2="372" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="260" y="392" font-size="11" fill="#9ca3af" text-anchor="middle">0%</text>
+  <text x="600" y="392" font-size="11" fill="#9ca3af" text-anchor="middle">50%</text>
+
+  <!-- 후루세 52% survivor -->
+  <text x="244" y="100" font-size="14" font-weight="600" fill="#1f2937" text-anchor="end">후루세 (나)</text>
+  <rect x="260" y="86" width="354" height="22" rx="4" fill="#2563eb"/>
+  <text x="624" y="102" font-size="14" font-weight="700" fill="#1d4ed8">52%</text>
+
+  <!-- 프리스턴 48% survivor -->
+  <text x="244" y="134" font-size="14" font-weight="600" fill="#1f2937" text-anchor="end">프리스턴</text>
+  <rect x="260" y="120" width="327" height="22" rx="4" fill="#0ea5e9"/>
+  <text x="597" y="136" font-size="14" font-weight="700" fill="#0284c7">48%</text>
+
+  <!-- extinct lineages -->
+  <text x="244" y="168" font-size="14" fill="#9ca3af" text-anchor="end">밀리지</text>
+  <rect x="260" y="154" width="6" height="22" rx="3" fill="#e5e7eb"/>
+  <text x="276" y="170" font-size="13" fill="#9ca3af">(절멸)</text>
+
+  <text x="244" y="202" font-size="14" fill="#9ca3af" text-anchor="end">이소무라</text>
+  <rect x="260" y="188" width="6" height="22" rx="3" fill="#e5e7eb"/>
+  <text x="276" y="204" font-size="13" fill="#9ca3af">(절멸)</text>
+
+  <text x="244" y="236" font-size="14" fill="#9ca3af" text-anchor="end">오카 기요시</text>
+  <rect x="260" y="222" width="6" height="22" rx="3" fill="#e5e7eb"/>
+  <text x="276" y="238" font-size="13" fill="#9ca3af">(절멸)</text>
+
+  <text x="244" y="270" font-size="14" fill="#9ca3af" text-anchor="end">그로텐디크</text>
+  <rect x="260" y="256" width="6" height="22" rx="3" fill="#e5e7eb"/>
+  <text x="276" y="272" font-size="13" fill="#9ca3af">(절멸)</text>
+
+  <text x="244" y="304" font-size="14" fill="#9ca3af" text-anchor="end">폰 노이만</text>
+  <rect x="260" y="290" width="6" height="22" rx="3" fill="#e5e7eb"/>
+  <text x="276" y="306" font-size="13" fill="#9ca3af">(절멸)</text>
+
+  <text x="244" y="338" font-size="14" fill="#9ca3af" text-anchor="end">파인만</text>
+  <rect x="260" y="324" width="6" height="22" rx="3" fill="#e5e7eb"/>
+  <text x="276" y="340" font-size="13" fill="#9ca3af">(절멸)</text>
+
+  <text x="24" y="372" font-size="12" fill="#b45309">선택압 0 -&gt; 유전적 부동으로 2개 계통에 치우쳤을 뿐 (실력이 아님)</text>
+</svg>
