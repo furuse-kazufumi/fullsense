@@ -212,3 +212,194 @@ llive の周辺独自性は十分。コア独自性を **5 段階で計画的に
 
 > llive を「Qwen の上にラップ」から「Qwen を内蔵から外す」へ。5 段階で計画的に
 > 独自路線に進む。
+
+---
+
+# English
+
+# A 5-Stage Roadmap to Break Free From Qwen Dependence — Migrating llive's Originality Into the Core
+
+Author: Kazufumi Furuse (Puruyan)
+
+## TL;DR
+
+- The current llive (v0.6) is **original as a peripheral cognitive OS**, but its **LLM core still depends on Qwen / Llama / Mistral**.
+- A user observation: "Research has no value if it isn't differentiated. We'd be tempted to just say it's better to use a mainstream AI instead."
+- For the sake of mid- to long-term research value, we are turning **making the core LLM itself original** into requirements as a 5-stage roadmap (ORG-FX, Phase 11).
+- Short term: keep strengthening the periphery; mid term: LoRA → distillation; long term: Transformer block replacement → native Mamba/RWKV-class architectures.
+
+## A "Layer-by-Layer" Analysis of the Current Differentiation
+
+| Layer | llive Originality | Qwen Dependence |
+|---|---|---|
+| Input (Brief API) | ★★★★★ | 0% |
+| Grounder (TRIZ × RAD) | ★★★★★ | 0% |
+| 6-stage Loop | ★★★★☆ | 10% (formalizing thought as equations is original) |
+| 4-layer memory | ★★★★☆ | 0% |
+| Multi-track Filter | ★★★★☆ | 0% |
+| Approval Bus | ★★★★★ | 0% |
+| Governance Scoring | ★★★★★ | 0% |
+| Trace Graph (Ledger) | ★★★★☆ | 0% |
+| **LLM core (Decoder-only Transformer)** | ☆ | **100%** ← the problem |
+
+→ The periphery is sufficiently original. **The originality of the core is untouched.** This is the weak point as research.
+
+## Why the Core Needs to Be Made Original
+
+### Reason 1: Value as research
+
+If you merely use Qwen / Llama / Mistral / GPT frozen, the heart of the research becomes "someone else's weights + your own wrapper." From the standpoint of writing papers or taking a long-term view, a design that doesn't touch the core itself loses citation value.
+
+### Reason 2: Differentiation from the mainstream
+
+There is the worry of becoming "you'd be better off using a mainstream AI." To counter the logic of "if you're going to use Qwen, just use Qwen directly," you need to increase the amount of **computation only llive can do**. This means either increasing the **"deterministic layers that don't use an LLM"** — like MATH-08 (SafeCalculator) or CREAT-01 (KJ-method nodes) — or making **the LLM itself llive-exclusive**: two routes.
+
+### Reason 3: Connection to industrial IoT
+
+When connecting an LLM directly to industrial IoT via the llmesh sensor bridge (FR-19), Qwen's generality is not necessarily an advantage. A small, purpose-specialized LLM is:
+- lower latency
+- lower memory consumption
+- higher domain-specific accuracy
+- easier to audit for security
+
+## The 5-Stage Roadmap
+
+```
+Stage A (短期, 〜3 ヶ月)
+  ├ LLM コアは凍結
+  ├ 周辺差別化を最大化
+  └ CABT forward hook / MATH-08 / CREAT-01 で「LLM を使わない層」を厚く
+       ↓
+Stage B (中期 1, 3〜6 ヶ月)
+  ├ LoRA で llive 用 specialised adapter
+  ├ RTX 3090 級で訓練可
+  └ Attention に memory bias を注入 (CABT-07 本実装の前段)
+       ↓
+Stage C (中期 2, 6〜12 ヶ月)
+  ├ Distillation: qwen2.5:14b → llive-7b
+  ├ 学習データ: RAD 49 分野 + ledger 成功例 + TRIZ 出力
+  └ Multi-track sub-network (EpistemicType 別)
+       ↓
+Stage D (長期 1, 1〜2 年)
+  ├ Transformer block を memory-coupled に置換
+  ├ Cognitive Block Replacement (CABT-01〜07 の本実装)
+  └ Approval-native decoding (constitutional AI の architectural 版)
+       ↓
+Stage E (長期 2, 2〜3 年)
+  ├ Transformer 以外の LLM コア (Mamba / RWKV / Hyena / RetNet)
+  ├ Surprise-native pretraining (Bayesian Surprise を loss に組込)
+  └ TRIZ-guided architecture search (AutoML-Zero + TRIZ ハイブリッド)
+```
+
+## The ORG-* Requirements Introduced at Each Stage
+
+| FR | Name | Stage | Motivation |
+|---|---|---|---|
+| **ORG-06** | Provenance-aware tokens | B+D | Add a metadata column to each token, referenced in attention |
+| **ORG-02** | Memory-coupled inference | C/D | Reference the 4-layer memory directly during LLM inference |
+| **ORG-03** | Multi-track sub-network | C | A sub-network per EpistemicType (a cognitive version of MoE) |
+| **ORG-08** | llive-specialized small model | C | qwen2.5:14b → llive-7b distillation |
+| **ORG-07** | Approval-native decoding | C/D | Bring Approval inside the decoder |
+| **ORG-01** | Cognitive Block Replacement | D | Synchronize Transformer blocks with llive's thinking layers |
+| **ORG-04** | TRIZ-guided architecture search | D | Self-improve the LLM core |
+| **ORG-05** | Surprise-native pretraining | E | Internalize Bayesian Surprise as the loss |
+
+## Risks and Evaluation per Stage
+
+| Stage | Risk | GPU Requirement | Evaluation Metric |
+|---|---|---|---|
+| A | Low | None | Keep overhead < 5% on the existing progressive matrix |
+| B | Medium | RTX 3090+ | Post-LoRA quality: on par with original Qwen ± 5% |
+| C | Medium | 1× A100, ~1 week | Distilled llive-7b beats qwen2.5:7b by +10% on MATH/RAD-grounded tasks |
+| D | High | 4–8× A100 | Full train-from-scratch; parallel comparison against Mamba / Hyena |
+| E | Highest | Cluster | Academic publication; Surprise loss differentiates from standard training |
+
+## Metrics to Measure "Distance From Qwen"
+
+We introduce three new evaluation metrics (REQUIREMENTS.md ORG-FX section):
+
+### 1. Architectural Originality Score (AOS)
+
+```
+AOS = Σ (差別化 FR 実装数) / 全 FR 数
+```
+
+Current (v0.6, as of 2026-05-17): AOS ≈ 60% (peripheral differentiation only)
+Target (at completion of Phase 11): AOS ≥ 85%
+
+### 2. LLM Core Independence Ratio (LCIR)
+
+```
+LCIR = (llive 専用 inference path のセル数) / (全 inference path のセル数)
+```
+
+Current: LCIR ≈ 0% (fully dependent on Qwen)
+Target (at completion of Stage C): LCIR ≥ 50%
+
+### 3. Replaceability Test
+
+Does it run llive-only with Qwen removed:
+- Stage A: ❌ (does not run without Qwen)
+- Stage C: 🟡 (runs on llive-7b, but with degraded quality)
+- Stage E: ✅ (no Transformer needed; runs on Mamba-class architectures)
+
+## What Should Be Done in the Short Term
+
+In **Stage A (~3 months)**, intensively **thicken the "layers that don't use an LLM"**:
+
+1. **Integrate MATH-01/08 into the Brief Grounder** (started today) — calculation goes through SafeCalculator, not the LLM.
+2. **MATH-02 formal verification gate** — verify and halt LLM equation hallucinations with Sympy/Z3.
+3. **MATH-05 CODATA dictionary** — ground physical constants in RAD metrology.
+4. **CREAT-01 KJ-method nodes** — divergence is template + clustering; the LLM only does the final naming.
+5. **CABT-01 forward hook** — a hook that adds memory bias to the Transformer output (weights stay frozen).
+
+This alone greatly increases the "computation only llive can do" and makes the differentiation from hitting Qwen directly *visible*.
+
+## Strategic Judgment for the Mid Term (Stage B/C, 3–12 months)
+
+- **LoRA**: trainable on RTX 3090+, medium risk. Can be reverted to the original Qwen.
+- **Distillation**: requires an A100, medium risk; llive-specialization becomes decisive.
+- **Full train**: requires a GPU cluster; a research budget is essential.
+
+The GPU investment decision will be made separately in the mid-term plan (the assumption is to start from Stage B).
+
+## Turning the Long Term (Stage D/E, 1–3 years) Into Research Themes
+
+From Stage D onward, these become candidates for academic publication:
+
+- "**Cognitive Block Replacement**: Memory-coupled Transformer for Verifiable Agent Loops"
+- "**Provenance-aware Attention**: Trust Score as Inductive Bias"
+- "**Surprise-native Pretraining**: Bayesian Surprise as Loss Function"
+- "**TRIZ-guided Neural Architecture Search**: 40 Principles for Network Mutation"
+
+These are of research quality that would pass at ICML / NeurIPS / ICLR / AAAI. Once Stage D is complete, they could even become the theme of a doctoral dissertation or a book.
+
+## Summary
+
+llive's peripheral originality is sufficient. By **building core originality methodically across 5 stages**, we sustain its value as research:
+
+- Short term: maximize the thickness of the periphery (Stage A; the MATH/COG/CABT plans advanced today).
+- Mid term: build a "llive-exclusive LLM" via LoRA → distillation (Stage B/C).
+- Long term: replace the Transformer itself / Surprise-native pretraining (Stage D/E).
+
+To reach a design that won't be told "you'd be better off using a mainstream AI," you need not only to **keep increasing the "computation only llive can do," but also an architecture in which the core itself evolves together with llive**.
+
+## Sources
+
+- Requirements: `llive/.planning/REQUIREMENTS.md` v2.0-core, ORG-FX section
+- Roadmap: ROADMAP.md Phase 11 (ORG-FX) + Phase 12 (full independence)
+- Related: same-day article [09 — Inspecting the Originality of llive's Structure](./09_llive_structure_originality.md)
+
+## Other Materials Published the Same Day
+
+- [01 — Brief API + progressive matrix](./01_brief_api_progressive.md)
+- [02 — The 10 deep-psychology factors × llive](./02_cognitive_factors.md)
+- [03 — A math/units-specialized AI (MATH-01/08)](./03_math_vertical.md)
+- [04-06 — Three design previews (CABT / CREAT / MATH-02)](./README.md)
+- [07 — fair bench (honest disclosure)](./07_bench_results.md)
+- [08 — quiz bench Debug vs Release](./08_quiz_bench_debug_vs_release.md)
+- [09 — The 8 elements of llive structural originality](./09_llive_structure_originality.md)
+
+---
+
+> Move llive from "wrapping over Qwen" to "removing Qwen from the inside." Advance methodically down the path of originality in 5 stages.
