@@ -307,7 +307,7 @@ def cmd_post(args: list[str]) -> int:
         print("BLOCKED (fix first): " + "; ".join(finds))
         return 1
     p = build_payload(meta, body)
-    item_id = meta.get("id") or meta.get("qiita_item_id")
+    item_id = real_id(meta)
     if item_id:
         code, res = _req("PATCH", f"/items/{item_id}", token, p)
     else:
