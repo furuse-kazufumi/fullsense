@@ -502,28 +502,7 @@ GitHub repo init is after the user's approval.
 
 Structure:
 
-```
-lleval/
-├── pyproject.toml           # Apache-2.0, optional extras: ci/report/trace
-├── README.md
-├── LICENSE
-├── src/lleval/
-│   ├── __init__.py          # public API
-│   ├── config.py            # pydantic Config (5 model)
-│   ├── runner.py            # ProgressiveMatrixRunner + Bench
-│   ├── providers/
-│   │   ├── __init__.py
-│   │   └── promptfoo_yaml.py # 4 backend templates (openai/mamba/rwkv/...)
-│   ├── analyzer/
-│   │   └── honest_disclosure.py # 5+1 軸異常診断 skeleton
-│   ├── report.py            # markdown + JSON
-│   └── cli.py               # `lleval run config.yaml`
-├── examples/
-│   ├── basic.yaml           # 1 provider × 1 size × 2 prompts
-│   ├── progressive.yaml     # 1 provider × 5 sizes
-│   └── multi_provider.yaml  # 4 provider (on-prem 3 + cloud 1) × 3 sizes
-└── tests/unit/              # 20 件緑 (skeleton + providers + examples)
-```
+![Directory structure of the lleval repository skeleton](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q23/lleval_skeleton_tree_en.svg)
 
 The policy of **wrapping `promptfoo` rather than forking it** is fixed on the portal
 side in `docs/spec/lleval_v0_1_implementation_notes.md`. The actual promptfoo
