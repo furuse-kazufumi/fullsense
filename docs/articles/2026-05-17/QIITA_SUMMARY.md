@@ -2400,14 +2400,7 @@ Phase 8 (CABT) 计划经由 forward hook 注入 attention bias。完全独立的
 
 ### 二层结构
 
-```
-路線 1: 常設の補完戦略 (Local 環境特化)
-       └ Qwen / Llama が進化しても不変の価値
-路線 2: 研究としての独自化 (ORG-FX 5 段階)
-       └ 中長期で研究価値を持続
-
-両者は同時並走可能
-```
+![二层结构 —— 补充战略 与 独自化路线 同时并行](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/summary/strategy_b_two_layer_zh.svg)
 
 ### 5 个隙间
 
