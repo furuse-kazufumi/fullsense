@@ -197,7 +197,9 @@ def render_motif(els, motif, y0, y1, font, lang):
         items = motif["circles"][:8]
         n = len(items)
         rows = [items] if n <= 4 else [items[: (n + 1) // 2], items[(n + 1) // 2:]]
-        row_ys = [mid_y] if len(rows) == 1 else [zone_top + 75, zone_top + 235]
+        # 2 段 (5-8 個) はゾーン高 218px に収まるよう半径を縮める
+        r = 62 if len(rows) == 1 else 50
+        row_ys = [mid_y] if len(rows) == 1 else [zone_top + 58, zone_top + 164]
         for row, cy in zip(rows, row_ys):
             k = len(row)
             span = 760 / (k + 1)
@@ -205,12 +207,12 @@ def render_motif(els, motif, y0, y1, font, lang):
                 cx = span * (j + 1)
                 label = it.get("label", "")
                 two = "\n" in label
-                size = 19 - (3 if max(len(x) for x in label.split("\n")) > 6 else 0)
+                size = (19 if r == 62 else 16) - (3 if max(len(x) for x in label.split("\n")) > 6 else 0)
                 if lang in ("en", "ko"):
-                    size = max(12, size - 3)
+                    size = max(11, size - 3)
                 oy = cy - 4 if two else cy + 7
                 fill = it.get("fill") or PASTELS[(j + (0 if cy == row_ys[0] else 4)) % 8]
-                els.append(tb({"circle": [cx, cy, 62]}, label, [cx, oy], size, font,
+                els.append(tb({"circle": [cx, cy, r]}, label, [cx, oy], size, font,
                               fill=fill, border_width=3, line_gap=size * 1.2,
                               text_color=auto_text_color(fill)))
     elif "flow" in motif:
