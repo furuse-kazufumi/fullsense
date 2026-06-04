@@ -7,6 +7,12 @@ tags: [llm, architecture, originality, qwen, distillation, mamba, research]
 id: ba3a0f41e42ec533a3a1
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # Qwen 依存から離脱する 5 段階ロードマップ — llive の独自性をコアに移植する
 
 著者: 古瀬 和文（ぷるやん）
