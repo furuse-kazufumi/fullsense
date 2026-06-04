@@ -542,11 +542,7 @@ I shrank "research that takes one person 7 hours" into "30 minutes with AI agent
 
 `docs/NEXT_SESSION.md` (manual, a direction memo for the next session) drifts. Fully automating it would erase "the next direction a human thought up." So I split it into a two-file scheme:
 
-```text
-docs/
-├── NEXT_SESSION.md       # 人手. 方向性メモ. drift してもいい
-└── NEXT_SESSION.auto.md  # 自動. Stop hook で毎ターン上書き
-```
+![NEXT_SESSION two-file scheme (manual direction memo + automatic snapshot)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q20/next_session_two_file_en.svg)
 
 I newly created `scripts/gen_next_session_auto.py`. With a Stop hook (via the raptor-side wrapper `libexec/raptor-next-session-update`), it overwrites the following every turn:
 
