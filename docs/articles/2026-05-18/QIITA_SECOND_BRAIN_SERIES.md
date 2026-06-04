@@ -1006,11 +1006,7 @@ class Annotation:
 
 ### 一个螺旋周期
 
-```
-外部思想 → Perplexity 摘要 → Claude Code 读入 → 需求化 → 实现 → 基准 → commit
-   ↑                                                                       |
-   └──────────────────────────── 下一周期 ──────────────────────────┘
-```
+![一个螺旋周期: 外部思想 → Perplexity 摘要 → Claude Code 读入 → 需求化 → 实现 → 基准 → commit，循环回到下一周期](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/second_brain/spiral_cycle_zh.svg)
 
 本次会话 9 轮中的实例:
 
