@@ -283,7 +283,7 @@ def build(slug: str, lang: str, spec: dict) -> dict:
         "center": [628, y0 + 330], "n": 56, "r_inner": 230, "r_outer": 820,
         "color": "#2a2417", "width": 4.0, "jitter": 0.7, "skip": 0.13,
         "fringe": "#ffffff", "clip": [25, y0 + 8, 710, (y1 - y0) - 16]}}})
-    mouth4 = _bust(els, 628, y0 + 330, 0.66, -1)
+    mouth4 = _bust(els, 628, y0 + 330, 0.66, -1, emo="shock")  # 結=驚き (オチ)
     psize = 26 if lang != "en" else 22
     els.append(speech(p4.get("bubble", ""), 300, y0 + 120, 252, 80, psize, f,
                       kind="shout", tail_to=mouth4, seed=9, bw=4))
