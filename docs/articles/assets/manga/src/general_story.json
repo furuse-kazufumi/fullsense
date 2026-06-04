@@ -1,0 +1,237 @@
+{
+ "slug": "general",
+ "langs": {
+  "ja": {
+   "title": "AI に秘書を付ける — llive 開発日記 4コマ",
+   "header": "AI を『使うだけ』から\n『AI に秘書を付ける』へ",
+   "panels": [
+    {
+     "caption": "便利な AI、でも実は怖い",
+     "motif": {
+      "circles": [
+       {
+        "label": "機密\n情報",
+        "fill": "#fbe5e5"
+       },
+       {
+        "label": "医療\n記録",
+        "fill": "#fbe5e5"
+       },
+       {
+        "label": "クラウド\n送信",
+        "fill": "#f7c8c8"
+       },
+       {
+        "label": "責任\n不明",
+        "fill": "#f7c8c8"
+       }
+      ]
+     },
+     "bubble": "機密も計算も全部\nクラウド任せで大丈夫?"
+    },
+    {
+     "caption": "そこで llive — AI に秘書を付ける",
+     "motif": {
+      "flow": [
+       "上司=人間が指示書",
+       "秘書=llive が記憶/監査",
+       "AI 本体 Qwen が回答"
+      ]
+     },
+     "bubble": "AI 本体じゃなく\n世話役を作る研究です"
+    },
+    {
+     "caption": "ベンチで圧勝!…が変に速い",
+     "motif": {
+      "burst": {
+       "big": "0.15秒",
+       "badge": "圧勝!\n…のはず"
+      }
+     },
+     "bubble": "変に高速ですね、\n何かおかしくない?"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "実は AI を呼んでなかった…\n直したら逆に 2-4 倍遅い!",
+     "caption_box": "速さじゃなく構造が価値\n記憶・監査・段取り\n失敗は消さず正直に出す",
+     "foot": "→ 続きは開発日記 本編へ"
+    }
+   ]
+  },
+  "en": {
+   "title": "Giving AI a Secretary — llive Dev Diary, 4 Panels",
+   "header": "From 'Just Using AI'\nto 'Giving AI a Secretary'",
+   "panels": [
+    {
+     "caption": "Handy AI, but actually scary",
+     "motif": {
+      "circles": [
+       {
+        "label": "Secret\ndata",
+        "fill": "#fbe5e5"
+       },
+       {
+        "label": "Medical\nrecords",
+        "fill": "#fbe5e5"
+       },
+       {
+        "label": "Sent to\ncloud",
+        "fill": "#f7c8c8"
+       },
+       {
+        "label": "Who's\nliable?",
+        "fill": "#f7c8c8"
+       }
+      ]
+     },
+     "bubble": "Secrets and math, all\nleft to the cloud — really?"
+    },
+    {
+     "caption": "Enter llive: give AI a secretary",
+     "motif": {
+      "flow": [
+       "Human boss hands a Brief",
+       "Secretary=llive logs/audits",
+       "AI engine Qwen replies"
+      ]
+     },
+     "bubble": "Research to build the\nhandler, not the AI itself"
+    },
+    {
+     "caption": "Landslide in the benchmark!… oddly fast",
+     "motif": {
+      "burst": {
+       "big": "0.15s",
+       "badge": "Landslide!\n…supposedly"
+      }
+     },
+     "bubble": "Suspiciously fast —\nisn't something off?"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "It wasn't even calling the AI…\nfixed, now it's 2-4x SLOWER!",
+     "caption_box": "Value is structure, not speed\nMemory, audit, workflow\nDon't erase failures — disclose them",
+     "foot": "→ Read the full dev diary"
+    }
+   ]
+  },
+  "zh": {
+   "title": "给 AI 配一个秘书 — llive 开发日记 四格",
+   "header": "从『只是使用 AI』\n到『给 AI 配一个秘书』",
+   "panels": [
+    {
+     "caption": "好用的 AI，其实很可怕",
+     "motif": {
+      "circles": [
+       {
+        "label": "机密\n信息",
+        "fill": "#fbe5e5"
+       },
+       {
+        "label": "医疗\n记录",
+        "fill": "#fbe5e5"
+       },
+       {
+        "label": "发往\n云端",
+        "fill": "#f7c8c8"
+       },
+       {
+        "label": "责任\n不明",
+        "fill": "#f7c8c8"
+       }
+      ]
+     },
+     "bubble": "机密和计算全交给\n云端，真的没问题吗?"
+    },
+    {
+     "caption": "于是有了 llive — 给 AI 配秘书",
+     "motif": {
+      "flow": [
+       "上司=人类递指示书",
+       "秘书=llive 记录/审计",
+       "AI 本体 Qwen 回答"
+      ]
+     },
+     "bubble": "做的不是 AI 本体,\n而是善用它的秘书"
+    },
+    {
+     "caption": "基准测试完胜!…快得奇怪",
+     "motif": {
+      "burst": {
+       "big": "0.15秒",
+       "badge": "完胜!\n…本应如此"
+      }
+     },
+     "bubble": "快得有点奇怪,\n是不是哪里不对劲?"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "其实根本没调用 AI…\n改好后反而慢了 2-4 倍!",
+     "caption_box": "价值在结构而非速度\n记忆·审计·流程\n不抹掉失败，而是诚实公开",
+     "foot": "→ 后续请看开发日记正文"
+    }
+   ]
+  },
+  "ko": {
+   "title": "AI에게 비서를 붙이다 — llive 개발 일기 4컷",
+   "header": "'AI를 그냥 쓰기'에서\n'AI에게 비서를 붙이기'로",
+   "panels": [
+    {
+     "caption": "편리한 AI, 사실은 무섭다",
+     "motif": {
+      "circles": [
+       {
+        "label": "기밀\n정보",
+        "fill": "#fbe5e5"
+       },
+       {
+        "label": "의료\n기록",
+        "fill": "#fbe5e5"
+       },
+       {
+        "label": "클라우드\n전송",
+        "fill": "#f7c8c8"
+       },
+       {
+        "label": "책임\n불명",
+        "fill": "#f7c8c8"
+       }
+      ]
+     },
+     "bubble": "기밀도 계산도 전부\n클라우드에 맡겨도 괜찮나?"
+    },
+    {
+     "caption": "그래서 llive — AI에게 비서를",
+     "motif": {
+      "flow": [
+       "상사=인간이 지시서",
+       "비서=llive가 기록/감사",
+       "AI 본체 Qwen이 응답"
+      ]
+     },
+     "bubble": "AI 본체가 아니라\n다루는 비서를 만든다"
+    },
+    {
+     "caption": "벤치마크 압승!…이상하게 빠르다",
+     "motif": {
+      "burst": {
+       "big": "0.15초",
+       "badge": "압승!\n…일 텐데"
+      }
+     },
+     "bubble": "이상하게 빠른데요,\n뭔가 잘못된 거 아닌가요?"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "사실 AI를 부르지 않았다…\n고치니 오히려 2-4배 느림!",
+     "caption_box": "가치는 속도가 아닌 구조\n기억·감사·단계\n실패는 지우지 않고 정직하게",
+     "foot": "→ 자세한 내용은 개발 일기 본편으로"
+    }
+   ]
+  }
+ }
+}

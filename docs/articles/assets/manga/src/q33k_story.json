@@ -1,0 +1,261 @@
+{
+ "slug": "q33k",
+ "langs": {
+  "ja": {
+   "title": "llcore 第三軸 ③ を山登りで決着",
+   "header": "選り分けて育てる工夫、\n本当に要る? を山登りで",
+   "panels": [
+    {
+     "caption": "進化の③適者生存。凝った工夫は役立つ?",
+     "motif": {
+      "circles": [
+       {
+        "label": "①変異",
+        "fill": "#dbeafe"
+       },
+       {
+        "label": "②遺伝",
+        "fill": "#dbeafe"
+       },
+       {
+        "label": "③選り\n分け",
+        "fill": "#fca5a5"
+       },
+       {
+        "label": "④繁殖",
+        "fill": "#dbeafe"
+       }
+      ]
+     },
+     "bubble": "③が要るかは地形しだい!"
+    },
+    {
+     "caption": "だまし地形なら③が要る。実物はどっち?",
+     "motif": {
+      "duo": [
+       {
+        "label": "なだらか\n山",
+        "fill": "#bbf7d0"
+       },
+       {
+        "label": "だまし\n地形",
+        "fill": "#fcd34d"
+       }
+      ]
+     },
+     "bubble": "船を止めて測ったら、谷0%!"
+    },
+    {
+     "caption": "CPUの抜け道=部品4つ混ぜで谷を作る作戦",
+     "motif": {
+      "flow": [
+       "部品4つ混ぜ",
+       "サイコロで全部ひける",
+       "谷を渡る必要なし"
+      ]
+     },
+     "bubble": "ワープされて③の出番ゼロ…"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "整いすぎた結果は\n勝ちじゃなく警報!",
+     "caption_box": "③はだまし地形でだけ本物\n抜け道は構造的にふさがってた\n正直さが自分のミスを捕まえる道具",
+     "foot": "→ 本編で proper power の決着を見る"
+    }
+   ]
+  },
+  "en": {
+   "title": "Settling llcore's third axis ③ by mountain-climbing",
+   "header": "Do we really need the sort-and-breed trick?\nSettled by mountain-climbing",
+   "panels": [
+    {
+     "caption": "Evolution's ③ selection. Is the fancy trick useful?",
+     "motif": {
+      "circles": [
+       {
+        "label": "1 vary",
+        "fill": "#dbeafe"
+       },
+       {
+        "label": "2 inher",
+        "fill": "#dbeafe"
+       },
+       {
+        "label": "3 sort\n& breed",
+        "fill": "#fca5a5"
+       },
+       {
+        "label": "4 breed",
+        "fill": "#dbeafe"
+       }
+      ]
+     },
+     "bubble": "Whether ③ helps depends on terrain!"
+    },
+    {
+     "caption": "③ helps on deceptive terrain. Which is the real one?",
+     "motif": {
+      "duo": [
+       {
+        "label": "gentle\nhill",
+        "fill": "#bbf7d0"
+       },
+       {
+        "label": "deceptive\nterrain",
+        "fill": "#fcd34d"
+       }
+      ]
+     },
+     "bubble": "Stopped the boat to measure: 0% valleys!"
+    },
+    {
+     "caption": "CPU loophole: mix 4 parts to forge a valley",
+     "motif": {
+      "flow": [
+       "mix 4 parts",
+       "die draws all 4",
+       "no valley to cross"
+      ]
+     },
+     "bubble": "It warps straight there, ③ never plays..."
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "A too-tidy result is\nnot a win but an alarm!",
+     "caption_box": "③ is the real deal only on deceptive terrain\nthe loophole was structurally closed\nhonesty is a tool to catch your own mistakes",
+     "foot": "→ See the proper-power settling in the main edition"
+    }
+   ]
+  },
+  "zh": {
+   "title": "用爬山给 llcore 第三轴 ③ 下结论",
+   "header": "挑选着培育的巧法真需要吗?\n用爬山来决断",
+   "panels": [
+    {
+     "caption": "进化的③适者生存。精巧的巧法有用吗?",
+     "motif": {
+      "circles": [
+       {
+        "label": "①变异",
+        "fill": "#dbeafe"
+       },
+       {
+        "label": "②遗传",
+        "fill": "#dbeafe"
+       },
+       {
+        "label": "③挑选\n培育",
+        "fill": "#fca5a5"
+       },
+       {
+        "label": "④繁殖",
+        "fill": "#dbeafe"
+       }
+      ]
+     },
+     "bubble": "③要不要看地形而定!"
+    },
+    {
+     "caption": "骗人地形才要③。真实是哪一种?",
+     "motif": {
+      "duo": [
+       {
+        "label": "平缓\n一座山",
+        "fill": "#bbf7d0"
+       },
+       {
+        "label": "骗人\n地形",
+        "fill": "#fcd34d"
+       }
+      ]
+     },
+     "bubble": "停船再测，山谷0%!"
+    },
+    {
+     "caption": "CPU捷径=混四种零件造出山谷",
+     "motif": {
+      "flow": [
+       "混四个零件",
+       "骰子能全抽到",
+       "无需过山谷"
+      ]
+     },
+     "bubble": "直接瞬移，③毫无用武之地…"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "太顺利的结果\n不是胜利而是警报!",
+     "caption_box": "③只在骗人地形才是真本事\n捷径在结构上本就堵死\n诚实是抓住自己错误的工具",
+     "foot": "→ 在技术版看 proper power 的决断"
+    }
+   ]
+  },
+  "ko": {
+   "title": "등산으로 llcore 제3축 ③ 결판",
+   "header": "골라내어 키우는 잔재주 정말 필요한가?\n등산으로 결판",
+   "panels": [
+    {
+     "caption": "진화의 ③ 적자생존. 정교한 잔재주는 쓸모 있나?",
+     "motif": {
+      "circles": [
+       {
+        "label": "①변이",
+        "fill": "#dbeafe"
+       },
+       {
+        "label": "②유전",
+        "fill": "#dbeafe"
+       },
+       {
+        "label": "③골라\n키움",
+        "fill": "#fca5a5"
+       },
+       {
+        "label": "④번식",
+        "fill": "#dbeafe"
+       }
+      ]
+     },
+     "bubble": "③ 필요 여부는 지형에 달렸다!"
+    },
+    {
+     "caption": "속임수 지형이라야 ③. 실물은 어느 쪽?",
+     "motif": {
+      "duo": [
+       {
+        "label": "완만한\n한 산",
+        "fill": "#bbf7d0"
+       },
+       {
+        "label": "속임수\n지형",
+        "fill": "#fcd34d"
+       }
+      ]
+     },
+     "bubble": "배를 멈추고 재니 골짜기 0%!"
+    },
+    {
+     "caption": "CPU 샛길=부품 4개 섞어 골짜기 만들기",
+     "motif": {
+      "flow": [
+       "부품 4개 섞기",
+       "주사위로 전부 뽑힘",
+       "골짜기 건널 필요 없음"
+      ]
+     },
+     "bubble": "바로 워프되어 ③ 차례가 없다…"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "너무 잘된 결과는\n승리가 아니라 경보!",
+     "caption_box": "③은 속임수 지형에서만 진짜배기\n샛길은 구조적으로 막혀 있었다\n정직함은 자기 실수를 붙잡는 도구",
+     "foot": "→ 기술판에서 proper power 결판을 보자"
+    }
+   ]
+  }
+ }
+}

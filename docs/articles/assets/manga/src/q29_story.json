@@ -1,0 +1,221 @@
+{
+ "slug": "q29",
+ "langs": {
+  "ja": {
+   "title": "眼鏡が飽和すると選択圧は無力 — 反証4コマ #29",
+   "header": "Goodhart の法則と\nproxy fitness の限界",
+   "panels": [
+    {
+     "caption": "#26 で monoculture が 0.05 に改善",
+     "motif": {
+      "burst": {
+       "big": "0.05",
+       "badge": "祝杯?\nサイレン?"
+      }
+     },
+     "bubble": "やった、綺麗な数字!"
+    },
+    {
+     "caption": "反証1: 飽和した眼鏡には淘汰が効かない",
+     "motif": {
+      "flow": [
+       "眼鏡が飽和",
+       "高級な淘汰器",
+       "やっぱり崩壊"
+      ]
+     },
+     "bubble": "審査員増やす前に\n答案を直せ!"
+    },
+    {
+     "caption": "反証2: 0.05 が測ったのは「行動だけ」",
+     "motif": {
+      "circles": [
+       {
+        "label": "行動\n改善",
+        "fill": "#7fb3d5"
+       },
+       {
+        "label": "系統\n別物",
+        "fill": "#e59866"
+       },
+       {
+        "label": "実知能\n未測定",
+        "fill": "#cd6155"
+       }
+      ]
+     },
+     "bubble": "系統も改善した?\n…それ私の早合点"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "全8系統そろってる!\n…半分は ICU で延命中",
+     "caption_box": "proxy が測る範囲を正直に限定\n指標が目標になると壊れる\n綺麗な数字はサイレン",
+     "foot": "→ 本編で Goodhart の解剖を全部見る"
+    }
+   ]
+  },
+  "en": {
+   "title": "A saturated lens makes selection powerless — Falsification #29",
+   "header": "Goodhart's law and\nthe limits of proxy fitness",
+   "panels": [
+    {
+     "caption": "#26: monoculture improved to 0.05",
+     "motif": {
+      "burst": {
+       "big": "0.05",
+       "badge": "Toast?\nSiren?"
+      }
+     },
+     "bubble": "Nice, what a clean number!"
+    },
+    {
+     "caption": "Reflection 1: a saturated lens defeats any selector",
+     "motif": {
+      "flow": [
+       "Lens saturates",
+       "Fancy selector",
+       "Still collapses"
+      ]
+     },
+     "bubble": "Fix the test paper,\nnot the judges!"
+    },
+    {
+     "caption": "Reflection 2: 0.05 measured behavior only",
+     "motif": {
+      "circles": [
+       {
+        "label": "Behavior\nimproved",
+        "fill": "#7fb3d5"
+       },
+       {
+        "label": "Lineage\nseparate",
+        "fill": "#e59866"
+       },
+       {
+        "label": "Real IQ\nunmeasured",
+        "fill": "#cd6155"
+       }
+      ]
+     },
+     "bubble": "Lineage improved too?\n…that was my own jump"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "All 8 lineages present!\n…half on life support",
+     "caption_box": "State honestly what proxy can measure\nA metric-as-target stops being good\nA clean number is a siren",
+     "foot": "→ Full Goodhart dissection in the article"
+    }
+   ]
+  },
+  "zh": {
+   "title": "眼镜饱和则选择压无力 — 反证四格 #29",
+   "header": "Goodhart 定律与\nproxy fitness 的极限",
+   "panels": [
+    {
+     "caption": "#26 中 monoculture 改善到 0.05",
+     "motif": {
+      "burst": {
+       "big": "0.05",
+       "badge": "庆功?\n警报?"
+      }
+     },
+     "bubble": "太好了，数字真漂亮!"
+    },
+    {
+     "caption": "反证1: 饱和的眼镜让任何淘汰器失效",
+     "motif": {
+      "flow": [
+       "眼镜饱和",
+       "高级淘汰器",
+       "照样崩溃"
+      ]
+     },
+     "bubble": "先修考卷，\n别加评委!"
+    },
+    {
+     "caption": "反证2: 0.05 只测了「行为」",
+     "motif": {
+      "circles": [
+       {
+        "label": "行为\n改善",
+        "fill": "#7fb3d5"
+       },
+       {
+        "label": "系统\n两回事",
+        "fill": "#e59866"
+       },
+       {
+        "label": "真智能\n未测",
+        "fill": "#cd6155"
+       }
+      ]
+     },
+     "bubble": "系统也改善了?\n…那是我自己误判"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "8 个系统都在!\n…一半靠维生设备吊命",
+     "caption_box": "诚实界定 proxy 能测什么\n指标变目标就不再是好指标\n漂亮的数字是警报",
+     "foot": "→ 正文里看 Goodhart 的完整解剖"
+    }
+   ]
+  },
+  "ko": {
+   "title": "안경이 포화되면 선택압은 무력 — 반증 4컷 #29",
+   "header": "Goodhart 법칙과\nproxy fitness 의 한계",
+   "panels": [
+    {
+     "caption": "#26 에서 monoculture 가 0.05 로 개선",
+     "motif": {
+      "burst": {
+       "big": "0.05",
+       "badge": "축배?\n사이렌?"
+      }
+     },
+     "bubble": "좋아, 깔끔한 숫자!"
+    },
+    {
+     "caption": "반증1: 포화된 안경엔 어떤 선택기도 무력",
+     "motif": {
+      "flow": [
+       "안경 포화",
+       "고급 선택기",
+       "그래도 붕괴"
+      ]
+     },
+     "bubble": "심사위원 말고\n시험지를 고쳐!"
+    },
+    {
+     "caption": "반증2: 0.05 가 잰 건 「행동」뿐",
+     "motif": {
+      "circles": [
+       {
+        "label": "행동\n개선",
+        "fill": "#7fb3d5"
+       },
+       {
+        "label": "계통\n별개",
+        "fill": "#e59866"
+       },
+       {
+        "label": "실지능\n미측정",
+        "fill": "#cd6155"
+       }
+      ]
+     },
+     "bubble": "계통도 개선됐나?\n…내 성급한 착각"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "8 계통 모두 생존!\n…절반은 생명유지 중",
+     "caption_box": "proxy 가 재는 범위를 정직히 한정\n지표가 목표가 되면 망가진다\n깔끔한 숫자는 사이렌",
+     "foot": "→ 본문에서 Goodhart 해부를 전부 확인"
+    }
+   ]
+  }
+ }
+}

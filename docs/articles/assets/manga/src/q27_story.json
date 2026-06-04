@@ -1,0 +1,237 @@
+{
+ "slug": "q27",
+ "langs": {
+  "ja": {
+   "title": "lldarwin v2 一晩マラソン #27",
+   "header": "実 LLM 12h ランがまた満点で飽和\n一晩で 6 検証が同じ結論へ",
+   "panels": [
+    {
+     "caption": "実 LLM(llama3.2) で 12h 進化させた",
+     "motif": {
+      "burst": {
+       "big": "満点",
+       "badge": "gen5 で 1.0\n65 世代無進歩"
+      }
+     },
+     "bubble": "本物の LLM なら進化する…はず!"
+    },
+    {
+     "caption": "全滅しないが累積しない=ふるい付きランダム",
+     "motif": {
+      "flow": [
+       "gen5 で best=1.0",
+       "65 世代ピクリとも",
+       "ただの淘汰ランダム"
+      ]
+     },
+     "bubble": "真因は固定ものさしの飽和だ"
+    },
+    {
+     "caption": "方策を決めるため一晩で分散調査",
+     "motif": {
+      "circles": [
+       {
+        "label": "自己\nPoC6",
+        "fill": "#4e79a7"
+       },
+       {
+        "label": "Agent\nA/B/C",
+        "fill": "#59a14f"
+       },
+       {
+        "label": "Perp\nlexity",
+        "fill": "#e15759"
+       },
+       {
+        "label": "実LLM\n検証",
+        "fill": "#f28e2b"
+       }
+      ]
+     },
+     "bubble": "貯蔵庫を足すだけじゃ救えない!"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "朝、全員が独立に\n同じ結論へ収束した",
+     "caption_box": "眼鏡(評価)が飽和したら淘汰器を磨いても無力\n直すのは LLM でも淘汰器でもなく評価の開放端化\n多様性は投票でなく指揮者(routing)で初めて活きる",
+     "foot": "→ 本編で 6 検証の honest cross-validation を読む"
+    }
+   ]
+  },
+  "en": {
+   "title": "lldarwin v2 Overnight Marathon #27",
+   "header": "A real-LLM 12h run saturated at a perfect score again\nBy morning 6 checks reached the same verdict",
+   "panels": [
+    {
+     "caption": "Evolved for 12h against real LLM (llama3.2)",
+     "motif": {
+      "burst": {
+       "big": "PERFECT",
+       "badge": "1.0 at gen5\n65 gens flat"
+      }
+     },
+     "bubble": "A real LLM should evolve... right?!"
+    },
+    {
+     "caption": "No extinction, no accumulation = filtered random",
+     "motif": {
+      "flow": [
+       "best=1.0 at gen5",
+       "65 gens dead flat",
+       "just filtered random"
+      ]
+     },
+     "bubble": "Root cause: the fixed ruler saturated"
+    },
+    {
+     "caption": "One all-nighter of distributed investigation",
+     "motif": {
+      "circles": [
+       {
+        "label": "6 self\nPoCs",
+        "fill": "#4e79a7"
+       },
+       {
+        "label": "Agent\nA/B/C",
+        "fill": "#59a14f"
+       },
+       {
+        "label": "Perp\nlexity",
+        "fill": "#e15759"
+       },
+       {
+        "label": "real-LLM\ncheck",
+        "fill": "#f28e2b"
+       }
+      ]
+     },
+     "bubble": "Adding an archive alone can't save it!"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "By morning everyone independently\nconverged on one conclusion",
+     "caption_box": "If the lens (evaluation) saturates, polishing the selector is useless\nFix not the LLM nor the selector, but open-end the evaluation\nDiversity pays off only via a conductor (routing), not by voting",
+     "foot": "→ Read the honest cross-validation of 6 checks inside"
+    }
+   ]
+  },
+  "zh": {
+   "title": "lldarwin v2 通宵马拉松 #27",
+   "header": "真实 LLM 12 小时跑又在满分饱和\n一晚 6 项验证收敛到同一结论",
+   "panels": [
+    {
+     "caption": "用真实 LLM(llama3.2) 进化了 12 小时",
+     "motif": {
+      "burst": {
+       "big": "满分",
+       "badge": "gen5 即 1.0\n65 代无进步"
+      }
+     },
+     "bubble": "用真正的 LLM 应该会进化…吧?!"
+    },
+    {
+     "caption": "不灭绝也不累积=带筛选的随机搜索",
+     "motif": {
+      "flow": [
+       "gen5 best=1.0",
+       "65 代纹丝不动",
+       "只是筛选随机"
+      ]
+     },
+     "bubble": "真因是固定标尺饱和了"
+    },
+    {
+     "caption": "为定策略 一晚做分布式调查",
+     "motif": {
+      "circles": [
+       {
+        "label": "自做\nPoC6",
+        "fill": "#4e79a7"
+       },
+       {
+        "label": "Agent\nA/B/C",
+        "fill": "#59a14f"
+       },
+       {
+        "label": "Perp\nlexity",
+        "fill": "#e15759"
+       },
+       {
+        "label": "真LLM\n验证",
+        "fill": "#f28e2b"
+       }
+      ]
+     },
+     "bubble": "光加仓库可救不了它!"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "清晨 全员各自独立\n收敛到同一结论",
+     "caption_box": "标尺(评价)一旦饱和 再磨淘汰器也无力\n要改的不是 LLM 也不是淘汰器 而是评价的开放端化\n多样性靠指挥者(routing)而非投票才显价值",
+     "foot": "→ 正文细读 6 项验证的 honest cross-validation"
+    }
+   ]
+  },
+  "ko": {
+   "title": "lldarwin v2 밤샘 마라톤 #27",
+   "header": "실제 LLM 12h 런이 또 만점에서 포화\n아침엔 6개 검증이 같은 결론으로 수렴",
+   "panels": [
+    {
+     "caption": "실제 LLM(llama3.2)로 12시간 진화시켰다",
+     "motif": {
+      "burst": {
+       "big": "만점",
+       "badge": "gen5 에서 1.0\n65세대 무진보"
+      }
+     },
+     "bubble": "진짜 LLM 이면 진화한다… 맞지?!"
+    },
+    {
+     "caption": "전멸도 누적도 없음 = 필터 랜덤 서치",
+     "motif": {
+      "flow": [
+       "gen5 best=1.0",
+       "65세대 꼼짝 안함",
+       "그냥 필터 랜덤"
+      ]
+     },
+     "bubble": "진짜 원인은 고정 잣대의 포화"
+    },
+    {
+     "caption": "방책 결정 위해 밤샘 분산 조사",
+     "motif": {
+      "circles": [
+       {
+        "label": "자체\nPoC6",
+        "fill": "#4e79a7"
+       },
+       {
+        "label": "Agent\nA/B/C",
+        "fill": "#59a14f"
+       },
+       {
+        "label": "Perp\nlexity",
+        "fill": "#e15759"
+       },
+       {
+        "label": "실LLM\n검증",
+        "fill": "#f28e2b"
+       }
+      ]
+     },
+     "bubble": "저장고만 더해선 못 살린다!"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "아침에 전원이 각자 독립적으로\n같은 결론으로 수렴했다",
+     "caption_box": "잣대(평가)가 포화되면 도태기를 갈아도 무력하다\n고칠 건 LLM 도 도태기도 아닌 평가의 개방단화\n다양성은 투표 아닌 지휘자(routing)로만 가치를 낸다",
+     "foot": "→ 본문에서 6개 검증의 honest cross-validation 읽기"
+    }
+   ]
+  }
+ }
+}

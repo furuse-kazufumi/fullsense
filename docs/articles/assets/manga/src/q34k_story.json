@@ -1,0 +1,213 @@
+{
+ "slug": "q34k",
+ "langs": {
+  "ja": {
+   "title": "山登り6連戦 — 選り分けて育てる工夫はいつ効く?",
+   "header": "選り分けて育てる工夫③\n山登り6連戦のオチ",
+   "panels": [
+    {
+     "caption": "わざと作っただまし地形で③が圧勝",
+     "motif": {
+      "burst": {
+       "big": "95%",
+       "badge": "③だけ\n本物の頂上へ"
+      }
+     },
+     "bubble": "やっぱり③は本物だ!"
+    },
+    {
+     "caption": "実物もどきを4回測りに行ったら",
+     "motif": {
+      "flow": [
+       "記憶テスト",
+       "応用力",
+       "なだらか確定",
+       "部品4択"
+      ]
+     },
+     "bubble": "あれ、どこも③が要らない…"
+    },
+    {
+     "caption": "100年前の生物学が同じ形を描いていた",
+     "motif": {
+      "duo": [
+       {
+        "label": "ライト\n散らばる",
+        "fill": "#5b8def"
+       },
+       {
+        "label": "コイン\n単純で十分",
+        "fill": "#e0823d"
+       }
+      ],
+      "extinct": 0
+     },
+     "bubble": "現実の谷は浅い\n散らばらず登れる"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "③は高次元のだまし地形\nでだけ効く。CPUは全部外れ",
+     "caption_box": "うまく行きすぎた結果は警報\n自分の結果を先に疑う仕組み\n正直さが研究を前に進める",
+     "foot": "→ 本編で6連戦の全記録を読む"
+    }
+   ]
+  },
+  "en": {
+   "title": "Six Hill-Climbing Bouts — When Does Sort-and-Raise Work?",
+   "header": "The sort-and-raise trick (3)\nPunchline of six bouts",
+   "panels": [
+    {
+     "caption": "On deliberately deceptive terrain, (3) wins big",
+     "motif": {
+      "burst": {
+       "big": "95%",
+       "badge": "Only (3)\nreached the peak"
+      }
+     },
+     "bubble": "See, (3) is the real deal!"
+    },
+    {
+     "caption": "Then we measured the real thing four times",
+     "motif": {
+      "flow": [
+       "Memory test",
+       "Generalize",
+       "Gentle",
+       "4-part mix"
+      ]
+     },
+     "bubble": "Huh, none of them need (3)..."
+    },
+    {
+     "caption": "100-year-old biology drew the same shape",
+     "motif": {
+      "duo": [
+       {
+        "label": "Wright\nscatter",
+        "fill": "#5b8def"
+       },
+       {
+        "label": "Coyne\nsimple wins",
+        "fill": "#e0823d"
+       }
+      ],
+      "extinct": 0
+     },
+     "bubble": "Real valleys are shallow\nyou climb without scattering"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "(3) works only on high-dim\ndeceptive terrain. CPU: all miss",
+     "caption_box": "A result that goes too well is an alarm\nDoubt your own result first\nHonesty moves research forward",
+     "foot": "Read the full record of all six bouts"
+    }
+   ]
+  },
+  "zh": {
+   "title": "爬山六连战 — 选别培养的工夫何时有效?",
+   "header": "选别培养的工夫③\n六连战的结局",
+   "panels": [
+    {
+     "caption": "在故意造的骗人地形上,③大胜",
+     "motif": {
+      "burst": {
+       "big": "95%",
+       "badge": "只有③\n登上真山顶"
+      }
+     },
+     "bubble": "看吧,③是真本事!"
+    },
+    {
+     "caption": "然后去测了四次接近实物的地形",
+     "motif": {
+      "flow": [
+       "记忆测试",
+       "应用能力",
+       "确定平缓",
+       "零件4选"
+      ]
+     },
+     "bubble": "咦,哪个都不需要③……"
+    },
+    {
+     "caption": "100年前的生物学画出了同样的形状",
+     "motif": {
+      "duo": [
+       {
+        "label": "赖特\n散开",
+        "fill": "#5b8def"
+       },
+       {
+        "label": "科恩\n简单就够",
+        "fill": "#e0823d"
+       }
+      ],
+      "extinct": 0
+     },
+     "bubble": "现实的谷很浅\n不散开也能爬"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "③只在高维骗人地形\n才有效。CPU全落空",
+     "caption_box": "顺利得过头的结果是警报\n先怀疑自己的结果\n诚实推动研究前进",
+     "foot": "→ 在正文阅读六连战全记录"
+    }
+   ]
+  },
+  "ko": {
+   "title": "등산 6연전 — 선별 육성 기법은 언제 효과가 있나?",
+   "header": "선별 육성 기법 ③\n6연전의 결말",
+   "panels": [
+    {
+     "caption": "일부러 만든 속임수 지형에서 ③이 압승",
+     "motif": {
+      "burst": {
+       "big": "95%",
+       "badge": "③만\n진짜 정상에"
+      }
+     },
+     "bubble": "역시 ③은 진짜다!"
+    },
+    {
+     "caption": "그래서 실물 유사 지형을 네 번 측정",
+     "motif": {
+      "flow": [
+       "기억 테스트",
+       "응용력",
+       "완만 확정",
+       "부품 4택"
+      ]
+     },
+     "bubble": "어, 전부 ③이 필요 없네…"
+    },
+    {
+     "caption": "100년 전 생물학이 같은 형태를 그렸다",
+     "motif": {
+      "duo": [
+       {
+        "label": "라이트\n흩어짐",
+        "fill": "#5b8def"
+       },
+       {
+        "label": "코인\n단순하면 충분",
+        "fill": "#e0823d"
+       }
+      ],
+      "extinct": 0
+     },
+     "bubble": "현실의 골짜기는 얕다\n흩어지지 않아도 오른다"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "③은 고차원 속임수 지형\n에서만 효과. CPU는 전부 빗나감",
+     "caption_box": "너무 잘 된 결과는 경보\n자기 결과를 먼저 의심하기\n정직함이 연구를 전진시킨다",
+     "foot": "→ 본문에서 6연전 전체 기록 읽기"
+    }
+   ]
+  }
+ }
+}
