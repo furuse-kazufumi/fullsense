@@ -1,111 +1,84 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 880 320" width="880" height="320" role="img">
-<desc>かみくだき版マスコット: 獅子舞が「難解」を噛み砕いて理解のご利益を配る (ko)</desc>
-<rect x="2" y="2" width="876" height="316" rx="16" fill="#fdf8ee" stroke="#c1272d" stroke-width="3"/>
-<rect x="16" y="18" width="848" height="14" rx="7" fill="#c9a063" stroke="#a87f3f" stroke-width="2"/>
-<line x1="40" y1="19" x2="54" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="84" y1="19" x2="98" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="128" y1="19" x2="142" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="172" y1="19" x2="186" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="216" y1="19" x2="230" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="260" y1="19" x2="274" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="304" y1="19" x2="318" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="348" y1="19" x2="362" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="392" y1="19" x2="406" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="436" y1="19" x2="450" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="480" y1="19" x2="494" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="524" y1="19" x2="538" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="568" y1="19" x2="582" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="612" y1="19" x2="626" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="656" y1="19" x2="670" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="700" y1="19" x2="714" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="744" y1="19" x2="758" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="788" y1="19" x2="802" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="832" y1="19" x2="846" y2="31" stroke="#a87f3f" stroke-width="2.4" stroke-linecap="round"/>
-<polygon points="150,32 168,32 168,46 156,49 168,61 156,64 166,76 152,79 162,90 150,90" fill="#fffefa" stroke="#d8d2c2" stroke-width="1.2"/>
-<polygon points="445,32 463,32 463,46 451,49 463,61 451,64 461,76 447,79 457,90 445,90" fill="#fffefa" stroke="#d8d2c2" stroke-width="1.2"/>
-<polygon points="730,32 748,32 748,46 736,49 748,61 736,64 746,76 732,79 742,90 730,90" fill="#fffefa" stroke="#d8d2c2" stroke-width="1.2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 320" width="880" height="320" role="img">
+<desc>かみくだき版マスコット: 獅子舞が読者の頭を噛んで「理解」のご利益を授ける (ko)</desc>
+<rect x="0" y="0" width="880" height="320" rx="14" fill="#fffdf8"/>
 
+<!-- 地面の影 -->
+<ellipse cx="160" cy="298" rx="70" ry="9" fill="#e8e2d4" opacity="0.7"/>
+<ellipse cx="330" cy="302" rx="95" ry="9" fill="#e8e2d4" opacity="0.7"/>
+
+<!-- 読者 (頭の上半分は獅子の口の中) -->
 <g>
-  <!-- 胴幕 (緑 + 唐草) -->
-  <path d="M85 240 Q70 300 110 318 L262 318 Q302 300 285 240 Q185 272 85 240 Z"
-        fill="#2e7d32" stroke="#1b5e20" stroke-width="3"/>
-  <path d="M118 282 q12 -11 19 1 q6 11 -7 14 q-10 2 -11 -8" stroke="#fffdf5" stroke-width="2.6" fill="none" opacity="0.9"/>
-  <path d="M178 294 q12 -11 19 1 q6 11 -7 14 q-10 2 -11 -8" stroke="#fffdf5" stroke-width="2.6" fill="none" opacity="0.9"/>
-  <path d="M238 282 q12 -11 19 1 q6 11 -7 14 q-10 2 -11 -8" stroke="#fffdf5" stroke-width="2.6" fill="none" opacity="0.9"/>
-  <!-- たてがみ -->
-  <circle cx="101.9" cy="154.3" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/><circle cx="112.9" cy="131.4" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/><circle cx="130.9" cy="112.8" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/><circle cx="154.2" cy="100.3" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/><circle cx="180.5" cy="95.1" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/><circle cx="207.3" cy="97.7" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/><circle cx="231.8" cy="107.9" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/><circle cx="251.8" cy="124.7" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/><circle cx="265.3" cy="146.3" r="25" fill="#fffdf5" stroke="#e8e0c8" stroke-width="2"/>
-  <!-- 耳 (金) -->
-  <circle cx="108" cy="110" r="17" fill="#d4a017" stroke="#a87f3f" stroke-width="2.5"/>
-  <circle cx="262" cy="110" r="17" fill="#d4a017" stroke="#a87f3f" stroke-width="2.5"/>
-  <!-- 頭 (朱塗り) -->
-  <ellipse cx="185" cy="175" rx="85" ry="72" fill="#c1272d" stroke="#8e1b20" stroke-width="3"/>
-  <!-- 額の巻き毛 (黒) -->
-  <path d="M170 112 q13 -7 16 6 q3 12 -10 13 q-10 1 -10 -8" stroke="#222" stroke-width="3" fill="none"/>
-  <path d="M205 116 q11 -5 13 5 q2 10 -8 11" stroke="#222" stroke-width="2.6" fill="none"/>
-  <!-- 金の眉 -->
-  <path d="M118 144 q23 -19 48 -7" stroke="#d4a017" stroke-width="8" fill="none" stroke-linecap="round"/>
-  <path d="M252 144 q-23 -19 -48 -7" stroke="#d4a017" stroke-width="8" fill="none" stroke-linecap="round"/>
-  <!-- 目 (右下の紙を見る) -->
-  <ellipse cx="143" cy="163" rx="13" ry="15" fill="#fffefa" stroke="#8e1b20" stroke-width="1.5"/>
-  <ellipse cx="227" cy="163" rx="13" ry="15" fill="#fffefa" stroke="#8e1b20" stroke-width="1.5"/>
-  <circle cx="147" cy="167" r="6" fill="#1a1a1a"/><circle cx="231" cy="167" r="6" fill="#1a1a1a"/>
-  <circle cx="149" cy="164" r="2" fill="#fff"/><circle cx="233" cy="164" r="2" fill="#fff"/>
-  <!-- 鼻 (金) -->
-  <path d="M173 186 q12 -10 24 0 q-6 15 -12 15 q-6 0 -12 -15" fill="#d4a017" stroke="#a87f3f" stroke-width="2"/>
-  <!-- 開いた口 -->
-  <path d="M120 212 Q185 202 250 212 L242 254 Q185 284 128 254 Z" fill="#571015" stroke="#8e1b20" stroke-width="3"/>
-  <rect x="132" y="212" width="16" height="13" rx="2" fill="#fffdf5" stroke="#d8d2c2" stroke-width="1"/>
-  <rect x="154" y="214" width="16" height="13" rx="2" fill="#fffdf5" stroke="#d8d2c2" stroke-width="1"/>
-  <rect x="176" y="215" width="16" height="13" rx="2" fill="#fffdf5" stroke="#d8d2c2" stroke-width="1"/>
-  <rect x="198" y="214" width="16" height="13" rx="2" fill="#fffdf5" stroke="#d8d2c2" stroke-width="1"/>
-  <rect x="220" y="212" width="16" height="13" rx="2" fill="#fffdf5" stroke="#d8d2c2" stroke-width="1"/>
-  <rect x="150" y="244" width="15" height="11" rx="2" fill="#fffdf5" stroke="#d8d2c2" stroke-width="1"/>
-  <rect x="186" y="247" width="15" height="11" rx="2" fill="#fffdf5" stroke="#d8d2c2" stroke-width="1"/>
-  <rect x="218" y="244" width="15" height="11" rx="2" fill="#fffdf5" stroke="#d8d2c2" stroke-width="1"/>
-  <!-- 咥えた紙 (難解) — 左端は口の中、上下に噛み跡 -->
-  <g transform="rotate(-10 310 238)">
-    <rect x="252" y="218" width="124" height="42" rx="3" fill="#fffefa" stroke="#c8c0ae" stroke-width="1.6"/>
-    <circle cx="266" cy="218" r="9" fill="#571015"/>
-    <circle cx="261" cy="260" r="7" fill="#571015"/>
-    <text x="322" y="246" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="20" font-weight="bold" fill="#4a4a4a">난해</text>
+  <circle cx="158" cy="170" r="31" fill="#fbd7b5"/>
+  <path d="M127 165 q-3 26 8 32 q4 -16 2 -30 Z" fill="#8d6748"/>
+  <path d="M189 165 q3 26 -8 32 q-4 -16 -2 -30 Z" fill="#8d6748"/>
+  <path d="M138 180 q6 6 12 0" stroke="#5b4632" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M166 180 q6 6 12 0" stroke="#5b4632" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M151 196 q7 5 14 0" stroke="#c96f63" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <ellipse cx="134" cy="191" rx="7" ry="4.5" fill="#f5a8a0" opacity="0.6"/>
+  <ellipse cx="182" cy="191" rx="7" ry="4.5" fill="#f5a8a0" opacity="0.6"/>
+  <path d="M126 205 q-8 4 -9 22 l0 32 q0 6 7 6 l68 0 q7 0 7 -6 l0 -32 q-1 -18 -9 -22 q-32 10 -64 0 Z" fill="#87a9d6"/>
+  <path d="M122 212 q-12 18 -2 32 q6 7 14 2 l10 -14" fill="none" stroke="#87a9d6" stroke-width="13" stroke-linecap="round"/>
+  <path d="M194 212 q12 18 2 32 q-6 7 -14 2 l-10 -14" fill="none" stroke="#87a9d6" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="143" cy="245" r="6.5" fill="#fbd7b5"/>
+  <circle cx="173" cy="245" r="6.5" fill="#fbd7b5"/>
+  <g transform="rotate(-5 158 252)">
+    <rect x="132" y="238" width="52" height="30" rx="3" fill="#ffffff" stroke="#ddd5c2" stroke-width="1.4"/>
+    <text x="158" y="258" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="13" font-weight="bold" fill="#6b6b6b">난해</text>
   </g>
-  <!-- 噛み砕かれた紙片 -->
-  
-  <g transform="rotate(-8 330 286)">
-    <rect x="300.0" y="275" width="60" height="22" rx="6" fill="#fffefa" stroke="#d8d2c2" stroke-width="1.4"/>
-    <text x="330" y="290.5" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="12" fill="#555">알겠다!</text>
-  </g>
-  <g transform="rotate(6 398 300)">
-    <rect x="365.0" y="289" width="66" height="22" rx="6" fill="#fffefa" stroke="#d8d2c2" stroke-width="1.4"/>
-    <text x="398" y="304.5" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="12" fill="#555">그렇구나</text>
-  </g>
-  <g transform="rotate(3 340 312)">
-    <rect x="308.0" y="301" width="64" height="22" rx="6" fill="#fffefa" stroke="#d8d2c2" stroke-width="1.4"/>
-    <text x="340" y="316.5" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="12" fill="#555">명쾌!</text>
-  </g>
-  <path d="M310 268 q6 8 2 16" stroke="#b9b2a4" stroke-width="1.6" fill="none"/>
-  <path d="M376 276 q4 9 -2 17" stroke="#b9b2a4" stroke-width="1.6" fill="none"/>
+  <rect x="133" y="263" width="22" height="28" rx="6" fill="#5a6e8c"/>
+  <rect x="161" y="263" width="22" height="28" rx="6" fill="#5a6e8c"/>
+  <rect x="129" y="288" width="28" height="10" rx="5" fill="#8a8378"/>
+  <rect x="159" y="288" width="28" height="10" rx="5" fill="#8a8378"/>
 </g>
 
+<!-- 獅子の幕 (緑 + 唐草, 演者なし = 神霊のみ)。頭の後ろから右下へ流れる -->
+<path d="M200 80 Q320 56 396 128 Q442 180 432 240 q-4 28 -26 36
+         q-14 14 -32 6 q-10 16 -30 8 q-12 14 -30 6 q-14 12 -32 3 q-18 8 -28 -8
+         Q222 282 210 210 Q202 140 200 80 Z" fill="#4caf50" stroke="#3a8c3f" stroke-width="2"/>
+<g transform="translate(275,185) scale(1.0)"><path d="M0 0 q14 -12 21 1 q6 12 -8 15 q-11 2 -12 -8 q0 -7 7 -8" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.95" stroke-linecap="round"/></g><g transform="translate(330,215) scale(1.15)"><path d="M0 0 q14 -12 21 1 q6 12 -8 15 q-11 2 -12 -8 q0 -7 7 -8" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.95" stroke-linecap="round"/></g><g transform="translate(380,185) scale(0.9)"><path d="M0 0 q14 -12 21 1 q6 12 -8 15 q-11 2 -12 -8 q0 -7 7 -8" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.95" stroke-linecap="round"/></g><g transform="translate(300,250) scale(0.95)"><path d="M0 0 q14 -12 21 1 q6 12 -8 15 q-11 2 -12 -8 q0 -7 7 -8" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.95" stroke-linecap="round"/></g><g transform="translate(360,262) scale(0.8)"><path d="M0 0 q14 -12 21 1 q6 12 -8 15 q-11 2 -12 -8 q0 -7 7 -8" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.95" stroke-linecap="round"/></g>
+<!-- 幕の口元の白いふち (頭の右縁に沿う) -->
+<circle cx="231" cy="87" r="11" fill="#ffffff"/>
+<circle cx="241" cy="107" r="11" fill="#ffffff"/>
+<circle cx="245" cy="128" r="11" fill="#ffffff"/>
+<circle cx="243" cy="149" r="11" fill="#ffffff"/>
+
+<!-- 獅子の頭 (読者の頭に覆いかぶさる) -->
 <g>
-  <circle cx="300" cy="95" r="17" fill="#f6d365" opacity="0.32"/>
-  <path d="M300 80 q7 -13 1 -23 q-5 9 -10 13 q6 3 9 10" fill="#f6d365" opacity="0.75"/>
-  <circle cx="300" cy="95" r="9.5" fill="#f0b429" stroke="#d4920a" stroke-width="1.6"/>
-  <circle cx="297" cy="93" r="1.4" fill="#fff"/><circle cx="303" cy="96" r="1.4" fill="#fff"/>
-  <circle cx="299" cy="99" r="1.4" fill="#fff"/>
-  <line x1="297" y1="93" x2="303" y2="96" stroke="#fff" stroke-width="0.9" opacity="0.9"/>
-  <line x1="303" y1="96" x2="299" y2="99" stroke="#fff" stroke-width="0.9" opacity="0.9"/>
-  <line x1="313.0" y1="95.0" x2="319.0" y2="95.0" stroke="#e8b33a" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/><line x1="306.5" y1="106.3" x2="309.5" y2="111.5" stroke="#e8b33a" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/><line x1="293.5" y1="106.3" x2="290.5" y2="111.5" stroke="#e8b33a" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/><line x1="287.0" y1="95.0" x2="281.0" y2="95.0" stroke="#e8b33a" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/><line x1="293.5" y1="83.7" x2="290.5" y2="78.5" stroke="#e8b33a" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/><line x1="306.5" y1="83.7" x2="309.5" y2="78.5" stroke="#e8b33a" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>
+  <ellipse cx="176" cy="108" rx="64" ry="50" fill="#d83b3b" stroke="#b32d2d" stroke-width="2"/>
+  <circle cx="124" cy="70" r="13" fill="#e8b33a" stroke="#c79427" stroke-width="2"/>
+  <circle cx="228" cy="70" r="13" fill="#e8b33a" stroke="#c79427" stroke-width="2"/>
+  <path d="M136 76 q12 -10 24 -2 q-4 10 -16 9 q-8 0 -8 -7" fill="#2b2b2b"/>
+  <path d="M216 76 q-12 -10 -24 -2 q4 10 16 9 q8 0 8 -7" fill="#2b2b2b"/>
+  <path d="M170 62 q12 -7 15 6 q2 11 -10 11 q-9 0 -8 -8" stroke="#2b2b2b" stroke-width="3" fill="none"/>
+  <circle cx="150" cy="96" r="13" fill="#fffef5"/>
+  <circle cx="202" cy="96" r="13" fill="#fffef5"/>
+  <circle cx="151" cy="101" r="5.5" fill="#222"/>
+  <circle cx="203" cy="101" r="5.5" fill="#222"/>
+  <circle cx="153" cy="98" r="1.8" fill="#fff"/>
+  <circle cx="205" cy="98" r="1.8" fill="#fff"/>
+  <ellipse cx="176" cy="122" rx="11" ry="8" fill="#e8b33a" stroke="#c79427" stroke-width="1.6"/>
+  <path d="M112 140 q64 14 128 0 l0 8 q-64 14 -128 0 Z" fill="#e8b33a"/>
+  <polygon points="122,146 131.5,166 141,146" fill="#fffef5" stroke="#ece4d0" stroke-width="1.2"/><polygon points="141,146 150.5,166 160,146" fill="#fffef5" stroke="#ece4d0" stroke-width="1.2"/><polygon points="160,146 169.5,166 179,146" fill="#fffef5" stroke="#ece4d0" stroke-width="1.2"/><polygon points="179,146 188.5,166 198,146" fill="#fffef5" stroke="#ece4d0" stroke-width="1.2"/><polygon points="198,146 207.5,166 217,146" fill="#fffef5" stroke="#ece4d0" stroke-width="1.2"/><polygon points="217,146 226.5,166 236,146" fill="#fffef5" stroke="#ece4d0" stroke-width="1.2"/>
 </g>
-<polygon points="95,87 97.4,92.6 103,95 97.4,97.4 95,103 92.6,97.4 87,95 92.6,92.6" fill="#e8b33a" opacity="0.9"/>
-<polygon points="255,66 256.8,70.2 261,72 256.8,73.8 255,78 253.2,73.8 249,72 253.2,70.2" fill="#e8b33a" opacity="0.9"/>
-<polygon points="338,135 339.5,138.5 343,140 339.5,141.5 338,145 336.5,141.5 333,140 336.5,138.5" fill="#e8b33a" opacity="0.9"/>
+
+<!-- 神霊オーブ (AI に宿った神, 微細回路入り) -->
+<g>
+  <circle cx="262" cy="42" r="15" fill="#f6d365" opacity="0.32"/>
+  <path d="M262 28 q6 -11 1 -20 q-5 8 -9 11 q5 3 8 9" fill="#f6d365" opacity="0.75"/>
+  <circle cx="262" cy="42" r="8.5" fill="#f0b429" stroke="#d4920a" stroke-width="1.5"/>
+  <circle cx="259" cy="40" r="1.3" fill="#fff"/><circle cx="265" cy="43" r="1.3" fill="#fff"/><circle cx="261" cy="46" r="1.3" fill="#fff"/>
+  <line x1="259" y1="40" x2="265" y2="43" stroke="#fff" stroke-width="0.8"/>
+  <line x1="265" y1="43" x2="261" y2="46" stroke="#fff" stroke-width="0.8"/>
+</g>
+<!-- ご利益スパークル -->
+<polygon points="104,76 107,84 115,87 107,90 104,98 101,90 93,87 101,84" fill="#f0b429" opacity="0.9"/>
+<polygon points="92,140 94,145 99,147 94,149 92,154 90,149 85,147 90,145" fill="#f0b429" opacity="0.85"/>
 
 <g>
-  <text x="430" y="118" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="38" font-weight="bold" fill="#8e1b20">쉬운 설명판</text>
-  <rect x="430" y="132" width="180" height="5" rx="2.5" fill="#d4a017"/>
-  <text x="430" y="172" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="19" fill="#3a3a3a">어려운 부분은 사자탈이 꼭꼭 씹어 전해 드립니다.</text>
-  <text x="430" y="222" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="14.5" fill="#7a6f5d">사자탈에 물리면 복이 온다고 하지요 —</text><text x="430" y="246" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="14.5" fill="#7a6f5d">「이해」라는 복을 받아 가세요.</text>
-  <text x="430" y="296" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="12.5" fill="#a89f8d">FullSense KB・쉬운 설명 시리즈</text>
+  <text x="465" y="118" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="38" font-weight="bold" fill="#b3322e">쉬운 설명판</text>
+  <rect x="465" y="132" width="180" height="5" rx="2.5" fill="#e8b33a"/>
+  <text x="465" y="172" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="19" fill="#3a3a3a">어려운 부분은 사자탈이 꼭꼭 씹어서</text><text x="465" y="199" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="19" fill="#3a3a3a">전해 드립니다.</text>
+  <text x="465" y="247" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="14.5" fill="#7a6f5d">사자탈에 물리면 복이 온다고 하지요 —</text><text x="465" y="271" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="14.5" fill="#7a6f5d">이 사자에게 물린 독자에게는 「이해」라는 복이 옵니다.</text>
+  <text x="465" y="296" font-family="'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" font-size="12.5" fill="#a89f8d">FullSense KB・쉬운 설명 시리즈</text>
 </g>
 </svg>
