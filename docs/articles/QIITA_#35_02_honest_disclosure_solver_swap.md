@@ -644,7 +644,7 @@ llcore 는 결합된 RWKV 풍 상태 갱신 유전자를 진화시킵니다. 각
 | inf-norm (행 절댓값 합 최대 < 1) | 88 | 88 |
 | + 2-norm (최대 특이값 < 1) | +49 | 137 |
 | + 2 차 SDP (공통 Lyapunov P) | **+149** | **286 (= 300 의 95.3%)** |
-| + degree-4 SOS (리프트 Veronese) | +0 | 286 |
+| + degree-4 SOS (리프트 Veronese) | +3 (deg4∖deg6 = 0＝deg4 고유 admit 없음; deg4 cone이 SDP 대비 +3, deg6도 동일 도달) | 289 |
 | + degree-6 SOS | +1 | 290 |
 | 잔차 (deg≤6 에서 미증명) | — | 10 |
 
