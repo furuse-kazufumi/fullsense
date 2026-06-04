@@ -151,7 +151,7 @@ def render_motif(els, motif, y0, y1, font, lang):
                               text_color=auto_text_color(fill)))
     elif "flow" in motif:
         boxes = motif["flow"][:4]
-        bh, gap = 58, 34
+        bh, gap = 54, 26
         total = len(boxes) * bh + (len(boxes) - 1) * gap
         y = mid_y - total // 2
         for j, label in enumerate(boxes):
