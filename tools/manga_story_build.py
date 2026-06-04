@@ -69,6 +69,50 @@ def nlines(s: str) -> int:
     return s.count("\n") + 1
 
 
+def _bust(els: list, cx: float, cy: float, k: float, sx: int,
+          hair: str = "#4a3826", skin: str = "#fbd7b5", cloth: str = "#5a6e8c") -> tuple[float, float]:
+    """説明役の半身 (バスト)。sx=-1 で左向き (右側に置く)、+1 で右向き (左側に置く)。
+
+    manga_grammar.md: フキダシには必ず話者を立て、尻尾を口元へ。戻り値 = 口元座標。
+    k = 頭半径スケール (基準 r=68 のサンプル比)。
+    """
+    r = 68 * k
+    shapes = [
+        {"shape": {"circle": [cx - 10 * sx, cy - 28 * k, 86 * k]}, "fill": hair},   # 後ろ髪
+        {"shape": {"circle": [cx, cy, r]}, "fill": skin},                            # 顔
+        {"shape": {"circle": [cx + 37 * sx * k, cy - 50 * k, 30 * k]}, "fill": hair},  # 前髪
+        {"shape": {"circle": [cx - 5 * sx * k, cy - 60 * k, 33 * k]}, "fill": hair},
+        {"shape": {"circle": [cx - 47 * sx * k, cy - 46 * k, 29 * k]}, "fill": hair},
+        {"path": f"M {cx + 52 * sx * k} {cy - 20 * k} q {-12 * sx * k} -8 {-24 * sx * k} -2",
+         "fill": "none", "stroke": "#3a2c20", "stroke_width": max(2.5, 4 * k)},      # 眉
+        {"shape": {"circle": [cx + 38 * sx * k, cy - 4 * k, 6 * k]}, "fill": "#3a2c20"},  # 目
+        {"shape": {"ellipse": [cx + 55 * sx * k, cy + 28 * k, 13 * k, 16 * k]},
+         "fill": "#8e3b35"},                                                          # 開いた口
+        {"path": f"M {cx - 85 * k} {cy + 225 * k} Q {cx - 85 * k} {cy + 100 * k} {cx} {cy + 95 * k} "
+                 f"Q {cx + 85 * k} {cy + 100 * k} {cx + 85 * k} {cy + 225 * k} Z", "fill": cloth},  # 体
+        {"path": f"M {cx - 15 * k} {cy + 110 * k} L {cx} {cy + 134 * k} L {cx + 15 * k} {cy + 110 * k}",
+         "fill": "#ffffff"},                                                          # 襟
+    ]
+    els.append({"draw": {"shapes": shapes}})
+    return (cx + 55 * sx * k, cy + 28 * k)  # 口元 (尻尾アンカー)
+
+
+def speech(text: str, cx: float, cy: float, rx: float, ry: float, size: int, font: str,
+           tail_to: tuple[float, float] | None = None, kind: str = "speech",
+           seed: float = 1.0, bw: int = 3) -> dict:
+    """speech/shout フキダシ (一体型尻尾)。テキストは中央揃え。"""
+    lines = nlines(text)
+    oy = cy + size * 0.35 - (lines - 1) * (size * 1.25) / 2
+    b = {"kind": kind, "shape": {"ellipse": [cx, cy, rx, ry]}, "text": text,
+         "writing": "horizontal", "font": font, "font_size": size,
+         "text_origin": [cx, oy], "fill": "#ffffff", "border": True,
+         "border_color": "#1a1a1a", "border_width": bw, "text_color": "#1a1a1a",
+         "line_gap": size * 1.25, "seed": seed}
+    if tail_to:
+        b["tail_to"] = list(tail_to)
+    return {"bubble": b}
+
+
 def auto_text_color(fill: str) -> str:
     """White text on dark fills, near-black on light fills (WCAG-ish luminance)."""
     try:
