@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="32" y="40" font-size="22" font-weight="700" fill="#1f2d3d">NEXT_SESSION 2파일 운용</text>
+  <text x="32" y="66" font-size="14" fill="#5b6b7b">drift와 정보 손실 사이에서 양자택일하지 않는다 — 수동 방침 메모와 자동 snapshot을 분리</text>
+
+  <!-- Root: docs/ -->
+  <rect x="60" y="100" width="160" height="56" rx="10" fill="#e8eef6" stroke="#3b5d80" stroke-width="2"/>
+  <text x="140" y="128" font-size="18" font-weight="700" fill="#1f2d3d" text-anchor="middle">docs/</text>
+  <text x="140" y="146" font-size="12" fill="#5b6b7b" text-anchor="middle">디렉터리</text>
+
+  <!-- Tree connectors -->
+  <path d="M140,156 L140,200" fill="none" stroke="#5b6b7b" stroke-width="2"/>
+  <path d="M140,200 L300,200" fill="none" stroke="#5b6b7b" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M140,200 L140,270 L300,270" fill="none" stroke="#5b6b7b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Leaf 1: NEXT_SESSION.md (manual) -->
+  <rect x="320" y="172" width="540" height="56" rx="10" fill="#fbf3e4" stroke="#c8922e" stroke-width="2"/>
+  <text x="340" y="196" font-size="16" font-weight="700" fill="#7a5a14">NEXT_SESSION.md</text>
+  <text x="540" y="196" font-size="13" fill="#7a5a14" font-weight="600">수동</text>
+  <text x="340" y="216" font-size="13" fill="#6b5a30">방향성 메모 — drift해도 된다 (사람이 생각한 다음 방침을 보존)</text>
+
+  <!-- Leaf 2: NEXT_SESSION.auto.md (auto) -->
+  <rect x="320" y="242" width="540" height="56" rx="10" fill="#e6f3ea" stroke="#3a8d5b" stroke-width="2"/>
+  <text x="340" y="266" font-size="16" font-weight="700" fill="#1f5e38">NEXT_SESSION.auto.md</text>
+  <text x="540" y="266" font-size="13" fill="#1f5e38" font-weight="600">자동 (Stop hook)</text>
+  <text x="340" y="286" font-size="13" fill="#2c5d40">매 턴 덮어쓰기 — git snapshot / 관련 프로젝트 상태를 자동 재생성</text>
+</svg>
