@@ -393,13 +393,7 @@ In other words, **the ORG-* requirements can be used not only for "separation fr
 
 不过 Stage B 至 E（中长期）走的是"独立化路线"。两者**可以同时并行**：
 
-```
-        補完路線 (短期持続)        独自化路線 (中長期)
-        ──────────────         ──────────────
-        Stage A 維持              Stage B → C → D → E
-        Qwen + llive               llive-7b → llive-mamba 等
-        隙間補完                   完全独立
-```
+![补充路线与独立化路线的双层结构图](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q11/two_routes_zh.svg)
 
 将"在 Local 环境中填补缝隙"作为**常设定位**，并在其之上叠加"作为研究路线的独立化"的双层结构。
 
