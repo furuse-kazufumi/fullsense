@@ -147,3 +147,423 @@ llive が計算する → IEEE 754 精度、再現可能、引用可能
 ---
 
 > FullSense ™ の最初の vertical specialisation。「数学に強い AI」を最初のキラー応用として育てる戦略。
+
+---
+
+# English
+
+# The First Step Toward an AI That Is Strong at Math and Units — The MATH-01/08 Built-in Calculation Engine
+
+## TL;DR
+
+- As llive's first specialised vertical, we chose a "**math- and unit-focused AI**" (per the user's strategic direction)
+- We overcome the three things general-purpose LLMs are bad at — (a) hallucinated symbolic manipulation, (b) confusing unit dimensions, (c) error propagation in numerical computation — with a **deterministic sidecar that does not let the LLM do the calculation**
+- In the same 2026-05-17 session we implemented the minimal skeletons of **MATH-01 (SI unit dimensional analysis)** + **MATH-08 (built-in calculation engine = the differentiation axis)**, adding 47 tests
+- An API that **always stops** typical hallucinations like `5 m/s + 3 s = 8`
+
+## Motivation — The Mathematical Weaknesses of General-Purpose LLMs
+
+LLMs generate linguistically plausible formulas, but they are bad at the following:
+
+| Aspect | Weakness of general-purpose LLM | Match with llive's existing assets |
+|---|---|---|
+| Hallucinated symbolic manipulation | False equalities like `x² + x = 2x³` | Gated by EVO-04 Z3 static verification |
+| Unit dimensions | `5 m/s + 3 s = 8` | SI dimensional analysis engine (MATH-01) |
+| Numerical precision | Ignoring float arithmetic errors | error propagation tracking (MATH-04) |
+| Axiomatic systems | Mixing in implicit premises | strict track of EpistemicType=MATHEMATICAL |
+| Reliability of citations | Answering "CODATA value is X" off the cuff | RAD math/metrology + provenance |
+
+## MATH-01 — Dimensional Algebra of the 7 SI Base Units + Derived Units
+
+Implemented in-house as a minimal-dependency version (no external libraries such as Pint required).
+
+```python
+from llive.math import Quantity, parse_unit, UnitMismatchError
+
+# 速度 + 時間 = 不可能 (典型的 LLM 幻覚)
+v = Quantity(5.0, parse_unit("m/s"))
+t = Quantity(3.0, parse_unit("s"))
+try:
+    bad = v + t
+except UnitMismatchError as e:
+    print(f"refused: {e}")
+
+# 速度 × 時間 = 距離 (m)
+d = v * t
+assert d.dimensions.matches(parse_unit("m"))
+
+# 力 × 距離 = エネルギー (J)
+F = Quantity(10.0, parse_unit("N"))
+d = Quantity(5.0, parse_unit("m"))
+E = F * d
+assert E.dimensions.matches(parse_unit("J"))  # ✓ Joule
+```
+
+The core of the implementation is the 7-dimensional vector `Dimensions(m, kg, s, A, K, mol, cd)`. Operations are addition/subtraction of dimensions (for product/division). In `Quantity.__add__`, the dimensions are checked → on mismatch it **always raises**.
+
+### Derived Units
+
+`N` (kg·m/s²) / `J` (kg·m²/s²) / `W` (kg·m²/s³) / `Pa` (kg/m/s²) / `Hz` (1/s) / `C` (s·A) / `V` (kg·m²/s³/A) / `ohm` — only the frequently-used range is implemented.
+
+## MATH-08 — Built-in Calculation Engine (Largest Differentiation Axis)
+
+**Core of the design**: do **not** let the LLM do the numerical computation.
+
+```python
+from llive.math import SafeCalculator, extract_expressions
+
+calc = SafeCalculator()
+brief_text = "Compute (2.5 * 7.8) / 0.3 then verify sqrt(16) is exact."
+
+for expr in extract_expressions(brief_text):
+    r = calc.evaluate(expr)
+    print(f"{r.expression} = {r.value}  (ops={r.operation_count}, fns={r.used_functions})")
+# (2.5 * 7.8) / 0.3 = 65.0   (ops=2, fns=())
+# sqrt(16)          = 4.0    (ops=1, fns=('sqrt',))
+```
+
+### What "Safe" Means
+
+Constraints of `Safe`:
+
+- Does not use `eval()` (avoids arbitrary code execution)
+- An AST visitor allows only permitted nodes (`BinOp` / `UnaryOp` / `Constant` / `Call` to whitelist)
+- Function whitelist: `sqrt` / `sin` / `cos` / `log` / `abs` / `mean` / ... (28 functions from the math + statistics modules)
+- Constant whitelist: `pi` / `e` / `tau` / `inf` / `nan`
+- Division by zero is safely rejected with `CalculationError`
+- Attack chains like `__import__('os').system('rm')` are rejected at the attribute-access stage
+
+### Grounding to the Brief
+
+If the goal of a Brief contains an arithmetic expression, `extract_expressions()` extracts it → `SafeCalculator` evaluates it deterministically → the result is injected as a **grounded Stimulus**:
+
+```
+Brief.goal にある式 → SafeCalculator が評価 → 結果が augmented goal に追加 → ledger に固定記録 → LLM はそれを「事実」として参照するだけ
+```
+
+LLM computes → floating-point hallucinations, loss of significance
+llive computes → IEEE 754 precision, reproducible, citable
+
+## Why This Is the Strongest Differentiation Axis
+
+- General-purpose LLMs (GPT / Claude / Gemini) are designed so that "the LLM computes"
+- llive is designed to "**verify** the LLM's output and, if necessary, **recompute** it"
+- Wolfram Alpha is powerful but a closed cloud. llive is fully on-prem
+- Math, physics, engineering, finance, and pharmacy all need "unit dimensions" and "precise computation" → as the first vertical, it has a broad range of applicability
+
+## All 8 Requirements of v0.7-vertical MATH
+
+| FR | Name | Priority |
+|---|---|---|
+| MATH-01 | SI unit dimensional analysis engine | ✅ implemented 1st |
+| MATH-02 | Z3 / Sympy integrated verification layer | 2nd |
+| MATH-05 | Physical constants dictionary (CODATA 2022 + NIST) | 3rd |
+| **MATH-08** | **Built-in calculation engine (differentiation axis)** | ✅ implemented 4th |
+| MATH-03 | Formula parsing (LaTeX/MathML/Sympy AST) | MED |
+| MATH-04 | Numerical precision tracking (IEEE 754) | MED |
+| MATH-06 | Unit conversion + Buckingham π non-dimensionalization | MED |
+| MATH-07 | MATHEMATICAL EpistemicType | MED |
+
+## Evaluation Benchmarks (Vertical-Specific)
+
+- **MMLU math** subset
+- **GSM8K / MATH** dataset
+- **PhysicsBench** (physics unit problems)
+- **DimSafe**: llive's own test set — 1000 items containing unit-dimension errors, targeting recall ≥99 %, precision ≥95 %
+
+## Sources
+
+- Implementation: `llive/src/llive/math/units.py` + `calculator.py`
+- Public API: `from llive.math import Quantity, parse_unit, SafeCalculator, extract_expressions`
+- Tests: `tests/unit/test_math_units.py` (22 items) + `tests/unit/test_math_calculator.py` (24 items)
+- All 1014 PASS / zero regressions
+
+## Next Steps
+
+- Integrate `SafeCalculator` into BriefGrounder → expressions are automatically grounded at the moment a Brief is submitted
+- Append the MATH-05 CODATA dictionary to the RAD `metrology` field
+- In the MATH-02 Sympy verification layer, turn the LLM's formula output into an AST → flag inconsistencies
+
+---
+
+> FullSense ™'s first vertical specialisation. The strategy is to grow an "AI that is strong at math" as the first killer application.
+
+---
+
+# 中文
+
+# 打造在数学与单位上很强的 AI 的第一步 — MATH-01/08 内置计算引擎
+
+## TL;DR
+
+- 作为 llive 的第一个专门化纵向 (specialised vertical)，我们选择了「**数学与单位特化 AI**」(依据用户的战略指示)
+- 通用 LLM 不擅长的 (a) 符号操作的幻觉 (b) 单位量纲的混淆 (c) 数值计算中的误差传播，我们用一个**不让 LLM 进行计算的确定性旁车 (sidecar)** 来克服
+- 在 2026-05-17 的同一会话中，我们实现了 **MATH-01 (SI 单位量纲分析)** + **MATH-08 (内置计算引擎 = 差异化轴)** 的最小骨架，并新增了 47 个测试
+- 一个**必定会阻止** `5 m/s + 3 s = 8` 这类典型幻觉的 API
+
+## 动机 — 通用 LLM 的数学弱点
+
+LLM 能生成在语言上合理的数学式，但不擅长以下几点:
+
+| 观点 | 通用 LLM 的弱点 | 与 llive 既有资产的契合 |
+|---|---|---|
+| 符号操作的幻觉 | 像 `x² + x = 2x³` 这样的错误等式 | 由 EVO-04 Z3 静态验证把关 |
+| 单位量纲 | `5 m/s + 3 s = 8` | SI 量纲分析引擎 (MATH-01) |
+| 数值精度 | 忽视 float 运算误差 | error propagation tracking (MATH-04) |
+| 公理体系 | 混入隐含的前提 | EpistemicType=MATHEMATICAL 的 strict track |
+| 引用的可信度 | 随口回答「CODATA value is X」 | RAD math/metrology + provenance |
+
+## MATH-01 — SI 7 个基本单位 + 导出单位的量纲代数
+
+自行实现了最小依赖版 (无需 Pint 等外部库)。
+
+```python
+from llive.math import Quantity, parse_unit, UnitMismatchError
+
+# 速度 + 時間 = 不可能 (典型的 LLM 幻覚)
+v = Quantity(5.0, parse_unit("m/s"))
+t = Quantity(3.0, parse_unit("s"))
+try:
+    bad = v + t
+except UnitMismatchError as e:
+    print(f"refused: {e}")
+
+# 速度 × 時間 = 距離 (m)
+d = v * t
+assert d.dimensions.matches(parse_unit("m"))
+
+# 力 × 距離 = エネルギー (J)
+F = Quantity(10.0, parse_unit("N"))
+d = Quantity(5.0, parse_unit("m"))
+E = F * d
+assert E.dimensions.matches(parse_unit("J"))  # ✓ Joule
+```
+
+实现的核心是 `Dimensions(m, kg, s, A, K, mol, cd)` 这个 7 维向量。运算就是量纲的加减 (对应乘/除)。在 `Quantity.__add__` 中进行量纲校验 → 不一致时**必定 raise**。
+
+### 导出单位
+
+`N` (kg·m/s²) / `J` (kg·m²/s²) / `W` (kg·m²/s³) / `Pa` (kg/m/s²) / `Hz` (1/s) / `C` (s·A) / `V` (kg·m²/s³/A) / `ohm` — 只实现了高频范围。
+
+## MATH-08 — 内置计算引擎 (差异化轴最强)
+
+**设计的核心**: **不让** LLM 做数值计算。
+
+```python
+from llive.math import SafeCalculator, extract_expressions
+
+calc = SafeCalculator()
+brief_text = "Compute (2.5 * 7.8) / 0.3 then verify sqrt(16) is exact."
+
+for expr in extract_expressions(brief_text):
+    r = calc.evaluate(expr)
+    print(f"{r.expression} = {r.value}  (ops={r.operation_count}, fns={r.used_functions})")
+# (2.5 * 7.8) / 0.3 = 65.0   (ops=2, fns=())
+# sqrt(16)          = 4.0    (ops=1, fns=('sqrt',))
+```
+
+### Safety 的含义
+
+`Safe` 的约束:
+
+- 不使用 `eval()` (避免任意代码执行)
+- AST visitor 只放行被许可的节点 (`BinOp` / `UnaryOp` / `Constant` / `Call` to whitelist)
+- 函数 whitelist: `sqrt` / `sin` / `cos` / `log` / `abs` / `mean` / ... (来自 math + statistics 模块的 28 个函数)
+- 常量 whitelist: `pi` / `e` / `tau` / `inf` / `nan`
+- 除以零会以 `CalculationError` 被安全地 reject
+- 像 `__import__('os').system('rm')` 这样的攻击链会在 attribute access 阶段被 reject
+
+### 对 Brief 的 grounding
+
+如果 Brief 的 goal 中包含算术式，`extract_expressions()` 会抽取出来 → `SafeCalculator` 进行确定性求值 → 将结果作为 **grounded Stimulus** 注入的设计:
+
+```
+Brief.goal にある式 → SafeCalculator が評価 → 結果が augmented goal に追加 → ledger に固定記録 → LLM はそれを「事実」として参照するだけ
+```
+
+LLM 计算 → 浮点幻觉、有效位丢失
+llive 计算 → IEEE 754 精度、可复现、可引用
+
+## 为何这是最强的差异化轴
+
+- 通用 LLM (GPT / Claude / Gemini) 是「LLM 来计算」的设计
+- llive 是「**验证** LLM 的输出，必要时**重新计算**」的设计
+- Wolfram Alpha 很强大，但是封闭的云端。llive 则完全 on-prem
+- 数学、物理、工程、金融、药学全都需要「单位量纲」和「精密计算」→ 作为第一个 vertical，适用范围很广
+
+## v0.7-vertical MATH 的全部 8 项要求
+
+| FR | 名称 | 优先级 |
+|---|---|---|
+| MATH-01 | SI 单位量纲分析引擎 | ✅ 1st 已实现 |
+| MATH-02 | Z3 / Sympy 集成验证层 | 2nd |
+| MATH-05 | 物理常数辞典 (CODATA 2022 + NIST) | 3rd |
+| **MATH-08** | **内置计算引擎 (差异化轴)** | ✅ 4th 已实现 |
+| MATH-03 | 数学式语法解析 (LaTeX/MathML/Sympy AST) | MED |
+| MATH-04 | 数值计算精度跟踪 (IEEE 754) | MED |
+| MATH-06 | 单位换算 + Buckingham π 无量纲化 | MED |
+| MATH-07 | MATHEMATICAL EpistemicType | MED |
+
+## 评估基准 (vertical 专用)
+
+- **MMLU math** subset
+- **GSM8K / MATH** dataset
+- **PhysicsBench** (物理单位问题)
+- **DimSafe**: llive 自有测试集 — 包含单位量纲错误的 1000 个样本，目标 recall ≥99 %, precision ≥95 %
+
+## 来源
+
+- 实现: `llive/src/llive/math/units.py` + `calculator.py`
+- 公开 API: `from llive.math import Quantity, parse_unit, SafeCalculator, extract_expressions`
+- 测试: `tests/unit/test_math_units.py` (22 个) + `tests/unit/test_math_calculator.py` (24 个)
+- 全部 1014 PASS / 零回归
+
+## 下一步
+
+- 把 `SafeCalculator` 集成进 BriefGrounder → 在投入 Brief 的那一刻式子就被自动 ground
+- 把 MATH-05 CODATA 辞典 append 到 RAD `metrology` 分野
+- 在 MATH-02 Sympy 检算层把 LLM 的数学式输出转成 AST → 标记 (flag) 不一致
+
+---
+
+> FullSense ™ 的第一个 vertical specialisation。把「数学很强的 AI」当作第一个杀手级应用来培育的战略。
+
+---
+
+# 한국어
+
+# 수학·단위에 강한 AI를 만드는 첫걸음 — MATH-01/08 내장 계산 엔진
+
+## TL;DR
+
+- llive의 첫 specialised vertical로서 「**수학·단위 특화 AI**」를 선정 (사용자 전략 지시)
+- 범용 LLM이 약한 (a) 기호 조작의 환각 (b) 단위 차원의 혼동 (c) 수치 계산의 error propagation 을 **「LLM에게 계산시키지 않는」 결정론적 사이드카**로 극복
+- 2026-05-17 같은 세션에서 **MATH-01 (SI 단위 차원 해석)** + **MATH-08 (내장 계산 엔진 = 차별화 축)** 의 minimal skeleton을 구현, 테스트 47건 추가
+- `5 m/s + 3 s = 8` 같은 전형적인 환각을 **반드시 멈추는** API
+
+## 동기 — 범용 LLM의 수학적 약점
+
+LLM은 언어적으로 그럴듯한 수식을 생성하지만, 다음에 약합니다:
+
+| 관점 | 범용 LLM의 약점 | llive 기존 자산과의 부합 |
+|---|---|---|
+| 기호 조작의 환각 | `x² + x = 2x³` 같은 잘못된 등식 | EVO-04 Z3 정적 검증으로 gate |
+| 단위 차원 | `5 m/s + 3 s = 8` | SI 차원 해석 엔진 (MATH-01) |
+| 수치 정밀도 | float 연산 오차를 무시 | error propagation tracking (MATH-04) |
+| 공리 체계 | 암묵적 전제를 혼입 | EpistemicType=MATHEMATICAL 의 strict track |
+| 인용의 신뢰성 | "CODATA value is X" 라고 대충 답함 | RAD math/metrology + provenance |
+
+## MATH-01 — SI 7개 기본 단위 + 유도 단위의 차원 대수
+
+최소 의존성 버전을 자체 구현 (Pint 등 외부 라이브러리 불필요).
+
+```python
+from llive.math import Quantity, parse_unit, UnitMismatchError
+
+# 速度 + 時間 = 不可能 (典型的 LLM 幻覚)
+v = Quantity(5.0, parse_unit("m/s"))
+t = Quantity(3.0, parse_unit("s"))
+try:
+    bad = v + t
+except UnitMismatchError as e:
+    print(f"refused: {e}")
+
+# 速度 × 時間 = 距離 (m)
+d = v * t
+assert d.dimensions.matches(parse_unit("m"))
+
+# 力 × 距離 = エネルギー (J)
+F = Quantity(10.0, parse_unit("N"))
+d = Quantity(5.0, parse_unit("m"))
+E = F * d
+assert E.dimensions.matches(parse_unit("J"))  # ✓ Joule
+```
+
+구현의 핵심은 `Dimensions(m, kg, s, A, K, mol, cd)` 라는 7차원 벡터. 연산은 차원의 가감산 (곱/나눗셈에 대응). `Quantity.__add__` 에서 차원 검산 → 불일치는 **반드시 raise**.
+
+### 유도 단위
+
+`N` (kg·m/s²) / `J` (kg·m²/s²) / `W` (kg·m²/s³) / `Pa` (kg/m/s²) / `Hz` (1/s) / `C` (s·A) / `V` (kg·m²/s³/A) / `ohm` — 자주 쓰이는 범위만 구현.
+
+## MATH-08 — 내장 계산 엔진 (차별화 축 최대)
+
+**설계의 핵심**: LLM에게 **수치 계산을 시키지 않는다**.
+
+```python
+from llive.math import SafeCalculator, extract_expressions
+
+calc = SafeCalculator()
+brief_text = "Compute (2.5 * 7.8) / 0.3 then verify sqrt(16) is exact."
+
+for expr in extract_expressions(brief_text):
+    r = calc.evaluate(expr)
+    print(f"{r.expression} = {r.value}  (ops={r.operation_count}, fns={r.used_functions})")
+# (2.5 * 7.8) / 0.3 = 65.0   (ops=2, fns=())
+# sqrt(16)          = 4.0    (ops=1, fns=('sqrt',))
+```
+
+### Safety의 의미
+
+`Safe`의 제약:
+
+- `eval()` 은 사용하지 않는다 (임의 코드 실행 회피)
+- AST visitor로 허용 노드 (`BinOp` / `UnaryOp` / `Constant` / `Call` to whitelist) 만 통과시킨다
+- 함수 whitelist: `sqrt` / `sin` / `cos` / `log` / `abs` / `mean` / ... (math + statistics 모듈에서 28개 함수)
+- 상수 whitelist: `pi` / `e` / `tau` / `inf` / `nan`
+- 0으로 나누기는 `CalculationError` 로 안전하게 reject
+- `__import__('os').system('rm')` 같은 공격 체인을 attribute access 단계에서 reject
+
+### Brief로의 grounding
+
+Brief의 goal에 산술식이 포함되어 있으면, `extract_expressions()` 가 추출 → `SafeCalculator` 가 결정론적으로 평가 → 결과를 **grounded Stimulus** 로 주입하는 설계:
+
+```
+Brief.goal にある式 → SafeCalculator が評価 → 結果が augmented goal に追加 → ledger に固定記録 → LLM はそれを「事実」として参照するだけ
+```
+
+LLM이 계산한다 → 부동소수점 환각, 자릿수 손실
+llive가 계산한다 → IEEE 754 정밀도, 재현 가능, 인용 가능
+
+## 왜 이것이 차별화 축으로서 가장 강한가
+
+- 범용 LLM (GPT / Claude / Gemini) 는 「LLM이 계산한다」 설계
+- llive는 「LLM의 출력을 **검증**하고, 필요하면 **재계산**한다」 설계
+- Wolfram Alpha는 강력하지만 closed cloud. llive는 완전 on-prem
+- 수학·물리·공학·금융·약학 모두가 「단위 차원」과 「정밀 계산」을 필요로 한다 → 첫 vertical로서 넓은 적용 범위
+
+## v0.7-vertical MATH의 8건 전체 요건
+
+| FR | 이름 | 우선 |
+|---|---|---|
+| MATH-01 | SI 단위 차원 해석 엔진 | ✅ 1st 구현 완료 |
+| MATH-02 | Z3 / Sympy 통합 검증층 | 2nd |
+| MATH-05 | 물리 상수 사전 (CODATA 2022 + NIST) | 3rd |
+| **MATH-08** | **내장 계산 엔진 (차별화 축)** | ✅ 4th 구현 완료 |
+| MATH-03 | 수식 구문 해석 (LaTeX/MathML/Sympy AST) | MED |
+| MATH-04 | 수치 계산 정밀도 트래킹 (IEEE 754) | MED |
+| MATH-06 | 단위 변환 + Buckingham π 무차원화 | MED |
+| MATH-07 | MATHEMATICAL EpistemicType | MED |
+
+## 평가 벤치마크 (vertical 전용)
+
+- **MMLU math** subset
+- **GSM8K / MATH** dataset
+- **PhysicsBench** (물리 단위 문제)
+- **DimSafe**: llive 독자 테스트셋 — 단위 차원 오류를 포함한 1000건으로 recall ≥99 %, precision ≥95 %
+
+## 소스
+
+- 구현: `llive/src/llive/math/units.py` + `calculator.py`
+- 공개 API: `from llive.math import Quantity, parse_unit, SafeCalculator, extract_expressions`
+- 테스트: `tests/unit/test_math_units.py` (22건) + `tests/unit/test_math_calculator.py` (24건)
+- 전체 1014 PASS / 회귀 제로
+
+## 다음 한 걸음
+
+- BriefGrounder에 `SafeCalculator` 를 통합 → Brief 투입 시점에 식이 자동으로 ground 된다
+- MATH-05 CODATA 사전을 RAD `metrology` 분야에 append
+- MATH-02 Sympy 검산층에서 LLM의 수식 출력을 AST화 → 불일치 flag
+
+---
+
+> FullSense ™ 의 첫 vertical specialisation. 「수학에 강한 AI」를 첫 킬러 애플리케이션으로 키우는 전략.
