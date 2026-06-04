@@ -6,6 +6,12 @@ updated_at: "2026-05-29"
 id: 88ed294aa107330c6894
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # (連載 #32) llcore CPU PoC battery 完成
 
 ## TL;DR
