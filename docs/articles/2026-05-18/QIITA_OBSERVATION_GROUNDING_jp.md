@@ -1,3 +1,14 @@
+---
+title: '実 Brief 6 件で MATH grounding を観察したら、1 セッションで 6 周のバグ修正サイクルが回った'
+tags:
+  - FullSense
+  - llive
+  - MATH
+  - デバッグ
+  - 解説
+private: false
+---
+
 # 実 Brief 6 件で MATH grounding を観察したら、1 セッションで 6 周のバグ修正サイクルが回った
 
 **1 行 hook**:
