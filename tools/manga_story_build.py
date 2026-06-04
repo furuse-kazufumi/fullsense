@@ -202,7 +202,7 @@ def render_motif(els, motif, y0, y1, font, lang):
         row_ys = [mid_y] if len(rows) == 1 else [zone_top + 58, zone_top + 164]
         for row, cy in zip(rows, row_ys):
             k = len(row)
-            span = 760 / (k + 1)
+            span = (760 if len(rows) == 1 else 680) / (k + 1)  # 2 段は右下のバストを避ける
             for j, it in enumerate(row):
                 cx = span * (j + 1)
                 label = it.get("label", "")
