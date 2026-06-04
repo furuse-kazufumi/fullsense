@@ -54,7 +54,7 @@
       <circle cx="-98" cy="-17" r="14" fill="#1e293b" stroke="#a78bfa"/><text x="-98" y="-14" text-anchor="middle" font-size="9" fill="#a78bfa">M08</text>
       <circle cx="-64" cy="-77" r="14" fill="#1e293b" stroke="#a78bfa"/><text x="-64" y="-74" text-anchor="middle" font-size="9" fill="#a78bfa">M09</text>
     </g>
-    <!-- traveling pulse around the ring (inline path: imgix が mpath xlink 参照を解決できず空を返すため) -->
+    <!-- traveling pulse around the ring (inline path: imgix cannot resolve the mpath xlink reference and returns empty) -->
     <circle r="6" fill="#22d3ee">
       <animateMotion dur="6s" repeatCount="indefinite" rotate="auto" path="M0,-100 A100,100 0 1 1 -0.1,-100 Z"/>
     </circle>
