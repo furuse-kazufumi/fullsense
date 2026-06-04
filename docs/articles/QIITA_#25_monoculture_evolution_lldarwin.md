@@ -548,12 +548,7 @@ automatically adjust the cadence and parameters. The goal is to make this time's
 
 The conceptual diagram I most want you to take away from this article is this:
 
-```
-individual ──▶ [ lleval = glasses ] ──▶ pressure profile (multi-axis case vector)
-                                              │
-                                              ▼
-                  [ lldarwin = culler ] ──▶ parents of the next generation
-```
+![2-tier structure diagram: an individual passes through lleval (glasses = measure) into a multi-axis pressure profile, which passes through lldarwin (culler = cull) into the parents of the next generation](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q25/two_tier_structure_en.svg)
 
 The essence of #25's failure is that **both** of these two tiers were broken:
 
