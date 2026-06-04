@@ -260,7 +260,7 @@ A ladder of increasing certifying power over 300 empirically-contracting n=2 gen
 | inf-norm (max abs row sum < 1) | 88 | 88 |
 | + 2-norm (max singular value < 1) | +49 | 137 |
 | + quadratic SDP (common Lyapunov P) | **+149** | **286 (= 95.3% of 300)** |
-| + degree-4 SOS (lifted Veronese) | +0 | 286 |
+| + degree-4 SOS (lifted Veronese) | +3 (deg4∖deg6 = 0 = no admit unique to deg4; the deg4 cone certifies +3 over the SDP, which deg6 also reaches) | 289 |
 | + degree-6 SOS | +1 | 290 |
 | residual (uncertified at deg≤6) | — | 10 |
 
