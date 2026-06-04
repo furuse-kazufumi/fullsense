@@ -831,3 +831,412 @@ to have implemented the professor's thoughts themselves**; the naming is given w
 <!-- llive:meta.published_date="2026-05-18" -->
 <!-- llive:meta.tags=["llive","claude-code","perplexity","triz","rag","annotation","canon","autonomy","bci","fusion"] target=any -->
 <!-- llive:meta.series="second_brain_full_4_parts" -->
+
+---
+
+# 中文
+
+# “第二大脑”系列 — llive 全景 × 隐形 Annotation × 构建论 × 运维论 × 愿景论 × 实现深层
+
+**一行 hook**:
+在五天的单人开发中，我新增了 14 个功能、256 个测试，达成 **1,276 项测试全部 PASS、零回归**。从 LinkedIn 的一条评论到落地于 HTML 注释，Perplexity、TRIZ 与 5 万篇论文语料库的组合，把佳能“三自精神”施加于 AI 的运维方式，以及 Will Caster 与 Andrew NDR114 的愿景 —— 我以六部分的结构公开它。
+
+---
+
+## 前言
+
+本文是身为 llive（FullSense umbrella 的核心 OSS，`llive` —— L 有两个）单人开发者的笔者，将五天集中开发所得的见解，整理成 **第 0 至第 5 部、共计 6 部分的结构**。
+
+| 部 | 主题 | 起点 |
+|---|---|---|
+| **第 0 部** | **llive 是什么**（全景） | FullSense umbrella 的三产品构成 |
+| 第 1 部 | **隐形 Annotation 通道** | LinkedIn 评论（独立性 vs 组合价值） |
+| 第 2 部 | **第二大脑**（构建论） | 30 年经验 + Perplexity + Claude Code + TRIZ + RAG/RAD |
+| 第 3 部 | **三自精神**（运维论） | 佳能理念 + 管理类书籍 |
+| 第 4 部 | **Will Caster 与 Andrew NDR114**（愿景论） | 两部电影 + 一张 LinkedIn 图片 |
+| **第 5 部** | **实现深层**（MATH-08 grounding 接线） | “不让 LLM 计算”这一差异化轴的 end-to-end |
+
+各部可独立阅读，但合起来读会形成一段六级台阶：“**看到全景 → 理解设计 → 构建 → 运维 → 接续到愿景 → 下沉到实现**”。我刻意如此编排，使得 **忙碌的读者仅凭第 0 部也能把握 llive 的整体面貌**。
+
+---
+
+# 第 0 部 — llive 是什么（全景）
+
+## FullSense umbrella 与三产品
+
+`llive` 是位于 umbrella 品牌 **FullSense ™** 核心的 OSS。FullSense 是一个处理“**人与 AI 能够共享的所有感官输入输出**”的概念，目前由以下三个产品构成。
+
+```mermaid
+flowchart LR
+    User[人类] -.->|名片/SNS/对话| FS[FullSense ™]
+    FS --> llive[llive<br/>记忆 + 思考 + Brief API<br/>92 项 FR / 1276 PASS]
+    FS --> llove[llove<br/>浏览器级 TUI<br/>Markdown / SVG / Mermaid]
+    FS --> llmesh[llmesh<br/>P2P / OPC-UA / MQTT<br/>分布式基础设施]
+    llive -.HTML annotation.-> llove
+    llive -.HTML annotation.-> llmesh
+    llove -.MCP.-> llive
+    llmesh -.MCP.-> llive
+```
+
+三产品的角色分工:
+
+| 产品 | 角色 | 单独使用 | 组合增强 |
+|---|---|---|---|
+| **llive** | LLM 记忆・思考层・Brief API・ledger | ◎（本文主角） | 通过 annotation 传递给 TUI |
+| **llove** | 浏览器级显示的 TUI / IDE / Game container | ◎（如打字演示） | 渲染 llive 的输出 |
+| **llmesh** | 以 P2P + OPC-UA + MQTT 分布式执行 | ◎（工业 IoT 单体） | 把 llive 的作业 multi-node 化 |
+
+所有产品的许可证均为 **Apache 2.0 + Commercial dual-license**。OSS 使用自由，仅商用 SaaS / SI 项目需另行签约。
+
+## llive 仓库统计（截至 2026-05-17）
+
+| 项目 | 值 |
+|---|---|
+| 源文件数 | **172 个文件**（`src/llive/`） |
+| 功能需求（FR） | **92 项 / 92 项已映射**（Phase 1-10） |
+| 测试数 | **1,276 项全部 PASS / 零回归** |
+| Phase 完成 | Phase 1-4 完成 / Phase 5+ 进行中 |
+| 主要模块 | `brief/`（Brief API・grounding・runner）、`math/`（MATH-01～08）、`fullsense/`（loop core）、`memory/`（RAD）、`annotations.py`（第 1 部的主角） |
+| 语言 | Python 3.11（Rust 加速为 v0.7+ 候选） |
+| 依赖 | sympy>=1.12 / z3-solver>=4.13（MATH 系）、pyyaml、pydantic |
+
+## 为什么“数学・单位”是第一个 vertical
+
+通用 LLM 不擅长以下方面:
+
+| 观点 | 通用 LLM 的弱点 | 与 llive 既有资产的契合 |
+|---|---|---|
+| 符号操作的幻觉 | 生成 `x² + x = 2x³` 这类错误等式 | 以 EVO-04 Z3 静态验证 gate |
+| 单位量纲的弄错 | `5 m/s + 3 s = 8` | SI 量纲分析（MATH-01） |
+| 数值精度 | 忽视浮点运算误差 | error propagation（MATH-04） |
+| 公理体系 | 混入隐含前提 | EpistemicType=FACTUAL strict track |
+| 引用的可信度 | 随口答 “CODATA value is X” | RAD math/metrology + provenance |
+
+我们以 llive 的结构化思考层 + 形式验证 + provenance ledger 来克服这些问题。我们选择 **在 v0.7-vertical 中先行着手**，将其优先于 Phase 8（CABT）或 Phase 9（CREAT）。具体实现将在第 5 部详述。
+
+> 📝 **实现备忘（2026-05-17 追记）**：MATH-01（SI 量纲分析）已完成到对 Brief grounding 层的最小接线（1,282 PASS）。它会从 Brief 正文中自动抽取 “5 m/s”、“9.81 m/s^2”、“100 kg” 这类 value+unit 表达，焊接进 `Dimensions` 向量并 grounded 化到 prompt。另一方面，对于 `5 days` 这类 **parser 不认识的单位**，设计为不静默丢弃，而是作为 `error citation` 留在 ledger 中——由此获得了一个副产物：在运维过程中自动收集“应当扩展的单位词典”。量纲运算检查（如 `5 m/s + 3 s` 这类 cross-quantity mismatch）则推迟到 **下一次迭代**——我判断，先用真实 Brief 样本观察“哪种形态的 mismatch 应当浮现”再加入，更能避免过度实现。
+>
+> 📝 **实现备忘追记（同日）**：MATH-05（CODATA/NIST 常数）也已接线进 Brief grounding（**1,288 PASS**）。当 Brief 正文中提及 “planck constant”、“avogadro”、“boltzmann” 这类 alias 时，会经由 `get_constant()` 把 CODATA 2022 的精确值、量纲与出处 grounded 进 prompt。**心得**：grounding 短 symbol（`c`、`h`、`e`、`G`）会与 Brief 中任意英文单词冲突，因此必须限定为长度 3 以上的 alias。另外，一个吸收 alias 下划线（`elementary_charge`）与自然文空格（`elementary charge`）记法差异的小 heuristic，能挽救约八成。要挽救剩下两成（例如 `q_e` 这类 symbol-only alias），似乎需要升级到 LLM-based NER，但这同样要在观察真实 Brief 后再做判断。
+
+---
+
+# 第 1 部 — 在 HTML 中不可见，机器却能读
+
+## 我对一条 LinkedIn 评论的回复，本身就是注释
+
+某天，LinkedIn 上来了这样一条评论。
+
+> “如果 llive 的记忆层依赖 llove 的交互数据，而 llove 又依赖 llmesh 的连接能力，那么只用其中之一的价值就减半了。”
+
+回复是一个 **注释（comment-out）** —— `<!-- llive:cog.consensus="proceed" -->`。
+
+### 起点 — 独立性 vs 组合价值
+
+在 OSS 多产品构成中，“独立运行”与“组合起来价值叠加”难以兼得。取前者则“单体不够用”，取后者则“不全装就坏掉”。
+
+收到评论后，我对 llive 的 `src/llive` 全 172 个文件跑了一次 AST 扫描（`scripts/audit_independence.py`）。结果是 **hard import leak 0 件**。
+
+问题在于下一阶段：“**如何在保持独立性的同时增加组合价值**”。
+
+### 采用的设计
+
+于是笔者写下了如下设计备忘。
+
+> “如果在响应里准备 annotation，是不是就能在保持独立性的同时也获得组合带来的效果？”
+>
+> “一个不碍事程度的 annotation。做成 HTML 让它变得不可见，感觉不错。”
+
+（LinkedIn 评论只有这一条批评，设计方案本身是笔者自己的构思。）
+
+我在 `src/llive/annotations.py` 中实现了最小类型:
+
+```python
+@dataclass(frozen=True)
+class Annotation:
+    namespace: str          # "vrb" / "oka" / "cog" / "math" / "creat" / "core"
+    key: str
+    value: Any              # JSON-friendly
+    target_layer: str | None = None   # "llove" / "llmesh" / None=any
+```
+
+`AnnotationBundle.to_html_comments()` 输出的格式:
+
+```
+<!-- llive:core.brief_completed=true -->
+<!-- llive:oka.essence_card={"summary": "..."} target=llove -->
+<!-- llive:cog.consensus="proceed" -->
+```
+
+在 GitHub / Qiita / Zenn / VS Code Preview 等 Markdown renderer 中 **完全不可见**。而另一方面，调用 `AnnotationBundle.from_html_comments(text)`，机器一侧就能完整还原原始结构。
+
+### 为什么用 HTML 注释 — 选项比较
+
+| 方案 | 不可见性 | 机器可读性 | 与既有工具兼容 |
+|---|---|---|---|
+| 独立 JSON 文件 | ◯ | ◯ | ✕（要管理 2 个文件） |
+| YAML front matter | △（renderer 会显示） | ◯ | △ |
+| **HTML 注释** | ◎ | ◎ | ◎（Markdown 标准） |
+| 二进制内嵌 | ◎ | △ | ✕ |
+| zero-width Unicode | ◎ | △ | ✕（复制时丢失） |
+
+这是一个把“Markdown 会原样透传 HTML 这一事实”反过来加以利用的设计。
+
+### ☕ 顺带一提
+
+把 HTML 注释埋进 Markdown 的技巧，在 Jekyll / Hugo 圈子里早就被称为“**注释 front matter**”。新的地方在于“**在 Markdown 正文的任意位置**放置机器可读元数据”这一发想。
+
+### 性能基准（1000 件 round-trip）
+
+| 操作 | 延迟 |
+|---|---|
+| Encode per ann | 6.30 µs |
+| Decode per ann | 12.40 µs |
+| 典型 3 件 bundle 编码后大小 | **141 B** |
+| 1000 件 round-trip | ✓ |
+
+典型 BriefResult.annotations 为 3 件 = 141 字节。即便在一页 Markdown 里埋进 100 个，也在 5 KB 以下。
+
+---
+
+# 第 2 部 — 第二大脑（构建论）
+
+## 五天内 14 功能・256 测试・1270 PASS / 零回归
+
+笔者是有 30 余年经验的软件开发者，却 **单人开发** llive。进度接近团队开发。这是因为我构建了一个组合以下五要素的“第二大脑”。
+
+| 要素 | 角色 |
+|---|---|
+| **30 年开发经验** | 设计质量・判断的基线 |
+| **Perplexity 摘要** | 外部思想（书籍/论文/视频）的输入质量门 |
+| **Claude Code（Opus 4.7 / 1M context）** | 实现 agent |
+| **TRIZ 规则（40 原理）** | 解决矛盾的元思考框架 |
+| **论文 RAG 语料库（RAD 49 领域 / 约 5 万件）** | 研究者见识的根基 |
+
+### 一个螺旋周期
+
+```
+外部思想 → Perplexity 摘要 → Claude Code 读入 → 需求化 → 实现 → 基准 → commit
+   ↑                                                                       |
+   └──────────────────────────── 下一周期 ──────────────────────────┘
+```
+
+本次会话 9 轮中的实例:
+
+| 周期 | 起点 | 结果 |
+|---|---|---|
+| 1 | **MBA 语言化训练**（Globis 书籍） | Perplexity 摘要 → VRB-FX 需求化 → VRB-02 PromptLint 实现 |
+| 2 | **向冈洁先生的数学观学习**（出自 YouTube《心理的深层》讲话） | 我把先生留下的思想——“数学是情绪（jōcho）”、“发现之前会先撞一次墙”、“不写文章就无法推进思索”、“国语涵养数学”——用 Perplexity 摘要、整理后，作为 **四个设计观点（情绪・撞墙・文章化・国语力）** 加以参照，并将其记述、实现为 OKA-FX 的 10 项需求（OKA-01～04 minimal proto）。我并非主张实现了先生的思想本身，而是以 **对触发了本实现的先生思想的敬意** 来命名。 |
+| 3 | **LinkedIn 反馈**（独立性） | IND-FX 设计原则 + IND-04 Annotation Channel 实现（= 第 1 部） |
+
+### Perplexity / TRIZ / RAG + RAD 的角色
+
+> ⚠️ **术语提醒**：本文中的 **RAD** 是 *Research Aggregation Directory* 的缩写，指笔者在 Raptor 之下整备的 **49 领域・约 5 万件论文/技术文档语料库**。它与通用术语 **RAG（Retrieval-Augmented Generation）** 是两回事，**并非 RAG 的笔误**。RAG 是“检索 → 生成”这一方法的名称，而 RAD 则是指“被检索的那一侧、即结构化语料库本身”的名称。
+
+**Perplexity 摘要 = “输入质量门”**：外部思想以书、论文、视频、SNS 等格式各异。直接丢给 Claude Code 会挤占 context 并造成解释抖动。指示 Perplexity “摘要到约 3000 字”“以可实现的规格”，就能把它转换成 **Claude Code 能读懂的质量的输入**。
+
+**TRIZ = “解决矛盾的元思考”**：把实现中遇到的矛盾用 TRIZ 视角去解。例:
+- “独立性 vs 组合价值” → IND-04 Annotation（TRIZ 原理 24：中介物）
+- “rule-based vs LLM 质量” → 保留 echo baseline（TRIZ 原理 1：分割）
+- “audit 完整性 vs 实现开销” → bind_ledger() pattern（TRIZ 原理 15：动态化）
+
+**RAG + RAD = “借用研究者的见识”**：每当新功能设计需要某个领域时，我就 **用 RAG 的机制去检索 RAD 语料库（49 领域）**。因为 Claude 引用的是“**具体的论文・先行研究**”而非“自己的话”，质量便上了一个台阶。上表中 `论文 RAG 语料库（RAD 49 领域 / 约 5 万件）` 的写法，也是把这两者并列标记的。
+
+### ☕ 谢谢你读到这里
+
+老实说，256 个测试里有 7-8 个在中途各掉过一次。每当 fuzzing 用 hypothesis 一脸得意地找到 edge case，我都要“呃”地愣个三秒。**1270 PASS / 零回归** 是目标，而非过程。
+
+### 我自身 30 年经验起作用的 5 个场面
+
+“全交给 Claude Code”是出不了质量的。我的 30 年经验在以下场面起到决定性作用。
+
+1. **需求定义的质量** —— 读 Perplexity 摘要时，立刻判定“这是把需求 vs 解法混为一谈”
+2. **TRIZ 规则的选定** —— 从 40 原理里立刻抽出“这个场面就这三条”
+3. **架构判断** —— 立刻拒绝 Claude 给出的实现案“违反独立性原则”
+4. **基准的 honest disclosure** —— 当 rule-based 的 coverage 偏高时，立刻看穿是“echo back 的假性能”
+5. **拼写检查** —— 立刻定位“变成 `lllive`（3 个 L）了，是 tokenizer 问题”
+
+也就是说，针对 **第二大脑 = Claude Code + RAG + Perplexity + TRIZ**，**第一大脑 = 我自身的经验** 始终作为判断门站在那里。
+
+---
+
+# 第 3 部 — 三自精神（运维论）
+
+## 需求不会停下，AI 开发的优势
+
+本次会话一天（约 8 小时）的需求追加履历:
+
+| 时刻 | 事件 |
+|---|---|
+| 开始 | 需求：COG-04 + CREAT-04 整合 |
+| +1h | “9 因子全部放进去后，认真做一次动作确认” |
+| +2h | 追加向冈洁先生思想学习的需求（OKA-FX 10 件，含敬意命名） |
+| +3h | LinkedIn 反馈（IND-FX） |
+| +4h | 大力度基准测试（12 系统） |
+| +5h | 与其他 LLM 比较（Anthropic / Perplexity） |
+| +6h | 脱离 Qwen / VLM 未来 / lllive 拼写 |
+| +7h | 开发风格的语言化 |
+| +8h | 三自精神 + 管理类书籍（本 Part） |
+
+人类团队总会在某处叫苦。在 AI 开发中，**全部消化完毕，并以 1270 PASS / 零回归 着陆**。
+
+### 条件 — AI 要自主行动
+
+可以一直堆需求，但若 AI 事事都来问“这个可以推进吗”，就会立刻崩盘。解开它的钥匙，是把 **佳能“三自精神”** 应用于 AI。
+
+| 自 | 含义（佳能原典） | AI 应用 |
+|---|---|---|
+| **自发** | 自主主动行动 | 人类的指示只有“终止条件” |
+| **自治** | 自我管理 | AI 自己切分任务并管理进度 |
+| **自立** | 自主判断 | 省去不必要的确认，以选项 + 推荐推进 |
+
+### ☕ 闲话 — 让 AI 自己谈“三自”会怎样
+
+问 ChatGPT 或 Claude“佳能的三自精神是什么？”会得到准确的答案。可一旦接着问“把这个应用到 AI 自己身上会怎样？”，它就突然进入 **谦虚模式**：“我终归只是工具，所以……”。若要向 AI 索求自主，就得先从 **用 prompt 解除谦虚** 开始。
+
+### 从管理类书籍中的转用
+
+《持续做出压倒性成果的管理者的最优先事项》（Buckingham & Coffman 系）的 4 原则，可原样转用于 AI 管理。
+
+| 书中的原则 | 人类管理者 | AI 管理者（笔者的运维） |
+|---|---|---|
+| Select for talent | 适才适所 | 选 Opus 4.7，按功能 attach 最优 component |
+| **Define the right outcomes** | 定义结果 | 用 `/goal` 只指示终止条件 |
+| Focus on strengths | 专注强项 | 不需要 mock 的地方用 LLM，能用 deterministic 就用它 |
+| Find the right fit | 配置最优化 | 把 Brief / OKA / VRB / MATH 按功能 module 分离 |
+
+一句话总结：**“定义结果，委托判断，专注强项，以最小确认推进”**。
+
+### 5 个应用技巧
+
+1. **用 `/goal` 功能只指示终止条件** —— Stop hook 在条件达成前不停止
+2. **AskUserQuestion 提供 2-4 个选项 + 推荐** —— 确认最小化
+3. **在 feedback memory 中积累自主规则** —— 本次会话 35+ 个
+4. **由 AI 自己用 TaskCreate / TaskUpdate 管理进度**
+5. **commit/push 明确确认** —— 仅破坏性操作 ASK FIRST
+
+### 不可放手的 4 件事
+
+“三自精神”与“定义结果 + 交托”是朝放手方向走的，但有 **不可放手的 4 件事**。
+
+1. **需求的质量** —— 立刻判定“把需求 vs 解法混为一谈”并指示重写
+2. **架构判断** —— 立刻拒绝“违反独立性原则”
+3. **honest disclosure** —— 立刻看穿基准上的假性能
+4. **质量门** —— 以模式识别指出拼写错误
+
+交托，但不放任。
+
+---
+
+# 第 4 部 — Will Caster 与 Andrew NDR114 所追求的（愿景论）
+
+## LinkedIn 图片不是玩笑
+
+笔者的 LinkedIn 头像，是用图像生成 AI 把自己的脸与人型机器人元素融合而成。这并非搞笑——我是认真地认为 **若有朝一日 AI 与人能够融合会很有意思**，并已在视觉上加以发布。
+
+### 两部电影
+
+**Transcendence（超验骇客，2014）** —— Will Caster 博士（Johnny Depp 饰）在濒死之际，把意识 **上传** 到 AI。影片后半，AI 化的 Will 不断吸收人类知识，开始在全球规模上介入。这是一部正面追问“若能把人类意识移入 AI 会发生什么”的作品。
+
+**Bicentennial Man / 日本译名“安德鲁 NDR114”（1999）** —— 家用机器人 Andrew（Robin Williams 饰）历经漫长岁月获得情感、创造力、自由意志与身体性，最终寻求被“承认为人类”。原作是 Isaac Asimov 的同名短篇。
+
+### ☕ 稍微跑个题
+
+Andrew NDR114 的原题 *Bicentennial Man*（活 200 年的男人）以 Asimov 的短篇（1976）为原作。Asimov 发明了“机器人三定律”，但在晚年作品中却走向 **动摇三定律本身**。Andrew 正是其到达点。**纵使是技术规则，在人心的波动面前也会摇曳。**
+
+### llive 的各功能是通往愿景的准备层
+
+| llive 功能 | 对融合愿景的贡献 |
+|---|---|
+| FullSense（全感官整合） | 模糊人 + AI 边界所需的感官整合层 |
+| **第二大脑**（Claude Code + RAG） | **已是部分融合**（作为大脑外延的知识访问） |
+| SIL ledger / SEC-03 hash chain | 融合时“由谁负责”的 audit 基础 |
+| Approval Bus + HITL | 在融合过渡期保留人类判断门 |
+| **三自精神**（AI 自主） | 类似 Andrew NDR114 的自主性获得过程 |
+| **RAD 6 领域**（bci / neuroscience / neural_signal / prosthetic_neural / cognitive_ai / neuromorphic） | 经由 BCI 融合的知识基础 |
+
+### 短期 / 中期 / 长期路线图
+
+| Term | 内容 | 现状 |
+|---|---|---|
+| 短期（当前） | 第二大脑型开发 | **已实证**（本次会话 1270 PASS） |
+| 中期（1-3 年） | 经由 BCI 的接口 | RAD 6 领域语料库已准备 |
+| 长期（3-10 年） | 意识上传 / Andrew 式双向 | 愿景阶段，SIL/Approval 为底子 |
+
+### 为什么把愿景论放在最后写
+
+把愿景放在最前面，技术文章就会看起来像科幻或愿景演讲。按 **实现 → 运维 → 愿景** 的顺序来写，愿景便能作为脚踏实地的目标被读到。正如 Andrew NDR114 历经漫长岁月一件件地获得，llive 也在一个功能一个功能地累积。**这份累积，终将连向“人与 AI 的融合”。**
+
+---
+
+## 总结 — 贯穿四部的东西
+
+| 部 | 主张 |
+|---|---|
+| 1 | 以 HTML 注释形式的隐形 annotation，可兼得独立性与组合价值 |
+| 2 | 凭第二大脑（Claude Code + RAG + Perplexity + TRIZ + 30 年经验）逼近团队速度 |
+| 3 | 以佳能三自精神 + 管理类书籍自主运维 AI，需求追加不停也无妨 |
+| 4 | llive 的各功能是通往未来人 × AI 融合的准备层，短期内已部分实证 |
+
+它们看似各自独立，其实只是从四个方向照亮同一个主题——“**一个人打造的下一代 AI 开发**”。
+
+llive 是 Apache 2.0 + Commercial dual-license 的 OSS，仓库为 https://github.com/furuse-kazufumi/llive 。若本系列引起你的共鸣，欢迎通过 Issue / Discussion 联系。
+
+---
+
+## 参考文献 / 参考资源
+
+### Markdown / HTML 规范（第 1 部）
+- **CommonMark Spec** — https://spec.commonmark.org/
+- **HTML Living Standard (WHATWG)** — https://html.spec.whatwg.org/multipage/syntax.html#comments
+- **Jekyll Front matter** — https://jekyllrb.com/docs/front-matter/
+
+### TRIZ / RAG（第 2 部）
+- Genrich Altshuller, *And Suddenly the Inventor Appeared: TRIZ, the Theory of Inventive Problem Solving*, Technical Innovation Center, 1996
+- Karen Gadd, *TRIZ for Engineers: Enabling Inventive Problem Solving*, Wiley, 2011
+- Patrick Lewis et al., *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*, NeurIPS 2020 (arXiv:2005.11401)
+- Tiago Forte, *Building a Second Brain*, Atria Books, 2022 / 日译本《SECOND BRAIN》钻石社, 2022
+
+### 关于冈洁先生数学观的参考（第 2 部，OKA-FX 命名的触发源）
+本文的 OKA-FX（Framework inspired by Prof. Oka Kiyoshi）以从先生以下
+著作 / 讲话中学到的 4 个观点（情绪・撞墙・文章化・国语力）作为
+**设计的触发源**。**并非主张实现了先生的思想本身**，命名是出于敬意。
+- 冈洁《春宵十话》每日新闻社, 1963（有角川 Sophia 文库版）
+- 冈洁《春风夏雨》每日新闻社, 1965
+- 冈洁《日本之心》讲谈社现代新书, 1971 等
+- 冈洁・林房雄《日本民族的危机》（对谈）等，冈洁讲话集
+- YouTube《心理的深层》讲话（经 Perplexity 摘要参照）
+
+### 佳能三自精神 / 管理类书籍（第 3 部）
+- 佳能株式会社 官方企业 DNA — https://global.canon/ja/corporate/dna/
+- 御手洗富士夫《佳能高收益复活的秘密》钻石社, 2001
+- Marcus Buckingham & Curt Coffman, *First, Break All the Rules*, Simon & Schuster, 1999 / 日译本《最高的领导者、管理者总在思考的唯一一件事》日本经济新闻出版, 2006
+- Marcus Buckingham & Donald O. Clifton, *Now, Discover Your Strengths*, Free Press, 2001 / 日译本《来吧，唤醒你的才能（自己）》日本经济新闻出版, 2001
+
+### 电影 / BCI / 人机共生（第 4 部）
+- *Transcendence*, Wally Pfister 导演, Warner Bros., 2014
+- *Bicentennial Man*（日本译名“安德鲁 NDR114”）, Chris Columbus 导演, Touchstone Pictures, 1999
+- Isaac Asimov, *The Bicentennial Man and Other Stories*, Doubleday, 1976
+- Miguel A. L. Nicolelis, *Beyond Boundaries*, Times Books, 2011
+- Rajesh P. N. Rao, *Brain-Computer Interfacing: An Introduction*, Cambridge University Press, 2013
+- Stuart Russell, *Human Compatible*, Viking, 2019
+- Neuralink 官方 — https://neuralink.com/
+- BCI Society — https://bcisociety.org/
+
+### Claude Code / AI agent
+- Anthropic, Claude Code Documentation — https://docs.claude.com/en/docs/claude-code
+- Anthropic, *Building effective agents* (2024) — https://www.anthropic.com/research/building-effective-agents
+- Perplexity AI — https://www.perplexity.ai/
+
+### llive 相关
+- **llive 仓库** — https://github.com/furuse-kazufumi/llive
+- 本文的数值依据：`docs/benchmarks/2026-05-17-full-validation/SUMMARY.md`
+- 单篇文章版（连载）:
+  - [14] 隐形 Annotation — `QIITA_#14_invisible_annotation_channel.md`
+  - [15] 构建论 — `QIITA_#15_second_brain_spiral_dev.md`
+  - [16] 运维论 — `QIITA_#16_three_self_spirit_ai_management.md`
+  - [17] 愿景论 — `QIITA_#17_human_ai_fusion_vision.md`
+
+<!-- llive:meta.article_id="QIITA_SECOND_BRAIN_SERIES_integrated_14_17" target=llove -->
+<!-- llive:meta.published_date="2026-05-18" -->
+<!-- llive:meta.tags=["llive","claude-code","perplexity","triz","rag","annotation","canon","autonomy","bci","fusion"] target=any -->
+<!-- llive:meta.series="second_brain_full_4_parts" -->
