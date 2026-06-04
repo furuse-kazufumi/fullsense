@@ -358,7 +358,7 @@ case が多すぎると、たまたま順序の先頭に来た case で勝者が
 貯蔵庫由来の多様性注入が減り、かつ少数系統が固定して diversity も伸びなくなる。
 ちょうどいい「放置加減」が真ん中にある、という非線形な世界です。
 
-![再投入頻度 sweep: diversity は interval=5 でピーク（非単調）](../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg)
+![再投入頻度 sweep: diversity は interval=5 でピーク（非単調）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg)
 
 運用指針はこうなります——**系統保持を最優先するなら interval=1（8/8 全系統生存）**、
 **系統保持と行動多様性を両立させたいなら interval=5（5/8 保持しつつ diversity 最大）**。
