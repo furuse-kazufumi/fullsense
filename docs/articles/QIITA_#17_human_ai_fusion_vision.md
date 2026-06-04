@@ -14,6 +14,12 @@ slide: false
 ignorePublish: true
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # Will Caster と Andrew NDR114 が目指したもの — llive のビジョン論
 
 > 📚 **連載ナビ**: ← #16 三自の精神で AI 運用 ｜ **#17 本記事** ｜ #18 GPU 無し PC 主役の LLM 基盤 → ｜ [連載 LINK_MAP](./QIITA_#24_LINK_MAP.md)。※ 各記事は単独でも読めます（リンクは回遊用）。
