@@ -121,7 +121,23 @@ def norm_tags(meta: dict) -> list[dict]:
     tags = meta.get("tags") or []
     if isinstance(tags, str):
         tags = [tags]
-    return [{"name": t, "versions": []} for t in tags if t and t != "TODO_TAG"]
+    out = []
+    for t in tags:
+        if not t or t == "TODO_TAG":
+            continue
+        name = re.sub(r"\s+", "_", str(t).strip())  # Qiita tags cannot contain spaces -> 403; normalise to '_'
+        if name:
+            out.append({"name": name, "versions": []})
+    return out
+
+
+def real_id(meta: dict) -> str | None:
+    """Frontmatter id, treating 'null'/'none'/'' as ABSENT (so we POST-create, not PATCH /items/null)."""
+    v = meta.get("id") or meta.get("qiita_item_id")
+    if v is None:
+        return None
+    v = str(v).strip()
+    return v if v and v.lower() not in ("null", "none") else None
 
 
 def as_bool(v, default=True) -> bool:
