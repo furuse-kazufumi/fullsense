@@ -425,13 +425,7 @@ llive 用户 **只需使用 CREAT**，便能被补全「自己未曾意识的视
 
 也就是说，llive 是:
 
-```
-[Phase 1: llive 开发者 (= 我)]
-  raptor 语料库 + memory + CLAUDE.md → AI 补全多视角 → 一天 32 件需求
-
-[Phase 2: llive 终端用户]
-  llive CREAT + Brief Grounder (TRIZ × RAD) → llive 补全多视角 → 用户无需意识到这些视角
-```
+![llive 的两阶段图: Phase 1 开发者通过语料库补全多视角, Phase 2 终端用户通过 CREAT 获得同样的优势](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q13/llive_two_phase_zh.svg)
 
 llive 本身就是把「语料库先行策略的优势」传播给用户的机制。
 
