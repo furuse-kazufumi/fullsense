@@ -1,3 +1,14 @@
+---
+title: '「第二の脳」シリーズ — llive 全景 × 不可視 Annotation × 構築論 × 運用論 × ビジョン論 × 実装の深層'
+tags:
+  - FullSense
+  - llive
+  - セカンドブレイン
+  - AIエージェント
+  - 解説
+private: false
+---
+
 # 「第二の脳」シリーズ — llive 全景 × 不可視 Annotation × 構築論 × 運用論 × ビジョン論 × 実装の深層
 
 **1 行 hook**:
