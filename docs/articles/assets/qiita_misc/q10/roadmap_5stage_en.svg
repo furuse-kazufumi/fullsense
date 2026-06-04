@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1180" viewBox="0 0 900 1180" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="1180" fill="#f8fafc"/>
+  <text x="450" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">5-Stage Roadmap to Break Free From Qwen Dependence</text>
+
+  <!-- Stage A -->
+  <rect x="120" y="70" width="660" height="150" rx="14" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="150" y="105" font-size="19" font-weight="700" fill="#0c4a6e">Stage A (short term, ~3 months)</text>
+  <text x="150" y="138" font-size="16" fill="#0f172a">• Freeze the LLM core</text>
+  <text x="150" y="166" font-size="16" fill="#0f172a">• Maximize peripheral differentiation</text>
+  <text x="150" y="194" font-size="16" fill="#0f172a">• Thicken "layers that don't use an LLM" via CABT hook / MATH-08 / CREAT-01</text>
+  <line x1="450" y1="220" x2="450" y2="248" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage B -->
+  <rect x="120" y="255" width="660" height="150" rx="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="150" y="290" font-size="19" font-weight="700" fill="#1e3a8a">Stage B (mid term 1, 3-6 months)</text>
+  <text x="150" y="323" font-size="16" fill="#0f172a">• A specialised LoRA adapter for llive</text>
+  <text x="150" y="351" font-size="16" fill="#0f172a">• Trainable on RTX 3090-class GPUs</text>
+  <text x="150" y="379" font-size="16" fill="#0f172a">• Inject memory bias into attention (prelude to full CABT-07)</text>
+  <line x1="450" y1="405" x2="450" y2="433" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage C -->
+  <rect x="120" y="440" width="660" height="150" rx="14" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="150" y="475" font-size="19" font-weight="700" fill="#3730a3">Stage C (mid term 2, 6-12 months)</text>
+  <text x="150" y="508" font-size="16" fill="#0f172a">• Distillation: qwen2.5:14b → llive-7b</text>
+  <text x="150" y="536" font-size="16" fill="#0f172a">• Training data: RAD 49 fields + ledger successes + TRIZ output</text>
+  <text x="150" y="564" font-size="16" fill="#0f172a">• Multi-track sub-network (per EpistemicType)</text>
+  <line x1="450" y1="590" x2="450" y2="618" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage D -->
+  <rect x="120" y="625" width="660" height="150" rx="14" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="150" y="660" font-size="19" font-weight="700" fill="#5b21b6">Stage D (long term 1, 1-2 years)</text>
+  <text x="150" y="693" font-size="16" fill="#0f172a">• Replace Transformer blocks with memory-coupled ones</text>
+  <text x="150" y="721" font-size="16" fill="#0f172a">• Cognitive Block Replacement (full implementation of CABT-01 to 07)</text>
+  <text x="150" y="749" font-size="16" fill="#0f172a">• Approval-native decoding (architectural version of constitutional AI)</text>
+  <line x1="450" y1="775" x2="450" y2="803" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage E -->
+  <rect x="120" y="810" width="660" height="150" rx="14" fill="#fae8ff" stroke="#c026d3" stroke-width="2"/>
+  <text x="150" y="845" font-size="19" font-weight="700" fill="#86198f">Stage E (long term 2, 2-3 years)</text>
+  <text x="150" y="878" font-size="16" fill="#0f172a">• Non-Transformer LLM core (Mamba / RWKV / Hyena / RetNet)</text>
+  <text x="150" y="906" font-size="16" fill="#0f172a">• Surprise-native pretraining (Bayesian Surprise built into the loss)</text>
+  <text x="150" y="934" font-size="16" fill="#0f172a">• TRIZ-guided architecture search (AutoML-Zero + TRIZ hybrid)</text>
+
+  <text x="450" y="1010" text-anchor="middle" font-size="16" fill="#475569">Periphery (frozen) → LoRA → distillation → block replacement → non-Transformer core</text>
+  <text x="450" y="1042" text-anchor="middle" font-size="15" fill="#64748b">From "wrapping over Qwen" to "removing Qwen from the inside"</text>
+</svg>

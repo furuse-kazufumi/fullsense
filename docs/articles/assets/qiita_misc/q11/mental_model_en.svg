@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="640" viewBox="0 0 900 640" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3a4a5c"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="640" fill="#f7f9fc"/>
+
+  <!-- Qwen box -->
+  <rect x="220" y="30" width="460" height="240" rx="14" fill="#eef3f8" stroke="#5a6b7d" stroke-width="2"/>
+  <text x="450" y="62" text-anchor="middle" font-size="20" font-weight="700" fill="#2b3b4d">Qwen (general language ability)</text>
+  <line x1="250" y1="76" x2="650" y2="76" stroke="#9aa8b6" stroke-width="1.2"/>
+  <text x="260" y="106" font-size="16" fill="#33424f">Language fluency</text>
+  <text x="640" y="106" text-anchor="end" font-size="16" fill="#caa53a">★★★★★</text>
+  <text x="260" y="134" font-size="16" fill="#33424f">Text generation</text>
+  <text x="640" y="134" text-anchor="end" font-size="16" fill="#caa53a">★★★★★</text>
+  <text x="260" y="162" font-size="16" fill="#33424f">Multilingual</text>
+  <text x="640" y="162" text-anchor="end" font-size="16" fill="#caa53a">★★★★★</text>
+  <text x="260" y="190" font-size="16" fill="#33424f">General knowledge</text>
+  <text x="640" y="190" text-anchor="end" font-size="16" fill="#caa53a">★★★★☆</text>
+  <text x="260" y="218" font-size="16" fill="#33424f">Reasoning</text>
+  <text x="640" y="218" text-anchor="end" font-size="16" fill="#caa53a">★★★★☆</text>
+  <text x="260" y="248" font-size="16" font-weight="600" fill="#b03030">Numerical computation</text>
+  <text x="500" y="248" text-anchor="end" font-size="16" fill="#b03030">★★☆☆☆</text>
+  <text x="525" y="248" font-size="15" font-weight="600" fill="#b03030">← gap</text>
+
+  <!-- Arrow -->
+  <line x1="450" y1="270" x2="450" y2="335" stroke="#3a4a5c" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="470" y="308" font-size="15" fill="#3a4a5c">fills the gap</text>
+
+  <!-- llive box -->
+  <rect x="160" y="345" width="580" height="270" rx="14" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/>
+  <text x="450" y="377" text-anchor="middle" font-size="20" font-weight="700" fill="#1f6b40">llive (cognitive OS + complement layer)</text>
+  <line x1="190" y1="391" x2="710" y2="391" stroke="#7fc49b" stroke-width="1.2"/>
+  <text x="200" y="421" font-size="16" fill="#234634">Numerical computation</text>
+  <text x="620" y="421" text-anchor="end" font-size="16" fill="#2e8b57">★★★★★</text>
+  <text x="635" y="421" font-size="15" fill="#3a6b4f">(MATH-08)</text>
+  <text x="200" y="449" font-size="16" fill="#234634">Units &amp; dimensions</text>
+  <text x="620" y="449" text-anchor="end" font-size="16" fill="#2e8b57">★★★★★</text>
+  <text x="635" y="449" font-size="15" fill="#3a6b4f">(MATH-01)</text>
+  <text x="200" y="477" font-size="16" fill="#234634">Formal verification</text>
+  <text x="620" y="477" text-anchor="end" font-size="16" fill="#2e8b57">★★★★★</text>
+  <text x="635" y="477" font-size="15" fill="#3a6b4f">(MATH-02)</text>
+  <text x="200" y="505" font-size="16" fill="#234634">Long-term memory</text>
+  <text x="620" y="505" text-anchor="end" font-size="16" fill="#2e8b57">★★★★★</text>
+  <text x="635" y="505" font-size="15" fill="#3a6b4f">(4-layer memory)</text>
+  <text x="200" y="533" font-size="16" fill="#234634">Audit</text>
+  <text x="620" y="533" text-anchor="end" font-size="16" fill="#2e8b57">★★★★★</text>
+  <text x="635" y="533" font-size="15" fill="#3a6b4f">(Approval Bus)</text>
+  <text x="200" y="561" font-size="16" fill="#234634">Cognitive structure</text>
+  <text x="620" y="561" text-anchor="end" font-size="16" fill="#2e8b57">★★★★★</text>
+  <text x="635" y="561" font-size="15" fill="#3a6b4f">(CREAT/TRIZ)</text>
+  <text x="200" y="589" font-size="16" fill="#234634">Local on-prem</text>
+  <text x="620" y="589" text-anchor="end" font-size="16" fill="#2e8b57">★★★★★</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="620" fill="#f8fafc"/>
+
+  <rect x="300" y="20" width="300" height="56" rx="12" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="450" y="53" text-anchor="middle" font-size="18" font-weight="600" fill="#1e3a8a">사용자(인간)</text>
+
+  <line x1="450" y1="76" x2="450" y2="118" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="465" y="103" font-size="14" fill="#334155">「Qwen에서 벗어나고 싶다」</text>
+
+  <rect x="120" y="124" width="660" height="246" rx="12" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="450" y="152" text-anchor="middle" font-size="18" font-weight="600" fill="#5b21b6">AI(Claude Opus 4.7)</text>
+  <text x="150" y="182" font-size="14" font-weight="600" fill="#6d28d9">백그라운드에서 참조:</text>
+
+  <text x="170" y="210" font-size="14" fill="#334155">├ raptor RAD 49 분야(4.9만 documents)</text>
+  <text x="170" y="238" font-size="14" fill="#334155">├ hacker_corpus(Exploit-DB + ATT&amp;CK + NVD + Phrack)</text>
+  <text x="170" y="266" font-size="14" fill="#334155">├ memory 60+ 파일(과거의 결정 + 교훈)</text>
+  <text x="170" y="294" font-size="14" fill="#334155">├ CLAUDE.md 규약(auto-trigger: rad-research /</text>
+  <text x="184" y="316" font-size="14" fill="#334155">triz-ideation / cross-domain-ideation)</text>
+  <text x="170" y="344" font-size="14" fill="#334155">└ Six Hats / TRIZ / KJ법 / MindMap의 구조화된 지식</text>
+
+  <line x1="450" y1="370" x2="450" y2="412" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="120" y="418" width="660" height="172" rx="12" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="450" y="446" text-anchor="middle" font-size="18" font-weight="600" fill="#15803d">출력</text>
+  <text x="450" y="478" text-anchor="middle" font-size="14" fill="#166534">5단계 로드맵 + GPU 판단 + 평가 지표 + 보완 노선 +</text>
+  <text x="450" y="504" text-anchor="middle" font-size="14" fill="#166534">관련 선행 연구 + 동점으로 인정하는 영역 + 리스크 표 + ...</text>
+  <text x="450" y="546" text-anchor="middle" font-size="13" fill="#4b5563">(굵은 부분은 사용자가 의식하지 못한 관점)</text>
+</svg>

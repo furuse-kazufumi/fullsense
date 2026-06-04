@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340" font-family="system-ui, sans-serif">
+  <rect x="0" y="0" width="900" height="340" fill="#f7f9fc"/>
+  <text x="450" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#1f2d3d">이층 구조로 동시 병행</text>
+
+  <!-- Left column: complementary route -->
+  <rect x="60" y="80" width="360" height="210" rx="14" fill="#e8f1fb" stroke="#2f6fb0" stroke-width="2"/>
+  <text x="240" y="115" text-anchor="middle" font-size="19" font-weight="700" fill="#1c4f86">보완 노선 (단기 지속)</text>
+  <line x1="100" y1="130" x2="380" y2="130" stroke="#2f6fb0" stroke-width="1.5"/>
+  <text x="240" y="170" text-anchor="middle" font-size="17" fill="#23435f">Stage A 유지</text>
+  <text x="240" y="205" text-anchor="middle" font-size="17" fill="#23435f">Qwen + llive</text>
+  <text x="240" y="245" text-anchor="middle" font-size="17" font-weight="600" fill="#1c4f86">틈새 보완</text>
+
+  <!-- Right column: independence route -->
+  <rect x="480" y="80" width="360" height="210" rx="14" fill="#fdeee6" stroke="#c4622d" stroke-width="2"/>
+  <text x="660" y="115" text-anchor="middle" font-size="19" font-weight="700" fill="#9d4818">독자화 노선 (중장기)</text>
+  <line x1="520" y1="130" x2="800" y2="130" stroke="#c4622d" stroke-width="1.5"/>
+  <text x="660" y="170" text-anchor="middle" font-size="17" fill="#6e3413">Stage B → C → D → E</text>
+  <text x="660" y="205" text-anchor="middle" font-size="17" fill="#6e3413">llive-7b → llive-mamba 등</text>
+  <text x="660" y="245" text-anchor="middle" font-size="17" font-weight="600" fill="#9d4818">완전 독립</text>
+</svg>

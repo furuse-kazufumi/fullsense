@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1180" viewBox="0 0 900 1180" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="1180" fill="#f8fafc"/>
+  <text x="450" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">摆脱 Qwen 依赖的 5 阶段路线图</text>
+
+  <!-- Stage A -->
+  <rect x="120" y="70" width="660" height="150" rx="14" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="150" y="105" font-size="19" font-weight="700" fill="#0c4a6e">Stage A（短期, 〜3 个月）</text>
+  <text x="150" y="138" font-size="16" fill="#0f172a">• 冻结 LLM 内核</text>
+  <text x="150" y="166" font-size="16" fill="#0f172a">• 最大化外围差异化</text>
+  <text x="150" y="194" font-size="16" fill="#0f172a">• 用 CABT forward hook / MATH-08 / CREAT-01 加厚「不使用 LLM 的层」</text>
+  <line x1="450" y1="220" x2="450" y2="248" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage B -->
+  <rect x="120" y="255" width="660" height="150" rx="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="150" y="290" font-size="19" font-weight="700" fill="#1e3a8a">Stage B（中期 1, 3〜6 个月）</text>
+  <text x="150" y="323" font-size="16" fill="#0f172a">• 为 llive 训练专用的 LoRA specialised adapter</text>
+  <text x="150" y="351" font-size="16" fill="#0f172a">• 可在 RTX 3090 级 GPU 上训练</text>
+  <text x="150" y="379" font-size="16" fill="#0f172a">• 向 Attention 注入 memory bias（CABT-07 正式实现的前段）</text>
+  <line x1="450" y1="405" x2="450" y2="433" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage C -->
+  <rect x="120" y="440" width="660" height="150" rx="14" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="150" y="475" font-size="19" font-weight="700" fill="#3730a3">Stage C（中期 2, 6〜12 个月）</text>
+  <text x="150" y="508" font-size="16" fill="#0f172a">• Distillation: qwen2.5:14b → llive-7b</text>
+  <text x="150" y="536" font-size="16" fill="#0f172a">• 训练数据：RAD 49 个领域 + ledger 成功例 + TRIZ 输出</text>
+  <text x="150" y="564" font-size="16" fill="#0f172a">• Multi-track sub-network（按 EpistemicType 划分）</text>
+  <line x1="450" y1="590" x2="450" y2="618" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage D -->
+  <rect x="120" y="625" width="660" height="150" rx="14" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="150" y="660" font-size="19" font-weight="700" fill="#5b21b6">Stage D（长期 1, 1〜2 年）</text>
+  <text x="150" y="693" font-size="16" fill="#0f172a">• 把 Transformer block 替换为 memory-coupled 版本</text>
+  <text x="150" y="721" font-size="16" fill="#0f172a">• Cognitive Block Replacement（CABT-01〜07 的正式实现）</text>
+  <text x="150" y="749" font-size="16" fill="#0f172a">• Approval-native decoding（constitutional AI 的 architectural 版）</text>
+  <line x1="450" y1="775" x2="450" y2="803" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage E -->
+  <rect x="120" y="810" width="660" height="150" rx="14" fill="#fae8ff" stroke="#c026d3" stroke-width="2"/>
+  <text x="150" y="845" font-size="19" font-weight="700" fill="#86198f">Stage E（长期 2, 2〜3 年）</text>
+  <text x="150" y="878" font-size="16" fill="#0f172a">• Transformer 以外的 LLM 内核（Mamba / RWKV / Hyena / RetNet）</text>
+  <text x="150" y="906" font-size="16" fill="#0f172a">• Surprise-native pretraining（把 Bayesian Surprise 嵌入 loss）</text>
+  <text x="150" y="934" font-size="16" fill="#0f172a">• TRIZ-guided architecture search（AutoML-Zero + TRIZ 混合）</text>
+
+  <text x="450" y="1010" text-anchor="middle" font-size="16" fill="#475569">强化外围（冻结）→ LoRA → 蒸馏 → 替换 block → 非 Transformer 内核</text>
+  <text x="450" y="1042" text-anchor="middle" font-size="15" fill="#64748b">从「在 Qwen 之上封装」转向「从内部移除 Qwen」</text>
+</svg>

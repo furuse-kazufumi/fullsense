@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="620" fill="#f8fafc"/>
+
+  <!-- User node -->
+  <rect x="300" y="20" width="300" height="56" rx="12" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="450" y="53" text-anchor="middle" font-size="18" font-weight="600" fill="#1e3a8a">ユーザー（人間）</text>
+
+  <!-- edge 1 -->
+  <line x1="450" y1="76" x2="450" y2="118" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="465" y="103" font-size="14" fill="#334155">「Qwen から離脱したい」</text>
+
+  <!-- AI node -->
+  <rect x="120" y="124" width="660" height="246" rx="12" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="450" y="152" text-anchor="middle" font-size="18" font-weight="600" fill="#5b21b6">AI（Claude Opus 4.7）</text>
+  <text x="150" y="182" font-size="14" font-weight="600" fill="#6d28d9">背景で参照：</text>
+
+  <text x="170" y="210" font-size="14" fill="#334155">├ raptor RAD 49 分野（4.9 万 documents）</text>
+  <text x="170" y="238" font-size="14" fill="#334155">├ hacker_corpus（Exploit-DB + ATT&amp;CK + NVD + Phrack）</text>
+  <text x="170" y="266" font-size="14" fill="#334155">├ memory 60+ ファイル（過去の決定 + 教訓）</text>
+  <text x="170" y="294" font-size="14" fill="#334155">├ CLAUDE.md 規約（auto-trigger: rad-research /</text>
+  <text x="184" y="316" font-size="14" fill="#334155">triz-ideation / cross-domain-ideation）</text>
+  <text x="170" y="344" font-size="14" fill="#334155">└ Six Hats / TRIZ / KJ法 / MindMap の構造化知識</text>
+
+  <!-- edge 2 -->
+  <line x1="450" y1="370" x2="450" y2="412" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Output node -->
+  <rect x="120" y="418" width="660" height="172" rx="12" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="450" y="446" text-anchor="middle" font-size="18" font-weight="600" fill="#15803d">出力</text>
+  <text x="450" y="478" text-anchor="middle" font-size="14" fill="#166534">5 段階ロードマップ + GPU 判断 + 評価指標 + 補完路線 +</text>
+  <text x="450" y="504" text-anchor="middle" font-size="14" fill="#166534">関連先行研究 + 同点と認める領域 + リスク表 + ...</text>
+  <text x="450" y="546" text-anchor="middle" font-size="13" fill="#4b5563">（太字部分はユーザーが意識していない観点）</text>
+</svg>
