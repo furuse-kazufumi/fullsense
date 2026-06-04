@@ -103,7 +103,8 @@ def render_motif(els, motif, y0, y1, font, lang):
                 oy = cy - 4 if two else cy + 7
                 fill = it.get("fill") or PASTELS[(j + (0 if cy == row_ys[0] else 4)) % 8]
                 els.append(tb({"circle": [cx, cy, 62]}, label, [cx, oy], size, font,
-                              fill=fill, border_width=3, line_gap=size * 1.2))
+                              fill=fill, border_width=3, line_gap=size * 1.2,
+                              text_color=auto_text_color(fill)))
     elif "flow" in motif:
         boxes = motif["flow"][:4]
         bh, gap = 58, 34
