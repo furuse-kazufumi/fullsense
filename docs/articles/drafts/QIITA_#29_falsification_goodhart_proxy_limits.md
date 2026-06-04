@@ -432,7 +432,7 @@ CoT + structure 戦略（`chain_of_thought` + structurize + loop）が、
 llama3.2 の **multistep を 0.0 → 1.0 に改善**（terse な戦略は 0.0 で失敗、score 0.80→1.00）。
 proxy の幻ではなく、**実 LLM で「prompt 戦略の進化が弱点を緩和する」ことを実証**できた。
 
-![Stage2 実 on-prem LLM 軸の推移（prompt 戦略進化）](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg)
+![Stage2 実 on-prem LLM 軸の推移（prompt 戦略進化）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg)
 
 proxy 軸（前掲）と実 LLM 軸（上）を**並べて見る**と、「proxy で測った形」と「実測の形」が
 どう違うかが目で分かります。proxy は機構が回ることを示すだけ。実 LLM は、実際にモデルの弱点に対して
