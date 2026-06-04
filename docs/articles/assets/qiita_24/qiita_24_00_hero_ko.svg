@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="llive 완전 해설 — 9부 연재 hero (인지/최적화/실행/횡단 4층, 공개/한정공유 상태 animated)" style="width:100%;height:auto;max-width:1200px">
   <title>llive 완전 해설 — 9부 연재: 인지 / 최적화 / 실행 / 횡단 4층 × 8장 + index</title>
-  <desc>連載 #24-00 〜 #24-08 を 4 層構造で animated 表示. 公開 = 緑パルス, 限定共有 = 黄パルス, データの流れを矢印アニメで.</desc>
+  <desc>연재 #24-00 ~ #24-08 을 4층 구조로 animated 표시. 공개 = 녹색 펄스, 한정 공유 = 노란색 펄스, 데이터 흐름을 화살표 애니메이션으로.</desc>
 
   <defs>
     <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
