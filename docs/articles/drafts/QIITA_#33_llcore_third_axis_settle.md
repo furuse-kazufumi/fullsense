@@ -703,3 +703,351 @@ The conclusion, once more, precisely (reflecting the BG9 settlement):
 **Tags**: evolutionary computation / MAP-Elites / statistical testing / statistical power / honest disclosure / CPU research
 **Related**: Series #32 (llcore CPU PoC battery) / #29 (refutation, Goodhart, proxy limits) / #31 (Codex two-pillar)
 **Project**: llcore (PyPI reservation llmesh-llcore, local research since the repository is not yet public)
+
+---
+
+# 中文
+
+# (连载 #33) 过于整齐的结果不是胜利，而是警报 —— 用 proper power 给第三轴 ③ 一锤定音的一天
+
+## TL;DR
+
+- 问题是 **「当用进化去搜索 AI 的核心计算时，"挑选、分开、培育"这个工夫 (= 进化的 ③ 适者生存/分离要素) 究竟需不需要？」**
+- **在合成的"带山谷的 (欺骗性) 地形"上，③ 大获全胜** (过去实验中 Cliff δ=+1.0)。③ 作为机制是货真价实的。
+- **但当我们把更接近真实的 CPU proxy 地形的评估噪声物理性地降到零之后重新测量，结果是"真正平滑 (单峰)"，于是确定 ③ 不需要。**"过去的 negative 不是检出力不足 (underpower)，而是地形本来就平滑"这一点首次得到佐证。
+- 只有真实 multitask 邻域 (C-gen4b) 出现了微弱的"③ NOT null"气息，但增加数据后就发生摇摆，**止步于候选** (走行内漂移 + 在多重比较下脆弱)。
+- "某个后处理在隐藏 ③"的怀疑 (K4 ridge clip)，去掉之后反而变得更差 → **它并没有隐藏什么，降级为诊断性所见。**
+- 外部评审 (Codex) **没有阻断项**地追认了结论。
+- 结论一句话：**「③ 只有在地形具有欺骗性时才会发挥作用。这次在 CPU 上能测到的、接近真实的地形，恰好是平滑的。」** 主战场的定论需要 GPU (真实 LLM 地形)，但那是投资决策。
+- **追记 (2026-06-02, §11.5): 最后的 CPU 逃生路线 kernel 多样化 (BG9) 在结构上被堵死了。** kernel 选择是低维，因此强 baseline (RR) 会直接采样，③ 的 niching 优势在原理上无法出现。**要让 ③ 起作用，需要"高维的"欺骗性地形**，剩下的路只有 GPU full-LLM (而这本身也是一场赌注)。
+- 元教训：**诚实披露 (honest disclosure) 不是装饰，而是推动研究前进的工具。** 在 BG9 中，同样的纪律在"把 negative 正确地确定为 negative"这个方向上也奏效了。
+
+> ⚠ 本文中的所有数值，都是与本地 (手边) 的研究 commit `THIRD_AXIS_SETTLE_VERDICT.md` 绑定的实测值。llcore 还没有建立公开仓库，所以无法贴出外部链接。作为替代，我把"如何测量"全部写在正文里。
+
+---
+
+## 0. 这篇文章在讲什么 (概念)
+
+`llcore` 是一个 CPU 完结的研究框架，它"把 Transformer 的核心计算 (状态更新规则、学习规则、认知驱动 Δ) 作为基因，一边用 Z3 验证其不会崩坏，一边进化" (PoC battery 的事在连载 #32 写过)。
+
+它的进化引擎有一个设计上的命门：如何让进化四要素中的 **③ (适者生存 selection / 分离 separation)** 生效。这是一种像 MAP-Elites 那样"挑选、分开、培育"的机制，保持多样性并把精英留在各自的 niche 里。
+
+问题很简单。
+
+> **那个 ③，真的需要吗？**
+
+如果需要，那么为承载 ③ 而进行的重投资 (最终是在 GPU 上跑真实 LLM) 就有意义。如果不需要，执着于 ③ 就是浪费时间和电力。
+
+在这一天 (2026-06-02)，我用 **3 个实验正面给这个问题作了了断**。正如标题所说，结论又一次把我们拉回 FullSense 的那条低音主旋律——"过于整齐的结果是警报"。
+
+—— 到这里 30 秒。准备运动结束。进入正题。 —
+
+---
+
+## 1. 打个比方：登山，与欺骗地形
+
+在公式之前，先用地形的比喻把全貌抓住 (这是本研究中一贯使用的隐喻)。
+
+我们用 **地形的高度** 来表示设计的好坏。**高处 = 好设计。** 这是一个寻找最高山顶的游戏。
+
+**地形其一：平滑的单座山 (简单)**
+
+```
+ 良さ↑
+  高 |            ___________
+     |         __/           \__
+     |      __/                 \__     ← どこから登っても
+     |   __/                       \__     同じ頂上に着く
+  低 |__/                             \__
+     +----------------------------------→ 設計の選び方
+```
+
+在这样的地形上，朴素的"登山法 (hill-climbing)"，也就是"只朝比现在稍好一点的方向移动"，就足以到达山顶。**不需要那些精巧的工夫 (③)。**
+
+**地形其二：欺骗地形 (deceptive)**
+
+```
+ 良さ↑                                  /\
+     |                                 /  \   ← 本物の頂上
+     |        ニセ頂上                /    \
+  中 |         /\         谷         /      \
+     |        /  \______________/        \
+  低 |____/                                  \
+     +----------------------------------------→ 設計の選び方
+          ↑ニセ頂上で素朴な山登りは停止 (谷を下れない)
+```
+
+在这里，朴素的登山法会停在假山顶上。因为它没有走下山谷的勇气。
+
+此时起作用的就是 ③ 的思路。**把各种类型的登山者分散留在山谷的各处** (= 记忆宫殿 / MAP-Elites archive)。某个登山者可以靠"踏脚石"渡过山谷，到达真正的山顶——这就是其机制。
+
+**用一句话概括本研究的核心**：③ 真正有用的，**只有在"欺骗地形"的时候。** 在平滑的单座山上，③ 是无用的累赘。
+
+所以问题可以改写为：
+
+> **「当用进化设计 AI 时，实际遇到的地形是"欺骗地形"，还是"平滑的单座山"？」**
+
+这个一旦确定，③ 需不需要也就确定了。今天，我们测的就是这个。
+
+---
+
+## 2. 过去遗留的问题 ——"③ 不需要"真的是"不需要"吗
+
+通过迄今为止的实验 (Step C → 梯子段 1 → E-A → 谷深实测)，图像大致是这样的。
+
+- **在合成的欺骗 corridor 上，③ 大获全胜** (战胜全部 3 个 baseline，Cliff δ=+1.0)。③ 已被存在性证明，作为机制是真的。
+- **在更接近真实问题的 proxy 地形上，③ 是 negative** (MAP-Elites 只能与 random 打平 = 与平滑地形相同的症状)。
+
+然而，这里残留着 2 个未解决的疙瘩。
+
+1. **"③ 不需要"究竟是因为"地形平滑"，还是仅仅因为"样本数不够、检测不出差异 (underpower)"？** ── 弄错这一点，就会犯下"③ 无力"这种过度泛化的错误。
+2. 谷深的直接测量上次以 **N/A (无法测量)** 告终。评估噪声比山谷的深度还大，所以即便有谷也会被埋没看不见——这是仪器的极限。
+
+也就是说，"看起来平滑"究竟是 **地形的性质** 还是 **仪器的极限**，并没有定论。把这一点说清楚就是 Step D。
+
+—— 稍事休息。以上是前提。从这里开始是今天做的 3 个实验。 —
+
+---
+
+## 3. 实验设计 —— 三件套
+
+| 实验 | 测什么 | 目的 |
+|---|---|---|
+| **EXP1** | proper-n 复检 | 认真增大样本数，用检出力把 ③ 的效果是否真实钉死 |
+| **EXP2** | 决定论 C1 多峰性 | 把评估噪声物理性地归零，noise-free 地判断地形是"欺骗地形"还是"平滑的单座山" |
+| **EXP3** | K4 ridge clip 的 verdict-flip | 验证"某个后处理在隐藏 ③"的怀疑 |
+
+纪律：全部隔离在 `research/step_d_settle/`，src 不改动，git 由协调器一次性提交。每个实验都要通过崩坏门 (G1 CPU 全程跑完 / G2 可复现性 / G3 诊断器有效 / G4 src 不变)。
+
+---
+
+## 4. EXP2 才是决定性的 —— 把评估噪声归零，地形就显现了
+
+顺序有所颠倒，但 **最起作用的是 EXP2**，所以先写它。
+
+上次谷深测量变成 N/A 的原因很简单，就是 **"谷的深度 (约 0.05·|fitness|) ≪ 评估噪声的抖动"**。山谷被埋在仪器的噪声里，无法判断它存在与否。
+
+EXP2 的诀窍是这样的。
+
+> ESN reservoir (固定 seed) + ridge readout 的 closed-form (`np.linalg.solve`)，**完全不抽取随机数。** 因此可以把评估噪声物理性地归零到机器 epsilon (约 1.11e-16)。
+
+实测中我们确认了 `eval_noise_std ≤ 1.11e-16`。这不是"每次评估值都抖动"，而是源于浮点最小单位 (ULP) 的误差，**实质为零。** 在噪声之雾完全散去的状态下，可以直接测量地形的山谷。
+
+结果如下 (valley_fraction = 山谷的比例，越大越多峰 = 欺骗地形)：
+
+| landscape | 类别 | 维度 | valley_fraction (mean/max) | 多峰？ | 判定 |
+|---|---|---|---|---|---|
+| **ESN_3param** (真实 proxy) | real | 3 | **0.000 / 0.000** | **False** (3 seed 一致) | 平滑=单峰 → ③ 不需要，noise-free 确定 |
+| **ESN_perneuron40** (真实 proxy) | real | 40 | **0.096 / 0.121** | **False** (3 seed 一致) | 偏平滑 (低于地板 0.2) → ③ 不需要 |
+| ctrl_multipeak_dim3 (正 control) | control | 3 | 0.701 / 0.727 | True | 诊断器能检出多峰 ✓ |
+| ctrl_multipeak_dim40 (正 control) | control | 40 | 0.795 / 0.818 | True | 诊断器健全 ✓ |
+| ctrl_quadratic_dim3 (负 control) | control | 3 | 0.000 | False | 诊断器能检出平滑 ✓ |
+| ctrl_quadratic_dim40 (负 control) | control | 40 | 0.000 | False | 诊断器健全 ✓ |
+
+要点有 3 个：
+
+1. **真实 proxy 地形 (3 维 / 40 维 都是) 是 valley≈0 = 单峰。** 在 3 个 seed 上完全一致。
+2. **诊断器本身是健全的。** 故意做出来的多峰正 control 被正确检出为多峰 (0.70/0.80)，二次函数的负 control 被正确检出为平滑 (0.0)。所以"真实 proxy 是单峰"不是仪器的 bug，而是地形的性质。
+3. 由此，**"过去的 ③ negative 不是 underpower，而是因为地形本来就平滑"** 首次在真实 substrate 上得到了 noise-free 的佐证。
+
+我也老实写下一个副发现。**原本打算用作正 control 的欺骗 corridor (`make_corridor_eval(d=0.16)`)，一旦决定论化，竟变成了 valley=0.0 (单峰判定)。** corridor 的欺骗性是"关进单一 basin、用 ③ 的 behavioral niching 逃出"这一型 (behavioral-reach 欺骗)，而 **不是** 地形山谷 (C1 multi-basin) 的欺骗。我们用实测确定了 scope 的收窄：corridor 不能成为 C1 的正 control。这意味着过去的谷深校准无法把"corridor 来源的阈值"迁移到地形多峰性上。
+
+—— 在这里喘口气。"正 control 没能当上 control"这件事，意外地让人受了点打击。但这一点也是不测就不会知道的。 —
+
+---
+
+## 5. EXP1 —— 只有真实 multitask 邻域出现微弱的"③ NOT null"气息
+
+接着，我们认真增大样本数，对最接近真实问题的频带 (C-gen4b = MAP-Elites vs random，真实 multitask 邻域) 进行了复检。
+
+| case | 原 n=15 (审计) | fresh 真复跑 | 判定 |
+|---|---|---|---|
+| **C-gen4b** | diff +0.063 / psd +0.20 / p 0.126 | **n=64: diff +0.0472, 单侧 p 0.038, psd +0.188, gate PASS** | **③ load-bearing 候选 (still_inconclusive)** |
+
+用 fresh seed 跑到 n=64，**严格门的 4 个条件全部 PASS。** 也就是说，审计读成"③ 不需要 (inconclusive)"在方向上是错的，**在 C-gen4b 中 ③ 是朝 NOT null 的方向。**
+
+…而在这里不产生"赢了"的飘飘然，正是这一轮的要害所在。出于 3 个理由，我把它 **止步于候选。**
+
+1. **更新后的检出力 power@n64 = 0.517 < 0.80。** 门通过了，但没达到确证的标准 (检出力 0.80)。
+2. **走行内漂移 (这一点起了作用)。** 追踪累积 p 值的轨迹：n=40 时首次 PASS (p=0.042) → n=60 时 p=0.010 显著性加深 → **n=64 时 p=0.038，又回到了 0.05 边界附近。** 进一步把 seed 按前半/后半切开：**前 32 个 seed 是 diff=+0.0755 (frac_pos=0.625)，但后 32 个 seed 是 diff=+0.0189，最后 9 个 seed 是 diff=−0.0376 (负)。** PASS 是靠前半 seed 撑着的，**越是新数据越往反方向跑。**
+3. **多重比较。** p=0.038 在 α=0.05 下 PASS，但仅就 EXP1 的 3 个 case 而言也超过了 Bonferroni α=0.0167 (FAIL)。放到整个 ③ research family 来看就更严苛。
+
+此外，效果量的地板 (psd) 撞上了 **结构性天花板。** C-gen4b 的 median psd 从 n=15→0.200 到 n=255→0.200 纹丝不动。`P(|psd|≥0.147)` (效果量条件的满足率) 即便在 n=255 也封顶于 0.794。因为是中效果 (psd≈0.20)，无论怎么增大样本，full gate 的检出力都不会超过 0.80。**也就是说，"只要增大样本就会确定 (A)"这个前景本身，在这个 proxy 上就很渺茫。**
+
+结论：**C-gen4b 是"③ load-bearing 候选 / still_inconclusive"。** "③ NOT null"这个 headline 过于依赖单一的边界 p=0.038。走行内漂移是"候选可能是假阳性"的真证据。
+
+---
+
+## 6. EXP3 ——"后处理在隐藏 ③"的怀疑，去掉之后反而更差了
+
+最后一个怀疑是这样的。"ridge readout 的 clip (K4) 这个后处理，会不会其实在掐死 ③ 的信号？" 如果是这样，去掉 clip，③ 就应该浮现出来。
+
+我试着去掉了。
+
+| task | clip | MAP-E mean | 战胜的 baseline 数 | verdict_flip |
+|---|---|---|---|---|
+| **addition** | True | +0.0100 | 1/3 | — |
+| **addition** | False | **−1.212** | 0/3 (全部恶化) | **False** |
+| **flip_flop** | True | +0.426 | 0/3 | — |
+| **flip_flop** | False | +0.438 | 0/3 | **False** |
+
+去掉 clip 后，③ 非但没有浮现，反而 **在 addition 上 MAP-Elites 从 +0.010 → −1.212 劣化。** clip=False 把 MAP-Elites 落进了 raw R²<0 的噪声区域 (15/15 seed 为负，R² 在 [−3.68, −0.20])，不仅没能恢复结构反而更差。**= 主动反证了"clip 在隐藏信号"这一假说。**
+
+null-ridge FPR (gene 无关 target = 真正的零假设) 在 clip True/False 之间差异也为零 (两者都是 0.0)。
+
+判定：**K4 不是"唯一的主动 suppression 机制"，而是降级为"压扁 spread 但不改变 verdict 的诊断性所见"。** 由此可知，过去统计审计断定的"K4 = 唯一的主动 suppression"是夸大了。
+
+诚实的保留 (相当于 §6.3)：null-FPR=0/0 只是 null_seeds=4 的地板值，而且这个实验把预算缩小了约 7 倍。所以我把 verdict 的标签统一为不是"null 确定"而是 **"not_load_bearing_at_this_budget (在此预算下非载荷)"**。因为"在此预算下 K4 非载荷"比"零假设已确定"更准确。判定的实体 (降级为诊断性所见) 不变，只是提高了用词的精度。
+
+—— 在这里深呼吸。3 个实验结束。接下来是"有没有说过头"的自检。 —
+
+---
+
+## 7. Surviving refutation —— 用 3 个透镜捶打自己的结论
+
+honest disclosure 的核心是"最狠地怀疑自己的结论"，所以我用了 3 个独立的反证透镜。**3 个都以 `refuted=true / medium` 存活下来**，也就是说保守的 verdict 没有被推翻，但偏 positive 的强调被朝着减弱的方向修正了。
+
+1. **[power_adequacy] C-gen4b 的 gate PASS 在 optional-stopping + 多重比较下脆弱。** 这就是上面 §5 的漂移和 Bonferroni FAIL。把"③ NOT null"做成 headline 过于依赖边界 p。→ 已把 p 的 n 轨迹和后半 seed 的符号反转记录到披露字段中。
+2. **[determinism_and_circularity] 单峰 verdict 在阈值临近处脆弱。** 决定论化和非循环性本身是 clean 的 (behavior 与 fitness 的相关 ≈0，诊断器不使用 behavior 描述子，而是直接看地形几何)。但 ESN_3param 的 midpoint 有 **90.9% 向下方 dip**，最大相对 dip=0.0435 就在 C1 谷阈 0.05 的正下方 (在 13% 以内)。所以精确地说，它不是"**真正单峰**"，而是"**略低于 C1 阈值、带浅谷 (~2–4%) 的弱 multi-basin**"。(B) null 的方向得以维持，但稳健性因阈值临近而有限。
+3. **[clip_flip_validity] K4 降级因低预算而仅限 "at this budget"。** verdict_flip=False 确实如此，但 FPR 0/0 是地板值，预算缩小了 7 倍。所以与其说"firm refutation"，不如说"not load-bearing at this budget"。
+
+3 个都不至于"把结论翻盘"，但全部朝着"削掉说过头的部分"的方向起了作用。这次自我审计正是今天成果的一半。
+
+---
+
+## 8. 老实写下自己踩过的一个坑
+
+在上次的谷深 workflow 中，我在第 2 段协调器 briefing 里传入了 **stale (旧) 值。** 像"全部 below threshold / d*=0.1234"这样的值。可实际 commit 的结果 JSON 是 `all_below_threshold=false`。我在读上次 workflow 结果时，把另一个 metric 的值搞混了。
+
+**敌对验证检出了这一点，把 verdict 降级为 N/A。** 也就是说，怀疑自己"过于整齐的结论"的这个过程，抓住了我自己的复制粘贴失误。这不是个令人愉快的故事，但正因为它转起来了，今天的 Step D 才能从正确的立足点重新测量。
+
+我再次体会到，honest disclosure 不只是"不抹掉失败"，更是"**预先放置一个能检出失败的机制**"。
+
+---
+
+## 9. 我是如何更新过去 verdict 的
+
+| 过去 verdict | 过去的解读 | Step D 的更新 |
+|---|---|---|
+| E-A C-gen4b | underpowered, inconclusive | **方向更新：③ 朝 NOT null 的方向 (fresh n=64 下 gate PASS)。** 但止步于候选 |
+| step6 exp7 (真实 ESN proxy, ③ negative) | n≤10 盲点域，"必须重测" | **大幅更新：地形本来就平滑 (③ 不需要)，noise-free 确定。** 重测也不会出现多峰 |
+| 谷深 N/A (无法测量) | instrument 不能 | **解除：靠决定论化使其可测** → vf≈0 (单峰)。但阈值临近的浅谷是保留项 |
+| K4 clip = 唯一的主动 suppression | "clip 隐蔽了 landscape 结构" | **降级：诊断性所见** (not_load_bearing_at_this_budget) |
+
+"看起来像'③ 不需要'的许多过去 negative，不是 underpower，而是因为地形本来就平滑"── 这一点首次在真实 substrate 上得到确认，正是今天的核心。
+
+---
+
+## 10. 外部评审 (Codex) 无阻断项地追认
+
+作为 llcore 的纪律，每个 capstone 都要通过 Codex (gpt-5.4, read-only) 的结对评审。这次的总评是 **"无阻断项 ── ③ 结论已获外部确认"。**
+
+- 把 C-gen4b 留作候选而非 load_bearing 的判断是妥当的 (已在 JSON 中确认更新检出力 0.5174 < 0.80)。
+- EXP2 的决定论、非循环是 clean 的。也追认了正文的自认："阈值下的弱 multi-basin"比"真正单峰"更精确。
+- EXP3 的 K4 降级在现预算下是妥当的 (FPR 0/0 + 缩小 7 倍，故仅限 at-this-budget)。
+
+被指出的 4 项 (CF1～CF4) **全都是关于未来 rerun 时 harness 的稳健性和文字精度**，并不推翻现结论。在 GPU 上复检 ③ 时，会先应用这些，再重用 harness。
+
+---
+
+## 11. 我们当时在尝试 CPU 的逃生路线 (kernel 多样化 / BG9)
+
+"③ 的主战场移到 GPU (真实 LLM 的损失地形)"是 EXP2 的建议。既然真实 proxy 已确定平滑，在平滑地形上追 ③ 也不会出 (A) (地形若是单座山，挑选分离自然没有收益)。
+
+但因为 GPU 是投资决策，我并行尝试着 **一个可以在 CPU 上前进的别的假说。** 那就是 **kernel 多样化。**
+
+假说是这样的。即使各个 kernel (rwkv / mamba / hopfield / linear_attn) 各自都平滑，**把 4 种 kernel 族 union 起来，可能会在 kernel 切换的瞬间让 fitness 产生不连续的台阶 → 地形可能变成 multi-basin (欺骗地形) → ③ 可能不用 GPU 就在 CPU 上成为 load-bearing。** 验证这个的就是 BG9。
+
+在我最初写这篇文章的时候，还是"现在正在 smoke 测量 BG6 (task → best-kernel 映射是否非常数，即'每个任务擅长的 kernel 是否不同')"。在那之后 (同在 2026-06-02 之内)，BG9 有了定论。下一节追记就是它的结局。
+
+---
+
+## 11.5. 追记 (2026-06-02): BG9 定论 —— 逃生路线在结构上被堵死了
+
+> 结论一句话：**BG9 = N/A (结构性)。也就是说，kernel 多样化这条 CPU 逃生路线被堵死了，因为"③ 立不起来"在结构上是注定的。** 这不是"③ 不需要"，而是"在这个空间里，③ 在原理上无法与强 baseline 分离"——一个有信息量的 negative。
+
+§11 设下的逃生路线的结果出来了。期待中的"kernel union 生成 multi-basin (欺骗地形)、③ 在 CPU 上立起来"**没有发生。** 而且不是"碰巧没立起来"，而是查明了 **在结构上就立不起来。** BG9 用 3 层证据确定了这一点。
+
+### (1) substrate validity ——"有辨别但弱" (PASS 但需注意)
+
+首先，把 kernel-favoring task 群从第一原理重新设计，再去测量"每个任务擅长的 kernel 是否不同" (BG6)，映射是 **非常数 = 非 inert (PASS)。** mamba / linear_attn / rwkv 各自在不同任务上成为 best。从避开了 BG6 踩过的"memory_tasks 对 kernel 中立"的覆辙这个意义上说，是前进了。
+
+但老实说 **弱**：
+
+- **hopfield 在任何任务上都没能赢。** 这是因为 hopfield kernel 是 **对角标量 mock**，其 tanh 吸引子功能失常 (per-seed 的 R² 在 0/0.99/0 上两极分化)。所以它实质上不是"4 kernel union"，而是 **3 kernel。**
+- clean 的专门化只有 2 个轴 (selective_copy↔mamba / weighted_accum↔linear_attn)。其余 margin 很薄、fragile。
+
+→ **辨别的存在 ≠ 多峰/障壁。** 非 inert 化成功了，但那并不保证欺骗地形——只到这一步为止。另外，对角 mock 的局限正如 kernels.py 的 scope 声明，这里 **只主张机制的 feasibility** (不主张 full kernel 性能)。
+
+### (2) harness validity —— positive control 不 validate (这是决定性的)
+
+接下来是主战场。在固定参数 (behavior=(kernel_id, theta L1)) 下，把 MAP-Elites (③) 与 3 个 baseline ── **RR-hillclimb (random restart 登山)** / panmictic-GA / random ── 做了 honest 的 paired 比较。
+
+| 基质 | 结果 |
+|---|---|
+| **positive control** (合成 kernel-barrier) | ③ 击溃 panmictic (+0.423) 和 random (+0.208)。**但赢不了 RR** (+0.051, p=0.31 → FAIL)。未达到 3 baseline 全胜 = **harness validity 立不起来** |
+| **negative control** (kernel 中立任务) | 全 method R²≈1.0 饱和，③ 无优势 = **正确地 null** (无假阳性，仪器健全) |
+| **real** (kernel-favoring multitask) smoke | ③ beaten 0/3，panmictic 反而超过 ③ = **③ 不胜** |
+
+这里就是与 Step D (技术版 §4-7) 决定性不同的地方。在 Step D 的欺骗 corridor 上，③ 能够排除 RR。**为什么在 kernel 空间里不行？** 根因只有一个：
+
+> **RR 在每次 restart 时都能直接采样 kernel_id ∈ [0,4)。** kernel 选择是 4 离散的单一座标 (低维)，所以 RR 在 restart 时会直击全部 4 个 kernel。要"找最佳 kernel"，无需跨越山谷 = **teleport (直接传送)。** 所以 ③ 的 behavioral niching 没有登场的机会。
+
+③ 在 Step4 的 corridor 上能排除 RR，是因为那里的 behavior 是 `mean(24 维)`，由 CLT，均值集中到 0.5 → 全局峰是 measure-zero 区 = **random/RR 无法直接采样的高维。** kernel_id 反过来是低维，可以被直接采样。
+
+### (3) red-team —— 即使用敌对验证也无法反证，反而成了确证
+
+我们用独立的 red-team 捶打"harness 立不起来真的是结构的缘故吗？会不会是碰巧的设置失误？"。结果 **无法反证结构主张，反而强化了它**：
+
+- **机制确证**：instrumented RR 在 positive control 上，把 restart kid 几乎均匀地分散到 4 个 basin 上 [12,18,16,18]，target 到达 88%，best 在 6/8 seed 上是 restart→in-basin climb。**用数值确证了**"RR 在 restart 时直接采样 kernel_id 来回避山谷"。
+- **在 4 个 faithful 构成 (高维 theta corridor / sequential-kernel / in-basin L1 corridor / deceptive multi-basin) 上，③ 都赢不了 RR (beats_rr=False)。** 把 corridor 放松，RR 也同等到达；把它收紧，③ 反而 **先饿死 (starve)。**
+- **边界 sweep**：把 theta corridor 的维度 D=0→3 越收紧，③ 比 RR 饿死得越快 (D=3: ③ reach 0.08 vs RR 0.42)。在 3 个 base_seed 上相同。
+
+→ 定量确证了 **"只排除 RR 而让 ③ 通过的 behavior 维度，在 kernel 空间里结构上并不存在"。**
+
+### 结构性洞察 (这次定论的 payoff)
+
+> **③ (MAP-Elites 的 behavioral niching) 超过强 baseline，只有在"难处"位于高维 behavior 空间、用直接采样 (random restart) 无法到达的时候。**
+
+- **kernel 选择是低维 (4 离散的单一座标)** → RR 直接采样 → ③ 的 niching 优势在原理上无法出现。
+- 即使把欺骗移到 theta 空间，RR 在 restart 后会在 in-basin 做 greedy climb，所以把 corridor 收紧到 RR 无法通过的程度时，③ 也会以同等程度饿死。**RR fail ∧ ③ succeed 的窗口并不存在。**
+
+这是对 Step4 §7 残留问题"靠 kernel 多样化扩展搜索空间，③ 会 unlock 吗？"的回答。答案是 **NO (在 CPU 上是结构性的)。** 要让扩展 unlock ③，追加的自由度必须产生一个 **高维、难以直接采样** 的 behavior。kernel 选择 (低维、离散) 不满足这个条件。
+
+### 对 GPU 的含意
+
+- **CPU 出尽门 CLEAR**：BG9 在结构上堵死了最后的 CPU 路线 (kernel-union)。③ 剩下的路线 **只有高维的 GPU full-LLM 损失地形。**
+- 结构性洞察让 GPU 这场赌注 **better-motivated。** ③ 只有在高维 behavior 中才有意义。full-LLM 的参数空间是数百万维 = 正是高维。所以 GPU 检定遵循一条原理——不是"也许 full-LLM 是唯一例外"这种弱赌注，而是"③ 需要高维，而 full-LLM 处于高维域"。
+- **但它依然是赌注**：如果真实 LLM 地形能被 backprop 系的强 baseline 直接导航，那 ③ 就不需要 ── 这是与 **BG9 的 RR 同型的风险** ("强 baseline 直接解出"的可能性在 GPU 上也依然存在)。所以 GPU 不应"单独为 ③"，而应作为 **组合判断** (与 llive 真实 LLM fitness 等搭车) + **借云做 1 次预注册** (在资本投入之前)，才算适当。BG9 的结构性洞察本身就成了 GPU 的可证伪 go/no-go 标准："如果 ③ 在 full-LLM 上 load-bearing，那它的难处应该位于高维 behavior 空间，并且用直接采样/backprop 难以到达。"
+
+### honest 保留 (重要)
+
+- 这 **不是"③ 被查明不需要"。** "③ 在这个低维 kernel 空间里，原理上无法与强 baseline 分离" = N/A (结构性)，而 ③ 的机制本身在 Step4 已确定是真的。它是一个 **有信息量的 N/A**——虽然是 N/A，却携带了"kernel 路线已堵死"这一决定性信息。
+- harness/red-team 是 smoke 规模 (5-12 seed)。在正式检定的 15 seed 下数值会动，但 **结构 (收紧则 ③ 先饿死 / RR 直接采样 kernel_id) 与 seed 无关、稳健。** 我们不会在 real 上跑 full ≥15-seed 的正式检定 ── 既然 positive control validity 在结构上立不起来，即便在 real 上出了"③ 不需要"，也无法分离"③ 不需要 vs 检测器盲"，而这个"检测器盲 = kernel 空间的结构"已被 red-team 确定，所以即使投入 7.5h 的 CPU，结论也不会改变。
+- substrate 弱 (实质 3 kernel，**hopfield 是对角 mock、功能失常**)。若有更强的 kernel 辨别 (full 实现、非对角)，则有不同结论的余地——这 **在理论上** 是有的，但 ③ 的结构性障壁 (低维选择 → RR 直接采样) 与 kernel 实现的质量无关。
+- 这次 **不需要** 那条怀疑"③ 过于整齐地成立"的纪律 ── ③ 成立从一开始就没出现 (与 honest prior 一致的 negative)。
+
+---
+
+## 12. 元教训 —— 诚实，是为了取胜的工具
+
+今天真正的成果不是数值，而是 **"怀疑过于整齐的结果"这种精神，实际推动了研究前进。**
+
+- 因为物理性地消除了评估噪声 (EXP2)，我们才能切分"平滑"到底是地形的性质还是仪器的极限。
+- 因为用了 3 个敌对验证透镜，我们才没把"③ NOT null"做成 headline，而是把它留作"候选"。
+- 因为我自己检出了 stale 值的混淆，我才能做出正确的降级到 N/A，并在今天重新测量。
+- **在 BG9 (追记) 中又学到一点**：**低维的难处会被强 baseline 直接解掉。所以要让 ③ (挑选、培育的工夫) 起作用，需要"高维 behavior 空间"。** "做出欺骗地形 ③ 就立"只对了一半，精确地说，地形必须是 **高维到无法直接采样的** 欺骗地形，③ 才会立起来。在 kernel 4 选 (低维) 的情况下，RR 在 restart 时把它们全部直击，所以 ③ 的登场在原理上就没来。这正是把逃生路线说成不是"放弃"而是"**结构性堵死**"的依据。
+
+"出现异常好的结果时，在飘飘然以为赢了之前，务必怀疑其内幕"── FullSense 的研究纪律 (`feedback_benchmark_honest_disclosure`)，不是单纯的自我警诫，而是作为 **实际抓住假阳性、提高研究精度的机制** 在运转。BG9 是同一纪律在相反方向 (**把 negative 正确地确定为 negative**) 上奏效的例子 ── 在 red-team 里试图反证自己的"③ 立不起来"，结果反证不了，反而作为结构得到了确证。
+
+最后，再把结论精确地说一遍 (反映 BG9 的定论)：
+
+> **在 proxy substrate 上，"③ 因地形真正平滑而不需要"被 noise-free 地确定** (Step D)。只有在真实 multitask 邻域 (C-gen4b) 出现了"③ NOT null"的微弱迹象，但因小效果 + 漂移 + 多重比较，它 **止步于候选。** K4 clip 从主动 suppression 降级为诊断性所见。而最后的 CPU 逃生路线 **kernel 多样化 (BG9) 在结构上被堵死** ── kernel 选择是低维，所以强 baseline (RR) 直接采样，③ 的 niching 优势在原理上无法出现。**验证 ③ 主战场剩下的路，只有高维的 GPU full-LLM 损失地形** (这本身也是一场带有"强 baseline 直接解出"风险的赌注)。
+
+"③ 定论 = ③ 被查明不需要"是错的。正确地说，**"③ 只有在'高维的'欺骗地形上才发挥作用。这次在 CPU 上能测到的、接近真实的东西 (平滑) 和 kernel 多样化 (低维)，都不满足这个条件。"** 主战场 (高维 GPU) 还在前方，而且是一场没有保证的赌注。
+
+---
+
+**Tags**: 进化计算 / MAP-Elites / 统计检验 / 检出力 / honest disclosure / CPU 研究
+**相关**: 连载 #32 (llcore CPU PoC battery) / #29 (反证・Goodhart・proxy 局限) / #31 (Codex 二本柱)
+**Project**: llcore (PyPI 预留 llmesh-llcore，因仓库未公开为本地研究)
