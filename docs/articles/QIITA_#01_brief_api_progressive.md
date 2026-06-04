@@ -6,6 +6,12 @@ tags: [llm, agent, on-prem, ollama, benchmark]
 id: 60537278f72f8a9fc2dc
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # Brief API 設計と progressive matrix で見える llive の overhead < 1 %
 
 ## TL;DR
