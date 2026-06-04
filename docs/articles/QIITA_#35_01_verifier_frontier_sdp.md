@@ -458,7 +458,7 @@ Per FullSense honest-disclosure discipline, the limits:
 | inf-norm (行绝对值和最大 < 1) | 88 | 88 |
 | + 2-norm (最大奇异值 < 1) | +49 | 137 |
 | **+ quadratic SDP (共同 Lyapunov P)** | **+149** | **286 (= 300 的 95.3%)** |
-| + degree-4 SOS (提升 Veronese) | +0 (deg4 内嵌于 deg6, deg4∖deg6 = 0) | 286 |
+| + degree-4 SOS (提升 Veronese) | +3 (deg4∖deg6 = 0＝无 deg4 独有 admit；deg4 锥相对 SDP 证明 +3，deg6 也达到) | 289 |
 | + degree-6 SOS | +1 | 290 |
 | 残余 (deg≤6 未证明) | 10 | — |
 
