@@ -263,7 +263,9 @@ def build(slug: str, lang: str, spec: dict) -> dict:
             right = i != 1  # p2 のみ左
             sx = -1 if right else 1
             bx = 640 if right else 120
-            mouth = _bust(els, bx, y1 - 148, 0.62, sx)
+            # 起承転結の感情曲線: 起=普通 / 承=にこにこ (説明) / 転=困り顔 (+汗)
+            mouth = _bust(els, bx, y1 - 148, 0.62, sx,
+                          emo=("normal", "happy", "worried")[i])
             if i == 2:  # 転 (フリ) のコマ: こめかみに汗 (1 コマ 1 漫符)
                 els.append({"manpu": {"kind": "sweat",
                                       "at": [bx - 60 * sx, y1 - 188], "s": 22,
