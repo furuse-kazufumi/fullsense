@@ -7,6 +7,7 @@ tags:
   - AIエージェント
   - 解説
 private: false
+id: 18dd57dcabbc84af9f02
 ---
 
 # 「第二の脳」シリーズ — llive 全景 × 不可視 Annotation × 構築論 × 運用論 × ビジョン論 × 実装の深層

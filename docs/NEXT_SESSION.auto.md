@@ -10,32 +10,35 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-04 21:49:41
+- **生成時刻**: 2026-06-04 22:08:34
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `2	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+03541da auto: QIITA_USV_jp.md 編集前 (2026-06-04 22:05)
+076edc8 auto: QIITA_SECOND_BRAIN_SERIES.md 編集前 (2026-06-04 22:04)
+d066bd0 auto: QIITA_OBSERVATION_GROUNDING_jp.md 編集前 (2026-06-04 22:04)
+f8ac92a qiita: fix BOM frontmatter parse + inline comma-tag split + 5-tag cap; 44 articles posted to fullsense team
+c237e45 auto: qiita_team_post.py 編集前 (2026-06-04 21:59)
+f025e45 auto: qiita_team_post.py 編集前 (2026-06-04 21:59)
 940487f qiita: write back correct item ids to 12 posted articles (idempotent re-post); fix _writeback_id id:null replacement bug
 2a0fedf qiita_team_post.py: Qiita Team poster + registration scan; fix id-null->404 and space-tag->403; idempotent id writeback. 12 image-less articles posted to fullsense team.
 da0486a auto: qiita_team_post.py 編集前 (2026-06-04 21:37)
 85a3dca auto: qiita_team_post.py 編集前 (2026-06-04 21:36)
-defe0f3 auto: qiita_team_post.py 編集前 (2026-06-04 21:36)
-7f48a09 auto: qiita_team_post.py 編集前 (2026-06-04 21:36)
-ca9e3e1 auto: qiita_team_post.py 編集前 (2026-06-04 21:21)
-748ac2c auto: qiita_team_post.py 編集前 (2026-06-04 21:21)
-dba1a67 auto: QIITA_#01_brief_api_progressive.md 編集前 (2026-06-04 21:21)
-bb6be4c article(#35-02): ladder deg4 row +3/289 (bookkeeping consistency with paper + exp_deg6_ladder json)
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/articles/2026-05-18/QIITA_OBSERVATION_GROUNDING_jp.md
+ M docs/articles/2026-05-18/QIITA_SECOND_BRAIN_SERIES.md
+ M docs/articles/2026-05-18/QIITA_USV_jp.md
+?? docs/articles/QIITA_INDEX_reading_order.md
 ```
 
 
@@ -75,22 +78,26 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `21:41` `docs/articles/drafts/QIITA_#34_third_axis_arc_overview_kamikudaki.md`
-- `21:41` `docs/articles/drafts/QIITA_#34_third_axis_arc_overview.md`
-- `21:41` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle_kamikudaki.md`
-- `21:41` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle.md`
-- `21:41` `docs/articles/drafts/QIITA_#31_codex_two_pillar_orchestration.md`
-- `21:41` `docs/articles/drafts/QIITA_#30_evolution_visualization_history.md`
-- `21:41` `docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md`
-- `21:41` `docs/articles/QIITA_#05_next_creat_kj_mindmap.md`
-- `21:41` `docs/articles/QIITA_#04_next_cabt_block_design.md`
-- `21:41` `docs/articles/QIITA_#03_math_vertical.md`
-- `21:41` `docs/articles/QIITA_#02_cognitive_factors.md`
-- `21:41` `docs/articles/QIITA_#01_brief_api_progressive.md`
-- `21:41` `tools/qiita_team_post.py`
-- `21:21` `docs/SESSION_SUMMARY.md`
-- `21:21` `docs/NEXT_SESSION.auto.md`
-- `21:12` `tools/qiita_registration_safety_report.json`
+- `22:07` `docs/articles/QIITA_INDEX_reading_order.md`
+- `22:05` `docs/articles/2026-05-18/QIITA_USV_jp.md`
+- `22:05` `docs/articles/2026-05-18/QIITA_SECOND_BRAIN_SERIES.md`
+- `22:05` `docs/articles/2026-05-18/QIITA_OBSERVATION_GROUNDING_jp.md`
+- `22:03` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
+- `22:03` `docs/articles/QIITA_#24_07_observability_governance.md`
+- `22:03` `docs/articles/QIITA_#24_06_llm_backend_non_transformer.md`
+- `22:03` `docs/articles/QIITA_#24_05_evolutionary_v0BCDE.md`
+- `22:03` `docs/articles/QIITA_#24_04_convergent_optimization_b_series.md`
+- `22:03` `docs/articles/QIITA_#24_03_structural_evolution_triz.md`
+- `22:03` `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md`
+- `22:03` `docs/articles/QIITA_#24_01_memory_layer.md`
+- `22:03` `docs/articles/QIITA_#24_00_llive_tech_series_index.md`
+- `22:00` `docs/articles/2026-05-17/QIITA_SUMMARY.md`
+- `21:59` `tools/qiita_team_post.py`
+- `21:54` `docs/articles/drafts/QIITA_#32_llcore_cpu_poc_battery.md`
+- `21:54` `docs/articles/drafts/QIITA_#29_falsification_goodhart_proxy_limits.md`
+- `21:54` `docs/articles/drafts/QIITA_#28_lldarwin_v2_phase1_orchestra.md`
+- `21:54` `docs/articles/QIITA_llive_mega_evolution.md`
+- `21:54` `docs/articles/QIITA_evolution_arc_lldarwin_complete.md`
 
 
 ## Cross-references

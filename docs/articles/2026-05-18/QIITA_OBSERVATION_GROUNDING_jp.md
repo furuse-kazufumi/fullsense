@@ -7,6 +7,7 @@ tags:
   - デバッグ
   - 解説
 private: false
+id: 29b26774667b3af3a04e
 ---
 
 # 実 Brief 6 件で MATH grounding を観察したら、1 セッションで 6 周のバグ修正サイクルが回った

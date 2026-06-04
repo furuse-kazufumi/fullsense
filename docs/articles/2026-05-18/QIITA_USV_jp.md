@@ -1,3 +1,15 @@
+---
+title: 'CSV/TSV の後継を作りました — USV (Unit-Separated Values) で AI ⇄ 人間の表データ通信を楽にする'
+tags:
+  - FullSense
+  - USV
+  - データフォーマット
+  - CSV
+  - 解説
+private: false
+id: fda1d13c689095720534
+---
+
 # CSV/TSV の後継を作りました — USV (Unit-Separated Values) で AI ⇄ 人間の表データ通信を楽にする
 
 **1 行 hook**:
