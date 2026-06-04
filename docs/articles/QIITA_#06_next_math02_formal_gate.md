@@ -7,6 +7,12 @@ draft: true
 id: acb5f5e0dabe2020c166
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # LLM 数式幻覚をどう止めるか — 形式検証ゲート (MATH-02 設計予告)
 
 > **Status**: 設計予告。実装は MATH-02 として v0.7-vertical で着手予定。

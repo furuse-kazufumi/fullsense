@@ -7,6 +7,12 @@ draft: true
 id: 0c6deb6f462843a71094
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # LLM × KJ法 × MindMap で要件定義を自動化する — CREAT 設計予告
 
 > **Status**: 設計予告。実装は v0.9 Phase 9 (CREAT-01〜05) で順次着手予定。
