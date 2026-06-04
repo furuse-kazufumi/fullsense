@@ -370,22 +370,7 @@ These 3 axioms are also provided to the end user through llive's CREAT requireme
 
 ### 结构
 
-```
-[用户 (人类)]
-     │ 「想从 Qwen 撤离」
-     ▼
-[AI (Claude Opus 4.7)]
-     │ 后台参照:
-     │  ├ raptor RAD 49 领域 (4.9 万 documents)
-     │  ├ hacker_corpus (Exploit-DB + ATT&CK + NVD + Phrack)
-     │  ├ memory 60+ 文件 (过去的决定 + 教训)
-     │  ├ CLAUDE.md 规约 (auto-trigger: rad-research / triz-ideation / cross-domain-ideation)
-     │  └ Six Hats / TRIZ / KJ 法 / MindMap 的结构化知识
-     ▼
-[输出]
-     5 阶段路线图 + GPU 判断 + 评估指标 + 补充路线 +
-     相关先行研究 + 承认打平的领域 + 风险表 + ...
-```
+![语料库先行策略的结构图: 用户输入 → AI 在后台参照语料库 → 补全多视角的输出](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q13/flow_structure_zh.svg)
 
 用户只输入了「想从 Qwen 撤离」这一行。输出中包含的 **「承认打平的领域」**、**「风险表」**、**「补充路线」**，都是用户未曾有意识察觉的视角。
 
