@@ -895,7 +895,7 @@ First, as the first half of Stage2, I plugged in the LLM's 5 weak axes as **prox
 A total of 14 cases are output to the breakdown, and lldarwin's ε-lexicase **selects specialists per axis without aggregating**.
 Below is the population-mean transition of those proxy axes.
 
-![Stage2 proxy axes transition (mechanism feasibility)](../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg)
+![Stage2 proxy axes transition (mechanism feasibility)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes_en.svg)
 
 However——as I have said repeatedly up to here——**this is a proxy**.
 Since an individual is a genome, not a real LLM, this pressure is merely a **behavioral surrogate** of "how much the genome
