@@ -269,7 +269,7 @@ The answer to "which inspector is right" came from measuring a ladder of increas
 Read the points in order.
 
 - **The big jump is the quadratic SDP's +149.** Within the flow 88 → 137 → 286, the moment SDP is added, 149 new genes are certified. This is the series headline. The reason is detailed in §3 (the non-identity-P degree of freedom).
-- **degree-4 SOS is +0.** This is not because "deg4 is weak"; it is because deg4 is nested inside deg6 (deg4∖deg6 = 0), so once deg6 is on the table there are 0 genes deg4 picks up independently. It is an ordering artifact, appearing as 0.
+- **degree-4 SOS is +3**, cumulative 289. The deg4 cone certifies 3 new genes over the quadratic SDP (deg6 reaches the same 3). deg4∖deg6 = 0 does not mean "deg4 is weak"; it means there are 0 genes *unique* to deg4 — deg4 is nested inside deg6. The +3 is the deg4 cone's gain over the SDP, not a delta against deg6.
 - **degree-6 SOS adds +1**, cumulative 290. The SOS lift does skim off 1 more, but the gain is small for the cost.
 - **Residual 10** are uncertified at deg≤6. But the composition of these 10 is what matters (next subsection).
 
