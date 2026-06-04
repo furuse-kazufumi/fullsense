@@ -12,6 +12,7 @@ id: 5a1124083298fdbcb9e6
 
 # 日本語
 
+![山登り6連戦 — 選り分けて育てる工夫はいつ効く?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma.svg)
 # (連載 #34 かみくだき版) 山登り 6 連戦と、暗くなった蛾・新しい力を得た大腸菌の話
 
 この記事は、ちょっと難しい研究の話を **中学生でも分かる言葉だけ** で説明します。専門用語が出てきたら、すぐ「山登り」や「生き物」のたとえに言い換えます。
@@ -306,6 +307,7 @@ id: 5a1124083298fdbcb9e6
 
 # English
 
+![Six Hill-Climbing Bouts — When Does Sort-and-Raise Work?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_en.svg)
 # (Series #34, Plain-Language Edition) Six Hill-Climbing Bouts, the Moth That Turned Dark, and the E. coli That Gained a New Power
 
 This article explains a slightly difficult research story using **only words a middle-schooler can understand**. Whenever a technical term shows up, we immediately rephrase it as a "hill-climbing" or "living-creature" analogy.
@@ -600,6 +602,7 @@ Being honest is itself a force that moves research forward — that's the kind o
 
 # 中文
 
+![爬山六连战 — 选别培养的工夫何时有效?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_zh.svg)
 # (连载 #34 通俗版) 爬山六连战，以及变黑的蛾子、获得新能力的大肠杆菌的故事
 
 这篇文章用**只有中学生也能懂的词语**来讲一个有点难的研究故事。每当出现专业术语，我们立刻把它换成"爬山"或"生物"的比喻。
@@ -894,6 +897,7 @@ Being honest is itself a force that moves research forward — that's the kind o
 
 # 한국어
 
+![등산 6연전 — 선별 육성 기법은 언제 효과가 있나?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_ko.svg)
 # (연재 #34 쉬운 버전) 등산 6연전과, 검게 변한 나방・새로운 힘을 얻은 대장균 이야기
 
 이 글은 조금 어려운 연구 이야기를 **중학생도 알 수 있는 말만으로** 설명합니다. 전문 용어가 나오면 곧바로 "등산"이나 "생물"의 비유로 바꿔 말합니다.

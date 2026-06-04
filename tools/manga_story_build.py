@@ -147,7 +147,8 @@ def render_motif(els, motif, y0, y1, font, lang):
             els.append(tb({"circle": [cx, cy, r]}, it.get("label", ""),
                           [cx, cy - 10], size, font,
                           fill=it.get("fill", "#ffe2a8"), border_width=4,
-                          line_gap=size * 1.3))
+                          line_gap=size * 1.3,
+                          text_color=auto_text_color(it.get("fill", "#ffe2a8"))))
         ext = int(motif.get("extinct") or 0)
         if ext > 0:
             ey = cy + 145
