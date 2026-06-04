@@ -108,7 +108,7 @@ ignorePublish: true
 
 この反証は、その後 llcore の Step C 実験（CPU 完結）で**実データとして再現**されました。標準的な記憶タスク 2 種を、進化（MAP-Elites）と素朴な探索で解かせた結果がこれです:
 
-<img src="../assets/step_c/step_c_two_regimes.svg" alt="Step C の2つの結果（床と天井）" width="640">
+<img src="https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/step_c/step_c_two_regimes.svg" alt="Step C の2つの結果（床と天井）" width="640">
 
 - **delayed_parity（XOR）= 床**: 全 method が R²≈0（基質が原理的に解けない）。誰も登れない＝差が出ない。
 - **flip_flop（覚えるだけ）= 天井**: 全 method が R²≈0.95（簡単すぎて全員到達）。**まさに「飽和した眼鏡」で、ここでも選択圧は無力**。
