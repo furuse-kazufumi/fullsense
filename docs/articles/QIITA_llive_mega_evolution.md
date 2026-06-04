@@ -1,5 +1,5 @@
 ---
-title: '個人開発AIのlliveが"メガ進化"！ — 進化の大失敗から甦り、実LLMの"苦手"まで淘汰した全記録'
+title: '【かみくだき版】個人開発AIのlliveが"メガ進化"！— 進化の大失敗から甦った話をやさしく'
 tags:
   - llive
   - FullSense
@@ -13,6 +13,8 @@ organization_url_name: null
 slide: false
 ignorePublish: true
 ---
+
+> 📘 これは **かみくだき版**（やさしい語り）です。技術的な完全版（#25-27 全記録）は → **[完全版はこちら](https://fullsense.qiita.com/furuse-kazufumi/items/0819897256c2e46831ad)**
 
 # 個人開発AIのlliveが"メガ進化"！
 
