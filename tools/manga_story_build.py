@@ -213,7 +213,8 @@ def build(slug: str, lang: str, spec: dict) -> dict:
                       fill="#ffffff", border=True, border_width=5))
 
     panels = spec["panels"]
-    # panels 1-3: caption / motif / bubble
+    # panels 1-3: caption (ナレーション箱) / motif (説明内容) / 話者バスト + speech フキダシ
+    # 話者を左右交互に置いて単調さを避ける (p1 右, p2 左, p3 右)
     for i in range(3):
         p = panels[i]
         y0, y1 = PANELS[i]
@@ -224,30 +225,40 @@ def build(slug: str, lang: str, spec: dict) -> dict:
                           border_width=3, line_gap=28))
         render_motif(els, p.get("motif"), y0, y1, f, lang)
         if p.get("bubble"):
+            right = i != 1  # p2 のみ左
+            sx = -1 if right else 1
+            bx = 640 if right else 120
+            mouth = _bust(els, bx, y1 - 148, 0.62, sx)
+            if i == 2:  # 転 (フリ) のコマ: こめかみに汗 (1 コマ 1 漫符)
+                els.append({"manpu": {"kind": "sweat",
+                                      "at": [bx - 60 * sx, y1 - 188], "s": 22,
+                                      "seed": 3.0 + i}})
             two = nlines(p["bubble"]) > 1
             bsize = 24 if lang != "en" else 20
-            oy = (y1 - 56) - (14 if two else 0)
-            els.append(tb({"polygon": rect(120, y1 - 88, 660, y1 - 22)}, p["bubble"],
-                          [390, oy + 8], bsize, f, border_width=3, line_gap=30,
-                          tail=[[200, y1 - 86], [230, y1 - 122], [262, y1 - 86]]))
+            bcx = 290 if right else 470
+            els.append(speech(p["bubble"], bcx, y1 - 92, 205, 60 if two else 48,
+                              bsize, f, tail_to=mouth, seed=5.0 + i))
 
-    # panel 4: punchline + lesson + foot
+    # panel 4 (結): 叫びフキダシ (オチ) + 集中線は話者に収束 + 教訓ナレーション箱
     p4 = panels[3]
     y0, y1 = PANELS[3]
+    els.append({"effect": {"concentration_lines": {
+        "center": [628, y0 + 330], "n": 56, "r_inner": 230, "r_outer": 820,
+        "color": "#2a2417", "width": 4.0, "jitter": 0.7, "skip": 0.13,
+        "fringe": "#ffffff", "clip": [25, y0 + 8, 710, (y1 - y0) - 16]}}})
+    mouth4 = _bust(els, 628, y0 + 330, 0.66, -1)
     psize = 26 if lang != "en" else 22
-    p_lines = nlines(p4.get("bubble", ""))
-    p_oy = 1801 - (p_lines - 1) * 20
-    els.append(tb({"polygon": rect(60, 1730, 700, 1872)}, p4.get("bubble", ""),
-                  [380, p_oy], psize, f, border_width=4, line_gap=42))
+    els.append(speech(p4.get("bubble", ""), 300, y0 + 120, 240, 78, psize, f,
+                      kind="shout", tail_to=mouth4, seed=9, bw=4))
     if p4.get("caption_box"):
         c_lines = nlines(p4["caption_box"])
-        c_oy = 1967 - (c_lines - 1) * 16
-        els.append(tb({"polygon": rect(60, 1900, 700, 2034)}, p4["caption_box"],
-                      [380, c_oy], 20 if lang != "en" else 17, f, fill="#efe7d2",
-                      border_width=2, line_gap=33))
+        c_oy = (y0 + 415) - (c_lines - 1) * 16
+        els.append(tb({"polygon": rect(48, y0 + 360, 470, y0 + 478)}, p4["caption_box"],
+                      [259, c_oy], 19 if lang != "en" else 16, f, fill="#efe7d2",
+                      border_width=2, line_gap=30))
     if p4.get("foot"):
         els.append(tb({"polygon": rect(376, 2086, 384, 2090)}, p4["foot"],
-                      [380, 2120], 20, f, fill="#f5efe2", border=False,
+                      [259, y0 + 498 - 6], 17, f, fill="#f5efe2", border=False,
                       text_color="#6a645a"))
     els.append(tb({"polygon": rect(376, 2156, 384, 2160)},
                   "mangamd L0 / FullSense", [380, 2180], 13, f,
