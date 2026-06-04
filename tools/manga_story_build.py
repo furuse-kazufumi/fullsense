@@ -248,7 +248,7 @@ def build(slug: str, lang: str, spec: dict) -> dict:
         "fringe": "#ffffff", "clip": [25, y0 + 8, 710, (y1 - y0) - 16]}}})
     mouth4 = _bust(els, 628, y0 + 330, 0.66, -1)
     psize = 26 if lang != "en" else 22
-    els.append(speech(p4.get("bubble", ""), 300, y0 + 120, 240, 78, psize, f,
+    els.append(speech(p4.get("bubble", ""), 300, y0 + 120, 252, 80, psize, f,
                       kind="shout", tail_to=mouth4, seed=9, bw=4))
     if p4.get("caption_box"):
         c_lines = nlines(p4["caption_box"])
