@@ -258,6 +258,20 @@ def cmd_dry_run(args: list[str]) -> int:
     return 0
 
 
+def _writeback_id(path: str, item_id: str) -> None:
+    """Insert `id: <item_id>` into the file's frontmatter so re-posts PATCH (idempotent)."""
+    if not item_id:
+        return
+    text = open(path, "r", encoding="utf-8").read()
+    if not text.startswith("---"):
+        return
+    end = text.find("\n---", 3)
+    if end == -1 or re.search(r"^\s*id:\s", text[3:end], re.M):
+        return
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text[:end] + f"\nid: {item_id}" + text[end:])
+
+
 def cmd_post(args: list[str]) -> int:
     files = [a for a in args if not a.startswith("--")]
     if not files:
