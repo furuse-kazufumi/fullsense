@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" role="img" aria-label="4 层记忆 + Bayesian surprise gating" style="width:100%;height:auto;max-width:1200px">
   <title>llive #24-01 — 4 层记忆 + Bayesian surprise gating</title>
-  <desc>Sensory → episodic → semantic → parameter の 4 層メモリに、Bayesian surprise gate がフィルタとして挟まる. 高 surprise の input だけ深い層に到達する. SMIL-only animation.</desc>
+  <desc>在 sensory → episodic → semantic → parameter 的 4 层记忆中，插入一个 Bayesian surprise gate 作为过滤器。只有 surprise 高的 input 才能到达深层。SMIL-only animation。</desc>
   <defs>
     <linearGradient id="bg24_01" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0e1426"/>
