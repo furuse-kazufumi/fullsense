@@ -10,6 +10,12 @@ private: false
 id: fda1d13c689095720534
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # CSV/TSV の後継を作りました — USV (Unit-Separated Values) で AI ⇄ 人間の表データ通信を楽にする
 
 **1 行 hook**:
