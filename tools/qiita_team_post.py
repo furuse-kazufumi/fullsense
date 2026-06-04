@@ -64,7 +64,7 @@ def get_token() -> str | None:
         return t.strip()
     for p in (r"D:/api-keys.json", os.path.expanduser("~/api-keys.json")):
         try:
-            with open(p, "r", encoding="utf-8") as f:
+            with open(p, "r", encoding="utf-8-sig") as f:
                 d = json.load(f)
             for k in ("qiita_team_token", "qiita_token", "QIITA_TEAM_TOKEN"):
                 if d.get(k):
@@ -184,7 +184,7 @@ def cmd_scan(args: list[str]) -> int:
     report = []
     for f in files:
         try:
-            text = open(f, "r", encoding="utf-8").read()
+            text = open(f, "r", encoding="utf-8-sig").read()
         except OSError:
             continue
         meta, body = split_frontmatter(text)
@@ -255,7 +255,7 @@ def cmd_dry_run(args: list[str]) -> int:
     if not args:
         print("usage: dry-run <file.md>")
         return 2
-    text = open(args[0], "r", encoding="utf-8").read()
+    text = open(args[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body)
     finds = safety_findings(meta, body)
@@ -279,7 +279,7 @@ def _writeback_id(path: str, item_id: str) -> None:
     inserts if absent, leaves a pre-existing real id untouched."""
     if not item_id:
         return
-    text = open(path, "r", encoding="utf-8").read()
+    text = open(path, "r", encoding="utf-8-sig").read()
     if not text.startswith("---"):
         return
     end = text.find("\n---", 3)
@@ -310,7 +310,7 @@ def cmd_post(args: list[str]) -> int:
     if not token:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
-    text = open(files[0], "r", encoding="utf-8").read()
+    text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     finds = [x for x in safety_findings(meta, body) if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR"))]
     if finds:
