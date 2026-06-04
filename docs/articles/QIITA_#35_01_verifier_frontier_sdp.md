@@ -465,7 +465,7 @@ Per FullSense honest-disclosure discipline, the limits:
 依次解读。
 
 - **最大跃迁是 quadratic SDP 的 +149**。在 88 → 137 → 286 的流程中，加入 SDP 的瞬间新证明了 149 个。这就是本系列的头条。原因详见 §3 (非单位 P 的自由度)。
-- **degree-4 SOS 为 +0**。这并非「deg4 弱」，而是 deg4 内嵌于 deg6 (deg4∖deg6 = 0)，所以一旦把 deg6 摆上台面，deg4 独立拾取的个体为 0。这是排序造成的，表面看是 0。
+- **degree-4 SOS 为 +3**，累计 289。deg4 锥相对二次 SDP 新证明 3 个 (deg6 也达到同样的 3 个)。deg4∖deg6 = 0 并非「deg4 弱」，而是 deg4 独有拾取的个体为 0 ＝ deg4 内嵌于 deg6。+3 是 deg4 锥相对 SDP 的增量，而非相对 deg6 的差分。
 - **degree-6 SOS 加 +1**，累计 290。SOS 提升确实再撇出 1 个，但相对成本，增量很小。
 - **残余 10 个**在 deg≤6 未证明。但这 10 个的构成才是关键 (下一小节)。
 
