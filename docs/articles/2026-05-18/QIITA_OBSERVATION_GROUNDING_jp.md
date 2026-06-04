@@ -10,6 +10,12 @@ private: false
 id: 29b26774667b3af3a04e
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # 実 Brief 6 件で MATH grounding を観察したら、1 セッションで 6 周のバグ修正サイクルが回った
 
 **1 行 hook**:
