@@ -6,6 +6,12 @@ tags: [llm, benchmark, debug, release, statistics, mean, stdev, ollama]
 id: 87dc2abff45b488f56a4
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # Quiz bench Debug vs Release 比較 — 統計指標付き 10 問テスト
 
 ## TL;DR
