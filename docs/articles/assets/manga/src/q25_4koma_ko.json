@@ -1,0 +1,1054 @@
+{
+ "title": "4컷 다이제스트 #25 — AI를 500세대 진화시킨 '대실패'",
+ "canvas": {
+  "w": 760,
+  "h": 2300,
+  "bg": "#f5efe2"
+ },
+ "elements": [
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       24,
+       18
+      ],
+      [
+       736,
+       18
+      ],
+      [
+       736,
+       118
+      ],
+      [
+       24,
+       118
+      ]
+     ]
+    },
+    "text": "4컷 다이제스트 #25\nAI를 500세대 진화시킨 '대실패'",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 28,
+    "text_origin": [
+     380,
+     58
+    ],
+    "fill": "#2b2317",
+    "border": false,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#f7efdd",
+    "line_gap": 40
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       20,
+       140
+      ],
+      [
+       740,
+       140
+      ],
+      [
+       740,
+       640
+      ],
+      [
+       20,
+       640
+      ]
+     ]
+    },
+    "text": "",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 1,
+    "text_origin": [
+     0,
+     0
+    ],
+    "fill": "#ffffff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 5,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       20,
+       660
+      ],
+      [
+       740,
+       660
+      ],
+      [
+       740,
+       1160
+      ],
+      [
+       20,
+       1160
+      ]
+     ]
+    },
+    "text": "",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 1,
+    "text_origin": [
+     0,
+     0
+    ],
+    "fill": "#ffffff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 5,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       20,
+       1180
+      ],
+      [
+       740,
+       1180
+      ],
+      [
+       740,
+       1680
+      ],
+      [
+       20,
+       1680
+      ]
+     ]
+    },
+    "text": "",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 1,
+    "text_origin": [
+     0,
+     0
+    ],
+    "fill": "#ffffff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 5,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       20,
+       1700
+      ],
+      [
+       740,
+       1700
+      ],
+      [
+       740,
+       2200
+      ],
+      [
+       20,
+       2200
+      ]
+     ]
+    },
+    "text": "",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 1,
+    "text_origin": [
+     0,
+     0
+    ],
+    "fill": "#ffffff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 5,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       40,
+       160
+      ],
+      [
+       720,
+       160
+      ],
+      [
+       720,
+       232
+      ],
+      [
+       40,
+       232
+      ]
+     ]
+    },
+    "text": "세계적인 지성 8인을 씨앗으로 AI에 심었다",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 23,
+    "text_origin": [
+     380,
+     203
+    ],
+    "fill": "#fffbe8",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      110,
+      330,
+      62
+     ]
+    },
+    "text": "후루세",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 16,
+    "text_origin": [
+     110,
+     337
+    ],
+    "fill": "#ffe2a8",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 19.2
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      290,
+      330,
+      62
+     ]
+    },
+    "text": "프리스턴",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 16,
+    "text_origin": [
+     290,
+     337
+    ],
+    "fill": "#cfe6ff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 19.2
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      470,
+      330,
+      62
+     ]
+    },
+    "text": "밀리지",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 16,
+    "text_origin": [
+     470,
+     337
+    ],
+    "fill": "#e8d5ff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 19.2
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      650,
+      330,
+      62
+     ]
+    },
+    "text": "이소무라",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 16,
+    "text_origin": [
+     650,
+     337
+    ],
+    "fill": "#d5ffd9",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 19.2
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      110,
+      490,
+      62
+     ]
+    },
+    "text": "오카",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 16,
+    "text_origin": [
+     110,
+     497
+    ],
+    "fill": "#ffd5d5",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 19.2
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      290,
+      490,
+      62
+     ]
+    },
+    "text": "그로텐디크",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 16,
+    "text_origin": [
+     290,
+     497
+    ],
+    "fill": "#fff3c4",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 19.2
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      470,
+      490,
+      62
+     ]
+    },
+    "text": "폰 노이만",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 16,
+    "text_origin": [
+     470,
+     497
+    ],
+    "fill": "#d9f2ff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 19.2
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      650,
+      490,
+      62
+     ]
+    },
+    "text": "파인만",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 16,
+    "text_origin": [
+     650,
+     497
+    ],
+    "fill": "#ffe0f0",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 19.2
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       376,
+       596
+      ],
+      [
+       384,
+       596
+      ],
+      [
+       384,
+       600
+      ],
+      [
+       376,
+       600
+      ]
+     ]
+    },
+    "text": "최강 지성들의 진화 배틀, 시작!",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 23,
+    "text_origin": [
+     380,
+     622
+    ],
+    "fill": "#ffffff",
+    "border": false,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "effect": {
+    "concentration_lines": {
+     "center": [
+      380,
+      880
+     ],
+     "n": 44,
+     "r_inner": 105,
+     "r_outer": 240,
+     "color": "#2a2417",
+     "width": 5
+    }
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       250,
+       825
+      ],
+      [
+       510,
+       825
+      ],
+      [
+       510,
+       930
+      ],
+      [
+       250,
+       930
+      ]
+     ]
+    },
+    "text": "500 세대",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 50,
+    "text_origin": [
+     380,
+     893
+    ],
+    "fill": "#ffffff",
+    "border": false,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "region": {
+    "op": "union",
+    "shapes": [
+     {
+      "circle": [
+       310,
+       1000,
+       62
+      ]
+     },
+     {
+      "circle": [
+       395,
+       1000,
+       50
+      ]
+     }
+    ],
+    "fill": "#ffd84d",
+    "stroke": "#1a1a1a",
+    "stroke_width": 4,
+    "border": true
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       348,
+       975
+      ],
+      [
+       352,
+       975
+      ],
+      [
+       352,
+       978
+      ],
+      [
+       348,
+       978
+      ]
+     ]
+    },
+    "text": "best_score\n1.0",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 19,
+    "text_origin": [
+     352,
+     995
+    ],
+    "fill": "#ffd84d",
+    "border": false,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "line_gap": 24
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       120,
+       1062
+      ],
+      [
+       660,
+       1062
+      ],
+      [
+       660,
+       1130
+      ],
+      [
+       120,
+       1130
+      ]
+     ]
+    },
+    "text": "전원 만점!? 이런 강함이…!",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 25,
+    "text_origin": [
+     390,
+     1103
+    ],
+    "fill": "#ffffff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a",
+    "tail": [
+     [
+      200,
+      1064
+     ],
+     [
+      230,
+      1025
+     ],
+     [
+      262,
+      1064
+     ]
+    ]
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       40,
+       1200
+      ],
+      [
+       720,
+       1200
+      ],
+      [
+       720,
+       1268
+      ],
+      [
+       40,
+       1268
+      ]
+     ]
+    },
+    "text": "500세대 후—— 살아남은 건 단 2명",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 23,
+    "text_origin": [
+     380,
+     1241
+    ],
+    "fill": "#fffbe8",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      250,
+      1420,
+      95
+     ]
+    },
+    "text": "후루세\n52%",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 26,
+    "text_origin": [
+     250,
+     1408
+    ],
+    "fill": "#ffe2a8",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 4,
+    "text_color": "#1a1a1a",
+    "line_gap": 34
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      510,
+      1420,
+      92
+     ]
+    },
+    "text": "프리스턴\n48%",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 21,
+    "text_origin": [
+     510,
+     1410
+    ],
+    "fill": "#cfe6ff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 4,
+    "text_color": "#1a1a1a",
+    "line_gap": 30
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      120,
+      1565,
+      32
+     ]
+    },
+    "text": "×",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 28,
+    "text_origin": [
+     120,
+     1576
+    ],
+    "fill": "#d9d4c8",
+    "border": true,
+    "border_color": "#8a8474",
+    "border_width": 2,
+    "text_color": "#6a645a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      224,
+      1565,
+      32
+     ]
+    },
+    "text": "×",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 28,
+    "text_origin": [
+     224,
+     1576
+    ],
+    "fill": "#d9d4c8",
+    "border": true,
+    "border_color": "#8a8474",
+    "border_width": 2,
+    "text_color": "#6a645a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      328,
+      1565,
+      32
+     ]
+    },
+    "text": "×",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 28,
+    "text_origin": [
+     328,
+     1576
+    ],
+    "fill": "#d9d4c8",
+    "border": true,
+    "border_color": "#8a8474",
+    "border_width": 2,
+    "text_color": "#6a645a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      432,
+      1565,
+      32
+     ]
+    },
+    "text": "×",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 28,
+    "text_origin": [
+     432,
+     1576
+    ],
+    "fill": "#d9d4c8",
+    "border": true,
+    "border_color": "#8a8474",
+    "border_width": 2,
+    "text_color": "#6a645a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      536,
+      1565,
+      32
+     ]
+    },
+    "text": "×",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 28,
+    "text_origin": [
+     536,
+     1576
+    ],
+    "fill": "#d9d4c8",
+    "border": true,
+    "border_color": "#8a8474",
+    "border_width": 2,
+    "text_color": "#6a645a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "circle": [
+      640,
+      1565,
+      32
+     ]
+    },
+    "text": "×",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 28,
+    "text_origin": [
+     640,
+     1576
+    ],
+    "fill": "#d9d4c8",
+    "border": true,
+    "border_color": "#8a8474",
+    "border_width": 2,
+    "text_color": "#6a645a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       140,
+       1612
+      ],
+      [
+       700,
+       1612
+      ],
+      [
+       700,
+       1670
+      ],
+      [
+       140,
+       1670
+      ]
+     ]
+    },
+    "text": "이것이 진화의 힘…!",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 25,
+    "text_origin": [
+     420,
+     1648
+    ],
+    "fill": "#ffffff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#1a1a1a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       60,
+       1730
+      ],
+      [
+       700,
+       1730
+      ],
+      [
+       700,
+       1872
+      ],
+      [
+       60,
+       1872
+      ]
+     ]
+    },
+    "text": "아닙니다. 선택압이 0이라\n그저 '제비뽑기'였습니다.",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 27,
+    "text_origin": [
+     380,
+     1788
+    ],
+    "fill": "#ffffff",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 4,
+    "text_color": "#1a1a1a",
+    "line_gap": 42
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       60,
+       1900
+      ],
+      [
+       700,
+       1900
+      ],
+      [
+       700,
+       2034
+      ],
+      [
+       60,
+       2034
+      ]
+     ]
+    },
+    "text": "전원 100점인 시험으론 순위가 안 나온다.\n'측정'(lleval) 다음에 필요한 것은\n'도태'(lldarwin)였다",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 21,
+    "text_origin": [
+     380,
+     1944
+    ],
+    "fill": "#efe7d2",
+    "border": true,
+    "border_color": "#1a1a1a",
+    "border_width": 2,
+    "text_color": "#1a1a1a",
+    "line_gap": 33
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       376,
+       2086
+      ],
+      [
+       384,
+       2086
+      ],
+      [
+       384,
+       2090
+      ],
+      [
+       376,
+       2090
+      ]
+     ]
+    },
+    "text": "→ 자세한 이야기는 아래 본문에서",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 21,
+    "text_origin": [
+     380,
+     2120
+    ],
+    "fill": "#f5efe2",
+    "border": false,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#6a645a"
+   }
+  },
+  {
+   "bubble": {
+    "shape": {
+     "polygon": [
+      [
+       376,
+       2156
+      ],
+      [
+       384,
+       2156
+      ],
+      [
+       384,
+       2160
+      ],
+      [
+       376,
+       2160
+      ]
+     ]
+    },
+    "text": "mangamd L0 / FullSense",
+    "writing": "horizontal",
+    "font": "'Malgun Gothic','Noto Sans CJK KR',sans-serif",
+    "font_size": 13,
+    "text_origin": [
+     380,
+     2180
+    ],
+    "fill": "#f5efe2",
+    "border": false,
+    "border_color": "#1a1a1a",
+    "border_width": 3,
+    "text_color": "#8a8474"
+   }
+  }
+ ]
+}
