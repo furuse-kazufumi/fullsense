@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320" font-family="system-ui, sans-serif">
+  <rect x="0" y="0" width="900" height="320" fill="#f8fafc"/>
+  <text x="450" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">二層構造 — 補完戦略 と 独自化路線 の同時並走</text>
+
+  <!-- track 1 -->
+  <rect x="50" y="64" width="800" height="80" rx="12" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.6"/>
+  <text x="74" y="96" font-size="16" font-weight="700" fill="#0e7490">路線 1: 常設の補完戦略 (Local 環境特化)</text>
+  <text x="94" y="124" font-size="14" fill="#1e293b">└ Qwen / Llama が進化しても不変の価値</text>
+
+  <!-- track 2 -->
+  <rect x="50" y="160" width="800" height="80" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.6"/>
+  <text x="74" y="192" font-size="16" font-weight="700" fill="#15803d">路線 2: 研究としての独自化 (ORG-FX 5 段階)</text>
+  <text x="94" y="220" font-size="14" fill="#1e293b">└ 中長期で研究価値を持続</text>
+
+  <text x="450" y="282" text-anchor="middle" font-size="15" font-weight="600" fill="#475569">両者は同時並走可能</text>
+</svg>
