@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-05 00:52:34
+- **生成時刻**: 2026-06-05 01:04:21
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,24 +20,23 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+a689db0 qiita: mangamd 横展開 — 汎用 story builder (manga_story_build.py, 輝度自動文字色) + 4 コマ 5 記事 (q27/q29/q33k/q34k/general) 20 SVG 生成・Edge headless 目視 QA 済・4 言語セクション挿入 + かみくだき版 3 本 (#26k/#27k/#29k, 4 言語)
+a7f2678 auto: manga_story_build.py 編集前 (2026-06-05 01:01)
+8ec8d55 auto: manga_story_build.py 編集前 (2026-06-05 01:01)
+28b8602 auto: manga_story_build.py 編集前 (2026-06-05 01:01)
+15019ce auto: QIITA_#29_falsification_goodhart_proxy_limits_kamikudaki.md 編集前 (2026-06-05 00:57)
+393ad9c auto: QIITA_#29_falsification_goodhart_proxy_limits_kamikudaki.md 編集前 (2026-06-05 00:57)
 92688c7 qiita: SVG 化 enrichment — reveal-gate 除去 7 セット (静的可視化) + JA 残存変種翻訳 5 セット + 相対パス 79 refs を raw URL 化 (#26/#29/evolution_arc, 言語変種振り分け) + ASCII アート 19 図を 4 言語 SVG 化 (qiita_misc/ 92 files) + mangamd 4 コマ #25 (manga/ 4 変種) + imgix cache-bust ?v=2 (5 記事)
 dd0648c auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:41)
 ec35562 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:41)
 1bd2053 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:41)
-096e531 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:41)
-94eaea4 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:37)
-3d34ab3 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:37)
-2409ef4 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:37)
-9994681 auto: QIITA_SUMMARY.md 編集前 (2026-06-05 00:37)
-6b444b3 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:37)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
-?? tools/manga_story_build.py
+?? docs/articles/QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md
+?? docs/articles/QIITA_#35_01_verifier_frontier_sdp_kamikudaki.md
 ```
 
 
@@ -77,26 +76,26 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `00:52` `tools/manga_story_build.py`
-- `00:47` `docs/NEXT_SESSION.auto.md`
-- `00:47` `docs/SESSION_SUMMARY.md`
-- `00:43` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
-- `00:43` `docs/articles/QIITA_#24_07_observability_governance.md`
-- `00:43` `docs/articles/QIITA_#24_06_llm_backend_non_transformer.md`
-- `00:43` `docs/articles/QIITA_#24_04_convergent_optimization_b_series.md`
-- `00:43` `docs/articles/QIITA_#24_03_structural_evolution_triz.md`
-- `00:41` `docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md`
-- `00:40` `docs/articles/assets/manga/src/q25_4koma_zh.json`
-- `00:40` `docs/articles/assets/manga/src/q25_4koma_ko.json`
-- `00:40` `docs/articles/assets/manga/src/q25_4koma_en.json`
-- `00:40` `docs/articles/assets/manga/src/q25_4koma.json`
-- `00:40` `docs/articles/assets/manga/q25_4koma_zh.svg`
-- `00:40` `docs/articles/assets/manga/q25_4koma_ko.svg`
-- `00:40` `docs/articles/assets/manga/q25_4koma_en.svg`
-- `00:40` `docs/articles/assets/manga/q25_4koma.svg`
-- `00:39` `tools/manga_q25_build.py`
-- `00:37` `docs/articles/2026-05-17/QIITA_SUMMARY.md`
-- `00:36` `docs/articles/QIITA_#23_15h_marathon_mid_report.md`
+- `01:04` `docs/articles/QIITA_#35_01_verifier_frontier_sdp_kamikudaki.md`
+- `01:04` `docs/articles/QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md`
+- `01:02` `docs/articles/drafts/QIITA_#34_third_axis_arc_overview_kamikudaki.md`
+- `01:02` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle_kamikudaki.md`
+- `01:02` `docs/articles/drafts/QIITA_#29_falsification_goodhart_proxy_limits.md`
+- `01:02` `docs/articles/QIITA_#27_lldarwin_v2_overnight_marathon.md`
+- `01:02` `docs/articles/2026-05-17/QIITA_GENERAL.md`
+- `01:01` `docs/articles/assets/manga/src/q34k_story.json`
+- `01:01` `docs/articles/assets/manga/src/q33k_story.json`
+- `01:01` `docs/articles/assets/manga/src/q29_story.json`
+- `01:01` `docs/articles/assets/manga/src/q27_story.json`
+- `01:01` `docs/articles/assets/manga/src/general_story.json`
+- `01:01` `docs/articles/assets/manga/q34k_4koma_zh.svg`
+- `01:01` `docs/articles/assets/manga/q34k_4koma_ko.svg`
+- `01:01` `docs/articles/assets/manga/q34k_4koma_en.svg`
+- `01:01` `docs/articles/assets/manga/q34k_4koma.svg`
+- `01:01` `docs/articles/assets/manga/q33k_4koma_zh.svg`
+- `01:01` `docs/articles/assets/manga/q33k_4koma_ko.svg`
+- `01:01` `docs/articles/assets/manga/q33k_4koma_en.svg`
+- `01:01` `docs/articles/assets/manga/q33k_4koma.svg`
 
 
 ## Cross-references

@@ -1,0 +1,631 @@
+---
+title: '【かみくだき版】AI の「壊れてないか検査器」を弱い順に並べてみたら — 検査器の梯子を山の見え方で読む (llcore #35-01 📗かみくだき版)'
+tags:
+  - FullSense
+  - llcore
+  - 形式手法
+  - 解説
+private: true
+---
+
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
+# 【かみくだき版】AI の「壊れてないか検査器」を弱い順に並べてみたら
+
+> 📗 これは [完全版](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) のかみくだき版です。数式や証明の細かいところは完全版にあります。ここでは「結局なにを測って、なにが分かったの?」を、たとえ話だけで 5 分でつかめるようにします。
+
+![検証器の進化フロンティア](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier.svg)
+
+## 三行あらすじ
+
+- AI を進化で育てるとき、「この子は暴走しないか?」を見る **検査器** が要る。その検査器は 1 種類じゃなく、**弱い順に梯子のように並ぶ**。
+- 弱い検査器から順に足していくと、300 個中 88 → 137 → **286 個** (95.3%) と合格者が増える。一番の大ジャンプは **SDP という検査器を足した瞬間の +149**。
+- 直感に反して、「最強の論理ソルバ (SMT/Z3) を呼べば最強の検査器になる」は **ハズレ**。この問題では Z3 は何も見分けられない「飾り」だった。本当に効いたのは SDP。
+
+---
+
+## 1. そもそも「検査器」ってなんの話?
+
+私たちは llcore (エルコア) という研究で、小さな AI の「動き方」を、生き物の進化のように少しずつ作り変えて、良い動き方を探しています。CPU だけ・自宅 PC・お金 $0 で動く研究基盤です。
+
+ここで困るのが、進化で作った子の中に **暴走する個体** が混ざることです。時間が経つと状態がどんどん膨らんで発散してしまう、いわゆる「壊れた」設計です。だから子を採用する前に「この子はちゃんと落ち着く (収縮する) か?」を見る関門が要る。これを **検査器 (verifier)** と呼びます。
+
+「収縮する」というのは、ざっくり言うと **「ほっておくと状態の差が縮んでいく = 暴走しない」** という性質のことです。検査器の仕事は「この子は収縮するか?」をイエス/ノーで判定することです。
+
+ポイントは、検査器が 1 種類じゃないこと。**安いけど見逃しが多い検査器**から、**高いけど見抜ける検査器**まで、強さの違うものが梯子のように並んでいます。今日の話は「その梯子を一段ずつ登って、どこでどれだけ合格者が増えるか」を実際に測った話です。
+
+---
+
+## 2. 梯子を一段ずつ登る — 88 → 137 → 286
+
+検査用に「実際に収縮する」とわかっている 300 個の個体を用意しました。これに検査器を弱い順に足していき、各段で **新しく合格にできた数** を数えます。
+
+| 検査器 (弱い順) | どんな見方か | 新しく合格 | 累積 |
+|---|---|---|---|
+| ∞ノルム | 一番安い・一番弱い | 88 | 88 |
+| + 2-norm | 少しだけ強い | +49 | 137 |
+| **+ 二次形式 SDP** | **傾いた楕円体まで試せる** | **+149** | **286 (= 95.3%)** |
+| + 高次 SOS (deg4/6) | さらに手の込んだ持ち上げ | +4 | 290 |
+| 残り | 高い検査でも閉じない | 10 | — |
+
+読みどころは一つ。**SDP を足した瞬間に、いきなり 149 個が新しく合格になった**こと。88 から 137 までは少しずつだったのに、SDP でドカンと跳ねます。これが今日の見出しです。
+
+そして大事なこと: この梯子の各段で、**「収縮しないのに合格にしてしまった」誤判定はゼロ**でした。検査器は安全側に倒れています。通すべきでない子をうっかり通す、という事故は一件も起きていません。
+
+---
+
+## 3. なぜ SDP だけ大勝ちするのか — 「丸い球」と「傾いた楕円」
+
+ここが今日いちばん面白いところです。同じ「収縮するか?」を見るのに、検査器によって **見る形が違う** のです。
+
+∞ノルムや 2-norm という弱い検査器は、いつも **「丸い球」** を基準にします。「この動きは、丸い球を球の外にはみ出させるか?」だけを見る。はみ出したら「収縮してない、不合格」と判定します。
+
+ところが世の中には、**縮みながらクルッと回る** 動きがあります。コマが回りながら小さくなっていくイメージです。この動きを丸い球で見ると、回転の途中で一瞬、球を外にはみ出させることがある。すると弱い検査器は「はみ出した! 不合格!」と弾いてしまう。実際にはちゃんと縮んでいるのに、です。
+
+SDP という検査器はここが違います。SDP は **「傾いた楕円」** で見ることができる。回転の向きに合わせて楕円を傾けてやると、さっきの「回りながら縮む」動きは、楕円の **内側にきれいに収まる**。だから SDP は合格を出せる。
+
+```mermaid
+flowchart LR
+    GENE["回りながら縮む子"] --> BALL{"丸い球で見る<br/>(弱い検査器)"}
+    BALL -->|球から一瞬はみ出す| REJ["2-norm: 不合格<br/>(収縮と言えない)"]
+    GENE --> ELL{"傾いた楕円で見る<br/>(SDP)"}
+    ELL -->|楕円の内側に収まる| CERT["SDP: 合格<br/>(ちゃんと収縮を証明)"]
+    REJ -. 同じ子なのに .-> ELL
+```
+
+たとえるなら、丸いザルでは引っかかってしまう「斜めの細長い物」を、ザルを傾けてやればスッと通せる、という話です。+149 の大ジャンプの正体は、この「傾いた楕円でしか合格にできない、回りながら縮む子」たちでした。
+
+しかも SDP は、弱い検査器が合格にした子を **全部含んだうえで** さらに上乗せします。「弱い検査器で受かるのに SDP で落ちる」子は一人もいない。だから安心して梯子を SDP まで上げてよい、というわけです。
+
+---
+
+## 4. 大規模でも崩れなかった (3270 個で確認)
+
+「300 個でたまたまそう見えただけでは?」を潰すため、**3270 個** で同じことを確かめました。
+
+| 測ったこと | 結果 |
+|---|---|
+| SDP が合格にした割合 | 1291/1363 (95%) |
+| SDP が弱い検査器に勝った差 | +692 |
+| 弱い検査器が SDP に勝った数 | **0** |
+
+95% という合格率は、300 個のときの 95.3% とぴったり整合します。10 倍以上にスケールしても被覆率は揺るがない。そして「弱い検査器が SDP に勝った数 = 0」が、§3 の幾何が大規模でも成り立つことの実証です。SDP は弱い検査器を完全に内包する上位互換でした。
+
+一点だけ正直に。「SDP が弱い検査器に勝った差」は、雑に数えると **+254** に見える場面がありました。でもこれは、ソルバ (計算機) が境界ぎりぎりで出す **偽陰性 (本当は合格なのに不合格と誤る)** が紛れ込んでいたせい。それを正して正確に数え直すと **+692** です。SDP の優位は、見かけよりずっと大きかった (この補正の経緯は別記事 #35-02 で扱います)。
+
+---
+
+## 5. 「最強ソルバを呼べば最強検査器」は、ハズレだった
+
+ここで多くの人が思うはずです。「梯子の上に、最強の論理ソルバ (SMT/Z3) を載せれば、もっと強い検査器になるのでは?」
+
+実測したら、**ハズレ**でした。この問題では Z3 は何も新しく見分けられず、いわば **飾り** だったのです。
+
+| 確かめ方 | 結果 |
+|---|---|
+| Z3 の判定 vs 閉じた式の判定 (3270 個) | 食い違い **0** |
+| Z3 vs 閉じた式 (20000 回) | **20000/20000 で完全一致** |
+
+なぜか。この問題の「収縮するか?」は、実は **閉じた数式に書き直せる** ものでした。閉じた式で答えが出るなら、わざわざ重い論理ソルバを呼んでも、結果は一切変わりません。3270 個で食い違いゼロ、2 万回試して全部一致 — つまり Z3 は識別力を 1 ミリも足していない。
+
+これは大事な正直開示です。「Z3 で証明しました」と書くと強そうに聞こえますが、実態は **閉じた式の代数と凸性の定理** が証明を担保していて、Z3 は呼んでも呼ばなくても同じ。本当に検査器を一段強くする価値があったのは、Z3 ではなく **SDP** の側だった、というのが結論です。
+
+---
+
+## 6. 強い検査器は「安全装置」であり「探索を広げる装置」でもある
+
+検査器を SDP まで強くするのは、安全のためだけではありませんでした。**進化がたどり着ける範囲そのものを広げる** 効果があったのです。
+
+まず安全の話。検査器を付けない進化 (検査なし) では、採用された子の **17〜20% が暴走へドリフト** していきました。SDP の関門を付けると、暴走する子の採用は **0** に。「証明できないものは通さない」という安全側の設計の素直な結果です。
+
+| 条件 | 採用された子が暴走へ流れた割合 |
+|---|---|
+| 検査なしの進化 | 17〜20% が暴走へ |
+| SDP の関門つき | 暴走の採用 0 |
+
+次に探索範囲の話。検査器を強くしたら、進化が到達できる **「良さ」の天井** まで上がりました。
+
+| 関門 | 進化後に届いた「回転の良さ」の上限 |
+|---|---|
+| 弱い ∞ノルムの関門 | 約 0.41 で頭打ち |
+| SDP の関門 | 約 0.86 まで到達 |
+
+弱い検査器だと、§3 のとおり「回りながら縮む子」を全部弾いてしまうので、進化はその領域に踏み込めず約 0.41 で頭打ちになります。SDP に替えると、その領域が解放されて約 0.86 まで伸びました。**強い検査器は、安全装置であると同時に、進化の行動範囲を広げる装置でもあった** — これが実利の正体です。
+
+この SDP 検査器は、もう研究室の実験ではなく、本番コードのプラガブルな部品として配線済みです。正確なソルバ (CLARABEL) が無ければ拒否する fail-closed 設計で、テストも合格済み。すべて CPU・$0・自宅 PC で完結します。
+
+---
+
+## 正直に言っておく限界 (honest disclosure)
+
+FullSense の「異常に良い結果ほど内訳を疑う」規律に従って、限界も並べておきます。
+
+- **「持ち上げを上げれば必ず強くなる」は嘘**。高次 SOS は次数を上げるとむしろ緩くなることがあり、きれいな一本道の階段ではない。各次数を測って一番タイトなものを取る運用になります。
+- **最後の 2 個は閉じきらない**。境界ぎりぎりの個体は、有限の計算量では未解決のまま境界に漸近するだけ。これは正直で、きれいな限界です。
+- **+254 か +692 かは数え方とソルバ次第**。本記事の +692 は偽陰性を正したあとの値です。
+- **適用範囲は限定的**。すべて小さな (n=2) 基質・この個体プールでの結果。「進化する AI が広く有用」という主張ではなく、あくまで **検査器の正しさ** の話です。
+
+---
+
+## で、結局何がわかったの?
+
+- 検査器は **弱い順に梯子状** に並ぶ。安い検査器ほど見逃しが多い。
+- 一番効いたのは **SDP** で、88 → 137 → 286 のうち **+149 の大ジャンプ** を生んだ。理由は「丸い球」ではなく **「傾いた楕円」** で収縮を見られるから。回りながら縮む子を救えるのが SDP だけだった。
+- 3270 個でも崩れず、**SDP は弱い検査器の上位互換** (負けた件数 0)。
+- 「最強ソルバ Z3 を載せれば最強」は **ハズレ**。閉じた式で答えが出るこの問題では Z3 は飾りで、識別力ゼロ。
+- 強い検査器は **安全装置 + 探索を広げる装置**。暴走採用を 0 にしつつ、到達できる「良さ」を 0.41 → 0.86 まで広げた。
+
+---
+
+## もっと知りたい人へ
+
+数式・SDP/LMI の定義・Mermaid 図・参考文献・3 トラックの詳細な実証は **[完全版](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)** にあります。シリーズは #35-00 (全体像) → #35-01 (本稿・梯子の詳細) → #35-02 (正直開示とペアレビュー) の 3 部構成です。
+
+---
+
+# English
+
+# [Plain-Language Edition] We Lined Up AI's "Is-It-Broken Inspector" From Weakest to Strongest
+
+> 📗 This is the plain-language edition of the [full version](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5). The equations and proof details live in the full version. Here we use only analogies so you can grasp "what was actually measured, and what did we learn?" in five minutes.
+
+![verifier-fitness frontier](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier_en.svg)
+
+## Three-line summary
+
+- When you grow AI by evolution, you need an **inspector** that checks "will this child blow up?". There is not just one inspector — they form a **ladder, ordered weakest-first**.
+- Add inspectors from weak to strong, and the passing count climbs: 88 → 137 → **286** of 300 (95.3%). The big jump is the **+149 the moment you add an inspector called SDP**.
+- Counter-intuitively, "calling the strongest logic solver (SMT/Z3) gives you the strongest inspector" is **wrong**. On this problem Z3 distinguishes nothing — it was decorative. The one that actually worked was SDP.
+
+---
+
+## 1. What do we mean by "inspector"?
+
+In a project called llcore, we evolve the "way of moving" of small AI systems, tweaking them little by little like living things, to find good dynamics. It is a research substrate that runs on CPU only, on a home PC, at $0.
+
+The trouble is that some children produced by evolution **blow up**: over time their state keeps growing and diverges — a "broken" design. So before adopting a child we need a gate that checks "does this child actually settle down (contract)?". That gate is the **verifier**.
+
+"Contracting" roughly means **"left alone, the differences in state shrink — no blow-up."** The verifier's job is a yes/no call on "does this child contract?".
+
+The key point: there is not just one verifier. From **cheap-but-misses-a-lot** to **expensive-but-sees-through-it**, verifiers of different strengths form a ladder. Today's story is about climbing that ladder rung by rung and measuring how many more children pass at each step.
+
+---
+
+## 2. Climbing the ladder rung by rung — 88 → 137 → 286
+
+We prepared 300 individuals known to **actually contract**. We add verifiers from weak to strong and count the **newly passed** at each rung.
+
+| Verifier (weak first) | How it looks | Newly passed | Cumulative |
+|---|---|---|---|
+| inf-norm | cheapest, weakest | 88 | 88 |
+| + 2-norm | a bit stronger | +49 | 137 |
+| **+ quadratic SDP** | **can try a tilted ellipse** | **+149** | **286 (= 95.3%)** |
+| + higher-degree SOS (deg4/6) | fancier lifting | +4 | 290 |
+| remainder | not closed even at high degree | 10 | — |
+
+There is one thing to read. **The moment SDP is added, 149 individuals suddenly pass.** From 88 to 137 it crept up, but SDP makes it leap. That is today's headline.
+
+And crucially: at every rung, **the count of "passed something that does not actually contract" was zero**. The verifier errs on the safe side. Not a single accident of waving through a child that should have been rejected.
+
+---
+
+## 3. Why does only SDP win big — the "round ball" vs the "tilted ellipse"
+
+This is the most fun part. To judge the same "does it contract?", different verifiers **look at a different shape**.
+
+The weak verifiers — inf-norm and 2-norm — always use a **round ball** as the reference. They only ask "does this motion push the round ball outside the ball?". If it pokes out, they call it "not contracting, fail".
+
+But some motions **shrink while spinning** — picture a spinning top that gets smaller. Viewed with a round ball, such a motion can momentarily poke the ball outside during the spin. The weak verifier then rejects it — even though it really is shrinking.
+
+SDP is different here. SDP can look with a **tilted ellipse**. Tilt the ellipse to match the spin, and that "shrink-while-spinning" motion lands **neatly inside** the ellipse. So SDP can pass it.
+
+```mermaid
+flowchart LR
+    GENE["child that shrinks while spinning"] --> BALL{"look with a round ball<br/>(weak verifier)"}
+    BALL -->|pokes out of the ball| REJ["2-norm: FAIL<br/>(can't call it contracting)"]
+    GENE --> ELL{"look with a tilted ellipse<br/>(SDP)"}
+    ELL -->|lands inside the ellipse| CERT["SDP: PASS<br/>(proves contraction)"]
+    REJ -. same child .-> ELL
+```
+
+As an analogy: a long, slanted object that snags in a round sieve slides right through once you tilt the sieve. The +149 jump is exactly those "shrink-while-spinning" children that only a tilted ellipse can pass.
+
+What is more, SDP **contains all the children the weak verifiers passed** and then adds more on top. Not a single child passes a weak verifier but fails SDP. So you can safely raise the ladder all the way to SDP.
+
+---
+
+## 4. It held at scale (checked on 3270 individuals)
+
+To kill "maybe it just looked that way for 300", we checked the same thing on **3270** individuals.
+
+| What we measured | Result |
+|---|---|
+| Fraction SDP passed | 1291/1363 (95%) |
+| Margin SDP beat the weak verifier by | +692 |
+| Times the weak verifier beat SDP | **0** |
+
+The 95% pass rate matches the 95.3% at 300 exactly. Scaling more than 10x does not shake the coverage. And "times the weak verifier beat SDP = 0" is empirical proof that the geometry of §3 holds at scale. SDP is a strict superset of the weak verifier.
+
+One honest note. The "margin SDP beat the weak verifier by" looked like **+254** under a sloppy count. But that count smuggled in **false negatives** the solver emits near the boundary (calling something that really passes a failure). Correct that and count carefully and it is **+692**. SDP's advantage is far larger than it looked (the correction story is in a companion article, #35-02).
+
+---
+
+## 5. "Bolt on the strongest solver to get the strongest inspector" was wrong
+
+Here many people would think: "If we put the strongest logic solver (SMT/Z3) on top of the ladder, we get an even stronger inspector, right?"
+
+Measured, it was **wrong**. On this problem Z3 distinguished nothing new — it was **decorative**.
+
+| How we checked | Result |
+|---|---|
+| Z3's verdict vs a closed-form verdict (3270) | **0** disagreements |
+| Z3 vs closed-form (20000 runs) | **20000/20000 perfect agreement** |
+
+Why? The "does it contract?" of this problem can in fact be **rewritten as a closed formula**. If a closed formula gives the answer, calling a heavy logic solver changes nothing. Zero disagreements over 3270, full agreement over 20000 — Z3 adds not one millimeter of discriminating power.
+
+This is an important honest disclosure. Writing "we proved it with Z3" sounds strong, but in reality the **algebra of the closed form plus convexity theorems** carry the proof; Z3 is the same whether called or not. The thing actually worth one extra rung of inspector was SDP, not Z3.
+
+---
+
+## 6. A strong inspector is a "safety device" and a "search-widening device"
+
+Raising the inspector to SDP was not only about safety. It also **widens the range evolution can reach**.
+
+First, safety. Without any inspector (ungated), **17–20% of adopted children drift toward blow-up**. Add the SDP gate and adoption of divergent children drops to **0** — the natural result of "do not admit what you cannot prove".
+
+| Condition | Fraction of adopted children that drifted to blow-up |
+|---|---|
+| ungated evolution | 17–20% diverge |
+| with SDP gate | 0 divergent admitted |
+
+Second, reach. Strengthening the inspector raised the **ceiling of "goodness"** evolution could reach.
+
+| Gate | Upper limit of "rotation goodness" reached after evolution |
+|---|---|
+| weak inf-norm gate | capped around 0.41 |
+| SDP gate | reached around 0.86 |
+
+With the weak verifier, as in §3 it rejects all the "shrink-while-spinning" children, so evolution cannot step into that territory and caps at ~0.41. Switch to SDP and that territory opens up, reaching ~0.86. **A strong inspector is a safety device and at the same time a device that widens evolution's range** — that is the real-world payoff.
+
+This SDP verifier is no longer a lab experiment; it is wired in as a pluggable component of production code. It is fail-closed — it rejects if the accurate solver (CLARABEL) is absent — and its tests pass. Everything runs on CPU, at $0, on a home PC.
+
+---
+
+## Limits, stated honestly (honest disclosure)
+
+Per FullSense's discipline of "the more unusually good the result, the harder you question the breakdown", here are the limits.
+
+- **"Lift the degree and it always gets stronger" is false.** Higher-degree SOS can become looser as the degree rises — it is not a clean one-way staircase. The practice is to measure each degree and take the tightest.
+- **The last 2 do not close.** Boundary-hugging individuals stay unresolved at finite compute, only asymptoting to the boundary. That is an honest, clean limit.
+- **+254 vs +692 depends on counting and solver.** The +692 here is the value after correcting false negatives.
+- **Scope is limited.** All results are on a small (n=2) substrate with this individual pool. This is not a claim that "evolving AI is broadly useful" — it is about **the correctness of the inspector**.
+
+---
+
+## So, what did we actually learn?
+
+- Inspectors form a **ladder, weakest first**. The cheaper the inspector, the more it misses.
+- The one that worked most was **SDP**, producing the **+149 big jump** within 88 → 137 → 286. The reason: it can judge contraction with a **tilted ellipse** rather than a round ball, rescuing children that shrink while spinning — and only SDP could.
+- It held at 3270 too: **SDP is a strict upgrade of the weak verifier** (zero losses).
+- "Bolt on the strongest solver Z3 to get the strongest" is **wrong**. On this problem, where a closed formula gives the answer, Z3 is decorative with zero discriminating power.
+- A strong inspector is **a safety device plus a search-widening device**: it drove divergent adoption to 0 while widening reachable "goodness" from 0.41 to 0.86.
+
+---
+
+## For those who want more
+
+The equations, the definitions of SDP/LMI, the Mermaid diagrams, the references, and the detailed three-track empirics are in the **[full version](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)**. The series is a three-part set: #35-00 (overview) → #35-01 (this part, the ladder in detail) → #35-02 (honest disclosure and peer review).
+
+---
+
+# 中文
+
+# 【通俗版】把 AI 的"是否损坏检查器"从弱到强排成一排
+
+> 📗 这是[完整版](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)的通俗版。公式与证明细节都在完整版里。这里只用比喻，让你在五分钟内抓住"到底测了什么、得出了什么结论?"。
+
+![检验器进化前沿](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier_zh.svg)
+
+## 三行摘要
+
+- 用进化培育 AI 时，需要一个**检查器**来判断"这个孩子会不会暴走?"。检查器不止一种 —— 它们像梯子一样，**从弱到强排列**。
+- 从弱到强逐级叠加检查器，合格数会爬升：300 个中 88 → 137 → **286** 个 (95.3%)。最大的跳跃，是**加上一个叫 SDP 的检查器那一刻的 +149**。
+- 与直觉相反，"调用最强的逻辑求解器 (SMT/Z3) 就能得到最强检查器"是**错的**。在这个问题上 Z3 什么都分辨不出，只是个"摆设"。真正起作用的是 SDP。
+
+---
+
+## 1. 所谓"检查器"到底是什么?
+
+在一个叫 llcore 的研究里，我们像培育生物一样一点点改造小型 AI 的"运动方式"，以寻找好的动力学。它是一个只用 CPU、在家用电脑上、花费 $0 的研究平台。
+
+麻烦在于，进化产生的孩子里混有**会暴走的个体**：随时间推移状态不断膨胀直至发散，也就是"坏掉"的设计。所以在采用一个孩子之前，需要一道关卡来检查"这个孩子会不会乖乖收敛 (收缩)?"。这道关卡就叫**检查器 (verifier)**。
+
+所谓"收缩"，大致是说**"放着不管，状态之间的差会缩小 —— 不会暴走"**。检查器的工作就是对"这个孩子会收缩吗?"做出是/否的判断。
+
+要点在于：检查器不止一种。从**便宜但漏检多**到**贵但看得透**，不同强度的检查器排成一架梯子。今天的故事，就是一级一级爬这架梯子，测量每一级又多了多少孩子合格。
+
+---
+
+## 2. 一级一级爬梯子 —— 88 → 137 → 286
+
+我们准备了 300 个已知**确实会收缩**的个体。从弱到强叠加检查器，数出每一级**新增合格**的数量。
+
+| 检查器 (由弱到强) | 怎么看 | 新增合格 | 累计 |
+|---|---|---|---|
+| inf-norm | 最便宜、最弱 | 88 | 88 |
+| + 2-norm | 稍强一点 | +49 | 137 |
+| **+ 二次型 SDP** | **能试"倾斜的椭圆"** | **+149** | **286 (= 95.3%)** |
+| + 高次 SOS (deg4/6) | 更精巧的提升 | +4 | 290 |
+| 剩余 | 高次也无法闭合 | 10 | — |
+
+只有一处值得细读。**加上 SDP 的那一刻，一下子有 149 个个体合格了。** 从 88 到 137 是慢慢爬的，而 SDP 让它一跃而起。这就是今天的标题。
+
+而且关键是：在每一级，**"本不收缩却被判合格"的误判都是 0**。检查器偏向安全一侧。把本该拒绝的孩子误放过去 —— 这种事故一件都没发生。
+
+---
+
+## 3. 为什么唯独 SDP 大胜 —— "圆球"与"倾斜椭圆"
+
+这是今天最有意思的部分。判断同一个"是否收缩?"，不同检查器**看的形状不一样**。
+
+弱检查器 —— inf-norm 和 2-norm —— 始终以**圆球**为基准。它们只问"这个运动会不会把圆球推出球外?"。一旦露出去，就判"不收缩，不合格"。
+
+但有些运动是**一边缩小一边旋转** —— 想象一个旋转中越转越小的陀螺。用圆球去看，这种运动在旋转途中可能一瞬间把球推出去。于是弱检查器就拒绝它 —— 尽管它其实在缩小。
+
+SDP 在这里不同。SDP 能用**倾斜的椭圆**来看。把椭圆顺着旋转方向倾斜，刚才那个"边转边缩"的运动就**恰好落在椭圆内部**。所以 SDP 能让它合格。
+
+```mermaid
+flowchart LR
+    GENE["边转边缩的孩子"] --> BALL{"用圆球看<br/>(弱检查器)"}
+    BALL -->|被推出球外| REJ["2-norm: 不合格<br/>(不能说它收缩)"]
+    GENE --> ELL{"用倾斜椭圆看<br/>(SDP)"}
+    ELL -->|落在椭圆内部| CERT["SDP: 合格<br/>(证明了收缩)"]
+    REJ -. 同一个孩子 .-> ELL
+```
+
+打个比方：一个又长又斜的东西卡在圆筛子上，把筛子一倾斜它就顺溜溜地通过了。+149 这一大跳的真身，正是那些只有倾斜椭圆才能让其合格的"边转边缩"的孩子。
+
+更妙的是，SDP **把弱检查器放过的孩子全都包含在内**，再往上加。没有一个孩子是"过了弱检查器却被 SDP 拒掉"。所以你可以放心地把梯子一直升到 SDP。
+
+---
+
+## 4. 规模放大也没崩 (用 3270 个个体验证)
+
+为了杜绝"也许 300 个只是碰巧那样"，我们在 **3270** 个个体上验证了同样的事。
+
+| 测量内容 | 结果 |
+|---|---|
+| SDP 判合格的比例 | 1291/1363 (95%) |
+| SDP 胜过弱检查器的差值 | +692 |
+| 弱检查器胜过 SDP 的次数 | **0** |
+
+95% 的合格率与 300 个时的 95.3% 完全吻合。放大十倍以上，覆盖率依然不动。而"弱检查器胜过 SDP 的次数 = 0"，正是 §3 几何在大规模下成立的实证。SDP 是弱检查器的严格超集。
+
+老实说一点。"SDP 胜过弱检查器的差值"，粗略数下来曾看似 **+254**。但那次计数里混进了求解器在边界附近给出的**假阴性 (本该合格却被误判为不合格)**。改正后仔细数，是 **+692**。SDP 的优势远比看起来大 (这段修正的来龙去脉在姊妹篇 #35-02 中讲)。
+
+---
+
+## 5. "装上最强求解器就得到最强检查器"是错的
+
+很多人会这样想："如果在梯子顶上装一个最强的逻辑求解器 (SMT/Z3)，不就得到更强的检查器了吗?"
+
+实测下来是**错的**。在这个问题上 Z3 分辨不出任何新东西 —— 它只是个**摆设**。
+
+| 验证方式 | 结果 |
+|---|---|
+| Z3 的判定 vs 闭式判定 (3270 个) | 分歧 **0** |
+| Z3 vs 闭式 (20000 次) | **20000/20000 完全一致** |
+
+为什么? 这个问题的"是否收缩?"其实可以**改写成一个闭式公式**。既然闭式就能给出答案，再去调用沉重的逻辑求解器，结果丝毫不变。3270 个零分歧、2 万次全一致 —— Z3 没有增加一毫米的分辨力。
+
+这是一条重要的诚实披露。写"我们用 Z3 证明了"听起来很强，但实际上是**闭式的代数加上凸性定理**在支撑证明; 调不调 Z3 都一样。真正值得多升一级检查器的，是 SDP，而不是 Z3。
+
+---
+
+## 6. 强检查器既是"安全装置"也是"拓宽搜索的装置"
+
+把检查器升到 SDP，不只是为了安全。它还能**拓宽进化所能到达的范围**。
+
+先说安全。不加检查器 (无关卡) 时，被采用的孩子里有 **17–20% 漂移向暴走**。加上 SDP 关卡，发散个体的采用降到 **0** —— 这是"无法证明的就不放行"的自然结果。
+
+| 条件 | 被采用的孩子漂移向暴走的比例 |
+|---|---|
+| 无关卡的进化 | 17–20% 发散 |
+| 带 SDP 关卡 | 发散采用为 0 |
+
+再说可达范围。增强检查器后，进化能够到达的**"好"的天花板**也升高了。
+
+| 关卡 | 进化后到达的"旋转之好"上限 |
+|---|---|
+| 弱 inf-norm 关卡 | 在约 0.41 处封顶 |
+| SDP 关卡 | 到达约 0.86 |
+
+用弱检查器时，如 §3 所述它会拒掉所有"边转边缩"的孩子，于是进化无法踏入那片领域，封顶在约 0.41。换成 SDP，那片领域被释放，到达约 0.86。**强检查器既是安全装置，同时也是拓宽进化活动范围的装置** —— 这就是实利所在。
+
+这个 SDP 检查器已不再是实验室里的实验，而是作为生产代码的可插拔组件接好了线。它是 fail-closed 的 —— 没有精确求解器 (CLARABEL) 就拒绝 —— 测试也已通过。一切都在 CPU、$0、家用电脑上完成。
+
+---
+
+## 老实交代的局限 (honest disclosure)
+
+按照 FullSense"结果越异常地好，越要追问其内部构成"的纪律，把局限也列出来。
+
+- **"提升次数就一定更强"是假的。** 高次 SOS 随次数升高反而可能变松 —— 不是干净的单向阶梯。做法是测每个次数，取最紧的那个。
+- **最后 2 个无法闭合。** 紧贴边界的个体在有限算力下仍未解决，只是渐近于边界。这是一条诚实而干净的局限。
+- **是 +254 还是 +692 取决于计数方式与求解器。** 本文的 +692 是改正假阴性之后的值。
+- **适用范围有限。** 所有结果都在小型 (n=2) 基质、这个个体池上得出。这并非"进化的 AI 普遍有用"的主张，而是关于**检查器正确性**的论述。
+
+---
+
+## 那么，到底学到了什么?
+
+- 检查器**从弱到强排成梯子**。越便宜的检查器漏检越多。
+- 最起作用的是 **SDP**，在 88 → 137 → 286 中贡献了 **+149 的大跳跃**。原因是它能用**倾斜的椭圆**而非圆球来判断收缩，救回了边转边缩的孩子 —— 而只有 SDP 能做到。
+- 在 3270 个上也没崩：**SDP 是弱检查器的严格升级版** (零败绩)。
+- "装上最强求解器 Z3 就最强"是**错的**。在这个用闭式就能给出答案的问题上，Z3 只是摆设，分辨力为零。
+- 强检查器是**安全装置 + 拓宽搜索的装置**：把发散采用降到 0，同时把可达的"好"从 0.41 拓宽到 0.86。
+
+---
+
+## 想了解更多
+
+公式、SDP/LMI 的定义、Mermaid 图、参考文献，以及三条轨道的详细实证，都在 **[完整版](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)** 里。本系列分三部分：#35-00 (总览) → #35-01 (本篇，梯子详解) → #35-02 (诚实披露与同行评审)。
+
+---
+
+# 한국어
+
+# [쉬운 풀이판] AI의 "고장 안 났나 검사기"를 약한 순서로 줄 세워 봤더니
+
+> 📗 이것은 [완전판](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)의 쉬운 풀이판입니다. 수식과 증명 세부는 완전판에 있습니다. 여기서는 비유만으로 "결국 무엇을 측정했고, 무엇을 알아냈나?"를 5분 안에 잡을 수 있게 합니다.
+
+![검사기 진화 프런티어](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier_ko.svg)
+
+## 세 줄 요약
+
+- AI를 진화로 키울 때, "이 아이가 폭주하지 않을까?"를 보는 **검사기**가 필요합니다. 검사기는 한 종류가 아니라 **약한 순서로 사다리처럼** 늘어섭니다.
+- 약한 검사기부터 차례로 더하면 합격 수가 늘어납니다: 300개 중 88 → 137 → **286개** (95.3%). 가장 큰 도약은 **SDP라는 검사기를 더하는 순간의 +149**.
+- 직관과 달리, "최강 논리 솔버 (SMT/Z3)를 부르면 최강 검사기가 된다"는 **틀렸습니다**. 이 문제에서 Z3는 아무것도 구별하지 못하는 "장식"이었습니다. 진짜로 효과를 낸 것은 SDP입니다.
+
+---
+
+## 1. 애초에 "검사기"가 무슨 이야기인가?
+
+llcore라는 연구에서 우리는 작은 AI의 "움직이는 방식"을, 생물의 진화처럼 조금씩 바꿔 가며 좋은 동역학을 찾고 있습니다. CPU만, 가정용 PC에서, 비용 $0으로 돌아가는 연구 기반입니다.
+
+곤란한 점은 진화로 만든 아이 중에 **폭주하는 개체**가 섞인다는 것입니다. 시간이 지나면 상태가 점점 부풀어 발산해 버리는, 이른바 "고장난" 설계입니다. 그래서 아이를 채택하기 전에 "이 아이는 제대로 가라앉는가 (수축하는가)?"를 보는 관문이 필요합니다. 이것이 **검사기 (verifier)** 입니다.
+
+"수축한다"는 것은 대략 **"내버려 두면 상태 차이가 줄어든다 = 폭주하지 않는다"** 는 성질을 말합니다. 검사기의 일은 "이 아이는 수축하는가?"에 대해 예/아니오로 판정하는 것입니다.
+
+핵심은 검사기가 한 종류가 아니라는 점입니다. **싸지만 놓치는 게 많은** 검사기부터 **비싸지만 꿰뚫어 보는** 검사기까지, 강도가 다른 것들이 사다리처럼 늘어섭니다. 오늘 이야기는 그 사다리를 한 단씩 오르며 각 단에서 합격하는 아이가 얼마나 늘어나는지를 실제로 측정한 이야기입니다.
+
+---
+
+## 2. 사다리를 한 단씩 오르기 — 88 → 137 → 286
+
+**실제로 수축한다**고 알려진 개체 300개를 준비했습니다. 약한 순서로 검사기를 더하며 각 단에서 **새로 합격시킨 수**를 셉니다.
+
+| 검사기 (약한 순서) | 보는 방식 | 새 합격 | 누적 |
+|---|---|---|---|
+| inf-norm | 가장 싸고 가장 약함 | 88 | 88 |
+| + 2-norm | 조금 더 강함 | +49 | 137 |
+| **+ 이차형식 SDP** | **기울어진 타원까지 시도 가능** | **+149** | **286 (= 95.3%)** |
+| + 고차 SOS (deg4/6) | 더 정교한 들어올리기 | +4 | 290 |
+| 나머지 | 고차로도 닫히지 않음 | 10 | — |
+
+읽을 거리는 하나입니다. **SDP를 더한 순간, 단번에 149개가 새로 합격했다는 것.** 88에서 137까지는 조금씩 올랐는데, SDP에서 껑충 뜁니다. 이것이 오늘의 표제입니다.
+
+그리고 중요한 점: 각 단에서 **"수축하지 않는데 합격시킨" 오판은 0**이었습니다. 검사기는 안전한 쪽으로 기웁니다. 통과시키면 안 되는 아이를 무심코 통과시키는 사고는 단 한 건도 없었습니다.
+
+---
+
+## 3. 왜 SDP만 크게 이기는가 — "둥근 공"과 "기울어진 타원"
+
+여기가 오늘 가장 재미있는 부분입니다. 같은 "수축하는가?"를 보는데도 검사기마다 **보는 모양이 다릅니다**.
+
+약한 검사기 — inf-norm과 2-norm — 은 늘 **둥근 공**을 기준으로 삼습니다. "이 움직임이 둥근 공을 공 밖으로 밀어내는가?"만 봅니다. 삐져나가면 "수축 안 함, 불합격"으로 판정합니다.
+
+그런데 어떤 움직임은 **줄어들면서 빙글 도는** 움직임입니다. 돌면서 점점 작아지는 팽이를 떠올려 보세요. 둥근 공으로 보면, 이 움직임은 회전 도중 한순간 공을 밖으로 밀어낼 수 있습니다. 그러면 약한 검사기는 거부합니다 — 실제로는 제대로 줄어들고 있는데도요.
+
+SDP는 여기서 다릅니다. SDP는 **기울어진 타원**으로 볼 수 있습니다. 회전 방향에 맞춰 타원을 기울이면, 아까의 "돌면서 줄어드는" 움직임은 타원 **안쪽에 깔끔하게** 들어옵니다. 그래서 SDP는 합격을 낼 수 있습니다.
+
+```mermaid
+flowchart LR
+    GENE["돌면서 줄어드는 아이"] --> BALL{"둥근 공으로 보기<br/>(약한 검사기)"}
+    BALL -->|공 밖으로 삐져나감| REJ["2-norm: 불합격<br/>(수축이라 못 함)"]
+    GENE --> ELL{"기울어진 타원으로 보기<br/>(SDP)"}
+    ELL -->|타원 안쪽에 들어옴| CERT["SDP: 합격<br/>(수축을 증명)"]
+    REJ -. 같은 아이인데 .-> ELL
+```
+
+비유하자면, 둥근 체에 걸리는 길고 비스듬한 물건을 체를 기울이면 쏙 통과시킬 수 있다는 이야기입니다. +149라는 큰 도약의 정체는, 기울어진 타원으로만 합격시킬 수 있는 "돌면서 줄어드는" 아이들이었습니다.
+
+게다가 SDP는 **약한 검사기가 합격시킨 아이를 전부 포함한 채로** 더 얹습니다. "약한 검사기는 통과했는데 SDP에서는 떨어지는" 아이는 한 명도 없습니다. 그래서 사다리를 SDP까지 안심하고 올려도 됩니다.
+
+---
+
+## 4. 대규모에서도 무너지지 않았다 (3270개로 확인)
+
+"300개에서 우연히 그렇게 보인 것 아닌가"를 없애기 위해, **3270개**에서 같은 것을 확인했습니다.
+
+| 측정한 것 | 결과 |
+|---|---|
+| SDP가 합격시킨 비율 | 1291/1363 (95%) |
+| SDP가 약한 검사기를 이긴 차이 | +692 |
+| 약한 검사기가 SDP를 이긴 횟수 | **0** |
+
+95%라는 합격률은 300개일 때의 95.3%와 정확히 일치합니다. 10배 이상으로 키워도 커버리지는 흔들리지 않습니다. 그리고 "약한 검사기가 SDP를 이긴 횟수 = 0"이, §3의 기하가 대규모에서도 성립한다는 실증입니다. SDP는 약한 검사기의 엄격한 상위 집합입니다.
+
+솔직히 하나. "SDP가 약한 검사기를 이긴 차이"는 거칠게 세면 **+254**로 보이는 국면이 있었습니다. 하지만 그 셈에는 솔버가 경계 근처에서 내놓는 **거짓 음성 (실은 합격인데 불합격으로 오판)**이 섞여 있었습니다. 그것을 바로잡고 정확히 다시 세면 **+692**입니다. SDP의 우위는 보기보다 훨씬 컸습니다 (이 보정의 경위는 자매편 #35-02에서 다룹니다).
+
+---
+
+## 5. "최강 솔버를 얹으면 최강 검사기"는 틀렸다
+
+여기서 많은 사람이 이렇게 생각할 겁니다. "사다리 위에 최강 논리 솔버 (SMT/Z3)를 얹으면 더 강한 검사기가 되지 않을까?"
+
+실측하니 **틀렸습니다**. 이 문제에서 Z3는 아무것도 새로 구별하지 못했고, 말하자면 **장식**이었습니다.
+
+| 확인 방식 | 결과 |
+|---|---|
+| Z3의 판정 vs 닫힌 식 판정 (3270개) | 불일치 **0** |
+| Z3 vs 닫힌 식 (20000회) | **20000/20000 완전 일치** |
+
+왜일까요? 이 문제의 "수축하는가?"는 실은 **닫힌 수식으로 다시 쓸 수 있는** 것이었습니다. 닫힌 식으로 답이 나온다면, 굳이 무거운 논리 솔버를 불러도 결과는 전혀 바뀌지 않습니다. 3270개에서 불일치 0, 2만 회에서 전부 일치 — 즉 Z3는 구별력을 1밀리미터도 더하지 않았습니다.
+
+이것은 중요한 정직한 공개입니다. "Z3로 증명했다"고 쓰면 강해 보이지만, 실제로는 **닫힌 식의 대수와 볼록성 정리**가 증명을 떠받치고 있으며, Z3는 부르든 안 부르든 같습니다. 검사기를 한 단 더 올릴 가치가 진짜로 있던 것은 Z3가 아니라 SDP 쪽이었습니다.
+
+---
+
+## 6. 강한 검사기는 "안전장치"이자 "탐색을 넓히는 장치"
+
+검사기를 SDP까지 올리는 것은 안전을 위해서만이 아니었습니다. **진화가 도달할 수 있는 범위 자체를 넓히는** 효과가 있었습니다.
+
+먼저 안전. 검사기 없는 진화 (관문 없음)에서는 채택된 아이의 **17~20%가 폭주로 표류**했습니다. SDP 관문을 붙이면 발산하는 아이의 채택은 **0**으로 — "증명할 수 없는 것은 통과시키지 않는다"는 안전한 설계의 자연스러운 결과입니다.
+
+| 조건 | 채택된 아이가 폭주로 흘러간 비율 |
+|---|---|
+| 관문 없는 진화 | 17~20%가 발산 |
+| SDP 관문 있음 | 발산 채택 0 |
+
+다음으로 도달 범위. 검사기를 강화하니 진화가 도달할 수 있는 **"좋음"의 천장**도 올라갔습니다.
+
+| 관문 | 진화 후 도달한 "회전의 좋음" 상한 |
+|---|---|
+| 약한 inf-norm 관문 | 약 0.41에서 정체 |
+| SDP 관문 | 약 0.86까지 도달 |
+
+약한 검사기로는, §3대로 "돌면서 줄어드는" 아이를 전부 거부하므로 진화가 그 영역으로 발을 들이지 못해 약 0.41에서 정체합니다. SDP로 바꾸면 그 영역이 열려 약 0.86까지 늘어났습니다. **강한 검사기는 안전장치이자 동시에 진화의 활동 범위를 넓히는 장치**였습니다 — 이것이 실리의 정체입니다.
+
+이 SDP 검사기는 더 이상 연구실 실험이 아니라, 운영 코드의 플러그형 부품으로 배선되어 있습니다. 정확한 솔버 (CLARABEL)가 없으면 거부하는 fail-closed 설계이며, 테스트도 통과했습니다. 모두 CPU, $0, 가정용 PC에서 완결됩니다.
+
+---
+
+## 정직하게 밝히는 한계 (honest disclosure)
+
+FullSense의 "결과가 이상하게 좋을수록 그 내역을 의심한다"는 규율에 따라 한계도 적어 둡니다.
+
+- **"차수를 올리면 반드시 강해진다"는 거짓.** 고차 SOS는 차수를 올리면 오히려 느슨해질 수 있어, 깔끔한 일방통행 계단이 아닙니다. 각 차수를 측정해 가장 타이트한 것을 취하는 운용이 됩니다.
+- **마지막 2개는 닫히지 않는다.** 경계에 바싹 붙은 개체는 유한 연산량으로는 미해결인 채 경계에 점근할 뿐입니다. 이것은 정직하고 깔끔한 한계입니다.
+- **+254냐 +692냐는 세는 방식과 솔버에 달려 있다.** 본문의 +692는 거짓 음성을 바로잡은 뒤의 값입니다.
+- **적용 범위는 제한적.** 모든 결과는 작은 (n=2) 기질, 이 개체 풀에서 얻은 것입니다. "진화하는 AI가 널리 유용하다"는 주장이 아니라, 어디까지나 **검사기의 정확성**에 관한 이야기입니다.
+
+---
+
+## 그래서 결국 무엇을 알아냈나?
+
+- 검사기는 **약한 순서로 사다리처럼** 늘어섭니다. 싼 검사기일수록 놓치는 게 많습니다.
+- 가장 효과를 낸 것은 **SDP**로, 88 → 137 → 286 중 **+149의 큰 도약**을 만들었습니다. 이유는 둥근 공이 아니라 **기울어진 타원**으로 수축을 볼 수 있어, 돌면서 줄어드는 아이를 구해냈기 때문입니다 — 그리고 그것은 오직 SDP만 가능했습니다.
+- 3270개에서도 무너지지 않았습니다: **SDP는 약한 검사기의 엄격한 상위 호환** (패배 0건).
+- "최강 솔버 Z3를 얹으면 최강"은 **틀렸습니다**. 닫힌 식으로 답이 나오는 이 문제에서 Z3는 장식이며 구별력이 0입니다.
+- 강한 검사기는 **안전장치 + 탐색을 넓히는 장치**입니다: 발산 채택을 0으로 만들면서, 도달 가능한 "좋음"을 0.41에서 0.86까지 넓혔습니다.
+
+---
+
+## 더 알고 싶은 분께
+
+수식, SDP/LMI의 정의, Mermaid 그림, 참고 문헌, 그리고 세 트랙의 상세 실증은 **[완전판](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)**에 있습니다. 시리즈는 세 부분 구성입니다: #35-00 (전체 그림) → #35-01 (본편, 사다리 상세) → #35-02 (정직한 공개와 동료 평가).
