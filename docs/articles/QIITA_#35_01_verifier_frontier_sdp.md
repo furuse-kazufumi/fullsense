@@ -15,6 +15,7 @@ ignorePublish: true
 
 # 日本語
 
+> 📗 **お急ぎの方へ**: この記事には [かみくだき版](https://fullsense.qiita.com/furuse-kazufumi/items/6b48b75c99e5d4b7d6b8) があります（比喩多め・短時間で要点だけ）。
 # llcore 検証 arc (#35-01) — 検査器の梯子: ∞ノルム→2ノルム→SDP→高次SOS→JSR、そして SMT が「飾り」な理由
 
 ![検証器の進化フロンティア](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier.svg)
@@ -211,6 +212,7 @@ FullSense の正直開示規律に従い、限界を明示する。
 
 # English
 
+> 📗 **In a hurry?** A [plain-language digest](https://fullsense.qiita.com/furuse-kazufumi/items/6b48b75c99e5d4b7d6b8) of this article is available.
 # llcore Verification Arc (#35-01) — The Verifier Ladder: inf-norm → 2-norm → SDP → higher-degree SOS → JSR, and Why SMT Is Decorative
 
 ![verifier-fitness frontier](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier_en.svg)
@@ -407,6 +409,7 @@ Per FullSense honest-disclosure discipline, the limits:
 
 # 中文
 
+> 📗 **赶时间?** 本文有[通俗易懂版](https://fullsense.qiita.com/furuse-kazufumi/items/6b48b75c99e5d4b7d6b8)。
 # llcore 验证 arc (#35-01) — 验证器阶梯: inf-norm → 2-norm → SDP → 高次 SOS → JSR，以及为何 SMT 只是「装饰」
 
 ![验证器-适应度前沿](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier_zh.svg)
@@ -603,6 +606,7 @@ inf-norm 门下，rotation 适应度在约 0.41 见顶。如 §3 所述，诱导
 
 # 한국어
 
+> 📗 **바쁘신 분께**: 이 글에는 [쉽게 풀어쓴 버전](https://fullsense.qiita.com/furuse-kazufumi/items/6b48b75c99e5d4b7d6b8)이 있습니다.
 # llcore 검증 arc (#35-01) — 검사기 사다리: inf-norm → 2-norm → SDP → 고차 SOS → JSR, 그리고 SMT가 「장식」인 이유
 
 ![검증기-적합도 프런티어](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier_ko.svg)

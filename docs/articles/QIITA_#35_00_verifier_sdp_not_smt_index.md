@@ -15,6 +15,7 @@ ignorePublish: true
 
 # 日本語
 
+> 📗 **お急ぎの方へ**: この記事には [かみくだき版](https://fullsense.qiita.com/furuse-kazufumi/items/a8118f557dda5c5e998c) があります（比喩多め・短時間で要点だけ）。
 # llcore 検証 arc (#35-00) — 進化する AI の「壊れてないか検査器」: SMT より SDP/Lyapunov が正解だった話
 
 ![llcore 検証 arc ヒーロー図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_hero.svg)
@@ -169,6 +170,7 @@ FullSense の正直開示規律に従い、限界を明示する。
 
 # English
 
+> 📗 **In a hurry?** A [plain-language digest](https://fullsense.qiita.com/furuse-kazufumi/items/a8118f557dda5c5e998c) of this article is available.
 # llcore Verification Arc (#35-00) — A "Breakage Inspector" for Evolving AI: Why SDP/Lyapunov Beat SMT
 
 ![llcore verification arc hero](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_hero_en.svg)
@@ -323,6 +325,7 @@ Per FullSense honest-disclosure discipline, the limits:
 
 # 中文
 
+> 📗 **赶时间?** 本文有[通俗易懂版](https://fullsense.qiita.com/furuse-kazufumi/items/a8118f557dda5c5e998c)。
 # llcore 验证 arc (#35-00) — 进化 AI 的「是否损坏检查器」: 为何 SDP/Lyapunov 胜过 SMT
 
 ![llcore 验证 arc 主图](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_hero_zh.svg)
@@ -477,6 +480,7 @@ flowchart TD
 
 # 한국어
 
+> 📗 **바쁘신 분께**: 이 글에는 [쉽게 풀어쓴 버전](https://fullsense.qiita.com/furuse-kazufumi/items/a8118f557dda5c5e998c)이 있습니다.
 # llcore 검증 arc (#35-00) — 진화하는 AI의 「고장 여부 검사기」: SMT보다 SDP/Lyapunov가 정답이었던 이야기
 
 ![llcore 검증 arc 히어로](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_hero_ko.svg)

@@ -19,6 +19,7 @@ ignorePublish: true
 
 # 日本語
 
+> 📗 **お急ぎの方へ**: この記事には [かみくだき版](https://fullsense.qiita.com/furuse-kazufumi/items/1d9eeb1b739623dbc285) があります（比喩多め・短時間で要点だけ）。
 # 「眼鏡で測る」だけでは進化しない — 選択圧コンポーネント lldarwin の設計と実測 #26
 
 > **コンセプト hook**: 前作 #25 で、私は「AI を 500 世代進化させたら、世界に**私とフリストンだけ**が残った」という大失敗を晒しました。
@@ -425,6 +426,7 @@ wallclock 12h で safely 停止（snapshot 済 → `--resume` で継続可能）
 
 # English
 
+> 📗 **In a hurry?** A [plain-language digest](https://fullsense.qiita.com/furuse-kazufumi/items/1d9eeb1b739623dbc285) of this article is available.
 # Measuring with "Glasses" Alone Doesn't Drive Evolution — Design and Measurements of the Selection-Pressure Component lldarwin #26
 
 > **Concept hook**: In the previous article #25, I exposed a massive failure: "When I evolved an AI for 500 generations, the only ones left in the world were **me and Friston**."
@@ -831,6 +833,7 @@ Just making good parts leaves evolution broken. **Bundle without aggregating, ac
 
 # 中文
 
+> 📗 **赶时间?** 本文有[通俗易懂版](https://fullsense.qiita.com/furuse-kazufumi/items/1d9eeb1b739623dbc285)。
 # 仅靠「用眼镜测量」无法驱动进化 —— 选择压组件 lldarwin 的设计与实测 #26
 
 > **概念 hook**: 在上一篇 #25 中，我曝光了一次巨大的失败：「把 AI 进化 500 代之后，世界上只剩下**我和 Friston**了。」
@@ -1237,6 +1240,7 @@ end-to-end 实测（pressure-proxy + lldarwin + novelty + reservoir, 8 founders 
 
 # 한국어
 
+> 📗 **바쁘신 분께**: 이 글에는 [쉽게 풀어쓴 버전](https://fullsense.qiita.com/furuse-kazufumi/items/1d9eeb1b739623dbc285)이 있습니다.
 # 「안경으로 측정」하는 것만으로는 진화하지 않는다 — 선택압 컴포넌트 lldarwin의 설계와 실측 #26
 
 > **콘셉트 hook**: 전작 #25에서 저는 「AI를 500세대 진화시켰더니, 세계에 **저와 프리스턴만** 남았다」는 큰 실패를 공개했습니다.

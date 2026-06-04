@@ -7,6 +7,7 @@ tags:
   - 形式手法
   - 解説
 private: true
+id: a8118f557dda5c5e998c
 ---
 
 言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)

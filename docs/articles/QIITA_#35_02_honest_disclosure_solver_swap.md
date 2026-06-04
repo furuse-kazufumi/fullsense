@@ -15,6 +15,7 @@ ignorePublish: true
 
 # 日本語
 
+> 📗 **お急ぎの方へ**: この記事には [かみくだき版](https://fullsense.qiita.com/furuse-kazufumi/items/146d5e2b27dabc59e799) があります（比喩多め・短時間で要点だけ）。
 # llcore 検証 arc (#35-02) — 「良すぎる数値」を疑え: SCS ソルバの罠を多視点 pair-review で捕まえて訂正した話
 
 ![ソルバ入れ替えで偽の数値が崩れる図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap.svg)
@@ -207,6 +208,7 @@ FullSense の honest-disclosure 規律に従い、限界を明示します。
 
 # English
 
+> 📗 **In a hurry?** A [plain-language digest](https://fullsense.qiita.com/furuse-kazufumi/items/146d5e2b27dabc59e799) of this article is available.
 # llcore Verification Arc (#35-02) — Suspect the Solver: How a Multi-Perspective Pair-Review Caught and Corrected an SCS Trap
 
 ![Diagram: swapping the solver collapses the fabricated numbers](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_en.svg)
@@ -399,6 +401,7 @@ Per FullSense honest-disclosure discipline, the limits are explicit.
 
 # 中文
 
+> 📗 **赶时间?** 本文有[通俗易懂版](https://fullsense.qiita.com/furuse-kazufumi/items/146d5e2b27dabc59e799)。
 # llcore 验证 arc (#35-02) — 怀疑求解器：用多视角 pair-review 抓住并修正 SCS 陷阱
 
 ![图：交换求解器后，被捏造的数字坍塌](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_zh.svg)
@@ -591,6 +594,7 @@ margin-sweep 红队对求解器伪影**结构性失明**——它们只是在同
 
 # 한국어
 
+> 📗 **바쁘신 분께**: 이 글에는 [쉽게 풀어쓴 버전](https://fullsense.qiita.com/furuse-kazufumi/items/146d5e2b27dabc59e799)이 있습니다.
 # llcore 검증 arc (#35-02) — 솔버를 의심하라: 다관점 pair-review 로 SCS 함정을 잡아내 정정한 이야기
 
 ![그림: 솔버를 교체하니 조작된 수치가 무너진다](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_ko.svg)
