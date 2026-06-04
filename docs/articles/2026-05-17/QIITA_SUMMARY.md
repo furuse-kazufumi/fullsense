@@ -4,6 +4,12 @@ tags: LLM,Agent,OnPrem,Ollama,Python,認知科学,TRIZ
 id: bfa83d01e79028132438
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # 1 日で要件 32 件追加 + Brief API + COG-FX + MATH 実装 + ベンチ 4 種 — 自己進化型 LLM フレームワーク llive 開発記 2026-05-17
 
 著者: **古瀬 和文（ぷるやん）**
