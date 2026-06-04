@@ -123,6 +123,8 @@ def _bust(els: list, cx: float, cy: float, k: float, sx: int, emo: str = "normal
                        "fill": "#8e3b35"})
         mouth = (cx + 55 * sx * k, cy + 28 * k)
     shapes += [
+        {"path": f"M {cx - 13 * k} {cy + 48 * k} h {26 * k} v {70 * k} h {-26 * k} Z",
+         "fill": skin},                                                               # 首 (頭と胴を接続)
         {"path": f"M {cx - 85 * k} {cy + 225 * k} Q {cx - 85 * k} {cy + 100 * k} {cx} {cy + 95 * k} "
                  f"Q {cx + 85 * k} {cy + 100 * k} {cx + 85 * k} {cy + 225 * k} Z", "fill": cloth},  # 体
         {"path": f"M {cx - 15 * k} {cy + 110 * k} L {cx} {cy + 134 * k} L {cx + 15 * k} {cy + 110 * k}",
