@@ -66,7 +66,7 @@ ignorePublish: true
 | inf-norm (行絶対値和の最大 < 1) | 88 | 88 |
 | + 2-norm (最大特異値 < 1) | +49 | 137 |
 | **+ quadratic SDP (共通 Lyapunov P)** | **+149** | **286 (= 300 の 95.3%)** |
-| + degree-4 SOS (持ち上げ Veronese) | +0 (deg4 は deg6 に内包、deg4∖deg6 = 0) | 286 |
+| + degree-4 SOS (持ち上げ Veronese) | +3 (deg4∖deg6 = 0＝deg4 固有 admit なし。deg4 cone が SDP に対し +3、deg6 も同達) | 289 |
 | + degree-6 SOS | +1 | 290 |
 | 残余 (deg≤6 で未証明) | 10 | — |
 
