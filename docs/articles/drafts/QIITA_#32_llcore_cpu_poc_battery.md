@@ -75,3 +75,207 @@ f. 論文化 (TMLR + GECCO 2027)
 **Tags**: 進化計算 / 形式検証 / Z3 / RWKV / state space model / CPU研究  
 **関連**: 連載 #14-31 (llive lldarwin v0.B-E + 観測+governance + lleval)  
 **Project**: D:/projects/llcore (PyPI llmesh-llcore 0.1.0a0)
+
+---
+
+# English
+
+# (Series #32) llcore CPU PoC battery complete
+
+## TL;DR
+
+- **CPU PoC battery complete** for `llcore` (PyPI: `llmesh-llcore` 0.1.0a0, an independent llive track), a research framework that makes the **core computation of a Transformer (state update / learning rule / cognition-driven Δ)** the target of evolution
+- Mechanism demonstrated with **5 PoCs / 39 falsifiable gates / 76 tests / Codex pair-review 5/5 green-light**
+- **Gating structural mutations online with Z3** = embedding SMT into the selection pressure of evolutionary search — found to be unexplored prior art (prior survey across 14 RAD domains + confirmation by Agents A–D)
+- Submission candidates: TMLR (primary) / GECCO 2027 short / NeurIPS 2026 workshop (verification × ML)
+
+## Why we built it
+
+Freezing LLM weights is the norm, but the **core computation algorithm itself stays fixed by hand design**. Architecture/algorithm search such as AutoML-Zero / NAS / AlphaEvolve / Sakana Evolutionary Model Merge has advanced, yet:
+
+1. **Infeasible compute for individuals** (TinyLlama 1.1B from scratch = $140k / 90 days / 16×A100)
+2. **No safety guarantee during search** = wasting time generating numerically unstable architectures
+3. **Verified search is disconnected from static verification (Reluplex/Marabou/α,β-CROWN)** — research on an SMT online gate inside the evolution loop was not found
+
+## Confirmed original axes (no negation work in the prior survey)
+
+Mechanism-proven (4 axes):
+1. **ChangeOp → Z3 online gate** (Stage 1a, 5.8ms)
+2. **State update rule turned into a gene, RWKV-style** (Stage 0a v2)
+3. **factor_hook (cognitive state → SSM Δ)** (Stage 2a mock)
+4. **In-house evolver + verifier foundation** (Stage 0c + 1a)
+
+Post phase: persona-indexed specialist / Marabou refinement / proposal of a new VNN-COMP category.
+
+## PoC ladder (5 stages / all 39 gates PASS)
+
+| PoC | Content | Key numbers |
+|---|---|---|
+| 0a v2 | RWKV-style state update gene | G6 var=7.4e-3, G9 escape@step1 |
+| 0b v2 | synthetic fitness (copy/add) | G4 rank_corr=-0.20, G7 best 0.518/0.525/0.703 |
+| 0c v2 | in-house minimal GA | G3 monotonic 0.249→0.552, G7 dist=2.15 |
+| 1a v2 | Z3 state_norm invariant | G2 unsat **5.8ms**, G3 sound CE |
+| 2a | factor_hook × state update mock | G7 evolution smoke monotonic |
+
+## What we learned from the v1 failure (honest disclosure)
+
+PoC 0a v1 used `decay*s + mix*x*tanh(gate_str*s)`, which made **state=0 a fixed point — a zero attractor**: it passed G1–G5 formally but transmitted zero information. The design flaw that Claude overlooked on its own was caught by the **independent verdicts of Codex (gpt-5.4) and gem-critic**, leading to a v2 redesign in RWKV-style.
+
+→ **In 4 of the 5 PoCs, Codex pair-review caught design flaws that Claude missed on its own.** A concrete case where mutual review worked to prevent structural breakdown.
+
+## Next options
+
+a. Stage 3 kernel diversification (turn rwkv/mamba/hopfield/linear-attn into genes)  
+b. Stage 4 turn learning rules (FF/EP/PCN/Hebb) into genes  
+c. Stage 5 Marabou Incremental NN Verification bridge  
+d. Speed up the Z3 gate with PrediPrune+Quokka  
+e. 3.5–5x wall-clock speedup with FlashEvolve  
+f. Write it up as a paper (TMLR + GECCO 2027)
+
+## Honest caveats
+
+- Mostly mock; connecting to real LLMs/weights waits for a GPU/new PC
+- The 1-step scalar invariant is at the over-approx proof stage; multi-dimensional and multi-step are in the post phase
+- The tanh upper-bound approximation is conservative (sound but not complete)
+
+---
+
+**Tags**: evolutionary computation / formal verification / Z3 / RWKV / state space model / CPU research  
+**Related**: Series #14-31 (llive lldarwin v0.B-E + observation + governance + lleval)  
+**Project**: D:/projects/llcore (PyPI llmesh-llcore 0.1.0a0)
+
+---
+
+# 中文
+
+# (连载 #32) llcore CPU PoC battery 完成
+
+## TL;DR
+
+- 将 **Transformer 的核心计算 (state update / 学习规则 / 认知驱动 Δ)** 作为进化对象的研究框架 `llcore` (PyPI: `llmesh-llcore` 0.1.0a0, llive 独立路线) 的 **CPU PoC battery 完成**
+- 以 **5 个 PoC / 39 个可证伪 gate / 76 个测试 / Codex pair-review 5/5 Green-light** 完成机制验证
+- **用 Z3 对结构变异进行 online gate** = 把 SMT 嵌入进化搜索的 selection pressure，经事先调查发现为未被探索的先行研究 (事前调查 RAD 14 个领域 + Agent A-D 确认)
+- 投稿候选: TMLR (本命) / GECCO 2027 short / NeurIPS 2026 workshop (verification × ML)
+
+## 为什么要做
+
+冻结 LLM 权重是标准做法，但**核心计算算法本身仍固定为人工设计**。AutoML-Zero / NAS / AlphaEvolve / Sakana Evolutionary Model Merge 等 architecture/algorithm 搜索虽已推进，但:
+
+1. **个人 compute 无法承担计算资源** (TinyLlama 1.1B from scratch = $140k / 90 天 / 16×A100)
+2. **搜索过程中没有安全性保证** = 生成数值不稳定的 architecture 而浪费时间
+3. **带验证的搜索与静态 verification (Reluplex/Marabou/α,β-CROWN) 相互割裂** — 在进化循环内做 SMT online gate 的研究未被发现
+
+## 已确定的独有轴 (事前调查中没有 negation work)
+
+机制已验证 (4 个轴):
+1. **ChangeOp → Z3 online gate** (Stage 1a, 5.8ms)
+2. **将 state update 规则基因化 RWKV-style** (Stage 0a v2)
+3. **factor_hook (认知状态 → SSM Δ)** (Stage 2a mock)
+4. **自研进化器 + verifier 基础** (Stage 0c + 1a)
+
+post phase: persona-indexed specialist / Marabou refinement / 提出 VNN-COMP 新类别。
+
+## PoC 阶梯 (5 stage / 39 gate 全部 PASS)
+
+| PoC | 内容 | 关键数值 |
+|---|---|---|
+| 0a v2 | RWKV-style state update gene | G6 var=7.4e-3, G9 escape@step1 |
+| 0b v2 | synthetic fitness (copy/add) | G4 rank_corr=-0.20, G7 best 0.518/0.525/0.703 |
+| 0c v2 | 自研 minimal GA | G3 monotonic 0.249→0.552, G7 dist=2.15 |
+| 1a v2 | Z3 state_norm invariant | G2 unsat **5.8ms**, G3 sound CE |
+| 2a | factor_hook × state update mock | G7 evolution smoke monotonic |
+
+## 从 v1 的失败中学到的东西 (honest disclosure)
+
+PoC 0a v1 用 `decay*s + mix*x*tanh(gate_str*s)`，使得 **state=0 成为 fixed point 的 zero attractor** = 形式上通过 G1-G5，但信息传递为零。Claude 单独遗漏的设计问题被 **Codex (gpt-5.4) 与 gem-critic 的独立 verdict** 检测出来，从而在 RWKV-style 上做了 v2 redesign。
+
+→ **在 5 个 PoC 中有 4 件，Claude 单独遗漏的设计问题被 Codex pair-review 检测出来**。这是相互评审在防止结构崩溃上发挥作用的实例。
+
+## 下一步选项
+
+a. Stage 3 kernel 多样化 (将 rwkv/mamba/hopfield/linear-attn 基因化)  
+b. Stage 4 将学习规则 (FF/EP/PCN/Hebb) 基因化  
+c. Stage 5 Marabou Incremental NN Verification bridge  
+d. 用 PrediPrune+Quokka 给 Z3 gate 提速  
+e. 用 FlashEvolve 实现 3.5-5x wall-clock 提速  
+f. 写成论文 (TMLR + GECCO 2027)
+
+## Honest 保留
+
+- 以 mock 为主，连接真实 LLM/权重要等 GPU/新 PC
+- 1 step scalar invariant 处于 over-approx proof 阶段，多维、多 step 在 post phase
+- tanh 上界近似偏保守 (sound 但不完整)
+
+---
+
+**Tags**: 进化计算 / 形式验证 / Z3 / RWKV / state space model / CPU研究  
+**相关**: 连载 #14-31 (llive lldarwin v0.B-E + 观测+governance + lleval)  
+**Project**: D:/projects/llcore (PyPI llmesh-llcore 0.1.0a0)
+
+---
+
+# 한국어
+
+# (연재 #32) llcore CPU PoC battery 완성
+
+## TL;DR
+
+- **Transformer의 코어 계산 (state update / 학습 규칙 / 인지 구동 Δ)** 을 진화 대상으로 삼는 연구 프레임워크 `llcore` (PyPI: `llmesh-llcore` 0.1.0a0, llive 독립 노선) 의 **CPU PoC battery 완성**
+- **5개 PoC / 39개 falsifiable gate / 76개 테스트 / Codex pair-review 5/5 Green-light** 로 메커니즘 실증
+- **Z3로 구조 변이를 online gate** = 진화 탐색의 selection pressure에 SMT를 끼워 넣음 — 사전 조사에서 발견되지 않은 선행 연구 (사전 조사 RAD 14개 분야 + Agent A-D 확인)
+- 투고 후보: TMLR (본명) / GECCO 2027 short / NeurIPS 2026 workshop (verification × ML)
+
+## 왜 만들었나
+
+LLM 가중치를 동결하는 것이 표준이지만, **코어 계산 알고리즘 자체는 수작업 설계로 고정**되어 있다. AutoML-Zero / NAS / AlphaEvolve / Sakana Evolutionary Model Merge 같은 architecture/algorithm 탐색은 진전되었지만:
+
+1. **개인 compute로는 계산 리소스가 불가능** (TinyLlama 1.1B from scratch = $140k / 90일 / 16×A100)
+2. **탐색 중 안전성 보장 없음** = 수치적으로 불안정한 architecture를 만들어 시간 낭비
+3. **검증을 동반한 탐색은 정적 verification (Reluplex/Marabou/α,β-CROWN) 과 단절** — 진화 루프 내 SMT online gate 연구는 발견되지 않음
+
+## 확정 독자 축 (사전 조사에서 negation work 없음)
+
+메커니즘 실증 완료 (4개 축):
+1. **ChangeOp → Z3 online gate** (Stage 1a, 5.8ms)
+2. **state update 규칙을 유전자화 RWKV-style** (Stage 0a v2)
+3. **factor_hook (인지 상태 → SSM Δ)** (Stage 2a mock)
+4. **자체 진화기 + verifier 기반** (Stage 0c + 1a)
+
+post phase: persona-indexed specialist / Marabou refinement / VNN-COMP 신규 카테고리 제안.
+
+## PoC 사다리 (5 stage / 39 gate 전부 PASS)
+
+| PoC | 내용 | 키 수치 |
+|---|---|---|
+| 0a v2 | RWKV-style state update gene | G6 var=7.4e-3, G9 escape@step1 |
+| 0b v2 | synthetic fitness (copy/add) | G4 rank_corr=-0.20, G7 best 0.518/0.525/0.703 |
+| 0c v2 | 자체 minimal GA | G3 monotonic 0.249→0.552, G7 dist=2.15 |
+| 1a v2 | Z3 state_norm invariant | G2 unsat **5.8ms**, G3 sound CE |
+| 2a | factor_hook × state update mock | G7 evolution smoke monotonic |
+
+## v1의 실패에서 배운 것 (honest disclosure)
+
+PoC 0a v1은 `decay*s + mix*x*tanh(gate_str*s)` 로 **state=0이 fixed point인 zero attractor** = G1-G5 형식적으로는 PASS이지만 정보 전달이 제로. Claude 단독으로 놓친 설계 문제를 **Codex (gpt-5.4) 와 gem-critic의 독립 verdict** 가 검출하여 RWKV-style로 v2 redesign 했다.
+
+→ **5개 PoC 중 4건에서 Claude 단독으로는 놓친 설계 문제를 Codex pair-review가 검출**. 상호 리뷰가 구조 붕괴 방지에 작동한 실례.
+
+## 다음 선택지
+
+a. Stage 3 kernel 다양화 (rwkv/mamba/hopfield/linear-attn 을 유전자화)  
+b. Stage 4 학습 규칙 (FF/EP/PCN/Hebb) 을 gene화  
+c. Stage 5 Marabou Incremental NN Verification bridge  
+d. PrediPrune+Quokka로 Z3 gate 고속화  
+e. FlashEvolve로 3.5-5x wall-clock 고속화  
+f. 논문화 (TMLR + GECCO 2027)
+
+## Honest 유보
+
+- mock 중심, 실제 LLM/가중치 접속은 GPU/새 PC 대기
+- 1 step scalar invariant의 over-approx proof 단계, 다차원·다 step은 post phase
+- tanh 상계 근사는 보수적 (sound이지만 완전하지 않음)
+
+---
+
+**Tags**: 진화 계산 / 형식 검증 / Z3 / RWKV / state space model / CPU연구  
+**관련**: 연재 #14-31 (llive lldarwin v0.B-E + 관측+governance + lleval)  
+**Project**: D:/projects/llcore (PyPI llmesh-llcore 0.1.0a0)
