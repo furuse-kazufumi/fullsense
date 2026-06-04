@@ -208,22 +208,7 @@ These are not things I "consciously" asked the AI for — they are perspectives 
 
 ### The Structure
 
-```
-[User (human)]
-     │ "I want to move away from Qwen"
-     ▼
-[AI (Claude Opus 4.7)]
-     │ References in the background:
-     │  ├ raptor RAD 49 fields (49,000 documents)
-     │  ├ hacker_corpus (Exploit-DB + ATT&CK + NVD + Phrack)
-     │  ├ memory 60+ files (past decisions + lessons)
-     │  ├ CLAUDE.md conventions (auto-trigger: rad-research / triz-ideation / cross-domain-ideation)
-     │  └ Structured knowledge of Six Hats / TRIZ / KJ Method / MindMap
-     ▼
-[Output]
-     5-stage roadmap + GPU decision + evaluation metrics + complementary track +
-     related prior research + areas conceded as a tie + risk table + ...
-```
+![Structure of the corpus-first strategy: user input -> AI references the corpus in the background -> output completed with multiple perspectives](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q13/flow_structure_en.svg)
 
 The user only entered the single line "I want to move away from Qwen." The **"areas conceded as a tie,"** the **"risk table,"** and the **"complementary track"** included in the output are perspectives the user was not consciously aware of.
 
