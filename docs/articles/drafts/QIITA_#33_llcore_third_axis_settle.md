@@ -3,6 +3,7 @@ title: "llcore — 「進化で AI を設計するとき、選り分けて育て
 tags: ["Python", "進化計算", "MAP-Elites", "honest disclosure", "統計検定"]
 private: true
 updated_at: "2026-06-02"
+id: 21d6c4dcfde204062a89
 ---
 
 # (連載 #33) 整いすぎた結果は、勝ちではなく警報 — 第三軸 ③ を proper power で決着させた一日

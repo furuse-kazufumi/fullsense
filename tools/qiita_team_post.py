@@ -275,17 +275,25 @@ def cmd_dry_run(args: list[str]) -> int:
 
 
 def _writeback_id(path: str, item_id: str) -> None:
-    """Insert `id: <item_id>` into the file's frontmatter so re-posts PATCH (idempotent)."""
+    """Store the new id in frontmatter so re-posts PATCH (idempotent). Replaces `id: null`/empty,
+    inserts if absent, leaves a pre-existing real id untouched."""
     if not item_id:
         return
     text = open(path, "r", encoding="utf-8").read()
     if not text.startswith("---"):
         return
     end = text.find("\n---", 3)
-    if end == -1 or re.search(r"^\s*id:\s", text[3:end], re.M):
+    if end == -1:
         return
+    head, fm, tail = text[:3], text[3:end], text[end:]
+    if re.search(r"^\s*id:\s*(?!null|None|\s*$).+$", fm, re.M):
+        return  # a real id is already present
+    if re.search(r"^\s*id:\s*.*$", fm, re.M):
+        fm = re.sub(r"^(\s*id:\s*).*$", lambda m: m.group(1) + item_id, fm, count=1, flags=re.M)
+    else:
+        fm = fm + f"\nid: {item_id}"
     with open(path, "w", encoding="utf-8") as f:
-        f.write(text[:end] + f"\nid: {item_id}" + text[end:])
+        f.write(head + fm + tail)
 
 
 def cmd_post(args: list[str]) -> int:
