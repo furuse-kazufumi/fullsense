@@ -398,7 +398,7 @@ reservoir ON で系統は全員生き残りました。が、よく見ると **d
 
 end-to-end の実測（pressure-proxy + lldarwin + novelty + reservoir, 8 founders / 120gens）: named 系統 **8/8 生存** / lineage_fixation (tail) 0.67 / diversity_l2 (tail) **17.91**。14 個の苦手軸 case が独立に淘汰され、行動多様性は高い。系統は reservoir が維持しています（pressure-proxy は persona の同一性を直接報酬化しないため、優占系統の share は rich-proxy の 0.29 より高い 0.67 になります）。
 
-![5 苦手軸（typo / polysemy / multistep / calibration / context）の母集団平均推移（proxy 測定）](assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg)
+![5 苦手軸（typo / polysemy / multistep / calibration / context）の母集団平均推移（proxy 測定）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg)
 
 **Honest 留保（設計で明記済の受容済み限界）**: 個体は実 LLM ではなく genome（llive 構成）です。本 pressure が測るのは「genome がその弱点に**関連する思考因子**をどれだけ備えるか」という**振る舞いの代理**であって、**production の LLM 能力ではありません**。これは **mechanism feasibility（機構が回ること）の検証**に限定されます。Goodhart リスク（proxy をハックする表面戦略が進化する）も受容済みの限界です（第 3 幕 §16 で正面から扱う）。実 LLM/VLM の苦手軸の実測は、Stage2 後半に持ち越します。
 
