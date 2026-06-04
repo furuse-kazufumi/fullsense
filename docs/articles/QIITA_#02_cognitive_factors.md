@@ -6,6 +6,12 @@ tags: [llm, agent, cognitive-architecture, design]
 id: 4de8dcff1cf4c2ab9bdc
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # 「心理の深層」10 因子で整理する llive 思考層 — 既に 9/10 実装済
 
 ## TL;DR
