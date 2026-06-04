@@ -393,16 +393,7 @@ llive 的差异化：**在保持既有 OSS LLM 权重冻结的同时，通过 fo
 
 ## 설계 동기
 
-```
-[현재의 attention]                  [CABT 의 치환안]
-attn_output = softmax(QK^T) · V     ref_id = softmax(QK^T)
-                                    attn_output = lookup(ref_id) + metadata_bias
-
-  ┌ V (float[B, S, H])              ┌ token table
-  │ 값 그 자체                      │ (id, embedding, metadata)
-  │ 메타 정보를 보유 불가           │ 참조 가능, 부가 정보 가능
-  └                                  └
-```
+![현재의 attention 과 CABT 치환안의 설계 동기 비교도](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q04/design_motivation_ko.svg)
 
 ## 7 가지 접근법 (CABT-01〜07)
 
