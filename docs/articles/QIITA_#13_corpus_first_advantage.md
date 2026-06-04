@@ -269,13 +269,7 @@ llive users get "perspectives they are not consciously aware of" completed for t
 
 In other words, llive is:
 
-```
-[Phase 1: llive developer (= me)]
-  raptor corpus + memory + CLAUDE.md → AI completes multiple viewpoints → 32 requirements in a day
-
-[Phase 2: llive end user]
-  llive CREAT + Brief Grounder (TRIZ × RAD) → llive completes multiple viewpoints → user need not be conscious of the perspectives
-```
+![Two-phase diagram of llive: Phase 1 developer gets multiple viewpoints from the corpus, Phase 2 end user gets the same advantage via CREAT](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q13/llive_two_phase_en.svg)
 
 llive itself is a mechanism that propagates "the advantage of the corpus-first strategy" to the user.
 
