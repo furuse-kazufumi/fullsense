@@ -46,22 +46,7 @@ id: 75d682ddefa5aeb738b8
 
 ### 構造
 
-```
-[ユーザー (人間)]
-     │ 「Qwen から離脱したい」
-     ▼
-[AI (Claude Opus 4.7)]
-     │ 背景で参照:
-     │  ├ raptor RAD 49 分野 (4.9 万 documents)
-     │  ├ hacker_corpus (Exploit-DB + ATT&CK + NVD + Phrack)
-     │  ├ memory 60+ ファイル (過去の決定 + 教訓)
-     │  ├ CLAUDE.md 規約 (auto-trigger: rad-research / triz-ideation / cross-domain-ideation)
-     │  └ Six Hats / TRIZ / KJ法 / MindMap の構造化された知識
-     ▼
-[出力]
-     5 段階ロードマップ + GPU 判断 + 評価指標 + 補完路線 +
-     関連先行研究 + 同点と認める領域 + リスク表 + ...
-```
+![コーパス先行戦略の構造図: ユーザー入力 → AI が背景でコーパス参照 → 多視点を補完した出力](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q13/flow_structure.svg)
 
 ユーザーは「Qwen から離脱したい」という 1 行を入力しただけ。出力に含まれる **「同点と認める領域」** や **「リスク表」** や **「補完路線」** は、ユーザーが意識していない観点。
 
