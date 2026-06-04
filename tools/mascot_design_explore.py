@@ -286,15 +286,16 @@ def build_e() -> str:
   <rect x="159" y="288" width="28" height="10" rx="5" fill="#8a8378"/>
 </g>
 
-<!-- 獅子の幕 (緑 + 唐草, 演者なし = 神霊のみ) -->
-<path d="M212 120 Q300 92 372 130 Q430 162 432 215 Q433 258 410 282
-         q-12 14 -28 6 q-8 16 -26 9 q-10 14 -28 7 q-12 13 -28 5 q-14 12 -30 3 q-16 9 -26 -6
-         Q220 290 212 240 Z" fill="#4caf50" stroke="#3a8c3f" stroke-width="2"/>
+<!-- 獅子の幕 (緑 + 唐草, 演者なし = 神霊のみ)。頭の後ろ (左上) から右下へ流れる -->
+<path d="M200 80 Q320 56 396 128 Q442 180 432 240 q-4 28 -26 36
+         q-14 14 -32 6 q-10 16 -30 8 q-12 14 -30 6 q-14 12 -32 3 q-18 8 -28 -8
+         Q222 282 210 210 Q202 140 200 80 Z" fill="#4caf50" stroke="#3a8c3f" stroke-width="2"/>
 {''.join(swirls)}
-<!-- 幕と頭の境の白いふち -->
-<circle cx="222" cy="128" r="12" fill="#ffffff"/>
-<circle cx="234" cy="148" r="12" fill="#ffffff"/>
-<circle cx="240" cy="170" r="12" fill="#ffffff"/>
+<!-- 幕の口元の白いふち (頭の右縁に沿う) -->
+<circle cx="232" cy="84" r="11" fill="#ffffff"/>
+<circle cx="241" cy="105" r="11" fill="#ffffff"/>
+<circle cx="245" cy="127" r="11" fill="#ffffff"/>
+<circle cx="243" cy="149" r="11" fill="#ffffff"/>
 
 <!-- 獅子の頭 (読者の頭に覆いかぶさる) -->
 <g>
