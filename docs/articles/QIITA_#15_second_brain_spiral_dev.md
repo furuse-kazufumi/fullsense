@@ -14,6 +14,12 @@ slide: false
 ignorePublish: true
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # 30 年のソフトウェア開発経験 + Perplexity 要約 + Claude Code + TRIZ + 5 万件の論文 RAG = 「第二の脳」
 
 > 📚 **連載ナビ**: ← #14 不可視アノテーションチャネル設計 ｜ **#15 本記事** ｜ #16 三自の精神で AI 運用 → ｜ [連載 LINK_MAP](./QIITA_#24_LINK_MAP.md)。※ 各記事は単独でも読めます（リンクは回遊用）。
