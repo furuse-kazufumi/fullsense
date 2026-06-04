@@ -388,3 +388,384 @@ arc は CPU の路を全部閉じました。実 proxy は noise-free で滑ら�
 **Tags**: 進化計算 / MAP-Elites / 統計検定 / honest disclosure / 進化生物学 / CPU 研究
 **関連**: 連載 #33 (第三軸 ③ 決着 Step D + BG9) / #32 (llcore CPU PoC battery) / #29 (反証・Goodhart・proxy 限界)
 **Project**: llcore (PyPI 予約 llmesh-llcore、リポジトリ未公開のためローカル研究)
+
+---
+
+# English
+
+# (Series #34) What Six Rounds of Hill-Climbing Taught Us About "When Does Evolution's ③ Actually Matter" — and How Evolutionary Biology Reached the Same Answer 100 Years Ago
+
+## TL;DR
+
+- The question is **"When you search for an AI's core computation by evolution, do you really need the 'sort-and-rear-separately' trick (= evolution's ③: survival of the fittest / separation)?"** Series #33 wrote up the endgame (Step D + BG9); **this #34 surveys the whole arc (6 stages) as a single story**.
+- **Stage 1 (synthetic deceptive landscape)**: ③ wins decisively (Cliff δ=+1.0). ③ is a real mechanism = **existence proof**.
+- **Stage 2 (memory task / multi-reservoir)**: blocked by the substrate's "floor" and "ceiling," so ③ could not be measured = **N/A**.
+- **Stage 3 (multi-task generalization)**: ③ beats "no selection," but cannot beat simple selection or random = ③ unnecessary (honest negative).
+- **Stage 4 (measure a real proxy landscape noise-free)**: once we physically drove evaluation noise to zero, the landscape was **genuinely smooth (unimodal)** = ③-unnecessary confirmed. For the first time, "the past negatives were not lack of statistical power but a smooth landscape" was backed up.
+- **Stage 5 (BG9: the loophole of mixing 4 component kinds)**: kernel selection is **low-dimensional**, so a strong baseline (random-restart hill-climbing) samples it directly, and ③'s niching advantage **structurally** does not appear = the loophole is closed.
+- **Structural insight (the core of this arc)**: ③ only helps when the hard spot lies in a **high-dimensional behavior space** that cannot be sampled directly. The real CPU substrate is low-dimensional/smooth, so ③ is unnecessary.
+- **Biological grounding (verified)**: this is exactly Wright's **shifting-balance theory**. For **the melanic moth (single gene = low-dimensional)**, ordinary selection suffices (= the BG9 kernel case); for **Lenski's Cit+ (high-dimensional, history-dependent)**, diversity matters (= the ③ regime). Our negative is **the computational version of the Coyne critique** (real landscapes are simple and ③ is only rarely decisive).
+- **Meta-lesson**: "a result that went too well is not a victory but an alarm." Pre-registration, honest disclosure, adversarial verification, and deterministic noise-free measurement kept us from premature celebration.
+
+> ⚠ Every number in this article is an actual measurement tied to local (on-machine) research records. llcore does not yet have a public repository, so I cannot link out. Instead I write "how it was measured" in the body. The papers cited in the biology part are only those whose existence, attribution, and claimed content I separately cross-checked against primary sources.
+
+---
+
+## 0. What this article is about (the concept)
+
+`llcore` is a CPU-complete research framework that "turns a Transformer's core computation (state-update rule, learning rule, cognitive-drive Δ) into a genome and evolves it while verifying with Z3 that it doesn't break."
+
+Its evolution engine has a design crux: of the 4 elements of evolution (① mutation / ② heredity / ③ survival of the fittest / separation / ④ overproduction), how should **③ (selection / separation)** be made to take effect? It is the "sort and rear separately" mechanism — like MAP-Elites, which preserves diversity and keeps things in niches.
+
+The question is simple.
+
+> **Is that ③ really needed?**
+
+If it is, then the heavy investment to carry ③ (ultimately running a real LLM on GPU) is meaningful. If it is not, then clinging to ③ is a waste of time and electricity.
+
+Series #33 wrote up in detail the **endgame** of that question (the deterministic measurement of Step D + the structural resolution of BG9). But to get there, there were **6 stages of experiments**, repeatedly winning (existence proof), failing to measure (N/A), and losing (honest negative). This #34 re-lays out **the whole arc as a single story**. And as the highlight this time, we **ground** — with verified primary sources — the fact that **this computational result has a strikingly identical shape to a roughly 100-year-old debate in evolutionary biology (Wright vs. Fisher)**.
+
+— That was 40 seconds. Warm-up done. On to the main topic. —
+
+---
+
+## 1. Metaphor: hill-climbing, the deceptive landscape, and the memory palace
+
+Before the equations, let's grasp the big picture with the 3 metaphors used consistently throughout this research.
+
+We represent the quality of a design as **the height of a landscape**. **High place = good design**. It's a game of finding the highest peak.
+
+**Landscape 1: a smooth single mountain (easy)**
+
+```
+ 良さ↑
+  高 |            ___________
+     |         __/           \__
+     |      __/                 \__     ← どこから登っても
+     |   __/                       \__     同じ頂上に着く
+  低 |__/                             \__
+     +----------------------------------→ 設計の選び方
+```
+
+In such a landscape, plain "hill-climbing" — that is, "just move toward something slightly better than now" — is enough to reach the top. **The fancy trick (③) is not needed.**
+
+**Landscape 2: the deceptive landscape (deceptive)**
+
+```
+ 良さ↑                                  /\
+     |                                 /  \   ← 本物の頂上
+     |        ニセ頂上                /    \
+  中 |         /\         谷         /      \
+     |        /  \______________/        \
+  低 |____/                                  \
+     +----------------------------------------→ 設計の選び方
+          ↑ニセ頂上で素朴な山登りは停止 (谷を下れない)
+```
+
+Here, plain hill-climbing stops at the false peak, because it lacks the courage to descend into the valley.
+
+This is where ③'s idea works. **You keep all sorts of climbers scattered around the valley** (= the memory palace / MAP-Elites archive). Someone can cross the valley by "stepping-stones" and reach the real peak — that's the mechanism.
+
+**The heart of this research in one line**: ③ is truly useful **only in the "deceptive landscape."** On a smooth single mountain, ③ is a white elephant.
+
+So the question can be rephrased like this.
+
+> **"When you design an AI by evolution, is the landscape you actually run into a 'deceptive landscape,' or a 'smooth single mountain'?"**
+
+In #33 we settled this question with Step D + BG9. In this #34 we show **all 6 stages of hill-climbing** that led there. The interesting part is that at each stage, "was it a deceptive landscape / was it smooth / could it even be measured" changes.
+
+— A short break. That's the prep. From here, the full record of the 6-round series. —
+
+---
+
+## 2. The whole-arc map — surveying the 6 stages of hill-climbing at a glance
+
+Let me put out the map first. This is the backbone of this article.
+
+| Stage | Substrate (what landscape was measured) | Did ③ work? | One line |
+|---|---|---|---|
+| **I (Step 4)** | a synthesized "deceptive landscape" (deceptive corridor) | **Yes (decisive)** | Existence proof. ③ is real |
+| **II (Step C / ladder 1)** | memory task / multi-reservoir parity | **N/A** | Couldn't measure due to floor, ceiling, the degree-5 wall |
+| **III (E-A)** | multi-task generalization | **No** | ③ beats "no selection," but no more than that |
+| **IV (Step D)** | real-proxy text landscape (deterministic measurement) | **No** | The landscape is confirmed **genuinely smooth** (noise-free) |
+| **V (BG9)** | union of 4 component (kernel) kinds | **No** | **Structurally** closed (low-dimensional selection) |
+
+The storyline is this. **First we prove existence — "③ is real and wins decisively under the right conditions" (I); next, to ask "well, what about real problems," we went to measure across 4 stages (II–V), and every single time it was "the real CPU substrate is a landscape that doesn't need ③."** Moreover, at the very end (IV, V), it was confirmed that the "reason it's not needed" is **the nature of the landscape, not lack of statistical power** — that is the whole-arc arc.
+
+So, one stage at a time.
+
+---
+
+## 3. Stage I (Step 4) — existence proof: in a deceptive landscape, ③ wins decisively
+
+The first thing we did was an existence proof of "does a scene where ③ **works as the theory says** actually exist?" We **deliberately built a deceptive landscape** and pitted ③ (MAP-Elites) against 3 baselines — pure random / panmictic GA / **random-restart hill-climbing** — in a contest.
+
+**The landscape's construction**: the genome is 24-dimensional. We define behavior (the climber's type) as `mean(genome)` = the average of the 24 values. To raise behavior, you have to **raise all 24 dimensions simultaneously**. The fitness is exactly a deceptive landscape: "a false peak (value 0.6) at behavior≈0.4 → a valley (value≈0) at behavior≈0.65 → the real peak (value 1.0) at behavior≈0.9."
+
+**Results**:
+
+| Method | Reach rate to the real peak | Comparison with ③ |
+|---|---|---|
+| **MAP-Elites (③)** | **about 95%** | — |
+| pure random | 0% | p=1.9e-6, Cliff δ=+1.00 |
+| panmictic GA | 0% | same as above |
+| random-restart hill-climbing | 0% | same as above |
+
+Only ③ reached the real peak; all 3 baselines stopped at the false peak (≈0.60). **100% wins / the effect size is the theoretical maximum (δ=+1.0)**. Robust across 3 base seeds (60 seeds total).
+
+Why this happens becomes foreshadowing for later.
+
+- **random** always has behavior concentrated at ≈0.5 (the average of 24 values is locked at 0.5 by the central limit theorem). So it can **never reach** behavior 0.9 (0% even after drawing 6000 samples).
+- **hill-climbing** climbs to the false peak 0.6 and refuses the one move of descending into the valley. Even on restart it returns to behavior≈0.5 and falls into the same trap.
+- **③ (MAP-Elites)** keeps the valley cells as "new behavioral niches" and **crosses behavior 0.5 → 0.9 by stepping-stones**.
+
+**We measured the boundary honestly too**. In a smooth corridor with the valley removed, ③ can no longer beat hill-climbing (p≈0.29). **③ is not omnipotent; it only works in a deceptive landscape.**
+
+**Honest caveat**: this is a **deliberately built** synthetic landscape. It only proves that ③ is "possible," not that real tasks have this structure. Toy scale, low noise, and the baseline is a plain (1+1).
+
+→ Here a hypothesis arises: **"If the real-problem landscape is this deceptive, ③ should come alive."** The next 4 stages are a journey to verify that on substrates closer to real problems.
+
+— A pause. Stage I was a satisfying decisive win. From here, the weather turns... —
+
+---
+
+## 4. Stage II (Step C / ladder 1) — blocked by the substrate's "floor" and "ceiling" (N/A)
+
+Next we investigated "does a deceptive corridor **naturally arise in standard memory tasks**?" (Step C). We ran delayed parity / flip-flop / delayed recall with a single leaky reservoir + ridge readout.
+
+The result was a clean **N/A (unmeasurable)**. The reasons are interesting because they're at two extremes.
+
+- **delayed parity = floor**: a single reservoir cannot compute XOR (Minsky-Papert). All methods give R²≈0.003. No one can climb, so ③ cannot be separated.
+- **flip_flop = ceiling**: all methods saturate at R²≈0.95. Variance is crushed and ③'s difference doesn't show (③ vs random has a positive sign but p=0.15 = underpowered, so it is **not a null**).
+
+Here is one important finding. **The multimodality of the genome space was high** (valley fraction was 1.000 for parity), yet it was no use to ③. In other words, **"multimodal in genome space" ≠ "a deceptive landscape whose behavior must be crossed."** This distinction becomes the key for the second half of the arc.
+
+**Ladder 1 (multi-reservoir)**: so, if we chain multiple reservoirs, does the floor rise? → We tried 5 mechanisms and all were `floor_lifted = false`. Depth (DeepESN) raises the floor statistically (effect +0.47/+0.60, PASS), but the absolute value stops at R² 0.05-0.10. The clincher is a positive control: a degree-2 readout solves 2-bit XOR exactly (R²=+1.0) but breaks down at degree≥3. **5-bit parity is degree-5 = a structural wall of this CPU reservoir+ridge paradigm.**
+
+→ The parity path is structurally blocked. The real test of ③ needs to **come down off parity**.
+
+**Honest caveat**: the degree-5 wall is "a wall of this setting," not a proof of impossibility for the whole paradigm.
+
+— A short break. A "couldn't measure" result is plain, but in drawing the map it's an important blank zone. —
+
+---
+
+## 5. Stage III (E-A) — multi-task generalization: ③ wasn't needed (honest negative)
+
+Coming down off the parity floor, we measured ③ on **generalization**, with the cleanest ablation we could assemble.
+
+**Setup**: single-layer leaky reservoir + ridge. Recall with variable delay. **Train on short delays {15, 30}, test on long delays {45, 60}** (extrapolation). The comparison is MAP-Elites (full ①②③) vs. **MAP-Elites with selection removed** (`randselect`: choose parents at random and place unconditionally = mutation only) + panmictic GA + random.
+
+**Results (after peer review)**:
+
+| Method | Test generalization R² (mean±std) |
+|---|---|
+| MAP-E (full ①②③) | 0.682 ± 0.115 |
+| MAP-E randselect (selection removed) | 0.557 ± 0.108 |
+| panmictic GA | 0.702 ± 0.083 |
+| random | 0.620 ± 0.105 |
+
+| Gate | Comparison | diff | p (one-sided) | Verdict |
+|---|---|---|---|---|
+| C-gen3 | MAP-E > randselect | +0.126 | 0.0151 | **PASS** |
+| C-gen4a | MAP-E > panmictic | −0.019 | 0.598 | FAIL |
+| C-gen4b | MAP-E > random | +0.062 | 0.126 | FAIL |
+
+**How to read it**: ③ beats the **drift control with selection removed** (C-gen3 PASS = "some selection beats no selection"). But it **cannot beat panmictic GA (which has selection but no niching)** (it even loses slightly), nor random. In other words, **there is no niching-specific (= ③'s intrinsic) contribution**. This generalization landscape was **smooth** enough that simple selection or even random arrives at the same place. This is consistent with Stage I's boundary, "if it's smooth, ③ doesn't work."
+
+**Honest caveat (important)**: this verdict is **limited to this setting** (budget 400, grid 6×6). Furthermore — and here is the crux of honest methodology — peer review (Codex) initially judged it "untrustworthy" and forced 3 rerun blockers (independent seeding per replicate / adopting the global best within budget / raising honest_n from 16→30). **Even after the fixes, the conclusion did not change.** The takeaway is that it was not a "fragile negative that flips when fixed."
+
+— A pause. A loss is a loss, but the work of confirming we "lost correctly" took more time. —
+
+---
+
+## 6. Stage IV (Step D) — the real-proxy landscape is confirmed "genuinely smooth" (noise-free)
+
+This is the turning point of the arc. Through Stage III, "③ negative" kept happening, but a **nagging doubt** lingered the whole time.
+
+> Is "③ unnecessary" really because **the landscape is smooth**? Or was it merely **lack of sample size, so the difference couldn't be detected (underpower)**?
+
+Mistake this and you'd over-generalize to "③ is powerless." Step D settles it here.
+
+**The trick**: an ESN reservoir (fixed seed) + a closed-form ridge readout (`np.linalg.solve`) **draws no random numbers at all**. So we can physically zero out evaluation noise down to **machine epsilon (about 1.11e-16)**. We measured `eval_noise_std ≤ 1.11e-16` — this comes from the smallest unit of floating point (ULP) and is **effectively zero**. With the fog of noise completely cleared, we can measure the landscape's valleys directly.
+
+The landscape is next-character prediction of llcore's own source (about 24k characters). We measured valley_fraction (the fraction of valleys; ≥0.2 means multimodal = deceptive landscape).
+
+| Landscape | Dims | valley_fraction (mean/max) | Multimodal? | Verdict |
+|---|---|---|---|---|
+| **ESN 3-param** (real proxy) | 3 | **0.000 / 0.000** | No (3 seeds agree) | Smooth → ③-unnecessary confirmed noise-free |
+| **ESN per-neuron** (real proxy) | 40 | **0.096 / 0.121** | No (3 seeds agree) | Smooth-ish → ③ unnecessary |
+| multimodal control (positive) | 3 / 40 | 0.70 / 0.80 | Yes | The diagnostic can detect multimodality ✓ |
+| quadratic control (negative) | 3 / 40 | 0.000 | No | The diagnostic can detect smoothness ✓ |
+
+There are 2 points.
+
+1. **The real-proxy landscape (both 3-dim and 40-dim) is unimodal**. Agreement across 3 seeds.
+2. **The diagnostic itself is sound**. A deliberately built multimodal landscape is properly detected as multimodal, and a quadratic is properly detected as smooth. So "the real proxy is unimodal" is not an instrument bug but **the nature of the landscape**.
+
+→ For the first time, **"the past ③ negatives were not underpower; the landscape was genuinely smooth"** was backed up on a real substrate, noise-free. Re-measure and no multimodality appears.
+
+**Honest caveat (important)**: "smooth" is precise only near the threshold. **90.9% of the midpoints of ESN 3-param dip slightly downward**, and the maximum relative dip (0.0435) is just below the valley threshold of 0.05. Strictly, it is not "**truly unimodal**" but a "**weak multi-basin with shallow valleys (~2-4%) just below the threshold**." The direction holds, but the robustness is limited because it's near the threshold — not rounding this off to "a perfect convex bowl" is this time's discipline.
+
+— A deep breath. Here, "the real-thing-mimic is smooth" is confirmed. What remains is "the last CPU loophole." —
+
+---
+
+## 7. Stage V (BG9) — the loophole of mixing components was structurally closed
+
+Since the real proxy is confirmed smooth, chasing ③ in a smooth landscape yields no gain. But GPU is an investment decision, so we tried **a different hypothesis we could advance on CPU**. That is **kernel diversification (BG9)**.
+
+**Hypothesis (pre-registered H7)**: even if each individual kernel (rwkv / mamba / hopfield / linear_attn) is smooth, **when you union the 4 kinds, the moment of kernel switching creates fitness steps → multi-basin (deceptive landscape) → ③ stands up on CPU without GPU**. The pre-registered honest prior leaned **toward null** (since all CPU substrates so far were smooth).
+
+The result in 3 parts.
+
+**(1) substrate validity — there is discrimination but it's weak (PASS but caution)**: when we measure whether the best kernel differs per task, the mapping is non-constant = non-inert (PASS). mamba is best on selective-copy, linear_attn on weighted-accumulation. However, **hopfield could not win on any task** (dysfunctional with the diagonal-scalar mock), so it is effectively a "**3-kernel** union." **The existence of discrimination ≠ a multimodal barrier.**
+
+**(2) harness validity — the positive control does not validate (the clincher)**: on a synthetic kernel-barrier, compare ③ against 3 baselines.
+
+| Substrate | Result |
+|---|---|
+| **positive control** | ③ crushes panmictic (+0.423) and random (+0.208). **But it cannot beat RR (random-restart hill-climbing)** (+0.051, p=0.31 → FAIL). It falls short of beating all 3 baselines = the harness doesn't stand |
+| **negative control** | all methods saturate, no ③ advantage = correctly null (the instrument is sound) |
+| **real** smoke | ③ beaten 0/3, panmictic actually exceeds ③ |
+
+In Stage I's corridor, ③ could shut out RR; **why can't it in kernel space?** The root cause is one.
+
+> **RR can sample kernel_id ∈ [0,4) directly at every restart.** Kernel selection is a single coordinate over 4 discrete values (**low-dimensional**), so RR hits all 4 kernels directly on restart. There's no need to cross a valley to "find the best kernel" = **direct warp**. So ③'s behavioral niching has no turn to play.
+
+The reason ③ could shut out RR in Stage I is that there, behavior was `mean(24 dims)`, the average concentrates at 0.5 → the global peak is in a measure-zero region = **high-dimensional, not directly samplable**. kernel_id, conversely, is low-dimensional and can be sampled directly.
+
+**(3) red-team — even adversarial verification couldn't refute it, and rather confirmed it**: on the positive control, instrumented RR spread restart kernels nearly uniformly across the 4 basins as [12,18,16,18], reaching target 88% of the time. In all 4 faithful configurations (high-dimensional theta corridor / sequential-kernel / in-basin L1 corridor / deceptive multi-basin), ③ cannot beat RR. Tightening the corridor makes ③ **starve first** (D=3: ③ reach 0.08 vs RR 0.42). We quantitatively confirmed **"the behavior dimension along which RR alone is excluded and ③ gets through does not structurally exist in kernel space."**
+
+**Verdict**: formally N/A (the positive control does not validate), but in substance a **decisive structural negative**. The harness is sound (it correctly nulls the negative control and detects GA/random), yet the substrate **cannot host ③'s deceptive landscape in the first place**. The answer to the question left from Stage I, "if we expand the search space with kernel diversification, does ③ unlock?", is **NO (structurally, on CPU)**.
+
+**Honest caveat (important)**: this is **not "③ turned out to be unnecessary."** It is "③ cannot in principle be separated from a strong baseline in low-dimensional kernel space" = **an informative N/A**. ③'s mechanism itself is already confirmed real in Stage I. The substrate is weak (effectively 3 kernels; hopfield is a diagonal mock). A stronger kernel implementation could in theory yield a different conclusion, but **the structural barrier (low-dimensional selection → RR direct sampling) is independent of the quality of the kernel implementation**.
+
+---
+
+## 8. Structural insight — uniting the 6 stages under a single condition
+
+The existence proof (I) and the 4 negatives (II–V) all connect under just one condition.
+
+> **③ (behavioral niching) exceeds a strong baseline only when the "hard spot" lies in a high-dimensional behavior space and cannot be reached by direct sampling (random restart).**
+
+- **Why Stage I satisfies it**: behavior = `mean(24 dims)`. The average concentrates at 0.5 by the central limit theorem, and the global peak (mean≈0.9) is effectively measure-zero. Neither random nor restart **reaches it directly**. So ③, which leaves stepping-stones and ratchets, is essential.
+- **Why the real CPU substrate doesn't satisfy it**: the hard spot is low-dimensional. The control coordinate of the ESN text proxy is effectively leak rate (a smooth low-dimensional knob; there's no valley to begin with). The hard spot of the kernel union is "which kernel" = a single discrete choice among 4. RR samples directly and teleports to all basins, so there's no valley to cross.
+
+So Stage II's "multimodality of genome space 1.000" is not a sufficient condition — even if the genome is riddled with valleys, if the hard spot is concentrated in low-dimensional behavior coordinates, restart reaches it directly. **What matters is "the dimension of the behavior the search must reach," not the dimension of the genome.**
+
+---
+
+## 9. Biological grounding — evolutionary biology gave the same answer 100 years ago
+
+From here is the highlight of #34. **"Diversity-preserving selection works only under narrow conditions and is redundant otherwise"** — this boundary condition has a strangely clean precedent in 20th-century evolutionary biology.
+
+> ⚠ **Honesty contract**: the following biology is a **"metaphor (structural analogy)," not a proof of our computational result**. The correspondence is structural and does not match at the mechanism level. Wherever the analogy slips, I note it on the spot. The papers cited are only those whose existence, attribution, and claimed content I separately cross-checked against primary sources.
+
+### 9.1 Wright's shifting-balance theory = the precedent of ③
+
+Sewall Wright (1931/1932) reasoned as follows. If you stay as one big "single herd (panmictic population)," ordinary natural selection **gets trapped on the local peak right in front of you**. To go to a higher mountain you must once **lower mean fitness and cross the valley**, but deterministic selection refuses that.
+
+Wright's solution was **to split the herd into many semi-isolated sub-populations (demes)**.
+
+- **Phase I**: a small deme crosses the valley by chance, descending via **genetic drift**.
+- **Phase II**: there, ordinary selection within the deme climbs a new (higher) peak.
+- **Phase III**: the deme that landed on the high peak sends out many migrants, and the superior gene combination spreads through the whole species.
+
+As a **whole** metapopulation, it crosses a valley that a single converged population cannot — this is the biological version of "crossing the valley of the deceptive landscape by stepping-stones."
+
+**Correspondence to ③ / MAP-Elites (= metaphor, not attribution)**: each cell of the archive = a semi-isolated deme, local elitism within a cell = within-deme selection (Phase II), cross-cell mutation = interdeme diffusion (Phase III), and **the archive as a whole** (≒ metapopulation, not a single cell) crosses the valley.
+
+> **Honesty notes (2 points)**:
+> 1. **This is a commentator's framework, neither Wright's claim nor MAP-Elites's origin.** The original MAP-Elites paper (Mouret & Clune 2015) and the QD literature **do not cite Wright or "shifting balance."** I raise Wright as our **inspiration / metaphor**, not as the lineage of MAP-Elites.
+> 2. **The mechanisms are only structurally similar, not identical.** MAP-Elites's valley crossing happens because a **mutation operator** places offspring in a new cell, **not genetic drift**. The archive is also not a population of replicating cells.
+
+### 9.2 Wright vs. Fisher = the dimension (the shape of the landscape) axis
+
+Wright's contemporary Fisher (R. A. Fisher, 1930) argued the opposite: **a large panmictic population + mass selection on additive variance is enough** for adaptation to proceed; there's no need to bother splitting it.
+
+The two's **deepest point of conflict was actually "epistasis (gene-gene interaction) and the shape of the landscape."** Wright assumed "because of non-additive interaction the landscape is **bumpy and multimodal**, so drift to cross valleys is needed," and Fisher judged "interactions exist but are unimportant, the landscape is roughly **unimodal and smoothly climbable**, so mass selection suffices."
+
+**This epistasis/ruggedness axis is exactly the dimension in which our result lives. The shape of the landscape (topology) is the whole problem.** If the landscape is genuinely bumpy and high-dimensional (the Wright regime), diversity ferries you across valleys; if it's smooth or the hard spot is low-dimensional (the Fisher regime), mass selection — i.e., the biological version of strong random-restart hill-climbing — already suffices. Our ESN text proxy is noise-free and smooth, and the hard spot of the kernel union is low-dimensional discrete. **Both are the Fisher regime**, and ③ doesn't work and didn't work.
+
+> Fine print (honestly): "Fisher ignored drift" is a compressed popular myth. Precisely, "he acknowledged drift exists but judged it quantitatively negligible in large populations." It's not a total denial.
+
+### 9.3 Our negative = the computational version of the Coyne critique
+
+The most telling correspondence is not Wright's **proposal** but the biology community's **empirical verdict**. Coyne, Barton & Turelli (1997, *Evolution* 51(3):643–671) evaluated shifting-balance theory both theoretically and empirically, and concluded as follows (full text cross-checked).
+
+- **Mass selection is usually enough.** "There are almost no real examples better explained by Wright's three-phase mechanism than by simple mass selection." Artificial-selection experiments also failed to show that "selection in subdivided populations produces a greater response than mass selection in a large population."
+- **Shifting balance works only under limited, rare conditions.** Empirical estimates of population structure suggest "**drift can move populations only between peaks separated by shallow valleys**" (deep valleys are only rarely crossed by drift), and moreover **most adaptation does not require valley crossing**.
+
+This is a **strikingly precise biological version** of our result. Translated into our vocabulary, their words become: **if the landscape isn't genuinely deceptive/high-dimensional, ordinary mass selection (≒ strong random-restart hill-climbing) already solves it, and the diversity-maintaining apparatus buys almost nothing.** "Real valleys are usually shallow, most adaptation needs no valley crossing" is the biological statement of our "**real landscapes are usually simple, so niching is redundant**."
+
+> **Honesty notes (3 points)**:
+> 1. **They did not "refute" shifting balance.** They explicitly state Phase I/II can happen and cite 6 empirical cases. The claim is **narrower and probabilistic** ("hard to call it a general, important mechanism"), and writing "refuted" overstates it.
+> 2. **The debate is not yet settled.** Wade & Goodnight (1998) and Peck et al. (1998, whose title literally argues "feasible") rebutted it, followed by Coyne et al.'s 2000 counter-rebuttal and Goodnight & Wade's rebuttal in the same issue. You must not cite the 1997 critique as the "final conclusion."
+> 3. **Biology has a mechanism with no counterpart on the computational side, and it makes a claim even stronger than ours.** In Phase III, the gene-flow barrier that protects diversity can **trap a good solution in peripheral demes and impede its spread** = niching can be **counterproductive**. Our stateless discrete-selection setting has no counterpart to this cost, so we **don't overlay** it here. This is a spot where biology makes a stronger claim.
+
+### 9.4 Two real examples — the low-dimensional moth and the high-dimensional E. coli
+
+Our claim has two poles (low-dimensional = ③ unnecessary / high-dimensional = ③ can work), and evolutionary biology has a clean real example for each.
+
+**The low-dimensional pole — industrial melanism of the peppered moth (= the BG9 kernel case)**: in *Biston betularia*, carbonaria (black) vs. typica (white) are governed by **a single Mendelian locus, few alleles** (the causal variant is a transposable-element insertion into the cortex gene; van't Hof et al. 2011/2016) under **strong directional selection** (s ≈ 0.1-0.2; Saccheri et al. 2008; predation reconfirmed in Cook, Grant, Saccheri & Mallet 2012). The optimum is unimodal at each moment, merely shifting with the environment. **Simple directional selection — the biological version of greedy hill-climbing / random restart — directly fixes the fitter morph, and a diversity-maintenance mechanism is neither needed nor invoked.** This is exactly BG9: kernel selection is a low-dimensional single coordinate of 4 choices, RR samples all kernels directly, and ③ cannot structurally separate. **The melanic morph = the living-organism version of the BG9 kernel case.**
+
+> Note (honestly): polymorphism is temporarily maintained during the transition, but that is due to **spatial environmental heterogeneity + gene flow (migration-selection balance)**, not an intrinsic diversity-preservation mechanism. A spot where the analogy slips slightly.
+
+**The high-dimensional, history-dependent pole — Lenski's Cit+ (= the ③ regime)**: in the E. coli Long-Term Evolution Experiment (LTEE), aerobic citrate utilization (Cit+) evolved in **exactly 1 of 12 populations** around generation 31,500 (Blount, Borland & Lenski 2008). The key is a high-dimensional, history-dependent path of ordered **potentiation (accumulation of precursor mutations) → actualization (promoter capture via tandem duplication of citT) → refinement** (Blount et al. 2012). Replay experiments distinguished "historical contingency" from "a constant rate of rare mutation." This **genuinely exemplifies** the value of exploring contingency, epistasis, and a high-dimensional bumpy landscape — a real example of a regime where ③ can work.
+
+> **Honesty notes (this corresponds only to the "antecedent" of our conditional)**:
+> - **LTEE uses no niching algorithm.** It's plain natural selection, and the 12 parallel populations are **themselves a random-restart-like design**. So it's an existence proof that "contingency + diversity enables a rare innovation," **not** evidence that "niching beats a strong restart baseline."
+> - "E. coli acquired the power to eat citrate from scratch" is a popular exaggeration. The innovation is **regulatory (aerobic expression of an existing transporter) = exaptation**, neither a new gene nor new biochemistry.
+> - Van Hofwegen et al. (2016) showed "with direct selection Cit+ appears much faster" and challenged the "rare/contingent" framing (the Lenski side rebutted that it doesn't contradict the potentiation under LTEE conditions). If you lean on the "extremely rare / long-delay" narrative, you should also note this **contested follow-up**.
+
+### 9.5 Grounding summary
+
+| Pole | Biology | Landscape | Does ③ work? | Our substrate |
+|---|---|---|---|---|
+| low-dim/smooth | melanic morph (single locus, s≈0.1-0.2, directional) | unimodal, shifting | **No** — mass selection suffices | BG9 kernel union; ESN/ridge text proxy (deterministic, smooth) |
+| high-dim/contingent | Lenski Cit+ (potentiation→actualization→refinement) | bumpy, valley crossing by mutation | **Yes** (a regime where it can work) | synthetic deceptive corridor (behavior = average of 24 dims) |
+| empirical verdict | Coyne, Barton & Turelli: mass selection usually suffices, shifting balance is only rarely decisive | real landscapes are usually simple | the **mirror** of our negative | every CPU substrate we tried |
+
+**Conclusion**: Wright's shifting balance is the correct biological precedent for "**why** ③ works when it works," the Wright-Fisher epistasis/ruggedness axis is the correct framework for the "**dimension** condition," the melanic moth and Lenski Cit+ are clean low-/high-dimensional poles, and the Coyne critique is the biological precedent of our **negative**. **But these do not prove the computational result. They only ground it.** Where the analogy loosens most is that biology adds a cost (the gene-flow trap of Phase III) — our stateless setting has none.
+
+— A pause. When I realized a 100-year-old debate had the same shape, honestly I got chills. But not mistaking "got chills" for "proof" is this time's discipline. —
+
+---
+
+## 10. Implications for GPU — the only path left is high-dimensional, yet still a bet
+
+The arc closed every CPU path. The real proxy is noise-free and smooth (IV), and the last candidate (kernel diversification) is structurally closed (V). The only path left for ③ is **a high-dimensional landscape** — and what provides that is **the parameter/loss space of a full LLM (millions of dimensions)**.
+
+The structural insight makes the GPU bet **better-motivated**. It's not the blind bet "maybe only full-LLM is the exception," but a bet that follows the principle "**③ requires high dimensions, and full-LLM is the high-dimensional regime**."
+
+**But still a bet.** For the same reason that biology's Cit+ does not prove "a victory of the ③ algorithm," and by the same form as not beating RR in BG9 — **if the real LLM landscape can be navigated directly by a strong baseline of backprop (gradient descent), ③ is again unnecessary**. The hard spot being high-dimensional is **a necessary, not a sufficient, condition**. You additionally need to show "a strong direct method cannot solve it" (RR on CPU, gradient descent on GPU).
+
+So GPU is appropriate **not "for ③ alone"** but as a **portfolio judgment** (riding along with llive's real-LLM fitness, etc.) + **one pre-registration on rented cloud** (before capital commitment). The go/no-go criterion can also be written falsifiably:
+
+> **Is the full-LLM hard spot high-dimensional in behavior, AND hard to reach by a strong direct baseline (gradient descent)?** If high-dimensional but the gradient reaches directly, ③ is unnecessary (= the GPU version of BG9's RR result).
+
+---
+
+## 11. Meta-lesson — honesty was a tool for winning
+
+The real achievement of this arc is not the numbers but **that the spirit of "doubting results that came out too neatly" actually pushed the research forward**.
+
+- When we won at the **existence proof (I)**, we voluntarily confirmed "③ is not omnipotent" with a boundary experiment that removed the valley (not overrating the win).
+- At **generalization (III)**, peer review thrust 3 rerun blockers at us, but even after fixing, the conclusion didn't change (confirmed it was not a fragile negative).
+- At the **deterministic measurement (IV)**, because we physically erased evaluation noise, we could separate whether "smooth" was the nature of the landscape or the limit of the instrument.
+- At **BG9 (V)**, in adversarial verification we **tried to refute and couldn't refute** our own "③ doesn't stand," and it was confirmed as structural (the same discipline worked in the direction of confirming a negative as correctly negative).
+
+And across the whole arc we learned one thing — **a low-dimensional hard spot gets solved directly by a strong baseline. So for ③ (the sort-and-rear trick) to work, a "high-dimensional behavior space" is required.** "Build a deceptive landscape and ③ stands up" is only half right; precisely, ③ doesn't stand unless it's a deceptive landscape **so high-dimensional it can't be directly sampled**. And surprisingly, this boundary condition was one that **Wright's shifting balance and the Coyne critique had reached nearly 100 years ago**.
+
+"When an abnormally good result comes out, always doubt the breakdown before you feel like you've won" — FullSense's research discipline (`honest disclosure`) was not mere self-admonition but a **mechanism that actually catches false positives, confirms negatives correctly, and raises the precision of the research**, turning across all 6 stages.
+
+Let me state the conclusion precisely one more time, at the end.
+
+> **③ comes alive only in a "high-dimensional" deceptive landscape.** It won decisively in the existence proof (synthetic corridor), but the real CPU substrate — the memory task (floor/ceiling), the multi-task generalization (smooth), the real-proxy text landscape (noise-free and smooth), the kernel diversification (low-dimensional, structurally closed) — none satisfied that condition. It is **not "③ resolved = ③ turned out unnecessary"** but "the real-thing-mimics we could measure on CPU now did not satisfy the condition (a high-dimensional deceptive landscape) under which ③ comes alive." The main keep (GPU high dimensions) is still ahead, and it's a bet that carries the risk that "a strong direct baseline solves it." And the skeleton of this conclusion had already been drawn by 20th-century evolutionary biology — except that biology does **not prove it, only grounds it**.
+
+---
+
+**Tags**: evolutionary computation / MAP-Elites / statistical testing / honest disclosure / evolutionary biology / CPU research
+**Related**: Series #33 (third axis ③ resolution Step D + BG9) / #32 (llcore CPU PoC battery) / #29 (refutation, Goodhart, proxy limits)
+**Project**: llcore (PyPI reservation llmesh-llcore; local research as the repository is not yet public)
