@@ -20,7 +20,7 @@ ignorePublish: false
 
 # llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero.svg?v=2)
 
 ![連載進捗 (7/8) — 現在: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_progress.svg)
 
@@ -183,7 +183,7 @@ flowchart TD
 (Type 0 → I → II → III → IV) の「文明レベル」スケールに束ねて, 個体 / 集団 /
 メタ集団の 3 階層で同時計測する構想.
 
-![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg?v=2)
 
 Ethics 軸はまさに本記事の Approval Bus pass率 + frozen gene 違反検出 + 規制
 適合度のスコアで, governance maturity を「個体の躾」から「文明の成熟」まで
@@ -265,7 +265,7 @@ governance 側で重要なのは:
 
 # llive Complete Guide (7) — "AI with Built-in Review": runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_en.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_en.svg?v=2)
 
 ![series progress (7/8) — current: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_progress_en.svg)
 
@@ -437,7 +437,7 @@ of 4 axes — Energy / Knowledge / Coordination / **Ethics** — × 5 stages
 (Type 0 → I → II → III → IV), measured simultaneously across the 3 tiers of
 individual / population / meta-population.
 
-![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg?v=2)
 
 The Ethics axis is exactly this article's score of Approval Bus pass rate +
 frozen gene violation detection + regulatory conformity, letting us speak of
@@ -525,7 +525,7 @@ matrix signed in the audit chain fits within the latency budget.
 
 # llive 完全解说 (7) — "带审查的 AI": runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_zh.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_zh.svg?v=2)
 
 ![连载进度 (7/8) — 当前: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_progress_zh.svg)
 
@@ -681,7 +681,7 @@ flowchart TD
 (Type 0 → I → II → III → IV) 的「文明等级」尺度上, 在个体 / 群体 / 元群体的 3 个
 层级上同时度量.
 
-![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg?v=2)
 
 Ethics 轴正是本文的 Approval Bus 通过率 + frozen gene 违规检测 + 法规符合度的分数,
 使我们能够把 governance maturity 用一条从「个体的管教」到「文明的成熟」的连续尺度
@@ -760,7 +760,7 @@ test (1e-6 tolerance). callers (`CollusionDetector.check`) 计划在下一 commi
 
 # llive 완전 해설 (7) — "심사가 붙은 AI": runtime_metadata × Approval Bus × Ed25519 audit chain
 
-![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_ko.svg)
+![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_ko.svg?v=2)
 
 ![연재 진행 (7/8) — 현재: audit](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_progress_ko.svg)
 
@@ -920,7 +920,7 @@ flowchart TD
 (Type 0 → I → II → III → IV) 의 「문명 레벨」 척도로 묶어서, 개체 / 집단 / 메타 집단의
 3 계층에서 동시에 계측하는 구상.
 
-![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg)
+![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_v0i_kardashev_4d_hero.svg?v=2)
 
 Ethics 축은 바로 본 기사의 Approval Bus pass 율 + frozen gene 위반 검출 + 규제
 적합도의 점수로, governance maturity 를 「개체의 훈육」에서 「문명의 성숙」까지

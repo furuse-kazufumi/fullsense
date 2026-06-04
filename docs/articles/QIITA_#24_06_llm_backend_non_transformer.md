@@ -34,7 +34,7 @@ ignorePublish: false
 > **重要な honest disclosure**: 本記事の数値は **mock baseline のみ着地**.
 > 実 Mamba / Jamba / RWKV backend は **credential / weights 未着地**.
 
-![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme.svg)
+![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme.svg?v=2)
 
 ## 0. 連載中での位置づけ
 
@@ -201,7 +201,7 @@ flowchart LR
 > **mock baseline**. The real Mamba / Jamba / RWKV backends are **not yet
 > landed — credentials / weights pending**.
 
-![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_en.svg)
+![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_en.svg?v=2)
 
 ## 0. Position within the series
 
@@ -379,7 +379,7 @@ flowchart LR
 > **重要的 honest disclosure**: 本文的数值仅 **落地为 mock baseline**. 真实的
 > Mamba / Jamba / RWKV backend **credential / weights 尚未落地**.
 
-![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_zh.svg)
+![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_zh.svg?v=2)
 
 ## 0. 在连载中的定位
 
@@ -540,7 +540,7 @@ flowchart LR
 > **중요한 honest disclosure**: 본 글의 수치는 **mock baseline 만 착지**. 실제
 > Mamba / Jamba / RWKV backend 는 **credential / weights 미착지**.
 
-![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_ko.svg)
+![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme_ko.svg?v=2)
 
 ## 0. 연재에서의 위치
 
