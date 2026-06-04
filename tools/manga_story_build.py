@@ -322,6 +322,7 @@ def build(slug: str, lang: str, spec: dict) -> dict:
     psize = 26 if lang != "en" else 22
     els.append(speech(p4.get("bubble", ""), 300, y0 + 120, 252, 80, psize, f,
                       kind="shout", tail_to=mouth4, seed=9, bw=4))
+    _lint_add("punch-shout", 300 - 280, y0 + 120 - 90, 300 + 280, y0 + 120 + 90)
     if p4.get("caption_box"):
         c_lines = nlines(p4["caption_box"])
         c_oy = (y0 + 415) - (c_lines - 1) * 16
