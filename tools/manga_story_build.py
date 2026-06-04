@@ -69,6 +69,33 @@ def nlines(s: str) -> int:
     return s.count("\n") + 1
 
 
+# --------------------------------------------------------------------------- #
+# タンジェント lint (manga_grammar.md §1: かすり接触禁止 / 尖り同士のクロス禁止)
+# build 中に主要要素の bbox を登録 → 同一コマ内のペアが margin 未満なら警告。
+# 役者と図解の意図的レイヤリング (bust×flow) は対象外。
+# --------------------------------------------------------------------------- #
+_LINT: list[tuple[str, float, float, float, float]] = []
+
+
+def _lint_add(label: str, x0: float, y0: float, x1: float, y1: float) -> None:
+    _LINT.append((label, x0, y0, x1, y1))
+
+
+def _lint_check(slug: str, lang: str, margin: float = 6.0) -> list[str]:
+    warns = []
+    for i in range(len(_LINT)):
+        for j in range(i + 1, len(_LINT)):
+            la, ax0, ay0, ax1, ay1 = _LINT[i]
+            lb, bx0, by0, bx1, by1 = _LINT[j]
+            if not (ax1 + margin < bx0 or bx1 + margin < ax0 or
+                    ay1 + margin < by0 or by1 + margin < ay0):
+                warns.append(f"LINT-WARN {slug}/{lang}: {la} × {lb} がかすり/交差 "
+                             f"(({ax0:.0f},{ay0:.0f})-({ax1:.0f},{ay1:.0f}) vs "
+                             f"({bx0:.0f},{by0:.0f})-({bx1:.0f},{by1:.0f}))")
+    _LINT.clear()
+    return warns
+
+
 def _bust(els: list, cx: float, cy: float, k: float, sx: int, emo: str = "normal",
           hair: str = "#4a3826", skin: str = "#fbd7b5", cloth: str = "#5a6e8c") -> tuple[float, float]:
     """説明役の半身 (バスト、3/4 視で両目)。sx=-1 で左向き (右側に置く)、+1 で右向き。
