@@ -14,6 +14,10 @@ slide: false
 ignorePublish: true
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
 > ⚠ 本記事は **ja 骨子ドラフト**（蓄積目的・完璧不要）。en/zh/ko 展開は後続。投稿前に hero/theme SVG・進捗 badge・関連記事の Qiita URL cross-link を埋める。
 
 # 日本語
