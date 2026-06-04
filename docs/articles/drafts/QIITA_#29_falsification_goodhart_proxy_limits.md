@@ -1090,7 +1090,7 @@ The footing to step forward exists only on top of this boundary.
 
 作为参考,③(选择)只有在存在"越过假山顶、虽欺骗但可通行的坡道(欺瞒 corridor)"时才奏效:
 
-<img src="../assets/step_c/deceptive_corridor.svg" alt="欺骗地形与进化(③奏效的状态)" width="640">
+<img src="https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/step_c/deceptive_corridor.svg" alt="欺骗地形与进化(③奏效的状态)" width="640">
 
 Step C 的结论干脆是 **N/A(在此基质上无法测量③的有无)**。而且在 draft 阶段我**写过头了**"③不必要",多视角的 adversarial 验证抓住"因天花板效应而非诊断、检出力不足(δ=+0.33 是 medium 但 p=0.15 为 inconclusive)"并将其降级——§3.2 的"自我反证",在这里也照样发生了。
 

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" font-family="'Segoe UI','Hiragino Sans','Yu Gothic UI',sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#37474f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="360" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1a237e">「測る」と「淘汰する」の2段構造</text>
+
+  <!-- Row 1: 個体 -> lleval -> pressure profile -->
+  <!-- 個体 -->
+  <rect x="40" y="90" width="120" height="64" rx="10" fill="#eceff1" stroke="#90a4ae" stroke-width="1.5"/>
+  <text x="100" y="128" text-anchor="middle" font-size="18" font-weight="600" fill="#263238">個体</text>
+
+  <!-- arrow -->
+  <line x1="160" y1="122" x2="232" y2="122" stroke="#37474f" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- lleval = 眼鏡 -->
+  <rect x="240" y="86" width="220" height="72" rx="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+  <text x="350" y="118" text-anchor="middle" font-size="18" font-weight="700" fill="#0d47a1">lleval = 眼鏡</text>
+  <text x="350" y="142" text-anchor="middle" font-size="13" fill="#1565c0">測る</text>
+
+  <!-- arrow -->
+  <line x1="460" y1="122" x2="532" y2="122" stroke="#37474f" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- pressure profile -->
+  <rect x="540" y="86" width="320" height="72" rx="10" fill="#f1f8e9" stroke="#7cb342" stroke-width="1.5"/>
+  <text x="700" y="116" text-anchor="middle" font-size="16" font-weight="600" fill="#33691e">pressure profile</text>
+  <text x="700" y="140" text-anchor="middle" font-size="13" fill="#558b2f">複数軸の case ベクトル</text>
+
+  <!-- down arrow from pressure profile to lldarwin -->
+  <line x1="700" y1="158" x2="700" y2="222" stroke="#37474f" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="716" y="196" font-size="12" fill="#546e7a">集約しないで渡す</text>
+
+  <!-- Row 2: lldarwin -> 次世代の親 -->
+  <!-- lldarwin = 淘汰器 -->
+  <rect x="540" y="230" width="220" height="72" rx="10" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <text x="650" y="262" text-anchor="middle" font-size="18" font-weight="700" fill="#e65100">lldarwin = 淘汰器</text>
+  <text x="650" y="286" text-anchor="middle" font-size="13" fill="#ef6c00">淘汰する</text>
+
+  <!-- arrow lldarwin -> 次世代の親 -->
+  <line x1="540" y1="266" x2="328" y2="266" stroke="#37474f" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- 次世代の親 -->
+  <rect x="160" y="230" width="160" height="72" rx="10" fill="#eceff1" stroke="#90a4ae" stroke-width="1.5"/>
+  <text x="240" y="272" text-anchor="middle" font-size="17" font-weight="600" fill="#263238">次世代の親</text>
+
+  <text x="450" y="338" text-anchor="middle" font-size="13" fill="#78909c">核は「集約しない」— 軸ごとの内訳を保ったまま淘汰する</text>
+</svg>

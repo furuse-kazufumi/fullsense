@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="320" fill="#f8fafc"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">CABT&#65306;attention &#30340;&#26367;&#25442;&#26041;&#26696;</text>
+
+  <rect x="40" y="64" width="380" height="44" rx="10" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="230" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#3730a3">&#29616;&#29366; attention</text>
+
+  <rect x="40" y="138" width="380" height="60" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="230" y="174" text-anchor="middle" font-size="16" fill="#1e293b" font-family="ui-monospace, monospace">attn_output = softmax(QK&#8868;) &#183; V</text>
+
+  <rect x="480" y="64" width="380" height="44" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="670" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#15803d">CABT &#30340;&#26367;&#25442;&#26041;&#26696;</text>
+
+  <rect x="480" y="138" width="380" height="100" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="670" y="170" text-anchor="middle" font-size="15" fill="#1e293b" font-family="ui-monospace, monospace">ref_id = softmax(QK&#8868;)</text>
+  <text x="670" y="198" text-anchor="middle" font-size="15" fill="#1e293b" font-family="ui-monospace, monospace">attn_output =</text>
+  <text x="670" y="220" text-anchor="middle" font-size="15" fill="#1e293b" font-family="ui-monospace, monospace">lookup(ref_id) + metadata_bias</text>
+
+  <line x1="425" y1="168" x2="475" y2="168" stroke="#475569" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="450" y="158" text-anchor="middle" font-size="13" fill="#64748b">&#26367;&#25442;</text>
+
+  <text x="230" y="270" text-anchor="middle" font-size="14" fill="#64748b">&#30452;&#25509;&#23545; V &#21152;&#26435;&#24179;&#22343;</text>
+  <text x="670" y="270" text-anchor="middle" font-size="14" fill="#64748b">&#21442;&#29031; ID + &#20803;&#25968;&#25454;&#20559;&#32622;&#65292;&#25658;&#24102;&#38468;&#21152;&#20449;&#24687;</text>
+</svg>
