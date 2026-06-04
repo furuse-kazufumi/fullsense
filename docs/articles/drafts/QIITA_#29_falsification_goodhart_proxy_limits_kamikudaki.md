@@ -17,6 +17,8 @@ id: f822f8c8b01cd7b16713
 
 # (連載 #29 かみくだき版) ものさしが頭打ちだと、どんな選び方も効かない — AI 進化に自分でダメ出しする回
 
+![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
+
 > 📗 これは [完全版](https://fullsense.qiita.com/furuse-kazufumi/items/bb2f19dbf60df28deb56) のかみくだき版です。むずかしい数式やコードは完全版にあります。ここでは「だいたい何を言ってる回なの?」を、たとえ話だけで 10 分で掴めるようにします。
 
 この記事は、ちょっと変わった回です。普通の連載なら「前回の失敗、直りました! めでたし!」となるところを、**わざと自分の成功報告にケチをつける** 回です。なぜそんな面倒なことをするのか。それは「うまくいった!」と喜んだ次の瞬間に足をすくわれるのが、研究という世界だからです。
@@ -192,6 +194,8 @@ id: f822f8c8b01cd7b16713
 
 # (Series #29, Plain Version) When the Yardstick Hits Its Ceiling, No Way of Choosing Works — The Episode Where I Critique My Own AI Evolution
 
+![Kamikudaki lion — a bite that grants the blessing of understanding](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_en.svg)
+
 > 📗 This is the plain-language version of the [full article](https://fullsense.qiita.com/furuse-kazufumi/items/bb2f19dbf60df28deb56). The hard math and code live in the full version. Here, you can grasp "what is this episode roughly about?" in 10 minutes using only analogies.
 
 This is an unusual episode. Where an ordinary series would say "Last time's failure? It's fixed! All's well!", this is the episode where **I deliberately nitpick my own success report.** Why go to such trouble? Because in research, the moment you cheer "it worked!" is the moment you get tripped up.
@@ -365,6 +369,8 @@ The math, code, measured graphs, and the contents of each countermeasure are all
 
 # (连载 #29 通俗版) 当标尺到顶时,任何挑选方式都失效 — 我给自己的 AI 进化挑刺的一集
 
+![通俗易懂版舞狮 — 被咬的读者获得「理解」的福气](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_zh.svg)
+
 > 📗 这是[完整版](https://fullsense.qiita.com/furuse-kazufumi/items/bb2f19dbf60df28deb56)的通俗版。难懂的数学和代码都在完整版里。这里只用比喻,让你在 10 分钟内抓住"这一集大概在讲什么?"。
 
 这是不寻常的一集。普通连载到这里会说"上次的失败?修好了!皆大欢喜!",而这一集是我**故意给自己的成功报告挑刺**的一集。为什么要找这种麻烦?因为在研究的世界里,你欢呼"成功了!"的那一刻,正是被绊倒的那一刻。
@@ -537,6 +543,8 @@ The math, code, measured graphs, and the contents of each countermeasure are all
 # 한국어
 
 # (연재 #29 쉬운 버전) 잣대가 천장에 닿으면 어떤 고르기 방식도 듣지 않는다 — 내 AI 진화에 스스로 트집 잡는 편
+
+![쉬운 설명판 사자탈 — 물린 독자에게 「이해」의 복](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_ko.svg)
 
 > 📗 이것은 [완전판](https://fullsense.qiita.com/furuse-kazufumi/items/bb2f19dbf60df28deb56)의 쉬운 버전입니다. 어려운 수식과 코드는 완전판에 있습니다. 여기서는 비유만으로 "이 편은 대체 무슨 이야기야?"를 10분 만에 잡을 수 있게 합니다.
 

@@ -17,6 +17,8 @@ id: 6b134e5a4f87963681c2
 
 # 【かみくだき版】一晩で AI 進化を作り直した夜 — 「本物の AI 先生」でテストしてもまた満点で詰んだ話
 
+![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
+
 > 📗 これは [完全版](https://fullsense.qiita.com/furuse-kazufumi/items/61dda4314c1b786381d0) のかみくだき版です。数式・表・細かい数値は完全版に全部あります。ここでは「結局、何が起きて、何がわかったの?」を、たとえ話多めで 5〜10 分で掴める形にします。技術的な結論と「正直な失敗の告白」は、薄めずにそのまま残します。
 
 ---
@@ -221,6 +223,8 @@ id: 6b134e5a4f87963681c2
 # English
 
 # [Plain-Language Edition] The Night I Rebuilt AI Evolution — When a "Real AI Teacher" Still Pinned Everyone at a Perfect Score
+
+![Kamikudaki lion — a bite that grants the blessing of understanding](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_en.svg)
 
 > 📗 This is the plain-language edition of the [full version](https://fullsense.qiita.com/furuse-kazufumi/items/61dda4314c1b786381d0). All the equations, tables, and fine-grained numbers live in the full version. Here, I aim to give you "so what actually happened, and what did we learn?" in 5–10 minutes, heavy on analogies. The technical conclusions and the "honest confession of failure" are kept intact, not watered down.
 
@@ -427,6 +431,8 @@ In one line — **"Once the grading sheet breaks, no amount of polishing the sel
 
 # 【通俗版】一夜之间重建 AI 进化 —— 用"真正的 AI 老师"测验，全员还是钉在满分的故事
 
+![通俗易懂版舞狮 — 被咬的读者获得「理解」的福气](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_zh.svg)
+
 > 📗 这是[完整版](https://fullsense.qiita.com/furuse-kazufumi/items/61dda4314c1b786381d0)的通俗版。公式、表格、细致数值都在完整版里。这里用大量比喻，5～10 分钟讲清"到底发生了什么、学到了什么"。技术结论与"诚实的失败坦白"原样保留，不稀释。
 
 ---
@@ -631,6 +637,8 @@ In one line — **"Once the grading sheet breaks, no amount of polishing the sel
 # 한국어
 
 # [쉽게 풀어쓴 판] 하룻밤 사이에 AI 진화를 다시 만든 밤 — "진짜 AI 선생님"으로 시험을 봐도 또 만점에 박혀버린 이야기
+
+![쉬운 설명판 사자탈 — 물린 독자에게 「이해」의 복](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_ko.svg)
 
 > 📗 이 글은 [완전판](https://fullsense.qiita.com/furuse-kazufumi/items/61dda4314c1b786381d0)의 쉽게 풀어쓴 판입니다. 수식·표·세밀한 수치는 모두 완전판에 있습니다. 여기서는 비유를 많이 써서 "결국 무슨 일이 일어났고, 무엇을 알게 됐나?"를 5~10분 안에 잡을 수 있게 합니다. 기술적 결론과 "정직한 실패의 고백"은 희석하지 않고 그대로 남깁니다.
 

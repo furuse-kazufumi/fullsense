@@ -60,7 +60,7 @@ TEXTS = {
         "sub": ["The hard parts come pre-chewed by our lion."],
         "sub_size": 18,
         "bless": ["A bite from the shishimai lion wards off misfortune —",
-                  "readers bitten by this lion receive the blessing of understanding."],
+                  "this lion's bite grants the blessing of understanding."],
         "paper": "HARD",
         "footer": "FullSense KB — Plain-Language Series",
     },

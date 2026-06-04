@@ -17,6 +17,8 @@ id: 146d5e2b27dabc59e799
 
 # 【かみくだき版】「良すぎる数値」は勝ちじゃなくて警報 — 計算機を1個入れ替えたら自慢の結果が崩れた話
 
+![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
+
 📗 これは [完全版](https://fullsense.qiita.com/furuse-kazufumi/items/ffef66ddbc48d7649615) のかみくだき版です。専門用語は出てきたらすぐ日常のたとえに言い換えます。技術版の前の地ならし、または「だいたい何やったの?」を10分で掴みたい人向けです。
 
 ![計算機を入れ替えると偽の数値が崩れる図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap.svg)
@@ -181,6 +183,8 @@ id: 146d5e2b27dabc59e799
 
 # (Plain-language edition) "Too-good numbers" aren't a win — they're an alarm: the story of how swapping one calculator made our proud result collapse
 
+![Kamikudaki lion — a bite that grants the blessing of understanding](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_en.svg)
+
 📗 This is the plain-language edition of the [full version](https://fullsense.qiita.com/furuse-kazufumi/items/ffef66ddbc48d7649615). Whenever a technical term shows up, we immediately swap it for an everyday analogy. Think of it as leveling the ground before the technical version, or a 10-minute "what did they roughly do?" for the curious.
 
 ![Diagram of fake numbers collapsing when the calculator is swapped](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_en.svg)
@@ -333,6 +337,8 @@ Because we set up the machinery to honestly doubt ourselves first, we didn't sto
 
 # (通俗版) "太好的数字"不是胜利，而是警报 —— 换掉一台计算器，自豪的结果就崩塌了
 
+![通俗易懂版舞狮 — 被咬的读者获得「理解」的福气](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_zh.svg)
+
 📗 这是[完整版](https://fullsense.qiita.com/furuse-kazufumi/items/ffef66ddbc48d7649615)的通俗版。一旦出现专业术语，我们立刻换成日常比喻。可以把它当作技术版之前的铺垫，或者给想用10分钟掌握"他们大概在做什么"的人看。
 
 ![换掉计算器后假数字崩塌的示意图](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_zh.svg)
@@ -484,6 +490,8 @@ Because we set up the machinery to honestly doubt ourselves first, we didn't sto
 # 한국어
 
 # (쉬운 풀이판) "너무 좋은 숫자"는 승리가 아니라 경보 —— 계산기 하나를 바꿨더니 자랑하던 결과가 무너진 이야기
+
+![쉬운 설명판 사자탈 — 물린 독자에게 「이해」의 복](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_ko.svg)
 
 📗 이 글은 [완전판](https://fullsense.qiita.com/furuse-kazufumi/items/ffef66ddbc48d7649615)의 쉬운 풀이판입니다. 전문 용어가 나오면 바로 일상적인 비유로 바꿉니다. 기술판을 읽기 전의 사전 정지 작업, 또는 "대충 뭘 한 거야?"를 10분 만에 잡고 싶은 분을 위한 글입니다.
 

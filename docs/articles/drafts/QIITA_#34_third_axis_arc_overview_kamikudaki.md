@@ -15,6 +15,8 @@ id: 5a1124083298fdbcb9e6
 ![山登り6連戦 — 選り分けて育てる工夫はいつ効く?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma.svg)
 # (連載 #34 かみくだき版) 山登り 6 連戦と、暗くなった蛾・新しい力を得た大腸菌の話
 
+![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
+
 この記事は、ちょっと難しい研究の話を **中学生でも分かる言葉だけ** で説明します。専門用語が出てきたら、すぐ「山登り」や「生き物」のたとえに言い換えます。
 
 連載 #33 のかみくだき版では「最後の決着」を説明しました。この #34 では、そこに **たどり着くまでの 6 つの実験ぜんぶ**を 1 つの物語として並べます。さらに今回は、**100 年近く前の生き物の研究が、私たちと同じ答えを出していた**という話をします。
@@ -309,6 +311,8 @@ id: 5a1124083298fdbcb9e6
 
 ![Six Hill-Climbing Bouts — When Does Sort-and-Raise Work?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_en.svg)
 # (Series #34, Plain-Language Edition) Six Hill-Climbing Bouts, the Moth That Turned Dark, and the E. coli That Gained a New Power
+
+![Kamikudaki lion — a bite that grants the blessing of understanding](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_en.svg)
 
 This article explains a slightly difficult research story using **only words a middle-schooler can understand**. Whenever a technical term shows up, we immediately rephrase it as a "hill-climbing" or "living-creature" analogy.
 
@@ -605,6 +609,8 @@ Being honest is itself a force that moves research forward — that's the kind o
 ![爬山六连战 — 选别培养的工夫何时有效?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_zh.svg)
 # (连载 #34 通俗版) 爬山六连战，以及变黑的蛾子、获得新能力的大肠杆菌的故事
 
+![通俗易懂版舞狮 — 被咬的读者获得「理解」的福气](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_zh.svg)
+
 这篇文章用**只有中学生也能懂的词语**来讲一个有点难的研究故事。每当出现专业术语，我们立刻把它换成"爬山"或"生物"的比喻。
 
 连载 #33 的通俗版讲了"最后的决战"。这篇 #34 把**到达那里之前的全部六个实验**串成一个故事。而且这次我们再加一点：**将近 100 年前的生物研究，早就得出了和我们一样的答案**。
@@ -899,6 +905,8 @@ Being honest is itself a force that moves research forward — that's the kind o
 
 ![등산 6연전 — 선별 육성 기법은 언제 효과가 있나?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_ko.svg)
 # (연재 #34 쉬운 버전) 등산 6연전과, 검게 변한 나방・새로운 힘을 얻은 대장균 이야기
+
+![쉬운 설명판 사자탈 — 물린 독자에게 「이해」의 복](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_ko.svg)
 
 이 글은 조금 어려운 연구 이야기를 **중학생도 알 수 있는 말만으로** 설명합니다. 전문 용어가 나오면 곧바로 "등산"이나 "생물"의 비유로 바꿔 말합니다.
 

@@ -18,6 +18,8 @@ id: a8118f557dda5c5e998c
 
 # 【かみくだき版】進化する AI の「壊れてないか検査器」── 最強ソルバより地味な道具が正解だった話
 
+![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
+
 > 📗 これは [完全版](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) のかみくだき版です。数式と細かい証拠は完全版に、ここでは「結局なにが起きたの?」を 10 分で掴めるようにします。
 
 ![llcore 検証 arc ヒーロー図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_hero.svg)
@@ -182,6 +184,8 @@ flowchart TD
 
 # (Plain-language edition) A "Breakage Inspector" for Evolving AI — Why a Plain Old Tool Beat the Strongest Solver
 
+![Kamikudaki lion — a bite that grants the blessing of understanding](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_en.svg)
+
 > 📗 This is the plain-language edition of the [full version](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6). The formulas and detailed evidence live in the full version; here you can grasp "so what actually happened?" in ten minutes.
 
 ![llcore verification arc hero](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_hero_en.svg)
@@ -338,6 +342,8 @@ That's the leveling of the ground for "what are they roughly doing?" The formula
 
 # (通俗版) 进化型 AI 的「是否损坏检查器」── 为什么朴素工具胜过最强求解器
 
+![通俗易懂版舞狮 — 被咬的读者获得「理解」的福气](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_zh.svg)
+
 > 📗 这是[完整版](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6)的通俗版。公式与详细证据在完整版中；这里让你用十分钟抓住「到底发生了什么?」
 
 ![llcore 验证 arc 主图](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_hero.svg)
@@ -493,6 +499,8 @@ flowchart TD
 # 한국어
 
 # (쉬운 해설판) 진화하는 AI의 「고장 안 났나 검사기」── 왜 수수한 도구가 최강 솔버를 이겼나
+
+![쉬운 설명판 사자탈 — 물린 독자에게 「이해」의 복](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_ko.svg)
 
 > 📗 이 글은 [완전판](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6)의 쉬운 해설판입니다. 수식과 자세한 증거는 완전판에 있고, 여기서는 「결국 무슨 일이 있었나?」를 10분 만에 파악할 수 있게 합니다.
 
