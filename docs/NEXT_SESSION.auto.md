@@ -10,33 +10,34 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-05 00:22:10
+- **生成時刻**: 2026-06-05 00:52:34
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-d932529 auto: qiita_24_01_hero_zh.svg 編集前 (2026-06-05 00:22)
-1ca743a auto: qiita_24_01_hero_en.svg 編集前 (2026-06-05 00:22)
-599cf2c auto: qiita_24_01_hero_en.svg 編集前 (2026-06-05 00:22)
-97965f6 qiita: JA-only 37 記事を JA/EN/ZH/KO 縦積み self-contained 多言語化 + Team 一括再投稿 (PATCH 冪等) — 純追記のみ (JA 本文無傷, 削除 0 行), id 全保全, 検証 37/37 PASS
-428251b auto: QIITA_SUMMARY.md 編集前 (2026-06-04 23:48)
-6765922 auto: QIITA_SECOND_BRAIN_SERIES.md 編集前 (2026-06-04 23:48)
-50c2375 auto: QIITA_INDEX_reading_order.md 編集前 (2026-06-04 23:47)
-13f7152 auto: QIITA_SECOND_BRAIN_SERIES.md 編集前 (2026-06-04 23:45)
-92dffe4 auto: QIITA_#34_third_axis_arc_overview.md 編集前 (2026-06-04 23:45)
-f33d785 auto: QIITA_USV_jp.md 編集前 (2026-06-04 23:44)
+92688c7 qiita: SVG 化 enrichment — reveal-gate 除去 7 セット (静的可視化) + JA 残存変種翻訳 5 セット + 相対パス 79 refs を raw URL 化 (#26/#29/evolution_arc, 言語変種振り分け) + ASCII アート 19 図を 4 言語 SVG 化 (qiita_misc/ 92 files) + mangamd 4 コマ #25 (manga/ 4 変種) + imgix cache-bust ?v=2 (5 記事)
+dd0648c auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:41)
+ec35562 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:41)
+1bd2053 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:41)
+096e531 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:41)
+94eaea4 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:37)
+3d34ab3 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:37)
+2409ef4 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:37)
+9994681 auto: QIITA_SUMMARY.md 編集前 (2026-06-05 00:37)
+6b444b3 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-05 00:37)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/assets/qiita_24_01_hero_zh.svg
- M docs/articles/assets/qiita_24_02_theme_en.svg
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
+?? tools/manga_story_build.py
 ```
 
 
@@ -76,26 +77,26 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `00:22` `docs/articles/assets/qiita_24_02_theme_zh.svg`
-- `00:22` `docs/articles/assets/qiita_24/qiita_24_01_hero_zh.svg`
-- `00:22` `docs/articles/assets/qiita_24_02_theme_en.svg`
-- `00:22` `docs/articles/assets/qiita_24_01_hero_zh.svg`
-- `00:22` `docs/articles/assets/qiita_24/qiita_24_01_hero_en.svg`
-- `00:22` `docs/articles/assets/qiita_24_01_hero_en.svg`
-- `23:54` `docs/SESSION_SUMMARY.md`
-- `23:54` `docs/NEXT_SESSION.auto.md`
-- `23:48` `docs/articles/2026-05-17/QIITA_SUMMARY.md`
-- `23:48` `docs/articles/2026-05-18/QIITA_SECOND_BRAIN_SERIES.md`
-- `23:47` `docs/articles/QIITA_INDEX_reading_order.md`
-- `23:45` `docs/articles/drafts/QIITA_#34_third_axis_arc_overview.md`
-- `23:44` `docs/articles/2026-05-18/QIITA_USV_jp.md`
-- `23:43` `docs/articles/2026-05-18/QIITA_OBSERVATION_GROUNDING_jp.md`
-- `23:42` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle.md`
-- `23:41` `docs/articles/drafts/QIITA_#34_third_axis_arc_overview_kamikudaki.md`
-- `23:40` `docs/articles/2026-05-17/QIITA_HISTORY.md`
-- `23:39` `docs/articles/2026-05-17/QIITA_GENERAL.md`
-- `23:38` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle_kamikudaki.md`
-- `23:36` `docs/articles/QIITA_#21_three_day_marathon_2026_05_18_to_20.md`
+- `00:52` `tools/manga_story_build.py`
+- `00:47` `docs/NEXT_SESSION.auto.md`
+- `00:47` `docs/SESSION_SUMMARY.md`
+- `00:43` `docs/articles/QIITA_#24_08_lleval_eval_framework.md`
+- `00:43` `docs/articles/QIITA_#24_07_observability_governance.md`
+- `00:43` `docs/articles/QIITA_#24_06_llm_backend_non_transformer.md`
+- `00:43` `docs/articles/QIITA_#24_04_convergent_optimization_b_series.md`
+- `00:43` `docs/articles/QIITA_#24_03_structural_evolution_triz.md`
+- `00:41` `docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md`
+- `00:40` `docs/articles/assets/manga/src/q25_4koma_zh.json`
+- `00:40` `docs/articles/assets/manga/src/q25_4koma_ko.json`
+- `00:40` `docs/articles/assets/manga/src/q25_4koma_en.json`
+- `00:40` `docs/articles/assets/manga/src/q25_4koma.json`
+- `00:40` `docs/articles/assets/manga/q25_4koma_zh.svg`
+- `00:40` `docs/articles/assets/manga/q25_4koma_ko.svg`
+- `00:40` `docs/articles/assets/manga/q25_4koma_en.svg`
+- `00:40` `docs/articles/assets/manga/q25_4koma.svg`
+- `00:39` `tools/manga_q25_build.py`
+- `00:37` `docs/articles/2026-05-17/QIITA_SUMMARY.md`
+- `00:36` `docs/articles/QIITA_#23_15h_marathon_mid_report.md`
 
 
 ## Cross-references
