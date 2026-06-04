@@ -407,7 +407,7 @@ case が多すぎると、たまたま順序の先頭に来た case で勝者が
 計 14 case を breakdown に出力し、lldarwin の ε-lexicase が**集約せず軸ごとに specialist を淘汰**します。
 下が、その proxy 軸の母集団平均推移です。
 
-![Stage2 proxy 軸の推移（mechanism feasibility）](../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg)
+![Stage2 proxy 軸の推移（mechanism feasibility）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg)
 
 ただし——ここまで散々言ってきた通り——**これは proxy**。
 個体は実 LLM ではなく genome なので、この pressure は「genome がその弱点に関連する思考因子を
