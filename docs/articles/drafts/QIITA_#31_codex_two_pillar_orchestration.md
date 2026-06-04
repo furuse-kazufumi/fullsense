@@ -185,18 +185,7 @@ In solo development, using just one AI agent is already commonplace. So why did 
 
 ## 2. Division of Roles — Orchestrator and Subordinate Worker
 
-```
-人間（私）= レビュアー兼方向性決定者
-   │ 方向性・GO/NO-GO
-   ▼
-Claude Code（主 = オーケストレータ）
-   │ 計画・実装・委任・検証・一括コミット
-   ├─▶ Claude サブエージェント（並列, run_in_background）
-   └─▶ Codex CLI（配下 worker）
-          ・独立サブタスクの実行
-          ・クロスレビュー / セカンドオピニオン
-          ・調べ物 / 雛形生成
-```
+![Hierarchy: Human → Claude Code (lead = orchestrator) → Claude sub-agents in parallel / Codex CLI as subordinate worker](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q31/role_hierarchy_en.svg)
 
 - **Claude's (the lead's) responsibilities**: task decomposition, dependency assessment, parallel launch of independent tasks, progress monitoring, **verification of results**, and batch commits.
 - **Codex's (the subordinate's) responsibilities**: executing the delegated scope. Non-interactive delegation = `codex exec -s read-only "<prompt>"`.

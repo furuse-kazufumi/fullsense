@@ -384,22 +384,7 @@ class ReferenceAttentionHook:
 
 ### 人間の思考フロー vs llive
 
-```
-[人間]                          [llive]
-  Brief (問題定義)        ←→     Brief API (実装済)
-       ↓
-  KJ法 (拡散 + 親和)      ←→     CREAT-01 KJ法ノード (計画)
-       ↓
-  MindMap (構造化)        ←→     CREAT-02 MindMap ノード (計画)
-       ↓
-  TRIZ (矛盾解決)         ←→     既存 FR-23〜27 + CREAT-05 類比
-       ↓
-  Six Hats (多視点検証)   ←→     CREAT-04 + EpistemicType (計画)
-       ↓
-  要件定義 (構造化変換)    ←→     CREAT-03 構造化変換 (計画)
-       ↓
-  実装                     ←→    BriefRunner.submit → Loop (実装済)
-```
+![人間の思考フロー ↔ llive のマッピング](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/summary/creat_thinking_flow.svg)
 
 ### 5 つの CREAT FR
 
