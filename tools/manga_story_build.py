@@ -124,10 +124,10 @@ def auto_text_color(fill: str) -> str:
 
 
 def render_motif(els, motif, y0, y1, font, lang):
-    """Render one motif into the zone between caption (y0+110) and bubble (y1-100)."""
+    """Render one motif into the zone between caption (y0+110) and 話者/フキダシ帯 (y1-170)."""
     if not motif:
         return
-    zone_top, zone_bot = y0 + 112, y1 - 100
+    zone_top, zone_bot = y0 + 112, y1 - 170
     mid_y = (zone_top + zone_bot) // 2
     if "circles" in motif:
         items = motif["circles"][:8]
