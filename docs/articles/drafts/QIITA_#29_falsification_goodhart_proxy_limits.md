@@ -1136,7 +1136,7 @@ Step C 的结论干脆是 **N/A(在此基质上无法测量③的有无)**。而
 来看看这个"镜片一糊,淘汰也崩"的结论在实测中的样子。下面是 baseline(无 novelty、素朴选择压力)的
 适应度与多样性的推移。临近末尾,可以看到多样性在崩溃。
 
-![baseline: 末尾的多样性崩溃](../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg)
+![baseline: 末尾的多样性崩溃](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status_zh.svg)
 
 > 🍵 **休息点(90 秒)**: "先打磨镜片再淘汰"——顺序重要,这是个朴素的故事。
 > 朴素,但跳过这一步就会蒸发半年(我蒸发掉了)。从下一节起是本文的正题,
