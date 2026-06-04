@@ -447,7 +447,7 @@ wallclock 12h で safely 停止（snapshot 済 → `--resume` で継続可能）
 
 参考として、勝者個体の「思考因子 × メモリ層」ヒートマップ（Genome3D）を載せておきます。どの認知プロファイルが残ったかを 2 次元で俯瞰できます（ただし real-pressure では c_factors は中立扱いなので、これはあくまで**参考**であって fitness の直接の勝因ではない点に注意）。
 
-![勝者個体の思考因子 × メモリ層ヒートマップ（Genome3D, 参考。real-pressure では c_factors 中立）](assets/lldarwin_2026_05_26/lldarwin_genome_heatmap.svg)
+![勝者個体の思考因子 × メモリ層ヒートマップ（Genome3D, 参考。real-pressure では c_factors 中立）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_genome_heatmap.svg)
 
 ### 14.4 Honest 留保（実 LLM 評価の限界）
 
