@@ -151,16 +151,7 @@ S2 (CABT-01 prototype) が動いた時点で、本記事は draft 解除し:
 
 ## Design Motivation
 
-```
-[current attention]                 [CABT replacement proposal]
-attn_output = softmax(QK^T) · V     ref_id = softmax(QK^T)
-                                    attn_output = lookup(ref_id) + metadata_bias
-
-  ┌ V (float[B, S, H])              ┌ token table
-  │ the values themselves           │ (id, embedding, metadata)
-  │ cannot hold meta-info           │ referenceable, can carry side info
-  └                                  └
-```
+![Design motivation: current attention vs CABT replacement proposal](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q04/design_motivation_en.svg)
 
 ## Seven Approaches (CABT-01 through 07)
 
