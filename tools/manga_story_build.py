@@ -252,22 +252,23 @@ def render_motif(els, motif, y0, y1, font, lang):
                           fill="#fffbe8", border_width=2, line_gap=22))
             _lint_add("badge", *bb)
     elif "duo" in motif:
+        # extinct 行つきはゾーン高 218px に収める (duo を上へ・絶滅円は小さく)
         a, c = motif["duo"][0], motif["duo"][1]
-        cy = zone_top + 130
-        for (it, cx, r, size) in ((a, 250, 95, 24), (c, 510, 92, 20)):
+        ext = int(motif.get("extinct") or 0)
+        cy = (zone_top + 82) if ext > 0 else (zone_top + 108)
+        for (it, cx, r, size) in ((a, 250, 78 if ext else 90, 22), (c, 510, 75 if ext else 88, 19)):
             if lang in ("en", "ko"):
-                size = max(14, size - 4)
+                size = max(13, size - 4)
             els.append(tb({"circle": [cx, cy, r]}, it.get("label", ""),
                           [cx, cy - 10], size, font,
                           fill=it.get("fill", "#ffe2a8"), border_width=4,
                           line_gap=size * 1.3,
                           text_color=auto_text_color(it.get("fill", "#ffe2a8"))))
-        ext = int(motif.get("extinct") or 0)
         if ext > 0:
-            ey = cy + 145
+            ey = zone_top + 190
             for k in range(min(ext, 6)):
-                cx = 120 + k * 104
-                els.append(tb({"circle": [cx, ey, 32]}, "×", [cx, ey + 11], 28, font,
+                cx = 130 + k * 100
+                els.append(tb({"circle": [cx, ey, 24]}, "×", [cx, ey + 9], 22, font,
                               fill="#d9d4c8", border_width=2,
                               border_color="#8a8474", text_color="#6a645a"))
 

@@ -1,0 +1,325 @@
+{
+ "slug": "q25",
+ "langs": {
+  "ja": {
+   "title": "4コマでわかる #25 — AI 500 世代進化の「大失敗」",
+   "header": "4コマでわかる #25\nAI 500 世代進化の「大失敗」",
+   "panels": [
+    {
+     "caption": "世界を代表する 8 つの知性を、種として AI に蒔いた",
+     "motif": {
+      "circles": [
+       {
+        "label": "古瀬",
+        "fill": "#ffe2a8"
+       },
+       {
+        "label": "フリストン",
+        "fill": "#cfe6ff"
+       },
+       {
+        "label": "ミリッジ",
+        "fill": "#e8d5ff"
+       },
+       {
+        "label": "磯村",
+        "fill": "#d5ffd9"
+       },
+       {
+        "label": "岡潔",
+        "fill": "#ffd5d5"
+       },
+       {
+        "label": "グロタン\nディーク",
+        "fill": "#fff3c4"
+       },
+       {
+        "label": "ノイマン",
+        "fill": "#d9f2ff"
+       },
+       {
+        "label": "ファインマン",
+        "fill": "#ffe0f0"
+       }
+      ]
+     },
+     "bubble": "最強知性の進化バトル、開始！"
+    },
+    {
+     "caption": null,
+     "motif": {
+      "burst": {
+       "big": "500 世代",
+       "badge": "best_score\n1.0"
+      }
+     },
+     "bubble": "全員満点!? なんて強さだ…!"
+    },
+    {
+     "caption": "500 世代後——生き残ったのは 2 人だけ",
+     "motif": {
+      "duo": [
+       {
+        "label": "古瀬\n52%",
+        "fill": "#ffe2a8"
+       },
+       {
+        "label": "フリストン\n48%",
+        "fill": "#cfe6ff"
+       }
+      ],
+      "extinct": 6
+     },
+     "bubble": "これが進化の力…！"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "違います。\n選択圧ゼロの『くじ引き』でした",
+     "caption_box": "全員 100 点のテストでは、席次は決まらない。\n「測る」(lleval) の次に必要なのは\n「淘汰する」(lldarwin) だった",
+     "foot": "→ 詳しくは本編で（この下から）"
+    }
+   ]
+  },
+  "en": {
+   "title": "4-panel digest #25 — the 'great failure' of evolving an AI for 500 generations",
+   "header": "4-panel digest #25\nEvolving an AI 500 generations: a \"great failure\"",
+   "panels": [
+    {
+     "caption": "We seeded 8 of the world's great minds into the AI",
+     "motif": {
+      "circles": [
+       {
+        "label": "Furuse",
+        "fill": "#ffe2a8"
+       },
+       {
+        "label": "Friston",
+        "fill": "#cfe6ff"
+       },
+       {
+        "label": "Millidge",
+        "fill": "#e8d5ff"
+       },
+       {
+        "label": "Isomura",
+        "fill": "#d5ffd9"
+       },
+       {
+        "label": "Kiyoshi\nOka",
+        "fill": "#ffd5d5"
+       },
+       {
+        "label": "Grothen-\ndieck",
+        "fill": "#fff3c4"
+       },
+       {
+        "label": "von\nNeumann",
+        "fill": "#d9f2ff"
+       },
+       {
+        "label": "Feynman",
+        "fill": "#ffe0f0"
+       }
+      ]
+     },
+     "bubble": "Battle of the smartest minds — begin!"
+    },
+    {
+     "caption": null,
+     "motif": {
+      "burst": {
+       "big": "500 gens",
+       "badge": "best_score\n1.0"
+      }
+     },
+     "bubble": "Everyone scores perfect!? What power...!"
+    },
+    {
+     "caption": "After 500 generations — only two survived",
+     "motif": {
+      "duo": [
+       {
+        "label": "Furuse\n52%",
+        "fill": "#ffe2a8"
+       },
+       {
+        "label": "Friston\n48%",
+        "fill": "#cfe6ff"
+       }
+      ],
+      "extinct": 6
+     },
+     "bubble": "Behold, the power of evolution...!"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "Nope. With zero selection pressure,\nit was just a lottery.",
+     "caption_box": "A test everyone aces ranks no one.\nAfter \"measuring\" (lleval), what we needed\nwas \"culling\" (lldarwin)",
+     "foot": "→ Full story below"
+    }
+   ]
+  },
+  "zh": {
+   "title": "4格速读 #25 — 把 AI 进化 500 代的“大失败”",
+   "header": "4格速读 #25\n把 AI 进化 500 代的“大失败”",
+   "panels": [
+    {
+     "caption": "把世界级的 8 位智者作为种子播进 AI",
+     "motif": {
+      "circles": [
+       {
+        "label": "古濑",
+        "fill": "#ffe2a8"
+       },
+       {
+        "label": "弗里斯顿",
+        "fill": "#cfe6ff"
+       },
+       {
+        "label": "米利奇",
+        "fill": "#e8d5ff"
+       },
+       {
+        "label": "矶村",
+        "fill": "#d5ffd9"
+       },
+       {
+        "label": "冈洁",
+        "fill": "#ffd5d5"
+       },
+       {
+        "label": "格罗滕\n迪克",
+        "fill": "#fff3c4"
+       },
+       {
+        "label": "冯·诺依曼",
+        "fill": "#d9f2ff"
+       },
+       {
+        "label": "费曼",
+        "fill": "#ffe0f0"
+       }
+      ]
+     },
+     "bubble": "最强智者的进化之战，开始！"
+    },
+    {
+     "caption": null,
+     "motif": {
+      "burst": {
+       "big": "500 代",
+       "badge": "best_score\n1.0"
+      }
+     },
+     "bubble": "全员满分!? 太强了…!"
+    },
+    {
+     "caption": "500 代之后——只剩 2 人幸存",
+     "motif": {
+      "duo": [
+       {
+        "label": "古濑\n52%",
+        "fill": "#ffe2a8"
+       },
+       {
+        "label": "弗里斯顿\n48%",
+        "fill": "#cfe6ff"
+       }
+      ],
+      "extinct": 6
+     },
+     "bubble": "这就是进化的力量…！"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "不对。选择压为零，\n这只是一场抽签。",
+     "caption_box": "人人 100 分的考试排不出名次。\n会“测量”(lleval) 之后，\n还需要会“淘汰”(lldarwin)",
+     "foot": "→ 详见下方正文"
+    }
+   ]
+  },
+  "ko": {
+   "title": "4컷 다이제스트 #25 — AI를 500세대 진화시킨 '대실패'",
+   "header": "4컷 다이제스트 #25\nAI를 500세대 진화시킨 '대실패'",
+   "panels": [
+    {
+     "caption": "세계적인 지성 8인을 씨앗으로 AI에 심었다",
+     "motif": {
+      "circles": [
+       {
+        "label": "후루세",
+        "fill": "#ffe2a8"
+       },
+       {
+        "label": "프리스턴",
+        "fill": "#cfe6ff"
+       },
+       {
+        "label": "밀리지",
+        "fill": "#e8d5ff"
+       },
+       {
+        "label": "이소무라",
+        "fill": "#d5ffd9"
+       },
+       {
+        "label": "오카",
+        "fill": "#ffd5d5"
+       },
+       {
+        "label": "그로텐디크",
+        "fill": "#fff3c4"
+       },
+       {
+        "label": "폰 노이만",
+        "fill": "#d9f2ff"
+       },
+       {
+        "label": "파인만",
+        "fill": "#ffe0f0"
+       }
+      ]
+     },
+     "bubble": "최강 지성들의 진화 배틀, 시작!"
+    },
+    {
+     "caption": null,
+     "motif": {
+      "burst": {
+       "big": "500 세대",
+       "badge": "best_score\n1.0"
+      }
+     },
+     "bubble": "전원 만점!? 이런 강함이…!"
+    },
+    {
+     "caption": "500세대 후—— 살아남은 건 단 2명",
+     "motif": {
+      "duo": [
+       {
+        "label": "후루세\n52%",
+        "fill": "#ffe2a8"
+       },
+       {
+        "label": "프리스턴\n48%",
+        "fill": "#cfe6ff"
+       }
+      ],
+      "extinct": 6
+     },
+     "bubble": "이것이 진화의 힘…!"
+    },
+    {
+     "caption": null,
+     "motif": null,
+     "bubble": "아닙니다. 선택압이 0이라\n그저 '제비뽑기'였습니다.",
+     "caption_box": "전원 100점인 시험으론 순위가 안 나온다.\n'측정'(lleval) 다음에 필요한 것은\n'도태'(lldarwin)였다",
+     "foot": "→ 자세한 이야기는 아래 본문에서"
+    }
+   ]
+  }
+ }
+}
