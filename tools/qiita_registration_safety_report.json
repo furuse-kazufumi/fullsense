@@ -1,0 +1,614 @@
+{
+  "team": "fullsense",
+  "files": [
+    {
+      "file": "QIITA_GENERAL.md",
+      "chars": 6612,
+      "title": true,
+      "tags": 1,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_HISTORY.md",
+      "chars": 10421,
+      "title": true,
+      "tags": 1,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_SUMMARY.md",
+      "chars": 31167,
+      "title": true,
+      "tags": 1,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_OBSERVATION_GROUNDING_jp.md",
+      "chars": 9857,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_SECOND_BRAIN_SERIES.md",
+      "chars": 15849,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_USV_jp.md",
+      "chars": 6588,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#01_brief_api_progressive.md",
+      "chars": 4711,
+      "title": true,
+      "tags": 5,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#02_cognitive_factors.md",
+      "chars": 4560,
+      "title": true,
+      "tags": 4,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#03_math_vertical.md",
+      "chars": 4213,
+      "title": true,
+      "tags": 5,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#04_next_cabt_block_design.md",
+      "chars": 4423,
+      "title": true,
+      "tags": 5,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#05_next_creat_kj_mindmap.md",
+      "chars": 3882,
+      "title": true,
+      "tags": 6,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#06_next_math02_formal_gate.md",
+      "chars": 3096,
+      "title": true,
+      "tags": 6,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#07_bench_results.md",
+      "chars": 6845,
+      "title": true,
+      "tags": 7,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#08_quiz_bench_debug_vs_release.md",
+      "chars": 5111,
+      "title": true,
+      "tags": 8,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#09_llive_structure_originality.md",
+      "chars": 6303,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#10_qwen_divergence_strategy.md",
+      "chars": 6038,
+      "title": true,
+      "tags": 7,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#11_complementary_with_qwen.md",
+      "chars": 6032,
+      "title": true,
+      "tags": 7,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#12_dev_history.md",
+      "chars": 9980,
+      "title": true,
+      "tags": 1,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#13_corpus_first_advantage.md",
+      "chars": 4974,
+      "title": true,
+      "tags": 1,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#14_invisible_annotation_channel.md",
+      "chars": 6810,
+      "title": true,
+      "tags": 3,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#15_second_brain_spiral_dev.md",
+      "chars": 6190,
+      "title": true,
+      "tags": 3,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#16_three_self_spirit_ai_management.md",
+      "chars": 6000,
+      "title": true,
+      "tags": 3,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#17_human_ai_fusion_vision.md",
+      "chars": 5202,
+      "title": true,
+      "tags": 3,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#18_non_transformer_low_spec_pc.md",
+      "chars": 12861,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#19_general_gpu_less_ai_for_everyone.md",
+      "chars": 8068,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#20_one_session_full_stack_progress.md",
+      "chars": 10645,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#21_three_day_marathon_2026_05_18_to_20.md",
+      "chars": 16428,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#22_transformer_escape_status.md",
+      "chars": 11817,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#23_15h_marathon_mid_report.md",
+      "chars": 10319,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_00_llive_tech_series_index.md",
+      "chars": 19666,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_01_memory_layer.md",
+      "chars": 54663,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_02_thought_factors_cog_mesh.md",
+      "chars": 44175,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_03_structural_evolution_triz.md",
+      "chars": 28562,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_04_convergent_optimization_b_series.md",
+      "chars": 35284,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_05_evolutionary_v0BCDE.md",
+      "chars": 60831,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_06_llm_backend_non_transformer.md",
+      "chars": 25862,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_07_observability_governance.md",
+      "chars": 36627,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_08_lleval_eval_framework.md",
+      "chars": 28246,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#24_LINK_MAP.md",
+      "chars": 6926,
+      "title": true,
+      "tags": 3,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#25_monoculture_evolution_lldarwin.md",
+      "chars": 41724,
+      "title": true,
+      "tags": 5,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#26_lldarwin_multi_pressure_selection.md",
+      "chars": 108643,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_status_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status_en.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_status_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status_zh.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_status_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status_ko.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#27_lldarwin_v2_overnight_marathon.md",
+      "chars": 99676,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#35_00_verifier_sdp_not_smt_index.md",
+      "chars": 32992,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#35_01_verifier_frontier_sdp.md",
+      "chars": 44859,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#35_02_honest_disclosure_solver_swap.md",
+      "chars": 42674,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_POST_GUIDE.md",
+      "chars": 8092,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_SERIES_INDEX.md",
+      "chars": 6628,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_SVG_GUIDE.md",
+      "chars": 4128,
+      "title": true,
+      "tags": 0,
+      "findings": [
+        "NO TAGS (Qiita は tag 0 個で publish 拒否; TODO_TAG は実タグ化要)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_WEEKLY_DIGEST_2026-05-17_to_24.md",
+      "chars": 14668,
+      "title": true,
+      "tags": 1,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_evolution_arc_lldarwin_complete.md",
+      "chars": 37111,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_stage1_diversity_overlay.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_stage1_novelty_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_reservoir_on_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: assets/lldarwin_2026_05_26/lldarwin_genome_heatmap.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)"
+      ]
+    },
+    {
+      "file": "QIITA_llive_mega_evolution.md",
+      "chars": 29719,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#28_lldarwin_v2_phase1_orchestra.md",
+      "chars": 34235,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#29_falsification_goodhart_proxy_limits.md",
+      "chars": 85070,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "NON-PUBLIC IMAGE: ../assets/step_c/step_c_two_regimes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/step_c/deceptive_corridor.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/step_c/step_c_two_regimes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/step_c/deceptive_corridor.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/step_c/step_c_two_regimes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/step_c/deceptive_corridor.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/step_c/step_c_two_regimes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/step_c/deceptive_corridor.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_off_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reservoir_on_dominance.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_proxy_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "NON-PUBLIC IMAGE: ../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)",
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#30_evolution_visualization_history.md",
+      "chars": 4631,
+      "title": true,
+      "tags": 5,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#31_codex_two_pillar_orchestration.md",
+      "chars": 4312,
+      "title": true,
+      "tags": 5,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#32_llcore_cpu_poc_battery.md",
+      "chars": 2619,
+      "title": true,
+      "tags": 5,
+      "findings": [
+        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+      ]
+    },
+    {
+      "file": "QIITA_#33_llcore_third_axis_settle.md",
+      "chars": 17930,
+      "title": true,
+      "tags": 5,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#33_llcore_third_axis_settle_kamikudaki.md",
+      "chars": 6505,
+      "title": true,
+      "tags": 4,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#34_third_axis_arc_overview.md",
+      "chars": 20167,
+      "title": true,
+      "tags": 5,
+      "findings": []
+    },
+    {
+      "file": "QIITA_#34_third_axis_arc_overview_kamikudaki.md",
+      "chars": 8762,
+      "title": true,
+      "tags": 4,
+      "findings": []
+    }
+  ]
+}

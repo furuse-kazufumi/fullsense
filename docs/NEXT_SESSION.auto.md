@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-04 12:51:24
+- **生成時刻**: 2026-06-04 21:16:13
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,16 +20,16 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
-04cfaf5 chore: gitignore + untrack docs/articles/*.lnk (machine-specific Windows shortcuts)
-9af1d13 auto: .gitignore 編集前 (2026-06-04 08:41)
-ac95b69 article(#35): land llcore verification-arc Qiita series (3 parts, ja/en/zh/ko, animated static-complete SVGs)
-26442a4 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 08:34)
-43f9a2e auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 08:34)
-2a5e19a auto: qiita_35_honest_loop.svg 編集前 (2026-06-04 08:14)
-38b4709 auto: qiita_35_progress.svg 編集前 (2026-06-04 08:12)
-e514cd6 auto: qiita_35_progress.svg 編集前 (2026-06-04 08:12)
-d884226 docs(research): 公開前に local path をマスク (no-local-path-in-public 準拠)
-f2e9f10 auto: llcore_cpu_poc_battery_completion_2026_05_29.md 編集前 (2026-06-02 22:48)
+bb6be4c article(#35-02): ladder deg4 row +3/289 (bookkeeping consistency with paper + exp_deg6_ladder json)
+7613494 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 12:58)
+67e932c auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 12:58)
+cb5d10c auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 12:58)
+893c5b1 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-04 12:57)
+6ad53e7 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
+9bf4a87 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
+5c05bd7 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
+55aa3da auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
+04578b8 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-04 12:57)
 ```
 
 ### git status (porcelain)
@@ -37,6 +37,8 @@ f2e9f10 auto: llcore_cpu_poc_battery_completion_2026_05_29.md 編集前 (2026-06
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
+?? tools/qiita_registration_safety_report.json
+?? tools/qiita_team_post.py
 ```
 
 
@@ -76,8 +78,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `12:46` `docs/NEXT_SESSION.auto.md`
-- `12:46` `docs/SESSION_SUMMARY.md`
+- `21:14` `docs/NEXT_SESSION.auto.md`
+- `21:14` `docs/SESSION_SUMMARY.md`
+- `21:12` `tools/qiita_registration_safety_report.json`
+- `21:11` `tools/qiita_team_post.py`
 
 
 ## Cross-references
