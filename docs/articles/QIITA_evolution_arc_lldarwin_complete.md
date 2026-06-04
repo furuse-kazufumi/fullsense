@@ -374,7 +374,7 @@ reservoir ON で系統は全員生き残りました。が、よく見ると **d
 
 両立の最適点は fitness の設計や集団規模に依存するので、本番では sweep で再較正します。
 
-![再投入頻度のトレードオフ。系統保持と行動多様性は反比例し、diversity は interval=5 でピークを打つ（非単調）](assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg)
+![再投入頻度のトレードオフ。系統保持と行動多様性は反比例し、diversity は interval=5 でピークを打つ（非単調）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg)
 
 ここには「予想を裏切る転」があります。「やればやるほど良い」と思っていたら、「やりすぎると逆効果」だった。植物の水やりと同じで、あげなさすぎても枯れるし、あげすぎても根腐れする。中庸に最適点があるのです。進化計算では、こうした「単調でない曲線」に何度も出会います。だからこそ、直感で決め打ちせずベースラインを測り、sweep を回す——直感はよく裏切られる、というのが実務上の教訓です。
 
