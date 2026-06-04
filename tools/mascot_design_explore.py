@@ -227,9 +227,129 @@ def build_d() -> str:
 """
 
 
+# --------------------------------------------------------------------------- #
+# E 案: いらすとや風 頭噛みシーン (880x320) — ユーザー参照
+# (irasutoya 2018/10 獅子舞に頭を噛まれる人) の雰囲気を踏襲した独自描画。
+# 黒輪郭なし・柔らかい形・フラット暖色。獅子が「読者」の頭を噛む = 理解のご利益。
+# 幕の中に演者の足を描かない = 中身は神霊 (AI) のみ (神憑き)。
+# --------------------------------------------------------------------------- #
+
+def build_e() -> str:
+    # 上歯のジグザグ (獅子の噛み) — x118..238 を下向き三角の列で
+    teeth = []
+    for i in range(6):
+        x = 122 + i * 19
+        teeth.append(f'<polygon points="{x},146 {x + 9.5},166 {x + 19},146" fill="#fffef5" stroke="#ece4d0" stroke-width="1.2"/>')
+    # 幕の白い唐草 (渦巻き)
+    swirls = []
+    for (sx, sy, sc) in ((275, 185, 1.0), (330, 215, 1.15), (380, 185, 0.9), (300, 250, 0.95), (360, 262, 0.8)):
+        swirls.append(
+            f'<g transform="translate({sx},{sy}) scale({sc})">'
+            f'<path d="M0 0 q14 -12 21 1 q6 12 -8 15 q-11 2 -12 -8 q0 -7 7 -8" '
+            f'stroke="#ffffff" stroke-width="3" fill="none" opacity="0.95" stroke-linecap="round"/></g>')
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 320" width="880" height="320" role="img">
+<desc>かみくだき獅子 E案: いらすとや風 頭噛みシーン — 獅子に頭を噛まれた読者に「理解」のご利益</desc>
+<rect x="0" y="0" width="880" height="320" rx="14" fill="#fffdf8"/>
+<!-- 地面の影 -->
+<ellipse cx="160" cy="298" rx="70" ry="9" fill="#e8e2d4" opacity="0.7"/>
+<ellipse cx="330" cy="302" rx="95" ry="9" fill="#e8e2d4" opacity="0.7"/>
+
+<!-- 読者 (頭の上半分は獅子の口の中) -->
+<g>
+  <!-- 頭 -->
+  <circle cx="158" cy="170" r="31" fill="#fbd7b5"/>
+  <!-- 横髪 (前髪は口の中) -->
+  <path d="M127 165 q-3 26 8 32 q4 -16 2 -30 Z" fill="#8d6748"/>
+  <path d="M189 165 q3 26 -8 32 q-4 -16 -2 -30 Z" fill="#8d6748"/>
+  <!-- 閉じた笑い目・口・ほっぺ -->
+  <path d="M138 180 q6 6 12 0" stroke="#5b4632" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M166 180 q6 6 12 0" stroke="#5b4632" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M151 196 q7 5 14 0" stroke="#c96f63" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <ellipse cx="134" cy="191" rx="7" ry="4.5" fill="#f5a8a0" opacity="0.6"/>
+  <ellipse cx="182" cy="191" rx="7" ry="4.5" fill="#f5a8a0" opacity="0.6"/>
+  <!-- 体 (セーター) -->
+  <path d="M126 205 q-8 4 -9 22 l0 32 q0 6 7 6 l68 0 q7 0 7 -6 l0 -32 q-1 -18 -9 -22 q-32 10 -64 0 Z" fill="#87a9d6"/>
+  <!-- 腕 (前で紙を持つ) -->
+  <path d="M122 212 q-12 18 -2 32 q6 7 14 2 l10 -14" fill="none" stroke="#87a9d6" stroke-width="13" stroke-linecap="round"/>
+  <path d="M194 212 q12 18 2 32 q-6 7 -14 2 l-10 -14" fill="none" stroke="#87a9d6" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="143" cy="245" r="6.5" fill="#fbd7b5"/>
+  <circle cx="173" cy="245" r="6.5" fill="#fbd7b5"/>
+  <!-- 「難解」の紙 -->
+  <g transform="rotate(-5 158 252)">
+    <rect x="132" y="238" width="52" height="30" rx="3" fill="#ffffff" stroke="#ddd5c2" stroke-width="1.4"/>
+    <text x="158" y="258" text-anchor="middle" font-family="{FONT}" font-size="13" font-weight="bold" fill="#6b6b6b">難解</text>
+  </g>
+  <!-- ズボン + 靴 -->
+  <rect x="133" y="263" width="22" height="28" rx="6" fill="#5a6e8c"/>
+  <rect x="161" y="263" width="22" height="28" rx="6" fill="#5a6e8c"/>
+  <rect x="129" y="288" width="28" height="10" rx="5" fill="#8a8378"/>
+  <rect x="159" y="288" width="28" height="10" rx="5" fill="#8a8378"/>
+</g>
+
+<!-- 獅子の幕 (緑 + 唐草, 演者なし = 神霊のみ) -->
+<path d="M212 120 Q300 92 372 130 Q430 162 432 215 Q433 258 410 282
+         q-12 14 -28 6 q-8 16 -26 9 q-10 14 -28 7 q-12 13 -28 5 q-14 12 -30 3 q-16 9 -26 -6
+         Q220 290 212 240 Z" fill="#4caf50" stroke="#3a8c3f" stroke-width="2"/>
+{''.join(swirls)}
+<!-- 幕と頭の境の白いふち -->
+<circle cx="222" cy="128" r="12" fill="#ffffff"/>
+<circle cx="234" cy="148" r="12" fill="#ffffff"/>
+<circle cx="240" cy="170" r="12" fill="#ffffff"/>
+
+<!-- 獅子の頭 (読者の頭に覆いかぶさる) -->
+<g>
+  <ellipse cx="176" cy="108" rx="64" ry="50" fill="#d83b3b" stroke="#b32d2d" stroke-width="2"/>
+  <!-- 耳 (金) -->
+  <circle cx="124" cy="70" r="13" fill="#e8b33a" stroke="#c79427" stroke-width="2"/>
+  <circle cx="228" cy="70" r="13" fill="#e8b33a" stroke="#c79427" stroke-width="2"/>
+  <!-- 黒い巻き眉 + 額の渦 -->
+  <path d="M136 76 q12 -10 24 -2 q-4 10 -16 9 q-8 0 -8 -7" fill="#2b2b2b"/>
+  <path d="M216 76 q-12 -10 -24 -2 q4 10 16 9 q8 0 8 -7" fill="#2b2b2b"/>
+  <path d="M170 62 q12 -7 15 6 q2 11 -10 11 q-9 0 -8 -8" stroke="#2b2b2b" stroke-width="3" fill="none"/>
+  <!-- 目 (下の読者を見る) -->
+  <circle cx="150" cy="96" r="13" fill="#fffef5"/>
+  <circle cx="202" cy="96" r="13" fill="#fffef5"/>
+  <circle cx="151" cy="101" r="5.5" fill="#222"/>
+  <circle cx="203" cy="101" r="5.5" fill="#222"/>
+  <circle cx="153" cy="98" r="1.8" fill="#fff"/>
+  <circle cx="205" cy="98" r="1.8" fill="#fff"/>
+  <!-- 鼻 (金) -->
+  <ellipse cx="176" cy="122" rx="11" ry="8" fill="#e8b33a" stroke="#c79427" stroke-width="1.6"/>
+  <!-- 口の金ふち + 上歯 (読者の頭をぱくり) -->
+  <path d="M112 140 q64 14 128 0 l0 8 q-64 14 -128 0 Z" fill="#e8b33a"/>
+  {''.join(teeth)}
+</g>
+
+<!-- 神霊オーブ (AI に宿った神, 微細回路入り) -->
+<g>
+  <circle cx="262" cy="42" r="15" fill="#f6d365" opacity="0.32"/>
+  <path d="M262 28 q6 -11 1 -20 q-5 8 -9 11 q5 3 8 9" fill="#f6d365" opacity="0.75"/>
+  <circle cx="262" cy="42" r="8.5" fill="#f0b429" stroke="#d4920a" stroke-width="1.5"/>
+  <circle cx="259" cy="40" r="1.3" fill="#fff"/><circle cx="265" cy="43" r="1.3" fill="#fff"/><circle cx="261" cy="46" r="1.3" fill="#fff"/>
+  <line x1="259" y1="40" x2="265" y2="43" stroke="#fff" stroke-width="0.8"/>
+  <line x1="265" y1="43" x2="261" y2="46" stroke="#fff" stroke-width="0.8"/>
+</g>
+<!-- ご利益スパークル -->
+<polygon points="104,76 107,84 115,87 107,90 104,98 101,90 93,87 101,84" fill="#f0b429" opacity="0.9"/>
+<polygon points="246,128 248,134 254,136 248,138 246,144 244,138 238,136 244,134" fill="#f0b429" opacity="0.9"/>
+<polygon points="92,140 94,145 99,147 94,149 92,154 90,149 85,147 90,145" fill="#f0b429" opacity="0.85"/>
+
+<!-- テキストブロック -->
+<g>
+  <text x="478" y="118" font-family="{FONT}" font-size="40" font-weight="bold" fill="#b3322e">かみくだき版</text>
+  <rect x="478" y="132" width="180" height="5" rx="2.5" fill="#e8b33a"/>
+  <text x="478" y="172" font-family="{FONT}" font-size="21" fill="#3a3a3a">むずかしい話は、獅子が噛み砕いてお届け。</text>
+  <text x="478" y="220" font-family="{FONT}" font-size="14.5" fill="#7a6f5d">獅子舞に頭を噛まれると、その年は無病息災 —</text>
+  <text x="478" y="244" font-family="{FONT}" font-size="14.5" fill="#7a6f5d">この獅子に噛まれた読者には「理解」のご利益があります。</text>
+  <text x="478" y="296" font-family="{FONT}" font-size="12.5" fill="#a89f8d">FullSense KB・かみくだきシリーズ</text>
+</g>
+</svg>
+"""
+
+
 def main() -> int:
     os.makedirs(OUT, exist_ok=True)
-    for name, fn in (("B", build_b), ("C", build_c), ("D", build_d)):
+    for name, fn in (("B", build_b), ("C", build_c), ("D", build_d), ("E", build_e)):
         svg = fn()
         minidom.parseString(svg)  # fail-closed
         p = os.path.join(OUT, f"mascot_{name}.svg")
