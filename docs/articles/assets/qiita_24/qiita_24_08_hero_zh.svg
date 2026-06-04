@@ -70,14 +70,14 @@
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
     </polygon>
 
-    <!-- Legend labels (toggling) -->
+    <!-- Legend labels (both visible static; SMIL pulses emphasis) -->
     <g transform="translate(95 -55)" opacity="1">
-      <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;1;0.4;0.4;1;1" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
       <rect x="-4" y="-9" width="80" height="16" rx="3" fill="#1f2937" opacity="0.7"/>
       <text x="36" y="2" font-size="10" fill="#ef476f" text-anchor="middle">naïve run #1</text>
     </g>
-    <g transform="translate(95 -55)" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+    <g transform="translate(95 -35)" opacity="1">
+      <animate attributeName="opacity" values="0.4;0.4;1;1;0.4;0.4" keyTimes="0;0.25;0.3;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
       <rect x="-4" y="-9" width="80" height="16" rx="3" fill="#1f2937" opacity="0.7"/>
       <text x="36" y="2" font-size="10" fill="#5dd1ff" text-anchor="middle">honest run #2</text>
     </g>
