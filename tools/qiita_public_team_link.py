@@ -77,10 +77,11 @@ BLURBS = {
         f":::\n"
     ),
     "zh": (
+        # 区切りは中文の頓号「、」(日本語中点「・」は ZH native には外来感 — QA workflow指摘)
         f":::note info\n"
         f"**📚 FullSense 知识库指南** {MARKER}\n"
-        f"FullSense 开发全史 60+ 篇文章（4 种语言版・故事化的[阅读顺序指南]({TEAM_INDEX})・"
-        f"通俗易懂版・四格漫画）均已汇总至 Qiita Team **[FullSense KB]({TEAM_TOP})**"
+        f"FullSense 开发全史 60+ 篇文章（4 种语言版、故事化的[阅读顺序指南]({TEAM_INDEX})、"
+        f"通俗易懂版、四格漫画）均已汇总至 Qiita Team **[FullSense KB]({TEAM_TOP})**"
         f"（仅限团队成员）。\n"
         f":::\n"
     ),
