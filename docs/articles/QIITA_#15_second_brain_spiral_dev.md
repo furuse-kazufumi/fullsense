@@ -500,11 +500,7 @@ llive 现阶段为 Apache 2.0 + Commercial dual-license 的 OSS，Repo 在 https
 
 ## 스파이럴 1 사이클
 
-```
-外部思想 → Perplexity 要約 → Claude Code 読込 → 要件化 → 実装 → ベンチ → commit
-   ↑                                                                      |
-   └──────────────────────────── 次サイクル ────────────────────────────┘
-```
+![스파이럴 개발 1 사이클의 플로우 다이어그램 (외부 사상 → Perplexity 요약 → Claude Code 읽기 → 요건화 → 구현 → 벤치 → commit → 다음 사이클)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q15/spiral_cycle_ko.svg)
 
 실제 예(이번 세션 9회 중 3예):
 
