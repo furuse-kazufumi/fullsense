@@ -717,16 +717,7 @@ This drastically cut the context-restoration cost at the start of the next sessi
 
 Dropped 6 items into `docs/research/`:
 
-```text
-docs/research/
-├── index.md                       # Reference hub
-├── lleval_sota.md                 # 10 framework 比較 + 4 ギャップ
-├── llgrow_prior_art.md            # Growth Automation 先行例
-├── cognitive_mesh_vs_sota.md      # COG-MESH の関連研究
-├── llcraft_sota.md                # llcraft 候補の SOTA
-├── llrisk_prior_art.md            # llrisk (Tonic Risk) 先行例
-└── llgov_sota.md                  # llgov (governance) SOTA
-```
+![docs/research/ directory layout — a research hub the autonomous agent can query for SOTA / prior art](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q21/research_hub_tree_en.svg)
 
 This is a **foundation so the autonomous agent can judge with research fields in mind.**
 A concept derived from RAD (Research Aggregation Directory): in an ordinary Claude
