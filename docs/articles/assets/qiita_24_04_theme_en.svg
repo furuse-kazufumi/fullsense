@@ -62,7 +62,7 @@
     <text x="0" y="-6" font-size="11" fill="#22c55e">SynapticSelector's selection history (picks the top arm)</text>
     <g>
       <line x1="0" y1="20" x2="800" y2="20" stroke="#334155"/>
-      <circle cy="20" r="6" fill="#fbbf24">
+      <circle cx="40" cy="20" r="6" fill="#fbbf24">
         <animate attributeName="cx" values="40;220;400;580;760;40" dur="6s" repeatCount="indefinite"/>
       </circle>
     </g>
