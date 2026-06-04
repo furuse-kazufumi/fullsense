@@ -121,14 +121,14 @@ def norm_tags(meta: dict) -> list[dict]:
     tags = meta.get("tags") or []
     if isinstance(tags, str):
         tags = [tags]
-    out = []
+    out, seen = [], set()
     for t in tags:
-        if not t or t == "TODO_TAG":
-            continue
-        name = re.sub(r"\s+", "_", str(t).strip())  # Qiita tags cannot contain spaces -> 403; normalise to '_'
-        if name:
-            out.append({"name": name, "versions": []})
-    return out
+        for part in str(t).split(","):  # handle inline comma-separated `tags: a,b,c`
+            name = re.sub(r"\s+", "_", part.strip())  # Qiita tags cannot contain spaces -> 403
+            if name and name != "TODO_TAG" and name not in seen:
+                seen.add(name)
+                out.append({"name": name, "versions": []})
+    return out[:5]  # Qiita allows at most 5 tags
 
 
 def real_id(meta: dict) -> str | None:
