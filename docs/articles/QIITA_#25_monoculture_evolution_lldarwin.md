@@ -21,6 +21,8 @@ ignorePublish: true
 
 # AI を 500 世代進化させたら、世界に「私」と「予測符号化の父カール・フリストン」だけが残った #25 — monoculture の honest disclosure と選択圧コンポーネント lldarwin
 
+![4コマでわかる #25 — AI 500 世代進化の「大失敗」](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q25_4koma.svg)
+
 > 📚 **連載ナビ（lldarwin アーク）**: #24-05 集団進化 → **#25 本記事（monoculture の失敗）** → #26 設計編 → #27 climax（実LLM飽和→開放端転回）。※ 各記事は単独でも読めます（リンクは回遊用）。
 
 > **コンセプト hook**: llive の派生集団進化に、人物ペルソナを 8 系統「種」として
