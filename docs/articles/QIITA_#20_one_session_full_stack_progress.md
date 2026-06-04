@@ -246,11 +246,7 @@ raptor 依存が強いため除外).
 完全自動化すると「人間が考えた次の方針」が消える. なので 2 ファイル運用に
 分離:
 
-```text
-docs/
-├── NEXT_SESSION.md       # 人手. 方向性メモ. drift してもいい
-└── NEXT_SESSION.auto.md  # 自動. Stop hook で毎ターン上書き
-```
+![NEXT_SESSION の 2 ファイル運用 (人手の方向性メモ + 自動 snapshot の分離)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q20/next_session_two_file.svg)
 
 `scripts/gen_next_session_auto.py` を新規作成. Stop hook (raptor 側の
 `libexec/raptor-next-session-update` ラッパ経由) で毎ターン以下を上書き:

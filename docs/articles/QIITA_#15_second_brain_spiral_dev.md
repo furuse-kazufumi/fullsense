@@ -49,11 +49,7 @@ ignorePublish: true
 
 ## スパイラル 1 サイクル
 
-```
-外部思想 → Perplexity 要約 → Claude Code 読込 → 要件化 → 実装 → ベンチ → commit
-   ↑                                                                      |
-   └──────────────────────────── 次サイクル ────────────────────────────┘
-```
+![スパイラル開発 1 サイクルのフロー図 (外部思想 → Perplexity 要約 → Claude Code 読込 → 要件化 → 実装 → ベンチ → commit → 次サイクル)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q15/spiral_cycle.svg)
 
 実際の例 (本セッション 9 回中の 3 例):
 

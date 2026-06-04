@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="340" fill="#f8fafc"/>
+
+  <rect x="30" y="24" width="840" height="124" rx="12" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="54" y="54" font-size="17" font-weight="600" fill="#1e3a8a">Phase 1: llive 개발자(= 나)</text>
+  <rect x="54" y="72" width="300" height="52" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="204" y="103" text-anchor="middle" font-size="13.5" fill="#1e40af">raptor 코퍼스 + memory + CLAUDE.md</text>
+  <line x1="358" y1="98" x2="430" y2="98" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)"/>
+  <rect x="434" y="72" width="200" height="52" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="534" y="103" text-anchor="middle" font-size="13.5" fill="#1e40af">AI가 다시점 보완</text>
+  <line x1="638" y1="98" x2="710" y2="98" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)"/>
+  <rect x="714" y="72" width="140" height="52" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="784" y="103" text-anchor="middle" font-size="13" fill="#1e40af">하루에 32건 요건</text>
+
+  <rect x="30" y="180" width="840" height="124" rx="12" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="54" y="210" font-size="17" font-weight="600" fill="#15803d">Phase 2: llive 엔드유저</text>
+  <rect x="54" y="228" width="320" height="52" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="214" y="259" text-anchor="middle" font-size="13" fill="#166534">llive CREAT + Brief Grounder (TRIZ × RAD)</text>
+  <line x1="378" y1="254" x2="440" y2="254" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)"/>
+  <rect x="444" y="228" width="180" height="52" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="534" y="259" text-anchor="middle" font-size="13.5" fill="#166534">llive가 다시점 보완</text>
+  <line x1="628" y1="254" x2="690" y2="254" stroke="#475569" stroke-width="2" marker-end="url(#arrow2)"/>
+  <rect x="694" y="228" width="160" height="52" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="774" y="252" text-anchor="middle" font-size="12.5" fill="#166534">사용자는 관점을</text>
+  <text x="774" y="270" text-anchor="middle" font-size="12.5" fill="#166534">의식하지 않아도 OK</text>
+</svg>
