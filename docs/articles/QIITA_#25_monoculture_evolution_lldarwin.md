@@ -699,16 +699,7 @@ llive 的进化层 (v0.B〜v0.F) 并不是让 1 个 LLM 变聪明，而是
 
 500 代之后的系统占有率（max_lineage_share 的内訳）:
 
-```
-古瀬           ████████████████████████████  52%
-弗里斯顿       ██████████████████████████    48%
-米利奇         (灭绝)
-矶村           (灭绝)
-冈洁           (灭绝)
-格罗滕迪克     (灭绝)
-冯·诺依曼      (灭绝)
-费曼           (灭绝)
-```
+![500 代之后的系统占有率: 只有古瀬 52% 和弗里斯顿 48% 存活, 其余 6 个系统灭绝的条形图](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q25/lineage_occupancy_zh.svg)
 
 乍一看，似乎可以写出一个"预测编码（Friston）和来历志向（古瀬）战胜了
 抽象数学（格罗滕迪克）和形式计算（冯·诺依曼）"的**故事**。
