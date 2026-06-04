@@ -351,11 +351,7 @@ llive is currently OSS under an Apache 2.0 + Commercial dual-license, repo at ht
 
 ## 一个螺旋周期
 
-```
-外部思想 → Perplexity 要約 → Claude Code 読込 → 要件化 → 実装 → ベンチ → commit
-   ↑                                                                      |
-   └──────────────────────────── 次サイクル ────────────────────────────┘
-```
+![一个螺旋开发周期的流程图（外部思想 → Perplexity 摘要 → Claude Code 读入 → 要件化 → 实现 → 基准 → commit → 下一周期）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q15/spiral_cycle_zh.svg)
 
 实际示例（本次 9 个会话中的 3 例）:
 
