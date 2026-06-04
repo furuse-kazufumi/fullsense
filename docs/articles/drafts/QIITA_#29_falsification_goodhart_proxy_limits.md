@@ -597,7 +597,7 @@ broken lens (fitness saturation) + sophisticated selector = still broken after a
 
 This falsification was later **reproduced as real data** in the Step C experiment of llcore (CPU-only). Here is the result of having evolution (MAP-Elites) and naive search solve 2 standard memory tasks:
 
-<img src="../assets/step_c/step_c_two_regimes.svg" alt="Step C's two results (floor and ceiling)" width="640">
+<img src="https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/step_c/step_c_two_regimes.svg" alt="Step C's two results (floor and ceiling)" width="640">
 
 - **delayed_parity (XOR) = floor**: all methods at R²≈0 (the substrate is in principle unsolvable). No one can climb = no difference appears.
 - **flip_flop (just memorize) = ceiling**: all methods at R²≈0.95 (too easy, everyone reaches it). **This is exactly the "saturated lens", and here too selection pressure is powerless.**
