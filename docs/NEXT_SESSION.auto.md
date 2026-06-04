@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-05 06:35:28
+- **生成時刻**: 2026-06-05 07:43:08
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `2	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+86de19e feat(manga): 4コマを mangamd L1 漫画文法へ移行 — 話者を立てる・部品むき出し解消
+0eec3ba auto: manga_story_build.py 編集前 (2026-06-05 07:35)
+358d2b9 auto: manga_story_build.py 編集前 (2026-06-05 07:35)
+60d683c auto: manga_story_build.py 編集前 (2026-06-05 07:33)
+3f0fa09 auto: manga_story_build.py 編集前 (2026-06-05 07:33)
+e3f3799 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
+5131464 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
+c0b8098 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
 d9116e0 docs(linkedin): FullSense KB 誘導投稿文 4 言語 (手動投稿用)
 0274d13 docs(linkedin): 獅子舞マスコット誕生記 LinkedIn 投稿文 4 言語 (jp/en/zh/ko, 手動投稿用ドラフト)
-ee48a5c feat(mascot): かみくだき獅子舞マスコット (いらすとや風頭噛みシーン) + 9 記事へ挿入
-dc5685d auto: mascot_kamikudaki_build.py 編集前 (2026-06-05 06:13)
-2e33ef7 auto: mascot_kamikudaki_build.py 編集前 (2026-06-05 06:12)
-73f3c89 auto: mascot_design_explore.py 編集前 (2026-06-05 06:09)
-759f89a auto: mascot_design_explore.py 編集前 (2026-06-05 06:08)
-cd0e262 auto: mascot_design_explore.py 編集前 (2026-06-05 06:07)
-3b4e7fe tools(qiita): 公開 qiita.com → Team KB 誘導ブロック挿入ツール + 全 39 本適用完了
-041a0a4 auto: qiita_public_team_link.py 編集前 (2026-06-05 05:41)
 ```
 
 ### git status (porcelain)
@@ -76,26 +76,26 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `06:34` `docs/articles/2026-06-05/LinkedIn_2026-06-05_fullsense_kb_announce_ko.md`
-- `06:34` `docs/articles/2026-06-05/LinkedIn_2026-06-05_fullsense_kb_announce_zh.md`
-- `06:34` `docs/articles/2026-06-05/LinkedIn_2026-06-05_fullsense_kb_announce_en.md`
-- `06:34` `docs/articles/2026-06-05/LinkedIn_2026-06-05_fullsense_kb_announce_jp.md`
-- `06:32` `docs/articles/2026-06-05/LinkedIn_2026-06-05_kamikudaki_mascot_ko.md`
-- `06:31` `docs/articles/2026-06-05/LinkedIn_2026-06-05_kamikudaki_mascot_zh.md`
-- `06:31` `docs/articles/2026-06-05/LinkedIn_2026-06-05_kamikudaki_mascot_en.md`
-- `06:31` `docs/articles/2026-06-05/LinkedIn_2026-06-05_kamikudaki_mascot_jp.md`
-- `06:26` `docs/SESSION_SUMMARY.md`
-- `06:26` `docs/NEXT_SESSION.auto.md`
-- `06:16` `docs/articles/drafts/QIITA_#34_third_axis_arc_overview_kamikudaki.md`
-- `06:16` `docs/articles/drafts/QIITA_#33_llcore_third_axis_settle_kamikudaki.md`
-- `06:16` `docs/articles/drafts/QIITA_#29_falsification_goodhart_proxy_limits_kamikudaki.md`
-- `06:16` `docs/articles/QIITA_llive_mega_evolution.md`
-- `06:16` `docs/articles/QIITA_#35_02_honest_disclosure_solver_swap_kamikudaki.md`
-- `06:16` `docs/articles/QIITA_#35_01_verifier_frontier_sdp_kamikudaki.md`
-- `06:16` `docs/articles/QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md`
-- `06:16` `docs/articles/QIITA_#27_lldarwin_v2_overnight_marathon_kamikudaki.md`
-- `06:16` `docs/articles/QIITA_#26_lldarwin_multi_pressure_selection_kamikudaki.md`
-- `06:15` `tools/mascot_insert.py`
+- `07:42` `docs/SESSION_SUMMARY.md`
+- `07:42` `docs/NEXT_SESSION.auto.md`
+- `07:36` `docs/articles/assets/manga/src/q34k_story.json`
+- `07:36` `docs/articles/assets/manga/src/q33k_story.json`
+- `07:36` `docs/articles/assets/manga/src/q29_story.json`
+- `07:36` `docs/articles/assets/manga/src/q27_story.json`
+- `07:36` `docs/articles/assets/manga/q34k_4koma_zh.svg`
+- `07:36` `docs/articles/assets/manga/q34k_4koma_ko.svg`
+- `07:36` `docs/articles/assets/manga/q34k_4koma_en.svg`
+- `07:36` `docs/articles/assets/manga/q34k_4koma.svg`
+- `07:36` `docs/articles/assets/manga/q33k_4koma_zh.svg`
+- `07:36` `docs/articles/assets/manga/q33k_4koma_ko.svg`
+- `07:36` `docs/articles/assets/manga/q33k_4koma_en.svg`
+- `07:36` `docs/articles/assets/manga/q33k_4koma.svg`
+- `07:36` `docs/articles/assets/manga/q29_4koma_zh.svg`
+- `07:36` `docs/articles/assets/manga/q29_4koma_ko.svg`
+- `07:36` `docs/articles/assets/manga/q29_4koma_en.svg`
+- `07:36` `docs/articles/assets/manga/q29_4koma.svg`
+- `07:36` `docs/articles/assets/manga/q27_4koma_zh.svg`
+- `07:36` `docs/articles/assets/manga/q27_4koma_ko.svg`
 
 
 ## Cross-references

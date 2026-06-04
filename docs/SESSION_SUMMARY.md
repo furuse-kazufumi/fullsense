@@ -3,23 +3,23 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-05 06:35:28
+- **最終更新**: 2026-06-05 07:43:08
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+86de19e feat(manga): 4コマを mangamd L1 漫画文法へ移行 — 話者を立てる・部品むき出し解消
+0eec3ba auto: manga_story_build.py 編集前 (2026-06-05 07:35)
+358d2b9 auto: manga_story_build.py 編集前 (2026-06-05 07:35)
+60d683c auto: manga_story_build.py 編集前 (2026-06-05 07:33)
+3f0fa09 auto: manga_story_build.py 編集前 (2026-06-05 07:33)
+e3f3799 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
+5131464 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
+c0b8098 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
 d9116e0 docs(linkedin): FullSense KB 誘導投稿文 4 言語 (手動投稿用)
 0274d13 docs(linkedin): 獅子舞マスコット誕生記 LinkedIn 投稿文 4 言語 (jp/en/zh/ko, 手動投稿用ドラフト)
-ee48a5c feat(mascot): かみくだき獅子舞マスコット (いらすとや風頭噛みシーン) + 9 記事へ挿入
-dc5685d auto: mascot_kamikudaki_build.py 編集前 (2026-06-05 06:13)
-2e33ef7 auto: mascot_kamikudaki_build.py 編集前 (2026-06-05 06:12)
-73f3c89 auto: mascot_design_explore.py 編集前 (2026-06-05 06:09)
-759f89a auto: mascot_design_explore.py 編集前 (2026-06-05 06:08)
-cd0e262 auto: mascot_design_explore.py 編集前 (2026-06-05 06:07)
-3b4e7fe tools(qiita): 公開 qiita.com → Team KB 誘導ブロック挿入ツール + 全 39 本適用完了
-041a0a4 auto: qiita_public_team_link.py 編集前 (2026-06-05 05:41)
 ```
 
 ## 現在の git status
@@ -32,21 +32,21 @@ M docs/NEXT_SESSION.auto.md
 ## 直近 2 時間に変更されたファイル
 
 ```
-06:34 docs/articles/2026-06-05/LinkedIn_2026-06-05_fullsense_kb_announce_ko.md
-06:34 docs/articles/2026-06-05/LinkedIn_2026-06-05_fullsense_kb_announce_zh.md
-06:34 docs/articles/2026-06-05/LinkedIn_2026-06-05_fullsense_kb_announce_en.md
-06:34 docs/articles/2026-06-05/LinkedIn_2026-06-05_fullsense_kb_announce_jp.md
-06:32 docs/articles/2026-06-05/LinkedIn_2026-06-05_kamikudaki_mascot_ko.md
-06:31 docs/articles/2026-06-05/LinkedIn_2026-06-05_kamikudaki_mascot_zh.md
-06:31 docs/articles/2026-06-05/LinkedIn_2026-06-05_kamikudaki_mascot_en.md
-06:31 docs/articles/2026-06-05/LinkedIn_2026-06-05_kamikudaki_mascot_jp.md
-06:26 docs/SESSION_SUMMARY.md
-06:26 docs/NEXT_SESSION.auto.md
-06:16 docs/articles/drafts/QIITA_#34_third_axis_arc_overview_kamikudaki.md
-06:16 docs/articles/drafts/QIITA_#33_llcore_third_axis_settle_kamikudaki.md
-06:16 docs/articles/drafts/QIITA_#29_falsification_goodhart_proxy_limits_kamikudaki.md
-06:16 docs/articles/QIITA_llive_mega_evolution.md
-06:16 docs/articles/QIITA_#35_02_honest_disclosure_solver_swap_kamikudaki.md
+07:42 docs/SESSION_SUMMARY.md
+07:42 docs/NEXT_SESSION.auto.md
+07:36 docs/articles/assets/manga/src/q34k_story.json
+07:36 docs/articles/assets/manga/src/q33k_story.json
+07:36 docs/articles/assets/manga/src/q29_story.json
+07:36 docs/articles/assets/manga/src/q27_story.json
+07:36 docs/articles/assets/manga/q34k_4koma_zh.svg
+07:36 docs/articles/assets/manga/q34k_4koma_ko.svg
+07:36 docs/articles/assets/manga/q34k_4koma_en.svg
+07:36 docs/articles/assets/manga/q34k_4koma.svg
+07:36 docs/articles/assets/manga/q33k_4koma_zh.svg
+07:36 docs/articles/assets/manga/q33k_4koma_ko.svg
+07:36 docs/articles/assets/manga/q33k_4koma_en.svg
+07:36 docs/articles/assets/manga/q33k_4koma.svg
+07:36 docs/articles/assets/manga/q29_4koma_zh.svg
 ```
 
 ---
