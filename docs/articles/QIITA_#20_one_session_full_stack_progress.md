@@ -1112,11 +1112,7 @@ FullSense umbrella에는 spinoff 후보가 7개 있다:
 
 `docs/NEXT_SESSION.md`(사람 손, 다음 세션으로의 방향성 메모)는 drift한다. 완전 자동화하면 「사람이 생각한 다음 방침」이 사라진다. 그래서 2파일 운용으로 분리:
 
-```text
-docs/
-├── NEXT_SESSION.md       # 人手. 方向性メモ. drift してもいい
-└── NEXT_SESSION.auto.md  # 自動. Stop hook で毎ターン上書き
-```
+![NEXT_SESSION 2파일 운용 (수동 방향성 메모 + 자동 snapshot 분리)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q20/next_session_two_file_ko.svg)
 
 `scripts/gen_next_session_auto.py`를 신규 작성. Stop hook(raptor 쪽 `libexec/raptor-next-session-update` 래퍼 경유)으로 매 턴 다음을 덮어쓴다:
 
