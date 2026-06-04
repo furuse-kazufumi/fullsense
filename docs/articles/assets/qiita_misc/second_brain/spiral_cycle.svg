@@ -52,5 +52,5 @@
 
   <!-- Loop back arrow: from commit back up to 外部思想 (next cycle) -->
   <path d="M88,206 L58,206 L58,96 L24,96" fill="none" stroke="#c0712f" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowLoop)"/>
-  <text x="58" y="156" text-anchor="middle" font-size="13" fill="#c0712f" transform="rotate(-90 58 156)">次サイクル</text>
+  <text x="44" y="156" text-anchor="middle" font-size="13" fill="#c0712f" transform="rotate(-90 44 156)">次サイクル</text>
 </svg>
