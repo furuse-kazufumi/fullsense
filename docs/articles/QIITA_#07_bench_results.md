@@ -6,6 +6,12 @@ tags: [llm, benchmark, on-prem, ollama, perplexity, llive, methodology]
 id: f2ebf45621d8f85399c9
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # llive vs 他 LLM ベンチマーク 2026-05-17 — 動作確認の罠と honest disclosure
 
 ## TL;DR (改訂 — 当初版に異常があったため全面書き換え)
