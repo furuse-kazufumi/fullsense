@@ -920,7 +920,7 @@ A CoT + structure strategy (`chain_of_thought` + structurize + loop) **improved 
 (a terse strategy failed at 0.0, score 0.80→1.00).
 Not a proxy mirage, but **empirically demonstrated, with a real LLM, that "evolution of the prompt strategy mitigates the weakness"**.
 
-![Stage2 real on-prem LLM axes transition (prompt-strategy evolution)](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg)
+![Stage2 real on-prem LLM axes transition (prompt-strategy evolution)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes_en.svg)
 
 **Looking side by side** at the proxy axes (above) and the real LLM axes (above), you can see with your eyes how "the shape measured by the proxy"
 and "the shape measured empirically" differ. The proxy only shows that the mechanism turns. The real LLM shows how the prompt
