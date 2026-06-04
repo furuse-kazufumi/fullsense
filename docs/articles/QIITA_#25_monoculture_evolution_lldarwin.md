@@ -624,6 +624,8 @@ Diagrams I'd like to prepare to make this article "captivating through motion"
 
 # 把 AI 进化了 500 代之后，世界上只剩下"我"和"预测编码之父卡尔·弗里斯顿"两个人 #25 — monoculture 的 honest disclosure 与选择压组件 lldarwin
 
+![4格漫画速读 #25 — 把 AI 进化 500 代的“大失败”](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q25_4koma_zh.svg)
+
 > 📚 **连载导航（lldarwin 弧）**: #24-05 群体进化 → **#25 本文（monoculture 的失败）** → #26 设计篇 → #27 climax（实 LLM 饱和→开放端转折）。※ 各文均可单独阅读（链接用于回游）。
 
 > **概念 hook**: 在 llive 的派生群体进化中，我把人物 persona 作为 8 个系统的"种子"
