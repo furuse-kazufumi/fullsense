@@ -272,16 +272,7 @@ and be released.
 
 ## 设计动机
 
-```
-[现状的 attention]                  [CABT 的置换方案]
-attn_output = softmax(QK^T) · V     ref_id = softmax(QK^T)
-                                    attn_output = lookup(ref_id) + metadata_bias
-
-  ┌ V (float[B, S, H])              ┌ token table
-  │ 值本身                          │ (id, embedding, metadata)
-  │ 无法保留元信息                  │ 可引用、可承载附加信息
-  └                                  └
-```
+![现状的 attention 与 CABT 置换方案的设计动机对比图](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q04/design_motivation_zh.svg)
 
 ## 7 种方法 (CABT-01〜07)
 
