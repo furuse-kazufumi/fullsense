@@ -307,18 +307,7 @@ Discipline for when you run multiple workers (Claude sub-agents + Codex) at the 
 
 ## 2. 角色分工 —— 编排者与配属 worker
 
-```
-人間（私）= レビュアー兼方向性決定者
-   │ 方向性・GO/NO-GO
-   ▼
-Claude Code（主 = オーケストレータ）
-   │ 計画・実装・委任・検証・一括コミット
-   ├─▶ Claude サブエージェント（並列, run_in_background）
-   └─▶ Codex CLI（配下 worker）
-          ・独立サブタスクの実行
-          ・クロスレビュー / セカンドオピニオン
-          ・調べ物 / 雛形生成
-```
+![层级图：人类 → Claude Code（主＝编排者）→ Claude 子代理并行 / Codex CLI 配属 worker](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q31/role_hierarchy_zh.svg)
 
 - **Claude（主）的职责**：任务分解、依赖性判定、独立任务的并行启动、进度监控、**成果验证**、统一提交（commit）。
 - **Codex（下属）的职责**：执行被委派的范围。非交互式委派 = `codex exec -s read-only "<prompt>"`。
