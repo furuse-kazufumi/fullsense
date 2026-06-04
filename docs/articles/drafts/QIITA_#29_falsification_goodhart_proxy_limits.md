@@ -846,7 +846,7 @@ A sweep varying the neutral reservoir's "reinjection frequency (reinject_interva
 the diversity injection from the reservoir decreases, and few lineages fix and diversity stops growing too.
 It is a nonlinear world in which the just-right "degree of leaving alone" is in the middle.
 
-![reinjection-frequency sweep: diversity peaks at interval=5 (non-monotonic)](../assets/lldarwin_2026_05_26/lldarwin_reinject_sweep.svg)
+![reinjection-frequency sweep: diversity peaks at interval=5 (non-monotonic)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_reinject_sweep_en.svg)
 
 The operational guideline becomes this——**if you prioritize lineage retention most, interval=1 (all 8/8 lineages survive)**,
 **if you want to balance lineage retention and behavioral diversity, interval=5 (retain 5/8 while maximizing diversity)**.
