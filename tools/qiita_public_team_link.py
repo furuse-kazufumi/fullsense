@@ -57,38 +57,39 @@ LANG_HEADINGS = {
 
 # 誘導ブロック (言語別)。アクセス招待 CTA は入れない (Team は有償メンバー制のため
 # 「コメントで招待希望」のような約束はユーザー判断なしに公開しない)。
+# 文言は「全対象記事で真」になる一般形のみ (per-article の「最新版は Team」主張は
+# 記事↔KB 対応の個別検証が要るため使わない — honest disclosure)。
 BLURBS = {
     "ja": (
         f":::note info\n"
         f"**📚 FullSense ナレッジベースのご案内** {MARKER}\n"
-        f"この記事の最新版 (4 言語・図版更新済) と、FullSense 開発全史 60+ 記事"
-        f" (物語ベースの[読む順ガイド]({TEAM_INDEX})・かみくだき版・4 コマ漫画つき) は"
-        f" Qiita Team **[FullSense KB]({TEAM_TOP})** に集約しています (チームメンバー向け)。\n"
+        f"FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド]({TEAM_INDEX})・"
+        f"かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB]({TEAM_TOP})** に"
+        f"集約しています (チームメンバー向け)。\n"
         f":::\n"
     ),
     "en": (
         f":::note info\n"
         f"**📚 FullSense Knowledge Base** {MARKER}\n"
-        f"The latest version of this article (4 languages, updated figures) — together with the full"
-        f" FullSense development history of 60+ articles (a story-based [reading guide]({TEAM_INDEX}),"
-        f" plain-language editions, and 4-panel manga) — is consolidated in our Qiita Team"
-        f" **[FullSense KB]({TEAM_TOP})** (team members only).\n"
+        f"The full FullSense development history — 60+ articles in 4 languages, with a story-based"
+        f" [reading guide]({TEAM_INDEX}), plain-language editions, and 4-panel manga — is consolidated"
+        f" in our Qiita Team **[FullSense KB]({TEAM_TOP})** (team members only).\n"
         f":::\n"
     ),
     "zh": (
         f":::note info\n"
         f"**📚 FullSense 知识库指南** {MARKER}\n"
-        f"本文的最新版本（4 种语言・图表已更新），以及 FullSense 开发全史 60+ 篇文章"
-        f"（故事化的[阅读顺序指南]({TEAM_INDEX})・通俗易懂版・四格漫画）均已汇总至 Qiita Team"
-        f" **[FullSense KB]({TEAM_TOP})**（仅限团队成员）。\n"
+        f"FullSense 开发全史 60+ 篇文章（4 种语言版・故事化的[阅读顺序指南]({TEAM_INDEX})・"
+        f"通俗易懂版・四格漫画）均已汇总至 Qiita Team **[FullSense KB]({TEAM_TOP})**"
+        f"（仅限团队成员）。\n"
         f":::\n"
     ),
     "ko": (
         f":::note info\n"
         f"**📚 FullSense 지식 베이스 안내** {MARKER}\n"
-        f"이 글의 최신판 (4개 언어・도판 갱신됨) 과 FullSense 개발 전사 60+ 편"
-        f" (스토리 기반 [읽기 순서 가이드]({TEAM_INDEX})・쉬운 설명판・4컷 만화 포함) 은 Qiita Team"
-        f" **[FullSense KB]({TEAM_TOP})** 에 모여 있습니다 (팀 멤버 전용).\n"
+        f"FullSense 개발 전사 60+ 편 (4개 언어판・스토리 기반 [읽기 순서 가이드]({TEAM_INDEX})・"
+        f"쉬운 설명판・4컷 만화 포함) 은 Qiita Team **[FullSense KB]({TEAM_TOP})** 에"
+        f" 모여 있습니다 (팀 멤버 전용).\n"
         f":::\n"
     ),
 }
