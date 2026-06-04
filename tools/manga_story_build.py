@@ -69,6 +69,16 @@ def nlines(s: str) -> int:
     return s.count("\n") + 1
 
 
+def auto_text_color(fill: str) -> str:
+    """White text on dark fills, near-black on light fills (WCAG-ish luminance)."""
+    try:
+        h = fill.lstrip("#")
+        r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+        return "#ffffff" if (0.299 * r + 0.587 * g + 0.114 * b) < 150 else "#1a1a1a"
+    except Exception:
+        return "#1a1a1a"
+
+
 def render_motif(els, motif, y0, y1, font, lang):
     """Render one motif into the zone between caption (y0+110) and bubble (y1-100)."""
     if not motif:
