@@ -1407,7 +1407,7 @@ CoT + structure 策略(`chain_of_thought` + structurize + loop),把
 llama3.2 的 **multistep 从 0.0 改善到了 1.0**(terse 的策略在 0.0 失败,score 0.80→1.00)。
 不是 proxy 的幻影,而是**在实 LLM 上实证了"prompt 策略的进化能缓解弱点"**。
 
-![Stage2 实 on-prem LLM 轴的推移(prompt 策略进化)](../assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes.svg)
+![Stage2 实 on-prem LLM 轴的推移(prompt 策略进化)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage2_real_llm_axes_zh.svg)
 
 把 proxy 轴(前述)和实 LLM 轴(上)**并排来看**,就能用眼睛看出"用 proxy 测出的形状"
 和"实测的形状"有何不同。proxy 只表明机构在运转。实 LLM 则表明,prompt 策略
