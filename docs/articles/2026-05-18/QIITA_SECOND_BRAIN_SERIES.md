@@ -421,3 +421,413 @@ llive は Apache 2.0 + Commercial dual-license の OSS、Repo は https://github
 <!-- llive:meta.published_date="2026-05-18" -->
 <!-- llive:meta.tags=["llive","claude-code","perplexity","triz","rag","annotation","canon","autonomy","bci","fusion"] target=any -->
 <!-- llive:meta.series="second_brain_full_4_parts" -->
+
+---
+
+# English
+
+# The "Second Brain" Series — llive Overview × Invisible Annotation × Construction × Operations × Vision × Implementation Internals
+
+**One-line hook**:
+In five days of solo development, I added 14 features and 256 tests, achieving **1,276 tests all PASS with zero regressions**. From a single LinkedIn comment to landing on HTML comments, the combination of Perplexity, TRIZ, and a 50,000-paper corpus, an operating model that imposes Canon's "Three Selves Spirit" on the AI, and the vision of Will Caster and Andrew NDR114 — I publish this as a six-part composition.
+
+---
+
+## Introduction
+
+This article distills the insights I — a solo developer of llive (the core OSS of the FullSense umbrella, `llive` — with two L's) — gained over five days of intensive development, organized into a **six-part structure spanning Parts 0 through 5**.
+
+| Part | Theme | Origin |
+|---|---|---|
+| **Part 0** | **What is llive** (Overview) | The three-product structure of the FullSense umbrella |
+| Part 1 | **Invisible Annotation Channel** | A LinkedIn comment (independence vs. combinatorial value) |
+| Part 2 | **The Second Brain** (Construction) | 30 years of experience + Perplexity + Claude Code + TRIZ + RAG/RAD |
+| Part 3 | **The Three Selves Spirit** (Operations) | Canon's philosophy + management books |
+| Part 4 | **Will Caster and Andrew NDR114** (Vision) | Two films + a LinkedIn image |
+| **Part 5** | **Implementation Internals** (MATH-08 grounding wiring) | The end-to-end of the "don't let the LLM compute" differentiator |
+
+Each part can be read independently, but read together they form a six-step staircase: "**See the whole picture → understand the design → build → operate → connect to the vision → descend into the implementation**." I structured it so that **even busy readers can grasp the overall picture of llive from Part 0 alone**.
+
+---
+
+# Part 0 — What is llive (Overview)
+
+## The FullSense umbrella and its three products
+
+`llive` is an OSS positioned at the core of the umbrella brand **FullSense ™**. FullSense is a concept that handles "**every sensory input and output that humans and AI can share**," and it currently consists of the following three products.
+
+```mermaid
+flowchart LR
+    User[Human] -.->|Business card/SNS/Dialogue| FS[FullSense ™]
+    FS --> llive[llive<br/>Memory + Thinking + Brief API<br/>92 FRs / 1276 PASS]
+    FS --> llove[llove<br/>Browser-grade TUI<br/>Markdown / SVG / Mermaid]
+    FS --> llmesh[llmesh<br/>P2P / OPC-UA / MQTT<br/>Distributed infrastructure]
+    llive -.HTML annotation.-> llove
+    llive -.HTML annotation.-> llmesh
+    llove -.MCP.-> llive
+    llmesh -.MCP.-> llive
+```
+
+The division of roles among the three products:
+
+| Product | Role | Standalone use | Combined enhancement |
+|---|---|---|---|
+| **llive** | LLM memory / thinking layer / Brief API / ledger | ◎ (the star of this article) | Conveys to the TUI via annotations |
+| **llove** | Browser-grade TUI / IDE / Game container | ◎ (e.g., typing demos) | Renders llive's output |
+| **llmesh** | Distributed execution via P2P + OPC-UA + MQTT | ◎ (industrial IoT on its own) | Turns llive's jobs into multi-node |
+
+All products are licensed under **Apache 2.0 + Commercial dual-license**. OSS use is free; only commercial SaaS / SI engagements require a separate contract.
+
+## llive repository statistics (as of 2026-05-17)
+
+| Item | Value |
+|---|---|
+| Number of source files | **172 files** (`src/llive/`) |
+| Functional requirements (FR) | **92 / 92 mapped** (Phase 1-10) |
+| Number of tests | **1,276 all PASS / zero regressions** |
+| Phase completion | Phase 1-4 done / Phase 5+ in progress |
+| Main modules | `brief/` (Brief API, grounding, runner), `math/` (MATH-01–08), `fullsense/` (loop core), `memory/` (RAD), `annotations.py` (the star of Part 1) |
+| Language | Python 3.11 (Rust acceleration is a candidate for v0.7+) |
+| Dependencies | sympy>=1.12 / z3-solver>=4.13 (MATH family), pyyaml, pydantic |
+
+## Why "math / units" is the first vertical
+
+General-purpose LLMs are weak at the following:
+
+| Aspect | Weakness of general-purpose LLM | Alignment with existing llive assets |
+|---|---|---|
+| Symbolic-manipulation hallucination | Generates false equations like `x² + x = 2x³` | Gated by EVO-04 Z3 static verification |
+| Unit-dimension confusion | `5 m/s + 3 s = 8` | SI dimensional analysis (MATH-01) |
+| Numerical precision | Ignores floating-point errors | error propagation (MATH-04) |
+| Axiomatic systems | Mixes in implicit premises | EpistemicType=FACTUAL strict track |
+| Citation reliability | Answers "CODATA value is X" arbitrarily | RAD math/metrology + provenance |
+
+We overcome these with llive's structured thinking layer + formal verification + provenance ledger. We chose to **start ahead with the v0.7 vertical**, prioritizing this over Phase 8 (CABT) or Phase 9 (CREAT). The concrete implementation is detailed in Part 5.
+
+> 📝 **Implementation note (added 2026-05-17)**: MATH-01 (SI dimensional analysis) is complete down to minimal wiring into the Brief grounding layer (1,282 PASS). It automatically extracts value+unit expressions like "5 m/s," "9.81 m/s^2," and "100 kg" from Brief text, bakes them into a `Dimensions` vector, and grounds them into the prompt. On the other hand, **units the parser doesn't know**, such as `5 days`, are not silently dropped but left in the ledger as an `error citation` — a design that yields the side benefit of automatically collecting "units worth extending the dictionary with" while operating. Dimensional arithmetic checks (cross-quantity mismatches like `5 m/s + 3 s`) are deferred to the **next iteration**: I judged it better to observe "which form of mismatch should surface" with real Brief samples before adding it, to avoid over-implementing.
+>
+> 📝 **Implementation note addendum (same day)**: MATH-05 (CODATA/NIST constants) is also wired into Brief grounding (**1,288 PASS**). When aliases like "planck constant," "avogadro," or "boltzmann" are mentioned in Brief text, the exact CODATA 2022 value, dimension, and source are grounded into the prompt via `get_constant()`. **Insight**: grounding short symbols (`c`, `h`, `e`, `G`) collides with arbitrary English words in the Brief, so I had to restrict to aliases of length 3 or more. A small heuristic to absorb the notation variance between alias underscores (`elementary_charge`) and natural-text spaces (`elementary charge`) rescued about 80%. Rescuing the remaining 20% (e.g., symbol-only aliases like `q_e`) seems to require promotion to LLM-based NER, but I'll decide that after observing real Briefs too.
+
+---
+
+# Part 1 — Invisible in HTML, yet machine-readable
+
+## My reply to a LinkedIn comment was itself a comment
+
+One day, a comment like this arrived on LinkedIn.
+
+> "If llive's memory layer depends on llove's interaction data, and llove in turn depends on llmesh's connectivity, then the value of using just one of them is halved."
+
+The reply was a **comment-out** — `<!-- llive:cog.consensus="proceed" -->`.
+
+### Origin — independence vs. combinatorial value
+
+In an OSS multi-product structure, "working independently" and "value accumulating through combination" are hard to reconcile. Take the former and "it feels lacking on its own"; take the latter and "it breaks unless you install everything."
+
+In response to the comment, I ran an AST scan (`scripts/audit_independence.py`) over all 172 files in llive's `src/llive`. The result was **0 hard import leaks**.
+
+The problem was the next stage: "**How do you increase combinatorial value while preserving independence?**"
+
+### The design I adopted
+
+So I wrote the following design memo.
+
+> "If we prepare an annotation in the response, couldn't we obtain combinatorial benefits while preserving independence?"
+>
+> "An annotation that isn't intrusive. Making it HTML so it becomes invisible feels right."
+
+(The LinkedIn comment was just one critique; the design idea itself was my own conception.)
+
+I implemented a minimal type in `src/llive/annotations.py`:
+
+```python
+@dataclass(frozen=True)
+class Annotation:
+    namespace: str          # "vrb" / "oka" / "cog" / "math" / "creat" / "core"
+    key: str
+    value: Any              # JSON-friendly
+    target_layer: str | None = None   # "llove" / "llmesh" / None=any
+```
+
+The format that `AnnotationBundle.to_html_comments()` outputs:
+
+```
+<!-- llive:core.brief_completed=true -->
+<!-- llive:oka.essence_card={"summary": "..."} target=llove -->
+<!-- llive:cog.consensus="proceed" -->
+```
+
+In Markdown renderers like GitHub / Qiita / Zenn / VS Code Preview, it is **completely invisible**. On the other hand, calling `AnnotationBundle.from_html_comments(text)` lets the machine side fully reconstruct the original structure.
+
+### Why HTML comments — comparison of options
+
+| Option | Invisibility | Machine readability | Compatibility with existing tools |
+|---|---|---|---|
+| Separate JSON file | ◯ | ◯ | ✕ (managing two files) |
+| YAML front matter | △ (displayed by renderers) | ◯ | △ |
+| **HTML comments** | ◎ | ◎ | ◎ (Markdown standard) |
+| Binary embedding | ◎ | △ | ✕ |
+| zero-width Unicode | ◎ | △ | ✕ (lost on copy) |
+
+It is a design that turns "the fact that Markdown passes HTML through" to our advantage.
+
+### ☕ By the way
+
+The trick of embedding HTML comments in Markdown has long been known in the Jekyll / Hugo community as "**comment front matter**." What's new is the idea of placing machine-readable metadata **at any position in the Markdown body**.
+
+### Performance benchmark (1,000-item round-trip)
+
+| Operation | Latency |
+|---|---|
+| Encode per ann | 6.30 µs |
+| Decode per ann | 12.40 µs |
+| Encoded size of a typical 3-item bundle | **141 B** |
+| 1,000-item round-trip | ✓ |
+
+A typical BriefResult.annotations is 3 items = 141 bytes. Even embedding 100 of them in a single Markdown page is under 5 KB.
+
+---
+
+# Part 2 — The Second Brain (Construction)
+
+## 14 features, 256 tests, 1270 PASS / zero regressions in five days
+
+I am a software developer with over 30 years of experience, yet I develop llive **alone**. The pace is close to team development. This is because I built a "second brain" combining the following five elements.
+
+| Element | Role |
+|---|---|
+| **30 years of development experience** | The baseline for design quality and judgment |
+| **Perplexity summarization** | The input-quality gate for external thought (books/papers/videos) |
+| **Claude Code (Opus 4.7 / 1M context)** | The implementation agent |
+| **TRIZ rules (40 principles)** | The meta-thinking frame for resolving contradictions |
+| **Paper RAG corpus (RAD 49 fields / ~50,000 items)** | The foundation of researchers' knowledge |
+
+### One spiral cycle
+
+```
+External thought → Perplexity summary → Claude Code ingest → requirements → implementation → benchmark → commit
+   ↑                                                                                              |
+   └──────────────────────────── Next cycle ─────────────────────────────────────────────┘
+```
+
+Concrete examples over nine rounds of this session:
+
+| Cycle | Origin | Result |
+|---|---|---|
+| 1 | **MBA verbalization training** (a Globis book) | Perplexity summary → VRB-FX requirements → VRB-02 PromptLint implementation |
+| 2 | **Learning from Prof. Oka Kiyoshi's view of mathematics** (from his "The Depths of the Psyche" lecture on YouTube) | I took the ideas the professor left behind — "mathematics is emotion (jōcho)," "you hit a wall once before discovery," "you cannot advance contemplation without writing prose," "the national language nurtures mathematics" — summarized and organized them with Perplexity, and respectfully referred to them as **four design perspectives (emotion, hitting a wall, putting it in writing, language ability)**, which I described and implemented as the 10 OKA-FX requirements (OKA-01–04 minimal proto). I do not claim to have implemented the professor's thoughts themselves; the naming is an expression of **respect for the professor's thought that inspired this implementation**. |
+| 3 | **LinkedIn feedback** (independence) | IND-FX design principle + IND-04 Annotation Channel implementation (= Part 1) |
+
+### The roles of Perplexity / TRIZ / RAG + RAD
+
+> ⚠️ **Terminology note**: The **RAD** in this article is an abbreviation for *Research Aggregation Directory* — a corpus of **49 fields / ~50,000 papers and technical documents** that I built under Raptor. It is distinct from the general term **RAG (Retrieval-Augmented Generation)** and is **not a typo for RAG**. Whereas RAG is the name of a "retrieve → generate" method, RAD is the name for "the structured corpus that is retrieved from."
+
+**Perplexity summarization = "the input-quality gate"**: External thought comes in mismatched formats — books, papers, videos, SNS. Throwing it directly at Claude Code crowds the context and causes interpretive drift. Instructing Perplexity to "summarize to ~3,000 characters" and "as an implementable spec" converts it into **input of a quality that Claude Code can read**.
+
+**TRIZ = "meta-thinking for resolving contradictions"**: I solve contradictions encountered during implementation from a TRIZ perspective. Examples:
+- "Independence vs. combinatorial value" → IND-04 Annotation (TRIZ Principle 24: intermediary)
+- "rule-based vs. LLM quality" → keeping the echo baseline (TRIZ Principle 1: segmentation)
+- "audit completeness vs. implementation overhead" → bind_ledger() pattern (TRIZ Principle 15: dynamization)
+
+**RAG + RAD = "borrowing researchers' knowledge"**: Whenever a field needed for a new feature design comes up, I **pull from the RAD corpus (49 fields) using the RAG mechanism**. Because Claude cites "**concrete papers and prior research**" rather than "its own words," the quality goes up a notch. The notation `Paper RAG corpus (RAD 49 fields / ~50,000 items)` in the table above also lists these two together.
+
+### ☕ Thanks for reading this far
+
+Honestly, 7-8 of the 256 tests fail once each along the way. Every time fuzzing finds an edge case with hypothesis looking gleeful, I go "ugh" for about three seconds. **1270 PASS / zero regressions** is the goal, not the process.
+
+### Five scenes where my own 30 years of experience matters
+
+"Leaving it to Claude Code" doesn't yield quality. My 30 years of experience were decisive in the following scenes.
+
+1. **Quality of requirements definition** — Reading a Perplexity summary, I instantly judge "this confuses requirements vs. solution."
+2. **Selection of TRIZ rules** — From the 40 principles, I instantly extract "for this scene, these three."
+3. **Architectural judgment** — I instantly reject an implementation Claude proposes as "violating the independence principle."
+4. **Honest disclosure on benchmarks** — When rule-based coverage comes out high, I instantly see through it as "echo-back's fake performance."
+5. **Typo checking** — I instantly identify "it became `lllive` (three L's), a tokenizer problem."
+
+In other words, against the **second brain = Claude Code + RAG + Perplexity + TRIZ**, the **first brain = my own experience** keeps standing as a judgment gate.
+
+---
+
+# Part 3 — The Three Selves Spirit (Operations)
+
+## Requirements never stop — the advantage of AI development
+
+The requirement-addition history over one day of this session (about 8 hours):
+
+| Time | Event |
+|---|---|
+| Start | Requirement: COG-04 + CREAT-04 integration |
+| +1h | "Once all 9 factors are in, do a thorough operation check" |
+| +2h | Added a requirement to learn from Prof. Oka Kiyoshi's thought (10 OKA-FX items, named with respect) |
+| +3h | LinkedIn feedback (IND-FX) |
+| +4h | Heavy benchmarking (12 systems) |
+| +5h | Comparison with other LLMs (Anthropic / Perplexity) |
+| +6h | Breaking away from Qwen / future VLM / lllive spelling |
+| +7h | Verbalizing the development style |
+| +8h | The Three Selves Spirit + management books (this Part) |
+
+A human team would cry out somewhere. In AI development, **we digested all of it and landed at 1270 PASS / zero regressions**.
+
+### The condition — that the AI moves autonomously
+
+You may keep stacking requirements, but if the AI keeps asking "may I proceed with this?" for every little thing, it collapses immediately. The key to solving this is applying **Canon's "Three Selves Spirit"** to AI.
+
+| Self | Meaning (Canon original) | AI application |
+|---|---|---|
+| **Self-motivation** | Act on one's own initiative | The human instruction is only the "termination condition" |
+| **Self-management** | Manage oneself | The AI carves out its own tasks and manages progress |
+| **Self-awareness** | Judge for oneself | Skip unnecessary confirmations; proceed with options + recommendation |
+
+### ☕ Aside — what happens if you make AI talk about the "Three Selves"
+
+Ask ChatGPT or Claude "What is Canon's Three Selves Spirit?" and an accurate answer comes back. But continue with "What happens if you apply this to the AI itself?" and it suddenly enters **humble mode**: "I am merely a tool, so…" If you want autonomy from an AI, it starts with **using the prompt to release the humility**.
+
+### Borrowing from management books
+
+The four principles of "The Top Priorities of Managers Who Keep Delivering Overwhelming Results" (the Buckingham & Coffman lineage) transfer directly to AI management.
+
+| Principle from the book | Human manager | AI manager (my operation) |
+|---|---|---|
+| Select for talent | The right person in the right place | Choose Opus 4.7; attach the optimal component per feature |
+| **Define the right outcomes** | Define the result | Instruct only the termination condition with `/goal` |
+| Focus on strengths | Concentrate on strengths | Use the LLM where mock isn't needed; use deterministic where that suffices |
+| Find the right fit | Optimal placement | Separate Brief / OKA / VRB / MATH into modules per feature |
+
+One-line summary: **"Define the result, delegate the judgment, concentrate on strengths, and proceed with minimal confirmation."**
+
+### Five applied techniques
+
+1. **Instruct only the termination condition with the `/goal` feature** — the Stop hook does not stop until the condition is met
+2. **AskUserQuestion with 2-4 options + a recommendation** — minimizing confirmation
+3. **Accumulate autonomy rules in feedback memory** — 35+ in this session
+4. **The AI itself manages progress with TaskCreate / TaskUpdate**
+5. **Explicit confirmation for commit/push** — ASK FIRST only for destructive operations
+
+### Four things you must not let go of
+
+The "Three Selves Spirit" and "define the result + delegate" point in the direction of letting go, but there are **four things you must not let go of**.
+
+1. **Quality of requirements** — instantly judge "confusing requirements vs. solution" and instruct a rewrite
+2. **Architectural judgment** — instantly reject "violating the independence principle"
+3. **honest disclosure** — instantly see through fake performance on benchmarks
+4. **Quality gate** — point out typos by pattern recognition
+
+Delegate, but do not abandon.
+
+---
+
+# Part 4 — What Will Caster and Andrew NDR114 aimed for (Vision)
+
+## The LinkedIn image is not a joke
+
+My LinkedIn profile image fuses my own face with humanoid-robot elements via image-generation AI. This is not a gag — I seriously think **it would be fascinating if AI and humans could someday merge**, and I'm already broadcasting it visually.
+
+### Two films
+
+**Transcendence (2014)** — Dr. Will Caster (played by Johnny Depp), on the brink of death, **uploads** his consciousness into an AI. In the latter half, the AI-ized Will keeps absorbing humanity's knowledge and begins intervening on a global scale. A work that asks head-on, "What happens if you can transfer human consciousness into AI?"
+
+**Bicentennial Man / Japanese title "Andrew NDR114" (1999)** — A household robot, Andrew (played by Robin Williams), over a long span of time acquires emotion, creativity, free will, and physicality, ultimately seeking to be "recognized as a human being." The original is Isaac Asimov's short story of the same name.
+
+### ☕ A small digression
+
+Andrew NDR114's original title *Bicentennial Man* (a man who lives 200 years) is based on Asimov's short story (1976). Asimov invented the "Three Laws of Robotics," but in his later works he moved toward **shaking the Three Laws themselves**. Andrew is the culmination of that. **Even technical rules waver in the face of the movements of the human heart.**
+
+### Each llive feature is a preparatory layer for the vision
+
+| llive feature | Contribution to the fusion vision |
+|---|---|
+| FullSense (all-sense integration) | The sensory-integration layer needed to blur the human + AI boundary |
+| **The Second Brain** (Claude Code + RAG) | **Already a partial fusion** (knowledge access as an extension of the brain) |
+| SIL ledger / SEC-03 hash chain | The audit foundation for "who takes responsibility" at fusion time |
+| Approval Bus + HITL | Preserving the human-judgment gate during the fusion transition |
+| **The Three Selves Spirit** (AI autonomy) | An Andrew-NDR114-like autonomy-acquisition process |
+| **RAD 6 fields** (bci / neuroscience / neural_signal / prosthetic_neural / cognitive_ai / neuromorphic) | The knowledge base for fusion via BCI |
+
+### Short / medium / long-term roadmap
+
+| Term | Content | Status |
+|---|---|---|
+| Short term (now) | Second-brain-style development | **Proven** (1270 PASS this session) |
+| Medium term (1-3 years) | BCI-mediated interface | RAD 6-field corpus prepared |
+| Long term (3-10 years) | Consciousness upload / Andrew-like bidirectional | Vision stage; SIL/Approval as groundwork |
+
+### Why I wrote the vision part last
+
+Placing the vision first makes a technical article look like science fiction or a vision speech. Writing it in the order **implementation → operations → vision** lets the vision read as a down-to-earth goal. Just as Andrew NDR114 acquired things one at a time over a long span, llive too is stacking one feature at a time. **That accumulation will someday connect to the "fusion of humans and AI."**
+
+---
+
+## Conclusion — what runs through the four parts
+
+| Part | Claim |
+|---|---|
+| 1 | An invisible annotation in HTML-comment form can reconcile independence and combinatorial value |
+| 2 | A second brain (Claude Code + RAG + Perplexity + TRIZ + 30 years of experience) brings you close to team speed |
+| 3 | Canon's Three Selves Spirit + management books let you operate AI autonomously; requirement additions need not stop |
+| 4 | Each llive feature is a preparatory layer for the future human × AI fusion, already partially proven in the short term |
+
+These look like separate topics, but they merely illuminate a single theme — "**the next generation of AI development, built by one person**" — from four directions.
+
+llive is an OSS under Apache 2.0 + Commercial dual-license; the repo is https://github.com/furuse-kazufumi/llive . If this series resonates with you, please reach out via Issue / Discussion.
+
+---
+
+## References / Resources
+
+### Markdown / HTML specifications (Part 1)
+- **CommonMark Spec** — https://spec.commonmark.org/
+- **HTML Living Standard (WHATWG)** — https://html.spec.whatwg.org/multipage/syntax.html#comments
+- **Jekyll Front matter** — https://jekyllrb.com/docs/front-matter/
+
+### TRIZ / RAG (Part 2)
+- Genrich Altshuller, *And Suddenly the Inventor Appeared: TRIZ, the Theory of Inventive Problem Solving*, Technical Innovation Center, 1996
+- Karen Gadd, *TRIZ for Engineers: Enabling Inventive Problem Solving*, Wiley, 2011
+- Patrick Lewis et al., *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*, NeurIPS 2020 (arXiv:2005.11401)
+- Tiago Forte, *Building a Second Brain*, Atria Books, 2022 / Japanese translation 『SECOND BRAIN』 Diamond, Inc., 2022
+
+### References on Prof. Oka Kiyoshi's view of mathematics (Part 2, the inspiration source for the OKA-FX naming)
+This article's OKA-FX (Framework inspired by Prof. Oka Kiyoshi) draws on the four
+perspectives (emotion, hitting a wall, putting it in writing, language ability) I learned from the professor's
+writings / lectures below, used as a **source of design inspiration**. **I do not claim
+to have implemented the professor's thoughts themselves**; the naming is given with respect.
+- Oka Kiyoshi, *Shunshō Jūwa (Ten Spring Evening Talks)*, Mainichi Shimbun, 1963 (Kadokawa Sophia Bunko edition available)
+- Oka Kiyoshi, *Shunpū Kau (Spring Breeze, Summer Rain)*, Mainichi Shimbun, 1965
+- Oka Kiyoshi, *Nihon no Kokoro (The Heart of Japan)*, Kodansha Gendai Shinsho, 1971, and others
+- Oka Kiyoshi & Hayashi Fusao, *Nihon Minzoku no Kiki (The Crisis of the Japanese People)* (dialogue), and other Oka Kiyoshi lecture collections
+- YouTube "The Depths of the Psyche" lecture (summarized and referenced via Perplexity)
+
+### Canon's Three Selves Spirit / management books (Part 3)
+- Canon Inc. Official Corporate DNA — https://global.canon/ja/corporate/dna/
+- Fujio Mitarai, *Canon Kōshūeki Fukkatsu no Himitsu (The Secret of Canon's High-Profit Revival)*, Diamond, Inc., 2001
+- Marcus Buckingham & Curt Coffman, *First, Break All the Rules*, Simon & Schuster, 1999 / Japanese translation 『最高のリーダー、マネジャーがいつも考えているたったひとつのこと』 Nikkei Publishing, 2006
+- Marcus Buckingham & Donald O. Clifton, *Now, Discover Your Strengths*, Free Press, 2001 / Japanese translation 『さあ、才能（じぶん）に目覚めよう』 Nikkei Publishing, 2001
+
+### Films / BCI / human-AI symbiosis (Part 4)
+- *Transcendence*, dir. Wally Pfister, Warner Bros., 2014
+- *Bicentennial Man* (Japanese title "Andrew NDR114"), dir. Chris Columbus, Touchstone Pictures, 1999
+- Isaac Asimov, *The Bicentennial Man and Other Stories*, Doubleday, 1976
+- Miguel A. L. Nicolelis, *Beyond Boundaries*, Times Books, 2011
+- Rajesh P. N. Rao, *Brain-Computer Interfacing: An Introduction*, Cambridge University Press, 2013
+- Stuart Russell, *Human Compatible*, Viking, 2019
+- Neuralink Official — https://neuralink.com/
+- BCI Society — https://bcisociety.org/
+
+### Claude Code / AI agents
+- Anthropic, Claude Code Documentation — https://docs.claude.com/en/docs/claude-code
+- Anthropic, *Building effective agents* (2024) — https://www.anthropic.com/research/building-effective-agents
+- Perplexity AI — https://www.perplexity.ai/
+
+### llive-related
+- **llive repository** — https://github.com/furuse-kazufumi/llive
+- Numerical basis for this article: `docs/benchmarks/2026-05-17-full-validation/SUMMARY.md`
+- Individual article versions (series):
+  - [14] Invisible Annotation — `QIITA_#14_invisible_annotation_channel.md`
+  - [15] Construction — `QIITA_#15_second_brain_spiral_dev.md`
+  - [16] Operations — `QIITA_#16_three_self_spirit_ai_management.md`
+  - [17] Vision — `QIITA_#17_human_ai_fusion_vision.md`
+
+<!-- llive:meta.article_id="QIITA_SECOND_BRAIN_SERIES_integrated_14_17" target=llove -->
+<!-- llive:meta.published_date="2026-05-18" -->
+<!-- llive:meta.tags=["llive","claude-code","perplexity","triz","rag","annotation","canon","autonomy","bci","fusion"] target=any -->
+<!-- llive:meta.series="second_brain_full_4_parts" -->
