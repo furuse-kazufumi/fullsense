@@ -12,7 +12,7 @@ id: 5a1124083298fdbcb9e6
 
 # 日本語
 
-![山登り6連戦 — 選り分けて育てる工夫はいつ効く?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma.svg)
+![山登り6連戦 — 選り分けて育てる工夫はいつ効く?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma.svg?v=2)
 # (連載 #34 かみくだき版) 山登り 6 連戦と、暗くなった蛾・新しい力を得た大腸菌の話
 
 ![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
@@ -309,7 +309,7 @@ id: 5a1124083298fdbcb9e6
 
 # English
 
-![Six Hill-Climbing Bouts — When Does Sort-and-Raise Work?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_en.svg)
+![Six Hill-Climbing Bouts — When Does Sort-and-Raise Work?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_en.svg?v=2)
 # (Series #34, Plain-Language Edition) Six Hill-Climbing Bouts, the Moth That Turned Dark, and the E. coli That Gained a New Power
 
 ![Kamikudaki lion — a bite that grants the blessing of understanding](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_en.svg)
@@ -606,7 +606,7 @@ Being honest is itself a force that moves research forward — that's the kind o
 
 # 中文
 
-![爬山六连战 — 选别培养的工夫何时有效?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_zh.svg)
+![爬山六连战 — 选别培养的工夫何时有效?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_zh.svg?v=2)
 # (连载 #34 通俗版) 爬山六连战，以及变黑的蛾子、获得新能力的大肠杆菌的故事
 
 ![通俗易懂版舞狮 — 被咬的读者获得「理解」的福气](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_zh.svg)
@@ -903,7 +903,7 @@ Being honest is itself a force that moves research forward — that's the kind o
 
 # 한국어
 
-![등산 6연전 — 선별 육성 기법은 언제 효과가 있나?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_ko.svg)
+![등산 6연전 — 선별 육성 기법은 언제 효과가 있나?](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q34k_4koma_ko.svg?v=2)
 # (연재 #34 쉬운 버전) 등산 6연전과, 검게 변한 나방・새로운 힘을 얻은 대장균 이야기
 
 ![쉬운 설명판 사자탈 — 물린 독자에게 「이해」의 복](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_ko.svg)

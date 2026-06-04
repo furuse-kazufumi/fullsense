@@ -267,7 +267,7 @@ def render_motif(els, motif, y0, y1, font, lang):
         if ext > 0:
             ey = zone_top + 190
             for k in range(min(ext, 6)):
-                cx = 130 + k * 100
+                cx = 110 + k * 88  # 右端 574 — 右下のバスト (頭左縁 ~598) を避ける
                 els.append(tb({"circle": [cx, ey, 24]}, "×", [cx, ey + 9], 22, font,
                               fill="#d9d4c8", border_width=2,
                               border_color="#8a8474", text_color="#6a645a"))
