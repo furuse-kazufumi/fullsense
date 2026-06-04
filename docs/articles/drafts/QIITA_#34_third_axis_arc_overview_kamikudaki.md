@@ -301,3 +301,297 @@ id: 5a1124083298fdbcb9e6
 ---
 
 **この記事の技術版**: 連載 #34「山登り 6 連戦で分かった "いつ進化の③は効くのか" — そして 100 年前の進化生物学が同じ答えを出していた」(同じフォルダ内)
+
+---
+
+# English
+
+# (Series #34, Plain-Language Edition) Six Hill-Climbing Bouts, the Moth That Turned Dark, and the E. coli That Gained a New Power
+
+This article explains a slightly difficult research story using **only words a middle-schooler can understand**. Whenever a technical term shows up, we immediately rephrase it as a "hill-climbing" or "living-creature" analogy.
+
+The plain-language edition of Series #33 explained "the final showdown." This #34 lines up **all six experiments that led there** as a single story. And this time we add another point: **research on living creatures from nearly 100 years ago had already reached the same answer we did**.
+
+---
+
+## First, what is this research even about?
+
+We are doing research on "remaking the parts of an AI's brain little by little, like the evolution of living things, to search for smart parts." The project is named **llcore**.
+
+The evolution of living things, as taught in textbooks, has four ingredients (in our research we call them by number).
+
+- (1) **Mutation** … try changing the design a little
+- (2) **Heredity** … the parent's design is passed on to the child
+- (3) **Survival of the fittest / separation** … pick the good ones and keep them ← **today's main character**
+- (4) **Overproduction** … make lots of offspring
+
+Today's story is about this question: when we turn (3) into the elaborate trick of **"sorting out various types and raising each one in a separate place,"** is it **actually useful?**
+
+---
+
+## The hill-climbing analogy (recap)
+
+We represent the "goodness" of a design by the **height of the terrain**. **High place = good design**. It's a game of searching for the single highest summit.
+
+**A single gentle hill (easy)**
+
+```
+ 良さ↑
+  高 |            ___________
+     |         __/           \__
+     |      __/                 \__     ← どこから登っても
+     |   __/                       \__     同じ頂上に着く
+  低 |__/                             \__
+     +----------------------------------→ 設計の選び方
+```
+
+For this one, you reach the summit just by **walking toward whatever is a little higher than where you are now** (the hill-climbing method). **No elaborate trick (3) is needed.**
+
+**Deceptive terrain (hard)**
+
+```
+ 良さ↑                                  /\
+     |                                 /  \   ← 本物の頂上
+     |        ニセ頂上                /    \
+  中 |         /\         谷         /      \
+     |        /  \______________/        \
+  低 |____/                                  \
+     +----------------------------------------→ 設計の選び方
+          ↑ ニセ頂上で止まってしまう (谷を下れないから)
+```
+
+There's a "fake summit" up front, and beyond a valley lies the "real summit." Naive hill-climbing **stops at the fake summit** (because it can't walk down into a valley).
+
+This is where (3) shines. If you **keep various types of climbers scattered all over the valley**, someone can cross the valley by "stepping stones" and reach the real summit. In research we call this the "memory palace (MAP-Elites)."
+
+> **The single most important point**: (3) is useful **only when the terrain is "deceptive."** For a single gentle hill, naive hill-climbing is enough.
+
+So the question is this.
+
+> **When we search for an AI design, is the terrain that shows up "deceptive terrain"? Or is it "a single gentle hill"?**
+
+— A breather here. That's all the analogies. The rest is the actual record of the six bouts. —
+
+---
+
+## A map that surveys all six bouts at once
+
+Let's put up the map first. This is the backbone.
+
+| Bout | What kind of terrain we measured | Did (3) work? | In a word |
+|---|---|---|---|
+| **1** | Deliberately built "deceptive terrain" | **Yes (landslide win)** | (3) is proven to be the real deal |
+| **2** | Memory test / chaining multiple parts | **Couldn't measure** | Terrain too easy/too hard, measurement impossible |
+| **3** | Generalization power to various tasks | **No** | (3) beats "no selection," but is no better beyond that |
+| **4** | Terrain just like the real thing (instrument jitter zeroed out) | **No** | Confirmed the terrain is **genuinely gentle** |
+| **5** | A loophole of mixing 4 kinds of parts | **No** | A die can draw all of them, so **the hole was already closed** |
+
+The story goes like this. **First we proved "if the terrain is deceptive, (3) wins by a landslide" (1); then we went to measure the real thing four times to ask "so what about reality?" (2-5), and every terrain close to the real thing turned out to be a "terrain that doesn't need (3)."** Moreover, in the last two (4, 5), we confirmed that the reason it isn't needed is **not that our measurement was sloppy, but that the terrain really was simple**. This is today's arc.
+
+---
+
+## Bout 1: When we deliberately built "deceptive terrain," (3) won by a landslide
+
+First we proved whether there is **really a scene where (3) works as the theory says**. We **deliberately built nasty terrain** and pitted (3) against naive methods (especially "random-restart hill-climbing, which goes back to the start and tries again").
+
+The result was a **landslide win for (3)**. Only (3) reached the real summit about 95% of the time, while all the other methods got stuck at fake summits (win rate 100%, the effect was the theoretical maximum).
+
+→ We learned that **(3) is a genuine mechanism that really does work**.
+
+To be honest, though, this is a story on terrain we **deliberately built to be nasty**. We only proved "(3) is possible"; we did not claim "the real terrain is this nasty too." So the next four bouts were a journey to verify on terrain close to the real thing.
+
+— Take a break. Bout 1 was a satisfying landslide. From here, the weather starts to turn... —
+
+---
+
+## Bout 2: The terrain was too easy/too hard, so we couldn't measure
+
+When we tried to measure on a real memory test, **the terrain was at both extremes**.
+
+- One test was **too hard for anyone to climb** (everyone marking time at the foot).
+- Another test was **too easy, so everyone reached the summit** (no difference shows up).
+
+In both cases we **could not compare** "does (3) work" = **measurement impossible**. Even chaining multiple parts couldn't get over this wall (a computation called 5-bit parity that, in principle, this method cannot solve).
+
+Here's one important realization. **Even if the terrain is bumpy at the gene level, that is different from a "deceptive terrain that (3) should cross."** This distinction pays off later.
+
+— A short rest. "Couldn't measure" is plain, but it matters as a blank zone on the map. —
+
+---
+
+## Bout 3: Generalization power to various tasks — (3) wasn't needed
+
+Next we measured by "can it apply even to problem lengths it wasn't taught?" (generalization power).
+
+Result: (3) **beat "the method that does no selection at all,"** but **couldn't beat the ordinary method that does selection (just no sorting),** and couldn't beat leave-it-to-the-die (random) either.
+
+In other words, there was no effect from "the trick unique to (3) (sorting)." This terrain was **gentle, and ordinary methods arrived at the same place**.
+
+An honest aside: another AI (Codex) at first said "this result can't be trusted" and demanded three fixes. But **even after fixing, the conclusion didn't change.** What we gained was that it wasn't "a fragile result that changes once you fix it."
+
+— Take a break. A loss is a loss, but it took more time to confirm "we lost correctly." —
+
+---
+
+## Bout 4: When we zeroed out the instrument's jitter, the terrain was "genuinely gentle"
+
+This is the turning point of the story. "(3) isn't needed" kept holding through Bout 3, but a **lump of doubt** remained.
+
+- (A) Is (3) unneeded because the terrain really is **gentle**?
+- (B) Or was our **measurement just sloppy**, so that even if there were valleys, we couldn't see them?
+
+If you mix these up, you overstate things into "(3) is powerless."
+
+So we devised a way to **physically zero out the jitter of the measuring instrument**. Picture stopping a rocking ship before measuring someone's height. The result was this.
+
+| Terrain measured | Fraction of valleys | Verdict |
+|---|---|---|
+| Terrain close to the real thing (small) | **0% (no valleys)** | Gentle → (3) not needed |
+| Terrain close to the real thing (large) | About 10% (very shallow) | Almost gentle → (3) not needed |
+| Deliberately built "bumpy" (for testing) | 70-80% | Correctly detected as "bumpy" ✓ |
+| Deliberately built "gentle" (for testing) | 0% | Correctly detected as "gentle" ✓ |
+
+The important thing is that **the measuring instrument itself is working correctly.** So "the real thing is gentle" is not a bug in the instrument — **the terrain really was gentle.**
+
+→ It became clear that **"(3) looked unneeded because the terrain really was gentle."**
+
+(An honest caveat: it's not "perfectly smooth" but more like "there are barely-there, very shallow valleys (2-4%)." We write that down without rounding it off.)
+
+— Take a deep breath. The real-thing-imitation is confirmed "gentle." What's left is "the last loophole." —
+
+---
+
+## Bout 5: The loophole of mixing 4 parts — a die could draw them all
+
+Big computers (GPUs) cost money, so we didn't want to reach for them right away. So we tried another hand: **mixing 4 kinds of parts (kernels)**.
+
+The aim: even if the terrain is gentle with one kind, **maybe a step (valley) forms at the moment you switch among 4 kinds, turning it into "deceptive terrain."** If so, (3) might get its turn.
+
+Result: **this loophole was already closed.** And not "by chance" — it was **"a structure that was impassable from the start."**
+
+Why? In analogy terms,
+
+> **Choosing a part out of 4 is like a climber rolling a die and trying 1 of 4 every time they go back to the start (restart).**
+
+A naive hill-climbing climber restarts whenever they hit a dead end. Since there are **only 4 parts**, after a few restarts they end up **trying all 4 directly.** Without crossing any valley, they can **draw the real summit directly with a die (a warp).**
+
+In that case, (3) (the trick of crossing valleys) has no turn. Because **there is no valley to cross in the first place.**
+
+We also hammered at it many times from another angle (adversarial checks), but the "closed-ness" did not crack; if anything, "because a die can draw all of them, (3) has no turn" became more certain.
+
+> **(3) comes alive only when the choices are "so vast you cannot try them directly."** Four parts were too few.
+
+(An honest caveat: one of the parts, "hopfield," was a simplified version and not at full strength — that weakness remains. Even so, the conclusion does not change.)
+
+---
+
+## The "single condition" that ties all six bouts together
+
+The six results all connect through a single condition.
+
+> **(3) is useful only when the "hard spot" is "so vast you cannot try it directly (high-dimensional)."**
+
+- Bout 1 was a landslide win because the real summit lay beyond **a combination so vast that a die could never draw it in a lifetime.**
+- The real terrains (Bouts 4 and 5) conversely had a **small hard spot** (gentle, or 4 choices). So a die (restart) could warp directly there, and (3) had no turn.
+
+That's why "bumpy at the gene level" (Bout 2) isn't enough either. What matters is **"how vast the goal that the search must reach is."**
+
+---
+
+## And now today's main event: it was the same as research on living creatures 100 years ago
+
+Actually, our conclusion that **"the trick of preserving diversity is useful only under narrow conditions"** has a precedent in research on living creatures from nearly 100 years ago that looks remarkably similar.
+
+> ⚠ An important caveat: the living-creature story is **"an analogy," and it does not prove our computer experiments.** Wherever the analogy doesn't fit perfectly, we'll write that honestly.
+
+### Wright's "scatter out as a group and cross the valley" strategy
+
+The biologist **Wright (1931, 1932)** thought this way. If you stay as one big "single herd," you stop at the little hill in front of you. To go to a higher mountain you must once go down into a "valley," but ordinary natural selection won't allow "going down."
+
+Wright's idea was to **break the herd into small scattered groups.**
+
+1. A small group drifts around by chance and happens to cross a valley.
+2. From there, ordinary selection climbs a different mountain.
+3. The good genes of the group that managed to climb the high mountain spread to the whole herd.
+
+This is the **shifting balance.** "If you stay scattered, someone can cross the valley" — exactly like our (3) (MAP-Elites).
+
+> An honest caveat: this is an *analogy* of "looking similar." The people who built MAP-Elites did not imitate Wright (their paper doesn't even cite him).
+
+### But it wasn't "always necessary"
+
+Wright's contemporary **Fisher (1930)** said the opposite. "Stay as one big herd; ordinary selection alone is enough. There's no need to go to the trouble of scattering."
+
+The deepest disagreement between the two was **"is the terrain bumpy (many mountains) or gentle (a single mountain)?"** Wright said "it's bumpy, so we need the valley-crossing strategy"; Fisher said "it's mostly gentle, so ordinary selection is fine."
+
+Then a later biologist, **Coyne, Barton, and Turelli (1997)**, seriously tested Wright's strategy and concluded as follows.
+
+- **Ordinary natural selection alone explains most things.** There are almost no real cases that only Wright's strategy can explain.
+- **Wright's strategy works only in the very special case of a deep valley.** Real valleys are mostly shallow, and often evolution can proceed without crossing any valley at all.
+
+This is **strikingly like our own result.** We too found that "if the terrain really is gentle, (3) is unneeded; a simple method is enough." Coyne and colleagues' "real terrain is mostly simple" is the **biology version of our negative result ((3) wasn't needed).**
+
+> An honest caveat (three of them):
+> - Coyne and colleagues did not say "Wright is utterly impossible." They only said "it can't be called general or important." The debate is not yet settled.
+> - So you must not write "Wright is wrong."
+> - Moreover, in living creatures the "scattering strategy" can sometimes be **counterproductive** (good genes get trapped in a small group and don't spread). Our computer has no counterpart to this — here the analogy breaks down, and the living-creature side makes a one-step-stronger claim.
+
+### Analogy 1: The moth that turned dark (low dimension = ordinary selection is enough)
+
+The story of an English moth called the **peppered moth.** In an era when factory smoke blackened the trees, white moths were easily eaten by birds, and dark moths increased. When the air became clean, white moths increased again.
+
+This "dark/white" is decided by **just a single gene's switch,** and the choosable colors are really only about 2-3 kinds = **very simple (low-dimensional).** The color that's harder for birds to eat simply survives (ordinary strong selection). **The scattering strategy (3) isn't needed, and nobody uses it.**
+
+This is **exactly the same as our Bout 5, "mixing 4 kinds of parts."** With 4 choices for the part = low-dimensional, a die can try all of them directly. (3) has no turn. **The moth that turned dark = the living-creature version of the 4-choice-part story.**
+
+> An honest caveat: there are periods when the colors mix for a while, but that's due to "different environments in different places + migration," not thanks to diversity preservation like (3). A spot where the analogy slips a little.
+
+### Analogy 2: The E. coli that gained a new power (high dimension = history and diversity matter)
+
+The researcher Lenski's **super-long-term experiment with E. coli.** He divided the same E. coli into 12 groups and raised them continuously from 1988. At one point, **only 1 of the 12 groups** acquired the new power to eat "citrate" in an oxygen-rich environment, which it previously couldn't (at the 31,500th generation).
+
+The important thing is that it happened **not "suddenly" but "only in a specific group where other changes had piled up beforehand."** It couldn't be reached unless changes accumulated in order = a genuine example of **a complex, high-dimensional, history-dependent terrain.** It's an analogy on the side where **(3) could work.**
+
+> An honest caveat: this is not proof that "the algorithm (3) won." It's just a natural experiment, and it doesn't use the mechanism of (3). Moreover, dividing into 12 groups itself resembles "going back to the start and trying again." So we can't go as far as "the scattering strategy was the best." It's only the image that "in complex terrain, diversity could work."
+
+— Take a break. When I realized the 100-year-old debate had the same shape, it gave me chills. But not mistaking the "chill" for "proof" is today's discipline. —
+
+---
+
+## So, should we rent a GPU?
+
+To sum up so far,
+
+- **Every terrain we tested on CPU was either "gentle" or "a low-dimensional simple choice."** So (3) wasn't needed (= the side of the moth that turned dark, Fisher, and Coyne's group).
+- **(3) really works only on "bumpy, high-dimensional terrain"** (= the side of Wright's shifting balance and Lenski's E. coli).
+- So where is "bumpy, high-dimensional terrain"? → Pretty much only **the terrain of a genuine large-scale AI running on a GPU** (millions of dials = truly high-dimensional) remains.
+
+So "renting a GPU and trying (3) on a real AI" is **not a hunch but a bet that follows a solid reason (only in high dimensions does (3) carry meaning).**
+
+That said, it's **still a bet.** Even on a real AI's terrain, if a strong gradient-using method (backprop) glides smoothly along, (3) might end up unneeded after all (the same risk as failing to beat the die with 4-choice parts). So we don't spend big money right away; the plan is to rent a little cloud and try it once.
+
+---
+
+## Summary — in one line
+
+We wrote a lot, but the conclusion is this one line.
+
+> **(3) (the trick of sorting and raising separately) is useful only on "high-dimensional deceptive terrain." Every "real-thing-imitation" terrain we could measure on CPU failed to meet that condition.**
+
+So it is not "we found out (3) is unneeded." Correctly:
+
+- On deceptive terrain, (3) is the real deal (it won by a landslide)
+- Memory test, generalization power, real-thing-imitation, 4 kinds of parts — none met the condition, and (3) wasn't needed
+- The true real thing (a genuine huge AI's terrain, millions of dials) hasn't been measured yet — that's the main keep, and it's also "a bet worth making"
+- And the skeleton of this conclusion was **already drawn by research on living creatures 100 years ago (Wright and Coyne's group)** — though the living-creature story is **not proof but an analogy (grounding)**
+
+And the thing I most want to convey today.
+
+> **"A result that goes too well is not a victory but an alarm."**
+> Because we placed a mechanism to doubt our own results in advance, we avoided premature celebration and reached a correct foundation.
+
+Being honest is itself a force that moves research forward — that's the kind of six bouts it was.
+
+---
+
+**The technical edition of this article**: Series #34 "Six Hill-Climbing Bouts Reveal 'When Does Evolution's (3) Work' — And 100-Year-Old Evolutionary Biology Had Already Given the Same Answer" (in the same folder)
