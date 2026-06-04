@@ -604,7 +604,7 @@ This falsification was later **reproduced as real data** in the Step C experimen
 
 For reference, ③ (selection) works only when there is a "deceptive corridor" — a slope that misleads but can be crossed, going over a false summit:
 
-<img src="../assets/step_c/deceptive_corridor.svg" alt="Deceptive terrain and evolution (the state where ③ works)" width="640">
+<img src="https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/step_c/deceptive_corridor.svg" alt="Deceptive terrain and evolution (the state where ③ works)" width="640">
 
 Step C's conclusion was, cleanly, **N/A (with this substrate we could not measure the presence or absence of ③)**. Moreover, at the draft stage I **over-wrote** "③ is unnecessary", and the multi-viewpoint adversarial verification caught it as "non-diagnostic due to the ceiling effect, insufficient power (δ=+0.33 is medium but p=0.15 is inconclusive)" and forced a downgrade——the "self-falsification" of §3.2 occurred here too, exactly as is.
 
