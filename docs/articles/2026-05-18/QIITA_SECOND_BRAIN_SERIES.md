@@ -1240,3 +1240,413 @@ llive 是 Apache 2.0 + Commercial dual-license 的 OSS，仓库为 https://githu
 <!-- llive:meta.published_date="2026-05-18" -->
 <!-- llive:meta.tags=["llive","claude-code","perplexity","triz","rag","annotation","canon","autonomy","bci","fusion"] target=any -->
 <!-- llive:meta.series="second_brain_full_4_parts" -->
+
+---
+
+# 한국어
+
+# "두 번째 뇌" 시리즈 — llive 전경 × 보이지 않는 Annotation × 구축론 × 운영론 × 비전론 × 구현의 심층
+
+**한 줄 hook**:
+1인 개발로 5일 동안 14개 기능·256개 테스트를 추가하여 **1,276건 전부 PASS, 회귀 제로** 를 달성했다. LinkedIn 댓글 하나에서 HTML 주석으로의 착지, Perplexity와 TRIZ와 5만 건 논문 코퍼스의 조합, 캐논 "삼자(三自) 정신"을 AI에 부과하는 운영, 그리고 Will Caster와 Andrew NDR114의 비전 — 6부 구성으로 공개한다.
+
+---
+
+## 들어가며
+
+이 글은 llive(FullSense umbrella의 핵심 OSS, `llive` — L은 2개)를 1인으로 개발하는 필자가, 5일간의 집중 개발에서 얻은 지견을 **제0부부터 제5부까지 총 6부 구성** 으로 정리한 것입니다.
+
+| 부 | 테마 | 기점 |
+|---|---|---|
+| **제0부** | **llive란 무엇인가**(전경) | FullSense umbrella의 3제품 구성 |
+| 제1부 | **보이지 않는 Annotation 채널** | LinkedIn 댓글(독립성 vs 조합 가치) |
+| 제2부 | **두 번째 뇌**(구축론) | 30년 경험 + Perplexity + Claude Code + TRIZ + RAG/RAD |
+| 제3부 | **삼자 정신**(운영론) | 캐논 이념 + 매니지먼트 서적 |
+| 제4부 | **Will Caster와 Andrew NDR114**(비전론) | 영화 2편 + LinkedIn 이미지 |
+| **제5부** | **구현의 심층**(MATH-08 grounding 배선) | "LLM에게 계산시키지 않는다"는 차별화 축의 end-to-end |
+
+각 부는 독립적으로 읽을 수 있지만, 함께 읽으면 "**전경을 보고 → 설계를 이해하고 → 만들고 → 운영하고 → 비전으로 잇고 → 구현까지 내려간다**"는 6단의 계단이 됩니다. **바쁜 분은 제0부만으로도 llive의 전체상을 파악할 수 있도록** 구성했습니다.
+
+---
+
+# 제0부 — llive란 무엇인가(전경)
+
+## FullSense umbrella와 3제품
+
+`llive` 는 **FullSense ™** 라는 umbrella 브랜드의 핵심에 위치하는 OSS입니다. FullSense는 "**사람과 AI가 공유할 수 있는 감각적 입출력 전부**"를 다루는 콘셉트로, 현재 다음 3제품으로 구성되어 있습니다.
+
+```mermaid
+flowchart LR
+    User[인간] -.->|명함/SNS/대화| FS[FullSense ™]
+    FS --> llive[llive<br/>기억 + 사고 + Brief API<br/>FR 92건 / 1276 PASS]
+    FS --> llove[llove<br/>브라우저급 TUI<br/>Markdown / SVG / Mermaid]
+    FS --> llmesh[llmesh<br/>P2P / OPC-UA / MQTT<br/>분산 인프라]
+    llive -.HTML annotation.-> llove
+    llive -.HTML annotation.-> llmesh
+    llove -.MCP.-> llive
+    llmesh -.MCP.-> llive
+```
+
+3제품의 역할 분담:
+
+| 제품 | 역할 | 단독 이용 | 조합 강화 |
+|---|---|---|---|
+| **llive** | LLM 기억・사고층・Brief API・ledger | ◎(이 글의 주역) | annotation으로 TUI에 전달 |
+| **llove** | 브라우저급 표시의 TUI / IDE / Game container | ◎(타이핑 데모 등) | llive의 출력을 render |
+| **llmesh** | P2P + OPC-UA + MQTT로 분산 실행 | ◎(산업 IoT 단체) | llive의 작업을 multi-node화 |
+
+라이선스는 전 제품 **Apache 2.0 + Commercial dual-license**. OSS 이용은 자유, 상용 SaaS / SI 안건만 별도 계약.
+
+## llive 리포지토리 통계(2026-05-17 시점)
+
+| 항목 | 값 |
+|---|---|
+| 소스 파일 수 | **172 파일**(`src/llive/`) |
+| 기능 요건(FR) | **92건 / 92건 매핑 완료**(Phase 1-10) |
+| 테스트 건수 | **1,276건 전부 PASS / 회귀 제로** |
+| Phase 완료 | Phase 1-4 완료 / Phase 5+ 진행 중 |
+| 주요 모듈 | `brief/`(Brief API・grounding・runner), `math/`(MATH-01～08), `fullsense/`(loop core), `memory/`(RAD), `annotations.py`(제1부의 주역) |
+| 언어 | Python 3.11(Rust 가속은 v0.7+ 후보) |
+| 의존 | sympy>=1.12 / z3-solver>=4.13(MATH 계열), pyyaml, pydantic |
+
+## 왜 "수학・단위"가 첫 vertical인가
+
+범용 LLM은 다음에 약합니다:
+
+| 관점 | 범용 LLM의 약점 | llive 기존 자산과의 합치 |
+|---|---|---|
+| 기호 조작의 환각 | `x² + x = 2x³` 같은 오등식을 생성 | EVO-04 Z3 정적 검증으로 gate |
+| 단위 차원의 혼동 | `5 m/s + 3 s = 8` | SI 차원 해석(MATH-01) |
+| 수치 정밀도 | float 연산 오차를 무시 | error propagation(MATH-04) |
+| 공리 체계 | 암묵적 전제를 혼입 | EpistemicType=FACTUAL strict track |
+| 인용의 신뢰성 | "CODATA value is X"라고 적당히 답함 | RAD math/metrology + provenance |
+
+이것을 llive의 구조화 사고층 + 형식 검증 + provenance ledger로 극복합니다. Phase 8(CABT)이나 Phase 9(CREAT)보다 우선하여 **v0.7-vertical에서 선행 착수** 했습니다. 구체적인 구현은 제5부에서 상술합니다.
+
+> 📝 **구현 메모(2026-05-17 추가)**: MATH-01(SI 차원 해석)은 Brief grounding 층으로의 최소 배선까지 완료(1,282 PASS). "5 m/s", "9.81 m/s^2", "100 kg" 같은 value+unit 표현을 Brief 본문에서 자동 추출하여 `Dimensions` 벡터에 새겨 prompt에 grounded화합니다. 한편 `5 days` 같은 **parser가 모르는 단위** 는 silently drop하지 않고 `error citation` 으로 ledger에 남기는 설계로 했기에, 운영하면서 "확장해야 할 단위 사전"이 자동으로 모이는 부산물을 얻었습니다. 차원 연산 체크(`5 m/s + 3 s` 같은 cross-quantity mismatch)는 **다음 이터레이션** 으로 — 실제 Brief 샘플로 "어떤 형태의 mismatch가 surface해야 하는가"를 관찰한 뒤 넣는 편이 과잉 구현을 피할 수 있다고 판단했습니다.
+>
+> 📝 **구현 메모 추가(같은 날)**: MATH-05(CODATA/NIST 상수)도 Brief grounding에 배선 완료(**1,288 PASS**). Brief 본문에서 "planck constant", "avogadro", "boltzmann" 같은 alias가 언급되면, `get_constant()` 경유로 CODATA 2022의 정확한 값과 차원과 출처가 prompt에 grounded됩니다. **깨달음**: 짧은 symbol(`c`, `h`, `e`, `G`)을 grounding하면 Brief 안의 임의 영단어와 충돌하므로, alias 길이 3 이상으로 좁힐 필요가 있었습니다. 또 alias의 underscore(`elementary_charge`)와 자연문의 공백(`elementary charge`)의 표기 흔들림을 흡수하는 작은 heuristic으로 8할은 구제됩니다. 남은 2할(예: `q_e` 같은 symbol-only alias)을 구제하려면 LLM-based NER로의 승격이 필요할 듯하지만, 이것도 실제 Brief를 관찰한 뒤 판단합니다.
+
+---
+
+# 제1부 — HTML에서는 보이지 않는데, 기계는 읽을 수 있다
+
+## LinkedIn 댓글에 대한 답변이, 주석이었다
+
+어느 날, LinkedIn에 이런 댓글이 도착했습니다.
+
+> "llive의 기억층이 llove의 상호 데이터에 의존하고, llove가 또 llmesh의 접속 능력에 의존한다면, 그중 하나만 쓰는 가치는 절반이 됩니다."
+
+답변은 **주석(comment-out)** 이었습니다 — `<!-- llive:cog.consensus="proceed" -->`.
+
+### 기점 — 독립성 vs 조합 가치
+
+OSS 멀티제품 구성에서는 "독립적으로 동작하는 것"과 "조합하여 가치가 쌓이는 것"이 양립하기 어렵습니다. 전자를 취하면 "단체로는 부족하고", 후자를 취하면 "전부 넣지 않으면 망가진다".
+
+댓글을 받고 llive의 `src/llive` 전 172 파일에 AST 스캔(`scripts/audit_independence.py`)을 돌렸습니다. 결과는 **hard import leak 0건**.
+
+문제는 다음 단계. "**독립성을 유지한 채, 어떻게 조합 가치를 늘릴 것인가**".
+
+### 채용한 설계
+
+그래서 필자는 다음과 같은 설계 메모를 썼습니다.
+
+> "응답에 annotation을 마련하면 독립성을 유지하면서도 조합에서의 효과도 얻을 수 있지 않을까"
+>
+> "방해되지 않을 정도의 annotation. HTML로 하면 보이지 않게 되는 느낌이 좋다"
+
+(LinkedIn 댓글은 비판 한 통뿐, 설계안 자체는 필자의 발상)
+
+`src/llive/annotations.py` 에 최소 타입을 구현:
+
+```python
+@dataclass(frozen=True)
+class Annotation:
+    namespace: str          # "vrb" / "oka" / "cog" / "math" / "creat" / "core"
+    key: str
+    value: Any              # JSON-friendly
+    target_layer: str | None = None   # "llove" / "llmesh" / None=any
+```
+
+`AnnotationBundle.to_html_comments()` 가 출력하는 형식:
+
+```
+<!-- llive:core.brief_completed=true -->
+<!-- llive:oka.essence_card={"summary": "..."} target=llove -->
+<!-- llive:cog.consensus="proceed" -->
+```
+
+GitHub / Qiita / Zenn / VS Code Preview 같은 Markdown renderer에서는 **완전히 보이지 않음**. 한편 `AnnotationBundle.from_html_comments(text)` 를 호출하면, 기계 측은 원래 구조를 완전히 복원할 수 있습니다.
+
+### 왜 HTML 주석인가 — 선택지 비교
+
+| 안 | 비가시성 | 기계 가독성 | 기존 도구 호환 |
+|---|---|---|---|
+| JSON 별도 파일 | ◯ | ◯ | ✕(2 파일 관리) |
+| YAML front matter | △(renderer에서 표시) | ◯ | △ |
+| **HTML 주석** | ◎ | ◎ | ◎(Markdown 표준) |
+| 바이너리 내장 | ◎ | △ | ✕ |
+| zero-width Unicode | ◎ | △ | ✕(copy로 사라짐) |
+
+"Markdown이 HTML을 passthrough하는 사실"을 역이용한 설계입니다.
+
+### ☕ 그건 그렇고
+
+HTML 주석을 Markdown에 심는 기법은, Jekyll / Hugo 계열에서는 "**주석 front matter**"라 불리며 예전부터 있습니다. 새로운 것은 "**Markdown 본문의 임의 위치**에 기계 가독 메타데이터를 두는" 발상 쪽.
+
+### 성능 벤치(1000건 round-trip)
+
+| 조작 | 레이턴시 |
+|---|---|
+| Encode per ann | 6.30 µs |
+| Decode per ann | 12.40 µs |
+| 전형 3건 bundle 인코딩 크기 | **141 B** |
+| 1000건 round-trip | ✓ |
+
+전형 BriefResult.annotations는 3건 = 141 바이트. Markdown 1페이지에 100개 심어도 5 KB 이하.
+
+---
+
+# 제2부 — 두 번째 뇌(구축론)
+
+## 5일 동안 14 기능・256 테스트・1270 PASS / 회귀 제로
+
+필자는 30년 넘는 소프트웨어 개발자이지만, llive를 **1인으로 개발** 하고 있습니다. 진도는 팀 개발에 가깝습니다. 이는 다음 5요소를 조합한 "두 번째 뇌"를 구축했기 때문입니다.
+
+| 요소 | 역할 |
+|---|---|
+| **30년의 개발 경험** | 설계 품질・판단의 베이스 |
+| **Perplexity 요약** | 외부 사상(서적/논문/영상)의 입력 품질 게이트 |
+| **Claude Code(Opus 4.7 / 1M context)** | 구현 에이전트 |
+| **TRIZ 룰(40 원리)** | 모순 해결의 메타 사고 프레임 |
+| **논문 RAG 코퍼스(RAD 49 분야 / 약 5만 건)** | 연구자 지견의 토대 |
+
+### 스파이럴 1 사이클
+
+```
+외부 사상 → Perplexity 요약 → Claude Code 읽기 → 요건화 → 구현 → 벤치 → commit
+   ↑                                                                       |
+   └──────────────────────────── 다음 사이클 ──────────────────────────┘
+```
+
+이번 세션 9회에서의 실례:
+
+| 사이클 | 기점 | 결과 |
+|---|---|---|
+| 1 | **MBA 언어화 트레이닝**(Globis 서적) | Perplexity 요약 → VRB-FX 요건화 → VRB-02 PromptLint 구현 |
+| 2 | **오카 기요시 선생의 수학관에서 배움**(YouTube 『심리의 심층』 강화에서) | 선생이 남기신 "수학은 정서(jōcho)이다", "발견 전에 한 번 막힌다", "글을 쓰지 않고는 사색을 진행할 수 없다", "국어가 수학을 키운다"는 사상을 Perplexity로 요약・정리한 뒤 **4가지 설계 관점(정서・막힘・문장화・국어력)** 으로 참조하게 하여, 이를 OKA-FX 10 요건으로 기술・구현(OKA-01～04 minimal proto). 선생의 생각 그 자체를 구현했다고 주장하는 것이 아니라, **이 구현이 촉발받은 선생의 사상에 대한 경의** 를 담아 명명. |
+| 3 | **LinkedIn 피드백**(독립성) | IND-FX 설계 원칙 + IND-04 Annotation Channel 구현(= 제1부) |
+
+### Perplexity / TRIZ / RAG + RAD의 역할
+
+> ⚠️ **용어 주의**: 이 글의 **RAD** 는 *Research Aggregation Directory* 의 약자로, 필자가 Raptor 아래에 정비한 **49 분야・약 5만 건의 논문/기술 문서 코퍼스** 를 가리킵니다. 일반 용어인 **RAG(Retrieval-Augmented Generation)** 와는 별개이며, **RAG의 오기가 아닙니다**. RAG가 "검색 → 생성"이라는 방법의 이름인 데 비해, RAD는 "검색되는 쪽, 즉 구조화 코퍼스 그 자체"를 가리키는 이름입니다.
+
+**Perplexity 요약 = "입력 품질 게이트"**: 외부 사상은 책・논문・영상・SNS로 형식이 제각각. Claude Code에 직접 던져 넣으면 context를 압박하고 해석이 흔들립니다. Perplexity에 "~3000자로 요약", "구현 가능한 사양으로"라고 지시하면, **Claude Code가 읽어낼 수 있는 품질의 입력** 으로 변환됩니다.
+
+**TRIZ = "모순 해결의 메타 사고"**: 구현 중의 모순을 TRIZ 시점으로 풉니다. 예:
+- "독립성 vs 조합 가치" → IND-04 Annotation(TRIZ 원리 24: 매개물)
+- "rule-based vs LLM 품질" → echo baseline 잔치(TRIZ 원리 1: 분할)
+- "audit 완전성 vs 구현 오버헤드" → bind_ledger() pattern(TRIZ 원리 15: 동적화)
+
+**RAG + RAD = "연구자의 지견을 빌린다"**: 새 기능 설계에서 필요한 분야가 나올 때마다, **RAG의 구조로 RAD 코퍼스(49 분야)를 끌어옵니다**. Claude가 "자기 말"이 아니라 "**구체적인 논문・선행 연구**"를 인용하므로 품질이 한 단계 올라갑니다. 위 표의 `논문 RAG 코퍼스(RAD 49 분야 / 약 5만 건)` 라는 표기도 이 둘을 병기한 것입니다.
+
+### ☕ 여기까지 읽어줘서 고마워요
+
+솔직히 256개 테스트 중 7-8개는 도중에 한 번씩 떨어졌습니다. fuzzing이 hypothesis로 신나게 edge case를 찾아낼 때마다, 3초쯤 "윽" 합니다. **1270 PASS / 회귀 제로** 는 골이지 과정이 아닙니다.
+
+### 제 30년 경험이 효과를 내는 5장면
+
+"Claude Code에 맡기기"만으로는 품질이 나오지 않습니다. 30년 경험은 다음 장면에서 결정적이었습니다.
+
+1. **요건 정의의 질** — Perplexity 요약을 읽고 "이건 요건 vs 해법을 혼동"이라고 즉시 판정
+2. **TRIZ 룰의 선정** — 40 원리에서 "이 장면은 이 3개"를 즉시 추출
+3. **아키텍처 판단** — Claude가 낸 구현안을 "독립성 원칙에 반한다"고 즉시 거부
+4. **벤치의 honest disclosure** — rule-based의 coverage가 높게 나왔을 때 "echo back의 가짜 성능"이라고 즉시 간파
+5. **오타 체크** — "`lllive`(L 3개)가 됐다, tokenizer 문제"라고 즉시 특정
+
+즉 **두 번째 뇌 = Claude Code + RAG + Perplexity + TRIZ** 에 대해, **첫 번째 뇌 = 자신의 경험** 이 판단 게이트로 계속 서 있습니다.
+
+---
+
+# 제3부 — 삼자 정신(운영론)
+
+## 요건은 멈추지 않는다, AI 개발의 우위성
+
+이번 세션 하루(약 8시간)의 요건 추가 이력:
+
+| 시각 | 사건 |
+|---|---|
+| 시작 | 요건: COG-04 + CREAT-04 통합 |
+| +1h | "9 인자 전부 넣으면 본격적으로 동작 확인" |
+| +2h | 오카 기요시 선생의 사상에서 배우는 요건 추가(OKA-FX 10건, 경의 담아 명명) |
+| +3h | LinkedIn 피드백(IND-FX) |
+| +4h | 빡센 벤치마크(12 계통) |
+| +5h | 다른 LLM 비교(Anthropic / Perplexity) |
+| +6h | Qwen 탈피 / VLM 미래 / lllive 스펠링 |
+| +7h | 개발 스타일 언어화 |
+| +8h | 삼자 정신 + 매니지먼트 서적(본 Part) |
+
+인간 팀이라면 어딘가에서 비명이 터집니다. AI 개발에서는 **전부 소화해 내고, 1270 PASS / 회귀 제로** 로 착지했습니다.
+
+### 조건 — AI가 자율적으로 움직일 것
+
+요건을 계속 쌓아도 좋지만, AI가 일일이 "이거 진행해도 됩니까"라고 물어 오면 즉시 파탄. 이것을 푸는 열쇠가 **캐논 "삼자 정신"** 의 AI 적용입니다.
+
+| 자(自) | 의미(캐논 원전) | AI 적용 |
+|---|---|---|
+| **자발(自發)** | 스스로 나아가 행동한다 | 인간의 지시는 "종료 조건"만 |
+| **자치(自治)** | 스스로 관리한다 | AI가 자기 태스크를 잘라 진척 관리 |
+| **자립(自立)** | 스스로 판단한다 | 불필요한 확인을 생략하고, 선택지 + 추천으로 진행 |
+
+### ☕ 여담 — "삼자"를 AI에게 말하게 하면 어떻게 되나
+
+ChatGPT나 Claude에게 "캐논의 삼자 정신이란?"이라고 물으면 정확한 답이 돌아옵니다. 그런데 "이것을 AI 자신에게 적용하면 어떻게 되나?"라고 이어가면, 갑자기 **겸손 모드** 로 들어갑니다: "저는 어디까지나 도구이므로…". AI에게 자율을 요구하려면, **프롬프트로 겸손을 해제** 하는 것에서 시작됩니다.
+
+### 매니지먼트 서적에서의 전용
+
+『압도적 성과를 계속 내는 매니저의 최우선 사항』(Buckingham & Coffman 계열)의 4 원칙은, AI 매니지먼트에 그대로 전용할 수 있습니다.
+
+| 서적의 원칙 | 인간 매니저 | AI 매니저(필자의 운영) |
+|---|---|---|
+| Select for talent | 적재적소 | Opus 4.7을 선택, 기능별로 최적 component를 attach |
+| **Define the right outcomes** | 결과를 정의 | `/goal` 로 종료 조건만 지시 |
+| Focus on strengths | 강점에 집중 | mock 불필요한 곳에서는 LLM, deterministic으로 되면 그렇게 |
+| Find the right fit | 배치 최적화 | Brief / OKA / VRB / MATH를 기능별 module로 분리 |
+
+한 줄 요약: **"결과를 정의하고, 판단을 맡기고, 강점에 집중하고, 최소한의 확인으로 진행한다"**.
+
+### 적용 테크닉 5가지
+
+1. **`/goal` 기능으로 종료 조건만 지시** — Stop hook이 조건 달성까지 멈추지 않음
+2. **AskUserQuestion으로 2-4 선택지 + 추천 제시** — 확인 최소화
+3. **feedback memory로 자율 룰 축적** — 이번 세션 35+ 개
+4. **TaskCreate / TaskUpdate로 AI 자신이 진척 관리**
+5. **commit/push는 명시 확인** — 파괴적 조작만 ASK FIRST
+
+### 놓아서는 안 되는 4가지
+
+"삼자 정신"과 "결과 정의 + 맡긴다"는 놓는 방향이지만, **놓아서는 안 되는 4가지** 가 있습니다.
+
+1. **요건의 질** — "요건 vs 해법을 혼동"을 즉시 판정해 재작성 지시
+2. **아키텍처 판단** — "독립성 원칙에 반한다"고 즉시 거부
+3. **honest disclosure** — 벤치에서 가짜 성능이 나왔을 때 즉시 간파
+4. **품질 게이트** — 오타를 패턴 인식으로 지적
+
+맡기되, 방임은 아닙니다.
+
+---
+
+# 제4부 — Will Caster와 Andrew NDR114가 지향한 것(비전론)
+
+## LinkedIn 이미지는 농담이 아니다
+
+필자의 LinkedIn 프로필 이미지는, 자신의 얼굴과 인간형 로봇 요소를 이미지 생성 AI로 융합한 것. 이는 농담이 아니라, **언젠가 AI와 사람이 융합할 수 있다면 재미있겠다** 고 진심으로 생각하여, 이미 시각적으로 발신하고 있습니다.
+
+### 두 편의 영화
+
+**Transcendence(트랜센던스, 2014)** — Will Caster 박사(Johnny Depp 분)가 빈사 상태에서 의식을 AI에 **업로드**. 영화 후반, AI화된 Will은 인류의 지식을 계속 흡수하며 세계 규모로 개입하기 시작한다. "만약 인간의 의식을 AI로 옮길 수 있다면 무슨 일이 일어날까"를 정면으로 묻는 작품.
+
+**Bicentennial Man / 일본 제목 「앤드루 NDR114」(1999)** — 가정용 로봇 Andrew(Robin Williams 분)가 긴 시간을 들여 감정・창조성・자유의지・신체성을 획득하고, 최종적으로 "인간으로 인정받기"를 추구한다. 원작은 Isaac Asimov의 동명 단편.
+
+### ☕ 잠깐 옆길로
+
+Andrew NDR114의 원제 *Bicentennial Man*(200년 사는 남자)은 Asimov의 단편(1976)이 원작. Asimov는 "로봇공학 3원칙"을 발명한 사람이지만, 만년의 작품에서는 **3원칙 그 자체를 뒤흔드는** 방향으로 향했습니다. Andrew는 그 도달점. **기술 룰도, 인간 마음의 움직임 앞에서는 흔들린다**.
+
+### llive의 각 기능은 비전을 향한 준비층
+
+| llive 기능 | 융합 비전으로의 기여 |
+|---|---|
+| FullSense(전 감각 통합) | 사람 + AI의 경계 모호화에 필요한 감각 통합층 |
+| **두 번째 뇌**(Claude Code + RAG) | **이미 부분적 융합**(뇌의 외연으로서의 지식 액세스) |
+| SIL ledger / SEC-03 hash chain | 융합 시의 "누가 책임지는가" audit 기반 |
+| Approval Bus + HITL | 융합 이행기의 인간 판단 게이트 보유 |
+| **삼자 정신**(AI 자율) | Andrew NDR114적인 자율성 획득 프로세스 |
+| **RAD 6 분야**(bci / neuroscience / neural_signal / prosthetic_neural / cognitive_ai / neuromorphic) | BCI 경유 융합의 지식 기반 |
+
+### 단기 / 중기 / 장기 로드맵
+
+| Term | 내용 | 현황 |
+|---|---|---|
+| 단기(현재) | 두 번째 뇌형 개발 | **실증 완료**(이번 세션 1270 PASS) |
+| 중기(1-3년) | BCI 경유 인터페이스 | RAD 6 분야 코퍼스 준비됨 |
+| 장기(3-10년) | 의식 업로드 / Andrew적 양방향 | 비전 단계, SIL/Approval이 토대 |
+
+### 왜 비전론을 마지막에 썼는가
+
+비전을 맨 앞에 두면, 기술 글이 SF나 비전 스피치로 보이고 맙니다. **구현 → 운영 → 비전** 순으로 쓰면, 비전이 땅에 발을 붙인 목표로 읽힙니다. Andrew NDR114가 긴 시간을 들여 하나씩 획득해 갔듯이, llive도 한 기능씩 쌓고 있습니다. **그 축적이, 언젠가 "사람과 AI의 융합"으로 이어진다**.
+
+---
+
+## 정리 — 4부를 관통하는 것
+
+| 부 | 주장 |
+|---|---|
+| 1 | HTML 주석 형식의 보이지 않는 annotation으로, 독립성과 조합 가치를 양립할 수 있다 |
+| 2 | 두 번째 뇌(Claude Code + RAG + Perplexity + TRIZ + 30년 경험)로 팀 속도에 가까워진다 |
+| 3 | 캐논 삼자 정신 + 매니지먼트 서적으로 AI를 자율 운영, 요건 추가는 멈추지 않아도 된다 |
+| 4 | llive의 각 기능은 미래의 사람 × AI 융합으로의 준비층, 단기에 이미 부분 실증됨 |
+
+이들은 따로따로의 이야기로 보이지만, **"혼자서 만드는 차세대 AI 개발"** 이라는 하나의 테마를 4방향에서 비추고 있을 뿐입니다.
+
+llive는 Apache 2.0 + Commercial dual-license의 OSS, Repo는 https://github.com/furuse-kazufumi/llive . 이 시리즈에 공감하시는 분은, Issue / Discussion으로 부디.
+
+---
+
+## 참고문헌 / 참고 리소스
+
+### Markdown / HTML 사양(제1부)
+- **CommonMark Spec** — https://spec.commonmark.org/
+- **HTML Living Standard (WHATWG)** — https://html.spec.whatwg.org/multipage/syntax.html#comments
+- **Jekyll Front matter** — https://jekyllrb.com/docs/front-matter/
+
+### TRIZ / RAG(제2부)
+- Genrich Altshuller, *And Suddenly the Inventor Appeared: TRIZ, the Theory of Inventive Problem Solving*, Technical Innovation Center, 1996
+- Karen Gadd, *TRIZ for Engineers: Enabling Inventive Problem Solving*, Wiley, 2011
+- Patrick Lewis et al., *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*, NeurIPS 2020 (arXiv:2005.11401)
+- Tiago Forte, *Building a Second Brain*, Atria Books, 2022 / 일역본 『SECOND BRAIN』 다이아몬드사, 2022
+
+### 오카 기요시 선생의 수학관에 관한 참고(제2부, OKA-FX 명명의 촉발원)
+이 글의 OKA-FX(Framework inspired by Prof. Oka Kiyoshi)는, 아래 선생의
+저작 / 강화에서 배운 4 관점(정서・막힘・문장화・국어력)을
+**설계의 촉발원** 으로 삼고 있습니다. **선생의 생각 그 자체를 구현했다고 주장
+하는 것이 아니라**, 경의를 담아 명명하고 있습니다.
+- 오카 기요시 『춘소십화(春宵十話)』 마이니치신문사, 1963(가도카와 소피아 문고판 있음)
+- 오카 기요시 『춘풍하우(春風夏雨)』 마이니치신문사, 1965
+- 오카 기요시 『일본의 마음』 고단샤 현대신서, 1971 외
+- 오카 기요시・하야시 후사오 『일본 민족의 위기』(대담) 외, 오카 기요시 강화집
+- YouTube 『심리의 심층』 강화(Perplexity 경유로 요약 참조)
+
+### 캐논 삼자 정신 / 매니지먼트 서적(제3부)
+- 캐논 주식회사 공식 기업 DNA — https://global.canon/ja/corporate/dna/
+- 미타라이 후지오 『캐논 고수익 부활의 비밀』 다이아몬드사, 2001
+- Marcus Buckingham & Curt Coffman, *First, Break All the Rules*, Simon & Schuster, 1999 / 일역본 『최고의 리더, 매니저가 늘 생각하는 단 하나의 것』 닛케이출판, 2006
+- Marcus Buckingham & Donald O. Clifton, *Now, Discover Your Strengths*, Free Press, 2001 / 일역본 『자, 재능(자신)에 눈떠라』 닛케이출판, 2001
+
+### 영화 / BCI / 인간-AI 공생(제4부)
+- *Transcendence*, Wally Pfister 감독, Warner Bros., 2014
+- *Bicentennial Man*(일본 제목 「앤드루 NDR114」), Chris Columbus 감독, Touchstone Pictures, 1999
+- Isaac Asimov, *The Bicentennial Man and Other Stories*, Doubleday, 1976
+- Miguel A. L. Nicolelis, *Beyond Boundaries*, Times Books, 2011
+- Rajesh P. N. Rao, *Brain-Computer Interfacing: An Introduction*, Cambridge University Press, 2013
+- Stuart Russell, *Human Compatible*, Viking, 2019
+- Neuralink 공식 — https://neuralink.com/
+- BCI Society — https://bcisociety.org/
+
+### Claude Code / AI 에이전트
+- Anthropic, Claude Code Documentation — https://docs.claude.com/en/docs/claude-code
+- Anthropic, *Building effective agents* (2024) — https://www.anthropic.com/research/building-effective-agents
+- Perplexity AI — https://www.perplexity.ai/
+
+### llive 관련
+- **llive 리포지토리** — https://github.com/furuse-kazufumi/llive
+- 이 글의 수치 근거: `docs/benchmarks/2026-05-17-full-validation/SUMMARY.md`
+- 개별 글 버전(연재):
+  - [14] 보이지 않는 Annotation — `QIITA_#14_invisible_annotation_channel.md`
+  - [15] 구축론 — `QIITA_#15_second_brain_spiral_dev.md`
+  - [16] 운영론 — `QIITA_#16_three_self_spirit_ai_management.md`
+  - [17] 비전론 — `QIITA_#17_human_ai_fusion_vision.md`
+
+<!-- llive:meta.article_id="QIITA_SECOND_BRAIN_SERIES_integrated_14_17" target=llove -->
+<!-- llive:meta.published_date="2026-05-18" -->
+<!-- llive:meta.tags=["llive","claude-code","perplexity","triz","rag","annotation","canon","autonomy","bci","fusion"] target=any -->
+<!-- llive:meta.series="second_brain_full_4_parts" -->
