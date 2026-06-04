@@ -259,7 +259,7 @@ def cmd_dry_run(args: list[str]) -> int:
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body)
     finds = safety_findings(meta, body)
-    item_id = meta.get("id") or meta.get("qiita_item_id")
+    item_id = real_id(meta)
     print(f"action: {'PATCH update id=' + str(item_id) if item_id else 'POST create'} on team '{TEAM}'")
     print(f"title : {p['title']}")
     print(f"tags  : {[t['name'] for t in p['tags']]}")
