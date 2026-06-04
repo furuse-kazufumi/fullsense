@@ -6,6 +6,12 @@ tags: [llm, math, units, dimensional-analysis, hallucination]
 id: 2c4a993937c373c464f6
 ---
 
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
+
+---
+
+# 日本語
+
 # 数学・単位に強い AI を作る最初の一歩 — MATH-01/08 内蔵計算エンジン
 
 ## TL;DR
