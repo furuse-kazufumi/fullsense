@@ -62,8 +62,8 @@
       <line x1="0" y1="0"   x2="0"   y2="110" stroke="#475569" stroke-width="1"/>
       <path d="M 0 100 L 20 96 L 40 92 L 60 86 L 80 78 L 100 70 L 120 60 L 140 52 L 160 44 L 180 36 L 200 30 L 220 26 L 240 22 L 260 20 L 280 18 L 300 17 L 320 16"
             fill="none" stroke="url(#curvegrad24_04)" stroke-width="2.4" stroke-linecap="round"
-            stroke-dasharray="500" stroke-dashoffset="500">
-        <animate attributeName="stroke-dashoffset" from="500" to="0" dur="4s" repeatCount="indefinite"/>
+            stroke-dasharray="500" stroke-dashoffset="0">
+        <animate attributeName="stroke-dashoffset" from="500" to="0" dur="4s" repeatCount="indefinite" fill="freeze"/>
       </path>
       <circle r="4" fill="#ef476f">
         <animateMotion dur="4s" repeatCount="indefinite"
