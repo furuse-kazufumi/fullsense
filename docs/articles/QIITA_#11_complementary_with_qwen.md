@@ -34,13 +34,7 @@ id: f400cf06e86b350b055c
 
 ただし Stage B〜E (中長期) は「独自化路線」。両者は **同時並走** が可能で:
 
-```
-        補完路線 (短期持続)        独自化路線 (中長期)
-        ──────────────         ──────────────
-        Stage A 維持              Stage B → C → D → E
-        Qwen + llive               llive-7b → llive-mamba 等
-        隙間補完                   完全独立
-```
+![補完路線と独自化路線の二層構造図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q11/two_routes.svg)
 
 「Local 環境で隙間補完」を **常設のポジション** とし、その上に「研究路線として
 独自化」を積む二層構造。
