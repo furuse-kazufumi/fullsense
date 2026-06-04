@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1180" viewBox="0 0 900 1180" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="1180" fill="#f8fafc"/>
+  <text x="450" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">Qwen 依存離脱 5 段階ロードマップ</text>
+
+  <!-- Stage A -->
+  <rect x="120" y="70" width="660" height="150" rx="14" fill="# effff" stroke="#0ea5e9" stroke-width="2"/>
+  <rect x="120" y="70" width="660" height="150" rx="14" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="150" y="105" font-size="19" font-weight="700" fill="#0c4a6e">Stage A（短期, 〜3 ヶ月）</text>
+  <text x="150" y="138" font-size="16" fill="#0f172a">• LLM コアは凍結</text>
+  <text x="150" y="166" font-size="16" fill="#0f172a">• 周辺差別化を最大化</text>
+  <text x="150" y="194" font-size="16" fill="#0f172a">• CABT forward hook / MATH-08 / CREAT-01 で「LLM を使わない層」を厚く</text>
+  <line x1="450" y1="220" x2="450" y2="248" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage B -->
+  <rect x="120" y="255" width="660" height="150" rx="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="150" y="290" font-size="19" font-weight="700" fill="#1e3a8a">Stage B（中期 1, 3〜6 ヶ月）</text>
+  <text x="150" y="323" font-size="16" fill="#0f172a">• LoRA で llive 用 specialised adapter</text>
+  <text x="150" y="351" font-size="16" fill="#0f172a">• RTX 3090 級で訓練可</text>
+  <text x="150" y="379" font-size="16" fill="#0f172a">• Attention に memory bias を注入（CABT-07 本実装の前段）</text>
+  <line x1="450" y1="405" x2="450" y2="433" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage C -->
+  <rect x="120" y="440" width="660" height="150" rx="14" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="150" y="475" font-size="19" font-weight="700" fill="#3730a3">Stage C（中期 2, 6〜12 ヶ月）</text>
+  <text x="150" y="508" font-size="16" fill="#0f172a">• Distillation: qwen2.5:14b → llive-7b</text>
+  <text x="150" y="536" font-size="16" fill="#0f172a">• 学習データ: RAD 49 分野 + ledger 成功例 + TRIZ 出力</text>
+  <text x="150" y="564" font-size="16" fill="#0f172a">• Multi-track sub-network（EpistemicType 別）</text>
+  <line x1="450" y1="590" x2="450" y2="618" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage D -->
+  <rect x="120" y="625" width="660" height="150" rx="14" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="150" y="660" font-size="19" font-weight="700" fill="#5b21b6">Stage D（長期 1, 1〜2 年）</text>
+  <text x="150" y="693" font-size="16" fill="#0f172a">• Transformer block を memory-coupled に置換</text>
+  <text x="150" y="721" font-size="16" fill="#0f172a">• Cognitive Block Replacement（CABT-01〜07 の本実装）</text>
+  <text x="150" y="749" font-size="16" fill="#0f172a">• Approval-native decoding（constitutional AI の architectural 版）</text>
+  <line x1="450" y1="775" x2="450" y2="803" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage E -->
+  <rect x="120" y="810" width="660" height="150" rx="14" fill="#fae8ff" stroke="#c026d3" stroke-width="2"/>
+  <text x="150" y="845" font-size="19" font-weight="700" fill="#86198f">Stage E（長期 2, 2〜3 年）</text>
+  <text x="150" y="878" font-size="16" fill="#0f172a">• Transformer 以外の LLM コア（Mamba / RWKV / Hyena / RetNet）</text>
+  <text x="150" y="906" font-size="16" fill="#0f172a">• Surprise-native pretraining（Bayesian Surprise を loss に組込）</text>
+  <text x="150" y="934" font-size="16" fill="#0f172a">• TRIZ-guided architecture search（AutoML-Zero + TRIZ ハイブリッド）</text>
+
+  <text x="450" y="1010" text-anchor="middle" font-size="16" fill="#475569">周辺強化（凍結）→ LoRA → 蒸留 → block 置換 → 非 Transformer コア</text>
+  <text x="450" y="1042" text-anchor="middle" font-size="15" fill="#64748b">「Qwen の上にラップ」から「Qwen を内蔵から外す」へ</text>
+</svg>

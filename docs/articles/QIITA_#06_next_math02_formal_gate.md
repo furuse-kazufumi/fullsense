@@ -350,21 +350,7 @@ MATH-02 实现后将解除 draft，并追加：
 
 ## 설계
 
-```
-LLM 출력 텍스트
-    │
-    ▼
-[식 추출기] (MATH-03 multi-syntax parser, LaTeX/MathML/Sympy)
-    │
-    ▼
-[Sympy AST]
-    │
-    ├─→ simplify(lhs - rhs) == 0 ? → ✅ 통과
-    │   ❌ → 실패 flag
-    │
-    └─→ Z3 로 satisfiability check (∀ x. lhs(x) == rhs(x) ?)
-        ❌ → 반례를 ledger 에 기록
-```
+![MATH-02 형식 검증 게이트의 흐름: 식 추출기로 LLM 출력 텍스트를 AST 로 만들고, Sympy simplify 와 Z3 satisfiability check 로 등식의 진위를 검산한다](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q06/formal_gate_flow_ko.svg)
 
 ```python
 # 設計案 (実装予定)
