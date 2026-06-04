@@ -650,7 +650,7 @@ This is the conclusion of falsification 1, and a more precise way of stating the
 Let's see this consequence of "when the lens fogs, selection collapses too" in measurements. Below is the
 transition of fitness and diversity for the baseline (no novelty, naive selection pressure). Toward the end, you can see diversity collapsing.
 
-![baseline: diversity collapse toward the end](../assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status.svg)
+![baseline: diversity collapse toward the end](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/lldarwin_2026_05_26/lldarwin_stage1_baseline_status_en.svg)
 
 > 🍵 **Break point (90 seconds)**: "Polish the lens before selecting"——it was a plain story that order matters.
 > Plain, but skip this and half a year melts away (I melted mine). From the next section is the heart of this article,
