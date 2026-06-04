@@ -65,7 +65,7 @@
     </g>
   </g>
 
-  <!-- Right: 矛盾マトリクス (improving × worsening) -->
+  <!-- Right: contradiction matrix (improving × worsening) -->
   <g transform="translate(560, 70)">
     <text x="180" y="-12" font-size="11" fill="#fb923c" text-anchor="middle" font-weight="600">contradiction matrix → Z3 verifier</text>
     <!-- improving axis label -->
