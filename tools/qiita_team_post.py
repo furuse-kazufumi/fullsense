@@ -286,10 +286,12 @@ def _writeback_id(path: str, item_id: str) -> None:
     if end == -1:
         return
     head, fm, tail = text[:3], text[3:end], text[end:]
-    if re.search(r"^\s*id:\s*(?!null|None|\s*$).+$", fm, re.M):
-        return  # a real id is already present
-    if re.search(r"^\s*id:\s*.*$", fm, re.M):
-        fm = re.sub(r"^(\s*id:\s*).*$", lambda m: m.group(1) + item_id, fm, count=1, flags=re.M)
+    m = re.search(r"^(\s*id:\s*)(.*)$", fm, re.M)
+    if m:
+        cur = m.group(2).strip().strip("'\"")
+        if cur and cur.lower() not in ("null", "none"):
+            return  # a real id is already present
+        fm = fm[:m.start()] + m.group(1) + item_id + fm[m.end():]  # replace id: null
     else:
         fm = fm + f"\nid: {item_id}"
     with open(path, "w", encoding="utf-8") as f:
