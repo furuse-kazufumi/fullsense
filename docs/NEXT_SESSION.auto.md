@@ -10,33 +10,32 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-05 05:24:29
+- **生成時刻**: 2026-06-05 05:45:22
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+3b4e7fe tools(qiita): 公開 qiita.com → Team KB 誘導ブロック挿入ツール + 全 39 本適用完了
+041a0a4 auto: qiita_public_team_link.py 編集前 (2026-06-05 05:41)
+80a44ff auto: qiita_public_team_link.py 編集前 (2026-06-05 05:35)
+c54f947 auto: qiita_public_team_link.py 編集前 (2026-06-05 05:35)
+19e4d95 auto: qiita_public_team_link.py 編集前 (2026-06-05 05:33)
 34e2e96 qiita: かみくだき版 6 本 (#26k/#27k/#29k/#35-00k/01k/02k, 各 4 言語・新規 team 投稿済) + 完全版 6 本に言語別相互リンク + INDEX に かみくだき リンク追加 (#35-00 の二重出現ずれは修復済)
 edad7c2 auto: QIITA_#35_02_honest_disclosure_solver_swap_kamikudaki.md 編集前 (2026-06-05 01:05)
 6e97614 auto: QIITA_#35_02_honest_disclosure_solver_swap_kamikudaki.md 編集前 (2026-06-05 01:05)
 85bc134 auto: QIITA_#35_02_honest_disclosure_solver_swap_kamikudaki.md 編集前 (2026-06-05 01:05)
 9c0708a auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-05 01:05)
-b0b8455 auto: QIITA_#35_01_verifier_frontier_sdp_kamikudaki.md 編集前 (2026-06-05 01:05)
-8297dcb auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-05 01:04)
-3932459 auto: QIITA_#35_01_verifier_frontier_sdp_kamikudaki.md 編集前 (2026-06-05 01:04)
-0c8717d auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-05 01:04)
-69383b7 auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-05 01:04)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+(clean)
 ```
 
 
@@ -76,8 +75,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `01:29` `docs/SESSION_SUMMARY.md`
-- `01:29` `docs/NEXT_SESSION.auto.md`
+- `05:41` `tools/qiita_public_team_link.py`
+- `05:24` `docs/SESSION_SUMMARY.md`
+- `05:24` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
