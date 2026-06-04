@@ -600,11 +600,7 @@ I am a software developer with over 30 years of experience, yet I develop llive 
 
 ### One spiral cycle
 
-```
-External thought → Perplexity summary → Claude Code ingest → requirements → implementation → benchmark → commit
-   ↑                                                                                              |
-   └──────────────────────────── Next cycle ─────────────────────────────────────────────┘
-```
+![One spiral cycle: External thought → Perplexity summary → Claude Code ingest → requirements → implementation → benchmark → commit, looping back to the next cycle](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/second_brain/spiral_cycle_en.svg)
 
 Concrete examples over nine rounds of this session:
 
