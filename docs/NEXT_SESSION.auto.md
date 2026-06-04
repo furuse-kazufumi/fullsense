@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-05 07:43:08
+- **生成時刻**: 2026-06-05 07:59:02
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,23 +20,22 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
-86de19e feat(manga): 4コマを mangamd L1 漫画文法へ移行 — 話者を立てる・部品むき出し解消
-0eec3ba auto: manga_story_build.py 編集前 (2026-06-05 07:35)
-358d2b9 auto: manga_story_build.py 編集前 (2026-06-05 07:35)
-60d683c auto: manga_story_build.py 編集前 (2026-06-05 07:33)
-3f0fa09 auto: manga_story_build.py 編集前 (2026-06-05 07:33)
-e3f3799 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
-5131464 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
-c0b8098 auto: manga_story_build.py 編集前 (2026-06-05 07:32)
-d9116e0 docs(linkedin): FullSense KB 誘導投稿文 4 言語 (手動投稿用)
-0274d13 docs(linkedin): 獅子舞マスコット誕生記 LinkedIn 投稿文 4 言語 (jp/en/zh/ko, 手動投稿用ドラフト)
+9002ea3 fix(manga): 首の接続 + P3 クロス解消 + タンジェント lint (ユーザー指摘 2 件)
+90dfc94 auto: manga_story_build.py 編集前 (2026-06-05 07:50)
+f8e2701 auto: manga_story_build.py 編集前 (2026-06-05 07:50)
+62086a5 auto: manga_story_build.py 編集前 (2026-06-05 07:50)
+f81354b auto: manga_story_build.py 編集前 (2026-06-05 07:50)
+69e7919 auto: manga_story_build.py 編集前 (2026-06-05 07:50)
+6d80593 auto: manga_story_build.py 編集前 (2026-06-05 07:49)
+a4205ea feat(manga): 表情システム — 起承転結の感情曲線を演技に乗せる
+ccd40df auto: manga_story_build.py 編集前 (2026-06-05 07:47)
+71bccce auto: manga_story_build.py 編集前 (2026-06-05 07:47)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+(clean)
 ```
 
 
@@ -76,26 +75,26 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `07:42` `docs/SESSION_SUMMARY.md`
-- `07:42` `docs/NEXT_SESSION.auto.md`
-- `07:36` `docs/articles/assets/manga/src/q34k_story.json`
-- `07:36` `docs/articles/assets/manga/src/q33k_story.json`
-- `07:36` `docs/articles/assets/manga/src/q29_story.json`
-- `07:36` `docs/articles/assets/manga/src/q27_story.json`
-- `07:36` `docs/articles/assets/manga/q34k_4koma_zh.svg`
-- `07:36` `docs/articles/assets/manga/q34k_4koma_ko.svg`
-- `07:36` `docs/articles/assets/manga/q34k_4koma_en.svg`
-- `07:36` `docs/articles/assets/manga/q34k_4koma.svg`
-- `07:36` `docs/articles/assets/manga/q33k_4koma_zh.svg`
-- `07:36` `docs/articles/assets/manga/q33k_4koma_ko.svg`
-- `07:36` `docs/articles/assets/manga/q33k_4koma_en.svg`
-- `07:36` `docs/articles/assets/manga/q33k_4koma.svg`
-- `07:36` `docs/articles/assets/manga/q29_4koma_zh.svg`
-- `07:36` `docs/articles/assets/manga/q29_4koma_ko.svg`
-- `07:36` `docs/articles/assets/manga/q29_4koma_en.svg`
-- `07:36` `docs/articles/assets/manga/q29_4koma.svg`
-- `07:36` `docs/articles/assets/manga/q27_4koma_zh.svg`
-- `07:36` `docs/articles/assets/manga/q27_4koma_ko.svg`
+- `07:58` `docs/articles/assets/manga/src/q34k_story.json`
+- `07:58` `docs/articles/assets/manga/src/q33k_story.json`
+- `07:58` `docs/articles/assets/manga/src/q29_story.json`
+- `07:58` `docs/articles/assets/manga/src/q27_story.json`
+- `07:58` `docs/articles/assets/manga/src/general_story.json`
+- `07:58` `docs/articles/assets/manga/q34k_4koma_zh.svg`
+- `07:58` `docs/articles/assets/manga/q34k_4koma_ko.svg`
+- `07:58` `docs/articles/assets/manga/q34k_4koma_en.svg`
+- `07:58` `docs/articles/assets/manga/q34k_4koma.svg`
+- `07:58` `docs/articles/assets/manga/q33k_4koma_zh.svg`
+- `07:58` `docs/articles/assets/manga/q33k_4koma_ko.svg`
+- `07:58` `docs/articles/assets/manga/q33k_4koma_en.svg`
+- `07:58` `docs/articles/assets/manga/q33k_4koma.svg`
+- `07:58` `docs/articles/assets/manga/q29_4koma_zh.svg`
+- `07:58` `docs/articles/assets/manga/q29_4koma_ko.svg`
+- `07:58` `docs/articles/assets/manga/q29_4koma_en.svg`
+- `07:58` `docs/articles/assets/manga/q29_4koma.svg`
+- `07:58` `docs/articles/assets/manga/q27_4koma_zh.svg`
+- `07:58` `docs/articles/assets/manga/q27_4koma_ko.svg`
+- `07:58` `docs/articles/assets/manga/q27_4koma_en.svg`
 
 
 ## Cross-references
