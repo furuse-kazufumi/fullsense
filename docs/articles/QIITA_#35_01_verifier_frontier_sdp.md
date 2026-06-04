@@ -654,7 +654,7 @@ inf-norm 门下，rotation 适应度在约 0.41 见顶。如 §3 所述，诱导
 | inf-norm (행 절댓값 합 최대 < 1) | 88 | 88 |
 | + 2-norm (최대 특이값 < 1) | +49 | 137 |
 | **+ quadratic SDP (공통 Lyapunov P)** | **+149** | **286 (= 300의 95.3%)** |
-| + degree-4 SOS (들어올린 Veronese) | +0 (deg4는 deg6에 내포, deg4∖deg6 = 0) | 286 |
+| + degree-4 SOS (들어올린 Veronese) | +3 (deg4∖deg6 = 0＝deg4 고유 admit 없음; deg4 cone이 SDP 대비 +3, deg6도 동일 도달) | 289 |
 | + degree-6 SOS | +1 | 290 |
 | 잔여 (deg≤6에서 미증명) | 10 | — |
 
