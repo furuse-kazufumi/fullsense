@@ -249,21 +249,7 @@ and then release it.
 
 ## 设计
 
-```
-LLM 输出文本
-    │
-    ▼
-[式抽取器] (MATH-03 multi-syntax parser, LaTeX/MathML/Sympy)
-    │
-    ▼
-[Sympy AST]
-    │
-    ├─→ simplify(lhs - rhs) == 0 ? → ✅ 通过
-    │   ❌ → 失败标记
-    │
-    └─→ 用 Z3 做可满足性检查 (∀ x. lhs(x) == rhs(x) ?)
-        ❌ → 将反例记录到 ledger
-```
+![MATH-02 形式化验证门的流程: 用式抽取器将 LLM 输出文本转为 AST, 再用 Sympy simplify 与 Z3 可满足性检查核算等式真伪](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q06/formal_gate_flow_zh.svg)
 
 ```python
 # 設計案 (実装予定)
