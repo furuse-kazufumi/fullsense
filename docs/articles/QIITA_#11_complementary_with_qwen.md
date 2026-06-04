@@ -571,13 +571,7 @@ llive 的战略是**双层结构**：
 
 다만 Stage B~E (중장기) 는 "독자화 노선". 양자는 **동시 병행** 이 가능하며:
 
-```
-        補完路線 (短期持続)        独自化路線 (中長期)
-        ──────────────         ──────────────
-        Stage A 維持              Stage B → C → D → E
-        Qwen + llive               llive-7b → llive-mamba 等
-        隙間補完                   完全独立
-```
+![보완 노선과 독자화 노선의 이층 구조도](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q11/two_routes_ko.svg)
 
 「Local 환경에서 틈새 보완」을 **상설 포지션** 으로 삼고, 그 위에 "연구 노선으로서의 독자화"를 쌓는 이층 구조.
 
