@@ -1083,7 +1083,7 @@ The footing to step forward exists only on top of this boundary.
 
 这个反证,后来在 llcore 的 Step C 实验(纯 CPU)中**作为实数据被复现**。让进化(MAP-Elites)和素朴搜索去解 2 种标准记忆任务,结果如下:
 
-<img src="../assets/step_c/step_c_two_regimes.svg" alt="Step C 的两个结果(地板与天花板)" width="640">
+<img src="https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/step_c/step_c_two_regimes.svg" alt="Step C 的两个结果(地板与天花板)" width="640">
 
 - **delayed_parity(XOR)= 地板**: 全部 method 都是 R²≈0(基质原理上无法求解)。谁都爬不上去=不出现差异。
 - **flip_flop(只是记住)= 天花板**: 全部 method 都是 R²≈0.95(太简单,全员都到达)。**这正是"饱和的镜片",这里选择压力同样无能为力**。
