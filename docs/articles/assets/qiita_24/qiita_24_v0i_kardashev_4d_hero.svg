@@ -79,8 +79,8 @@
            t=12  Type III : E=4, K=4, C=3, Eth=4   →  ( 64,0)  (0, 64) (-48,0)  (0,-64)
          Loop closes back to t=0 keyframe. -->
     <polygon stroke-width="1.8" stroke-linejoin="round"
-             fill="url(#radarFillA)" stroke="#5dd1ff"
-             points="16,0 0,16 0,0 0,-16">
+             fill="url(#radarFillD)" stroke="#ef476f"
+             points="64,0 0,64 -48,0 0,-64">
       <animate attributeName="points"
                values="16,0 0,16 0,0 0,-16;
                        32,0 0,32 -16,0 0,-32;
