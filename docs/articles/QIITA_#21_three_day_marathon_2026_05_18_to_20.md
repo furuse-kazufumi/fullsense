@@ -1689,16 +1689,7 @@ NEXT_SESSION.md는 손으로 갱신하니까 **반드시 drift한다**. 아침 1
 
 `docs/research/`에 6건 투입:
 
-```text
-docs/research/
-├── index.md                       # Reference hub
-├── lleval_sota.md                 # 10 framework 비교 + 4 gap
-├── llgrow_prior_art.md            # Growth Automation 선행 예
-├── cognitive_mesh_vs_sota.md      # COG-MESH의 관련 연구
-├── llcraft_sota.md                # llcraft 후보의 SOTA
-├── llrisk_prior_art.md            # llrisk (Tonic Risk) 선행 예
-└── llgov_sota.md                  # llgov (governance) SOTA
-```
+![docs/research/ 디렉터리 구성도 — 자율 agent가 SOTA / prior-art를 조회할 수 있는 연구 허브](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q21/research_hub_tree_ko.svg)
 
 이것은 「**자율 agent가 연구 분야를 감안해 판단할 수 있는 기반**」.
 RAD (Research Aggregation Directory)의 파생 개념으로, 평소의 Claude

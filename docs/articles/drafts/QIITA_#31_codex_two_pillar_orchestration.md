@@ -57,18 +57,7 @@ ignorePublish: true
 
 ## 2. 役割分担 — オーケストレータと配下 worker
 
-```
-人間（私）= レビュアー兼方向性決定者
-   │ 方向性・GO/NO-GO
-   ▼
-Claude Code（主 = オーケストレータ）
-   │ 計画・実装・委任・検証・一括コミット
-   ├─▶ Claude サブエージェント（並列, run_in_background）
-   └─▶ Codex CLI（配下 worker）
-          ・独立サブタスクの実行
-          ・クロスレビュー / セカンドオピニオン
-          ・調べ物 / 雛形生成
-```
+![人間→Claude（主＝オーケストレータ）→Claude サブエージェント並列 / Codex CLI 配下 worker の階層図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q31/role_hierarchy.svg)
 
 - **Claude（主）の責務**: タスク分解・依存性判定・独立タスクの並列起動・進捗監視・**成果の検証**・一括コミット。
 - **Codex（配下）の責務**: 委任された範囲の実行。非対話委任 = `codex exec -s read-only "<prompt>"`。
