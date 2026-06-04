@@ -338,6 +338,8 @@ def build(slug: str, lang: str, spec: dict) -> dict:
     els.append(tb({"polygon": rect(376, 2272, 384, 2276)},
                   "mangamd L1 / FullSense", [380, 2284], 13, f,
                   fill="#f5efe2", border=False, text_color="#8a8474"))
+    for w in _lint_check(slug, lang):
+        print(w)
     return {"title": spec.get("title", f"{slug} 4-koma"),
             "canvas": {"w": 760, "h": 2300, "bg": "#f5efe2"},
             "elements": els}
