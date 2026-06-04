@@ -443,11 +443,7 @@ away all of "how it differs from the other geniuses". As a result, resembling
 any of them even slightly yields a high score → **it immediately sticks to the
 ceiling**.
 
-```
-What it should be: pressure profile = [typicality, diversity, specialization, ...] ← multi-axis vector
-Actual impl:       fitness = max(similarity of individual to each archetype)        ← single scalar
-                              ↑ collapsed by argmax = multi-objectiveness vanishes
-```
+![argmax-collapse diagram: a pressure profile that should be a multi-axis vector of typicality, diversity, specialization is crushed by max() into a single scalar, so multi-objectiveness vanishes (before/after)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_misc/q25/argmax_collapse_en.svg)
 
 In other words, **"what should have been measured with multiple yardsticks was
 scored only by the maximum of a single yardstick"**. The glasses (lleval) had
