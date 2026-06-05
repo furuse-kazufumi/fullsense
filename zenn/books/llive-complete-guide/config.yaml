@@ -1,0 +1,15 @@
+title: "llive 完全解説 — 認知 OS を構成する技術を名称ごとに解く 9 章"
+summary: "FullSense の認知 OS llive を 9 章 (index + 8 大分類) で解説する Book。 認知 / 最適化 / 実行 / 横断の 4 層を、具体的な class / function 名まで降りて解く。"
+topics: ["llive", "fullsense", "進化計算", "llm", "解説"]
+published: false
+price: 0
+chapters:
+  - 00-llive-tech-series-index
+  - 01-memory-layer
+  - 02-thought-factors-cog-mesh
+  - 03-structural-evolution-triz
+  - 04-convergent-optimization-b-series
+  - 05-evolutionary-v0bcde
+  - 06-llm-backend-non-transformer
+  - 07-observability-governance
+  - 08-lleval-eval-framework

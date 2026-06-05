@@ -407,7 +407,9 @@ def _yaml_escape(s: str) -> str:
 # ──────────────────────────────────────────────────────────────────────────
 
 _LOCAL_PATH_PATTERNS = [
-    re.compile(r"[A-Za-z]:[\\/]"),          # C:\ / D:/
+    # C:\ / D:/ など。URL scheme (https:) と誤検出しないよう、ドライブ文字の
+    # 直前が英数字でないこと (= 単独のドライブ文字) を要求する。
+    re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]"),
     re.compile(r"/Users/[^/\s]+/"),         # macOS home
     re.compile(r"/home/[^/\s]+/"),          # linux home
     re.compile(r"\\\\[^\\]+\\"),            # UNC \\host\
