@@ -10,16 +10,19 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-05 23:49:31
+- **生成時刻**: 2026-06-06 00:43:26
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+f7e7e78 feat(zenn): Zenn.dev 投稿基盤 Phase 1 — Qiita→zenn-cli 形式変換 (loop task)
+0ac529d auto: zenn_convert.py 編集前 (2026-06-05 23:53)
+3b75b3e auto: zenn_convert.py 編集前 (2026-06-05 23:53)
 259e5c2 feat(manga): q25 を story schema へ移植 (旧 builder 廃止可) + 6 記事に ?v=2 cache-bust
 211aef7 auto: manga_story_build.py 編集前 (2026-06-05 08:04)
 75e6c26 auto: manga_story_build.py 編集前 (2026-06-05 08:04)
@@ -27,9 +30,6 @@ e90c549 auto: manga_story_build.py 編集前 (2026-06-05 08:03)
 2bcb43b auto: manga_story_build.py 編集前 (2026-06-05 08:02)
 9002ea3 fix(manga): 首の接続 + P3 クロス解消 + タンジェント lint (ユーザー指摘 2 件)
 90dfc94 auto: manga_story_build.py 編集前 (2026-06-05 07:50)
-f8e2701 auto: manga_story_build.py 編集前 (2026-06-05 07:50)
-62086a5 auto: manga_story_build.py 編集前 (2026-06-05 07:50)
-f81354b auto: manga_story_build.py 編集前 (2026-06-05 07:50)
 ```
 
 ### git status (porcelain)
@@ -76,8 +76,26 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `23:48` `docs/SESSION_SUMMARY.md`
-- `23:48` `docs/NEXT_SESSION.auto.md`
+- `00:18` `docs/SESSION_SUMMARY.md`
+- `00:18` `docs/NEXT_SESSION.auto.md`
+- `00:08` `.pytest_cache/v/cache/nodeids`
+- `23:54` `zenn/README.md`
+- `23:54` `zenn/books/llive-complete-guide/config.yaml`
+- `23:54` `zenn/books/llive-complete-guide/08-lleval-eval-framework.md`
+- `23:54` `zenn/books/llive-complete-guide/07-observability-governance.md`
+- `23:54` `zenn/books/llive-complete-guide/06-llm-backend-non-transformer.md`
+- `23:54` `zenn/books/llive-complete-guide/05-evolutionary-v0bcde.md`
+- `23:54` `zenn/books/llive-complete-guide/04-convergent-optimization-b-series.md`
+- `23:54` `zenn/books/llive-complete-guide/03-structural-evolution-triz.md`
+- `23:54` `zenn/books/llive-complete-guide/02-thought-factors-cog-mesh.md`
+- `23:54` `zenn/books/llive-complete-guide/01-memory-layer.md`
+- `23:54` `zenn/books/llive-complete-guide/00-llive-tech-series-index.md`
+- `23:54` `zenn/articles/fs-25_monoculture_evolution_lldarwin.md`
+- `23:54` `zenn/articles/fs-23_15h_marathon_mid_report.md`
+- `23:54` `zenn/articles/fs-22_transformer_escape_status.md`
+- `23:53` `scripts/publish/zenn_convert.py`
+- `23:53` `.pytest_cache/v/cache/lastfailed`
+- `23:52` `.pytest_cache/README.md`
 
 
 ## Cross-references
