@@ -120,6 +120,36 @@ kernel-favoring task で substrate は非 inert 化(PASS)だが弱い(実質 3 k
 
 **(D) ③ arc 結晶化** (2026-06-02): arc 全体を研究資産化。**論文 draft** `llcore docs/papers/third_axis_selection_arc_2026-06-02.md`(英語7103w「When Is Darwinian Selection Load-Bearing? A High-Dimensionality Condition for QD over Neural Dynamics」, honest negative + 高次元条件, TMLR/workshop/arXiv 候補)+ **検証済み生物学接地** `biological_grounding_third_axis.md`(Wright shifting balance↔③/Coyne 批判↔negative の鏡/暗化モフ↔低次元/Lenski Cit+↔高次元、7-agent web 検証 + caveat)+ **公開記事** QIITA_#34(arc 6段俯瞰+生物学, 技術版+かみくだき版, push 済)。残(投稿前)=repro code 公開/図/bib。詳細=memory `project_llcore_init_2026_05_29`(③ arc 結晶化節)。
 
+### 2026-06-06 進捗 — L3 §3c 確定 + 検証器コスト削減スレッド + 論文 第一ドラフト
+
+**(A) L3 §3c 最終化 + 3-lens 敵対検証** (llcore `research/verified_lm_evolution/VERDICT.md`):
+null 対照 10 paired seed 確定 → 検証 Workflow (数値/過大主張/事前登録整合, 全 lens pass=false) の指摘を
+一次データ再検算で反映。**「~84% で残存」は fitness スケール限定→CE(nats)では ~107%**(gate-gap は shuffle で
+縮まない)を明記、**gate-gap は essentially structure-independent** と訂正、structure-dependent「gate-gap
+residual」主張を撤回(real−null 残差非有意)。唯一の構造依存 signal=unigram-crossing に一本化。inf collapse
+「8 sig figs/= unigram」→「~3 sig figs/0.0003 nats だけ上」訂正。**結論=L3 payoff は evolvability であって
+language learning ではない**。
+
+**(B) 検証器コスト削減スレッド = decisive 完了** (llcore `research/verifier_cost_reduction/SKETCH.md`,
+memory `project_llcore_verifier_cost_reduction`): 律速=cert の **2^n 頂点列挙(状態次元 n)**。PoC を 3 段:
+PoC-1 naive 境界 B1=σ(M)+σ(R) は緩すぎ(29.5%)→ **PoC-2 絶対値支配 B2=σ(\|M\|+R) が exact 2^n の 77.6% を
+SVD 1 回・n=16 で 12,520x・偽陽性 0 で回収**, inf∪B2=87.2% で inf 単独超え → **PoC-2.5 で B2 取り逃し tail に
+LM payoff 無し(最良遺伝子は B2 側, tail 優位は 0.001-0.003 nats=ノイズ)→ SDP(robust-LMI/R-LLM-1)は LM 目標で
+NO-GO**。**結論: n は inf∪B2 でスケール、SDP は作らない**。L1 低ランク/L3 MOR/L4 コストを選択圧に(生物の還元進化,
+良い安さ vs inf 罠/退化, パレート)を SKETCH に設計記録(user-gate)。
+
+**(C) 論文 第一ドラフト** (llcore `research/paper/PAPER_DRAFT.md`, 1117 行): arc(SDP gate rigor)+R-LLM
+(L0-L2)+L3(honest scope)+BG10(gradient escapes)+dimension thread+cost reduction を統合。9-agent Workflow
+(証拠接地 §2-§8 並列起草→統合→over-claim 批評)で生成、批評 **overturns_core:false**(minor 2 件=abstract の
+カバレッジ/tail 取り違え + inf∪B2 を single-SVD 誤称、反映済)。CPU/宣言的 SVG 図 3 枚 (`research/paper_assets/`,
+matplotlib 不要) を配線。§6 に BG10 honest caveat(EVO 罠は wrapper で CE masked, admit-rate に出る)追加。来歴=CRITIQUE.md。
+
+**(D) 公開記事** QIITA #36(本体+かみくだき, `fullsense docs/articles/QIITA_#36_*`): 「2^n の壁を破る vertex-free
+健全証明 + コストを選択圧に」。図 3 枚 assets 同梱。EN/ZH/KO 完全版は翻訳パスで追加。private/ignorePublish ドラフト。
+
+詳細・honest 内訳の単一の真実 = memory `project_llcore_verifier_cost_reduction` + `project_llcore_real_llm_pivot_2026_06_04`
++ `project_llcore_init_2026_05_29`。push 未(llcore は GitHub repo 未作成)。
+
 ## いつ更新するか
 
 - `spinoff_ideas_2026_05.md` の Planned / Pattern が新しい段階に進む直前.
