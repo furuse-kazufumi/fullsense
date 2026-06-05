@@ -369,7 +369,8 @@ def origin_note(source_filename: str) -> str:
     Zenn は canonical_url frontmatter を持たないため、cross-post の出自を
     本文冒頭にリンク注記で示す (README にもこの代替策を明記する)。
     """
-    url = f"{GITHUB_BLOB_BASE}/{source_filename}"
+    # ファイル名の '#' は URL fragment 区切りと衝突するため %23 にエンコードする。
+    url = f"{GITHUB_BLOB_BASE}/{source_filename.replace('#', '%23')}"
     return (
         "> この記事は [FullSense リポジトリ]"
         f"({url}) の記事を Zenn 向けに変換したものです "

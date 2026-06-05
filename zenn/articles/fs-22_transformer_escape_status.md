@@ -6,7 +6,7 @@ topics: ["fullsense", "llive", "mamba", "rwkv", "honestdisclosure"]
 published: false
 ---
 
-> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_#22_transformer_escape_status.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
+> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_%2322_transformer_escape_status.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
 
 <!--
 Qiita タグ 5 個上限. 本記事の主役順:

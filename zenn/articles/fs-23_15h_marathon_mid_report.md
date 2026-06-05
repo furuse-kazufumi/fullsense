@@ -6,7 +6,7 @@ topics: ["fullsense", "llive", "lleval", "evolutionaryalgorithm", "honestdisclos
 published: false
 ---
 
-> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_#23_15h_marathon_mid_report.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
+> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_%2323_15h_marathon_mid_report.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
 
 <!--
 Qiita タグ 5 個上限. 本記事の主役順:

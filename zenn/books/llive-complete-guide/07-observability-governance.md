@@ -2,7 +2,7 @@
 title: "llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain"
 ---
 
-> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_#24_07_observability_governance.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
+> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_%2324_07_observability_governance.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
 
 # llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
 

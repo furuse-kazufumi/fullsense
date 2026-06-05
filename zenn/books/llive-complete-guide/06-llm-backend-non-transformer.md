@@ -2,7 +2,7 @@
 title: "llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ"
 ---
 
-> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_#24_06_llm_backend_non_transformer.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
+> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_%2324_06_llm_backend_non_transformer.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
 
 # llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ
 

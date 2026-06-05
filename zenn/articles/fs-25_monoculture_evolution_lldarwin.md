@@ -6,7 +6,7 @@ topics: ["fullsense", "llive", "進化計算", "honestdisclosure", "解説"]
 published: false
 ---
 
-> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
+> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_%2325_monoculture_evolution_lldarwin.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
 
 # AI を 500 世代進化させたら、世界に「私」と「予測符号化の父カール・フリストン」だけが残った #25 — monoculture の honest disclosure と選択圧コンポーネント lldarwin
 

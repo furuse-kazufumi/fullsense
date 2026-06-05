@@ -2,7 +2,7 @@
 title: "llive 完全解説 (2) — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞"
 ---
 
-> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
+> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_%2324_02_thought_factors_cog_mesh.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
 
 # llive 完全解説 (2) — 「10 軸で考える AI」: 思考因子 × COG-MESH × 三重縞
 

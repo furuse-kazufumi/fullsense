@@ -2,7 +2,7 @@
 title: "llive 完全解説 (1) — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating"
 ---
 
-> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_#24_01_memory_layer.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
+> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_%2324_01_memory_layer.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
 
 # llive 完全解説 (1) — 「忘れない LLM」: 4 層メモリ + Bayesian surprise gating
 

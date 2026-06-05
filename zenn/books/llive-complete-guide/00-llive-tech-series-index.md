@@ -2,7 +2,7 @@
 title: "llive 完全解説 (0) — series index: 大分類 8 記事 + 全体図"
 ---
 
-> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_#24_00_llive_tech_series_index.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
+> この記事は [FullSense リポジトリ](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/articles/QIITA_%2324_00_llive_tech_series_index.md) の記事を Zenn 向けに変換したものです (原本 = GitHub / single source of truth)。
 
 # llive 完全解説 (0) — series index: 大分類 8 記事 + 全体図
 
