@@ -13,6 +13,8 @@ ignorePublish: true
 
 > 📘 これは [#36 本編](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/QIITA_%2336_verifier_2pow_n_wall_vertex_free.md) のかみくだき版です (比喩多め・数式少なめ・短時間で要点だけ)。正確な数値と手順は本編へ。
 
+> ⚠️ **追記 / Addendum (2026-06-06)**: 本文の「8 割(87%)通せた」は **部屋が 8 個(n=8)のとき**の話。部屋が増えると一望の精度は落ちる(部屋 16 個=n=16 で 6 割まで、安い門番と同水準に)。**速さと見逃しゼロは全 n で維持**されるが、高次元では一望が慎重になりすぎる。 / "Passed ~80% (87%)" is for **8 rooms (n=8)**; the glance gets less accurate as rooms grow (down to ~60% at n=16, level with the cheap gatekeeper). Speed and zero-oversight hold at all n. / 「通过约 8 成(87%)」是 **8 个房间(n=8)** 时；房间增多则一望精度下降(n=16 时约 6 成)。速度与零漏检在所有 n 下保持。 / 「약 80%(87%) 통과」는 **방 8 개(n=8)** 기준이며, 방이 늘면 정확도가 떨어진다(n=16 에서 약 60%). 속도와 무누락은 모든 n 에서 유지.
+
 ---
 
 # 日本語
