@@ -75,6 +75,8 @@ nav_order: 1
 |---|---|---|
 | 統合版 | 個人開発 AI の llive がメガ進化！— 進化の大失敗から甦り、実 LLM の苦手まで淘汰した全記録 | [mega_evolution](./QIITA_llive_mega_evolution.md) / [arc 版](./QIITA_evolution_arc_lldarwin_complete.md) |
 | ダイジェスト | 推論する AI から「予測する認知 OS」へ — 開発 1 週間ダイジェスト (05-17→05-24) | [weekly digest](./QIITA_WEEKLY_DIGEST_2026-05-17_to_24.md) |
+| 検証器 arc | llcore 検証器の梯子 (∞→2→SDP→SOS→JSR, SMT は飾り) | [#35-00](./QIITA_%2335_00_verifier_sdp_not_smt_index.md) / [01](./QIITA_%2335_01_verifier_frontier_sdp.md) / [02](./QIITA_%2335_02_honest_disclosure_solver_swap.md) |
+| 検証器 arc | 2ⁿ の壁を破る vertex-free 健全証明 + コストを進化の選択圧に (JA/EN/ZH/KO) | [#36](./QIITA_%2336_verifier_2pow_n_wall_vertex_free.md) / [かみくだき](./QIITA_%2336_verifier_2pow_n_wall_vertex_free_kamikudaki.md) |
 
 ## メンテナンス note
 
