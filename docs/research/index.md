@@ -146,9 +146,10 @@ matplotlib 不要) を配線。§6 に BG10 honest caveat(EVO 罠は wrapper で
 
 **(D) 公開記事** QIITA #36(本体+かみくだき, `fullsense docs/articles/QIITA_#36_*`): 「2^n の壁を破る vertex-free
 健全証明 + コストを選択圧に」。**JA/EN/ZH/KO 4 言語完全版 + 図 3 枚 assets 同梱**(翻訳 Workflow で組成済)。
-private/ignorePublish ドラフト。**⚠️公開前 TODO: 本記事は PoC-2.6 (coverage は n で劣化, 87→60%) 完了前に
-書かれており、honest-disclosure 整合のため degradation caveat を 4 言語すべてに反映してから公開する**
-(現状は楽観的な n=8 値 87% のみ。論文 PAPER_DRAFT.md は反映済)。
+private/ignorePublish ドラフト。**honest 整合**: PoC-2.6 (coverage は n で 87→60% に劣化) は記事執筆後の
+発見だったため、冒頭に **4 言語 addendum box (n=8 限定 + degradation を明示)** を追加済 (論文 PAPER_DRAFT.md
+は本文反映済)。**残 publish-polish: 本文中 n=8 値の文中注記 + かみくだき版への caveat 反映**(addendum で
+up-front には開示済なので軽微)。
 
 詳細・honest 内訳の単一の真実 = memory `project_llcore_verifier_cost_reduction` + `project_llcore_real_llm_pivot_2026_06_04`
 + `project_llcore_init_2026_05_29`。push 未(llcore は GitHub repo 未作成)。
