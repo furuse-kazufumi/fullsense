@@ -13,6 +13,12 @@ ignorePublish: true
 
 > 📝 **ドラフト注記**: 本稿は #35 (検証器の梯子) の続編。図アセットは `docs/articles/assets/qiita_36/` に同梱済 (公開時に push して raw URL を解決)。
 
+> ⚠️ **追記 / Addendum (2026-06-06, PoC-2.6)**
+> - **JA**: 本文の coverage 値 (B2 77.6% / inf∪B2 87%) は **n=8 限定**。後続測定で coverage は次元上昇に伴い劣化 (inf∪B2 87→77→**60%** @ n=8/12/16、n=16 で inf に合流) と判明。**コスト勝ち・健全性は全 n で維持**されるが、高次元では cheap 境界が保守化する (詳細は論文 PAPER_DRAFT.md §7.5)。
+> - **EN**: The coverage figures (B2 77.6% / inf∪B2 87%) are **n=8 only**; a follow-up found coverage degrades with dimension (inf∪B2 87→77→**60%** at n=8/12/16, meeting cert_inf by n=16). The cost win and soundness hold at all n, but the cheap bound becomes conservative at scale.
+> - **中文**: 本文的覆盖率 (B2 77.6% / inf∪B2 87%) **仅限 n=8**；后续测量发现覆盖率随维度上升而下降 (inf∪B2 87→77→**60%**，n=16 时与 inf 持平)。成本优势与健全性在所有 n 下保持，但廉价上界在高维下趋于保守。
+> - **한국어**: 본문의 커버리지 수치 (B2 77.6% / inf∪B2 87%) 는 **n=8 한정**이며, 후속 측정에서 차원이 커질수록 저하됨 (inf∪B2 87→77→**60%**, n=16 에서 inf 와 합류). 비용 이점과 건전성은 모든 n 에서 유지되지만 고차원에서는 저렴한 상계가 보수적으로 변한다.
+
 ---
 
 # 日本語
