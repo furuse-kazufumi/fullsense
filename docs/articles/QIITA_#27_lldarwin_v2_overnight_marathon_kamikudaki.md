@@ -390,7 +390,7 @@ There's an even nicer twist: **the "conductor's score" (the markers of who is st
 
 > 🔑 **This is the article's core**: My synthetic experiment (homemade) and the real-AI experiment (AI assistant C) reached the **same conclusion by entirely different methods**: "the ensemble beats the single one only via 'routing' / it doesn't via voting." Because the two agreed not by coincidence, you may believe it. This is the power of independent cross-validation.
 
-> 🤔 **Analogy**: Have 10 experts vote, and the ignorant majority overrides the right expert. So you need a **dispatcher (conductor)** to "send math to the mathematician." And that conductor's score can reuse something already prepared for another purpose. Voting kills the expert; the conductor brings them alive.
+> 🤔 **Analogy**: Have 10 experts vote, and the ignorant majority overrides the right expert. So you need a **dispatcher (conductor)** to "send math to the mathematician." And that conductor's score can reuse something already prepared for another purpose. Voting cancels out the expert; the conductor brings them alive.
 
 ---
 
