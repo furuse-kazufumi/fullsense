@@ -405,7 +405,7 @@ This is a question the author received from the user as well. In the next articl
 
 | 现有 | llive |
 |---|---|
-| 全量 fine-tune / LoRA / adapter | LLM 权重**绝对不触碰** |
+| 全量 fine-tune / LoRA / adapter | LLM 权重**现阶段 (Phase 1〜v0.6) 不更新** |
 | 学习 = 模型更新 | 学习 = **写入外部记忆** + **结构变更** |
 
 这处于 LoRA / adapter 的延长线上，但其独特之处在于：通过不更新权重，把「可 replay / 可 monitorable 的学习轨迹」置于最优先。在 CABT（计划于 S2）中，通过 forward hook 给 attention 加上 bias，但这同样保持权重冻结。
