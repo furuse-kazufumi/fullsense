@@ -617,6 +617,10 @@ In the next article, **#13 "[The corpus-first strategy — how AI complements th
 
 # llive 开发历程 — 5 天内从 v0.1 到 v0.7 候选版
 
+> 📚 **连载导航**: ← #11 [与 Qwen 相互补充的 llive（填补“隙间”的设计）](./QIITA_#11_complementary_with_qwen.md) ｜ **#12 本文**（按时间顺序回顾这 5 天的开发历程）｜ #13 [语料先行战略（为什么能在 5 天里推进）](./QIITA_#13_corpus_first_advantage.md) → 。※ 各篇均可独立阅读。
+>
+> 到 #11 为止，关注的是 llive **设计的内容**（与 Qwen 的互补、结构的独创性）。本文先把视角拉远一下，看一看那套设计是**以怎样的顺序、如何一层层垒起来的**——一份横跨 5 天的时间顺序回顾。
+
 作者：**古濑和文（Puruyan）**
 
 ## 为什么要留下开发历程
