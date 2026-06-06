@@ -230,6 +230,8 @@ FullSense の honest-disclosure 規律に従い、限界を明示します。
 
 ![Progress theme diagram for the verification arc](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_progress_en.svg)
 
+> This is the finale of the llcore verification arc (#35-02). [#35-00 (overview)](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) gave the conclusion "SDP is the right answer," and [#35-01 (the ladder in detail)](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) laid out the ladder of certifying power. #35-01 promised "+692, not +254" and "the numbers change once you correct the false negatives" — and this part is **the solver-correction scene itself**.
+
 ## 0. Glossary
 
 | Term | Plain meaning |
