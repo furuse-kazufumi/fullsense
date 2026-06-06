@@ -803,6 +803,14 @@ FullSense honest-disclosure 규율에 따라 한계를 명시합니다.
 - 모든 결과는 n=2 결합 기반, CPU, 이 풀/seed 의 것입니다. 건전성 = **관측된 위허가 0**(JSR 오라클은 반증기이지 증명이 아님; Rump gate 가 유일한 기계 검증 PD 증명이며 가산적).
 - 이것은 올바른 **verifier** 에 관한 것이지, 진화하는 신경 다이내믹스가 널리 유용하다는 주장이 아닙니다.
 
+## 그렇다면 다른 숫자는 믿어도 될까?
+
+솔버를 단 한 번 교체했을 뿐인데, "차수 상보성" 이라는 하나의 finding 이 통째로 환상이었음이 드러났습니다. 그러자 불편한 물음이 남습니다 — **이 기반에서 지금껏 측정해 온 다른 검증 결과 중, 얼마나가 "솔버의 버릇" 이었을까?** +254 가 +692 로 바뀌었다면, 당연하게 여겨 온 다른 숫자들도 다른 솔버 아래에서는 다른 얼굴을 보일지 모릅니다.
+
+다만 솔버의 정확성을 좇을수록 또 하나의 대가가 보이기 시작합니다. 이번에 CLARABEL 로 고정해 위음성을 지웠지만, 정확한 내점법은 빠르지 않습니다. 건전한 검증은 상태 차원 n 에 대해 **2ⁿ 개의 꼭짓점**을 열거합니다 — n=16 에서 65,536, n=32 에서 약 43 억. verifier 는 안전의 문지기이면서 동시에 **계산 비용의 괴물**입니다. 숫자를 끝까지 의심한 다음, 이번에는 "정확성" 과 "비용" 이 정면으로 부딪칩니다.
+
+다음 편 **#36** 에서는 이 2ⁿ 벽을 **꼭짓점을 열거하지 않는 건전한 근사**로 깨뜨린 실측 (SVD 1 회・최대 수천 배 가속・건전성 위반 0) 을 다루고, 나아가 생물의 환원 진화에 따라 "**비용 자체를 진화의 선택압으로**" 삼는 구상으로 나아갑니다. 본 글에서 "솔버를 의심하라" 고 쓴 한 줄은, 거기서 "**검사기의 비용을 의심하라**" 로 다시 그어집니다.
+
 ## References
 
 1. Diamond, S. & Boyd, S. *cvxpy: A Python-Embedded Modeling Language for Convex Optimization* — JMLR 17(83), 2016.
@@ -815,11 +823,14 @@ FullSense honest-disclosure 규율에 따라 한계를 명시합니다.
 8. Boyd, S. & Vandenberghe, L. *Convex Optimization* (LMIs / SDP) — Cambridge University Press, 2004.
 9. Boyd, S., El Ghaoui, L., Feron, E. & Balakrishnan, V. *Linear Matrix Inequalities in System and Control Theory* — SIAM, 1994.
 10. Mouret, J.-B. & Clune, J. *Illuminating search spaces by mapping elites (MAP-Elites)* — arXiv:1504.04909, 2015.
-11. 내부: [#35-00 개관](#) — llcore 검증 arc 의 전체 그림.
-12. 내부: [#35-01 verifier 프런티어](#) — 사다리와 SDP 큰 점프.
+11. 내부: [#35-00 개관](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) — llcore 검증 arc 의 전체 그림.
+12. 내부: [#35-01 verifier 프런티어](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) — 사다리와 SDP 큰 점프.
 
 ## 시리즈 / Series navigation
 
-- [#35-00 — llcore 검증 arc 개관](#)
-- [#35-01 — verifier-fitness 프런티어 (증명 능력의 사다리)](#)
-- **#35-02 — 솔버를 의심하라 (본문)**
+- [#35-00 — llcore 검증 arc 개관](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6)
+- [#35-01 — verifier-fitness 프런티어 (증명 능력의 사다리)](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)
+- **#35-02 — 솔버를 의심하라 (본문・검증 arc 마지막 편)**
+- #36 — 2ⁿ 벽을 깨다: vertex-free 건전 증명과 "비용을 진화 선택압으로" (다음 arc)
+
+※ 각 글은 단독으로 읽을 수 있습니다 (링크는 회유용).
