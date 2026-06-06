@@ -312,7 +312,7 @@ Even with defensive disclosure we do not bend honest disclosure.
 - **The verifier's payoff is navigability, not learning (L3)**: the effect is EA-specific and vanishes with gradient methods.
 - **The gate is a ~20–60× cost**: it only looks free under short training.
 - **"Zero false admits" is an empirical observation, not a machine check**: the verifier's *conditions* are sound, but the *implementation* carrying them is not end-to-end formally verified.
-- **The scope of "not found"**: limited to the scope of the adversarial audit + a surface-level patent search. CNIPA (Chinese) was not queried, and patents have a publication lag of up to 18 months. We always maintain the "within the search scope" caveat.
+- **The scope of "not found"**: limited to the scope of the adversarial verification + a surface-level patent search. CNIPA (Chinese) was not queried, and patents have a publication lag of up to 18 months. We always maintain the "within the search scope" caveat.
 
 ---
 
