@@ -3,7 +3,8 @@ title: 'llcore 検証 arc (#37) — AI が無料 GPU で実験 3 連戦を自走
 tags: [FullSense, llcore, Singularity, AI, 解説]
 private: false
 updated_at: '2026-06-06'
-id: 6f44575d440a9ebf5228
+id: a0e16b74a23c62bcf59a
+qiita_public_id: 6f44575d440a9ebf5228
 organization_url_name: null
 slide: false
 ignorePublish: false
