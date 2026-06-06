@@ -249,6 +249,12 @@ That said, today's experimental results bear more on **control design** than on 
 
 **Whether or not the singularity arrives, you can empirically measure the "price list for safety rails" for $0, starting today.**
 
+## Homework for next time — does the price list keep the same face "as you scale up"?
+
+Today's price list was measured on a **small desk**: ~0.5M params, character-level, a single corpus. So one unsettling question remains at the end — **does this "tax rate" keep the same face as the model grows?** HD-1 already showed that a conclusion that "looked safe under short training" can flip its very sign once you extend the budget. If the same thing happens with **scale**, then today's 19× may itself be a number that moves as a function of dimension.
+
+In the next arc, we move this price list onto **a desk one size larger**. Concretely: if you multiply "make the verifier's cost itself the selection pressure for evolution" (the idea raised in #36) with "the tax is levied only at the site of capability" (what we saw in this article), does a **population that optimizes safety and capability simultaneously** actually hold together? That's what we'll find out. The line I drew in this article — "the rail can't be bolted on afterward" — gets redrawn there as "**can we turn the rail into the fuel of evolution?**"
+
 ## Public artifacts
 
 - Kaggle kernels (all public and re-runnable): [hd1-highdim-evo](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo) / [hd1-highdim-evo-full](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full) / [hd1-highdim-evo-full-null](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full-null) / [rllm-stage-b](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b) / [rllm-stage-b-full](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full) / [rllm-stage-b-full-null](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full-null)
