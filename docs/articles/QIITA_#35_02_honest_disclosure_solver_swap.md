@@ -530,7 +530,7 @@ flowchart LR
 
 固定 CLARABEL 后，伪影坍塌：
 
-| 指标 | SCS (捏造) | CLARABEL (真实) |
+| 指标 | SCS (虚假) | CLARABEL (真实) |
 |---|---|---|
 | deg4_only / deg6_only / both | 23 / 13 / 18 | 0 / 1 / 54 |
 | 结构解读 | 互补、非嵌套 | 嵌套 |
