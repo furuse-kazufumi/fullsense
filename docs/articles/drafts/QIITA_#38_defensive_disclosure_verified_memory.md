@@ -83,14 +83,14 @@ id: fa55b499b45a871a97db
 
 新規性は「全部を 1 文で名指しできるか」で誠実さが決まります。隅ごとに最も近い先行を 1 文で:
 
-- **SSGM(arXiv:2603.11768)** — 「進化する記憶を統べる」看板を **理論だけ** で先取り。ゲートは NLI(矛盾検出)で **健全な形式証明ではなく**、実装もなし。→ 看板を担う相手として **必ず引用**。実装 + 証明の窓が空いている。
-- **SEVerA(arXiv:2603.25111)** — 自己進化エージェントに Dafny/SMT 検証。ただし対象は **出力契約** で、記憶コアの縮小性の毎更新ゲートではない。
-- **PSV-Verus(arXiv:2512.18160)** — self-play ループ内の健全 SMT ゲート。ただし検証対象は **生成コードの正しさ**。
-- **Provably Safe Model Updates / LID(arXiv:2512.01899)** — 更新を抽象解釈で δ-safe 認証。ただし **射影(押し戻し)** で prove-then-reject ではなく、対象は frozen-embedding の分類 head。
-- **GP × モデル検査(Katz & Peled, arXiv:1402.6785, 2014)** — 進化ループに健全な検査ゲートを置く **パターンの先例**。だから私たちは **ゲートのパターン自体を新規とは主張しません**。記憶コアの縮小性への適用だけが未踏。
-- **Enforced-Lipschitz Transformers(arXiv:2507.13338)/ R2DN(arXiv:2504.01250)** — 縮小性を **構造で強制(by-construction)**。これは「ゲートなんか要らない、最初から組み込め」という最強の対抗設計。私たちは **by-construction 対 prove-then-reject** を設計軸として対比します(構造強制は表現力を犠牲にし、棄却ゲートは任意更新を構造制約なしに検査する)。
+- **SSGM([arXiv:2603.11768](https://arxiv.org/abs/2603.11768))** — 「進化する記憶を統べる」看板を **理論だけ** で先取り。ゲートは NLI(矛盾検出)で **健全な形式証明ではなく**、実装もなし。→ 看板を担う相手として **必ず引用**。実装 + 証明の窓が空いている。
+- **SEVerA([arXiv:2603.25111](https://arxiv.org/abs/2603.25111))** — 自己進化エージェントに Dafny/SMT 検証。ただし対象は **出力契約** で、記憶コアの縮小性の毎更新ゲートではない。
+- **PSV-Verus([arXiv:2512.18160](https://arxiv.org/abs/2512.18160))** — self-play ループ内の健全 SMT ゲート。ただし検証対象は **生成コードの正しさ**。
+- **Provably Safe Model Updates / LID([arXiv:2512.01899](https://arxiv.org/abs/2512.01899))** — 更新を抽象解釈で δ-safe 認証。ただし **射影(押し戻し)** で prove-then-reject ではなく、対象は frozen-embedding の分類 head。
+- **GP × モデル検査(Katz & Peled, [arXiv:1402.6785](https://arxiv.org/abs/1402.6785), 2014)** — 進化ループに健全な検査ゲートを置く **パターンの先例**。だから私たちは **ゲートのパターン自体を新規とは主張しません**。記憶コアの縮小性への適用だけが未踏。
+- **Enforced-Lipschitz Transformers([arXiv:2507.13338](https://arxiv.org/abs/2507.13338))/ R2DN([arXiv:2504.01250](https://arxiv.org/abs/2504.01250))** — 縮小性を **構造で強制(by-construction)**。これは「ゲートなんか要らない、最初から組み込め」という最強の対抗設計。私たちは **by-construction 対 prove-then-reject** を設計軸として対比します(構造強制は表現力を犠牲にし、棄却ゲートは任意更新を構造制約なしに検査する)。
 - **Safeguarded AI(ARIA programme)** — 最も権威ある proof-gated-gatekeeper 概念。ただしゲート対象は **行動/計画**(出力ゲート)で、重み/記憶の更新ゲートではなく、まだ programme 段階。
-- **Emergent FV / substrate-guard(arXiv:2603.21149)** — AI の **出力** を Z3 で検証する動くシステム。ただし post-hoc 監視で、毎更新ゲートではない。
+- **Emergent FV / substrate-guard([arXiv:2603.21149](https://arxiv.org/abs/2603.21149))** — AI の **出力** を Z3 で検証する動くシステム。ただし post-hoc 監視で、毎更新ゲートではない。
 
 (上記 arXiv ID はすべて論文ドラフトで abstract と照合確認済みのものだけを使っています。)
 
