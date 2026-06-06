@@ -10,32 +10,33 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 19:35:30
+- **生成時刻**: 2026-06-06 19:55:19
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
-7d92303 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:35)
-df24a15 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:34)
-ec6433a auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:34)
-d407ef1 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:34)
-2901deb auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:34)
-273f5be auto: qiita_38_fig_core.svg 編集前 (2026-06-06 19:34)
-b419b02 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:34)
-a90d395 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:34)
-793f129 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:33)
-b918ea9 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:33)
+4f4a129 docs(research): 公開済み記事の倫理遡及監査 — high 0 / low 7 記事
+cd73f1f fix(qiita-tool): LOCAL PATH 検査の URL 誤検出を修正
+3019413 docs(articles): #38 を仁の倫理ゲートで全面改修 (暴力語除去 + 来歴修正 + 図 + リンク)
+d7a50a8 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:40)
+8c6508b auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:39)
+1f99a85 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:39)
+34141d5 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:39)
+c243bb2 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:38)
+495bd2a auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:38)
+01a9d32 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:37)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -75,14 +76,16 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `19:35` `docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md`
+- `19:49` `docs/research/ethics_audit_published_2026_06_06.md`
+- `19:47` `docs/SESSION_SUMMARY.md`
+- `19:47` `docs/NEXT_SESSION.auto.md`
+- `19:46` `tools/qiita_team_post.py`
+- `19:40` `docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md`
 - `19:34` `docs/articles/assets/qiita_38/qiita_38_fig_core.svg`
 - `19:30` `docs/articles/assets/qiita_38/qiita_38_fig_gate.svg`
 - `19:29` `docs/articles/assets/qiita_38/qiita_38_fig_tube.svg`
 - `19:29` `docs/articles/assets/qiita_38/qiita_38_fig_ladder.svg`
 - `19:28` `docs/articles/assets/qiita_38/qiita_38_fig_intersection.svg`
-- `19:28` `docs/SESSION_SUMMARY.md`
-- `19:28` `docs/NEXT_SESSION.auto.md`
 - `17:51` `docs/doc_map.md`
 - `17:47` `docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md`
 - `17:36` `docs/research/master_plan_2026_06_06.md`
