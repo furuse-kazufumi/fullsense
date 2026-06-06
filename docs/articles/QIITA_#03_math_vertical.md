@@ -168,7 +168,7 @@ llive が計算する → IEEE 754 精度、再現可能、引用可能
 - As llive's first specialised vertical, we chose a "**math- and unit-focused AI**" (per the user's strategic direction)
 - We overcome the three things general-purpose LLMs are bad at — (a) hallucinated symbolic manipulation, (b) confusing unit dimensions, (c) error propagation in numerical computation — with a **deterministic sidecar that does not let the LLM do the calculation**
 - In the same 2026-05-17 session we implemented the minimal skeletons of **MATH-01 (SI unit dimensional analysis)** + **MATH-08 (built-in calculation engine = the differentiation axis)**, adding 47 tests
-- An API that **always stops** typical hallucinations like `5 m/s + 3 s = 8`
+- An API that, **once it detects a dimensional mismatch like `5 m/s + 3 s = 8`, reliably refuses it** (deterministically, within the range it can detect)
 
 ## Motivation — The Mathematical Weaknesses of General-Purpose LLMs
 
