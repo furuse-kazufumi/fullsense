@@ -123,6 +123,12 @@ Anthropic の Dario Amodei は 2026 年 1 月の 38 ページのエッセイ「T
 
 **シンギュラリティが来るかどうかはともかく、「安全柵の値段表」は今日から $0 で実測できます。**
 
+## 次回への宿題 — 値段表は「次元を上げても」同じ顔か
+
+今日の値段表は、~0.5M params・文字レベル・1 コーパスという**小さな机の上**で測ったものです。だから最後に、自分でも落ち着かない問いが 1 つ残ります — **この「税率」は、モデルを大きくしても同じ顔のままなのか?** HD-1 はすでに「短い訓練では安全に見えた結論が、予算を伸ばすと符号ごと変わる」ことを見せました。同じことが**規模**でも起きるなら、今日の 19 倍も、次元の関数として動く数字かもしれません。
+
+次の arc では、この値段表を**もう一段大きな机**に載せ替えます。具体的には「検査器のコストを進化の選択圧そのものにする」(#36 で立てた構想) と、本記事で見えた「税は能力の現場でだけ徴収される」を掛け合わせたら、**安全と能力を同時に最適化する集団**は本当に成立するのか — それを確かめます。今日「柵は後付けできない」と書いた一線は、そこでは「**柵を進化の燃料に変えられるか**」へと引き直されます。
+
 ## 公開アーティファクト
 
 - Kaggle kernels(全て公開・再実行可能): [hd1-highdim-evo](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo) / [hd1-highdim-evo-full](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full) / [hd1-highdim-evo-full-null](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full-null) / [rllm-stage-b](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b) / [rllm-stage-b-full](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full) / [rllm-stage-b-full-null](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full-null)
