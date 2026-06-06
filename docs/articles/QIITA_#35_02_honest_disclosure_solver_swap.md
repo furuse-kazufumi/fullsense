@@ -638,7 +638,7 @@ margin-sweep 红队对求解器伪影**结构性失明**——它们只是在同
 
 ![그림: 솔버를 교체하니 거짓 수치가 무너진다](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_ko.svg)
 
-> Concept hook: 진화한 AI 다이내믹스가 "망가지지 않았는지" 검사하는 verifier 연구에서, SDP/차수 사다리의 수치가 지나치게 "풍부"해 보였다. 우리는 의심했다. 알고 보니 cvxpy 의 기본 솔버 SCS 가 실행가능성 경계 부근에서 위음성을 내고 있었다 — 실제로 존재하는 Lyapunov 증명서를 "못 찾았다"고 보고한 것이다. 정확한 내점법 솔버 CLARABEL 로 고정하자, 조작되었던 "차수 상보성"(23/13/18, 잔차 53, SDP 64%)은 중첩 구조(0/0/54, 잔차 10, SDP 95%)로 무너졌고, SDP 의 우위는 오히려 *과소평가*되어 있었다 (+254 → +692). 이 편은 그 정정과, Codex + 6 에이전트 적대 Workflow 의 pair-review 전말을 사실만으로 풀어낸다.
+> Concept hook: 진화한 AI 다이내믹스가 "망가지지 않았는지" 검사하는 verifier 연구에서, SDP/차수 사다리의 수치가 지나치게 "풍부"해 보였다. 우리는 의심했다. 알고 보니 cvxpy 의 기본 솔버 SCS 가 실행가능성 경계 부근에서 위음성을 내고 있었다 — 실제로 존재하는 Lyapunov 증명서를 "못 찾았다"고 보고한 것이다. 정확한 내점법 솔버 CLARABEL 로 고정하자, 솔버에서 비롯된 거짓 "차수 상보성"(23/13/18, 잔차 53, SDP 64%)은 중첩 구조(0/0/54, 잔차 10, SDP 95%)로 무너졌고, SDP 의 우위는 오히려 *과소평가*되어 있었다 (+254 → +692). 이 편은 그 정정과, Codex + 6 에이전트 적대 Workflow 의 pair-review 전말을 사실만으로 풀어낸다.
 
 ![검증 arc 진척 테마 그림](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_progress_ko.svg)
 
