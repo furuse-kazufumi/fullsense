@@ -153,7 +153,10 @@ def as_bool(v, default=True) -> bool:
 # --------------------------------------------------------------------------- #
 
 _IMG_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)|<img[^>]+src=[\"']([^\"']+)[\"']")
-_LOCALPATH_RE = re.compile(r"[A-Za-z]:[\\/]|\]\(\.{1,2}/")
+# Drive-letter path (D:\ or D:/foo) or relative markdown link (](./ ](../).
+# `:/(?!/)` excludes URL schemes like https:// (s:// → ':/' followed by '/'),
+# which the old `[A-Za-z]:[\\/]` falsely flagged once articles include links.
+_LOCALPATH_RE = re.compile(r"[A-Za-z]:\\|[A-Za-z]:/(?!/)|\]\(\.{1,2}/")
 
 
 def safety_findings(meta: dict, body: str) -> list[str]:
