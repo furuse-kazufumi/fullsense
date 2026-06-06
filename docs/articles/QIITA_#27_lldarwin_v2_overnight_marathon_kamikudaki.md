@@ -384,7 +384,7 @@ The key was the "**way of combining**."
 - **Combine by majority vote, and diversity backfires.** On each problem, the one expert who truly knows gets negated by the ignorant majority.
 - **Combine by routing to the knowledgeable person, and diversity comes alive.** Send the math problem to the mathematician.
 
-In other words — **the difference between "an orchestra with a conductor" and "a crowd where everyone makes sound as they please."** Voting kills the expert; routing (the conductor) brings the expert alive.
+In other words — **the difference between "an orchestra with a conductor" and "a crowd where everyone makes sound as they please."** Voting cancels out the expert; routing (the conductor) brings the expert alive.
 
 There's an even nicer twist: **the "conductor's score" (the markers of who is strong on which problem) could be reused as-is** from what we already compute to manage diversity. Two birds, one stone.
 
