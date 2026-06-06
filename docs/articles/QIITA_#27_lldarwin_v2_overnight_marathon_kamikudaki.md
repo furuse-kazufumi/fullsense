@@ -340,7 +340,7 @@ So I added one more thing to "gradually harder": **"give a reward to unusual sol
 
 ## 5. The main event — rigorously testing "never-ending evolution" over 10,000 generations
 
-The small experiments showed the "direction." Next, do it at large scale, rigorously. I had AI assistant A hammer **10,000 generations × 19 settings** to test whether it's "never-ending evolution (open-ended)." The criterion: does it avoid saturation, avoid being dyed one color, and keep growing a reservoir of diversity?
+The small experiments showed the "direction." Next, do it at large scale, rigorously. I had AI assistant A rigorously test **10,000 generations × 19 settings** to see whether it's "never-ending evolution (open-ended)." The criterion: does it avoid saturation, avoid being dyed one color, and keep growing a reservoir of diversity?
 
 The result was strikingly clean.
 
