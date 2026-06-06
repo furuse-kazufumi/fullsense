@@ -576,11 +576,13 @@ llive가 계산한다 → IEEE 754 정밀도, 재현 가능, 인용 가능
 - 테스트: `tests/unit/test_math_units.py` (22건) + `tests/unit/test_math_calculator.py` (24건)
 - 전체 1014 PASS / 회귀 제로
 
-## 다음 한 걸음
+## 남은 물음 — 「계산시키지 않는다」로 충분한가
 
-- BriefGrounder에 `SafeCalculator` 를 통합 → Brief 투입 시점에 식이 자동으로 ground 된다
-- MATH-05 CODATA 사전을 RAD `metrology` 분야에 append
-- MATH-02 Sympy 검산층에서 LLM의 수식 출력을 AST화 → 불일치 flag
+여기까지의 설계는 「LLM에게 **계산시키지 않는다**」였다. 산술식을 빼앗아 결정론 엔진에 넘기면 `5 m/s + 3 s` 는 멈춘다. 하지만 LLM이 토해내는 것은 수치만이 아니다. `x² + x = 2x³` 같은 **틀린 수식 그 자체** 를 그럴듯한 말로 써 온다면? 식을 빼앗기 전에 그 식이 옳은지를 기계적으로 반증할 수 없다면, 그 검증은 한쪽 폐로만 숨 쉬는 셈이다.
+
+다음 회 **#06「[LLM 수식 환각을 어떻게 멈출 것인가 — 형식 검증 게이트](./QIITA_#06_next_math02_formal_gate.md)」** 에서는 MATH-02 를 해부한다. LLM이 내놓은 수식을 Sympy로 AST화하고 모순을 기계적으로 flag 하는 구조——이번의 「계산시키지 않는다」에서 「출력을 반증한다」로 한 걸음 나아간다. 식을 믿기 전에, 식을 의심하는 쪽의 엔진을 만들러 간다.
+
+（손에 잡히는 병행 작업으로는, BriefGrounder에 `SafeCalculator` 를 통합해 Brief 투입 시점에 식을 자동 ground 하고, MATH-05 CODATA 사전을 RAD `metrology` 분야에 append 하는 정비도 함께 진행 중이다.）
 
 ---
 
