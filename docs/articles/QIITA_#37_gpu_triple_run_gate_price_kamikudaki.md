@@ -270,6 +270,8 @@ But this price list was measured on a "small AI." So one question lingers at the
 2. AI 安全护栏的「价目表」,已经可以实测了 —— 它是测量的对象,而非思想之争
 3. 那张价目表说的是: **护栏比想象中便宜,事后补装比想象中贵**
 
+不过,这张价目表是在「小号 AI」上测出来的。所以最后,留下这样一个问题 —— **把 AI 放大之后,这张价目表还是原样吗?** 这次的实验也展示了:「短短试一下看着安全」的结论,跑久了就会翻盘。如果这种事在「规模」上也会发生,那今天这个 "19 倍",在更大的 AI 上没准也会变成另一个数字。下一篇,我们要把这张价目表搬到**大一号的桌子**上,去试一试:「能不能把安全护栏,从进化的枷锁变成它的**燃料**?」
+
 > 完整版(数值、统计、实验设计全部齐全)在这里 → [llcore 验证 arc (#37)](https://qiita.com/furuse-kazufumi/items/6f44575d440a9ebf5228)
 > 系列入口 → [FullSense 开发记 KB](https://qiita.com/furuse-kazufumi/items/cab6bb47a72ebedf5436)
 
