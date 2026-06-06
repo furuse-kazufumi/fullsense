@@ -24,6 +24,8 @@ ignorePublish: true
 
 ![検証 arc の進捗テーマ図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_progress.svg)
 
+> 本稿は llcore 検証 arc の終幕 (#35-02) です。[#35-00 (概観)](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) で「SDP が正解」という結論を、[#35-01 (梯子の詳細)](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) で証明能力のラダーを示しました。#35-01 で「+254 ではなく +692」「偽陰性を正すと数字が変わる」と予告した、その**ソルバ補正の現場**が本稿です。
+
 ## 0. 用語説明 / Glossary
 
 | 用語 | かみくだいた意味 |
