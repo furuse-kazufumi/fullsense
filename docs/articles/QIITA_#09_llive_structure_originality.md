@@ -591,7 +591,7 @@ Brief(
 
 | 기존 | llive |
 |---|---|
-| 전량 fine-tune / LoRA / adapter | LLM 가중치는 **절대로 건드리지 않는다** |
+| 전량 fine-tune / LoRA / adapter | LLM 가중치는 **현 단계 (Phase 1〜v0.6) 에서는 갱신하지 않는다** |
 | 학습 = 모델 갱신 | 학습 = **외부 기억으로의 기록** + **구조 변경** |
 
 이것은 LoRA / adapter 의 연장선상에 있지만, 「가중치를 갱신하지 않음으로써 replay 가능 / monitorable 한 학습 궤적」을 최우선으로 하는 점이 독자적이다. CABT (S2 에서 계획 중) 에서는 forward hook 으로 attention 에 bias 를 더하지만, 이것도 가중치 동결 그대로다.
