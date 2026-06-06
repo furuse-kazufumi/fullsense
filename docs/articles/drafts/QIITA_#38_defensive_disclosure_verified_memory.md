@@ -181,7 +181,7 @@ The results were as follows.
 - **Refutations in patents: 0** (across 14 English + 3 Japanese queries, no patent occupies the intersection).
 - So I decided **not to file a patent** (a cost judgment), and instead planted a flag called **defensive publication**.
 
-This article is a breakdown of the story of that one day (the design and results of the adversarial audit, and the decision-making) plus **what we published (= the technology at the four-point intersection)**. As always, the order is ① term explanations → ② breakdown (plain language) → ③ details.
+This article is a breakdown of the story of that one day (the design and results of the adversarial verification, and the decision-making) plus **what we published (= the technology at the four-point intersection)**. As always, the order is ① term explanations → ② breakdown (plain language) → ③ details.
 
 ---
 
