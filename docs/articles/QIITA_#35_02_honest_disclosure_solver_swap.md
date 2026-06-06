@@ -642,6 +642,8 @@ margin-sweep 红队对求解器伪影**结构性失明**——它们只是在同
 
 ![검증 arc 진척 테마 그림](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_progress_ko.svg)
 
+> 본 글은 llcore 검증 arc 의 마지막 편 (#35-02) 입니다. [#35-00 (개관)](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) 에서 "SDP 가 정답" 이라는 결론을, [#35-01 (사다리 상세)](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) 에서 증명 능력의 사다리를 보였습니다. #35-01 에서 "+254 가 아니라 +692", "위음성을 바로잡으면 숫자가 바뀐다" 고 예고한, 그 **솔버 보정의 현장**이 본 글입니다.
+
 ## 0. 용어 설명 / Glossary
 
 | 용어 | 쉬운 의미 |
