@@ -270,16 +270,24 @@ The academic audit used **literature only** and did not look at patent DBs (weak
 
 A defensive publication is weak as prior art unless written at "a level of detail that a person skilled in the art can implement." So the disclosure document wrote the following at **an implementable level**.
 
+![Memory core equation — an illustration of the leaky, saturating recurrence s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg)
+
 **(a) The ladder of sound contraction verifiers.** Three rungs, cheapest first:
 - `cert_inf` — closed-form ∞-norm upper bound (`O(n²)`). Uses the property that the sum of absolute values per row is maximized at the endpoints, so it is **solver-free**.
 - `cert_two` — SVD at all `2^n` vertices.
 - `cert_sdp` — a common Lyapunov matrix via a convex LMI (interior-point SDP, CLARABEL).
 
+![Verifier ladder — the three rungs cert_inf → cert_two → cert_sdp, a staircase of proof strength tried cheapest-first](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_ladder.svg)
+
 **Here is the honest point**: the project's old nickname was "Z3-gated," but **the actual gate does not use SMT (Z3)**. When we ran a dedicated Z3 contraction track to check, it **matched the closed-form ∞-norm verifier byte-for-byte (0 mismatches out of 3270; even near the boundary, 0 out of 8000)**. In other words, for this invariant class, **Z3 was decoration**. So we corrected the banner to "the ladder of sound contraction verifiers" (this is not a retreat but a strength — it avoids solver dependence and incompleteness).
 
 **(b) prove-then-reject gate (fail-closed).** Propose a child individual → adopt if the proof passes, resample up to a cap if it fails, and if it still fails, adopt a **known-safe fallback**. **An unproven child is never adopted.** We added `gate_mode="contraction"` / `"state_norm"` additively, and the default `"none"` is byte-identical to prior behavior (= a pure overlay on the existing evolution base).
 
+![prove-then-reject gate — a fail-closed checkpoint that proposes a child, adopts it if the proof passes, and rejects then resamples if it fails](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_gate.svg)
+
 **(c) tracking tube inspection metric.** An answer to the user's request to see not just "shrinks to somewhere" but "**tracks a desired trajectory**." Reusing the quantities the gate already computes (state Lipschitz `L`, input gain `G`) and the disturbance upper bound `w̄`, it reports the tube `r = G·w̄/(1−L)` in which the tracking error stays — at **zero additional proof cost**. Even in small-scale measurement, the 3 genes that PASS contraction have error/disturbance ratios 0.50/0.78/1.04, inside the theoretical tube, while a non-contraction control **amplifies by 9.3×** (= the gate is load-bearing, not decoration).
+
+![tracking tube — a tube of radius r = G·w̄/(1−L) drawn around the desired trajectory, with the actual trajectory staying inside it](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_tube.svg)
 
 **(d) Two routes for verified memory evolution.**
 - Route (a): gate updates of the agent's **memory bank** with a sound proof (the difference from SSGM's NLI theory = sound proof + a working gate).
