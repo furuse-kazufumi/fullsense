@@ -69,7 +69,7 @@ assert E.dimensions.matches(parse_unit("J"))  # ✓ Joule
 
 `N` (kg·m/s²) / `J` (kg·m²/s²) / `W` (kg·m²/s³) / `Pa` (kg/m/s²) / `Hz` (1/s) / `C` (s·A) / `V` (kg·m²/s³/A) / `ohm` を頻出範囲のみ実装。
 
-## MATH-08 — 内蔵計算エンジン (差別化軸最大)
+## MATH-08 — 内蔵計算エンジン (差別化の中核)
 
 **設計の核**: LLM に **数値計算をさせない**。
 
