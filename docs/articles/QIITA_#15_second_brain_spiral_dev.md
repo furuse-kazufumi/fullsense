@@ -184,6 +184,8 @@ llive は現時点で Apache 2.0 + Commercial dual-license の OSS、Repo は ht
 # 30 Years of Software Development Experience + Perplexity Summaries + Claude Code + TRIZ + a 50,000-Paper RAG = a "Second Brain"
 
 > 📚 **Series nav**: ← #14 Designing the invisible annotation channel ｜ **#15 This article** ｜ #16 Running AI with the "three selves" spirit → ｜ [Series LINK_MAP](./QIITA_#24_LINK_MAP.md). ※ Each article also stands on its own (links are for browsing).
+>
+> In the previous article #14, I designed an annotation channel that humans cannot see but machines can read. This article steps back one level: how do I stack up that body of features alone—that is, how do I **build** the "second brain" that powers the development?
 
 **One-line hook**:
 As a solo developer, over 5 days I added 14 features—including the Brief API, OKA-FX, VRB-FX, IND-04 annotations, and the MathVerifier—plus 256 tests, achieving 1270 all-PASS with zero regressions. The secret lies in how you assemble a "second brain."
