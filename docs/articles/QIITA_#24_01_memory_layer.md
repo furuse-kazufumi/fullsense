@@ -753,7 +753,7 @@ We ask the LLM "for this cluster, should it be `new / update / merge / split` ag
 
 ### Lesson 1: don't write everything — select by surprise
 
-Even a fixed-θ SurpriseGate **cuts ~90% of noise** versus writing everything. Going Bayesian makes it smarter still. To put it honestly, this **"decision not to write" determines the quality of the memory system**.
+Even a fixed-θ SurpriseGate, on typical repetitive input, greatly reduces what gets written versus writing everything (the reduction rate depends on θ and the input's redundancy). Going Bayesian makes the selection more adaptive still. To put it honestly, this **"decision not to write" shapes the quality of the memory system**.
 
 ### Lesson 2: keep the 4 layers loosely coupled
 
