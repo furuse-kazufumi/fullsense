@@ -560,14 +560,14 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 
 신규성은 「전부를 한 문장으로 지명할 수 있는가」로 정직함이 결정됩니다. 모서리별로 가장 가까운 선행을 한 문장으로:
 
-- **SSGM(arXiv:2603.11768)** — 「진화하는 기억을 통솔하는」 간판을 **이론만으로** 선점. 게이트는 NLI(모순 검출)로 **건전한 형식 증명이 아니며**, 구현도 없다. → 간판을 짊어진 상대로서 **반드시 인용**. 구현 + 증명의 창문이 비어 있다.
-- **SEVerA(arXiv:2603.25111)** — 자기 진화 에이전트에 Dafny/SMT 검증. 다만 대상은 **출력 계약**이지, 기억 코어의 축소성의 매 업데이트 게이트가 아니다.
-- **PSV-Verus(arXiv:2512.18160)** — self-play 루프 내의 건전 SMT 게이트. 다만 검증 대상은 **생성 코드의 정확성**.
-- **Provably Safe Model Updates / LID(arXiv:2512.01899)** — 업데이트를 추상 해석으로 δ-safe 인증. 다만 **사영(밀어 되돌리기)**으로 prove-then-reject가 아니며, 대상은 frozen-embedding의 분류 head.
-- **GP × 모델 검사(Katz & Peled, arXiv:1402.6785, 2014)** — 진화 루프에 건전한 검사 게이트를 두는 **패턴의 선례**. 그래서 우리는 **게이트의 패턴 자체를 신규라고 주장하지 않습니다**. 기억 코어의 축소성으로의 적용만이 미답.
-- **Enforced-Lipschitz Transformers(arXiv:2507.13338) / R2DN(arXiv:2504.01250)** — 축소성을 **구조로 강제(by-construction)**. 이것은 「게이트 따위 필요 없다, 처음부터 내장하라」는 최강의 대항 설계. 우리는 **by-construction 대 prove-then-reject**를 설계 축으로 대비합니다(구조 강제는 표현력을 희생하고, 기각 게이트는 임의 업데이트를 구조 제약 없이 검사한다).
+- **SSGM([arXiv:2603.11768](https://arxiv.org/abs/2603.11768))** — 「진화하는 기억을 통솔하는」 간판을 **이론만으로** 선점. 게이트는 NLI(모순 검출)로 **건전한 형식 증명이 아니며**, 구현도 없다. → 간판을 짊어진 상대로서 **반드시 인용**. 구현 + 증명의 창문이 비어 있다.
+- **SEVerA([arXiv:2603.25111](https://arxiv.org/abs/2603.25111))** — 자기 진화 에이전트에 Dafny/SMT 검증. 다만 대상은 **출력 계약**이지, 기억 코어의 축소성의 매 업데이트 게이트가 아니다.
+- **PSV-Verus([arXiv:2512.18160](https://arxiv.org/abs/2512.18160))** — self-play 루프 내의 건전 SMT 게이트. 다만 검증 대상은 **생성 코드의 정확성**.
+- **Provably Safe Model Updates / LID([arXiv:2512.01899](https://arxiv.org/abs/2512.01899))** — 업데이트를 추상 해석으로 δ-safe 인증. 다만 **사영(밀어 되돌리기)**으로 prove-then-reject가 아니며, 대상은 frozen-embedding의 분류 head.
+- **GP × 모델 검사(Katz & Peled, [arXiv:1402.6785](https://arxiv.org/abs/1402.6785), 2014)** — 진화 루프에 건전한 검사 게이트를 두는 **패턴의 선례**. 그래서 우리는 **게이트의 패턴 자체를 신규라고 주장하지 않습니다**. 기억 코어의 축소성으로의 적용만이 미답.
+- **Enforced-Lipschitz Transformers([arXiv:2507.13338](https://arxiv.org/abs/2507.13338)) / R2DN([arXiv:2504.01250](https://arxiv.org/abs/2504.01250))** — 축소성을 **구조로 강제(by-construction)**. 이것은 「게이트 따위 필요 없다, 처음부터 내장하라」는 최강의 대항 설계. 우리는 **by-construction 대 prove-then-reject**를 설계 축으로 대비합니다(구조 강제는 표현력을 희생하고, 기각 게이트는 임의 업데이트를 구조 제약 없이 검사한다).
 - **Safeguarded AI(ARIA programme)** — 가장 권위 있는 proof-gated-gatekeeper 개념. 다만 게이트 대상은 **행동/계획**(출력 게이트)으로, 가중치/기억의 업데이트 게이트가 아니며, 아직 programme 단계.
-- **Emergent FV / substrate-guard(arXiv:2603.21149)** — AI의 **출력**을 Z3로 검증하는 돌아가는 시스템. 다만 post-hoc 감시로, 매 업데이트 게이트가 아니다.
+- **Emergent FV / substrate-guard([arXiv:2603.21149](https://arxiv.org/abs/2603.21149))** — AI의 **출력**을 Z3로 검증하는 돌아가는 시스템. 다만 post-hoc 감시로, 매 업데이트 게이트가 아니다.
 
 (위 arXiv ID는 모두 논문 드래프트에서 abstract와 대조 확인된 것만 사용하고 있습니다.)
 
