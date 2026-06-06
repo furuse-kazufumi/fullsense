@@ -324,7 +324,7 @@ flowchart LR
 
 Pinning CLARABEL collapsed the artifact:
 
-| Metric | SCS (fabricated) | CLARABEL (true) |
+| Metric | SCS (spurious) | CLARABEL (true) |
 |---|---|---|
 | deg4_only / deg6_only / both | 23 / 13 / 18 | 0 / 1 / 54 |
 | structural reading | complementary, non-nested | nested |
