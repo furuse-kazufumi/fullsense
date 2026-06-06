@@ -551,6 +551,12 @@ Brief(
 
 「该用 benchmark 比较速度吗」 → No，**应该比较的是结构，而非速度**。llive 的附加价值在于 ledger / approval / governance / grounding / 6 stage trace，这无法通过直接调用 ollama 或 LangChain chain 来复现。
 
+## 留下的问题 — 仅凭「外围」能否断言独特
+
+到目前为止的结论是：独特性「在于覆盖在 LLM 周围的 cognitive OS」。但有一个戳中痛处的反驳：如果核心仍是 Qwen / Llama / Mistral，那这岂不就是「在别人的大脑上嫁接了一个自制的额叶」? 无论把外围打磨得多么精细，只要思考的根仍依赖借来的东西，作为研究真的能主张独特性吗?
+
+这也是作者本人从用户那里收到的提问。在下一篇 **#10「[脱离 Qwen 依赖的 5 阶段路线图](./QIITA_%2310_qwen_divergence_strategy.md)」** 中，我们将处理把那个借来的核心逐步迁移为自制的路径——如何把在外围证明的独特性，下沉到核心本身? 我们要去确认：本文中写下的「现阶段 (Phase 1〜v0.6) 不更新权重」这条线，何时、跨到何处。
+
 ## 来源
 
 - 设计：`llive/.planning/REQUIREMENTS.md`（92 条要件，其中 v1.0-frame COG-FX 4 条进行因子映射）
