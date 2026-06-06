@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 22:42:52
+- **生成時刻**: 2026-06-06 22:55:52
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `2	0`
 
 ```
+a74fac4 docs(research): llterm spec 確定 — v1 実装オプション (b) 従来TUI+追加入力欄を採用
+7dc5cdf docs(research): llterm spec v1 スコープ確定 — 表示は互換・入力欄だけ別扱い
+3f5d88c auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:45)
+eae9cca auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:45)
 654a8fc docs(research): llterm spec に R13 追加 (矢印=カーソル移動、Ctrl/Shift+矢印=履歴・補完)
 b24fb83 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:42)
 8bf0da9 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:42)
 2038f34 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:42)
 f143a00 docs(research): llterm spec に R12 追加 (Enter=改行のみ、送信は Ctrl+Enter/Shift+Enter)
 fe3f7d2 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:39)
-319dd01 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:39)
-0e7ae1e auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:38)
-53c72c8 docs(research): llterm spec に R11 追加 (複数行貼り付け対応)
-ed9aa79 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:36)
 ```
 
 ### git status (porcelain)
@@ -75,9 +75,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:42` `docs/research/llterm_spec_2026_06_06.md`
-- `22:39` `docs/NEXT_SESSION.auto.md`
-- `22:39` `docs/SESSION_SUMMARY.md`
+- `22:46` `docs/research/llterm_spec_2026_06_06.md`
+- `22:42` `docs/NEXT_SESSION.auto.md`
+- `22:42` `docs/SESSION_SUMMARY.md`
 - `22:31` `docs/research/index.md`
 - `22:17` `docs/research/phase2a_verified_memory_evolution_design_2026_06_06.md`
 - `22:05` `docs/articles/QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md`
