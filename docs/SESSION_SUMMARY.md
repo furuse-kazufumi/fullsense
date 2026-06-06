@@ -3,23 +3,23 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-06 22:36:57
+- **最終更新**: 2026-06-06 22:39:40
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+f143a00 docs(research): llterm spec に R12 追加 (Enter=改行のみ、送信は Ctrl+Enter/Shift+Enter)
+fe3f7d2 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:39)
+319dd01 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:39)
+0e7ae1e auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:38)
 53c72c8 docs(research): llterm spec に R11 追加 (複数行貼り付け対応)
 ed9aa79 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:36)
 6a794e8 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:36)
 8b6b2cc auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:36)
 de636b0 docs(research): llterm spec に R8-R10 追加 (等幅/ANSI色/IME 入力欄安定)
 1b89df3 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:32)
-86ff676 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:32)
-ea88de5 docs(research): llterm spec 確定 + Phase 2a 設計 doc + lloT memo を index 登録
-4ad8c41 auto: index.md 編集前 (2026-06-06 22:31)
-76c2701 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:30)
 ```
 
 ## 現在の git status
@@ -31,9 +31,9 @@ ea88de5 docs(research): llterm spec 確定 + Phase 2a 設計 doc + lloT memo を
 ## 直近 2 時間に変更されたファイル
 
 ```
-22:36 docs/research/llterm_spec_2026_06_06.md
-22:33 docs/SESSION_SUMMARY.md
-22:33 docs/NEXT_SESSION.auto.md
+22:39 docs/research/llterm_spec_2026_06_06.md
+22:37 docs/SESSION_SUMMARY.md
+22:37 docs/NEXT_SESSION.auto.md
 22:31 docs/research/index.md
 22:17 docs/research/phase2a_verified_memory_evolution_design_2026_06_06.md
 22:05 docs/articles/QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md
