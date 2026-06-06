@@ -159,6 +159,10 @@ llive が計算する → IEEE 754 精度、再現可能、引用可能
 
 # The First Step Toward an AI That Is Strong at Math and Units — The MATH-01/08 Built-in Calculation Engine
 
+> 📚 **Series nav**: ← #01 [Brief API design and the progressive matrix](./QIITA_#01_brief_api_progressive.md) / #02 [Organizing the thinking layer with 10 cognitive factors](./QIITA_#02_cognitive_factors.md) ｜ **#03 This article** (the first vertical = math & units) ｜ #06 [How do we stop LLM math hallucinations](./QIITA_#06_next_math02_formal_gate.md) →. ※ Each article stands on its own.
+>
+> In #01 we looked at the Brief as an entry point, and in #02 at the cognitive factors that flow over it. In this article we put the **first specialised field** onto that entry point — math and units. We start from the question of why a general-purpose LLM will calmly write `5 m/s + 3 s = 8`.
+
 ## TL;DR
 
 - As llive's first specialised vertical, we chose a "**math- and unit-focused AI**" (per the user's strategic direction)
