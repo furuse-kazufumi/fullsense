@@ -253,12 +253,11 @@ Brief.goal にある式 → SafeCalculator が評価 → 結果が augmented goa
 LLM computes → floating-point hallucinations, loss of significance
 llive computes → IEEE 754 precision, reproducible, citable
 
-## Why This Is the Strongest Differentiation Axis
+## Why We Chose This as the First Differentiation Axis
 
-- General-purpose LLMs (GPT / Claude / Gemini) are designed so that "the LLM computes"
-- llive is designed to "**verify** the LLM's output and, if necessary, **recompute** it"
-- Wolfram Alpha is powerful but a closed cloud. llive is fully on-prem
-- Math, physics, engineering, finance, and pharmacy all need "unit dimensions" and "precise computation" → as the first vertical, it has a broad range of applicability
+- General-purpose LLMs (GPT / Claude / Gemini) are designed so that "the LLM computes." llive took the design where it "**verifies** the LLM's output and, if necessary, **recomputes** it" — which is better depends on the use case, so we present it here as a difference in design philosophy
+- Wolfram Alpha is a powerful calculation engine but a closed cloud. llive is fully on-prem. Whether that difference matters depends on the constraint of whether you can send your data outside
+- Math, physics, engineering, finance, and pharmacy all need "unit dimensions" and "precise computation" → as the first vertical it has a broad range of applicability, which is why we judged it worth validating first
 
 ## All 8 Requirements of v0.7-vertical MATH
 
