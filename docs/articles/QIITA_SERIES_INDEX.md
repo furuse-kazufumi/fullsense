@@ -77,6 +77,7 @@ nav_order: 1
 | ダイジェスト | 推論する AI から「予測する認知 OS」へ — 開発 1 週間ダイジェスト (05-17→05-24) | [weekly digest](./QIITA_WEEKLY_DIGEST_2026-05-17_to_24.md) |
 | 検証器 arc | llcore 検証器の梯子 (∞→2→SDP→SOS→JSR, SMT は飾り) | [#35-00](./QIITA_%2335_00_verifier_sdp_not_smt_index.md) / [01](./QIITA_%2335_01_verifier_frontier_sdp.md) / [02](./QIITA_%2335_02_honest_disclosure_solver_swap.md) |
 | 検証器 arc | 2ⁿ の壁を破る vertex-free 健全証明 + コストを進化の選択圧に (JA/EN/ZH/KO) | [#36](./QIITA_%2336_verifier_2pow_n_wall_vertex_free.md) / [かみくだき](./QIITA_%2336_verifier_2pow_n_wall_vertex_free_kamikudaki.md) |
+| 検証器 arc | **公開済** AI が無料 GPU で実験 3 連戦を自走 — 安全ゲートの代価 (HD-1 + Stage-B, JA/EN/ZH/KO) | [#37](./QIITA_%2337_gpu_triple_run_gate_price.md) ([live](https://qiita.com/furuse-kazufumi/items/6f44575d440a9ebf5228)) / [かみくだき](./QIITA_%2337_gpu_triple_run_gate_price_kamikudaki.md) ([live](https://qiita.com/furuse-kazufumi/items/f06ca92ea208c7646fcd)) |
 
 ## メンテナンス note
 
