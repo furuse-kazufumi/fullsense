@@ -358,9 +358,9 @@ The 8 lineages I sowed:
 | von Neumann | formalization / computation / multi-domain crossing |
 | Feynman | recomposition / first principles / intuitive verification |
 
-> 🍵 **A break**: If you now picture "8 geniuses thrown into a VR battle royale",
+> 🍵 **A break**: If you now picture "8 cognitive styles evolving in a shared environment",
 > you're good. The problem is that the **rules (the evaluation function) of this
-> battle royale were broken**. The main topic starts in the next section.
+> selection environment were broken**. The main topic starts in the next section.
 
 ---
 
