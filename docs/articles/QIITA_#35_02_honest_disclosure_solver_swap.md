@@ -636,7 +636,7 @@ margin-sweep 红队对求解器伪影**结构性失明**——它们只是在同
 > 📗 **바쁘신 분께**: 이 글에는 [쉽게 풀어쓴 버전](https://fullsense.qiita.com/furuse-kazufumi/items/146d5e2b27dabc59e799)이 있습니다.
 # llcore 검증 arc (#35-02) — 솔버를 의심하라: 다관점 pair-review 로 SCS 함정을 잡아내 정정한 이야기
 
-![그림: 솔버를 교체하니 조작된 수치가 무너진다](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_ko.svg)
+![그림: 솔버를 교체하니 거짓 수치가 무너진다](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_ko.svg)
 
 > Concept hook: 진화한 AI 다이내믹스가 "망가지지 않았는지" 검사하는 verifier 연구에서, SDP/차수 사다리의 수치가 지나치게 "풍부"해 보였다. 우리는 의심했다. 알고 보니 cvxpy 의 기본 솔버 SCS 가 실행가능성 경계 부근에서 위음성을 내고 있었다 — 실제로 존재하는 Lyapunov 증명서를 "못 찾았다"고 보고한 것이다. 정확한 내점법 솔버 CLARABEL 로 고정하자, 조작되었던 "차수 상보성"(23/13/18, 잔차 53, SDP 64%)은 중첩 구조(0/0/54, 잔차 10, SDP 95%)로 무너졌고, SDP 의 우위는 오히려 *과소평가*되어 있었다 (+254 → +692). 이 편은 그 정정과, Codex + 6 에이전트 적대 Workflow 의 pair-review 전말을 사실만으로 풀어낸다.
 
