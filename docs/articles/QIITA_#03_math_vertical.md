@@ -431,11 +431,13 @@ llive 计算 → IEEE 754 精度、可复现、可引用
 - 测试: `tests/unit/test_math_units.py` (22 个) + `tests/unit/test_math_calculator.py` (24 个)
 - 全部 1014 PASS / 零回归
 
-## 下一步
+## 留下的问题 — 「不让它计算」就够了吗
 
-- 把 `SafeCalculator` 集成进 BriefGrounder → 在投入 Brief 的那一刻式子就被自动 ground
-- 把 MATH-05 CODATA 辞典 append 到 RAD `metrology` 分野
-- 在 MATH-02 Sympy 检算层把 LLM 的数学式输出转成 AST → 标记 (flag) 不一致
+到目前为止的设计都是「**不让** LLM 计算」。把算术式夺过来交给确定性引擎，`5 m/s + 3 s` 就会被拦下。但 LLM 吐出的不只是数值。如果它用一套像模像样的措辞，写出 `x² + x = 2x³` 这样**本身就错的数式**，又该怎么办？如果在夺走式子之前，无法机械地反证这个式子是否正确，那这套验证就只用了一半的肺。
+
+下一篇 **#06「[如何阻止 LLM 的数式幻觉 —— 形式化验证门](./QIITA_#06_next_math02_formal_gate.md)」** 将解剖 MATH-02：把 LLM 吐出的数式用 Sympy 转成 AST、并机械地标记 (flag) 矛盾的机制——从本文的「不让它计算」向「反证它的输出」迈进一步。在相信一个式子之前，我们先去打造那台怀疑式子的引擎。
+
+（作为手头并行推进的工作，还包括把 `SafeCalculator` 集成进 BriefGrounder，使式子在投入 Brief 的那一刻被自动 ground，以及把 MATH-05 CODATA 辞典 append 到 RAD `metrology` 分野。）
 
 ---
 
