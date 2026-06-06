@@ -411,14 +411,17 @@ In the next part, **#36**, we break this 2ⁿ wall with a **sound approximation 
 8. Boyd, S. & Vandenberghe, L. *Convex Optimization* (LMIs / SDP) — Cambridge University Press, 2004.
 9. Boyd, S., El Ghaoui, L., Feron, E. & Balakrishnan, V. *Linear Matrix Inequalities in System and Control Theory* — SIAM, 1994.
 10. Mouret, J.-B. & Clune, J. *Illuminating search spaces by mapping elites (MAP-Elites)* — arXiv:1504.04909, 2015.
-11. Internal: [#35-00 Overview](#) — the big picture of the llcore verification arc.
-12. Internal: [#35-01 Verifier frontier](#) — the ladder and the SDP big jump.
+11. Internal: [#35-00 Overview](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) — the big picture of the llcore verification arc.
+12. Internal: [#35-01 Verifier frontier](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) — the ladder and the SDP big jump.
 
 ## Series navigation
 
-- [#35-00 — llcore verification arc overview](#)
-- [#35-01 — verifier-fitness frontier (ladder of certifying power)](#)
-- **#35-02 — Suspect the solver (this article)**
+- [#35-00 — llcore verification arc overview](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6)
+- [#35-01 — verifier-fitness frontier (ladder of certifying power)](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)
+- **#35-02 — Suspect the solver (this article; finale of the verification arc)**
+- #36 — Breaking the 2ⁿ wall: vertex-free sound proofs and "cost as evolutionary pressure" (the next arc)
+
+※ Each article stands on its own (links are for browsing).
 
 ---
 
