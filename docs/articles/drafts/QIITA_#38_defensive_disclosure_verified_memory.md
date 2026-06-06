@@ -111,16 +111,24 @@ id: fa55b499b45a871a97db
 
 防衛的公開は「当業者が実施できる詳細度」で書かないと先行技術として弱い。なので、開示文書には次を **実装可能なレベル** で書きました。
 
+![記憶コア式 — 漏れと飽和つき再帰 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) の図解](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg)
+
 **(a) 健全な縮小性証明器の梯子(ladder)。** 安いものから順に 3 段:
 - `cert_inf` — 閉形式の ∞-ノルム上限(`O(n²)`)。各行の絶対値和が端点で最大になる性質を使い、**ソルバ不要**。
 - `cert_two` — 全 `2^n` 頂点で SVD。
 - `cert_sdp` — 共通 Lyapunov 行列を凸 LMI(内点 SDP, CLARABEL)で。
 
+![証明器ラダー — cert_inf → cert_two → cert_sdp の 3 段、安い順に試す証明強度の階段](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_ladder.svg)
+
 **ここが正直ポイント**: プロジェクトの旧通称は「Z3-gated」でしたが、**実際のゲートに SMT(Z3)は使っていません**。専用の Z3 縮小性トラックを走らせて確認したら、閉形式 ∞-ノルム証明器と **バイト単位で一致(3270 件中 0 件の不一致、境界近傍でも 8000 件中 0 件)**。つまりこの不変量クラスでは **Z3 は装飾** でした。だから看板を「健全な縮小性証明器の梯子」に直しています(これは退却ではなく強み — ソルバ依存と不完全性を回避できる)。
 
 **(b) prove-then-reject ゲート(fail-closed)。** 子個体を提案 → 証明が通れば採用、ダメなら上限まで resample、それでもダメなら **既知安全な fallback** を採用。**未証明の子は決して採用しない**。`gate_mode="contraction"` / `"state_norm"` を additive に追加し、既定 `"none"` は従前挙動とバイト一致(=既存進化基盤への純粋な被せ物)。
 
+![prove-then-reject ゲート — 子個体を提案し、証明が通れば採用・ダメなら棄却して再生成する fail-closed の関所](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_gate.svg)
+
 **(c) tracking tube 検査指標。** 「どこかに縮む」だけでなく「**望ましい軌道に追従する**」を見たい、というユーザー要望への答え。ゲートが既に計算している量(状態 Lipschitz `L`、入力ゲイン `G`)と外乱上界 `w̄` を再利用し、追従誤差が収まる筒 `r = G·w̄/(1−L)` を **追加証明コストゼロ** で報告。小規模実測でも、縮小性 PASS の 3 gene は誤差/外乱比 0.50/0.78/1.04 で理論筒の内側、非縮小性の対照は **9.3 倍** に増幅(=ゲートは飾りでなく load-bearing)。
+
+![tracking tube — 望ましい軌道のまわりに半径 r = G·w̄/(1−L) の筒が張られ、実際の軌道がその内側に収まる図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_tube.svg)
 
 **(d) verified memory evolution の 2 ルート。**
 - ルート (a): エージェント **記憶バンク** の更新を健全証明でゲート(SSGM の NLI 理論との差 = 健全証明 + 動くゲート)。
