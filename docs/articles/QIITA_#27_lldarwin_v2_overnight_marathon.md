@@ -962,7 +962,7 @@ Build good parts, bundle them without aggregating, verify saturation with a real
 
 最先该验证的假设，是最根本的问题：**「把尺子从固定难度改为自适应难度，饱和会被修好吗？」**
 
-### 4.1 自跑 PoC #1 —— 自适应难度修好饱和，但杀死多样性
+### 4.1 自跑 PoC #1 —— 自适应难度修好饱和，但抵消多样性
 
 用合成的 competence 向量的 proxy，去除混杂后（按 score 选 elite）做对比。
 
