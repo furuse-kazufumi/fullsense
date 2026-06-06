@@ -10,33 +10,32 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 21:38:35
+- **生成時刻**: 2026-06-06 22:08:46
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-91ef4d6 docs(articles): 第2波 文章改善 — #03 (謙虚さ) + #35_02 (引き/トーン)
-bc0bf8f auto: master_plan_2026_06_06.md 編集前 (2026-06-06 21:33)
-0639c01 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:33)
-7bcab72 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:33)
-20601d0 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
-b29b203 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
-511b5e8 auto: master_plan_2026_06_06.md 編集前 (2026-06-06 21:32)
-135eadc auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
-56da605 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
-2a3557a auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
+61f5630 auto: QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md 編集前 (2026-06-06 22:05)
+516a4dc auto: QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md 編集前 (2026-06-06 22:04)
+d4b263a auto: QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md 編集前 (2026-06-06 22:04)
+95abf46 auto: QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md 編集前 (2026-06-06 22:04)
+91aebb4 auto: QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md 編集前 (2026-06-06 22:04)
+6b916f0 auto: QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md 編集前 (2026-06-06 22:04)
+55bcc6b auto: QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md 編集前 (2026-06-06 22:03)
+46ec06b auto: QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md 編集前 (2026-06-06 22:03)
+c81fcc9 auto: QIITA_#37_gpu_triple_run_gate_price.md 編集前 (2026-06-06 22:03)
+9dc7cf5 auto: QIITA_#37_gpu_triple_run_gate_price.md 編集前 (2026-06-06 22:03)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+M docs/articles/QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md
 ```
 
 
@@ -76,6 +75,15 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `22:05` `docs/articles/QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md`
+- `22:03` `docs/articles/QIITA_#37_gpu_triple_run_gate_price.md`
+- `22:01` `docs/articles/QIITA_#12_dev_history.md`
+- `22:00` `docs/articles/QIITA_#13_corpus_first_advantage.md`
+- `22:00` `docs/articles/QIITA_#24_01_memory_layer.md`
+- `22:00` `docs/articles/QIITA_#09_llive_structure_originality.md`
+- `21:59` `docs/articles/QIITA_#14_invisible_annotation_channel.md`
+- `21:58` `docs/articles/QIITA_#15_second_brain_spiral_dev.md`
+- `21:56` `docs/research/llot_idea_research_2026_06_06.md`
 - `21:38` `docs/SESSION_SUMMARY.md`
 - `21:38` `docs/NEXT_SESSION.auto.md`
 - `21:33` `docs/research/master_plan_2026_06_06.md`
@@ -87,15 +95,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `20:01` `docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md`
 - `19:59` `docs/articles/QIITA_#27_lldarwin_v2_overnight_marathon_kamikudaki.md`
 - `19:57` `docs/articles/QIITA_#27_lldarwin_v2_overnight_marathon.md`
-- `19:49` `docs/research/ethics_audit_published_2026_06_06.md`
-- `19:46` `tools/qiita_team_post.py`
-- `19:34` `docs/articles/assets/qiita_38/qiita_38_fig_core.svg`
-- `19:30` `docs/articles/assets/qiita_38/qiita_38_fig_gate.svg`
-- `19:29` `docs/articles/assets/qiita_38/qiita_38_fig_tube.svg`
-- `19:29` `docs/articles/assets/qiita_38/qiita_38_fig_ladder.svg`
-- `19:28` `docs/articles/assets/qiita_38/qiita_38_fig_intersection.svg`
-- `17:51` `docs/doc_map.md`
-- `17:47` `docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md`
 
 
 ## Cross-references
