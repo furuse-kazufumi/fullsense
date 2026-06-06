@@ -308,15 +308,15 @@ llive itself is a mechanism that propagates "the advantage of the corpus-first s
 - Record, among the "perspectives the user is not consciously aware of," the ones that were especially effective
 - Reuse them in sessions from the next day onward
 
-## Summary — 3 Axioms of the Advantage of AI-Collaborative Development
+## Summary — 3 Observations on Where AI-Collaborative Development Pays Off
 
-Three axioms from the realization gained today:
+Three observations that seem safe to make at this point, from what I noticed today:
 
-1. **Corpus quality = output quality** — Not the AI alone, but the set of AI + corpus + conventions + memory
-2. **The perspectives not in your consciousness are precisely the valuable ones** — The AI completes, in the background, the perspectives the user does not notice
-3. **Solo development = multi-person development** — Through automatic application of Six Hats / Role-based agents, one person gets multiple viewpoints
+1. **Corpus quality tends to drive output quality** — It works as a set: AI + corpus + conventions + memory, not the AI alone
+2. **The perspectives not in your consciousness may be exactly the valuable ones** — The AI completes, in the background, the perspectives the user does not notice
+3. **Even a solo developer can get multiple viewpoints** — Through automatic application of Six Hats / Role-based agents, multiple viewpoints get mixed in even for one person
 
-These 3 axioms are also provided to the end user through llive's CREAT requirement group.
+We aim to deliver all three to the end user as well, through llive's CREAT requirement group.
 
 ## Sources
 
