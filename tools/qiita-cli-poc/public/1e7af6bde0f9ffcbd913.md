@@ -5,13 +5,19 @@ tags:
   - llive
   - FullSense
 private: true
-updated_at: '2026-05-23T07:25:38+09:00'
+updated_at: '2026-06-05T05:42:39+09:00'
 id: 1e7af6bde0f9ffcbd913
 organization_url_name: null
 slide: false
 ignorePublish: false
 ---
 # Will Caster と Andrew NDR114 が目指したもの — llive のビジョン論
+
+:::note info
+**📚 FullSense ナレッジベースのご案内** <!-- fullsense-team-kb -->
+FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** に集約しています (チームメンバー向け)。
+:::
+
 
 **1 行 hook**:
 LinkedIn のプロフィール画像を、自分の顔とロボットを画像生成 AI で融合した一枚にしている。冗談ではない。**いずれ AI と人が融合できたら面白い**と本気で考えている。その第一歩としての llive。

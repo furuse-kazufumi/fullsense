@@ -7,13 +7,19 @@ tags:
   - MCP
   - LLM
 private: false
-updated_at: '2026-05-09T09:49:23+09:00'
+updated_at: '2026-06-05T05:42:59+09:00'
 id: edaef9aa56ae66b8423e
 organization_url_name: null
 slide: false
 ignorePublish: false
 ---
 # ローカル LLM × 産業 IoT × プロンプトファイアウォールを 1 つの Python フレームワークで — LLMesh v3.1.0 を作った話
+
+:::note info
+**📚 FullSense ナレッジベースのご案内** <!-- fullsense-team-kb -->
+FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** に集約しています (チームメンバー向け)。
+:::
+
 
 > Secure LLM Mesh over MCP — `pip install llmesh-mcp`
 

@@ -9,12 +9,17 @@ tags:
   - FullSense
   - HonestDisclosure
 private: false
-updated_at: '2026-05-23T07:45:02+09:00'
+updated_at: '2026-06-05T05:42:44+09:00'
 id: 7fa693bc2f1ae43ba5ba
 organization_url_name: null
 slide: false
 ignorePublish: false
 ---
+:::note info
+**📚 FullSense ナレッジベースのご案内** <!-- fullsense-team-kb -->
+FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** に集約しています (チームメンバー向け)。
+:::
+
 ## 0. 冒頭 hook — 「脱却した」と「default が脱却」のあいだに広がる谷
 
 「Transformer から脱却した」と「default の実行経路が non-transformer」は

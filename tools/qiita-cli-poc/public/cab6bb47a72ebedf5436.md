@@ -7,13 +7,19 @@ tags:
   - LLM
   - 開発履歴
 private: false
-updated_at: '2026-05-17T10:00:49+09:00'
+updated_at: '2026-06-05T05:42:47+09:00'
 id: cab6bb47a72ebedf5436
 organization_url_name: null
 slide: false
 ignorePublish: false
 ---
 # llmesh → llove → llive — FullSense 3 製品の開発履歴・設計コンセプト・差別化・普及戦略 (2026-05-17 時点)
+
+:::note info
+**📚 FullSense ナレッジベースのご案内** <!-- fullsense-team-kb -->
+FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** に集約しています (チームメンバー向け)。
+:::
+
 
 著者: **古瀬 和文（ぷるやん）**
 

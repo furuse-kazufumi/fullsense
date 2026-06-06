@@ -7,13 +7,19 @@ tags:
   - 業務効率化
   - 認知科学
 private: false
-updated_at: '2026-05-17T09:36:32+09:00'
+updated_at: '2026-06-05T05:42:49+09:00'
 id: 25fd4cae8aed848d3a3c
 organization_url_name: null
 slide: false
 ignorePublish: false
 ---
 # AI を『使うだけ』から『AI に秘書を付ける』へ — 自宅 PC で動くおせっかい AI フレームワーク llive 開発日記
+
+:::note info
+**📚 FullSense ナレッジベースのご案内** <!-- fullsense-team-kb -->
+FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** に集約しています (チームメンバー向け)。
+:::
+
 
 著者: **古瀬 和文（ぷるやん）**
 
