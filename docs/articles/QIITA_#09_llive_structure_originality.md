@@ -203,6 +203,10 @@ LLM (Qwen/Llama/...) を凍結コアとして使い
 
 Author: Kazufumi Furuse (Puruyan)
 
+> 📚 **Series nav**: ← #08 [Quiz bench Debug vs Release comparison](./QIITA_%2308_quiz_bench_debug_vs_release.md) ｜ **#09 This article** (reviewing the originality of the structure) ｜ #10 [A 5-stage roadmap to break free from Qwen dependence](./QIITA_%2310_qwen_divergence_strategy.md) →. ※ Each article stands on its own.
+>
+> In #07/#08 we looked, from the measurement side, at whether it even makes sense to benchmark llive on speed. In this article we move the question to the structural side — is llive becoming something original *as an LLM*? Starting from a single question raised by the user, we review the 8 differentiating elements one by one.
+
 ## TL;DR
 
 A question from the user: "Is llive's structure becoming an original structure as an LLM?"
