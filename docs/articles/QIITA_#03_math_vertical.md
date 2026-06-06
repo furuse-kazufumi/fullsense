@@ -398,12 +398,11 @@ Brief.goal にある式 → SafeCalculator が評価 → 結果が augmented goa
 LLM 计算 → 浮点幻觉、有效位丢失
 llive 计算 → IEEE 754 精度、可复现、可引用
 
-## 为何这是最强的差异化轴
+## 为何我们把它选为第一个差异化轴
 
-- 通用 LLM (GPT / Claude / Gemini) 是「LLM 来计算」的设计
-- llive 是「**验证** LLM 的输出，必要时**重新计算**」的设计
-- Wolfram Alpha 很强大，但是封闭的云端。llive 则完全 on-prem
-- 数学、物理、工程、金融、药学全都需要「单位量纲」和「精密计算」→ 作为第一个 vertical，适用范围很广
+- 通用 LLM (GPT / Claude / Gemini) 是「LLM 来计算」的设计；llive 则采用「**验证** LLM 的输出，必要时**重新计算**」的设计——孰优孰劣取决于用途，这里仅作为设计思路的差异来呈现
+- Wolfram Alpha 是强大的计算引擎，但是封闭的云端；llive 则完全 on-prem。这一差异是否起作用，取决于你能否把数据送到外部这一约束
+- 数学、物理、工程、金融、药学全都需要「单位量纲」和「精密计算」→ 作为第一个 vertical，适用范围很广，我们据此判断它值得优先验证
 
 ## v0.7-vertical MATH 的全部 8 项要求
 
