@@ -504,7 +504,7 @@ assert E.dimensions.matches(parse_unit("J"))  # ✓ Joule
 
 `N` (kg·m/s²) / `J` (kg·m²/s²) / `W` (kg·m²/s³) / `Pa` (kg/m/s²) / `Hz` (1/s) / `C` (s·A) / `V` (kg·m²/s³/A) / `ohm` — 자주 쓰이는 범위만 구현.
 
-## MATH-08 — 내장 계산 엔진 (차별화 축 최대)
+## MATH-08 — 내장 계산 엔진 (차별화의 핵심)
 
 **설계의 핵심**: LLM에게 **수치 계산을 시키지 않는다**.
 
