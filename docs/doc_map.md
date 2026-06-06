@@ -167,6 +167,7 @@ nav_order: 3
 | `docs/research/classics_dna_mapping_2026_06_06.md` | 孫子13篇+論語から差別化 trait を 20 原理抽出 → (a)研究戦略/(b)設計遺伝子/(c)検問統治 に写像。新設遺伝子座 G14-G18 提案。llive ontology に sun-tzu-strategist/confucius ペルソナ追加 |
 | `docs/research/differentiation_audit_dna_roadmap_2026_06_06.md` | 敵対的差別化監査の確定結果 (56 agents, breaks 0/narrows 36) + 特別 DNA ロードマップ。四点交差点の生存確認、D1'-D4' クレーム再定義、防御壁 15 件、Phase 0-4 優先度計画 (計画→小PoC→大PoC→組込み) |
 | `docs/research/master_plan_2026_06_06.md` | 包括計画: 5 トラック (llcore 本線/llive+Sakana/発信/防御調査/台帳掃除) に全やり残しを統合、次 3 セッションの推奨実行順 + user-gate 一覧 |
+| `docs/research/patent_search_2026_06_06.md` | 特許 DB 照会 (T4 4-1): 結論 clear — 四点交差点の特許ゼロ、narrows 弱 2 件は related work で対比推奨。D2' は出願でも先取り可能 (user 判断) |
 | `docs/papers/2026-05-29_core_evolution_master_survey.md` | Core Evolution master survey (Agent A-D + RAD 14 分野) |
 | `docs/papers/2026-05-29_research_plan_core_evolution.md` | 研究計画書 v1 (TMLR 本命) |
 
