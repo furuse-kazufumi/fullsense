@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520" role="img" aria-label="Prove-then-reject gate (fail-closed): propose child, prove, accept or resample, fallback at cap">
+  <title>Prove-then-reject gate (fail-closed)</title>
+  <desc>A child is accepted only if its contraction proof passes; otherwise it is rejected and resampled, with a known-safe fallback at the cap.</desc>
+
+  <rect width="800" height="520" fill="#f7f9fc"/>
+
+  <text x="400" y="40" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#1f2a44" text-anchor="middle">Prove-then-reject (fail-closed)</text>
+  <text x="400" y="66" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#5a6477" text-anchor="middle">reject and resample &#8212; never project an unproven child into the safe set</text>
+
+  <!-- propose child -->
+  <rect x="60" y="160" width="160" height="64" rx="10" fill="#e3eefb" stroke="#3b7dd8" stroke-width="2"/>
+  <text x="140" y="190" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#2c5aa0" text-anchor="middle">propose</text>
+  <text x="140" y="210" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#2c5aa0" text-anchor="middle">child</text>
+
+  <!-- prove? diamond -->
+  <polygon points="370,130 460,192 370,254 280,192" fill="#ece2f7" stroke="#8a55c4" stroke-width="2"/>
+  <text x="370" y="186" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#6f3fa8" text-anchor="middle">prove?</text>
+  <text x="370" y="206" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6f3fa8" text-anchor="middle">contraction</text>
+
+  <!-- accept -->
+  <rect x="560" y="120" width="170" height="64" rx="10" fill="#dff0ec" stroke="#2e9e8f" stroke-width="2"/>
+  <text x="645" y="150" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#1d7a6e" text-anchor="middle">accept</text>
+  <text x="645" y="170" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#1d7a6e" text-anchor="middle">(certified child)</text>
+
+  <!-- resample -->
+  <rect x="285" y="330" width="170" height="64" rx="10" fill="#fbf4e0" stroke="#caa13a" stroke-width="2"/>
+  <text x="370" y="360" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#8a6d1f" text-anchor="middle">resample</text>
+  <text x="370" y="380" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#8a6d1f" text-anchor="middle">draw a new child</text>
+
+  <!-- fallback -->
+  <rect x="540" y="400" width="210" height="64" rx="10" fill="#eef1f6" stroke="#5a6477" stroke-width="2"/>
+  <text x="645" y="430" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#3a4459" text-anchor="middle">known-safe fallback</text>
+  <text x="645" y="450" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#5a6477" text-anchor="middle">parent / identity child</text>
+
+  <!-- arrows -->
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 L8 3 L0 6 Z" fill="#5a6477"/>
+    </marker>
+  </defs>
+  <g stroke="#5a6477" stroke-width="2" fill="none">
+    <!-- propose -> prove -->
+    <line x1="220" y1="192" x2="276" y2="192" marker-end="url(#ah)"/>
+    <!-- prove -> accept (pass) -->
+    <line x1="460" y1="170" x2="556" y2="152" marker-end="url(#ah)"/>
+    <!-- prove -> resample (fail) -->
+    <line x1="370" y1="254" x2="370" y2="326" marker-end="url(#ah)"/>
+    <!-- resample -> propose (loop back up) -->
+    <path d="M285 362 C150 362, 110 300, 130 228" marker-end="url(#ah)"/>
+    <!-- resample -> fallback (cap reached) -->
+    <path d="M455 372 C500 384, 520 396, 540 420" marker-end="url(#ah)"/>
+  </g>
+
+  <!-- edge labels -->
+  <text x="505" y="138" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#1d7a6e">pass</text>
+  <text x="382" y="296" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#a23026">fail</text>
+  <text x="150" y="296" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#7a8499">retry</text>
+  <text x="470" y="408" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#7a8499">cap reached</text>
+
+  <!-- emphasis note: reject not project -->
+  <rect x="60" y="430" width="300" height="56" rx="8" fill="#ffffff" stroke="#c0392b" stroke-width="1.6"/>
+  <text x="76" y="454" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#a23026">reject, do NOT project</text>
+  <text x="76" y="472" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#5a6477">unproven children never enter the safe set</text>
+</svg>
