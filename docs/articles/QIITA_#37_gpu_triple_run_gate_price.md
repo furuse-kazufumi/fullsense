@@ -501,6 +501,12 @@ Anthropic의 Dario Amodei는 2026년 1월의 38페이지짜리 에세이 「The 
 
 **싱귤래리티가 올지 어떨지는 차치하고, 「안전 펜스의 가격표」는 오늘부터 $0로 실측할 수 있습니다.**
 
+## 다음 회로의 숙제 — 가격표는 「규모를 키워도」 같은 얼굴인가
+
+오늘의 가격표는 ~0.5M params·문자 레벨·1 코퍼스라는 **작은 책상 위**에서 측정한 것입니다. 그래서 마지막으로, 필자 자신도 마음이 놓이지 않는 질문이 하나 남습니다 — **이 「세율」은, 모델을 키워도 같은 얼굴 그대로인가?** HD-1 은 이미 「짧은 훈련에서 안전해 보였던 결론이, 예산을 늘리면 부호째 바뀐다」는 것을 보여줬습니다. 같은 일이 **규모**에서도 일어난다면, 오늘의 19배도 차원의 함수로 움직이는 숫자일지 모릅니다.
+
+다음 arc에서는, 이 가격표를 **한 치수 큰 책상**으로 옮겨 싣습니다. 구체적으로는 「검사기의 비용을 진화의 선택압 그 자체로 삼는다」(#36 에서 세운 구상)와 본 글에서 본 「세금은 능력의 현장에서만 징수된다」를 곱하면, **안전과 능력을 동시에 최적화하는 집단**은 정말로 성립하는가 — 그것을 확인합니다. 오늘 「펜스는 나중에 붙일 수 없다」고 쓴 한 줄은, 거기서는 「**펜스를 진화의 연료로 바꿀 수 있는가**」로 다시 그어집니다.
+
 ## 공개 아티팩트
 
 - Kaggle kernels(전부 공개·재실행 가능): [hd1-highdim-evo](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo) / [hd1-highdim-evo-full](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full) / [hd1-highdim-evo-full-null](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full-null) / [rllm-stage-b](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b) / [rllm-stage-b-full](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full) / [rllm-stage-b-full-null](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full-null)
