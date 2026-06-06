@@ -171,9 +171,9 @@ id: fa55b499b45a871a97db
 
 # English
 
-## What this article is — a day that ran from "adversarial audit → patent clearance → declining to file → defensive publication"
+## What this article is — a day that ran from "adversarial verification → patent clearance → declining to file → defensive publication"
 
-On June 6, 2026, I (the author) instructed an AI (Claude Code) to **let the enemy attack** the "core of differentiation" of our research, llcore. Fifty-six AI agents searched from 7 + 3 angles for refutations along the lines of "this claim should be defeatable with prior work," and a separate detachment even queried patent databases.
+On June 6, 2026, I (the author) asked an AI (Claude Code) **"to verify whether what we are doing is truly differentiated."** The AI answered with **adversarial verification** — running many verifier AIs that deliberately try to refute and disprove our own claims, to see whether they still survive. Fifty-six verifier agents searched from 7 + 3 angles for counterexamples along the lines of "this claim should be refutable with prior work," and a separate detachment even queried patent databases.
 
 The results were as follows.
 
