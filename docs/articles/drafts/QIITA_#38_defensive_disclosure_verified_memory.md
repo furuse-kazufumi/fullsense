@@ -221,7 +221,7 @@ Here is one biology metaphor. In evolution, "a species that occupies a niche (a 
 
 And the important decision. This gap was **also empty in patents**. Normally one would then say "OK, let's get a patent." But patents cost money and time. I **passed on that**, and instead chose **"publish and plant the flag first" defensive publication**. The aim is not offense but **defense** — to **preempt** anyone (a big player, or a successor implementation of SSGM) later patenting the same concept and binding us or the public. Once you publish with a date, it becomes public prior art, and a later patent dies on novelty.
 
-That said — and this is our consistent discipline — **we do not inflate**. We do not say "world first." The correct phrasing is **"within the scope of our adversarial audit, there is zero prior work occupying all four corners simultaneously."** We always leave the caveat that we cannot know about what is outside the search scope.
+That said — and this is our consistent discipline — **we do not inflate**. We do not say "world first." The correct phrasing is **"within the scope of our adversarial verification, there is zero prior work occupying all four corners simultaneously."** We always leave the caveat that we cannot know about what is outside the search scope.
 
 ---
 
