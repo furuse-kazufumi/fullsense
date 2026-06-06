@@ -215,7 +215,7 @@ Let me use a comic-strip metaphor. The protagonist (our research) is a character
 3. **Inside an evolution loop**, **rejecting** bad mutations (discarding them, not pushing them back = not projection).
 4. And there is **a working implementation and experiments** (it doesn't end as armchair theory).
 
-No prior work doing all 4 of these **simultaneously** was found, even when we had 56 enemy AIs attack and queried patent DBs. Each individual condition has predecessors (we name them all honestly). But no one had "occupied all four corners at once." This is the **four-point intersection**.
+No prior work doing all 4 of these **simultaneously** was found, even when we had 56 verifier AIs critically scrutinize it and queried patent DBs. Each individual condition has predecessors (we name them all honestly). But no one had "occupied all four corners at once." This is the **four-point intersection**.
 
 Here is one biology metaphor. In evolution, "a species that occupies a niche (a gap with no other species)" survives. The big players (OpenAI/Google, etc.) dominate the plains as "large species that are smart on average." We cannot win on the plains. So we slip into **the gap in the four corners that no one has filled**. That is this strategy (in Sun Tzu's terms, "avoid the solid and strike the void").
 
