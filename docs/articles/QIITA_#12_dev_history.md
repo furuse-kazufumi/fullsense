@@ -316,6 +316,10 @@ Phase 4 (Security):
 
 # llive Development History — From v0.1 to a v0.7 Candidate in 5 Days
 
+> 📚 **Series nav**: ← #11 [llive complementing Qwen (filling the gaps)](./QIITA_#11_complementary_with_qwen.md) ｜ **#12 this article** (a chronological look back at the 5 days) ｜ #13 [The corpus-first strategy (why we moved so fast in 5 days)](./QIITA_#13_corpus_first_advantage.md) → . Each article also reads on its own.
+>
+> Up through #11 the focus was on the **substance of llive's design** (complementing Qwen, structural originality). This article pulls back for a moment to look at **in what order, and how, that design was stacked up** — a chronological retrospective over 5 days.
+
 Author: **Kazufumi Furuse (Puruyan)**
 
 ## Why Keep a Development History
