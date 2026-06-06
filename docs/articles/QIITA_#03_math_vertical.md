@@ -214,7 +214,7 @@ The core of the implementation is the 7-dimensional vector `Dimensions(m, kg, s,
 
 `N` (kg·m/s²) / `J` (kg·m²/s²) / `W` (kg·m²/s³) / `Pa` (kg/m/s²) / `Hz` (1/s) / `C` (s·A) / `V` (kg·m²/s³/A) / `ohm` — only the frequently-used range is implemented.
 
-## MATH-08 — Built-in Calculation Engine (Largest Differentiation Axis)
+## MATH-08 — Built-in Calculation Engine (Core of the Differentiation)
 
 **Core of the design**: do **not** let the LLM do the numerical computation.
 
