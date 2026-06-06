@@ -303,7 +303,7 @@ This is the heart of the article.
 
 cvxpy's **default solver** for these feasibility-boundary SDPs is **SCS** (a first-order ADMM method). Near the SDP feasibility boundary, SCS returns **false negatives** — it fails to find a Lyapunov certificate that exists ("Solution may be inaccurate" warnings are the tell).
 
-Under SCS, the degree ladder looked rich and complementary — a **fabricated finding**.
+Under SCS, the degree ladder looked rich and complementary — a **spurious finding (a solver artifact)**.
 
 ```mermaid
 flowchart LR
