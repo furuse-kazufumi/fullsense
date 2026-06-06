@@ -602,7 +602,7 @@ Honest caveat: this is an abstract proxy (competence vectors), not a real-LLM ma
 
 ## 5. The core evidence — the 10k-generation open-ended sweep (Agent A)
 
-The self-PoCs showed the "direction." Next, it was time to hit it **at scale, rigorously.** I had parallel Agent A run an open-ended sweep of **10k generations each × pop256 × 19 configurations × 2 rounds.**
+The self-PoCs showed the "direction." Next, it was time to **test it at scale, rigorously.** I had parallel Agent A run an open-ended sweep of **10k generations each × pop256 × 19 configurations × 2 rounds.**
 
 The criterion was whether it was "open-ended" — **does it avoid saturation, avoid monoculture (convergence to a single culture), and keep its archive (diversity reservoir) growing?**
 
