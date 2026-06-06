@@ -304,6 +304,10 @@ In the next article, **#06 "[How Do We Stop LLM Math Hallucinations — A Formal
 
 # 打造在数学与单位上很强的 AI 的第一步 — MATH-01/08 内置计算引擎
 
+> 📚 **连载导航**: ← #01 [Brief API 设计与 progressive matrix](./QIITA_#01_brief_api_progressive.md) / #02 [用 10 思考因子梳理思考层](./QIITA_#02_cognitive_factors.md) ｜ **#03 本文**（第一个 vertical = 数学与单位）｜ #06 [如何阻止 LLM 的数式幻觉](./QIITA_#06_next_math02_formal_gate.md) →。※ 每篇文章均可单独阅读。
+>
+> 在 #01 我们看了 Brief 这个入口，在 #02 看了流经其上的思考因子。本文则在这个入口上装载 **第一个专门领域**——数学与单位。我们从一个问题开始：为何通用 LLM 会若无其事地写出 `5 m/s + 3 s = 8`。
+
 ## TL;DR
 
 - 作为 llive 的第一个专门化纵向 (specialised vertical)，我们选择了「**数学与单位特化 AI**」(依据用户的战略指示)
