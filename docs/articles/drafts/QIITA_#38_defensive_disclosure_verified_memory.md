@@ -43,6 +43,8 @@ id: fa55b499b45a871a97db
 | **SSGM** | 「進化する記憶を統べる」write ゲートを **理論だけ** で提案した先行研究(arXiv:2603.11768, 2026)。看板が一番近い相手。 |
 | **navigability(探索可能性)** | 進化が「動きやすい地形か」。学習が賢くなることとは別。検証器の効き目はこちら側。 |
 
+![四点交差点 — 4 条件が同時に重なる中心だけが差別化核](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_intersection.svg)
+
 ---
 
 ## ② かみくだき — 3 分でわかる全体像

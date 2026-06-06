@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520" role="img" aria-label="Certifier ladder: cert_inf, cert_two, cert_sdp with increasing cost; Z3 decorative">
+  <title>Certifier ladder</title>
+  <desc>Three rungs of contraction certifiers with increasing cost.</desc>
+
+  <rect width="800" height="520" fill="#f7f9fc"/>
+
+  <text x="400" y="42" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#1f2a44" text-anchor="middle">The certifier ladder</text>
+  <text x="400" y="68" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#5a6477" text-anchor="middle">stronger guarantee costs more</text>
+
+  <!-- Rung 1 (bottom): cert_inf -->
+  <rect x="120" y="380" width="460" height="84" rx="8" fill="#e3eefb" stroke="#3b7dd8" stroke-width="2"/>
+  <text x="150" y="412" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#2c5aa0">cert_inf</text>
+  <text x="150" y="436" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#3a4459">closed-form &#8734;-norm</text>
+  <text x="150" y="455" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#3a4459">O(n&#178;), no solver</text>
+  <text x="560" y="427" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#7a8499" text-anchor="end">cheapest</text>
+
+  <!-- Rung 2 (middle): cert_two -->
+  <rect x="170" y="270" width="460" height="84" rx="8" fill="#ece2f7" stroke="#8a55c4" stroke-width="2"/>
+  <text x="200" y="302" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#6f3fa8">cert_two</text>
+  <text x="200" y="326" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#3a4459">2&#8319; vertices enumerated</text>
+  <text x="200" y="345" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#3a4459">SVD per vertex</text>
+
+  <!-- Rung 3 (top): cert_sdp -->
+  <rect x="220" y="160" width="460" height="84" rx="8" fill="#dff0ec" stroke="#2e9e8f" stroke-width="2"/>
+  <text x="250" y="192" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1d7a6e">cert_sdp</text>
+  <text x="250" y="216" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#3a4459">Lyapunov LMI</text>
+  <text x="250" y="235" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#3a4459">SDP / CLARABEL solver</text>
+  <text x="660" y="207" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#7a8499" text-anchor="end">tightest</text>
+
+  <!-- side rails of the ladder (diagonal) -->
+  <line x1="110" y1="468" x2="210" y2="156" stroke="#9aa4b8" stroke-width="3"/>
+  <line x1="690" y1="156" x2="690" y2="156" stroke="#9aa4b8" stroke-width="0"/>
+
+  <!-- cost-increase arrow on the right -->
+  <g stroke="#c0392b" stroke-width="2.5" fill="none">
+    <line x1="730" y1="450" x2="730" y2="180"/>
+    <path d="M730 168 L723 184 L737 184 Z" fill="#c0392b" stroke="none"/>
+  </g>
+  <text x="752" y="320" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#c0392b" text-anchor="middle" transform="rotate(90 752 320)">cost &#8593;</text>
+
+  <!-- Z3 decorative note -->
+  <rect x="120" y="92" width="280" height="48" rx="6" fill="#fbf4e0" stroke="#caa13a" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="138" y="116" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#8a6d1f">Z3 = decorative</text>
+  <text x="138" y="133" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#8a6d1f">0 / 3270 mismatch (no effect on verdict)</text>
+</svg>
