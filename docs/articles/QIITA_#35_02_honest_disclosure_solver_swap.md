@@ -391,6 +391,14 @@ Per FullSense honest-disclosure discipline, the limits are explicit.
 - All results are n=2 coupled substrate, CPU, this pool/seed. Soundness = **0 observed false admits** (the JSR oracle is a falsifier, not a proof; the Rump gate is the only machine-checked PD proof, and it is additive).
 - This is about the right **verifier**; it is not a claim that evolving neural dynamics is broadly useful.
 
+## So — can we trust the other numbers?
+
+A single solver swap revealed that one whole finding — the "degree complementarity" — was an illusion. That leaves an uneasy question: **of all the verification results we have measured on this substrate, how many were a "solver quirk"?** If +254 turned into +692, other numbers we took for granted might well show a different face under a different solver.
+
+Yet the more we chase solver accuracy, the more a second cost comes into view. Pinning CLARABEL erased the false negatives this time, but an accurate interior-point method is not fast. A sound verification enumerates **2ⁿ vertices** in the state dimension n — 65,536 at n=16, ~4.3 billion at n=32. The verifier is a guardian of safety and, at the same time, a **monster of compute cost**. Having doubted every number, we now find "correctness" and "cost" colliding head-on.
+
+In the next part, **#36**, we break this 2ⁿ wall with a **sound approximation that does not enumerate vertices** (one SVD, up to thousands-fold faster, zero soundness violations), then move toward turning **cost itself into an evolutionary selection pressure**, after biology's reductive evolution. The line we drew here — "suspect the solver" — gets redrawn there into "**suspect the verifier's cost**."
+
 ## References
 
 1. Diamond, S. & Boyd, S. *cvxpy: A Python-Embedded Modeling Language for Convex Optimization* — JMLR 17(83), 2016.
