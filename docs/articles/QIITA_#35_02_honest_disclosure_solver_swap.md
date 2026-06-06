@@ -224,7 +224,7 @@ FullSense の honest-disclosure 規律に従い、限界を明示します。
 > 📗 **In a hurry?** A [plain-language digest](https://fullsense.qiita.com/furuse-kazufumi/items/146d5e2b27dabc59e799) of this article is available.
 # llcore Verification Arc (#35-02) — Suspect the Solver: How a Multi-Perspective Pair-Review Caught and Corrected an SCS Trap
 
-![Diagram: swapping the solver collapses the fabricated numbers](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_en.svg)
+![Diagram: swapping the solver collapses the spurious numbers](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_en.svg)
 
 > Concept hook: While researching the verifier that checks whether evolved AI dynamics are "not broken," the SDP/degree-ladder numbers looked far too rich. We suspected them. It turned out cvxpy's default solver SCS was producing false negatives near the feasibility boundary — failing to find Lyapunov certificates that actually exist. Pinning the accurate interior-point solver CLARABEL collapsed the solver-induced "degree complementarity" (23/13/18, residual 53, SDP 64%) into a nested structure (0/0/54, residual 10, SDP 95%), and revealed that the SDP advantage had instead been *understated* (+254 → +692). This part tells, factually, the correction and the pair-review by Codex plus a 6-agent adversarial Workflow.
 
