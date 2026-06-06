@@ -20,7 +20,7 @@ ignorePublish: true
 
 ![ソルバ入れ替えで偽の数値が崩れる図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap.svg)
 
-> Concept hook: 進化させた AI のダイナミクスを「壊れていないか」検査する verifier の研究で、SDP/次数ラダーの数値があまりに「豊か」に見えた。疑って調べたら、cvxpy のデフォルトソルバ SCS が実行可能性の境界付近で偽陰性を出し、存在するはずの Lyapunov 証明書を「見つけられない」と報告していた。正確な内点法 CLARABEL に固定すると、捏造されていた「次数の相補性」(23/13/18, 残差 53, SDP 64%) は入れ子構造 (0/0/54, 残差 10, SDP 95%) に崩れ、SDP の優位は逆に過小評価されていたと判明した (+254 → +692)。この記事は、その訂正と、Codex + 6 エージェント敵対 Workflow による pair-review の顛末を、事実だけで語る。
+> Concept hook: 進化させた AI のダイナミクスを「壊れていないか」検査する verifier の研究で、SDP/次数ラダーの数値があまりに「豊か」に見えた。疑って調べたら、cvxpy のデフォルトソルバ SCS が実行可能性の境界付近で偽陰性を出し、存在するはずの Lyapunov 証明書を「見つけられない」と報告していた。正確な内点法 CLARABEL に固定すると、ソルバ由来の偽の「次数の相補性」(23/13/18, 残差 53, SDP 64%) は入れ子構造 (0/0/54, 残差 10, SDP 95%) に崩れ、SDP の優位は逆に過小評価されていたと判明した (+254 → +692)。この記事は、その訂正と、Codex + 6 エージェント敵対 Workflow による pair-review の顛末を、事実だけで語る。
 
 ![検証 arc の進捗テーマ図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_progress.svg)
 
