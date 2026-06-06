@@ -389,6 +389,10 @@ This is a question the author received from the user as well. In the next articl
 
 作者：古濑 和文（Puruyan）
 
+> 📚 **连载导航**：← #08 [Quiz bench Debug vs Release 对比](./QIITA_%2308_quiz_bench_debug_vs_release.md) ｜ **#09 本文**（审视结构的独特性）｜ #10 [脱离 Qwen 依赖的 5 阶段路线图](./QIITA_%2310_qwen_divergence_strategy.md) →。※ 各篇文章均可独立阅读。
+>
+> 在 #07/#08 中，我们从测量的一侧看了「到底该不该用速度来给 llive 跑 benchmark」。本文把问题移到结构的一侧——llive 作为 LLM，是否正在变成某种独特的形态? 以来自用户的一个提问为起点，我们逐一审视 8 个差异化要素。
+
 ## TL;DR
 
 来自用户的提问：「llive 的结构，作为 LLM 是否正变得具有独特结构？」
