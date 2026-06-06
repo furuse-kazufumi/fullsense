@@ -115,6 +115,8 @@ Taking those, the AI designed the experiments, had three other AIs attack the co
 
 And what did those experiments measure? — **"When you bolt a safety rail onto an AI, how much does its performance drop?"** This is, in fact, a miniature version of the single hottest debate in the global AI industry right now.
 
+> In this series, last time (**#36**) we covered "how do you build a safety rail **cheaply and correctly?**" (how to cut down the checking effort). This time it's the opposite — the star is **"when you use that rail, how much of the actual smartness gets shaved off?"** You don't need to have read #36; this article stands on its own.
+
 ## Analogy ①: Left alone, an AI's memory turns into a "speaker that never stops howling"
 
 The star of today's show is the "memory circuit" inside the AI. A healthy memory circuit has the property that "echoes gradually decay." You know how, when a microphone and a speaker get too close, you get that screeching feedback? That howl is the "no decay" state. This research studies the constraint of **mathematically proving that the memory circuit won't howl before you use it**.
