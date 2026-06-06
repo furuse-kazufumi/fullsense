@@ -1485,7 +1485,7 @@ honest disclosure로서, Perplexity가 준 **반증 경고**도 같은 비중으
 - 다양 MoA는 **best-of / routing이면 1.000**(단일 best의 두 배). **ORCH는 성립한다.**
 - **그런데 naive majority(다수결)에서는, 다양성이 역효과**(diverse = 0.000). 각 sub-task에서 competent한 전문가 1인이, 무지한 다수파에게 negate(상쇄)당한다. 중복 MoA의 majority(0.500) 쪽이 위.
 
-즉 **Self-MoA 반증(다양성 ≠ 자동 우위)의 정체는, 「집약기가 투표인가, 라우팅인가」였다.** 투표・평균은 다양성을 죽이고, competence-aware한 routing/gating은 다양성을 살린다. 「지휘자가 있는 오케스트라」와 「전원이 제멋대로 소리를 내는 혼잡」의 차이입니다.
+즉 **Self-MoA 반증(다양성 ≠ 자동 우위)의 정체는, 「집약기가 투표인가, 라우팅인가」였다.** 투표・평균은 다양성을 상쇄하고, competence-aware한 routing/gating은 다양성을 살린다. 「지휘자가 있는 오케스트라」와 「전원이 제멋대로 소리를 내는 혼잡」의 차이입니다.
 
 ### 7.2 Agent C의 실제 LLM이, 독립적으로 같은 결론을 냈다
 
