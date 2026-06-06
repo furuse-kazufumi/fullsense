@@ -365,6 +365,12 @@ However, **Phase 8 (CABT) plans to inject attention bias via a forward hook**. T
 
 "Should we benchmark its speed?" → No, **we should compare structure, not speed**. llive's added value lies in the ledger / approval / governance / grounding / 6-stage trace, and this cannot be reproduced by hitting ollama directly or by a LangChain chain.
 
+## The Question That Remains — Can "the Periphery Alone" Really Be Called Original?
+
+The conclusion so far has been that the originality "lies in the cognitive OS layered around the LLM." But there is a counterargument that hits a sore spot: if the core stays Qwen / Llama / Mistral, isn't this just "grafting a homemade frontal lobe onto someone else's brain"? No matter how refined the periphery becomes, as long as the root of thought depends on something borrowed, can you really claim originality as research?
+
+This is a question the author received from the user as well. In the next article, **#10 "[A 5-stage roadmap to break free from Qwen dependence](./QIITA_%2310_qwen_divergence_strategy.md)"**, we take up the path of gradually moving that borrowed core to a homemade one — how do we bring the originality proven in the periphery down into the core itself? We go to find out when, and how far, to step across the line drawn in this article when we wrote "for now (Phase 1 through v0.6) we do not update the weights."
+
 ## Sources
 
 - Design: `llive/.planning/REQUIREMENTS.md` (92 requirements, of which 4 v1.0-frame COG-FX map the factors)

@@ -424,6 +424,10 @@ Welford (1962) は 60 年前. それでも今の LLM 周辺アーキテクチャ
 
 ![series progress (1/8) — current: memory](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_01_progress_en.svg)
 
+> 📚 **Series nav**: ← [llive Complete Guide (0) series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c) ｜ **(1) This article** (4-layer memory + surprise gate) ｜ (2) ["AI that Thinks in 10 Axes"](https://qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511) → ｜ ※ Each article stands on its own.
+>
+> If the series index gave you the map of llive as a whole, this article is the first stop on it — we dissect the memory substrate that decides **what an AI remembers and what it forgets**. Before calling it "the LLM that never forgets", we start from the design that "does not remember everything".
+
 ## 0. What this article is (8-second read)
 
 This explains llive's **4-layer memory + 1 surprise gate** — a cognitive layer wrapped **around** the LLM, not inside it. It is a design that writes only the items with high **surprise** across 4 kinds of memory with distinct roles: semantic / episodic / structural / parameter. With the combination of Faiss + DuckDB + Kùzu + safetensors, it **runs fully on-prem**.
