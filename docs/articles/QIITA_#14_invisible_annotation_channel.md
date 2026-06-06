@@ -627,7 +627,15 @@ Annotation 与写入 `BriefLedger`（append-only JSONL）的 `perspectives_obser
 - emit 侧不知道 consumer，consumer 侧不要求 emit = 完全可选的 connector
 - 既有的 Markdown/HTML 输出**完全不被污染**
 
-如果你正为 OSS 多产品构成中「**独立性与组合价值的兼顾**」而烦恼，请务必试试 HTML 注释形式的 annotation channel。实现只要 200 行多一点就够了。
+如果你正为 OSS 多产品构成中「**独立性与组合价值的兼顾**」而烦恼，HTML 注释形式的 annotation channel 或许值得一试。我手头的实现只用了 200 行多一点。
+
+### 那么，这些 hint 由谁来接收
+
+到此为止，我们拿到了「emit 侧不知道 consumer」的配线。但 annotation **只有在接收方出现时才产生意义**。如果没人读 `<!-- llive:cog.risk_alert -->`，它就只是一段不可见的字符串。llive 负责 emit，llove 把它拾起来点亮在屏幕上。如果这两者各自是独立的产品——那么**一个人开发，究竟是怎么同时让三个产品跑起来的？**
+
+annotation channel 讲的是「配线」。接下来该问的，是「**铺设它的那颗头脑**」。一个开发者要把多个产品以团队规模运转起来，需要什么？
+
+下一篇 **#15** 会正面处理这个问题——把 30 年的软件开发经验，叠加 Perplexity、Claude Code、TRIZ 与 5 万件论文 RAG 的「**第二大脑**」构建论。我们会去看看，本文铺下的这条不可见通道，在那颗第二大脑里是如何像神经一样工作的。
 
 ---
 
@@ -635,9 +643,12 @@ Annotation 与写入 `BriefLedger`（append-only JSONL）的 `perspectives_obser
 
 **实现**：`src/llive/annotations.py`, `src/llive/brief/render.py`, `src/llive/brief/runner.py`
 
-**过去的相关文章（连载）**：
+**前一篇文章**：
 - [12] llive 开发履历 —— 5 天从 v0.1 到 v0.7 候选
 - [13] 语料库先行战略 —— 为思考流补足 AI 没察觉的观点
+
+**下一篇文章**：
+- [15] 「第二大脑」开发论 —— 把不可见通道当作神经的认知系统（本文配线的续篇）
 
 ## 参考文献 / 参考规范
 

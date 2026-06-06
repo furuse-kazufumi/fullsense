@@ -219,7 +219,7 @@ Answer: **llive is not an LLM itself, but is original as a "cognitive OS" layere
 
 | Existing | llive |
 |---|---|
-| Full fine-tune / LoRA / adapter | LLM weights are **absolutely never touched** |
+| Full fine-tune / LoRA / adapter | LLM weights are **not updated for now (Phase 1 through v0.6)** |
 | Learning = model update | Learning = **writing to external memory** + **structural change** |
 
 This is an extension of the LoRA / adapter line, but what is original is that it prioritizes "a replayable / monitorable learning trajectory through not updating weights." In CABT (planned in S2), a forward hook adds a bias to attention, but this too keeps the weights frozen.
