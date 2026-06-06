@@ -342,13 +342,22 @@ This brings solo development close to team speed. If the previous article [15] w
 
 llive is OSS under the Apache 2.0 + Commercial dual-license; the repo is https://github.com/furuse-kazufumi/llive . If you are interested in the AI management methods of this article, I would love to discuss them in an Issue / Discussion.
 
+### So what lies beyond this?
+
+So far this has been a story about how a human **manages** an AI. But once the line between the manager (the human) and the subordinate (the AI) grows this thin, one question remains: **how long do the "first brain" (the human) that stays present as a judgment gate, and the "second brain" (the AI) that acts autonomously, remain separate beings?** The wider the scope you delegate, the more the boundary between the two blurs. The final form of management may turn out to be not "control" but "fusion."
+
+In the next article, **#17**, I take that question head-on — when human and AI fuse not as a division of labor but as **a single cognitive system**, how does development change? I will go and find out how the line I drew in this article — "delegate, but do not abandon" — gets redrawn there.
+
 ---
 
 **This article is Part 2 (operations theory) of the "Second Brain" series.**
 
-**Past articles**:
+**Previous articles**:
 - [14] Invisible on the HTML, yet machine-readable — designing an invisible annotation channel
 - [15] 30 years of software development experience + Perplexity + Claude Code + TRIZ + RAG = the "Second Brain" (construction theory)
+
+**Next article**:
+- [17] The Vision of Human-AI Fusion — when "control" turns into "fusion" (a continuation of this article's question)
 
 ## References / Resources
 
