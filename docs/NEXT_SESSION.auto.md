@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 17:17:14
+- **生成時刻**: 2026-06-06 17:27:44
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+d6b7967 docs: NEXT_SESSION の stale 掃除 — PyPI fullsense 0.0.1 は 2026-05-25 完了済をクローズ
+2b6d732 auto: NEXT_SESSION.md 編集前 (2026-06-06 17:19)
 df01ef1 docs(research): 包括計画 — 特別 DNA x 全やり残しを 5 トラックに統合
 9ae5adc auto: doc_map.md 編集前 (2026-06-06 17:11)
 b258dd1 auto: index.md 編集前 (2026-06-06 17:11)
@@ -28,8 +30,6 @@ b258dd1 auto: index.md 編集前 (2026-06-06 17:11)
 1baefc0 auto: index.md 編集前 (2026-06-06 17:06)
 5101272 auto: doc_map.md 編集前 (2026-06-06 17:04)
 61c110a auto: index.md 編集前 (2026-06-06 17:04)
-f3e21bb docs(research): 差別化監査の確定結果 + 特別 DNA ロードマップ
-f024164 docs(research): 検問体系監査 — A-Evolve 三重検問 vs FullSense 対応表 + 検問タクソノミ
 ```
 
 ### git status (porcelain)
@@ -76,8 +76,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `17:13` `docs/SESSION_SUMMARY.md`
-- `17:13` `docs/NEXT_SESSION.auto.md`
+- `17:20` `docs/NEXT_SESSION.auto.md`
+- `17:20` `docs/SESSION_SUMMARY.md`
+- `17:19` `docs/NEXT_SESSION.md`
 - `17:11` `docs/doc_map.md`
 - `17:11` `docs/research/index.md`
 - `17:11` `docs/research/master_plan_2026_06_06.md`
