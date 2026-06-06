@@ -258,7 +258,7 @@ In their own field of expertise, humans use "perspectives they ought to know" un
 - Related but distant perspectives (e.g., cognitive psychology for an LLM developer)
 - Perspectives learned in the past but now forgotten (e.g., Six Hats learned in undergraduate days)
 
-Because these **never rise into consciousness**, you cannot complete them on your own. The fact that the AI pulls these up via the corpus is the essential advantage of collaborative development.
+Because these **never rise into consciousness**, you cannot complete them on your own. The AI pulling these up via the corpus is the one place where, on my own machine, collaborative development feels like it is working.
 
 ## The Difference Between "Using AI" vs. "Building Together With AI"
 
