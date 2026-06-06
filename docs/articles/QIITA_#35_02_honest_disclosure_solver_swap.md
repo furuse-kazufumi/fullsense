@@ -205,14 +205,17 @@ FullSense の honest-disclosure 規律に従い、限界を明示します。
 8. Boyd, S. & Vandenberghe, L. *Convex Optimization* (LMIs / SDP) — Cambridge University Press, 2004.
 9. Boyd, S., El Ghaoui, L., Feron, E. & Balakrishnan, V. *Linear Matrix Inequalities in System and Control Theory* — SIAM, 1994.
 10. Mouret, J.-B. & Clune, J. *Illuminating search spaces by mapping elites (MAP-Elites)* — arXiv:1504.04909, 2015.
-11. 内部: [#35-00 概観](#) — llcore 検証 arc の全体像。
-12. 内部: [#35-01 verifier フロンティア](#) — ラダーと SDP の大ジャンプ。
+11. 内部: [#35-00 概観](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) — llcore 検証 arc の全体像。
+12. 内部: [#35-01 verifier フロンティア](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) — ラダーと SDP の大ジャンプ。
 
 ## シリーズ / Series navigation
 
-- [#35-00 — llcore 検証 arc 概観](#)
-- [#35-01 — verifier-fitness フロンティア (証明能力のラダー)](#)
-- **#35-02 — 「良すぎる数値」を疑え (本記事)**
+- [#35-00 — llcore 検証 arc 概観](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6)
+- [#35-01 — verifier-fitness フロンティア (証明能力のラダー)](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)
+- **#35-02 — 「良すぎる数値」を疑え (本記事・検証 arc 終幕)**
+- #36 — 2ⁿ の壁を破る: vertex-free 健全証明と「コストを進化の選択圧に」(次の arc)
+
+※ 各記事は単独で読めます (リンクは回遊用)。
 
 ---
 
