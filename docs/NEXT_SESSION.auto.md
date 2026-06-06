@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 22:55:52
+- **生成時刻**: 2026-06-06 23:35:50
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,22 +20,23 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `2	0`
 
 ```
+e7a3a4a docs(research): lloT 位置づけ確定 — 翻訳者 + 改造自由なひな形どまり (ユーザー判断)
+405c4ca docs(research): Phase 2a 設計 — VLA リスクを一次確認で格下げ (実装 GO)
+49f6b2a auto: phase2a_verified_memory_evolution_design_2026_06_06.md 編集前 (2026-06-06 22:58)
+fc093ff auto: phase2a_verified_memory_evolution_design_2026_06_06.md 編集前 (2026-06-06 22:58)
 a74fac4 docs(research): llterm spec 確定 — v1 実装オプション (b) 従来TUI+追加入力欄を採用
 7dc5cdf docs(research): llterm spec v1 スコープ確定 — 表示は互換・入力欄だけ別扱い
 3f5d88c auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:45)
 eae9cca auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:45)
 654a8fc docs(research): llterm spec に R13 追加 (矢印=カーソル移動、Ctrl/Shift+矢印=履歴・補完)
 b24fb83 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:42)
-8bf0da9 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:42)
-2038f34 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:42)
-f143a00 docs(research): llterm spec に R12 追加 (Enter=改行のみ、送信は Ctrl+Enter/Shift+Enter)
-fe3f7d2 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:39)
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -75,11 +76,12 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `23:32` `docs/NEXT_SESSION.auto.md`
+- `23:32` `docs/SESSION_SUMMARY.md`
+- `23:04` `docs/research/llot_idea_research_2026_06_06.md`
+- `22:58` `docs/research/phase2a_verified_memory_evolution_design_2026_06_06.md`
 - `22:46` `docs/research/llterm_spec_2026_06_06.md`
-- `22:42` `docs/NEXT_SESSION.auto.md`
-- `22:42` `docs/SESSION_SUMMARY.md`
 - `22:31` `docs/research/index.md`
-- `22:17` `docs/research/phase2a_verified_memory_evolution_design_2026_06_06.md`
 - `22:05` `docs/articles/QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md`
 - `22:03` `docs/articles/QIITA_#37_gpu_triple_run_gate_price.md`
 - `22:01` `docs/articles/QIITA_#12_dev_history.md`
@@ -88,7 +90,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `22:00` `docs/articles/QIITA_#09_llive_structure_originality.md`
 - `21:59` `docs/articles/QIITA_#14_invisible_annotation_channel.md`
 - `21:58` `docs/articles/QIITA_#15_second_brain_spiral_dev.md`
-- `21:56` `docs/research/llot_idea_research_2026_06_06.md`
 - `21:33` `docs/research/master_plan_2026_06_06.md`
 - `21:33` `docs/articles/QIITA_#35_02_honest_disclosure_solver_swap.md`
 - `21:29` `docs/articles/QIITA_#03_math_vertical.md`
