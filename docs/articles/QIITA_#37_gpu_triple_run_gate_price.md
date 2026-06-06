@@ -166,6 +166,8 @@ And more important than the autonomy story is **the scientific result itself**. 
 
 llcore is a research series that combines a memory core that can **mathematically prove** stability (contractivity ρ<1 = the property that echoes decay = homeostasis) with evolution and gradient learning. The verifier is fail-closed: it does not let through any change it cannot prove.
 
+Last time, in **#36 "Breaking the 2ⁿ wall,"** we worked the *cost* side of that verifier — a vertex-free proof that approximates soundly without enumerating vertices. That was the question of "how do you run the checker cheaply and correctly?" This article is its flip side: it measures, for the first time on top of a real Transformer, **"and when you run the checker, how much of the actual capability does it shave off?"**
+
 Over the arc so far, we had established that (i) this core actually functions as a small language model, (ii) the verifier does real work (78.9% of an ungated population is unstable), and (iii) but for evolution (random mutation), a strict gate becomes a "trap." Two big questions remained: **what happens at high dimensions**, and **what happens when you put it inside a real Transformer**. Today, both of these closed.
 
 ## Experiment 1: HD-1 — where does high-dimensional, unconstrained learning go?
