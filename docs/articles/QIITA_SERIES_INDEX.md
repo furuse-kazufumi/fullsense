@@ -83,7 +83,7 @@ nav_order: 1
 
 - 物理配置: **#01〜#13 = root 複製**（2026-05-28, 原本 `2026-05-17/NN` 据置）/ #14〜27 = root（#26 は 2026-05-28 に drafts→root 昇格, ignorePublish:true=draft 状態維持）/
   未投稿 = drafts（#28〜31）。新記事を drafts→root へ昇格・新規投稿したらここに 1 行追記する。
-- **2026-06-06: #37 本編+かみくだき版を public 公開**（id `6f44575d440a9ebf5228` / `f06ca92ea208c7646fcd`、4 言語縦積み、Singularity タグ、かみくだき版はマスコット SVG を言語別 `_en/_zh/_ko` で配置、関連ニュース節入り）。投稿は `tools/qiita-cli-poc/public/qiita37_*` から（private 投稿→public flip の 2 段、live 検証済）。#36 は未投稿のまま（id: null）。
+- **2026-06-06: #37 本編+かみくだき版を public 公開**（id `6f44575d440a9ebf5228` / `f06ca92ea208c7646fcd`、4 言語縦積み、Singularity タグ、かみくだき版はマスコット SVG を言語別 `_en/_zh/_ko` で配置、関連ニュース節入り）。投稿は `tools/qiita-cli-poc/public/qiita37_*` から（private 投稿→public flip の 2 段、live 検証済）。**Qiita Team へも投稿済**（team id `a0e16b74a23c62bcf59a` / `df687d0ecddb56d5a373` = frontmatter `id`、public id は `qiita_public_id` に退避 = 集約方針）+ 公開側 2 本に Team 誘導リンク適用（4 言語 ×2、verify 2/2 OK、Team 記事総数 = 65）。#36 は未投稿のまま（id: null）。
 - **#01〜#13 複製の同期注意**: root 複製と `2026-05-17/NN` 原本は別ファイル。原本を編集したら root
   複製にも反映する（divergence 防止）。公開済み Qiita 記事 `64fac910780f59ab61f9` が原本パスを
   参照するため原本は消さない。
