@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520" role="img" aria-label="Four-point intersection: only the center where all four conditions overlap is the differentiation core (llcore)">
+  <title>Four-point intersection</title>
+  <desc>Four overlapping conditions; only their common center is the differentiation core.</desc>
+
+  <rect width="800" height="520" fill="#f7f9fc"/>
+
+  <text x="400" y="40" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#1f2a44" text-anchor="middle">The four-point intersection</text>
+  <text x="400" y="66" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#5a6477" text-anchor="middle">only the center where all four conditions overlap is the differentiation core</text>
+
+  <!-- Four overlapping circles (Venn-style) -->
+  <g>
+    <!-- top -->
+    <circle cx="400" cy="220" r="135" fill="#3b7dd8" fill-opacity="0.18" stroke="#3b7dd8" stroke-width="2"/>
+    <!-- right -->
+    <circle cx="490" cy="300" r="135" fill="#8a55c4" fill-opacity="0.18" stroke="#8a55c4" stroke-width="2"/>
+    <!-- bottom -->
+    <circle cx="400" cy="360" r="135" fill="#2e9e8f" fill-opacity="0.18" stroke="#2e9e8f" stroke-width="2"/>
+    <!-- left -->
+    <circle cx="310" cy="300" r="135" fill="#c9802e" fill-opacity="0.18" stroke="#c9802e" stroke-width="2"/>
+  </g>
+
+  <!-- Center core highlight -->
+  <circle cx="400" cy="295" r="42" fill="#1f2a44" fill-opacity="0.92" stroke="#f4c430" stroke-width="3"/>
+  <text x="400" y="290" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">llcore</text>
+  <text x="400" y="308" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f4c430" text-anchor="middle">all four overlap</text>
+
+  <!-- Condition labels -->
+  <text x="400" y="120" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#2c5aa0" text-anchor="middle">sound contraction proof</text>
+  <text x="690" y="300" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#6f3fa8" text-anchor="middle">Transformer</text>
+  <text x="690" y="320" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#6f3fa8" text-anchor="middle">memory core</text>
+  <text x="400" y="470" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#1d7a6e" text-anchor="middle">in-loop prove-then-reject</text>
+  <text x="110" y="300" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#a5651f" text-anchor="middle">working</text>
+  <text x="110" y="320" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#a5651f" text-anchor="middle">implementation</text>
+
+  <!-- pointer to center -->
+  <line x1="400" y1="345" x2="400" y2="448" stroke="#5a6477" stroke-width="1.2" stroke-dasharray="4 4"/>
+
+  <text x="400" y="505" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#7a8499" text-anchor="middle">the only point at which all four conditions are simultaneously satisfied</text>
+</svg>
