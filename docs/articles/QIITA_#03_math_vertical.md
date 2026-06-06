@@ -108,12 +108,11 @@ Brief.goal にある式 → SafeCalculator が評価 → 結果が augmented goa
 LLM が計算する → 浮動小数点幻覚、桁落ち
 llive が計算する → IEEE 754 精度、再現可能、引用可能
 
-## なぜこれが差別化軸として最強か
+## なぜこれを最初の差別化軸に選んだか
 
-- 汎用 LLM (GPT / Claude / Gemini) は「LLM が計算する」設計
-- llive は「LLM の出力を **検証**し、必要なら **再計算** する」設計
-- Wolfram Alpha は強力だが closed cloud。llive は完全 on-prem
-- 数学・物理・工学・金融・薬学 すべてが「単位次元」と「精密計算」を必要とする → 最初の vertical として広い適用範囲
+- 汎用 LLM (GPT / Claude / Gemini) は「LLM が計算する」設計。llive は「LLM の出力を **検証**し、必要なら **再計算** する」設計を取った——どちらが優れているかは用途次第で、ここでは設計思想の違いとして示す
+- Wolfram Alpha は強力な計算エンジンだが closed cloud。llive は完全 on-prem。この差が効くかは、データを外に出せるかどうかという制約次第
+- 数学・物理・工学・金融・薬学 すべてが「単位次元」と「精密計算」を必要とする → 最初の vertical として適用範囲が広く、検証する価値があると判断した
 
 ## v0.7-vertical MATH の 8 件全要件
 
