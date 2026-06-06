@@ -227,9 +227,9 @@ That said — and this is our consistent discipline — **we do not inflate**. W
 
 ## ③ Details — the day's session, and the substance of the technology we published
 
-### 3.1 Design of the adversarial audit (so it can be reproduced)
+### 3.1 Design of the adversarial verification (so it can be reproduced)
 
-Saying "my research is strong" yourself means nothing. So we built an **adversarial workflow**.
+Saying "my research is strong" yourself means nothing. So the AI built an **refutation-driven workflow**.
 
 - **Refutation search from 7 angles**: lineage of proof gates / certified training / Transformer stability / evolution × verification / verified memory / runtime assurance / industry and patents.
 - **Added 3 blind-spot angles the critic pointed out**: reverse lookup from the formal-methods conference side / the vocabulary system of certified continual learning / interpretation of internal state and SSMs.
