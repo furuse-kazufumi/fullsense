@@ -401,14 +401,14 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 
 新颖性的诚实，取决于「能否用一句话点名全部」。逐隅，用一句话点出最接近的先行：
 
-- **SSGM（arXiv:2603.11768）** —— **仅以理论**抢先拿下「统御进化记忆」的招牌。门是 NLI（矛盾检测），**并非健全的形式证明**，也没有实现。→ 作为扛招牌的对手**必须引用**。实现 + 证明的窗口是空着的。
-- **SEVerA（arXiv:2603.25111）** —— 对自进化代理施以 Dafny/SMT 验证。但对象是**输出契约**，不是对记忆核收缩性的每次更新设门。
-- **PSV-Verus（arXiv:2512.18160）** —— self-play 循环内的健全 SMT 门。但验证对象是**生成代码的正确性**。
-- **Provably Safe Model Updates / LID（arXiv:2512.01899）** —— 用抽象解释把更新认证为 δ-safe。但它是**射影（推回去）**而非 prove-then-reject，对象是 frozen-embedding 的分类 head。
-- **GP × 模型检查（Katz & Peled, arXiv:1402.6785, 2014）** —— 在进化循环里放一道健全检查门的**模式先例**。所以我们**不主张门这个模式本身是新颖的**。只有把它应用到记忆核的收缩性上，才是未踏之地。
-- **Enforced-Lipschitz Transformers（arXiv:2507.13338）/ R2DN（arXiv:2504.01250）** —— 用**结构来强制（by-construction）**收缩性。这是最强的对抗设计：「根本不需要门，一开始就内嵌进去」。我们把**by-construction 对 prove-then-reject**作为设计轴来对比（结构强制牺牲表现力，棄却门则在无结构约束下检查任意更新）。
+- **SSGM（[arXiv:2603.11768](https://arxiv.org/abs/2603.11768)）** —— **仅以理论**抢先拿下「统御进化记忆」的招牌。门是 NLI（矛盾检测），**并非健全的形式证明**，也没有实现。→ 作为扛招牌的对手**必须引用**。实现 + 证明的窗口是空着的。
+- **SEVerA（[arXiv:2603.25111](https://arxiv.org/abs/2603.25111)）** —— 对自进化代理施以 Dafny/SMT 验证。但对象是**输出契约**，不是对记忆核收缩性的每次更新设门。
+- **PSV-Verus（[arXiv:2512.18160](https://arxiv.org/abs/2512.18160)）** —— self-play 循环内的健全 SMT 门。但验证对象是**生成代码的正确性**。
+- **Provably Safe Model Updates / LID（[arXiv:2512.01899](https://arxiv.org/abs/2512.01899)）** —— 用抽象解释把更新认证为 δ-safe。但它是**射影（推回去）**而非 prove-then-reject，对象是 frozen-embedding 的分类 head。
+- **GP × 模型检查（Katz & Peled, [arXiv:1402.6785](https://arxiv.org/abs/1402.6785), 2014）** —— 在进化循环里放一道健全检查门的**模式先例**。所以我们**不主张门这个模式本身是新颖的**。只有把它应用到记忆核的收缩性上，才是未踏之地。
+- **Enforced-Lipschitz Transformers（[arXiv:2507.13338](https://arxiv.org/abs/2507.13338)）/ R2DN（[arXiv:2504.01250](https://arxiv.org/abs/2504.01250)）** —— 用**结构来强制（by-construction）**收缩性。这是最强的对抗设计：「根本不需要门，一开始就内嵌进去」。我们把**by-construction 对 prove-then-reject**作为设计轴来对比（结构强制牺牲表现力，棄却门则在无结构约束下检查任意更新）。
 - **Safeguarded AI（ARIA programme）** —— 最具权威的 proof-gated-gatekeeper 概念。但门的对象是**行为/计划**（输出门），不是对权重/记忆更新设门，而且还停留在 programme 阶段。
-- **Emergent FV / substrate-guard（arXiv:2603.21149）** —— 用 Z3 验证 AI 的**输出**的、能跑的系统。但它是事后监视，不是每次更新设门。
+- **Emergent FV / substrate-guard（[arXiv:2603.21149](https://arxiv.org/abs/2603.21149)）** —— 用 Z3 验证 AI 的**输出**的、能跑的系统。但它是事后监视，不是每次更新设门。
 
 （以上 arXiv ID 只使用在论文草稿中已与 abstract 核对过的那些。）
 
