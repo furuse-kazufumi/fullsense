@@ -769,7 +769,15 @@ We hold a design that runs without faiss / without DuckDB / without kuzu **from 
 
 ### Lesson 5: don't underestimate classic numerical algorithms
 
-Welford (1962) is 60 years old. It still provides **front-line numerical stability** in today's LLM-surrounding architecture. Even when new models appear, the underlying mathematics does not change.
+Welford (1962) is 60 years old. It still provides numerical stability that is more than sufficient in today's LLM-surrounding architecture. Even when new models appear, the underlying mathematics does not change.
+
+## An open question — once remembered, who "thinks" over the memory?
+
+So far we have dissected the 4 layers + surprise gate that decide **what llive remembers and what it forgets**. The surprise gate judges "is this worth writing?". But here an uneasy question remains — **the memory does not decide what to think with it**. semantic, episodic, structural — they are all passive warehouses waiting to be drawn from. Even when the warehouse is full, **which memory to read, from which viewpoint, and how to turn it into reasoning** is the job of a different layer.
+
+And to make it harder, thinking is not a single kind. Looking at the same memory, "reading it structurally" and "reading it linked to past events" lead to different conclusions. So how many kinds of thinking — and which ones — does llive actually run over this memory?
+
+In the next article, **(2) "[AI that Thinks in 10 Axes](https://qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511)"**, we cover the **10 thinking factors** that run over this article's 4 layers. It reads one memory from 10 viewpoints at once, lets them evaluate each other, and absorbs only the thoughts that survive into the population — and there the surprise gate's idea of "do not remember everything", written here, gets redrawn on the thinking side as "**do not trust every way of thinking equally**". Having built the memory, next it is time to use that memory to think.
 
 ## 9. References
 
