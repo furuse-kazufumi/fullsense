@@ -600,6 +600,12 @@ The design draft (estimated at 5 days) was **completed in a single day**:
   - [QIITA_GENERAL](./QIITA_GENERAL.md) — integrated for non-engineers
   - [01–11 individual articles](./README.md)
 
+## An Open Question — Is "21× in 5 Days" Really About Speed?
+
+Over these 5 days the test count went 49 → 1014, advancing at more than one version per day. But speed itself is nothing to boast about. The real question lies elsewhere — **why did this pace hold for a single person plus AI?** Not because the hands were fast. Not only because the design core fixed on Day 1 never broke. A hypothesis remains: something that "anticipates and fills in perspectives," which I couldn't even put into words during development, was quietly working in the background.
+
+In the next article, **#13 "[The corpus-first strategy — how AI complements the perspectives I miss in my thinking flow](./QIITA_#13_corpus_first_advantage.md)"**, I dissect what that something is. Stack a 49,000-document RAD corpus across 21 fields up front, and collaboration starts to flow in a way where the AI fills my blind spots — I'll step beyond the development-history numbers and put into words the collaborative structure behind this "5-day" pace.
+
 ---
 
 > From v0.1 → v0.7 candidate in 5 days. Advancing at a pace of more than one version per day,
