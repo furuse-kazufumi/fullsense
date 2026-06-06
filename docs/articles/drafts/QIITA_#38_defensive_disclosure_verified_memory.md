@@ -210,16 +210,18 @@ This article is a breakdown of the story of that one day (the design and results
 
 ## ② Breakdown — the whole picture in 3 minutes
 
-Let me use a comic-strip metaphor. The protagonist (our research) is a character who "attached a **prove-then-adopt checkpoint** to the heart of an evolving AI memory." The special move activates when 4 conditions are met **simultaneously**.
+Let's start from the idea of a biological niche. In evolution, "a species that moves into a niche — a gap no other species has occupied yet" survives. The AI world is similar. The big players (OpenAI/Google, etc.) are "large species that are smart on average," occupying the wide plains. We cannot win on those plains. So we look for **a gap no one has filled** and build a part that fits it. The thing that fit that gap precisely, this time, is a concrete system called `llcore`.
+
+In one sentence, `llcore` is **"a system in which an AI part that holds memory imposes a 'checkpoint of proof' on itself, so that it does not run away."** The memory core mutates (evolves) every time it updates, but before any mutation is adopted, it must pass through a checkpoint (gate). The checkpoint admits **only what can be mathematically proven** to keep the memory from running away, and turns away anything that cannot be proven (fail-closed).
+
+This system fits that "gap" precisely because the following 4 conditions **overlap at a single point**.
 
 1. A **sound contraction proof** (a mathematical guarantee that echoes necessarily decay — and it never issues a false pass).
 2. Applying it **inside the LLM's memory core** (not a control robot, not a classifier, but the "remembering part" itself).
 3. **Inside an evolution loop**, **rejecting** bad mutations (discarding them, not pushing them back = not projection).
 4. And there is **a working implementation and experiments** (it doesn't end as armchair theory).
 
-No prior work doing all 4 of these **simultaneously** was found, even when we had 56 verifier AIs critically scrutinize it and queried patent DBs. Each individual condition has predecessors (we name them all honestly). But no one had "occupied all four corners at once." This is the **four-point intersection**.
-
-Here is one biology metaphor. In evolution, "a species that occupies a niche (a gap with no other species)" survives. The big players (OpenAI/Google, etc.) dominate the plains as "large species that are smart on average." We cannot win on the plains. So we slip into **the gap in the four corners that no one has filled**. That is this strategy (in Sun Tzu's terms, "avoid the solid and strike the void").
+No prior work satisfying all 4 of these **simultaneously** was found, even when we had 56 verifier AIs critically scrutinize it and queried patent DBs. Each individual condition has predecessors (we name them all honestly). But no one had "occupied all four corners at once." This is the **four-point intersection**. In terms of the biological niche, `llcore` sits in **the single-point gap** where the four boundary lines exactly cross (in Sun Tzu's terms, "avoid the solid and strike the void").
 
 And the important decision. This gap was **also empty in patents**. Normally one would then say "OK, let's get a patent." But patents cost money and time. I **passed on that**, and instead chose **"publish and plant the flag first" defensive publication**. The aim is not offense but **defense** — to **preempt** anyone (a big player, or a successor implementation of SSGM) later patenting the same concept and binding us or the public. Once you publish with a date, it becomes public prior art, and a later patent dies on novelty.
 
