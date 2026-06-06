@@ -141,11 +141,13 @@ llive が計算する → IEEE 754 精度、再現可能、引用可能
 - テスト: `tests/unit/test_math_units.py` (22 件) + `tests/unit/test_math_calculator.py` (24 件)
 - 全 1014 PASS / 回帰ゼロ
 
-## 次の一歩
+## 残った問い — 「計算させない」で十分か
 
-- BriefGrounder に `SafeCalculator` を統合 → Brief 投入時点で式が自動 ground される
-- MATH-05 CODATA 辞書を RAD `metrology` 分野に append
-- MATH-02 Sympy 検算層で LLM の数式出力を AST 化 → 不整合 flag
+ここまでは「LLM に **計算させない**」設計だった。算術式を奪い取って決定論エンジンに渡せば、`5 m/s + 3 s` は止まる。だが LLM が吐くのは数値だけではない。`x² + x = 2x³` のような **誤った数式そのもの** を、もっともらしい言葉で書いてきたら? 式を奪う前に、その式が正しいかどうかを機械的に反証できなければ、検証は片肺だ。
+
+次回 **#06「[LLM 数式幻覚をどう止めるか — 形式検証ゲート](./QIITA_#06_next_math02_formal_gate.md)」** では、MATH-02 を解剖する。LLM が出した数式を Sympy で AST 化し、矛盾を機械的に flag する仕組み——今回の「計算をさせない」から、「出力を反証する」へ一歩進む。式を信じる前に、式を疑う側のエンジンを作りにいく。
+
+（手元の作業としては、BriefGrounder への `SafeCalculator` 統合で Brief 投入時に式を自動 ground し、MATH-05 CODATA 辞書を RAD `metrology` 分野へ append する整備も並走している。）
 
 ---
 
