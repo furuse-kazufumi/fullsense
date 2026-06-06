@@ -375,6 +375,12 @@ Anthropic 的 Dario Amodei 在 2026 年 1 月那篇 38 页的随笔《The Adoles
 
 **不管奇点到底来不来，「安全护栏的价目表」从今天起就能以 $0 实测出来。**
 
+## 给下一篇留的作业 —— 价目表「把规模放大」之后，还是同一张脸吗
+
+今天这张价目表，是在 ~0.5M params、字符级、单一语料这样一张**小桌子**上测出来的。所以最后，留下一个连笔者自己都不踏实的问题 —— **这张「税率表」，把模型放大之后还是同一张脸吗?** HD-1 已经展示过：「短训练里看起来安全」的结论，把预算拉长就连符号都会翻。如果同样的事在**规模**上也会发生，那今天这个 19 倍，本身可能就是一个随维度变动的数字。
+
+下一个 arc 里，我们要把这张价目表搬到**大一号的桌子**上。具体说：把「让检查器的成本本身成为进化的选择压」（#36 里立下的构想）和本文看到的「税只在能力的现场征收」相乘之后，一个**同时优化安全与能力的群体**，到底能不能真的立得住 —— 这就是我们要去确认的。今天写下的那条「护栏没法事后补上」，在那里会被改写成「**能不能把护栏变成进化的燃料**」。
+
 ## 公开 artifact
 
 - Kaggle kernels（全部公开、可重新运行）：[hd1-highdim-evo](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo) / [hd1-highdim-evo-full](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full) / [hd1-highdim-evo-full-null](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full-null) / [rllm-stage-b](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b) / [rllm-stage-b-full](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full) / [rllm-stage-b-full-null](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full-null)
