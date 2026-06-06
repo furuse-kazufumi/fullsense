@@ -318,9 +318,11 @@ Even with defensive disclosure we do not bend honest disclosure.
 
 ## Summary — the flag was planted for "defense," not "offense"
 
-In a single day, we had 56 enemies attack our own research, queried patent DBs, and confirmed the "four-corner gap" that still remained. Normally one would aim for a patent here, but weighing the cost, we **passed on filing** and instead planted a flag with **a dated defensive publication**.
+In a single day, we had 56 verifier AIs critically scrutinize our own research, queried patent DBs, and confirmed the "four-corner gap" that still remained. Normally one would aim for a patent here, but weighing the cost, we **passed on filing** and instead planted a flag with **a dated defensive publication**.
 
-The aim is simple — **to preempt someone later fencing off this gap with a patent and binding us or the public**. To that end, we published everything at a level of detail a person skilled in the art can implement. And to the end, we keep the non-inflating phrasing: **not "world first," but "within the scope of our audit, zero prior work occupying all four corners at once."**
+The aim is simple — **to preempt anyone later enclosing this gap with a patent and binding us or the public**. To that end, we published everything at a level of detail a person skilled in the art can implement. And to the end, we keep the non-inflating phrasing: **not "world first," but "within the scope of our verification, zero prior work occupying all four corners at once."**
+
+The body of the defensive publication (the dated disclosure document) is here: [verified_memory_evolution_defensive_disclosure.md](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md).
 
 Next time (from #39 on), we plan to report the landing of the heart of this four-point intersection — a small PoC of verified memory evolution (the memory-bank update route). Before the window where SSGM took the banner in theory closes in implementation.
 
