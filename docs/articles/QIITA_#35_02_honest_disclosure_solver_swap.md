@@ -436,6 +436,8 @@ In the next part, **#36**, we break this 2ⁿ wall with a **sound approximation 
 
 ![验证 arc 的进度主题图](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_progress_zh.svg)
 
+> 本文是 llcore 验证 arc 的终章 (#35-02)。[#35-00 (概览)](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) 给出了「SDP 才是正解」的结论，[#35-01 (阶梯细节)](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) 展示了证明能力的阶梯。#35-01 预告的「是 +692 而非 +254」「修正假阴性后数字会变」——其**求解器修正的现场**正是本文。
+
 ## 0. 术语说明 / Glossary
 
 | 术语 | 通俗含义 |
