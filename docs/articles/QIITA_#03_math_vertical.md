@@ -543,12 +543,11 @@ Brief.goal にある式 → SafeCalculator が評価 → 結果が augmented goa
 LLM이 계산한다 → 부동소수점 환각, 자릿수 손실
 llive가 계산한다 → IEEE 754 정밀도, 재현 가능, 인용 가능
 
-## 왜 이것이 차별화 축으로서 가장 강한가
+## 왜 이것을 첫 차별화 축으로 선택했는가
 
-- 범용 LLM (GPT / Claude / Gemini) 는 「LLM이 계산한다」 설계
-- llive는 「LLM의 출력을 **검증**하고, 필요하면 **재계산**한다」 설계
-- Wolfram Alpha는 강력하지만 closed cloud. llive는 완전 on-prem
-- 수학·물리·공학·금융·약학 모두가 「단위 차원」과 「정밀 계산」을 필요로 한다 → 첫 vertical로서 넓은 적용 범위
+- 범용 LLM (GPT / Claude / Gemini) 는 「LLM이 계산한다」 설계. llive는 「LLM의 출력을 **검증**하고, 필요하면 **재계산**한다」 설계를 택했다——어느 쪽이 우월한지는 용도에 달려 있으므로, 여기서는 설계 사상의 차이로 제시한다
+- Wolfram Alpha는 강력한 계산 엔진이지만 closed cloud. llive는 완전 on-prem. 이 차이가 효력을 발휘하는지는 데이터를 외부로 내보낼 수 있는가라는 제약에 달려 있다
+- 수학·물리·공학·금융·약학 모두가 「단위 차원」과 「정밀 계산」을 필요로 한다 → 첫 vertical로서 적용 범위가 넓어, 먼저 검증할 가치가 있다고 판단했다
 
 ## v0.7-vertical MATH의 8건 전체 요건
 
