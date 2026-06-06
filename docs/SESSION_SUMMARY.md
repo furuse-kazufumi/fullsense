@@ -3,7 +3,7 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-06 18:09:09
+- **最終更新**: 2026-06-06 19:28:25
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
@@ -25,24 +25,21 @@ e334415 auto: doc_map.md 編集前 (2026-06-06 17:34)
 ## 現在の git status
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-18:08 docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md
-18:02 docs/SESSION_SUMMARY.md
-18:02 docs/NEXT_SESSION.auto.md
+19:28 docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md
+18:09 docs/SESSION_SUMMARY.md
+18:09 docs/NEXT_SESSION.auto.md
 17:51 docs/doc_map.md
 17:47 docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md
 17:36 docs/research/master_plan_2026_06_06.md
 17:34 docs/research/index.md
 17:32 docs/research/patent_search_2026_06_06.md
-17:19 docs/NEXT_SESSION.md
-17:03 docs/research/classics_dna_mapping_2026_06_06.md
-17:02 docs/research/differentiation_audit_dna_roadmap_2026_06_06.md
-16:55 docs/research/gate_taxonomy_audit_2026_06_06.md
 ```
 
 ---

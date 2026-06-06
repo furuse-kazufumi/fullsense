@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 18:09:10
+- **生成時刻**: 2026-06-06 19:28:26
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -35,7 +35,8 @@ e334415 auto: doc_map.md 編集前 (2026-06-06 17:34)
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -75,9 +76,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `18:08` `docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md`
-- `18:02` `docs/SESSION_SUMMARY.md`
-- `18:02` `docs/NEXT_SESSION.auto.md`
+- `19:28` `docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md`
+- `18:09` `docs/SESSION_SUMMARY.md`
+- `18:09` `docs/NEXT_SESSION.auto.md`
 - `17:51` `docs/doc_map.md`
 - `17:47` `docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md`
 - `17:36` `docs/research/master_plan_2026_06_06.md`

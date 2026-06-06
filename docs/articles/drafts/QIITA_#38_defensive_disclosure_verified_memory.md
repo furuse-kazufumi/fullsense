@@ -1,5 +1,5 @@
 ---
-title: 'llcore 検証 arc (#38) — 敵 56 体に自分の研究を殴らせたら「四隅の空白」が残った日: 特許を出さずに「防衛的公開」で旗を立てる'
+title: 'llcore 検証 arc (#38) — 自分の研究を 56 体の AI に反証させたら「四隅の空白」が残った日: 特許を出さずに「防衛的公開」で旗を立てる'
 tags: [FullSense, llcore, Singularity, AI, 解説]
 private: false
 updated_at: '2026-06-06'
