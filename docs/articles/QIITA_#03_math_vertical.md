@@ -286,11 +286,13 @@ llive computes → IEEE 754 precision, reproducible, citable
 - Tests: `tests/unit/test_math_units.py` (22 items) + `tests/unit/test_math_calculator.py` (24 items)
 - All 1014 PASS / zero regressions
 
-## Next Steps
+## The Question That Remains — Is "Don't Let It Compute" Enough?
 
-- Integrate `SafeCalculator` into BriefGrounder → expressions are automatically grounded at the moment a Brief is submitted
-- Append the MATH-05 CODATA dictionary to the RAD `metrology` field
-- In the MATH-02 Sympy verification layer, turn the LLM's formula output into an AST → flag inconsistencies
+So far the design has been to **not let the LLM compute**. Snatch the arithmetic expression away, hand it to a deterministic engine, and `5 m/s + 3 s` is stopped. But numbers are not the only thing an LLM emits. What if it writes out a **wrong formula itself**, like `x² + x = 2x³`, dressed up in plausible words? If we cannot mechanically disprove whether a formula is correct before we take it away, the verification is running on one lung.
+
+In the next article, **#06 "[How Do We Stop LLM Math Hallucinations — A Formal Verification Gate](./QIITA_#06_next_math02_formal_gate.md)"**, we dissect MATH-02: the machinery that turns the LLM's emitted formula into an AST with Sympy and mechanically flags contradictions — a step forward from this article's "don't let it compute" toward "disprove the output." Before trusting a formula, we go build the engine that doubts it.
+
+(As ongoing hands-on work, integrating `SafeCalculator` into BriefGrounder so expressions are auto-grounded the moment a Brief is submitted, and appending the MATH-05 CODATA dictionary to the RAD `metrology` field, are also running in parallel.)
 
 ---
 
