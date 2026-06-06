@@ -386,9 +386,9 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 
 ## ③ 详细 —— 一天的会话，以及所公开技术的内容
 
-### 3.1 对抗审计的设计（为了可复现）
+### 3.1 反证检验的设计（为了可复现）
 
-自己说「我的研究很强」没有意义。所以我们搭了一套**对抗性工作流**。
+自己说「我的研究很强」没有意义。所以 AI 搭了一套**反证主导的工作流**。
 
 - **从 7 个角度搜寻反证**：证明门的谱系 / certified training / Transformer 稳定性 / 进化 × 验证 / verified memory / runtime assurance / 产业·专利。
 - **追加 critic 指出的 3 个盲点角度**：从形式方法会议一侧的反查 / certified continual learning 的词汇系 / 内部状态·SSM 的解释。
