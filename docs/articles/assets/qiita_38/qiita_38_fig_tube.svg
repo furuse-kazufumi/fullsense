@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520" role="img" aria-label="Tracking tube of radius r around a reference trajectory; non-contractive case diverges">
+  <title>Tracking tube</title>
+  <desc>The real trajectory stays inside a tube of radius r around the reference; without contraction the tube diverges.</desc>
+
+  <rect width="800" height="520" fill="#f7f9fc"/>
+
+  <text x="400" y="40" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#1f2a44" text-anchor="middle">The tracking tube</text>
+  <text x="400" y="66" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#5a6477" text-anchor="middle">contraction keeps the real trajectory within radius r of the reference</text>
+
+  <!-- ===== Contractive case (left/main) ===== -->
+  <!-- axes -->
+  <line x1="80" y1="320" x2="540" y2="320" stroke="#9aa4b8" stroke-width="1.5"/>
+  <line x1="80" y1="120" x2="80" y2="320" stroke="#9aa4b8" stroke-width="1.5"/>
+  <text x="540" y="342" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#7a8499" text-anchor="end">time / state</text>
+  <text x="70" y="118" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#7a8499" text-anchor="end">x</text>
+
+  <!-- tube band (constant radius r) -->
+  <path d="M80 180 L540 180 L540 260 L80 260 Z" fill="#3b7dd8" fill-opacity="0.14" stroke="none"/>
+  <!-- tube edges -->
+  <line x1="80" y1="180" x2="540" y2="180" stroke="#3b7dd8" stroke-width="1.3" stroke-dasharray="2 3" opacity="0.7"/>
+  <line x1="80" y1="260" x2="540" y2="260" stroke="#3b7dd8" stroke-width="1.3" stroke-dasharray="2 3" opacity="0.7"/>
+
+  <!-- reference trajectory (dashed center) -->
+  <line x1="80" y1="220" x2="540" y2="220" stroke="#5a6477" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="548" y="224" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#5a6477">reference (dashed)</text>
+
+  <!-- real trajectory (solid wavy, stays inside) -->
+  <path d="M80 220 C140 200, 180 245, 230 230 S320 195, 370 225 S460 250, 540 215" fill="none" stroke="#2e9e8f" stroke-width="2.6"/>
+  <text x="548" y="208" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#1d7a6e">real (solid)</text>
+
+  <!-- radius r annotation -->
+  <line x1="120" y1="180" x2="120" y2="260" stroke="#c9802e" stroke-width="1.6"/>
+  <path d="M120 180 L116 188 L124 188 Z" fill="#c9802e"/>
+  <path d="M120 260 L116 252 L124 252 Z" fill="#c9802e"/>
+  <text x="132" y="224" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#a5651f">r</text>
+
+  <!-- formula box -->
+  <rect x="150" y="380" width="320" height="56" rx="8" fill="#ffffff" stroke="#3b7dd8" stroke-width="1.8"/>
+  <text x="310" y="416" font-family="'Courier New', monospace" font-size="22" font-weight="700" fill="#1f2a44" text-anchor="middle">r = G&#183;w&#772; / (1 &#8722; L)</text>
+  <text x="310" y="458" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#7a8499" text-anchor="middle">finite tube radius when L &lt; 1 (contractive)</text>
+
+  <!-- ===== Non-contractive contrast (right, small) ===== -->
+  <line x1="600" y1="320" x2="760" y2="320" stroke="#9aa4b8" stroke-width="1.2"/>
+  <line x1="600" y1="140" x2="600" y2="320" stroke="#9aa4b8" stroke-width="1.2"/>
+  <!-- diverging tube -->
+  <path d="M600 225 L760 150 L760 290 L600 215 Z" fill="#c0392b" fill-opacity="0.10" stroke="none"/>
+  <line x1="600" y1="225" x2="760" y2="150" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.7"/>
+  <line x1="600" y1="215" x2="760" y2="290" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.7"/>
+  <path d="M600 220 C640 205, 670 250, 700 230 S740 180, 760 215" fill="none" stroke="#c0392b" stroke-width="2"/>
+  <text x="680" y="135" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#a23026" text-anchor="middle">L &#8805; 1</text>
+  <text x="680" y="345" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#a23026" text-anchor="middle">r &#8594; &#8734; (diverges)</text>
+</svg>
