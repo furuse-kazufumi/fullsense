@@ -10,7 +10,7 @@
 
   <!-- Central formula -->
   <rect x="90" y="120" width="620" height="86" rx="10" fill="#ffffff" stroke="#3b7dd8" stroke-width="2"/>
-  <text x="400" y="173" font-family="'Courier New', monospace" font-size="24" font-weight="700" fill="#1f2a44" text-anchor="middle">s&#8341;&#8330;&#8321; = decay &#8857; s&#8341; + (1 &#8722; decay) &#8857; tanh(W s&#8341; + V x&#8341;)</text>
+  <text x="400" y="173" font-family="'Courier New', monospace" font-size="24" font-weight="700" fill="#1f2a44" text-anchor="middle">s&#8348;&#8330;&#8321; = decay &#8857; s&#8348; + (1 &#8722; decay) &#8857; tanh(W s&#8348; + V x&#8348;)</text>
 
   <!-- Callout: decay = leak -->
   <line x1="270" y1="206" x2="250" y2="280" stroke="#2e9e8f" stroke-width="1.5"/>
@@ -31,12 +31,12 @@
   <rect x="500" y="280" width="200" height="74" rx="8" fill="#fbf0df" stroke="#c9802e" stroke-width="1.8"/>
   <text x="518" y="306" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#a5651f">W = recurrent coupling</text>
   <text x="518" y="326" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#3a4459">state feeds back on itself;</text>
-  <text x="518" y="343" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#3a4459">V x&#8341; injects the input</text>
+  <text x="518" y="343" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#3a4459">V x&#8348; injects the input</text>
 
   <!-- Mini recurrence diagram -->
   <g>
     <rect x="320" y="400" width="160" height="62" rx="10" fill="#e3eefb" stroke="#3b7dd8" stroke-width="2"/>
-    <text x="400" y="436" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#2c5aa0" text-anchor="middle">state s&#8341;</text>
+    <text x="400" y="436" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#2c5aa0" text-anchor="middle">state s&#8348;</text>
 
     <!-- input arrow in -->
     <defs>
@@ -45,7 +45,7 @@
       </marker>
     </defs>
     <line x1="200" y1="431" x2="316" y2="431" stroke="#5a6477" stroke-width="2" marker-end="url(#ah2)"/>
-    <text x="180" y="435" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#5a6477" text-anchor="end">x&#8341;</text>
+    <text x="180" y="435" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#5a6477" text-anchor="end">x&#8348;</text>
 
     <!-- self-loop (recurrence) -->
     <path d="M480 415 C560 390, 560 472, 480 447" fill="none" stroke="#c9802e" stroke-width="2" marker-end="url(#ah2)"/>
