@@ -517,8 +517,10 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 | **진화 루프 (evolution loop)** | 변이 → 선택 → 다음 세대를 돌려 좋은 개체를 찾는 최적화. 여기서는 그 선택의 관문에 증명 게이트를 둔다. |
 | **SMT 솔버 (Z3 등)** | 논리식이 충족 가능한지 푸는 만능 솔버. 무겁다. 본 연구에서는 「실은 필요 없었다(장식)」가 결론. |
 | **tracking tube(추종 튜브)** | 「바람직한 궤도」에서의 실제 편차가 수렴하는 **통(반경 r)**의 보증. `r = G·w̄/(1−L)`. |
-| **SSGM** | 「진화하는 기억을 통솔하는」 write 게이트를 **이론만으로** 제안한 선행 연구(arXiv:2603.11768, 2026). 간판에서 가장 가까운 상대. |
+| **SSGM** | 「진화하는 기억을 통솔하는」 write 게이트를 **이론만으로** 제안한 선행 연구([arXiv:2603.11768](https://arxiv.org/abs/2603.11768), 2026). 간판에서 가장 가까운 상대. |
 | **navigability(탐색 가능성)** | 진화가 「움직이기 쉬운 지형인가」. 학습이 똑똑해지는 것과는 별개. 검증기의 효과는 이쪽에 있다. |
+
+![네 점 교차점 — 4개 조건이 동시에 겹치는 중심만이 차별화 핵심](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_intersection.svg)
 
 ---
 
