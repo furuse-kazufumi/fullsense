@@ -298,6 +298,12 @@ The last item matters most. If you dump everything on Claude Code, you only get 
 
 llive is currently OSS under an Apache 2.0 + Commercial dual-license, repo at https://github.com/furuse-kazufumi/llive . If you are interested in this "second brain" style of development, I'd like to discuss it via Issue / Discussion.
 
+### But "assembling it" alone makes it stall
+
+So far this has been about how you **build** the second brain. But an assembled brain does nothing if left alone. One question remains: even with the five elements in place, requirements keep piling on, and the next arrives before you've digested the last. **Why can AI development keep this situation turning—the very situation that would break a human team—instead of stalling?** "Having" a second brain and "keeping it running" are different skills.
+
+In the next article **#16**, I tackle that question head-on—the **operation theory** of the second brain: carrying over Canon's "three selves" spirit and the mindset of managers who keep producing results into running AI. We'll see what the "first brain (my own experience)," seated as the judgment gate in this article, gives up in the torrent of requirements—and what it must never give up.
+
 ---
 
 **Past related articles**:
