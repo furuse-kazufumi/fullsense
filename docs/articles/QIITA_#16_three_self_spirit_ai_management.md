@@ -242,7 +242,7 @@ One cycle for a human team = days to weeks (requirements → design → implemen
 - Even if you add before fully digesting, the next cycle naturally picks it up
 - The author's "passing idea" can become a requirement **at the very speed it occurs**
 
-You never have to agonize over "when to close" the requirements definition. **Open it anytime, close it anytime.** This is a "development style unique to AI" that no human team can imitate.
+You never have to agonize over "when to close" the requirements definition. **Open it anytime, close it anytime.** This is a "development style unique to AI" that is hard to pull off on a human team — at least, that is how it feels in my own work.
 
 ## But there is a condition — the AI must act autonomously
 
