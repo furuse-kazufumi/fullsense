@@ -449,6 +449,10 @@ llive 计算 → IEEE 754 精度、可复现、可引用
 
 # 수학·단위에 강한 AI를 만드는 첫걸음 — MATH-01/08 내장 계산 엔진
 
+> 📚 **연재 내비**: ← #01 [Brief API 설계와 progressive matrix](./QIITA_#01_brief_api_progressive.md) / #02 [10 사고 인자로 정리하는 사고층](./QIITA_#02_cognitive_factors.md) ｜ **#03 본 기사**（첫 vertical = 수학·단위）｜ #06 [LLM 수식 환각을 어떻게 멈출 것인가](./QIITA_#06_next_math02_formal_gate.md) →. ※ 각 기사는 단독으로도 읽을 수 있습니다.
+>
+> #01 에서 Brief 라는 입구를, #02 에서 그 위를 흐르는 사고 인자를 보았다. 본 기사에서는 그 입구에 **첫 전문 분야** 를 얹는다——수학과 단위다. 왜 범용 LLM 이 `5 m/s + 3 s = 8` 을 태연히 써 버리는가, 그 물음에서 시작한다.
+
 ## TL;DR
 
 - llive의 첫 specialised vertical로서 「**수학·단위 특화 AI**」를 선정 (사용자 전략 지시)
