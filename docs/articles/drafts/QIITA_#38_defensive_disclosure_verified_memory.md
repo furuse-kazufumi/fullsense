@@ -358,8 +358,10 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 | **进化循环 (evolution loop)** | 转动变异 → 选择 → 下一代来搜寻优秀个体的最优化。这里把证明门放在那个选择的关卡上。 |
 | **SMT 求解器 (Z3 等)** | 解判逻辑式是否可满足的万能求解器。很重。本研究的结论是它「其实并不需要（只是装饰）」。 |
 | **tracking tube（追踪管）** | 保证实际与「理想轨道」的偏差收在一个**管（半径 r）**之内。`r = G·w̄/(1−L)`。 |
-| **SSGM** | **仅以理论**提出「统御进化记忆」write 门的先行研究（arXiv:2603.11768, 2026）。在招牌上最接近的对手。 |
+| **SSGM** | **仅以理论**提出「统御进化记忆」write 门的先行研究（[arXiv:2603.11768](https://arxiv.org/abs/2603.11768), 2026）。在招牌上最接近的对手。 |
 | **navigability（可探索性）** | 进化是否「易于移动的地形」。与学习变聪明是两回事。验证器的功效在这一侧。 |
+
+![四点交叉点 —— 只有 4 个条件同时重叠的中心才是差异化核心](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_intersection.svg)
 
 ---
 
