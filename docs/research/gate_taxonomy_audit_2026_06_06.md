@@ -161,7 +161,7 @@ raptor はセキュリティエージェント fork。改造案(plugin/skill/MCP
 
 ## 4. ギャップ分析 (honest 仕分け)
 
-### (a) すぐ足せて差別化に効くもち [採用推奨]
+### (a) すぐ足せて差別化に効くもの [採用推奨]
 
 1. **SPC 管理図を自己進化メトリクスの runtime ゲートに転用 (llmesh→llcore/llive)**
    — `llmesh/industrial/` の CUSUM / Xbar-R は成熟実装。fitness 曲線・多様性・gate
