@@ -205,9 +205,11 @@ llive は Apache 2.0 + Commercial dual-license の OSS、Repo は https://github
 
 # English
 
-# Imposing the "Three Selfs Spirit" on AI — A Manager's Playbook for AI Operations That Keep Delivering Outstanding Results
+# Imposing the "Three Selfs Spirit" on AI — Porting a Results-Driven Manager's Mindset into AI Operations
 
-> 📚 **Series nav**: ← #15 The "Second Brain" Development Theory ｜ **#16 This article** ｜ #17 The Vision of Human-AI Fusion → ｜ [Series LINK_MAP](./QIITA_#24_LINK_MAP.md). ※ Each article stands on its own (links are for browsing).
+> 📚 **Series nav**: ← #15 The "Second Brain" Development Theory (construction) ｜ **#16 This article** (its operations theory) ｜ #17 The Vision of Human-AI Fusion → ｜ [Series LINK_MAP](./QIITA_#24_LINK_MAP.md). ※ Each article stands on its own (links are for browsing).
+>
+> In the previous article, #15, I wrote about how to **build** the "Second Brain." This article is about how to **keep it running** — in other words, operations.
 
 **One-line hook**:
 You can **keep piling on new requirements before the old ones are fully digested**. This breaks a human team, but in AI development it becomes an advantage. There is exactly one condition — the AI has to **act autonomously**. Canon's "Three Selfs Spirit" and management books such as those by Buckingham & Coffman can be ported over almost verbatim.
