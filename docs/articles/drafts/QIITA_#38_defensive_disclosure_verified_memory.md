@@ -7,7 +7,7 @@ slide: false
 ignorePublish: false
 ---
 
-言語 / Language / 语言 / 언어: [日本語](#日本語)（EN/ZH/KO 版は追って追加）
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
 
 # 日本語
 
