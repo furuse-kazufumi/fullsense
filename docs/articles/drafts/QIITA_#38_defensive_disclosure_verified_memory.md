@@ -588,16 +588,24 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 
 방어적 공개는 「당업자가 실시할 수 있는 상세도」로 쓰지 않으면 선행 기술로서 약합니다. 그래서 개시 문서에는 다음을 **구현 가능한 레벨**로 썼습니다.
 
+![기억 코어 식 — 누수와 포화 딸린 재귀 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) 의 도해](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg)
+
 **(a) 건전한 축소성 증명기의 사다리(ladder).** 싼 것부터 순서대로 3단:
 - `cert_inf` — 닫힌 형식의 ∞-노름 상한(`O(n²)`). 각 행의 절댓값 합이 끝점에서 최대가 되는 성질을 사용해, **솔버 불필요**.
 - `cert_two` — 전체 `2^n` 꼭짓점에서 SVD.
 - `cert_sdp` — 공통 Lyapunov 행렬을 볼록 LMI(내점 SDP, CLARABEL)로.
 
+![증명기 사다리 — cert_inf → cert_two → cert_sdp 의 3단, 싼 순서로 시도하는 증명 강도의 계단](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_ladder.svg)
+
 **여기가 정직 포인트**: 프로젝트의 옛 통칭은 「Z3-gated」였지만, **실제 게이트에 SMT(Z3)는 사용하지 않습니다**. 전용 Z3 축소성 트랙을 돌려 확인하니, 닫힌 형식 ∞-노름 증명기와 **바이트 단위로 일치(3270건 중 0건의 불일치, 경계 근방에서도 8000건 중 0건)**. 즉 이 불변량 클래스에서는 **Z3는 장식**이었습니다. 그래서 간판을 「건전한 축소성 증명기의 사다리」로 고쳤습니다(이것은 후퇴가 아니라 강점 — 솔버 의존과 불완전성을 회피할 수 있다).
 
 **(b) prove-then-reject 게이트(fail-closed).** 자식 개체를 제안 → 증명이 통과하면 채용, 안 되면 상한까지 resample, 그래도 안 되면 **알려진 안전한 fallback**을 채용. **미증명의 자식은 결코 채용하지 않는다**. `gate_mode="contraction"` / `"state_norm"`을 additive하게 추가하고, 기본 `"none"`은 종전 거동과 바이트 일치(= 기존 진화 기반으로의 순수한 덧씌움).
 
+![prove-then-reject 게이트 — 자식 개체를 제안하고, 증명이 통과하면 채용·안 되면 기각 후 재샘플하는 fail-closed 관문](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_gate.svg)
+
 **(c) tracking tube 검사 지표.** 「어딘가로 수축한다」뿐만 아니라 「**바람직한 궤도에 추종한다**」를 보고 싶다는 사용자 요망에 대한 답. 게이트가 이미 계산하고 있는 양(상태 Lipschitz `L`, 입력 게인 `G`)과 외란 상계 `w̄`를 재이용해, 추종 오차가 수렴하는 통 `r = G·w̄/(1−L)`을 **추가 증명 비용 제로**로 보고. 소규모 실측에서도, 축소성 PASS의 3 gene은 오차/외란 비 0.50/0.78/1.04로 이론 통의 안쪽, 비축소성의 대조는 **9.3배**로 증폭(= 게이트는 장식이 아니라 load-bearing).
+
+![tracking tube — 바람직한 궤도 주위에 반경 r = G·w̄/(1−L) 의 통이 쳐지고, 실제 궤도가 그 안쪽에 수렴하는 그림](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_tube.svg)
 
 **(d) verified memory evolution의 2개 루트.**
 - 루트 (a): 에이전트 **기억 뱅크**의 업데이트를 건전 증명으로 게이트(SSGM의 NLI 이론과의 차 = 건전 증명 + 돌아가는 게이트).
