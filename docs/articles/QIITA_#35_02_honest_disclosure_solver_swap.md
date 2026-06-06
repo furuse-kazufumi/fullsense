@@ -597,6 +597,14 @@ margin-sweep 红队对求解器伪影**结构性失明**——它们只是在同
 - 所有结果都是 n=2 耦合基座、CPU、本池/seed。健全性 = **观测到的假许可为 0**（JSR 预言机是证伪器，不是证明；Rump gate 是唯一机器校验的 PD 证明，且是加性的）。
 - 这是关于正确的 **verifier**；并非声称进化神经动力学普遍有用。
 
+## 那么，其他数字可信吗?
+
+仅仅交换一次求解器，就让「次数互补性」这一整个 finding 被揭穿为幻觉。于是留下一个令人不安的问题：**在这个基座上我们至今测过的所有验证结果里，有多少是「求解器的怪癖」?** 既然 +254 能变成 +692，那些我们视为理所当然的其他数字，在另一个求解器下也许会露出不同的面貌。
+
+不过，越是追求求解器的精确，第二个代价就越发显现。这次固定 CLARABEL 消除了假阴性，但精确的内点法并不快。健全的验证要对状态维数 n 列举 **2ⁿ 个顶点**——n=16 时 65,536，n=32 时约 43 亿。verifier 既是安全的守门人，同时也是**计算成本的怪物**。在把数字怀疑到底之后，这次轮到「正确」与「成本」正面相撞。
+
+下一篇 **#36** 将用**不列举顶点的健全近似**打破这道 2ⁿ 墙（一次 SVD、最高数千倍加速、零健全性违规），并仿照生物的还原进化，走向「**把成本本身变成进化的选择压**」的构想。本文写下的「怀疑求解器」这条线，在那里被重画为「**怀疑检查器的成本**」。
+
 ## References
 
 1. Diamond, S. & Boyd, S. *cvxpy: A Python-Embedded Modeling Language for Convex Optimization* — JMLR 17(83), 2016.
@@ -609,14 +617,17 @@ margin-sweep 红队对求解器伪影**结构性失明**——它们只是在同
 8. Boyd, S. & Vandenberghe, L. *Convex Optimization* (LMIs / SDP) — Cambridge University Press, 2004.
 9. Boyd, S., El Ghaoui, L., Feron, E. & Balakrishnan, V. *Linear Matrix Inequalities in System and Control Theory* — SIAM, 1994.
 10. Mouret, J.-B. & Clune, J. *Illuminating search spaces by mapping elites (MAP-Elites)* — arXiv:1504.04909, 2015.
-11. 内部：[#35-00 概览](#) — llcore 验证 arc 的全貌。
-12. 内部：[#35-01 verifier 前沿](#) — 阶梯与 SDP 大跳跃。
+11. 内部：[#35-00 概览](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6) — llcore 验证 arc 的全貌。
+12. 内部：[#35-01 verifier 前沿](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5) — 阶梯与 SDP 大跳跃。
 
 ## 系列 / Series navigation
 
-- [#35-00 — llcore 验证 arc 概览](#)
-- [#35-01 — verifier-fitness 前沿（证明能力的阶梯）](#)
-- **#35-02 — 怀疑求解器（本文）**
+- [#35-00 — llcore 验证 arc 概览](https://fullsense.qiita.com/furuse-kazufumi/items/6fc86b4732eeec77adb6)
+- [#35-01 — verifier-fitness 前沿（证明能力的阶梯）](https://fullsense.qiita.com/furuse-kazufumi/items/71f05f901fd9a2de6de5)
+- **#35-02 — 怀疑求解器（本文・验证 arc 终章）**
+- #36 — 打破 2ⁿ 墙：vertex-free 健全证明与「把成本变成进化选择压」（下一个 arc）
+
+※ 每篇文章均可独立阅读（链接用于回游浏览）。
 
 ---
 
