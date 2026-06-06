@@ -24,6 +24,10 @@ ignorePublish: false
 
 ![連載進捗 (1/8) — 現在: memory](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_01_progress.svg)
 
+> 📚 **連載ナビ**: ← [llive 完全解説 (0) series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c) ｜ **(1) 本記事**（4 層メモリ + surprise gate）｜ (2) [「10 軸で考える AI」](https://qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511) → ｜ ※ 各記事は単独でも読めます。
+>
+> series index で llive 全体の地図を見たなら、本記事はその最初の停留所——**AI が何を覚え、何を忘れるか** を決める記憶基盤を解剖する。「忘れない LLM」を名乗る前に、まず「全部は覚えない」設計から始める。
+
 ## 0. この記事は何 (8 秒 read)
 
 **LLM 本体ではなく LLM の周りに被せる認知層** llive の **4 層メモリ + 1 つの surprise gate** を解説します. semantic / episodic / structural / parameter の役割が違う 4 種類の記憶を, **「驚き」(surprise)** が高いものだけ書き込む設計です. Faiss + DuckDB + Kùzu + safetensors の組合せで, **on-prem だけで動きます**.
