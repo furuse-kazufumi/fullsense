@@ -315,7 +315,7 @@ One honest dud, too: **Codex (another AI), which was supposed to be a subordinat
 
 ## 4. The first decisive move — making the problems "gradually harder" fixed the saturation
 
-The first hypothesis to crush was the most fundamental one: **"If, instead of fixing the test paper, we gradually make it harder in step with the flock's ability, does the saturation get fixed?"**
+The first hypothesis to test was the most fundamental one: **"If, instead of fixing the test paper, we gradually make it harder in step with the flock's ability, does the saturation get fixed?"**
 
 I compared on a synthetic fake grading sheet (but with conditions fairly aligned).
 
