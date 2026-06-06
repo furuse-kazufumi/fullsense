@@ -410,7 +410,15 @@ The two don't overlap. The ledger is **a past fact**; the annotation is **a sugg
 - The emit side doesn't know the consumer, and the consumer side doesn't require an emit = a completely optional connector
 - The existing Markdown/HTML output is **completely uncontaminated**
 
-If you're wrestling with **"reconciling independence and combination value"** in an OSS multi-product setup, do give the HTML-comment-style annotation channel a try. The implementation fits in just over 200 lines.
+If you're wrestling with **"reconciling independence and combination value"** in an OSS multi-product setup, the HTML-comment-style annotation channel may be worth a try. My own implementation fit in just over 200 lines.
+
+### So who actually receives these hints?
+
+By now we have the wiring where "the emit side doesn't know the consumer." But an annotation **only takes on meaning once a receiver appears.** If nobody reads `<!-- llive:cog.risk_alert -->`, it stays just an invisible string. llive emits, llove picks it up and lights it on screen. If those two are independent products in their own right — then **how does a single solo developer keep three products running at once in the first place?**
+
+The annotation channel was a story about "wiring." The next question to ask is about "**the mind that lays it down.**" What does it take for one developer to run multiple products at team scale?
+
+In the next article, **#15**, I'll tackle that question head-on — the construction theory of the "**second brain**," layering 30 years of software development experience with Perplexity, Claude Code, TRIZ, and a 50,000-paper RAG. We'll go check how the invisible channel laid down in this article works like a nerve inside that second brain.
 
 ---
 
@@ -418,9 +426,12 @@ If you're wrestling with **"reconciling independence and combination value"** in
 
 **Implementation**: `src/llive/annotations.py`, `src/llive/brief/render.py`, `src/llive/brief/runner.py`
 
-**Related past articles (series)**:
+**Previous articles**:
 - [12] llive development history — from v0.1 to a v0.7 candidate in 5 days
 - [13] Corpus-first strategy — supplementing the thinking flow with perspectives the AI doesn't notice
+
+**Next article**:
+- [15] "The Second Brain" development theory — a cognitive system that uses the invisible channel as a nerve (the wiring of this article, continued)
 
 ## References / referenced specs
 
