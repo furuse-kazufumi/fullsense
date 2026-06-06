@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520" role="img" aria-label="Memory core recurrence with leak (decay), saturation (tanh) and recurrent coupling (W), RWKV-style">
   <title>Memory core: leaky, saturating recurrence</title>
-  <desc>State update s_{t+1} = decay * s_t + (1 - decay) * tanh(W s_t + V x_t); RWKV-style recurrence with leak and saturation.</desc>
+  <desc>State update s_{t+1} = decay * s_t + (1 - decay) * tanh(W s_t + V x_t); RWKV-style recurrence with leak and saturation. Subscripts denote time step t.</desc>
 
   <rect width="800" height="520" fill="#f7f9fc"/>
 
