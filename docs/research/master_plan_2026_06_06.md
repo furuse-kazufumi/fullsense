@@ -66,7 +66,7 @@ T5 台帳・環境の大掃除              ← 随時 (セッション端数時
 |---|---|---|
 | 4-1 | 特許 DB 照会 (USPTO/JPO/Google Patents) — 監査の既知の穴 | 調査のみ |
 | 4-2 | ✅ **完了 (06-07)**: CAV/TACAS/FM 逆引き 2 巡目 — breaks 0 / narrows 17 / SSGM 後続なし。論文編入済。正本 = research/cav_tacas_reverse_lookup_round2_2026_06_07.md | 監査 critic 指摘の最優先盲点 → 解消 |
-| 4-3 | 内部状態解釈の related work 防御 (Hopfield/SSM/RWKV 安定性) | D4 の最脆部を先回り |
+| 4-3 | ✅ **完了 (06-07)**: 内部状態安定性 4 系統 sweep — breaks 0 / must_cite 27 → 系統代表 ~14 件を論文編入。「解析は成熟・ゲートは不在」の二段防御確立。正本 = research/internal_state_stability_defense_2026_06_07.md | D4 の最脆部 → 解消 |
 | 4-4 | metamorphic gate (llive 構造不変量→振る舞い不変量) | 検問タクソノミ TOP-3 の残り |
 
 ## 6. T5: 台帳・環境の大掃除 (端数時間で消化)
