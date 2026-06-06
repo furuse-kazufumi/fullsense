@@ -65,7 +65,7 @@ T5 台帳・環境の大掃除              ← 随時 (セッション端数時
 | # | 項目 | 備考 |
 |---|---|---|
 | 4-1 | 特許 DB 照会 (USPTO/JPO/Google Patents) — 監査の既知の穴 | 調査のみ |
-| 4-2 | CAV/TACAS/FM tool paper 逆引きの 2 巡目 | 監査 critic 指摘の最優先盲点 |
+| 4-2 | ✅ **完了 (06-07)**: CAV/TACAS/FM 逆引き 2 巡目 — breaks 0 / narrows 17 / SSGM 後続なし。論文編入済。正本 = research/cav_tacas_reverse_lookup_round2_2026_06_07.md | 監査 critic 指摘の最優先盲点 → 解消 |
 | 4-3 | 内部状態解釈の related work 防御 (Hopfield/SSM/RWKV 安定性) | D4 の最脆部を先回り |
 | 4-4 | metamorphic gate (llive 構造不変量→振る舞い不変量) | 検問タクソノミ TOP-3 の残り |
 
