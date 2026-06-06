@@ -10,16 +10,19 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 17:04:59
+- **生成時刻**: 2026-06-06 17:07:31
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+21c76cf docs(research): 古典 DNA マッピング (孫子・論語 20 原理 + G14-G18) + index/doc_map 反映
+19e95ec auto: doc_map.md 編集前 (2026-06-06 17:06)
+1baefc0 auto: index.md 編集前 (2026-06-06 17:06)
 5101272 auto: doc_map.md 編集前 (2026-06-06 17:04)
 61c110a auto: index.md 編集前 (2026-06-06 17:04)
 f3e21bb docs(research): 差別化監査の確定結果 + 特別 DNA ロードマップ
@@ -27,15 +30,12 @@ f024164 docs(research): 検問体系監査 — A-Evolve 三重検問 vs FullSens
 6d1e2f7 auto: doc_map.md 編集前 (2026-06-06 16:55)
 efffd49 auto: index.md 編集前 (2026-06-06 16:55)
 1421e68 auto: gate_taxonomy_audit_2026_06_06.md 編集前 (2026-06-06 16:55)
-c4cf376 QIITA #37 ×2 を Qiita Team へ投稿 (team id 集約方針) + 公開側に Team 誘導リンク適用
-0b4d485 auto: QIITA_SERIES_INDEX.md 編集前 (2026-06-06 12:10)
-d2f5700 QIITA #37 本編+かみくだき版を 4 言語で公開 (HD-1 + Stage-B GPU 3 連戦, Singularity タグ)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/doc_map.md
+(clean)
 ```
 
 
@@ -43,7 +43,7 @@ M docs/doc_map.md
 
 | project | 最新 commit | 直近 commit msg | tests/ 直近 mtime |
 |---|---|---|---|
-| llive | `90b97d1 2026-06-06` | auto: test_evolutionary_persona.py 編集前 (2026-06-06 16:59) | 2026-06-06 17:00 |
+| llive | `8606670 2026-06-06` | feat(persona): 古典思想家 2 名 (孫子/孔子) を PERSONA_ONTOLOGY に追加 | 2026-06-06 17:00 |
 | llove | `701624a 2026-05-30` | docs: かみ砕いた説明を中学生レベルに見直し (workflow wr87hqvj2) | 2026-05-25 22:52 |
 | llmesh | `c6afef0 2026-05-30` | docs: readability 3層化(中学生レベル) — かみ砕き+用語集+日本語(英語) (workflow wmik3xm1n) | 2026-05-25 07:06 |
 | lldesign | `1014ce3 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:52 |
@@ -75,13 +75,13 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `17:04` `docs/doc_map.md`
-- `17:04` `docs/research/index.md`
+- `17:06` `docs/doc_map.md`
+- `17:06` `docs/research/index.md`
+- `17:05` `docs/SESSION_SUMMARY.md`
+- `17:05` `docs/NEXT_SESSION.auto.md`
 - `17:03` `docs/research/classics_dna_mapping_2026_06_06.md`
 - `17:02` `docs/research/differentiation_audit_dna_roadmap_2026_06_06.md`
 - `16:55` `docs/research/gate_taxonomy_audit_2026_06_06.md`
-- `16:52` `docs/SESSION_SUMMARY.md`
-- `16:52` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
