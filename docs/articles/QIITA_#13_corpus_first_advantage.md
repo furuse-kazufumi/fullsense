@@ -318,6 +318,14 @@ Three observations that seem safe to make at this point, from what I noticed tod
 
 We aim to deliver all three to the end user as well, through llive's CREAT requirement group.
 
+## The Question That Remains — Who Sees the Completed Perspectives, and When?
+
+So far this has been a happy story for the human: the AI completes perspectives in the background. But the flip side is that those completed perspectives (consensus / risk / complementary track) operate in a place **invisible to human eyes**. Looking only at the final output, you cannot tell which perspectives the AI referenced in the background or how it judged. That is at once the benefit of the collaboration and its weakness — the provenance vanishes into the fog.
+
+So where should we **inscribe** the perspectives the AI mixed in behind the scenes, in a form that does not get in the human's way yet is reliably readable by machines? If we leave no trace in the output, "why this design?" sinks back below consciousness in the next session.
+
+In the next article, **#14 "[Invisible in HTML, but readable by machines — the invisible annotation channel design](./QIITA_#14_invisible_annotation_channel.md)"**, I offer one answer to "where to put that invisible provenance." Leaving the perspectives completed in the background without obstructing the human's reading — this is the other side: how to pin down, rather than let drift away, the multiple viewpoints that the corpus-first strategy gave us.
+
 ## Sources
 
 - memory: `project_corpus_first_advantage.md` (newly added today)
