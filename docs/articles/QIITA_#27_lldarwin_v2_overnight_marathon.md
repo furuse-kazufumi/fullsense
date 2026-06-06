@@ -820,7 +820,7 @@ Imposing a separate novelty for the semantic dimension (factor) roughly halves t
 - **Adding an archive alone can't save it.** "Hold a diversity reservoir and diversity is protected" is wrong.
   scalar selection went extinct even with a QD archive added. **What saves it is open-ending the selection pressure itself.**
 - **Diversity isn't automatically good.** The true nature of the Self-MoA counter-result is "voting or routing."
-  Only with a conductor (competence-aware routing) does diversity become a value. Voting kills experts.
+  Only with a conductor (competence-aware routing) does diversity become a value. Voting cancels out the expert.
 - **Independent cross-validation strengthens the conclusion.** Self-PoCs (synthetic), Agent C (real LLM), and Perplexity (literature)
   separately converged on the same conclusion — that's why you can trust it. A conclusion from the same mind shares the same bias.
 - **Proxy is only mechanism feasibility.** This article's PoCs verify "whether the mechanism turns," not a claim of "general capability improvement of real LLMs." The moment you cross this line, the research becomes a lie.
