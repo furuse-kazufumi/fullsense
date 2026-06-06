@@ -577,9 +577,9 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 
 - **교차점을 점유하는 특허: 제로 건.**
 - 최근접 특허는 3계통뿐이며, 모두 교차점 밖:
-  - **US11715005B2** — NN을 해시 대조로 진정성 검증(건전 증명이 아니라 암호 해시).
-  - **US10896032** — certify-then-deploy의 거버넌스 게이트(근거가 절차적 attestation).
-  - **US11868855** — 모델/가중치의 「stability」 검증(다만 가용성·내장애의 의미일 개연성 큼).
+  - **[US11715005B2](https://patents.google.com/patent/US11715005B2)** — NN을 해시 대조로 진정성 검증(건전 증명이 아니라 암호 해시).
+  - **[US10896032](https://patents.google.com/patent/US10896032)** — certify-then-deploy의 거버넌스 게이트(근거가 절차적 attestation).
+  - **[US11868855](https://patents.google.com/patent/US11868855)** — 모델/가중치의 「stability」 검증(다만 가용성·내장애의 의미일 개연성 큼).
 - 흥미로운 구조적 증거: 「**건전 증명으로 업데이트/기억/진화를 게이트한다**」고 쿼리하면, 특허 DB에 site 지정을 해도 결과가 거의 전부 **arXiv로 빗나갔다**. 이것은 「이 개념이 아직 학술 단계에 머물러 있어, 특허화되지 않았다」는 간접 증거입니다.
 
 → 결론: **특허 면에서도 clear**. 다만 US10896032 / US11868855는 어휘가 부분적으로 겹치므로, 논문의 related work에 「전개 거버넌스형 게이트 / 운용 안정성 검증과는 달리, 본 연구는 가중치 업데이트의 해석적 contraction 성질을 건전 증명으로 게이트한다」는 대비를 1~2문 선제적으로 넣었습니다.
