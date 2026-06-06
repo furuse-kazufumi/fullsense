@@ -164,6 +164,7 @@ nav_order: 3
 | `scripts/research_pocs/poc_saturation_fixes_2026_05_26.py` | 飽和修正手法 PoC |
 | `docs/research/llcore_cpu_poc_battery_completion_2026_05_29.md` | llcore Stage 0-2 完成 (39 gates / 76 tests / Codex 5/5 Green) |
 | `docs/research/gate_taxonomy_audit_2026_06_06.md` | A-Evolve 三重検問の棚卸し + 検問体系化監査 (llcore/llive/raptor/lleval/llmesh の gate 対応表・gap 分析・TOP-3) |
+| `docs/research/classics_dna_mapping_2026_06_06.md` | 孫子13篇+論語から差別化 trait を 20 原理抽出 → (a)研究戦略/(b)設計遺伝子/(c)検問統治 に写像。新設遺伝子座 G14-G18 提案。llive ontology に sun-tzu-strategist/confucius ペルソナ追加 |
 | `docs/papers/2026-05-29_core_evolution_master_survey.md` | Core Evolution master survey (Agent A-D + RAD 14 分野) |
 | `docs/papers/2026-05-29_research_plan_core_evolution.md` | 研究計画書 v1 (TMLR 本命) |
 

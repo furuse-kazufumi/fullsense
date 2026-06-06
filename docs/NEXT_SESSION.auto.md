@@ -10,33 +10,32 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 16:51:56
+- **生成時刻**: 2026-06-06 17:04:59
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+5101272 auto: doc_map.md 編集前 (2026-06-06 17:04)
+61c110a auto: index.md 編集前 (2026-06-06 17:04)
+f3e21bb docs(research): 差別化監査の確定結果 + 特別 DNA ロードマップ
+f024164 docs(research): 検問体系監査 — A-Evolve 三重検問 vs FullSense 対応表 + 検問タクソノミ
+6d1e2f7 auto: doc_map.md 編集前 (2026-06-06 16:55)
+efffd49 auto: index.md 編集前 (2026-06-06 16:55)
+1421e68 auto: gate_taxonomy_audit_2026_06_06.md 編集前 (2026-06-06 16:55)
 c4cf376 QIITA #37 ×2 を Qiita Team へ投稿 (team id 集約方針) + 公開側に Team 誘導リンク適用
 0b4d485 auto: QIITA_SERIES_INDEX.md 編集前 (2026-06-06 12:10)
 d2f5700 QIITA #37 本編+かみくだき版を 4 言語で公開 (HD-1 + Stage-B GPU 3 連戦, Singularity タグ)
-692722e auto: QIITA_SERIES_INDEX.md 編集前 (2026-06-06 12:01)
-3086ff4 auto: QIITA_SERIES_INDEX.md 編集前 (2026-06-06 12:01)
-5c3f15a docs(articles): #36 かみくだき版にも PoC-2.6 degradation の 4 言語 addendum を追加
-a7db968 auto: index.md 編集前 (2026-06-06 01:36)
-802ddba docs(articles): #36 に PoC-2.6 degradation の 4 言語 addendum box を追加 (honest 整合)
-c7388bb auto: index.md 編集前 (2026-06-06 01:35)
-551efa7 docs(research): index (D) を更新 — #36 は 4 言語完了 + 公開前 PoC-2.6 caveat 反映要 (honest tracking)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+M docs/doc_map.md
 ```
 
 
@@ -44,7 +43,7 @@ M docs/NEXT_SESSION.auto.md
 
 | project | 最新 commit | 直近 commit msg | tests/ 直近 mtime |
 |---|---|---|---|
-| llive | `b71ab66 2026-06-06` | auto: test_evolutionary_persona.py 編集前 (2026-06-06 16:50) | 2026-06-06 16:51 |
+| llive | `90b97d1 2026-06-06` | auto: test_evolutionary_persona.py 編集前 (2026-06-06 16:59) | 2026-06-06 17:00 |
 | llove | `701624a 2026-05-30` | docs: かみ砕いた説明を中学生レベルに見直し (workflow wr87hqvj2) | 2026-05-25 22:52 |
 | llmesh | `c6afef0 2026-05-30` | docs: readability 3層化(中学生レベル) — かみ砕き+用語集+日本語(英語) (workflow wmik3xm1n) | 2026-05-25 07:06 |
 | lldesign | `1014ce3 2026-05-19` | docs(pages): FullSense portal hub への参照を docs/index.md にも追加 | 2026-05-16 17:52 |
@@ -76,8 +75,13 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `16:33` `docs/SESSION_SUMMARY.md`
-- `16:33` `docs/NEXT_SESSION.auto.md`
+- `17:04` `docs/doc_map.md`
+- `17:04` `docs/research/index.md`
+- `17:03` `docs/research/classics_dna_mapping_2026_06_06.md`
+- `17:02` `docs/research/differentiation_audit_dna_roadmap_2026_06_06.md`
+- `16:55` `docs/research/gate_taxonomy_audit_2026_06_06.md`
+- `16:52` `docs/SESSION_SUMMARY.md`
+- `16:52` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
