@@ -10,32 +10,32 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 21:01:02
+- **生成時刻**: 2026-06-06 21:25:34
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
-8696cf4 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:00)
-b3be7ee auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:00)
-cc5da3a auto: master_plan_2026_06_06.md 編集前 (2026-06-06 21:00)
-13982fb docs(research): 全記事 文章作法監査 — 引き弱10 / 自慢2 / 落語shallow 0
-af96774 docs(articles): #38 ②の比喩を作り直し — 漫画看板除去 + llcore具体物 + ニッチ主軸
-4683e26 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 20:18)
-70dacff auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 20:18)
-c97d3e2 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 20:18)
-b0da44b docs(articles): A群暴力動詞を穏当化 (#25/#27, 4言語) — 倫理監査の遡及適用
-52a81e4 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-06 20:01)
+235946d docs(articles): #16 を引き+謙虚さで改善 (第1波・改善の型確立)
+d9ef80b auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:03)
+a2bffa1 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
+0988944 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
+738dafd auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
+14a8891 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
+c88e0e4 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
+bb37f0b auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:01)
+0794d35 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:01)
+dbd180c auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:01)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/QIITA_#16_three_self_spirit_ai_management.md
+(clean)
 ```
 
 
@@ -75,11 +75,11 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `21:00` `docs/articles/QIITA_#16_three_self_spirit_ai_management.md`
+- `21:03` `docs/articles/QIITA_#16_three_self_spirit_ai_management.md`
+- `21:01` `docs/NEXT_SESSION.auto.md`
+- `21:01` `docs/SESSION_SUMMARY.md`
 - `21:00` `docs/research/master_plan_2026_06_06.md`
 - `20:57` `docs/research/article_craft_audit_2026_06_06.md`
-- `20:44` `docs/SESSION_SUMMARY.md`
-- `20:44` `docs/NEXT_SESSION.auto.md`
 - `20:18` `docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md`
 - `20:01` `docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md`
 - `19:59` `docs/articles/QIITA_#27_lldarwin_v2_overnight_marathon_kamikudaki.md`
