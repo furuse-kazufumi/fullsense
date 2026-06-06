@@ -14,6 +14,10 @@ id: 2c4a993937c373c464f6
 
 # 数学・単位に強い AI を作る最初の一歩 — MATH-01/08 内蔵計算エンジン
 
+> 📚 **連載ナビ**: ← #01 [Brief API 設計と progressive matrix](./QIITA_#01_brief_api_progressive.md) / #02 [10 思考因子で整理する思考層](./QIITA_#02_cognitive_factors.md) ｜ **#03 本記事**（最初の vertical = 数学・単位）｜ #06 [LLM 数式幻覚をどう止めるか](./QIITA_#06_next_math02_formal_gate.md) →。※ 各記事は単独でも読めます。
+>
+> #01 で Brief という入口を、#02 でその上を流れる思考因子を見た。本記事では、その入口に **最初の専門分野** を載せる——数学と単位だ。なぜ汎用 LLM が `5 m/s + 3 s = 8` を平然と書いてしまうのか、そこから始める。
+
 ## TL;DR
 
 - llive 最初の specialised vertical として「**数学・単位特化 AI**」を選定 (ユーザー戦略指示)
