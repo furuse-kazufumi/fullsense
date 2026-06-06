@@ -418,9 +418,9 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 
 - **占据交叉点的专利：零件。**
 - 最接近的专利只有 3 个谱系，且都在交叉点之外：
-  - **US11715005B2** —— 用哈希匹配来验证 NN 的真正性（是密码哈希，不是健全证明）。
-  - **US10896032** —— certify-then-deploy 的治理门（根据是程序性 attestation）。
-  - **US11868855** —— 模型/权重的「stability」验证（但大概率是可用性·耐故障意义上的蓋然性）。
+  - **[US11715005B2](https://patents.google.com/patent/US11715005B2)** —— 用哈希匹配来验证 NN 的真正性（是密码哈希，不是健全证明）。
+  - **[US10896032](https://patents.google.com/patent/US10896032)** —— certify-then-deploy 的治理门（根据是程序性 attestation）。
+  - **[US11868855](https://patents.google.com/patent/US11868855)** —— 模型/权重的「stability」验证（但大概率是可用性·耐故障意义上的蓋然性）。
 - 一个有趣的结构性证据：当你查询「**用健全证明对更新/记忆/进化设门**」时，即便对专利 DB 指定了 site，结果也几乎全部**偏到了 arXiv**。这是「这个概念还停留在学术阶段、尚未被专利化」的间接证据。
 
 → 结论：**专利面也 clear**。不过由于 US10896032 / US11868855 在词汇上部分重叠，我们在论文的 related work 里先发地放了 1～2 句对比：「与展开治理型门 / 运营稳定性验证不同，本研究是用健全证明对权重更新的解析性 contraction 性质设门」。
