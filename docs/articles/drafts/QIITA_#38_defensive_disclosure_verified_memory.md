@@ -545,9 +545,9 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 
 ## ③ 상세 — 하루의 세션, 그리고 공개한 기술의 내용
 
-### 3.1 적대적 감사의 설계(재현할 수 있도록)
+### 3.1 반증 검증의 설계(재현할 수 있도록)
 
-「내 연구는 강하다」고 스스로 말해 봐야 의미가 없습니다. 그래서 **적대적 워크플로**를 짰습니다.
+「내 연구는 강하다」고 스스로 말해 봐야 의미가 없습니다. 그래서 AI는 **반증 주도의 워크플로**를 짰습니다.
 
 - **7개 각도의 반증 탐색**: 증명 게이트의 계보 / certified training / Transformer 안정성 / 진화 × 검증 / verified memory / runtime assurance / 산업·특허.
 - **critic가 지적한 맹점 3개 각도를 추가**: 형식 방법 컨퍼런스 측의 역추적 / certified continual learning의 어휘계 / 내부 상태·SSM의 해석.
