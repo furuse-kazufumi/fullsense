@@ -736,7 +736,7 @@ flowchart LR
 
 CLARABEL 로 고정하니 아티팩트가 무너졌습니다:
 
-| 지표 | SCS (조작) | CLARABEL (참) |
+| 지표 | SCS (거짓) | CLARABEL (참) |
 |---|---|---|
 | deg4_only / deg6_only / both | 23 / 13 / 18 | 0 / 1 / 54 |
 | 구조 해석 | 상보·비중첩 | 중첩 |
