@@ -259,9 +259,9 @@ The academic audit used **literature only** and did not look at patent DBs (weak
 
 - **Patents occupying the intersection: zero.**
 - The closest patents are just 3 lineages, all outside the intersection:
-  - **US11715005B2** — authenticity verification of NNs by hash matching (cryptographic hash, not a sound proof).
-  - **US10896032** — a certify-then-deploy governance gate (grounded in procedural attestation).
-  - **US11868855** — "stability" verification of models/weights (but very likely in the availability / fault-tolerance sense).
+  - **[US11715005B2](https://patents.google.com/patent/US11715005B2)** — authenticity verification of NNs by hash matching (cryptographic hash, not a sound proof).
+  - **[US10896032](https://patents.google.com/patent/US10896032)** — a certify-then-deploy governance gate (grounded in procedural attestation).
+  - **[US11868855](https://patents.google.com/patent/US11868855)** — "stability" verification of models/weights (but very likely in the availability / fault-tolerance sense).
 - An interesting structural piece of evidence: when you query "**gate updates/memory/evolution with a sound proof**," even with a site restriction on the patent DB, almost all results **veered off to arXiv**. This is indirect evidence that "this concept still remains at the academic stage and has not been patented."
 
 → Conclusion: **clear on the patent side too**. However, since US10896032 / US11868855 partially overlap in vocabulary, we proactively put 1–2 sentences of contrast into the paper's related work: "unlike deployment-governance gates / operational-stability verification, this research gates the analytic contraction property of weight updates with a sound proof."
