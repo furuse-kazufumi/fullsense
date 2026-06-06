@@ -3,23 +3,23 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-06 19:55:18
+- **最終更新**: 2026-06-06 20:44:33
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
-4f4a129 docs(research): 公開済み記事の倫理遡及監査 — high 0 / low 7 記事
-cd73f1f fix(qiita-tool): LOCAL PATH 検査の URL 誤検出を修正
-3019413 docs(articles): #38 を仁の倫理ゲートで全面改修 (暴力語除去 + 来歴修正 + 図 + リンク)
-d7a50a8 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:40)
-8c6508b auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:39)
-1f99a85 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:39)
-34141d5 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:39)
-c243bb2 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:38)
-495bd2a auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:38)
-01a9d32 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 19:37)
+af96774 docs(articles): #38 ②の比喩を作り直し — 漫画看板除去 + llcore具体物 + ニッチ主軸
+4683e26 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 20:18)
+70dacff auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 20:18)
+c97d3e2 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-06 20:18)
+b0da44b docs(articles): A群暴力動詞を穏当化 (#25/#27, 4言語) — 倫理監査の遡及適用
+52a81e4 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-06 20:01)
+4b5bc8c auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-06 20:01)
+2c5a285 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-06 20:01)
+915f882 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-06 20:01)
+0d3c8a1 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-06 20:00)
 ```
 
 ## 現在の git status
@@ -32,11 +32,14 @@ M docs/NEXT_SESSION.auto.md
 ## 直近 2 時間に変更されたファイル
 
 ```
+20:18 docs/NEXT_SESSION.auto.md
+20:18 docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md
+20:18 docs/SESSION_SUMMARY.md
+20:01 docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md
+19:59 docs/articles/QIITA_#27_lldarwin_v2_overnight_marathon_kamikudaki.md
+19:57 docs/articles/QIITA_#27_lldarwin_v2_overnight_marathon.md
 19:49 docs/research/ethics_audit_published_2026_06_06.md
-19:47 docs/SESSION_SUMMARY.md
-19:47 docs/NEXT_SESSION.auto.md
 19:46 tools/qiita_team_post.py
-19:40 docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md
 19:34 docs/articles/assets/qiita_38/qiita_38_fig_core.svg
 19:30 docs/articles/assets/qiita_38/qiita_38_fig_gate.svg
 19:29 docs/articles/assets/qiita_38/qiita_38_fig_tube.svg
