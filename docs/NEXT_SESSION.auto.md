@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 21:25:34
+- **生成時刻**: 2026-06-06 21:38:35
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,22 +20,23 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
-235946d docs(articles): #16 を引き+謙虚さで改善 (第1波・改善の型確立)
-d9ef80b auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:03)
-a2bffa1 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
-0988944 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
-738dafd auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
-14a8891 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
-c88e0e4 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:02)
-bb37f0b auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:01)
-0794d35 auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:01)
-dbd180c auto: QIITA_#16_three_self_spirit_ai_management.md 編集前 (2026-06-06 21:01)
+91ef4d6 docs(articles): 第2波 文章改善 — #03 (謙虚さ) + #35_02 (引き/トーン)
+bc0bf8f auto: master_plan_2026_06_06.md 編集前 (2026-06-06 21:33)
+0639c01 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:33)
+7bcab72 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:33)
+20601d0 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
+b29b203 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
+511b5e8 auto: master_plan_2026_06_06.md 編集前 (2026-06-06 21:32)
+135eadc auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
+56da605 auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
+2a3557a auto: QIITA_#35_02_honest_disclosure_solver_swap.md 編集前 (2026-06-06 21:32)
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
 ```
 
 
@@ -75,10 +76,12 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `21:38` `docs/SESSION_SUMMARY.md`
+- `21:38` `docs/NEXT_SESSION.auto.md`
+- `21:33` `docs/research/master_plan_2026_06_06.md`
+- `21:33` `docs/articles/QIITA_#35_02_honest_disclosure_solver_swap.md`
+- `21:29` `docs/articles/QIITA_#03_math_vertical.md`
 - `21:03` `docs/articles/QIITA_#16_three_self_spirit_ai_management.md`
-- `21:01` `docs/NEXT_SESSION.auto.md`
-- `21:01` `docs/SESSION_SUMMARY.md`
-- `21:00` `docs/research/master_plan_2026_06_06.md`
 - `20:57` `docs/research/article_craft_audit_2026_06_06.md`
 - `20:18` `docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md`
 - `20:01` `docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md`
@@ -93,8 +96,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `19:28` `docs/articles/assets/qiita_38/qiita_38_fig_intersection.svg`
 - `17:51` `docs/doc_map.md`
 - `17:47` `docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md`
-- `17:34` `docs/research/index.md`
-- `17:32` `docs/research/patent_search_2026_06_06.md`
 
 
 ## Cross-references
