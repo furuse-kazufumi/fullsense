@@ -341,6 +341,8 @@ In the next article **#16**, I tackle that question head-on—the **operation th
 # 30 年软件开发经验 + Perplexity 摘要 + Claude Code + TRIZ + 5 万篇论文 RAG =「第二大脑」
 
 > 📚 **连载导航**: ← #14 不可见注释通道设计 ｜ **#15 本文** ｜ #16 以「三自」精神运营 AI → ｜ [连载 LINK_MAP](./QIITA_#24_LINK_MAP.md)。※ 每篇文章均可独立阅读（链接用于回游）。
+>
+> 上一篇 #14 设计了人看不见、却能被机器读取的注释通道。本文退后一步：这一整套功能，我是如何一个人堆起来的——也就是，支撑开发的「第二大脑」该 **如何构建**。
 
 **一行 hook**:
 作为单人开发者，我在 5 天内追加了包含 Brief API、OKA-FX、VRB-FX、IND-04 注释、MathVerifier 在内的 14 个功能和 256 个测试，实现了 1270 项全部 PASS、零回归。秘诀在于如何组装「第二大脑」。
