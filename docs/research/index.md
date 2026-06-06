@@ -85,6 +85,7 @@ has_children: true
 | Doc | 内容 |
 |---|---|
 | [llcore_cpu_poc_battery_completion_2026_05_29]({{ '/research/llcore_cpu_poc_battery_completion_2026_05_29' \| relative_url }}) | Stage 0-2 完成 (39 gates / 76 tests / Codex 5/5 Green、独自軸 4 軸 mechanism 実証) |
+| [検問体系監査 (A-Evolve 三重検問棚卸し)]({{ '/research/gate_taxonomy_audit_2026_06_06' \| relative_url }}) | A-Evolve (arXiv 2602.00359) の AST/スキーマ/sandbox 三重検問 + 来歴/rollback/HITL を実コードで棚卸し。我々だけの 4 軸 (llcore 形式証明 / llcore null harness / llmesh SPC / raptor 供給網) を明示し、あり得る検問 16 種を 4 段階 (変異/採用/実行/事後) で体系化。TOP-3 = SPC 管理図 runtime gate / llcore 証明ゲート src 配線 / llive metamorphic gate |
 
 技術詳細・統合 verdict は llcore project `docs/poc/COMPLETION_VERDICT.md`、研究計画書 v1 は `docs/papers/2026-05-29_research_plan_core_evolution.md`。
 
