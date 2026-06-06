@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-06 22:33:26
+- **生成時刻**: 2026-06-06 22:36:57
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,16 +20,16 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+53c72c8 docs(research): llterm spec に R11 追加 (複数行貼り付け対応)
+ed9aa79 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:36)
+6a794e8 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:36)
+8b6b2cc auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:36)
 de636b0 docs(research): llterm spec に R8-R10 追加 (等幅/ANSI色/IME 入力欄安定)
 1b89df3 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:32)
 86ff676 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:32)
 ea88de5 docs(research): llterm spec 確定 + Phase 2a 設計 doc + lloT memo を index 登録
 4ad8c41 auto: index.md 編集前 (2026-06-06 22:31)
 76c2701 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:30)
-5214198 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:29)
-ad6b00b auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:29)
-05a4e14 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:28)
-84d3c59 auto: llterm_spec_2026_06_06.md 編集前 (2026-06-06 22:27)
 ```
 
 ### git status (porcelain)
@@ -75,11 +75,11 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:32` `docs/research/llterm_spec_2026_06_06.md`
+- `22:36` `docs/research/llterm_spec_2026_06_06.md`
+- `22:33` `docs/SESSION_SUMMARY.md`
+- `22:33` `docs/NEXT_SESSION.auto.md`
 - `22:31` `docs/research/index.md`
 - `22:17` `docs/research/phase2a_verified_memory_evolution_design_2026_06_06.md`
-- `22:08` `docs/SESSION_SUMMARY.md`
-- `22:08` `docs/NEXT_SESSION.auto.md`
 - `22:05` `docs/articles/QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md`
 - `22:03` `docs/articles/QIITA_#37_gpu_triple_run_gate_price.md`
 - `22:01` `docs/articles/QIITA_#12_dev_history.md`
