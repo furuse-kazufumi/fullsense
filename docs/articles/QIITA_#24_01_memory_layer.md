@@ -824,6 +824,10 @@ In the next article, **(2) "[AI that Thinks in 10 Axes](https://qiita.com/furuse
 
 ![连载进度 (1/8) — 当前: memory](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_01_progress_zh.svg)
 
+> 📚 **连载导航**: ← [llive 完全解说 (0) series index](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c) ｜ **(1) 本文**（4 层记忆 + surprise gate）｜ (2) [「用 10 个轴思考的 AI」](https://qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511) → ｜ ※ 各篇均可单独阅读。
+>
+> 如果 series index 让你看到了 llive 的整体地图, 本文就是图上的第一站——剖析决定 **AI 记住什么、遗忘什么** 的记忆基盘. 在自称「不会遗忘的 LLM」之前, 先从「不全部记住」的设计讲起.
+
 ## 0. 本文是什么 (8 秒速读)
 
 讲解 **不是 LLM 本体, 而是包裹在 LLM 外侧的认知层** llive 的 **4 层记忆 + 1 个 surprise gate**. 这是一种对 semantic / episodic / structural / parameter 这 4 种角色不同的记忆, **只写入「惊喜」(surprise)** 较高内容的设计. 用 Faiss + DuckDB + Kùzu + safetensors 的组合, **仅靠本地即可运行**.
