@@ -566,7 +566,7 @@ Here, one honest dud to record. **Codex (X) was unusable.** A permitted-model mi
 
 ## 4. The first decisive blow — should we discard the "fixed ruler"? (self-PoC #1 / #2)
 
-The first hypothesis to knock down was the most fundamental question: **"If we change the ruler from fixed difficulty to adaptive difficulty, does saturation get fixed?"**
+The first hypothesis to test was the most fundamental question: **"If we change the ruler from fixed difficulty to adaptive difficulty, does saturation get fixed?"**
 
 ### 4.1 Self-PoC #1 — adaptive difficulty fixes saturation. But it kills diversity
 
