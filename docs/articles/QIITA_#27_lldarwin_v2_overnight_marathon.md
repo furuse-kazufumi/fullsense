@@ -568,7 +568,7 @@ Here, one honest dud to record. **Codex (X) was unusable.** A permitted-model mi
 
 The first hypothesis to test was the most fundamental question: **"If we change the ruler from fixed difficulty to adaptive difficulty, does saturation get fixed?"**
 
-### 4.1 Self-PoC #1 — adaptive difficulty fixes saturation. But it kills diversity
+### 4.1 Self-PoC #1 — adaptive difficulty fixes saturation. But it cancels out diversity
 
 Using a proxy with synthetic competence vectors, I compared while removing confounds (selecting elites by score).
 
