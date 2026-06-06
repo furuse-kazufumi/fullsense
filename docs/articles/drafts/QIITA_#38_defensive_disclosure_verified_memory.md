@@ -429,16 +429,24 @@ Next time (from #39 on), we plan to report the landing of the heart of this four
 
 防御性公开如果不写到「当业者可实施的详细度」，作为先行技术就会偏弱。所以披露文件里，把以下内容写到了**可实现的层级**。
 
+![记忆核公式 —— 带漏与饱和的递归 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) 的图解](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg)
+
 **(a) 健全收缩性证明器的梯子（ladder）。** 从便宜的开始，共 3 级：
 - `cert_inf` —— 闭式 ∞-范数上界（`O(n²)`）。利用各行绝对值之和在端点处取最大的性质，**无需求解器**。
 - `cert_two` —— 在全部 `2^n` 个顶点上做 SVD。
 - `cert_sdp` —— 用凸 LMI（内点 SDP, CLARABEL）求共同 Lyapunov 矩阵。
 
+![证明器梯子 —— cert_inf → cert_two → cert_sdp 三级，按便宜优先逐级尝试的证明强度阶梯](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_ladder.svg)
+
 **这里是诚实点**：项目的旧俗称是「Z3-gated」，但**实际的门并没有用 SMT(Z3)**。专门跑了一条 Z3 收缩性轨道来确认后，它与闭式 ∞-范数证明器**逐字节一致（3270 件中 0 件不一致，连边界附近也是 8000 件中 0 件）**。也就是说，在这个不变量类里，**Z3 是装饰**。所以我们把招牌改正为「健全收缩性证明器的梯子」（这不是撤退而是强项 —— 可以规避求解器依赖与不完全性）。
 
 **(b) prove-then-reject 门（fail-closed）。** 提出一个子个体 → 证明通过则采用，不行则 resample 直到上限，再不行就采用一个**已知安全的 fallback**。**未证明的子绝不采用**。我们把 `gate_mode="contraction"` / `"state_norm"` additive 地加入，而默认的 `"none"` 与既往行为逐字节一致（= 对既有进化基盘的纯粹罩层）。
 
+![prove-then-reject 门 —— 一道 fail-closed 关卡：提出子个体，证明通过则采用，不行则棄却并重新采样](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_gate.svg)
+
 **(c) tracking tube 检查指标。** 这是对用户要求「不只要『收缩到某处』，还要看『追踪理想轨道』」的回答。复用门已经在算的量（状态 Lipschitz `L`、输入增益 `G`）与外扰上界 `w̄`，以**零额外证明成本**报告追踪误差收住的管 `r = G·w̄/(1−L)`。即便在小规模实测里，收缩性 PASS 的 3 gene 误差/外扰比为 0.50/0.78/1.04，处于理论管之内；而非收缩性的对照则**放大 9.3 倍**（= 门是 load-bearing，不是装饰）。
+
+![tracking tube —— 在理想轨道周围张起半径 r = G·w̄/(1−L) 的管，实际轨道收在其内部的图](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_tube.svg)
 
 **(d) verified memory evolution 的 2 条路线。**
 - 路线 (a)：用健全证明对代理**记忆库**的更新设门（与 SSGM 的 NLI 理论之差 = 健全证明 + 能跑的门）。
