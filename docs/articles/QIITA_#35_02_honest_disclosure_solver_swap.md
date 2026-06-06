@@ -430,7 +430,7 @@ In the next part, **#36**, we break this 2ⁿ wall with a **sound approximation 
 > 📗 **赶时间?** 本文有[通俗易懂版](https://fullsense.qiita.com/furuse-kazufumi/items/146d5e2b27dabc59e799)。
 # llcore 验证 arc (#35-02) — 怀疑求解器：用多视角 pair-review 抓住并修正 SCS 陷阱
 
-![图：交换求解器后，被捏造的数字坍塌](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_zh.svg)
+![图：交换求解器后，虚假的数字坍塌](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_zh.svg)
 
 > Concept hook: 在研究检查进化 AI 动力学是否「没坏」的 verifier 时，SDP/次数阶梯的数字看起来「太丰富」了。我们起了疑心。结果发现 cvxpy 的默认求解器 SCS 在可行性边界附近产生假阴性——找不到本来存在的 Lyapunov 证书。固定为精确的内点法求解器 CLARABEL 后，源自求解器的虚假「次数互补性」(23/13/18, 残差 53, SDP 64%) 坍塌成嵌套结构 (0/0/54, 残差 10, SDP 95%)，并揭示 SDP 的优势其实被*低估*了 (+254 → +692)。本篇据实讲述这次修正，以及 Codex 加 6 智能体对抗 Workflow 的 pair-review 始末。
 
