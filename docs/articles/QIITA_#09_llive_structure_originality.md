@@ -33,7 +33,7 @@ id: 0c1d5ebd6b0656ba74e1
 
 | 既存 | llive |
 |---|---|
-| 全量 fine-tune / LoRA / adapter | LLM 重みは **絶対に触らない** |
+| 全量 fine-tune / LoRA / adapter | LLM 重みは **現状 (Phase 1〜v0.6) では更新しない** |
 | 学習 = モデル更新 | 学習 = **外部記憶への書き込み** + **構造変更** |
 
 これは LoRA / adapter の延長線にあるが、「重みを更新しないことで replay 可能 / monitorable な学習軌跡」を最優先にしている点が独自。CABT (S2 で計画中) では forward hook で attention に bias を加えるが、これも重み凍結のまま。
