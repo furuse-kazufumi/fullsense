@@ -10,16 +10,17 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-07 09:50:54
+- **生成時刻**: 2026-06-07 10:55:04
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+7c00fd2 auto: master_plan_2026_06_06.md 編集前 (2026-06-07 10:03)
 b0887c0 research: T4 4-3 内部状態安定性防御地図 — breaks 0 / 4 系統 sweep / 二段防御 (解析は成熟・ゲートは不在)
 ba32cb9 auto: master_plan_2026_06_06.md 編集前 (2026-06-07 01:18)
 502e4bb auto: index.md 編集前 (2026-06-07 01:18)
@@ -29,14 +30,12 @@ d4e7161 auto: master_plan_2026_06_06.md 編集前 (2026-06-07 01:00)
 e88f766 docs(research): master_plan T1 1-4 完了反映 — Phase 2a (c) 決着 + 論文 §9 編入
 df6089e auto: master_plan_2026_06_06.md 編集前 (2026-06-07 00:44)
 6bc1fd6 docs: NEXT_SESSION stale 相互参照 1 件クローズ (fullsense PyPI は 05-25 完了済)
-fefa55b auto: NEXT_SESSION.md 編集前 (2026-06-06 23:50)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+M docs/research/master_plan_2026_06_06.md
 ```
 
 
@@ -76,8 +75,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `09:38` `docs/NEXT_SESSION.auto.md`
-- `09:38` `docs/SESSION_SUMMARY.md`
+- `10:03` `docs/research/master_plan_2026_06_06.md`
+- `09:51` `docs/NEXT_SESSION.auto.md`
+- `09:50` `docs/SESSION_SUMMARY.md`
 
 
 ## Cross-references

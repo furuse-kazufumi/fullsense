@@ -34,9 +34,10 @@ T5 台帳・環境の大掃除              ← 随時 (セッション端数時
 | 1-1 | **Phase 0: クレーム再定義** — D1'-D4' + 防御壁 15 件を PAPER_DRAFT related work に編入、Z3 看板を「sound contraction certifier ladder」へ修正 | 編集 0.5-1 セッション | なし | 全後続の前提。誇張のまま=査読一撃の行き止まり |
 | 1-2 | **Phase 1a: 証明ゲート本配線** — `gated_evolve` を src `evolve()` に additive flag で正式配線 + 回帰テスト | 小 | なし | 研究実証済の配線のみ。1-3/2 系の差し込み口になる |
 | 1-3 | **Phase 1b: tracking tube レポータ組込み** — 本日 PoC 済 (cert_inf 限定、r=G·w̄/(1−L)) | 小 | なし | additive read-only、certifies() 非破壊 |
-| 1-4 | ✅ **完了 (06-06/07)**: Phase 2a trajectory_tube gate — P1/P2/P3 PASS + (c) n=20 事前登録決着 (d8 Δ=+0.0152, p=0.0056, dose-response) + 論文新 §9 編入 (SSGM 引用済)。正本 = llcore verified_memory_poc/VERDICT.md | — | — | 防衛的公開 (push + 記事) が次の user-gate |
+| 1-4 | ✅ **完了 (06-06/07)**: Phase 2a trajectory_tube gate — P1/P2/P3 PASS + (c) n=20 事前登録決着。**06-07 追補: 第二軸 w̄ NEGATIVE で用量反応を horizon (分母 1/(1−L)) 固有と確定 + d8 pooled n=40 (p=0.0021) + 論文 §9 honest 同期 (single-run seed 感受性併記)。正本 = verified_memory_poc/VERDICT.md §11** | — | — | 防衛的公開 (push + 記事) が次の user-gate |
 | 1-5 | **Phase 2b: SPC 進化ゲート転用** — llmesh Xbar-R/CUSUM を進化メトリクス runtime ゲートに配線 | 小 | なし | 新規実装ほぼ不要、SPC×進化は我々だけの軸 |
 | 1-6 | **Phase 4: 地形改造 E (検証器殻) × 1-4 合流** — ③を立たせる人工地形で「証明ゲート下の記憶進化」 | 大 | ユーザー選択 | Phase 1-2 の trait を全部踏み石に使う。地形ブレスト Workflow は resume 可 |
+| 1-8 | **R-endo: 内的検証器 PoC (ユーザー提案 06-07)** — entity が自分の sound verifier を per-step に持つ endogenous gate を additive PoC (StateUpdateGene に read-only method 1 個追加, runner=research/internalization_poc/, production evolve() 非配線, arm EXO/ENDO/DUAL/NONE)。事前登録 H1 非劣性 / H2 w̄ 摂動後の再適応速度 (autonomy 本丸) / H3 internal-pass∧external-reject=0 (safety) | 小 | **ユーザー選択** | **verdict=CONDITIONAL_POC_FIRST**: 概念は Gödel Machine 既出・location shift 自体は無価値、価値は「環境結合 self-verify が短サイクル適応を生むか」に限定 (M3 より null 事前確率高)。curriculum.py に ChangeOp 粒度 endogenous loop 既存。HIGH_VALUE 昇格は H1∧H2∧H3 充足時のみ、それ以外 advisory-only park。critical path 非搭載・防衛的公開の後 |
 | 1-7 | (park 継続) 人狼 PoC / ECC instinct-loop / IP 保護・Cython 化 | — | ユーザー | social corpus は資産として保持 |
 
 ## 3. T2: llive 進化基盤 — 走行再開 + Sakana 取込
