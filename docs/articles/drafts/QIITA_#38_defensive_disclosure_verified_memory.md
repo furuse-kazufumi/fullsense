@@ -165,9 +165,20 @@ id: fa55b499b45a871a97db
 
 狙いはシンプルです — **誰かが後からこの空白を特許で囲い込み、私たちや公衆を縛るのを未然に無効化する**。そのために、当業者が実装できる詳細度で全部公開しました。そして最後まで、**「世界初」とは言わず「我々の検証の範囲で四隅同時の先行ゼロ」** という、盛らない言い方を守っています。
 
-防衛的公開の本体(日付付き開示文書)はこちら: [verified_memory_evolution_defensive_disclosure.md](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md)。
+防衛的公開の本体(日付付き開示)は、下の追記のとおり **実装と全データを含む public リポジトリ** に昇格しました: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore)。
 
 次回(#39 以降)は、この四点交差点の本丸 — verified memory evolution の小 PoC(記憶バンク更新ルート)の着地を report する予定です。SSGM が理論で看板を取った窓が、実装で閉じる前に。
+
+## 追記(2026-06-07)— 旗は実装になりました
+
+この記事の翌日、予告していた verified memory evolution の PoC は **完走し、防衛的公開は「文書」から「実物」に昇格**しました。
+
+- **public リポジトリ**: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore) — 論文ドラフト([PAPER_DRAFT.md](https://github.com/furuse-kazufumi/llcore/blob/main/research/paper/PAPER_DRAFT.md))+ 全実験コード/データ(570 ファイル、テスト 318 件 green)を、日付付きの単一コミットとして公開
+- **trajectory-tube gate**(予告していた本丸): 事前登録 n=40 の決着で、記憶 horizon への効果を確認(論文 §9)
+- **さらに先へ**: 「検証器を AI 自身が持ったらどうなるか」— 死ねる環境での記憶形成 3 機構(自己予見/復活修復/社会的観察)の測定まで公開内容に含まれます(論文 §9.6)
+- **知見スライド(CC BY 4.0)**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) — 出典明示で企業利用も可能な 10 枚要約(日英)
+
+「SSGM の窓が実装で閉じる前に」という予告は、こうして果たされました。
 
 ---
 
