@@ -176,7 +176,7 @@ id: fa55b499b45a871a97db
 - **public リポジトリ**: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore) — 論文ドラフト([PAPER_DRAFT.md](https://github.com/furuse-kazufumi/llcore/blob/main/research/paper/PAPER_DRAFT.md))+ 全実験コード/データ(570 ファイル、テスト 318 件 green)を、日付付きの単一コミットとして公開
 - **trajectory-tube gate**(予告していた本丸): 事前登録 n=40 の決着で、記憶 horizon への効果を確認(論文 §9)
 - **さらに先へ**: 「検証器を AI 自身が持ったらどうなるか」— 死ねる環境での記憶形成 3 機構(自己予見/復活修復/社会的観察)の測定まで公開内容に含まれます(論文 §9.6)
-- **知見スライド(CC BY 4.0)**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) — 出典明示で企業利用も可能な 10 枚要約(日英)
+- **知見スライド(CC BY 4.0)**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) — 出典明示で企業利用も可能な 10 枚要約(日英)。**現状は要約版で情報密度は控えめです — 研究の進展に合わせて、実験設計の詳細・図表・再現手順・採用判断の材料まで、今後 1 年かけて拡充していきます**
 
 「SSGM の窓が実装で閉じる前に」という予告は、こうして果たされました。
 
