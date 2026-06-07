@@ -10,16 +10,18 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-07 13:54:31
+- **生成時刻**: 2026-06-07 14:03:49
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+03d2b12 docs(research): master_plan T1 1-9 追記 — llcore viability thread ①②③④ 完了 (反証#2 潰し+factorial+META)
+0116444 auto: master_plan_2026_06_06.md 編集前 (2026-06-07 14:01)
 040dec6 auto: master_plan_2026_06_06.md 編集前 (2026-06-07 10:59)
 7c00fd2 auto: master_plan_2026_06_06.md 編集前 (2026-06-07 10:03)
 b0887c0 research: T4 4-3 内部状態安定性防御地図 — breaks 0 / 4 系統 sweep / 二段防御 (解析は成熟・ゲートは不在)
@@ -28,16 +30,12 @@ ba32cb9 auto: master_plan_2026_06_06.md 編集前 (2026-06-07 01:18)
 c54853a research: CAV/TACAS 逆引き 2 巡目 (T4 4-2) — breaks 0 / narrows 17 / SSGM 後続なし
 d4e7161 auto: master_plan_2026_06_06.md 編集前 (2026-06-07 01:00)
 6fa2fd8 auto: index.md 編集前 (2026-06-07 01:00)
-e88f766 docs(research): master_plan T1 1-4 完了反映 — Phase 2a (c) 決着 + 論文 §9 編入
-df6089e auto: master_plan_2026_06_06.md 編集前 (2026-06-07 00:44)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
- M docs/research/master_plan_2026_06_06.md
+(clean)
 ```
 
 
@@ -77,9 +75,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `13:52` `docs/NEXT_SESSION.auto.md`
-- `13:52` `docs/SESSION_SUMMARY.md`
-- `10:59` `docs/research/master_plan_2026_06_06.md`
+- `14:01` `docs/research/master_plan_2026_06_06.md`
+- `13:54` `docs/NEXT_SESSION.auto.md`
+- `13:54` `docs/SESSION_SUMMARY.md`
 
 
 ## Cross-references
