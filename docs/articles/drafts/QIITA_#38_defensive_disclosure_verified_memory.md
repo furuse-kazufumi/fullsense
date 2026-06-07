@@ -692,6 +692,6 @@ The promise — "before the SSGM window closes in implementation" — was kept t
 - **public 리포지토리**: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore) — 논문 드래프트([PAPER_DRAFT.md](https://github.com/furuse-kazufumi/llcore/blob/main/research/paper/PAPER_DRAFT.md)) + 전체 실험 코드/데이터(570 파일, 테스트 318건 green)를, 날짜 붙은 단일 커밋으로 공개
 - **trajectory-tube gate**(예고했던 본진): 사전 등록 n=40의 결착으로, 기억 horizon에의 효과를 확인(논문 §9)
 - **더 나아가**: 「검증기를 AI 자신이 가지면 어떻게 되는가」— 죽을 수 있는 환경에서의 기억 형성 3기구(자기 예견/부활 수복/사회적 관찰)의 측정까지 공개 내용에 포함됩니다(논문 §9.6)
-- **지견 슬라이드(CC BY 4.0)**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) — 출처 명시로 기업 이용도 가능한 10장 요약(일영)
+- **지견 슬라이드(CC BY 4.0)**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) — 출처 명시로 기업 이용도 가능한 10장 요약(일영). **현재는 정보 밀도가 낮은 요약판입니다 — 연구 진전에 맞춰, 실험 설계 상세・도표・재현 절차・도입 판단 재료까지 앞으로 1년에 걸쳐 확충해 갑니다**
 
 「SSGM의 창이 구현으로 닫히기 전에」라는 예고는, 이렇게 지켜졌습니다.
