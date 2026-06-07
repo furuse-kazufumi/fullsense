@@ -520,7 +520,7 @@ The promise — "before the SSGM window closes in implementation" — was kept t
 - **public 仓库**: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore) —— 论文草稿（[PAPER_DRAFT.md](https://github.com/furuse-kazufumi/llcore/blob/main/research/paper/PAPER_DRAFT.md)）+ 全部实验代码/数据（570 个文件、318 个测试 green），以带日期的单一提交公开
 - **trajectory-tube gate**（预告过的本丸）: 以预注册 n=40 的决着确认了对记忆 horizon 的效果（论文 §9）
 - **更进一步**: 「让 AI 自己持有验证器会怎样」—— 在可致死环境中对记忆形成 3 机构（自我预见/复活修复/社会观察）的测量也包含在公开内容里（论文 §9.6）
-- **知见幻灯片（CC BY 4.0）**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) —— 注明出处即可商用的 10 页摘要（日英）
+- **知见幻灯片（CC BY 4.0）**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) —— 注明出处即可商用的 10 页摘要（日英）。**当前版本是信息密度有限的摘要版 —— 随着研究推进，今后一年将持续扩充（实验设计细节、完整图表、复现步骤、采用决策材料）**
 
 「趁 SSGM 的窗被实现合上之前」的预告，就这样兑现了。
 
