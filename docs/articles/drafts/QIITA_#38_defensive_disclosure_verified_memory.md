@@ -681,6 +681,17 @@ The promise — "before the SSGM window closes in implementation" — was kept t
 
 노림수는 단순합니다 — **누군가가 나중에 이 공백을 특허로 둘러싸, 우리나 공중을 옭아매려는 시도를 미연에 무효화한다**. 그것을 위해, 당업자가 구현할 수 있는 상세도로 전부 공개했습니다. 그리고 끝까지, **「세계 최초」라고 말하지 않고 「우리 검증의 범위에서 네 모서리 동시의 선행 제로」**라는, 부풀리지 않는 표현을 지키고 있습니다.
 
-방어적 공개의 본체(날짜 붙은 개시 문서)는 여기: [verified_memory_evolution_defensive_disclosure.md](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md).
+방어적 공개의 본체(날짜 붙은 개시)는, 아래 추기와 같이 **구현과 전체 데이터를 포함한 public 리포지토리**로 승격했습니다: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore).
 
 다음 회(#39 이후)는, 이 네 점 교차점의 본진 — verified memory evolution의 작은 PoC(기억 뱅크 업데이트 루트)의 착지를 report할 예정입니다. SSGM이 이론으로 간판을 차지한 창문이, 구현으로 닫히기 전에.
+
+## 추기(2026-06-07) — 깃발은 구현이 되었습니다
+
+이 기사의 다음 날, 예고했던 verified memory evolution PoC는 **완주했고, 방어적 공개는 「문서」에서 「실물」로 승격**했습니다.
+
+- **public 리포지토리**: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore) — 논문 드래프트([PAPER_DRAFT.md](https://github.com/furuse-kazufumi/llcore/blob/main/research/paper/PAPER_DRAFT.md)) + 전체 실험 코드/데이터(570 파일, 테스트 318건 green)를, 날짜 붙은 단일 커밋으로 공개
+- **trajectory-tube gate**(예고했던 본진): 사전 등록 n=40의 결착으로, 기억 horizon에의 효과를 확인(논문 §9)
+- **더 나아가**: 「검증기를 AI 자신이 가지면 어떻게 되는가」— 죽을 수 있는 환경에서의 기억 형성 3기구(자기 예견/부활 수복/사회적 관찰)의 측정까지 공개 내용에 포함됩니다(논문 §9.6)
+- **지견 슬라이드(CC BY 4.0)**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) — 출처 명시로 기업 이용도 가능한 10장 요약(일영)
+
+「SSGM의 창이 구현으로 닫히기 전에」라는 예고는, 이렇게 지켜졌습니다.
