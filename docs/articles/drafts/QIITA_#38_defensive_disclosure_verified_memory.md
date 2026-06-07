@@ -337,9 +337,20 @@ In a single day, we had 56 verifier AIs critically scrutinize our own research, 
 
 The aim is simple — **to preempt anyone later enclosing this gap with a patent and binding us or the public**. To that end, we published everything at a level of detail a person skilled in the art can implement. And to the end, we keep the non-inflating phrasing: **not "world first," but "within the scope of our verification, zero prior work occupying all four corners at once."**
 
-The body of the defensive publication (the dated disclosure document) is here: [verified_memory_evolution_defensive_disclosure.md](https://github.com/furuse-kazufumi/fullsense/blob/main/docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md).
+The body of the defensive publication (the dated disclosure) has been upgraded, as the addendum below describes, to **a public repository containing the implementation and all data**: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore).
 
 Next time (from #39 on), we plan to report the landing of the heart of this four-point intersection — a small PoC of verified memory evolution (the memory-bank update route). Before the window where SSGM took the banner in theory closes in implementation.
+
+## Addendum (2026-06-07) — the flag became an implementation
+
+The day after this article, the promised verified-memory-evolution PoC **was completed, and the defensive publication was upgraded from "a document" to "the real thing."**
+
+- **Public repository**: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore) — the paper draft ([PAPER_DRAFT.md](https://github.com/furuse-kazufumi/llcore/blob/main/research/paper/PAPER_DRAFT.md)) plus all experiment code/data (570 files, 318 tests green), published as a single dated commit
+- **The trajectory-tube gate** (the promised centerpiece): a pre-registered n=40 decision confirmed the effect on the memory horizon (paper §9)
+- **And beyond**: "what happens when the AI holds the verifier itself" — measurements of three memory-formation mechanisms (endogenous foresight / certificate-preserving revival / observational learning) in a lethal environment are also included (paper §9.6)
+- **Findings slides (CC BY 4.0)**: [slides/](https://github.com/furuse-kazufumi/llcore/tree/main/slides) — a 10-slide summary (ja/en), usable in corporate settings with attribution
+
+The promise — "before the SSGM window closes in implementation" — was kept this way.
 
 ---
 
