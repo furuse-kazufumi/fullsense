@@ -1,11 +1,10 @@
 ---
 title: 'llcore 検証 arc (#38) — 自分の研究を 56 体の AI に反証させたら「四隅の空白」が残った日: 特許を出さずに「防衛的公開」で旗を立てる'
 tags: [FullSense, llcore, Singularity, AI, 解説]
-private: false
+private: true
 updated_at: '2026-06-07'
 slide: false
 ignorePublish: false
-id: fa55b499b45a871a97db
 ---
 
 言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
