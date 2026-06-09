@@ -633,7 +633,7 @@ Diagrams I'd like to prepare to make this article "captivating through motion"
 
 # 中文
 
-# 把 AI 进化了 500 代之后，世界上只剩下"我"和"预测编码之父卡尔·弗里斯顿"两个人 #25 — monoculture 的 honest disclosure 与选择压组件 lldarwin
+# 把 AI 进化了 500 代之后，世界上只剩下 Furuse 和 Friston 两个人 #25 — AI 只是偏向了两个罗马字都以 F 开头、长得很像的名字的「monoculture 大失败」的 honest disclosure 与选择压组件 lldarwin
 
 ![4格漫画速读 #25 — 把 AI 进化 500 代的“大失败”](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q25_4koma_zh.svg?v=2)
 
