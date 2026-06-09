@@ -1,5 +1,5 @@
 ---
-title: 'AI を 500 世代進化させたら、世界に「私」と「予測符号化の父カール・フリストン」だけが残った #25 — monoculture の honest disclosure と選択圧コンポーネント lldarwin'
+title: 'AI を 500 世代進化させたら、世界に Furuse と Friston だけ残った #25 — 名前が F で似てるだけの 2 人に偏る「monoculture 大失敗」の honest disclosure と選択圧コンポーネント lldarwin'
 tags:
   - FullSense
   - llive
