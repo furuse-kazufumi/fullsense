@@ -10,16 +10,17 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-07 18:02:47
+- **生成時刻**: 2026-06-09 21:34:09
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+d64a20e auto: SESSION_SUMMARY.md 編集前 (2026-06-07 18:06)
 52e952a articles(#38): スライド言及 4 言語に「今後 1 年かけて拡充」を明記 (ユーザー指示)
 5e700f7 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:25)
 4fc1137 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:25)
@@ -29,7 +30,6 @@ cf1b656 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-
 87e87ce auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:21)
 d6c6682 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:21)
 ff57d6a auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:20)
-81c78e0 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:20)
 ```
 
 ### git status (porcelain)
@@ -76,10 +76,8 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `17:48` `docs/SESSION_SUMMARY.md`
-- `17:48` `docs/NEXT_SESSION.auto.md`
-- `17:25` `docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md`
-- `14:18` `docs/research/master_plan_2026_06_06.md`
+- `19:44` `docs/SESSION_SUMMARY.md`
+- `19:44` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references

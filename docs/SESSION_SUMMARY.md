@@ -3,13 +3,14 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-07 18:02:47
+- **最終更新**: 2026-06-09 21:34:09
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+d64a20e auto: SESSION_SUMMARY.md 編集前 (2026-06-07 18:06)
 52e952a articles(#38): スライド言及 4 言語に「今後 1 年かけて拡充」を明記 (ユーザー指示)
 5e700f7 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:25)
 4fc1137 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:25)
@@ -19,7 +20,6 @@ cf1b656 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-
 87e87ce auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:21)
 d6c6682 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:21)
 ff57d6a auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:20)
-81c78e0 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:20)
 ```
 
 ## 現在の git status
@@ -32,9 +32,8 @@ M docs/NEXT_SESSION.auto.md
 ## 直近 2 時間に変更されたファイル
 
 ```
-17:48 docs/SESSION_SUMMARY.md
-17:48 docs/NEXT_SESSION.auto.md
-17:25 docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md
+19:44 docs/SESSION_SUMMARY.md
+19:44 docs/NEXT_SESSION.auto.md
 ```
 
 ---
