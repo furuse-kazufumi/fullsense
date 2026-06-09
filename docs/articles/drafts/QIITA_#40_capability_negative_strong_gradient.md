@@ -146,6 +146,145 @@ capability は売れない。では何が立つのか — **guarantee(安全性�
 
 ---
 
-# English / 中文 / 한국어
+<a id="english"></a>
+# English
 
-(翻訳 follow-up: publish 前に各言語版を自己完結で展開する。日本語版の SVG・表・honest disclosure をそのまま複製+翻訳。)
+## What this is — "the moment I thought I'd won, my own framework stopped me"
+
+In the last installment (#39) we concluded: "We built a memory core that evolves *with a proof* — but only for small parts, n≤6. The scalability wall didn't budge."
+
+This time (2026-06-10) we finally answered the question we'd been putting off:
+
+> **"So does this 'evolving memory' actually get *smart*? Is it better than gradient descent (ordinary learning)?"**
+
+One-line answer: **"On a real terrain made by an actual small LLM, evolution beat ordinary gradient descent 20 games to 0. For a moment I thought I'd won. Then, following my own framework's discipline, I called in a *strong* gradient — and the victory turned out to be an illusion."**
+
+This is a record of the scariest moment in research — **the moment an abnormally good result appears** — and how I doubted myself before celebrating. Same order as always: ① terms → ② plain words → ③ details. No embellishment. At the end I disclose the result of having **verifier AIs adversarially refute** my numerical claims in parallel (zero MAJOR discrepancies).
+
+Source data: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore) (all experiment code/data + verdicts).
+
+---
+
+## ① Mini-glossary
+
+| Term | In one line |
+|---|---|
+| **capability** | "Does it get smart?" Here, how well it predicts what comes next (low cross-entropy / CE). |
+| **guarantee** | "Does it avoid blowing up?" Provably stable (contraction ρ<1). **The lifeline of honest-disclosure is never confusing these two.** |
+| **MAP-Elites (evolution)** | Evolutionary search that keeps a grid of diverse solutions. The "evolution" side. |
+| **finite-diff gradient (weak)** | Naively *estimates* the slope by nudging values. Costs dim+1 evals per step = **slow and weak**. |
+| **analytic (exact) gradient (strong)** | Gets the *exact* slope in one pass via autodiff (backprop). What real LLM training actually uses. The decider here. |
+| **meta-gate** | When evolution "wins," bring in a **stronger opponent** and check whether the gain survives. If it vanishes, it was an illusion (ARTIFACT). |
+| **ARTIFACT** | A fake win caused by the **opponent being weak**, not a real performance gap. |
+| **Langton's ant** | A famous system, simple rules, that looks chaotic then suddenly orders. A metaphor for "appearance ≠ essence." |
+
+---
+
+## ② Plain words — "winning 20 straight against a weak opponent says nothing"
+
+A baseball analogy. Your team (evolution) beats an opponent (finite-diff gradient) **20 games to 0**. Strong, no complaints.
+
+…but what if that opponent was a *sandlot* team? 20 straight wins is no proof *you* are strong — maybe the *opponent was weak*.
+
+Do this in research and you get a disaster. You write "evolution beat gradient!" in a paper, and later someone says "no, the gradient method you compared against was just too weak." This is the **capability trap**.
+
+So our framework had a **rule (meta-gate)** baked in from the start:
+
+> **If evolution wins, call in the "pro" for a rematch before you celebrate.**
+
+We called the pro (analytic gradient = the exact gradient real LLM training uses). Result:
+
+- vs sandlot (finite-diff): evolution **20–0** (+0.029 mean CE lead)
+- vs pro (analytic gradient): evolution **1–19** (the pro wins)
+
+So **evolution won only because the opponent was weak**. With a strong gradient, gradient was better. **"Evolution gets smarter (capability)" cannot be claimed.**
+
+The key point: **losing here is not a failure.** Our framework's value was never on the "smart" side (capability) — it's on the **"doesn't blow up" side (guarantee)**. This result means that choice was **right, in data** — good thing we didn't sell on smarts.
+
+---
+
+## ③ Details — what we measured on a real LLM terrain, and how
+
+### 3-1. From "synthetic" to "real" terrain
+
+Earlier capability experiments measured on a **synthetic multi-peaked terrain** (an artificial landscape). We honestly flagged: "this is not a real LLM loss terrain."
+
+This time we closed that gap with the **real SmolLM2-135M** (an Apache-2.0 small LLM):
+
+1. Run text through SmolLM2, extract the **real internal representations (hidden states)** at layer 15.
+2. Project to small dimension (n=6) and build a **CE terrain that predicts "the cluster of the next internal representation"** — not synthetic Gaussians, but a **real prediction task derived from the model's own internal dynamics**.
+3. On that terrain, run evolution (MAP-Elites) / random / weak gradient / **strong analytic gradient** at the **same budget** (eval count), comparing prediction on **held-out (unseen) sentences** across 20 seeds.
+
+### 3-2. Results (held-out mean fitness = −CE, higher is better)
+
+| Method | held-out mean | Note |
+|---|---|---|
+| **strong analytic gradient (torch Adam)** | **−1.446** | **best of all** |
+| evolution (MAP-Elites) | −1.454 | 2nd |
+| random | −1.473 | |
+| weak gradient (more restarts) | −1.481 | |
+| weak gradient (finite-diff) | −1.483 | **last** |
+| evolution + ρ<1 gate | −1.483 | gating constrains search to finite-diff level |
+
+- evolution vs **weak gradient**: +0.029 mean, **20–0**, p<1e-6 → 4-condition AND **passes** (looks like EXISTS).
+- evolution vs **strong analytic gradient**: −0.008 mean, **1–19**, gradient wins at p=3.5e-4 → 4-condition AND **fails**.
+
+**→ Verdict = ARTIFACT+NEGATIVE.** Evolution's win was due to a weak opponent. With a strong gradient, gradient ≥ evolution = **capability is NEGATIVE even on a real LLM terrain**.
+
+### 3-3. We also checked it holds on both terrains (cross-check)
+
+"Then wasn't the earlier synthetic 'tie (NULL_TIE)' also understated by the weak gradient?" — we checked that **in data** too. Adding the strong analytic gradient to the synthetic terrain, **the analytic gradient had the best mean** (0.575 > evolution 0.535). But the synthetic terrain has high run-to-run variance, so the paired test stayed a tie. The real terrain, with lower variance, let the gradient advantage reach **significance** (19/20).
+
+**Conclusion: capability NEGATIVE is consistent across both terrains** (strong gradient best on both). The only difference is variance.
+
+### 3-4. The "does the framework see the real thing" side PASSES
+
+Capability can't be sold. So what stands up — the **guarantee (discriminative power)**. Three confirmations in the same session:
+
+- **Discrimination**: an experience-based gate **misses 84%** of "dangerous structures" (passes diverging ones as "safe"). A **sound certificate misses 0%**. In particular cert_sdp has zero false-admits and only 4.6% over-rejection = **sound and most navigable**.
+- **Base-level discrimination**: Mamba (a structurally stable SSM) is intrinsically stable across all 24 layers → trivially passes. The standard Transformer SmolLM2 has no state recurrence → **safety must be imposed by a bolted-on gate**. The framework cleanly separates "safe base" from "needs-a-gate base."
+- **Extensibility (framework-ness)**: the three plug-points (substrate / objective / certifier) swap with a **single object** (17 unit tests green). But the hypothesis "diversity helps generalization" is **NULL** (doesn't hold) — also disclosed honestly.
+
+### 3-5. Shown "in motion" — the norm doesn't explode, only the sensitivity does
+
+A side finding. This substrate keeps the state bounded via tanh, so **even when unstable, the output norm does not diverge**. Worse, even a diverging individual (ρ≈2.9) has its perturbation **appear to decay** on one trajectory (exactly Langton's ant — appearance betrays essence). Watching the state norm, or a finite-horizon "forgetting test," **cannot catch ρ≥1**. Only the **certificate's worst-case (box-sup) evaluation** can. The demo captures this "experience is fooled, only the certificate sees" in one figure (`phase2_demo_gate_discrimination.svg`).
+
+---
+
+## Honest disclosure — what I doubted at the scariest moment
+
+The most dangerous moment was **seeing "evolution 20–0."** An SNS-friendly headline flashed by ("Found a real LLM terrain where evolution beats gradient!").
+
+What stopped me wasn't a new insight — it was the **rule baked in from the start (meta-gate)**: "if you win, call the strong opponent." I called, and lost. So I can't write it.
+
+This is not a report of losing — it's a report of **the framework working**. Without the meta-gate, I would have published a falsehood. "Abnormally good results: doubt the breakdown before celebrating" — that discipline actually stopped one false positive, in data.
+
+Remaining honest caveats:
+- A hidden-cluster CE proxy, not a full-vocab softmax CE (full-vocab degenerates at small n).
+- Gating costs −0.028 performance on the real terrain (it measurably trims plasticity). But since evolution has no capability edge, this doesn't change the conclusion.
+- "Strong gradient is best" assumes backprop gives exact gradients for free — which is exactly what real LLM training does, so it's a realistic comparison.
+
+## Verification — I had AIs refute my own claims (MAJOR 0)
+
+Finally, I had **independent verifier AIs adversarially refute** the numerical claims of all three experiments in parallel. For the main result (capability), a verifier AI **loaded SmolLM2 itself and re-ran 3 seeds independently**, deterministically reproducing "strong gradient beats evolution." **Zero MAJOR discrepancies.** All findings improved reproducibility / wording / caveat precision, none overturned a conclusion (one verifier found a non-reproducible RNG defect, which I made deterministic and re-ran on the spot).
+
+---
+
+## Wrap-up — what "evolvable LLM" really is
+
+Across three installments (#38→#39→#40) we landed here:
+
+- **#38**: Defensive disclosure — the window for "proof-carrying memory" opened in theory.
+- **#39**: The window closed in implementation. But the **scalability wall** didn't budge (verified evolution only up to n≤6).
+- **#40 (this one)**: Does it get smart? → **NO.** Even on a real LLM terrain, a strong gradient beats evolution. **Capability can't be sold.**
+
+So "evolvable LLM" really means: **not "an AI where evolution wins on performance," but "a framework that provably guarantees and measures that online structural adaptation doesn't blow up or catastrophically forget."** It's unglamorous. But having decided to **compete on safety, not inflated smarts**, this is the honest picture.
+
+Next time we plan to summarize this framework under the metaphor "an eye that sees through Langton's-ant illusions." Experience is fooled by appearances; only the certificate sees the essence — and on that single point, three installments of honest disclosure all converge.
+
+---
+
+<a id="中文"></a>
+# 中文 / <a id="한국어"></a>한국어
+
+(翻訳 follow-up: 中文・한국어 版は publish 前に上記日本語/English と同じ構成で自己完結展開する。)
