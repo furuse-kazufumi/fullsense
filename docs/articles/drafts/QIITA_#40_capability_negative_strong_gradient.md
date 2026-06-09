@@ -7,8 +7,9 @@ slide: false
 ignorePublish: false
 ---
 
-> **本記事は日本語ドラフト**(private-first)。English / 中文 / 한국어 版は publish 前に展開予定。
+言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
 
+<a id="日本語"></a>
 # 日本語
 
 ## この記事は何か — 「勝ったと思った瞬間に、自分のフレームワークが自分を止めた」報告
