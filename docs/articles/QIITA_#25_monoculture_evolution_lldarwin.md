@@ -19,7 +19,7 @@ ignorePublish: true
 
 # 日本語
 
-# AI を 500 世代進化させたら、世界に「私」と「予測符号化の父カール・フリストン」だけが残った #25 — monoculture の honest disclosure と選択圧コンポーネント lldarwin
+# AI を 500 世代進化させたら、世界に Furuse と Friston だけ残った #25 — 名前が F で似てるだけの 2 人に偏る「monoculture 大失敗」の honest disclosure と選択圧コンポーネント lldarwin
 
 ![4コマでわかる #25 — AI 500 世代進化の「大失敗」](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q25_4koma.svg?v=2)
 
