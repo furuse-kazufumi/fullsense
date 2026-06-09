@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-09 21:34:09
+- **生成時刻**: 2026-06-09 23:55:37
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
-d64a20e auto: SESSION_SUMMARY.md 編集前 (2026-06-07 18:06)
-52e952a articles(#38): スライド言及 4 言語に「今後 1 年かけて拡充」を明記 (ユーザー指示)
-5e700f7 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:25)
-4fc1137 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:25)
-fa06744 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:25)
-11ce450 articles(#38): 公開 URL 反映 — private リンクを llcore public repo へ差し替え + 4 言語に追記節 (PoC 完走/repo 570 files/§9.6/スライド CC BY 4.0)
-cf1b656 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:21)
-87e87ce auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:21)
-d6c6682 auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:21)
-ff57d6a auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-06-07 17:20)
+5d8dba0 articles(#25): 偉人と並ぶ自己誇示感を自虐ギャグ化 (Furuse/Friston の F 名前ギャグ, 4言語) — monoculture 大失敗の honest disclosure 維持
+0e5b226 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:45)
+65e7e10 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:44)
+77c16ee auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:44)
+51e84b5 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:44)
+868532d auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:43)
+c087e20 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:42)
+b91b6a4 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:42)
+066a33e auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:42)
+8595eed auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 21:42)
 ```
 
 ### git status (porcelain)
@@ -37,6 +37,7 @@ ff57d6a auto: QIITA_#38_defensive_disclosure_verified_memory.md 編集前 (2026-
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
+?? docs/SESSION_SUMMARY_2026-06-09.md
 ```
 
 
@@ -76,8 +77,12 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `19:44` `docs/SESSION_SUMMARY.md`
-- `19:44` `docs/NEXT_SESSION.auto.md`
+- `23:30` `docs/NEXT_SESSION.auto.md`
+- `23:30` `docs/SESSION_SUMMARY.md`
+- `22:19` `docs/SESSION_SUMMARY_2026-06-09.md`
+- `21:45` `docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md`
+- `21:44` `docs/articles/drafts/QIITA_#39_verified_plasticity_small_n_wall.md`
+- `21:37` `docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md`
 
 
 ## Cross-references

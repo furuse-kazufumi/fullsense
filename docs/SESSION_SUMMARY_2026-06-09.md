@@ -3,7 +3,7 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-09 23:55:37
+- **最終更新**: 2026-06-09 22:19:00
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
@@ -27,15 +27,16 @@ b91b6a4 auto: QIITA_#25_monoculture_evolution_lldarwin.md 編集前 (2026-06-09 
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
-?? docs/SESSION_SUMMARY_2026-06-09.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-23:30 docs/NEXT_SESSION.auto.md
-23:30 docs/SESSION_SUMMARY.md
-22:19 docs/SESSION_SUMMARY_2026-06-09.md
+22:11 docs/SESSION_SUMMARY.md
+22:11 docs/NEXT_SESSION.auto.md
+21:45 docs/articles/QIITA_#25_monoculture_evolution_lldarwin.md
+21:44 docs/articles/drafts/QIITA_#39_verified_plasticity_small_n_wall.md
+21:37 docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md
 ```
 
 ---
