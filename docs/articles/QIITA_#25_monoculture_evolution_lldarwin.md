@@ -301,21 +301,26 @@ FullSense の中核思想は **SPC（統計的工程管理）**。lldarwin で�
 > 📚 **Series navigation (lldarwin arc)**: #24-05 population evolution → **#25 this article (the monoculture failure)** → #26 design edition → #27 climax (real-LLM saturation → open-ended pivot). ※ Each article reads on its own (links are for navigation).
 
 > **Concept hook**: Into llive's derived-population evolution, I sowed 8 lineages
-> of human personas as "seeds": Furuse (= me), Friston, Millidge, Isomura, Oka
-> Kiyoshi, Grothendieck, von Neumann, and Feynman. Eight of the world's
-> representative intellects — after 500 generations of generational turnover, which
-> would persist as a lineage?
+> of human personas as "seeds": Friston, Millidge, Isomura, Oka Kiyoshi,
+> Grothendieck, von Neumann, Feynman… and, for some reason, the developer himself
+> (Furuse). Seven of the world's representative intellects, plus one guy who is
+> very much out of place. After 500 generations of turnover, which would persist?
 >
-> The result: the only lineages that persisted were **me (52%) and Karl Friston, the father of
-> predictive coding (48%) — just two**. Oka Kiyoshi, Grothendieck, von Neumann,
-> and Feynman — **not a single one left any descendants; none persisted as a lineage (they were selected out).**
+> The result: the only lineages that persisted were **Furuse (52%) and Friston
+> (48%) — just two**. …Notice anything? **Furuse and Friston both start with F and
+> sound suspiciously alike.** Oka Kiyoshi, Grothendieck, von Neumann, and Feynman
+> all went extinct, yet the two survivors are "the two with the similar F-names."
+> This is **not** a moving tale of me standing shoulder-to-shoulder with the father
+> of predictive coding. It's more like "**the AI's evolution just skewed toward two
+> people whose names happen to be similar**" — a result too neat to trust.
 >
-> …Sounds like a moving tale of evolution? **No. This is a record of a major
-> failure.** Evolution did not "select the strong"; rather, **because the
-> selection pressure was zero, the population merely skewed toward 2 lineages by
-> sheer luck (genetic drift)**. This article is an honest disclosure of that, plus
-> the design story of the component needed after "measuring (lleval)" — namely
-> "culling (lldarwin)".
+> The reveal: this is a **record of a major failure**. Evolution did not "select
+> the strong"; rather, **because the selection pressure was zero, the population
+> merely skewed toward 2 lineages by sheer luck (genetic drift)**. I got to sit
+> next to a great mind not on merit but **thanks to a broken fitness function** (if
+> anything, the moment *I* survived I should have suspected the experiment was
+> rigged). This article is an honest disclosure of that, plus the design story of
+> the component needed after "measuring (lleval)" — namely "culling (lldarwin)".
 
 ---
 
