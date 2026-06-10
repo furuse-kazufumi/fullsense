@@ -173,6 +173,7 @@ nav_order: 3
 | `docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md` | **防衛的開示論文** (date of record): 四点交差点アーキテクチャ + certifier ladder + tracking tube + verified memory evolution 2 ルート + SPC/二層倫理ゲートの enabling disclosure。英日縦積み、特許出願の代替 |
 | `docs/papers/2026-05-29_core_evolution_master_survey.md` | Core Evolution master survey (Agent A-D + RAD 14 分野) |
 | `docs/papers/2026-05-29_research_plan_core_evolution.md` | 研究計画書 v1 (TMLR 本命) |
+| `(llcore) docs/VERIFIED_PLASTICITY_FRAMEWORK.md` | **verified-plasticity framework deliverable / 論文化ドラフト** (2026-06-10): 評価枠組み自体が deliverable。4 method × 6 instruments × 3 plug-point、H-discriminative (STABLE 風経験 gate 84% false-admit vs sound cert 0%)、capability NULL_TIE→実地形 ARTIFACT+NEGATIVE、F8 (b)PASS/(a)NULL、Mamba Lyapunov を exact 数値で。honest 留保を decisive/未実証で厳密区別 |
 
 ## Maintenance rule
 
