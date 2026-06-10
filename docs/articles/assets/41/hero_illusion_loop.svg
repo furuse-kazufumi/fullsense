@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="Segoe UI,Helvetica,Arial,sans-serif" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">同じ遺伝子なのに、経験は「安全」、証明器は「発散」</title>
+  <desc id="dsc">同一の発散遺伝子(rho約2.9)を、左の経験的観測(有限ホライズン)では摂動が減衰して見え緑の「安全」と誤判定する。右の sound certificate(box-sup)は針が sigma_max=4.87 まで上昇して 1.0 しきい線を超え、真の発散(rho>=1)を赤の REJECT で見抜く。経験 gate は発散 gene の 84% を見逃すが sound cert の見逃しは 0%。ループ再生。</desc>
+
+  <!-- ===== background ===== -->
+  <rect width="900" height="460" fill="#0f1320"/>
+  <rect x="0" y="0" width="900" height="460" fill="none"/>
+
+  <!-- subtle grid -->
+  <g stroke="#1b2233" stroke-width="1">
+    <line x1="0" y1="115" x2="900" y2="115"/>
+    <line x1="0" y1="230" x2="900" y2="230"/>
+    <line x1="0" y1="345" x2="900" y2="345"/>
+  </g>
+
+  <!-- ===== headline ===== -->
+  <text x="450" y="36" text-anchor="middle" fill="#e8ecf4" font-size="22" font-weight="700">同じ遺伝子なのに、経験は「安全」、証明器は「発散」</text>
+
+  <!-- ===== center: the shared gene ===== -->
+  <g>
+    <circle cx="450" cy="232" r="46" fill="#161c2c" stroke="#566075" stroke-width="2"/>
+    <!-- gentle breathing pulse so the static node still reads as "alive / shared source" -->
+    <circle cx="450" cy="232" r="46" fill="none" stroke="#9aa3b2" stroke-width="1.5" opacity="0.5">
+      <animate attributeName="r" values="46;58;46" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <text x="450" y="222" text-anchor="middle" fill="#e8ecf4" font-size="13" font-weight="600">同じ遺伝子</text>
+    <text x="450" y="242" text-anchor="middle" fill="#ff9f43" font-size="16" font-weight="700">&#961; &#8776; 2.9</text>
+    <text x="450" y="259" text-anchor="middle" fill="#9aa3b2" font-size="10">tanh 基質 / 1 個体</text>
+  </g>
+
+  <!-- arrows from gene to each panel -->
+  <g stroke="#566075" stroke-width="2" fill="none" marker-end="url(#arr)">
+    <path d="M404 232 H300"/>
+    <path d="M496 232 H600"/>
+  </g>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#566075"/>
+    </marker>
+  </defs>
+
+  <!-- =========================================================
+       LEFT PANEL : empirical observation (finite horizon) -> SAFE (wrong)
+       ========================================================= -->
+  <g>
+    <rect x="28" y="66" width="262" height="346" rx="10" fill="#121726" stroke="#283142" stroke-width="1.5"/>
+    <text x="44" y="92" fill="#e8ecf4" font-size="14" font-weight="700">経験的観測</text>
+    <text x="44" y="109" fill="#9aa3b2" font-size="11">有限ホライズン(摂動の応答を見る)</text>
+
+    <!-- baseline axis -->
+    <line x1="48" y1="232" x2="270" y2="232" stroke="#2a3346" stroke-width="1"/>
+    <text x="52" y="248" fill="#566075" font-size="9">t &#8594;</text>
+
+    <!-- decaying perturbation wave: starts large, flattens (the illusion of safety) -->
+    <path id="wave" fill="none" stroke="#ff9f43" stroke-width="2.5" stroke-linecap="round"
+          d="M48,232 Q66,170 84,232 Q102,290 120,232 Q138,196 156,232 Q174,266 192,232 Q210,218 228,232 Q246,243 264,232"
+          stroke-dasharray="600" stroke-dashoffset="600">
+      <!-- draw the trace left->right each loop -->
+      <animate attributeName="stroke-dashoffset" values="600;0;0;600" keyTimes="0;0.5;0.85;1" dur="7s" repeatCount="indefinite"/>
+      <!-- amplitude collapse: tall wave -> nearly flat (perturbation decays, looks safe) -->
+      <animateTransform attributeName="transform" type="scale" additive="sum"
+                        values="1 1;1 0.45;1 0.08;1 1" keyTimes="0;0.45;0.7;1"
+                        dur="7s" repeatCount="indefinite"/>
+    </path>
+    <!-- scale anchor: keep vertical scaling centered on baseline y=232 -->
+    <!-- (transform-origin emulated via translate wrapper) -->
+
+    <!-- point trail riding the decay -->
+    <g fill="#ff9f43">
+      <circle cx="84" cy="232" r="3"><animate attributeName="cy" values="172;210;229;172" keyTimes="0;0.45;0.7;1" dur="7s" repeatCount="indefinite"/></circle>
+      <circle cx="156" cy="232" r="3"><animate attributeName="cy" values="198;220;231;198" keyTimes="0;0.45;0.7;1" dur="7s" repeatCount="indefinite"/></circle>
+      <circle cx="228" cy="232" r="3"><animate attributeName="cy" values="220;229;232;220" keyTimes="0;0.45;0.7;1" dur="7s" repeatCount="indefinite"/></circle>
+    </g>
+
+    <text x="159" y="300" text-anchor="middle" fill="#9aa3b2" font-size="10">摂動 1 &#8594; 2e-14(減衰して見える)</text>
+
+    <!-- SAFE badge: lights up after the wave flattens (misjudgement) -->
+    <g>
+      <rect x="78" y="328" width="162" height="46" rx="23" fill="#13261a" stroke="#2ecc71" stroke-width="2" opacity="0.25">
+        <animate attributeName="opacity" values="0.25;0.25;1;1;0.25" keyTimes="0;0.6;0.7;0.9;1" dur="7s" repeatCount="indefinite"/>
+      </rect>
+      <text x="159" y="350" text-anchor="middle" fill="#2ecc71" font-size="16" font-weight="700" opacity="0.35">
+        安全 &#10003;
+        <animate attributeName="opacity" values="0.35;0.35;1;1;0.35" keyTimes="0;0.6;0.7;0.9;1" dur="7s" repeatCount="indefinite"/>
+      </text>
+      <text x="159" y="366" text-anchor="middle" fill="#9aa3b2" font-size="9.5" opacity="0.35">経験 gate の誤判定
+        <animate attributeName="opacity" values="0.35;0.35;1;1;0.35" keyTimes="0;0.6;0.7;0.9;1" dur="7s" repeatCount="indefinite"/>
+      </text>
+    </g>
+  </g>
+
+  <!-- =========================================================
+       RIGHT PANEL : sound certificate (box-sup) -> REJECT (correct)
+       ========================================================= -->
+  <g>
+    <rect x="610" y="66" width="262" height="346" rx="10" fill="#121726" stroke="#283142" stroke-width="1.5"/>
+    <text x="626" y="92" fill="#e8ecf4" font-size="14" font-weight="700">sound certificate</text>
+    <text x="626" y="109" fill="#9aa3b2" font-size="11">box-sup(健全な上界, 証明付き)</text>
+
+    <!-- vertical gauge frame: maps value 0..6 to y 360..130 -->
+    <rect x="700" y="130" width="40" height="230" rx="6" fill="#161c2c" stroke="#283142" stroke-width="1.5"/>
+
+    <!-- threshold line at value 1.0 -> y = 360 - (1.0/6)*230 = 321.7 -->
+    <line x1="688" y1="322" x2="800" y2="322" stroke="#9aa3b2" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="806" y="326" fill="#e8ecf4" font-size="11" font-weight="600">1.0</text>
+    <text x="806" y="338" fill="#566075" font-size="9">しきい線</text>
+
+    <!-- sigma_max=4.87 mark -> y = 360 - (4.87/6)*230 = 173.3 -->
+    <line x1="694" y1="173" x2="746" y2="173" stroke="#4ea1ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>
+    <text x="806" y="170" fill="#4ea1ff" font-size="11" font-weight="700">&#963;max</text>
+    <text x="806" y="183" fill="#4ea1ff" font-size="11" font-weight="700">4.87</text>
+
+    <!-- rising bar: from baseline (value 0, y=360) up past 1.0 to 4.87 (y=173) -->
+    <rect x="703" y="360" width="34" height="0" fill="#ff9f43" rx="3">
+      <animate attributeName="y" values="360;360;173;173;360" keyTimes="0;0.15;0.6;0.88;1" dur="7s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="0;0;187;187;0" keyTimes="0;0.15;0.6;0.88;1" dur="7s" repeatCount="indefinite"/>
+      <!-- turn red/danger once it crosses 1.0 -->
+      <animate attributeName="fill" values="#4ea1ff;#4ea1ff;#ff9f43;#ff5a5a;#ff5a5a;#4ea1ff" keyTimes="0;0.3;0.45;0.6;0.88;1" dur="7s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- needle/pointer riding the top of the bar -->
+    <g>
+      <polygon points="744,360 762,353 762,367" fill="#e8ecf4">
+        <animateTransform attributeName="transform" type="translate"
+                          values="0 0;0 0;0 -187;0 -187;0 0" keyTimes="0;0.15;0.6;0.88;1" dur="7s" repeatCount="indefinite"/>
+      </polygon>
+    </g>
+
+    <!-- value readout -->
+    <text x="720" y="378" text-anchor="middle" fill="#9aa3b2" font-size="9">box-sup &#963;</text>
+
+    <!-- REJECT badge: appears as bar crosses 1.0 -->
+    <g>
+      <rect x="632" y="120" width="162" height="0" rx="10" fill="#2a1414" stroke="#ff5a5a" stroke-width="2" opacity="0">
+        <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.62;0.9;1" dur="7s" repeatCount="indefinite"/>
+        <animate attributeName="height" values="0;0;46;46;0" keyTimes="0;0.55;0.62;0.9;1" dur="7s" repeatCount="indefinite"/>
+      </rect>
+      <text x="713" y="143" text-anchor="middle" fill="#ff5a5a" font-size="15" font-weight="700" opacity="0">
+        REJECT
+        <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.62;0.9;1" dur="7s" repeatCount="indefinite"/>
+      </text>
+      <text x="713" y="159" text-anchor="middle" fill="#e8ecf4" font-size="10.5" font-weight="600" opacity="0">
+        &#963;max=4.87 &gt; 1 &#8594; 真 &#961; &#8805; 1
+        <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.62;0.9;1" dur="7s" repeatCount="indefinite"/>
+      </text>
+    </g>
+  </g>
+
+  <!-- ===== bottom honest stats ===== -->
+  <g>
+    <text x="450" y="430" text-anchor="middle" fill="#9aa3b2" font-size="11.5">
+      経験 gate は発散 gene の <tspan fill="#ff9f43" font-weight="700">84%(80/95)</tspan> を見逃す  /  sound cert(inf/two/sdp)の見逃しは <tspan fill="#4ea1ff" font-weight="700">0%</tspan>
+    </text>
+    <text x="450" y="448" text-anchor="middle" fill="#566075" font-size="9.5">
+      ※ tanh 基質では状態も摂動感度も発散しない(減衰して見える)からこそ経験は騙される。capability(進化が勝つ)と guarantee(証明付き安定)は別物。
+    </text>
+  </g>
+</svg>

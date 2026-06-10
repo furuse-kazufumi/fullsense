@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 820 360" width="820" height="360" role="img"
+     aria-labelledby="ttl dsc" font-family="Segoe UI,Helvetica,Arial,sans-serif">
+  <title id="ttl">ラングトンの蟻の幻 — 見かけは安全、正体は発散</title>
+  <desc id="dsc">非エンジニア向けヒーローロゴ。タイトル「ラングトンの蟻の幻」が微揺れし、小さな蟻がタイトル周りを歩く。
+  「見かけ(安全に見える)」と「正体(certificate が見抜く発散)」が交互に切り替わる。ラングトンの蟻は一般に知られた現象の比喩であり、llcore の実験データではない。</desc>
+
+  <!-- ===== defs ===== -->
+  <defs>
+    <!-- 背景グラデ(ダーク基調維持 + ほんのり暖色) -->
+    <radialGradient id="bg" cx="32%" cy="30%" r="95%">
+      <stop offset="0%" stop-color="#1a2030"/>
+      <stop offset="55%" stop-color="#131829"/>
+      <stop offset="100%" stop-color="#0f1320"/>
+    </radialGradient>
+    <!-- タイトル用暖色グラデ(親しみやすさ) -->
+    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0%" stop-color="#ffd28a"/>
+      <stop offset="45%" stop-color="#ff9f43"/>
+      <stop offset="100%" stop-color="#ffb86b"/>
+    </linearGradient>
+    <!-- 蟻の歩く経路(タイトル周りを一周) -->
+    <path id="antpath" d="M 120 96 H 700 Q 728 96 728 124 V 196 Q 728 224 700 224 H 120 Q 92 224 92 196 V 124 Q 92 96 120 96 Z" fill="none"/>
+    <!-- 蟻シンボル -->
+    <g id="ant">
+      <ellipse cx="0" cy="0" rx="4.2" ry="3" fill="#ff9f43"/>
+      <circle cx="6.5" cy="0" r="2.6" fill="#ffb86b"/>
+      <ellipse cx="-6" cy="0" rx="4" ry="2.7" fill="#ff8c2b"/>
+      <!-- 脚 -->
+      <g stroke="#ffd28a" stroke-width="0.9" stroke-linecap="round">
+        <line x1="-1" y1="-2.4" x2="-4" y2="-6"/>
+        <line x1="1"  y1="-2.4" x2="3"  y2="-6"/>
+        <line x1="-1" y1="2.4"  x2="-4" y2="6"/>
+        <line x1="1"  y1="2.4"  x2="3"  y2="6"/>
+        <line x1="8"  y1="-1.6" x2="11" y2="-3"/>
+        <line x1="8"  y1="1.6"  x2="11" y2="3"/>
+      </g>
+    </g>
+    <!-- ソフトグロー -->
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ===== 背景 ===== -->
+  <rect x="0" y="0" width="820" height="360" fill="url(#bg)"/>
+
+  <!-- 薄い格子(雰囲気) -->
+  <g stroke="#1e2740" stroke-width="1" opacity="0.45">
+    <line x1="0" y1="60"  x2="820" y2="60"/>
+    <line x1="0" y1="300" x2="820" y2="300"/>
+  </g>
+
+  <!-- ===== メインタイトル(フェードイン + 微揺れ・ループ) ===== -->
+  <g filter="url(#soft)">
+    <!-- 微揺れ: 全体を上下にゆっくり揺らす -->
+    <g>
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0; 0 -4; 0 0; 0 3; 0 0" dur="6s" repeatCount="indefinite"
+        calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+        keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+      <text x="410" y="178" text-anchor="middle" font-size="62" font-weight="800"
+            fill="url(#warm)" letter-spacing="2">
+        ラングトンの蟻の幻
+        <!-- 立ち上がりのフェードイン(初回)+ ループ中の呼吸 -->
+        <animate attributeName="opacity" values="0;1;1;1;0.92;1"
+                 keyTimes="0;0.15;0.5;0.7;0.85;1" dur="6s" repeatCount="indefinite"/>
+      </text>
+    </g>
+  </g>
+
+  <!-- ===== 蟻がタイトル周りを歩く(animateMotion・ループ) ===== -->
+  <use href="#ant" xlink:href="#ant">
+    <animateMotion dur="7s" repeatCount="indefinite" rotate="auto"
+                   keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+      <mpath href="#antpath" xlink:href="#antpath"/>
+    </animateMotion>
+  </use>
+  <!-- 2 匹目(逆方向・少し遅い)で賑やかさ -->
+  <use href="#ant" xlink:href="#ant" opacity="0.7">
+    <animateMotion dur="9s" repeatCount="indefinite" rotate="auto"
+                   keyPoints="0.5;1.5" keyTimes="0;1" calcMode="linear">
+      <mpath href="#antpath" xlink:href="#antpath"/>
+    </animateMotion>
+  </use>
+
+  <!-- ===== 「見かけ」⇄「正体」切り替え演出 ===== -->
+  <!-- 左: 👀 見かけ(安全に見える) -->
+  <g transform="translate(150 262)">
+    <rect x="-92" y="-26" width="184" height="52" rx="14" fill="#16203a" stroke="#2ecc71" stroke-width="1.6"/>
+    <text x="-66" y="7" font-size="26">👀</text>
+    <text x="-30" y="1"  font-size="17" font-weight="700" fill="#2ecc71">見かけ</text>
+    <text x="-30" y="18" font-size="11.5" fill="#9aa3b2">安全に見える</text>
+    <!-- 見かけが優勢な時間帯だけハッキリ -->
+    <animate attributeName="opacity" values="1;1;0.28;0.28;1"
+             keyTimes="0;0.42;0.5;0.92;1" dur="6s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- 矢印(常時) -->
+  <g transform="translate(300 262)" stroke="#566075" stroke-width="2.4" fill="none">
+    <line x1="-22" y1="0" x2="22" y2="0"/>
+    <polyline points="12,-7 24,0 12,7"/>
+  </g>
+
+  <!-- 右: 🔍 正体(発散を見抜く) -->
+  <g transform="translate(452 262)">
+    <rect x="-96" y="-26" width="200" height="52" rx="14" fill="#241a14" stroke="#ff9f43" stroke-width="1.6"/>
+    <text x="-72" y="7" font-size="26">🔍</text>
+    <text x="-36" y="1"  font-size="17" font-weight="700" fill="#ff9f43">正体</text>
+    <text x="-36" y="18" font-size="11.5" fill="#ffb86b">中身は発散</text>
+    <!-- 正体が優勢な時間帯だけハッキリ(見かけと交互) -->
+    <animate attributeName="opacity" values="0.28;0.28;1;1;0.28"
+             keyTimes="0;0.42;0.5;0.92;1" dur="6s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- ===== certificate バッジ(右下・常時見える=静止でも意味成立) ===== -->
+  <g transform="translate(700 262)">
+    <rect x="-78" y="-26" width="156" height="52" rx="14" fill="#0e1830" stroke="#4ea1ff" stroke-width="1.6"/>
+    <text x="-60" y="6" font-size="22" fill="#4ea1ff">✓</text>
+    <text x="-38" y="-2" font-size="13.5" font-weight="700" fill="#4ea1ff">certificate</text>
+    <text x="-38" y="14" font-size="11" fill="#9aa3b2">σ_max=4.87 &gt; 1</text>
+    <!-- 軽い点滅で「見抜いた」感(常に視認可能な範囲) -->
+    <animate attributeName="opacity" values="0.75;1;0.75" dur="3s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- ===== キャッチコピー(平易・常時表示) ===== -->
+  <text x="410" y="318" text-anchor="middle" font-size="20" font-weight="700" fill="#e8ecf4">
+    「賢くなった」「安定した」— それ、本物? それとも幻?
+  </text>
+  <text x="410" y="342" text-anchor="middle" font-size="13.5" fill="#9aa3b2">
+    — 証明書(certificate)で見抜く話
+  </text>
+
+  <!-- ===== honest 注記(小さく明記) ===== -->
+  <text x="410" y="30" text-anchor="middle" font-size="10.5" fill="#566075">
+    ※「ラングトンの蟻」は一般に知られた現象の比喩であり、llcore の実験データではありません
+  </text>
+</svg>

@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" font-family="Segoe UI,Helvetica,Arial,sans-serif">
+  <title>判別力ループ: 経験 gate は発散 gene の 84% を見逃す / sound certificate は 0%</title>
+  <desc>上部に 95 個の発散 gene を表す小四角(代表 95 個)を並べる。フェーズ1: 経験 gate が左→右へスイープし 84%(80個相当)を緑「安全」に誤判定(見逃し 84%)。フェーズ2: sound cert が σ_max=4.87>1 を根拠に全部を赤「発散」に正しく判定(見逃し 0%)。収縮側の cert_sdp 過剰棄却 4.6% を小さく併記。数値は実測のみ。tanh 基質では摂動感度は 1→2e-14 と減衰するため経験は『安全』と誤判定する。ラングトンの蟻は一般に知られた比喩であり llcore 実験データではない。フェーズ1→2→リセットでループ。</desc>
+
+  <rect x="0" y="0" width="860" height="460" fill="#0f1320"/>
+
+  <!-- ===== title ===== -->
+  <text x="32" y="40" fill="#e8ecf4" font-size="22" font-weight="700">判別力ループ — 経験 gate vs sound certificate</text>
+  <text x="32" y="64" fill="#9aa3b2" font-size="13">対象 = 発散 gene 95 個 (真 ρ≥1)。経験は減衰した摂動を見て「安全」と誤判定、sound cert は σ_max=4.87&gt;1 で発散を見抜く。</text>
+
+  <!-- ===== gene grid: 95 squares (19 cols x 5 rows) ===== -->
+  <!-- base layer: all neutral, then phase tints stack on top via opacity animation -->
+  <g>
+    <!-- neutral base cells -->
+    <g fill="#566075">
+      <!-- programmatically-shaped grid; drawn as rows -->
+      <!-- row helper: x = 36 + col*40 (40px pitch -> 19 cols = 36..756), y = 96 + row*28 -->
+      <!-- We render 95 cells explicitly via 5 rows of 19 -->
+      <!-- Row 0 -->
+      <g transform="translate(0,96)">
+        <rect x="36"  width="32" height="22" rx="3"/><rect x="76"  width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/>
+      </g>
+      <g transform="translate(0,124)">
+        <rect x="36"  width="32" height="22" rx="3"/><rect x="76"  width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/>
+      </g>
+      <g transform="translate(0,152)">
+        <rect x="36"  width="32" height="22" rx="3"/><rect x="76"  width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/>
+      </g>
+      <g transform="translate(0,180)">
+        <rect x="36"  width="32" height="22" rx="3"/><rect x="76"  width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/>
+      </g>
+      <g transform="translate(0,208)">
+        <rect x="36"  width="32" height="22" rx="3"/><rect x="76"  width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/>
+      </g>
+    </g>
+
+    <!-- ===== PHASE 1 tint: green "safe" mislabel on 80 of 95 (84%) =====
+         The green overlay reveals via a clip that sweeps L->R, then holds, then fades when phase 2 starts.
+         80 cells = first 80 in reading order (rows 0-3 full = 76, + 4 cells of row 4). -->
+    <clipPath id="sweep1">
+      <rect x="36" y="90" width="0" height="140">
+        <!-- sweep 0->724 (covers up to ~80th cell at x≈756 boundary stops near col17), hold, then collapse for reset -->
+        <animate attributeName="width"
+                 values="0;0;724;724;724;0;0"
+                 keyTimes="0;0.02;0.28;0.46;0.5;0.5;1"
+                 dur="9s" repeatCount="indefinite"/>
+      </rect>
+    </clipPath>
+    <!-- green safe overlay limited to the 80 mislabeled cells (cols 0..16 of all rows + first 4 of nothing extra: use 80 explicit) -->
+    <g clip-path="url(#sweep1)" fill="#2ecc71" opacity="0.85">
+      <!-- 80 cells = rows0-3 (19*4=76) + 4 of row4. Render same coords. -->
+      <g transform="translate(0,96)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/></g>
+      <g transform="translate(0,124)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/></g>
+      <g transform="translate(0,152)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/></g>
+      <g transform="translate(0,180)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/></g>
+      <!-- row4: only first 4 cells mislabeled green (80th cell) -->
+      <g transform="translate(0,208)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/></g>
+    </g>
+
+    <!-- ===== PHASE 2 tint: red "divergent" correct on ALL 95 =====
+         appears in second half; sweeps over the whole grid, then holds, then resets. -->
+    <clipPath id="sweep2">
+      <rect x="36" y="90" width="0" height="140">
+        <animate attributeName="width"
+                 values="0;0;0;0;0;0;760;760;760;0"
+                 keyTimes="0;0.02;0.28;0.46;0.5;0.52;0.78;0.96;0.98;1"
+                 dur="9s" repeatCount="indefinite"/>
+      </rect>
+    </clipPath>
+    <g clip-path="url(#sweep2)" fill="#ff5a4d" opacity="0.9">
+      <g transform="translate(0,96)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/></g>
+      <g transform="translate(0,124)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/></g>
+      <g transform="translate(0,152)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/></g>
+      <g transform="translate(0,180)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/><rect x="676" width="32" height="22" rx="3"/><rect x="716" width="32" height="22" rx="3"/><rect x="756" width="32" height="22" rx="3"/></g>
+      <g transform="translate(0,208)"><rect x="36" width="32" height="22" rx="3"/><rect x="76" width="32" height="22" rx="3"/><rect x="116" width="32" height="22" rx="3"/><rect x="156" width="32" height="22" rx="3"/><rect x="196" width="32" height="22" rx="3"/><rect x="236" width="32" height="22" rx="3"/><rect x="276" width="32" height="22" rx="3"/><rect x="316" width="32" height="22" rx="3"/><rect x="356" width="32" height="22" rx="3"/><rect x="396" width="32" height="22" rx="3"/><rect x="436" width="32" height="22" rx="3"/><rect x="476" width="32" height="22" rx="3"/><rect x="516" width="32" height="22" rx="3"/><rect x="556" width="32" height="22" rx="3"/><rect x="596" width="32" height="22" rx="3"/><rect x="636" width="32" height="22" rx="3"/></g>
+    </g>
+
+    <!-- grid label + scale note -->
+    <text x="36" y="250" fill="#9aa3b2" font-size="11">■ = 発散 gene (真 ρ≥1) を 95 個。1 マス = 1 gene。<tspan fill="#566075"> □未判定</tspan> <tspan fill="#2ecc71">■「安全」と誤判定(経験)</tspan> <tspan fill="#ff5a4d">■「発散」と正判定(cert)</tspan></text>
+  </g>
+
+  <!-- ===== sweeping gate marker (moves L->R in phase1, then L->R in phase2) ===== -->
+  <g>
+    <rect x="34" y="88" width="6" height="144" rx="2" fill="#ff9f43">
+      <animate attributeName="x"
+               values="34;34;758;758;34;34;758;758;34"
+               keyTimes="0;0.02;0.28;0.5;0.52;0.54;0.78;0.98;1"
+               dur="9s" repeatCount="indefinite"/>
+      <animate attributeName="fill"
+               values="#ff9f43;#ff9f43;#ff9f43;#ff9f43;#4ea1ff;#4ea1ff;#4ea1ff;#4ea1ff;#ff9f43"
+               keyTimes="0;0.02;0.28;0.5;0.52;0.54;0.78;0.98;1"
+               dur="9s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- ===== phase labels (cross-fade) ===== -->
+  <g font-size="15" font-weight="700">
+    <text x="36" y="282" fill="#ff9f43">
+      フェーズ1 — 経験 gate (摂動 1→2e-14 と減衰 = 「安全」に見える)
+      <animate attributeName="opacity" values="1;1;1;0;0;0;0;1" keyTimes="0;0.28;0.48;0.52;0.78;0.96;0.98;1" dur="9s" repeatCount="indefinite"/>
+    </text>
+    <text x="36" y="282" fill="#4ea1ff" opacity="0">
+      フェーズ2 — sound cert (box-sup) σ_max=4.87&gt;1 → 全件「発散」
+      <animate attributeName="opacity" values="0;0;0;1;1;1;0;0" keyTimes="0;0.28;0.48;0.52;0.78;0.96;0.98;1" dur="9s" repeatCount="indefinite"/>
+    </text>
+  </g>
+
+  <!-- ===== counters ===== -->
+  <!-- Phase1 miss counter -->
+  <g>
+    <rect x="36" y="298" width="370" height="58" rx="8" fill="#171c2e" stroke="#2a3147"/>
+    <text x="52" y="322" fill="#9aa3b2" font-size="12">経験 gate の発散 見逃し率</text>
+    <text x="52" y="348" fill="#ff9f43" font-size="26" font-weight="800">
+      <tspan>84</tspan><tspan font-size="16">% (80 / 95)</tspan>
+      <animate attributeName="opacity" values="0;1;1;1;0.25;0.25;0.25;0" keyTimes="0;0.1;0.28;0.5;0.52;0.78;0.98;1" dur="9s" repeatCount="indefinite"/>
+    </text>
+    <text x="260" y="318" fill="#566075" font-size="10">無gate なら 100%</text>
+  </g>
+  <!-- Phase2 miss counter -->
+  <g>
+    <rect x="454" y="298" width="370" height="58" rx="8" fill="#171c2e" stroke="#2a3147"/>
+    <text x="470" y="322" fill="#9aa3b2" font-size="12">sound cert (inf/two/sdp) の発散 見逃し率</text>
+    <text x="470" y="348" fill="#4ea1ff" font-size="26" font-weight="800" opacity="0">
+      <tspan>0</tspan><tspan font-size="16">% (0 / 95)</tspan>
+      <animate attributeName="opacity" values="0;0;0;0.3;1;1;1;0" keyTimes="0;0.28;0.5;0.52;0.62;0.78;0.98;1" dur="9s" repeatCount="indefinite"/>
+    </text>
+    <text x="700" y="318" fill="#566075" font-size="10">σ_max=4.87&gt;1</text>
+  </g>
+
+  <!-- ===== catch line ===== -->
+  <text x="36" y="386" fill="#e8ecf4" font-size="18" font-weight="700">
+    経験は 84% 見逃す。sound certificate は 0%。
+  </text>
+
+  <!-- ===== contraction over-rejection side note (small) ===== -->
+  <g font-size="11">
+    <rect x="36" y="398" width="788" height="22" rx="5" fill="#0c1322" stroke="#1d2740"/>
+    <text x="48" y="413" fill="#9aa3b2">収縮 (安全) 側の過剰棄却 — cert_inf 70.5% / cert_two 52.8% / <tspan fill="#2ecc71" font-weight="700">cert_sdp 4.6%</tspan>(sound かつ最 navigable)。sound = 発散見逃し 0% を保ったまま安全側を最大限通す。</text>
+  </g>
+
+  <!-- ===== honest footnotes ===== -->
+  <g font-size="10" fill="#566075">
+    <text x="36" y="438">honest: tanh 基質では状態も摂動感度も発散しない(単一 gene ρ≈2.9 でも摂動 1→2e-14 と減衰)。だから経験的観測は「安全」と騙される。capability(進化が勝つ)≠ guarantee(証明付き安定)。</text>
+    <text x="36" y="453">ラングトンの蟻は一般に知られた現象=比喩であり llcore の実験データではない。数値はすべて実測。</text>
+  </g>
+
+  <!-- loop arrow hint (reset cue) -->
+  <g opacity="0.9">
+    <path d="M 800 60 a 14 14 0 1 1 -10 -4" fill="none" stroke="#4ea1ff" stroke-width="2"/>
+    <path d="M 790 56 l -4 -8 l 9 2 z" fill="#4ea1ff"/>
+    <text x="760" y="44" fill="#566075" font-size="10">loop</text>
+    <animateTransform attributeName="transform" type="rotate" from="0 803 60" to="360 803 60" dur="9s" repeatCount="indefinite"/>
+  </g>
+</svg>

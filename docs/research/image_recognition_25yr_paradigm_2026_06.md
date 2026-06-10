@@ -34,7 +34,7 @@ llmesh の near-real-time push / llrepr typed diff-stream の設計原理(重い
 
 ### 3. Supervision Deficit → 密な自己教師 (llive 自己進化への示唆)
 VLA の弱点 = 行動ラベルが疎(Supervision Deficit)。世界モデルの未来予測を**密な自己教師信号**にして
-スケーリングを増幅。第3世代(MAE/DINO)の「ラベル不要化」の行動版再演。
+スケーリングを増幅。自己教師あり学習(MAE/DINO 等)がラベル依存を下げたのと同様の発想を、行動学習(行動ラベルの疎さ)へ持ち込むもの。
 → llive 自己進化メモリの fitness 設計(合成 proxy 脱却)に、「予測誤差=密な自己信号」という発想を移植可能。
 
 ### 4. 産業センシング含意 (llmesh の差別化補強)
