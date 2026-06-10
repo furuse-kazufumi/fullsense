@@ -508,13 +508,13 @@ The point is **not to disparate competitors**. Their "got smarter" claims may be
 
 ---
 
-## Even world models cannot issue guarantees — connecting to Fujiyoshi's lecture p.51
+## Even world models cannot issue guarantees — distinguishing contribution from guarantee
 
-Another major current is **world models**: an agent holds an internal environment simulator and predicts actions. Powerful, and it contributes to safe design too. Yet Hironobu Fujiyoshi, a leading world-model researcher, honestly limits it in his 2026 lecture (p.51): **"World models contribute to safe design, but are not a guarantee."** An honest stance — not confusing contribution with guarantee.
+Another major current is **world models**: an agent holds an internal environment simulator and predicts actions. Powerful, and it contributes to safe design too. As a technical fact, however, world-model approaches generally can contribute to safe design but **do not provide a formal guarantee**. This is an observation widely shared in the technical community (a 2026 lecture by Hironobu Fujiyoshi expressed the same gist). Contribution and guarantee must be treated as distinct.
 
-verified-plasticity's place becomes clear here. Where the world model stays at "contribution," **verified-plasticity issues a GUARANTEE with a sound certificate** — bounding "contracts (ρ<1, doesn't blow up)" by proof, not appearance. Not a replacement but a complement: the world model predicts actions cleverly; verified-plasticity guarantees that its structural adaptation does not blow up.
+verified-plasticity's place becomes clear here. Where world-model approaches stay at "contribution," **verified-plasticity issues a GUARANTEE with a sound certificate** — bounding "contracts (ρ<1, doesn't blow up)" by proof, not appearance. Not a replacement but a complement: the world model predicts actions cleverly; verified-plasticity guarantees that its structural adaptation does not blow up.
 
-Further, Fujiyoshi's core thesis — **"the boundary between what humans give and what machines acquire on their own has kept widening through history"** — is **isomorphic** to this research's evolution thesis. The boundary moves toward machines acquiring (evolving) structures we used to hand-design. Who guarantees that "self-acquired structure" doesn't blow up? verified-plasticity's answer: "a sound certificate does."
+Technically, this aligns with the general observation that the history of AI has moved toward machines acquiring (evolving) structures we used to hand-design. This research's evolution thesis sits in the same direction. Who guarantees that "self-acquired structure" doesn't blow up? verified-plasticity's answer: "a sound certificate does."
 
 ---
 

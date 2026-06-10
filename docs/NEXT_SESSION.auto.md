@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-10 18:19:04
+- **生成時刻**: 2026-06-10 18:25:39
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,22 +20,23 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+ef381b3 auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:25)
+6488673 auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:25)
+98eb652 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 18:25)
+ce91150 auto: QIITA_#41_verified_plasticity_langton_ant_meta_kamikudaki.md 編集前 (2026-06-10 18:25)
+35c63f6 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 18:24)
 81b203c auto: doc_map.md 編集前 (2026-06-10 18:17)
 4e9c7eb auto: QIITA_SERIES_INDEX.md 編集前 (2026-06-10 18:16)
 beb686f auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:14)
 8ee0322 auto: doc_map.md 編集前 (2026-06-10 18:13)
 db613dd auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:13)
-bd5f628 auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:13)
-2d846e9 auto: QIITA_#41_verified_plasticity_langton_ant_meta_kamikudaki.md 編集前 (2026-06-10 18:13)
-534da0a auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:13)
-c7a062b auto: QIITA_#41_verified_plasticity_langton_ant_meta_kamikudaki.md 編集前 (2026-06-10 18:13)
-f513c1d auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:13)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/doc_map.md
+M docs/articles/drafts/QIITA_#41_verified_plasticity_langton_ant_meta.md
+ M docs/research/image_recognition_25yr_paradigm_2026_06.md
 ```
 
 
@@ -75,14 +76,14 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `18:25` `docs/research/image_recognition_25yr_paradigm_2026_06.md`
+- `18:25` `docs/articles/drafts/QIITA_#41_verified_plasticity_langton_ant_meta.md`
+- `18:25` `docs/articles/drafts/QIITA_#41_verified_plasticity_langton_ant_meta_kamikudaki.md`
+- `18:19` `docs/NEXT_SESSION.auto.md`
+- `18:19` `docs/SESSION_SUMMARY.md`
 - `18:17` `docs/doc_map.md`
 - `18:16` `docs/articles/QIITA_SERIES_INDEX.md`
-- `18:14` `docs/NEXT_SESSION.auto.md`
-- `18:14` `docs/SESSION_SUMMARY.md`
-- `18:14` `docs/articles/drafts/QIITA_#41_verified_plasticity_langton_ant_meta.md`
-- `18:13` `docs/articles/drafts/QIITA_#41_verified_plasticity_langton_ant_meta_kamikudaki.md`
 - `18:12` `docs/research/index.md`
-- `17:49` `docs/research/image_recognition_25yr_paradigm_2026_06.md`
 
 
 ## Cross-references

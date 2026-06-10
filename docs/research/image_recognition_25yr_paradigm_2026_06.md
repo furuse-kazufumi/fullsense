@@ -19,12 +19,11 @@ published: false
 
 ## ★FullSense への接続 (本メモの主眼)
 
-### 1. llcore verified-plasticity への最強フック (p.51)
-世界モデルの「未来予測でできること」5項目の第5: **「安全設計に寄与する(ただし保証ではない)」**
-— 不確実性定量化・因果制御・行動検証と組合せて効く、と藤吉氏は honest に限定している。
+### 1. llcore verified-plasticity への最強フック
+技術的事実として、世界モデル系の手法は不確実性定量化・因果制御・行動検証と組合せることで安全設計に寄与しうるが、それ自体は形式的な保証(guarantee)を与えるものではない。これは技術コミュニティで広く共有された観察である。
 → **llcore の核は『保証(GUARANTEE)』**: sound certificate で「進化/学習が ρ<1 で発散しない」を判別する。
-世界モデル/VLA 系の「安全に寄与するが保証なし」と、llcore verified-plasticity の「sound cert で保証」は
-**記事の決定的対比軸**。普及メタ記事「ラングトンの蟻の幻」に『世界モデルですら保証は出せない。
+すなわち「世界モデル系の手法は一般に安全性に寄与するが形式的保証は与えない」のに対し、「llcore verified-plasticity は sound certificate で(small-n per-component 域で)保証を出す」という、
+**記事の決定的対比軸**になる。普及メタ記事「ラングトンの蟻の幻」に『世界モデル系の手法でも形式的保証は出せない。
 verified-plasticity は出す』の1節を足せる。
 
 ### 2. 予測符号化テーマの裏付け (World Model = 予測→反省→行動)
