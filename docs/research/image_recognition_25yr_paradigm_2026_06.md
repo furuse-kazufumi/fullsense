@@ -27,10 +27,9 @@ published: false
 verified-plasticity は出す』の1節を足せる。
 
 ### 2. 予測符号化テーマの裏付け (World Model = 予測→反省→行動)
-p.47-50 の3統合アーキ(Uni-World VLA インターリーブ / DriveWorld-VLA 潜在統合 / VLA-World 生成→反省)+
-LeWM(JEPA型・潜在予測で軽量) は、FullSense の「表現×リアルタイム」ideation 統合発見
-=**予測符号化アーキテクチャ**([[project_fullsense_expression_realtime_marathon]])の学術的裏付け。
-特に **「潜在空間で予測するからリアルタイム実行可能(ピクセル生成を回避)」(DriveWorld-VLA/LeWM)** は
+世界モデルと VLA を統合する近年の研究(Uni-World VLA / DriveWorld-VLA / VLA-World / LeWM 等)は、FullSense の「表現×リアルタイム」ideation 統合発見
+=**予測符号化アーキテクチャ**([[project_fullsense_expression_realtime_marathon]])の学術的裏付けになる。
+特に **「潜在空間で予測するからリアルタイム実行可能(ピクセル生成を回避)」(DriveWorld-VLA / LeWM)** は
 llmesh の near-real-time push / llrepr typed diff-stream の設計原理(重い完全生成でなく差分/潜在)と同型。
 
 ### 3. Supervision Deficit → 密な自己教師 (llive 自己進化への示唆)
