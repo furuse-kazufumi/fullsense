@@ -262,6 +262,24 @@ Terms used in this part. Technical identifiers stay canonical (CLARABEL, SDP, SO
 | SMT / Z3 | A satisfiability solver. On this substrate it was decorative — zero discriminating power. |
 | Track B/C/D | Names of the empirical tracks: SMT-decorative proof (B/C) and the scale check (D). |
 | fail-closed | Safe-by-default design: if you cannot verify, do not admit. |
+| substrate | The system under study — the testbed. Here, a small coupled state-update system with n=2 (a 2-dimensional state). "On this substrate" signals "within this system and this setup only". |
+| gene / GA | GA = genetic algorithm: an evolutionary method that mutates and selects individuals across generations to find good solutions. A "gene" here is the evolved dynamic (the coefficients of the coupled state update). An ungated GA is a GA with no inspector. |
+| GATE (soundness gate) | The checkpoint that admits/rejects evolved individuals; its job is to always reject divergent ones. inf-norm GATE / SDP GATE are configurations using the respective verifier as that checkpoint. |
+| fitness | The score measuring how "good" an individual is in evolutionary computation. Rotation fitness is the score on rotation-mixed dynamics; the "safe-fitness ceiling" is the highest fitness evolution can reach while staying inside what the inspector admits. |
+| frontier | The advancing front of "what can be certified" — each stronger rung of the ladder pushes it outward. Also called the coverage frontier. |
+| singular value | How much a matrix stretches the unit ball, direction by direction. The max singular value is the stretch factor of the most-stretched direction; below 1, every direction must shrink — that is the 2-norm test. |
+| quadratic form | A function of the form xᵀPx (second-order terms only). The Lyapunov energy function has this form; the coefficient matrix P sets the tilt and shape of the ellipse. |
+| convex optimization | Optimization over a "bowl-shaped" problem with a single valley: no local-optimum traps, and any optimum found is guaranteed global. SDP belongs to this family, which is why the Lyapunov P can be found reliably. |
+| interior-point method | A standard algorithm for convex optimization that converges to the optimum with high accuracy while traveling through the interior of the feasible region. CLARABEL uses it, so verdicts stay solid even right at the boundary. |
+| false negative | Returning "cannot certify" for something that actually contracts (and is certifiable). The SCS trap near the boundary — before correcting it, SDP's edge looked like +254 (after correction, +692; detail in #35-02). |
+| lifting (Veronese) | Mapping into a higher-dimensional space by treating higher-order combinations of the variables (x², xy, …) as new coordinates. The preprocessing that lets higher-degree SOS chase certificates a quadratic form cannot reach. |
+| switched system | A system where several update rules (matrices) take turns acting over time. The question is whether it shrinks under every switching order; the worst-case growth rate is the JSR. |
+| NP-hard | A hardness class meaning no efficient (polynomial-time) algorithm is known or expected to exist. Computing the exact JSR is NP-hard, so finite lift degrees can only approach it. |
+| closed form | When the answer can be written down as a finite expression — plug in values, no search solver needed. The contraction tests in Track B/C reduce to closed form, which is why calling Z3 added no discriminating power. |
+| soundness | The inspector-side guarantee that anything certified "contracting" really contracts. An unsound certificate admits a non-contracting individual — observed 0 times at every rung here. |
+| exact-JSR bracket / jsr_lb | Pinching the true JSR between an upper and a lower bound (a bracket). jsr_lb is the JSR lower bound; a gene with jsr_lb near 1 sits right at the contracting/non-contracting boundary. |
+| oracle / falsifier | "Oracle" is the CS term for a device you query for an answer. The JSR oracle here hunts for counterexamples (evidence of non-contraction) to refute a claim. Finding none is not a proof — hence a falsifier, not a prover. |
+| p-value | A statistical measure of how likely the observed difference would be under pure chance. Smaller = harder to attribute to chance; p = 3.1e-5 means roughly 3 in 100,000 by chance alone. |
 
 ## 1. Plain-language conclusion
 
