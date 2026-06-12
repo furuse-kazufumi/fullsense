@@ -330,9 +330,9 @@ Second, reach. Strengthening the inspector raised the **ceiling of "goodness"** 
 | weak inf-norm gate | capped around 0.41 |
 | SDP gate | reached around 0.86 |
 
-With the weak verifier, as in §3 it rejects all the "shrink-while-spinning" children, so evolution cannot step into that territory and caps at ~0.41. Switch to SDP and that territory opens up, reaching ~0.86. **A strong inspector is a safety device and at the same time a device that widens evolution's range** — that is the real-world payoff.
+Why does swapping the verifier move the ceiling of "goodness" at all? Because evolution can only build the next generation out of children that made it through the gate. With the weak verifier, as in §3, every "shrink-while-spinning" child is wrongfully convicted, so that whole family is never adopted, and evolution can never step into the territory where rotation-goodness lives — hence the cap at ~0.41. Switch to SDP and that territory opens up, reaching ~0.86. For the record, this gap sits at a level pure chance would produce only about 3 times in 100,000 (p = 3.1e-5) — hard to call a fluke. **A strong inspector is a safety device and at the same time a device that widens evolution's range** — that is the real-world payoff.
 
-This SDP verifier is no longer a lab experiment; it is wired in as a pluggable component of production code. It is fail-closed — it rejects if the accurate solver (CLARABEL) is absent — and its tests pass. Everything runs on CPU, at $0, on a home PC.
+This SDP verifier is no longer a lab experiment; it is wired in as a pluggable component of production code. The design is fail-closed: if the accurate solver (CLARABEL) is not found, it refuses to judge at all rather than silently running on a less precise stand-in — because, as §4 showed, verdicts near the boundary go wrong when solver precision drops. Its tests pass, and everything runs on CPU, at $0, on a home PC.
 
 ---
 
