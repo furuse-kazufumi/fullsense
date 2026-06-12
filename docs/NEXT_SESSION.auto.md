@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-12 18:27:33
+- **生成時刻**: 2026-06-12 18:39:08
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,22 +20,22 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-ddbd73f auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-12 18:27)
-8e9eee7 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-12 18:26)
-75ca27d auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-12 18:26)
-0cf49cd docs(handoff): 次回最優先=Qiita記事ライン (#35_00用語追補/かみくだき長め/#35-38公開判断/llterm小話)
-cd803c3 auto: NEXT_SESSION.md 編集前 (2026-06-12 18:07)
-3829cad fix(qiita_35 svg): ラベルとグラフの被りを解消 (sdp_vs_norm 判定ボックス + 進行マップ タイムライン)
-c5803cc auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
-827ea5f auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
-ef277f3 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
-9231c73 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
+e8896e9 auto: QIITA_#36_verifier_2pow_n_wall_vertex_free_kamikudaki.md 編集前 (2026-06-12 18:38)
+febb88d auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-12 18:38)
+8836de3 auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-12 18:38)
+0af0618 auto: QIITA_#36_verifier_2pow_n_wall_vertex_free_kamikudaki.md 編集前 (2026-06-12 18:38)
+c0d93d0 auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-12 18:38)
+5bd49c5 auto: QIITA_#36_verifier_2pow_n_wall_vertex_free_kamikudaki.md 編集前 (2026-06-12 18:37)
+b38eb11 auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-12 18:37)
+e8c4ca0 auto: QIITA_#36_verifier_2pow_n_wall_vertex_free_kamikudaki.md 編集前 (2026-06-12 18:37)
+70bb940 auto: QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md 編集前 (2026-06-12 18:37)
+c603997 auto: QIITA_#36_verifier_2pow_n_wall_vertex_free_kamikudaki.md 編集前 (2026-06-12 18:36)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/QIITA_#35_01_verifier_frontier_sdp.md
+M docs/articles/QIITA_#36_verifier_2pow_n_wall_vertex_free_kamikudaki.md
 ```
 
 
@@ -70,9 +70,16 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `18:38` `docs/articles/QIITA_#36_verifier_2pow_n_wall_vertex_free_kamikudaki.md`
+- `18:38` `docs/articles/QIITA_#35_00_verifier_sdp_not_smt_index_kamikudaki.md`
+- `18:31` `docs/articles/QIITA_#35_02_honest_disclosure_solver_swap.md`
+- `18:31` `docs/articles/QIITA_#37_gpu_triple_run_gate_price.md`
+- `18:30` `docs/articles/drafts/QIITA_#42_llterm_kobanashi.md`
+- `18:29` `docs/articles/QIITA_#35_00_verifier_sdp_not_smt_index.md`
+- `18:29` `docs/articles/QIITA_#36_verifier_2pow_n_wall_vertex_free.md`
 - `18:27` `docs/articles/QIITA_#35_01_verifier_frontier_sdp.md`
-- `18:08` `docs/NEXT_SESSION.auto.md`
-- `18:08` `docs/SESSION_SUMMARY.md`
+- `18:27` `docs/SESSION_SUMMARY.md`
+- `18:27` `docs/NEXT_SESSION.auto.md`
 - `18:07` `docs/NEXT_SESSION.md`
 - `17:59` `docs/articles/assets/qiita_35/qiita_35_progress_zh.svg`
 - `17:59` `docs/articles/assets/qiita_35/qiita_35_progress_ko.svg`
@@ -83,13 +90,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `17:43` `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price.md`
 - `17:43` `tools/qiita-cli-poc/public/fcb43968a5c642610762.md`
 - `17:43` `tools/qiita-cli-poc/public/fa0890f136636d495ea6.md`
-- `17:43` `tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md`
-- `17:43` `tools/qiita-cli-poc/public/e49b7ab9027d93594402.md`
-- `17:43` `tools/qiita-cli-poc/public/da2a2822dabe7b17b8c8.md`
-- `17:43` `tools/qiita-cli-poc/public/cdeea496af01dd424a09.md`
-- `17:43` `tools/qiita-cli-poc/public/cd954f57f510e03954e6.md`
-- `17:43` `tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md`
-- `17:43` `tools/qiita-cli-poc/public/c543014188744262ec83.md`
 
 
 ## Cross-references

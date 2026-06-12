@@ -122,17 +122,19 @@ The lesson is clear. The "cheap glance" itself was not the problem — **the way
 
 ## Another idea: model it on "creatures that declutter"
 
-Living things sometimes keep discarding what they don't need and become simpler. Cave fish discard their eyes, parasites discard their genes, deep-sea bacteria trim their genomes to travel light. **If "maintenance cost > usefulness," the simpler one survives.**
+Living things sometimes keep discarding what they don't need and become simpler. Fish living in pitch-dark caves discard their eyes; parasites that live leaning on other organisms discard their own genes; deep-sea bacteria trim their genomes to travel light. Why is discarding the better deal? Eyes and genes cost something to maintain (energy, the labor of copying) just by being held. If eyes are useless in a lightless cave yet still charge a maintenance fee, the individual that discards them survives more easily. **If "maintenance cost > usefulness," the simpler one survives** — that is the cold rule of the living world.
 
-We want to bring this into AI evolution too. If we add not just "good performance" but "**a simple body that is cheap to verify**" to the score, the AI will steer on its own toward a lighter structure.
+We want to bring this into AI evolution too. Right now we select individuals only by whether their "performance is good." If we also add the viewpoint of "**a simple body that is cheap to verify**" to the score, the AI should, without being told, steer on its own toward a light structure that the gatekeeper can wave through at a glance. The idea is to make the cheapness of cost itself an "evolutionary selection pressure."
 
-But there is a pitfall. "Simple" comes in two kinds:
+But there is a pitfall here, because "simple" comes in kinds we must tell apart.
 
-- **Good simplicity** = the body's build is simple (truly light). This is welcome.
-- **Bad simplicity ①** = the gatekeeper is so strict that you get a pseudo-honor-student who learns nothing (= the trap of the cheapest ∞ gatekeeper).
-- **Bad simplicity ②** = an individual that has degenerated into "saying nothing" (= sticking to a unigram). Safe and cheap, but incompetent. A parasite that trimmed so much it can no longer fend for itself.
+- **Good simplicity** = the body's build itself is simple (truly light). Cheap to verify, and easy for evolution to move through. Very welcome.
+- **Bad simplicity ①** = because the gatekeeper is so strict, a "pseudo-honor-student" who learns nothing survives (= the trap of the cheapest ∞ gatekeeper). It looks safe but is merely cowering.
+- **Bad simplicity ②** = an individual that has degenerated into "saying nothing" (= a state that just returns the safest non-answer, sticking to a unigram). Safe and cheap, but incompetent. The same as a parasite that trimmed so much it can no longer fend for itself.
 
-llcore has an eye (a soundness oracle) that sees through "whether it is truly stable," so it can **tell good simplicity apart from degenerate simplicity**. This is the FullSense worldview —— "evolve not merely to be clever, but in a direction where one can prove it is cheap and safe."
+In other words, if you naively reward "anything cheap is fine," the AI takes the easy way out and escapes toward degeneration. So performance and cost must not be simply added up (scalarized); they must be handled as a balance between the two (a Pareto trade-off).
+
+Fortunately, llcore has an eye (a soundness oracle) that sees through "whether it is truly stable." So it can **tell good simplicity apart from degenerate simplicity** — for the same "simple and cheap," it can tell whether it is an individual with real substance or one that merely cowered. This is a feat ordinary evolutionary systems cannot pull off. This is the FullSense worldview —— "evolve not merely to be clever, but in a direction where one can prove it is cheap and safe."
 
 ## The honest breakdown: "the inspector makes it smart" was an overstatement
 
