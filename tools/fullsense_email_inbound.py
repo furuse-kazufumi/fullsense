@@ -52,10 +52,11 @@ def _loop_root() -> Path:
 
 
 def _ensure_utf8_stdout() -> None:
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[union-attr]
-    except Exception:
-        pass
+    for stream in (sys.stdout, sys.stderr):  # stderr も: 警告の cp932 文字化け回避
+        try:
+            stream.reconfigure(encoding="utf-8")  # type: ignore[union-attr]
+        except Exception:
+            pass
 
 
 def _secret(name: str, default: str = "") -> str:
