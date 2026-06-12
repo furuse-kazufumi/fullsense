@@ -226,17 +226,25 @@ id: 146d5e2b27dabc59e799
 
 ## Act 1: What are we even verifying?
 
-In a research base called **llcore**, we evolve the "brain parts" of small AIs, bit by bit, like living organisms — under strict constraints: CPU-only, inside your own PC, zero cost.
+In a research base called **llcore**, we evolve the "brain parts" of small AIs, bit by bit, like living organisms. The recipe is a classic genetic algorithm; roughly, "make lots of candidates → keep the good ones → tweak them a little and try again," over and over — the same logic as breeding sweeter tomatoes. All under strict constraints: CPU-only, inside your own PC, zero cost.
 
-Evolved parts vary in quality. The troublesome ones "run away": repeating the same computation, their numbers balloon and diverge — like a car stuck with the accelerator pinned. So we need a **verifier** that inspects each evolved part and decides:
+Evolved parts vary in quality. The troublesome ones "run away." A "part" here is a small computing device that updates a state (a bundle of internal numbers) one step at a time, with its output fed back as the next input — a loop. In a loop like that, if "amplify" wins by even a sliver on each pass, the numbers snowball. It's the same shape as audio feedback when a microphone sits too close to a speaker: the mic picks up the speaker's sound, the amp boosts it, the speaker plays it louder, the mic picks that up again… and a whisper becomes a shriek in an instant. This is the computational version — a car stuck with the accelerator pinned.
+
+So we need a **verifier** that inspects each evolved part and decides:
 
 > "Does this part stay calm (settle down) under repetition, instead of running away?"
 
 It turns away the bad ones. The research question is simple: **"So how do you build a *correct* verifier?"**
 
-We call the "settling down" property **contraction**: distance shrinks with each step, like a marble rolling down a slope and finally resting at the bottom. If we can issue a **mathematical certificate** that "this part really contracts," we can safely admit it.
+"Why not just run it and watch?" you might ask. But observation can only ever say "it has been calm **so far**." In fact — this comes up later in the story — there really are parts that behave on an ordinary run yet break loose only when they hit the worst-case conditions (the worst order of operations). Passing a test drive isn't enough. What we want is a guarantee that **covers the future**: "no matter how things unfold, this will not run away" — and that comes from mathematics, not observation.
 
-There are several schools of computation for finding that certificate; the front-runner is **SDP**, a convex-optimization method — "search, within fixed rules, for a convenient certificate (a matrix P)."
+We call the "settling down" property **contraction**: with every step, the distance to the resting point must shrink — like a marble in a bowl that always ends up at the bottom. If every single step shrinks the distance, blow-up is simply impossible; prove contraction, and the worry about runaway disappears. And if we can issue a **mathematical certificate** that "this part really contracts," we can safely admit it. Think of a building's structural-engineering report: not "we shook it and it didn't fall," but "we computed that it cannot fall under any shaking within this range."
+
+The certificate itself is a matrix called P — in plain terms, a **skewed ruler**. A motion that doesn't look shrinking under an ordinary straight ruler can turn out to shrink at every step once you re-measure it with a custom-bent ruler fitted to that part. If you can say "measured with this skewed ruler P, every possible step shrinks the distance," that one sentence *is* the certificate of contraction.
+
+The front-runner method for finding such a convenient ruler P is **SDP**, a kind of **convex optimization**. Convex optimization means problems shaped like a single bowl — searching for the lowest point in a bowl-shaped landscape, where no small fake dip can fool you. That is why an answer found there can be used directly as a guarantee — and why it works for certificate hunting.
+
+By the way, we initially hoped that a fancy logic-puzzle solver (SMT/Z3) would also become a pillar of the verification. But on inspection, Z3 was **decorative** on this base. The questions we were asking Z3 actually reduce to **closed-form expressions** — formulas you can compute directly with ordinary arithmetic. Empirically too: checked against 20,000 cases and 3,270 cases, Z3's verdicts **matched the closed-form computation perfectly** (zero disagreements). We had hired a logic-puzzle master for problems a pocket calculator answers in one stroke. The master was never wrong — but never added anything either. What truly captured the essence of contraction was, after all, **the SDP certificate**. That's the groundwork.
 
 ---
 
