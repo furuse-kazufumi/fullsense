@@ -9,7 +9,20 @@ nav_order: 95
 > Picked up by the next FullSense session. Everything below is ready to
 > resume on. Operator actions are flagged 🧑 (user) vs 🤖 (agent).
 
-## 🟢 2026-05-27 — lldarwin v2 方策確定 + 先駆者論文公開（最新・最優先の文脈）
+## 🟢 2026-06-12 — 現在の本線 = llcore ROADMAP 自走運用 (最優先の文脈)
+
+**正本 = `D:/projects/llcore/docs/ROADMAP.md`** (自走運用、ユーザー確定 2026-06-11) +
+包括計画 = [research/master_plan_2026_06_06]({{ '/research/master_plan_2026_06_06' | relative_url }})。
+
+- M0/M4/M5 ✅ (chat/clip/AnnotationStore、RAD corpus 生成、llloop v0.1.0a0)
+- **M1 ✅ クローズ (2026-06-12)**: entity-coref エッジ + MiniLM encoder。MiniLM cosine MRR 0.947 =
+  会話 retrieval ほぼ解決。正本 = llcore research/textseg1d/M1_ENTITY_ENCODER_RESULTS_2026_06_12.md
+- **M3 🔄 進行中**: RAD→AnnotationStore 世界知識注入 (最初 = loop_engineering corpus dogfooding)
+- M2 ⬜: cert gate × 連結性教師 (M3 の次)
+- llcore branch = `phase2a-trajectory-tube-gate` (push は user-gate)
+- 別途 human-go 待ち: Hyperframes PoC 提案 ([research/hyperframes_heygen_survey_2026_06_12]({{ '/research/hyperframes_heygen_survey_2026_06_12' | relative_url }}))
+
+## 🟢 2026-05-27 — lldarwin v2 方策確定 + 先駆者論文公開（当時の文脈）
 
 overnight PoC マラソン（ユーザー Goal「徹底的に要件整理＋進化型として独自性＋PoC何度も」）で
 **lldarwin v2 の方策を確定**。12h 実 LLM ランが「まだ進化でなかった（飽和で累積せず）」ことを
@@ -85,113 +98,14 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 
 ## 🧑 Operator actions queued — pick these up first
 
-### 0z. ✅ 完了 (2026-05-23): ABC 並列 verify + 後続
+### ✅ クローズ済み operator 項目 (要約のみ残置, 2026-06-12 stale 掃除)
 
-ABC 並列 (相互監視つき並列処理) は実証完了。CMA-ES / GraphRAG / Mamba skeleton 着地 → 要件 `requirements_v0.F_genome_diversity_addendum.md` (DIV-01/02/03) → DIV wiring 実装 (50 test, 104 passed) まで一貫消化。llive `optimize/core-2026-05-20` に push 済。詳細は [[feedback_parallel_first_execution]] §6.6 / [[project_ai_algorithms_taxonomy]].
+詳細は git history (本ファイルの 2026-06-12 以前の版) / PROGRESS 参照。
 
-### 0y. ✅ 完了 (2026-05-23): #24 シリーズ 多言語 rollout (8 記事)
-
-**全 8 記事 (#24-00, 01, 03, 04, 05, 06, 07, 08) を #24-02 と同じ 4 言語自己完結形式に
-横展開完了** (main に着地済)。SVG variant 計 72 個新規生成 (全 well-formed 検証済、
-#24-02 既存 9 と合わせ 78)。再利用ツール `scripts/svg_i18n.py` (base SVG の text のみ
-翻訳、minidom 検証) + 手順書 `docs/articles/MULTILINGUAL_ROLLOUT_SPEC.md` を整備。
-#24-05/07/08 は git 操作禁止の background Agent 3 並列で生成 → orchestrator 検証着地
-([[feedback_agent_no_git_parallel]])。#24-00 index は内部オーサリングメモを整理して公開向けに。
-
-**🧑 残り operator 作業 (どちらも user-gated)**:
-1. **`git push`** — SVG raw URL は `main` ブランチ参照なので、push しないと Qiita 上で画像が出ない
-2. **`npx qiita publish <id> --force`** — 各記事の public/<id>.md を再投稿 (可視性は frontmatter の private で維持)。連載順 (00→01→…→08) 推奨
-
----
-
-### 0y-orig (履歴: 着手前メモ)
-
-**#24-02 をテンプレとして 4 言語自己完結形式が確立・公開済**。残り 8 記事 (#24-00, 01, 03, 04, 05, 06, 07, 08) に同形式を横展開する。
-
-**テンプレ (これに完全に倣う)**: `docs/articles/QIITA_#24_02_thought_factors_cog_mesh.md` (公開済 `qiita.com/furuse-kazufumi/private/bdfad6db3f2e70c40511`)
-
-**形式** ([[feedback_multilingual_article_structure]]):
-- 1 記事に JA → EN → ZH → KO の **全文を縦積み**。各言語は `# 日本語` / `# English` / `# 中文` / `# 한국어` の H1 + 直前に `---` 区切り。冒頭に言語ジャンプ TOC。
-- **各言語版は完全自己完結** — hero/progress/theme SVG・Mermaid・表・References・Series Navigation を各言語内に複製 + 翻訳。
-- 断片翻訳 `<small>EN/中</small>` と `<!-- *-placed -->` は全削除。
-
-**SVG variant** (記事ごと 9 個): `qiita_24_0X_{hero,progress,theme}_{en,zh,ko}.svg` を作成し、各言語セクションが自分の variant 参照 (JA=base)。**imgix 制約厳守**: `<mpath>` 不使用 (inline `animateMotion path=`) / `xmlns:xlink` 宣言 / `xml.dom.minidom` で well-formed 検証。geometry/アニメ不変・テキストのみ翻訳。
-
-**publish gotcha** ([[reference_qiita_cli]] に全記載):
-- **タイトルは必ずクオート** (`title: '...'`) — コロン含みで YAML 誤パース→全フィールドエラーになる。
-- publish は `public/<id>.md` から。docs/articles を編集後 cp してから `npx qiita publish <id> --force` (staleness 警告は --force)。
-- login 済 (credential 永続)。`includePrivate: true` 設定済 (`tools/qiita-cli-poc/qiita.config.json`)。
-- **各記事の現可視性を維持** — LINK_MAP より #24-00/01 は **公開** (private: false), #24-02〜08 は **限定共有** (private: true)。frontmatter の private を記事ごとに正しく設定。id も LINK_MAP の URL hash を `qiita pull` で照合済の値を使う。
-
-**実行方法**: 記事ごと独立 Agent で並列 (本文 4 言語翻訳 + SVG 9 variant + wiring)。main が orchestrator + publish (都度確認)。1 記事ずつ検証してから次へでも可。
-
----
-
-### 0a. ✅ lleval + usv-pandas-bridge GitHub repo 作成 + 初回 push (完了: 2026-05-23)
-
-**完了**: 両 repo 公開 + GitHub Actions / About / Topics / Dependabot 整備済.
-
-- **lleval**: <https://github.com/furuse-kazufumi/lleval> (workflow restore commit `5f85663`, CI green, 7 topics, Dependabot enabled)
-- **usv-pandas-bridge**: <https://github.com/furuse-kazufumi/usv-pandas-bridge> (1 commit `95633e3`, 7 topics, Dependabot enabled)
-- llive PR #1: <https://github.com/furuse-kazufumi/llive/pull/1> (4 commits: island demo / ThoughtFactor / RWKV / Genome3D 4 階建て)
-
-経緯: 2026-05-22 深夜は PAT scope 不足で失敗. 2026-05-23 に PAT rotate (新 token `fullsense-cli-2026-05-23` + Workflows scope 追加) + workflow 退避 push + GitHub UI 整備 (Comet 経由) で完了. PAT 値露出を契機に [[feedback_clipboard_no_persist]] + [[feedback_powershell_script_for_long_commands]] を memory 化.
-
-[本セクションは 2026-05-30 以降に削除予定]
-
----
-
-### 0a-legacy. (旧版残し)
-
-(以下は 2026-05-22 時点のメモ. 完了済のため履歴目的のみ)
-
-- **lleval** (D:/projects/lleval) — LE-01 honest disclosure 5+1 factor, commit `665bacf`, 88 PASS
-- **usv-pandas-bridge** (D:/projects/usv-pandas-bridge) — pandas DataFrame ↔ USV bridge, commit `95633e3` (root), 24 PASS
-
-**手順**:
-
-```powershell
-# Step 1: PAT scope を追加
-gh auth refresh -s repo,delete_repo
-
-# Step 2: lleval (private 推奨, 後で公開判断)
-cd D:/projects/lleval
-gh repo create furuse-kazufumi/lleval --private --source=. --remote=origin `
-  --description "lleval — LLM evaluation framework (honest disclosure 5+1 factor decomposition). Companion to llive."
-git push -u origin main
-
-# Step 3: usv-pandas-bridge (public 推奨 — usrs の補完で発信効果あり)
-cd D:/projects/usv-pandas-bridge
-gh repo create furuse-kazufumi/usv-pandas-bridge --public --source=. --remote=origin `
-  --description "pandas DataFrame ↔ USV (Unit-Separated Values) bridge. CSV breaks on cell newlines / emoji / CJK / Markdown — USV doesn't."
-git push -u origin main
-```
-
-最初は **private** で作成、公開準備が整ったら `gh repo edit --visibility public` で公開判断.
-
-### 0b. ★ Qiita 連載 #16 から投稿再開 (2026-05-23 以降, Qiita 投稿数制限解除待ち)
-
-**2026-05-22 セッション末で投稿数制限に到達**. 解除は通常 24 時間程度.
-
-**現状**:
-
-- ✅ 投稿済 2 件: [#14](https://qiita.com/furuse-kazufumi/items/33b70c801894b91ca826) / [#15](https://qiita.com/furuse-kazufumi/items/ab3839f8b5b3ea91311e)
-- 🚧 残 18 件: #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24-00 / #24-01 / #24-02 / #24-03 / #24-04 / #24-05 / #24-06 / #24-07 / #24-08 / #24-LINK_MAP
-
-**翌セッション開始時の処理**:
-
-1. `docs/articles/QIITA_POST_GUIDE.md` を開く
-2. preflight 実行: `py -3.11 scripts/qiita_preflight.py`
-3. #16 (`QIITA_#16_three_self_spirit_ai_management.md`) から投稿案内を Claude に依頼
-4. 各投稿後、Qiita 確定 URL を Claude に投げて LINK_MAP 更新 → cross-link 同期 (`scripts/qiita_url_sync.py`)
-5. 全件投稿後、LinkedIn 投稿 (`docs/articles/2026-05-22/LinkedIn_2026-05-22_harness_vibe_session.md`) の GitHub blob URL を Qiita URL に差替
-
-**注意**:
-
-- TODO_TAG プレースホルダ 12 件は Qiita UI でタグ手入力 (POST_GUIDE §1.2 参照)
-- TITLE-LONG 4 件 (#22/#24_04/#24_06/#24_07) は短縮判断
-- #20 は Jekyll frontmatter (`layout: default`) — 投稿時に削除 or 6 行目以降コピペ
-- 「**多ければ多いほど良い**」 ([[feedback_qiita_long_form]] 2026-05-22 update) — 本文短縮は禁忌
+- **0z** ✅ (05-23) ABC 並列 verify + DIV wiring — llive push 済
+- **0y** ✅ (05-23) #24 シリーズ 4 言語 rollout 8 記事 + SVG 72 variant — 投稿も完走済 (末尾「Qiita 連載 #14-#24 全 19 本完走」参照)
+- **0a** ✅ (05-23) lleval + usv-pandas-bridge repo 公開 (CI green / Topics / Dependabot)
+- **0b** ✅ (05-23) Qiita 連載 #14-#24 全 19 本投稿完走 (公開 9 / 限定共有 10)
 
 ### 1. Credential restoration — 3 cloud LLMs (継続)
 
