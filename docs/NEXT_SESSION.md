@@ -21,25 +21,38 @@ nav_order: 95
   会話 22 probe への干渉ゼロ (store 11 倍化でも 0.947 不変)。次 = 大規模化 (i)(ii)(iii)
   (正本 = llcore research/textseg1d/M3_RAD_INGEST_POC_2026_06_12.md)
 
-### ▶ 次の具体的な一手 (2026-06-12 EXIT 時点、ここから再開)
+### ▶ 次の具体的な一手 (2026-06-12 14:15 EXIT 時点、ここから再開)
 
-**M3 増分 2 (スケール干渉再測 + 多言語 encoder 比較) のデバッグ再走**:
+**M3 増分 2 (rad_scale_poc.py) — 根本原因は特定済み。完走待ち or 再走のみ**:
 
-1. `cd D:/projects/llcore` で `py -3.11 scripts/rad_scale_poc.py` を **foreground 実行**
-   (前回は background detached で JSON 未生成のまま死亡・stderr 喪失。スクリプトは
-   llcore に WIP commit 済み = `git log --oneline -1` で `wip(rad)` を確認)。
-   エラー全文を見て根本原因から修正 (推測禁止)。長時間 (10-30 分) かかるのは正常。
+0. **まず `D:/projects/llcore/out/rad_scale_poc.json` の存在確認**。
+   - **あれば** デバッグ不要 → 手順 2 (一次検証 → report) へ直行。
+   - **なければ** `out/rad_scale_poc.log` の tail を見て手順 1 で再走。
+1. **再走方法 (デバッグは不要 — script は健全と確認済み)**: 前々回/前回の死因は
+   **harness background のプロセスツリーがターン境界付近で silent kill される環境問題**
+   (memory `feedback-windows-background-task-silent-kill` 参照)。証拠: e5 encode 単体の
+   foreground 実行は 22s/exit 0 で成功、minilm 構成は in-run 再現で M3.0 正本と完全一致
+   (world MRR 0.6389 / conv 0.9470)、Event Log にクラッシュ記録なし・wrapper ごと消滅。
+   → **Monitor ツール (timeout 60 分) に載せて 1 ターン内で完走を待つ**か、
+   `--skip-scale` / `--skip-multilingual` + `--out` 分割で foreground 実行 (各 ≤10 分)。
+   コマンド: `cd D:/projects/llcore && py -3.11 scripts/rad_scale_poc.py 2>&1 | tee out/rad_scale_poc.log`
 2. 成功したら `out/rad_scale_poc.json` を一次検証 → report
-   `research/textseg1d/M3_SCALE_MULTILINGUAL_2026_06_12.md` を執筆 (劣化も隠さず開示) →
+   `research/textseg1d/M3_SCALE_MULTILINGUAL_2026_06_12.md` を執筆 (体裁は
+   M3_RAD_INGEST_POC_2026_06_12.md に合わせる。劣化も隠さず開示) →
    `docs/ROADMAP.md` M3 の (i)(ii) を ✅ 化 → commit。
 3. 仕様の要点: (i) language+evolution+agents corpus (~2,000 docs)、annotations 上限 60k
    (超過時は doc 単位サブサンプル + 必ず log = silent cap 禁止)、会話 22 probe の劣化と
    世界知識 18 probe の埋もれを測る (ii) MiniLM vs multilingual-e5-small (E5 は
    "query: "/"passage: " prefix あり/なし両方)。**probe は既存を変更しない** (cherry-pick 禁止)。
-4. その後 = ROADMAP M3 残り (iii) 会話トピック重複 corpus の干渉測定 → M2 (cert × 連結性教師)。
+4. その後 = ROADMAP M3 残り (iii) 会話トピック重複 corpus の干渉測定。
+   **(iii) 準備調査済み (2026-06-12)**: 重複 corpus 候補 = `D:/docs/astrophysics_corpus_v2`
+   (3,757 md docs、planet/Mars 言及多数 — 会話の天文 probe 4 問と直接衝突)。全量 encode は
+   ~27 分 (0.44s/doc) なので数百 docs サブサンプル + cap 設計を (i) の結果を見て決める。
+   その後 M2 (cert × 連結性教師)。
 
 状態: llcore branch `phase2a-trajectory-tube-gate`、unit 390 PASS、push は全 repo user-gate のまま。
-本日の本セッション着地 = M1 クローズ (`519d56d`) + M3 PoC (`0dd6cd3`) + WIP (`rad_scale_poc.py`)。
+本日の着地 = M1 クローズ (`519d56d`) + M3 PoC (`0dd6cd3`) + WIP (`4174e77` rad_scale_poc.py) +
+死因特定 (background silent kill → memory 化) + (iii) 準備調査。
 - M2 ⬜: cert gate × 連結性教師 (M3 の次)
 - llcore branch = `phase2a-trajectory-tube-gate` (push は user-gate)
 - 別途 human-go 待ち: Hyperframes PoC 提案 ([research/hyperframes_heygen_survey_2026_06_12]({{ '/research/hyperframes_heygen_survey_2026_06_12' | relative_url }}))

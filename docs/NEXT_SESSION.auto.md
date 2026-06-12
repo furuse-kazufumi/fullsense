@@ -10,16 +10,19 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-12 13:18:08
+- **生成時刻**: 2026-06-12 13:52:09
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `3	0`
 
 ```
+21ef576 docs(handoff): M3 取込 PoC 成立を本線サマリに反映
+51a114f docs(handoff): NEXT_SESSION stale 掃除 (T5 5-2) + 現在の本線 (llcore ROADMAP 自走) を先頭に明示
+1130a93 docs(research): hyperframes (HeyGen) 調査を doc_map に登録 + auto snapshot
 9faae5a auto: doc_map.md 編集前 (2026-06-12 12:10)
 dcc2217 auto: index.md 編集前 (2026-06-12 12:09)
 0b7628c auto: fullsense_email_inbound.py 編集前 (2026-06-10 21:47)
@@ -27,9 +30,6 @@ d8f6720 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 1
 e20c175 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 18:26)
 4373b53 auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:25)
 6f8e3b6 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 18:25)
-ef381b3 auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:25)
-6488673 auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:25)
-98eb652 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 18:25)
 ```
 
 ### git status (porcelain)
@@ -37,7 +37,6 @@ ef381b3 auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- M docs/doc_map.md
 ```
 
 
@@ -54,12 +53,7 @@ M docs/NEXT_SESSION.auto.md
 
 ## 3. 未消化 operator action (NEXT_SESSION.md 由来)
 
-- [ ] 0z. ✅ 完了 (2026-05-23): ABC 並列 verify + 後続
-- [ ] 0y. ✅ 完了 (2026-05-23): #24 シリーズ 多言語 rollout (8 記事)
-- [ ] 0y-orig (履歴: 着手前メモ)
-- [ ] 0a. ✅ lleval + usv-pandas-bridge GitHub repo 作成 + 初回 push (完了: 2026-05-23)
-- [ ] 0a-legacy. (旧版残し)
-- [ ] 0b. ★ Qiita 連載 #16 から投稿再開 (2026-05-23 以降, Qiita 投稿数制限解除待ち)
+- [ ] ✅ クローズ済み operator 項目 (要約のみ残置, 2026-06-12 stale 掃除)
 - [ ] 1. Credential restoration — 3 cloud LLMs (継続)
 - [ ] 2. asciinema 録画 — Cognitive Mesh 統合 demo (9 セクション拡張版)
 - [ ] 3. PAT rotation (継続)
@@ -77,12 +71,14 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `13:17` `docs/SESSION_SUMMARY.md`
-- `13:17` `docs/NEXT_SESSION.auto.md`
+- `13:48` `docs/NEXT_SESSION.md`
+- `13:29` `docs/NEXT_SESSION.auto.md`
+- `13:29` `docs/SESSION_SUMMARY.md`
+- `13:27` `.pytest_cache/v/cache/nodeids`
+- `13:19` `.llterm/loop_ledger.jsonl`
 - `12:10` `docs/doc_map.md`
 - `12:09` `docs/research/index.md`
 - `12:09` `docs/research/hyperframes_heygen_survey_2026_06_12.md`
-- `11:37` `.llterm/loop_ledger.jsonl`
 
 
 ## Cross-references
