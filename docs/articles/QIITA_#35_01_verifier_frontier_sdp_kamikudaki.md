@@ -281,7 +281,7 @@ What is more, SDP **contains all the children the weak verifiers passed** and th
 
 ## 4. It held at scale (checked on 3270 individuals)
 
-To kill "maybe it just looked that way for 300", we checked the same thing on **3270** individuals.
+To kill "maybe it just looked that way for 300", we checked the same thing on **3270** individuals. If the same picture appears with more than 10× the sample, the suspicion "it was just this particular pool" mostly evaporates.
 
 | What we measured | Result |
 |---|---|
