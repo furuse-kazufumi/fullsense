@@ -297,7 +297,7 @@ One honest note. The "margin SDP beat the weak verifier by" looked like **+254**
 
 ## 5. "Bolt on the strongest solver to get the strongest inspector" was wrong
 
-Here many people would think: "If we put the strongest logic solver (SMT/Z3) on top of the ladder, we get an even stronger inspector, right?"
+Here many people would think: "If we put the strongest logic solver (SMT/Z3) on top of the ladder, we get an even stronger inspector, right?" Z3 is a search-style logic solver that settles, yes or no, questions of the form "does an answer satisfying these conditions exist?".
 
 Measured, it was **wrong**. On this problem Z3 distinguished nothing new — it was **decorative**.
 
