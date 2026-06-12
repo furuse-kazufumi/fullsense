@@ -289,9 +289,9 @@ To kill "maybe it just looked that way for 300", we checked the same thing on **
 | Margin SDP beat the weak verifier by | +692 |
 | Times the weak verifier beat SDP | **0** |
 
-The 95% pass rate matches the 95.3% at 300 exactly. Scaling more than 10x does not shake the coverage. And "times the weak verifier beat SDP = 0" is empirical proof that the geometry of §3 holds at scale. SDP is a strict superset of the weak verifier.
+Two readings. First, the 95% pass rate matches the 95.3% at 300 exactly. Scaling more than 10× does not shake the coverage. Second, "times the weak verifier beat SDP = **0**": among 3270 individuals, not a single one was "provable with the ball but not with the ellipse". The trick revealed in §3 — a round ball is just a special ellipse — holds unchanged at scale, and this is the empirical proof. SDP is a strict superset of the weak verifier.
 
-One honest note. The "margin SDP beat the weak verifier by" looked like **+254** under a sloppy count. But that count smuggled in **false negatives** the solver emits near the boundary (calling something that really passes a failure). Correct that and count carefully and it is **+692**. SDP's advantage is far larger than it looked (the correction story is in a companion article, #35-02).
+One honest note. The "margin SDP beat the weak verifier by" looked like **+254** under a sloppy count. The cause is the precision of the tool that actually computes the verdict (the solver). An answer sheet sitting right on the pass line can get pushed to "fail" by a rough grader — that is a **false negative** (calling something that really passes a failure). Exactly this was happening for the boundary-hugging individuals; recount with a high-precision grader (CLARABEL, an interior-point solver) and it is **+692**. SDP's advantage is far larger than it looked (the correction story is in a companion article, #35-02).
 
 ---
 
