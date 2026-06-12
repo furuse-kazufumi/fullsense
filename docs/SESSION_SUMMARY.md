@@ -3,13 +3,15 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-12 18:03:37
+- **最終更新**: 2026-06-12 18:08:02
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+0cf49cd docs(handoff): 次回最優先=Qiita記事ライン (#35_00用語追補/かみくだき長め/#35-38公開判断/llterm小話)
+cd803c3 auto: NEXT_SESSION.md 編集前 (2026-06-12 18:07)
 3829cad fix(qiita_35 svg): ラベルとグラフの被りを解消 (sdp_vs_norm 判定ボックス + 進行マップ タイムライン)
 c5803cc auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 827ea5f auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
@@ -18,22 +20,20 @@ ef277f3 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 e7d4d18 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 9379a15 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 2aee5dc auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
-135b44f chore(qiita): hero 強化版を反映 — 9記事の hero URL を ?v=20260612 で cache-bust + 再publish
-246355f feat(articles): hero アニメ SVG に強化レイヤを注入 (静止リッチ + SMIL、78 ファイル)
 ```
 
 ## 現在の git status
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+(clean)
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-18:00 docs/SESSION_SUMMARY.md
-18:00 docs/NEXT_SESSION.auto.md
+18:07 docs/NEXT_SESSION.md
+18:03 docs/SESSION_SUMMARY.md
+18:03 docs/NEXT_SESSION.auto.md
 17:59 docs/articles/assets/qiita_35/qiita_35_progress_zh.svg
 17:59 docs/articles/assets/qiita_35/qiita_35_progress_ko.svg
 17:59 docs/articles/assets/qiita_35/qiita_35_progress_en.svg
@@ -46,7 +46,6 @@ M docs/NEXT_SESSION.auto.md
 17:43 tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md
 17:43 tools/qiita-cli-poc/public/e49b7ab9027d93594402.md
 17:43 tools/qiita-cli-poc/public/da2a2822dabe7b17b8c8.md
-17:43 tools/qiita-cli-poc/public/cdeea496af01dd424a09.md
 ```
 
 ---

@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-12 18:03:37
+- **生成時刻**: 2026-06-12 18:08:03
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+0cf49cd docs(handoff): 次回最優先=Qiita記事ライン (#35_00用語追補/かみくだき長め/#35-38公開判断/llterm小話)
+cd803c3 auto: NEXT_SESSION.md 編集前 (2026-06-12 18:07)
 3829cad fix(qiita_35 svg): ラベルとグラフの被りを解消 (sdp_vs_norm 判定ボックス + 進行マップ タイムライン)
 c5803cc auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 827ea5f auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
@@ -28,15 +30,12 @@ ef277f3 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 e7d4d18 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 9379a15 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 2aee5dc auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
-135b44f chore(qiita): hero 強化版を反映 — 9記事の hero URL を ?v=20260612 で cache-bust + 再publish
-246355f feat(articles): hero アニメ SVG に強化レイヤを注入 (静止リッチ + SMIL、78 ファイル)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+(clean)
 ```
 
 
@@ -71,8 +70,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `18:00` `docs/SESSION_SUMMARY.md`
-- `18:00` `docs/NEXT_SESSION.auto.md`
+- `18:07` `docs/NEXT_SESSION.md`
+- `18:03` `docs/SESSION_SUMMARY.md`
+- `18:03` `docs/NEXT_SESSION.auto.md`
 - `17:59` `docs/articles/assets/qiita_35/qiita_35_progress_zh.svg`
 - `17:59` `docs/articles/assets/qiita_35/qiita_35_progress_ko.svg`
 - `17:59` `docs/articles/assets/qiita_35/qiita_35_progress_en.svg`
@@ -90,7 +90,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `17:43` `tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md`
 - `17:43` `tools/qiita-cli-poc/public/c543014188744262ec83.md`
 - `17:43` `tools/qiita-cli-poc/public/be52eeb6455732161486.md`
-- `17:43` `tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md`
 
 
 ## Cross-references
