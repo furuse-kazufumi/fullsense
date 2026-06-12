@@ -170,6 +170,7 @@ nav_order: 3
 | `docs/research/patent_search_2026_06_06.md` | 特許 DB 照会 (T4 4-1): 結論 clear — 四点交差点の特許ゼロ、narrows 弱 2 件は related work で対比推奨。D2' は出願でも先取り可能 (user 判断) |
 | `docs/research/telegram_ai_tools_scan_2026_06_10.md` | Telegram共有4件(ui-skills/NotebookLM-MCP/GitHub急上昇10選)網羅調査+競合スキャン。hermes-agent(189k★)/ECC(211.8k★)/codegraph/headroom が FullSense 個別機能を先行、優位4点(産業接続/責任architecture/verified-plasticity/二重設計)は競合に皆無。競合の自己改善主張は全て第三者未検証 |
 | `docs/research/image_recognition_25yr_paradigm_2026_06.md` | 藤吉2026講演(①→②CNN→③ViT→④MLLM→⑤世界モデル×VLA)の FullSense 戦略接続。世界モデルは安全に寄与するが保証でない⇔llcore verified-plasticity=sound certで保証=記事決定的対比。予測符号化テーマの学術裏付け |
+| `docs/research/hyperframes_heygen_survey_2026_06_12.md` | Telegram 送付の HeyGen Hyperframes (HTML→決定論的 MP4, agent-first, Apache-2.0, 26.9k★) 調査。animemd/mangamd/SVG 戦略と競合せず隣接、llrepr 路線の大手裏付け、frame.md は writer 設計に示唆。PoC 提案 = llcore gate デモ MP4 化 (human-go) |
 | `docs/papers/2026-06-06_verified_memory_evolution_defensive_disclosure.md` | **防衛的開示論文** (date of record): 四点交差点アーキテクチャ + certifier ladder + tracking tube + verified memory evolution 2 ルート + SPC/二層倫理ゲートの enabling disclosure。英日縦積み、特許出願の代替 |
 | `docs/papers/2026-05-29_core_evolution_master_survey.md` | Core Evolution master survey (Agent A-D + RAD 14 分野) |
 | `docs/papers/2026-05-29_research_plan_core_evolution.md` | 研究計画書 v1 (TMLR 本命) |
