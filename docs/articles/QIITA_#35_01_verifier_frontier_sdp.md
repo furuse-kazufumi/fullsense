@@ -263,7 +263,7 @@ Terms used in this part. Technical identifiers stay canonical (CLARABEL, SDP, SO
 | Track B/C/D | Names of the empirical tracks: SMT-decorative proof (B/C) and the scale check (D). |
 | fail-closed | Safe-by-default design: if you cannot verify, do not admit. |
 | substrate | The system under study — the testbed. Here, a small coupled state-update system with n=2 (a 2-dimensional state). "On this substrate" signals "within this system and this setup only". |
-| gene / GA | GA = genetic algorithm: an evolutionary method that mutates and selects individuals across generations to find good solutions. A "gene" here is the evolved dynamic (the coefficients of the coupled state update). An ungated GA is a GA with no inspector. |
+| gene / GA | GA = genetic algorithm: an evolutionary method that mutates and selects individuals across generations to find good solutions. A "gene" here is the evolved dynamic itself (the n=2 coupled state update). An ungated GA is a GA with no inspector. |
 | GATE (soundness gate) | The checkpoint that admits/rejects evolved individuals; its job is to always reject divergent ones. inf-norm GATE / SDP GATE are configurations using the respective verifier as that checkpoint. |
 | fitness | The score measuring how "good" an individual is in evolutionary computation. Rotation fitness is the score on rotation-mixed dynamics; the "safe-fitness ceiling" is the highest fitness evolution can reach while staying inside what the inspector admits. |
 | frontier | The advancing front of "what can be certified" — each stronger rung of the ladder pushes it outward. Also called the coverage frontier. |
