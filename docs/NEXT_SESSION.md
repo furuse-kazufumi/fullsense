@@ -24,20 +24,26 @@ nav_order: 95
   **corpus が rank 1 を取った事例は全て role="corpus" → role フィルタで会話 R@1 全防衛可**。
   正本 = llcore research/textseg1d/M3_SCALE_MULTILINGUAL + M3_TOPIC_OVERLAP (各 2026_06_12)
 
-### ▶ 次の具体的な一手 (2026-06-12 午後、ここから再開)
+### ▶ 次の具体的な一手 (2026-06-12 夕方、ここから再開)
 
-**M3 スコープ絞り込み — AnnotationStore.query の role/group フィルタ実装**:
+**✅ role 絞り込み完了 (llcore `6f2803e`)**: `query(exclude_roles={"corpus"})` で (iii) +800
+store の会話 22 probe が **0.849 → 0.947 (R@1 0.909) = 注入前に完全復元** (実証済、unit +3 =
+393 PASS)。限界も開示済: corpus 間 (loop vs astro) の食い合いは role では防げない。
 
-1. (iii) の実証済み構造: 会話 probe の R@1 押し下げ犯は全て role="corpus" annotation。
-   `AnnotationStore.query()` に `roles=` (positive) / `exclude_roles=` (negative) を追加
-   (既定 None = 現状維持・後方互換)。unit テスト追加 (新規機能にはテスト)。
-2. 実証: (iii) の +800 store で `exclude_roles={"corpus"}` の会話 22 probe 再測 →
-   R@1 0.909 / MRR 0.947 復元を確認し M3_TOPIC_OVERLAP report に追記。
-3. その後 = RAD 全量取込の cap/ANN 設計 → M2 (cert × 連結性教師)。
+**次 = M3 残り: 分野単位スコープ設計 + ANN 化 → RAD 全量取込**:
 
-状態: llcore branch `phase2a-trajectory-tube-gate`、unit 390 PASS、push は全 repo user-gate のまま。
+1. **分野単位スコープ**: corpus 間食い合い対策。候補設計 = (a) group の帯域割当
+   (corpus ごとに group 範囲を予約し range フィルタ)、(b) 行ごとの分野タグ (roles と同様の
+   per-row list、save/load 互換に注意)。(b) が素直 — `add_text(domain="astro")` 的な。
+   設計判断を 1 行宣言して実装 → loop probe が astro 混入下で 0.639 に復元するかで実証。
+2. **ANN 化**: 10 万 annotations 級で総当たり cosine (87.8MB matmul @ 60k) が限界。
+   optional extra 設計を維持 (基本 = stdlib+numpy、ANN は faiss optional — CLAUDE.md 方針)。
+3. その後 = RAD 全量取込 (~48 分野) → M2 (cert × 連結性教師)。
+4. 実行注意: 長走 PoC は **foreground 分割** (memory `feedback-windows-background-task-silent-kill`)。
+
+状態: llcore branch `phase2a-trajectory-tube-gate`、**unit 393 PASS**、push は全 repo user-gate のまま。
 本日の着地 = M1 クローズ (`519d56d`) + M3 PoC (`0dd6cd3`) + 検証 (i)(ii) (`e399df4`) +
-検証 (iii) (`7884f1f`、トピック重複干渉の定量化 + 実ヒット目視で機序特定)。
+検証 (iii) (`7884f1f`) + role 絞り込み実装/実証 (`6f2803e`)。
 - M2 ⬜: cert gate × 連結性教師 (M3 の次)
 - llcore branch = `phase2a-trajectory-tube-gate` (push は user-gate)
 - 別途 human-go 待ち: Hyperframes PoC 提案 ([research/hyperframes_heygen_survey_2026_06_12]({{ '/research/hyperframes_heygen_survey_2026_06_12' | relative_url }}))
