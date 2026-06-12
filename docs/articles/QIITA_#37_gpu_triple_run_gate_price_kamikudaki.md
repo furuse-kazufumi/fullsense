@@ -167,18 +167,22 @@ So this isn't a "geniuses break the mold" story; it's a **narrow desert road** s
 
 ## Analogy ②: The price of the safety rail didn't change with "how you levy the fine"
 
-In Experiment 2, we embedded a proof-backed memory circuit into a real mini Transformer (an ultra-tiny relative of ChatGPT). Here's the fun trick: we deliberately made the Transformer's "eyes" nearsighted (it can only see 8 characters ahead), so that **distant context can only arrive by passing through the memory circuit.** It's a design where any slacking by the memory gets caught instantly.
+In Experiment 2, we embedded the proof-backed memory circuit from earlier into a real mini Transformer (an ultra-tiny version of the standard machinery underlying ChatGPT and its relatives).
 
-Result #1: **the proof-backed memory did its job properly.** With the memory circuit, the model is consistently smarter than without it. Since this gap vanishes on nonsensical data, it's genuinely memorizing context — not just "because there are more parts."
+Here's the fun trick. A normal Transformer can directly survey a fairly wide stretch of the text through a gaze mechanism called "attention." That's actually a problem for us — even if the memory circuit slacks off, attention would just look at the distant text in its place, and we'd have no way to tell from outside whether the memory really did any work. So we deliberately made the Transformer's "eyes" nearsighted (it can only see 8 characters ahead; about 15 even with stacked layers), and then handed it a long context of 160 characters. Now **any information farther than about 15 characters has no route to arrive except through the memory circuit.** If the memory slacks off, the score drops instantly — we built an exam room where cheating is impossible.
+
+Result #1: **the proof-backed memory did its job properly.** With the memory circuit, the model is consistently smarter than without it, and the gap widens as the circuit grows. To the suspicion "isn't it just stronger because more parts mean more parameters?", the control experiment answers again — on nonsensical data, the gap **vanishes**. If it were a parts-count effect, the gap would show up on nonsense too. Since it vanished, we can say the circuit is genuinely memorizing and carrying the *content* of the context.
 
 Result #2 is the main event. We prepared two ways of operating the safety rail:
 
 - **Push-back mode**: when it's about to spill over the rail, smoothly nudge it back inside
-- **Roll-back mode**: when it has spilled over, make it redo from "the state it was just in"
+- **Roll-back mode**: when it has spilled over, make it redo from "the last passing state"
 
-If the cause of the performance drop were "the hassle of redoing" (operational friction), then push-back mode should come out cheaper. And yet — **both lost almost exactly the same amount.** Switching a speeding fine to a gentle installment plan doesn't shorten the travel time. **The speed limit itself was what determined the travel time.** The true identity of the safety rail's cost wasn't the procedure; it was "the fact that there are fewer places you're allowed to go," plain and simple.
+The two are identical in "where the rail stands" (the substance of the constraint); they differ **only in what happens when you spill over**. Roll-back mode carries the wasted effort of redoing (operational friction), so you'd expect it to be the pricier one. Hence, if the cause of the performance drop were "the hassle of redoing," push-back mode should come out cheaper — that expectation is exactly what this comparison was designed to test.
 
-One more important finding: this cost **does not occur on nonsensical data.** It only occurs while the model is learning real language. In other words, the safety tax is collected only "at the scene of capability" — and that is exactly why how you design the tax rate matters.
+And yet — **both lost almost exactly the same amount.** In car terms: switching a speeding fine from a harsh lump sum to a gentle installment plan doesn't shorten your travel time by a single minute, because what determined the travel time was never how the fine is collected — it was **the speed limit itself.** The true identity of the safety rail's cost wasn't the procedure's hassle; it was "the fact that there are fewer places you're allowed to go," plain and simple — in technical terms, a constraint on expressive capacity.
+
+One more important finding: this cost **does not occur on nonsensical data** (the gap between rail-on and rail-off drops to nearly zero there). It only occurs while the model is learning real language. In other words, the safety tax is not a flat fee charged everywhere at all times; it is collected only **"at the scene of capability."** And that's good news: a flat fee you can only pay, but a tax that arises only on site leaves room to change the bill through how you design the tax rate — where and how much you constrain. That is exactly why designing the tax rate matters.
 
 ## Analogy ③: Seismic retrofitting costs 19× more when it's "after the fact"
 
