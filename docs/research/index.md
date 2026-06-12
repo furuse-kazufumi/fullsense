@@ -55,6 +55,7 @@ has_children: true
 | [ペルソナ ontology 拡張 — affinity 自動算出]({{ '/research/persona_ontology_expansion_2026_05_24' | relative_url }}) | llive 進化の persona ontology を数百人規模へ段階拡張する基盤。**ユーザー指摘「ハードコードを疑え」→ 手書き factor_affinity を撤回**し、affinity_text (特性記述文) から keyword_extractor で**自動算出** (`persona_extended.py`, commit `d940ff3`)。算出 top 因子が記述意図と整合 (darwin→reality_link, turing→exploration 等)、回帰テスト 6 件。投入候補カタログ約 60 名 (非西洋/女性/古典〜現代の多様性) + 改善メモ (本命=LLM injection) を下調べ。実投入は段階的 |
 | [RepIR → llrepr MCP 互換設計 (2026-05-23)]({{ '/research/repir_mcp_compat_2026_05_23' | relative_url }}) | llrepr (LLVM-for-expression) の MCP structuredContent 配線設計。protocolVersion 2025-06-18 + outputSchema + text 後方互換。RepIR→llrepr 改名経緯 (github.com/repir/repir 衝突回避) を収録 |
 | [Speculative Mesh 本格配線 (SPEC-MESH-02/03/04)]({{ '/research/spec_mesh_wiring_2026_05_25' | relative_url }}) | llmesh SPEC-MESH-02 (transport)・03 (executor)・04 (fast-fallback) 配線完了 + security 修正 (ingest_result fail-closed 化等)。全 llmesh テスト exit 0 確認 |
+| [HeyGen Hyperframes 調査 — HTML→決定論的 MP4]({{ '/research/hyperframes_heygen_survey_2026_06_12' | relative_url }}) | Telegram 経由ユーザー送付の調査。HeyGen の agent-first OSS (Apache-2.0, 3 ヶ月で 26.9k★): data 属性付き HTML + seekable animation adapter → headless Chrome + FFmpeg で決定論的 MP4。判定 = animemd/mangamd/SVG 戦略と**競合せず隣接** (出力メディア相補)、llrepr の typed-representation 路線の大手裏付け、frame.md (design.md のカメラ向け反転契約) は llrepr writer 設計に直接示唆。提案 (human-go) = llcore gate デモの MP4 化 PoC → X/YouTube 発信チャネル拡張 |
 
 ## lldarwin 設計ノート 2026-05-25〜27
 
