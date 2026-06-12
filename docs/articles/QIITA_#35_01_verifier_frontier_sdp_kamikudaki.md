@@ -210,17 +210,23 @@ FullSense の「異常に良い結果ほど内訳を疑う」規律に従って�
 
 In a project called llcore, we evolve the "way of moving" of small AI systems, tweaking them little by little like living things, to find good dynamics. It is a research substrate that runs on CPU only, on a home PC, at $0.
 
+"Like living things" means something like selective breeding. Make many children whose dynamics differ a little, keep the good ones, and breed the next batch from the keepers — repeat over many generations, and the dynamics gradually improve without anyone writing the blueprint by hand.
+
 The trouble is that some children produced by evolution **blow up**: over time their state keeps growing and diverges — a "broken" design. So before adopting a child we need a gate that checks "does this child actually settle down (contract)?". That gate is the **verifier**.
 
-"Contracting" roughly means **"left alone, the differences in state shrink — no blow-up."** The verifier's job is a yes/no call on "does this child contract?".
+"Contracting" roughly means **"left alone, the differences in state shrink — no blow-up."** Think of a playground swing: stop pushing and the swing settles down — that is contraction. A swing that somehow keeps swinging higher on its own with nobody pushing — that is divergence, a blow-up. The verifier's job is a yes/no call on "does this child contract?" — it is the entrance examiner standing at the door of evolution.
 
 The key point: there is not just one verifier. From **cheap-but-misses-a-lot** to **expensive-but-sees-through-it**, verifiers of different strengths form a ladder. Today's story is about climbing that ladder rung by rung and measuring how many more children pass at each step.
+
+Why is a weak verifier a problem? A weak verifier "rejects whenever unsure", so it **also takes down children that are actually fine** (not a miss, but a wrongful conviction). Picture an airport bag inspector who cannot see inside the bags: the less they can tell, the more they lean toward "confiscate everything that looks odd". Evolution then cannot adopt those children and never reaches the good dynamics they carry. Loosen the inspection instead, and now children that blow up slip through. To cut misses and wrongful convictions at the same time, the only way is to make the verifier itself smarter (better at seeing through). Adding that smartness one rung at a time and measuring the effect — that is the ladder story.
 
 ---
 
 ## 2. Climbing the ladder rung by rung — 88 → 137 → 286
 
-We prepared 300 individuals known to **actually contract**. We add verifiers from weak to strong and count the **newly passed** at each rung.
+We prepared 300 individuals known to **actually contract**. This is the heart of the experiment design: all 300 have been run and confirmed to genuinely contract — every one of them is a child that *deserves* to pass. So every rejection is a wrongful conviction, and the experiment measures, verifier by verifier, **"how many of the truly-fine children can you actually prove fine?"** — in other words, how few wrongful convictions, which is certifying power.
+
+We add verifiers from weak to strong and count the **newly passed** at each rung. "Newly passed" means: every weaker verifier failed this child, and this rung is the first to pass it.
 
 | Verifier (weak first) | How it looks | Newly passed | Cumulative |
 |---|---|---|---|
