@@ -306,9 +306,9 @@ Measured, it was **wrong**. On this problem Z3 distinguished nothing new — it 
 | Z3's verdict vs a closed-form verdict (3270) | **0** disagreements |
 | Z3 vs closed-form (20000 runs) | **20000/20000 perfect agreement** |
 
-Why? The "does it contract?" of this problem can in fact be **rewritten as a closed formula**. If a closed formula gives the answer, calling a heavy logic solver changes nothing. Zero disagreements over 3270, full agreement over 20000 — Z3 adds not one millimeter of discriminating power.
+Why? The "does it contract?" of this problem can in fact be **rewritten as a closed formula**. A "closed formula" is like the area of a triangle being "base × height ÷ 2": **plug in the numbers and the answer falls out in one shot**. On a problem a formula answers directly, hauling in a heavy search-style logic solver changes nothing about the answer. And that is what happened: Z3's verdict and the formula's verdict disagreed zero times over 3270 individuals and matched 20000 out of 20000 runs — there was not one single thing only Z3 could see. That is what "zero discriminating power" means.
 
-This is an important honest disclosure. Writing "we proved it with Z3" sounds strong, but in reality the **algebra of the closed form plus convexity theorems** carry the proof; Z3 is the same whether called or not. The thing actually worth one extra rung of inspector was SDP, not Z3.
+This is an important honest disclosure. Writing "we proved it with Z3" sounds strong, but in reality the **algebra of the closed form plus convexity theorems** carry the proof; Z3 is the same whether called or not. In building terms, Z3 was not a load-bearing pillar but a decorative one, put up for looks. And to be clear, this is not saying "Z3 is a bad tool" — it is just that **this problem happened to be one a formula can solve**. The thing actually worth one extra rung of inspector was SDP, not Z3.
 
 ---
 
