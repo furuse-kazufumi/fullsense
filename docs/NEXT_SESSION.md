@@ -17,7 +17,9 @@ nav_order: 95
 - M0/M4/M5 ✅ (chat/clip/AnnotationStore、RAD corpus 生成、llloop v0.1.0a0)
 - **M1 ✅ クローズ (2026-06-12)**: entity-coref エッジ + MiniLM encoder。MiniLM cosine MRR 0.947 =
   会話 retrieval ほぼ解決。正本 = llcore research/textseg1d/M1_ENTITY_ENCODER_RESULTS_2026_06_12.md
-- **M3 🔄 進行中**: RAD→AnnotationStore 世界知識注入 (最初 = loop_engineering corpus dogfooding)
+- **M3 🔄 進行中**: 取込 PoC 成立 (06-12) — loop_engineering 39 docs で世界知識 MRR 0→0.639、
+  会話 22 probe への干渉ゼロ (store 11 倍化でも 0.947 不変)。次 = 大規模化 (i)(ii)(iii)
+  (正本 = llcore research/textseg1d/M3_RAD_INGEST_POC_2026_06_12.md)
 - M2 ⬜: cert gate × 連結性教師 (M3 の次)
 - llcore branch = `phase2a-trajectory-tube-gate` (push は user-gate)
 - 別途 human-go 待ち: Hyperframes PoC 提案 ([research/hyperframes_heygen_survey_2026_06_12]({{ '/research/hyperframes_heygen_survey_2026_06_12' | relative_url }}))
