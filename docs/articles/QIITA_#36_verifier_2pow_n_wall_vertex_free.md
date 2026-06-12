@@ -183,6 +183,19 @@ llcore の進化対象は遺伝子 `(decay, W)` で、次元は `n + n²`(n=8 �
 | sound | "If it is judged to contract, it really does contract." It produces no false positives (no missed diverging individuals). |
 | conservative | Rejecting too much — saying "no" even when something actually contracts. Sound, but it leaves real cases behind. |
 | B2 = σ(\|M\|+R) | A sound upper bound built from the midpoint M and radius R of an interval matrix. A single SVD. The protagonist of this article. |
+| SDP / LMI (robust-LMI) | Semidefinite program / linear matrix inequality — a rigorous framework that finds the Lyapunov certificate P by convex optimization (the protagonist of #35). Here it is the even heavier exact verifier that lies beyond 2ⁿ enumeration. |
+| Lyapunov function / certificate | An energy function P proving the system contracts — the idea of finding a quantity that must keep decreasing over time. Referenced here in the context of the inspector's "order (how strong a proof)." |
+| 2-norm (σ_max, largest singular value) | The maximum factor by which a matrix stretches an input. If σ_max(J)<1, deviations in every direction shrink = contraction in the 2-norm sense. cert_two checks this exactly at the 2ⁿ corners. |
+| ∞-norm (cert_inf) | The max over rows of the absolute-value row sum. At O(n²) it is the cheapest sound inspector, but over-conservative (it trapped evolution in #35). The cheap baseline of this article. |
+| SVD (singular value decomposition) | The standard computation that factors a matrix into "rotation × stretch × rotation" and yields σ_max. B2 obtains an upper bound over the whole box with a single SVD (the source of its cheapness). |
+| interval matrix (midpoint M / radius R) | A matrix whose entries each have a width. The whole J over the t-box is written as "center M ± spread R." B2 builds its bound from only this M and R. |
+| fitness | The "goodness" score by which evolution selects individuals. Here it mainly means language-prediction performance (perplexity). |
+| perplexity (PPL) | A measure of how much a language model "hesitates" over the next character. Lower is a better prediction. Used as the fitness metric in L3. |
+| unigram (context-free model) | The simplest language model, predicting from each character's frequency alone with no context. The "floor of degeneration" evolution falls into. |
+| evolvability | Whether mutation can reach good individuals within a region — distinct from the best reachable value (the height of the ceiling). The core of this article's honest disclosure. |
+| navigability | Whether the search space can be "walked up" by mutation. Low if good genes exist but cannot be reached. Used almost synonymously with evolvability. |
+| Pareto | The balance among multiple objectives where "improving one worsens the other." This article argues performance vs structural cost must be handled as a Pareto trade-off, not a scalar sum. |
+| CE / nats | CE = cross-entropy (the prediction gap; lower is better). nats is the unit of information in natural-log base (1 nat ≈ 1.44 bit). The metric of the L3 control experiment. |
 | reductive evolution | The evolution by which organisms discard unnecessary genes and organs and become simpler. Cost reduction itself is the selection pressure. |
 | canalization | The phenomenon that the more evolution advances, the more developmental pathways become fixed and resistant to change (Waddington). |
 
