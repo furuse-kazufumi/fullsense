@@ -20,6 +20,26 @@ nav_order: 95
 - **M3 🔄 進行中**: 取込 PoC 成立 (06-12) — loop_engineering 39 docs で世界知識 MRR 0→0.639、
   会話 22 probe への干渉ゼロ (store 11 倍化でも 0.947 不変)。次 = 大規模化 (i)(ii)(iii)
   (正本 = llcore research/textseg1d/M3_RAD_INGEST_POC_2026_06_12.md)
+
+### ▶ 次の具体的な一手 (2026-06-12 EXIT 時点、ここから再開)
+
+**M3 増分 2 (スケール干渉再測 + 多言語 encoder 比較) のデバッグ再走**:
+
+1. `cd D:/projects/llcore` で `py -3.11 scripts/rad_scale_poc.py` を **foreground 実行**
+   (前回は background detached で JSON 未生成のまま死亡・stderr 喪失。スクリプトは
+   llcore に WIP commit 済み = `git log --oneline -1` で `wip(rad)` を確認)。
+   エラー全文を見て根本原因から修正 (推測禁止)。長時間 (10-30 分) かかるのは正常。
+2. 成功したら `out/rad_scale_poc.json` を一次検証 → report
+   `research/textseg1d/M3_SCALE_MULTILINGUAL_2026_06_12.md` を執筆 (劣化も隠さず開示) →
+   `docs/ROADMAP.md` M3 の (i)(ii) を ✅ 化 → commit。
+3. 仕様の要点: (i) language+evolution+agents corpus (~2,000 docs)、annotations 上限 60k
+   (超過時は doc 単位サブサンプル + 必ず log = silent cap 禁止)、会話 22 probe の劣化と
+   世界知識 18 probe の埋もれを測る (ii) MiniLM vs multilingual-e5-small (E5 は
+   "query: "/"passage: " prefix あり/なし両方)。**probe は既存を変更しない** (cherry-pick 禁止)。
+4. その後 = ROADMAP M3 残り (iii) 会話トピック重複 corpus の干渉測定 → M2 (cert × 連結性教師)。
+
+状態: llcore branch `phase2a-trajectory-tube-gate`、unit 390 PASS、push は全 repo user-gate のまま。
+本日の本セッション着地 = M1 クローズ (`519d56d`) + M3 PoC (`0dd6cd3`) + WIP (`rad_scale_poc.py`)。
 - M2 ⬜: cert gate × 連結性教師 (M3 の次)
 - llcore branch = `phase2a-trajectory-tube-gate` (push は user-gate)
 - 別途 human-go 待ち: Hyperframes PoC 提案 ([research/hyperframes_heygen_survey_2026_06_12]({{ '/research/hyperframes_heygen_survey_2026_06_12' | relative_url }}))
