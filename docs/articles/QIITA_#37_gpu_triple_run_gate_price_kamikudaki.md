@@ -91,7 +91,7 @@ ignorePublish: false
 ## 関連ニュースまとめ — この実験は世界のどの議論につながっているか
 
 **① Anthropic CEO の 38 ページ警告文(2026 年 1 月)**
-Claude を作る Anthropic の CEO、Dario Amodei は 1 月に「[The Adolescence of Technology(技術の思春期)](https://www.darioamodei.com/essay/the-adolescence-of-technology)」を公開しました。「人類は想像を超える力を手にしつつあるが、それを扱う成熟があるかは全く不明」「[AI は種としての人類を試す](https://www.axios.com/2026/01/26/anthropic-ai-dario-amodei-humanity)」。さらに自社製品のコードの約 9 割を AI が書いているとも。今日の「指示 4 文で実験 3 本」は、この「AI が研究を自走する」段階の小さな実例です。
+Claude を作る Anthropic の CEO、Dario Amodei 氏は 1 月に「[The Adolescence of Technology(技術の思春期)](https://www.darioamodei.com/essay/the-adolescence-of-technology)」を公開しました。「人類は想像を超える力を手にしつつあるが、それを扱う成熟があるかは全く不明」「[AI は種としての人類を試す](https://www.axios.com/2026/01/26/anthropic-ai-dario-amodei-humanity)」。さらに自社製品のコードの約 9 割を AI が書いているとも。今日の「指示 4 文で実験 3 本」は、この「AI が研究を自走する」段階の小さな実例です。
 
 **② その Anthropic が「減速」を提言している**
 面白いことに、加速の最前線にいる Anthropic 自身が、AI が AI を改良する「再帰的自己改善」に人間の制御が追いつかなくなるリスクを掲げ、[開発の協調的な減速を提言](https://www.watch.impress.co.jp/docs/news/2115005.html)しています。「速く走れる者ほどブレーキの話をする」構図 — 今回の実験で言えば、「柵のコストは小さく、後付けは 19 倍」という実測は、ブレーキを*先に*設計する側の論拠になります。
