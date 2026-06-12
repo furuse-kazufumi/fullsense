@@ -340,22 +340,32 @@ By the way, "doesn't this risk waving through a runaway part?" — no need to wo
 
 Here's the meta highlight. This trap is **structurally invisible to ordinary checks**.
 
-A common self-check is "margin-sweep" (a red team that nudges the margins to test robustness). But it only **nudges margins inside the same cheating calculator**. The calculator itself is lying, so no matter how much you nudge, a lie stays a lie. You can't catch it.
+A common self-check is "margin-sweep" (a red team that nudges thresholds and margins to test robustness): tighten the cutoff a little, loosen it a little, and see whether the conclusion flips. Normally a dependable check. Here it was powerless — because every computation under every nudged condition was **still done by the same cheating calculator**. Stand on a broken bathroom scale, shift your stance, hold a bag, re-measure thirty times: nothing will ever reveal that the scale itself is broken, because everything you compare shares the same lie. To expose a lie, you need an **outside**.
 
-Two things were decisive:
+Two things were decisive — both ways of bringing in an outside:
 
-1. **Swap the calculator (SOLVER-SWAP):** have SCS and CLARABEL solve the same problems and compare answers. Only here do you notice "huh, the answers differ by calculator."
-2. **Review adversarially from multiple perspectives (pair-review):** another AI (Codex) plus six skeptic agents each tried, with real code and independent recomputation, to **refute** the headline claims: "your boast — that's a lie, right?"
+1. **Swap the calculator (SOLVER-SWAP):** have two calculators of different pedigree, SCS and CLARABEL, solve the same problems and compare answers. Only when you step onto a second scale do you notice "huh, the numbers differ."
+2. **Review adversarially from multiple perspectives (pair-review):** hand another AI (Codex) plus six skeptic agents the assignment "break this conclusion." The point is that they don't offer impressions — they **read the real code and independently recompute the numbers**, genuinely attacking: "your boast — that's a lie, right?"
 
 The review raised five findings (F1–F5). The representative ones:
 
-- **F1:** when the solver field was empty (""), there was a hole that slipped past the safety guard and quietly fell back to the cheating calculator (SCS) → **plugged, with a regression test added**.
-- **F2:** the "absolutely safe" phrasing was too strong → honestly weakened to "**zero false admits observed**."
-- **F3:** the logic of one claim was **backwards to begin with** → corrected (see the full version).
+- **F1:** when the solver field was empty (""), there was a hole that slipped past the safety guard and quietly fell back to the cheating calculator (SCS). In programming, an empty string tends to be treated the same as "not filled in," so the fail-closed guard — "if the accurate calculator isn't available, refuse" — read it as "no preference → default SCS is fine." The same quiet horror as a medical questionnaire treating a blank allergy field as "no allergies." → **Plugged, with a regression test (an automated don't-let-this-happen-again test) added.**
+- **F2:** the "absolutely safe" phrasing was too strong → honestly weakened to "**zero false admits observed**." Say only as much as the checks actually support: everything was correct *within the range we examined*.
+- **F3:** the logic of one claim was **backwards to begin with** — a check had been described as the "more lenient" direction when it is actually the "stricter" one → corrected (see the full version).
 
-The result: **zero findings overturned the central conclusion.** What the review did was "trim three overclaims and plug one dangerous hole." Far from collapsing, the thesis was honestly weakened and thereby made **sturdier**.
+The result: **zero findings overturned the central conclusion.** What the review did was "trim three overclaims and plug one dangerous hole." Honestly pulling your claims back to the line you can defend from any direction — like shrinking a castle wall to the perimeter you can actually hold — far from collapsing, the thesis became **sturdier**.
 
 ![Diagram of the honest-disclosure loop that keeps doubting its own conclusion](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_honest_loop_en.svg)
+
+### Bonus: a strong verifier improves evolution itself
+
+"So what do we gain by wiring this accurate verifier into the evolution loop?" — the natural question, and the numbers answer it.
+
+Safety first. Evolving without the verifier, **17–20%** of the admitted offspring quietly drift toward the runaway side — generation after generation, risky children keep slipping in. Put the main SDP verifier at the gate, and **zero divergent offspring get through**.
+
+The fun part: it doesn't just get safer — **the ceiling of evolution rises too**. With a naive verifier (inf-norm) as the gatekeeper, the reachable fitness plateaued at **about 0.41**; with the main SDP verifier it reached **about 0.86**. The probability of that gap arising by sheer luck is about 3 in 100,000 (p = 3.1e-5) — not a fluke.
+
+Why does a stronger gatekeeper raise the ceiling? Because a weak gatekeeper doesn't just reject dangerous parts — it also **wrongly rejects masses of genuinely safe parts as "unprovable"** (indeed, on the Act 2 ladder the naive ruler could certify only 88 of 300, versus 286 for SDP). Under a gatekeeper prone to false accusations, evolution can only try timid designs. Under one that recognizes safe as safe, evolution can confidently explore bolder designs. **The stronger the gatekeeper, the higher the ceiling of safely reachable intelligence** — verification accuracy doesn't just buy safety; it lifts the very payoff of evolution.
 
 ---
 
