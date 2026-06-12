@@ -391,7 +391,7 @@ And the thing I most want to convey today:
 > **A result that "goes too well" is not a win; it's an alarm.**
 > If the numbers are too good, suspect the calculator (solver) before you believe them. And a self-check that merely nudges inside the same tool is blind to the trap. **Swapping the tool** and **attacking adversarially from another perspective** are what break the illusion.
 
-Because we set up the machinery to honestly doubt ourselves first, we didn't stop at premature joy and reached solid ground — that was the kind of day it was.
+More than any single number, please take home the **order of operations**. "Get a good result → celebrate → check just in case" makes the check soft, every time. "Install the doubting machinery first → get a good result → the machinery doubts it for you." Because we set up the machinery to honestly doubt ourselves first, we didn't stop at premature joy and reached solid ground — that was the kind of day it was.
 
 ---
 
