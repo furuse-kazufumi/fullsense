@@ -7,7 +7,7 @@ tags:
   - FullSense
   - llcore
 private: false
-updated_at: '2026-06-06T11:59:59+09:00'
+updated_at: '2026-06-06T12:10:14+09:00'
 id: 6f44575d440a9ebf5228
 organization_url_name: null
 slide: false
@@ -17,6 +17,12 @@ ignorePublish: false
 言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
 
 # 日本語
+
+
+:::note info
+**📚 FullSense ナレッジベースのご案内** <!-- fullsense-team-kb -->
+FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** に集約しています (チームメンバー向け)。
+:::
 
 ## この記事は何か — 人間の指示は 4 文だけだった
 
@@ -136,6 +142,12 @@ Anthropic の Dario Amodei は 2026 年 1 月の 38 ページのエッセイ「T
 
 # English
 
+
+:::note info
+**📚 FullSense Knowledge Base** <!-- fullsense-team-kb -->
+The full FullSense development history — 60+ articles in 4 languages, with a story-based [reading guide](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346), plain-language editions, and 4-panel manga — is consolidated in our Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** (team members only).
+:::
+
 ## What this article is — the human's instructions were only 4 sentences
 
 This article is a record of a research session that took place over a single day, June 6, 2026. The experiment instructions the human (the author) gave the AI that day were, in essence, only these 4 sentences:
@@ -254,6 +266,12 @@ That said, today's experimental results bear more on **control design** than on 
 
 # 中文
 
+
+:::note info
+**📚 FullSense 知识库指南** <!-- fullsense-team-kb -->
+FullSense 开发全史 60+ 篇文章（4 种语言版、故事化的[阅读顺序指南](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)、通俗易懂版、四格漫画）均已汇总至 Qiita Team **[FullSense KB](https://fullsense.qiita.com/)**（仅限团队成员）。
+:::
+
 ## 这篇文章是什么 —— 人类的指令只有 4 句话
 
 这篇文章记录的是 2026 年 6 月 6 日这一天里发生的一次研究会话。这一天，人类（笔者）实际下达给 AI 的实验指令，本质上就只有下面这 4 句话。
@@ -371,6 +389,12 @@ Anthropic 的 Dario Amodei 在 2026 年 1 月那篇 38 页的随笔《The Adoles
 ---
 
 # 한국어
+
+
+:::note info
+**📚 FullSense 지식 베이스 안내** <!-- fullsense-team-kb -->
+FullSense 개발 전사 60+ 편 (4개 언어판・스토리 기반 [읽기 순서 가이드](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・쉬운 설명판・4컷 만화 포함) 은 Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** 에 모여 있습니다 (팀 멤버 전용).
+:::
 
 ## 이 글은 무엇인가 — 사람의 지시는 단 4문장뿐이었다
 

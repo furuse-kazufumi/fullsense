@@ -7,7 +7,7 @@ tags:
   - FullSense
   - llcore
 private: false
-updated_at: '2026-06-06T12:00:05+09:00'
+updated_at: '2026-06-06T12:10:16+09:00'
 id: f06ca92ea208c7646fcd
 organization_url_name: null
 slide: false
@@ -17,6 +17,12 @@ ignorePublish: false
 言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
 
 # 日本語
+
+
+:::note info
+**📚 FullSense ナレッジベースのご案内** <!-- fullsense-team-kb -->
+FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** に集約しています (チームメンバー向け)。
+:::
 
 ![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
 
@@ -103,6 +109,12 @@ Claude を作る Anthropic の CEO、Dario Amodei は 1 月に「[The Adolescenc
 
 # English
 
+
+:::note info
+**📚 FullSense Knowledge Base** <!-- fullsense-team-kb -->
+The full FullSense development history — 60+ articles in 4 languages, with a story-based [reading guide](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346), plain-language editions, and 4-panel manga — is consolidated in our Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** (team members only).
+:::
+
 ![Kamikudaki Lion — the blessing of "understanding" for the readers it bites](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_en.svg)
 
 > 📗 This is the chewed-down (easy-reading) version of the [full version (#37)](https://qiita.com/furuse-kazufumi/items/6f44575d440a9ebf5228). The equations and the fine-grained evidence live in the full version. Here, the goal is to let you grasp "so what actually happened?" in 10 minutes. Whenever a hard term shows up, I'll immediately swap it for an everyday analogy.
@@ -188,6 +200,12 @@ Whether the singularity is coming, I genuinely don't know. But there are three t
 
 # 中文
 
+
+:::note info
+**📚 FullSense 知识库指南** <!-- fullsense-team-kb -->
+FullSense 开发全史 60+ 篇文章（4 种语言版、故事化的[阅读顺序指南](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)、通俗易懂版、四格漫画）均已汇总至 Qiita Team **[FullSense KB](https://fullsense.qiita.com/)**（仅限团队成员）。
+:::
+
 ![嚼碎狮 — 给被咬到的读者带来「理解」的功德](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_zh.svg)
 
 > 📗 这是 [完整版 (#37)](https://qiita.com/furuse-kazufumi/items/6f44575d440a9ebf5228) 的嚼碎版。公式和细致的证据都在完整版里。这里要让你用 10 分钟就抓住「到底发生了什么?」。一旦冒出难懂的术语,马上换成日常生活里的比喻。
@@ -272,6 +290,12 @@ Whether the singularity is coming, I genuinely don't know. But there are three t
 ---
 
 # 한국어
+
+
+:::note info
+**📚 FullSense 지식 베이스 안내** <!-- fullsense-team-kb -->
+FullSense 개발 전사 60+ 편 (4개 언어판・스토리 기반 [읽기 순서 가이드](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・쉬운 설명판・4컷 만화 포함) 은 Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** 에 모여 있습니다 (팀 멤버 전용).
+:::
 
 ![가미쿠다키 사자 — 물린 독자에게 「이해」의 영험을](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi_ko.svg)
 
