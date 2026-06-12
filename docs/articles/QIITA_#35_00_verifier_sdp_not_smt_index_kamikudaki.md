@@ -216,7 +216,11 @@ This article explains a somewhat difficult research topic using **only words a n
 
 We study how to evolve the **dynamics** of an AI's "brain" little by little, like biological evolution, to search for good behavior. The project is called **llcore**. Its pride: it runs CPU-only, at $0, entirely on a home PC.
 
-"Dynamics" here means **the rule for how state changes over time** — like how a pendulum swings, or how bathwater temperature settles back. Evolution makes lots of individuals with slightly rewritten rules and keeps the promising ones.
+"Dynamics" here means **the rule for how state changes over time** — like how a pendulum swings, or how bathwater temperature settles back. A pendulum follows a rule like "if I'm swung far to the right now, I head back toward the center next"; bathwater follows "if I'm too hot now, I cool down little by little as time passes." Rules of this kind — "given the current state, decide the next state" — are what we are rewriting. And whenever this article says an "individual," think of one candidate carrying one such set of rules. Evolution makes lots of individuals with slightly rewritten rules and keeps the promising ones.
+
+For the evolution part, picture living creatures. Make many children whose design differs just slightly from the parent's (mutation), and let only the ones that survive better carry on to the next generation (selection). Repeat this for hundreds of generations and, with nobody ever drawing a blueprint, the population gradually fits its environment. What llcore does is exactly this, applied to "an AI's dynamics" — that's all. Instead of a designer cleverly nailing the optimal answer in one shot, it **tries lots of things roughly and keeps whatever worked**: a decidedly down-to-earth, unglamorous way of searching.
+
+Here's the catch. This "unglamorous way" has a pitfall: left unattended, troublesome individuals sneak into the mix.
 
 ---
 
