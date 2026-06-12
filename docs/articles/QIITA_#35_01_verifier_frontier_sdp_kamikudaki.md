@@ -236,9 +236,19 @@ We add verifiers from weak to strong and count the **newly passed** at each rung
 | + higher-degree SOS (deg4/6) | fancier lifting | +4 | 290 |
 | remainder | not closed even at high degree | 10 | — |
 
-There is one thing to read. **The moment SDP is added, 149 individuals suddenly pass.** From 88 to 137 it crept up, but SDP makes it leap. That is today's headline.
+There is one thing to read. **The moment SDP is added, 149 individuals suddenly pass.** From 88 to 137 it crept up, but SDP makes it leap. That is today's headline. Why this rung alone jumps is unpacked carefully in §3.
 
-And crucially: at every rung, **the count of "passed something that does not actually contract" was zero**. The verifier errs on the safe side. Not a single accident of waving through a child that should have been rejected.
+And crucially: at every rung, **the count of "passed something that does not actually contract" was zero**. This property has a name — **soundness** — and it is the one thing a verifier must never give up. Why? A wrongful conviction (failing a child that is actually fine) can be repaired later by adding a stronger verifier. But the opposite accident — handing a pass certificate to a child that blows up — destroys, even once, the verifier's whole reason to exist as a safety device. On this ladder that accident happened zero times at every rung. The verifiers stayed tipped toward the safe side while growing their certifying power rung by rung.
+
+### Do not rush to call the "remaining 10" misses
+
+Looking at the bottom row of the table, "remainder: 10", it is tempting to conclude "so it still drops 10 in the end." Split the composition carefully and it looks like this:
+
+- **6 are correct rejections of children that deserved to be rejected.** They have switching dynamics that expand — not "misses" but the right call.
+- **4 can be certified by an even higher-degree check (degree-8)**, and 2 of those can also be pinned down from another angle (bracketing the JSR from above and below).
+- **Only 2 remain at the very end.** They hug the boundary (exactly 1), and at finite compute they never close — they only approach the boundary.
+
+So the "10 left behind" are, for more than half, **children that were correctly rejected**, and most of the rest are catchable at higher degree. The only truly intractable ones are the 2 boundary-huggers. "The boundary" is the dividing line between contracting and diverging — exactly 1 (below it things shrink, above it they grow). Settling black-or-white with finite computation for individuals glued to that line is hard because the problem itself is hard there, not because the verifier is lazy. That is the "honest, clean limit."
 
 ---
 
