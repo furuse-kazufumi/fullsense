@@ -235,7 +235,7 @@ Evolutionary search is, frankly, **rough**. It tries tons of things and keeps wh
 
 If evolution accidentally adopts a "howling individual," that's bad for both research and operations. So we put a **GATE** inside the evolution loop, inspecting each individual — "does your behavior really settle down?" — and rejecting any we can't guarantee.
 
-By FullSense rule, this gate is **fail-closed**: "if you can't prove it, don't admit it" — when in doubt, keep it out.
+By FullSense rule, this gate is **fail-closed**: "if you can't prove it, don't admit it" — when in doubt, keep it out. Think of airport security. If a bag whose contents nobody can identify gets waved through on "it's probably fine," the inspection is meaningless. "Only what's confirmed clean passes; everything gray gets stopped" — that is fail-closed. Stopping the gray means sometimes stopping a bag that was actually harmless. Even so, letting one dangerous thing through is a far worse failure than needlessly stopping one safe thing — if you must err, always err on the safe side. That's the philosophy of this design.
 
 Comparing no-check vs. check, the difference was obvious.
 
@@ -243,6 +243,8 @@ Comparing no-check vs. check, the difference was obvious.
 |---|---|
 | No-check evolution | **17–20% drifted to divergence** |
 | Checked evolution (SDP gate) | **Zero divergent individuals adopted** |
+
+"Drifted" means a child that looked fine at adoption time gradually slides toward blow-up as the generations go by. Run evolution without the check, and roughly one in five or six adopted children went down that road. That's not "an occasional accident" — it's "contamination as a matter of routine," a number you simply cannot leave alone. Put the inspector in, and this accident dropped to zero. That is the inspector's first job.
 
 Even more interesting: **the stronger the inspector, the higher the ceiling of "safe quality" evolution could reach.**
 
