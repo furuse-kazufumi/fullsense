@@ -106,8 +106,8 @@
       <path d="M-100 -132 q 70 -22 132 6" fill="none" stroke="#5b6b8c" stroke-width="1.6" marker-end="url(#ah)"/>
     </g>
 
-    <!-- verdict -->
-    <g transform="translate(22,318)">
+    <!-- verdict (グラフ下端 y≈330 を避けて下へ配置) -->
+    <g transform="translate(22,372)">
       <rect x="0" y="-22" width="396" height="32" rx="8" fill="#dde9ee" stroke="#9bc2cf" stroke-width="1.2"/>
       <text class="glyph" x="14" y="0" fill="#27617a">✓ 証明</text>
       <text class="lbl" x="88" y="0">写像後の楕円が自身に収まる → 収縮を証明 (CLARABEL)</text>
