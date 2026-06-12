@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-12 18:08:03
+- **生成時刻**: 2026-06-12 18:27:33
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,9 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+ddbd73f auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-12 18:27)
+8e9eee7 auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-12 18:26)
+75ca27d auto: QIITA_#35_01_verifier_frontier_sdp.md 編集前 (2026-06-12 18:26)
 0cf49cd docs(handoff): 次回最優先=Qiita記事ライン (#35_00用語追補/かみくだき長め/#35-38公開判断/llterm小話)
 cd803c3 auto: NEXT_SESSION.md 編集前 (2026-06-12 18:07)
 3829cad fix(qiita_35 svg): ラベルとグラフの被りを解消 (sdp_vs_norm 判定ボックス + 進行マップ タイムライン)
@@ -27,15 +30,12 @@ c5803cc auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 827ea5f auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 ef277f3 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 9231c73 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
-e7d4d18 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
-9379a15 auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
-2aee5dc auto: qiita_35_sdp_vs_norm.svg 編集前 (2026-06-12 17:57)
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/articles/QIITA_#35_01_verifier_frontier_sdp.md
 ```
 
 
@@ -70,9 +70,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `18:27` `docs/articles/QIITA_#35_01_verifier_frontier_sdp.md`
+- `18:08` `docs/NEXT_SESSION.auto.md`
+- `18:08` `docs/SESSION_SUMMARY.md`
 - `18:07` `docs/NEXT_SESSION.md`
-- `18:03` `docs/SESSION_SUMMARY.md`
-- `18:03` `docs/NEXT_SESSION.auto.md`
 - `17:59` `docs/articles/assets/qiita_35/qiita_35_progress_zh.svg`
 - `17:59` `docs/articles/assets/qiita_35/qiita_35_progress_ko.svg`
 - `17:59` `docs/articles/assets/qiita_35/qiita_35_progress_en.svg`
@@ -89,7 +90,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `17:43` `tools/qiita-cli-poc/public/cd954f57f510e03954e6.md`
 - `17:43` `tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md`
 - `17:43` `tools/qiita-cli-poc/public/c543014188744262ec83.md`
-- `17:43` `tools/qiita-cli-poc/public/be52eeb6455732161486.md`
 
 
 ## Cross-references
