@@ -71,7 +71,7 @@
 
   <!-- ===================== RIGHT PANEL : tilted ellipse (SDP) ===================== -->
   <g transform="translate(520,96)">
-    <rect x="0" y="0" width="440" height="356" rx="12" fill="#ffffff" stroke="#d7deec" stroke-width="1.5"/>
+    <rect x="0" y="0" width="440" height="400" rx="12" fill="#ffffff" stroke="#d7deec" stroke-width="1.5"/>
     <text class="panel" x="22" y="34">傾いた楕円: SDP の Lyapunov P</text>
     <text class="sm" x="22" y="56">非単位の P を 1 つ見つける — JᵀPJ ≺ P を満たせば証明</text>
 
