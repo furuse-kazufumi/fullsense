@@ -253,7 +253,9 @@ Even more interesting: **the stronger the inspector, the higher the ceiling of "
 | Loose gate (inf-norm) | about 0.41 |
 | Strong gate (SDP) | **about 0.86** (statistically near-certain) |
 
-An inspector is usually thought of as "a safety device that rejects danger," but it was also a **"device that lets you explore farther with peace of mind."** Because there's a fence, you can walk right up to the cliff edge.
+"Quality" here is the score that measures an individual's performance in evolutionary computation (the technical term is *fitness*). Higher-scoring individuals are more likely to survive into the next generation. What this table says is that the ceiling of scores reachable by *provably safe individuals only* more than doubled — from 0.41 to 0.86 — just by making the gate stronger. And "statistically near-certain" is not a feeling: the probability of this gap appearing by pure chance works out to about 3 in 100,000.
+
+An inspector is usually thought of as "a safety device that rejects danger," but it was also a **"device that lets you explore farther with peace of mind."** Because there's a fence, you can walk right up to the cliff edge. Put the other way around: an evolution that only has a loose gate is "too scared to go far." It can only avoid anything that looks risky in big, crude strokes, so it throws away good individuals that were actually safe along with the bad ones — and ends up treading water at a low level. A strong gate can tell apart, in fine detail, "this spot really is safe," so evolution can confidently push into higher ground.
 
 ![verifier-fitness frontier](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_frontier_en.svg)
 
