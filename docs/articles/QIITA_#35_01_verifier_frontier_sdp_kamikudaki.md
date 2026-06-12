@@ -340,10 +340,10 @@ This SDP verifier is no longer a lab experiment; it is wired in as a pluggable c
 
 Per FullSense's discipline of "the more unusually good the result, the harder you question the breakdown", here are the limits.
 
-- **"Lift the degree and it always gets stronger" is false.** Higher-degree SOS can become looser as the degree rises — it is not a clean one-way staircase. The practice is to measure each degree and take the tightest.
-- **The last 2 do not close.** Boundary-hugging individuals stay unresolved at finite compute, only asymptoting to the boundary. That is an honest, clean limit.
-- **+254 vs +692 depends on counting and solver.** The +692 here is the value after correcting false negatives.
-- **Scope is limited.** All results are on a small (n=2) substrate with this individual pool. This is not a claim that "evolving AI is broadly useful" — it is about **the correctness of the inspector**.
+- **"Lift the degree and it always gets stronger" is false.** The upper rungs of the ladder (higher-degree SOS) look like they should get monotonically stronger as the degree — the elaborateness of the check — rises, but they can actually get looser. It is not a clean one-way staircase, so the practice is to measure every degree and take the tightest result.
+- **The last 2 do not close.** Individuals glued to the contract-or-diverge dividing line of exactly 1 stay unresolved at finite compute, only approaching the boundary. This is not the verifier being lazy: computing that boundary exactly is itself a problem of the difficulty class computer science calls "NP-hard". An honest, clean limit.
+- **+254 vs +692 depends on counting and solver.** The +692 here is the value after correcting the false negatives the solver emits near the boundary (the correction story is in #35-02).
+- **Scope is limited.** All results are on a small substrate (an n=2 system whose state has just 2 dimensions) with this individual pool. This is not a claim that "evolving AI is broadly useful" — it is about **the correctness of the inspector**.
 
 ---
 
