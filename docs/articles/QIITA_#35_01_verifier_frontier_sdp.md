@@ -279,7 +279,7 @@ Terms used in this part. Technical identifiers stay canonical (CLARABEL, SDP, SO
 | soundness | The inspector-side guarantee that anything certified "contracting" really contracts. An unsound certificate admits a non-contracting individual — observed 0 times at every rung here. |
 | exact-JSR bracket / jsr_lb | Pinching the true JSR between an upper and a lower bound (a bracket). jsr_lb is the JSR lower bound; a gene with jsr_lb near 1 sits right at the contracting/non-contracting boundary. |
 | oracle / falsifier | "Oracle" is the CS term for a device you query for an answer. The JSR oracle here hunts for counterexamples (evidence of non-contraction) to refute a claim. Finding none is not a proof — hence a falsifier, not a prover. |
-| p-value | A statistical measure of how likely the observed difference would be under pure chance. Smaller = harder to attribute to chance; p = 3.1e-5 means roughly 3 in 100,000 by chance alone. |
+| p-value | A statistical measure: assuming there is actually no difference (pure chance), the probability of seeing a difference at least as extreme as the one observed. Note it is not "the probability that the difference is due to chance". The smaller it is, the harder it becomes to explain the difference by chance alone; p = 3.1e-5 means a difference this extreme would appear only about 3 times in 100,000 under chance alone. |
 
 ## 1. Plain-language conclusion
 
