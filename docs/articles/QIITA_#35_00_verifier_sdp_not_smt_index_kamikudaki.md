@@ -298,6 +298,8 @@ But measured, on this substrate **SMT had zero smarts.**
 
 For this check, the **answer pops out of a simple formula from the start**, so there was no point summoning the genius puzzle machine. It's like booting a supercomputer for arithmetic a calculator handles.
 
+Let's unpack "pops out of a simple formula" a bit more. The area of a triangle comes out in one shot from the formula "base × height ÷ 2." You never need to "try every conceivable area one by one and verify which is right." This check turned out to be the same kind of problem: the answer can be written directly in formula form. Throw a search machine at a problem whose answer is already fixed by a formula, and all it can return is the same answer the formula gives. So 20,000 matches out of 20,000 trials is not evidence that "SMT was smart" — it is evidence that **"the formula alone was enough from the very start."**
+
 > Analogy: **You don't need the world's fastest AI supercomputer to figure out the change from a $1 purchase. You do it in your head.**
 > SMT is exactly that "supercomputer" — magnificent, but **overkill and wasted** on this problem.
 
