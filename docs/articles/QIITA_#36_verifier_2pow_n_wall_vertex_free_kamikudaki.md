@@ -138,11 +138,15 @@ Fortunately, llcore has an eye (a soundness oracle) that sees through "whether i
 
 ## The honest breakdown: "the inspector makes it smart" was an overstatement
 
-Finally, the story I cut the most today. We had a result that "the stronger the gatekeeper, the smarter the AI gets." The numbers are real. But when you doubt the breakdown ——
+Finally, the story I cut the most today. In the experiment we had a result that "the stronger the gatekeeper, the smarter the AI gets (the better it predicts language)." We tried it 10 times and the trend held every time — a difference unlikely to arise by chance — and the numbers themselves are real. But before feeling like we'd won, we doubted the breakdown.
 
-Even when we shuffled the text into a mess so that there was "zero substance to learn," **the difference between gatekeepers did not vanish**. In other words, this difference was not because it "learned the language," but a phenomenon unrelated to substance: "**ease of evolving (ease of moving)**." Furthermore, when we trained hard with gradients instead of evolution, the result was the same for every gatekeeper — the benefit of a strong gatekeeper was "limited to evolution (random mutation)."
+So we ran a control experiment. We shuffled the training text into a mess, destroying any meaningful order, so that there was "zero substance to learn." If the difference between gatekeepers arose "because it learned the language well," then in this condition with the substance removed, the difference should also vanish — that is what we predicted in advance.
 
-It is not a defeat. **Doubt the breakdown before you feel like you've won** —— this is the core of FullSense research ([feedback_benchmark_honest_disclosure]). The real finding was the more accurate description: "the inspector's payoff is not learning but evolvability."
+Yet **the difference between gatekeepers did not vanish**. Even on meaningless strings, the stronger gatekeeper kept producing better scores. This means it was not "got smarter because it learned the language." The true cause of the difference was something unrelated to substance: "**ease of evolving (ease of moving)**." It is not about whether a good gene exists somewhere (the height of the ceiling), but about whether you can "walk up" to it through repeated mutation.
+
+There is a clinching check too. When we optimized hard with gradients — instead of evolution (random mutation and selection) — **the result was the same for every gatekeeper**. So the benefit of a strong gatekeeper is "limited to evolution," not a lift to learning itself.
+
+It is not a defeat. **Doubt the breakdown before you feel like you've won** —— this is the very core of FullSense research ([feedback_benchmark_honest_disclosure]). In exchange for throwing away the flashy headline ("the inspector makes the AI smart"), we kept a more accurate, plainer finding: "the inspector's payoff is not learning but evolvability." Plain, but we keep the one that is correct.
 
 ---
 
