@@ -9,6 +9,29 @@ nav_order: 95
 > Picked up by the next FullSense session. Everything below is ready to
 > resume on. Operator actions are flagged 🧑 (user) vs 🤖 (agent).
 
+## ⭐ 2026-06-12 夜 — 次回最優先 (ccr で FullSense 選択時 / Qiita 記事ライン)
+
+> llterm は llcore 対象で別駆動中。こちら (ccr/FullSense) は記事・SVG 整備が本線。
+
+**今セッションで完了:**
+- hero アニメ SVG 強化レイヤ注入 (78 ファイル, `tools/enrich_hero_svgs.py`)。qiita_24 連載 9 記事を
+  `?v=20260612` cache-bust で再 publish (全 public)。GitHub 直表示でアニメ強化、Qiita は静止フレーム反映。
+- #35 SVG 被り修正: `qiita_35_sdp_vs_norm.svg` (判定ボックスをグラフ下へ) / `qiita_35_progress.svg`
+  +en/zh/ko (タイムライン+点を y=415=カード下へ)。push 済 (#35 未公開なので再 publish 不要)。
+
+**次回やること (この順):**
+1. **#35_00 用語追補** (`docs/articles/QIITA_#35_00_verifier_sdp_not_smt_index.md`): 本文の専門語で
+   `## 0. 用語説明 / Glossary` 未掲載のもの (SDP/Lyapunov/frontier/vertex-free 等) を追補。1 記事ずつ。
+2. **かみくだき長め化** ([[feedback_kamikudaki_longer]]): plain-language 節は要約でなく比喩+具体例+
+   「なぜそう言えるか」まで展開。研究者名に敬称 ([[feedback_qiita_professor_honorific]])、落語使うなら徹底。
+3. **#35/#36/#38 公開判断**: 未公開草稿 (#35=`docs/articles/QIITA_#35_*`, #36=同, #38=`docs/articles/drafts/`)。
+   公開するなら private-first (限定共有→確認→public)。
+4. **llterm 小話** ([[project_llterm_kobanashi_idea]]): 任意。今セッションの素材 (黙る問題/ctx156%/Codex切替) で 1 本。
+
+---
+
+## 🟢 2026-06-12 — 現在の本線 (llterm 別駆動) = llcore ROADMAP 自走運用 (参考文脈)
+
 ## 🟢 2026-06-12 — 現在の本線 = llcore ROADMAP 自走運用 (最優先の文脈)
 
 **正本 = `D:/projects/llcore/docs/ROADMAP.md`** (自走運用、ユーザー確定 2026-06-11) +
