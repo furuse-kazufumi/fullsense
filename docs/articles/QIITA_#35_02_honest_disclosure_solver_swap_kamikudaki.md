@@ -250,7 +250,9 @@ By the way, we initially hoped that a fancy logic-puzzle solver (SMT/Z3) would a
 
 ## Act 2: A proud report card appeared — but it was too good
 
-We measured the verifier's strength. We built a **stepwise ladder**: as we raise the "degree" (allow fancier certificates), the number of parts we can catch grows.
+We measured the verifier's strength. The key concept is the **degree**. We just called the certificate a "skewed ruler"; the degree is that ruler's **freedom to bend**. Raising the degree allows ever more intricate ruler shapes = fancier certificates = in principle, more parts you can catch.
+
+So we built a **stepwise ladder**: "as we raise the degree, how does the number of catchable parts grow?" — like a fishing log where you keep weaving the net finer and counting what each net catches.
 
 The first tally looked like this:
 
@@ -258,13 +260,15 @@ The first tally looked like this:
 - Caught only by the even fancier certificate (degree 6): 13 parts
 - Caught by both: 18 parts
 
-For a researcher this is "tasty," because some parts are caught only at degree 4 and others only at degree 6 — meaning **each higher degree unlocks fresh prey**, suggesting a "rich hierarchy of proving power." A picture that looks great in a paper.
+Read it like this: 23 fish only the degree-4 net can catch, 13 fish only the degree-6 net can catch, and 18 caught by both. In other words, each net seems to have **fish that only it can catch**.
+
+For a researcher this is "tasty." It looks like **each higher degree unlocks fresh prey** — a "rich hierarchy of proving power." "Every higher degree has its own unique reason to exist, so it's worth keeping every net" — a story where every new tool yields new results is the best-looking picture a paper can have.
 
 …But here the [[honest-disclosure discipline]] kicks in. FullSense research has an iron rule:
 
 > **If a result looks abnormally good, suspect the breakdown before you feel like you've won.**
 
-The report card looked "too rich, too convenient," so instead of celebrating, we got suspicious.
+Humans don't re-examine results that match their hopes; we only hunt for causes when results disappoint. Which means, left alone, it is exactly the *convenient* mistakes that slip through inspection and survive. Knowing that, we pre-committed to the opposite rule — the better the result, the harder we doubt it. The report card looked "too rich, too convenient," so instead of celebrating, we got suspicious.
 
 ---
 
