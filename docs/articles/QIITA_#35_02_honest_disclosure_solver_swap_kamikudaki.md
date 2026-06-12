@@ -315,12 +315,16 @@ The flashy "proving power grows hierarchically with degree" picture was a castle
 
 ## Act 4: The way the illusion broke is interesting — over-inflated, and under-stated
 
-Usually "convenient numbers collapse" just means everything shrinks and that's it. But this calculator's cheating ran **both ways**.
+Usually "convenient numbers collapse" just means everything shrinks and that's it. But this calculator's cheating ran **both ways**. The very same single kind of error — "couldn't find it" — can inflate or deflate appearances, depending on **what you are measuring**.
 
-- **In one place, "over-inflated":** like the "rich hierarchy," it made things look fancier than reality.
-- **In another, "under-stated":** in a larger check (3270 parts), it **under-estimated** the main SDP's strength.
+- **In one place, "over-inflated":** the dropped balls were scattered across degree 4 and degree 6, creating the impression that "each net has its own unique prey." That was the "rich hierarchy" — fancier than reality.
+- **In another, "under-stated":** in a larger check (3270 parts), the calculator dropped wins the main SDP was rightfully owed, and **under-estimated** its strength.
 
 The under-statement is the punch line. The main SDP looked "+254 parts stronger" than a naive method (a simple yardstick called 2-norm). Re-measured with the accurate calculator, it was really "**+692 parts stronger**." SDP was **far better** than we thought.
+
+Why did the gap widen so much? Because the naive 2-norm verdict is computable directly, no calculator needed (= immune to the cheating), while only the SDP verdict passed through the cheating calculator. Picture a footrace where only the favorite runs with sandbags on his ankles. Take the sandbags off, and the true gap in ability shows itself.
+
+To be careful about where the numbers come from: the cheating calculator SCS had dropped 53 cases that were "actually provable." The accurate calculator CLARABEL **recovered 42–43** of them. And of the few that remained, **6 were "dangerous parts" deliberately and correctly rejected** — not misses but **correct refusals**. These 6 are exactly the type that behaves on an ordinary run yet breaks loose under the worst-case ordering — the living example of why, back in Act 1, we said observation alone isn't enough. At every rung of the inspection ladder, "unsound certificates that passed a bad part" were zero.
 
 So this episode is not a story of a **loss** where a boast collapses.
 
@@ -328,7 +332,7 @@ So this episode is not a story of a **loss** where a boast collapses.
 
 The single unified truth: **"the main SDP verifier can prove about 95% of the contracting parts."** Simple, and strong.
 
-By the way, "doesn't this risk waving through a runaway part?" — no need to worry. The calculator's cheating was the "**can't find a certificate (false negative)**" kind of error, not the "**OK a bad part (false admit)**" kind. A separate independent re-check confirmed "zero false admits observed." It was cheating that **fails to the safe side**, so trust in the verifier itself didn't collapse.
+By the way, "doesn't this risk waving through a runaway part?" — no need to worry. Inspection errors come in two kinds. At airport security: stopping a safe bag as "suspicious" (inconvenient, but no accident), versus letting a dangerous item through (catastrophe). This calculator's cheating was strictly the former — the "**can't find a certificate (false negative)**" kind, never the "**OK a bad part (false admit)**" kind. On top of that, two independent lines of cross-checking — re-verifying each issued certificate with a different computation, and actually exercising combinations of the parts while hunting for runaway counterexamples — confirmed "zero false admits observed." It was cheating that **fails to the safe side**, so trust in the verifier itself didn't collapse.
 
 ---
 
