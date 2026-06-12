@@ -14,7 +14,7 @@
     </style>
   </defs>
 
-  <rect x="0" y="0" width="1000" height="560" fill="#f6f8fc"/>
+  <rect x="0" y="0" width="1000" height="600" fill="#f6f8fc"/>
   <text class="ttl" x="40" y="46">同じ写像 J を 2 つの物差しで検証する</text>
   <text class="sub" x="40" y="70">回転 + 収縮の線形写像 J を、丸い物差し(2ノルム)と傾いた楕円(SDP の Lyapunov P)で測る</text>
 
