@@ -507,7 +507,7 @@ flowchart TD
 | 部 | 主题 | 内容 |
 |---|---|---|
 | **#35-00** (本文) | 全局与结论 | 为何需要检查器 / 正确的门是 quadratic SDP 约 95% / 诚实披露预告 / CPU、$0、本地 / 255+313 测试 |
-| **#35-01** | 验证器阶梯 | inf-norm → 2-norm → SDP → SOS 前沿细节、Track D 规模检验、SMT 是装饰的 3 trace 实证 |
+| **#35-01** | 验证器阶梯 | inf-norm → 2-norm → SDP → SOS 前沿细节、Track D 规模检验、SMT 是装饰的 3 track 实证 |
 | **#35-02** | 诚实披露与 pair-review | SCS 求解器陷阱的发现与 CLARABEL 修正、Rump verified-PD 加固、Codex + 6-agent pair-review 的 5 findings |
 
 作为 llcore 的归宿，SDP/Lyapunov 验证器现已成为 src 中的生产级、可插拔后端 (Stage 3b)。它 cvxpy-optional 且 fail-closed: 若无 CLARABEL 则拒绝 (绝不静默运行 SCS)。测试: src 255 + research 313 通过。一切都在 CPU、$0、本地完成。
