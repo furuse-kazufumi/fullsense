@@ -3,43 +3,51 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-12 13:52:09
+- **最終更新**: 2026-06-12 17:49:38
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+135b44f chore(qiita): hero 強化版を反映 — 9記事の hero URL を ?v=20260612 で cache-bust + 再publish
+246355f feat(articles): hero アニメ SVG に強化レイヤを注入 (静止リッチ + SMIL、78 ファイル)
+10819a8 docs(handoff): EXIT 準備 — クリーン状態 (llcore 5 commit 完了・走行プロセスなし) と再開手順を明記
+bfd8cf0 docs(handoff): role 絞り込み完了 (llcore 6f2803e) — 次 = 分野単位スコープ + ANN 化
+94f7acb docs(handoff): M3 検証 (iii) 完了を反映 — 次 = role/group フィルタ実装
+79124c4 docs(handoff): M3 検証 (i)(ii) 完了を反映 — 次 = (iii) トピック重複干渉測定
+e53d5cc docs(handoff): EXIT 準備 — M3 増分 2 の死因特定 (background silent kill) と再開手順 (json 確認 → Monitor/分割再走) を明記
+dc28d6d docs(handoff): EXIT 準備 — M3 増分 2 の再開手順 (foreground デバッグ再走) を明記
 21ef576 docs(handoff): M3 取込 PoC 成立を本線サマリに反映
 51a114f docs(handoff): NEXT_SESSION stale 掃除 (T5 5-2) + 現在の本線 (llcore ROADMAP 自走) を先頭に明示
-1130a93 docs(research): hyperframes (HeyGen) 調査を doc_map に登録 + auto snapshot
-9faae5a auto: doc_map.md 編集前 (2026-06-12 12:10)
-dcc2217 auto: index.md 編集前 (2026-06-12 12:09)
-0b7628c auto: fullsense_email_inbound.py 編集前 (2026-06-10 21:47)
-d8f6720 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 18:29)
-e20c175 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 18:26)
-4373b53 auto: QIITA_#41_verified_plasticity_langton_ant_meta.md 編集前 (2026-06-10 18:25)
-6f8e3b6 auto: image_recognition_25yr_paradigm_2026_06.md 編集前 (2026-06-10 18:25)
 ```
 
 ## 現在の git status
 
 ```
-M docs/NEXT_SESSION.auto.md
+M .llterm/loop_ledger.jsonl
+ M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-13:48 docs/NEXT_SESSION.md
-13:29 docs/NEXT_SESSION.auto.md
-13:29 docs/SESSION_SUMMARY.md
-13:27 .pytest_cache/v/cache/nodeids
-13:19 .llterm/loop_ledger.jsonl
-12:10 docs/doc_map.md
-12:09 docs/research/index.md
-12:09 docs/research/hyperframes_heygen_survey_2026_06_12.md
+17:44 docs/SESSION_SUMMARY.md
+17:44 docs/NEXT_SESSION.auto.md
+17:43 tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md
+17:43 tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price.md
+17:43 tools/qiita-cli-poc/public/fcb43968a5c642610762.md
+17:43 tools/qiita-cli-poc/public/fa0890f136636d495ea6.md
+17:43 tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md
+17:43 tools/qiita-cli-poc/public/e49b7ab9027d93594402.md
+17:43 tools/qiita-cli-poc/public/da2a2822dabe7b17b8c8.md
+17:43 tools/qiita-cli-poc/public/cdeea496af01dd424a09.md
+17:43 tools/qiita-cli-poc/public/cd954f57f510e03954e6.md
+17:43 tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md
+17:43 tools/qiita-cli-poc/public/c543014188744262ec83.md
+17:43 tools/qiita-cli-poc/public/be52eeb6455732161486.md
+17:43 tools/qiita-cli-poc/public/bdfad6db3f2e70c40511.md
 ```
 
 ---
