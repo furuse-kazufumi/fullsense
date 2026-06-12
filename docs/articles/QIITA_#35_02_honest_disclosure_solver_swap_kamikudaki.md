@@ -373,9 +373,9 @@ Why does a stronger gatekeeper raise the ceiling? Because a weak gatekeeper does
 
 Writing only the good parts goes against the FullSense way, so here are the limits as-is.
 
-- **Making the certificate fancier doesn't always make it stronger.** Raising the degree can return a **looser (weaker) bound**. "Raise the degree and march straight to the strongest" is **false**.
-- The computation that gives exact answers is **NP-hard** (a problem not solvable in realistic time). About 2 parts right at the boundary stay **open** within CPU range. A limit that doesn't close cleanly — and we say so honestly.
-- All results are for "small parts (n=2), CPU, this pool." Safety is "**zero false admits observed**," not "mathematically absolute" (there is a separate machine-checked rigorous proof, but it's treated as an add-on option).
+- **Making the certificate fancier doesn't always make it stronger.** Intuition says "more freedom to bend the ruler can only help," but in reality raising the degree can return a **looser (weaker) bound**. If you want the tightest estimate, you must lay the results out across degrees and take the best one — there is no clean single staircase. "Raise the degree and march straight to the strongest" is **false**.
+- The computation that gives exact answers is **NP-hard** (a problem class believed to blow up in computing time, for every known method, as the size grows). Of the remaining unproven parts, an even fancier certificate (degree 8) closed 4 more, and an exact bracketing computation closed 2 of those — but the last ~2 parts right at the boundary stay **open** within CPU range. A limit that doesn't close cleanly — and we say so honestly.
+- All results are for "small parts (n=2 — two numbers of state), CPU, this pool." Safety is "**zero false admits observed**," not "mathematically absolute" (there is a separate machine-checked rigorous proof, but it's treated as an add-on option).
 - This is about "**how to build a correct verifier**," not a claim that "evolved AIs are broadly useful."
 
 ---
