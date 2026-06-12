@@ -194,9 +194,9 @@ It's like trying to get a seismic certificate after building the house and being
 
 ## Three numbers to take home
 
-- **4/4** — without constraints, the memory circuit drifts to the runaway side on every seed (even inside a real Transformer)
-- **19×** — the cost of "retrofitting" the safety certificate (relative to paying it at training time)
-- **0 yen** — the total GPU bill for all three back-to-back experiments plus the controls (Kaggle free tier, 152 runs in total)
+- **4/4** — without constraints, the memory circuit drifted to the runaway side in all 4 training runs repeated with different random seeds. And that's *inside* a real Transformer (helped by attention's wide gaze it strays shallower than when alone, but cross it does). This is the number that says "leave it alone and it'll happen to stay safe" is not something you can count on
+- **19×** — the performance cost of "retrofitting" the safety certificate is up to 19 times what you pay by building it into training from the start. You get to choose *when* to pay for safety, but paying late carries steep interest
+- **0 yen** — the total GPU bill for all three back-to-back experiments plus the controls (Kaggle free tier, 152 runs in total). Which means this "price list for safety rails" can be re-measured by anyone, no special facilities required
 
 ## Related news roundup — which global debates this experiment connects to
 
