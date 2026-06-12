@@ -17,31 +17,27 @@ nav_order: 95
 - M0/M4/M5 ✅ (chat/clip/AnnotationStore、RAD corpus 生成、llloop v0.1.0a0)
 - **M1 ✅ クローズ (2026-06-12)**: entity-coref エッジ + MiniLM encoder。MiniLM cosine MRR 0.947 =
   会話 retrieval ほぼ解決。正本 = llcore research/textseg1d/M1_ENTITY_ENCODER_RESULTS_2026_06_12.md
-- **M3 🔄 進行中**: PoC ✅ + 検証 (i)(ii) ✅ (06-12, llcore `e399df4`)。
-  (i) 大規模化 56 倍 (1,989 docs/59,971 annotations): conv MRR 0.947→0.890 (軽微)、
-  loop probe 0.639→0.306 — **劣化はトピック重複 probe に集中 → 「干渉ゼロ」は
-  トピック非重複の条件付きと down-claim**。(ii) e5 prefix なし world +0.034 だが
-  conv −0.015 + lat 2 倍、prefix ありは逆効果 → **MiniLM 続投確定**。
-  正本 = llcore research/textseg1d/M3_SCALE_MULTILINGUAL_2026_06_12.md
+- **M3 🔄 進行中**: PoC + 検証 (i)(ii)(iii) ✅ (06-12, llcore `e399df4` + `7884f1f`)。
+  (i) 56 倍化: 劣化はトピック重複 probe に集中 → **「干渉ゼロ」は条件付きと down-claim**。
+  (ii) e5 は対価に見合わず → **MiniLM 続投確定**。(iii) 重複 corpus 段階注入: fail モードは
+  **壊滅でなく漸進的押し下げ** (conv R@3 1.000 維持)、劣化 9 probe 中 7 は重複で説明、
+  **corpus が rank 1 を取った事例は全て role="corpus" → role フィルタで会話 R@1 全防衛可**。
+  正本 = llcore research/textseg1d/M3_SCALE_MULTILINGUAL + M3_TOPIC_OVERLAP (各 2026_06_12)
 
 ### ▶ 次の具体的な一手 (2026-06-12 午後、ここから再開)
 
-**M3 検証 (iii) — 会話トピック重複 corpus の干渉測定 (進行中)**:
+**M3 スコープ絞り込み — AnnotationStore.query の role/group フィルタ実装**:
 
-1. 重複 corpus = `D:/docs/astrophysics_corpus_v2` (3,757 md docs、planet/Mars 言及多数 —
-   会話の天文 probe 4 問と直接衝突)。数百 docs サブサンプル (等間隔 deterministic) で
-   会話 22 probe の劣化を直接測る。スクリプト = `scripts/rad_topic_overlap_poc.py` (新規、
-   rad_scale_poc.py の ingest/probe 系を流用)。
-2. (i) の知見から予想 = 天文 4 probe が選択的に埋もれる。予想どおりかの確認 +
-   docs 数を段階化 (例 100/400/800) して埋もれの規模依存性を見る。
-3. **probe は既存を変更しない** (cherry-pick 禁止)。実行は **foreground 分割**
-   (background silent kill 回避、memory `feedback-windows-background-task-silent-kill`)。
-4. report = `research/textseg1d/M3_TOPIC_OVERLAP_2026_06_12.md` → ROADMAP (iii) ✅ →
-   commit。その後 = スコープ絞り込み設計 (group/role 活用) → M2 (cert × 連結性教師)。
+1. (iii) の実証済み構造: 会話 probe の R@1 押し下げ犯は全て role="corpus" annotation。
+   `AnnotationStore.query()` に `roles=` (positive) / `exclude_roles=` (negative) を追加
+   (既定 None = 現状維持・後方互換)。unit テスト追加 (新規機能にはテスト)。
+2. 実証: (iii) の +800 store で `exclude_roles={"corpus"}` の会話 22 probe 再測 →
+   R@1 0.909 / MRR 0.947 復元を確認し M3_TOPIC_OVERLAP report に追記。
+3. その後 = RAD 全量取込の cap/ANN 設計 → M2 (cert × 連結性教師)。
 
 状態: llcore branch `phase2a-trajectory-tube-gate`、unit 390 PASS、push は全 repo user-gate のまま。
-本日の着地 = M1 クローズ (`519d56d`) + M3 PoC (`0dd6cd3`) + M3 検証 (i)(ii) (`e399df4`、
-分割 foreground で完走 509.8s + 84.2s)。
+本日の着地 = M1 クローズ (`519d56d`) + M3 PoC (`0dd6cd3`) + 検証 (i)(ii) (`e399df4`) +
+検証 (iii) (`7884f1f`、トピック重複干渉の定量化 + 実ヒット目視で機序特定)。
 - M2 ⬜: cert gate × 連結性教師 (M3 の次)
 - llcore branch = `phase2a-trajectory-tube-gate` (push は user-gate)
 - 別途 human-go 待ち: Hyperframes PoC 提案 ([research/hyperframes_heygen_survey_2026_06_12]({{ '/research/hyperframes_heygen_survey_2026_06_12' | relative_url }}))
