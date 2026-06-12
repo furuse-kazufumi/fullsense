@@ -256,11 +256,13 @@ So the "10 left behind" are, for more than half, **children that were correctly 
 
 This is the most fun part. To judge the same "does it contract?", different verifiers **look at a different shape**.
 
-The weak verifiers — inf-norm and 2-norm — always use a **round ball** as the reference. They only ask "does this motion push the round ball outside the ball?". If it pokes out, they call it "not contracting, fail".
+The weak verifiers — inf-norm and 2-norm — always use a **round ball** as the reference. They only ask "does this motion push the round ball outside the ball?". If it pokes out, they call it "not contracting, fail". Measuring with a round ball means **holding a ruler of the same length up to every direction** — in other words, a very strict grading rule: "no direction may stretch, not even for a single step."
 
-But some motions **shrink while spinning** — picture a spinning top that gets smaller. Viewed with a round ball, such a motion can momentarily poke the ball outside during the spin. The weak verifier then rejects it — even though it really is shrinking.
+But some motions **shrink while spinning** — picture a spinning top that gets smaller. Once rotation is mixed in, the whole may be shrinking for certain, and yet **carve out one direction at one instant and it can look stretched for a moment**. Viewed with a round ball, such a motion can momentarily poke the ball outside during the spin. The weak verifier then rejects it — even though it really is shrinking. This is exactly where the wrongful convictions of §1 come from.
 
-SDP is different here. SDP can look with a **tilted ellipse**. Tilt the ellipse to match the spin, and that "shrink-while-spinning" motion lands **neatly inside** the ellipse. So SDP can pass it.
+SDP is different here. SDP can look with a **tilted ellipse**. An ellipse is a ruler whose length differs by direction. Tilt the ellipse to match the spin — a longer ruler for the direction that tends to look stretched, a shorter one for the direction that shrinks well — and that "shrink-while-spinning" motion lands **neatly inside** the ellipse at every step. The moment you can say "measured with this ellipse, it always lands inside", that is a genuine proof of contraction. So SDP can pass it.
+
+"But the tilts and shapes of an ellipse are endless — how do you find the right one?" you might ask. This is SDP's clever part: the problem "find an ellipse satisfying the condition" is known to be rewritable as a **bowl-shaped optimization with a single valley (convex optimization)**. Just as a marble rolled inside a bowl always settles at the lowest point, a bowl-shaped problem reaches the answer reliably, with no luck or trial-and-error needed. That is why SDP is a verifier that "finds the right ellipse whenever one exists."
 
 ```mermaid
 flowchart LR
