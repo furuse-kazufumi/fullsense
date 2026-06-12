@@ -20,7 +20,7 @@
 
   <!-- ===================== LEFT PANEL : 2-norm ball ===================== -->
   <g transform="translate(40,96)">
-    <rect x="0" y="0" width="440" height="356" rx="12" fill="#ffffff" stroke="#d7deec" stroke-width="1.5"/>
+    <rect x="0" y="0" width="440" height="400" rx="12" fill="#ffffff" stroke="#d7deec" stroke-width="1.5"/>
     <text class="panel" x="22" y="34">丸い物差し: 2ノルム単位球</text>
     <text class="sm" x="22" y="56">max 特異値 &lt; 1 を要求 — ||J||₂ &gt; 1 で棄却</text>
 
