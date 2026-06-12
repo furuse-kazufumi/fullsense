@@ -324,10 +324,14 @@ There's an honest failure story.
 
 At first, the inspector's report card looked **"oddly complicated and conveniently good."** FullSense has an iron rule: **"if the numbers are too good, suspect the breakdown before feeling like you won."** Suspecting it, we dug in — and found that the compute solver we were using (SCS) had a trap where it **misjudged "safe" individuals as "dangerous" right near the boundary.**
 
-We swapped in a more accurate solver (**CLARABEL**), the numbers tidied up all at once, and the conclusion became **simpler and stronger.**
+Here's the slightly surprising part: the trap's true identity was that **"the measuring tool itself (the solver) was returning slightly sloppy answers."** The logic of the inspection was correct, but the machine computing it lacked precision, so for individuals right at the boundary it issued the misjudgment "actually safe, but reported dangerous." In research terms: the ruler was warped, so a line that was actually straight read as "bent."
 
-> Lesson: **"results too good" means suspect your tools before celebrating.**
-> Because we'd placed a mechanism to avoid false joy in advance, we reached the correct foundation.
+To go one step deeper, solvers have different personalities. SCS is the type whose "each step is light and fast, but whose accuracy stops at 'roughly right.'" Usually that's plenty — but for individuals sitting exactly at the pass/fail line, that "roughly" error is enough to flip the verdict. Picture an exam paper scoring exactly at the pass mark being run through a rough-and-ready grading machine: occasionally it gets failed by mistake. CLARABEL, on the other hand, is the type whose "each step is heavy, but which nails the answer right up to the boundary," so it is strong on razor-thin judgments. Note the misjudgment ran in the direction "calling safe things dangerous," so no dangerous individual slipped through (exactly as the fail-closed design intends — even the error erred on the safe side). The problem, still, is that it needlessly rejected individuals that should have passed, **making the inspector look weaker than it really was and the report card look more complicated than it really was.** That was precisely the identity of the "oddly complicated."
+
+We swapped in a more accurate solver (**CLARABEL**), the numbers tidied up all at once, and the conclusion became **simpler and stronger.** It felt like replacing the warped ruler with a straight one: all the convoluted excuses became unnecessary, and the story snapped into a single line.
+
+> Lesson: **"results too good (or oddly over-complicated)" means suspect your tools before celebrating.**
+> Because we'd placed a mechanism to avoid false joy in advance, we reached the correct foundation. This was also a moment where FullSense's "honest disclosure" rule — never hide failures or limits; always write them down — actually paid off.
 
 This series also passed a **peer review** by another AI (Codex) and multiple agents (independently trying to refute the claims). Honesty isn't just a nice attitude — it's a **tool for catching your own mistakes.**
 
