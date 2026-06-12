@@ -303,7 +303,7 @@ Let's unpack "pops out of a simple formula" a bit more. The area of a triangle c
 > Analogy: **You don't need the world's fastest AI supercomputer to figure out the change from a $1 purchase. You do it in your head.**
 > SMT is exactly that "supercomputer" — magnificent, but **overkill and wasted** on this problem.
 
-What actually helped was the plain, classical **SDP / Lyapunov** (a tool that searches for proof that energy keeps decreasing). The right answer was the tool that fit the problem — not the flashiest, strongest solver. That's the heart of this article.
+What actually helped was the plain, classical **SDP / Lyapunov** (a tool that searches for proof that energy keeps decreasing). This too can be told with an everyday analogy. Drop a marble into a bowl: it rolls around, but you can declare it will always come to rest at the bottom — and the reason you can declare that is "the marble's height (its energy) provably decreases with every roll." A Lyapunov certificate is exactly this: **finding, for the individual under inspection, one way of measuring energy that provably keeps decreasing.** Once found, you have proven "this individual always settles down eventually — it does not blow up." And here's the kicker: the search for that way of measuring reduces to an optimization of the "find the lowest point in a bowl-shaped landscape" type (convex optimization). A bowl-shaped landscape has no false valleys, so the answer you find comes with a guarantee — which is why SDP can serve not as a "plausible-looking judgment" but as a **proof**. The right answer was the tool that fit the problem — not the flashiest, strongest solver. That's the heart of this article.
 
 ```mermaid
 flowchart TD
