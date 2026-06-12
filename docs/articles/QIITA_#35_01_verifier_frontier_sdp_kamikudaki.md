@@ -275,7 +275,7 @@ flowchart LR
 
 As an analogy: a long, slanted object that snags in a round sieve slides right through once you tilt the sieve. The +149 jump is exactly those "shrink-while-spinning" children that only a tilted ellipse can pass.
 
-What is more, SDP **contains all the children the weak verifiers passed** and then adds more on top. Not a single child passes a weak verifier but fails SDP. So you can safely raise the ladder all the way to SDP.
+What is more, SDP **contains all the children the weak verifiers passed** and then adds more on top. The trick is simple: **a round ball is just a special ellipse — one that is neither tilted nor squashed.** The ellipse-searching SDP includes the round ball itself among its candidates. So any child provable with the ball is necessarily provable with an ellipse too. Not a single child passes a weak verifier but fails SDP — and indeed, in the scale check of §4, not one showed up. So you can safely raise the ladder all the way to SDP.
 
 ---
 
