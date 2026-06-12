@@ -187,6 +187,40 @@ Everything else — designing the experiments, writing the pre-registration, adv
 
 And more important than the autonomy story is **the scientific result itself**. This article reports on both.
 
+## 0. Glossary
+
+Before the main text, the terms used in this article. Technical identifiers stay canonical (Transformer, CE, nat, etc.) in every language. Feel free to skip ahead and come back whenever something blocks you.
+
+| Term | Plain meaning |
+|---|---|
+| llcore | The protagonist of this series: a FullSense research line that combines a "memory core whose stability can be mathematically proven" with evolution and gradient learning. |
+| arc | A connected sequence of chapters in the series (a story arc). This article belongs to the "verified evolution" arc, which runs #35 (which inspector is right) → #36 (running the inspector cheaply) → #37 (this article: measuring the inspector's price). |
+| ρ (rho) | A number (the spectral radius) describing how much the memory core's state update amplifies a signal per step. With ρ<1, past influences (echoes) decay over time and the system stays stable — that is contractivity, the mathematical face of homeostasis in this series. Above 1, the state can keep growing. Every ρ in the tables is this value. |
+| stable region & crossing | The set of parameters with ρ<1 is the stable region. When training moves the parameters out of it (ρ≥1), this article calls that "crossing the boundary." |
+| verifier | The machinery that mathematically checks "is this state update really stable (ρ<1)?" Changes it cannot prove are not let through (fail-closed). |
+| fail-closed | A safety-side design: when you cannot verify, or are unsure, default to "do not let it through." The opposite (default to letting it through) is fail-open. |
+| sound | The property that "whatever it certifies as safe really is safe." Overly cautious misses (rejecting something actually safe) are allowed; mistakenly admitting something dangerous is not. "Sound gate" and "soundness defect" use this meaning. |
+| safety gate | The checkpoint that runs the verifier on updates during training and rejects any update whose stability cannot be proven. HD-1 compares "none (no gate)" vs "inf (a cheap sound gate)"; in Stage-B, project (push back) and reject (roll back) are two ways of operating the gate (pure has no memory core at all; none has the core but no gate). |
+| inf and O(n²) | inf is the cheapest stability check: just verify that the sum of absolute values in every row of the matrix stays below 1 (the inf-norm). O(n²) is complexity notation meaning the work grows only like the square of the dimension n — i.e., this is a cheap gate. |
+| vertex-free proof | The subject of #36. Where a stability proof would normally have to examine 2ⁿ "vertices" (the corner cases of a case split), this method approximates soundly without enumerating them. |
+| gradient learning | The standard learning method: use derivatives to compute "the direction in which the current error decreases" (downhill) and nudge the parameters that way, step by step. In the article's metaphor, "looking at the slope and walking down." |
+| evolution (mutation + selection) | A learning method that creates candidates by randomly mutating parameters and keeps the better-scoring individuals, over and over. It uses no slope information. In the article's metaphor, "blindly sticking your foot out at random." |
+| seed | The initial value of the random number generator. You rerun the same experiment with different seeds to check the result is not a fluke. "19/20 seeds" means it happened in 19 runs out of 20. |
+| null control | A comparison condition where the real corpus is shuffled so there is no structure left to learn. Seeing whether the same phenomenon occurs on meaningless data separates "it happened because structure was being learned" from "it is just a byproduct." |
+| CE and nat | CE (cross-entropy) is the loss measuring how bad the language model's next-character predictions are — lower is better. A nat is the unit of information measured with the natural logarithm. "The gate's CE cost is 0.03 nat" reads as "adding the gate made the predictions worse by that much." |
+| drift | Being carried in one direction not by a clear purposeful force but by the accumulation of random fluctuations. "Entropic drift" here means flowing out of the stable region as a byproduct, not in order to get smarter. |
+| reservoir computing / edge of chaos | Reservoir computing feeds inputs into a fixed random dynamical system (the reservoir) and trains only the readout. That field has a famous hypothesis that performance peaks when the system sits right at the boundary between stability and instability (the "edge of chaos"). This article's null control rejected the naive application of that hypothesis to this system. |
+| Transformer / attention | The Transformer is the standard architecture of today's large language models. Attention is the mechanism that weights "which positions in the context to look at, and how much"; softmax-attention is its standard form. In this experiment, attention's field of view was deliberately restricted to an 8-token window. |
+| token and receptive field | A token is the smallest unit the input is split into (here, character-level: 1 character = 1 token). The receptive field is the range of input one output position can see once layers are stacked; with an 8-token window and 2 layers, the receptive field is ≈ 15. |
+| pre-registration and B-G1–B-G4 | Pre-registration is the research procedure of fixing, in writing and before running the experiment, what will be judged and by which criteria — preventing moving the goalposts after seeing the results. B-G1 through B-G4 are the 4 adjudication gates fixed this way for Stage-B (a different thing from the safety gate). |
+| load-bearing | From architecture: "carrying the load." Not decorative — remove it and performance actually drops; i.e., it is genuinely doing work. B-G1 asked whether the memory core is load-bearing. |
+| feasibility and full | A feasibility run is a small-budget trial before the real thing; the full run is the long, real one. In this article, a conclusion that looked "stable" at feasibility was overturned at full — a live example of conclusions depending on the training budget. |
+| regime map | A map of relative relationships — "under which conditions (dimension, budget, method) which side wins" — as opposed to claims about absolute performance or universal laws. |
+| coupling matrix | The matrix listing how strongly the states inside the memory core influence each other. In B-G4, returning to the provable region after the fact required shrinking it to 2–6% of the original, all but destroying what was learned. |
+| sigmoid saturation | The sigmoid squashes any number into the range 0–1; for large inputs the output pins to 1.0 (saturation). In float32 (32-bit floating point), the saturated value becomes exactly 1.0, the memory's decay becomes "no decay at all," and the provable region becomes the empty set — the defect the adversarial review found. |
+| params | The count of numeric values (parameters) a model adjusts during learning. This experiment's ~0.5M params ≈ 500 thousand, orders of magnitude smaller than recent large language models. |
+| Kaggle / T4 | Kaggle is Google's data science platform, offering up to 30 hours of free GPU time per week. T4 and P100 are NVIDIA GPU models (this experiment used the T4). |
+
 ## Today's synopsis — the firm conclusions from 3 experiments
 
 | Experiment | Question | Answer |
