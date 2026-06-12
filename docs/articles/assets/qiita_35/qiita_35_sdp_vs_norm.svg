@@ -115,7 +115,7 @@
   </g>
 
   <!-- caption -->
-  <text class="cap" x="500" y="500" text-anchor="middle">同じ写像を、丸い物差し(2ノルム)は誤って棄却、傾いた楕円(SDP)は正しく証明</text>
-  <text class="sm" x="500" y="526" text-anchor="middle">2ノルムは累計 137 件、common Lyapunov の quadratic SDP で +149 = 286 件 (300 件中 95.3%)</text>
-  <text class="sm" x="500" y="546" text-anchor="middle">llcore / FullSense — CPU-only, on-prem, $0 — n=2 連結基質, seed=2024</text>
+  <text class="cap" x="500" y="540" text-anchor="middle">同じ写像を、丸い物差し(2ノルム)は誤って棄却、傾いた楕円(SDP)は正しく証明</text>
+  <text class="sm" x="500" y="566" text-anchor="middle">2ノルムは累計 137 件、common Lyapunov の quadratic SDP で +149 = 286 件 (300 件中 95.3%)</text>
+  <text class="sm" x="500" y="586" text-anchor="middle">llcore / FullSense — CPU-only, on-prem, $0 — n=2 連結基質, seed=2024</text>
 </svg>

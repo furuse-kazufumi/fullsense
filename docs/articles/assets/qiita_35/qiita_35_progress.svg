@@ -25,8 +25,8 @@
   <line x1="60" y1="130" x2="940" y2="130" stroke="#c7d0e0" stroke-width="2"/>
 
   <!-- Connector track -->
-  <line x1="200" y1="320" x2="800" y2="320" stroke="#b9c4d8" stroke-width="4" stroke-linecap="round"/>
-  <line x1="200" y1="320" x2="800" y2="320" stroke="#7d93c4" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 600">
+  <line x1="200" y1="415" x2="800" y2="415" stroke="#b9c4d8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="200" y1="415" x2="800" y2="415" stroke="#7d93c4" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 600">
     <animate attributeName="stroke-dasharray" from="0 600" to="600 0" dur="1.4s" fill="freeze"/>
   </line>
 
@@ -39,8 +39,8 @@
       <animate attributeName="stroke-width" values="3;7;3" dur="2.6s" repeatCount="indefinite"/>
     </rect>
   </g>
-  <circle cx="200" cy="320" r="11" fill="#4f6bb0"/>
-  <circle cx="200" cy="320" r="11" fill="none" stroke="#4f6bb0" stroke-width="2" opacity="0.6">
+  <circle cx="200" cy="415" r="11" fill="#4f6bb0"/>
+  <circle cx="200" cy="415" r="11" fill="none" stroke="#4f6bb0" stroke-width="2" opacity="0.6">
     <animate attributeName="r" values="11;18;11" dur="2.6s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0.6;0;0.6" dur="2.6s" repeatCount="indefinite"/>
   </circle>
@@ -54,7 +54,7 @@
   <g filter="url(#soft)">
     <rect x="370" y="200" width="260" height="180" rx="18" fill="url(#cardIdle)" stroke="#c2cbdd" stroke-width="2"/>
   </g>
-  <circle cx="500" cy="320" r="9" fill="#9aa8c6"/>
+  <circle cx="500" cy="415" r="9" fill="#9aa8c6"/>
   <text x="500" y="240" font-size="17" font-weight="700" fill="#5a6680" text-anchor="middle" letter-spacing="1">#35-01</text>
   <text x="500" y="284" font-size="30" font-weight="800" fill="#2a3550" text-anchor="middle">梯子</text>
   <text x="500" y="334" font-size="15" fill="#5a6680" text-anchor="middle">inf-norm → 2-norm</text>
@@ -64,7 +64,7 @@
   <g filter="url(#soft)">
     <rect x="670" y="200" width="260" height="180" rx="18" fill="url(#cardIdle)" stroke="#c2cbdd" stroke-width="2"/>
   </g>
-  <circle cx="800" cy="320" r="9" fill="#9aa8c6"/>
+  <circle cx="800" cy="415" r="9" fill="#9aa8c6"/>
   <text x="800" y="240" font-size="17" font-weight="700" fill="#5a6680" text-anchor="middle" letter-spacing="1">#35-02</text>
   <text x="800" y="284" font-size="27" font-weight="800" fill="#2a3550" text-anchor="middle">正直な訂正</text>
   <text x="800" y="334" font-size="15" fill="#5a6680" text-anchor="middle">SCS の偽陰性 →</text>
