@@ -130,11 +130,20 @@ Claude を作る Anthropic の CEO、Dario Amodei 氏は 1 月に「[The Adolesc
 
 ## The 1-minute version: what happened
 
-June 6, 2026. The experiment instructions a human typed at the computer were just **four sentences**: "Submit the experiment." "Run the control too." "Move on to the next experiment." "Submit it."
+June 6, 2026. The experiment instructions a human typed at the computer were just **four sentences**: "Submit the experiment." "Run the control too." "Move on to the next experiment." "Submit it." Essentially, four variations of "just take care of it."
 
-Taking those, the AI designed the experiments, had three other AIs attack the code it had written and fixed 5 defects, fired off three experiments back-to-back on a **free GPU** (the free tier of a site called Kaggle), collected the results, ran the statistical verdicts, and added one whole chapter to the draft of a paper. The money it cost: **0 yen**.
+Here is what the AI (Claude Code) did with those, in order:
 
-And what did those experiments measure? — **"When you bolt a safety rail onto an AI, how much does its performance drop?"** This is, in fact, a miniature version of the single hottest debate in the global AI industry right now.
+1. It **designed** the experiments — fixing in writing, *before* running anything, what would be measured and where the pass line sits (so that nobody could quietly move the goalposts after seeing the results)
+2. It had its own experiment code **deliberately attacked by three other AIs** — if you only review what you wrote yourself, you miss things, so it lined up three nitpicking adversarial reviewers. They actually found 5 serious defects, all of which were fixed before submission
+3. It fired off three experiments back-to-back on a **free GPU** — a GPU is the computing device used for training AI, and using one normally costs money. This time everything ran on the free tier of a site called Kaggle (Google's data science platform, which gives you up to 30 hours of free GPU time per week)
+4. It collected the results, ran the statistical check of "could this just be a coincidence?", and added one whole chapter to the draft of a paper
+
+The money it cost: **0 yen**.
+
+One piece of vocabulary before we go on. A "control experiment" is a comparison experiment where you **deliberately run the very same setup on meaningless, scrambled data with nothing in it to learn**. It's the same idea as giving one group a placebo in a drug trial: it lets you separate "this happened *because* the data was real" from "this happens no matter what you feed it." Most of this article's claims lean on that comparison, so it will keep coming back.
+
+And what did those experiments measure? — **"When you bolt a safety rail onto an AI, how much does its performance drop?"** The safety rail here is a mechanism that stops the AI mid-training whenever it is about to step into a "dangerous state" (Analogy ① below explains exactly what that means). Tighten the safety and you'd expect to shave off smartness; prioritize smartness and you'd expect the safety to get thin — so what is the actual *price*? This question is, in fact, a miniature version of the single hottest debate in the global AI industry right now (the "safety tax" debate that appears later in this article).
 
 > In this series, last time (**#36**) we covered "how do you build a safety rail **cheaply and correctly?**" (how to cut down the checking effort). This time it's the opposite — the star is **"when you use that rail, how much of the actual smartness gets shaved off?"** You don't need to have read #36; this article stands on its own.
 
