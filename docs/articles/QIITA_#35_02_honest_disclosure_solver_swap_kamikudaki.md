@@ -274,25 +274,38 @@ Humans don't re-examine results that match their hopes; we only hunt for causes 
 
 ## Act 3: The culprit was the calculator (this is the heart of it)
 
-The certificate search is outsourced to a specialist **solver** ("calculator") behind the scenes. The default one was named **SCS**. Fast, but with a weakness:
+The search for the certificate (the skewed ruler P) is a standardized math problem, so it's outsourced to a specialist **solver** ("calculator") behind the scenes — like a kitchen delegating stock-making to a dedicated machine. Nothing wrong with that in itself. The problem was the calculator's **personality**.
+
+The default calculator was named **SCS** — a "roughly but fast" type that creeps toward the answer with lightweight iterations and calls it a day at "approximately right." Usually that's plenty. But it had a weakness:
 
 > **Near the "boundary" of whether an answer barely exists, SCS cheats and reports "couldn't find one."**
 
-Even though a certificate really did exist, it gave a **false report (false negative)**: "Nope, couldn't find it." The calculator half-knew, quietly flashing a warning: "Solution may be inaccurate."
+Some parts have certificates that exist with room to spare; others, only barely. Any calculator gets the comfortable cases right. But on the borderline cases — like a car that fits the parking space with just a few centimeters to spare — a calculator that stops at "approximately" answers "doesn't fit (couldn't find it)." Even though a certificate really did exist, it filed a **false report (false negative)**: "Nope, couldn't find it."
 
-So we swapped in **CLARABEL**, an accurate-but-slower **interior-point** calculator. Same pool of parts, same problems, calculator only switched. The result:
+Worse, the calculator half-knew: it quietly flashed a warning, "Solution may be inaccurate." Like a bathroom scale showing "approximate reading" in the corner while we recorded only the number.
+
+So we swapped in **CLARABEL**, an accurate-but-slower **interior-point** calculator. Interior-point methods walk carefully through the *inside* of the region where answers live, arriving at a high-precision result, so they hold up even on borderline cases. The mental-math whiz (SCS) versus the careful long-hand checker (CLARABEL).
+
+The crucial part is the experimental design: **same pool of parts, same problems, only the calculator switched**. Just like a controlled experiment in science class — change exactly one thing, and when the outcome changes, you can pin the cause on that one thing. The result:
 
 | Tally item | SCS (cheating calculator, false) | CLARABEL (accurate calculator, true) |
 |---|---|---|
 | degree-4-only / degree-6-only / both | 23 / 13 / 18 | 0 / 1 / 54 |
 | Structural reading | scattered (looks like a rich hierarchy) | clean nesting (actually simple) |
 | "Left unproven" | 53 parts | 10 parts |
-| Main SDP coverage | 64% | **95%** |
+| Main SDP coverage | 64% (193 of 300) | **95% (286 of 300)** |
 | "Prey gained by raising degree" | +54 (lavish!) | +4 (modest…) |
 
 The proud "rich hierarchy" was **entirely an illusion**.
 
-Computed correctly, every part caught at degree 4 is also caught at degree 6. It nests cleanly, and raising the degree gains only 4 new parts. The flashy "proving power grows hierarchically with degree" picture was a castle on sand, built by a cheating calculator.
+Reading the table line by line:
+
+- **"degree-4-only" went 23 → 0**: computed correctly, there wasn't a single fish only the degree-4 net could catch. Every part caught at degree 4 is also caught at degree 6 — like matryoshka dolls, the bigger net's catch list wholly contains the smaller net's. Clean **nesting**.
+- **"Left unproven" went 53 → 10**: most of the "couldn't prove it" pile wasn't bad parts — it was the **calculator's dropped balls**.
+- **Coverage 64% → 95%**: the main SDP could in fact prove almost all of the contracting parts single-handedly.
+- **"Prey gained by raising degree" +54 → +4**: the higher degrees' unique contribution wasn't a lavish 54 but a modest 4.
+
+The flashy "proving power grows hierarchically with degree" picture was a castle on sand, built by a cheating calculator.
 
 ![Diagram of the illusion collapsing on calculator swap (reprise)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_35/qiita_35_solver_swap_en.svg)
 
