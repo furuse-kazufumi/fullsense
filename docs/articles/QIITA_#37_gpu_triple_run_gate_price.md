@@ -311,7 +311,7 @@ With this, the loop of "one push → completes server-side → automatic collect
 
 ## Is this the footstep of the singularity?
 
-In his 38-page essay "The Adolescence of Technology" in January 2026, Anthropic's Dario Amodei wrote that "humanity is about to acquire powers beyond imagination, but whether it has the maturity to handle them is entirely unclear," and revealed that AI writes 90% of his company's product code. AI driving the research loop autonomously — today's session is a small instance of that (4 human instructions, all the way from design to review, experiments, and incorporation into the paper).
+In his 38-page essay "The Adolescence of Technology" in January 2026, Anthropic CEO Dario Amodei wrote that "humanity is about to acquire powers beyond imagination, but whether it has the maturity to handle them is entirely unclear," and revealed that AI writes 90% of his company's product code. AI driving the research loop autonomously — today's session is a small instance of that (4 human instructions, all the way from design to review, experiments, and incorporation into the paper).
 
 That said, today's experimental results bear more on **control design** than on acceleration arguments per se: "unconstrained optimization runs off into a runaway region not in order to get smarter but as a byproduct of geometry," "the cost of a safety rail is real but small, and arises only at the site of capability," "the rail cannot be bolted on afterward (19×)." This directly becomes a design guideline that safety mechanisms should be built into the training loop at the architecture level — quantitative backing for the FullSense philosophy at the root of this series (do not bypass the Approval Bus, do not make responsibility an afterthought).
 
