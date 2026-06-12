@@ -109,12 +109,16 @@ So the true identity of the wall "we can't grow the AI any bigger" was not a lim
 
 ## What we did: don't walk every corner — take in the rooms "at a glance"
 
-So we tried an approximation that "stops walking every corner and estimates the whole room at a glance."
+So we hit on this: stop walking the corners one by one, and estimate the whole room at a glance. As an analogy, instead of going around measuring every nook with a tape measure, you stand in the doorway and size up the ceiling at a glance: "even at its messiest, this room is about this big." The number of corners to walk drops from 2ⁿ to a single estimate, so it is incomparably cheaper.
 
-- The first naive estimate (B1): safe, but **too cautious** — it turned away even individuals that were actually harmless. It let only 30% of the contracting individuals into the castle. That is putting the cart before the horse — stricter than the cheapest gatekeeper — and for a moment we got discouraged, thinking "the cheap glance is no good."
-- The version that changed how the estimate is built (B2 = pressing down from above with absolute values): this hit the mark. **It let through nearly 80% (77.6%) of the people the diligent gatekeeper passes, with a single glance.** Paired with the cheap gatekeeper, 87%. The speed at 16 rooms was **12,000×**. Oversights (false positives) were zero.
+But there was a knack to building the estimate.
 
-Lesson: the "cheap glance" itself was not the problem — **the way the first estimate was built was just clumsy**. Before starting to build the heavy full-scale apparatus (SDP), we checked cheaply with a small experiment, and figured it out in seconds.
+- **The first naive estimate (B1)**: erring on the safe side, it was **too cautious**. It estimated the room's "average shape" and its "wobble width" separately, each at its worst, and added them up — so the worst case got counted twice, making everything look far more dangerous than it really is. As a result it turned away even harmless individuals, letting only 30% of the contracting (stable) individuals into the castle. That is stricter than the cheapest gatekeeper — putting the cart before the horse — and for a moment we got discouraged: "the cheap glance really is no good after all."
+- **The version that changed how the estimate is built (B2 = pressing down from above with absolute values)**: instead of treating the wobble separately, it presses everything down from above using absolute values. This hit the mark. **It let through nearly 80% (77.6%) of the people the diligent gatekeeper passes, with a single glance.** And with the cheap gatekeeper (∞-norm) as a second pair of eyes, it reaches 87%. The speed at 16 rooms was **12,000×**. Work that took the diligent gatekeeper seconds finishes almost instantly.
+
+What matters most here is that **oversights (false positives) were zero**. When the glance gatekeeper says "pass," he passes only genuinely safe individuals, and not once did he carelessly let a dangerous one through. In exchange, there are some safe ones he rejects just in case. But that direction of error is forgivable — a checkpoint exists to keep things safe, and while "too strict" is bearable, "too lax, letting a runaway through" is not. The glance kept this safe-side property (technically called soundness) — "if it says pass, it is always right" — while gaining only speed.
+
+The lesson is clear. The "cheap glance" itself was not the problem — **the way the first estimate was built was simply clumsy**. And we figured this out in seconds precisely because we tried it cheaply with a small experiment before building the heavy full-scale apparatus (SDP) from scratch. Confirm the skeleton cheaply before inflating the spec — that order saved us time.
 
 ## Another idea: model it on "creatures that declutter"
 
