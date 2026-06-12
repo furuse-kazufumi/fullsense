@@ -186,11 +186,11 @@ One more important finding: this cost **does not occur on nonsensical data** (th
 
 ## Analogy ③: Seismic retrofitting costs 19× more when it's "after the fact"
 
-This was the result that surprised me the most. We empirically measured "couldn't you just train freely and get the safety certificate once it's finished?"
+This was the result that surprised me the most. After everything so far, isn't this the thought that creeps in — "the tax gets collected because the rail watches us all through training. So why not **train freely with no rail at all, and just go get the safety certificate once it's finished** — best of both worlds?" Picture a factory skipping every in-process inspection and taking only the final inspection at the end. As ideas go, it's perfectly sensible — so we measured it.
 
-Result: the freely-trained memory circuit had strayed **far too deep** out of the certifiable region, and pulling it back required **cutting the circuit's connections down to 2–6% of the original.** Almost everything it learned gets wrecked. The performance cost was **17–19×** that of training with the rail on from the very start.
+Result: the freely-trained memory circuit had strayed **far too deep** out of the certifiable region (the range where you can mathematically guarantee "this will not howl"). As Analogy ① showed, an unconstrained circuit drifts outside the rail as a matter of course. And pulling it back from out there required **cutting the circuit's internal connections — the strengths of the links between its parts — down to 2–6% of the original.** Here is the vital point: what the circuit learned is engraved precisely *as* that combination of link strengths. Cutting more than 90% of the links means **erasing nearly everything it learned.** The measured performance cost was **17–19×** that of training with the rail on from the very start.
 
-It's like trying to get a seismic certificate after building the house and being told to cut 95% of the pillars. **Safety can't be bolted on afterward. You have no choice but to put it in at the design stage (inside the training loop)** — the most practically useful conclusion of the day.
+It's like trying to get a seismic certificate after building the house and being told, "this house is too far out of code — please cut 95% of the pillars." At that point it isn't retrofitting anymore; it's a teardown and rebuild. **Safety can't be bolted on afterward. You have no choice but to put it in at the design stage (inside the training loop)** — the most practically useful conclusion of the day.
 
 ## Three numbers to take home
 
