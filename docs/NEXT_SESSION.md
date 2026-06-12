@@ -24,7 +24,12 @@ nav_order: 95
   **corpus が rank 1 を取った事例は全て role="corpus" → role フィルタで会話 R@1 全防衛可**。
   正本 = llcore research/textseg1d/M3_SCALE_MULTILINGUAL + M3_TOPIC_OVERLAP (各 2026_06_12)
 
-### ▶ 次の具体的な一手 (2026-06-12 夕方、ここから再開)
+### ▶ 次の具体的な一手 (2026-06-12 夕方 EXIT 時点、ここから再開)
+
+> **EXIT 状態 (クリーン)**: llcore 未コミットなし・走行中プロセスなし (全 PoC は foreground
+> 完走済み)。本日の全成果は llcore `519d56d`→`6f2803e` の 5 commit + 本ファイルに反映済み。
+> 再開 = 下の手順 1 (分野単位スコープ設計) から。設計判断 (a)/(b) は新セッションが
+> 1 行宣言して進めてよい ((b) per-row 分野タグ推奨)。
 
 **✅ role 絞り込み完了 (llcore `6f2803e`)**: `query(exclude_roles={"corpus"})` で (iii) +800
 store の会話 22 probe が **0.849 → 0.947 (R@1 0.909) = 注入前に完全復元** (実証済、unit +3 =
