@@ -95,9 +95,17 @@ ignorePublish: true
 
 ## A parable: a checkpoint, and a gatekeeper who walks around every corner
 
-An evolving AI has a **checkpoint** before entering the castle town. It is a gatekeeper who verifies "won't this individual run away out of control?" (we call this the inspector). It is a diligent gatekeeper who never overlooks a runaway individual.
+"An evolving AI" may not mean much at first. The "evolution" here is close to selective breeding of livestock. We create many tiny AI individuals, breed offspring whose settings are nudged a little each time, keep only the "well-made" ones for the next generation — and repeat this for hundreds of generations. Nobody designs a clever one by hand, yet smarter individuals gradually emerge.
 
-But this gatekeeper has an absurdly meticulous way of checking. If the castle (= the AI's state) has n "rooms," he walks **all 2ⁿ ways through the corners of the rooms** to check. If there are 8 rooms it takes 256 ways, but with 16 rooms it is 60,000-some ways, and with 32 rooms it is **4.3 billion ways**. The moment you try to grow it to the scale of an insect's brain, the gatekeeper collapses from overwork first. This was the true identity of the "ceiling on evolution."
+But along the road to cleverness, dangerous individuals slip in. These are individuals whose "state" (the bundle of numbers the computation carries midway) keeps swelling generation after generation and never stops. We call this **running away (out of control)**. Conversely, an individual whose small deviations naturally shrink over time is stable (technically, it "contracts"). Leave a runaway child in the herd and later generations break along with it.
+
+So we place a **checkpoint** before entering the castle town, with a gatekeeper who checks each individual one by one: "won't this one run away out of control?" This is the protagonist of the article, the **inspector**. He is a very diligent gatekeeper who never overlooks even a single runaway.
+
+But this gatekeeper has an absurdly meticulous way of checking. Picture the castle (= the AI's state) as having n "rooms." The gatekeeper wants to examine the "corner" — the most extreme wobble — of each room. The trouble is that each room has two corners (one extreme and the other), and he tries every combination across all n rooms. This is the same as trying every ON/OFF pattern of n switches, which comes to **2ⁿ combinations**.
+
+The numbers are chilling. With 8 rooms it is 2⁸ = 256 combinations — fine. But every time you add one room, the work **doubles**. So 16 rooms is 65,536 (over sixty thousand), and 32 rooms is **4.3 billion**. Going from 8 to 16 rooms is not "twice" but "256 times" the work. The moment you try to grow it to the scale of an insect's brain — still small for an AI — the gatekeeper collapses from overwork first.
+
+So the true identity of the wall "we can't grow the AI any bigger" was not a limit of cleverness nor the number of genes, but the fact that **the gatekeeper's (inspector's) labor grows exponentially with the number of rooms**. This is the "ceiling on evolution."
 
 ## What we did: don't walk every corner — take in the rooms "at a glance"
 
