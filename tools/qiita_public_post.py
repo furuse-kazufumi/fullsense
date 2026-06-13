@@ -121,6 +121,8 @@ def norm_tags(meta: dict) -> list[dict]:
 def real_public_id(meta: dict) -> str | None:
     """Frontmatter public_id (PUBLIC qiita.com item id). 'null'/'none'/'' -> ABSENT (POST-create)."""
     v = meta.get("public_id")
+    if isinstance(v, list):
+        v = v[0] if v else None
     if v is None:
         return None
     v = str(v).strip()
