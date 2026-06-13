@@ -128,4 +128,6 @@ Brendan Bycroft 氏の [`llm-viz`](https://github.com/bbycroft/llm-viz) を fork
 - 検証地形・軌跡の描画：自前 Apache-2.0 ツール（実 900 個体 / 実 GA 2 系統 / 領域一致 900/900）
 - 環境：Python 3.11・torch 2.12+cpu（GPU 非搭載）・Node v24・Next 13.4.19
 
-<!-- DRAFT NOTE (非公開): 画像は llcore を push 後に raw URL 確定 + Qiita 静止フォールバック。公開は human-go。タイトル番号 #42。over-claim 再点検済みだが敵対レビュー待ち。 -->
+<!-- DRAFT NOTE (非公開): 敵対レビュー済 (verdict=minor-fixes・全数値 検証OK・honest 3ビート適正)。
+     ★公開ゲート (human-go・未完): (1) llcore の assets/articles/llcore_landscape_real.svg を commit+push し repo を public 化 (現状 raw URL は HTTP 404)、(2) curl で raw URL 200 を確認、(3) Qiita はアニメ SVG を動かさない → 両軌跡が着地済み・ρ=1 境界つきの静止フレームを本文画像にし、アニメ raw SVG は別リンク、(4) 公開 URL に ?v=N。
+     タイトル番号 #42。 -->
