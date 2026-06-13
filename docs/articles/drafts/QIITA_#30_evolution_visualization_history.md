@@ -474,3 +474,27 @@ FullSense 의 진화 시각화(**사고 인자 그래프 위의 계통수 + anim
 - 연재 #25〜#27 — 본 글 진화 시각화의 「내용」（monoculture / lldarwin / 반증）
 - 관련 memory: [[project_github_animated_svg]] / [[project_fullsense_animemd_branch_token_viz]] / [[project_f25_demo_polish]]
 - 참고: Conway 1970 (Life) / Ray 1991 (Tierra) / Adami & Ofria (Avida) / Lenski et al. 2003 (Nature) / Karl Sims 1994 (SIGGRAPH) / Bert Chan 2019 (Lenia, arXiv 2005.03742) / MAP-Elites (Mouret & Clune 2015, 1504.04909) / 3DGS (Kerbl et al. 2023)
+
+<!-- NAV -->
+---
+**FullSense KB ナビ**: [← #29 【📗かみくだき版】「ものさしが頭打ちだと、どんな](https://fullsense.qiita.com/furuse-kazufumi/items/f822f8c8b01cd7b16713) ・ [📑 目次](https://fullsense.qiita.com/furuse-kazufumi/items/1ad8db4b854194e2d215) ・ [#31 AI に AI を部下として使わせる #31 — →](https://fullsense.qiita.com/furuse-kazufumi/items/71c2304718ad5829d2d7)
+<!-- /NAV -->
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->

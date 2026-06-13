@@ -511,3 +511,27 @@ Discipline for when you run multiple workers (Claude sub-agents + Codex) at the 
 ## 8. 관련
 - 연재 #26 「lldarwin 의 설계」—— 본 체제로 돌린 실례.
 - 관련 memory: [[reference_codex_two_pillar]] / [[feedback_parallel_first_execution]] / [[feedback_agent_no_git_parallel]] / [[feedback_external_ai_verify]]
+
+<!-- NAV -->
+---
+**FullSense KB ナビ**: [← #30 進化を「見せる」技術の系譜 #30 — Conw](https://fullsense.qiita.com/furuse-kazufumi/items/0e221d447b7a8ad66d22) ・ [📑 目次](https://fullsense.qiita.com/furuse-kazufumi/items/1ad8db4b854194e2d215) ・ [#32 llcore — Transformer のコア →](https://fullsense.qiita.com/furuse-kazufumi/items/88ed294aa107330c6894)
+<!-- /NAV -->
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->

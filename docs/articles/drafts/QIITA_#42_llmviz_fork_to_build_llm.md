@@ -7,7 +7,7 @@ tags:
   - 機械学習
   - llcore
 private: true
-id: null
+id: a27332c0428320ee5def
 organization_url_name: null
 slide: false
 ignorePublish: false
@@ -140,3 +140,27 @@ Brendan Bycroft 氏の [`llm-viz`](https://github.com/bbycroft/llm-viz) を fork
 - minGPT：Andrej Karpathy 氏 / MIT
 - 検証地形・軌跡の描画：自前 Apache-2.0 ツール（実 900 個体 / 実 GA 2 系統 / 領域一致 900/900）
 - 環境：Python 3.11・torch 2.12+cpu（GPU 非搭載）・Node v24・Next 13.4.19
+
+<!-- NAV -->
+---
+**FullSense KB ナビ**: [← #41 llcore 検証 arc (#41) かみくだ](https://fullsense.qiita.com/furuse-kazufumi/items/4cab01ed8896c555f3c9) ・ [📑 目次](https://fullsense.qiita.com/furuse-kazufumi/items/1ad8db4b854194e2d215) ・ [#42 llterm 小話 (#42) — 沈黙する A →](https://fullsense.qiita.com/furuse-kazufumi/items/75cd92ab2c683965f3ac)
+<!-- /NAV -->
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->

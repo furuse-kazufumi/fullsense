@@ -1195,3 +1195,27 @@ Being honest is itself a force that moves research forward — that's the kind o
 ---
 
 **이 글의 기술 버전**: 연재 #34 "등산 6연전으로 알게 된 '진화의 ③은 언제 효과를 내는가' — 그리고 100년 전의 진화생물학이 같은 답을 내놓고 있었다" (같은 폴더 안)
+
+<!-- NAV -->
+---
+**FullSense KB ナビ**: [← #34 llcore — 「進化で AI を設計するとき](https://fullsense.qiita.com/furuse-kazufumi/items/ff1f2b6c29e41abab10d) ・ [📑 目次](https://fullsense.qiita.com/furuse-kazufumi/items/1ad8db4b854194e2d215) ・ [#38 llcore 検証 arc (#38) — 自分 →](https://fullsense.qiita.com/furuse-kazufumi/items/0ae167821e38294fff96)
+<!-- /NAV -->
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->

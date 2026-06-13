@@ -1982,3 +1982,27 @@ prompt 전략이 어떻게 효과를 내는지를 보여줍니다. **이 2장의
 <!-- NOTE(事実整合): PoC デプロイで monoculture は実際 0.05 に改善した(誇張でない)。本記事はそれを否定せず「何を測った 0.05 か」を honest に深掘りする構成。「lldarwin を入れても改善せず」とは書かない(事実と異なるため)。novelty/reservoir はそれぞれ行動多様性 +109% / 系統 8/8 を実際に改善した。 -->
 <!-- 埋込 SVG: stage1_baseline_status / reservoir_off_dominance / reservoir_on_dominance / reinject_sweep / stage2_proxy_axes / stage2_real_llm_axes (全て ../assets/lldarwin_2026_05_26/, 実在確認済 2026-05-26) + step_c/step_c_two_regimes / step_c/deceptive_corridor -->
 <!-- 多言語: JA→EN→ZH→KO 全文縦積み・各言語自己完結 (SVG/表/参考文献を各言語に複製、alt は翻訳) -->
+
+<!-- NAV -->
+---
+**FullSense KB ナビ**: [← #28 進化し続ける AI 集団を「指揮者」が合奏させて](https://fullsense.qiita.com/furuse-kazufumi/items/333165c2d5704e652721) ・ [📑 目次](https://fullsense.qiita.com/furuse-kazufumi/items/1ad8db4b854194e2d215) ・ [#29 【📗かみくだき版】「ものさしが頭打ちだと、どんな →](https://fullsense.qiita.com/furuse-kazufumi/items/f822f8c8b01cd7b16713)
+<!-- /NAV -->
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->

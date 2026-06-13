@@ -5,6 +5,7 @@ private: true
 updated_at: '2026-06-10'
 slide: false
 ignorePublish: false
+id: 4cab01ed8896c555f3c9
 ---
 
 > この記事は、技術版(#38〜#40)の総まとめを **非エンジニア向けに噛みくだいた capstone** です。数式もコードも出てきません。出てくるのは「蟻」と「野球」と「占い師」だけです。技術版が読みたい方は #38〜#40 をどうぞ。ここでは、3 回分の研究で得た一番大事な教訓を **たった 1 つの比喩** にまとめます。
@@ -317,3 +318,27 @@ flowchart TD
 正本データ(全部公開しています): [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore)
 
 そして技術的にもっと深く知りたい方は、姉妹記事の技術版 #38(防衛的公開)/ #39(スケールの壁)/ #40(賢さの幻)へどうぞ。この #41 は、その 3 つの上に立つ「総まとめ」でした。
+
+<!-- NAV -->
+---
+**FullSense KB ナビ**: [← #41 llcore 検証 arc (#41) — ve](https://fullsense.qiita.com/furuse-kazufumi/items/f8ff0a278c190afde1cd) ・ [📑 目次](https://fullsense.qiita.com/furuse-kazufumi/items/1ad8db4b854194e2d215) ・ [#42 #42 llm-viz を fork して実デー →](https://fullsense.qiita.com/furuse-kazufumi/items/a27332c0428320ee5def)
+<!-- /NAV -->
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->

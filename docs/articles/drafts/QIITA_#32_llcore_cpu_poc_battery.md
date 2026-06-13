@@ -279,3 +279,27 @@ f. 논문화 (TMLR + GECCO 2027)
 **Tags**: 진화 계산 / 형식 검증 / Z3 / RWKV / state space model / CPU연구  
 **관련**: 연재 #14-31 (llive lldarwin v0.B-E + 관측+governance + lleval)  
 **Project**: D:/projects/llcore (PyPI llmesh-llcore 0.1.0a0)
+
+<!-- NAV -->
+---
+**FullSense KB ナビ**: [← #31 AI に AI を部下として使わせる #31 —](https://fullsense.qiita.com/furuse-kazufumi/items/71c2304718ad5829d2d7) ・ [📑 目次](https://fullsense.qiita.com/furuse-kazufumi/items/1ad8db4b854194e2d215) ・ [#33 llcore — 「進化で AI を設計するとき →](https://fullsense.qiita.com/furuse-kazufumi/items/21d6c4dcfde204062a89)
+<!-- /NAV -->
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->
