@@ -14,7 +14,7 @@ Brendan Bycroft 氏の [`llm-viz`](https://github.com/bbycroft/llm-viz) を fork
 
 ## なぜ「LLM を 3D で歩く」絵が欲しかったのか
 
-私は `llcore` という研究プロジェクトをやっている。Transformer のコアを「進化」させ、その安定性を形式的に検証する、という尖った（そして正直に言えば、ちょっと地味な）テーマだ。地味なテーマには、**動く絵**が要る。動かないと、誰も 20 分も読んでくれない。
+私は `llcore` という研究プロジェクトをやっている。Transformer のコアを「進化」させ、その安定性を形式的に検証する、という尖った（そして正直に言えば、ちょっと地味な）テーマだ。地味なテーマこそ、**動く絵**が要る。
 
 そこで目をつけたのが Bycroft 氏の `llm-viz`（[bbycroft.net/llm](https://bbycroft.net/llm)）。WebGL2 + TypeScript の独自 3D エンジンで、**実際に動く nano-GPT の forward pass を 3D で歩ける**、という名作だ。Andrej Karpathy 氏の minGPT 由来の極小モデル（A/B/C を並べ替えるだけの、層数3・ヘッド3・埋め込み48次元・語彙3 の“豆 GPT”）の重みが本物で、トークンが行列を通って予測になる過程が、文字通り目で追える。
 
