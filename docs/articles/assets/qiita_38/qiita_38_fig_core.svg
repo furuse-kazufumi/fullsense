@@ -10,7 +10,7 @@
 
   <!-- Central formula -->
   <rect x="90" y="120" width="620" height="86" rx="10" fill="#ffffff" stroke="#3b7dd8" stroke-width="2"/>
-  <text x="400" y="173" font-family="'Courier New', monospace" font-size="24" font-weight="700" fill="#1f2a44" text-anchor="middle">s&#8348;&#8330;&#8321; = decay &#8857; s&#8348; + (1 &#8722; decay) &#8857; tanh(W s&#8348; + V x&#8348;)</text>
+  <text x="400" y="171" font-family="'Courier New', monospace" font-size="18" font-weight="700" fill="#1f2a44" text-anchor="middle">s&#8348;&#8330;&#8321; = decay &#8857; s&#8348; + (1 &#8722; decay) &#8857; tanh(W s&#8348; + V x&#8348;)</text>
 
   <!-- Callout: decay = leak -->
   <line x1="270" y1="206" x2="250" y2="280" stroke="#2e9e8f" stroke-width="1.5"/>
