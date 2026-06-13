@@ -1,4 +1,17 @@
-# #42 llm-viz を fork して実データ検証器を作り、最後に「可視化より“本体”を作る」と計画を引き直した一日の話
+---
+title: '#42 llm-viz を fork して実データ検証器を作り「可視化より本体を作る」へ計画を引き直した話'
+tags:
+  - FullSense
+  - LLM
+  - 可視化
+  - 機械学習
+  - llcore
+private: true
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: false
+---
 
 > 【前提知識】GPT 系 LLM の超ざっくりした内部（埋め込み→注意→出力）と、「学習＝損失を下げる」くらい。難しい用語は本文で都度かみくだきます。
 > 【全体の流れ】3D 可視化の fork → 借り物の限界（ライセンス＋“中身が薄い”）→ 自前の実データ検証ビューア → 予想外の転回 → 計画の引き直し。
