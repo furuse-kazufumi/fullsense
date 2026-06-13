@@ -20,7 +20,7 @@ Brendan Bycroft 氏の [`llm-viz`](https://github.com/bbycroft/llm-viz) を fork
 
 「これを fork して、自分のモデルを 3D で歩かせればいい。近道だ」——そう思った。
 
-まず動かす。`corepack yarn install`（450 パッケージ）→ `yarn dev` → ブラウザで `/llm` を開く。**HTTP 200、717 モジュールが Node v24 でコンパイル成功。** 借り物のエンジンは、ちゃんと回った。ここまでは順調だった。
+まず動かす。`corepack yarn install` → `yarn dev` → ブラウザで `/llm` を開く。**HTTP 200、717 モジュールが Node v24 でコンパイル成功。** 借り物のエンジンは、ちゃんと回った。ここまでは順調だった。
 
 *ここまでは。*
 
