@@ -97,7 +97,7 @@ Brendan Bycroft 氏の [`llm-viz`](https://github.com/bbycroft/llm-viz) を fork
 
 統計が、サスペンスになる瞬間だ。
 
-![検証付き可塑性の地形（実 900 個体・実 GA 軌跡）](https://raw.githubusercontent.com/furuse-kazufumi/llcore/main/assets/articles/llcore_landscape_real.svg)
+![検証付き可塑性の地形（実 900 個体・実 GA 軌跡）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_42/llcore_landscape_real.svg)
 
 > （公開時メモ：SVG は raw 絶対 URL で参照。Qiita は SVG 内アニメをラスタライズするため、アニメ版＝raw URL／静止フォールバックを併置し `?v=N` でキャッシュ更新する。本図は実ターミナルランの replay であり、理想化した模式図ではない＝“動きが、そのままデータ”。）
 
