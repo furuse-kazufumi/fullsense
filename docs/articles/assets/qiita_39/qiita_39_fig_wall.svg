@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="Segoe UI, Meiryo, sans-serif">
+<rect width="900" height="500" fill="#0b0f14"/>
+<text x="28" y="36" fill="#e6edf3" font-size="19" font-weight="700">navigability vs 次元 n — cert_sdp は天井を上げたが 2^n 壁は破れていない</text>
+<rect x="524.7" y="64" width="165.3" height="372" fill="#f85149" fill-opacity="0.12"/>
+<line x1="524.7" y1="64" x2="524.7" y2="436" stroke="#f85149" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="532.7" y="86" fill="#f85149" font-size="13" font-weight="700">2^n コスト壁</text>
+<text x="532.7" y="104" fill="#cdd9e5" font-size="11.5">cert_two: n=12→1.3s / n=14→予算外</text>
+<text x="532.7" y="120" fill="#8b949e" font-size="11.5">navigability を上げても cost は 2^n のまま</text>
+<rect x="84" y="64" width="606" height="372" fill="none" stroke="#30363d"/>
+<line x1="84" y1="436.0" x2="690" y2="436.0" stroke="#21262d" stroke-width="1"/>
+<text x="74" y="440.0" fill="#8b949e" font-size="11" text-anchor="end">0.0</text>
+<line x1="84" y1="361.6" x2="690" y2="361.6" stroke="#21262d" stroke-width="1"/>
+<text x="74" y="365.6" fill="#8b949e" font-size="11" text-anchor="end">0.2</text>
+<line x1="84" y1="287.2" x2="690" y2="287.2" stroke="#21262d" stroke-width="1"/>
+<text x="74" y="291.2" fill="#8b949e" font-size="11" text-anchor="end">0.4</text>
+<line x1="84" y1="212.8" x2="690" y2="212.8" stroke="#21262d" stroke-width="1"/>
+<text x="74" y="216.8" fill="#8b949e" font-size="11" text-anchor="end">0.6</text>
+<line x1="84" y1="138.4" x2="690" y2="138.4" stroke="#21262d" stroke-width="1"/>
+<text x="74" y="142.4" fill="#8b949e" font-size="11" text-anchor="end">0.8</text>
+<line x1="84" y1="64.0" x2="690" y2="64.0" stroke="#21262d" stroke-width="1"/>
+<text x="74" y="68.0" fill="#8b949e" font-size="11" text-anchor="end">1.0</text>
+<text x="111.5" y="456" fill="#8b949e" font-size="12" text-anchor="middle">4</text>
+<text x="221.7" y="456" fill="#8b949e" font-size="12" text-anchor="middle">6</text>
+<text x="331.9" y="456" fill="#8b949e" font-size="12" text-anchor="middle">8</text>
+<text x="442.1" y="456" fill="#8b949e" font-size="12" text-anchor="middle">10</text>
+<text x="552.3" y="456" fill="#8b949e" font-size="12" text-anchor="middle">12</text>
+<text x="662.5" y="456" fill="#8b949e" font-size="12" text-anchor="middle">14</text>
+<text x="387" y="484" fill="#cdd9e5" font-size="13" text-anchor="middle">次元 n (記憶コアの大きさ)</text>
+<text x="22" y="250" fill="#cdd9e5" font-size="13" transform="rotate(-90 22 250)" text-anchor="middle">navigability (真に収縮する個体の合格率)</text>
+<path d="M 111.5,82.6 L 221.7,86.3 L 331.9,97.5" fill="none" stroke="#3fb950" stroke-width="2.6"/>
+<circle cx="111.5" cy="82.6" r="4.5" fill="#3fb950" stroke="#0b0f14" stroke-width="1.3"/>
+<circle cx="221.7" cy="86.3" r="4.5" fill="#3fb950" stroke="#0b0f14" stroke-width="1.3"/>
+<circle cx="331.9" cy="97.5" r="4.5" fill="#3fb950" stroke="#0b0f14" stroke-width="1.3"/>
+<line x1="708" y1="154" x2="734" y2="154" stroke="#3fb950" stroke-width="3"/>
+<text x="740" y="158" fill="#e6edf3" font-size="12.5" font-weight="700">cert_sdp</text>
+<text x="740" y="174" fill="#8b949e" font-size="11">最 navigable (sound)</text>
+<path d="M 111.5,246.3 L 221.7,276.0 L 331.9,287.2" fill="none" stroke="#58a6ff" stroke-width="2.6"/>
+<circle cx="111.5" cy="246.3" r="4.5" fill="#58a6ff" stroke="#0b0f14" stroke-width="1.3"/>
+<circle cx="221.7" cy="276.0" r="4.5" fill="#58a6ff" stroke="#0b0f14" stroke-width="1.3"/>
+<circle cx="331.9" cy="287.2" r="4.5" fill="#58a6ff" stroke="#0b0f14" stroke-width="1.3"/>
+<line x1="708" y1="198" x2="734" y2="198" stroke="#58a6ff" stroke-width="3"/>
+<text x="740" y="202" fill="#e6edf3" font-size="12.5" font-weight="700">cert_two</text>
+<text x="740" y="218" fill="#8b949e" font-size="11">中位</text>
+<path d="M 111.5,283.5 L 221.7,328.1 L 331.9,350.4" fill="none" stroke="#f0a04b" stroke-width="2.6"/>
+<circle cx="111.5" cy="283.5" r="4.5" fill="#f0a04b" stroke="#0b0f14" stroke-width="1.3"/>
+<circle cx="221.7" cy="328.1" r="4.5" fill="#f0a04b" stroke="#0b0f14" stroke-width="1.3"/>
+<circle cx="331.9" cy="350.4" r="4.5" fill="#f0a04b" stroke="#0b0f14" stroke-width="1.3"/>
+<line x1="708" y1="242" x2="734" y2="242" stroke="#f0a04b" stroke-width="3"/>
+<text x="740" y="246" fill="#e6edf3" font-size="12.5" font-weight="700">cert_inf</text>
+<text x="740" y="262" fill="#8b949e" font-size="11">安価だが脆い</text>
+<text x="708" y="292" fill="#8b949e" font-size="10.5">実測点 = n=4,6,8 (各数百サンプル)</text>
+</svg>
