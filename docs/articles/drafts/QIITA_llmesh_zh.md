@@ -1581,3 +1581,90 @@ python -m llmesh.cli.doctor
 只要先统一到共同的单据上，那么哪怕来了新的传感器、没见过的设备，也只需写「把这台设备的原始数据薄薄翻译成 `SensorEvent` 形态的那一张」大约 50 行，异常检测和 AI 说明就原封不动地都乘上去了。虽不花哨，但在要长期运营的系统里，这种「一开始就只先把共同入口定一个」的判断，往后往往最能省时间。
 
 <!-- INTERLUDE -->
+
+
+
+---
+
+## 第6章 LLMesh: 做了一个用 MCP 安全连接 Local LLM 的 P2P Swarm PoC
+
+<!-- KAMI -->
+> 📖 **简单来说**
+>
+> 本章介绍的是一个试作品（PoC），它回应了「想把手头的 AI 连起来多台、组成团队一起干活，但又不想让公司内部的机密流到外面」这一愿望。多个 AI 节点分担代码生成、测试、评审，但其特点是把安全的边界线划在了便利之前。给每个节点用电子签名带上身份、对初次见面的对象慎重确认、拦下危险输入、输出也经验证后再接收——就这样以「会被冒充、被篡改、机密会泄漏」为前提把防守加固。它还处在研究阶段，设想用于可信任的公司内部网络。
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense 知识库指南** <!-- fullsense-team-kb -->
+FullSense 开发全史 60+ 篇文章（4 种语言版、故事化的阅读顺序指南、通俗易懂版、四格漫画）均已汇总至 Qiita Team **FullSense KB**（仅限团队成员）。
+:::
+
+
+想把 Local LLM 用多台协同起来。但是，不想把机密代码或公司内部 know-how 交给外部节点。LLMesh 就是从这个问题意识出发做出来的、安全优先的 Local LLM Swarm 的 PoC。
+
+### 做了什么
+
+LLMesh 是一个框架，把用 Ollama 或 llama.cpp 跑的 Local LLM 节点，用 MCP 风格的 HTTP tool interface 连起来，分布式执行代码生成、测试生成、代码评审、输出评估。
+
+当前的实现，针对的是可信 LAN 或单一操作者的多台 PC 环境。还不到信任公开互联网上任意节点来使用的阶段。
+
+GitHub: https://github.com/furuse-kazufumi/llmesh
+
+### 安全设计
+
+在 LLMesh 中，把安全边界设计在便利之前。
+
+- 用 Ed25519 做 Node ID 和请求签名
+- `did:llmesh:1:` 形式的标识符
+- 用 TOFU 做初次 peer 确认
+- Prompt Firewall 的 fail-closed 设计
+- 基于 JSON Schema 的 OutputValidator
+- UUID v4 task_id 验证
+- nonce replay 防御
+- 用 OSV API 的 SCA Gate
+- HMAC chain 的 AuditTrace
+- 在 L3/L4 数据中不保存 prompt 正文的审计日志
+- Docker Compose PoC 中的 cap_drop, read_only, tmpfs, no-new-privileges
+
+### 为什么做
+
+Local LLM 在守密方面很有魅力，但单体在能力和专业性上有局限。另一方面，把多个节点连起来后，这次又会冒出 prompt leakage、恶意 patch、依赖关系攻击、replay、节点冒充等问题。
+
+LLMesh 是一个为「以倒向安全侧的前提开始 Local LLM Swarm 实验」而打造的地基。
+
+### 当前状态
+
+- 526 tests passing
+- Critical findings: 0
+- High findings: 0
+- 有 5-node Docker Compose PoC
+- 已在 GitHub 公开: https://github.com/furuse-kazufumi/llmesh
+- PyPI 分发名预定为 `llmesh-mcp`
+
+### 5-node PoC
+
+```bash
+pip install -e ".[dev]"
+python -m pytest
+docker compose -f docker-compose.poc.yml up --build
+```
+
+在 PoC 中，会启动 4 个 worker node 和 orchestrator。
+
+- generate_code
+- generate_tests
+- review_code
+- critique_output
+- orchestrator
+
+### 今后
+
+接下来打算着手的：
+
+- NonceStore 的 SQLite 持久化
+- AuditTrace 的 file lock 支持
+- TrustedPeers 的尺寸上限与 gossip TTL
+- 让 CapabilityManifest 签名对象做到 schema-version-aware
+- 对 L3+ 输入强制 Firewall → PrivacySummarizer → LLMBackend 的管线
+
+LLMesh 还处在研究/PoC 阶段，但会把它当作让 Local LLM 安全协同的实验基盘培育下去。
