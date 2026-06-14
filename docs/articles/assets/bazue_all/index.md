@@ -899,6 +899,7 @@
   - EN: "Femininity reading: only 5… garbage." "That gadget you're wearing scores lower."
   - ZH: 「女子力只有5…垃圾呢。」「戴那种怪东西的你更低吧。」
   - KO: "여자력 고작 5… 쓰레기네." "그런 이상한 거 단 쪽이 더 낮거든."
+- 使いどころ: llcore の完成度／達成スコアが低すぎた時の身も蓋もない一言：「(女子力)たったの5…ゴミね…」を「capability たったの5…」式に流用。期待値に届かない計測値（弱い達成度・振るわないベンチ）への自虐ツッコミ。honest disclosure で数値が低い場面の挿絵（ユーザー確認済 2026-06-14）
 
 ### 089.jpg
 - セリフ:
