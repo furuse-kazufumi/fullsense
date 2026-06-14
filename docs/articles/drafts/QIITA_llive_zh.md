@@ -2244,3 +2244,10 @@ llive Rust 高速化 **5 模式判定表** (#24-05 §13.3) 是用 **结构上相
 > 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
 
 <!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+
+![「ひくわ」と一万円札を差し出す森田](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/012.jpg)
+> 🗒️ *「ひくわ」— 紹介リンクで小銭を稼ごうとする魂胆、我ながらちょっと引く*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+
+<!-- /CTAIMG -->
