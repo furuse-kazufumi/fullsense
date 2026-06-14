@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-14 09:42:49
+- **生成時刻**: 2026-06-14 11:09:10
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,16 +20,16 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-7565249 feat(qiita_42): 地形アニメを GIF 化 (Qiita は SVG をラスタライズしアニメ不可 → GIF はアニメ保持)
-3707337 fix(qiita_38): 数式フォント 24→18 で枠内に収め文字はみ出しを解消 + W callout 14→13
-bfdd4f6 auto: qiita_38_fig_core.svg 編集前 (2026-06-14 08:59)
-6b15a4d auto: qiita_38_fig_core.svg 編集前 (2026-06-14 08:57)
-ad43821 auto: qiita_public_post.py 編集前 (2026-06-14 07:45)
-5d4ff23 asset(#39): navigability vs n + 2^n wall figure (real n=4,6,8 data)
-d98702b article(#42): llm-viz fork→honest verifier viz→capability-first replan + landscape SVG asset
-0b46cd2 auto: QIITA_#42_llmviz_fork_to_build_llm.md 編集前 (2026-06-13 21:50)
-1df6b3c auto: QIITA_#42_llmviz_fork_to_build_llm.md 編集前 (2026-06-13 21:50)
-837e8fc auto: QIITA_#42_llmviz_fork_to_build_llm.md 編集前 (2026-06-13 21:50)
+ddaa7f4 auto: _verify_llmesh_tr.py 編集前 (2026-06-14 10:11)
+ccbd8fa auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:07)
+74bdebd auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:06)
+f335dd7 auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:06)
+af719c7 auto: QIITA_llmesh_zh.md 編集前 (2026-06-14 10:05)
+b59cc44 auto: QIITA_llmesh_en.md 編集前 (2026-06-14 10:05)
+26d5b39 auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:04)
+aa4c337 auto: QIITA_llmesh_en.md 編集前 (2026-06-14 10:03)
+9581e59 auto: QIITA_llmesh_zh.md 編集前 (2026-06-14 10:03)
+c04b4ac auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:03)
 ```
 
 ### git status (porcelain)
@@ -37,26 +37,9 @@ d98702b article(#42): llm-viz fork→honest verifier viz→capability-first repl
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- M docs/articles/drafts/QIITA_#38_defensive_disclosure_verified_memory.md
- M docs/articles/drafts/QIITA_#42_llmviz_fork_to_build_llm.md
- M docs/articles/drafts/QIITA_ARC_38-42_combined.md
-?? docs/articles/drafts/QIITA_arc_en.md
-?? docs/articles/drafts/QIITA_arc_ja.md
-?? docs/articles/drafts/QIITA_arc_ko.md
-?? docs/articles/drafts/QIITA_arc_zh.md
-?? docs/articles/drafts/QIITA_evo_en.md
-?? docs/articles/drafts/QIITA_evo_ja.md
-?? docs/articles/drafts/QIITA_evo_ko.md
-?? docs/articles/drafts/QIITA_evo_zh.md
-?? docs/articles/drafts/QIITA_kami_en.md
-?? docs/articles/drafts/QIITA_kami_ja.md
-?? docs/articles/drafts/QIITA_kami_ko.md
-?? docs/articles/drafts/QIITA_kami_zh.md
-?? docs/articles/drafts/QIITA_llive_en.md
-?? docs/articles/drafts/QIITA_llive_ja.md
-?? docs/articles/drafts/QIITA_llive_ko.md
-?? docs/articles/drafts/QIITA_llive_zh.md
-?? docs/articles/drafts/QIITA_llmesh_ja.md
+ D docs/articles/drafts/_verify_llmesh_tr.py
+?? docs/articles/assets/bazue_all/index.md
+?? docs/articles/drafts/QIITA_wait_essay_ja.md
 ```
 
 
@@ -91,8 +74,13 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `09:41` `docs/SESSION_SUMMARY.md`
-- `09:41` `docs/NEXT_SESSION.auto.md`
+- `11:06` `docs/NEXT_SESSION.auto.md`
+- `11:06` `docs/SESSION_SUMMARY.md`
+- `11:06` `docs/articles/assets/bazue_all/index.md`
+- `10:51` `docs/articles/drafts/QIITA_wait_essay_ja.md`
+- `10:07` `docs/articles/drafts/QIITA_llmesh_ko.md`
+- `10:06` `docs/articles/drafts/QIITA_llmesh_zh.md`
+- `10:05` `docs/articles/drafts/QIITA_llmesh_en.md`
 - `09:40` `docs/articles/drafts/QIITA_llmesh_ja.md`
 - `09:40` `docs/articles/drafts/QIITA_evo_ja.md`
 - `09:40` `docs/articles/drafts/QIITA_llive_ja.md`
@@ -106,11 +94,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `09:28` `docs/articles/drafts/QIITA_llive_en.md`
 - `09:27` `docs/articles/drafts/QIITA_kami_ko.md`
 - `09:27` `docs/articles/drafts/QIITA_kami_zh.md`
-- `09:27` `docs/articles/drafts/QIITA_kami_en.md`
-- `09:25` `docs/articles/drafts/QIITA_arc_ko.md`
-- `09:25` `docs/articles/drafts/QIITA_arc_zh.md`
-- `09:24` `docs/articles/drafts/QIITA_arc_en.md`
-- `09:16` `docs/articles/drafts/QIITA_#42_llmviz_fork_to_build_llm.md`
 
 
 ## Cross-references
