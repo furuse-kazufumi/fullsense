@@ -978,6 +978,9 @@ flowchart LR
 
 つまり、**「進化が勝った!」というあの 20 連勝は幻** だったのです。相手が弱かっただけ。強い相手を出せば、**(同じ計算予算・同じ評価回数で比べた場合)** ふつうの学習法のほうが賢かった。
 
+![「たったの5…ゴミね…」と容赦なく低評価を下す明美](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/088.jpg)
+> 🗒️ *「たったの5…ゴミね…」— 強い相手を出した瞬間、自慢の点数はこの扱い*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+
 #### 負けたけど、これは失敗じゃない
 
 ここで大事なのは、**負けたこと自体は失敗ではない**、という点です。
