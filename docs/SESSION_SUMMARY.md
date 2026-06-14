@@ -3,47 +3,44 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-14 13:19:03
+- **最終更新**: 2026-06-14 13:31:51
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+f866f45 auto: QIITA_kami_ja.md 編集前 (2026-06-14 13:31)
+7b4a114 auto: index.md 編集前 (2026-06-14 13:31)
+e8d81ba auto: QIITA_wait_essay_ja.md 編集前 (2026-06-14 13:30)
+665369a auto: QIITA_kami_ja.md 編集前 (2026-06-14 13:29)
+38d7dab auto: QIITA_kami_ja.md 編集前 (2026-06-14 13:28)
 bc0e7f1 auto: index.md 編集前 (2026-06-14 13:18)
 66a4484 auto: index.md 編集前 (2026-06-14 13:16)
 ce2eddb auto: index.md 編集前 (2026-06-14 13:11)
 b6f0200 auto: FULLSENSE_KB_INDEX.md 編集前 (2026-06-14 13:07)
 24922ea auto: index.md 編集前 (2026-06-14 13:06)
-10dd73f auto: index.md 編集前 (2026-06-14 13:06)
-2e779cd auto: index.md 編集前 (2026-06-14 13:00)
-77c3250 auto: index.md 編集前 (2026-06-14 11:31)
-8d1dfab auto: index.md 編集前 (2026-06-14 11:14)
-19047a9 auto: index.md 編集前 (2026-06-14 11:14)
 ```
 
 ## 現在の git status
 
 ```
-M docs/articles/assets/bazue_all/index.md
+M docs/articles/drafts/QIITA_kami_ja.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-13:18 docs/articles/assets/bazue_all/index.md
-13:16 docs/SESSION_SUMMARY.md
-13:16 docs/NEXT_SESSION.auto.md
+13:31 docs/articles/drafts/QIITA_kami_ja.md
+13:31 docs/articles/assets/bazue_all/index.md
+13:30 docs/articles/drafts/QIITA_wait_essay_ja.md
+13:19 docs/SESSION_SUMMARY.md
+13:19 docs/NEXT_SESSION.auto.md
 13:07 docs/articles/FULLSENSE_KB_INDEX.md
 12:20 docs/articles/drafts/QIITA_llmesh_ja.md
 12:20 docs/articles/drafts/QIITA_llive_ja.md
-12:20 docs/articles/drafts/QIITA_kami_ja.md
 12:20 docs/articles/drafts/QIITA_evo_ja.md
 12:20 docs/articles/drafts/QIITA_arc_ja.md
-11:21 docs/articles/drafts/QIITA_wait_essay_ja.md
-11:21 docs/articles/drafts/QIITA_llmesh_ko.md
-11:21 docs/articles/drafts/QIITA_llmesh_zh.md
-11:21 docs/articles/drafts/QIITA_llmesh_en.md
 ```
 
 ---
