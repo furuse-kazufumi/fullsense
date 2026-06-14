@@ -1668,3 +1668,330 @@ PoC 에서는, 4 개의 worker node 와 orchestrator 를 기동합니다.
 - L3+ 입력에 대한 Firewall → PrivacySummarizer → LLMBackend 의 강제 파이프라인
 
 LLMesh 는 아직 연구/PoC 단계이지만, Local LLM 을 안전하게 협조시키는 실험 기반으로 키워 갑니다.
+
+---
+
+## 제7장 llmesh: 로컬 LLM 스웜 × 산업 IoT × 연구 자동화
+
+<!-- KAMI -->
+> 📖 **간단히 말하면**
+>
+> 마지막 장은 「지금까지의 전부 포함」과 「앞으로의 확장」을 보여주는 에코시스템 소개입니다. 본체(llmesh-mcp)에, 터미널에서 결과를 깔끔하게 보여주는 짝꿍 도구(llove)가 조합되고, 거기에 최근에는 연구의 자동화——논문을 읽는다→가설을 세운다→계획한다→리뷰한다, 라는 일련의 흐름이나, 로봇 제어・재료 탐색・여러 종류의 데이터를 한데 모아 기억하는 구조까지 확장하고 있습니다. 설계의 슬로건은 「본체는 가볍고 얇게, 겉모습이나 연출은 별도 도구에 맡긴다」 「외부의 무거운 의존에 기대지 않고 최소 구성으로도 동작한다」로, 로컬에서 완결되는 연구 기반을 한 차례 갖추고 싶은 사람을 위한 장입니다.
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense 지식 베이스 안내** <!-- fullsense-team-kb -->
+FullSense 개발 전사 60+ 편 (4개 언어판・스토리 기반 읽기 순서 가이드・쉬운 설명판・4컷 만화 포함) 은 Qiita Team **FullSense KB** 에 모여 있습니다 (팀 멤버 전용).
+:::
+
+
+`llmesh` 는, 로컬 LLM (Ollama) 노드 군을 MCP
+프로토콜로 연결해, 코드 생성・리뷰・테스트 생성을 분산 실행하는 시큐어한 Python
+스웜 프레임워크입니다. 최근에는 「연구 자동화 × 유연 로봇 × 멀티모달 지식 × HCI 를 1
+개의 기반으로 다룬다」 방향으로 확장하고 있으며, 본 기사에서는 에코시스템 일체 (llmesh / llmesh-llove + 연구 오케스트레이션 층)
+를 한 번에 소개합니다.
+
+- llmesh 소스: https://github.com/furuse-kazufumi/llmesh
+- PyPI: https://pypi.org/project/llmesh-mcp/
+- llmesh-llove (TUI viewer): https://pypi.org/project/llmesh-llove/
+
+#### 에코시스템 전체상
+
+```mermaid
+flowchart TB
+  Root[llmesh 에코시스템]
+  Root --> Mcp[llmesh-mcp 본체]
+  Root --> Llove[llmesh-llove TUI viewer]
+
+  Mcp --> Llm[Multi-LLM backend<br/>Ollama / Anthropic / 7 호환]
+  Mcp --> Proto[23 통신 어댑터<br/>Modbus / OPC-UA / MQTT 등]
+  Mcp --> Sec[Privacy stack<br/>Firewall + PII + DataLevel]
+  Mcp --> Rag[RAG + Multimodal memory]
+  Mcp --> Res[연구 자동화 기반<br/>Literature / Hypothesis / Planner]
+  Mcp --> Rust[Rust 확장<br/>PointCloud encode 6x]
+
+  Llove --> Tui[17 시나리오 TUI]
+  Llove --> Vw[Markdown / SVG / Mermaid 표시]
+  Llove --> Cmd[Command Palette]
+```
+
+#### 1. llmesh-mcp 본체
+
+##### 1.1 멀티 프로토콜 접속 층
+
+REST / TCP / UDP / SSH / SMTP / Modbus / Serial / OPC-UA / MQTT / EtherCAT / CAN / BACnet / WebSocket / DNP3 / GOOSE /
+DVS / Depth 까지 `ProtocolAdapter` ABC 로 통일되어 있습니다. FanoutExecutor 는 `protocol=` 을 전환하기만 하면 k-of-n
+병렬 팬아웃을 HTTP→TCP→Modbus 등으로 실행할 수 있습니다.
+
+```python
+from llmesh.protocol import HTTPAdapter, Modbus
+from llmesh.orchestrator import FanoutExecutor
+
+executor = FanoutExecutor(nodes=[...], protocol="http", k=2)
+result = executor.invoke("generate_code", {"prompt": "..."})
+```
+
+##### 1.2 멀티 LLM 백엔드
+
+```python
+from llmesh.llm import OllamaBackend
+from llmesh.llm.anthropic_backend import AnthropicBackend
+from llmesh.llm.openai_compatible import OpenAICompatibleBackend
+
+### 동일 LLMBackend ABC 로 맞추므로 Ollama → Anthropic → Together AI 로
+### 설정 교체만으로 전환 가능
+backend = AnthropicBackend(model="claude-haiku-4-5")
+```
+
+OpenAICompatibleBackend 는 OpenAI / Azure / OpenRouter / Together / Groq / Mistral / DeepSeek 의 7
+프로바이더에 대응합니다.
+
+##### 1.3 RAG 모듈
+
+```python
+from llmesh.rag import MockEmbedder, NumpyVectorStore, Retriever
+
+emb = MockEmbedder(dim=384)
+store = NumpyVectorStore(dimension=384)
+ret = Retriever(embedder=emb, store=store)
+ret.index(text="LLMesh is...", doc_id="d1")
+hits = ret.search("What is LLMesh?", top_k=3)
+```
+
+3 개의 스토어 백엔드에서 선택 가능:
+
+- `NumpyVectorStore`: 순 numpy, `.npz` 영속화, ~10 만 건용
+- `SqliteVectorStore`: stdlib 만, 단일 파일, ~100 만 건
+- `LSHVectorStore`: numpy 근사 NN, 100 만 건 이상용
+
+##### 1.4 보안 스택
+
+PromptFirewall (4 층: 정규식 / Presidio / PII / 구조) + DataLevel L0~L4 + 7 단 OutputValidator + HMAC Chain
+AuditTrail. LLM 응답은 OutputValidator 를 통과할 때까지 untrusted 로 취급합니다.
+
+#### 2. llmesh-llove (TUI viewer)
+
+`llove` 는 llmesh 의 시나리오를 Textual TUI 로 재생・가시화하는 패키지입니다. 「llmesh 심플 / llove
+로 표시 궁리」의 분담으로, SFEN 이나 did:key 나 sensor float 를 llmesh 가 얇게 흘리고, llove 는 전속으로 표시를 담당하는 설계입니다.
+
+```bash
+pip install llmesh-llove
+llove demo --list                          # 17 시나리오 목록
+llove --lang ja demo --scenario shogi      # 장기 MVP
+llove --lang ja demo --scenario vision     # VLM 불량 검사 ASCII
+llove --lang ja demo --scenario pointcloud # LiDAR top-view ASCII
+```
+
+17 시나리오의 내역: firewall / scada / multimodal / rag / backends / audit / reliability / cost / chat / bench / drift
+/ mcp_call / vision / pointcloud / coin_toss / mindmap / shogi.
+
+##### 주요 특징
+
+- **Markdown / SVG / Mermaid** 를 터미널에서 표시 (chafa / rsvg-convert 등의 외부 도구에 subprocess 로 폴백)
+- **접기** (제목 / 코드 블록 / 표) + 상태 영속화
+- **Command Palette**: `:` 키로부터 빌트인 11 종 (`:help` `:identity` `:layout` `:demo` `:play` `:open` `:peer`
+`:set` `:get` `:alias` `:macro`) + alias / macro 중첩 5 단 방지
+- **WindowManager** (F17): Registry + IconSet + 자유 가변/상주 락의 2 종 컨테이너 + `layout.toml`
+- **shogi MVP**: 한자 말 + 기보 `▲７六歩 (2.4초)` + 자동 kifu 로그
+
+##### Ed25519 per-move 서명
+
+전 게임 횡단으로 1 수마다 Ed25519 서명을 찍습니다 (`did:key` 베이스). 이로써 대국 리플레이의 변조를 검출할 수 있습니다.
+
+#### 3. 연구 오케스트레이션 층
+
+최근 (2026-05-11 세션) 에 `llmesh.core` / `llmesh.research` / `llmesh.domains` / `llmesh.rag` 에 연구 자동화 기반의
+Phase 0~5 를 한 번에 추가했습니다. pydantic 의존 없음, `dataclasses` 만으로 JSON-Schema 호환의 스키마를 유지합니다.
+
+##### 3.1 core 프리미티브 (Phase 0a / 0b)
+
+```python
+from llmesh.core import Agent, AgentConfig, Tool, ToolSpec, TaskGraph, TaskNode
+from llmesh.core import TraceLogger
+
+with TraceLogger("trace.jsonl", run_id="r1", seed=42, config={}) as tl:
+  tl.log_prompt("agent.lit", prompt="...", response="...",
+				model="claude-haiku-4-5", model_version="20251001")
+  tl.log_tool_call("search", input_payload={"q": "..."},
+				   output_payload={"hits": 3})
+  tl.log_evaluation("reviewer", target="agent.lit#1", score=0.85)
+```
+
+`TraceLogger` 는 `run.start` / `run.end` 를 자동 발행하고, `threading.Lock` 으로 병렬 agent 로부터의 쓰기를 직렬화합니다.
+
+##### 3.2 literature → hypothesis → planner → reviewer 폐루프 (Phase 1 / 2)
+
+```python
+from llmesh.research import (
+  LiteratureAgent, LiteratureRequest, mock_extract,
+  HypothesisAgent, HypothesisRequest, mock_hypothesis_extract,
+  PlannerAgent, ReviewerAgent, run_plan_review_loop,
+  mock_planner_extract, mock_reviewer_extract,
+)
+from llmesh.core import AgentConfig
+
+lit = LiteratureAgent(AgentConfig(name="lit"), extract_fn=mock_extract)
+digest = lit.run(LiteratureRequest(text="paper body", title="My Paper"))
+
+hyp = HypothesisAgent(AgentConfig(name="hyp"), extract_fn=mock_hypothesis_extract)
+candidates = hyp.run(HypothesisRequest(digest=digest, max_candidates=3)).candidates
+
+planner = PlannerAgent(AgentConfig(name="p"), extract_fn=mock_planner_extract)
+reviewer = ReviewerAgent(AgentConfig(name="r"), extract_fn=mock_reviewer_extract)
+loop = run_plan_review_loop(
+  hypothesis=candidates[0],
+  planner=planner,
+  reviewer=reviewer,
+  max_iterations=3,
+)
+print(loop.verdict.kind, loop.iterations)  # "approve" 1
+```
+
+backend 추상은 `ExtractFn = Callable[[str], dict]`. 테스트는 `mock_*` 함수로 완결되고, 본번은 `make_ollama_extract` /
+`make_anthropic_extract` adapter 로 기존 `LLMBackend.invoke` 를 래핑합니다.
+
+##### 3.3 robotics planning interface (Phase 3)
+
+```python
+from llmesh.research import (
+  MockPerceptionAgent, MockTaskPlannerAgent,
+  MockMotionPlannerAgent, run_robotics_pipeline,
+)
+
+result = run_robotics_pipeline(
+  perception_agent=MockPerceptionAgent(),
+  task_planner=MockTaskPlannerAgent(),
+  motion_planner=MockMotionPlannerAgent(),
+  instruction="pick the cup_blue",
+  sensors={"objects": [{"name": "cup_blue"}]},
+)
+print(result.motion_plan.trajectory.waypoints)
+```
+
+PerceptionAgent / TaskPlannerAgent / MotionPlannerAgent / ReplanningAgent 의 4 ABC + `ContactEvent` (Saguri-bot 풍:
+body_a/b + normal_force + is_expected) + `Trajectory` / `Waypoint`. Phase 8 에서 ROS 2 turtlesim, Phase 9 에서 VLA
+mock, Phase 10 에서 Gazebo arm 이 끼워넣어질 예정입니다.
+
+##### 3.4 materials predictor (Phase 4)
+
+```python
+from llmesh.domains.materials import (
+  Structure, Property,
+  MockPropertyPredictor, MockCandidateGeneratorAgent, MockEvaluatorAgent,
+  discover_top_k,
+)
+
+top = discover_top_k(
+  seed=Structure(structure_id="seed", composition={"Fe": 0.7, "Ni": 0.3}),
+  target_property=Property(name="band_gap", unit="eV"),
+  target_value=2.5,
+  generator=MockCandidateGeneratorAgent(),
+  predictor=MockPropertyPredictor(low=0.0, high=5.0),
+  evaluator=MockEvaluatorAgent(accept_fraction=0.5),
+  n_candidates=10,
+  k=3,
+)
+```
+
+`MockPropertyPredictor` 는 SHA-1 베이스의 deterministic pseudo-regressor 로 random forest 대체입니다. ABC 를 진짜
+scikit-learn / GNN / ALIGNN 으로 교체하면 실기 운용으로 이행할 수 있습니다.
+
+##### 3.5 multimodal memory + document parsers (Phase 5)
+
+```python
+from pathlib import Path
+from llmesh.rag import parse_document, MultimodalMemory
+
+### PDF / Markdown / HTML / text 를 1 함수로
+text = parse_document(Path("paper.md"))    # 확장자로 자동 분배
+text2 = parse_document(b"<p>hi</p>", kind="html")
+
+### text / image / table / log 를 동일 ID 공간에서 기억
+mem = MultimodalMemory()
+mem.add_text("paper-1#abstract", text=text, vector=[0.7, 0.3, 0.1])
+mem.add_image("paper-1#fig1", uri="figs/fig1.png", vector=[0.0, 1.0, 0.0])
+mem.add_table("paper-1#tab1",
+			rows=[("metric", "val"), ("acc", "0.9")],
+			vector=[0.0, 0.0, 1.0])
+mem.add_log("run-42#evt-001",
+		  line="2026-05-11 12:00 INFO ok",
+		  vector=[1.0, 1.0, 0.0])
+
+hits = mem.search([0.7, 0.3, 0.1], modalities=("text", "table"), top_k=5)
+```
+
+cosine 유사도는 `math.sqrt` 만으로 구현하고 있습니다 (numpy 불필요). `MultimodalStoreBackend` ABC 를 교체하면 기존 NumpyVS
+/ SqliteVS / LSHVS 에도 접속할 수 있습니다.
+
+#### 4. 설치
+
+```bash
+### 최소 구성 (RTOS / 임베디드 Linux 에서도 설치 가능)
+pip install llmesh-mcp
+
+### 자주 쓰는 조합
+pip install "llmesh-mcp[industrial,vision,rag]"
+
+### llove TUI viewer
+pip install llmesh-llove
+```
+
+`pyproject.toml` 의 optional extras:
+
+- `industrial`: Modbus / OPC-UA / MQTT 등의 업무 프로토콜
+- `rag`: numpy / sqlite-vec
+- `presidio`: Microsoft Presidio PII 검출
+- `vlm`: Pillow + LLaVA captioner
+- `dnp3`: pydnp3 (중요 인프라)
+
+#### 5. 로드맵
+
+직근의 우선순위 (claude-loop queue 에서):
+
+| Phase | 내용 | 상황 |
+|-------|------|------|
+| 0a~5 | core / trace logger / llove view / literature / hypothesis / planner / robotics I/F / materials / multimodal
+memory | 완료 |
+| 6 | llove explainability dashboard | 진행 중 |
+| 7 | e2e demo + paper artifact pipeline | 계획 |
+| 8 | ROS 2 연계 데모 (유연 로봇 작업 e2e) | 계획 |
+| 9 | VLA PoC — turtlesim mock | 계획 |
+| 10 | VLA — Gazebo arm pick&place | 계획 |
+
+#### 6. 하이라이트된 설계 원칙
+
+1. **no-pydantic policy**: `dataclasses` 로 JSON-Schema 호환 스키마를 표현하고, `llmesh-mcp` 를 RTOS / 임베디드 Linux
+에도 설치 가능하게 유지
+2. **ExtractFn 주입**: 모든 에이전트가 `Callable[[str], dict]` 를 받는 형태로 해서, Ollama / Anthropic / mock
+을 통일 인터페이스로 전환 가능하게
+3. **trace-as-replay**: 모든 prompt / model_version / tool I/O / 평가 결과가 JSONL 로 남으므로, 연구 run 을 임의 시점부터
+replay 할 수 있다
+4. **llmesh 심플 / llove 로 표시 궁리**: 통신이나 상태는 llmesh 가 얇게 흘리고, 겉모습은 전부 llove 가 떠맡는 역할 분담
+
+#### 7. 참고 링크
+
+- 소스: https://github.com/furuse-kazufumi/llmesh
+- llove 소스: https://github.com/furuse-kazufumi/llove
+- 사양서: 117 장 / 500+ 요건 항목 (`SPECIFICATION.md`)
+- 아키 도: `docs/ARCHITECTURE.md` (Mermaid 포함)
+
+로컬에서 동작하는 멀티 에이전트 연구 기반을 한 차례 갖추고 싶은 사람을 위한 것입니다. 의견・PR 환영합니다.
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ 이 연재는 Claude Code 와 이인삼각으로 쓰고 있습니다
+>
+> 기사 속의 구현・검증・가시화는 **Claude Code**(Anthropic 의 AI 코딩 환경)와 함께 진행하고 있습니다.
+> Claude Code 는 **1 주일 무료 트라이얼**로 시험할 수 있습니다. 마음에 들어 유료 플랜에 등록하실 때,
+> 아래 소개 링크를 경유하면 필자에게 「개발을 계속하기 위한 크레딧」이 들어와, 이 연재의 지속을 뒷받침할 수 있습니다.
+>
+> 👉 **무료로 시험하기 / 소개 링크** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->
