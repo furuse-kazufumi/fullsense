@@ -1581,3 +1581,396 @@ The idea of aligning a factory's communication standards onto a single slip is u
 If you align onto a common slip, then even when a new sensor or an unfamiliar device arrives, you only write about 50 lines of "one sheet that thinly translates this device's raw data into the shape of `SensorEvent`," and anomaly detection and AI explanation ride on exactly as they are. It's not flashy, but in systems you operate for a long time, this kind of judgment — "decide just one common entry point at the very start" — saves the most time in the long run.
 
 <!-- INTERLUDE -->
+
+
+
+---
+
+## Chapter 6 LLMesh: I Built a P2P Swarm PoC That Safely Connects Local LLMs over MCP
+
+<!-- KAMI -->
+> 📖 **In a nutshell**
+>
+> This chapter introduces a prototype (PoC) that answers the wish: "I want to connect several of my own AIs and have them work as a team, but I don't want internal secrets going outside." Multiple AI nodes divide up code generation, testing, and review, but the distinctive part is that we drew the safety boundary before convenience. Each node is given an identity via a digital signature, first-time peers are carefully verified, dangerous inputs are stopped, and outputs are verified before being accepted — in this way, the defenses are hardened on the assumption of impersonation, tampering, and secret leaks. It's still at the research stage and is intended for use on a trusted internal network.
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense Knowledge Base** <!-- fullsense-team-kb -->
+The full FullSense development history — 60+ articles in 4 languages, with a story-based reading guide, plain-language editions, and 4-panel manga — is consolidated in our Qiita Team **FullSense KB** (team members only).
+:::
+
+
+I want to make Local LLMs cooperate across several machines. But I don't want to hand secret code or internal know-how to external nodes. LLMesh is a security-first Local LLM Swarm PoC built out of this concern.
+
+### What I built
+
+LLMesh is a framework for connecting Local LLM nodes running on Ollama or llama.cpp via an MCP-style HTTP tool interface, and for distributing code generation, test generation, code review, and output evaluation.
+
+The current implementation targets a trusted LAN, or a multi-PC environment under a single operator. It's not at the stage of trusting and using arbitrary nodes on the public internet.
+
+GitHub: https://github.com/furuse-kazufumi/llmesh
+
+### Security design
+
+In LLMesh, I designed the security boundary before convenience.
+
+- Node ID and request signing via Ed25519
+- `did:llmesh:1:`-format identifiers
+- first-time peer confirmation via TOFU
+- the Prompt Firewall's fail-closed design
+- a JSON-Schema-based OutputValidator
+- UUID v4 task_id validation
+- nonce replay defense
+- an SCA Gate using the OSV API
+- an HMAC-chain AuditTrace
+- an audit log that does not store the prompt body for L3/L4 data
+- cap_drop, read_only, tmpfs, no-new-privileges in the Docker Compose PoC
+
+### Why I built it
+
+Local LLMs are attractive in terms of confidentiality, but on their own they have limits in capability and specialization. On the other hand, once you connect multiple nodes, now prompt leakage, malicious patches, dependency attacks, replay, and node impersonation become problems.
+
+LLMesh is a foundation for starting Local LLM Swarm experiments on the premise of "erring on the side of safety."
+
+### Current state
+
+- 526 tests passing
+- Critical findings: 0
+- High findings: 0
+- a 5-node Docker Compose PoC
+- published on GitHub: https://github.com/furuse-kazufumi/llmesh
+- PyPI distribution name planned as `llmesh-mcp`
+
+### 5-node PoC
+
+```bash
+pip install -e ".[dev]"
+python -m pytest
+docker compose -f docker-compose.poc.yml up --build
+```
+
+The PoC starts four worker nodes and an orchestrator.
+
+- generate_code
+- generate_tests
+- review_code
+- critique_output
+- orchestrator
+
+### Going forward
+
+Next, I plan to work on:
+
+- SQLite persistence for the NonceStore
+- file-lock support for the AuditTrace
+- a size cap and gossip TTL for TrustedPeers
+- making the CapabilityManifest signing target schema-version-aware
+- a forced pipeline of Firewall → PrivacySummarizer → LLMBackend for L3+ input
+
+LLMesh is still at the research/PoC stage, but I'll grow it as an experimental platform for safely cooperating Local LLMs.
+
+---
+
+## Chapter 7 llmesh: Local LLM Swarm × Industrial IoT × Research Automation
+
+<!-- KAMI -->
+> 📖 **In a nutshell**
+>
+> The final chapter is an ecosystem tour showing "everything so far" and "where it's spreading next." To the core (llmesh-mcp), a companion tool that displays results nicely in the terminal (llove) is combined, and lately it has spread further into research automation — a sequence of read a paper → form a hypothesis → plan → review — as well as robot control, materials discovery, and a mechanism that records multiple kinds of data together. The design watchwords are "keep the core light and thin, and leave the look and presentation to a separate tool" and "don't rely on heavy external dependencies; work even in a minimal configuration." This chapter is for people who want to assemble a full set of a research foundation that runs entirely locally.
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense Knowledge Base** <!-- fullsense-team-kb -->
+The full FullSense development history — 60+ articles in 4 languages, with a story-based reading guide, plain-language editions, and 4-panel manga — is consolidated in our Qiita Team **FullSense KB** (team members only).
+:::
+
+
+`llmesh` is a secure Python swarm framework that connects groups of local LLM (Ollama) nodes via the MCP protocol and distributes code generation, review, and test generation. Recently it has been expanding toward "handling research automation × flexible robots × multimodal knowledge × HCI on a single foundation," and this article introduces the full ecosystem (llmesh / llmesh-llove + the research orchestration layer) all at once.
+
+- llmesh source: https://github.com/furuse-kazufumi/llmesh
+- PyPI: https://pypi.org/project/llmesh-mcp/
+- llmesh-llove (TUI viewer): https://pypi.org/project/llmesh-llove/
+
+#### Ecosystem overview
+
+```mermaid
+flowchart TB
+  Root[llmesh ecosystem]
+  Root --> Mcp[llmesh-mcp core]
+  Root --> Llove[llmesh-llove TUI viewer]
+
+  Mcp --> Llm[Multi-LLM backend<br/>Ollama / Anthropic / 7 compatible]
+  Mcp --> Proto[23 communication adapters<br/>Modbus / OPC-UA / MQTT and more]
+  Mcp --> Sec[Privacy stack<br/>Firewall + PII + DataLevel]
+  Mcp --> Rag[RAG + Multimodal memory]
+  Mcp --> Res[Research automation foundation<br/>Literature / Hypothesis / Planner]
+  Mcp --> Rust[Rust extension<br/>PointCloud encode 6x]
+
+  Llove --> Tui[17-scenario TUI]
+  Llove --> Vw[Markdown / SVG / Mermaid display]
+  Llove --> Cmd[Command Palette]
+```
+
+#### 1. The llmesh-mcp core
+
+##### 1.1 Multi-protocol connection layer
+
+Everything from REST / TCP / UDP / SSH / SMTP / Modbus / Serial / OPC-UA / MQTT / EtherCAT / CAN / BACnet / WebSocket / DNP3 / GOOSE / DVS / Depth is unified under the `ProtocolAdapter` ABC. The FanoutExecutor can run k-of-n parallel fanout over HTTP→TCP→Modbus etc. just by switching `protocol=`.
+
+```python
+from llmesh.protocol import HTTPAdapter, Modbus
+from llmesh.orchestrator import FanoutExecutor
+
+executor = FanoutExecutor(nodes=[...], protocol="http", k=2)
+result = executor.invoke("generate_code", {"prompt": "..."})
+```
+
+##### 1.2 Multi-LLM backend
+
+```python
+from llmesh.llm import OllamaBackend
+from llmesh.llm.anthropic_backend import AnthropicBackend
+from llmesh.llm.openai_compatible import OpenAICompatibleBackend
+
+### Aligned under the same LLMBackend ABC, so Ollama → Anthropic → Together AI
+### can be switched just by swapping configuration
+backend = AnthropicBackend(model="claude-haiku-4-5")
+```
+
+The OpenAICompatibleBackend supports 7 providers: OpenAI / Azure / OpenRouter / Together / Groq / Mistral / DeepSeek.
+
+##### 1.3 RAG module
+
+```python
+from llmesh.rag import MockEmbedder, NumpyVectorStore, Retriever
+
+emb = MockEmbedder(dim=384)
+store = NumpyVectorStore(dimension=384)
+ret = Retriever(embedder=emb, store=store)
+ret.index(text="LLMesh is...", doc_id="d1")
+hits = ret.search("What is LLMesh?", top_k=3)
+```
+
+You can choose from three store backends:
+
+- `NumpyVectorStore`: pure numpy, `.npz` persistence, for ~100k items
+- `SqliteVectorStore`: stdlib only, single file, ~1M items
+- `LSHVectorStore`: numpy approximate NN, for 1M+ items
+
+##### 1.4 Security stack
+
+PromptFirewall (4 layers: regex / Presidio / PII / structure) + DataLevel L0–L4 + 7-stage OutputValidator + HMAC Chain AuditTrail. LLM responses are treated as untrusted until they pass through OutputValidator.
+
+#### 2. llmesh-llove (TUI viewer)
+
+`llove` is a package that replays and visualizes llmesh scenarios in a Textual TUI. With the division of "llmesh simple / llove for display polish," llmesh thinly streams SFEN, did:key, and sensor floats, while llove exclusively handles the display.
+
+```bash
+pip install llmesh-llove
+llove demo --list                          # list of 17 scenarios
+llove --lang ja demo --scenario shogi      # shogi MVP
+llove --lang ja demo --scenario vision     # VLM defect-inspection ASCII
+llove --lang ja demo --scenario pointcloud # LiDAR top-view ASCII
+```
+
+The breakdown of the 17 scenarios: firewall / scada / multimodal / rag / backends / audit / reliability / cost / chat / bench / drift / mcp_call / vision / pointcloud / coin_toss / mindmap / shogi.
+
+##### Key features
+
+- display **Markdown / SVG / Mermaid** in the terminal (falls back via subprocess to external tools such as chafa / rsvg-convert)
+- **folding** (headings / code blocks / tables) + state persistence
+- **Command Palette**: 11 built-ins from the `:` key (`:help` `:identity` `:layout` `:demo` `:play` `:open` `:peer` `:set` `:get` `:alias` `:macro`) + alias / macro nesting capped at 5 levels
+- **WindowManager** (F17): Registry + IconSet + two container kinds (freely resizable / always-on-top locked) + `layout.toml`
+- **shogi MVP**: kanji pieces + move notation `▲７六歩 (2.4s)` + automatic kifu (move-record) log
+
+##### Ed25519 per-move signing
+
+Across all games, it stamps an Ed25519 signature on every move (`did:key`-based). This lets you detect tampering in game replays.
+
+#### 3. The research orchestration layer
+
+Recently (the 2026-05-11 session) I added research-automation foundation Phases 0–5 all at once into `llmesh.core` / `llmesh.research` / `llmesh.domains` / `llmesh.rag`. With no pydantic dependency, it keeps JSON-Schema-compatible schemas using `dataclasses` only.
+
+##### 3.1 core primitives (Phase 0a / 0b)
+
+```python
+from llmesh.core import Agent, AgentConfig, Tool, ToolSpec, TaskGraph, TaskNode
+from llmesh.core import TraceLogger
+
+with TraceLogger("trace.jsonl", run_id="r1", seed=42, config={}) as tl:
+  tl.log_prompt("agent.lit", prompt="...", response="...",
+				model="claude-haiku-4-5", model_version="20251001")
+  tl.log_tool_call("search", input_payload={"q": "..."},
+				   output_payload={"hits": 3})
+  tl.log_evaluation("reviewer", target="agent.lit#1", score=0.85)
+```
+
+`TraceLogger` automatically issues `run.start` / `run.end` and serializes writes from parallel agents with a `threading.Lock`.
+
+##### 3.2 literature → hypothesis → planner → reviewer closed loop (Phase 1 / 2)
+
+```python
+from llmesh.research import (
+  LiteratureAgent, LiteratureRequest, mock_extract,
+  HypothesisAgent, HypothesisRequest, mock_hypothesis_extract,
+  PlannerAgent, ReviewerAgent, run_plan_review_loop,
+  mock_planner_extract, mock_reviewer_extract,
+)
+from llmesh.core import AgentConfig
+
+lit = LiteratureAgent(AgentConfig(name="lit"), extract_fn=mock_extract)
+digest = lit.run(LiteratureRequest(text="paper body", title="My Paper"))
+
+hyp = HypothesisAgent(AgentConfig(name="hyp"), extract_fn=mock_hypothesis_extract)
+candidates = hyp.run(HypothesisRequest(digest=digest, max_candidates=3)).candidates
+
+planner = PlannerAgent(AgentConfig(name="p"), extract_fn=mock_planner_extract)
+reviewer = ReviewerAgent(AgentConfig(name="r"), extract_fn=mock_reviewer_extract)
+loop = run_plan_review_loop(
+  hypothesis=candidates[0],
+  planner=planner,
+  reviewer=reviewer,
+  max_iterations=3,
+)
+print(loop.verdict.kind, loop.iterations)  # "approve" 1
+```
+
+The backend abstraction is `ExtractFn = Callable[[str], dict]`. Tests are self-contained via `mock_*` functions, while production wraps the existing `LLMBackend.invoke` with the `make_ollama_extract` / `make_anthropic_extract` adapters.
+
+##### 3.3 robotics planning interface (Phase 3)
+
+```python
+from llmesh.research import (
+  MockPerceptionAgent, MockTaskPlannerAgent,
+  MockMotionPlannerAgent, run_robotics_pipeline,
+)
+
+result = run_robotics_pipeline(
+  perception_agent=MockPerceptionAgent(),
+  task_planner=MockTaskPlannerAgent(),
+  motion_planner=MockMotionPlannerAgent(),
+  instruction="pick the cup_blue",
+  sensors={"objects": [{"name": "cup_blue"}]},
+)
+print(result.motion_plan.trajectory.waypoints)
+```
+
+4 ABCs — PerceptionAgent / TaskPlannerAgent / MotionPlannerAgent / ReplanningAgent — + `ContactEvent` (Saguri-bot style: body_a/b + normal_force + is_expected) + `Trajectory` / `Waypoint`. ROS 2 turtlesim is slated for Phase 8, a VLA mock for Phase 9, and a Gazebo arm for Phase 10.
+
+##### 3.4 materials predictor (Phase 4)
+
+```python
+from llmesh.domains.materials import (
+  Structure, Property,
+  MockPropertyPredictor, MockCandidateGeneratorAgent, MockEvaluatorAgent,
+  discover_top_k,
+)
+
+top = discover_top_k(
+  seed=Structure(structure_id="seed", composition={"Fe": 0.7, "Ni": 0.3}),
+  target_property=Property(name="band_gap", unit="eV"),
+  target_value=2.5,
+  generator=MockCandidateGeneratorAgent(),
+  predictor=MockPropertyPredictor(low=0.0, high=5.0),
+  evaluator=MockEvaluatorAgent(accept_fraction=0.5),
+  n_candidates=10,
+  k=3,
+)
+```
+
+`MockPropertyPredictor` is a SHA-1-based deterministic pseudo-regressor that substitutes for a random forest. Replace the ABC with a real scikit-learn / GNN / ALIGNN and you can move to real operation.
+
+##### 3.5 multimodal memory + document parsers (Phase 5)
+
+```python
+from pathlib import Path
+from llmesh.rag import parse_document, MultimodalMemory
+
+### PDF / Markdown / HTML / text with one function
+text = parse_document(Path("paper.md"))    # auto-dispatched by extension
+text2 = parse_document(b"<p>hi</p>", kind="html")
+
+### remember text / image / table / log in the same ID space
+mem = MultimodalMemory()
+mem.add_text("paper-1#abstract", text=text, vector=[0.7, 0.3, 0.1])
+mem.add_image("paper-1#fig1", uri="figs/fig1.png", vector=[0.0, 1.0, 0.0])
+mem.add_table("paper-1#tab1",
+			rows=[("metric", "val"), ("acc", "0.9")],
+			vector=[0.0, 0.0, 1.0])
+mem.add_log("run-42#evt-001",
+		  line="2026-05-11 12:00 INFO ok",
+		  vector=[1.0, 1.0, 0.0])
+
+hits = mem.search([0.7, 0.3, 0.1], modalities=("text", "table"), top_k=5)
+```
+
+Cosine similarity is implemented with `math.sqrt` alone (no numpy needed). Swap the `MultimodalStoreBackend` ABC and you can also connect it to the existing NumpyVS / SqliteVS / LSHVS.
+
+#### 4. Installation
+
+```bash
+### minimal configuration (installable even on RTOS / embedded Linux)
+pip install llmesh-mcp
+
+### frequently used combination
+pip install "llmesh-mcp[industrial,vision,rag]"
+
+### llove TUI viewer
+pip install llmesh-llove
+```
+
+The optional extras in `pyproject.toml`:
+
+- `industrial`: business protocols such as Modbus / OPC-UA / MQTT
+- `rag`: numpy / sqlite-vec
+- `presidio`: Microsoft Presidio PII detection
+- `vlm`: Pillow + LLaVA captioner
+- `dnp3`: pydnp3 (critical infrastructure)
+
+#### 5. Roadmap
+
+Near-term priorities (from the claude-loop queue):
+
+| Phase | Contents | Status |
+|-------|------|------|
+| 0a–5 | core / trace logger / llove view / literature / hypothesis / planner / robotics I/F / materials / multimodal memory | done |
+| 6 | llove explainability dashboard | in progress |
+| 7 | e2e demo + paper artifact pipeline | planned |
+| 8 | ROS 2 integration demo (flexible-robot work e2e) | planned |
+| 9 | VLA PoC — turtlesim mock | planned |
+| 10 | VLA — Gazebo arm pick&place | planned |
+
+#### 6. Highlighted design principles
+
+1. **no-pydantic policy**: express JSON-Schema-compatible schemas with `dataclasses`, keeping `llmesh-mcp` installable even on RTOS / embedded Linux
+2. **ExtractFn injection**: make every agent receive a `Callable[[str], dict]`, so Ollama / Anthropic / mock can be switched through a unified interface
+3. **trace-as-replay**: every prompt / model_version / tool I/O / evaluation result is kept in JSONL, so a research run can be replayed from any point
+4. **llmesh simple / llove for display polish**: llmesh thinly streams communication and state, while llove takes on all of the look — a division of roles
+
+#### 7. Reference links
+
+- Source: https://github.com/furuse-kazufumi/llmesh
+- llove source: https://github.com/furuse-kazufumi/llove
+- Specification: 117 chapters / 500+ requirement items (`SPECIFICATION.md`)
+- Architecture diagram: `docs/ARCHITECTURE.md` (Mermaid included)
+
+For people who want to assemble a full set of a multi-agent research foundation that runs locally. Feedback / PRs welcome.
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ This series is written hand-in-hand with Claude Code
+>
+> The implementation, verification, and visualization in these articles are advanced together with **Claude Code** (Anthropic's AI coding environment).
+> Claude Code can be tried with a **1-week free trial**. If you like it and subscribe to a paid plan,
+> registering via the referral link below gives the author "credits to keep developing," helping sustain this series.
+>
+> 👉 **Try it free / referral link** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->
