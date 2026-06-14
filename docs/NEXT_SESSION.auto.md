@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-14 13:12:12
+- **生成時刻**: 2026-06-14 13:16:43
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,7 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+66a4484 auto: index.md 編集前 (2026-06-14 13:16)
 ce2eddb auto: index.md 編集前 (2026-06-14 13:11)
 b6f0200 auto: FULLSENSE_KB_INDEX.md 編集前 (2026-06-14 13:07)
 24922ea auto: index.md 編集前 (2026-06-14 13:06)
@@ -29,7 +30,6 @@ b6f0200 auto: FULLSENSE_KB_INDEX.md 編集前 (2026-06-14 13:07)
 8d1dfab auto: index.md 編集前 (2026-06-14 11:14)
 19047a9 auto: index.md 編集前 (2026-06-14 11:14)
 ddaa7f4 auto: _verify_llmesh_tr.py 編集前 (2026-06-14 10:11)
-ccbd8fa auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:07)
 ```
 
 ### git status (porcelain)
@@ -70,9 +70,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `13:11` `docs/articles/assets/bazue_all/index.md`
-- `13:08` `docs/NEXT_SESSION.auto.md`
-- `13:08` `docs/SESSION_SUMMARY.md`
+- `13:16` `docs/articles/assets/bazue_all/index.md`
+- `13:12` `docs/SESSION_SUMMARY.md`
+- `13:12` `docs/NEXT_SESSION.auto.md`
 - `13:07` `docs/articles/FULLSENSE_KB_INDEX.md`
 - `12:20` `docs/articles/drafts/QIITA_llmesh_ja.md`
 - `12:20` `docs/articles/drafts/QIITA_llive_ja.md`
