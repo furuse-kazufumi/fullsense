@@ -575,3 +575,262 @@ LLM 의 보안은, **「앱 층의 경계에서 무엇을 허용하고 무엇을
 그래서 이 구조에는, 업무에서 자주 쓰는 표현을 「이건 통과시켜도 좋다」고 등록해 두는 우회로(allowlist)가 마련되어 있습니다. 완벽한 검문소를 한 방에 만들려 하지 말고, 현장에서 오검지가 나올 때마다 조금씩 구멍을 메워간다——보안의 세계에서는, 이 수수한 조정을 계속할 수 있는지가 결국 가장 효과를 봅니다.
 
 <!-- INTERLUDE -->
+
+
+
+---
+
+## 제3장 Pure Python 의 6 배 빠른 Rust 확장과, 스트리밍 재전송・HTTP DoS 대책까지 담은 Python 라이브러리 — LLMesh 성능과 신뢰성 이야기
+
+<!-- KAMI -->
+> 📖 **간단히 말하면**
+>
+> 이 장은 「빠름」과 「잘 깨지지 않음」이라는 수수한 토대 만들기 이야기입니다. 프로그램 안에서 특히 무거운 처리(대량의 점군 데이터 변환 등)만을 Rust 라는 빠른 언어로 다시 짜서, Python 그대로보다 최대 6 배 빠르게 했습니다. 다만 Rust 가 없어도 자동으로 기존 버전으로 전환되므로 동작이 멈추지 않습니다. 거기에, 통신이 끊겨도 재전송으로 복구하는 구조와, 거대한 응답을 보내와도 메모리가 터지지 않도록 사이즈 상한을 거는 대책, 그리고 「있을 법한 입력을 기계적으로 대량 생성해서 시험하는」 테스트 기법을 조합해, 24 시간 계속 돌려도 쓰러지지 않는 것을 노리고 있습니다.
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense 지식 베이스 안내** <!-- fullsense-team-kb -->
+FullSense 개발 전사 60+ 편 (4개 언어판・스토리 기반 읽기 순서 가이드・쉬운 설명판・4컷 만화 포함) 은 Qiita Team **FullSense KB** 에 모여 있습니다 (팀 멤버 전용).
+:::
+
+
+> Rust 확장으로 6× / multi-platform wheel / 신뢰성 프로토콜 / HTTP DoS hardening
+> `pip install llmesh-mcp`(Rust 확장은 **임의・자동 fallback**)
+
+---
+
+#### 먼저 결론
+
+| 조작 | Pure Python | Rust | 배율 |
+|------|-----------:|-----:|----:|
+| PointCloud encode (1M) | 4.0M pts/s | **24.1M pts/s** | **6.0×** |
+| PointCloud decode (1M) | 3.7M pts/s | 5.9M pts/s | 1.6× |
+| DVS encode (1M) | 3.4M evt/s | 5.5M evt/s | 1.6× |
+| Pipeline + CUSUM | 190K events/s | – | – |
+
+포인트는 **「Rust 가 없어도 동작한다」**. Rust 확장은 import 에 실패하면 **조용히 Pure Python 으로 폴백** 합니다(명시적으로 환경 체크를 걸고 싶다면 `python -m llmesh.cli.doctor`).
+
+---
+
+#### 30 초로 성능을 시험한다
+
+```bash
+### 우선 Pure Python 으로 동작시킨다
+pip install llmesh-mcp
+python -c "from llmesh.industrial.sensor_3d import PointCloud; \
+import numpy as np; \
+pts = np.random.rand(1_000_000, 3).astype('float32'); \
+import time; t=time.perf_counter(); PointCloud.encode(pts); \
+print(f'pure python: {1_000_000/(time.perf_counter()-t):,.0f} pts/s')"
+```
+
+Rust 버전을 넣는다(임의):
+
+```bash
+git clone git@github.com:furuse-kazufumi/llmesh.git
+cd llmesh/rust_ext
+python -m maturin build --release
+pip install --force-reinstall target/wheels/*.whl
+```
+
+CI 가 **Linux × macOS × Windows × CPython 3.10/3.11/3.12 의 8 타깃** 으로 wheel 을 뱉으므로, 직접 빌드하지 않아도 되는 케이스가 늘고 있습니다.
+
+---
+
+#### 왜 Rust 인가(구현상의 판단)
+
+점군과 DVS 이벤트는 「**`numpy.ndarray` 를 넣어서, bytes 한 줄로 만들어 반환한다**」는 단순한 I/O 변환입니다. 이것은 PyO3 로 쓰면 **GIL 을 해제한 채 병렬화** 할 수 있는 전형적인 예이고, Pure Python 의 **2~6 배** 가 보통 나옵니다.
+
+반대로 **CUSUM / SPC / MT 법 같은 수치 계산은 numpy 그대로로 충분히 빠릅니다**(einsum / 공분산 / Tikhonov). 그래서 Rust 화하지 않았습니다. **Rust 화는 핫스폿 한정** 이 방침입니다.
+
+```
+rust_ext/
+├── Cargo.toml
+├── pyproject.toml          # maturin 의 설정
+└── src/
+    ├── lib.rs              # PyO3 엔트리
+    ├── pointcloud.rs       # encode/decode
+    └── dvs.rs              # encode
+```
+
+---
+
+#### 신뢰성 프로토콜 — 스트리밍 통신을 「제대로」 한다
+
+장시간 스트림에서는 **「ACK / 재전송 / 절단 검출 / TTL 만료」** 를 조합하지 않으면, 언젠가 메모리가 터집니다. LLMesh 는 `MessageAssembler`(수신)와 `ChunkSender`(송신)의 2 개로 전부 막고 있습니다.
+
+```
+[정상 완료]  수신: pop_completed() → STREAM_ACK 송신
+            송신: handle_ack()    → 송신 버퍼 폐기
+
+[누락 검출]  수신: check_timeouts() → RETRANSMIT 송신(1 회만)
+            송신: handle_retransmit() → 누락 청크만 재전송
+
+[절단 검출]  수신: check_watchdog()  → True 로 절단 시그널
+            송신: expire_old()      → TTL 초과 버퍼 자동 폐기
+```
+
+**RETRANSMIT 를 1 회밖에 보내지 않는** 것은, 재전송 루프에 의한 증폭 공격을 억제하기 위해서입니다.
+절단 검출은 `WatchdogTimer` 의 단일 소스(시각은 `llmesh.security.clock` 의 NTP 체크 포함).
+
+```python
+from llmesh.protocol import MessageAssembler, ChunkSender, WatchdogTimer
+
+assembler = MessageAssembler(timeout=5.0)
+sender    = ChunkSender(ttl=30.0)
+watchdog  = WatchdogTimer(timeout=10.0)
+
+### 수신 측
+for chunk in incoming:
+    assembler.feed(chunk)
+    while msg := assembler.pop_completed():
+        handle(msg)
+    for missing in assembler.check_timeouts():
+        send_retransmit(missing)
+
+### 송신 측
+sender.send(payload)
+sender.expire_old()                # TTL 만료를 청소
+```
+
+---
+
+#### HTTP DoS Hardening(v2.17)
+
+LLM 주변은 **HTTP 너머로 거대한 응답을 먹게 되는** 리스크가 은근히 큽니다. Ollama・OpenAI 호환・Webhook・RAG 용 임베딩 서버, 전부 HTTP 입니다.
+
+LLMesh 는 `llmesh.security.http_limits.read_capped` 를 **전 8 개의 HTTP 클라이언트에 통일 적용** 했습니다.
+
+```python
+from llmesh.security.http_limits import read_capped
+
+### 예: 임의의 HTTP 응답을 사이즈 상한 포함해서 읽는다
+body = read_capped(response, max_bytes=8 * 1024 * 1024)   # 8 MiB
+```
+
+용도별 캡:
+
+| 용도 | 기본 상한 |
+|---|---:|
+| LLM 보완 응답 | 16 MiB |
+| Embedding 응답 | 8 MiB |
+| 센서 HTTP 풀 | 4 MiB |
+| Webhook | 1 MiB |
+
+**쓰는 쪽은 1 줄**. 본체 라이브러리 전체에 효과가 있습니다.
+
+---
+
+#### 테스트 전략 — 2300+ 건 + Hypothesis property-based 1,200 케이스
+
+LLMesh 는 일반적인 예 기반 pytest 에 더해, **프로퍼티 기반** 을 많이 씁니다. `hypothesis` 로:
+
+- 센서 시계열을 **임의의 dtype / 형상** 으로 생성해서 SPC 가 떨어지지 않음을 검증
+- 메시지 분할과 재전송을 **임의의 손실률** 로 생성해서 `MessageAssembler` 가 메시지를 보증함을 검증
+- Firewall 에 **Unicode 전 범위** 의 입력을 흘려서 fail-closed 를 검증
+
+```python
+### 예: MessageAssembler property test
+@given(st.lists(st.binary(min_size=1, max_size=32), min_size=1, max_size=64),
+       st.lists(st.integers(min_value=0, max_value=63), unique=True))
+def test_assembler_recovers_arbitrary_loss(chunks, dropped_indices):
+    ...
+```
+
+이것으로 **「테스트가 통과한다 = 동작한다」** 에 상당히 가까워졌습니다.
+
+---
+
+#### OWASP 정적 감사를 계속 통과한다
+
+v2.16 에서 전 코드베이스에 대해 **Bandit + 자체 리뷰** 를 한 바퀴 돌렸습니다. HIGH/MEDIUM 을 제로로.
+**우연히 클린** 이 아니라, CI 로 재발을 막고 있습니다. 코드베이스 전체에서:
+
+- `shell=True` 제로
+- `pickle` 제로
+- `yaml.load(unsafe)` 제로(`yaml.safe_load` 만)
+- `eval` / `exec` 제로
+- 약한 암호 제로
+
+`subprocess` 호출은 **list 형식만**. 문자열로 넘기면 shell 해석의 여지가 생기므로 금지하고 있습니다.
+
+---
+
+#### CycloneDX SBOM 을 뱉는 CLI
+
+```bash
+python -m llmesh.cli.sbom > llmesh.sbom.cdx.json
+```
+
+의존 관계를 CycloneDX 형식으로 뱉습니다. 공급망 감사(GHSA / OSV)에 그대로 흘려보낼 수 있습니다.
+
+---
+
+#### 전체 동선(성능 + 신뢰성)
+
+```
+   ┌────────────────────────────────────────────────────────┐
+   │ Sensor / 3D / DVS                                      │
+   │  ├ PointCloud.encode  (Rust 24.1M pts/s)              │
+   │  └ DVS.encode         (Rust 5.5M evt/s)               │
+   └───────────┬────────────────────────────────────────────┘
+               │
+               ▼
+   ┌────────────────────────────────────────────────────────┐
+   │ ChunkSender ─► [network] ─► MessageAssembler          │
+   │   │                                  │                 │
+   │   ACK / RETRANSMIT / TTL ◄───────────┘                 │
+   │   WatchdogTimer (NTP-checked clock)                    │
+   └───────────┬────────────────────────────────────────────┘
+               │
+               ▼
+   ┌────────────────────────────────────────────────────────┐
+   │ HTTP layer (read_capped on every client)              │
+   │   LLM / Embedding / Webhook / Sensor pull             │
+   └───────────┬────────────────────────────────────────────┘
+               │
+               ▼
+   ┌────────────────────────────────────────────────────────┐
+   │ Pipeline + CUSUM   190K events/s                       │
+   └────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### 벤치를 재현한다
+
+```bash
+git clone git@github.com:furuse-kazufumi/llmesh.git
+cd llmesh
+pip install -e ".[dev,industrial]"
+pytest benchmarks/ -k bench --benchmark-only    # 로컬 PC 에서 재현 가능
+```
+
+CI artifact 에도 `bench-report.json` 을 남기고 있습니다(`docs/PERFORMANCE.md` 에 모듈별 계산량과 메모리 기준).
+
+---
+
+#### 트러블슈팅
+
+| 증상 | 원인 | 해결 |
+|---|---|---|
+| Rust 확장 빌드 실패 | `cargo` 미설치 | rustup 에서 넣는다, 또는 Pure Python 그대로 OK |
+| maturin 에서 「manifest path not found」 | `cd rust_ext` 망각 | `rust_ext` 디렉터리에서 실행 |
+| Windows 에서 wheel 이 안 골라짐 | Python 3.10 미만 | 3.10+ 로 업그레이드 |
+| `pytest` 가 느림 | property-based 의 시행 횟수 | `--hypothesis-profile=ci` 를 쓴다 |
+
+---
+
+#### 써본다(퀵 링크)
+
+- GitHub: <https://github.com/furuse-kazufumi/llmesh>
+- PyPI: <https://pypi.org/project/llmesh-mcp/>
+- 사양: `docs/API_STABILITY.md` / `docs/PERFORMANCE.md`
+- License: MIT
+
+---
+
+#### 마치며
+
+성능과 신뢰성은, **「핫스폿만 Rust 화, 그 외는 numpy 로 충분」「재전송과 TTL 을 짝으로 다룬다」「HTTP 는 전부 캡」「테스트는 프로퍼티 기반」** 이라는 수수한 원칙의 축적으로 만들어져 있습니다.
+화려한 장치가 없는 대신, **24 시간 계속 돌려도 깨지지 않는** 것을 노리고 있습니다.
