@@ -1170,3 +1170,414 @@ A little off the main thread, but these articles and implementations are built o
 Another classic was "fighting over the cursor." When a human tries to type while the AI is in the middle of typing, the hands collide on screen like two people in a single futari-baori robe (a comic act where one person wears the kimono while another's arms, hidden behind, do the gestures). Throw Japanese input (IME) into the mix and the AI side snatches the mid-conversion characters, and gibberish dances across the screen. However much you want to keep going automatically and endlessly, the one moment a re-login or authentication is demanded, a human just has to press the button — because the AI cannot re-log-in to itself. The dream of full automation always leaves, somewhere, a tiny "single human finger." It's not so much a flaw as an emergency exit that should be kept for safety's sake — something I feel almost every night.
 
 <!-- INTERLUDE -->
+
+
+
+---
+
+## Chapter 5 Pouring Modbus / OPC-UA / DNP3 / IEC 61850 GOOSE into a Single SensorEvent, Catching Anomalies with CUSUM, and Letting the LLM Explain Them — LLMesh Industrial IoT Edition
+
+<!-- KAMI -->
+> 📖 **In a nutshell**
+>
+> In a nutshell, this chapter is about "translating the many communication standards of factories and power facilities into a single common format, finding anomalies as early as possible, and letting the AI explain their reasons in words." The world of equipment has a mountain of dialects — Modbus, OPC-UA, and on the power side DNP3 and GOOSE — but it aligns them all onto a single slip called `SensorEvent`. On top of that, statistical anomaly detection (CUSUM and the like) catches the faint signs of small changes, and the moment an anomaly appears the AI writes out a guess at the cause, such as "this may be a lubrication failure in the bearing." Even without real hardware, you can try the whole flow with a simulator.
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense Knowledge Base** <!-- fullsense-team-kb -->
+The full FullSense development history — 60+ articles in 4 languages, with a story-based reading guide, plain-language editions, and 4-panel manga — is consolidated in our Qiita Team **FullSense KB** (team members only).
+:::
+
+
+> Industrial protocols × multivariate SPC × LLM explanation reports in one library
+> `pip install "llmesh-mcp[industrial]"`
+
+---
+
+#### Run "anomaly detection → LLM explanation" in 60 seconds
+
+```bash
+pip install "llmesh-mcp[industrial]"
+```
+
+It's **self-contained with a simulator**, even without real hardware:
+
+```python
+import asyncio, random
+from llmesh.industrial import SensorEvent, ExplainedCUSUM
+
+### Try CUSUM only (with explainer=None, the LLM explanation falls back to a template, fail-safe)
+chart = ExplainedCUSUM(target=70.0, k=0.5, h=5.0, explainer=None)
+
+async def run():
+    for i in range(200):
+        # drift 5°C higher from the 100th sample
+        value = 70.0 + (5.0 if i > 100 else 0) + random.gauss(0, 0.5)
+        ev = SensorEvent(ts=i*0.1, sensor_id="bearing_temp_07",
+                         sensor_type="temperature", value=value,
+                         quality="good", meta={})
+        report = chart.update(ev)
+        if report:
+            print(report.to_markdown()); break
+
+asyncio.run(run())
+```
+
+The moment CUSUM rises, an `IncidentReport` (Markdown) appears.
+To enable the **LLM explanation**, just pass a backend to `explainer=` (see below).
+
+---
+
+#### What I built (the conclusion first)
+
+- treat **20+ industrial protocols** (Modbus / Serial / OPC-UA / MQTT / EtherCAT / CAN / BACnet / DNP3 / IEC 61850 GOOSE / WebSocket / SNMP / SSH / Telnet / SFTP / IMAP / POP3 / FTP / SMTP / HTTP / TCP / UDP / ROS1 / ROS2) under **one and the same ABC**
+- align every input onto a single data model called **`SensorEvent`**
+- apply multivariate SPC: **Mahalanobis-Taguchi method / Hotelling T² / CUSUM / Xbar-R**
+- at the moment of anomaly detection, **have the LLM output a cause hypothesis in Markdown / JSON** (`ExplainedCUSUM`)
+- time-synchronize **video frames × numeric sensors** and apply two parallel CUSUMs (`VideoCUSUM`)
+- all **fail-closed**, **OWASP static-audit clean**, **no external DB needed** (pure stdlib + numpy based)
+
+---
+
+#### SensorEvent — the common entry point for all protocols
+
+```python
+@dataclass(frozen=True)
+class SensorEvent:
+    ts: float          # epoch seconds (NTP-checked)
+    sensor_id: str
+    sensor_type: str   # "temperature", "vibration", "pressure", ...
+    value: float
+    quality: str       # "good" / "uncertain" / "bad"
+    meta: dict         # protocol-specific raw info
+```
+
+The design crux is **not creating a separate Event class per protocol**. The SPC engine, the logger, the audit log, and the LLM explainer can all face the same type.
+
+```python
+from llmesh.industrial import (
+    ModbusAdapter, OPCUAAdapter, MQTTAdapter,
+    DNP3Adapter, GOOSEAdapter,
+)
+
+modbus = ModbusAdapter(host="10.0.0.10", unit=1)
+async for ev in modbus.stream():
+    print(ev.sensor_type, ev.value, ev.quality)
+```
+
+Whether it's `OPCUAAdapter` or `DNP3Adapter`, what's yielded is **the same `SensorEvent`**.
+
+---
+
+#### DNP3 / GOOSE — handling key power-system protocols safely
+
+##### DNP3Adapter (v2.14)
+
+- built-in **group code → sensor_type conversion table** (Analog Input / Binary Input …)
+- **point allow-list required** (it won't read anything unspecified)
+- driver injection enables **library-independent testing** (when pydnp3 is absent, `connect()` raises an explicit `RuntimeError`)
+
+##### GOOSEAdapter (IEC 61850)
+
+- **pure stdlib implementation** (zero external dependencies)
+- **`stNum` per-ref replay defense** (GOOSE replay attacks really do happen)
+- **`MAX_DATASET_VALUES` guard** (blocks DoS via huge datasets)
+- emits `SensorEvent` at HIGH priority (the operating side can write priority-based routing)
+
+```python
+from llmesh.industrial import GOOSEAdapter
+
+goose = GOOSEAdapter(iface="eth1", allow_refs=["IED1/LLN0$GO$gcb01"])
+async for ev in goose.stream():
+    if ev.quality != "good":
+        alert(ev)   # send bad/uncertain down a separate path
+```
+
+---
+
+#### Multivariate SPC — which one to use
+
+| Tool | What it's for | Computational character |
+|---|---|---|
+| `XbarRChart` | mean and range of individual variables | classic Shewhart |
+| `CUSUMChart` | early detection of tiny drift | cumulative sum, k/h parameters |
+| `HotellingT²Chart` | **multivariate center shift** | covariance with Tikhonov regularization |
+| `MTEngine` | Mahalanobis distance (distance classification) | offline training + real-time inference |
+| `OnlineMTEngine` | large-batch Mahalanobis | einsum, memory cap via `LLMESH_MT_ONLINE_MAX_BATCH_BYTES` |
+| `EventDensityMap` | DVS events → 8×8 grid features | front stage before putting camera systems on SPC |
+| `UnifiedSPC` | two-stream combined SPC of sensor × VLM text | AND / OR / Weighted |
+
+**`OnlineMTEngine`'s memory cap** is surprisingly effective. Throwing 1024-channel sensors every 1 ms in 100-way parallel easily blows up memory, so you can set the cap via an env var.
+
+---
+
+#### ExplainedCUSUM — the LLM explains at the same instant anomalies are detected
+
+**The very instant** CUSUM emits an anomaly, the LLM reads the context (the most recent N samples + meta info) and emits a cause hypothesis in Markdown / JSON.
+
+```python
+from llmesh.industrial import ExplainedCUSUM
+
+chart = ExplainedCUSUM(
+    target=70.0,        # assumed mean (°C)
+    k=0.5, h=5.0,       # CUSUM parameters
+    explainer=llm_explainer,   # any LLM backend
+)
+
+async for ev in opcua.stream():
+    report = chart.update(ev)
+    if report:
+        print(report.to_markdown())
+        save(report.to_json())
+```
+
+Contents of `IncidentReport` (excerpt):
+
+```markdown
+#### Incident at 2026-05-09 03:22:11Z
+
+- sensor: bearing_temp_07 (temperature)
+- baseline: 70.0 °C / threshold h=5.0
+- observed CUSUM: +9.4
+
+##### Hypothesis (LLM)
+The cumulative drift began ~12 minutes prior, coinciding with a
+viscosity drop in lubricant_flow_03. Bearing wear or lubricant
+degradation is plausible. Consider checking lubricant pressure and
+vibration spectrum for sub-resonant components.
+```
+
+The LLM explanation is **optional** (with `explainer=None`, it's fail-safe via a template). This too is the thoroughness of fail-closed.
+
+---
+
+#### VideoCUSUM — mesh video × numeric sensors together by time
+
+The camera and the PLC come from different networks and different time sources. LLMesh pairs them with a **bounded deque at `sync_window_s` default 1.0 second** and then applies two parallel CUSUMs.
+
+```python
+from llmesh.industrial import VideoCUSUM, VLMFeatureExtractor
+
+vlm = VLMFeatureExtractor(captioner=ollama_llava)   # image → caption → numeric vector
+chart = VideoCUSUM(sync_window_s=1.0, vlm=vlm)
+
+async for pair in chart.stream(video_iter, sensor_iter):
+    if pair.alarm:
+        report = pair.explain()  # anomaly hypothesis for both image + sensor
+```
+
+**`VLMFeatureExtractor` is also fail-closed**: if the captioner throws an exception or returns a non-string, it BLOCKs immediately (via the `ImageFirewall` gate).
+
+---
+
+#### The SCADA × LLM flow (full diagram)
+
+```
+[field]
+  PLC ─Modbus──┐
+  RTU ─DNP3 ───┤
+  IED ─GOOSE ──┤   all normalized into SensorEvent
+  Camera ─DVS ─┘
+                │
+                ▼
+         ┌──────────────────────────┐
+         │  SPC Engines             │
+         │   CUSUM / Xbar-R         │
+         │   Hotelling T²           │
+         │   MT / OnlineMT          │
+         │   UnifiedSPC (multi-modal)│
+         └──────────┬───────────────┘
+                    │
+                    ▼
+         ┌──────────────────────────┐
+         │  ExplainedCUSUM          │
+         │   ── LLM ──► IncidentReport
+         └──────────┬───────────────┘
+                    │  Markdown / JSON
+                    ▼
+            ops / Slack / audit log
+```
+
+---
+
+#### Reliability protocol
+
+Retransmission, order restoration, and disconnect detection for long-running streams are guaranteed by the combination of `MessageAssembler` + `ChunkSender`.
+
+```
+[normal completion]  receive: pop_completed() → send STREAM_ACK
+                     send:    handle_ack()    → discard send buffer
+
+[loss detection]     receive: check_timeouts() → send RETRANSMIT (once only)
+                     send:    handle_retransmit() → resend only the missing chunks
+
+[disconnect detect]  receive: check_watchdog()  → True signals disconnect
+                     send:    expire_old()      → auto-discard TTL-exceeded buffers
+```
+
+For clock skew, the **NTP check** in `llmesh.security.clock` decides whether `SensorEvent.ts` can be trusted. When the time source can't be trusted, it's marked `quality="uncertain"` so downstream can screen it out.
+
+---
+
+#### CLI
+
+```bash
+python -m llmesh.cli.doctor   # environment health check (protocol driver presence, ports, permissions)
+python -m llmesh.cli.status   # runtime state (node ID, Capability, endpoints)
+python -m llmesh.cli.sbom     # auto-generate CycloneDX SBOM (supply-chain audit)
+```
+
+`doctor` is tuned to **"print every reason it isn't working."** It's most effective during on-site handovers.
+
+---
+
+#### Benchmark (with the Rust extension)
+
+| Operation | Pure Python | Rust | Ratio |
+|------|-----------:|-----:|----:|
+| PointCloud encode (1M) | 4.0M pts/s | **24.1M pts/s** | **6.0×** |
+| PointCloud decode (1M) | 3.7M pts/s | 5.9M pts/s | 1.6× |
+| DVS encode (1M) | 3.4M evt/s | 5.5M evt/s | 1.6× |
+| Pipeline + CUSUM | 190K events/s | – | – |
+
+The Rust extension is **optional**. CI emits **multi-platform wheels for 8 targets**.
+
+---
+
+#### A collection of practical patterns (copy-paste ready)
+
+##### 1. Run Modbus with an LLM explanation
+
+```python
+import asyncio
+from llmesh.industrial import ModbusAdapter, ExplainedCUSUM
+from llmesh.llm import OllamaBackend
+from llmesh.industrial.explainer import LLMExplainer
+
+llm       = OllamaBackend(model="llama3.2")
+explainer = LLMExplainer(backend=llm)
+
+async def main():
+    modbus = ModbusAdapter(host="10.0.0.10", unit=1, registers=[(0, "holding")])
+    chart  = ExplainedCUSUM(target=70.0, k=0.5, h=5.0, explainer=explainer)
+
+    async for ev in modbus.stream():
+        report = chart.update(ev)
+        if report:
+            print(report.to_markdown())
+
+asyncio.run(main())
+```
+
+##### 2. Send anomalies to Slack (pipe the IncidentReport as-is)
+
+```python
+import urllib.request, json
+
+def post_to_slack(report, webhook_url: str):
+    payload = {"text": f"```{report.to_markdown()}```"}
+    req = urllib.request.Request(webhook_url, data=json.dumps(payload).encode(),
+                                 headers={"Content-Type": "application/json"})
+    urllib.request.urlopen(req, timeout=5)
+```
+
+##### 3. Pour multiple protocols into a single SPC
+
+```python
+from llmesh.industrial import OPCUAAdapter, MQTTAdapter, HotellingT2Chart
+import asyncio
+
+chart = HotellingT2Chart(window=300, alpha=0.001)
+
+async def feeder(adapter, channel):
+    async for ev in adapter.stream():
+        chart.feed(channel, ev.value, ts=ev.ts)
+        if chart.alarm():
+            print("multivariate alarm:", chart.snapshot())
+
+opcua = OPCUAAdapter(url="opc.tcp://10.0.0.20:4840", nodes=["ns=2;i=2"])
+mqtt  = MQTTAdapter(host="10.0.0.30", topics=["plant/+/temp"])
+asyncio.run(asyncio.gather(feeder(opcua, "temp"), feeder(mqtt, "vibration")))
+```
+
+##### 4. Thinly wrap your own driver into SensorEvent
+
+Even with a vendor-specific SDK, the whole stack works if you just yield a `SensorEvent`.
+
+```python
+from llmesh.industrial import SensorEvent
+
+async def my_adapter(driver):
+    async for raw in driver.read_loop():
+        yield SensorEvent(
+            ts=raw.timestamp, sensor_id=raw.tag,
+            sensor_type="pressure", value=float(raw.value),
+            quality="good" if raw.ok else "bad", meta={"driver": "vendor-x"},
+        )
+```
+
+---
+
+#### Troubleshooting
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| `ImportError: pydnp3` | DNP3 driver not installed | `pip install "llmesh-mcp[industrial,dnp3]"` |
+| OPC-UA connection failure | server certificate issue | confirm connectivity first with `OPCUAAdapter(security="None")` |
+| TLS won't go through on MQTT | CA / client certificate | `MQTTAdapter(tls_ca=..., tls_cert=..., tls_key=...)` |
+| `SensorEvent.ts` is NaN/Inf | sent into the pipeline with `quality="bad"` | place `if ev.quality != "good": continue` upstream |
+| GOOSE stNum replay warning | a past number on the same ref | increase `GOOSEAdapter(replay_log_size=1024)` (default 256) |
+| Mojibake (Windows) | `cp932` is the default | `set PYTHONUTF8=1` (PowerShell: `$env:PYTHONUTF8=1`) |
+
+When stuck, always run this first:
+
+```bash
+python -m llmesh.cli.doctor   # print all of driver presence / ports / permissions
+```
+
+---
+
+#### Next steps
+
+```bash
+### Install only the extras you need
+pip install "llmesh-mcp[industrial]"               # Modbus / OPC-UA / MQTT / SPC
+pip install "llmesh-mcp[industrial,vision]"        # + VLM / VideoCUSUM
+pip install "llmesh-mcp[industrial,dnp3]"          # + DNP3
+pip install "llmesh-mcp[industrial,bacnet,can]"    # + BACnet / CAN
+
+### Run it first
+python -m llmesh.cli.doctor
+```
+
+Reference docs:
+
+- `docs/INDUSTRIAL_GUIDE.md` — industrial IoT usage guide (Phase A–v3)
+- `docs/USAGE.md` — usage examples (including the v2.13/2.14 enhanced-features section)
+- `docs/PERFORMANCE.md` — per-module complexity and memory estimates
+
+Links:
+
+- GitHub: <https://github.com/furuse-kazufumi/llmesh>
+- PyPI: <https://pypi.org/project/llmesh-mcp/>
+- Issues: <https://github.com/furuse-kazufumi/llmesh/issues>
+- License: MIT
+
+---
+
+#### In closing
+
+The goal of industrial IoT × LLM is **"explain on-site anomalies, in on-site language, immediately, and explainably."**
+Each time you use a vendor-specific driver, write a 50-line `SensorEvent`-compatible wrapper, and SPC and LLM explanation ride along as-is.
+Because **power-system protocols** like DNP3 / GOOSE sit on the same abstraction, you can drop it straight into SCADA projects too.
+
+
+<!-- INTERLUDE -->
+
+### ☕ Interlude — Why Cram Everything into `SensorEvent`
+
+The idea of aligning a factory's communication standards onto a single slip is unglamorous, but its sweet spot is the point that "every tool that comes later gets easier." If you make a separate data format per protocol, then the statistics engine, the logging, the audit, and the AI explainer all end up writing per-standard handling, one for each standard. This is like having a different ticket shape at each station and building one ticket gate per station.
+
+If you align onto a common slip, then even when a new sensor or an unfamiliar device arrives, you only write about 50 lines of "one sheet that thinly translates this device's raw data into the shape of `SensorEvent`," and anomaly detection and AI explanation ride on exactly as they are. It's not flashy, but in systems you operate for a long time, this kind of judgment — "decide just one common entry point at the very start" — saves the most time in the long run.
+
+<!-- INTERLUDE -->
