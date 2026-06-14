@@ -41,3 +41,13 @@ ignorePublish: false
 - #42 #42 llm-viz を fork して実データ検証器を作り「可視化より本体を作る」へ計画を引き直した話
 
 > 計 2 記事が日本語のみ。多言語化は session limit リセット後に実施。
+
+---
+
+## 整理した本人より
+
+![「整理整頓した後って何処に何があるか分からなくならない？」「出来てないんだよそれは…！」とツッコむ明美](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/197.jpg)
+
+> © Forbidden shibukawa / SHUEISHA（『スナックバス江』YJ 公式 SNS 素材）
+
+ここまで 17 記事を #NN 昇順に並べ直しました。……が、総集編に結合し、言語別に分け、解放スロットを再利用していると、整理した本人が「どこに何があるか分からない」状態に片足を突っ込みかけます。それは整理できていない、ということ。この INDEX は、その自戒を兼ねた地図です。
