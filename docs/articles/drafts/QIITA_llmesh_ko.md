@@ -834,3 +834,339 @@ CI artifact 에도 `bench-report.json` 을 남기고 있습니다(`docs/PERFORMA
 
 성능과 신뢰성은, **「핫스폿만 Rust 화, 그 외는 numpy 로 충분」「재전송과 TTL 을 짝으로 다룬다」「HTTP 는 전부 캡」「테스트는 프로퍼티 기반」** 이라는 수수한 원칙의 축적으로 만들어져 있습니다.
 화려한 장치가 없는 대신, **24 시간 계속 돌려도 깨지지 않는** 것을 노리고 있습니다.
+
+---
+
+## 제4장 로컬 LLM × 산업 IoT × 프롬프트 파이어월을 1 개의 Python 프레임워크로 — LLMesh v3.1.0 을 만든 이야기
+
+<!-- KAMI -->
+> 📖 **간단히 말하면**
+>
+> 여기는 1~3 장에서 설명해 온 부품(로컬/클라우드 통합・프롬프트 검문소・Rust 고속화)에 더해, 공장이나 설비의 센서와의 접속 층까지를 「하나의 프레임워크로 정리했습니다」라는 총정리 장입니다. 현장의 센서에서 AI 의 답변까지를, 도중에 위험한 것을 통과시키지 않는 외길로 설계하고 있습니다. 버전마다 무엇을 더해 왔는지, 테스트나 정적 감사를 어디까지 했는지라는 「성적표」도 실려 있어, 이 제품의 전체상을 한눈에 볼 수 있는 내용으로 되어 있습니다.
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense 지식 베이스 안내** <!-- fullsense-team-kb -->
+FullSense 개발 전사 60+ 편 (4개 언어판・스토리 기반 읽기 순서 가이드・쉬운 설명판・4컷 만화 포함) 은 Qiita Team **FullSense KB** 에 모여 있습니다 (팀 멤버 전용).
+:::
+
+
+> Secure LLM Mesh over MCP — `pip install llmesh-mcp`
+
+#### TL;DR
+
+- **LLMesh** 는, 로컬 LLM(Ollama / llama.cpp)과 클라우드 LLM(OpenAI / Azure / Anthropic / OpenRouter / Groq / Together / Mistral / DeepSeek)을 **동일 ABC 로 투과 운용** 할 수 있는 Python 통합 프레임워크입니다.
+- 거기에 더해 **4 층 프롬프트 파이어월**, **산업 프로토콜 20+ 어댑터**(Modbus / OPC-UA / MQTT / EtherCAT / CAN / BACnet / DNP3 / IEC 61850 GOOSE / WebSocket …), **다변량 SPC(MT 법 / Hotelling T² / CUSUM / Xbar-R)**, **RAG**, **Rust 확장(PointCloud encode 6×)** 을 일원화하고 있습니다.
+- **117 장 / 500+ 요건 항목**, **2300+ 테스트 전 PASS**, **OWASP 정적 감사 클린**(`shell=True` / `pickle` / `eval` / SQL 주입 / 약한 암호 제로), **v3.0.0 부터 SemVer 정식 적용**.
+- 리포지토리: <https://github.com/furuse-kazufumi/llmesh>　/　PyPI: <https://pypi.org/project/llmesh-mcp/>
+
+```bash
+pip install llmesh-mcp
+### 산업용 풀 기능
+pip install "llmesh-mcp[industrial,vision,presidio,rag]"
+```
+
+---
+
+#### 왜 만들었나
+
+LLM 을 프로덕션에 올릴 때, 매번 부딪히는 벽이 3 가지 있습니다.
+
+1. **프롬프트에 무엇을 넘길지의 통제가 안 됨** — API 키, PEM, 환자 데이터, 절대 경로가 그대로 흐른다.
+2. **로컬 LLM 과 클라우드 LLM 의 전환이 지옥** — backend 마다 에러 타입・타임아웃・토큰 제어가 다르다.
+3. **산업 IoT 와의 결합 층이 매번 스크래치** — Modbus / OPC-UA / MQTT 를 붙이고, CUSUM 을 numpy 로 다시 쓰고, JSON 으로 뱉고….
+
+LLMesh 는 이 3 가지를 **1 개의 프레임워크 + 통일 ABC** 로 풀려고 한 것입니다. `SensorEvent` 라는 단일 데이터 모델로, 필드에서 클라우드 LLM 까지를 **fail-closed** 로 관통합니다.
+
+---
+
+#### 아키텍처 개관
+
+```
+        ┌────────────────────────────────────────────────────────┐
+        │  Industrial Adapters (Modbus / OPC-UA / MQTT / DNP3 / │
+        │  GOOSE / EtherCAT / CAN / BACnet / WebSocket / ROS2)  │
+        └───────────────┬────────────────────────────────────────┘
+                        │  SensorEvent
+                        ▼
+        ┌────────────────────────────────────────────────────────┐
+        │   SPC / MT / CUSUM / Hotelling T² / VideoCUSUM        │
+        │   ExplainedCUSUM ──► IncidentReport (Markdown / JSON) │
+        └───────────────┬────────────────────────────────────────┘
+                        │
+                        ▼
+        ┌────────────────────────────────────────────────────────┐
+        │   PromptFirewall  L0 → L1 → L1.5 (Presidio) → L2      │
+        │   PrivacySummarizer  /  ImageFirewall                  │
+        └───────────────┬────────────────────────────────────────┘
+                        │
+                        ▼
+        ┌────────────────────────────────────────────────────────┐
+        │   LLM Backend (Ollama / llama.cpp / OpenAI / Azure /   │
+        │   Anthropic / OpenRouter / Groq / Together / Mistral   │
+        │   / DeepSeek) — 동일 ABC                              │
+        └───────────────┬────────────────────────────────────────┘
+                        │
+                        ▼
+                 OutputValidator (JSON / schema / nonce)
+                        │
+                        ▼
+                  RAG (Numpy / SQLite / LSH)
+```
+
+---
+
+#### 하이라이트 1: 4 층 프롬프트 파이어월
+
+LLM 에 넘기는 **직전** 에, 4 층으로 나누어 검사합니다.
+
+| Layer | 역할 | 출력 |
+|------:|------|------|
+| L0 | 프롬프트 주입 / jailbreak / Unicode 제어 문자 | BLOCK |
+| L1 | 시크릿(API 키, JWT, PEM, AWS, GitHub, Anthropic, OpenAI) | BLOCK |
+| **L1.5** | **Microsoft Presidio 에 의한 PII(CC / SSN / IBAN / 의료 면허 / 개인명 / Email / 전화 …)** | **BLOCK or SUMMARIZE** |
+| L2 | 절대 경로 / 내부 import / 오버사이즈 payload | SUMMARIZE or BLOCK |
+
+```python
+from llmesh import PromptFirewall
+
+fw = PromptFirewall()
+verdict = fw.check("API_KEY=sk-... 를 누설하지 말고 요약해줘")
+### verdict.action == "BLOCK"
+### verdict.layer  == "L1"
+### verdict.reason == "secret_pattern: openai_api_key"
+```
+
+설계상의 핵심은 **fail-closed**(예외가 나면 BLOCK)와, **모든 HTTP 클라이언트에 응답 사이즈 상한**(DoS 대책). `pickle`・`yaml.load(unsafe)`・`eval`・`exec`・`shell=True` 는 **코드베이스 전체에서 제로** 입니다.
+
+---
+
+#### 하이라이트 2: 로컬 / 클라우드 LLM 을 동일 ABC 로 투과 운용(v3.1.0)
+
+```python
+from llmesh.llm import OllamaBackend, openai_backend, anthropic_backend
+
+### 로컬
+local = OllamaBackend(model="llama3.2")
+
+### 클라우드(OpenAI / Azure / OpenRouter / Together / Groq / Mistral / DeepSeek)
+cloud = openai_backend(api_key=..., model="gpt-4o-mini")
+
+### Anthropic
+claude = anthropic_backend(api_key=..., model="claude-haiku-4-5")
+
+### 어느 것이든 .complete(prompt) / .chat(messages) 로 호출 가능
+for backend in (local, cloud, claude):
+    print(backend.complete("Hello in one short sentence."))
+```
+
+**페일오버나 비용 라우팅** 을 위에 얹을 때, ABC 가 갖춰져 있으면 30 줄로 끝납니다.
+
+---
+
+#### 하이라이트 3: 산업 IoT — `SensorEvent` 로 전부 흡수
+
+```python
+from llmesh.industrial import (
+    ModbusAdapter, OPCUAAdapter, MQTTAdapter,
+    DNP3Adapter, GOOSEAdapter,             # v2.14
+    SensorEvent,
+    CUSUMChart, HotellingT2Chart,          # 다변량 SPC
+    ExplainedCUSUM,                        # v2.14: 자기 설명 CUSUM
+)
+
+modbus = ModbusAdapter(host="10.0.0.10")
+chart  = ExplainedCUSUM(target=70.0, k=0.5, h=5.0)
+
+async for ev in modbus.stream():           # SensorEvent 를 yield
+    report = chart.update(ev)              # IncidentReport or None
+    if report:
+        print(report.to_markdown())        # LLM 설명 포함된 이상 리포트
+```
+
+`ExplainedCUSUM` 은 **CUSUM 이 이상을 검출한 순간에 LLM 이 원인 가설을 내놓는** 컴포넌트입니다. `IncidentReport` 는 Markdown / JSON 어느 쪽으로도 뱉을 수 있습니다.
+
+`VideoCUSUM` 은 동영상 프레임과 수치 센서를 **시각 동기 페어화 버퍼** 로 맞춘 뒤 2 계통 CUSUM 을 거는 것(`sync_window_s` 기본 1.0s, bounded deque). SCADA × 카메라의 조합을 상정하고 있습니다.
+
+---
+
+#### 하이라이트 4: RAG — 3 단계의 벡터 스토어
+
+데이터 규모에 맞춰 3 종류의 스토어를 전환할 수 있습니다. **외부 DB 제로・전부 stdlib + numpy** 입니다.
+
+| 스토어 | 건수 기준 | 영속화 | 검색 |
+|---|---:|---|---|
+| `NumpyVectorStore` | ~10⁵ | `.npz` 아토믹 | O(n) cosine |
+| `SqliteVectorStore` | ~10⁶ | sqlite3 (WAL) | O(n) cosine |
+| `LSHVectorStore` | 10⁶~ | `.npz` | LSH ANN(recall@10 ≥ 0.92) |
+
+```python
+from llmesh.rag import Retriever, MockEmbedder, NumpyVectorStore
+from llmesh import PromptFirewall
+
+retriever = Retriever(
+    embedder=MockEmbedder(dim=128),
+    store=NumpyVectorStore(path="kb.npz"),
+    firewall=PromptFirewall(),       # 꺼낸 문서도 Firewall 을 통과시킨다
+)
+hits = retriever.search("Modbus 의 리플레이 공격 대책", k=5)
+```
+
+`Retriever` 에는 **Firewall 을 필수 주입** 하고 있으므로, 오염된 문서가 그대로 LLM 에 흐르는 사고를 막을 수 있습니다.
+
+---
+
+#### 하이라이트 5: Rust 확장으로 6×
+
+`rust_ext/`(PyO3 + maturin)에서 점군과 DVS 이벤트의 인코드를 Rust 화하고 있습니다.
+
+| 조작 | Pure Python | Rust | 배율 |
+|------|-----------:|-----:|----:|
+| PointCloud encode (1M) | 4.0M pts/s | **24.1M pts/s** | **6.0×** |
+| PointCloud decode (1M) | 3.7M pts/s | 5.9M pts/s | 1.6× |
+| DVS encode (1M) | 3.4M evt/s | 5.5M evt/s | 1.6× |
+| Pipeline + CUSUM | 190K events/s | – | – |
+
+```bash
+cd rust_ext && python -m maturin build --release
+pip install --force-reinstall target/wheels/*.whl
+```
+
+Rust 확장은 **임의**(없어도 Pure Python 으로 동작). CI 는 **8 타깃의 multi-platform wheel** 을 뱉습니다.
+
+---
+
+#### 하이라이트 6: 신뢰성 프로토콜
+
+스트리밍 통신의 신뢰성을 `MessageAssembler` 와 `ChunkSender` 의 조합으로 보증합니다.
+
+```
+[정상 완료]  수신: pop_completed() → STREAM_ACK 송신
+            송신: handle_ack()    → 송신 버퍼 폐기
+
+[누락 검출]  수신: check_timeouts() → RETRANSMIT 송신(1 회만)
+            송신: handle_retransmit() → 누락 청크만 재전송
+
+[절단 검출]  수신: check_watchdog()  → True 로 절단 시그널
+            송신: expire_old()      → TTL 초과 버퍼 자동 폐기
+```
+
+GOOSE 어댑터는 **`stNum` 의 per-ref 리플레이 방어** 포함, `MAX_DATASET_VALUES` 가드 포함.
+
+---
+
+#### 보안 설계의 불변 조건
+
+LLMesh 의 `docs/SECURITY.md` 에는 STRIDE 모델과 **불변 조건** 이 적혀 있습니다. 요약하면:
+
+- `shell=True`, `pickle`, `yaml.load(unsafe)`, `eval`, `exec` 를 **일절 쓰지 않는다**
+- subprocess 는 **list 형식만**
+- Firewall 은 **fail-closed**(예외 → L4 / BLOCK)
+- OutputValidator 가 **non-JSON / schema 불일치 / nonce replay** 를 거부
+- 모든 HTTP 클라이언트는 **`read_capped` 로 용도별 응답 상한**
+- 모든 optional 의존은 **extras**(경량 본체)
+- Audit log 는 **HMAC chain 으로 tamper-evident**
+
+이것은 v2.16 에서 전 코드에 대한 OWASP 정적 감사를 건 결과로서 **클린** 해져 있습니다(Bandit / 자체 리뷰).
+
+---
+
+#### CLI 툴체인
+
+```bash
+python -m llmesh.cli.doctor   # 환경 건전성 체크(의존・포트・권한)
+python -m llmesh.cli.status   # 런타임 상태(노드 ID / Capability / 접속처)
+python -m llmesh.cli.sbom     # CycloneDX SBOM 자동 생성
+```
+
+`doctor` 는 일부러 **「동작하지 않는 이유를 전부 출력한다」** 에 집중하고 있습니다. `status` 는 운영 노드를 들여다보기 위해, `sbom` 은 공급망 감사를 위해 상설하고 있습니다.
+
+---
+
+#### Claude Code MCP 서버로 쓴다
+
+`claude_desktop_config.json` 에 적기만 하면, Claude Code 에서 `llmesh` 의 툴 군(센서 읽기 / SPC 판정 / RAG 검색)을 호출할 수 있습니다.
+
+```json
+{
+  "mcpServers": {
+    "llmesh": {
+      "command": "python",
+      "args": ["-m", "llmesh", "serve-mcp"],
+      "env": {
+        "LLMESH_BACKEND": "ollama",
+        "LLMESH_MODEL": "llama3.2"
+      }
+    }
+  }
+}
+```
+
+MCP 의 Output 은 **OutputValidator** 를 반드시 통과하므로, tool 쪽에서의 주입도 봉쇄하고 있습니다.
+
+---
+
+#### 버전 이력(발췌)
+
+| Ver | 내용 |
+|---|---|
+| v2.13.0 | Presidio Layer 1.5 + RAG MVP + 다변량 SPC 코어 |
+| v2.14.0 | ExplainedCUSUM / VideoCUSUM / VLMFeatureExtractor / SqliteVectorStore / DNP3 / GOOSE |
+| v2.15.0 | LSHVectorStore(ANN) + 공개 API 레이어 + `API_STABILITY.md` |
+| v2.16.0 | 전체 코드 리뷰 반영(OWASP 정적 감사 클린) |
+| v2.17.0 | HTTP DoS hardening(전 8 HTTP 클라이언트에 `read_capped`) |
+| v2.18.0 | 문서 정비(CONTRIBUTING / DEVELOPMENT / TROUBLESHOOTING / MIGRATION / DEPLOYMENT / OBSERVABILITY / TESTING / GLOSSARY) |
+| v3.0.0 | **API Stability Release**(SemVer 정식 적용, `__all__` 계약화) |
+| **v3.1.0** | **클라우드 LLM 통합(OpenAI / Azure / Anthropic / OpenRouter / Together / Groq / Mistral / DeepSeek)** |
+
+---
+
+#### 품질 스코어
+
+| 축 | 스코어 |
+|----|---:|
+| 데이터 망라성 | 9.9(25 분야 RAD + 117 장 요건) |
+| 문서 | 9.8 |
+| 확장성 | 9.8 |
+| 테스트 | 9.5(2300+ 건, Hypothesis property-based 1,200 케이스) |
+| 퍼포먼스 | 8.5(Rust 6×) |
+| **종합** | **약 9.5 / 10** |
+
+---
+
+#### 만져본다
+
+```bash
+pip install llmesh-mcp
+python -c "from llmesh import PromptFirewall; print(PromptFirewall().check('hello'))"
+```
+
+산업 프로토콜이나 클라우드 LLM 을 시험할 때는 extras 를 넣어 주세요:
+
+```bash
+pip install "llmesh-mcp[industrial,vision,presidio,rag]"
+```
+
+- GitHub: <https://github.com/furuse-kazufumi/llmesh>
+- PyPI: <https://pypi.org/project/llmesh-mcp/>
+- License: MIT
+
+---
+
+#### 마치며
+
+LLMesh 는 「LLM 을 프로덕션에 올릴 때마다 매번 쓰던 지루한 부분」을 1 개의 패키지에 봉인하기 위한 실험입니다.
+**프롬프트에 무엇을 넘겨도 되는지를 통제하고, 현장의 센서에서 LLM 까지를 fail-closed 로 관통하고, 로컬과 클라우드를 교체 가능하게 한다** —— 여기에 수요가 있다고 느끼는 사람이 있다면, 꼭 Issue 나 PR 을 보내 주세요.
+
+의견・버그 보고: <https://github.com/furuse-kazufumi/llmesh/issues>
+
+
+<!-- INTERLUDE -->
+
+### ☕ 막간 — AI 가 갑자기 「입을 다물」 때 —— 자율 주행 터미널 개발의 무대 뒤 이야기
+
+본론에서는 조금 벗어나지만, 이런 기사나 구현은, 필자가 직접 만든 터미널(Claude Code 전용 작업 환경) 위에서, AI 에게 절반쯤 자율 주행시키면서 만들고 있습니다. 그리고 자율 주행시키면, 교과서에는 실려 있지 않은 진풍경을 만나게 됩니다. 그중에서도 잊기 힘든 것이 「AI 가 갑자기 입을 다무는」 현상입니다. 지시를 던져도, 생각하고 있는지, 멈춘 건지, 화면은 아무 말도 하지 않는다. 사람이라면 『음—』 하고 맞장구라도 칠 대목인데, 기계는 완전한 침묵으로 굳어버리니, 이쪽 심장에 안 좋다.
+
+또 하나의 명물이 「커서 쟁탈전」이었습니다. AI 가 글자를 입력하고 있는 도중에 사람도 입력하려 하면, 화면 위에서 二人羽織(니닌바오리, 한 사람이 옷을 입고 뒤의 사람이 소매에 팔을 넣어 함께 동작하는 일본 전통 개그)처럼 손이 부딪힌다. 게다가 일본어 입력(IME)이 얽히면, 변환 도중의 글자를 AI 쪽이 가로채서, 화면에 의미불명의 문자열이 춤춘다. 자동으로 끝없이 진행시키고 싶어도, 재로그인이나 인증이 요구된 순간만큼은, 아무래도 사람이 버튼을 누를 수밖에 없다——AI 는 스스로 자기 자신을 다시 로그인할 수 없기 때문입니다. 완전 자동의 꿈에는, 반드시 어딘가에 작은 「인간의 손가락 하나」가 남는다. 이것은 결함이라기보다, 안전을 위해 남겨 두어야 할 비상구라고, 매일 밤처럼 실감하고 있습니다.
+
+<!-- INTERLUDE -->
