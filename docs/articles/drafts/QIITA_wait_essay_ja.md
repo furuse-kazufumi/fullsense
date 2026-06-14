@@ -69,6 +69,9 @@ id: 86bcee1d8dc52ac8d96d
 
 この「…………」を何秒見つめられるか。これが、自走AIと暮らすうえでの最初の修行になります。
 
+![「サヨウナラ…」突然の別れ。昨日まで動いていたAIが、ある日いなくなる ©Forbidden shibukawa / SHUEISHA](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/046.jpg)
+> 🗒️ *「サヨウナラ…／◆突然の別れ…!」— 沈黙どころか、使っていたモデルがある日そっと使えなくなることも*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』/ 週刊ヤングジャンプ公式SNS素材）
+
 ---
 
 ## 4. 今日も待った —— ツールに「投稿しすぎ」と言われて
