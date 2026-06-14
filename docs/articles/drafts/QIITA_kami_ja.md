@@ -1085,6 +1085,10 @@ flowchart TD
 
 単純なものが複雑に見え、暴走しているものが静かに見え、運の良い勝ちが実力に見える。**見かけは、本質を平気で裏切ります。**
 
+![「惑わされず分けて考えてみ?」と諭す明美](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/128.jpg)
+> 🗒️ *「惑わされず分けて考えてみ?」— 見かけ≠本質を下ネタで同型反復*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+
+
 だから私たちは、見かけではなく、**ウソをつかない数学の証明書** で測ることにしました。経験は 84% だまされても、証明書は 1 個も見逃さない。賢さでバズるより、**正直さで信頼される** ほうを選びました。地味だけど、それが本当に役に立つモノサシだと信じています。
 
 正本データ(全部公開しています): [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/llcore)
