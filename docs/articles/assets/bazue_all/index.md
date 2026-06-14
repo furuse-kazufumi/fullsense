@@ -808,6 +808,8 @@
   - EN: Bar scene — a bob-haired woman sits cross-legged while two others crouch and a wide-mouthed man looms in the corner.
   - ZH: 酒吧场景——黑发波波头女子翘脚而坐，两人蹲在前方，右下角是张大嘴的男人。
   - KO: 바 장면 — 단발 여자가 다리 꼬고 앉고, 앞에 둘이 쪼그려 있고, 우하단엔 입 벌린 남자.
+- 使いどころ: 複数AI協調（オーケストラ）でコードレビュー役のAIが偉そうに見える構図：天野小雨（スーツ）が脚を組んで見下ろし、2人が縮こまる＝Codex二本柱（Claude主導+Codex配下）等で、レビュー役AI（Codex/Copilot）が主役AIより偉そうに振る舞う様の自虐。AIオーケストラ・二本柱・コードレビューの挿絵向き（ユーザー確認 2026-06-14）
+
 ### 079.jpg
 - セリフ:
   - 「お前は恥を知れや！」
