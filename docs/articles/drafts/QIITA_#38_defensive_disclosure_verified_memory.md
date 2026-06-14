@@ -114,7 +114,7 @@ public_id: cc0713ab78a5b390df76
 
 防衛的公開は「当業者が実施できる詳細度」で書かないと先行技術として弱い。なので、開示文書には次を **実装可能なレベル** で書きました。
 
-![記憶コア式 — 漏れと飽和つき再帰 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) の図解](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg)
+![記憶コア式 — 漏れと飽和つき再帰 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) の図解](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg?v=2)
 
 **(a) 健全な縮小性証明器の梯子(ladder)。** 安いものから順に 3 段:
 - `cert_inf` — 閉形式の ∞-ノルム上限(`O(n²)`)。各行の絶対値和が端点で最大になる性質を使い、**ソルバ不要**。
@@ -286,7 +286,7 @@ The academic audit used **literature only** and did not look at patent DBs (weak
 
 A defensive publication is weak as prior art unless written at "a level of detail that a person skilled in the art can implement." So the disclosure document wrote the following at **an implementable level**.
 
-![Memory core equation — an illustration of the leaky, saturating recurrence s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg)
+![Memory core equation — an illustration of the leaky, saturating recurrence s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg?v=2)
 
 **(a) The ladder of sound contraction verifiers.** Three rungs, cheapest first:
 - `cert_inf` — closed-form ∞-norm upper bound (`O(n²)`). Uses the property that the sum of absolute values per row is maximized at the endpoints, so it is **solver-free**.
@@ -458,7 +458,7 @@ The promise — "before the SSGM window closes in implementation" — was kept t
 
 防御性公开如果不写到「当业者可实施的详细度」，作为先行技术就会偏弱。所以披露文件里，把以下内容写到了**可实现的层级**。
 
-![记忆核公式 —— 带漏与饱和的递归 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) 的图解](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg)
+![记忆核公式 —— 带漏与饱和的递归 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) 的图解](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg?v=2)
 
 **(a) 健全收缩性证明器的梯子（ladder）。** 从便宜的开始，共 3 级：
 - `cert_inf` —— 闭式 ∞-范数上界（`O(n²)`）。利用各行绝对值之和在端点处取最大的性质，**无需求解器**。
@@ -630,7 +630,7 @@ The promise — "before the SSGM window closes in implementation" — was kept t
 
 방어적 공개는 「당업자가 실시할 수 있는 상세도」로 쓰지 않으면 선행 기술로서 약합니다. 그래서 개시 문서에는 다음을 **구현 가능한 레벨**로 썼습니다.
 
-![기억 코어 식 — 누수와 포화 딸린 재귀 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) 의 도해](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg)
+![기억 코어 식 — 누수와 포화 딸린 재귀 s(t+1) = decay⊙s + (1−decay)⊙tanh(W s + V x) 의 도해](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_38/qiita_38_fig_core.svg?v=2)
 
 **(a) 건전한 축소성 증명기의 사다리(ladder).** 싼 것부터 순서대로 3단:
 - `cert_inf` — 닫힌 형식의 ∞-노름 상한(`O(n²)`). 각 행의 절댓값 합이 끝점에서 최대가 되는 성질을 사용해, **솔버 불필요**.
