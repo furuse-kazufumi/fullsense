@@ -2,6 +2,7 @@
 title: 進捗バーが止まったとき、人は何分待てるのか —— 沈黙するAIと「待ち」の工学
 tags: 設計, UX, AI, タイムアウト, ポエム
 private: false
+id: 86bcee1d8dc52ac8d96d
 ---
 
 <!--

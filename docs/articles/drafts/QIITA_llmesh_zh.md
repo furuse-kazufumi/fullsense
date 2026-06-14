@@ -2,6 +2,7 @@
 title: llmesh 合集 — 本地/云端统一 × Prompt Firewall × Rust 加速 × 工业 IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × 生态系统
 tags: OpenAI, LLM, LLaMA, Anthropic, ollama
 private: false
+id: fa263850e615f666f976
 ---
 
 # llmesh 合集 — 本地/云端统一 × Prompt Firewall × Rust 加速 × 工业 IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × 生态系统

@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-14 11:09:10
+- **生成時刻**: 2026-06-14 11:18:24
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+8d1dfab auto: index.md 編集前 (2026-06-14 11:14)
+19047a9 auto: index.md 編集前 (2026-06-14 11:14)
 ddaa7f4 auto: _verify_llmesh_tr.py 編集前 (2026-06-14 10:11)
 ccbd8fa auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:07)
 74bdebd auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:06)
@@ -28,18 +30,12 @@ af719c7 auto: QIITA_llmesh_zh.md 編集前 (2026-06-14 10:05)
 b59cc44 auto: QIITA_llmesh_en.md 編集前 (2026-06-14 10:05)
 26d5b39 auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:04)
 aa4c337 auto: QIITA_llmesh_en.md 編集前 (2026-06-14 10:03)
-9581e59 auto: QIITA_llmesh_zh.md 編集前 (2026-06-14 10:03)
-c04b4ac auto: QIITA_llmesh_ko.md 編集前 (2026-06-14 10:03)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
- D docs/articles/drafts/_verify_llmesh_tr.py
-?? docs/articles/assets/bazue_all/index.md
-?? docs/articles/drafts/QIITA_wait_essay_ja.md
+M docs/articles/assets/bazue_all/index.md
 ```
 
 
@@ -74,9 +70,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `11:06` `docs/NEXT_SESSION.auto.md`
-- `11:06` `docs/SESSION_SUMMARY.md`
-- `11:06` `docs/articles/assets/bazue_all/index.md`
+- `11:17` `docs/articles/assets/bazue_all/index.md`
+- `11:09` `docs/NEXT_SESSION.auto.md`
+- `11:09` `docs/SESSION_SUMMARY.md`
 - `10:51` `docs/articles/drafts/QIITA_wait_essay_ja.md`
 - `10:07` `docs/articles/drafts/QIITA_llmesh_ko.md`
 - `10:06` `docs/articles/drafts/QIITA_llmesh_zh.md`

@@ -2,6 +2,7 @@
 title: llmesh 모음 — 로컬/클라우드 통합 × Prompt Firewall × Rust 고속화 × 산업 IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × 에코시스템
 tags: OpenAI, LLM, LLaMA, Anthropic, ollama
 private: false
+id: 952c5ea965ca0499df98
 ---
 
 # llmesh 모음 — 로컬/클라우드 통합 × Prompt Firewall × Rust 고속화 × 산업 IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × 에코시스템
