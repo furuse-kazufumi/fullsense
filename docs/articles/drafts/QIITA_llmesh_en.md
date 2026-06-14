@@ -3,6 +3,7 @@ title: llmesh Digest — Unified Local/Cloud × Prompt Firewall × Rust Accelera
 tags: OpenAI, LLM, LLaMA, Anthropic, ollama
 private: false
 id: 8df131193caf4dba5218
+public_id: edaef9aa56ae66b8423e
 ---
 
 # llmesh Digest — Unified Local/Cloud × Prompt Firewall × Rust Acceleration × Industrial IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × Ecosystem
