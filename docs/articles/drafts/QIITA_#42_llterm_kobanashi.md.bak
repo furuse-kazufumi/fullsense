@@ -275,7 +275,30 @@ flowchart LR
 <a id="english"></a>
 # English
 
-(後続セッションで展開予定 / To be expanded in a follow-up session)
+> The Japanese section above is the full six-story collection — a developer's behind-the-scenes notes from building **llterm**, a personal tool that drives Claude Code in an autonomous loop. The full English translation is pending; below is the **postscript that arrived three days after publication**, because it was too timely to wait.
+
+## Postscript — "The Invoice Arrived" (added 2026-06-15)
+
+I wrote this collection on June 12, 2026. Three days later, a seventh story came to find me.
+
+In the honest-disclosure note I'd written: "subscription terms are based on observation at the time of writing — **they may change.**" I meant it as a hedge. I didn't expect it to be flipped in three days.
+
+On June 15, 2026, the company behind Claude changed its billing structure. In a nutshell: **what a human drives interactively, on screen,** stays on the flat subscription. But **what you let the AI run on its own (headless — without going through a terminal)** now draws from a separate monthly credit metered at **actual (API list) prices**, with no rollover.
+
+> Quick glossary: **interactive TUI** = the terminal screen a human watches and operates. **Headless** = run in one shot from a program, with no screen (`claude -p`). The new line was drawn almost exactly along that boundary.
+
+Recall the fifth story: llterm "threw away the terminal" and moved its autonomous loop to **headless**. I wrote that all I lost was a craftsman's pride. The notice three days later taught me I'd moved to the *billed* side too — **a terminal-less autonomous loop is exactly what now counts as "metered."**
+
+Just to be sure, I checked my other launcher (the interactive one). It starts the **actual interactive screen** on a pseudo-terminal, and a human presses the final Enter — counted as "a human interacting," so: safe. I'll admit it: I first assumed "llterm must be the same." But when I **opened the code instead of guessing**, there sat the `-p` (headless) flag. Origin (a terminal host) and substance (never touches a terminal) are not the same thing. The second story's "doubt the meter's implementation, not the world" applied here too — **doubt apparent safety; read the implementation.**
+
+![Higashi Miki leans in with a big grin: "Where's your human warmth, huh?!"](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/018.jpg)
+> 🗒️ *"Where's your human warmth, huh?!" — the first honest reaction of someone who spent half a year building an autonomous machine, only to be told, the moment it runs, "that run costs money."*（© Forbidden shibukawa / SHUEISHA・*Snack Basue*）
+
+But once I calmed down, this was the fourth story's payoff. In story four, llterm handed work to a neighbor AI (Codex) **only when** it hit a rate limit — a neighbor that works inside a fixed monthly subscription. This change gave me reason enough to promote that "only when" to "**by default.**" So I've started the change: **make Codex the default autonomous player**. Token-burning self-driving goes to the fixed-fee neighbor; Claude stays for conversation and high-value judgment. The bridge I built half a year ago "for redundancy" turned out to be a cost bridge too.
+
+**Punchline:** the invoice for "the day I threw away the terminal" (story five) arrived three days later as "where's your human warmth" (this one), and was paid by "hand it to the neighbor AI" (story four). The seeds you plant yourself are the ones most reliably harvested.
+
+**Lesson:** **Terms change. So build a provider-independent escape route in peacetime.** Redundancy is usually framed as failure insurance — but it works against billing changes too. Insurance only reveals why you bought it the day you need it: the neighbor I added "just in case" in story four became the lead three days later.
 
 ---
 
