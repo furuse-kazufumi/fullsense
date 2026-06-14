@@ -1668,3 +1668,325 @@ docker compose -f docker-compose.poc.yml up --build
 - 对 L3+ 输入强制 Firewall → PrivacySummarizer → LLMBackend 的管线
 
 LLMesh 还处在研究/PoC 阶段，但会把它当作让 Local LLM 安全协同的实验基盘培育下去。
+
+---
+
+## 第7章 llmesh: 本地 LLM 集群 × 工业 IoT × 研究自动化
+
+<!-- KAMI -->
+> 📖 **简单来说**
+>
+> 最终章是展示「至此的全部融合」与「未来的扩展」的生态系统介绍。在本体（llmesh-mcp）之上，组合进了一个能在终端里把结果漂亮呈现的搭档工具（llove），并且最近还扩展到了研究的自动化——读论文→立假设→做计划→评审这一连串流程，乃至机器人控制、材料探索、把多种数据统一记忆的机制。设计的口号是「本体要轻要薄，外观和演出交给别的工具」「不依赖外部的重依赖，最小配置也能跑」，是写给想把一套本地内完结的研究基盘一通配齐的人的章节。
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense 知识库指南** <!-- fullsense-team-kb -->
+FullSense 开发全史 60+ 篇文章（4 种语言版、故事化的阅读顺序指南、通俗易懂版、四格漫画）均已汇总至 Qiita Team **FullSense KB**（仅限团队成员）。
+:::
+
+
+`llmesh` 是一个安全的 Python 集群框架，把本地 LLM (Ollama) 节点群用 MCP
+协议连起来，分布式执行代码生成、评审、测试生成。最近正朝着「用一个基盘处理 研究自动化 × 柔性机器人 × 多模态知识 × HCI」的方向扩展，本文一口气介绍整套生态系统 (llmesh / llmesh-llove + 研究编排层)。
+
+- llmesh 源: https://github.com/furuse-kazufumi/llmesh
+- PyPI: https://pypi.org/project/llmesh-mcp/
+- llmesh-llove (TUI viewer): https://pypi.org/project/llmesh-llove/
+
+#### 生态系统全貌
+
+```mermaid
+flowchart TB
+  Root[llmesh 生态系统]
+  Root --> Mcp[llmesh-mcp 本体]
+  Root --> Llove[llmesh-llove TUI viewer]
+
+  Mcp --> Llm[Multi-LLM backend<br/>Ollama / Anthropic / 7 兼容]
+  Mcp --> Proto[23 通信适配器<br/>Modbus / OPC-UA / MQTT 等]
+  Mcp --> Sec[Privacy stack<br/>Firewall + PII + DataLevel]
+  Mcp --> Rag[RAG + Multimodal memory]
+  Mcp --> Res[研究自动化基盘<br/>Literature / Hypothesis / Planner]
+  Mcp --> Rust[Rust 扩展<br/>PointCloud encode 6x]
+
+  Llove --> Tui[17 场景 TUI]
+  Llove --> Vw[Markdown / SVG / Mermaid 显示]
+  Llove --> Cmd[Command Palette]
+```
+
+#### 1. llmesh-mcp 本体
+
+##### 1.1 多协议接入层
+
+REST / TCP / UDP / SSH / SMTP / Modbus / Serial / OPC-UA / MQTT / EtherCAT / CAN / BACnet / WebSocket / DNP3 / GOOSE /
+DVS / Depth 都用 `ProtocolAdapter` ABC 统一。FanoutExecutor 只需切换 `protocol=` 就能用 HTTP→TCP→Modbus 等执行 k-of-n
+并行 fan-out。
+
+```python
+from llmesh.protocol import HTTPAdapter, Modbus
+from llmesh.orchestrator import FanoutExecutor
+
+executor = FanoutExecutor(nodes=[...], protocol="http", k=2)
+result = executor.invoke("generate_code", {"prompt": "..."})
+```
+
+##### 1.2 多 LLM 后端
+
+```python
+from llmesh.llm import OllamaBackend
+from llmesh.llm.anthropic_backend import AnthropicBackend
+from llmesh.llm.openai_compatible import OpenAICompatibleBackend
+
+### 用同一个 LLMBackend ABC 对齐，所以 Ollama → Anthropic → Together AI
+### 只换配置就能切换
+backend = AnthropicBackend(model="claude-haiku-4-5")
+```
+
+OpenAICompatibleBackend 支持 OpenAI / Azure / OpenRouter / Together / Groq / Mistral / DeepSeek 这 7
+个供应商。
+
+##### 1.3 RAG 模块
+
+```python
+from llmesh.rag import MockEmbedder, NumpyVectorStore, Retriever
+
+emb = MockEmbedder(dim=384)
+store = NumpyVectorStore(dimension=384)
+ret = Retriever(embedder=emb, store=store)
+ret.index(text="LLMesh is...", doc_id="d1")
+hits = ret.search("What is LLMesh?", top_k=3)
+```
+
+可从 3 个存储后端中选择：
+
+- `NumpyVectorStore`: 纯 numpy，`.npz` 持久化，面向 ~10 万件
+- `SqliteVectorStore`: 仅 stdlib，单文件，~100 万件
+- `LSHVectorStore`: numpy 近似 NN，面向 100 万件以上
+
+##### 1.4 安全栈
+
+PromptFirewall (4 层: 正则 / Presidio / PII / 结构) + DataLevel L0〜L4 + 7 段 OutputValidator + HMAC Chain
+AuditTrail。LLM 响应在通过 OutputValidator 之前都当作 untrusted 处理。
+
+#### 2. llmesh-llove (TUI viewer)
+
+`llove` 是一个把 llmesh 的场景用 Textual TUI 回放、可视化的包。按「llmesh 简单 / llove
+做显示加工」分担，llmesh 薄薄地流出 SFEN、did:key、sensor float，llove 专门负责显示——这是其设计。
+
+```bash
+pip install llmesh-llove
+llove demo --list                          # 17 场景一览
+llove --lang ja demo --scenario shogi      # 将棋 MVP
+llove --lang ja demo --scenario vision     # VLM 不良检查 ASCII
+llove --lang ja demo --scenario pointcloud # LiDAR top-view ASCII
+```
+
+17 场景的明细: firewall / scada / multimodal / rag / backends / audit / reliability / cost / chat / bench / drift
+/ mcp_call / vision / pointcloud / coin_toss / mindmap / shogi。
+
+##### 主要特征
+
+- **Markdown / SVG / Mermaid** 在终端中显示 (用 subprocess 回退到 chafa / rsvg-convert 等外部工具)
+- **折叠** (标题 / 代码块 / 表) + 状态持久化
+- **Command Palette**: 从 `:` 键起的 内置 11 种 (`:help` `:identity` `:layout` `:demo` `:play` `:open` `:peer`
+`:set` `:get` `:alias` `:macro`) + alias / macro 嵌套防 5 段
+- **WindowManager** (F17): Registry + IconSet + 自由可变/常驻锁定 两种容器 + `layout.toml`
+- **shogi MVP**: 汉字棋子 + 棋谱 `▲７六歩 (2.4秒)` + 自动 kifu 日志
+
+##### Ed25519 per-move 签名
+
+全游戏横跨，每一手都打一个 Ed25519 签名 (基于 `did:key`)。借此可以检测对局回放的篡改。
+
+#### 3. 研究编排层
+
+最近 (2026-05-11 会话) 在 `llmesh.core` / `llmesh.research` / `llmesh.domains` / `llmesh.rag` 一口气加入了研究自动化基盘的
+Phase 0〜5。无 pydantic 依赖，仅用 `dataclasses` 就保持 JSON-Schema 兼容的 schema。
+
+##### 3.1 core 原语 (Phase 0a / 0b)
+
+```python
+from llmesh.core import Agent, AgentConfig, Tool, ToolSpec, TaskGraph, TaskNode
+from llmesh.core import TraceLogger
+
+with TraceLogger("trace.jsonl", run_id="r1", seed=42, config={}) as tl:
+  tl.log_prompt("agent.lit", prompt="...", response="...",
+				model="claude-haiku-4-5", model_version="20251001")
+  tl.log_tool_call("search", input_payload={"q": "..."},
+				   output_payload={"hits": 3})
+  tl.log_evaluation("reviewer", target="agent.lit#1", score=0.85)
+```
+
+`TraceLogger` 会自动发出 `run.start` / `run.end`，并用 `threading.Lock` 把来自并行 agent 的写入串行化。
+
+##### 3.2 literature → hypothesis → planner → reviewer 闭环 (Phase 1 / 2)
+
+```python
+from llmesh.research import (
+  LiteratureAgent, LiteratureRequest, mock_extract,
+  HypothesisAgent, HypothesisRequest, mock_hypothesis_extract,
+  PlannerAgent, ReviewerAgent, run_plan_review_loop,
+  mock_planner_extract, mock_reviewer_extract,
+)
+from llmesh.core import AgentConfig
+
+lit = LiteratureAgent(AgentConfig(name="lit"), extract_fn=mock_extract)
+digest = lit.run(LiteratureRequest(text="paper body", title="My Paper"))
+
+hyp = HypothesisAgent(AgentConfig(name="hyp"), extract_fn=mock_hypothesis_extract)
+candidates = hyp.run(HypothesisRequest(digest=digest, max_candidates=3)).candidates
+
+planner = PlannerAgent(AgentConfig(name="p"), extract_fn=mock_planner_extract)
+reviewer = ReviewerAgent(AgentConfig(name="r"), extract_fn=mock_reviewer_extract)
+loop = run_plan_review_loop(
+  hypothesis=candidates[0],
+  planner=planner,
+  reviewer=reviewer,
+  max_iterations=3,
+)
+print(loop.verdict.kind, loop.iterations)  # "approve" 1
+```
+
+backend 抽象是 `ExtractFn = Callable[[str], dict]`。测试用 `mock_*` 函数即可自成闭环，生产则用 `make_ollama_extract` /
+`make_anthropic_extract` adapter 包装既有的 `LLMBackend.invoke`。
+
+##### 3.3 robotics planning interface (Phase 3)
+
+```python
+from llmesh.research import (
+  MockPerceptionAgent, MockTaskPlannerAgent,
+  MockMotionPlannerAgent, run_robotics_pipeline,
+)
+
+result = run_robotics_pipeline(
+  perception_agent=MockPerceptionAgent(),
+  task_planner=MockTaskPlannerAgent(),
+  motion_planner=MockMotionPlannerAgent(),
+  instruction="pick the cup_blue",
+  sensors={"objects": [{"name": "cup_blue"}]},
+)
+print(result.motion_plan.trajectory.waypoints)
+```
+
+PerceptionAgent / TaskPlannerAgent / MotionPlannerAgent / ReplanningAgent 这 4 个 ABC + `ContactEvent` (Saguri-bot 风:
+body_a/b + normal_force + is_expected) + `Trajectory` / `Waypoint`。预定在 Phase 8 插入 ROS 2 turtlesim，Phase 9 插入 VLA
+mock，Phase 10 插入 Gazebo arm。
+
+##### 3.4 materials predictor (Phase 4)
+
+```python
+from llmesh.domains.materials import (
+  Structure, Property,
+  MockPropertyPredictor, MockCandidateGeneratorAgent, MockEvaluatorAgent,
+  discover_top_k,
+)
+
+top = discover_top_k(
+  seed=Structure(structure_id="seed", composition={"Fe": 0.7, "Ni": 0.3}),
+  target_property=Property(name="band_gap", unit="eV"),
+  target_value=2.5,
+  generator=MockCandidateGeneratorAgent(),
+  predictor=MockPropertyPredictor(low=0.0, high=5.0),
+  evaluator=MockEvaluatorAgent(accept_fraction=0.5),
+  n_candidates=10,
+  k=3,
+)
+```
+
+`MockPropertyPredictor` 是基于 SHA-1 的 deterministic pseudo-regressor，用作 random forest 的替代。把 ABC 换成真正的
+scikit-learn / GNN / ALIGNN，就能迁移到实机运用。
+
+##### 3.5 multimodal memory + document parsers (Phase 5)
+
+```python
+from pathlib import Path
+from llmesh.rag import parse_document, MultimodalMemory
+
+### PDF / Markdown / HTML / text 用 1 个函数搞定
+text = parse_document(Path("paper.md"))    # 按扩展名自动分流
+text2 = parse_document(b"<p>hi</p>", kind="html")
+
+### text / image / table / log 在同一 ID 空间里记忆
+mem = MultimodalMemory()
+mem.add_text("paper-1#abstract", text=text, vector=[0.7, 0.3, 0.1])
+mem.add_image("paper-1#fig1", uri="figs/fig1.png", vector=[0.0, 1.0, 0.0])
+mem.add_table("paper-1#tab1",
+			rows=[("metric", "val"), ("acc", "0.9")],
+			vector=[0.0, 0.0, 1.0])
+mem.add_log("run-42#evt-001",
+		  line="2026-05-11 12:00 INFO ok",
+		  vector=[1.0, 1.0, 0.0])
+
+hits = mem.search([0.7, 0.3, 0.1], modalities=("text", "table"), top_k=5)
+```
+
+cosine 相似度仅用 `math.sqrt` 实现 (不需要 numpy)。把 `MultimodalStoreBackend` ABC 换掉，就能接到既有的 NumpyVS
+/ SqliteVS / LSHVS。
+
+#### 4. 安装
+
+```bash
+### 最小配置 (RTOS / 嵌入式 Linux 也可安装)
+pip install llmesh-mcp
+
+### 常用组合
+pip install "llmesh-mcp[industrial,vision,rag]"
+
+### llove TUI viewer
+pip install llmesh-llove
+```
+
+`pyproject.toml` 的 optional extras：
+
+- `industrial`: Modbus / OPC-UA / MQTT 等业务协议
+- `rag`: numpy / sqlite-vec
+- `presidio`: Microsoft Presidio PII 检测
+- `vlm`: Pillow + LLaVA captioner
+- `dnp3`: pydnp3 (重要基础设施)
+
+#### 5. 路线图
+
+近期的优先顺序 (来自 claude-loop queue)：
+
+| Phase | 内容 | 状况 |
+|-------|------|------|
+| 0a〜5 | core / trace logger / llove view / literature / hypothesis / planner / robotics I/F / materials / multimodal
+memory | 完成 |
+| 6 | llove explainability dashboard | 进行中 |
+| 7 | e2e demo + paper artifact pipeline | 计划 |
+| 8 | ROS 2 联动演示 (柔性机器人作业 e2e) | 计划 |
+| 9 | VLA PoC — turtlesim mock | 计划 |
+| 10 | VLA — Gazebo arm pick&place | 计划 |
+
+#### 6. 着重强调的设计原则
+
+1. **no-pydantic policy**: 用 `dataclasses` 表达 JSON-Schema 兼容 schema，让 `llmesh-mcp` 保持也能安装到 RTOS / 嵌入式 Linux
+2. **ExtractFn 注入**: 让全部 agent 都做成接收 `Callable[[str], dict]` 的形态，从而可以用统一接口切换 Ollama / Anthropic / mock
+3. **trace-as-replay**: 全部 prompt / model_version / tool I/O / 评估结果都以 JSONL 留存，所以能从任意时点
+replay 研究 run
+4. **llmesh 简单 / llove 做显示加工**: 通信和状态由 llmesh 薄薄地流出，外观全部由 llove 承担的职责分担
+
+#### 7. 参考链接
+
+- 源: https://github.com/furuse-kazufumi/llmesh
+- llove 源: https://github.com/furuse-kazufumi/llove
+- 规格书: 117 章 / 500+ 需求条目 (`SPECIFICATION.md`)
+- 架构图: `docs/ARCHITECTURE.md` (含 Mermaid)
+
+写给想把一套能在本地跑的多 agent 研究基盘一通配齐的人。欢迎意见、PR。
+
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ 这个连载是与 Claude Code 二人三脚一起写的
+>
+> 文中的实现、验证、可视化都是与 **Claude Code**（Anthropic 的 AI 编码环境）一起推进的。
+> Claude Code 可以用 **1 周免费试用** 来体验。如果你喜欢并注册付费方案时，
+> 经由下方的推荐链接，作者会获得「继续开发用的额度」，从而能助推这个连载的延续。
+>
+> 👉 **免费试用 / 推荐链接** → https://claude.ai/referral/0sqPw8E_lw
+>
+> <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
+> 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
+> 한국어: 이 시리즈는 **Claude Code**와 함께 작성합니다 — **1주 무료 체험** 제공. 링크로 가입하면 저자가 개발 지속용 크레딧을 받습니다.</sub>
+
+<!-- /REFERRAL -->
