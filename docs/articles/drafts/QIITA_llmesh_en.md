@@ -575,3 +575,262 @@ In designing a checkpoint, the part that frays your nerves most is actually not 
 That's why this mechanism comes with an escape hatch (an allowlist) where you can register frequently-used business phrasings as "this is okay to pass." Rather than trying to build a perfect checkpoint in one shot, you patch the holes little by little as false positives surface in the field — in the world of security, whether you can keep up this unglamorous tuning is, in the end, what matters most.
 
 <!-- INTERLUDE -->
+
+
+
+---
+
+## Chapter 3 A Rust Extension 6× Faster Than Pure Python, Plus Streaming Retransmission and HTTP DoS Defenses — The Performance and Reliability Story of LLMesh
+
+<!-- KAMI -->
+> 📖 **In a nutshell**
+>
+> This chapter is about the unglamorous groundwork of "speed" and "robustness." We rewrote only the especially heavy parts of the program (such as converting large point-cloud data) in a fast language called Rust, making it up to 6× faster than staying in Python. That said, even without Rust it automatically falls back to the conventional version, so it never stops working. On top of that, we combine a mechanism that recovers via retransmission when communication is interrupted, a defense that caps response size so memory doesn't blow up even if you're hit with a huge response, and a testing technique that "mechanically generates a flood of plausible inputs and tries them" — all aimed at staying upright even when run continuously for 24 hours.
+<!-- KAMI -->
+
+:::note info
+**📚 FullSense Knowledge Base** <!-- fullsense-team-kb -->
+The full FullSense development history — 60+ articles in 4 languages, with a story-based reading guide, plain-language editions, and 4-panel manga — is consolidated in our Qiita Team **FullSense KB** (team members only).
+:::
+
+
+> Rust extension for 6× / multi-platform wheel / reliability protocol / HTTP DoS hardening
+> `pip install llmesh-mcp` (the Rust extension is **optional, with automatic fallback**)
+
+---
+
+#### The conclusion first
+
+| Operation | Pure Python | Rust | Ratio |
+|------|-----------:|-----:|----:|
+| PointCloud encode (1M) | 4.0M pts/s | **24.1M pts/s** | **6.0×** |
+| PointCloud decode (1M) | 3.7M pts/s | 5.9M pts/s | 1.6× |
+| DVS encode (1M) | 3.4M evt/s | 5.5M evt/s | 1.6× |
+| Pipeline + CUSUM | 190K events/s | – | – |
+
+The point is **"it works even without Rust."** If the Rust extension fails to import, it **silently falls back to Pure Python** (if you want to check the environment explicitly, run `python -m llmesh.cli.doctor`).
+
+---
+
+#### Try the performance in 30 seconds
+
+```bash
+### Run it with Pure Python first
+pip install llmesh-mcp
+python -c "from llmesh.industrial.sensor_3d import PointCloud; \
+import numpy as np; \
+pts = np.random.rand(1_000_000, 3).astype('float32'); \
+import time; t=time.perf_counter(); PointCloud.encode(pts); \
+print(f'pure python: {1_000_000/(time.perf_counter()-t):,.0f} pts/s')"
+```
+
+Install the Rust version (optional):
+
+```bash
+git clone git@github.com:furuse-kazufumi/llmesh.git
+cd llmesh/rust_ext
+python -m maturin build --release
+pip install --force-reinstall target/wheels/*.whl
+```
+
+Because CI emits wheels for **8 targets — Linux × macOS × Windows × CPython 3.10/3.11/3.12** — the cases where you don't need to build it yourself keep increasing.
+
+---
+
+#### Why Rust (the implementation-level judgment)
+
+Point clouds and DVS events are simple I/O conversions: **"take in a `numpy.ndarray`, return a single `bytes`."** Written with PyO3, this is a textbook case for **parallelizing with the GIL released**, and **2–6×** over Pure Python comes out routinely.
+
+Conversely, **numerical computation like CUSUM / SPC / the MT method is already fast enough in numpy** (einsum / covariance / Tikhonov). So we did not Rust-ify it. The policy is **Rust only for hotspots**.
+
+```
+rust_ext/
+├── Cargo.toml
+├── pyproject.toml          # maturin settings
+└── src/
+    ├── lib.rs              # PyO3 entry
+    ├── pointcloud.rs       # encode/decode
+    └── dvs.rs              # encode
+```
+
+---
+
+#### Reliability protocol — doing streaming communication "properly"
+
+In long-running streams, unless you combine **"ACK / retransmit / disconnect detection / TTL expiry,"** memory will eventually blow up. LLMesh seals all of it with two pieces: `MessageAssembler` (receive) and `ChunkSender` (send).
+
+```
+[normal completion]  receive: pop_completed() → send STREAM_ACK
+                     send:    handle_ack()    → discard send buffer
+
+[loss detection]     receive: check_timeouts() → send RETRANSMIT (once only)
+                     send:    handle_retransmit() → resend only the missing chunks
+
+[disconnect detect]  receive: check_watchdog()  → True signals disconnect
+                     send:    expire_old()      → auto-discard TTL-exceeded buffers
+```
+
+**Sending RETRANSMIT only once** is to suppress amplification attacks via retransmit loops.
+Disconnect detection uses the single source `WatchdogTimer` (time comes from `llmesh.security.clock` with an NTP check).
+
+```python
+from llmesh.protocol import MessageAssembler, ChunkSender, WatchdogTimer
+
+assembler = MessageAssembler(timeout=5.0)
+sender    = ChunkSender(ttl=30.0)
+watchdog  = WatchdogTimer(timeout=10.0)
+
+### receive side
+for chunk in incoming:
+    assembler.feed(chunk)
+    while msg := assembler.pop_completed():
+        handle(msg)
+    for missing in assembler.check_timeouts():
+        send_retransmit(missing)
+
+### send side
+sender.send(payload)
+sender.expire_old()                # sweep TTL-expired entries
+```
+
+---
+
+#### HTTP DoS Hardening (v2.17)
+
+The risk around LLMs of **being force-fed a huge response over HTTP** is quietly significant. Ollama, OpenAI-compatible, Webhook, the embedding server for RAG — all HTTP.
+
+LLMesh applies `llmesh.security.http_limits.read_capped` **uniformly across all 8 HTTP clients**.
+
+```python
+from llmesh.security.http_limits import read_capped
+
+### Example: read an arbitrary HTTP response with a size cap
+body = read_capped(response, max_bytes=8 * 1024 * 1024)   # 8 MiB
+```
+
+Per-purpose caps:
+
+| Use | Default cap |
+|---|---:|
+| LLM completion response | 16 MiB |
+| Embedding response | 8 MiB |
+| Sensor HTTP pull | 4 MiB |
+| Webhook | 1 MiB |
+
+**One line on the caller side.** It takes effect across the whole core library.
+
+---
+
+#### Test strategy — 2300+ cases + 1,200 Hypothesis property-based cases
+
+In addition to ordinary example-based pytest, LLMesh makes heavy use of **property-based** testing. With `hypothesis`:
+
+- generate sensor time series with **arbitrary dtype / shape** and verify SPC doesn't fall over
+- generate message splitting and retransmission at **arbitrary loss rates** and verify `MessageAssembler` guarantees the message
+- pour input from the **full Unicode range** into the Firewall and verify fail-closed
+
+```python
+### Example: MessageAssembler property test
+@given(st.lists(st.binary(min_size=1, max_size=32), min_size=1, max_size=64),
+       st.lists(st.integers(min_value=0, max_value=63), unique=True))
+def test_assembler_recovers_arbitrary_loss(chunks, dropped_indices):
+    ...
+```
+
+This brings us considerably closer to **"tests pass = it works."**
+
+---
+
+#### Keep passing the OWASP static audit
+
+In v2.16 we did one pass over the whole codebase with **Bandit + our own review**. HIGH/MEDIUM down to zero.
+This isn't **clean by chance** — CI stops regressions. Across the whole codebase:
+
+- zero `shell=True`
+- zero `pickle`
+- zero `yaml.load(unsafe)` (only `yaml.safe_load`)
+- zero `eval` / `exec`
+- zero weak crypto
+
+`subprocess` calls are **list form only**. Passing a string leaves room for shell interpretation, so it's prohibited.
+
+---
+
+#### A CLI that emits a CycloneDX SBOM
+
+```bash
+python -m llmesh.cli.sbom > llmesh.sbom.cdx.json
+```
+
+Emits dependencies in CycloneDX format. You can pipe it straight into supply-chain audits (GHSA / OSV).
+
+---
+
+#### The overall flow (performance + reliability)
+
+```
+   ┌────────────────────────────────────────────────────────┐
+   │ Sensor / 3D / DVS                                      │
+   │  ├ PointCloud.encode  (Rust 24.1M pts/s)              │
+   │  └ DVS.encode         (Rust 5.5M evt/s)               │
+   └───────────┬────────────────────────────────────────────┘
+               │
+               ▼
+   ┌────────────────────────────────────────────────────────┐
+   │ ChunkSender ─► [network] ─► MessageAssembler          │
+   │   │                                  │                 │
+   │   ACK / RETRANSMIT / TTL ◄───────────┘                 │
+   │   WatchdogTimer (NTP-checked clock)                    │
+   └───────────┬────────────────────────────────────────────┘
+               │
+               ▼
+   ┌────────────────────────────────────────────────────────┐
+   │ HTTP layer (read_capped on every client)              │
+   │   LLM / Embedding / Webhook / Sensor pull             │
+   └───────────┬────────────────────────────────────────────┘
+               │
+               ▼
+   ┌────────────────────────────────────────────────────────┐
+   │ Pipeline + CUSUM   190K events/s                       │
+   └────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### Reproduce the benchmark
+
+```bash
+git clone git@github.com:furuse-kazufumi/llmesh.git
+cd llmesh
+pip install -e ".[dev,industrial]"
+pytest benchmarks/ -k bench --benchmark-only    # reproducible on a local PC
+```
+
+We also keep `bench-report.json` as a CI artifact (`docs/PERFORMANCE.md` has per-module complexity and memory estimates).
+
+---
+
+#### Troubleshooting
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| Rust extension build failure | `cargo` not installed | install it from rustup, or just stay on Pure Python |
+| maturin "manifest path not found" | forgot `cd rust_ext` | run it inside the `rust_ext` directory |
+| wheel not selected on Windows | Python below 3.10 | upgrade to 3.10+ |
+| `pytest` is slow | property-based trial count | use `--hypothesis-profile=ci` |
+
+---
+
+#### Try it (quick links)
+
+- GitHub: <https://github.com/furuse-kazufumi/llmesh>
+- PyPI: <https://pypi.org/project/llmesh-mcp/>
+- Spec: `docs/API_STABILITY.md` / `docs/PERFORMANCE.md`
+- License: MIT
+
+---
+
+#### In closing
+
+Performance and reliability are built from an accumulation of unglamorous principles: **"Rust-ify only the hotspots, numpy is enough for the rest," "treat retransmission and TTL as a pair," "cap all HTTP," "tests are property-based."**
+Instead of flashy tricks, the aim is **to run continuously for 24 hours without breaking**.
