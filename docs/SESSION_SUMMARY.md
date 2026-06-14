@@ -3,13 +3,14 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-14 13:16:43
+- **最終更新**: 2026-06-14 13:19:03
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+bc0e7f1 auto: index.md 編集前 (2026-06-14 13:18)
 66a4484 auto: index.md 編集前 (2026-06-14 13:16)
 ce2eddb auto: index.md 編集前 (2026-06-14 13:11)
 b6f0200 auto: FULLSENSE_KB_INDEX.md 編集前 (2026-06-14 13:07)
@@ -19,7 +20,6 @@ b6f0200 auto: FULLSENSE_KB_INDEX.md 編集前 (2026-06-14 13:07)
 77c3250 auto: index.md 編集前 (2026-06-14 11:31)
 8d1dfab auto: index.md 編集前 (2026-06-14 11:14)
 19047a9 auto: index.md 編集前 (2026-06-14 11:14)
-ddaa7f4 auto: _verify_llmesh_tr.py 編集前 (2026-06-14 10:11)
 ```
 
 ## 現在の git status
@@ -31,9 +31,9 @@ M docs/articles/assets/bazue_all/index.md
 ## 直近 2 時間に変更されたファイル
 
 ```
-13:16 docs/articles/assets/bazue_all/index.md
-13:12 docs/SESSION_SUMMARY.md
-13:12 docs/NEXT_SESSION.auto.md
+13:18 docs/articles/assets/bazue_all/index.md
+13:16 docs/SESSION_SUMMARY.md
+13:16 docs/NEXT_SESSION.auto.md
 13:07 docs/articles/FULLSENSE_KB_INDEX.md
 12:20 docs/articles/drafts/QIITA_llmesh_ja.md
 12:20 docs/articles/drafts/QIITA_llive_ja.md
