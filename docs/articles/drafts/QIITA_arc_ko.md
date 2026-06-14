@@ -235,6 +235,7 @@ public_id: a5ebb3992e4c28862f47
 | **2^n 벽** | 증명 비용이 차원 n에 대해 지수 `2^n`로 늘어나는 한계. `cert_two`/`cert_sdp`는 꼭짓점을 전부 보므로 이 벽에 부딪힘. |
 
 ![네 점 교차점과 2^n 벽 — 통과 용이성(navigability)을 세로축, 차원 n을 가로축으로 두면, cert_sdp는 천장을 올렸지만 벽(2^n)은 깨지 못했다](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_39/qiita_39_fig_wall.svg)
+> 🗒️ *참고: 이 그림의 라벨은 일본어입니다. (2ⁿ 벽 = 블록 크기가 커질수록 증명 비용이 지수적으로 폭증.)*
 
 ---
 

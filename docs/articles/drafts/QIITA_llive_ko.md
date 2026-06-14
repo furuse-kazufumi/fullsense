@@ -1988,6 +1988,7 @@ flowchart TD
 3 계층에서 동시에 계측하는 구상.
 
 ![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg?v=20260612)
+> 🗒️ *참고: 이 그림의 라벨은 일본어입니다.*
 
 Ethics 축은 바로 본 기사의 Approval Bus pass 율 + frozen gene 위반 검출 + 규제
 적합도의 점수로, governance maturity 를 「개체의 훈육」에서 「문명의 성숙」까지

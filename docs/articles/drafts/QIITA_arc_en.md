@@ -237,6 +237,7 @@ Source of truth: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-k
 | **2^n wall** | The limit where proof cost grows exponentially `2^n` in dimension n. `cert_two`/`cert_sdp` look at all vertices, so they hit this wall. |
 
 ![Four-point intersection and the 2^n wall — with navigability on the vertical axis and dimension n on the horizontal, cert_sdp raised the ceiling but did not break the wall (2^n)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_39/qiita_39_fig_wall.svg)
+> 🗒️ *Note: labels in this figure are in Japanese. (The 2ⁿ wall = the cost of the proof blows up exponentially as the block size grows.)*
 
 ---
 

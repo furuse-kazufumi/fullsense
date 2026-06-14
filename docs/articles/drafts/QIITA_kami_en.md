@@ -443,30 +443,13 @@ We represent the "goodness" of a design by the **height of the terrain**. **High
 
 **A single gentle hill (easy)**
 
-```
- 良さ↑
-  高 |            ___________
-     |         __/           \__
-     |      __/                 \__     ← どこから登っても
-     |   __/                       \__     同じ頂上に着く
-  低 |__/                             \__
-     +----------------------------------→ 設計の選び方
-```
+![Terrain 1: a gentle mountain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/kami_terrain/terrain1_en.gif)
 
 For this one, you reach the summit just by **walking toward whatever is a little higher than where you are now** (the hill-climbing method). **No elaborate trick (3) is needed.**
 
 **Deceptive terrain (hard)**
 
-```
- 良さ↑                                  /\
-     |                                 /  \   ← 本物の頂上
-     |        ニセ頂上                /    \
-  中 |         /\         谷         /      \
-     |        /  \______________/        \
-  低 |____/                                  \
-     +----------------------------------------→ 設計の選び方
-          ↑ ニセ頂上で止まってしまう (谷を下れないから)
-```
+![Terrain 2: deceptive terrain (fake summit)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/kami_terrain/terrain2_en.gif)
 
 There's a "fake summit" up front, and beyond a valley lies the "real summit." Naive hill-climbing **stops at the fake summit** (because it can't walk down into a valley).
 

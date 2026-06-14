@@ -1968,6 +1968,7 @@ flowchart TD
 层级上同时度量.
 
 ![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg?v=20260612)
+> 🗒️ *注：此图标签为日语。*
 
 Ethics 轴正是本文的 Approval Bus 通过率 + frozen gene 违规检测 + 法规符合度的分数,
 使我们能够把 governance maturity 用一条从「个体的管教」到「文明的成熟」的连续尺度

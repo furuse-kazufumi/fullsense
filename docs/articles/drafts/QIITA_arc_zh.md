@@ -237,6 +237,7 @@ public_id: 29b100b00f0d58306886
 | **2^n 墙** | 证明成本对维度 n 呈指数 `2^n` 增长的极限。`cert_two`/`cert_sdp` 要看全部顶点，所以撞上这堵墙。 |
 
 ![四点交叉点与 2^n 墙 —— 纵轴取易通过性(navigability)、横轴取维度 n，cert_sdp 抬高了天花板，但没破墙(2^n)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_39/qiita_39_fig_wall.svg)
+> 🗒️ *注：此图标签为日语。（2ⁿ 壁垒＝随着块尺寸增大，证明成本呈指数级膨胀。）*
 
 ---
 

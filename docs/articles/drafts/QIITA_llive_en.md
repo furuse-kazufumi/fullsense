@@ -2123,6 +2123,7 @@ of 4 axes — Energy / Knowledge / Coordination / **Ethics** — × 5 stages
 individual / population / meta-population.
 
 ![4D Kardashev Scale](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24_v0i_kardashev_4d_hero.svg?v=20260612)
+> 🗒️ *Note: the labels in this figure are in Japanese.*
 
 The Ethics axis is exactly this article's score of Approval Bus pass rate +
 frozen gene violation detection + regulatory conformity, letting us speak of
