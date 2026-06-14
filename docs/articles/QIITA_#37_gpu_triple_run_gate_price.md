@@ -4,7 +4,7 @@ tags: [FullSense, llcore, Singularity, AI, 解説]
 private: false
 updated_at: '2026-06-06'
 id: a0e16b74a23c62bcf59a
-qiita_public_id: 6f44575d440a9ebf5228
+public_id: 6f44575d440a9ebf5228
 organization_url_name: null
 slide: false
 ignorePublish: false
@@ -143,6 +143,9 @@ Kaggle の無料 T4 を CLI から使う際の罠 4 つ(全部踏みました):
 
 ## Honest disclosure(正直な限界)
 
+![「嘘は良くない」と一喝する明美](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/196.jpg)
+> 🗒️ *「嘘は良くない」— over-claim を許さない検証の擬人化*（© Forbidden shibukawa / SHUEISHA・スナックバス江）
+
 - モデルは極小(~0.5M params)、文字レベル、1 コーパス系列、4 seeds。**相対比較の regime map** であり、絶対性能や普遍法則の主張ではない
 - HD-1 自身が示した通り、**結論は訓練予算に依存しうる**(feasibility と full で符号が変わった項目あり)。本記事の数値も「この予算・この次元・この最適化手法」での地図
 - B-G2 の n=64 判定は閾値ぎりぎり(0.76 vs 0.75)。n=256 は明確
@@ -150,6 +153,9 @@ Kaggle の無料 T4 を CLI から使う際の罠 4 つ(全部踏みました):
 - 数値は全て、論文編入時に独立の検証 AI 2 体が一次 JSON から再計算して突合済(Stage-B 24/24 一致、HD-1 は 4 件の表記揺れを検出→修正済 — この記事の数値は修正後)
 
 ## これはシンギュラリティの足音か
+
+![「シンギュラリティ/AI反乱」を茶化す明美](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/191.jpg)
+> 🗒️ *シンギュラリティの足音か?という大仰な問いへのツッコミ*（© Forbidden shibukawa / SHUEISHA・スナックバス江）
 
 Anthropic の Dario Amodei CEO は 2026 年 1 月の 38 ページのエッセイ「The Adolescence of Technology」で「人類は想像を超える力を手にしつつあるが、それを扱う成熟を備えているかは全く不明」と書き、同社製品のコードの 90% を AI が書いていると明かしました。AI が研究ループを自走する — 今日のセッションはその小さな実例です(人間の指示 4 文、設計からレビュー、実験、論文編入まで)。
 
