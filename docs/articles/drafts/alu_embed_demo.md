@@ -47,7 +47,7 @@ https://alu.jp/series/スナックバス江/crop/PJm0yAGeJy9iSa487mrX
 
 https://alu.jp/series/スナックバス江/crop/vZiE4UJF8WUuZFhyUfEk
 
-**フォールバック:**
+**Qiita 標準（出典付きリンク）:**
 
 > 🗨️ 「貴方の世界にある筈もない例えでかみ砕きなさるな!」
 > — [スナックバス江／フォビドゥン澁川（アル）](https://alu.jp/series/スナックバス江/crop/vZiE4UJF8WUuZFhyUfEk)
@@ -62,7 +62,7 @@ https://alu.jp/series/スナックバス江/crop/vZiE4UJF8WUuZFhyUfEk
 
 https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 
-**フォールバック:**
+**Qiita 標準（出典付きリンク）:**
 
 > 🗨️ 「クソ! 謎のグラフのおかげで悲壮感が薄いぜ!!」
 > — [スナックバス江／フォビドゥン澁川（アル）](https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf)
@@ -77,7 +77,7 @@ https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 
 https://alu.jp/series/スナックバス江/crop/llQmydCCdUnqFoOusBCk
 
-**フォールバック:**
+**Qiita 標準（出典付きリンク）:**
 
 > 🗨️ 「減点法って事は満点からのスタート…つまり加点方式では0点のワイにもチャンスがある…?」
 > — [スナックバス江／フォビドゥン澁川（アル）](https://alu.jp/series/スナックバス江/crop/llQmydCCdUnqFoOusBCk)
