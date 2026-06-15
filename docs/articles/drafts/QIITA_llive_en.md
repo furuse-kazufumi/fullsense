@@ -817,7 +817,7 @@ flowchart LR
 - Constitutional AI (Anthropic 2022) — for HITL alternative.
 - Six Thinking Hats (De Bono 1985).
 - 岡潔『春宵十話』.
-- ファインマン『ご冗談でしょう, ファインマンさん』.
+- Feynman, *Surely You're Joking, Mr. Feynman!*.
 - Maturana & Varela — Autopoiesis.
 - Bayes — *Essay towards solving a problem in the doctrine of chances*.
 - The full list will be bundled in references.bib at the v0.6.0a1 release.
