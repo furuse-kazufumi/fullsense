@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-15 22:07:03
+- **生成時刻**: 2026-06-15 22:29:58
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+e23dc2a auto: alu_embed_demo.md 編集前 (2026-06-15 22:10)
+556f7ad auto: alu_embed_demo.md 編集前 (2026-06-15 22:10)
 ea57a18 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
 df3f8cb auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
 f205244 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
@@ -28,14 +30,16 @@ f205244 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
 037411d auto: QIITA_llmesh_en.md 編集前 (2026-06-15 21:37)
 af2f258 auto: QIITA_llive_en.md 編集前 (2026-06-15 21:37)
 1c4524a auto: QIITA_llive_en.md 編集前 (2026-06-15 21:37)
-61811af auto: QIITA_llive_en.md 編集前 (2026-06-15 21:36)
-6c0cd60 auto: QIITA_llive_en.md 編集前 (2026-06-15 21:36)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/drafts/alu_embed_demo.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
+ M docs/articles/drafts/alu_embed_demo.md
+?? docs/articles/IDEAS_2026_06_15_ai_news_harvest.md
+?? docs/articles/IDEAS_2026_06_15_harness_loop_raptor.md
 ```
 
 
@@ -70,9 +74,11 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:06` `docs/articles/drafts/alu_embed_demo.md`
-- `22:03` `docs/SESSION_SUMMARY.md`
-- `22:03` `docs/NEXT_SESSION.auto.md`
+- `22:24` `docs/articles/IDEAS_2026_06_15_ai_news_harvest.md`
+- `22:19` `docs/NEXT_SESSION.auto.md`
+- `22:19` `docs/SESSION_SUMMARY.md`
+- `22:15` `docs/articles/IDEAS_2026_06_15_harness_loop_raptor.md`
+- `22:10` `docs/articles/drafts/alu_embed_demo.md`
 - `21:51` `docs/articles/assets/bazue_alu_catalog.md`
 - `21:37` `docs/articles/drafts/QIITA_llmesh_en.md`
 - `21:37` `docs/articles/drafts/QIITA_llive_en.md`
@@ -88,7 +94,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `21:33` `docs/articles/drafts/QIITA_arc_ko.md`
 - `21:32` `docs/articles/drafts/QIITA_llmesh_ko.md`
 - `21:32` `docs/articles/drafts/QIITA_arc_en.md`
-- `21:31` `docs/articles/drafts/QIITA_arc_zh.md`
 
 
 ## Cross-references
