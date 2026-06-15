@@ -2248,7 +2248,7 @@ llive Rust 高速化 **5 模式判定表** (#24-05 §13.3) 是用 **结构上相
 
 <!-- CTAIMG -->
 
-![「ひくわ」と一万円札を差し出す森田](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/012.jpg)
-> 🗒️ *「ひくわ」— 紹介リンクで小銭を稼ごうとする魂胆、我ながらちょっと引く*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+![递出一万日元钞票、说着「真服了」的森田](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/012.jpg)
+> 🗒️ *「真服了」— 想靠推荐链接赚点小钱的小算盘,连我自己都有点服了*（© Forbidden shibukawa / SHUEISHA・《Snack Basue》)
 
 <!-- /CTAIMG -->
