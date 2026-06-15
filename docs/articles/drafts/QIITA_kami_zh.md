@@ -1,6 +1,6 @@
 ---
 title: 通俗版合集 — 证伪与 Goodhart / 第三个轴 / arc 总览 / 兰顿蚂蚁的幻象,通俗讲解
-tags: FullSense, 進化計算, honest_disclosure, 解説, かみくだき
+tags: FullSense, 进化计算, honest_disclosure, 讲解, 通俗讲解
 private: false
 public_id: fa0890f136636d495ea6
 ---
