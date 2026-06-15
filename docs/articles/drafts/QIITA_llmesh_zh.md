@@ -128,7 +128,7 @@ store.save()
 
 ### 检索
 retriever = Retriever(embedder=embedder, store=store)
-hits = retriever.search("プロンプトインジェクション対策は？", k=2)
+hits = retriever.search("如何防范提示词注入?", k=2)
 for h in hits:
     print(h.score, h.document.text)
 ```
