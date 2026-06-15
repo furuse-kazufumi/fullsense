@@ -10,16 +10,19 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-15 21:37:09
+- **生成時刻**: 2026-06-15 22:03:55
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
+7de7194 fix(articles): translate leaked Japanese in en/zh/ko draft variants
+037411d auto: QIITA_llmesh_en.md 編集前 (2026-06-15 21:37)
+af2f258 auto: QIITA_llive_en.md 編集前 (2026-06-15 21:37)
 1c4524a auto: QIITA_llive_en.md 編集前 (2026-06-15 21:37)
 61811af auto: QIITA_llive_en.md 編集前 (2026-06-15 21:36)
 6c0cd60 auto: QIITA_llive_en.md 編集前 (2026-06-15 21:36)
@@ -27,15 +30,16 @@ e33d42a auto: QIITA_llmesh_zh.md 編集前 (2026-06-15 21:36)
 dfe0c77 auto: QIITA_kami_en.md 編集前 (2026-06-15 21:36)
 bdec2ee auto: QIITA_llmesh_zh.md 編集前 (2026-06-15 21:36)
 82e4d11 auto: QIITA_kami_en.md 編集前 (2026-06-15 21:36)
-3ea14ad auto: QIITA_llmesh_zh.md 編集前 (2026-06-15 21:36)
-cc057f6 auto: QIITA_kami_en.md 編集前 (2026-06-15 21:36)
-bc422b5 auto: QIITA_llmesh_zh.md 編集前 (2026-06-15 21:36)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/drafts/QIITA_llive_en.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
+ D tmp_diagcheck.py
+?? docs/articles/assets/bazue_alu_catalog.md
+?? docs/articles/drafts/alu_embed_demo.md
 ```
 
 
@@ -70,13 +74,17 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `22:03` `docs/articles/drafts/alu_embed_demo.md`
+- `21:53` `docs/SESSION_SUMMARY.md`
+- `21:53` `docs/NEXT_SESSION.auto.md`
+- `21:51` `docs/articles/assets/bazue_alu_catalog.md`
+- `21:37` `docs/articles/drafts/QIITA_llmesh_en.md`
 - `21:37` `docs/articles/drafts/QIITA_llive_en.md`
 - `21:36` `docs/articles/drafts/QIITA_llmesh_zh.md`
 - `21:36` `docs/articles/drafts/QIITA_kami_en.md`
 - `21:35` `docs/articles/drafts/QIITA_evo_en.md`
 - `21:35` `docs/articles/drafts/QIITA_llive_zh.md`
 - `21:35` `docs/articles/drafts/QIITA_kami_zh.md`
-- `21:34` `tmp_diagcheck.py`
 - `21:34` `docs/articles/drafts/QIITA_evo_zh.md`
 - `21:34` `docs/articles/drafts/QIITA_llive_ko.md`
 - `21:34` `docs/articles/drafts/QIITA_kami_ko.md`
@@ -85,8 +93,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `21:32` `docs/articles/drafts/QIITA_llmesh_ko.md`
 - `21:32` `docs/articles/drafts/QIITA_arc_en.md`
 - `21:31` `docs/articles/drafts/QIITA_arc_zh.md`
-- `21:14` `docs/SESSION_SUMMARY.md`
-- `21:14` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
