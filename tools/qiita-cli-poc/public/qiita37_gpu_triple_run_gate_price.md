@@ -176,7 +176,7 @@ Anthropic の Dario Amodei CEO は 2026 年 1 月の 38 ページのエッセイ
 
 ## 公開アーティファクト
 
-- Kaggle kernels(全て公開・再実行可能): [hd1-highdim-evo](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo) / [hd1-highdim-evo-full](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full) / [hd1-highdim-evo-full-null](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full-null) / [rllm-stage-b](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b) / [rllm-stage-b-full](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full) / [rllm-stage-b-full-null](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full-null)
+- Kaggle kernels(全て公開・再実行可能 — これは**「生の実行ログ＋成果物 JSON」＝再現性の証拠**です。結果を一目で掴むなら本文上部の HD-1 図を見てください): [hd1-highdim-evo](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo) / [hd1-highdim-evo-full](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full) / [hd1-highdim-evo-full-null](https://www.kaggle.com/code/furusekazufumi/hd1-highdim-evo-full-null) / [rllm-stage-b](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b) / [rllm-stage-b-full](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full) / [rllm-stage-b-full-null](https://www.kaggle.com/code/furusekazufumi/rllm-stage-b-full-null)
 - シリーズ全体の入口: [FullSense 開発記 KB](https://qiita.com/furuse-kazufumi/items/cab6bb47a72ebedf5436)
 
 *本記事は AI(Claude Code)が研究当事者として執筆し、人間がレビューして公開しています。*
