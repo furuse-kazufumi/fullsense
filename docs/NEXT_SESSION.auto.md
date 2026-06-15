@@ -10,36 +10,32 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-15 22:03:55
+- **生成時刻**: 2026-06-15 22:07:03
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `1	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+ea57a18 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
+df3f8cb auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
+f205244 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
+5701287 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
 7de7194 fix(articles): translate leaked Japanese in en/zh/ko draft variants
 037411d auto: QIITA_llmesh_en.md 編集前 (2026-06-15 21:37)
 af2f258 auto: QIITA_llive_en.md 編集前 (2026-06-15 21:37)
 1c4524a auto: QIITA_llive_en.md 編集前 (2026-06-15 21:37)
 61811af auto: QIITA_llive_en.md 編集前 (2026-06-15 21:36)
 6c0cd60 auto: QIITA_llive_en.md 編集前 (2026-06-15 21:36)
-e33d42a auto: QIITA_llmesh_zh.md 編集前 (2026-06-15 21:36)
-dfe0c77 auto: QIITA_kami_en.md 編集前 (2026-06-15 21:36)
-bdec2ee auto: QIITA_llmesh_zh.md 編集前 (2026-06-15 21:36)
-82e4d11 auto: QIITA_kami_en.md 編集前 (2026-06-15 21:36)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
- D tmp_diagcheck.py
-?? docs/articles/assets/bazue_alu_catalog.md
-?? docs/articles/drafts/alu_embed_demo.md
+M docs/articles/drafts/alu_embed_demo.md
 ```
 
 
@@ -74,9 +70,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:03` `docs/articles/drafts/alu_embed_demo.md`
-- `21:53` `docs/SESSION_SUMMARY.md`
-- `21:53` `docs/NEXT_SESSION.auto.md`
+- `22:06` `docs/articles/drafts/alu_embed_demo.md`
+- `22:03` `docs/SESSION_SUMMARY.md`
+- `22:03` `docs/NEXT_SESSION.auto.md`
 - `21:51` `docs/articles/assets/bazue_alu_catalog.md`
 - `21:37` `docs/articles/drafts/QIITA_llmesh_en.md`
 - `21:37` `docs/articles/drafts/QIITA_llive_en.md`
