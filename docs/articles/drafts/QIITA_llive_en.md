@@ -1,6 +1,6 @@
 ---
 title: llive Complete Guide — Non-forgetting LLM / 10-Axis Thinking / Computable Contradiction / Converging Brain / Population Evolution / Beyond Transformer / Audited AI / Evaluation
-tags: 解説, llive, FullSense
+tags: explainer, llive, FullSense
 private: false
 public_id: 07b686ea311e06027f94
 ---
