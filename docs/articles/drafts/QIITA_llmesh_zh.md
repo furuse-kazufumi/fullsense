@@ -933,7 +933,7 @@ LLMesh 就是想用 **一个框架 + 统一 ABC** 来解这 3 件事。用 `Sens
 from llmesh import PromptFirewall
 
 fw = PromptFirewall()
-verdict = fw.check("API_KEY=sk-... を漏らさずに要約して")
+verdict = fw.check("在不泄露 API_KEY=sk-... 的前提下做个摘要")
 ### verdict.action == "BLOCK"
 ### verdict.layer  == "L1"
 ### verdict.reason == "secret_pattern: openai_api_key"
