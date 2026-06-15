@@ -1,6 +1,6 @@
 ---
 title: llcore Verification Arc — Collected (#38–#42): Defensive Disclosure × the 2ⁿ Wall × Strong Gradient Beats Evolution × the Langton's-Ant Illusion
-tags: FullSense, llcore, Singularity, AI, 解説
+tags: FullSense, llcore, Singularity, AI, explainer
 private: false
 public_id: 525cd01eda5c1ad707ef
 ---

@@ -2000,7 +2000,7 @@ replay 할 수 있다
 
 <!-- CTAIMG -->
 
-![「ひくわ」と一万円札を差し出す森田](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/012.jpg)
-> 🗒️ *「ひくわ」— 紹介リンクで小銭を稼ごうとする魂胆、我ながらちょっと引く*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+![「깬다」며 만 엔 지폐를 내미는 모리타](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/012.jpg)
+> 🗒️ *「깬다」— 소개 링크로 푼돈을 벌어 보려는 속셈, 스스로도 좀 깬다*（© Forbidden shibukawa / SHUEISHA・『스낵 바스에(Snack Basue)』）
 
 <!-- /CTAIMG -->
