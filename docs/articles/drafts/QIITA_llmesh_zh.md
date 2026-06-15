@@ -62,7 +62,7 @@ pip install llmesh-mcp
 from llmesh.llm import OllamaBackend
 
 llm = OllamaBackend(model="llama3.2")          # 本地的话不需要 API 密钥
-print(llm.complete("Pythonの`yield`を1行で説明して"))
+print(llm.complete("用一行解释 Python 的 `yield`"))
 ```
 
 切换到云端只需这些：
@@ -71,7 +71,7 @@ print(llm.complete("Pythonの`yield`を1行で説明して"))
 from llmesh.llm import openai_backend
 
 llm = openai_backend(api_key="sk-...", model="gpt-4o-mini")
-print(llm.complete("Pythonの`yield`を1行で説明して"))
+print(llm.complete("用一行解释 Python 的 `yield`"))
 ```
 
 **调用代码一个字都不用改。** 这正是想要做到的点。
