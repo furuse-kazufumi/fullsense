@@ -12,7 +12,7 @@ orig = {
  2222: '          ↑ニセ頂上で素朴な山登りは停止 (谷を下れない)',
 }
 new = {
- 2215: 'Quality↑                               /' + BS,
+ 2215: 'Quality↑                                /' + BS,
  2216: '     |                                 /  ' + BS + '   ← the true peak',
  2217: '     |        false pk                /    ' + BS,
  2218: '  Md |         /' + BS + '         vy         /      ' + BS,
