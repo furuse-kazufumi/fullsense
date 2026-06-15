@@ -7,7 +7,7 @@ tags:
   - LLM
   - 開発履歴
 private: false
-updated_at: '2026-06-05T05:42:47+09:00'
+updated_at: '2026-06-14T22:26:33+09:00'
 id: cab6bb47a72ebedf5436
 organization_url_name: null
 slide: false
@@ -15,17 +15,15 @@ ignorePublish: false
 ---
 # llmesh → llove → llive — FullSense 3 製品の開発履歴・設計コンセプト・差別化・普及戦略 (2026-05-17 時点)
 
-:::note info
-**📚 FullSense ナレッジベースのご案内** <!-- fullsense-team-kb -->
-FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガイド](https://fullsense.qiita.com/furuse-kazufumi/items/90ea260703fb49065346)・かみくだき版・4 コマ漫画つき) は Qiita Team **[FullSense KB](https://fullsense.qiita.com/)** に集約しています (チームメンバー向け)。
-:::
-
-
 著者: **古瀬 和文（ぷるやん）**
 
 ## はじめに — なぜ 3 製品で 1 つの世界観なのか
 
 私 (古瀬 和文 / ぷるやん) は **FullSense ™** という umbrella ブランドで 3 つの OSS プロジェクトを並走開発しています:
+
+![スナック大好きおじさんが製品愛で熱く語る場面](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/068.jpg)
+> 🗒️ *「スナック…大好き…」— llmesh・llove・llive。3つの独立 OSS を1つの世界観で愛でる、その熱量がこの連載の出発点*（© Forbidden shibukawa / SHUEISHA・スナックバス江）
+
 
 | 製品 | 役割 | PyPI | GitHub |
 |---|---|---|---|
@@ -77,7 +75,7 @@ FullSense 開発全史 60+ 記事 (4 言語版・物語ベースの[読む順ガ
 | 2026-05-16 | v0.6.0 — 9 axes skeleton + Apache 2.0 + FullSense umbrella (970 tests) |
 | 2026-05-17 (本日) | Brief API + 32 件要件 + 4 種ベンチ + 14 記事 (1014 tests) |
 
-設計思想: **「LLM 本体ではなく、LLM の周りに被せる認知 OS」** — 4 層メモリ + 6 stage Loop + Approval Bus + TRIZ + 10 思考因子。詳細は同日記事 [09 llive 構造独自性 8 要素](./09_llive_structure_originality.md) 参照。
+設計思想: **「LLM 本体ではなく、LLM の周りに被せる認知 OS」** — 4 層メモリ + 6 stage Loop + Approval Bus + TRIZ + 10 思考因子。
 
 ### 3 製品が交差する場所
 
@@ -124,6 +122,10 @@ llive の **10 思考因子 (構造化 / 再構成 / 閉ループ / 自己拡張
 llive 内蔵の **TRIZ 40 原理 + 39×39 矛盾マトリクス + ARIZ + 9 画法** は、自己進化の mutation policy として動作。「面白い案を出す」のではなく「**矛盾を発見し、原理に従って体系的に解決**」する。
 
 ### 哲学 5: Honest disclosure を研究の核に
+
+![「嘘は良くない」と honest disclosure を戒める場面](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/196.jpg)
+> 🗒️ *「嘘は良くないよ」— 異常に良い結果が出たら、勝った気になる前に必ず内訳を疑う。FullSense の Honest disclosure はここから*（© Forbidden shibukawa / SHUEISHA・スナックバス江）
+
 
 memory ルール: `feedback_benchmark_honest_disclosure` (2026-05-17 確立) — 自社が異常に速い結果が出たら、勝った気になる前に必ず内訳を疑う。失敗を消さず、教訓として残す。
 
@@ -327,20 +329,6 @@ llmesh の MQTT / OPC-UA bridge により、製造業 / 計測 / 物理 / 工学
 - llove: <https://github.com/furuse-kazufumi/llove>
 - FullSense umbrella ポータル: <https://github.com/furuse-kazufumi/fullsense>
 - llmesh-suite (one-shot installer): <https://github.com/furuse-kazufumi/llmesh-suite>
-
-### 同日記事 (2026-05-17)
-
-- 技術者向け詳細 (11 本): [docs/articles/2026-05-17/](.)
-- 技術者向け統合: [QIITA_SUMMARY.md](./QIITA_SUMMARY.md)
-- 非エンジニア向け統合: [QIITA_GENERAL.md](./QIITA_GENERAL.md)
-- 開発履歴 (llive 単独 5 日): [12_dev_history.md](./12_dev_history.md)
-- **本記事 (llmesh + llove + llive 統合履歴 + 設計 + 差別化 + 普及)**
-
-### LinkedIn 投稿用 (本記事と同フォルダ、多言語版)
-
-- [LinkedIn_SUMMARY_jp.md](./LinkedIn_SUMMARY_jp.md) / `_en.md` / `_zh.md` / `_ko.md`
-- [LinkedIn_GENERAL_jp.md](./LinkedIn_GENERAL_jp.md) / `_en.md` / `_zh.md` / `_ko.md`
-- [LinkedIn_HISTORY_jp.md](./LinkedIn_HISTORY_jp.md) / `_en.md` / `_zh.md` / `_ko.md`
 
 ---
 

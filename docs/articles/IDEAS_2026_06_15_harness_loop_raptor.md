@@ -80,7 +80,14 @@ WebSearch で判明（要一次確認）:
 **A（WHY=哲学：harness を握る）→ B（HOW=制御：loop を安全に回す）→ C（WHAT=実装スタック：RAPTOR/RAD/Wiki）**。
 各回末に「2026 年、業界がこの言葉を発明した。私はその実物をここに置いておく」で連結。技術者向け（QIITA_SUMMARY）と一般向け（QIITA_GENERAL）を並走（[[feedback_daily_articles_policy]]）。
 
+## 実施状況（2026-06-15）
+- **★A+B+C を 1 本に統合した #43 を執筆・publish-ready 化済**（grounding→一次情報検証→執筆→敵対レビュー→仕上げ workflow）。
+  - 成果物: `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md`（本文 34,471 字 / private:true=限定共有 / Alu 閑話休題 3 / be52eeb 関連リンク / ローカルパス 0・画像 0）。
+  - 一次情報検証の結果ヘッジ: Bölük「10×」=引用論文に該当記述なし→**冒頭で「捨てた数字」として教訓化** / OpenAI harness 記事=HTTP403→二次情報ヘッジ / Hashimoto は実引用（命名独占を主張しない）/ RAPTOR 2層=upstream README 実引用。
+  - publish: 公開Qiitaトークン無→ユーザーが `npx qiita publish qiita43_harness_loop_stack`（限定共有確認→public）。
+- AI 一般ニュースネタ集（139 候補）: `docs/articles/IDEAS_2026_06_15_ai_news_harvest.md`。
+
 ## 次アクション候補
-1. A/B/C のどれか 1 本を full draft 化（grounding workflow で実コード/実コーパス照合 → 執筆 → 敵対レビュー）。
-2. まず業界用語の出自（Hashimoto/Lopopolo/Bölük/`/goal` 日付）を一次情報で確定（要 honest）。
-3. AI ネタ workflow（一般ニュース 12 領域）完了を待って統合台帳に合流。
+1. #43 を限定共有 publish → 実機確認 → public 化。
+2. #43 のかみくだき版 + en/zh/ko 多言語版（#37 と同パターン）。
+3. AI ニュースネタ集から次の単発記事（Mythos / DeepSeek V4 / ローカルAI三段ロケット等）。
