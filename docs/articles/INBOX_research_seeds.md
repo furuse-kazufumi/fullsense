@@ -2,29 +2,8 @@
 
 > `tools/collect_research_seeds.py` が各 FullSense 系 project の `docs/ARTICLE_SEEDS.md` を集約。
 > ☐=未記事化 / ☑=記事化済(元エントリに「→ 記事化: #NN」を書くと ☑ になる)。
-> 計 36 件 / 未記事化 **35** 件。
+> 計 18 件 / 未記事化 **17** 件。
 
-
-## ?
-
-- ☐ **[llterm]** 背景 (かみくだき)
-- ☐ **[llterm]** 何が起きたか (事実・production ログ由来)
-- ☐ **[llterm]** 直し方 (技術設計)
-- ☐ **[llterm]** honest disclosure (記事の核)
-- ☐ **[llterm]** コード参照
-- ☐ **[llterm]** 事実
-- ☐ **[llterm]** 直し方
-- ☐ **[llterm]** angle 候補
-- ☐ **[llterm]** 設計
-- ☐ **[llterm]** 落とし穴 (教訓・honest)
-- ☐ **[llterm]** コード参照
-- ☐ **[llterm]** 事実 / 設計
-- ☐ **[llterm]** angle
-- ☐ **[llterm]** コード参照
-- ☐ **[llterm]** 事実
-- ☐ **[llterm]** 教訓 (記事 angle)
-- ☐ **[llterm]** 抽出した原則 (転用可能・各々が小見出しになる)
-- ☐ **[llterm]** angle / 連載の割り方 (13 側面に対応)
 
 ## 2026-06-13
 

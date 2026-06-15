@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-16 08:01:06
+- **生成時刻**: 2026-06-16 08:16:56
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,7 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+de4eb96 auto: collect_research_seeds.py 編集前 (2026-06-16 08:04)
 5f10609 docs(#43): publish public + add paradigm staircase figure; add HD-1 null figure asset
 604e9b8 auto: qiita43_harness_loop_stack.md 編集前 (2026-06-16 07:26)
 998a630 auto: qiita43_harness_loop_stack.md 編集前 (2026-06-16 07:25)
@@ -29,7 +30,6 @@ nav_order: 94
 67b5bb9 auto: IDEAS_2026_06_15_harness_loop_raptor.md 編集前 (2026-06-15 22:53)
 e23dc2a auto: alu_embed_demo.md 編集前 (2026-06-15 22:10)
 556f7ad auto: alu_embed_demo.md 編集前 (2026-06-15 22:10)
-ea57a18 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
 ```
 
 ### git status (porcelain)
@@ -37,8 +37,8 @@ ea57a18 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- D docs/articles/assets/_prev_stair.png
- M tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md
+ M docs/articles/INBOX_research_seeds.md
+ M tools/collect_research_seeds.py
 ```
 
 
@@ -73,8 +73,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `07:58` `docs/SESSION_SUMMARY.md`
-- `07:58` `docs/NEXT_SESSION.auto.md`
+- `08:13` `docs/SESSION_SUMMARY.md`
+- `08:13` `docs/NEXT_SESSION.auto.md`
+- `08:05` `docs/articles/INBOX_research_seeds.md`
+- `08:04` `tools/collect_research_seeds.py`
 - `07:26` `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md`
 - `07:26` `tools/qiita-cli-poc/public/.remote/a96a15cb771fe5a57df6.md`
 - `07:26` `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_zh.md`
@@ -91,8 +93,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `07:26` `tools/qiita-cli-poc/public/22d5460384c2cb54a9e6.md`
 - `07:26` `tools/qiita-cli-poc/public/0a35e1bfb814adab8565.md`
 - `07:26` `tools/qiita-cli-poc/public/.remote/f06ca92ea208c7646fcd.md`
-- `07:26` `tools/qiita-cli-poc/public/.remote/cc0713ab78a5b390df76.md`
-- `07:26` `tools/qiita-cli-poc/public/.remote/bfb20aca3cf1df510c26.md`
 
 
 ## Cross-references

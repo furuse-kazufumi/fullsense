@@ -3,13 +3,14 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-06-16 08:01:05
+- **最終更新**: 2026-06-16 08:16:55
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+de4eb96 auto: collect_research_seeds.py 編集前 (2026-06-16 08:04)
 5f10609 docs(#43): publish public + add paradigm staircase figure; add HD-1 null figure asset
 604e9b8 auto: qiita43_harness_loop_stack.md 編集前 (2026-06-16 07:26)
 998a630 auto: qiita43_harness_loop_stack.md 編集前 (2026-06-16 07:25)
@@ -19,7 +20,6 @@
 67b5bb9 auto: IDEAS_2026_06_15_harness_loop_raptor.md 編集前 (2026-06-15 22:53)
 e23dc2a auto: alu_embed_demo.md 編集前 (2026-06-15 22:10)
 556f7ad auto: alu_embed_demo.md 編集前 (2026-06-15 22:10)
-ea57a18 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
 ```
 
 ## 現在の git status
@@ -27,15 +27,17 @@ ea57a18 auto: alu_embed_demo.md 編集前 (2026-06-15 22:06)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- D docs/articles/assets/_prev_stair.png
- M tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md
+ M docs/articles/INBOX_research_seeds.md
+ M tools/collect_research_seeds.py
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-07:58 docs/SESSION_SUMMARY.md
-07:58 docs/NEXT_SESSION.auto.md
+08:13 docs/SESSION_SUMMARY.md
+08:13 docs/NEXT_SESSION.auto.md
+08:05 docs/articles/INBOX_research_seeds.md
+08:04 tools/collect_research_seeds.py
 07:26 tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md
 07:26 tools/qiita-cli-poc/public/.remote/a96a15cb771fe5a57df6.md
 07:26 tools/qiita-cli-poc/public/qiita43_harness_loop_stack_zh.md
@@ -47,8 +49,6 @@ M docs/NEXT_SESSION.auto.md
 07:26 tools/qiita-cli-poc/public/bfb20aca3cf1df510c26.md
 07:26 tools/qiita-cli-poc/public/6e107c7dfa0c261ee4d7.md
 07:26 tools/qiita-cli-poc/public/525cd01eda5c1ad707ef.md
-07:26 tools/qiita-cli-poc/public/29b100b00f0d58306886.md
-07:26 tools/qiita-cli-poc/public/2347918057820a658293.md
 ```
 
 ---

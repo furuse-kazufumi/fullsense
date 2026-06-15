@@ -42,14 +42,20 @@ def parse(path, proj):
     entries, cur_date, buf, title = [], "?", None, None
 
     def flush():
-        if title is not None:
-            body = "\n".join(buf)
-            entries.append({
-                "proj": proj, "date": cur_date, "title": title.strip(),
-                "aspect": first_value(body, "側面"),
-                "gist": first_value(body, "気付き")[:140],
-                "consumed": bool(CONSUMED_RE.search(body)),
-            })
+        # 正規 seed のみ: 日付セッション配下 + 「側面」or「気付き」フィールド付き。
+        # (llterm 等の記事ドラフト小見出し「背景/何が起きたか」等の誤検出を除外)
+        if title is None or cur_date == "?":
+            return
+        body = "\n".join(buf)
+        aspect = first_value(body, "側面")
+        gist = first_value(body, "気付き")[:140]
+        if not (aspect or gist):
+            return
+        entries.append({
+            "proj": proj, "date": cur_date, "title": title.strip(),
+            "aspect": aspect, "gist": gist,
+            "consumed": bool(CONSUMED_RE.search(body)),
+        })
 
     for ln in lines:
         dm = DATE_RE.match(ln)
