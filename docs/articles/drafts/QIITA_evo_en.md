@@ -2198,13 +2198,13 @@ We represent the quality of a design by **the height of the terrain**. **A high 
 **Terrain 1: a smooth single mountain (easy)**
 
 ```
- 良さ↑
-  高 |            ___________
+ Quality↑
+  Hi |            ___________
      |         __/           \__
-     |      __/                 \__     ← どこから登っても
-     |   __/                       \__     同じ頂上に着く
-  低 |__/                             \__
-     +----------------------------------→ 設計の選び方
+     |      __/                 \__     ← climb from anywhere
+     |   __/                       \__     and reach the same peak
+  Lo |__/                             \__
+     +----------------------------------→ how you pick the design
 ```
 
 On terrain like this, naive "hill-climbing" — "just move toward something slightly better than now" — is enough to reach the summit. **You don't need the fancy device (③).**
@@ -2546,13 +2546,13 @@ We represent the quality of a design as **the height of a landscape**. **High pl
 **Landscape 1: a smooth single mountain (easy)**
 
 ```
- 良さ↑
-  高 |            ___________
+ Quality↑
+  Hi |            ___________
      |         __/           \__
-     |      __/                 \__     ← どこから登っても
-     |   __/                       \__     同じ頂上に着く
-  低 |__/                             \__
-     +----------------------------------→ 設計の選び方
+     |      __/                 \__     ← climb from anywhere
+     |   __/                       \__     and reach the same peak
+  Lo |__/                             \__
+     +----------------------------------→ how you pick the design
 ```
 
 In such a landscape, plain "hill-climbing" — that is, "just move toward something slightly better than now" — is enough to reach the top. **The fancy trick (③) is not needed.**
