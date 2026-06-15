@@ -120,9 +120,9 @@ embedder = MockEmbedder(dim=128)               # 确定性哈希（零依赖）
 
 ### 放入文档
 store.add([
-    Document(id="d1", text="LLMesh はローカル LLM とクラウド LLM を同じ ABC で扱う"),
-    Document(id="d2", text="PromptFirewall は注入・PII・シークレットを 4 層で塞ぐ"),
-    Document(id="d3", text="SensorEvent は産業プロトコル 20+ を 1 つに統一する"),
+    Document(id="d1", text="LLMesh 用同一套 ABC 来处理本地 LLM 和云端 LLM"),
+    Document(id="d2", text="PromptFirewall 用 4 层来拦截注入、PII、密钥"),
+    Document(id="d3", text="SensorEvent 把 20+ 种工业协议统一成一个"),
 ], embedder=embedder)
 store.save()
 
