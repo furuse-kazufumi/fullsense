@@ -2212,14 +2212,14 @@ On terrain like this, naive "hill-climbing" — "just move toward something slig
 **Terrain 2: deceptive terrain**
 
 ```
- 良さ↑                                  /\
-     |                                 /  \   ← 本物の頂上
-     |        ニセ頂上                /    \
-  中 |         /\         谷         /      \
+Quality↑                                /\
+     |                                 /  \   ← the true peak
+     |        false pk                /    \
+  Md |         /\         vy         /      \
      |        /  \______________/        \
-  低 |____/                                  \
-     +----------------------------------------→ 設計の選び方
-          ↑ニセ頂上で素朴な山登りは停止 (谷を下れない)
+  Lo |____/                                  \
+     +----------------------------------------→ how you pick the design
+          ↑ naive hill-climbing gets stuck at the false peak (it cannot descend valleys)
 ```
 
 Here, naive hill-climbing stops at the false peak. It hasn't the courage to descend into the valley.
@@ -2560,14 +2560,14 @@ In such a landscape, plain "hill-climbing" — that is, "just move toward someth
 **Landscape 2: the deceptive landscape (deceptive)**
 
 ```
- 良さ↑                                  /\
-     |                                 /  \   ← 本物の頂上
-     |        ニセ頂上                /    \
-  中 |         /\         谷         /      \
+Quality↑                                /\
+     |                                 /  \   ← the true peak
+     |        false pk                /    \
+  Md |         /\         vy         /      \
      |        /  \______________/        \
-  低 |____/                                  \
-     +----------------------------------------→ 設計の選び方
-          ↑ニセ頂上で素朴な山登りは停止 (谷を下れない)
+  Lo |____/                                  \
+     +----------------------------------------→ how you pick the design
+          ↑ naive hill-climbing gets stuck at the false peak (it cannot descend valleys)
 ```
 
 Here, plain hill-climbing stops at the false peak, because it lacks the courage to descend into the valley.
