@@ -730,7 +730,7 @@ Source: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/l
 
 ## Chapter 5 Chapter 5
 
-(後続セッションで展開予定 / To be expanded in a follow-up session)
+(To be expanded in a follow-up session)
 
 ---
 
