@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" font-family="Segoe UI, Hiragino Sans, Meiryo, sans-serif">
+<rect width="1000" height="440" fill="#ffffff"/>
+<rect x="20" y="100" width="480" height="300" rx="10" fill="#f4f5f7"/>
+<rect x="510" y="100" width="470" height="300" rx="10" fill="#eef4fb"/>
+<text x="260" y="126" font-size="16" fill="#8a94a3" text-anchor="middle" font-weight="bold">2025 — prompt / context</text>
+<text x="745" y="126" font-size="16" fill="#3f7cc0" text-anchor="middle" font-weight="bold">2026 — harness / loop</text>
+<line x1="240" y1="374" x2="272" y2="314" stroke="#b0b8c4" stroke-width="3"/>
+<path d="M272,314 l-12,-3 l4,9 z" fill="#b0b8c4"/>
+<line x1="480" y1="308" x2="512" y2="248" stroke="#b0b8c4" stroke-width="3"/>
+<path d="M512,248 l-12,-3 l4,9 z" fill="#b0b8c4"/>
+<line x1="720" y1="242" x2="752" y2="182" stroke="#b0b8c4" stroke-width="3"/>
+<path d="M752,182 l-12,-3 l4,9 z" fill="#b0b8c4"/>
+<rect x="40" y="332" width="200" height="84" rx="10" fill="#6b7785"/>
+<text x="140" y="366" font-size="23" fill="#fff" text-anchor="middle" font-weight="bold">prompt</text>
+<text x="140" y="389" font-size="16" fill="#e8eef5" text-anchor="middle">engineering</text>
+<text x="140" y="438" font-size="14" fill="#555" text-anchor="middle">craft the ask</text>
+<rect x="280" y="266" width="200" height="84" rx="10" fill="#6b7785"/>
+<text x="380" y="300" font-size="23" fill="#fff" text-anchor="middle" font-weight="bold">context</text>
+<text x="380" y="323" font-size="16" fill="#e8eef5" text-anchor="middle">engineering</text>
+<text x="380" y="372" font-size="14" fill="#555" text-anchor="middle">design what it sees</text>
+<rect x="520" y="200" width="200" height="84" rx="10" fill="#1565c0"/>
+<text x="620" y="234" font-size="23" fill="#fff" text-anchor="middle" font-weight="bold">harness</text>
+<text x="620" y="257" font-size="16" fill="#e8eef5" text-anchor="middle">engineering</text>
+<text x="620" y="306" font-size="14" fill="#555" text-anchor="middle">design the apparatus</text>
+<rect x="760" y="134" width="200" height="84" rx="10" fill="#2e7d32"/>
+<text x="860" y="168" font-size="23" fill="#fff" text-anchor="middle" font-weight="bold">loop</text>
+<text x="860" y="191" font-size="16" fill="#e8eef5" text-anchor="middle">engineering</text>
+<text x="860" y="240" font-size="14" fill="#555" text-anchor="middle">design the autonomy</text>
+<line x1="20" y1="404" x2="980" y2="404" stroke="#333" stroke-width="2"/>
+<text x="980" y="426" font-size="15" fill="#333" text-anchor="end">engineering maturity →</text>
+<text x="500" y="58" font-size="25" fill="#1a1a1a" text-anchor="middle" font-weight="bold">The staircase of AI engineering: 2025 → 2026</text>
+<text x="500" y="84" font-size="14.5" fill="#666" text-anchor="middle">prompt → context → harness → loop （上の段ほど「LLM の外側」を設計する）</text>
+</svg>
