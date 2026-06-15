@@ -1,6 +1,6 @@
 ---
 title: lldarwin / Evolution Arc — Monoculture Evolution / Selection Pressure / Conductor Ensemble / Falsification & Goodhart / Evolution Visualization / Codex Two-Pillar / llcore CPU Evolution × the Third Axis
-tags: 解説, 進化計算, llive, FullSense, honest_disclosure
+tags: explainer, evolutionary_computation, llive, FullSense, honest_disclosure
 private: false
 public_id: e49b7ab9027d93594402
 ---
