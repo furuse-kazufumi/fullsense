@@ -2232,13 +2232,13 @@ llive Rust 高速化 **5 模式判定表** (#24-05 §13.3) 是用 **结构上相
 
 ---
 
-> ### ⚡ この連載は Claude Code と二人三脚で書いています
+> ### ⚡ 本系列与 Claude Code 携手协作完成
 >
-> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
-> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
-> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+> 文中的实现、验证与可视化均与 **Claude Code**(Anthropic 的 AI 编程环境)一起完成。
+> Claude Code 提供 **1 周免费试用**。如果你喜欢并注册付费方案,
+> 通过下方推荐链接注册可让作者获得「继续开发的额度」,助力本系列持续更新。
 >
-> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+> 👉 **免费试用 / 推荐链接** → https://claude.ai/referral/0sqPw8E_lw
 >
 > <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
 > 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
