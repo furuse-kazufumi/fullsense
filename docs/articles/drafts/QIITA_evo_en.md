@@ -2885,13 +2885,13 @@ Let me state the conclusion precisely one more time, at the end.
 
 ---
 
-> ### ⚡ この連載は Claude Code と二人三脚で書いています
+> ### ⚡ This series is written hand-in-hand with Claude Code
 >
-> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
-> Claude Code は **1 週間の無料トライアル**で試せます。気に入って有料プランに登録される際、
-> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+> The implementation, verification, and visualization in this article are all done together with **Claude Code** (Anthropic's AI coding environment).
+> Claude Code can be tried with a **1-week free trial**. If you like it and sign up for a paid plan,
+> registering via the referral link below gives the author "credits to keep developing," helping this series continue.
 >
-> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+> 👉 **Try it for free / Referral link** → https://claude.ai/referral/0sqPw8E_lw
 >
 > <sub>EN: This series is built together with **Claude Code** — try it with a **1-week free trial**. If you subscribe via the link, the author receives credits to keep building. /
 > 中文: 本系列与 **Claude Code** 协作完成,可享 **1 周免费试用**;通过链接注册可让作者获得继续开发的额度。 /
