@@ -1011,7 +1011,7 @@ retriever = Retriever(
     store=NumpyVectorStore(path="kb.npz"),
     firewall=PromptFirewall(),       # 取出的文档也过一遍 Firewall
 )
-hits = retriever.search("Modbus のリプレイ攻撃対策", k=5)
+hits = retriever.search("Modbus 的重放攻击防范", k=5)
 ```
 
 `Retriever` 里 **强制注入 Firewall**，所以能防止被污染的文档就这么流入 LLM 的事故。
