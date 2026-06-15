@@ -757,7 +757,7 @@ Source: [github.com/furuse-kazufumi/llcore](https://github.com/furuse-kazufumi/l
 
 <!-- CTAIMG -->
 
-![「ひくわ」と一万円札を差し出す森田](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/012.jpg)
-> 🗒️ *「ひくわ」— 紹介リンクで小銭を稼ごうとする魂胆、我ながらちょっと引く*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+![Morita holding out a 10,000-yen bill, saying "That's a bit much"](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/012.jpg)
+> 🗒️ *"That's a bit much" — the scheme of trying to earn pocket change off a referral link; even I find it a little off-putting*（© Forbidden shibukawa / SHUEISHA, "Snack Basue"）
 
 <!-- /CTAIMG -->
