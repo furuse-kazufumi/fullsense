@@ -1,6 +1,6 @@
 ---
 title: Plain-Language Digest — Falsification & Goodhart / the Third Axis / Arc Overview / the Langton's-Ant Illusion, made simple
-tags: FullSense, 進化計算, honest_disclosure, 解説, かみくだき
+tags: FullSense, evolutionary_computation, honest_disclosure, explainer, plain_language
 private: false
 public_id: bdfad6db3f2e70c40511
 ---
