@@ -72,7 +72,9 @@ description: |
   **browser 風 `User-Agent`** を必ず付ける (publish_devto.py / 疎通チェック両方)。空ボディ 403 はキー不正でなく WAF。
 - ★**罠2 (folded title)**: Qiita frontmatter の `title: >-` (折返しスカラ) を素朴な正規表現でパースすると
   title が `>-` になる。block scalar の後続インデント行を結合 or H1 フォールバックで解決 (ツール修正済)。
-- タグ: 最大 4・小文字・英数 + ハイフンのみ (日本語タグは落ちる)。
+- ★**罠3 (タグ/タイトル 422)**: dev.to タグは **英数字のみ小文字** = ハイフン/アンダースコア/空白も
+  **不可** (`honest-disclosure` は 422 → 除去して連結 `honestdisclosure`)。最大 4。**title は 128 字上限**
+  (超過は 422 → 語/区切り境界でトリム、全文は本文 H1 に残す)。両方ツール修正済。
 - **既定 draft** (`--published` で公開)。**冪等性**: 初回 POST で `<stem>.devto.json` (sidecar) が生成され、
   次回以降は PUT 更新。`--canonical-url` に Qiita 原典 URL を入れると重複コンテンツ SEO 対策になる。
 - **キー発行**: dev.to → Settings → 左メニュー **Extensions** → 最下部「DEV Community API Keys」→ Generate。
