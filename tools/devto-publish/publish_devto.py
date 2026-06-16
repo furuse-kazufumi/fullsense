@@ -293,6 +293,11 @@ def _api_request(
             "Content-Type": "application/json",
             "api-key": api_key,
             "Accept": "application/vnd.forem.api-v1+json",
+            # dev.to の WAF は無 UA / urllib デフォルト UA を 403 で弾くため browser 風 UA を付ける。
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+            ),
         },
     )
     try:
