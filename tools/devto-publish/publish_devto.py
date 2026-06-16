@@ -345,6 +345,11 @@ def build_payload(
 ) -> dict:
     """dev.to POST /api/articles の payload を構築する。"""
     title = title_override or meta.get("title", "Untitled")
+    # dev.to は title 128 字上限。超過は語/区切り境界でトリムする (全文は本文 H1 に残る)。
+    if len(title) > DEVTO_TITLE_MAX:
+        trimmed = title[:DEVTO_TITLE_MAX].rstrip()
+        cut = max(trimmed.rfind(" "), trimmed.rfind("/"), trimmed.rfind("—"), trimmed.rfind("-"))
+        title = (trimmed[:cut] if cut > 80 else trimmed).rstrip(" —/-")
 
     raw_tags = tags_override if tags_override else meta.get("tags", [])
     tags = sanitize_tags(raw_tags)
