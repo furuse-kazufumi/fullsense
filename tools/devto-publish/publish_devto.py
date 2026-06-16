@@ -62,8 +62,9 @@ _SECTION_PATTERNS = {
     "korean": re.compile(r"^#{1,3}\s+한국어\b", re.MULTILINE),
 }
 
-# dev.to タグに使えない文字 (英数字・ハイフンのみ許可)
-_TAG_SANITIZE = re.compile(r"[^a-zA-Z0-9\-]")
+# dev.to タグは英数字のみ (ハイフン/アンダースコア/空白も不可 → 除去して連結)。
+_TAG_SANITIZE = re.compile(r"[^a-zA-Z0-9]")
+DEVTO_TITLE_MAX = 128  # dev.to の記事タイトル上限
 
 
 # ────────────────────────────────────────────────
