@@ -26,7 +26,9 @@ OUT = r"D:/projects/fullsense/docs/articles/INBOX_research_seeds.md"
 
 DATE_RE = re.compile(r"^##\s+(\d{4}-\d{2}-\d{2})")
 ENTRY_RE = re.compile(r"^###\s+(.*)")
-CONSUMED_RE = re.compile(r"記事化|→\s*#|→\s*記事|published")
+# 正規マーカー `→ 記事化: #NN` を主対象にしつつ、既存 seed の legacy shorthand
+# (`→ #...`, `→ 記事...`) も後方互換で consumed 扱いする。
+CONSUMED_RE = re.compile(r"→\s*記事化\s*[:：]\s*#|→\s*#|→\s*記事")
 
 
 def first_value(body, key):
