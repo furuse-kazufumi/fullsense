@@ -112,10 +112,31 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
     fm_text = fm_match.group(1)
     body = text[fm_match.end():]
 
-    # title
-    m = re.search(r"^title:\s*['\"]?(.*?)['\"]?\s*$", fm_text, re.MULTILINE)
+    # title — plain / quoted / YAML block scalar (`title: >-`, `|`) 対応。
+    # 折返しスカラは後続のインデント行を結合し、空なら本文の最初の H1 へフォールバックする。
+    m = re.search(r"^title:[ \t]*(.*)$", fm_text, re.MULTILINE)
+    title = ""
     if m:
-        meta["title"] = m.group(1).strip().strip("'\"")
+        val = m.group(1).strip()
+        if val in (">", ">-", ">+", "|", "|-", "|+", ""):
+            cont: list[str] = []
+            for ln in fm_text[m.end():].splitlines():
+                if not ln.strip():
+                    if cont:
+                        break
+                    continue
+                if re.match(r"^[ \t]+\S", ln):
+                    cont.append(ln.strip())
+                else:
+                    break
+            title = " ".join(cont).strip()
+        else:
+            title = val.strip("'\"")
+    if not title:
+        h1 = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
+        title = h1.group(1).strip() if h1 else ""
+    if title:
+        meta["title"] = title
 
     # tags (list形式 or inline)
     tags_block = re.search(r"^tags:\s*\n((?:\s+-\s+.+\n?)+)", fm_text, re.MULTILINE)
