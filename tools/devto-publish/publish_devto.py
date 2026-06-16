@@ -228,10 +228,8 @@ def sanitize_tags(raw_tags: list[str], max_tags: int = 4) -> list[str]:
     """
     sanitized = []
     for tag in raw_tags:
-        # 全角記号・スペースをハイフンに
-        t = tag.replace(" ", "-").replace("_", "-")
-        t = _TAG_SANITIZE.sub("", t)
-        t = t.strip("-").lower()
+        # dev.to タグ = 英数字のみ。空白/ハイフン/アンダースコア/全角は除去して連結。
+        t = _TAG_SANITIZE.sub("", tag).lower()
         if t:
             sanitized.append(t)
     # 重複除去・上限
