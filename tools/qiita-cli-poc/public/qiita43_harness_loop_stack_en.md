@@ -216,7 +216,7 @@ The core of this axis is the point that "it's not enough for the human to merely
 
 | Ability | Role | Basis in My Case |
 |---|---|---|
-| **Ideation** | Presenting high-dimensional direction, cross-domain association, discovering new requirements | That burst of speed where the four-way association of "Kinnikuman Planet + R.O.D + Reincarnation + ROS PBT" instantly crystallized the design for derivative-population evolution |
+| **Ideation** | Presenting high-dimensional direction, cross-domain association, discovering new requirements | "Kinnikuman Planet" pointed to the idea of lining up personas as species, "R.O.D" to externalized knowledge that each one brings in, "Reincarnation" to carrying the same soul across different bodies, and "ROS PBT" to the implementation feel of evaluating a population while rotating generations. In other words, this was not random metaphor-stacking; each association owned a different design part, so the skeleton of **derivative-population evolution that rotates eight persona-species across generations** snapped into place on the spot. |
 | **Heuristics** | Shortcutting design decisions, anticipating similar failures, cutting off unnecessary exploration | 30 years of engineering experience + precision metrology + industrial IoT + DX experience |
 | **Algorithmic understanding** | Validating the soundness of the AI's implementation, estimating computational complexity, identifying hot paths, honest disclosure of benchmarks | The native wit to instantly evaluate a gap like "about 0.8x for single calls, about 12.7x for batches" |
 
