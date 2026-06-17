@@ -10,10 +10,10 @@
 ## 現況
 
 - 今回の作業は **Qiita 草稿 / handoff 文書の整合調整のみ**。
-- 文書バッチは commit `bab1557`（`docs: sync qiita draft handoff for articles 43-45`）として保存済み。
+- 文書バッチは commit `bab1557`（`docs: sync qiita draft handoff for articles 43-45`）と `e4e3968`（`docs: tighten publish-gate notes for qiita drafts`）として保存済み。
 - `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
-- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit に含めた。
+- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 2 commit に含めた。
 - 公開 safety 柵は維持:
   - `qiita43_harness_loop_stack_kamikudaki.md` = `private: true` + `ignorePublish: true`
   - `qiita44_evolutionary_programs_block_diagram.md` = `private: true` + `ignorePublish: true`
@@ -23,14 +23,6 @@
 ## いま worktree に残っている差分
 
 - `.llterm/loop_ledger.jsonl`
-- `docs/SESSION_SUMMARY.md`
-- `docs/next_plan.md`
-- `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md`
-- `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.md`
-- `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_kamikudaki.md`
-- `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_ko.md`
-- `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_zh.md`
-- `tools/qiita-cli-poc/public/qiita44_evolutionary_programs_block_diagram.md`
 
 ## 今回 commit した差分の要点
 
@@ -65,6 +57,7 @@
 - `qiita43_harness_loop_stack_kamikudaki.md` には ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし短縮版のため、一次情報の細目は完全版 #43 側へ寄せる方針を維持。
 - `qiita43` en/zh/ko の終盤 hedged note に残っていた RAD 総件数の古い表現は、`47,097 docs` ベースへ更新済み。
+- `e4e3968` では #43 多言語 draft の要約表・結論部の RAD 件数も `47,097 docs` ベースへ揃えた。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
 
 ## 次の具体的な一手
@@ -72,4 +65,3 @@
 1. publish gate 用の別バッチとして、#43 en/zh/ko の残りの translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. `.llterm/loop_ledger.jsonl` は次の commit に混ぜない。必要なら restore するか、恒久対策を別判断する。
-4. commit `bab1557` 後に加えた `qiita43` かみくだき / `qiita44` 参考文献 / handoff 更新の未 commit 差分を取りこぼさない。

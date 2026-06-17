@@ -4,12 +4,10 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` で一段落した。
-- 現在の worktree 差分は 9 ファイル。
-  - `.llterm/loop_ledger.jsonl` の tracked ノイズ
-  - commit `bab1557` 後に加えた `docs/SESSION_SUMMARY.md` / `docs/next_plan.md` / `qiita43_harness_loop_stack.md` / `qiita43_harness_loop_stack_en.md` / `qiita43_harness_loop_stack_kamikudaki.md` / `qiita43_harness_loop_stack_ko.md` / `qiita43_harness_loop_stack_zh.md` / `qiita44_evolutionary_programs_block_diagram.md`
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` と `e4e3968` で一段落した。
+- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
-- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit に含めた。
+- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 2 commit に含めた。
 - 外部公開・push は未実施。
 
 ## 次の具体的な一手
@@ -22,9 +20,10 @@
 ## このターンの実施結果
 
 - `docs: sync qiita draft handoff for articles 43-45` を commit `bab1557` として作成した。
-- commit 対象は handoff 3 文書、`FULLSENSE_KB_INDEX.md`、`IDEAS_2026_06_15_harness_loop_raptor.md`、Qiita 草稿 6 ファイルの計 11 ファイル。
+- `docs: tighten publish-gate notes for qiita drafts` を commit `e4e3968` として作成した。
+- `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
 - en/zh/ko の変更は本文改稿ではなく `ignorePublish: true` への切替だが、`id:` を持つ発行済み限定共有 draft の **同期凍結**であって、公開面の drift が消えるわけではない。
-- `.llterm/loop_ledger.jsonl` は commit に含めていない。
+- `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
 
 ## publish gate 送り
 
