@@ -78,6 +78,7 @@
 - `tools/_frontmatter.py` を新設し、`qiita_public_post.py` / `qiita_team_post.py` / `convert_to_qiita_cli.py` / `zenn_convert.py` の frontmatter パーサを共有化した。
 - `tests/test_qiita_frontmatter.py` を追加し、folded scalar / single-quote escaping / block list の回帰テストを導入した。`pytest tests/test_qiita_frontmatter.py tests/test_zenn_convert.py tests/test_qiita_url_sync.py` は 34 passed。
 - live 反映確認は、このセッションで実行した Qiita API / HTML の自己確認ログに基づく。
+- `docs/articles/assets/bazue_all/index.md` にユーザー確認済みの挿絵対応を追記し、`081.jpg` = バイブコーディング、`006.jpg` = ハーネスエンジニアリング、`163.jpg` = AIオーケストラ、`025.jpg` = ループエンジニアリング実践中、という運用メモを固定した。
 - `tools: share frontmatter parser across qiita flows` を commit `a07f0c7` として作成し、shared parser・sibling root-cause 修正・回帰テスト追加を ledger ノイズから分離して確定した。
 - #43 の 4 言語草稿で、旧名称 `llloop` と起動コマンド `lll` を最終名称 `llterm` へ更新した。`SESSION_SUMMARY.md` / `next_plan.md` の現行進捗説明も同じ表記へ揃えた。
 - #43 の「キン肉星＋R.O.D＋リィンカーネーション＋ROS PBT」の 4 連想は、人によっては飛躍や `bazue_all/015.jpg` 的な誤用に見えうるため、4 つの連想が別々の設計部品を受け持ったことを ja/en/zh/ko の本文へ追記した。
