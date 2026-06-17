@@ -88,6 +88,7 @@
 - #43 の「キン肉星＋R.O.D＋リィンカーネーション＋ROS PBT」の 4 連想は、人によっては飛躍や `bazue_all/015.jpg` 的な誤用に見えうるため、4 つの連想が別々の設計部品を受け持ったことを ja/en/zh/ko の本文へ追記した。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` を canonical `6e107c7dfa0c261ee4d7` への short redirect 本文へ更新した。ローカル source `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は public PATCH 済みの実体として維持する。
 - public Qiita の redirect / タイトル修正の反映確認は、このセッションで実行した API / HTML の自己確認ログに基づく。
+- `D:/projects/llterm/docs/ARTICLE_SEEDS.md` を記事化観点で読み直し、`docs/articles/2026-06-18/llterm_article_seeds_screening.md` にスクリーニングを追加した。本命は 種 #6「自走 AI ループの作り方と落とし穴」、先行して切り出せる中編は 種 #1「注入タスク飢餓」、種 #2〜#5 は #6 の章素材として回収する方針が最有力。
 - 現在の未コミット差分はなし。`loop_ledger` の deindex は commit `7745f84` で完了済み。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` を確認したところ、内容は `個人開発AIのlliveが"メガ進化"！ — 進化の大失敗から甦り、実LLMの"苦手"まで淘汰した全記録` で、既公開の canonical 総集編 `6e107c7dfa0c261ee4d7`（`lldarwin / 進化 arc 総集編`）と実質重複している。#26 public 短報 `0a35e1...` が既に canonical へ誘導する short redirect 化を採っているため、`bf1...` も同じ方針で整理するのが最小。
 - 上記の重複・前例確認は、Qiita API の `bf1...` / `6e107...` / `0a35...` と、ローカル原稿 `tools/qiita-cli-poc/public/0a35e1bfb814adab8565.md` / `6e107c7dfa0c261ee4d7.md` の一次確認に基づく。

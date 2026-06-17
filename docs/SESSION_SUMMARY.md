@@ -40,6 +40,8 @@
 - public Qiita:
   - public Qiita 記事 `bf1cfe3b4f40b87f068d` を、既公開 canonical `6e107c7dfa0c261ee4d7` へ誘導する short redirect 本文へ PATCH 更新した。ローカル source は `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` として保持し、前例 `0a35e1bfb814adab8565` と同じ「統合・再編しました」+ canonical 直リンクの文面へ揃えた
   - Qiita 側の反映確認は、このセッションで実行した API / HTML の自己確認ログに基づく。Qiita API `GET /api/v2/items/bf1cfe3b4f40b87f068d` の `body` 先頭と、公開 HTML の canonical ID `6e107c7dfa0c261ee4d7` / 「統合・再編しました」の文言が一致していた
+- 記事ネタ評価:
+  - `D:/projects/llterm/docs/ARTICLE_SEEDS.md` を読み、`docs/articles/2026-06-18/llterm_article_seeds_screening.md` に記事化スクリーニングを追加した。結論は、**本命長編は 種 #6「自走 AI ループの作り方と落とし穴」**、単独中編候補は 種 #1「注入タスク飢餓」で、種 #2〜#5 は #6 の章素材に吸収するのが最も筋が良い、というもの
 - 挿絵索引:
   - `docs/articles/assets/bazue_all/index.md` にユーザー指定の 4 対応を追記した。`081.jpg` をバイブコーディング、`006.jpg` をハーネスエンジニアリング、`163.jpg` を AI オーケストラ、`025.jpg` をループエンジニアリング実践中のイメージとして再利用する方針を、各コマの `使いどころ` に固定した
 - deindex:
