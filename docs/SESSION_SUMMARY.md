@@ -10,7 +10,7 @@
 ## 現況
 
 - 今回の作業は **Qiita 草稿 / handoff 文書の整合調整のみ**。
-- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` として保存済み。
+- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` として保存済み。
 - `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
@@ -64,12 +64,14 @@
   - 根拠: en は `qiita43_harness_loop_stack_en.md` の `#### honest disclosure (Handling the "About 49k Items" Number)`、zh は `qiita43_harness_loop_stack_zh.md` の `#### honest disclosure（关于「约49k件」这个数字的处理）`、ko は `qiita43_harness_loop_stack_ko.md` の `#### honest disclosure("약 49k건"이라는 숫자의 취급)`。
 - 残っているのは「節が無い」ことではなく、節**内部**とその周辺の factual / translation drift。
 - `e942370` では上記の factual 反転確認を handoff へ反映し、`loop_ledger` を巻き込まない個別 `git add` 方針も明記した。
+- `496ca41` では `e942370` 後の handoff 現在地を更新し、「約49k件」節まわりの局所監査結果を handoff に追記した。
 - その後の局所確認では、「約49k件」節と直後の橋渡し段については en/zh/ko とも日本語正本に大筋追従しており、残差は細い訳しぶれの範囲だった。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
-  - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add で、次の doc commit に混ぜない。
+  - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
+  - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko の節内 factual / translation drift を詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後橋渡し段を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
-3. `.llterm/loop_ledger.jsonl` は次の commit に混ぜない。必要なら restore するか、恒久対策を別判断する。
+3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記を human gate 解除後に実施する。
