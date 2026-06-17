@@ -710,4 +710,4 @@ https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 - 「半信×半疑」: https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 - 「社会とはこういう事でもあるのか… ルールが見えて来たぜ…」: https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
-> ※ 本文中でヘッジした「二次情報のみ／一次未確認」の主な項目は次の通りです：OpenAI 記事の本文・タグライン・規模数値（一次は HTTP 403）、LangChain の `Agent = Model + Harness` 式と各ハーネスベンチの計測元・計測条件（GPT-5.5 とされるモデル名を含む）、Claude Code v2.1.139 のリリース日、llloop のテスト緑の最新状態（再実行は未実施）、RAD 総 documents 数（「約49k」は2026年5月集計値）、Karpathy 氏 LLM Wiki Gist の提案者・日付、キヤノン「三自の精神」と *First, Break All the Rules* 4原則の出典頁、第3章の「人間優位3点」（measured ではなく観察ベース）。一次情報で確定でき次第、更新します。
+> ※ 本文中でヘッジした「二次情報のみ／一次未確認」の主な項目は次の通りです：OpenAI 記事の本文・タグライン・規模数値（一次は HTTP 403）、LangChain の `Agent = Model + Harness` 式と各ハーネスベンチの計測元・計測条件（GPT-5.5 とされるモデル名を含む）、Claude Code v2.1.139 のリリース日、llloop のテスト緑の最新状態（再実行は未実施）、RAD 総 documents 数（現在のローカル再集計は **2026年6月17日時点で 47,097 docs** で、古い prose には「約49k」が残ることがある）、Karpathy 氏 LLM Wiki Gist の提案者・日付、キヤノン「三自の精神」と *First, Break All the Rules* 4原則の出典頁、第3章の「人間優位3点」（measured ではなく観察ベース）。一次情報で確定でき次第、更新します。

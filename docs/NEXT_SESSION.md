@@ -49,9 +49,12 @@ nav_order: 95
   直すまで accidental publish を避けるため `ignorePublish: true` に倒した。
   ただし `id:` を持つ発行済み限定共有 draft のため、これは **同期凍結**であって
   既発行 URL 上の translation drift が消えるわけではない。
+  2026-06-18 に手元 source では `47,097 docs` ベースへ factual drift を詰めたが、
+  それは **ローカル working copy の修正**であり、既発行の限定共有 URL まではまだ更新していない。
 - `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_kamikudaki.md` を
   新規追加済み。公開版 #43 とは別に、**手元の草稿は現在** `private: true` で、
-  完全版 #43 への導線つき。現状は短縮版草稿として ☕ 休憩ポイントと参考文献節をまだ省略している。
+  完全版 #43 への導線つき。短縮版草稿として ☕ 休憩ポイントと参考文献節は追加済みで、
+  一次情報の細目は完全版 #43 側へ寄せる方針を維持している。
 - `tools/qiita-cli-poc/public/qiita44_evolutionary_programs_block_diagram.md` を
   新規追加済み。**現在は** `private: true` のローカル草稿で、
   進化型プログラムを **用語表 → 流派地図 → Mermaid block diagram → FullSense 接続**
@@ -94,6 +97,10 @@ nav_order: 95
    en/zh/ko の translation sync note は本文から外してあり、publish へ進めるときは
    `ignorePublish: true` / `private: true` を外す前に
    翻訳 drift と metadata を見直す。
+   2026-06-18 の時点で RAD 件数の factual drift（`47,097 docs`）は
+   ローカル source へ反映済みだが、公開面の live URL はまだ旧表現を残している。
+   また en/zh/ko には、日本語正本 `## honest disclosure（「約49k件」という数字の扱い）`
+   に対応する説明節がまだ無く、表・注記だけで吸収している差も残る。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため
    en/zh/ko の `ignorePublish: false` を先に戻してから同期する。
 3. 出自不明の front matter 整形差分が再発した場合は、

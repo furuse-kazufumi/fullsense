@@ -33,6 +33,8 @@
 - `qiita43_harness_loop_stack_kamikudaki.md` は ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。
 - #43 en/zh/ko は発行済み限定共有 draft の translation drift を解消してから `ignorePublish: false` に戻す。
+  - `47,097 docs` ベースの factual drift 修正は **ローカル source 側のみ** で、live URL はまだ旧表現を残している。
+  - en/zh/ko には、日本語正本の「約49k件」の honest-disclosure 説明節に相当する段がまだ無い。
 
 ## 次回の開始メモ
 
@@ -40,6 +42,7 @@
 - publish gate は着手済みで、`qiita44` の参考文献補強は RAD 接地後に着手した。
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
+- #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
 - 次は #43 en/zh/ko の残りの translation drift を詰める。
 
 ## 注意
