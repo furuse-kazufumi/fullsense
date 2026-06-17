@@ -66,12 +66,13 @@
 - `e942370` では上記の factual 反転確認を handoff へ反映し、`loop_ledger` を巻き込まない個別 `git add` 方針も明記した。
 - `496ca41` では `e942370` 後の handoff 現在地を更新し、「約49k件」節まわりの局所監査結果を handoff に追記した。
 - その後の局所確認では、「約49k件」節と直後の橋渡し段については en/zh/ko とも日本語正本に大筋追従しており、残差は細い訳しぶれの範囲だった。
+- さらに RAD 再接地後に `50手法 vs 96ノート` 節も spot-check し、96ノート / 39 documents / 12 clusters の注意書きまで en/zh/ko が日本語正本に追従していることを確認した。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
   - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
   - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後橋渡し段を除く未確認箇所の factual / translation drift を詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節まわりと `50手法 vs 96ノート` 節を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記を human gate 解除後に実施する。
