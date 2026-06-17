@@ -13,8 +13,9 @@
 - 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` として保存済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
+- public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
-- `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local draft として untracked のまま保留している。
+- `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 公開 safety 柵は維持:
   - `qiita43_harness_loop_stack_kamikudaki.md` = `private: true` + `ignorePublish: true`
@@ -35,6 +36,9 @@
   - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、英語版には `public_id` も明示した。`tools/_frontmatter.py` を新設して poster / converter 4 経路へ共有化し、`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストを追加した。human gate 後の public PATCH と API / HTML 確認まで完了した
   - #43 本文の旧名称 `llloop` / 起動コマンド `lll` を、最終名称 `llterm` へ 4 言語草稿で一括置換した。あわせて handoff 内の現行進捗説明も `llterm` 表記へ揃え、archive 扱いの旧メモは温存した
   - #43 の「キン肉星＋R.O.D＋リィンカーネーション＋ROS PBT」の 4 連想について、引用や画像の誤用に見えないよう補足説明を追加した。4 つの連想がそれぞれ「種の並立 / 知識の外部化 / 同じ魂の再搭載 / 世代交代つき個体群評価」という別々の設計部品を指していたことを、ja/en/zh/ko で明示した
+- public Qiita:
+  - public Qiita 記事 `bf1cfe3b4f40b87f068d` を、既公開 canonical `6e107c7dfa0c261ee4d7` へ誘導する short redirect 本文へ PATCH 更新した。ローカル source は `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` として保持し、前例 `0a35e1bfb814adab8565` と同じ「統合・再編しました」+ canonical 直リンクの文面へ揃えた
+  - Qiita API `GET /api/v2/items/bf1cfe3b4f40b87f068d` では redirect 本文の先頭と canonical URL を確認済み。公開 HTML でも canonical ID `6e107c7dfa0c261ee4d7` と「統合・再編しました」の文言が出ていることを確認した
 - handoff:
   - `NEXT_SESSION.md` / `SESSION_SUMMARY.md` / `next_plan.md` のナラティブを今回監査内容へ更新し、前バッチの #44 / #45 説明が再開導線に残らないよう整理した
   - handoff の commit 列と実施結果列に `d92192f` を backfill し、`20afd3e` 自身は 1-commit ラグ規律どおり次回 backfill 対象に維持した
