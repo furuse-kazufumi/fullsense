@@ -70,6 +70,7 @@
   - ここで確認したのは数値そのものの正当性ではなく、日本語正本に対する訳文追従である。
 - さらに `LLM Wiki / thought circulation` 節も spot-check し、Anti-Circulation Safeguards の箇条書きと `llmesh / llive / llove` の製品対応づけまで en/zh/ko が日本語正本に追従していることを確認した。
   - ここで確認したのは日本語正本に対する訳文追従であり、`Anti-Circulation Safeguards` / `thought circulation` / `RAD` の外部一次情報ベースの factual 検証ではない。
+  - 追加 spot-check で、Karpathy 帰属のヘッジ、`設計段階` の限定、製品対応づけの「私のマッピング / 主観」表現も en/zh/ko で保持されていることを確認した。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
   - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
   - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
