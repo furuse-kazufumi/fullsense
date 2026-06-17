@@ -1,7 +1,5 @@
 ---
-title: >-
-  #43 In 2026, the Industry Named the AI's "Reins" and "Wheel" — How I Started
-  Assembling a Prototype harness/loop engineering Stack Locally
+title: '#43 In 2026, the Industry Named the AI''s "Reins" and "Wheel" — How I Started Assembling a Prototype harness/loop engineering Stack Locally'
 tags:
   - AI
   - Agent

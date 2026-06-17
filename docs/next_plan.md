@@ -4,22 +4,23 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` まで反映済み。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` まで反映済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
-- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
+- 現在の作業中差分は #43 英語版タイトル崩れ対応（source / poster / handoff）と `.llterm/loop_ledger.jsonl` の tracked ノイズ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 外部公開・push は未実施。
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
+1. 英語版 public Qiita item `2622da17495d61480fa2` のタイトル修正を最優先とし、human gate 後に public PATCH を実行する。ローカル source と poster の修正は先に完了させる。
 2. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
-3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ちだが、次の安全な区切りで早めに上程する。
-4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
-5. push / publish / 外部書き込みは引き続き human gate のまま維持する。
-6. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
-7. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
+3. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
+4. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。今回の安全な区切りで上程する。
+5. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
+6. push / publish / 外部書き込みは引き続き human gate のまま維持する。
+7. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
+8. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
 
 ## このターンの実施結果
 
@@ -48,6 +49,11 @@
 - `docs: sync handoff after article 43 audits` を commit `d2cec49` として作成した。
 - `docs: record article 43 reference audit` を commit `e7dfdef` として作成した。
 - `docs: align next-session handoff state` を commit `d92192f` として作成した。
+- `docs: record article 43 chapter 3 intro audit` を commit `20afd3e` として作成した。
+- `docs: refresh handoff narrative after audit` を commit `dc70dc0` として作成した。
+- `docs: sync article 43 llm wiki quote blocks` を commit `83f510b` として作成した。
+- `docs: align article 43 quote formatting` を commit `16f2b52` として作成した。
+- `docs: sync remaining article 43 interludes` を commit `5a4aedf` として作成した。
 - `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
 - `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述を、ローカル source / live URL の差も含めて整えた。
 - `426be90` では handoff 2 ファイルを最新の commit 列まで追従させたが、その後の factual 反転確認ぶんで handoff 2 文書に再度更新が入っている。
@@ -55,11 +61,17 @@
 - `496ca41` は `git show` で spot-check し、handoff 2 文書だけの更新であることを確認済み。
 - `d92192f` では handoff 3 文書の commit 列と drift 範囲メモを更新し、当時最新だった `e7dfdef` までの現在地を揃えた。
 - en/zh/ko の変更は `ignorePublish: true` への切替だけでなく、終盤 hedge note / 要約表 / 結論部の `47,097 docs` 反映まで含む本文改稿である。
-- 今回の `20afd3e` 自身は 1-commit ラグ規律どおり本節にはまだ列挙しないが、内容は #43 第3章導入〜`3-2. LLM Wiki` 導入直前の監査結果を handoff へ反映する更新だった。
-- 今回の `dc70dc0` 自身も 1-commit ラグ規律どおり本節にはまだ列挙しないが、その後の本文監査では en/zh/ko の `3-2. LLM Wiki` 本体に日本語正本の「半信×半疑」引用ブロックと `alu.jp` URL が欠落していることを確認し、3 言語へ同期した。
-- 追加の再確認では、新規 `Ud7l...` ブロックが各翻訳ファイルの既存引用スタイルから外れていたため、`Snack Bus-e / Forbidden Shibukawa (Alu)` 表記の埋込リンク 1 行形式へ揃え、末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を追記した。
+- `20afd3e` では #43 第3章導入〜`3-2. LLM Wiki` 導入直前の監査結果を handoff へ反映した。
+- `dc70dc0` では stale だった handoff ナラティブを今回監査内容へ更新した。
+- `83f510b` では en/zh/ko の `3-2. LLM Wiki` 本体に日本語正本の「半信×半疑」引用ブロックと `alu.jp` URL を同期した。
+- `16f2b52` では新規 `Ud7l...` ブロックを各翻訳ファイルの既存引用スタイルへ揃え、末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を追記した。
+- `5a4aedf` では残っていた inline 引用 4 件（`MDsuu...` / `2qlJjB...` / `CPon283...` / `H4Pix38...`）を本文と末尾参考へ同期し、crop URL 数を日本語正本 16 / en 16 / zh 16 / ko 16 へ揃えた。
+- 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、front matter の `title: >-` と poster 側の最小パーサ不一致が原因と切り分けた。
+- `qiita43_harness_loop_stack_en.md` / `_ko.md` の front matter `title:` を repo 規約どおり single-quoted 1 行へ修正した。
+- `tools/qiita_public_post.py` / `tools/qiita_team_post.py` に YAML block scalar title (`>-` / `|`) と single-quoted YAML escaping (`''`) の解釈を追加し、dry-run で英語版タイトルが正しく復旧することを確認した。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
+  - タイトル修正と handoff 更新を commit し終えた時点で、残差分が ledger だけなら次アクションは deindex 案の human gate 上程へ戻す。
 
 ## publish gate 送り
 

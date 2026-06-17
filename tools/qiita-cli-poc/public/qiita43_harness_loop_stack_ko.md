@@ -1,7 +1,5 @@
 ---
-title: >-
-  #43 2026년, 업계는 AI에게 "고삐"와 "고리"라는 이름을 붙였다 — harness/loop engineering 시제품 스택을
-  로컬에 조립하기 시작한 이야기
+title: '#43 2026년, 업계는 AI에게 "고삐"와 "고리"라는 이름을 붙였다 — harness/loop engineering 시제품 스택을 로컬에 조립하기 시작한 이야기'
 tags:
   - AI
   - Agent
