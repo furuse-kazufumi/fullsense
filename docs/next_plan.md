@@ -4,7 +4,7 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` まで反映済み。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` まで反映済み。
 - 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
@@ -12,7 +12,7 @@
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節を除く未確認箇所の factual / translation drift を優先して詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節の訳文追従確認済み部分を除く未確認箇所の factual / translation drift を優先して詰める。
 2. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ちだが、次の安全な区切りで早めに上程する。
 4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
@@ -27,6 +27,10 @@
 - `docs: refresh handoff after latest drift sync` を commit `426be90` として作成した。
 - `docs: fix handoff evidence for article 43 drift` を commit `e942370` として作成した。
 - `docs: refresh handoff after article 43 audit` を commit `496ca41` として作成した。
+- `docs: clarify handoff risk and next scope` を commit `fded95b` として作成した。
+- `docs: narrow article 43 drift scope` を commit `e0b0ee5` として作成した。
+- `docs: tighten handoff scope wording` を commit `7ce6ee1` として作成した。
+- `docs: record article 43 llm wiki audit` を commit `31e974e` として作成した。
 - `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
 - `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述を、ローカル source / live URL の差も含めて整えた。
 - `426be90` では handoff 2 ファイルを最新の commit 列まで追従させたが、その後の factual 反転確認ぶんで handoff 2 文書に再度更新が入っている。
@@ -51,6 +55,8 @@
   - `50手法 vs 96ノート` 節も局所確認済みで、96ノート / 39 documents / 12 clusters の注意書きまで日本語正本に追従している。
     - ここで確認したのは数値そのものの正当性ではなく、日本語正本に対する訳文追従である。
   - `LLM Wiki / thought circulation` 節も局所確認済みで、Anti-Circulation Safeguards の箇条書きと `llmesh / llive / llove` の製品対応づけまで日本語正本に追従している。
+    - ここで確認したのは日本語正本に対する訳文追従であり、`Anti-Circulation Safeguards` / `thought circulation` / `RAD` の外部一次情報ベースの factual 検証ではない。
+  - 次の drift 詰めでは、Karpathy 帰属のヘッジ語、`llive` 設計段階の限定句、製品対応づけの「私のマッピング」表現が en/zh/ko で保持されているかを優先確認する。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 
 ## 次回の開始メモ
@@ -60,7 +66,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko のうち、「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節を除く未確認箇所の factual / translation drift を詰める。
+- 次は #43 en/zh/ko のうち、「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節の訳文追従確認済み部分を除く未確認箇所の factual / translation drift を詰める。
 
 ## 注意
 

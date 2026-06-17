@@ -10,7 +10,7 @@
 ## 現況
 
 - 今回の作業は **Qiita 草稿 / handoff 文書の整合調整のみ**。
-- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` として保存済み。
+- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` として保存済み。
 - `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
@@ -69,12 +69,13 @@
 - さらに RAD 再接地後に `50手法 vs 96ノート` 節も spot-check し、96ノート / 39 documents / 12 clusters の注意書きまで en/zh/ko が日本語正本に追従していることを確認した。
   - ここで確認したのは数値そのものの正当性ではなく、日本語正本に対する訳文追従である。
 - さらに `LLM Wiki / thought circulation` 節も spot-check し、Anti-Circulation Safeguards の箇条書きと `llmesh / llive / llove` の製品対応づけまで en/zh/ko が日本語正本に追従していることを確認した。
+  - ここで確認したのは日本語正本に対する訳文追従であり、`Anti-Circulation Safeguards` / `thought circulation` / `RAD` の外部一次情報ベースの factual 検証ではない。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
   - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
   - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節を除く未確認箇所の factual / translation drift を詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節の訳文追従確認済み部分を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記を human gate 解除後に早めに実施する。
