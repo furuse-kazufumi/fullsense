@@ -10,7 +10,7 @@
 ## 現況
 
 - 今回の作業は **Qiita 草稿 / handoff 文書の整合調整のみ**。
-- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` として保存済み。
+- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` として保存済み。
 - `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
@@ -23,8 +23,6 @@
 ## いま worktree に残っている差分
 
 - `.llterm/loop_ledger.jsonl`
-- `docs/SESSION_SUMMARY.md`
-- `docs/next_plan.md`
 
 ## 今回 commit した差分の要点
 
@@ -65,6 +63,8 @@
 - en/zh/ko とも、日本語正本の「約49k件」という数字の扱いに対応する honest-disclosure 節は実在する。
   - 根拠: en は `qiita43_harness_loop_stack_en.md` の `#### honest disclosure (Handling the "About 49k Items" Number)`、zh は `qiita43_harness_loop_stack_zh.md` の `#### honest disclosure（关于「约49k件」这个数字的处理）`、ko は `qiita43_harness_loop_stack_ko.md` の `#### honest disclosure("약 49k건"이라는 숫자의 취급)`。
 - 残っているのは「節が無い」ことではなく、節**内部**とその周辺の factual / translation drift。
+- `e942370` では上記の factual 反転確認を handoff へ反映し、`loop_ledger` を巻き込まない個別 `git add` 方針も明記した。
+- その後の局所確認では、「約49k件」節と直後の橋渡し段については en/zh/ko とも日本語正本に大筋追従しており、残差は細い訳しぶれの範囲だった。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add で、次の doc commit に混ぜない。
 

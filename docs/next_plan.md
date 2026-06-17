@@ -4,8 +4,8 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` まで反映済み。
-- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズに加え、handoff 更新中の `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` まで反映済み。
+- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 外部公開・push は未実施。
@@ -24,9 +24,11 @@
 - `docs: refresh handoff after publish-gate cleanup` を commit `7e7931c` として作成した。
 - `docs: sync handoff with article 43 drift fixes` を commit `0478fa1` として作成した。
 - `docs: refresh handoff after latest drift sync` を commit `426be90` として作成した。
+- `docs: fix handoff evidence for article 43 drift` を commit `e942370` として作成した。
 - `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
 - `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述を、ローカル source / live URL の差も含めて整えた。
 - `426be90` では handoff 2 ファイルを最新の commit 列まで追従させたが、その後の factual 反転確認ぶんで handoff 2 文書に再度更新が入っている。
+- `e942370` では #43 en/zh/ko の honest-disclosure 節の実在根拠を handoff に明記し、`git add .` で `loop_ledger` を再ステージしない個別 add 方針を足した。
 - en/zh/ko の変更は `ignorePublish: true` への切替だけでなく、終盤 hedge note / 要約表 / 結論部の `47,097 docs` 反映まで含む本文改稿である。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
@@ -42,7 +44,8 @@
   - `47,097 docs` ベースの factual drift 修正は **ローカル source 側のみ** で、live URL はまだ旧表現を残している。
   - en/zh/ko とも対応する honest-disclosure 節は実在している。
     - 根拠: en `qiita43_harness_loop_stack_en.md` の `#### honest disclosure (Handling the "About 49k Items" Number)`、zh `qiita43_harness_loop_stack_zh.md` の `#### honest disclosure（关于「约49k件」这个数字的处理）`、ko `qiita43_harness_loop_stack_ko.md` の `#### honest disclosure("약 49k건"이라는 숫자의 취급)`。
-  - 残っているのは節**内部**と周辺の factual / translation drift。
+  - 「約49k件」節と直後の橋渡し段は局所確認済みで、日本語正本に大筋追従している。
+  - 残っているのは節**内部**と周辺の細い factual / translation drift。
 
 ## 次回の開始メモ
 
