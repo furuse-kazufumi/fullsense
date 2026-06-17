@@ -49,7 +49,7 @@ ignorePublish: true
 
 > **业界命名的这两者，我已在概念验证（PoC）层面置于手边（本地）。只不过，我的设计图里，还有一个在业界以模型为中心的解说图中难以呈现的「另一条轴」。**
 
-那条轴，就是 **始终握着缰绳的人类**，以及 **像部下一样被培养的AI**。本文将通过我实际在运行的实现——`RAPTOR`（安全智能体）、`llloop`（自制循环 harness · alpha）、`RAD` 语料库 + `LLM Wiki`（自有研究知识）——来验证 (A) harness、(B) loop、(C) 支撑两者的知识基础 这三个主题。
+那条轴，就是 **始终握着缰绳的人类**，以及 **像部下一样被培养的AI**。本文将通过我实际在运行的实现——`RAPTOR`（安全智能体）、`llterm`（自制循环 harness · alpha）、`RAD` 语料库 + `LLM Wiki`（自有研究知识）——来验证 (A) harness、(B) loop、(C) 支撑两者的知识基础 这三个主题。
 
 这是一篇长文（约2万字，20分钟课程）。我会在关键处穿插 **掰开揉碎（术语的浅显说明）**、**闲话休题（小憩）**、**honest disclosure（诚实的内部披露）**。累了的话，请在章节的间隙喘口气。
 
@@ -280,7 +280,7 @@ RAPTOR 的全称是 **Recursive Autonomous Penetration Testing and Observation R
 
 ---
 
-## 第2章【轮子 = loop】循环工程，与自制 harness llloop
+## 第2章【轮子 = loop】循环工程，与自制 harness llterm
 
 ### 2-1. 把 loop engineering 再深挖一层
 
@@ -314,17 +314,17 @@ Filip Verloy 先生在2026年6月的 Medium 文章 *From Prompt Engineering to L
 
 「以机器速度扩展风险」这一句，正是接下来这个自制 harness 的设计动机本身。
 
-### 2-3. llloop——自制的循环 harness
+### 2-3. llterm——自制的循环 harness
 
-我自制了一个名为 **llloop**（本地的独立项目，v0.1.0a0，Apache-2.0）的、**用于设计 · 执行 · 实验自主循环的独立 harness**。这是2026年6月11日启动的 Python 项目。
+我自制了一个名为 **llterm**（本地的独立项目，v0.1.0a0，Apache-2.0）的、**用于设计 · 执行 · 实验自主循环的独立 harness**。这是2026年6月11日启动的 Python 项目。
 
-首先放一段 **honest disclosure**。**llloop 处于 alpha 阶段（v0.1.0a0，骨架）。** 因为还没有公开到 GitHub，所以正文里贴不出公开仓库的 URL（用已公开的 RAPTOR 一侧的链接来补）。验证任务目前也以 green-keeper 为中心，并非生产品质。我不掺水地写。
+首先放一段 **honest disclosure**。**llterm 处于 alpha 阶段（v0.1.0a0，骨架）。** 因为还没有公开到 GitHub，所以正文里贴不出公开仓库的 URL（用已公开的 RAPTOR 一侧的链接来补）。验证任务目前也以 green-keeper 为中心，并非生产品质。我不掺水地写。
 
 在此之上，设计的骨架是这样的。
 
 #### 骨架：MAPE-K 控制循环
 
-llloop 的脊梁是 **MAPE-K**。这是自主计算（autonomic computing）的经典控制循环，由 **Monitor（监控）→ Analyze（分析）→ Plan（计划）→ Execute（执行）**，以及它们共享的 **Knowledge（知识 K）** 构成。设计代码中引用了 Kephart & Chess 2003年的 autonomic computing 论文。
+llterm 的脊梁是 **MAPE-K**。这是自主计算（autonomic computing）的经典控制循环，由 **Monitor（监控）→ Analyze（分析）→ Plan（计划）→ Execute（执行）**，以及它们共享的 **Knowledge（知识 K）** 构成。设计代码中引用了 Kephart & Chess 2003年的 autonomic computing 论文。
 
 实现是 `MapeKRunner` 类，一圈会按——
 
@@ -347,9 +347,9 @@ MAPE-K 与人类的体温调节相似。
 
 ### 2-4. ★主角登场：fail-closed 安全层（safety.py）
 
-这里是 llloop 里我最想讲的部分。loop 很快。快的东西，需要一个 **绕不过去的刹车**。在2-1我写过「拥有决策点，与保证决策的质量，是两个问题」。承担那个「保证质量」的，就是这个安全层。
+这里是 llterm 里我最想讲的部分。loop 很快。快的东西，需要一个 **绕不过去的刹车**。在2-1我写过「拥有决策点，与保证决策的质量，是两个问题」。承担那个「保证质量」的，就是这个安全层。
 
-llloop 的安全层 `safety.py` 里的 `SafetyPolicy.classify`，会把每个动作分成 **ALLOW（允许）/ CONFIRM（人类确认）/ FORBID（禁止）** 三级来判定。判定顺序是——
+llterm 的安全层 `safety.py` 里的 `SafetyPolicy.classify`，会把每个动作分成 **ALLOW（允许）/ CONFIRM（人类确认）/ FORBID（禁止）** 三级来判定。判定顺序是——
 
 1. **FORBID 最优先** …… `rm -rf /`、`curl | sh`（把网上的内容原样灌进 shell）、`--no-verify`（绕过 hook）、fork bomb 等无条件禁止。
 2. **危险命令一律 CONFIRM** …… 删除、force-push、submodule 改动、DB drop 必须人类确认。
@@ -368,7 +368,7 @@ llloop 的安全层 `safety.py` 里的 `SafetyPolicy.classify`，会把每个动
 
 我把标题写得精确了。**「在当前实现下」** 这一限定才是本质（原因在本节末披露）。
 
-「如果用LLM来驱动，最后不还是LLM会失控吗？」——这是个合理的疑问。llloop 的答案是 **以结构令其无法绕过**。
+「如果用LLM来驱动，最后不还是LLM会失控吗？」——这是个合理的疑问。llterm 的答案是 **以结构令其无法绕过**。
 
 `LLMStrategy` 让LLM「以JSON只提一个下一步动作」。但是——
 
@@ -384,11 +384,11 @@ llloop 的安全层 `safety.py` 里的 `SafetyPolicy.classify`，会把每个动
 
 #### honest disclosure（为何要限定为「在当前实现下」）
 
-「LLM 无法绕过安全层」，作为代码上的路径（`LLMStrategy → parse_action → runner.SafetyPolicy`）在结构上有保证。不过这依赖于「**只经由 llloop 的 Executor 执行命令**」这一前提，是一个 **有条件的命题**。`codex exec` 本身被设计为在 `-s read-only` 的沙箱中不产生副作用，但若将来在 Executor 之外添加让LLM直接敲 shell 的路径，保证就会崩坏。**当前的实现没有那条路径**——所以我把标题写成「在当前实现下无法绕过」，而非无条件的「无法绕过」。
+「LLM 无法绕过安全层」，作为代码上的路径（`LLMStrategy → parse_action → runner.SafetyPolicy`）在结构上有保证。不过这依赖于「**只经由 llterm 的 Executor 执行命令**」这一前提，是一个 **有条件的命题**。`codex exec` 本身被设计为在 `-s read-only` 的沙箱中不产生副作用，但若将来在 Executor 之外添加让LLM直接敲 shell 的路径，保证就会崩坏。**当前的实现没有那条路径**——所以我把标题写成「在当前实现下无法绕过」，而非无条件的「无法绕过」。
 
 ### 2-6. 启动与验证任务 green-keeper
 
-llloop 的启动命令是 `lll`（console script ＝ 安装包后会进入 PATH 的启动命令）。无参数启动时，会弹出 ccr 风格的交互菜单（项目选择＋next_plan / last_outcome 的承接显示＋默认30秒自动继续活跃项目），并执行首个验证任务 **green-keeper**。
+llterm 的启动命令是 `llterm`（console script ＝ 安装包后会进入 PATH 的启动命令）。无参数启动时，会弹出 ccr 风格的交互菜单（项目选择＋next_plan / last_outcome 的承接显示＋默认30秒自动继续活跃项目），并执行首个验证任务 **green-keeper**。
 
 green-keeper 是一个 **GitOps reconciliation（reconciliation ＝把「应有的样子」和「当前的样子」对照，填平差异的整合）** 风格的循环。意象是：园丁把「所有草木都生机勃勃的状态」当作 desired，一旦发现枯萎（drift）就浇水。
 
@@ -457,7 +457,7 @@ harness 很强大。但要讲它的强大，并不需要错误的权威背书。
 
 > 🗨️ 「成果呢？可以撒谎吗？去确认反而更诚实……」 — [Snack Bus-e ／ Forbidden Shibukawa（Alu）](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
 >
-> （闲话休题）「去确认」不是软弱，而是**诚实**。llloop 的 `CONFIRM` 也是一样——拿不准就先停下再问。把判断还给握缰绳的人类，这就是「无法绕过的刹车」的作法。
+> （闲话休题）「去确认」不是软弱，而是**诚实**。llterm 的 `CONFIRM` 也是一样——拿不准就先停下再问。把判断还给握缰绳的人类，这就是「无法绕过的刹车」的作法。
 
 ---
 
@@ -509,7 +509,7 @@ RAD 并非「收集完就完事」。它有三条运用纪律。
 
 内容是——控制反馈（PID / anti-windup〔抑制积分项失控的机制〕/ state-space〔状态空间表示〕/ Lyapunov〔稳定性分析〕/ MPC〔模型预测控制〕/ MAPE-K / OODA / cybernetics）、自主智能体循环（ReAct / Reflexion / Plan-and-Execute / Self-Refine / Tree-of-Thoughts 等）、**强化学习的各流派**（policy-value iteration / PPO / RLHF / RLAIF / Constitutional / RLVR / AlphaZero 等）、运维CI（GitOps reconciliation / watchdog / chaos engineering）——一应俱全。实笔记例：`a001_pid_control` / `a009_ooda_loop_boyd` / `a013_mape_k_autonomic_loop` / `b001_mape_k_autonomic_reference_loop`。
 
-也就是说，第2章 `llloop` 的 MAPE-K、safety、green-keeper（GitOps reconciliation），都是 **以这个语料库为设计依据实现的**。知识（语料库）→ 循环（llloop）这条脉络，用实物连了起来。
+也就是说，第2章 `llterm` 的 MAPE-K、safety、green-keeper（GitOps reconciliation），都是 **以这个语料库为设计依据实现的**。知识（语料库）→ 循环（llterm）这条脉络，用实物连了起来。
 
 #### honest disclosure（「50种手法」与「96条笔记」的出入）
 
@@ -593,7 +593,7 @@ suspicion（怀疑）
 
 这里我加条件地写作「有可能」。语料库参照并非万能。**关联性过滤若不起作用，无关 · 陈旧的知识混进来，反而会变成噪声**。事实上，3-1写的「鲜度×价值的剪枝」，正是为抑制这种噪声混入的装置。所以准确地说，「**在关联性过滤起作用的前提下，多视角有可能被补全**」才是恰当的分寸感。
 
-举一个具体例子。设计第2章 `llloop` 的安全层时，我把「把 fail-closed 做成三级（ALLOW/CONFIRM/FORBID）」这个想法，从 `loop_engineering_corpus_v2` 的控制理论笔记群（anti-windup 与 circuit breaker 模式）和 RAPTOR 的 governance（DENY/REVIEW/列表外DENY）两边都引了过来。即便是一个人在设计，语料库也在背后把「控制工程的视角」和「安全的视角」叠加在了一起——这就是 corpus-first 起作用的一例。
+举一个具体例子。设计第2章 `llterm` 的安全层时，我把「把 fail-closed 做成三级（ALLOW/CONFIRM/FORBID）」这个想法，从 `loop_engineering_corpus_v2` 的控制理论笔记群（anti-windup 与 circuit breaker 模式）和 RAPTOR 的 governance（DENY/REVIEW/列表外DENY）两边都引了过来。即便是一个人在设计，语料库也在背后把「控制工程的视角」和「安全的视角」叠加在了一起——这就是 corpus-first 起作用的一例。
 
 这对应于「**使用AI**（听答案）」与「**与AI一起做**（在背后参照语料库、补全多视角的同时，设计判断仍由人类握住）」的区别。第1章我写过「用户一侧需要构想力 · 经验法则 · 算法理解三种能力」。corpus-first，是一个 **有可能用AI一侧的知识基础来放大** 那三种能力的机关（前提是噪声得到管理，这一保留条件附上）。
 
@@ -612,7 +612,7 @@ suspicion（怀疑）
 | | 主题 | 问题 | 实物 | 「另一条轴」 |
 |---|---|---|---|---|
 | **A** | harness engineering | **为什么**（哲学） | RAPTOR 的两层分离 | 人类握缰绳，把AI当部下来培养 |
-| **B** | loop engineering | **怎么做**（控制） | llloop（MAPE-K＋fail-closed，alpha） | 安全层在当前路径下绕不过去 · 替换策略加以比较 |
+| **B** | loop engineering | **怎么做**（控制） | llterm（MAPE-K＋fail-closed，alpha） | 安全层在当前路径下绕不过去 · 替换策略加以比较 |
 | **C** | RAD + LLM Wiki | **做什么**（知识） | 约4.7万条笔记（Markdown 实数 47,097 docs）＋证据阶梯 | corpus-first 让单人也多视角 · 一次信息源主义 |
 
 业界的图，往往把 A、B、C 当作各自的流行词并排摆着。我的主张是——**这三者，是同一个世界观的三张面孔**。那个世界观的核心，收敛于仅仅两条原理。
@@ -621,7 +621,7 @@ suspicion（怀疑）
 
 第二条是 **「把 honest disclosure 置于核心」**。一旦出现异常好的数字（「Bölük 10×」），在自以为赢了之前就怀疑其内部构成。本文各章里，我对自己的数字（49k件、测试90件、50种手法 vs 96条笔记）也套用了同样的做法。
 
-而且这个世界观，在本地就能完结。RAD 也好 llloop 也好 RAPTOR 也好，全都在手边运行，不把个人信息 · 企业机密 · 传感器数据送往外部。另外，这套自有栈（llloop / RAD / RAPTOR），是与我另行称作 **FullSense** 的产品生态系统（llmesh / llive / llove **三款产品** ＋ suite installer）**有别的、本地的研究栈**。两者共享思想，但与产品线划开一条界线（唯独 llive，作为第3章提到的 LLM Wiki 的承接处，横跨两者）。
+而且这个世界观，在本地就能完结。RAD 也好 llterm 也好 RAPTOR 也好，全都在手边运行，不把个人信息 · 企业机密 · 传感器数据送往外部。另外，这套自有栈（llterm / RAD / RAPTOR），是与我另行称作 **FullSense** 的产品生态系统（llmesh / llive / llove **三款产品** ＋ suite installer）**有别的、本地的研究栈**。两者共享思想，但与产品线划开一条界线（唯独 llive，作为第3章提到的 LLM Wiki 的承接处，横跨两者）。
 
 #### 为什么能说「握缰绳的是人类」——基于观察的三点
 
@@ -644,7 +644,7 @@ suspicion（怀疑）
 2026年，AI业界在 prompt engineering 之后，命名了 **harness engineering（缰绳）** 与 **loop engineering（轮子）**（发明它们的不是AI，而是人类工程师们）。它们的试验栈，我已在概念验证层面置于本地。
 
 - **缰绳（A）** …… RAPTOR 以「Python 全程控制，LLM 专注判断」的两层分离来实现。在此之上，往以模型为中心的图里添了一条辅助线：「人类握缰绳，把AI当部下来培养」。这与 Karpathy 先生的 "vibe coding"（2025-02）是不同谱系，不说「是我先命名的」。
-- **轮子（B）** …… 自制 `llloop`（alpha · 未公开）用 MAPE-K 运转，以 **在当前路径下绕不过去的 fail-closed 安全层** 挂上刹车。LLM 只能提议，最终闸门是 SafetyPolicy。
+- **轮子（B）** …… 自制 `llterm`（alpha · 未公开）用 MAPE-K 运转，以 **在当前路径下绕不过去的 fail-closed 安全层** 挂上刹车。LLM 只能提议，最终闸门是 SafetyPolicy。
 - **知（C）** …… 约65领域 · 约4.7万条笔记（Markdown 实数 47,097 docs）的 RAD，用 LLM Wiki 模式培养（给思想的循环装上反循环安全装置），由 RAPTOR 守住证据的阶段来安全使用。
 
 而贯穿本文的，只有一条做法。
@@ -689,4 +689,4 @@ suspicion（怀疑）
 - 「半信×半疑」: https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 - 「社会也会是这么回事吗……我开始看见规则了……」: https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
-> ※ 正文中作过对冲的「仅二次信息／一次未确认」的主要项目如下：OpenAI 文章的正文 · 标语 · 规模数值（一次为 HTTP 403）、LangChain 的 `Agent = Model + Harness` 公式与各 harness 基准的计测来源 · 计测条件（含被称为 GPT-5.5 的模型名）、Claude Code v2.1.139 的发布日、llloop 测试为绿的最新状态（重新跑尚未实施）、RAD 总 documents 数（当前手元重计为 **2026年6月17日的 47,097 docs**，较旧的 prose 里仍可能写作「约49k」）、Karpathy 先生 LLM Wiki Gist 的提案者 · 日期、佳能「三自精神」与 *First, Break All the Rules* 四原则的出处页码、第3章的「人类优越三点」（并非 measured 而是基于观察）。一旦能以一次信息源确定，便即更新。
+> ※ 正文中作过对冲的「仅二次信息／一次未确认」的主要项目如下：OpenAI 文章的正文 · 标语 · 规模数值（一次为 HTTP 403）、LangChain 的 `Agent = Model + Harness` 公式与各 harness 基准的计测来源 · 计测条件（含被称为 GPT-5.5 的模型名）、Claude Code v2.1.139 的发布日、llterm 测试为绿的最新状态（重新跑尚未实施）、RAD 总 documents 数（当前手元重计为 **2026年6月17日的 47,097 docs**，较旧的 prose 里仍可能写作「约49k」）、Karpathy 先生 LLM Wiki Gist 的提案者 · 日期、佳能「三自精神」与 *First, Break All the Rules* 四原则的出处页码、第3章的「人类优越三点」（并非 measured 而是基于观察）。一旦能以一次信息源确定，便即更新。

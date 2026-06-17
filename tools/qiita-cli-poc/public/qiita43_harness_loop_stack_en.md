@@ -50,7 +50,7 @@ The concept of this article is this:
 
 > **I keep both of these industry-named things on hand (locally) at the proof-of-concept level. But my blueprint has one more axis that rarely appears in the industry's model-centric explanatory diagrams.**
 
-That axis is **the human who keeps holding the reins** and **the AI that can be raised like a subordinate**. In this article, I examine three themes — (A) the harness, (B) the loop, and (C) the knowledge foundation that supports them — through implementations I actually run: `RAPTOR` (a security agent), `llloop` (my homemade loop harness, alpha), and the `RAD` corpus + `LLM Wiki` (my own research knowledge).
+That axis is **the human who keeps holding the reins** and **the AI that can be raised like a subordinate**. In this article, I examine three themes — (A) the harness, (B) the loop, and (C) the knowledge foundation that supports them — through implementations I actually run: `RAPTOR` (a security agent), `llterm` (my homemade loop harness, alpha), and the `RAD` corpus + `LLM Wiki` (my own research knowledge).
 
 This is a long article (about 20,000 Japanese characters, a 20-minute read). At key points I insert **plain-language explanations** (gentle definitions of terms), **interludes** (palate cleansers), and **honest disclosure** (frank breakdowns of the internals). If you get tired, take a breath at a chapter break.
 
@@ -281,7 +281,7 @@ Chapter 1 was about the "**why**" (philosophy). I placed an auxiliary line onto 
 
 ---
 
-## Chapter 2 [Wheel = loop] Loop Engineering and llloop, My Homemade Harness
+## Chapter 2 [Wheel = loop] Loop Engineering and llterm, My Homemade Harness
 
 ### 2-1. loop engineering, One Level Deeper
 
@@ -315,17 +315,17 @@ The loop is fast. Precisely because of that, if you get the way of stopping it w
 
 This single line, "scales risk at machine speed," is the very design motivation for the homemade harness that follows.
 
-### 2-3. llloop — My Homemade Loop Harness
+### 2-3. llterm — My Homemade Loop Harness
 
-I've built **llloop** (a local, independent project, v0.1.0a0, Apache-2.0), an **independent harness for designing, running, and experimenting with autonomous loops**. It's a Python project launched on June 11, 2026.
+I've built **llterm** (a local, independent project, v0.1.0a0, Apache-2.0), an **independent harness for designing, running, and experimenting with autonomous loops**. It's a Python project launched on June 11, 2026.
 
-Let me place an **honest disclosure** first. **llloop is at the alpha stage (v0.1.0a0, a skeleton).** I haven't published it to GitHub yet, so I can't paste a public repository URL in the text (I supplement with links to the already-published RAPTOR side). The demonstration tasks are currently centered on the green-keeper too, not production quality. I'll write this without padding.
+Let me place an **honest disclosure** first. **llterm is at the alpha stage (v0.1.0a0, a skeleton).** I haven't published it to GitHub yet, so I can't paste a public repository URL in the text (I supplement with links to the already-published RAPTOR side). The demonstration tasks are currently centered on the green-keeper too, not production quality. I'll write this without padding.
 
 That said, the skeleton of the design is this.
 
 #### The Skeleton: The MAPE-K Control Loop
 
-llloop's backbone is **MAPE-K**. This is a classic control loop from autonomic computing, consisting of **Monitor → Analyze → Plan → Execute**, plus the **Knowledge (K)** they all share. The design code cites Kephart & Chess's 2003 autonomic computing paper.
+llterm's backbone is **MAPE-K**. This is a classic control loop from autonomic computing, consisting of **Monitor → Analyze → Plan → Execute**, plus the **Knowledge (K)** they all share. The design code cites Kephart & Chess's 2003 autonomic computing paper.
 
 The implementation is the `MapeKRunner` class, and one cycle closes the loop in the order —
 
@@ -348,9 +348,9 @@ The difference from automation (a recipe) is clear. A recipe decides "sweat when
 
 ### 2-4. ★ The Star Appears: The fail-closed Safety Layer (safety.py)
 
-This is the part of llloop I most want to talk about. The loop is fast. Fast things need **a brake that can't be bypassed**. In 2-1 I wrote that "having decision points and guaranteeing the quality of decisions are separate problems." The one in charge of "guaranteeing the quality" is this safety layer.
+This is the part of llterm I most want to talk about. The loop is fast. Fast things need **a brake that can't be bypassed**. In 2-1 I wrote that "having decision points and guaranteeing the quality of decisions are separate problems." The one in charge of "guaranteeing the quality" is this safety layer.
 
-llloop's safety layer `safety.py`, via `SafetyPolicy.classify`, judges each action in three tiers: **ALLOW / CONFIRM (human confirmation) / FORBID**. The order of judgment is —
+llterm's safety layer `safety.py`, via `SafetyPolicy.classify`, judges each action in three tiers: **ALLOW / CONFIRM (human confirmation) / FORBID**. The order of judgment is —
 
 1. **FORBID takes top priority** … `rm -rf /`, `curl | sh` (piping content fetched over the net straight into the shell), `--no-verify` (bypassing hooks), fork bombs, and the like are unconditionally forbidden.
 2. **Dangerous commands are CONFIRM** … deletion, force-push, submodule modification, and DB drop require human confirmation.
@@ -369,7 +369,7 @@ And the three-piece set for preventing runaway behavior.
 
 I made the heading precise. The qualifier "**in the current implementation**" is essential (I disclose the reason at the end of this section).
 
-"If you run it with an LLM, won't the LLM run away in the end?" — a reasonable doubt. llloop's answer is to **make bypassing structurally impossible**.
+"If you run it with an LLM, won't the LLM run away in the end?" — a reasonable doubt. llterm's answer is to **make bypassing structurally impossible**.
 
 `LLMStrategy` has the LLM propose "just one next action, in JSON." However —
 
@@ -385,11 +385,11 @@ In fact, the tests demonstrate that "**even if the LLM proposes a dangerous dele
 
 #### honest disclosure (Why I Qualify It as "in the Current Implementation")
 
-"The LLM cannot bypass the safety layer" is structurally guaranteed as a code path (`LLMStrategy → parse_action → runner.SafetyPolicy`). But this is a **conditional proposition** that depends on the premise that "**commands are executed only via llloop's Executor.**" `codex exec` itself is designed not to cause side effects, running in an `-s read-only` sandbox, but if a path were added in the future to let the LLM hit the shell directly outside the Executor, the guarantee would collapse. **There is no such path in the current implementation** — so I made the heading not the unconditional "cannot be bypassed" but "cannot be bypassed in the current implementation."
+"The LLM cannot bypass the safety layer" is structurally guaranteed as a code path (`LLMStrategy → parse_action → runner.SafetyPolicy`). But this is a **conditional proposition** that depends on the premise that "**commands are executed only via llterm's Executor.**" `codex exec` itself is designed not to cause side effects, running in an `-s read-only` sandbox, but if a path were added in the future to let the LLM hit the shell directly outside the Executor, the guarantee would collapse. **There is no such path in the current implementation** — so I made the heading not the unconditional "cannot be bypassed" but "cannot be bypassed in the current implementation."
 
 ### 2-6. Launch and the Demonstration Task green-keeper
 
-llloop's launch command is `lll` (a console script = a launch command that enters PATH when you install the package). Launching with no arguments brings up a ccr-style interactive menu (project selection + carry-over display of next_plan / last_outcome + automatic continuation of the active project after the default 30 seconds), and runs the first demonstration task **green-keeper**.
+llterm's launch command is `llterm` (a console script = a launch command that enters PATH when you install the package). Launching with no arguments brings up a ccr-style interactive menu (project selection + carry-over display of next_plan / last_outcome + automatic continuation of the active project after the default 30 seconds), and runs the first demonstration task **green-keeper**.
 
 green-keeper is a loop in the style of **GitOps reconciliation** (reconciliation = aligning by matching "how things should be" against "how things are" and filling the gap). The image is a gardener who sets "all the plants in healthy condition" as desired, and when they find a withering one (drift), they water it.
 
@@ -458,7 +458,7 @@ The harness is powerful. But to speak of that power, you don't need false attrib
 
 > 🗨️ "Results? Is it okay to lie? Asking for confirmation is, on the contrary, honest..." — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
 >
-> (Interlude) "Asking for confirmation" is not weakness but **honesty**. llloop's `CONFIRM` is the same: when in doubt, stop and ask. Returning the judgment to the human holding the reins is the discipline of an "unbypassable brake."
+> (Interlude) "Asking for confirmation" is not weakness but **honesty**. llterm's `CONFIRM` is the same: when in doubt, stop and ask. Returning the judgment to the human holding the reins is the discipline of an "unbypassable brake."
 
 ---
 
@@ -510,7 +510,7 @@ As a corpus directly tied to this article's three themes, `loop_engineering_corp
 
 The contents cover — control feedback (PID / anti-windup [a mechanism that suppresses runaway of the integral term] / state-space [the state-space representation] / Lyapunov [stability analysis] / MPC [model predictive control] / MAPE-K / OODA / cybernetics), autonomous agent loops (ReAct / Reflexion / Plan-and-Execute / Self-Refine / Tree-of-Thoughts, etc.), **the various schools of reinforcement learning** (policy-value iteration / PPO / RLHF / RLAIF / Constitutional / RLVR / AlphaZero, etc.), and operational CI (GitOps reconciliation / watchdog / chaos engineering). Example actual notes: `a001_pid_control` / `a009_ooda_loop_boyd` / `a013_mape_k_autonomic_loop` / `b001_mape_k_autonomic_reference_loop`.
 
-In other words, Chapter 2's `llloop` — its MAPE-K, its safety, and its green-keeper (GitOps reconciliation) — are all **implemented with this corpus as their design basis**. The flow of knowledge (corpus) → loop (llloop) is connected in the real thing.
+In other words, Chapter 2's `llterm` — its MAPE-K, its safety, and its green-keeper (GitOps reconciliation) — are all **implemented with this corpus as their design basis**. The flow of knowledge (corpus) → loop (llterm) is connected in the real thing.
 
 #### honest disclosure (The Discrepancy Between "50 Methods" and "96 Notes")
 
@@ -594,7 +594,7 @@ There's the realization of the **corpus-first strategy**. If you grow the RAD co
 
 I write this with the qualifier "can be." Corpus reference isn't a panacea. **If the relevance filter doesn't work, irrelevant or stale knowledge gets mixed in and, conversely, becomes noise.** In fact, the "pruning by freshness × value" I wrote about in 3-1 is precisely a device to suppress this noise contamination. So the accurate sense is "**multi-perspective can be complemented, on the premise that the relevance filter is working.**"
 
-One concrete example. When designing Chapter 2's llloop safety layer, I drew the idea of "make fail-closed three-tiered (ALLOW/CONFIRM/FORBID)" from both the control-theory notes (anti-windup and circuit-breaker patterns) of `loop_engineering_corpus_v2` and RAPTOR's governance (DENY/REVIEW/DENY-if-not-on-allow-list). Even though I was designing alone, the corpus overlaid "the control-engineering perspective" and "the security perspective" behind the scenes — this is one example of how corpus-first works.
+One concrete example. When designing Chapter 2's llterm safety layer, I drew the idea of "make fail-closed three-tiered (ALLOW/CONFIRM/FORBID)" from both the control-theory notes (anti-windup and circuit-breaker patterns) of `loop_engineering_corpus_v2` and RAPTOR's governance (DENY/REVIEW/DENY-if-not-on-allow-list). Even though I was designing alone, the corpus overlaid "the control-engineering perspective" and "the security perspective" behind the scenes — this is one example of how corpus-first works.
 
 This corresponds to the difference between "**using an AI** (asking for an answer)" and "**building together with an AI** (referencing a corpus in the background, complementing multiple perspectives, while the human holds the design decisions)." In Chapter 1 I wrote that "the user side needs three abilities: ideation, heuristics, and algorithmic understanding." corpus-first is a contrivance that **can amplify** those three abilities with the AI side's knowledge foundation (with the caveat that noise management is a premise).
 
@@ -613,7 +613,7 @@ Let me fold the three chapters so far onto a single sheet.
 | | Theme | Question | Real Thing | "One More Axis" |
 |---|---|---|---|---|
 | **A** | harness engineering | **Why** (philosophy) | RAPTOR's two-layer separation | The human holds the reins and raises the AI as a subordinate |
-| **B** | loop engineering | **How** (control) | llloop (MAPE-K + fail-closed, alpha) | The safety layer can't be bypassed on the current path; swap strategies to compare |
+| **B** | loop engineering | **How** (control) | llterm (MAPE-K + fail-closed, alpha) | The safety layer can't be bypassed on the current path; swap strategies to compare |
 | **C** | RAD + LLM Wiki | **What** (knowledge) | About 47,000 notes (Markdown count: 47,097 docs) + the evidence ladder | corpus-first means multi-perspective and primary-source-ism even solo |
 
 The industry's diagrams tend to line up A, B, and C as separate buzzwords. My claim is — **these three are three faces of a single worldview.** The core of that worldview converges to just two principles.
@@ -622,7 +622,7 @@ The first is **"bring the locus of responsibility to the architecture level."** 
 
 The second is **"place honest disclosure at the core."** When an unusually good number ("Bölük 10×") appears, doubt the breakdown before you feel victorious. In each chapter of this article, I applied the same discipline to my own numbers too (49k items, 90 tests, 50 methods vs 96 notes).
 
-And this worldview is self-contained locally. RAD, llloop, and RAPTOR all run on hand and don't let personal information, corporate secrets, or sensor data out. Note that this homemade stack (llloop / RAD / RAPTOR) is **a local research stack separate from** the product ecosystem I separately call **FullSense** (the **three products** llmesh / llive / llove + a suite installer). The two share a philosophy, but I draw a line between this and the product line (only llive straddles both, as the receptacle for the LLM Wiki touched on in Chapter 3).
+And this worldview is self-contained locally. RAD, llterm, and RAPTOR all run on hand and don't let personal information, corporate secrets, or sensor data out. Note that this homemade stack (llterm / RAD / RAPTOR) is **a local research stack separate from** the product ecosystem I separately call **FullSense** (the **three products** llmesh / llive / llove + a suite installer). The two share a philosophy, but I draw a line between this and the product line (only llive straddles both, as the receptacle for the LLM Wiki touched on in Chapter 3).
 
 #### Why I Can Say "It Is the Human Who Holds the Reins" — Three Observation-Based Points
 
@@ -645,7 +645,7 @@ So that "it is the human who holds the reins" is less machismo than an **observe
 In 2026, the AI industry, after prompt engineering, named **harness engineering (the reins)** and **loop engineering (the wheel)** (the inventors were not the AI, but human engineers). I keep a prototype of that stack on hand, locally, at the proof-of-concept level.
 
 - **The reins (A)** … implemented by RAPTOR's two-layer separation where "Python controls everything, and the LLM concentrates on judgment." Onto that, I added an auxiliary line to the model-centric diagram: "the human holds the reins and raises the AI as a subordinate." It's a different lineage from Karpathy's "vibe coding" (February 2025), and I don't say "I named it first."
-- **The wheel (B)** … my homemade `llloop` (alpha, unpublished) circulates with MAPE-K and applies the brake with a **fail-closed safety layer that can't be bypassed on the current path**. The LLM can only propose; the final gate is the SafetyPolicy.
+- **The wheel (B)** … my homemade `llterm` (alpha, unpublished) circulates with MAPE-K and applies the brake with a **fail-closed safety layer that can't be bypassed on the current path**. The LLM can only propose; the final gate is the SafetyPolicy.
 - **Knowledge (C)** … RAD of about 65 domains and about 47,000 notes (Markdown count: 47,097 docs) is grown with the LLM Wiki pattern (with an anti-circulation safeguard against the circulation of thought), and RAPTOR uses it safely while preserving the stages of evidence.
 
 And what ran through this entire article was a single discipline.
@@ -690,4 +690,4 @@ Hold the reins, circulate the wheel safely, and grow the knowledge. All of it, w
 - "Half Trust × Half Doubt": https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 - "So this is what society is like too... I can see the rules now...": https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
-> ※ The main items hedged in the text as "secondary-only / primary unconfirmed" are as follows: the OpenAI article's text, tagline, and scale figures (the primary returns HTTP 403); LangChain's `Agent = Model + Harness` formula and the measurement sources and conditions of each harness benchmark (including the model name said to be GPT-5.5); the release date of Claude Code v2.1.139; the latest status of llloop's tests being green (no re-run performed); RAD's total document count (the current local recount is **47,097 docs as of June 17, 2026**, while older prose may still refer to "about 49k"); the proposer and date of Karpathy's LLM Wiki Gist; the source pages for Canon's "Spirit of the Three Selfs" and the four principles of *First, Break All the Rules*; and Chapter 3's "three points of human advantage" (observation-based, not measured). I will update them as soon as I can confirm them with primary sources.
+> ※ The main items hedged in the text as "secondary-only / primary unconfirmed" are as follows: the OpenAI article's text, tagline, and scale figures (the primary returns HTTP 403); LangChain's `Agent = Model + Harness` formula and the measurement sources and conditions of each harness benchmark (including the model name said to be GPT-5.5); the release date of Claude Code v2.1.139; the latest status of llterm's tests being green (no re-run performed); RAD's total document count (the current local recount is **47,097 docs as of June 17, 2026**, while older prose may still refer to "about 49k"); the proposer and date of Karpathy's LLM Wiki Gist; the source pages for Canon's "Spirit of the Three Selfs" and the four principles of *First, Break All the Rules*; and Chapter 3's "three points of human advantage" (observation-based, not measured). I will update them as soon as I can confirm them with primary sources.

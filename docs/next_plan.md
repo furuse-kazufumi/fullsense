@@ -4,25 +4,27 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` まで反映済み。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` / `a07f0c7` まで反映済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
-- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
+- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズと、`tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` の untracked redirect 草稿。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 外部公開・push は未実施。
 
 ## 次の具体的な一手
 
-1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
-2. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
-3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。今回の安全な区切りで上程する。
-4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
-5. push / publish / 外部書き込みは引き続き human gate のまま維持する。
-6. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
-7. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
+1. public Qiita 記事 `bf1cfe3b4f40b87f068d` の重複整理を優先する。一次確認では、`bf1...` は `個人開発AIのlliveが"メガ進化"！ — 進化の大失敗から甦り、実LLMの"苦手"まで淘汰した全記録` という本文を持つ公開記事、`6e107c7dfa0c261ee4d7` は #25〜#34 を含む canonical 総集編、`0a35e1bfb814adab8565` は既に canonical へ誘導する short redirect 記事だった。最小案は `bf1...` を削除せず short redirect 化し、本文に「この内容は canonical 総集編へ統合・再編した」旨と `6e107...` への明示リンクを置くこと。ローカル実体として `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` を作成済み。
+2. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
+3. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
+4. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。今回の安全な区切りで上程する。
+5. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
+6. push / publish / 外部書き込みは引き続き human gate のまま維持する。
+7. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
+8. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
 
 2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。公開中の Qiita 英語版記事 `2622da17495d61480fa2` に対して、local で復旧済みの正しいタイトルを public PATCH で反映する。対象は Qiita API の記事更新 1 件のみで、push / publish 範囲拡大 / deindex はこの決定に含めない。
 2026-06-18 execution log: `tools/qiita_public_post.py post ... --yes` で public Qiita item `2622da17495d61480fa2` を PATCH 更新し、Qiita API `GET /api/v2/items/2622da17495d61480fa2` と HTML の `<title>` / `og:title` / `<h1>` で正しい英語タイトルへの反映を確認した。
+2026-06-18 pending gate: public Qiita 記事 `bf1cfe3b4f40b87f068d` の重複整理は **Qiita 側更新を含めて**実施する前提。一次確認では canonical `6e107c7dfa0c261ee4d7` と実質重複、前例 `0a35e1bfb814adab8565` は short redirect 化済み。残る判断は `bf1...` を short redirect にするか、本文を少し残した統合案内にするかのみ。
 
 ## このターンの実施結果
 
@@ -76,6 +78,12 @@
 - `tools/_frontmatter.py` を新設し、`qiita_public_post.py` / `qiita_team_post.py` / `convert_to_qiita_cli.py` / `zenn_convert.py` の frontmatter パーサを共有化した。
 - `tests/test_qiita_frontmatter.py` を追加し、folded scalar / single-quote escaping / block list の回帰テストを導入した。`pytest tests/test_qiita_frontmatter.py tests/test_zenn_convert.py tests/test_qiita_url_sync.py` は 34 passed。
 - live 反映確認は、このセッションで実行した Qiita API / HTML の自己確認ログに基づく。
+- `tools: share frontmatter parser across qiita flows` を commit `a07f0c7` として作成し、shared parser・sibling root-cause 修正・回帰テスト追加を ledger ノイズから分離して確定した。
+- #43 の 4 言語草稿で、旧名称 `llloop` と起動コマンド `lll` を最終名称 `llterm` へ更新した。`SESSION_SUMMARY.md` / `next_plan.md` の現行進捗説明も同じ表記へ揃えた。
+- 現在の未コミット差分は `.llterm/loop_ledger.jsonl` の tracked ノイズと、`tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` の untracked redirect 草稿。次アクションは deindex 案 (`git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore`) の human gate 上程か、`bf1...` の Qiita 側更新ゲート再開。
+- public Qiita 記事 `bf1cfe3b4f40b87f068d` を確認したところ、内容は `個人開発AIのlliveが"メガ進化"！ — 進化の大失敗から甦り、実LLMの"苦手"まで淘汰した全記録` で、既公開の canonical 総集編 `6e107c7dfa0c261ee4d7`（`lldarwin / 進化 arc 総集編`）と実質重複している。#26 public 短報 `0a35e1...` が既に canonical へ誘導する short redirect 化を採っているため、`bf1...` も同じ方針で整理するのが最小。
+- 上記の重複・前例確認は、Qiita API の `bf1...` / `6e107...` / `0a35...` と、ローカル原稿 `tools/qiita-cli-poc/public/0a35e1bfb814adab8565.md` / `6e107c7dfa0c261ee4d7.md` の一次確認に基づく。
+- canonical `6e107c7dfa0c261ee4d7` と raw 原稿 `docs/articles/drafts/QIITA_evo_ja.md` の HEAD 200 は確認済み。`bf1...` の redirect 文面は、前例 `0a35e1bfb814adab8565.md` の「統合・再編しました」+ canonical 直リンク形式に合わせた。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
   - タイトル修正と handoff 更新を commit し終えた時点で、残差分が ledger だけなら次アクションは deindex 案の human gate 上程へ戻す。
@@ -99,8 +107,8 @@
   - 追加 spot-check で、Karpathy 帰属のヘッジ語、`llive` 設計段階の限定句、製品対応づけの「私のマッピング」表現が en/zh/ko で保持されていることも確認済み。
   - 統合章〜結語も局所確認済みで、A/B/C 統合表、`手綱 / 輪 / 知` の3点整理、`Bölük 10×` を捨てた設計思想、次回予告の `設計段階` ヘッジまで日本語正本に追従している。
   - 第1章前半（`harness engineering` 命名経緯 / `vibe coding` 区別 / RAPTOR 2層 / `ハーネス型バイブコーディング` 説明）も局所確認済みで、Hashimoto/OpenAI まわりのヘッジ、Karpathy との差異、fail-closed の説明、ユーザー側3能力の導入まで日本語正本に追従している。
-  - 第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` 定義 / `Semantic Governance` 導入 / `llloop` honest disclosure）も局所確認済みで、比喩・留保・戦略説明まで日本語正本に追従している。
-  - 第2章前半の `llloop` 導入〜 MAPE-K 骨格も局所確認済みで、alpha 段階の honest disclosure、`MapeKRunner` の閉ループ、plan-execute-verify / Reflexion、体温調節の比喩まで日本語正本に追従している。
+  - 第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` 定義 / `Semantic Governance` 導入 / `llterm` honest disclosure）も局所確認済みで、比喩・留保・戦略説明まで日本語正本に追従している。
+  - 第2章前半の `llterm` 導入〜 MAPE-K 骨格も局所確認済みで、alpha 段階の honest disclosure、`MapeKRunner` の閉ループ、plan-execute-verify / Reflexion、体温調節の比喩まで日本語正本に追従している。
   - 第2章中盤（`fail-closed` 安全層 / `現状の実装では` の条件付き留保 / `green-keeper` / `/goal`）も局所確認済みで、SafetyPolicy の 3 段判定、CircuitBreaker / Budget / 認証要求検知、`Executor` 条件付きの honest disclosure、GitOps reconciliation 比喩、`Haiku` 既定の `/goal` 説明まで日本語正本に追従している。
     - ここで確認したのは主に日本語正本に対する訳文追従であり、Claude Code `/goal` docs の外部一次情報ベース再検証をこのターンで追加実施したわけではない。
   - 冒頭〜第1章前寄り（捨てた数字の導入 / `prompt → context → harness → loop` の階段 / automation と loop の差分 / Hashimoto 起点の `harness engineering` / OpenAI 403 に伴う二次情報ヘッジ / RAPTOR 二層構造の導入）も局所確認済みで、一次情報アンカー・二次情報ヘッジ・`Agent = Model + Harness` の注意書きまで日本語正本に追従している。
@@ -124,7 +132,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
+- 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 - `.llterm/loop_ledger.jsonl` の恒久対策は、`git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記案として整理済みで、次の安全な区切りで human gate に上程する。
 
 ## 注意

@@ -14,6 +14,7 @@
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
+- `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local draft として untracked のまま保留している。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 公開 safety 柵は維持:
   - `qiita43_harness_loop_stack_kamikudaki.md` = `private: true` + `ignorePublish: true`
@@ -24,6 +25,7 @@
 ## いま worktree に残っている差分
 
 - `.llterm/loop_ledger.jsonl`
+- `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md`（untracked）
 
 ## 今回 commit した差分の要点
 
@@ -31,6 +33,7 @@
   - 第3章導入〜`3-2. LLM Wiki` 本体の主要段落を日本語正本→en→zh→ko の順で spot-check し、3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入、thought circulation / Anti-Circulation Safeguards、製品対応づけまで多言語 draft が日本語正本に追従していることを確認した
   - en/zh/ko に欠落していた「半信×半疑」の引用ブロックと URL を既存の inline 引用形式へ揃えて日本語正本へ同期し、末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を追加した。`3-2. LLM Wiki` 本体は quote block と参考導線を含む主要論点まで局所確認済みとして扱える状態になった
   - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、英語版には `public_id` も明示した。`tools/_frontmatter.py` を新設して poster / converter 4 経路へ共有化し、`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストを追加した。human gate 後の public PATCH と API / HTML 確認まで完了した
+  - #43 本文の旧名称 `llloop` / 起動コマンド `lll` を、最終名称 `llterm` へ 4 言語草稿で一括置換した。あわせて handoff 内の現行進捗説明も `llterm` 表記へ揃え、archive 扱いの旧メモは温存した
 - handoff:
   - `NEXT_SESSION.md` / `SESSION_SUMMARY.md` / `next_plan.md` のナラティブを今回監査内容へ更新し、前バッチの #44 / #45 説明が再開導線に残らないよう整理した
   - handoff の commit 列と実施結果列に `d92192f` を backfill し、`20afd3e` 自身は 1-commit ラグ規律どおり次回 backfill 対象に維持した
@@ -62,12 +65,12 @@
   - 追加 spot-check で、Karpathy 帰属のヘッジ、`設計段階` の限定、製品対応づけの「私のマッピング / 主観」表現も en/zh/ko で保持されていることを確認した。
 - さらに統合章〜結語も spot-check し、A/B/C の統合表、`手綱 / 輪 / 知` の3点整理、`Bölük 10×` を捨てた設計思想、次回予告の `設計段階` ヘッジまで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第1章前半（`harness engineering` 命名経緯 / `vibe coding` 区別 / RAPTOR 2層 / `ハーネス型バイブコーディング` の説明）も spot-check し、Hashimoto/OpenAI まわりのヘッジ、Karpathy との差異、fail-closed の説明、ユーザー側3能力の導入まで en/zh/ko が日本語正本に追従していることを確認した。
-- さらに第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` の定義 / `Semantic Governance` 導入 / `llloop` honest disclosure）も spot-check し、比喩・留保・戦略説明まで en/zh/ko が日本語正本に追従していることを確認した。
+- さらに第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` の定義 / `Semantic Governance` 導入 / `llterm` honest disclosure）も spot-check し、比喩・留保・戦略説明まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第2章中盤（`fail-closed` 安全層 / `現状の実装では` の条件付き留保 / `green-keeper` / `/goal`）も spot-check し、SafetyPolicy の 3 段判定、CircuitBreaker / Budget / 認証要求検知、`Executor` 条件付きの honest disclosure、GitOps reconciliation 比喩、`Haiku` 既定の `/goal` 説明まで en/zh/ko が日本語正本に追従していることを確認した。
   - ここで確認したのは主に日本語正本に対する訳文追従であり、Claude Code `/goal` docs の外部一次情報ベース再検証をこのターンで追加実施したわけではない。
 - さらに冒頭〜第1章前寄り（捨てた数字の導入 / `prompt → context → harness → loop` の階段 / automation と loop の差分 / Hashimoto 起点の `harness engineering` / OpenAI 403 に伴う二次情報ヘッジ / RAPTOR 二層構造の導入）も spot-check し、一次情報アンカー・二次情報ヘッジ・`Agent = Model + Harness` の注意書きまで en/zh/ko が日本語正本に追従していることを確認した。
   - ここでも確認したのは主に日本語正本に対する訳文追従であり、Hashimoto/OpenAI/Karpathy/RAPTOR の一次情報を各翻訳ターンで再取得したわけではない。
-- さらに第2章前半の `llloop` 導入〜 MAPE-K 骨格（alpha 段階の honest disclosure / `MapeKRunner` の閉ループ / plan-execute-verify と Reflexion / 体温調節の比喩）も spot-check し、`llloop` の位置づけと MAPE-K の説明まで en/zh/ko が日本語正本に追従していることを確認した。
+- さらに第2章前半の `llterm` 導入〜 MAPE-K 骨格（alpha 段階の honest disclosure / `MapeKRunner` の閉ループ / plan-execute-verify と Reflexion / 体温調節の比喩）も spot-check し、`llterm` の位置づけと MAPE-K の説明まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに「捨てた数字」の独立 honest disclosure 節（arXiv `2605.18747` / `2605.27922` / `2605.26112`、`Bölük 10x` の否定、`GPT-5.5` 要検証、一次と二次の線引き）も spot-check し、一次情報アンカーと二次情報ヘッジの書き分けまで en/zh/ko が日本語正本に追従していることを確認した。
   - ここでも確認したのは主に日本語正本に対する訳文追従であり、各論文やベンチの一次ページをこの翻訳監査ターンで再取得したわけではない。
 - さらに第3章後半（RAD の運用ルール / `LLM Wiki` の 3 層 / thought circulation と Anti-Circulation Safeguards / RAPTOR の evidence ladder / `corpus-first advantage` / 統合章の A-B-C 表）も spot-check し、K² サイジング、`rad_prune.py` の dry-run、`39 documents / 12 clusters` 注記、llive の主観マッピング、`suspicion → patch_validated` の証拠段階、`47,097 docs` を含む統合表まで en/zh/ko が日本語正本に追従していることを確認した。
@@ -90,6 +93,6 @@
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記を human gate 解除後に早めに実施する。
