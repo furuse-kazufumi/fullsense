@@ -550,11 +550,9 @@ Against this, llive designs **Anti-Circulation Safeguards (LLW-AC-01–08)** (at
 
 That last one, "external anchor mandatory," is the very stance that runs through this whole article — **primary-source-ism**. The AI shouldn't complete things solely within itself; it must always drop anchor in an immovable external fact.
 
-> 🗨️ "Half Trust × Half Doubt" — Snack Basue / Forbidden Shibukawa (Al)
+> 🗨️ "Half Trust × Half Doubt" — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i)
 >
 > (Brief aside) The antidote to thought circulation is this **half-trust, half-doubt**. Even the summary you wrote yourself should be doubted as a "working draft," and anchored to immovable external facts (DOI / hash / CAD). It is the healthy doubt that keeps an AI from believing the rumor it started as "what everyone is saying."
-
-https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 
 Incidentally, FullSense (described later) consists of **three products: llmesh / llive / llove**. If we map the LLM Wiki roles onto the products, **llive is the "Wiki editor," llove is the "Wiki's UI," and llmesh is the "Bus that carries the raw sources."** (RAG is not a product but a *method* of search, so I don't place it in the product column; I position it as a tool used on top of the three products.)
 
@@ -671,5 +669,6 @@ Hold the reins, circulate the wheel safely, and grow the knowledge. All of it, w
 - "Conversations don't click with someone who differs in IQ.": https://alu.jp/series/スナックバス江/crop/PJm0yAGeJy9iSa487mrX
 - "Thanks to the mystery graph, the sense of desperation is faint.": https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 - "Knowing that one does not know.": https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l
+- "Half Trust × Half Doubt": https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 
 > ※ The main items hedged in the text as "secondary-only / primary unconfirmed" are as follows: the OpenAI article's text, tagline, and scale figures (the primary returns HTTP 403); LangChain's `Agent = Model + Harness` formula and the measurement sources and conditions of each harness benchmark (including the model name said to be GPT-5.5); the release date of Claude Code v2.1.139; the latest status of llloop's tests being green (no re-run performed); RAD's total document count (the current local recount is **47,097 docs as of June 17, 2026**, while older prose may still refer to "about 49k"); the proposer and date of Karpathy's LLM Wiki Gist; the source pages for Canon's "Spirit of the Three Selfs" and the four principles of *First, Break All the Rules*; and Chapter 3's "three points of human advantage" (observation-based, not measured). I will update them as soon as I can confirm them with primary sources.

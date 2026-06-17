@@ -57,6 +57,7 @@
 - en/zh/ko の変更は `ignorePublish: true` への切替だけでなく、終盤 hedge note / 要約表 / 結論部の `47,097 docs` 反映まで含む本文改稿である。
 - 今回の `20afd3e` 自身は 1-commit ラグ規律どおり本節にはまだ列挙しないが、内容は #43 第3章導入〜`3-2. LLM Wiki` 導入直前の監査結果を handoff へ反映する更新だった。
 - 今回の `dc70dc0` 自身も 1-commit ラグ規律どおり本節にはまだ列挙しないが、その後の本文監査では en/zh/ko の `3-2. LLM Wiki` 本体に日本語正本の「半信×半疑」引用ブロックと `alu.jp` URL が欠落していることを確認し、3 言語へ同期した。
+- 追加の再確認では、新規 `Ud7l...` ブロックが各翻訳ファイルの既存引用スタイルから外れていたため、`Snack Bus-e / Forbidden Shibukawa (Alu)` 表記の埋込リンク 1 行形式へ揃え、末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を追記した。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
 
@@ -91,8 +92,9 @@
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、Karpathy Gist / llive 要件 / RAPTOR 実装の一次情報をこの翻訳監査ターンで再取得したわけではない。
   - 第3章の導入〜`3-2. LLM Wiki` 導入直前も局所確認済みで、3層スタックの説明、`RAD_INDEX.md` / `65 RAD corpora` の導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従している。
     - ここで確認したのは主に日本語正本に対する訳文追従であり、`RAD_INDEX.md` や Karpathy Gist の一次情報をこの翻訳監査ターンで再取得したわけではない。
-  - `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節、製品対応づけ、「半信×半疑」の引用ブロックと URL まで局所確認・同期済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
-  - 追加 spot-check で、en/zh/ko に欠落していた「半信×半疑」の引用ブロックと `alu.jp` URL を日本語正本に合わせて補った。
+  - `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節、製品対応づけ、「半信×半疑」の引用ブロックと URL、末尾参考リストまで局所確認・同期済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
+  - 追加 spot-check で、en/zh/ko に欠落していた「半信×半疑」の引用ブロックと `alu.jp` URL を日本語正本に合わせて補い、新規ブロックを各翻訳ファイルの既存引用スタイルへ揃えた。
+  - ただし #43 翻訳 3 本は、日本語正本の inline 引用 8 ブロック中 4 ブロックのみ保持で、未同期の 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）が残る。crop URL 数も日本語正本 16 に対し en/zh/ko は各 8 で、なお非対称である。
   - 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 

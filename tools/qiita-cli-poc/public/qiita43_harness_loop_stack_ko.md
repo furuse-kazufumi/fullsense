@@ -550,11 +550,9 @@ llive는 이에 대해 **Anti-Circulation Safeguards(반순환의 안전 장치,
 
 마지막의 "외부 앵커 필수"는, 이 글 전체를 관통하는 자세 — **일차 정보주의** — 그 자체다. AI가 자기 안에서만 완결시키지 않고, 반드시 바깥의 움직이지 않는 사실에 닻을 내린다.
 
-> 🗨️ "반신×반의" — 스낵 바스에 / 포비든 시부카와(알)
+> 🗨️ "반신×반의" — [스낵 버스에 / 포비든 시부카와(Forbidden Shibukawa, Alu)](https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i)
 >
 > (잠깐 딴말) 사고의 순환에 대한 특효약이, 이 **반신반의**다. 자신이 쓴 요약조차 "working draft"라고 의심하고, 바깥의 움직이지 않는 사실(DOI / hash / CAD)에 닻을 내린다. AI가 스스로 퍼뜨린 소문을 "모두가 말하고 있다"고 믿어 버리지 않기 위한, 건강한 의심이다.
-
-https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 
 덧붙여, FullSense(후술)는 **llmesh / llive / llove의 3제품**으로 구성된다. LLM Wiki의 역할을 제품에 맵핑하면 **llive가 "Wiki 편집자", llove가 "Wiki의 UI", llmesh가 "날 소스를 나르는 Bus"** 에 해당한다(RAG는 제품이 아니라 검색의 **수법**이므로, 제품의 열에는 넣지 않고, 3제품 위에서 쓰는 도구로 자리매김한다).
 
@@ -671,5 +669,6 @@ suspicion(의심)
 - "IQ에 차이가 있는 자와는 대화가 맞물리지 않는다": https://alu.jp/series/スナックバス江/crop/PJm0yAGeJy9iSa487mrX
 - "수수께끼의 그래프 덕분에 비장감이 옅다": https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 - "무지의 지": https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l
+- "반신×반의": https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 
 > ※ 본문 중에서 헤지한 "이차 정보뿐 / 일차 미확인"의 주요 항목은 다음과 같다: OpenAI 기사의 본문·태그라인·규모 수치(일차는 HTTP 403), LangChain의 `Agent = Model + Harness` 식과 각 하네스 벤치의 계측 출처·계측 조건(GPT-5.5로 여겨지는 모델명을 포함), Claude Code v2.1.139의 릴리스 날짜, llloop의 테스트 녹색의 최신 상태(재실행은 미실시), RAD 총 documents 수(현재 로컬 재집계는 **2026년 6월 17일 기준 47,097 docs**이며, 오래된 prose에는 여전히 "약 49k"가 남아 있을 수 있음), Karpathy 씨 LLM Wiki Gist의 제안자·날짜, 캐논 "삼자의 정신"과 *First, Break All the Rules* 4원칙의 출처 페이지, 제3장의 "인간 우위 3점"(measured가 아니라 관찰 기반). 일차 정보로 확정되는 대로, 갱신한다.
