@@ -12,7 +12,7 @@ updated_at: '2026-06-16T06:48:35+09:00'
 id: 9951789fbc432d74076a
 organization_url_name: null
 slide: false
-ignorePublish: false
+ignorePublish: true
 ---
 # #43 2026년, 업계는 AI에게 "고삐"와 "고리"라는 이름을 붙였다 — harness/loop engineering 시제품 스택을 로컬에 조립하기 시작한 이야기
 

@@ -60,18 +60,18 @@ WebSearch で判明（要一次確認）:
 ## 記事 C — RAPTOR + RAD コーパス + LLM Wiki のすごさ（技術設計・エコシステム）
 
 - **タイトル案**:
-  - 「自分専用の 49,000 件の研究知識を、fail-closed のセキュリティ AI に食わせる — RAPTOR × RAD × LLM Wiki」
+  - 「自分専用の 47,097 docs の研究知識を、fail-closed のセキュリティ AI に食わせる — RAPTOR × RAD × LLM Wiki」
   - 「AI に『調べておいて』と言える日常 — corpus-first という反則」
-- **フック**: 「AI に『この分野、先に調べておいて』と言える。返ってくるのは Web の検索結果ではなく、**自分で育てた 21 分野・約 49,000 件の研究知識**だ。それを **fail-closed のセキュリティエージェント**が引きながら脆弱性を狩る。知識は Wiki のように育つ。これが私の“反則”の正体だ。」
+- **フック**: 「AI に『この分野、先に調べておいて』と言える。返ってくるのは Web の検索結果ではなく、**自分で育てた 65 コーパス・47,097 docs の研究知識**だ。それを **fail-closed のセキュリティエージェント**が引きながら脆弱性を狩る。知識は Wiki のように育つ。これが私の“反則”の正体だ。」
 - **本文骨子**:
   1. **RAPTOR**: gadievron/raptor ベースの security agent fork。決定論 Python orchestration、run lifecycle、fail-closed、commands（/agentic /scan /sourcehunt /validate /understand /sca）、governance / plugin-integrity / coverage tracking。= 記事 A の harness の実物。
-  2. **RAD コーパス**: Research Aggregation Directory、21 分野 + hacker_corpus ≈ 49k docs。file-per-note deposit / K² サイジング / 鮮度×価値剪定（[[project_rad_corpus_governance]] / [[project_rad_expansion_2026_05]]）。= agent の grounding 層。
+  2. **RAD コーパス**: Research Aggregation Directory、**65 コーパス / 47,097 docs**（2026-06-17 手元再集計、ローカル RAD コーパス群配下 `*.md`、`hacker_corpus_v2` を含む）。file-per-note deposit / K² サイジング / 鮮度×価値剪定（[[project_rad_corpus_governance]] / [[project_rad_expansion_2026_05]]）。= agent の grounding 層。
   3. **LLM Wiki**: Karpathy 2026-04 パターンを llive Phase 2-4（LLW-01〜08）+ raptor corpus にマップ（[[project_llm_wiki_pattern]]）。= 知識が Wiki 的に育つ仕組み。
   4. **corpus-first advantage**（[[project_corpus_first_advantage]]）: 「調べる」を内製化した者の優位。一次情報主義（[[feedback_no_solo_ai_judgment]]）。
-  5. honest: 「すごさ」を盛らない。実数（21 分野 / ≈49k / 50 ループ手法）で語り、research-grade と production を区別。
+  5. honest: 「すごさ」を盛らない。実数（65 コーパス / 47,097 docs / 50 ループ手法）で語り、research-grade と production を区別。
 - **13 側面**: 技術設計 / エコシステム / 戦略 / 哲学（corpus-first）/ ユーザー体験
 - **読者**: both
-- **閑話休題（Alu）**: 「無知の知／ガチの無知じゃないですか」JRY5aSqHgjWRo1QnfR2l or 「本を鵜呑みにするな」MDsuuBm0xXPgngwyQve0（知ったかぶり防止＝一次情報主義）。
+- **閑話休題（Alu）**: 「本を鵜呑みにするな」MDsuuBm0xXPgngwyQve0（qiita43 側コマ。知ったかぶり防止＝一次情報主義）。`JRY5aSqHgjWRo1QnfR2l` は #44 候補からは撤去済み。
 
 ---
 
@@ -80,14 +80,74 @@ WebSearch で判明（要一次確認）:
 **A（WHY=哲学：harness を握る）→ B（HOW=制御：loop を安全に回す）→ C（WHAT=実装スタック：RAPTOR/RAD/Wiki）**。
 各回末に「2026 年、業界がこの言葉を発明した。私はその実物をここに置いておく」で連結。技術者向け（QIITA_SUMMARY）と一般向け（QIITA_GENERAL）を並走（[[feedback_daily_articles_policy]]）。
 
-## 実施状況（2026-06-15）
-- **★A+B+C を 1 本に統合した #43 を執筆・publish-ready 化済**（grounding→一次情報検証→執筆→敵対レビュー→仕上げ workflow）。
-  - 成果物: `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md`（本文 34,471 字 / private:true=限定共有 / Alu 閑話休題 3 / be52eeb 関連リンク / ローカルパス 0・画像 0）。
+## 実施状況（2026-06-15 起点 / 2026-06-18 追記反映）
+- **★A+B+C を 1 本に統合した #43 を執筆し、日本語版は public publish 済**（grounding→一次情報検証→執筆→敵対レビュー→仕上げ workflow）。
+  - 成果物: `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md`（本文 34,471 字 / 公開版は public publish 済み / 手元 source の front matter も `private: false` で公開状態と一致 / Alu 閑話休題 3 / 既存 Qiita 関連リンクあり / ローカルパス 0・画像 0）。
   - 一次情報検証の結果ヘッジ: Bölük「10×」=引用論文に該当記述なし→**冒頭で「捨てた数字」として教訓化** / OpenAI harness 記事=HTTP403→二次情報ヘッジ / Hashimoto は実引用（命名独占を主張しない）/ RAPTOR 2層=upstream README 実引用。
-  - publish: 公開Qiitaトークン無→ユーザーが `npx qiita publish qiita43_harness_loop_stack`（限定共有確認→public）。
+  - publish: ✅ 実施済み（2026-06-16 / commit `5f10609`）。当時は公開Qiitaトークン無のため、ユーザーが `npx qiita publish qiita43_harness_loop_stack` を実行して限定共有確認→public 化した。
+- **2026-06-17 追記**: `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_kamikudaki.md`
+  を追加。`private: true` のローカル草稿で、完全版 #43 の 10 分版として
+  「手綱 / 輪 / 知識基盤」に絞って説明。冒頭には拾い読みガイドも追加。
+  ただし冒頭ジャンプ導線は Qiita 実機未検証なので、現時点では publish-ready 扱いにしない。
+- **2026-06-17 追記**: `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md`
+  は、日本語版 `qiita43_harness_loop_stack.md` を source of truth とする
+  多言語草稿ラインとして整理。章立て / 主張 / honest disclosure の同期を優先し、
+  現時点では drift が残るため `ignorePublish: true` に倒した。
+  冒頭の sync note は記事本文から外してある。
+- **2026-06-17 追記**: `qiita43_harness_loop_stack_kamikudaki.md` /
+  `qiita44_evolutionary_programs_block_diagram.md` /
+  `qiita45_human_ai_dev_incident_patterns.md` も、`private: true` 草稿として
+  `ignorePublish: true` に統一。`qiita44` のバス江コマは
+  `JRY5aSqHgjWRo1QnfR2l` と `H4Pix38XWLRS077emoZC` の **2 コマとも本文から外した（残 0）**。
+- **2026-06-17 追記**: RAD コーパス件数は handoff 用にローカル再集計し、
+  `65 コーパス / 47,097 docs` へ更新。旧 `21分野 / 約49,000` は概数メモとして扱わない。
+  この値は 2026-06-17 の再集計値を handoff 上の正として引き継ぐ。
+  公開面の概数は「約47,000」または「約4.7万」とし、内訳や厳密値を出すときは
+  `47,097 docs`（2026-06-17 再集計、ローカル RAD 配下 `*.md`、`hacker_corpus_v2` を含む）に揃える。
+- **2026-06-17 追記**: Qiita の伸び筋については外部記事も参考にしつつ、
+  最終的には自分の経験則として、`qiita44` は benefit 先出し +
+  初心者導線 + 「壊れどころ」訴求へ、`qiita45` は
+  `handoff / human gate / diff / checkpoint` を軸にした AI 失敗談 +
+  すぐ試せるチェックリスト寄りへタイトル / タグ / 導入を寄せた。
+- **2026-06-17 追記**: その続きとして、`qiita44` には「最初の 1 本を実装するなら」、
+  `qiita45` には「今ならこう直す」を追加し、読むだけで終わらず次の一歩へ
+  着地しやすい草稿へ寄せた。
+  さらに `qiita44` / `qiita45` 冒頭へ拾い読みガイドを追加。
+  こちらも冒頭ジャンプ導線は Qiita 実機未検証で、publish 前にアンカー方式の切り分けが必要。
+- **2026-06-18 追記**: `qiita45` の休憩ポイントは 1 箇所集中から複数配置へ寄せ直し、
+  #44/#45 とも attention trough ごとに呼吸を入れる構成へ再調整した。
+- **2026-06-18 追記**: #43 かみくだき / `qiita44` / `qiita45` の冒頭導線は、
+  アンカーが落ちても節番号 + 実見出し名だけで本文内を追える表記へ寄せた。
+  ただし Qiita 実機でのアンカー可否は引き続き未検証。
+- **2026-06-18 追記**: `qiita44` / `qiita45` に出てくる `llcore` / `lldarwin`
+  の名称は、本文が参照する既公開 Qiita 記事名と一致しているため、役割名への抽象化はしない。
+- **2026-06-18 追記**: `qiita45` の RAD 節は、外部研究との対応づけを
+  「コーパス要約上の傾向」まで弱め、一次確認前提の honest disclosure に揃えた。
+- **2026-06-18 追記**: `qiita45` 終盤の総括でも同じ温度感へ寄せ、
+  「かなり広い母集団」といった強めの言い回しは避けて
+  コーパス要約ベースの表現に揃えた。
+- **2026-06-18 追記**: `qiita44` / `qiita45` の終盤は、まとめ・appendix の
+  一文目で要点が立つよう front-load して、拾い読みでも結論が先に見える形へ寄せた。
+- **2026-06-18 追記**: `qiita44` / `qiita45` の draft-only 注記と
+  #43 多言語の sync note は記事本文から外し、`qiita45` 本文内の内部 handoff
+  ファイル名は公開向けに抽象化した。
+- **2026-06-18 追記**: `qiita45` の honest disclosure / appendix に残っていた
+  self-TODO は外し、読者向けの外部系統メモ / 背景メモとして読める形へ寄せた。
+- **2026-06-18 追記**: `qiita44` は staged 版も worktree と同期し、
+  本文からバス江コマ 0 の状態をそのまま commit できる形へ揃えた。
+  `qiita45` の外部研究との対応づけも「近い型として読めた」水準へ弱め、
+  検証状態と主張強度を合わせた。
+- **2026-06-18 追記**: #43 かみくだき / `qiita44` / `qiita45` の冒頭導線は、
+  custom アンカーを本文から外し、見出し階層だけで読める text TOC を優先した。
+- **2026-06-18 追記**: `qiita45` の挿絵は意図的に 0 コマへ戻した。
+- **2026-06-18 追記**: `docs/articles/FULLSENSE_KB_INDEX.md` の導入文は
+  `fullsense.qiita.com` と `qiita.com` の両方を含む表現へ修正した。
+- **2026-06-18 追記**: `qiita44` は ☕ 休憩ポイントを 4 箇所へ増やし、
+  `qiita44` / `qiita45` には末尾 HTML annotation メタタグと参考文献節を追加した。
 - AI 一般ニュースネタ集（139 候補）: `docs/articles/IDEAS_2026_06_15_ai_news_harvest.md`。
 
 ## 次アクション候補
-1. #43 を限定共有 publish → 実機確認 → public 化。
-2. #43 のかみくだき版 + en/zh/ko 多言語版（#37 と同パターン）。
-3. AI ニュースネタ集から次の単発記事（Mythos / DeepSeek V4 / ローカルAI三段ロケット等）。
+1. 日本語版 #43 は public publish 済み。残タスクは dev.to 英語版の更新 / publish だが、外部書き込みなので human gate。
+2. #43 の多言語版を触るときは、日本語版を正本として chapter order / claims / honest disclosure を先に合わせ、その後 dev.to 英語版へ流す。
+3. #43 のかみくだき版を推敲し、必要なら en/zh/ko への横展開を検討（#37 と同パターン）。
+4. AI ニュースネタ集から次の単発記事（Mythos / DeepSeek V4 / ローカルAI三段ロケット等）。

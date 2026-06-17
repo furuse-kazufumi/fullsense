@@ -13,7 +13,9 @@ ignorePublish: false
 
 # FullSense ナレッジベース — 読む順ガイド (INDEX)
 
-> 17 記事 / Qiita Team `fullsense.qiita.com`。#NN 昇順 = 推奨読了順。 かみくだき版は本編の直後に併記。🌐=多言語あり / 🇯🇵=日本語のみ(翻訳候補)。
+> 18 記事 / Qiita Team `fullsense.qiita.com` + `qiita.com` 公開分を含む。#NN 昇順 = 推奨読了順。 かみくだき版は本編の直後に併記。🌐=多言語版あり（公開状態は各行・注記を参照） / 🇯🇵=日本語のみ(翻訳候補または単一言語公開)。
+> ただし `#43` は ja のみ `qiita.com` で public 公開済みで、en/zh/ko は手元草稿があるが未同期・未公開。
+> 多言語記事は **日本語版を source of truth** とし、en/zh/ko は章立て・主張・honest disclosure を追従させる運用に寄せる。
 
 | # | 記事 | 言語 | リンク |
 |---|---|---|---|
@@ -34,13 +36,14 @@ ignorePublish: false
 | 41 ・かみくだき | llcore 検証 arc (#41) かみくだき版 — 「AI が賢くなった」って本当? ラングトンの蟻に学ぶ「見かけにだまさ | 🇯🇵 ja | [Qiita](https://fullsense.qiita.com/furuse-kazufumi/items/4cab01ed8896c555f3c9) |
 | 42 | #42 llm-viz を fork して実データ検証器を作り「可視化より本体を作る」へ計画を引き直した話 | 🇯🇵 ja | [Qiita](https://fullsense.qiita.com/furuse-kazufumi/items/a27332c0428320ee5def) |
 | 42 | llterm 小話 (#42) — 沈黙する AI、156% を指すメーター、メニューに無い大盛り: Claude Code を | 🌐 ja/zh/ko | [Qiita](https://fullsense.qiita.com/furuse-kazufumi/items/75cd92ab2c683965f3ac) |
+| 43 | #43 2026年、業界はAIに「手綱」と「輪」を名付けた — harness/loop engineering の試作スタックをローカルに組み始めた話 | 🇯🇵 ja | [Qiita](https://qiita.com/furuse-kazufumi/items/a96a15cb771fe5a57df6) |
 
 ## 🇯🇵 日本語のみ（en/zh/ko 化候補）
 
+- 状態注記: #43 は ja のみ `qiita.com` で public 公開済み。en/zh/ko は手元草稿があるが未同期・未公開。
 - #41 llcore 検証 arc (#41) かみくだき版 — 「AI が賢くなった」って本当? ラングトンの蟻に学ぶ
 - #42 #42 llm-viz を fork して実データ検証器を作り「可視化より本体を作る」へ計画を引き直した話
-
-> 計 2 記事が日本語のみ。多言語化は session limit リセット後に実施。
+> 計 2 記事が日本語のみ（#41 / #42）。この件数は en/zh/ko 化候補だけを数えており、#43 は ja 公開済みの状態注記として別扱い。多言語草稿は未同期・未公開で、多言語化は session limit リセット後に実施。
 
 ---
 
@@ -50,4 +53,4 @@ ignorePublish: false
 
 > © Forbidden shibukawa / SHUEISHA（『スナックバス江』YJ 公式 SNS 素材）
 
-ここまで 17 記事を #NN 昇順に並べ直しました。……が、総集編に結合し、言語別に分け、解放スロットを再利用していると、整理した本人が「どこに何があるか分からない」状態に片足を突っ込みかけます。それは整理できていない、ということ。この INDEX は、その自戒を兼ねた地図です。
+ここまで 18 記事を #NN 昇順に並べ直しました。……が、総集編に結合し、言語別に分け、解放スロットを再利用していると、整理した本人が「どこに何があるか分からない」状態に片足を突っ込みかけます。それは整理できていない、ということ。この INDEX は、その自戒を兼ねた地図です。

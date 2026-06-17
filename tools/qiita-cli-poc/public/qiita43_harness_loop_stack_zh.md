@@ -10,7 +10,7 @@ updated_at: '2026-06-16T06:48:30+09:00'
 id: 5d522525c53a98c09ff0
 organization_url_name: null
 slide: false
-ignorePublish: false
+ignorePublish: true
 ---
 # #43 2026年，业界为AI命名了「缰绳」与「轮子」——我开始在本地搭建 harness/loop engineering 试验栈的故事
 

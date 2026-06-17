@@ -12,7 +12,7 @@ updated_at: '2026-06-16T06:48:26+09:00'
 id: 2622da17495d61480fa2
 organization_url_name: null
 slide: false
-ignorePublish: false
+ignorePublish: true
 ---
 # #43 In 2026, the Industry Named the AI's "Reins" and "Wheel" — How I Started Assembling a Prototype harness/loop engineering Stack Locally
 
