@@ -47,12 +47,15 @@
 - `docs: record article 43 knowledge-stack audit` を commit `7d281c3` として作成した。
 - `docs: sync handoff after article 43 audits` を commit `d2cec49` として作成した。
 - `docs: record article 43 reference audit` を commit `e7dfdef` として作成した。
+- `docs: align next-session handoff state` を commit `d92192f` として作成した。
 - `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
 - `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述を、ローカル source / live URL の差も含めて整えた。
 - `426be90` では handoff 2 ファイルを最新の commit 列まで追従させたが、その後の factual 反転確認ぶんで handoff 2 文書に再度更新が入っている。
 - `e942370` では #43 en/zh/ko の honest-disclosure 節の実在根拠を handoff に明記し、`git add .` で `loop_ledger` を再ステージしない個別 add 方針を足した。
 - `496ca41` は `git show` で spot-check し、handoff 2 文書だけの更新であることを確認済み。
+- `d92192f` では handoff 3 文書の commit 列と drift 範囲メモを更新し、当時最新だった `e7dfdef` までの現在地を揃えた。
 - en/zh/ko の変更は `ignorePublish: true` への切替だけでなく、終盤 hedge note / 要約表 / 結論部の `47,097 docs` 反映まで含む本文改稿である。
+- 今回の `20afd3e` 自身は 1-commit ラグ規律どおり本節にはまだ列挙しないが、内容は #43 第3章導入〜`3-2. LLM Wiki` 導入直前の監査結果を handoff へ反映する更新だった。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
 
@@ -87,6 +90,7 @@
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、Karpathy Gist / llive 要件 / RAPTOR 実装の一次情報をこの翻訳監査ターンで再取得したわけではない。
   - 第3章の導入〜`3-2. LLM Wiki` 導入直前も局所確認済みで、3層スタックの説明、`RAD_INDEX.md` / `65 RAD corpora` の導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従している。
     - ここで確認したのは主に日本語正本に対する訳文追従であり、`RAD_INDEX.md` や Karpathy Gist の一次情報をこの翻訳監査ターンで再取得したわけではない。
+  - `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節まで局所確認済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
   - 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 
@@ -98,6 +102,7 @@
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
 - 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
+- `.llterm/loop_ledger.jsonl` の恒久対策は、`git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記案として整理済みで、次の安全な区切りで human gate に上程する。
 
 ## 注意
 

@@ -28,24 +28,11 @@
 ## 今回 commit した差分の要点
 
 - #43:
-  - かみくだき版を追加
-  - en/zh/ko draft を `ignorePublish: true` へ倒し、日本語正本追従の前提を handoff に明記
-  - en/zh/ko は `id:` を持つ発行済み限定共有 draft のため、**live URL を残したまま同期を凍結**している
-- #44:
-  - 新規草稿追加
-  - 冒頭導線を text TOC 化
-  - バス江コマは本文から撤去済み（残 0）
-  - ☕ 休憩ポイント、annotation、参考文献節を追加
-  - 参考文献節には canonical 入口を追加済みで、残タスクは URL 露出粒度と lexicase を足すかの調整
-- #45:
-  - 新規草稿追加
-  - `artifact` 系ラベルを `残した再開導線` に統一
-  - appendix / 参考文献節 / honest disclosure をローカルコーパス要約ベースの温度へ調整
-  - 参考文献節は既公開 FullSense 記事 URL を追加し、外部研究系は現時点でローカル整理扱い
+  - 第3章導入〜`3-2. LLM Wiki` 導入直前を日本語正本→en→zh→ko の順で spot-check し、3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで多言語 draft が日本語正本に追従していることを確認した
+  - `3-2. LLM Wiki` 本体は、既存の thought circulation / Anti-Circulation Safeguards 監査と今回の導入監査を合わせて、3層説明から主要論点まで局所確認済みとして扱える状態になった
 - handoff:
-  - `NEXT_SESSION.md` を repo-local 正本として整理
-  - `FULLSENSE_KB_INDEX.md` を 18 記事・#43 public 状態へ更新
-  - `IDEAS_2026_06_15_harness_loop_raptor.md` を補足・背景メモとして追従
+  - `NEXT_SESSION.md` / `SESSION_SUMMARY.md` / `next_plan.md` のナラティブを今回監査内容へ更新し、前バッチの #44 / #45 説明が再開導線に残らないよう整理した
+  - handoff の commit 列と実施結果列に `d92192f` を backfill し、`20afd3e` 自身は 1-commit ラグ規律どおり次回 backfill 対象に維持した
 
 ## 未解決ではないが次に確認すべき点
 
@@ -89,6 +76,7 @@
 - さらに参考文献節と末尾注記（`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙）も spot-check し、4 言語とも出典束と留保注記が日本語正本に追従していることを確認した。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
   - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
+  - 次の安全な区切りで、上記 deindex 案を `⟦LLTERM_CHOICE⟧` による human gate へ上程する。
   - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
 - レビュー依頼時は、未 commit の `.llterm/loop_ledger.jsonl` ノイズ diff と commit 本体の docs diff を混ぜず、対象 commit の `git show` を優先提示する。
 - `hedge retention audit` のような audit 系語は内部 handoff では問題ないが、外部公開文脈へ出す場合は records-retention 監査と誤読されないよう定義を添える。

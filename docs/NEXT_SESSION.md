@@ -24,10 +24,7 @@ nav_order: 95
 ## ⭐ 2026-06-17 昼 — #43 継続の再開地点
 
 > **この節が現時点の最優先の再開地点。** 下の 2026-06-12 節は旧文脈の記録として残している。
-> **2026-06-18 このターンの変更範囲:** `qiita45` に休憩ポイントを増補し、#43 かみくだき / #44 / #45 の冒頭導線を「節番号 + 実見出し名」で読める形へ寄せた。`qiita44` は本文からバス江 2 コマを外した前提で title / 冒頭 / handoff を整合させた。`qiita45` は**現在も `private: true` のローカル草稿**として、RAD 主張強度と外部研究との対応づけを本文の終盤までコーパス要約ベースへ揃え、`artifact` 系ラベルも「残した再開導線」へ寄せた。さらに #44 / #45 の終盤は、まとめと appendix の一文目で要点が先に立つよう微修正し、draft-only 注記と translation sync note は記事本文から除去、公開面に不要な内部パス名は抽象化した。`docs/articles/FULLSENSE_KB_INDEX.md` の #43 状態注記も現況へ合わせて更新済み。各草稿の `ignorePublish: true` / `private: true` は accidental publish 防止の安全柵として維持している。いまは custom アンカーも本文から外し、見出し階層だけで読める草稿にしている。再開時の index / worktree 状態は `git status` で現況確認する。
-> **2026-06-18 追記:** `docs/articles/FULLSENSE_KB_INDEX.md` の導入文は `fullsense.qiita.com` と `qiita.com` の両方を含む表現へ修正した。`qiita44` は ☕ 休憩ポイントを 4 箇所へ増やし、`qiita44` / `qiita45` には末尾 HTML annotation メタタグと参考文献節を追加した。
-> **2026-06-18 追記:** `qiita45` の参考文献節には、#43 / `lldarwin` / `llcore` の既公開 URL を先に入れ、外部研究系はローカルコーパス要約上の整理として扱う形へ揃えた。
-> **2026-06-18 追記:** `qiita45` の外部研究対応は「ローカルコーパス要約上の整理」と明示し、`qiita44` の参考文献節も「外部系譜は系統名整理まで」の温度に揃えた。
+> **2026-06-18 このターンの変更範囲:** #43 多言語 draft のうち、第3章導入〜`3-2. LLM Wiki` 導入直前を日本語正本→en→zh→ko の順で spot-check し、3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従していることを確認した。あわせて handoff 3 文書の commit 列に `d92192f` を backfill し、再開導線が前バッチの説明を引きずらないよう更新した。再開時の index / worktree 状態は `git status` で現況確認する。
 
 **再確認した状態:**
 - `#43` 日本語記事 `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md` は
@@ -105,6 +102,7 @@ nav_order: 95
    3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と
    `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、
    Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従している。
+   `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節まで局所確認済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
    残っているのは、それ以外の未確認箇所にある factual / translation drift である。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため
