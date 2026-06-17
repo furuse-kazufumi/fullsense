@@ -61,6 +61,12 @@ def _ensure_utf8_stdout() -> None:
 
 # repo root = scripts/publish/zenn_convert.py から 2 つ上
 REPO_ROOT = Path(__file__).resolve().parents[2]
+TOOLS_DIR = REPO_ROOT / "tools"
+if str(TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(TOOLS_DIR))
+
+from _frontmatter import parse_frontmatter_lines, split_frontmatter_lines
+
 ARTICLES_DIR = REPO_ROOT / "docs" / "articles"
 ZENN_DIR = REPO_ROOT / "zenn"
 ZENN_ARTICLES_DIR = ZENN_DIR / "articles"
@@ -123,97 +129,15 @@ DEFAULT_ARTICLE_EMOJI = "🧬"
 
 
 # ──────────────────────────────────────────────────────────────────────────
-# Frontmatter parsing (軽量・PyYAML 不要)
+# Frontmatter parsing (shared minimal parser)
 # ──────────────────────────────────────────────────────────────────────────
 
 def split_frontmatter(text: str) -> tuple[list[str], str]:
-    """先頭の `---\\n ... \\n---` を (frontmatter_lines, body) に分割する。
-
-    frontmatter が無ければ ([], text) を返す。先頭 BOM を許容。
-    """
-    if text.startswith("﻿"):
-        text = text.lstrip("﻿")
-    lines = text.splitlines()
-    if not lines or lines[0].strip() != "---":
-        return [], text
-    for i in range(1, len(lines)):
-        if lines[i].strip() == "---":
-            fm = lines[1:i]
-            # body は元改行を保つため splitlines ではなく原文から切り出す
-            # (画像 URL や SVG が改行 sensitive なケースに備える)
-            joined_head = "\n".join(lines[: i + 1])
-            body = text[len(joined_head):]
-            return fm, body.lstrip("\n")
-    return [], text
+    return split_frontmatter_lines(text)
 
 
 def parse_frontmatter(fm_lines: list[str]) -> dict:
-    """軽量 YAML パーサ。スカラー値・block-sequence (- item)・inline list ([a, b]) に対応。
-
-    Qiita / FullSense 記事で使われる範囲のみを対象とし、ネストは扱わない。
-    """
-    meta: dict = {}
-    i = 0
-    n = len(fm_lines)
-    while i < n:
-        raw = fm_lines[i]
-        line = raw.rstrip()
-        if not line.strip():
-            i += 1
-            continue
-        m = re.match(r"^([A-Za-z_][\w]*):\s*(.*)$", line)
-        if not m:
-            i += 1
-            continue
-        key, val = m.group(1), m.group(2).strip()
-
-        # inline list:  tags: [a, b, c]
-        if val.startswith("[") and val.endswith("]"):
-            inner = val[1:-1].strip()
-            items = [
-                _strip_quotes(s.strip())
-                for s in _split_inline_list(inner)
-                if s.strip()
-            ]
-            meta[key] = items
-            i += 1
-            continue
-
-        # block sequence:  tags:\n  - a\n  - b
-        if val == "":
-            seq: list[str] = []
-            j = i + 1
-            while j < n:
-                item = re.match(r"^\s+-\s+(.*)$", fm_lines[j])
-                if not item:
-                    break
-                seq.append(_strip_quotes(item.group(1).strip()))
-                j += 1
-            if seq:
-                meta[key] = seq
-                i = j
-                continue
-            # 空値スカラー
-            meta[key] = ""
-            i += 1
-            continue
-
-        # scalar
-        meta[key] = _strip_quotes(val)
-        i += 1
-    return meta
-
-
-def _split_inline_list(inner: str) -> list[str]:
-    """inline list の中身をカンマで分割 (簡易; quote 内カンマは想定しない)。"""
-    return inner.split(",")
-
-
-def _strip_quotes(s: str) -> str:
-    s = s.strip()
-    if len(s) >= 2 and s[0] == s[-1] and s[0] in ("'", '"'):
-        return s[1:-1]
-    return s
+    return parse_frontmatter_lines(fm_lines)
 
 
 # ──────────────────────────────────────────────────────────────────────────

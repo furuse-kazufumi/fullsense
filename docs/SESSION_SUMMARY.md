@@ -30,7 +30,7 @@
 - #43:
   - 第3章導入〜`3-2. LLM Wiki` 本体の主要段落を日本語正本→en→zh→ko の順で spot-check し、3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入、thought circulation / Anti-Circulation Safeguards、製品対応づけまで多言語 draft が日本語正本に追従していることを確認した
   - en/zh/ko に欠落していた「半信×半疑」の引用ブロックと URL を既存の inline 引用形式へ揃えて日本語正本へ同期し、末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を追加した。`3-2. LLM Wiki` 本体は quote block と参考導線を含む主要論点まで局所確認済みとして扱える状態になった
-  - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、英語版には `public_id` も明示した。`qiita_public_post.py` / `qiita_team_post.py` には YAML block scalar title と single-quote escaping の解釈を追加し、human gate 後の public PATCH と API / HTML 確認まで完了した
+  - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、英語版には `public_id` も明示した。`tools/_frontmatter.py` を新設して poster / converter 4 経路へ共有化し、`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストを追加した。human gate 後の public PATCH と API / HTML 確認まで完了した
 - handoff:
   - `NEXT_SESSION.md` / `SESSION_SUMMARY.md` / `next_plan.md` のナラティブを今回監査内容へ更新し、前バッチの #44 / #45 説明が再開導線に残らないよう整理した
   - handoff の commit 列と実施結果列に `d92192f` を backfill し、`20afd3e` 自身は 1-commit ラグ規律どおり次回 backfill 対象に維持した
@@ -86,7 +86,7 @@
   - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
 - レビュー依頼時は、未 commit の `.llterm/loop_ledger.jsonl` ノイズ diff と commit 本体の docs diff を混ぜず、対象 commit の `git show` を優先提示する。
 - `hedge retention audit` のような audit 系語は内部 handoff では問題ないが、外部公開文脈へ出す場合は records-retention 監査と誤読されないよう定義を添える。
-- 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル修正は完了した。再発防止の観点では、他の `title: >-` 残存ファイルを同じ poster 経路へ流す前に正規化対象を広げるかどうかが残論点。
+- 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル修正は完了した。なお live 反映確認は、このセッションで実行した API / HTML 自己確認ログに基づく。
 
 ## 次の具体的な一手
 

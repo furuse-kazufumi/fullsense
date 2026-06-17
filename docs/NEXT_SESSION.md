@@ -24,7 +24,7 @@ nav_order: 95
 ## ⭐ 2026-06-17 昼 — #43 継続の再開地点
 
 > **この節が現時点の最優先の再開地点。** 下の 2026-06-12 節は旧文脈の記録として残している。
-> **2026-06-18 このターンの変更範囲:** #43 多言語 draft の引用同期と handoff 更新に続き、公開済み英語版 `https://qiita.com/furuse-kazufumi/items/2622da17495d61480fa2` のタイトル崩れ（表示が `# >-` になる不具合）を切り分けた。原因は front matter の `title: >-` と poster 側の最小パーサ不一致で、repo 規約 (`MULTILINGUAL_ROLLOUT_SPEC.md`) に反して英語版と韓国語版が block scalar title を持っていたこと。手元 source は single-quoted title へ修正し、`tools/qiita_public_post.py` / `tools/qiita_team_post.py` に block-scalar title と YAML single-quote 解釈の対応を追加した。そのうえで human gate 後に public PATCH を実行し、Qiita API / HTML (`<title>` / `og:title` / `<h1>`) で本来のタイトル文字列へ復旧したことを確認した。
+> **2026-06-18 このターンの変更範囲:** #43 多言語 draft の引用同期と handoff 更新に続き、公開済み英語版 `https://qiita.com/furuse-kazufumi/items/2622da17495d61480fa2` のタイトル崩れ（表示が `# >-` になる不具合）を切り分けた。原因は front matter の `title: >-` と poster 側の最小パーサ不一致で、repo 規約 (`MULTILINGUAL_ROLLOUT_SPEC.md`) に反して英語版と韓国語版が block scalar title を持っていたこと。手元 source は single-quoted title へ修正し、poster / converter 4 経路で共有する `tools/_frontmatter.py` を新設、`tools/qiita_public_post.py` / `tools/qiita_team_post.py` / `tools/qiita-cli-poc/convert_to_qiita_cli.py` / `scripts/publish/zenn_convert.py` を shared parser へ切替えた。`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストも追加した。そのうえで human gate 後に public PATCH を実行し、Qiita API / HTML (`<title>` / `og:title` / `<h1>`) で本来のタイトル文字列へ復旧したことを確認した。なお live 反映確認は、このセッションでの API/HTML 自己確認ログに基づく。
 
 **再確認した状態:**
 - `#43` 日本語記事 `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md` は
@@ -47,6 +47,9 @@ nav_order: 95
   `title: >-` / `|` と single-quoted YAML の `''` エスケープを解釈できるよう修正済み。
   2026-06-18 の dry-run と public PATCH 後の API / HTML 確認では、
   英語版タイトルを正しく表示することを確認した。
+- `tools/qiita-cli-poc/convert_to_qiita_cli.py` と `scripts/publish/zenn_convert.py` も
+  同じ shared parser へ切替済み。`title: >-` を文字列 `">-"` のまま持ち回る
+  sibling 側の root-cause は除去した。
 - `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md` は、翻訳ドリフトを
   直すまで accidental publish を避けるため `ignorePublish: true` に倒した。
   ただし `id:` を持つ発行済み限定共有 draft のため、これは **同期凍結**であって

@@ -34,6 +34,8 @@ import sys
 import urllib.error
 import urllib.request
 
+from _frontmatter import split_frontmatter
+
 
 def _utf8() -> None:
     for s in ("stdout", "stderr"):
@@ -72,78 +74,6 @@ def get_token() -> str | None:
         except (OSError, ValueError):
             continue
     return None
-
-
-# --------------------------------------------------------------------------- #
-# frontmatter (minimal, qiita-cli-compatible subset) + body
-# --------------------------------------------------------------------------- #
-
-
-def _block_scalar_lines(lines: list[str], start_idx: int) -> tuple[list[str], int]:
-    cont: list[str] = []
-    j = start_idx + 1
-    while j < len(lines):
-        ln = lines[j]
-        if not ln.strip():
-            if cont:
-                break
-            j += 1
-            continue
-        if re.match(r"^[ \t]+\S", ln):
-            cont.append(ln.strip())
-            j += 1
-            continue
-        break
-    return cont, j
-
-
-def _unquote_scalar(value: str) -> str:
-    value = value.strip()
-    if len(value) >= 2 and value[0] == value[-1] and value[0] in ("'", '"'):
-        inner = value[1:-1]
-        if value[0] == "'":
-            return inner.replace("''", "'")
-        return inner.replace('\\"', '"')
-    return value
-
-
-def split_frontmatter(text: str) -> tuple[dict, str]:
-    """Return (meta, body). Supports `title:`, `tags:` (block list or inline), `private:`, `id:`."""
-    meta: dict = {}
-    body = text
-    if text.startswith("---"):
-        end = text.find("\n---", 3)
-        if end != -1:
-            fm = text[3:end].strip("\n")
-            body = text[end + 4:].lstrip("\n")
-            cur_list_key = None
-            lines = fm.splitlines()
-            i = 0
-            while i < len(lines):
-                line = lines[i]
-                if cur_list_key and re.match(r"\s*-\s+", line):
-                    meta.setdefault(cur_list_key, []).append(line.split("-", 1)[1].strip().strip("'\""))
-                    i += 1
-                    continue
-                cur_list_key = None
-                m = re.match(r"([A-Za-z_]+):\s*(.*)$", line)
-                if not m:
-                    i += 1
-                    continue
-                k, v = m.group(1), m.group(2).strip()
-                if v == "":
-                    cur_list_key = k  # block list follows
-                    meta[k] = []
-                elif v in (">", ">-", ">+", "|", "|-", "|+"):
-                    cont, i = _block_scalar_lines(lines, i)
-                    meta[k] = " ".join(cont).strip()
-                    continue
-                elif v.startswith("[") and v.endswith("]"):
-                    meta[k] = [_unquote_scalar(x.strip()) for x in v[1:-1].split(",") if x.strip()]
-                else:
-                    meta[k] = _unquote_scalar(v)
-                i += 1
-    return meta, body
 
 
 def infer_title(meta: dict, body: str) -> str:

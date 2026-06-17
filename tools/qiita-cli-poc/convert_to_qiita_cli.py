@@ -60,94 +60,19 @@ DROP_KEYS = {
 PLACEHOLDER_TAGS = {"TODO_TAG", "TODO", "TBD", ""}
 
 SCRIPT_DIR = Path(__file__).resolve().parent
+TOOLS_DIR = SCRIPT_DIR.parent
+if str(TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(TOOLS_DIR))
+
+from _frontmatter import parse_frontmatter_lines, split_frontmatter_lines
 
 
 def split_frontmatter(text: str):
-    """先頭の `---\\n ... \\n---` を (frontmatter_lines, body) に分割。
-
-    frontmatter が無ければ ([], text) を返す。
-    """
-    # 先頭 BOM を許容
-    if text.startswith("﻿"):
-        text = text.lstrip("﻿")
-    lines = text.splitlines()
-    if not lines or lines[0].strip() != "---":
-        return [], text
-    # 2 番目の '---' を探す
-    for i in range(1, len(lines)):
-        if lines[i].strip() == "---":
-            fm = lines[1:i]
-            body = "\n".join(lines[i + 1:])
-            return fm, body
-    # 閉じ '---' が無い = frontmatter ではない
-    return [], text
+    return split_frontmatter_lines(text)
 
 
 def parse_frontmatter(fm_lines):
-    """軽量 YAML パーサ。スカラー値と block-sequence (- item) の list のみ対応。
-
-    戻り値: dict[str, str|list[str]]、出現順を保つため Python 3.7+ の dict 順序に依存。
-    """
-    data = {}
-    i = 0
-    n = len(fm_lines)
-    while i < n:
-        raw = fm_lines[i]
-        line = raw.rstrip()
-        if not line.strip():
-            i += 1
-            continue
-        # "key:" または "key: value"
-        if ":" not in line:
-            i += 1
-            continue
-        # インデント無しのトップレベルキーのみ扱う
-        if line[:1] in (" ", "\t"):
-            i += 1
-            continue
-        key, _, val = line.partition(":")
-        key = key.strip()
-        val = val.strip()
-        if val == "":
-            # 次行以降が block sequence なら list として収集
-            seq = []
-            j = i + 1
-            while j < n:
-                nxt = fm_lines[j]
-                stripped = nxt.strip()
-                if stripped.startswith("- "):
-                    seq.append(_unquote(stripped[2:].strip()))
-                    j += 1
-                elif stripped == "":
-                    j += 1
-                elif nxt[:1] in (" ", "\t"):
-                    # ネストした map 等は PoC では未対応 → スキップ
-                    j += 1
-                else:
-                    break
-            if seq:
-                data[key] = seq
-                i = j
-                continue
-            data[key] = ""
-            i += 1
-            continue
-        # flow list ["a","b"] も最低限対応
-        if val.startswith("[") and val.endswith("]"):
-            inner = val[1:-1]
-            items = [_unquote(x.strip()) for x in inner.split(",") if x.strip()]
-            data[key] = items
-        else:
-            data[key] = _unquote(val)
-        i += 1
-    return data
-
-
-def _unquote(s: str) -> str:
-    s = s.strip()
-    if len(s) >= 2 and s[0] == s[-1] and s[0] in ("'", '"'):
-        return s[1:-1]
-    return s
+    return parse_frontmatter_lines(fm_lines)
 
 
 def _to_bool(v, default: bool) -> bool:

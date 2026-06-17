@@ -4,7 +4,7 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` まで反映済み。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` まで反映済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
@@ -73,6 +73,9 @@
 - `tools/qiita_public_post.py` / `tools/qiita_team_post.py` に YAML block scalar title (`>-` / `|`) と single-quoted YAML escaping (`''`) の解釈を追加し、dry-run で英語版タイトルが正しく復旧することを確認した。
 - `tools: fix qiita title frontmatter parsing` を commit `409b628` として作成し、ローカル修正を ledger ノイズから分離して確定した。
 - public Qiita item `2622da17495d61480fa2` に対してタイトル修正 PATCH を実行し、API / HTML の両方で `#43 In 2026, the Industry Named the AI's "Reins" and "Wheel" — How I Started Assembling a Prototype harness/loop engineering Stack Locally` へ復旧したことを確認した。
+- `tools/_frontmatter.py` を新設し、`qiita_public_post.py` / `qiita_team_post.py` / `convert_to_qiita_cli.py` / `zenn_convert.py` の frontmatter パーサを共有化した。
+- `tests/test_qiita_frontmatter.py` を追加し、folded scalar / single-quote escaping / block list の回帰テストを導入した。`pytest tests/test_qiita_frontmatter.py tests/test_zenn_convert.py tests/test_qiita_url_sync.py` は 34 passed。
+- live 反映確認は、このセッションで実行した Qiita API / HTML の自己確認ログに基づく。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
   - タイトル修正と handoff 更新を commit し終えた時点で、残差分が ledger だけなら次アクションは deindex 案の human gate 上程へ戻す。
