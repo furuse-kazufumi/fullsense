@@ -10,10 +10,10 @@
 ## 現況
 
 - 今回の作業は **Qiita 草稿 / handoff 文書の整合調整のみ**。
-- 文書バッチは commit `bab1557`（`docs: sync qiita draft handoff for articles 43-45`）と `e4e3968`（`docs: tighten publish-gate notes for qiita drafts`）として保存済み。
+- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` として保存済み。
 - `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
-- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 2 commit に含めた。
+- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 公開 safety 柵は維持:
   - `qiita43_harness_loop_stack_kamikudaki.md` = `private: true` + `ignorePublish: true`
   - `qiita44_evolutionary_programs_block_diagram.md` = `private: true` + `ignorePublish: true`
@@ -58,6 +58,7 @@
   - ただし短縮版のため、一次情報の細目は完全版 #43 側へ寄せる方針を維持。
 - `qiita43` en/zh/ko の終盤 hedged note に残っていた RAD 総件数の古い表現は、`47,097 docs` ベースへ更新済み。
 - `e4e3968` では #43 多言語 draft の要約表・結論部の RAD 件数も `47,097 docs` ベースへ揃えた。
+- `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述も `47,097 docs` / live URL 未反映の前提へ揃えた。
 - ただしこの `47,097 docs` 修正は **ローカル source 側のみ** で、発行済み限定共有 URL まではまだ更新していない。
 - en/zh/ko には、日本語正本の「約49k件」という数字の扱いを説明する honest-disclosure 節に相当する段がまだ無い。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。

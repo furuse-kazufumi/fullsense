@@ -4,10 +4,10 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` と `e4e3968` で一段落した。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` まで反映済み。
 - 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
-- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 2 commit に含めた。
+- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 外部公開・push は未実施。
 
 ## 次の具体的な一手
@@ -21,7 +21,10 @@
 
 - `docs: sync qiita draft handoff for articles 43-45` を commit `bab1557` として作成した。
 - `docs: tighten publish-gate notes for qiita drafts` を commit `e4e3968` として作成した。
+- `docs: refresh handoff after publish-gate cleanup` を commit `7e7931c` として作成した。
+- `docs: sync handoff with article 43 drift fixes` を commit `0478fa1` として作成した。
 - `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
+- `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述を、ローカル source / live URL の差も含めて整えた。
 - en/zh/ko の変更は本文改稿ではなく `ignorePublish: true` への切替だが、`id:` を持つ発行済み限定共有 draft の **同期凍結**であって、公開面の drift が消えるわけではない。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
 
