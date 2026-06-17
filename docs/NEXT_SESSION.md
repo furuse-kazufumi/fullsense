@@ -101,6 +101,10 @@ nav_order: 95
    ローカル source へ反映済みだが、公開面の live URL はまだ旧表現を残している。
    また en/zh/ko には、日本語正本 `## honest disclosure（「約49k件」という数字の扱い）`
    に対応する honest-disclosure 節は実在する。
+   第3章の導入〜`3-2. LLM Wiki` 導入直前も 4 言語で spot-check 済みで、
+   3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と
+   `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、
+   Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従している。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
    残っているのは、それ以外の未確認箇所にある factual / translation drift である。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため
