@@ -10,7 +10,7 @@
 ## 現況
 
 - 今回の作業は **Qiita 草稿 / handoff 文書の整合調整のみ**。
-- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` として保存済み。
+- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` として保存済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。

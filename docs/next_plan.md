@@ -4,7 +4,7 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` まで反映済み。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` まで反映済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
@@ -45,6 +45,8 @@
 - `docs: record article 43 terminology audit` を commit `521d318` として作成した。
 - `docs: record article 43 benchmark section audit` を commit `9af1bbd` として作成した。
 - `docs: record article 43 knowledge-stack audit` を commit `7d281c3` として作成した。
+- `docs: sync handoff after article 43 audits` を commit `d2cec49` として作成した。
+- `docs: record article 43 reference audit` を commit `e7dfdef` として作成した。
 - `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
 - `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述を、ローカル source / live URL の差も含めて整えた。
 - `426be90` では handoff 2 ファイルを最新の commit 列まで追従させたが、その後の factual 反転確認ぶんで handoff 2 文書に再度更新が入っている。

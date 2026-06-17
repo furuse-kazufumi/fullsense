@@ -101,7 +101,8 @@ nav_order: 95
    ローカル source へ反映済みだが、公開面の live URL はまだ旧表現を残している。
    また en/zh/ko には、日本語正本 `## honest disclosure（「約49k件」という数字の扱い）`
    に対応する honest-disclosure 節は実在する。
-   残っているのは、当該節の内部と周辺にある factual / translation drift である。
+   参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
+   残っているのは、それ以外の未確認箇所にある factual / translation drift である。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため
    en/zh/ko の `ignorePublish: false` を先に戻してから同期する。
 3. 出自不明の front matter 整形差分が再発した場合は、
@@ -120,6 +121,7 @@ nav_order: 95
    冒頭の拾い読みガイドも追加済みで、節番号 + 実見出し名でも辿れる text TOC にしてある。
    ただし annotation / 参考文献節は追加済みで、残タスクは
    一次 URL 確認と著者帰属の整備。
+   この一次確認は references 節に列挙した外部 URL 群にも同じく適用する。
    参考メモ節は、いまは appendix として外部系統メモと背景メモを分けた状態。
    `## 2` の外部用語帰属も、`ignorePublish` を外す前に appendix の外部系統メモと照合する。
 7. 公開作業を止める場合は、#43 の多言語版 /
@@ -130,6 +132,7 @@ nav_order: 95
    その時点でコマ選定・クレジット・転載許諾 / 利用条件の一次確認をやり直す。
 9. `qiita44` / `qiita45` の末尾 HTML annotation と参考文献節は追加済み。
    publish 前は一次確認と出典 URL / 著者帰属の整備を残タスクとして確認する。
+   references 節にある外部 URL 群も、この publish gate の一次確認対象に含める。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で
    annotation / 参考導線 / 参考文献テンプレの有無を確認する。
    `qiita44` は参考文献節がまだ薄いので、各流派の一次文献を最低 1 本ずつ補う。
@@ -149,7 +152,8 @@ nav_order: 95
     冒頭導線は、**いまは text TOC として読める形を優先**している。
     custom アンカーは本文から外してあるので、publish 前は
     見出し階層と限定共有での見え方だけ確認すればよい。
-    `qiita43_harness_loop_stack_kamikudaki.md` は短縮版のため ☕ / 参考文献を省略したまま進めるか、公開線に乗せる前に追補するかを決める。
+    `qiita43_harness_loop_stack_kamikudaki.md` は短縮版だが、☕ / 参考文献は追加済み。
+    公開線に乗せる前は、一次 URL 確認と著者帰属の整備を優先する。
 
 ## Archive: 2026-06-12 夜 当時の次回最優先 (ccr で FullSense 選択時 / Qiita 記事ライン)
 
