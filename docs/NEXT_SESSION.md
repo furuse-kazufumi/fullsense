@@ -100,7 +100,8 @@ nav_order: 95
    2026-06-18 の時点で RAD 件数の factual drift（`47,097 docs`）は
    ローカル source へ反映済みだが、公開面の live URL はまだ旧表現を残している。
    また en/zh/ko には、日本語正本 `## honest disclosure（「約49k件」という数字の扱い）`
-   に対応する説明節がまだ無く、表・注記だけで吸収している差も残る。
+   に対応する honest-disclosure 節は実在する。
+   残っているのは、当該節の内部と周辺にある factual / translation drift である。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため
    en/zh/ko の `ignorePublish: false` を先に戻してから同期する。
 3. 出自不明の front matter 整形差分が再発した場合は、
