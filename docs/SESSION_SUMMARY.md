@@ -25,7 +25,7 @@
 
 ## いま worktree に残っている差分
 
-- deindex commit 前の整理差分として `.gitignore` / `.llterm/loop_ledger.jsonl` の index 解除 / handoff docs 更新
+- なし。`loop_ledger` deindex は commit `7745f84` で確定済み。
 
 ## 今回 commit した差分の要点
 
@@ -91,10 +91,8 @@
 - 続く追補で、未同期だった 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）も本文と末尾参考へ同期した。
   - crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に揃い、引用導線の非対称は解消した。
 - さらに参考文献節と末尾注記（`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙）も spot-check し、4 言語とも出典束と留保注記が日本語正本に追従していることを確認した。
-- `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
-  - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
-  - 次の安全な区切りで、上記 deindex 案を `⟦LLTERM_CHOICE⟧` による human gate へ上程する。
-  - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
+- `loop_ledger` の恒久対策は commit `7745f84` で実施済み。`git rm --cached .llterm/loop_ledger.jsonl` と `.gitignore` 追記により、以後は tracked ノイズを発生させず local-only telemetry として保持する。
+  - 運用ルール: `git add .` は引き続き避け、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
 - レビュー依頼時は、未 commit の `.llterm/loop_ledger.jsonl` ノイズ diff と commit 本体の docs diff を混ぜず、対象 commit の `git show` を優先提示する。
 - `hedge retention audit` のような audit 系語は内部 handoff では問題ないが、外部公開文脈へ出す場合は records-retention 監査と誤読されないよう定義を添える。
 - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル修正は完了した。なお live 反映確認は、このセッションで実行した API / HTML 自己確認ログに基づく。
@@ -103,4 +101,4 @@
 
 1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
-3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記を human gate 解除後に早めに実施する。
+3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。

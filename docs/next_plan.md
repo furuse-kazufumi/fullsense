@@ -86,13 +86,13 @@
 - #43 の「キン肉星＋R.O.D＋リィンカーネーション＋ROS PBT」の 4 連想は、人によっては飛躍や `bazue_all/015.jpg` 的な誤用に見えうるため、4 つの連想が別々の設計部品を受け持ったことを ja/en/zh/ko の本文へ追記した。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` を canonical `6e107c7dfa0c261ee4d7` への short redirect 本文へ更新した。ローカル source `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は public PATCH 済みの実体として維持する。
 - public Qiita の redirect / タイトル修正の反映確認は、このセッションで実行した API / HTML の自己確認ログに基づく。
-- 現在の未コミット差分は `.llterm/loop_ledger.jsonl` の tracked ノイズのみ。次アクションは deindex 案 (`git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore`) の human gate 上程へ戻る。
+- 現在の未コミット差分はなし。`loop_ledger` の deindex は commit `7745f84` で完了済み。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` を確認したところ、内容は `個人開発AIのlliveが"メガ進化"！ — 進化の大失敗から甦り、実LLMの"苦手"まで淘汰した全記録` で、既公開の canonical 総集編 `6e107c7dfa0c261ee4d7`（`lldarwin / 進化 arc 総集編`）と実質重複している。#26 public 短報 `0a35e1...` が既に canonical へ誘導する short redirect 化を採っているため、`bf1...` も同じ方針で整理するのが最小。
 - 上記の重複・前例確認は、Qiita API の `bf1...` / `6e107...` / `0a35...` と、ローカル原稿 `tools/qiita-cli-poc/public/0a35e1bfb814adab8565.md` / `6e107c7dfa0c261ee4d7.md` の一次確認に基づく。
 - canonical `6e107c7dfa0c261ee4d7` と raw 原稿 `docs/articles/drafts/QIITA_evo_ja.md` の HEAD 200 は確認済み。`bf1...` の redirect 文面は、前例 `0a35e1bfb814adab8565.md` の「統合・再編しました」+ canonical 直リンク形式に合わせた。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
-  - タイトル修正と handoff 更新を commit し終えた時点で、残差分が ledger だけなら次アクションは deindex 案の human gate 上程へ戻す。
+  - 旧 tracked ノイズ問題は `7745f84` で解消済み。以後は `loop_ledger` を通常の review diff へ混ぜない運用を維持する。
 
 ## publish gate 送り
 
@@ -139,7 +139,7 @@
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
 - 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
-- `.llterm/loop_ledger.jsonl` の恒久対策は、`git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記案として整理済みで、次の安全な区切りで human gate に上程する。
+- `.llterm/loop_ledger.jsonl` の恒久対策は commit `7745f84` で実施済み。今後は `.gitignore` 管理の local telemetry として扱う。
 
 ## 注意
 
