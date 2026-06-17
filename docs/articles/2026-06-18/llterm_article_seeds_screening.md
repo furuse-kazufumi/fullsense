@@ -1,6 +1,7 @@
 # llterm ARTICLE_SEEDS 記事化スクリーニング (2026-06-18)
 
-対象: `D:/projects/llterm/docs/ARTICLE_SEEDS.md`
+対象: `D:/projects/llterm/docs/ARTICLE_SEEDS.md`  
+参照時点: llterm commit `ff066bdf99db74263f1c6208fa8a671a080bc7fc`
 
 ## 結論
 
@@ -30,7 +31,7 @@
 
 ### A. すぐ記事になる
 
-#### 種 #6 「ハーネス/ループエンジニアリングのノウハウ」
+#### 種 #6 「ハーネス/ループエンジニアリングのノウハウ」(= 長編タイトル案「自走 AI ループの作り方と落とし穴」)
 
 - **評価**: 最有力
 - **理由**:
@@ -112,6 +113,8 @@
 - incident から原則へ上げられる
 - FullSense の `harness engineering / loop engineering / honest disclosure` 全部に接続できる
 - #1〜#5 を材料として回収でき、記事資産の分散を防げる
+
+**現時点の採用方針はこれ。** handoff 上は、種 #1 を先に単独公開する案はいったん採らず、#6 の導入 incident として吸収する前提で進める。
 
 ### 方針 2: #1 を先に短く出し、#6 で回収する
 
