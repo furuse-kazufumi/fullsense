@@ -24,7 +24,7 @@ nav_order: 95
 ## ⭐ 2026-06-17 昼 — #43 継続の再開地点
 
 > **この節が現時点の最優先の再開地点。** 下の 2026-06-12 節は旧文脈の記録として残している。
-> **2026-06-18 このターンの変更範囲:** #43 多言語 draft の引用同期と handoff 更新に続き、公開済み英語版 `https://qiita.com/furuse-kazufumi/items/2622da17495d61480fa2` のタイトル崩れ（表示が `# >-` になる不具合）を切り分けた。原因は front matter の `title: >-` と poster 側の最小パーサ不一致で、repo 規約 (`MULTILINGUAL_ROLLOUT_SPEC.md`) に反して英語版と韓国語版が block scalar title を持っていたこと。手元 source は single-quoted title へ修正し、`tools/qiita_public_post.py` / `tools/qiita_team_post.py` に block-scalar title と YAML single-quote 解釈の対応を追加した。dry-run では本来のタイトル文字列へ復旧済みだが、公開 Qiita 記事そのものはまだ未 PATCH のため表示崩れが残っている。外部更新は human gate が要る。
+> **2026-06-18 このターンの変更範囲:** #43 多言語 draft の引用同期と handoff 更新に続き、公開済み英語版 `https://qiita.com/furuse-kazufumi/items/2622da17495d61480fa2` のタイトル崩れ（表示が `# >-` になる不具合）を切り分けた。原因は front matter の `title: >-` と poster 側の最小パーサ不一致で、repo 規約 (`MULTILINGUAL_ROLLOUT_SPEC.md`) に反して英語版と韓国語版が block scalar title を持っていたこと。手元 source は single-quoted title へ修正し、`tools/qiita_public_post.py` / `tools/qiita_team_post.py` に block-scalar title と YAML single-quote 解釈の対応を追加した。そのうえで human gate 後に public PATCH を実行し、Qiita API / HTML (`<title>` / `og:title` / `<h1>`) で本来のタイトル文字列へ復旧したことを確認した。
 
 **再確認した状態:**
 - `#43` 日本語記事 `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md` は
@@ -41,12 +41,12 @@ nav_order: 95
   翻訳ドリフトが残る。翻訳差分を直すときは
   まず日本語 source を見て、次に英語、その後 zh/ko を追従させる。
 - `qiita43_harness_loop_stack_en.md` と `qiita43_harness_loop_stack_ko.md` の front matter `title:` は
-  repo 規約どおり **single-quoted 1 行 title** へ修正済み。英語版の公開 Qiita item
-  `2622da17495d61480fa2` は現時点ではまだ `# >-` 表示のままなので、
-  反映には別途 public PATCH が必要。
+  repo 規約どおり **single-quoted 1 行 title** へ修正済み。英語版は
+  `public_id: 2622da17495d61480fa2` も front matter に明示した。
 - `tools/qiita_public_post.py` / `tools/qiita_team_post.py` は、front matter の
   `title: >-` / `|` と single-quoted YAML の `''` エスケープを解釈できるよう修正済み。
-  2026-06-18 の dry-run では英語版タイトルを正しく表示することを確認した。
+  2026-06-18 の dry-run と public PATCH 後の API / HTML 確認では、
+  英語版タイトルを正しく表示することを確認した。
 - `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md` は、翻訳ドリフトを
   直すまで accidental publish を避けるため `ignorePublish: true` に倒した。
   ただし `id:` を持つ発行済み限定共有 draft のため、これは **同期凍結**であって
@@ -92,11 +92,9 @@ nav_order: 95
   （`<RAD corpus root>` は各環境のローカル配置に置き換える）。
 
 **次回ここから再開:**
-1. 英語版 public Qiita item `2622da17495d61480fa2` のタイトル修正を優先する。
-   ローカル source と poster は修正済みなので、残りは human gate 後の public PATCH のみ。
-2. dev.to 英語版を更新または publish する前に、
+1. dev.to 英語版を更新または publish する前に、
    「外部公開/外部書き込みは human gate」という運用を守る。
-3. #43 の多言語差分を触るときは、日本語版を source of truth として
+2. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
    en/zh/ko の translation sync note は本文から外してあり、publish へ進めるときは
    `ignorePublish: true` / `private: true` を外す前に

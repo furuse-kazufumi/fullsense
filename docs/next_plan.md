@@ -4,23 +4,25 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` まで反映済み。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` まで反映済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
-- 現在の作業中差分は #43 英語版タイトル崩れ対応（source / poster / handoff）と `.llterm/loop_ledger.jsonl` の tracked ノイズ。
+- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 外部公開・push は未実施。
 
 ## 次の具体的な一手
 
-1. 英語版 public Qiita item `2622da17495d61480fa2` のタイトル修正を最優先とし、human gate 後に public PATCH を実行する。ローカル source と poster の修正は先に完了させる。
-2. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
-3. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
-4. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。今回の安全な区切りで上程する。
-5. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
-6. push / publish / 外部書き込みは引き続き human gate のまま維持する。
-7. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
-8. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
+1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
+2. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
+3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。今回の安全な区切りで上程する。
+4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
+5. push / publish / 外部書き込みは引き続き human gate のまま維持する。
+6. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
+7. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
+
+2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。公開中の Qiita 英語版記事 `2622da17495d61480fa2` に対して、local で復旧済みの正しいタイトルを public PATCH で反映する。対象は Qiita API の記事更新 1 件のみで、push / publish 範囲拡大 / deindex はこの決定に含めない。
+2026-06-18 execution log: `tools/qiita_public_post.py post ... --yes` で public Qiita item `2622da17495d61480fa2` を PATCH 更新し、Qiita API `GET /api/v2/items/2622da17495d61480fa2` と HTML の `<title>` / `og:title` / `<h1>` で正しい英語タイトルへの反映を確認した。
 
 ## このターンの実施結果
 
@@ -69,6 +71,8 @@
 - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、front matter の `title: >-` と poster 側の最小パーサ不一致が原因と切り分けた。
 - `qiita43_harness_loop_stack_en.md` / `_ko.md` の front matter `title:` を repo 規約どおり single-quoted 1 行へ修正した。
 - `tools/qiita_public_post.py` / `tools/qiita_team_post.py` に YAML block scalar title (`>-` / `|`) と single-quoted YAML escaping (`''`) の解釈を追加し、dry-run で英語版タイトルが正しく復旧することを確認した。
+- `tools: fix qiita title frontmatter parsing` を commit `409b628` として作成し、ローカル修正を ledger ノイズから分離して確定した。
+- public Qiita item `2622da17495d61480fa2` に対してタイトル修正 PATCH を実行し、API / HTML の両方で `#43 In 2026, the Industry Named the AI's "Reins" and "Wheel" — How I Started Assembling a Prototype harness/loop engineering Stack Locally` へ復旧したことを確認した。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
   - タイトル修正と handoff 更新を commit し終えた時点で、残差分が ledger だけなら次アクションは deindex 案の human gate 上程へ戻す。

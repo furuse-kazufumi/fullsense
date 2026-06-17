@@ -30,7 +30,7 @@
 - #43:
   - 第3章導入〜`3-2. LLM Wiki` 本体の主要段落を日本語正本→en→zh→ko の順で spot-check し、3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入、thought circulation / Anti-Circulation Safeguards、製品対応づけまで多言語 draft が日本語正本に追従していることを確認した
   - en/zh/ko に欠落していた「半信×半疑」の引用ブロックと URL を既存の inline 引用形式へ揃えて日本語正本へ同期し、末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を追加した。`3-2. LLM Wiki` 本体は quote block と参考導線を含む主要論点まで局所確認済みとして扱える状態になった
-  - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、`qiita_public_post.py` / `qiita_team_post.py` には YAML block scalar title と single-quote escaping の解釈を追加した。dry-run では本来のタイトル文字列へ復旧済みだが、公開 Qiita item への PATCH は未実施
+  - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、英語版には `public_id` も明示した。`qiita_public_post.py` / `qiita_team_post.py` には YAML block scalar title と single-quote escaping の解釈を追加し、human gate 後の public PATCH と API / HTML 確認まで完了した
 - handoff:
   - `NEXT_SESSION.md` / `SESSION_SUMMARY.md` / `next_plan.md` のナラティブを今回監査内容へ更新し、前バッチの #44 / #45 説明が再開導線に残らないよう整理した
   - handoff の commit 列と実施結果列に `d92192f` を backfill し、`20afd3e` 自身は 1-commit ラグ規律どおり次回 backfill 対象に維持した
@@ -86,11 +86,10 @@
   - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
 - レビュー依頼時は、未 commit の `.llterm/loop_ledger.jsonl` ノイズ diff と commit 本体の docs diff を混ぜず、対象 commit の `git show` を優先提示する。
 - `hedge retention audit` のような audit 系語は内部 handoff では問題ないが、外部公開文脈へ出す場合は records-retention 監査と誤読されないよう定義を添える。
-- 公開済み英語版 Qiita item `2622da17495d61480fa2` は現時点でもタイトル表示が壊れている。ローカル source / poster 側の fix は完了したが、公開面の修正には human gate 後の public PATCH が必要。
+- 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル修正は完了した。再発防止の観点では、他の `title: >-` 残存ファイルを同じ poster 経路へ流す前に正規化対象を広げるかどうかが残論点。
 
 ## 次の具体的な一手
 
-1. 英語版 public Qiita item `2622da17495d61480fa2` のタイトル修正を、human gate 後に public PATCH で反映する。
-2. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
-3. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
-4. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記を human gate 解除後に早めに実施する。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
+2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
+3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記を human gate 解除後に早めに実施する。
