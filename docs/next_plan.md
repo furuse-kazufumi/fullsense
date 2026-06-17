@@ -94,7 +94,7 @@
     - ここで確認したのは主に日本語正本に対する訳文追従であり、`RAD_INDEX.md` や Karpathy Gist の一次情報をこの翻訳監査ターンで再取得したわけではない。
   - `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節、製品対応づけ、「半信×半疑」の引用ブロックと URL、末尾参考リストまで局所確認・同期済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
   - 追加 spot-check で、en/zh/ko に欠落していた「半信×半疑」の引用ブロックと `alu.jp` URL を日本語正本に合わせて補い、新規ブロックを各翻訳ファイルの既存引用スタイルへ揃えた。
-  - ただし #43 翻訳 3 本は、日本語正本の inline 引用 8 ブロック中 4 ブロックのみ保持で、未同期の 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）が残る。crop URL 数も日本語正本 16 に対し en/zh/ko は各 8 で、なお非対称である。
+  - 続く追補で、未同期だった 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）も本文と末尾参考へ同期した。crop URL 数も日本語正本 16 / en 16 / zh 16 / ko 16 に揃った。
   - 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 

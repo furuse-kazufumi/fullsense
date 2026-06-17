@@ -103,9 +103,9 @@ nav_order: 95
    `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、
    Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従している。
    `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節、製品対応づけ、「半信×半疑」の引用ブロックと URL、末尾参考リストまで局所確認・同期済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
-   ただし #43 翻訳 3 本は、日本語正本の inline 引用 8 ブロック中 4 ブロックのみ保持で、未同期の 4 件
-   （`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）
-   が残る。crop URL 数も日本語正本 16 に対し en/zh/ko は各 8 で、まだ非対称である。
+   その後の追補で、未同期だった 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` /
+   `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）も本文と末尾参考へ同期した。
+   これで crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に揃っている。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
    残っているのは、それ以外の未確認箇所にある factual / translation drift である。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため

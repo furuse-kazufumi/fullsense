@@ -96,6 +96,10 @@ Keep the phrase "verifiable goal" in mind. Later it pays off directly in Claude 
 
 The sources around loop engineering (Data Science Dojo, Medium articles, various blogs) are **practitioner blogs, not peer-reviewed papers**. Since the definitions (automation vs loop, P-R-P-A-O) are consistent across multiple sources, I treat them as "terminology that circulated in practice in 2026." I maintain the sense that this is not an "authoritative academic definition."
 
+> 🗨️ "Don't take books at face value." — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/MDsuuBm0xXPgngwyQve0)
+>
+> (Interlude) Practitioner blogs, peer-reviewed papers, and this article too — **don't swallow any of them whole**. Please at least take home that sense of temperature: don't confuse "terminology that circulated in practice in 2026" with an "authoritative academic definition."
+
 ---
 
 ## Chapter 1 [Reins = harness] The Industry Definition, RAPTOR as the Real Thing, and "One More Axis"
@@ -453,6 +457,10 @@ The harness is powerful. But to speak of that power, you don't need false attrib
 >
 > (Interlude) "Knowing that you don't know" — this is the spirit of honest disclosure. An AI can fluently hold forth even on what it doesn't know. That's why the human side needs an eye that draws the line: "this part is unverified." Chapter 1's "algorithmic understanding," too, is in the end, I think, one form of this **knowing-that-one-does-not-know**.
 
+> 🗨️ "Results? Is it okay to lie? Asking for confirmation is, on the contrary, honest..." — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
+>
+> (Interlude) "Asking for confirmation" is not weakness but **honesty**. llloop's `CONFIRM` is the same: when in doubt, stop and ask. Returning the judgment to the human holding the reins is the discipline of an "unbypassable brake."
+
 ---
 
 ## Chapter 3 [Knowledge = RAPTOR + RAD + LLM Wiki] Pouring "Knowledge" into the Harness and the Loop
@@ -486,6 +494,10 @@ So if I write it honestly —
 > **About 65 domains, about 47,000 notes (actual Markdown count). Separately, hacker_corpus about 32,000 files. When I round it to 'about 49k-item scale,' I do so with the timestamp 'the tally value at the May 2026 expansion.'**
 
 I'm calmly applying "doubt the breakdown of unusually large numbers," which I stated at the top, to my own numbers too.
+
+> 🗨️ "Luck... That's a way of talking about luck that almost makes you feel skill instead." — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/CPon283udq6PfvfKrxAP)
+>
+> (Interlude) "49k items" is the same. **The bigger the number, the more you should doubt the breakdown.** Just as the real substance behind "great luck" might be skill, the real substance behind "great scale" might just be "a rounded value from the May 2026 tally." The more comfortably a number flatters you, the more reason to stop once.
 
 #### RAD's Operating Rules — Don't Just Accumulate
 
@@ -623,6 +635,10 @@ Finally, I consolidate here the "argument for superiority" foreshadowed in Chapt
 
 So that "it is the human who holds the reins" is less machismo than an **observed tendency**. And my llive is trying to bring this human tendency, little by little, to the architecture level — that's the motivation running through A, B, and C.
 
+> 🗨️ "So this is what society is like too... I can see the rules now..." — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC)
+>
+> (Interlude) Not a gutsy slogan of "let's be careful," but **bind it with rules (structure).** The first principle, bringing the locus of responsibility to the architecture level, means exactly this: implement the rules that have come into view in a form that's hard to bypass.
+
 ---
 
 ## Conclusion: The Reins, the Wheel, and Knowledge
@@ -669,6 +685,10 @@ Hold the reins, circulate the wheel safely, and grow the knowledge. All of it, w
 - "Conversations don't click with someone who differs in IQ.": https://alu.jp/series/スナックバス江/crop/PJm0yAGeJy9iSa487mrX
 - "Thanks to the mystery graph, the sense of desperation is faint.": https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 - "Knowing that one does not know.": https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l
+- "Don't take books at face value.": https://alu.jp/series/スナックバス江/crop/MDsuuBm0xXPgngwyQve0
+- "Results? Is it okay to lie? Asking for confirmation is, on the contrary, honest...": https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL
+- "Luck... That's a way of talking about luck that almost makes you feel skill instead.": https://alu.jp/series/スナックバス江/crop/CPon283udq6PfvfKrxAP
 - "Half Trust × Half Doubt": https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
+- "So this is what society is like too... I can see the rules now...": https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
 > ※ The main items hedged in the text as "secondary-only / primary unconfirmed" are as follows: the OpenAI article's text, tagline, and scale figures (the primary returns HTTP 403); LangChain's `Agent = Model + Harness` formula and the measurement sources and conditions of each harness benchmark (including the model name said to be GPT-5.5); the release date of Claude Code v2.1.139; the latest status of llloop's tests being green (no re-run performed); RAD's total document count (the current local recount is **47,097 docs as of June 17, 2026**, while older prose may still refer to "about 49k"); the proposer and date of Karpathy's LLM Wiki Gist; the source pages for Canon's "Spirit of the Three Selfs" and the four principles of *First, Break All the Rules*; and Chapter 3's "three points of human advantage" (observation-based, not measured). I will update them as soon as I can confirm them with primary sources.

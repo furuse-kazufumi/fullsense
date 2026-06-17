@@ -76,9 +76,8 @@
 - 追加 spot-check で、`3-2. LLM Wiki` 本体にある「半信×半疑」の引用ブロックと `alu.jp` URL が en/zh/ko で欠落していたことを確認し、日本語正本に合わせて補った。
   - この修正は factual 反転ではなく、引用ブロックと参照 URL の同期漏れを埋めるための translation drift 修正である。
 - さらに末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を同期し、新規ブロックの `Snack Bus-e / Forbidden Shibukawa (Alu)` 表記と埋込リンク形式を各翻訳ファイル内の既存引用スタイルへ揃えた。
-- ただし #43 翻訳 3 本は、日本語正本の inline 引用 8 ブロック中 4 ブロックのみ保持で、未同期の 4 件
-  （`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）が残る。
-  - crop URL 数も日本語正本 16 に対し en/zh/ko は各 8 で、引用導線はなお非対称である。
+- 続く追補で、未同期だった 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）も本文と末尾参考へ同期した。
+  - crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に揃い、引用導線の非対称は解消した。
 - さらに参考文献節と末尾注記（`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙）も spot-check し、4 言語とも出典束と留保注記が日本語正本に追従していることを確認した。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
   - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
