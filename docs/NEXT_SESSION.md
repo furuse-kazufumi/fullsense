@@ -24,7 +24,7 @@ nav_order: 95
 ## ⭐ 2026-06-17 昼 — #43 継続の再開地点
 
 > **この節が現時点の最優先の再開地点。** 下の 2026-06-12 節は旧文脈の記録として残している。
-> **2026-06-18 このターンの変更範囲:** #43 多言語 draft のうち、第3章導入〜`3-2. LLM Wiki` 導入直前を日本語正本→en→zh→ko の順で spot-check し、3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従していることを確認した。あわせて handoff 3 文書の commit 列に `d92192f` を backfill し、再開導線が前バッチの説明を引きずらないよう更新した。再開時の index / worktree 状態は `git status` で現況確認する。
+> **2026-06-18 このターンの変更範囲:** #43 多言語 draft のうち、第3章導入〜`3-2. LLM Wiki` 本体の主要段落を日本語正本→en→zh→ko の順で spot-check し、3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入、thought circulation / Anti-Circulation Safeguards、製品対応づけ、そして日本語正本にある「半信×半疑」の引用ブロックと URL の欠落修正まで反映した。あわせて handoff 3 文書の commit 列に `d92192f` を backfill し、再開導線が前バッチの説明を引きずらないよう更新した。再開時の index / worktree 状態は `git status` で現況確認する。
 
 **再確認した状態:**
 - `#43` 日本語記事 `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md` は
@@ -102,7 +102,7 @@ nav_order: 95
    3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と
    `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、
    Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従している。
-   `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節まで局所確認済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
+   `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節、製品対応づけ、「半信×半疑」の引用ブロックと URL まで局所確認・同期済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
    残っているのは、それ以外の未確認箇所にある factual / translation drift である。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため

@@ -550,6 +550,12 @@ Against this, llive designs **Anti-Circulation Safeguards (LLW-AC-01–08)** (at
 
 That last one, "external anchor mandatory," is the very stance that runs through this whole article — **primary-source-ism**. The AI shouldn't complete things solely within itself; it must always drop anchor in an immovable external fact.
 
+> 🗨️ "Half Trust × Half Doubt" — Snack Basue / Forbidden Shibukawa (Al)
+>
+> (Brief aside) The antidote to thought circulation is this **half-trust, half-doubt**. Even the summary you wrote yourself should be doubted as a "working draft," and anchored to immovable external facts (DOI / hash / CAD). It is the healthy doubt that keeps an AI from believing the rumor it started as "what everyone is saying."
+
+https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
+
 Incidentally, FullSense (described later) consists of **three products: llmesh / llive / llove**. If we map the LLM Wiki roles onto the products, **llive is the "Wiki editor," llove is the "Wiki's UI," and llmesh is the "Bus that carries the raw sources."** (RAG is not a product but a *method* of search, so I don't place it in the product column; I position it as a tool used on top of the three products.)
 
 ### 3-3. RAPTOR Doubles as the Entry Point for "Using Knowledge Safely"

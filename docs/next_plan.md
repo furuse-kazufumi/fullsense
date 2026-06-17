@@ -56,6 +56,7 @@
 - `d92192f` では handoff 3 文書の commit 列と drift 範囲メモを更新し、当時最新だった `e7dfdef` までの現在地を揃えた。
 - en/zh/ko の変更は `ignorePublish: true` への切替だけでなく、終盤 hedge note / 要約表 / 結論部の `47,097 docs` 反映まで含む本文改稿である。
 - 今回の `20afd3e` 自身は 1-commit ラグ規律どおり本節にはまだ列挙しないが、内容は #43 第3章導入〜`3-2. LLM Wiki` 導入直前の監査結果を handoff へ反映する更新だった。
+- 今回の `dc70dc0` 自身も 1-commit ラグ規律どおり本節にはまだ列挙しないが、その後の本文監査では en/zh/ko の `3-2. LLM Wiki` 本体に日本語正本の「半信×半疑」引用ブロックと `alu.jp` URL が欠落していることを確認し、3 言語へ同期した。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
   - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
 
@@ -90,7 +91,8 @@
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、Karpathy Gist / llive 要件 / RAPTOR 実装の一次情報をこの翻訳監査ターンで再取得したわけではない。
   - 第3章の導入〜`3-2. LLM Wiki` 導入直前も局所確認済みで、3層スタックの説明、`RAD_INDEX.md` / `65 RAD corpora` の導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入まで日本語正本に追従している。
     - ここで確認したのは主に日本語正本に対する訳文追従であり、`RAD_INDEX.md` や Karpathy Gist の一次情報をこの翻訳監査ターンで再取得したわけではない。
-  - `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節まで局所確認済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
+  - `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節、製品対応づけ、「半信×半疑」の引用ブロックと URL まで局所確認・同期済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
+  - 追加 spot-check で、en/zh/ko に欠落していた「半信×半疑」の引用ブロックと `alu.jp` URL を日本語正本に合わせて補った。
   - 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 
@@ -101,7 +103,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
+- 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 - `.llterm/loop_ledger.jsonl` の恒久対策は、`git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記案として整理済みで、次の安全な区切りで human gate に上程する。
 
 ## 注意
