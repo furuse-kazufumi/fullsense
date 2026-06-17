@@ -16,7 +16,7 @@
 1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
 2. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
 3. llterm 記事シードは、まず **種 #6「自走 AI ループの作り方と落とし穴」** を先に育てる。種 #1「注入タスク飢餓」は #6 の導入 incident としていったん吸収し、単独先出しは当面しない。
-4. 種 #6 の article plan (`docs/articles/2026-06-18/llterm_seed6_article_plan.md`) は作成済み。次はこの骨格に沿って ja 草稿を起こし、冒頭 100 語 + 第1章で through-line を検証する。
+4. 種 #6 の article plan (`docs/articles/2026-06-18/llterm_seed6_article_plan.md`) は作成済みで、9 原則の骨子と単一長編向けの 1 コマ方針 (`025.jpg`) まで確定した。次は ja 草稿の冒頭 100 語 + 第1章を書き、その後に第7章の各原則を 1 段落ずつ肉付けする。
 5. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
 6. push / publish / 外部書き込みは引き続き human gate のまま維持する。
 7. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。

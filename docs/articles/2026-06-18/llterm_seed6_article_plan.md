@@ -1,7 +1,8 @@
 # llterm 種 #6 記事設計メモ (2026-06-18)
 
-対象: `D:/projects/llterm/docs/ARTICLE_SEEDS.md`  
-参照時点: llterm commit `ff066bdf99db74263f1c6208fa8a671a080bc7fc`
+対象: llterm 種 #6 を Qiita 長編へ落とすための設計メモ  
+参照時点: llterm commit `ff066bdf99db74263f1c6208fa8a671a080bc7fc`  
+根拠スナップショット: [llterm_seed6_evidence.md](/D:/projects/fullsense/docs/articles/2026-06-18/llterm_seed6_evidence.md)
 
 ## 記事の狙い
 
@@ -44,6 +45,8 @@ AI に「今の進捗を要約して」と頼んだ。
 13 分待っても返ってこない。遅いだけではなかった。ログを追うと、そのタスクは構造上、永久に飲み込まれる経路に入っていた。  
 しかも掘るほど、別の穴まで出てきた。`ctx 2549%` という物理的にありえない占有率、rotate のたびに回る過剰レビュー、そして「任せているはずなのに監督できない」自走ループの弱さ。
 
+根拠: [llterm_seed6_evidence.md](/D:/projects/fullsense/docs/articles/2026-06-18/llterm_seed6_evidence.md) の A / B
+
 ### nut graf
 
 この一件で痛感したのは、自走 AI の難しさは「賢いプロンプトを書くこと」ではなく、**人間がどこで介入できるかを設計すること**だという点だった。  
@@ -65,6 +68,7 @@ AI に「今の進捗を要約して」と頼んだ。
 
 - 消費点が継続ターン側にしかなく、rotate 連発だと injection を拾えない
 - `ctx 2549%` により毎ターン rotate
+- codex 側の自己圧縮と llterm 側 rotate が競合し、1 セッション=1 ターンに縮退する
 - handoff ターンにもフルレビューが走り、時間とレートを食う
 
 ### 4. investigation
@@ -94,6 +98,8 @@ AI に「今の進捗を要約して」と頼んだ。
 | 種 #4 全行タイムスタンプ + ローテログ | 監査可能性を architecture level で担保 | 第5章 |
 | 種 #5 flaky test 顕在化 | 観測だけでなく検証系も決定論化が必要 | 第6章 |
 
+注記: 第3章の `ctx 2549%` と「自己圧縮 × rotate」の衝突は、種の 1 本ではなく **原則 2 / 原則 3** から起こす章。
+
 ## 章構成案
 
 ### 0. 冒頭 3 点ボックス
@@ -119,7 +125,9 @@ AI に「今の進捗を要約して」と頼んだ。
 
 - 物理上限を超える数字は、改善ではなく計測バグの兆候
 - billing 用累積値を occupancy 制御へ流用した誤り
+- codex が自前で圧縮する系に外側から rotate を重ねると、境界の二重管理で縮退する
 - honest disclosure の山場 1
+- 根拠: [llterm_seed6_evidence.md](/D:/projects/fullsense/docs/articles/2026-06-18/llterm_seed6_evidence.md) の B / C / D
 
 ### 4. 多 AI レビューは質だが、無条件に重ねると時間を食う
 
@@ -140,11 +148,30 @@ AI に「今の進捗を要約して」と頼んだ。
 - 出力ログ追加で flaky が露出
 - block point を作って決定論化
 - 種 #5 を回収
+- 根拠: [llterm_seed6_evidence.md](/D:/projects/fullsense/docs/articles/2026-06-18/llterm_seed6_evidence.md) の E
 
 ### 7. 抽出した 9 原則
 
-- 種別ではなく一般論として再列挙
-- 他 harness / agent loop へ転用できる書き方に寄せる
+1. **ターン境界を制御単位として設計する**  
+   headless CLI を回す系では、人間の介入はまずターン境界に吸着する。即時介入が欲しいなら interrupt を別建てにする。
+2. **物理上限を超える指標は、まず計測を疑う**  
+   `ctx 2549%` のような数字は勝ち筋ではなく計測破綻のサイン。占有率は瞬間値として測る。
+3. **自己管理コンポーネントに外側の管理を二重掛けしない**  
+   codex の自己圧縮と llterm の rotate を重ねると、境界が競合して縮退する。管理境界は 1 つに絞る。
+4. **レビューは量ではなく適用範囲で設計する**  
+   実装ターンと記録ターンを分けずに同じ強度でレビューすると、高コストな二度漬けになる。
+5. **飢餓は「積んだ」ではなく「消費点に届くか」で決まる**  
+   queue に積んだだけでは足りない。rotate や分岐をまたいでも必ず拾う消費点が必要。
+6. **監督可能性は telemetry を architecture に埋め込んで作る**  
+   全行タイムスタンプや時間ローテログは後付けの便利機能ではなく、HITL の土台。
+7. **推測ではなく production 観測から芋づるで掘る**  
+   1 観察から複数の構造バグを辿る姿勢が、solo AI judgment を避ける。
+8. **並行テストは「たまたま緑」をまず疑う**  
+   race 依存の緑は、観測点を少し動かしただけで崩れる。block point を作って決定論化する。
+9. **honest disclosure を結果ではなく判断基準として使う**  
+   異常値を盛らず、直っていない残課題まで書くことで、記事全体の信頼性を作る。
+
+各原則の根拠: [llterm_seed6_evidence.md](/D:/projects/fullsense/docs/articles/2026-06-18/llterm_seed6_evidence.md)
 
 ### 8. honest disclosure / 残課題
 
@@ -162,10 +189,9 @@ AI に「今の進捗を要約して」と頼んだ。
 
 ## 図や挿絵の候補
 
-- `006.jpg`: harness engineering
-- `025.jpg`: loop engineering 実践中
-- `081.jpg`: vibe coding との対比で「ここから先は loop engineering」
-- `163.jpg`: 多 AI orchestration の密集感
+- 今回は **単一の長編 Qiita 記事** として設計するため、バス江コマは **1 枚だけ**使う
+- 採用候補は `025.jpg`。loop engineering を実地で回している感じが最も強く、記事全体の代表絵として使える
+- `006.jpg` / `081.jpg` / `163.jpg` は別記事や派生かみくだき版へ回し、この長編では使わない
 
 注意:
 
@@ -183,4 +209,4 @@ AI に「今の進捗を要約して」と頼んだ。
 
 1. この章構成をベースに Qiita 草稿 `ja` を起こす
 2. 冒頭 100 語と第1章だけ先に書き、through-line が立つか確認する
-3. その後に 9 原則と honest disclosure 節を肉付けする
+3. 第7章の 9 原則を各 1 段落へ肉付けし、第3章 / 第6章 / 第8章の evidence link と整合させる
