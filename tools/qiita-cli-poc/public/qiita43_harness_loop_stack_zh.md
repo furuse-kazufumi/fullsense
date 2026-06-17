@@ -318,6 +318,8 @@ Filip Verloy 先生在2026年6月的 Medium 文章 *From Prompt Engineering to L
 
 我自制了一个名为 **llterm**（本地的独立项目，v0.1.0a0，Apache-2.0）的、**用于设计 · 执行 · 实验自主循环的独立 harness**。这是2026年6月11日启动的 Python 项目。
 
+这里先把名字理清：**`llloop` 是在终端里运转的 TUI 试作名，`llterm` 则是从那条线重做出来的 GUI 版。** 我感觉 TUI 在输入、显示、观察这几方面已经碰到了墙，所以判断若想把循环长时间而安全地跑起来，**改成 GUI 分离**会更合适，于是连名称也一起切换了。
+
 首先放一段 **honest disclosure**。**llterm 处于 alpha 阶段（v0.1.0a0，骨架）。** 因为还没有公开到 GitHub，所以正文里贴不出公开仓库的 URL（用已公开的 RAPTOR 一侧的链接来补）。验证任务目前也以 green-keeper 为中心，并非生产品质。我不掺水地写。
 
 在此之上，设计的骨架是这样的。

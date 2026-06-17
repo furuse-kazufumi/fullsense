@@ -83,6 +83,7 @@
 - `docs/articles/assets/bazue_all/index.md` にユーザー確認済みの挿絵対応を追記し、`081.jpg` = バイブコーディング、`006.jpg` = ハーネスエンジニアリング、`163.jpg` = AIオーケストラ、`025.jpg` = ループエンジニアリング実践中、という運用メモを固定した。
 - `tools: share frontmatter parser across qiita flows` を commit `a07f0c7` として作成し、shared parser・sibling root-cause 修正・回帰テスト追加を ledger ノイズから分離して確定した。
 - #43 の 4 言語草稿で、旧名称 `llloop` と起動コマンド `lll` を最終名称 `llterm` へ更新した。`SESSION_SUMMARY.md` / `next_plan.md` の現行進捗説明も同じ表記へ揃えた。
+- #43 の `llloop` / `llterm` の関係も 4 言語本文へ補足し、`llloop` は TUI 試作名、`llterm` は TUI の限界感から GUI に切り替えて作り直した後継だと明記した。
 - #43 の「キン肉星＋R.O.D＋リィンカーネーション＋ROS PBT」の 4 連想は、人によっては飛躍や `bazue_all/015.jpg` 的な誤用に見えうるため、4 つの連想が別々の設計部品を受け持ったことを ja/en/zh/ko の本文へ追記した。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` を canonical `6e107c7dfa0c261ee4d7` への short redirect 本文へ更新した。ローカル source `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は public PATCH 済みの実体として維持する。
 - public Qiita の redirect / タイトル修正の反映確認は、このセッションで実行した API / HTML の自己確認ログに基づく。

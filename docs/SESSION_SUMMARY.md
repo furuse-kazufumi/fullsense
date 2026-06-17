@@ -34,6 +34,7 @@
   - en/zh/ko に欠落していた「半信×半疑」の引用ブロックと URL を既存の inline 引用形式へ揃えて日本語正本へ同期し、末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を追加した。`3-2. LLM Wiki` 本体は quote block と参考導線を含む主要論点まで局所確認済みとして扱える状態になった
   - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、英語版には `public_id` も明示した。`tools/_frontmatter.py` を新設して poster / converter 4 経路へ共有化し、`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストを追加した。human gate 後の public PATCH と API / HTML 確認まで完了した
   - #43 本文の旧名称 `llloop` / 起動コマンド `lll` を、最終名称 `llterm` へ 4 言語草稿で一括置換した。あわせて handoff 内の現行進捗説明も `llterm` 表記へ揃え、archive 扱いの旧メモは温存した
+  - さらに #43 の `llloop` / `llterm` 関係を補足し、`llloop` は terminal 内で回していた TUI 試作、`llterm` は TUI の入力・表示・観測で行き詰まりを感じて作り直した GUI 版だと 4 言語本文へ明記した
   - #43 の「キン肉星＋R.O.D＋リィンカーネーション＋ROS PBT」の 4 連想について、引用や画像の誤用に見えないよう補足説明を追加した。4 つの連想がそれぞれ「種の並立 / 知識の外部化 / 同じ魂の再搭載 / 世代交代つき個体群評価」という別々の設計部品を指していたことを、ja/en/zh/ko で明示した
 - public Qiita:
   - public Qiita 記事 `bf1cfe3b4f40b87f068d` を、既公開 canonical `6e107c7dfa0c261ee4d7` へ誘導する short redirect 本文へ PATCH 更新した。ローカル source は `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` として保持し、前例 `0a35e1bfb814adab8565` と同じ「統合・再編しました」+ canonical 直リンクの文面へ揃えた

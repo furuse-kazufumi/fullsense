@@ -319,6 +319,8 @@ This single line, "scales risk at machine speed," is the very design motivation 
 
 I've built **llterm** (a local, independent project, v0.1.0a0, Apache-2.0), an **independent harness for designing, running, and experimenting with autonomous loops**. It's a Python project launched on June 11, 2026.
 
+To clarify the naming: **`llloop` was the TUI prototype that ran inside the terminal, while `llterm` is the GUI version rebuilt from that line.** I felt the TUI had hit a wall in input, display, and observability, so I judged that **separating it into a GUI** was the better way to run long autonomous loops safely, and I changed the name along with the architecture.
+
 Let me place an **honest disclosure** first. **llterm is at the alpha stage (v0.1.0a0, a skeleton).** I haven't published it to GitHub yet, so I can't paste a public repository URL in the text (I supplement with links to the already-published RAPTOR side). The demonstration tasks are currently centered on the green-keeper too, not production quality. I'll write this without padding.
 
 That said, the skeleton of the design is this.
