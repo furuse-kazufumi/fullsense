@@ -12,7 +12,7 @@
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / `LLM Wiki / thought circulation` / 統合章〜結語 を除く未確認箇所の factual / translation drift を優先して詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章後半（RAD 運用ルール〜統合章）/ `LLM Wiki / thought circulation` / 統合章〜結語 を除く未確認箇所の factual / translation drift を優先して詰める。
 2. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ちだが、次の安全な区切りで早めに上程する。
 4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
@@ -78,6 +78,8 @@
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、Hashimoto/OpenAI/Karpathy/RAPTOR の一次情報を各翻訳ターンで再取得したわけではない。
   - 「捨てた数字」の独立 honest disclosure 節も局所確認済みで、arXiv `2605.18747` / `2605.27922` / `2605.26112`、`Bölük 10x` 否定、`GPT-5.5` 要検証、一次と二次の線引きまで日本語正本に追従している。
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、各論文やベンチの一次ページをこの翻訳監査ターンで再取得したわけではない。
+  - 第3章後半（RAD の運用ルール / `LLM Wiki` の 3 層 / thought circulation と Anti-Circulation Safeguards / RAPTOR の evidence ladder / `corpus-first advantage` / 統合章の A-B-C 表）も局所確認済みで、K² サイジング、`rad_prune.py` の dry-run、`39 documents / 12 clusters` 注記、llive の主観マッピング、`suspicion → patch_validated` の証拠段階、`47,097 docs` を含む統合表まで日本語正本に追従している。
+    - ここでも確認したのは主に日本語正本に対する訳文追従であり、Karpathy Gist / llive 要件 / RAPTOR 実装の一次情報をこの翻訳監査ターンで再取得したわけではない。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 
 ## 次回の開始メモ
@@ -87,7 +89,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / `LLM Wiki / thought circulation` / 統合章〜結語 を除く未確認箇所の factual / translation drift を詰める。
+- 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章後半（RAD 運用ルール〜統合章）/ `LLM Wiki / thought circulation` / 統合章〜結語 を除く未確認箇所の factual / translation drift を詰める。
 
 ## 注意
 
