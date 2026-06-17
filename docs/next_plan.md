@@ -17,6 +17,8 @@
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ちだが、次の安全な区切りで早めに上程する。
 4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
 5. push / publish / 外部書き込みは引き続き human gate のまま維持する。
+6. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
+7. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
 
 ## このターンの実施結果
 

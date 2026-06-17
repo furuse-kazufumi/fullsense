@@ -74,6 +74,8 @@
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
   - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
   - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
+ - レビュー依頼時は、未 commit の `.llterm/loop_ledger.jsonl` ノイズ diff と commit 本体の docs diff を混ぜず、対象 commit の `git show` を優先提示する。
+ - `hedge retention audit` のような audit 系語は内部 handoff では問題ないが、外部公開文脈へ出す場合は records-retention 監査と誤読されないよう定義を添える。
 
 ## 次の具体的な一手
 
