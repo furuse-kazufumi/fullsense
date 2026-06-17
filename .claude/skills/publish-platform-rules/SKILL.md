@@ -75,7 +75,11 @@ description: |
 - ★**罠3 (タグ/タイトル 422)**: dev.to タグは **英数字のみ小文字** = ハイフン/アンダースコア/空白も
   **不可** (`honest-disclosure` は 422 → 除去して連結 `honestdisclosure`)。最大 4。**title は 128 字上限**
   (超過は 422 → 語/区切り境界でトリム、全文は本文 H1 に残す)。両方ツール修正済。
-- **既定 draft** (`--published` で公開)。**冪等性**: 初回 POST で `<stem>.devto.json` (sidecar) が生成され、
+- ★**罠4 (公開が効かない)**: dev.to/Forem は **JSON の `published` フィールドを反映しない** (PUT しても draft のまま)。
+  **公開は `body_markdown` 先頭の front matter `published: true`** で制御する (`---\ntitle: "..."\npublished: true\n
+  tags: a, b\ncanonical_url: ...\n---\n\n<本文>`)。title に `:` や `"` を含むので **`json.dumps(title)` で二重引用符化**。
+  確認は `GET /api/articles/me/published` (権威)。publish_devto.py の `--published` は front matter 方式へ要改修。
+- **既定 draft** (公開は上記 front matter 方式)。**冪等性**: 初回 POST で `<stem>.devto.json` (sidecar) が生成され、
   次回以降は PUT 更新。`--canonical-url` に Qiita 原典 URL を入れると重複コンテンツ SEO 対策になる。
 - **キー発行**: dev.to → Settings → 左メニュー **Extensions** → 最下部「DEV Community API Keys」→ Generate。
 - 言語: **英語版をそのまま** 出す (separate-per-language 原則)。日本語版は出さない。
