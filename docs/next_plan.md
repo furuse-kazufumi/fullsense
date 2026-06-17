@@ -4,17 +4,17 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` まで反映済み。
-- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` まで反映済み。
+- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズに加え、handoff 更新中の `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 外部公開・push は未実施。
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko の translation drift を優先して詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko の honest-disclosure 節**内部**を含む factual / translation drift を優先して詰める。
 2. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
-3. `.llterm/loop_ledger.jsonl` は次の commit に混ぜない。必要なら restore するか、恒久対策を別判断する。
+3. `.llterm/loop_ledger.jsonl` は次の commit に混ぜない。恒久対策として `git rm --cached` + `.gitignore` 追加を行うなら human gate を通す。
 4. push / publish / 外部書き込みは引き続き human gate のまま維持する。
 
 ## このターンの実施結果
@@ -23,10 +23,13 @@
 - `docs: tighten publish-gate notes for qiita drafts` を commit `e4e3968` として作成した。
 - `docs: refresh handoff after publish-gate cleanup` を commit `7e7931c` として作成した。
 - `docs: sync handoff with article 43 drift fixes` を commit `0478fa1` として作成した。
+- `docs: refresh handoff after latest drift sync` を commit `426be90` として作成した。
 - `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
 - `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述を、ローカル source / live URL の差も含めて整えた。
-- en/zh/ko の変更は本文改稿ではなく `ignorePublish: true` への切替だが、`id:` を持つ発行済み限定共有 draft の **同期凍結**であって、公開面の drift が消えるわけではない。
+- `426be90` では handoff 2 ファイルを最新の commit 列まで追従させたが、その後の factual 反転確認ぶんで handoff 2 文書に再度更新が入っている。
+- en/zh/ko の変更は `ignorePublish: true` への切替だけでなく、終盤 hedge note / 要約表 / 結論部の `47,097 docs` 反映まで含む本文改稿である。
 - `.llterm/loop_ledger.jsonl` はどちらの commit にも含めていない。
+  - 当面は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような個別 add を使い、`git add .` で ledger を再ステージしない。
 
 ## publish gate 送り
 
@@ -37,7 +40,9 @@
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。
 - #43 en/zh/ko は発行済み限定共有 draft の translation drift を解消してから `ignorePublish: false` に戻す。
   - `47,097 docs` ベースの factual drift 修正は **ローカル source 側のみ** で、live URL はまだ旧表現を残している。
-  - en/zh/ko には、日本語正本の「約49k件」の honest-disclosure 説明節に相当する段がまだ無い。
+  - en/zh/ko とも対応する honest-disclosure 節は実在している。
+    - 根拠: en `qiita43_harness_loop_stack_en.md` の `#### honest disclosure (Handling the "About 49k Items" Number)`、zh `qiita43_harness_loop_stack_zh.md` の `#### honest disclosure（关于「约49k件」这个数字的处理）`、ko `qiita43_harness_loop_stack_ko.md` の `#### honest disclosure("약 49k건"이라는 숫자의 취급)`。
+  - 残っているのは節**内部**と周辺の factual / translation drift。
 
 ## 次回の開始メモ
 
@@ -46,7 +51,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko の残りの translation drift を詰める。
+- 次は #43 en/zh/ko の節内 factual / translation drift を詰める。
 
 ## 注意
 
