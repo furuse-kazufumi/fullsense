@@ -6,8 +6,8 @@
 
 - Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` / `a07f0c7` / `0232814` / `bafacdd` / `ac7cb80` / `7200d5d` / `40f580e` / `e2d1887` / `c37d084` まで反映済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
-- 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズのみ。
-- `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
+- 現在の deindex 作業差分は `.gitignore` 追記 / `.llterm/loop_ledger.jsonl` の index 解除 / `docs/next_plan.md` の実行ログ更新のみ。
+- `.llterm/loop_ledger.jsonl` は deindex 実行済みで、以後は local-only telemetry として `.gitignore` 管理へ移行する。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - git push / 新規記事の新規 publish は未実施。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
 
@@ -15,7 +15,7 @@
 
 1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
 2. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 導入直前 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
-3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。今回の安全な区切りで上程する。
+3. deindex commit では `.llterm/loop_ledger.jsonl` の削除分と `.gitignore` 追記だけを含め、台帳の実データ追記を巻き込まない。
 4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
 5. push / publish / 外部書き込みは引き続き human gate のまま維持する。
 6. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
@@ -25,6 +25,8 @@
 2026-06-18 execution log: `tools/qiita_public_post.py post ... --yes` で public Qiita item `2622da17495d61480fa2` を PATCH 更新し、Qiita API `GET /api/v2/items/2622da17495d61480fa2` と HTML の `<title>` / `og:title` / `<h1>` で正しい英語タイトルへの反映を確認した。
 2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。public Qiita 記事 `bf1cfe3b4f40b87f068d` は、既公開 canonical `6e107c7dfa0c261ee4d7` へ誘導する short redirect 本文へ置き換える。対象は Qiita API の記事更新 1 件のみで、push / deindex / 他記事の publish はこの決定に含めない。
 2026-06-18 execution log: `py -3.11 tools/qiita_public_post.py post tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md --yes` で public Qiita item `bf1cfe3b4f40b87f068d` を PATCH 更新した。反映確認は、このセッションで実行した Qiita API / HTML の自己確認ログに基づく。API `GET /api/v2/items/bf1cfe3b4f40b87f068d` の `body` 先頭と、公開 HTML の canonical ID / 「統合・再編しました」文言で redirect 本文への反映を確認した。
+2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。`.llterm/loop_ledger.jsonl` の tracked ノイズを恒久対策として deindex する。実行内容は `git rm --cached .llterm/loop_ledger.jsonl` と `.gitignore` へのファイル単位追記で、push / publish / 追加の削除はこの決定に含めない。
+2026-06-18 execution log: `git rm --cached .llterm/loop_ledger.jsonl` を実行し、`.gitignore` に `.llterm/loop_ledger.jsonl` を追記した。実ファイル末尾は JSONL として読める状態を確認済みで、破損切り分けは不要だった。以後この台帳は on-disk で保持しつつ untracked 運用へ切り替える。
 
 ## このターンの実施結果
 

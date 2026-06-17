@@ -33,3 +33,5 @@ __pycache__/
 # Explorer browsing but NEVER tracked in this PUBLIC portal repo (feedback_no_local_path_in_public).
 docs/articles/*.lnk
 
+# llterm local telemetry ledger — machine/session generated, keep on disk but untracked
+.llterm/loop_ledger.jsonl

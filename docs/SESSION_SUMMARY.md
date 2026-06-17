@@ -14,7 +14,7 @@
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - git push / 新規記事の新規 publish / Qiita Team 書き込み / test は **未実施**。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
-- `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
+- `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - 公開 safety 柵は維持:
@@ -25,7 +25,7 @@
 
 ## いま worktree に残っている差分
 
-- `.llterm/loop_ledger.jsonl`
+- deindex commit 前の整理差分として `.gitignore` / `.llterm/loop_ledger.jsonl` の index 解除 / handoff docs 更新
 
 ## 今回 commit した差分の要点
 
@@ -40,6 +40,8 @@
   - Qiita 側の反映確認は、このセッションで実行した API / HTML の自己確認ログに基づく。Qiita API `GET /api/v2/items/bf1cfe3b4f40b87f068d` の `body` 先頭と、公開 HTML の canonical ID `6e107c7dfa0c261ee4d7` / 「統合・再編しました」の文言が一致していた
 - 挿絵索引:
   - `docs/articles/assets/bazue_all/index.md` にユーザー指定の 4 対応を追記した。`081.jpg` をバイブコーディング、`006.jpg` をハーネスエンジニアリング、`163.jpg` を AI オーケストラ、`025.jpg` をループエンジニアリング実践中のイメージとして再利用する方針を、各コマの `使いどころ` に固定した
+- deindex:
+  - ユーザー承認後、`.llterm/loop_ledger.jsonl` に対して `git rm --cached` を実行し、`.gitignore` にファイル単位の ignore を追加した。ログファイル本体は残したまま Git 追跡だけを外す形で、毎セッションの tracked ノイズ差分を止める恒久対策へ切り替えた
 - handoff:
   - `NEXT_SESSION.md` / `SESSION_SUMMARY.md` / `next_plan.md` のナラティブを今回監査内容へ更新し、前バッチの #44 / #45 説明が再開導線に残らないよう整理した
   - handoff の commit 列と実施結果列に `d92192f` を backfill し、`20afd3e` 自身は 1-commit ラグ規律どおり次回 backfill 対象に維持した
