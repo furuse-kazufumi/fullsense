@@ -599,7 +599,7 @@ Let me fold the three chapters so far onto a single sheet.
 |---|---|---|---|---|
 | **A** | harness engineering | **Why** (philosophy) | RAPTOR's two-layer separation | The human holds the reins and raises the AI as a subordinate |
 | **B** | loop engineering | **How** (control) | llloop (MAPE-K + fail-closed, alpha) | The safety layer can't be bypassed on the current path; swap strategies to compare |
-| **C** | RAD + LLM Wiki | **What** (knowledge) | About 47,000 notes (※as of the May 2026 tally) + the evidence ladder | corpus-first means multi-perspective and primary-source-ism even solo |
+| **C** | RAD + LLM Wiki | **What** (knowledge) | About 47,000 notes (Markdown count: 47,097 docs) + the evidence ladder | corpus-first means multi-perspective and primary-source-ism even solo |
 
 The industry's diagrams tend to line up A, B, and C as separate buzzwords. My claim is — **these three are three faces of a single worldview.** The core of that worldview converges to just two principles.
 
@@ -627,7 +627,7 @@ In 2026, the AI industry, after prompt engineering, named **harness engineering 
 
 - **The reins (A)** … implemented by RAPTOR's two-layer separation where "Python controls everything, and the LLM concentrates on judgment." Onto that, I added an auxiliary line to the model-centric diagram: "the human holds the reins and raises the AI as a subordinate." It's a different lineage from Karpathy's "vibe coding" (February 2025), and I don't say "I named it first."
 - **The wheel (B)** … my homemade `llloop` (alpha, unpublished) circulates with MAPE-K and applies the brake with a **fail-closed safety layer that can't be bypassed on the current path**. The LLM can only propose; the final gate is the SafetyPolicy.
-- **Knowledge (C)** … RAD of about 65 domains and about 47,000 notes (※as of the May tally) is grown with the LLM Wiki pattern (with an anti-circulation safeguard against the circulation of thought), and RAPTOR uses it safely while preserving the stages of evidence.
+- **Knowledge (C)** … RAD of about 65 domains and about 47,000 notes (Markdown count: 47,097 docs) is grown with the LLM Wiki pattern (with an anti-circulation safeguard against the circulation of thought), and RAPTOR uses it safely while preserving the stages of evidence.
 
 And what ran through this entire article was a single discipline.
 
@@ -666,4 +666,4 @@ Hold the reins, circulate the wheel safely, and grow the knowledge. All of it, w
 - "Thanks to the mystery graph, the sense of desperation is faint.": https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 - "Knowing that one does not know.": https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l
 
-> ※ The main items hedged in the text as "secondary-only / primary unconfirmed" are as follows: the OpenAI article's text, tagline, and scale figures (the primary returns HTTP 403); LangChain's `Agent = Model + Harness` formula and the measurement sources and conditions of each harness benchmark (including the model name said to be GPT-5.5); the release date of Claude Code v2.1.139; the latest status of llloop's tests being green (no re-run performed); RAD's total document count ("about 49k" is the May 2026 tally value); the proposer and date of Karpathy's LLM Wiki Gist; the source pages for Canon's "Spirit of the Three Selfs" and the four principles of *First, Break All the Rules*; and Chapter 3's "three points of human advantage" (observation-based, not measured). I will update them as soon as I can confirm them with primary sources.
+> ※ The main items hedged in the text as "secondary-only / primary unconfirmed" are as follows: the OpenAI article's text, tagline, and scale figures (the primary returns HTTP 403); LangChain's `Agent = Model + Harness` formula and the measurement sources and conditions of each harness benchmark (including the model name said to be GPT-5.5); the release date of Claude Code v2.1.139; the latest status of llloop's tests being green (no re-run performed); RAD's total document count (the current local recount is **47,097 docs as of June 17, 2026**, while older prose may still refer to "about 49k"); the proposer and date of Karpathy's LLM Wiki Gist; the source pages for Canon's "Spirit of the Three Selfs" and the four principles of *First, Break All the Rules*; and Chapter 3's "three points of human advantage" (observation-based, not measured). I will update them as soon as I can confirm them with primary sources.

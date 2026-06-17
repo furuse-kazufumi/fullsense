@@ -597,7 +597,7 @@ suspicion（怀疑）
 |---|---|---|---|---|
 | **A** | harness engineering | **为什么**（哲学） | RAPTOR 的两层分离 | 人类握缰绳，把AI当部下来培养 |
 | **B** | loop engineering | **怎么做**（控制） | llloop（MAPE-K＋fail-closed，alpha） | 安全层在当前路径下绕不过去 · 替换策略加以比较 |
-| **C** | RAD + LLM Wiki | **做什么**（知识） | 约4.7万条笔记（※2026年5月统计时点）＋证据阶梯 | corpus-first 让单人也多视角 · 一次信息源主义 |
+| **C** | RAD + LLM Wiki | **做什么**（知识） | 约4.7万条笔记（Markdown 实数 47,097 docs）＋证据阶梯 | corpus-first 让单人也多视角 · 一次信息源主义 |
 
 业界的图，往往把 A、B、C 当作各自的流行词并排摆着。我的主张是——**这三者，是同一个世界观的三张面孔**。那个世界观的核心，收敛于仅仅两条原理。
 
@@ -625,7 +625,7 @@ suspicion（怀疑）
 
 - **缰绳（A）** …… RAPTOR 以「Python 全程控制，LLM 专注判断」的两层分离来实现。在此之上，往以模型为中心的图里添了一条辅助线：「人类握缰绳，把AI当部下来培养」。这与 Karpathy 先生的 "vibe coding"（2025-02）是不同谱系，不说「是我先命名的」。
 - **轮子（B）** …… 自制 `llloop`（alpha · 未公开）用 MAPE-K 运转，以 **在当前路径下绕不过去的 fail-closed 安全层** 挂上刹车。LLM 只能提议，最终闸门是 SafetyPolicy。
-- **知（C）** …… 约65领域 · 约4.7万条笔记（※5月统计时点）的 RAD，用 LLM Wiki 模式培养（给思想的循环装上反循环安全装置），由 RAPTOR 守住证据的阶段来安全使用。
+- **知（C）** …… 约65领域 · 约4.7万条笔记（Markdown 实数 47,097 docs）的 RAD，用 LLM Wiki 模式培养（给思想的循环装上反循环安全装置），由 RAPTOR 守住证据的阶段来安全使用。
 
 而贯穿本文的，只有一条做法。
 
@@ -664,4 +664,4 @@ suspicion（怀疑）
 - 「多亏了那张谜之图表，悲壮感淡了些」: https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 - 「无知之知」: https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l
 
-> ※ 正文中作过对冲的「仅二次信息／一次未确认」的主要项目如下：OpenAI 文章的正文 · 标语 · 规模数值（一次为 HTTP 403）、LangChain 的 `Agent = Model + Harness` 公式与各 harness 基准的计测来源 · 计测条件（含被称为 GPT-5.5 的模型名）、Claude Code v2.1.139 的发布日、llloop 测试为绿的最新状态（重新跑尚未实施）、RAD 总 documents 数（「约49k」为2026年5月统计值）、Karpathy 先生 LLM Wiki Gist 的提案者 · 日期、佳能「三自精神」与 *First, Break All the Rules* 四原则的出处页码、第3章的「人类优越三点」（并非 measured 而是基于观察）。一旦能以一次信息源确定，便即更新。
+> ※ 正文中作过对冲的「仅二次信息／一次未确认」的主要项目如下：OpenAI 文章的正文 · 标语 · 规模数值（一次为 HTTP 403）、LangChain 的 `Agent = Model + Harness` 公式与各 harness 基准的计测来源 · 计测条件（含被称为 GPT-5.5 的模型名）、Claude Code v2.1.139 的发布日、llloop 测试为绿的最新状态（重新跑尚未实施）、RAD 总 documents 数（当前手元重计为 **2026年6月17日的 47,097 docs**，较旧的 prose 里仍可能写作「约49k」）、Karpathy 先生 LLM Wiki Gist 的提案者 · 日期、佳能「三自精神」与 *First, Break All the Rules* 四原则的出处页码、第3章的「人类优越三点」（并非 measured 而是基于观察）。一旦能以一次信息源确定，便即更新。

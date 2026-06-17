@@ -599,7 +599,7 @@ suspicion(의심)
 |---|---|---|---|---|
 | **A** | harness engineering | **왜**(철학) | RAPTOR의 2층 분리 | 인간이 고삐를 쥐고, AI를 부하로서 기른다 |
 | **B** | loop engineering | **어떻게**(제어) | llloop(MAPE-K + fail-closed, alpha) | 안전 층은 현 상태의 경로에서는 우회 불가·전략을 교체하여 비교 |
-| **C** | RAD + LLM Wiki | **무엇을**(지식) | 약 4.7만 노트(※2026년 5월 집계 시점) + 증거 사다리 | corpus-first로 혼자라도 다시점·일차 정보주의 |
+| **C** | RAD + LLM Wiki | **무엇을**(지식) | 약 4.7만 노트(Markdown 실수 47,097 docs) + 증거 사다리 | corpus-first로 혼자라도 다시점·일차 정보주의 |
 
 업계의 도식은, A와 B와 C를 따로따로 유행어로 늘어놓기 쉽다. 내 주장은 — **이 셋은, 하나의 세계관의 세 개의 얼굴이다** 라는 것이다. 그 세계관의 핵심은, 단 두 개의 원리로 수렴한다.
 
@@ -627,7 +627,7 @@ suspicion(의심)
 
 - **고삐(A)** … RAPTOR가 "Python이 전부 제어하고, LLM은 판단에 전념하는" 2층 분리로 구현. 거기에 "인간이 고삐를 쥐고, AI를 부하로서 기른다"는, 모델 중심의 도식에의 보조선을 더했다. Karpathy 씨의 "vibe coding"(2025-02)과는 별개 계통이고, "내가 먼저 명명했다"고는 말하지 않는다.
 - **고리(B)** … 직접 만든 `llloop`(alpha·미공개)이 MAPE-K로 돌고, **현 상태의 경로에서는 우회 불가의 fail-closed 안전 층**으로 브레이크를 건다. LLM은 제안밖에 할 수 없고, 최종 게이트는 SafetyPolicy.
-- **지(C)** … 약 65분야·약 4.7만 노트(※5월 집계 시점)의 RAD를, LLM Wiki 패턴으로 키우고(사고의 순환에는 반순환의 안전 장치를 달고), RAPTOR가 증거의 단계를 지켜 안전하게 쓴다.
+- **지(C)** … 약 65분야·약 4.7만 노트(Markdown 실수 47,097 docs)의 RAD를, LLM Wiki 패턴으로 키우고(사고의 순환에는 반순환의 안전 장치를 달고), RAPTOR가 증거의 단계를 지켜 안전하게 쓴다.
 
 그리고 이 글을 관통한 것은, 단 하나의 작법이었다.
 
@@ -666,4 +666,4 @@ suspicion(의심)
 - "수수께끼의 그래프 덕분에 비장감이 옅다": https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 - "무지의 지": https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l
 
-> ※ 본문 중에서 헤지한 "이차 정보뿐 / 일차 미확인"의 주요 항목은 다음과 같다: OpenAI 기사의 본문·태그라인·규모 수치(일차는 HTTP 403), LangChain의 `Agent = Model + Harness` 식과 각 하네스 벤치의 계측 출처·계측 조건(GPT-5.5로 여겨지는 모델명을 포함), Claude Code v2.1.139의 릴리스 날짜, llloop의 테스트 녹색의 최신 상태(재실행은 미실시), RAD 총 documents 수("약 49k"는 2026년 5월 집계값), Karpathy 씨 LLM Wiki Gist의 제안자·날짜, 캐논 "삼자의 정신"과 *First, Break All the Rules* 4원칙의 출처 페이지, 제3장의 "인간 우위 3점"(measured가 아니라 관찰 기반). 일차 정보로 확정되는 대로, 갱신한다.
+> ※ 본문 중에서 헤지한 "이차 정보뿐 / 일차 미확인"의 주요 항목은 다음과 같다: OpenAI 기사의 본문·태그라인·규모 수치(일차는 HTTP 403), LangChain의 `Agent = Model + Harness` 식과 각 하네스 벤치의 계측 출처·계측 조건(GPT-5.5로 여겨지는 모델명을 포함), Claude Code v2.1.139의 릴리스 날짜, llloop의 테스트 녹색의 최신 상태(재실행은 미실시), RAD 총 documents 수(현재 로컬 재집계는 **2026년 6월 17일 기준 47,097 docs**이며, 오래된 prose에는 여전히 "약 49k"가 남아 있을 수 있음), Karpathy 씨 LLM Wiki Gist의 제안자·날짜, 캐논 "삼자의 정신"과 *First, Break All the Rules* 4원칙의 출처 페이지, 제3장의 "인간 우위 3점"(measured가 아니라 관찰 기반). 일차 정보로 확정되는 대로, 갱신한다.

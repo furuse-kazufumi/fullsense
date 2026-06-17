@@ -10,34 +10,29 @@
 ## 現況
 
 - 今回の作業は **Qiita 草稿 / handoff 文書の整合調整のみ**。
-- `push` / 外部公開 / Qiita Team 書き込み / commit / test は **未実施**。
+- 文書バッチは commit `bab1557`（`docs: sync qiita draft handoff for articles 43-45`）として保存済み。
+- `push` / 外部公開 / Qiita Team 書き込み / test は **未実施**。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズとして worktree に差分が残っている。
-- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は今回の doc batch に含めて staged 済み。
+- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit に含めた。
 - 公開 safety 柵は維持:
   - `qiita43_harness_loop_stack_kamikudaki.md` = `private: true` + `ignorePublish: true`
   - `qiita44_evolutionary_programs_block_diagram.md` = `private: true` + `ignorePublish: true`
   - `qiita45_human_ai_dev_incident_patterns.md` = `private: true` + `ignorePublish: true`
   - #43 en/zh/ko draft も `ignorePublish: true`
 
-## いま staged されている差分
+## いま worktree に残っている差分
 
-- `docs/NEXT_SESSION.md`
+- `.llterm/loop_ledger.jsonl`
 - `docs/SESSION_SUMMARY.md`
-- `docs/articles/FULLSENSE_KB_INDEX.md`
-- `docs/articles/IDEAS_2026_06_15_harness_loop_raptor.md`
 - `docs/next_plan.md`
+- `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md`
 - `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.md`
 - `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_kamikudaki.md`
 - `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_ko.md`
 - `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_zh.md`
 - `tools/qiita-cli-poc/public/qiita44_evolutionary_programs_block_diagram.md`
-- `tools/qiita-cli-poc/public/qiita45_human_ai_dev_incident_patterns.md`
 
-## staged 外のノイズ差分
-
-- `.llterm/loop_ledger.jsonl` = 自動ログ差分が残存しており、今回の doc batch へは含めない
-
-## 差分の要点
+## 今回 commit した差分の要点
 
 - #43:
   - かみくだき版を追加
@@ -48,7 +43,7 @@
   - 冒頭導線を text TOC 化
   - バス江コマは本文から撤去済み（残 0）
   - ☕ 休憩ポイント、annotation、参考文献節を追加
-  - 参考文献節は現状まだ系統名整理の水準で、publish 前に各流派の一次文献補強が必要
+  - 参考文献節には canonical 入口を追加済みで、残タスクは URL 露出粒度と lexicase を足すかの調整
 - #45:
   - 新規草稿追加
   - `artifact` 系ラベルを `残した再開導線` に統一
@@ -61,15 +56,20 @@
 
 ## 未解決ではないが次に確認すべき点
 
-- staged 集合は **11 ファイル / 1909 insertions / 76 deletions** の doc batch。
+- commit `bab1557` は **11 ファイル / 1909 insertions / 76 deletions** の doc batch。
 - `NEXT_SESSION.md` には publish gate（外部 URL / 著者帰属 / raw 200 / translation drift / dev.to draft 状態）が残っている。
 - #43 en/zh/ko は発行済み限定共有 draft のまま translation drift を残して凍結しているので、公開線へ戻す前に drift 解消が必要。
-- `qiita44` は参考文献が薄く、publish gate で各系統の一次文献を最低 1 本ずつ補う必要がある。
-- `qiita43_harness_loop_stack_kamikudaki.md` は短縮版草稿として ☕ 休憩ポイントと参考文献節をまだ省略している。
+- `qiita44` の参考文献節には canonical 入口を追加済み。
+  - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME の代表文献を最低 1 本ずつ置いた。
+  - 残りは URL を本文へどこまで出すか、lexicase まで足すかの粒度調整。
+- `qiita43_harness_loop_stack_kamikudaki.md` には ☕ 休憩ポイントと参考文献節を追加済み。
+  - ただし短縮版のため、一次情報の細目は完全版 #43 側へ寄せる方針を維持。
+- `qiita43` en/zh/ko の終盤 hedged note に残っていた RAD 総件数の古い表現は、`47,097 docs` ベースへ更新済み。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
 
 ## 次の具体的な一手
 
-1. `docs/NEXT_SESSION.md` を起点に staged 11 ファイルの塊をそのまま 1 本の doc batch として扱うか、必要なら commit 境界を切り直すか決める。
-2. その判断前に `git diff --cached --stat` と `git diff --cached -- docs/NEXT_SESSION.md tools/qiita-cli-poc/public/qiita44_evolutionary_programs_block_diagram.md tools/qiita-cli-poc/public/qiita45_human_ai_dev_incident_patterns.md` を見て、今回の handoff + 草稿変更範囲を再確認する。
-3. もしこの batch を維持するなら、次は **新規作業を足さず** commit メッセージ案を作るか、publish 前 gate の残タスクだけを別 batch で続ける。
+1. publish gate 用の別バッチとして、#43 en/zh/ko の残りの translation drift を詰める。
+2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
+3. `.llterm/loop_ledger.jsonl` は次の commit に混ぜない。必要なら restore するか、恒久対策を別判断する。
+4. commit `bab1557` 後に加えた `qiita43` かみくだき / `qiita44` 参考文献 / handoff 更新の未 commit 差分を取りこぼさない。
