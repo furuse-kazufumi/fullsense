@@ -44,6 +44,7 @@
   - llterm 側 commit `ff066bdf99db74263f1c6208fa8a671a080bc7fc` 時点の `D:/projects/llterm/docs/ARTICLE_SEEDS.md` を読み、`docs/articles/2026-06-18/llterm_article_seeds_screening.md` に記事化スクリーニングを追加した。結論は、**本命長編は 種 #6「自走 AI ループの作り方と落とし穴」**、単独中編候補は 種 #1「注入タスク飢餓」だったが、handoff 方針としては #1 を先出しせず #6 の導入 incident に吸収する、というもの
   - さらに `docs/articles/2026-06-18/llterm_seed6_article_plan.md` を追加し、種 #6 の controlling idea、hook + nut graf、6-beat through-line、種 #1〜#5 の章マッピング、章構成案、9 原則の骨子まで固定した。Qiita 草稿の spine は確定済みだが、各原則の 1 段落肉付けはまだ残っている
   - `docs/articles/2026-06-18/llterm_seed6_evidence.md` を追加し、`13 分` / `ctx 2549%` / `billing 累積値の occupancy 誤用` / `race 依存の緑` など公開直結の具体主張を、llterm 側 `ARTICLE_SEEDS.md` から fullsense repo 内へ根拠スナップショットとして固定した
+  - `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first.md` を新規作成し、種 #6 の Qiita 草稿を起こし始めた。現時点では front matter つき draft として、冒頭 3 点ボックス、hook + nut graf、`0. まず結論`、`1. 「進捗を要約して」が永久に返らなかった` までを書き、through-line が実際の prose でも立つところまで確認した
 - 挿絵索引:
   - `docs/articles/assets/bazue_all/index.md` にユーザー指定の 4 対応を追記した。`081.jpg` をバイブコーディング、`006.jpg` をハーネスエンジニアリング、`163.jpg` を AI オーケストラ、`025.jpg` をループエンジニアリング実践中のイメージとして再利用する方針を、各コマの `使いどころ` に固定した
   - `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は一次確認し、セリフ `『そういうお前も好きやで…』激オチ『頑ななあの娘へ』2章12節から.. 聖書の引用みたいになってる…!` の存在を確認した。今後このコマを記事に使う場合、出典として支えられるのはこのセリフまでで、`honest disclosure` を毎回持ち出す感じ / chapter-verse のように引用する感じ、等の上乗せ解釈は筆者側の比喩として分離して書く
