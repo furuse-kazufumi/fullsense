@@ -68,12 +68,13 @@
 - その後の局所確認では、「約49k件」節と直後の橋渡し段については en/zh/ko とも日本語正本に大筋追従しており、残差は細い訳しぶれの範囲だった。
 - さらに RAD 再接地後に `50手法 vs 96ノート` 節も spot-check し、96ノート / 39 documents / 12 clusters の注意書きまで en/zh/ko が日本語正本に追従していることを確認した。
   - ここで確認したのは数値そのものの正当性ではなく、日本語正本に対する訳文追従である。
+- さらに `LLM Wiki / thought circulation` 節も spot-check し、Anti-Circulation Safeguards の箇条書きと `llmesh / llive / llove` の製品対応づけまで en/zh/ko が日本語正本に追従していることを確認した。
 - `loop_ledger` は tracked のままなので、恒久対策（`git rm --cached` を採るか）は未決。
   - 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ち。
   - 暫定運用: `git add .` は使わず、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後の橋渡し段、および `50手法 vs 96ノート` 節を除く未確認箇所の factual / translation drift を詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記を human gate 解除後に早めに実施する。

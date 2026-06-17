@@ -12,7 +12,7 @@
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後の橋渡し段、および `50手法 vs 96ノート` 節を除く未確認箇所の factual / translation drift を優先して詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節を除く未確認箇所の factual / translation drift を優先して詰める。
 2. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ちだが、次の安全な区切りで早めに上程する。
 4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
@@ -50,6 +50,7 @@
   - 「約49k件」節と直後の橋渡し段は局所確認済みで、日本語正本に大筋追従している。
   - `50手法 vs 96ノート` 節も局所確認済みで、96ノート / 39 documents / 12 clusters の注意書きまで日本語正本に追従している。
     - ここで確認したのは数値そのものの正当性ではなく、日本語正本に対する訳文追従である。
+  - `LLM Wiki / thought circulation` 節も局所確認済みで、Anti-Circulation Safeguards の箇条書きと `llmesh / llive / llove` の製品対応づけまで日本語正本に追従している。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 
 ## 次回の開始メモ
@@ -59,7 +60,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko のうち、「約49k件」節と直後の橋渡し段、および `50手法 vs 96ノート` 節を除く未確認箇所の factual / translation drift を詰める。
+- 次は #43 en/zh/ko のうち、「約49k件」節と直後の橋渡し段、`50手法 vs 96ノート` 節、`LLM Wiki / thought circulation` 節を除く未確認箇所の factual / translation drift を詰める。
 
 ## 注意
 
