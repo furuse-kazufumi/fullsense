@@ -405,7 +405,7 @@ https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL
 
 ### 2-6. 起動と実証タスク green-keeper
 
-llterm の起動コマンドは `llterm`（console script ＝ パッケージをインストールすると PATH に入る起動コマンド）。引数なしで起動すると、ccr 風の対話メニュー（プロジェクト選択＋ next_plan / last_outcome の引き継ぎ表示＋既定30秒でアクティブプロジェクト自動継続）が出て、初回実証タスク **green-keeper** を実行します。
+llterm の起動コマンドは `llterm` です。現行実装では **PySide6 の GUI エントリポイント**として起動し、ウィンドウ上でプロジェクト選択・`next_plan` / `last_outcome` の引き継ぎ表示・既定30秒でのアクティブプロジェクト自動継続を扱います。名前に `term` が残っているのは、terminal 起点で育った名残です。初回実証タスクは **green-keeper** です。
 
 green-keeper は **GitOps reconciliation（reconciliation ＝「あるべき姿」と「今の姿」を突き合わせて差を埋める整合化）** 風のループです。庭師が「全部の草木が元気な状態」を desired として、枯れかけ（drift）を見つけたら水をやる、というイメージ。
 

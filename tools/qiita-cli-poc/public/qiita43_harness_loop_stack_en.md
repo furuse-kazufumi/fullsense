@@ -391,7 +391,7 @@ In fact, the tests demonstrate that "**even if the LLM proposes a dangerous dele
 
 ### 2-6. Launch and the Demonstration Task green-keeper
 
-llterm's launch command is `llterm` (a console script = a launch command that enters PATH when you install the package). Launching with no arguments brings up a ccr-style interactive menu (project selection + carry-over display of next_plan / last_outcome + automatic continuation of the active project after the default 30 seconds), and runs the first demonstration task **green-keeper**.
+llterm's launch command is `llterm`. In the current implementation it starts as a **PySide6 GUI entry point**, where the window handles project selection, carry-over display of `next_plan` / `last_outcome`, and automatic continuation of the active project after the default 30 seconds. The name still contains `term` as a remnant of its terminal-origin line. The first demonstration task is **green-keeper**.
 
 green-keeper is a loop in the style of **GitOps reconciliation** (reconciliation = aligning by matching "how things should be" against "how things are" and filling the gap). The image is a gardener who sets "all the plants in healthy condition" as desired, and when they find a withering one (drift), they water it.
 

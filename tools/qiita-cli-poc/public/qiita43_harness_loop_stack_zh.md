@@ -390,7 +390,7 @@ llterm 的安全层 `safety.py` 里的 `SafetyPolicy.classify`，会把每个动
 
 ### 2-6. 启动与验证任务 green-keeper
 
-llterm 的启动命令是 `llterm`（console script ＝ 安装包后会进入 PATH 的启动命令）。无参数启动时，会弹出 ccr 风格的交互菜单（项目选择＋next_plan / last_outcome 的承接显示＋默认30秒自动继续活跃项目），并执行首个验证任务 **green-keeper**。
+llterm 的启动命令是 `llterm`。在现行实现里，它作为 **PySide6 的 GUI 入口**启动，由窗口来处理项目选择、`next_plan` / `last_outcome` 的承接显示，以及默认30秒后的活跃项目自动继续。名字里还保留着 `term`，只是因为它出身于 terminal 那条线。首个验证任务是 **green-keeper**。
 
 green-keeper 是一个 **GitOps reconciliation（reconciliation ＝把「应有的样子」和「当前的样子」对照，填平差异的整合）** 风格的循环。意象是：园丁把「所有草木都生机勃勃的状态」当作 desired，一旦发现枯萎（drift）就浇水。
 

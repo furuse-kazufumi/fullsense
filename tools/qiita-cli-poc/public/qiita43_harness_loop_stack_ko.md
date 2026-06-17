@@ -390,7 +390,7 @@ llterm의 안전 층 `safety.py`의 `SafetyPolicy.classify`는, 각 액션을 **
 
 ### 2-6. 기동과 실증 태스크 green-keeper
 
-llterm의 기동 명령은 `llterm`(console script = 패키지를 설치하면 PATH에 들어가는 기동 명령). 인자 없이 기동하면, ccr 풍의 대화형 메뉴(프로젝트 선택 + next_plan / last_outcome의 인계 표시 + 기본 30초로 활성 프로젝트 자동 계속)가 나오고, 첫 실증 태스크 **green-keeper** 를 실행한다.
+llterm의 기동 명령은 `llterm` 이다. 현행 구현에서는 이것이 **PySide6 GUI 엔트리포인트**로 기동하며, 창 안에서 프로젝트 선택, `next_plan` / `last_outcome`의 인계 표시, 기본 30초 뒤 활성 프로젝트 자동 계속을 다룬다. 이름에 `term` 이 남아 있는 것은 terminal 계열에서 출발한 흔적일 뿐이다. 첫 실증 태스크는 **green-keeper** 다.
 
 green-keeper는 **GitOps reconciliation(reconciliation = "있어야 할 모습"과 "지금의 모습"을 맞대어 차이를 메우는 정합화) 풍의 루프다. 정원사가 "모든 초목이 건강한 상태"를 desired로 삼고, 시들어 가는 것(drift)을 발견하면 물을 준다, 는 이미지.
 
