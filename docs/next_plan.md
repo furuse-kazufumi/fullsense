@@ -4,7 +4,7 @@
 
 ## 現在地
 
-- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` まで反映済み。
+- Qiita 草稿と handoff 文書の整合調整は commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` まで反映済み。
 - 現在の worktree 差分は `.llterm/loop_ledger.jsonl` の tracked ノイズだけ。
 - `.llterm/loop_ledger.jsonl` は **未 restore** で、tracked ノイズ差分が worktree に残っている。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
@@ -12,7 +12,7 @@
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / `LLM Wiki / thought circulation` / 統合章〜結語 / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章中盤（安全層〜`/goal`）を除く未確認箇所の factual / translation drift を優先して詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / `LLM Wiki / thought circulation` / 統合章〜結語 を除く未確認箇所の factual / translation drift を優先して詰める。
 2. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
 3. `loop_ledger` 恒久対策: `git rm --cached .llterm/loop_ledger.jsonl` + `.gitignore` 追記。human gate 解除待ちだが、次の安全な区切りで早めに上程する。
 4. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
@@ -39,6 +39,9 @@
 - `docs: narrow article 43 remaining audit scope` を commit `ed1caab` として作成した。
 - `docs: sync next session handoff for article 43 drift` を commit `cdcc389` として作成した。
 - `docs: record article 43 harness audit` を commit `2f92ee2` として作成した。
+- `docs: narrow article 43 early-section audit scope` を commit `7f82f6e` として作成した。
+- `docs: record article 43 control-loop audit` を commit `85eb5e3` として作成した。
+- `docs: record article 43 terminology audit` を commit `521d318` として作成した。
 - `e4e3968` では #43 多言語 draft の RAD 件数 drift、`kamikudaki` の最小補強、`qiita44` の参考文献訂正、handoff の stale 記述を整えた。
 - `0478fa1` では #43 JA 正本の hedge note と `NEXT_SESSION.md` の stale 記述を、ローカル source / live URL の差も含めて整えた。
 - `426be90` では handoff 2 ファイルを最新の commit 列まで追従させたが、その後の factual 反転確認ぶんで handoff 2 文書に再度更新が入っている。
@@ -68,10 +71,13 @@
   - 統合章〜結語も局所確認済みで、A/B/C 統合表、`手綱 / 輪 / 知` の3点整理、`Bölük 10×` を捨てた設計思想、次回予告の `設計段階` ヘッジまで日本語正本に追従している。
   - 第1章前半（`harness engineering` 命名経緯 / `vibe coding` 区別 / RAPTOR 2層 / `ハーネス型バイブコーディング` 説明）も局所確認済みで、Hashimoto/OpenAI まわりのヘッジ、Karpathy との差異、fail-closed の説明、ユーザー側3能力の導入まで日本語正本に追従している。
   - 第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` 定義 / `Semantic Governance` 導入 / `llloop` honest disclosure）も局所確認済みで、比喩・留保・戦略説明まで日本語正本に追従している。
+  - 第2章前半の `llloop` 導入〜 MAPE-K 骨格も局所確認済みで、alpha 段階の honest disclosure、`MapeKRunner` の閉ループ、plan-execute-verify / Reflexion、体温調節の比喩まで日本語正本に追従している。
   - 第2章中盤（`fail-closed` 安全層 / `現状の実装では` の条件付き留保 / `green-keeper` / `/goal`）も局所確認済みで、SafetyPolicy の 3 段判定、CircuitBreaker / Budget / 認証要求検知、`Executor` 条件付きの honest disclosure、GitOps reconciliation 比喩、`Haiku` 既定の `/goal` 説明まで日本語正本に追従している。
     - ここで確認したのは主に日本語正本に対する訳文追従であり、Claude Code `/goal` docs の外部一次情報ベース再検証をこのターンで追加実施したわけではない。
   - 冒頭〜第1章前寄り（捨てた数字の導入 / `prompt → context → harness → loop` の階段 / automation と loop の差分 / Hashimoto 起点の `harness engineering` / OpenAI 403 に伴う二次情報ヘッジ / RAPTOR 二層構造の導入）も局所確認済みで、一次情報アンカー・二次情報ヘッジ・`Agent = Model + Harness` の注意書きまで日本語正本に追従している。
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、Hashimoto/OpenAI/Karpathy/RAPTOR の一次情報を各翻訳ターンで再取得したわけではない。
+  - 「捨てた数字」の独立 honest disclosure 節も局所確認済みで、arXiv `2605.18747` / `2605.27922` / `2605.26112`、`Bölük 10x` 否定、`GPT-5.5` 要検証、一次と二次の線引きまで日本語正本に追従している。
+    - ここでも確認したのは主に日本語正本に対する訳文追従であり、各論文やベンチの一次ページをこの翻訳監査ターンで再取得したわけではない。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 
 ## 次回の開始メモ
@@ -81,7 +87,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / `LLM Wiki / thought circulation` / 統合章〜結語 / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章中盤（安全層〜`/goal`）を除く未確認箇所の factual / translation drift を詰める。
+- 次は #43 en/zh/ko のうち、既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llloop` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / `LLM Wiki / thought circulation` / 統合章〜結語 を除く未確認箇所の factual / translation drift を詰める。
 
 ## 注意
 
