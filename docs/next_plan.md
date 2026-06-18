@@ -22,6 +22,7 @@
 7. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
 8. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
 9. バス江コマを比喩に使う場合は、一次確認できたセリフと筆者解釈を混ぜない。たとえば `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は「聖書の引用みたいになってる…!」までは出典化できるが、`honest disclosure` を毎回持ち出す感じ等は筆者比喩として明示する。
+10. `qiita46_llterm_supervision_first.md` はタイトルで「9原則」を約束しているため、publish gate 解除前に第4章〜第7章を埋め、9 原則の本文実体とかみくだき / 多言語 / 挿絵 `025.jpg` を揃える。
 
 2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。公開中の Qiita 英語版記事 `2622da17495d61480fa2` に対して、local で復旧済みの正しいタイトルを public PATCH で反映する。対象は Qiita API の記事更新 1 件のみで、push / publish 範囲拡大 / deindex はこの決定に含めない。
 2026-06-18 execution log: `tools/qiita_public_post.py post ... --yes` で public Qiita item `2622da17495d61480fa2` を PATCH 更新し、Qiita API `GET /api/v2/items/2622da17495d61480fa2` と HTML の `<title>` / `og:title` / `<h1>` で正しい英語タイトルへの反映を確認した。
