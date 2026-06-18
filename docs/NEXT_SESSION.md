@@ -136,6 +136,10 @@ nav_order: 95
    ただし再監査で、`2qlJjBwdpYGOVjBkyhhL` は単純な未同期ではなく、
    en/zh/ko で **`2-5` honest disclosure 末尾から第3章直前へ位置ずれ**していたことが判明した。
    現在は 3 言語とも `2-5` 末尾の本来位置へ戻し、第3章直前の誤配置は除去済み。
+   さらに `1-4` 後半の `AI成長マネジメント` / 4理由 / `First, Break All the Rules` ヘッジ /
+   `アンチパターン` / 第2章への橋渡しも 4 言語で spot-check し、新たな factual / translation drift は見つかっていない。
+   なお、統合レビューで触れられた「翻訳版は blockquote 内 inline link / 正本は blockquote 下 raw URL」という形式差は、
+   今回の修正で生じたものではなく既存スタイル差なので、このターンの修正対象にはしない。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
    導入部（「捨てた数字」フック / 一次情報への錨 / 第2章後の独立 honest disclosure 節への前振り）も
    4 言語で spot-check 済みで、異常値を捨てる作法と本稿の主題提示まで日本語正本に追従している。
