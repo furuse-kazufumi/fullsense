@@ -33,6 +33,7 @@
 - 残ブリッジ棚卸しとして、`第1章末 → 第2章頭`（`なぜ` → `どう` への橋渡し）、`3-1. RAD コーパス → 3-2. LLM Wiki`、`3-4. corpus-first advantage → 統合章` の 3 接続も 4 言語で再確認した。第1章の補助線から第2章の制御論へ移る温度感、`集めた知識は放っておくとただの山` から LLM Wiki へ入る導入、`A/B/C が1本に繋がる` から統合章へ畳む着地まで、日本語正本に対する新たな factual / translation drift は見つかっていない。
 - さらに最終棚卸しとして、導入 → 第0章、第0章末 → 第1章頭、`/goal` 節 → 独立 honest disclosure、独立 honest disclosure → 第3章頭、`3-2. LLM Wiki` → `3-3. RAPTOR` の局所接続も 4 言語で spot-check した。一次情報に錨を下ろす作法から用語地図へ入る導入、`実務ブログも査読論文も鵜呑みにしない` から harness engineering の命名確認へ移る接続、`mystery graph` から `捨てた数字` 検証へ降りる橋、`無知の知` から knowledge stack へ移る着地、thought circulation 警告から RAPTOR の evidence ladder へ渡す流れまで、日本語正本に対する新たな factual / translation drift は見つかっていない。
 - さらに、まだ handoff に明示していなかった seam として、`2-7. /goal` → ★ honest disclosure 節、`3-3. RAPTOR` → `3-4. corpus-first advantage`、統合章 → まとめ、まとめ → 次回予告 / 参考 も 4 言語で spot-check した。`検証可能なゴール` から `捨てた数字` 実演へ落とす open loop、evidence ladder から corpus-first の条件付き優位へ渡す橋、A/B/C 統合から `手綱 / 輪 / 知` の3点要約へ畳む順序、次回予告と参考節で閉じる終盤構造まで、日本語正本に対する新たな factual / translation drift は見つかっていない。
+- 上記までで、handoff 上で再開候補になりやすい #43 の seam は一巡した。少なくとも `導入 → 第0章`、`第0章末 → 第1章頭`、`第1章末 → 第2章頭`、`2-7 → ★ honest disclosure`、独立 honest disclosure → 第3章頭、`3-1 → 3-2`、`3-2 → 3-3`、`3-3 → 3-4`、`3-4 → 統合章`、統合章 → まとめ、まとめ → 次回予告 / 参考 は 4 言語で spot-check 済みで、handoff が列挙してきた seam 候補は実質的に出尽くした。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで、Team stock 3 本は local draft / dry-run / provenance spot-check まで監査済み。未解決の外部アクションは、human-gate を要する #46 の publish 判断、Qiita Team POST、dev.to 英語版 update / publish 判断である。
 - dev.to 英語版の残件定義も実ファイルと一致している。`tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.devto.json` は `id: 3915834` / `published: false` / dev.to URL 付きの sidecar として残っており、公開前に human-gate を要する draft 状態である。
 - `NEXT_SESSION.md` の旧 operator queue 見出しは `old context / current scope outside (2026-06-12 stale)` へ更新済みで、asciinema 録画 / production 起動 / credential 復旧は **ローカル operator 作業の旧メモ**として現行スコープ外に退避した。現行の human-gate 外部アクション 3 件とは別カテゴリで読む。
@@ -40,7 +41,7 @@
 ## 次の具体的な一手
 
 1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままだが、residual translation drift が本当に残っているかの最終棚卸しを優先する。
-2. #43 en/zh/ko の次の再開点は、**既に handoff に列挙済みの帯を再監査しない**こと。`第1章末 → 第2章頭`、`3-1 → 3-2`、`3-4 → 統合章` の代表ブリッジは再確認済みなので、未確認対象はそれ以外の局所接続が本当に残っているかの最終棚卸しに寄せる。
+2. #43 en/zh/ko の次の再開点は、**既に handoff に列挙済みの帯を再監査しない**こと。少なくとも handoff がこれまで再開候補として挙げてきた seam は一巡済みなので、次にやるなら「新しい seam 候補の発見」か「4 言語 line 単位 re-diff を追加で回すか」の判断に寄せる。
    - `2-7 → ★ honest disclosure`、`3-3 → 3-4`、統合章 → まとめ、まとめ → 次回予告 / 参考 も spot-check 済みとして再監査対象から外した。
 3. llterm 記事シードは、まず **種 #6「自走 AI ループの作り方と落とし穴」** を先に育てる。種 #1「注入タスク飢餓」は #6 の導入 incident としていったん吸収し、単独先出しは当面しない。
 4. 種 #6 の ja draft は `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first.md` として第8章まで通し、`2549%` 記述も「rotate 因果は確認済み / 膨張機序は有力推定 / 算定内訳は未確定」の境界へ締め直した。JA 正本側の `☕ 休憩ポイント` / 参考文献 / HTML annotation / 挿絵 `025.jpg` は投入済みで、`025.jpg` は多言語ごとに作品名表記を分けつつ raw URL の HTTP 200 も確認済み。URL は既存運用どおり `raw.githubusercontent.com/.../main/...` を維持する。`qiita46_llterm_supervision_first_kamikudaki.md` も冒頭ナビ・「完全版で掘る 3 点」・内部語の 1 行グロスまで磨き込み済み、`kamikudaki_shishi.svg` raw URL の HTTP 200 も確認済み。さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期し、最終見直しパスでも新たな重大 drift は未検出だった。次の外部アクションは human-gate を伴う publish 判断になる。
@@ -182,7 +183,7 @@
   - `alu.jp` crop URL 数の 16 本基準は、日本語正本を source of truth として **本文 8 本 + 参考節 8 本 = 計 16 本（unique は 8 本、各 URL が本文と参考で 2 回ずつ出現）** と確認したうえで、en/zh/ko も同じ構成かを照合した。
   - `promise-progress-payoff` / `ending-payoff` の再確認では、終盤の `観察ベースの3点` → H4Pix 引用 → `まとめ：手綱と、輪と、知` の 3 箇条 → `Bölük` 数字を捨てた payoff 文 → `次回予告的な余韻` → 参考文献節、という鎖を 4 言語で突き合わせた。
   - 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
-  - 残っているのは、それ以外の未確認箇所が本当にあるかどうかの最終棚卸しで、代表的な細い橋渡し段と再開候補になりやすい章境界の局所接続は一巡済み。
+  - 残っているのは、それでも未確認箇所が本当にあるかどうかの棚卸しで、代表的な細い橋渡し段と再開候補になりやすい章境界の局所接続は一巡済み。次に進めるなら、新しい seam 候補の発見か、4 言語 line 単位 re-diff の追加実施を判断する段階。
 
 ## 次回の開始メモ
 
@@ -191,7 +192,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko について、代表的な細い橋渡し段は一巡済みという前提で、**それ以外の局所接続に未確認帯が本当に残っているか**を最終棚卸しする。既に spot-check 済みの導入 / 第0章 / 第1章前半〜第2章冒頭 / 第2章前半〜中盤 / 独立 honest disclosure 節 / `47,097 docs` 節 / `50手法 vs 96ノート` / 第3章前半主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記は再監査対象に戻さない。
+- 次は #43 en/zh/ko について、handoff が列挙してきた代表 seam は一巡済みという前提で、**新しい未確認帯が本当に見つかるか**を疑う。既に spot-check 済みの導入 / 第0章 / 第1章前半〜第2章冒頭 / 第2章前半〜中盤 / 独立 honest disclosure 節 / `47,097 docs` 節 / `50手法 vs 96ノート` / 第3章前半主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 / 主要 seam 群は再監査対象に戻さない。必要なら line 単位 re-diff を新規タスクとして切る。
 - `.llterm/loop_ledger.jsonl` の恒久対策は commit `7745f84` で実施済み。今後は `.gitignore` 管理の local telemetry として扱う。
 
 ## 注意
