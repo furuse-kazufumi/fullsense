@@ -43,9 +43,10 @@
 - この seam spot-check の最小根跡として、確認観点は `ja/en/zh/ko` 4 言語の見出し語順、★/独立 honest disclosure の節境界、引用 / コードブロックの有無、直前直後の橋渡し文の追従に置いた。
 - 追加の機械点検として、4 言語の見出し数 / 引用ブロック数 / コードフェンス数 / table 行数も比較した。`headings=47`、`quotes=54`、`codefence=4`、`table_lines=26`（`|` 含有行ベース）は 4 言語で一致し、section 単位の bullet / quote 分布も本文側は揃っている。front matter タグの既知差は 2 種で、①本数差 = ja のみ `個人開発` が 1 本多い（`ja bullets=81`、en/zh/ko=`80`）、②ローカライズ差 = `AIエージェント`（ja）↔ `Agent`（en/zh/ko）である。いずれも translation drift というより想定内の metadata / ローカライズ差として扱う。
 - `個人開発` タグは、現時点では ja 固有タグとして現状維持する。4 言語タグの完全一致は要件にせず、将来 line 単位 re-diff を回す際は `個人開発` と `AIエージェント` ↔ `Agent` の両方を既知差として除外する。
-- 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで、Team stock 3 本は Team POST と item id 記録まで完了した。未解決の外部アクションは、human-gate を要する #46 の publish 判断と dev.to 英語版 update / publish 判断である。Qiita Team 3 本の rollback / visibility tightening は、必要になった場合のみ別の human-gate 外部アクションとして扱う。
+- 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで、Team stock 3 本は Team POST と item id 記録まで完了した。現行 blocker として最優先で残すのは、Qiita Team 3 本が API GET では `private:false` で着地した件である。可視範囲是正（rollback / visibility tightening）が必要かどうかの判断待ち案件として、残件一覧から落とさない。
+- 未解決の human-gate 外部アクションは、#46 の publish 判断、dev.to 英語版 update / publish 判断、CTA-149 local batch の live 再 publish / PATCH 要否判断の 3 件である。Qiita Team 3 本の rollback / visibility tightening は、必要だと人間が判断した時点でこの集合へ追加する。
 - dev.to 英語版の残件定義も実ファイルと一致している。`tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.devto.json` は `id: 3915834` / `published: false` / dev.to URL 付きの sidecar として残っており、公開前に human-gate を要する draft 状態である。
-- `NEXT_SESSION.md` の旧 operator queue 見出しは `old context / current scope outside (2026-06-12 stale)` へ更新済みで、asciinema 録画 / production 起動 / credential 復旧は **ローカル operator 作業の旧メモ**として現行スコープ外に退避した。現行の human-gate 外部アクション 2 件とは別カテゴリで読む。
+- `NEXT_SESSION.md` の旧 operator queue 見出しは `old context / current scope outside (2026-06-12 stale)` へ更新済みで、asciinema 録画 / production 起動 / credential 復旧は **ローカル operator 作業の旧メモ**として現行スコープ外に退避した。現行の未解決 human-gate 外部アクション 3 件とは別カテゴリで読む。
 
 ## 次の具体的な一手
 
@@ -61,8 +62,8 @@
 8. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
 9. バス江コマを比喩に使う場合は、一次確認できたセリフと筆者解釈を混ぜない。たとえば `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は「聖書の引用みたいになってる…!」までは出典化できるが、`honest disclosure` を毎回持ち出す感じ等は筆者比喩として明示する。
 10. #46 の publish gate 状態は項目 `4` を正本として追う。JA 正本の HTML annotation は完了済み。翻訳版の最終見直しと用語 drift 監査は一巡し、新たな重大差分は未検出。残る外部アクションは human-gate を伴う publish 判断。
-11. 難しい論点は Team 向けに個別 stock する。現時点での 3 本 (`Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem) は Team POST 済みで、投稿待ち一覧 / POST 後の記録欄の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human-gate 条件・rollback 注意は `docs/articles/2026-06-18/team_stock_publish_plan.md` を正本とする。追加の外部操作が要る場合は、rollback / visibility tightening の判断だけを別 human-gate で扱う。
-12. `NEXT_SESSION.md` の 2026-06-12 旧 operator セクションは stale 扱いを明示済みなので、asciinema 録画 / production 起動 / credential 復旧は現行優先の残件に数えない。既に human-gate 外部アクションとして並べている集合は #46 publish 判断 / dev.to 英語版 update・publish 判断の 2 件だけを正として読む。Qiita Team 3 本の `private:false` 着地は current blocker だが、この rollback / visibility tightening は、必要だと人間が判断した時点で別の human-gate 外部アクションとして追加する。
+11. 難しい論点は Team 向けに個別 stock する。現時点での 3 本 (`Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem) は Team POST 済みで、投稿待ち一覧 / POST 後の記録欄の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human-gate 条件・rollback 注意は `docs/articles/2026-06-18/team_stock_publish_plan.md` を正本とする。`private:false` 着地に対する可視範囲是正（rollback / visibility tightening）の判断待ちは current blocker として別建てで追う。
+12. `NEXT_SESSION.md` の 2026-06-12 旧 operator セクションは stale 扱いを明示済みなので、asciinema 録画 / production 起動 / credential 復旧は現行優先の残件に数えない。現行の未解決 human-gate 外部アクションは #46 publish 判断 / dev.to 英語版 update・publish 判断 / CTA-149 live 再 publish・PATCH 要否判断の 3 件で読み、Qiita Team 3 本の `private:false` 着地はこれとは別の current blocker として追う。
 13. 翻訳 QA は、JA 原文と各節を逐次照合し、専門用語 (`ctx 2549%` / `turn boundary` / `interrupt` / `sign-off` / `block point`) を固定しながら反映する。
    - ko 版では、第5章の `운영 환경` / `본 처리` も最終見直しで固定済み。
    - zh 版では、`算定内情` / `饥饿` も第3章〜第7章で統一済み。
@@ -80,7 +81,7 @@
 2026-06-18 note: referral CTA 用のバス江コマは `012.jpg`（「ひくわ」）を既定のまま維持し、`044.jpg` は「押し売り感を意図的に過剰化する強め variant」として台帳に追加定義した。既存 CTAIMG の一括差し替えは行わず、必要な草稿だけ opt-in で差し込む。
 <!-- CTA149_BATCH_STATE_BEGIN -->
 2026-06-18 note: review 対象だった CTA-149 batch は `22d5460384c2cb54a9e6` の live item を直す作業ではなく、`qiita43/44/45/46/47` の local source 末尾 CTA を整える差分だった。`149.jpg` は opt-in の強め variant に戻し、`1-week free trial` / `1 週間の無料トライアル` などの時限断定は「無料で試せる（提供条件は公式参照）」へヘッジ済み。live 再 publish / PATCH は未実施のまま据え置く。
-2026-06-18 note: 上記 CTA-149 local batch は commit `430fcdc` で確定済み。したがって次に触るなら local wording ではなく、live 再 publish / PATCH を本当にやるかどうかの human-gate 外部アクション判断から始める。
+2026-06-18 note: 上記 CTA-149 local batch は commit `430fcdc` で確定済み。したがって次に触るなら local wording ではなく、live 再 publish / PATCH を本当にやるかどうかの human-gate 外部アクション判断から始める。この判断待ちは未解決の外部アクション一覧にも残す。
 <!-- CTA149_BATCH_STATE_END -->
 
 ## このターンの実施結果
