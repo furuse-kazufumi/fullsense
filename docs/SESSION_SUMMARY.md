@@ -55,6 +55,7 @@
 - local source `qiita37_gpu_triple_run_gate_price_kamikudaki.md` はこの保全案へ戻し済みで、冒頭に「完全版 #37 が正本」告知を追加し、本文本体は維持した。front matter `ignorePublish` は human-gate 前流出防止のため一時的に `true` へ退避してあり、live item `f06ca92ea208c7646fcd` への PATCH は未実行である。
 - ここで使う `ignorePublish` は Qiita 標準属性ではなく、`qiita-cli-poc` ローカル運用の publish 安全柵である。また「redirect」は HTTP 転送ではなく、Qiita 本文を統合告知 + canonical 誘導へ差し替える運用語として使っている。
 - `tools/qiita_public_post.py` は filename ではなく frontmatter `public_id` を冪等キーとして public PATCH/POST を分ける実装なので、PATCH 直前は `tools/.../qiita37_gpu_triple_run_gate_price_kamikudaki.md` の `public_id` / `id` のどちらを使う source かだけ再確認すればよい。custom 名そのものは直ちに重複条件ではない。
+- 追加で、`tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md` に `public_id:f06ca92ea208c7646fcd` を明示し、public poster の dry-run 上も `PATCH update public_id=f06ca92ea208c7646fcd` と解釈される source へ揃えた。`id:` は既存 metadata 互換のため残し、poster 実装の冪等キーとしては `public_id` を正とする。
 - あわせて、読む順ガイド `ac398349ec42e40913f1.md` と `docs/articles/QIITA_SERIES_INDEX.md` の #37 導線も `canonical / companion` 表記へ揃えた。live URL 自体は変えず、local index 上の役割だけ明示している。
 - `qiita44_evolutionary_programs_block_diagram.md` の参考文献節には、2026-06-18 時点で GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME / lexicase の一次導線 URL を補った。本文の主張強度と参考導線の最終突合は完了済みで、MIT Press 2 件の到達性 gate は 2026-06-19 時点で **soft-gate** 状態へ整理した。
 - `qiita44_evolutionary_programs_block_diagram.md` は本文と参考導線の spot-check も 1 パス通した。GA = 固定長遺伝子列、ES / CMA-ES = 変異分布更新、GP = 式 / プログラム木進化、NEAT = 構造進化、novelty / MAP-Elites / lexicase = 「何を残すか」の分岐、という説明は参考節の入口と整合している。
