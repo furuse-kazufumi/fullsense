@@ -89,7 +89,7 @@ def test_qiita_public_post_real_public_id_uses_public_id_only():
 def test_qiita_public_post_build_payload_uses_public_private_only():
     body = "body\n"
     meta = {"title": "hello", "tags": ["AI"], "private": True}
-    payload = qpp.build_payload(meta, body, force_private=False)
+    payload = qpp.build_payload(meta, body, force_private=None)
     assert payload["private"] is False
 
     meta_with_public_private = {"title": "hello", "tags": ["AI"], "public_private": True}

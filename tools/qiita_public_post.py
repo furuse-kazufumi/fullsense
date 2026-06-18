@@ -185,7 +185,7 @@ def cmd_dry_run(args: list[str]) -> int:
     if not files:
         print("usage: dry-run <file.md>")
         return 2
-    force_private = True if "--private" in args else False
+    force_private = True if "--private" in args else None
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
@@ -240,7 +240,7 @@ def cmd_post(args: list[str]) -> int:
     if not token:
         print("NO TOKEN")
         return 2
-    force_private = True if "--private" in args else False
+    force_private = True if "--private" in args else None
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     hard = [x for x in safety_findings(meta, body)
