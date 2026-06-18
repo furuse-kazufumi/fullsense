@@ -123,9 +123,11 @@ nav_order: 95
    `ctx2549` postmortem は #46 `2 / 3 / 6`（incident 束）を基準に、
    local draft が切り出し範囲から外れていないことを spot-check 済み。
    また `team_stock_queue.md` / `team_stock_publish_plan.md` / local draft 3 本の
-   title・source anchor・`private: true`・`ignorePublish: true` も相互に矛盾していない。
-   ただし実際の Qiita Team POST は未実施で、ここも human-gate を要する
-   外部アクションである。
+   title・source anchor・`private: true`・`ignorePublish: true` も相互に矛盾していなかった。
+   2026-06-18 に human-gate 後の Team POST まで完了し、item id は
+   `6f67e54e538c10b8f1c3` / `b35b429dc6dc1fde207a` / `6fe79ab04443f7654eca`。
+   ただし API GET では 3 本とも `private:false` で返ったため、可視範囲の絞り込みや rollback が必要なら、
+   以後は別の human-gate 外部アクションとして扱う。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
    en/zh/ko の translation sync note は本文から外してあり、publish へ進めるときは
@@ -413,8 +415,8 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 ## 🧑 Operator actions queued — old context / current scope outside (2026-06-12 stale)
 
 この節の項目はローカル operator 作業の旧メモであり、上位 handoff が言う
-**human-gate を要する外部アクション 3 件**
-（#46 の publish 判断 / Qiita Team POST / dev.to 英語版 update・publish 判断）
+**human-gate を要する外部アクション 2 件**
+（#46 の publish 判断 / dev.to 英語版 update・publish 判断）
 とは別カテゴリで、現行の最優先ではない。
 
 ### ✅ クローズ済み operator 項目 (要約のみ残置, 2026-06-12 stale 掃除)

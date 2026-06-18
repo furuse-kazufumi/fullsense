@@ -19,23 +19,23 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 | slug | title | source | status | note |
 | --- | --- | --- | --- | --- |
-| `team_stock_semantic_governance.md` | Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」 | #43 `2-2. loop engineering にもセキュリティの顔がある` | `local_draft / dry_run_ok / blocked_human_gate` | `ignorePublish: true` のまま。実 POST は user GO 待ち |
-| `team_stock_llm_wiki_anti_circulation.md` | LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」 | #43 `3-2. LLM Wiki — 「育つ知識」のパターン` | `local_draft / dry_run_ok / blocked_human_gate` | anti-circulation の境界を公開前に再確認 |
-| `team_stock_ctx2549_postmortem.md` | `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録 | #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` | `local_draft / dry_run_ok / blocked_human_gate` | internal logs / evidence snapshot の非公開境界を維持 |
+| `team_stock_semantic_governance.md` | Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」 | #43 `2-2. loop engineering にもセキュリティの顔がある` | `published` | 2026-06-18 Team POST 済み。API GET では `private:false` |
+| `team_stock_llm_wiki_anti_circulation.md` | LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」 | #43 `3-2. LLM Wiki — 「育つ知識」のパターン` | `published` | 2026-06-18 Team POST 済み。API GET では `private:false` |
+| `team_stock_ctx2549_postmortem.md` | `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録 | #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` | `published` | 2026-06-18 Team POST 済み。API GET では `private:false` |
 
 ## POST 後の記録欄
 
 | slug | item id | Team URL | visible range memo | rollback needed | note |
 | --- | --- | --- | --- | --- | --- |
-| `team_stock_semantic_governance.md` |  |  |  |  |  |
-| `team_stock_llm_wiki_anti_circulation.md` |  |  |  |  |  |
-| `team_stock_ctx2549_postmortem.md` |  |  |  |  |  |
+| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | API GET で `private:false`。実ブラウザ範囲は未確認 | conditional | `private:true` frontmatter でも Team create 後は public-like state に見える。rollback は別 human-gate 判断 |
+| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | API GET で `private:false`。実ブラウザ範囲は未確認 | conditional | `private:true` frontmatter でも Team create 後は public-like state に見える。rollback は別 human-gate 判断 |
+| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | API GET で `private:false`。実ブラウザ範囲は未確認 | conditional | `private:true` frontmatter でも Team create 後は public-like state に見える。rollback は別 human-gate 判断 |
 
 ## blockers
 
-1. `tools/qiita_team_post.py` は `ignorePublish` を読まず、`post --yes` でそのまま外部 POST する
-2. `private: true` が Qiita Team `fullsense` 上でどの範囲に見えるか、一次情報で十分に確定できていない
-3. よって、実行前に human gate で明示確認が必要
+1. `tools/qiita_team_post.py` は `ignorePublish` を読まず、`post --yes` でそのまま外部 POST した
+2. 2026-06-18 の API GET では 3 本とも `private:false` で返っており、frontmatter `private:true` は Team create 後の可視範囲を保証しなかった
+3. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
 
 ## 状態更新ルール
 

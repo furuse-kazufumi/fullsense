@@ -9,6 +9,7 @@ tags:
 private: true
 slide: false
 ignorePublish: true
+id: b35b429dc6dc1fde207a
 ---
 # LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」
 

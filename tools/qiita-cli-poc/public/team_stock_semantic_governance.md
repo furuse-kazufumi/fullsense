@@ -9,6 +9,7 @@ tags:
 private: true
 slide: false
 ignorePublish: true
+id: 6f67e54e538c10b8f1c3
 ---
 # Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」
 

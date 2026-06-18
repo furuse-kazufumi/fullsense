@@ -9,6 +9,7 @@ tags:
 private: true
 slide: false
 ignorePublish: true
+id: 6fe79ab04443f7654eca
 ---
 # `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録
 
