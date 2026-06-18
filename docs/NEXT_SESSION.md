@@ -109,6 +109,11 @@ nav_order: 95
    `team_stock_ctx2549_postmortem.md`
    を local draft として追加済みで、`tools/qiita_team_post.py dry-run` では
    3 本とも registration-safe を確認済み。
+   source article 本文との一次突合も実施済みで、`Semantic Governance` は
+   #43 `2-2`（Verloy / Semantic Governance / fail-closed 束）、
+   `LLM Wiki` は #43 `3-2`（3 層 / thought circulation / safeguards 束）、
+   `ctx2549` postmortem は #46 `2 / 3 / 6`（incident 束）を基準に、
+   local draft が切り出し範囲から外れていないことを spot-check 済み。
    ただし実際の Qiita Team POST は未実施で、ここも外部書き込みなので
    human gate が必要。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
