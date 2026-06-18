@@ -243,6 +243,7 @@ nav_order: 95
    一次 URL 確認と著者帰属の整備。
 8. `qiita47_harness_engineering_thoughts.md` は `#43` から派生した local-only の independent short draft として新設済みで、いまは独立短稿として最低限読める具体節に加え、`green-keeper` 的な最小具体例まで入った状態。
    現状の spine は「ハーネスは AI を賢くする技術というより、人類側の曖昧な運用を二度と通さない discipline である」。
+   canonical ledger 2 正本にはまだ `68e7b49` 自身が未反映なので、次の substantive handoff 更新時に `513546f..68e7b49` を回収するところから始める。
    次にやるなら、`#43` へ戻す判断ではなく、独立短稿として参考導線を足して育てるかを決める。現段階では publish / Team stock へは送らず、`157.jpg` の使いどころ定義、RAPTOR / `llterm` / `/goal` の具体節、`desired-actual-drift-repair` の最小 loop 説明までで止めている。
 9. `qiita37_gpu_triple_run_gate_price_kamikudaki.md` は本文の spine を増補済み。次に触るなら、Kaggle 運用 PoC を本文に残すか `<details>` 層へ逃がすかを 1 回だけ決める。
    この一次確認は references 節に列挙した外部 URL 群にも同じく適用する。
