@@ -9,7 +9,7 @@
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する（現時点ではこの commit が該当）。
 - 現在の worktree は clean。deindex は commit `7745f84`、記事シードのスクリーニングは commit `b4d1241` で確定済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済みで、以後は local-only telemetry として `.gitignore` 管理へ移行する。
-- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
+- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。ただし最新レンジ `855ffae..c6f32d6` の 2 commit は `docs/SESSION_SUMMARY.md` / `docs/next_plan.md` のみで、`docs/NEXT_SESSION.md` の直近更新は `855ffae`（同レンジの除外端）である。
 - git push は local-first 運用のため未実施のまま据え置いており、human-gate を要する外部アクション集合には数えない。新規記事の新規 publish も未実施で、既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH だけ実施済み。
 - Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`py -3.11 tools/qiita_team_post.py dry-run ...` では 3 本とも registration-safe だが、実際の Qiita Team POST は未実施。追跡先は `docs/articles/2026-06-18/team_stock_queue.md`。
 - Team stock の公開順・human-gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。投稿待ち一覧の正本は `docs/articles/2026-06-18/team_stock_queue.md`。

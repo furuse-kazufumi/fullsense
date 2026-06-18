@@ -46,7 +46,7 @@
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
-- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
+- handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。ただし最新レンジ `855ffae..c6f32d6` の 2 commit は `docs/SESSION_SUMMARY.md` / `docs/next_plan.md` のみで、`docs/NEXT_SESSION.md` の直近更新は `855ffae`（同レンジの除外端）である。
 - 公開 safety 柵は維持:
   - `qiita43_harness_loop_stack_kamikudaki.md` = `private: true` + `ignorePublish: true`
   - `qiita44_evolutionary_programs_block_diagram.md` = `private: true` + `ignorePublish: true`
