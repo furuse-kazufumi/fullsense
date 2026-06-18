@@ -158,6 +158,11 @@ nav_order: 95
    第1章の `なぜ` から第2章の `どう` へ移る橋渡し、`集めた知識は放っておくとただの山`
    から LLM Wiki へ入る導入、`A/B/C が1本に繋がる` から統合章へ畳む着地まで、
    日本語正本に対する新たな factual / translation drift は見つかっていない。
+   さらに最終棚卸しとして、導入 → 第0章、第0章末 → 第1章頭、`/goal` 節 → 独立 honest disclosure、
+   独立 honest disclosure → 第3章頭、`3-2. LLM Wiki` → `3-3. RAPTOR` の局所接続も 4 言語で再確認した。
+   導入の作法宣言から用語地図、`鵜呑みにしない` から一次情報確認、`mystery graph` から
+   `捨てた数字` 検証、`無知の知` から knowledge stack、thought circulation 警告から
+   evidence ladder へ渡す流れまで、日本語正本に対する新たな factual / translation drift はない。
    なお、統合レビューで触れられた「翻訳版は blockquote 内 inline link / 正本は blockquote 下 raw URL」という形式差は、
    今回の修正で生じたものではなく既存スタイル差なので、このターンの修正対象にはしない。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。

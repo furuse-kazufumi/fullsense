@@ -32,6 +32,7 @@
 - さらに終盤の `なぜ「手綱を握るのは人間」だと言えるのか — 観察ベースの3点` から、H4Pix 引用を挟んだ結語導入まで 4 言語で spot-check し、`常時並列 / 長射程の伏線回収 / 常時稼働の危険予知` の 3 点、`観察された傾向` というヘッジ、`ルール（構造）で縛る` への橋渡しまで日本語正本に追従していることを確認した。
 - さらに参考文献節と末尾 hedge note も 4 言語で spot-check し、`alu.jp` crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に維持され、OpenAI 403 / RAD `47,097 docs` / `人間優位3点` 観察ベースなどの留保も日本語正本に追従していることを確認した。`GPT-5.5` についてはこのターンで OpenAI 公式一次情報によりモデル名の実在を確認し、留保を「モデル名未確認」から「比較値の一次計測元・計測条件未確認」へ締め直した。
 - 残ブリッジ棚卸しとして、`第1章末 → 第2章頭`（`なぜ` → `どう` への橋渡し）、`3-1. RAD コーパス → 3-2. LLM Wiki`、`3-4. corpus-first advantage → 統合章` の 3 接続を 4 言語で再確認した。第1章の補助線から第2章の制御論へ移る温度感、`集めた知識は放っておくとただの山` から LLM Wiki へ入る導入、`A/B/C が1本に繋がる` から統合章へ畳む着地まで、日本語正本に対する新たな factual / translation drift は見つかっていない。
+- さらに最終棚卸しとして、導入 → 第0章、 第0章末 → 第1章頭、`/goal` 節 → 独立 honest disclosure、独立 honest disclosure → 第3章頭、`3-2. LLM Wiki` → `3-3. RAPTOR` の局所接続も 4 言語で spot-check した。一次情報に錨を下ろす作法から用語地図へ入る導入、`実務ブログも査読論文も鵜呑みにしない` から harness engineering の命名確認へ移る接続、`mystery graph` から `捨てた数字` 検証へ降りる橋、`無知の知` から knowledge stack へ移る着地、thought circulation 警告から RAPTOR の evidence ladder へ渡す流れまで、日本語正本に対する新たな factual / translation drift は見つかっていない。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで監査済み、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで監査済み、Team stock 3 本は local draft / dry-run / provenance spot-check まで完了。未解決の外部アクションは human gate 待ちの Qiita Team POST だけ。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
@@ -150,6 +151,7 @@
 - `promise-progress-payoff` / `ending-payoff` の再確認では、終盤の `観察ベースの3点` → H4Pix 引用 → `まとめ：手綱と、輪と、知` の 3 箇条 → `Bölük` 数字を捨てた payoff 文 → `次回予告的な余韻` → 参考文献節、という鎖を 4 言語で突き合わせた。
 - これで #43 en/zh/ko は、handoff に列挙した主要帯に加え endmatter まで一巡しており、残る translation drift 候補は「未確認の細い橋渡し段」が本当に残っているかの再棚卸しに近づいた。
 - 上記 3 接続の再確認も終えたことで、少なくとも handoff で「未確認候補」として残していた代表的な細い橋渡し段は一巡した。以後の #43 は、新規 drift 修正よりも「本当に未確認帯が残っているか」の最終棚卸しと、live draft を触る場合の publish gate 管理が中心になる。
+- 上記の追加 spot-check まで含めると、手元 handoff で再開候補になりやすい章境界の局所接続はほぼ一巡した。#43 の残タスクは、drift 修正そのものよりも「まだ未確認と呼べる帯が本当に残っているか」の確認と、live draft を再開する際の publish gate 管理が中心である。
 - さらに参考文献節と末尾注記（`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙）も spot-check し、4 言語とも出典束と留保注記が日本語正本に追従していることを確認した。
 - `loop_ledger` の恒久対策は commit `7745f84` で実施済み。`git rm --cached .llterm/loop_ledger.jsonl` と `.gitignore` 追記により、以後は tracked ノイズを発生させず local-only telemetry として保持する。
   - 運用ルール: `git add .` は引き続き避け、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
