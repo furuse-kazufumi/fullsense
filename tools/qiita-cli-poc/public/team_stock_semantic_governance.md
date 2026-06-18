@@ -47,7 +47,7 @@ AI agent の安全性を語るとき、つい ACL や権限管理の話に寄り
 
 ## source
 
-- 完全版: `qiita43_harness_loop_stack.md` 第2章前半 `security face`
+- 完全版: `qiita43_harness_loop_stack.md` 第2章前半 `2-2. loop engineering にもセキュリティの顔がある`
 - 橋渡し先:
   - `MAPE-K` と fail-closed 安全層
   - `/goal` と人間の介入点

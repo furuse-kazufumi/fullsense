@@ -56,7 +56,7 @@ ignorePublish: true
 
 ## source
 
-- 完全版: `qiita46_llterm_supervision_first.md`
+- 完全版: `qiita46_llterm_supervision_first.md` 第3章 `ctx 2549%` / 第2章 `turn boundary と interrupt` / 第6章 `flaky test`
 - 根拠スナップショット: `docs/articles/2026-06-18/llterm_seed6_evidence.md`
 
 ## honest disclosure

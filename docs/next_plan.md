@@ -15,6 +15,7 @@
 - Team stock 正本 2 枚には preflight runbook / 実行コマンド / rollback notes / POST 後の記録欄まで追加済み。通常 POST はその 2 枚で回せるが、rollback 実施時のみ handoff にも 1 行転記する。
 - Team stock 3 本は source article と大筋整合していることを spot-check 済み。対応は `team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` = #43、`team_stock_ctx2549_postmortem.md` = #46。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
 - Team stock 3 本には `この記事で話さないこと` も追加し、難所の切り出し範囲を local draft の段階で固定した。
+- Team stock 3 本の source anchor も明記し、#43 `2-2. security face` / #43 `3-2. LLM Wiki` / #46 `ctx 2549% + turn boundary + flaky test` のどこから切り出したかを queue と draft 本文の両方で追えるようにした。
 
 ## 次の具体的な一手
 

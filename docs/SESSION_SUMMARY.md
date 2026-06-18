@@ -17,6 +17,7 @@
 - Team stock 正本 2 枚には preflight runbook / 実行コマンド / rollback notes / POST 後の記録欄まで追加済み。通常 POST はその 2 枚で回せるが、rollback 実施時のみ handoff にも 1 行転記する。
 - Team stock 3 本は source article と大筋整合していることを spot-check 済み。対応は `team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` = #43、`team_stock_ctx2549_postmortem.md` = #46。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
 - さらに 3 本とも `この記事で話さないこと` を足し、難所の切り出し範囲を local draft の段階で固定した。
+- さらに source anchor も明記し、#43 `2-2. security face` / #43 `3-2. LLM Wiki` / #46 `ctx 2549% + turn boundary + flaky test` のどこから切り出したかを queue と draft 本文の両方で追えるようにした。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
