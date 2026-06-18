@@ -166,6 +166,11 @@ nav_order: 95
    導入の作法宣言から用語地図、`鵜呑みにしない` から一次情報確認、`mystery graph` から
    `捨てた数字` 検証、`無知の知` から knowledge stack、thought circulation 警告から
    evidence ladder へ渡す流れまで、日本語正本に対する新たな factual / translation drift はない。
+   さらに `2-7. /goal` → ★ honest disclosure 節、`3-3. RAPTOR` → `3-4. corpus-first advantage`、
+   統合章 → まとめ、まとめ → 次回予告 / 参考 も 4 言語で再確認した。`検証可能なゴール` から
+   `捨てた数字` 実演へ落とす open loop、evidence ladder から corpus-first の条件付き優位へ渡す橋、
+   A/B/C 統合から `手綱 / 輪 / 知` の3点要約へ畳む順序、次回予告と参考節で閉じる終盤構造まで、
+   日本語正本に対する新たな factual / translation drift は見つかっていない。
    なお、統合レビューで触れられた「翻訳版は blockquote 内 inline link / 正本は blockquote 下 raw URL」という形式差は、
    今回の修正で生じたものではなく既存スタイル差なので、このターンの修正対象にはしない。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
@@ -180,6 +185,8 @@ nav_order: 95
    直後の「捨てた数字」節への橋渡しまで日本語正本に追従している。
    代表的な細い橋渡し段は一巡済みで、残っているのはそれ以外の局所接続に
    未確認帯が本当に残っているかの最終棚卸しである。
+   `2-7 → ★ honest disclosure`、`3-3 → 3-4`、統合章 → まとめ、まとめ → 次回予告 / 参考 も
+   spot-check 済みなので、以後は未確認帯の実在有無そのものを疑う段階として読む。
    日本語正本に対する最終棚卸しで未確認帯なしを確認したら、
    その後に en/zh/ko の `ignorePublish: false` を戻して同期判断へ進む。
 3. 出自不明の front matter 整形差分が再発した場合は、
