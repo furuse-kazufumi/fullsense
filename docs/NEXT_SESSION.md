@@ -139,6 +139,10 @@ nav_order: 95
    第0章（`prompt → context → harness → loop` / automation vs loop / 章末 honest disclosure）と、
    第2章前半の `loop engineering` をもう一段深く〜strategy names〜security face〜`llterm` 導入〜
    MAPE-K 骨格も spot-check 済みで、用語の橋渡し・二次情報ヘッジ・Verloy 出典導線まで日本語正本に追従している。
+   `2-6. 起動と実証タスク green-keeper` / `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装`
+   も 4 言語で spot-check 済みで、`desired / actual / drift / repair` の対応、
+   PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、
+   直後の「捨てた数字」節への橋渡しまで日本語正本に追従している。
    残っているのは、それ以外の未確認箇所にある factual / translation drift である。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため
    en/zh/ko の `ignorePublish: false` を先に戻してから同期する。
