@@ -79,6 +79,7 @@
 2026-06-18 decision log: ユーザー選択 `1) 別 egress を含む対話ブラウザで Holland / Koza の canonical permalink を確認し、開けない側にだけ WorldCat / Google Books / archive.org 書誌ページなどの補助導線を併記する` を受領。まず handoff 上はこの方針を固定し、その後に non-local egress からの reader reachability を補助確認して、結果と根拠を handoff へ戻す。
 2026-06-18 note: referral CTA 用のバス江コマは `012.jpg`（「ひくわ」）を既定のまま維持し、`044.jpg` は「押し売り感を意図的に過剰化する強め variant」として台帳に追加定義した。既存 CTAIMG の一括差し替えは行わず、必要な草稿だけ opt-in で差し込む。
 2026-06-18 note: いま review 中の CTA-149 batch は `22d5460384c2cb54a9e6` の live item を直す作業ではなく、`qiita43/44/45/46/47` の local source 末尾 CTA を整える未コミット差分である。`149.jpg` は opt-in の強め variant に戻し、`1-week free trial` / `1 週間の無料トライアル` などの時限断定は「無料で試せる（提供条件は公式参照）」へヘッジ済み。live 再 publish / PATCH は未実施のまま据え置く。
+2026-06-18 note: 上記 CTA-149 local batch は commit `430fcdc` で確定済み。したがって次に触るなら local wording ではなく、live 再 publish / PATCH を本当にやるかどうかの human-gate 外部アクション判断から始める。
 
 ## このターンの実施結果
 
