@@ -98,6 +98,7 @@
 - さらに第1章前半（`harness engineering` 命名経緯 / `vibe coding` 区別 / RAPTOR 2層 / `ハーネス型バイブコーディング` の説明）も spot-check し、Hashimoto/OpenAI まわりのヘッジ、Karpathy との差異、fail-closed の説明、ユーザー側3能力の導入まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` の定義 / `Semantic Governance` 導入 / `llterm` honest disclosure）も spot-check し、比喩・留保・戦略説明まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第2章前半の `loop engineering` security face（Filip Verloy 引用 / `scaling risk at machine speed` / `Semantic Governance`）も spot-check し、警句・出典導線・自作ハーネスの設計動機への橋渡しまで en/zh/ko が日本語正本に追従していることを確認した。
+  - 確認方法: JA `qiita43_harness_loop_stack.md:313-323, 687-695` と en/zh/ko の対応段落・参考文献行を横並びで突き合わせ、本文リンクと末尾出典の両方に Verloy Medium URL があることまで確認した。
 - さらに第2章中盤（`fail-closed` 安全層 / `現状の実装では` の条件付き留保 / `green-keeper` / `/goal`）も spot-check し、SafetyPolicy の 3 段判定、CircuitBreaker / Budget / 認証要求検知、`Executor` 条件付きの honest disclosure、GitOps reconciliation 比喩、`Haiku` 既定の `/goal` 説明まで en/zh/ko が日本語正本に追従していることを確認した。
   - ここで確認したのは主に日本語正本に対する訳文追従であり、Claude Code `/goal` docs の外部一次情報ベース再検証をこのターンで追加実施したわけではない。
 - さらに冒頭〜第1章前寄り（捨てた数字の導入 / `prompt → context → harness → loop` の階段 / automation と loop の差分 / Hashimoto 起点の `harness engineering` / OpenAI 403 に伴う二次情報ヘッジ / RAPTOR 二層構造の導入）も spot-check し、一次情報アンカー・二次情報ヘッジ・`Agent = Model + Harness` の注意書きまで en/zh/ko が日本語正本に追従していることを確認した。

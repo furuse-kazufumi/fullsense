@@ -126,6 +126,7 @@
   - 第1章前半（`harness engineering` 命名経緯 / `vibe coding` 区別 / RAPTOR 2層 / `ハーネス型バイブコーディング` 説明）も局所確認済みで、Hashimoto/OpenAI まわりのヘッジ、Karpathy との差異、fail-closed の説明、ユーザー側3能力の導入まで日本語正本に追従している。
   - 第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` 定義 / `Semantic Governance` 導入 / `llterm` honest disclosure）も局所確認済みで、比喩・留保・戦略説明まで日本語正本に追従している。
   - 第2章前半の `loop engineering` security face（Filip Verloy 引用 / `scaling risk at machine speed` / `Semantic Governance`）も局所確認済みで、警句・出典導線・自作ハーネスの設計動機への橋渡しまで日本語正本に追従している。
+    - この確認は JA `qiita43_harness_loop_stack.md:313-323, 687-695` と en/zh/ko の対応段落・参考文献行を横並びで突き合わせ、本文リンクと末尾出典の両方に Verloy Medium URL があることまで含めて行った。
   - 第2章前半の `llterm` 導入〜 MAPE-K 骨格も局所確認済みで、alpha 段階の honest disclosure、`MapeKRunner` の閉ループ、plan-execute-verify / Reflexion、体温調節の比喩まで日本語正本に追従している。
   - 第2章中盤（`fail-closed` 安全層 / `現状の実装では` の条件付き留保 / `green-keeper` / `/goal`）も局所確認済みで、SafetyPolicy の 3 段判定、CircuitBreaker / Budget / 認証要求検知、`Executor` 条件付きの honest disclosure、GitOps reconciliation 比喩、`Haiku` 既定の `/goal` 説明まで日本語正本に追従している。
     - ここで確認したのは主に日本語正本に対する訳文追従であり、Claude Code `/goal` docs の外部一次情報ベース再検証をこのターンで追加実施したわけではない。
