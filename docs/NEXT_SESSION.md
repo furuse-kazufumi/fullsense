@@ -96,6 +96,7 @@ nav_order: 95
 
 **次回ここから再開:**
 1. dev.to 英語版を更新または publish する前に、
+   `published: false` の sidecar draft が残っている前提を確認しつつ、
    「外部公開/外部書き込みは human gate」という運用を守る。
 2. #46 (`qiita46_llterm_supervision_first.md`) は JA / en / zh / ko / kamikudaki の本文と endmatter まで同期済みで、
    `ctx 2549%` / `turn boundary` / `interrupt` / `block point` の用語固定も一巡している。
