@@ -464,3 +464,78 @@ In other words, supervisability cannot be improvised out of "smart humans will m
 You have to **embed traceability into the system as a mechanism**.
 
 Next we move to the way that same traceability loops back into testing. In other words: was that green test really green?
+
+---
+
+## 6. You also have to distrust tests that are "green by accident"
+
+While fixing the incident, one more weakness surfaced: the brittleness of the tests.
+
+This, too, is a very loop-engineering kind of lesson.  
+The races and ordering dependencies that show up in production usually cast a shadow over the tests as well. The difference is that in production they appear as failures, while in tests they can stay hidden as "green by accident."
+
+### 6-1. The test was not really green. It only happened to look green
+
+The problematic test drove the real loop on threads while directly asserting against the state of the injection queue.
+
+At first glance, that type of test looks attractive because it feels close to production.  
+In reality, however, the result varies with details such as:
+
+- when the worker reads the queue
+- when the main thread performs the assertion
+- at what timing output-log I/O gets inserted
+
+In other words, the test was not validating only "is the function correct?" It was also implicitly validating "does it happen to run in this order?"
+
+Adding output-log I/O shifted the timing of the main thread just enough for that ambiguity to surface.  
+So this should be read less as "the logging feature broke the test" and more as **the test had always depended on a race, and only now finally broke**.
+
+### 6-2. Concurrent tests need block points so they become deterministic
+
+What was needed here was not speed. It was **fixed ordering**.
+
+Concretely:
+
+- pause the worker briefly
+- create a window in which the injection has not yet been consumed
+- assert inside that window
+- then stop explicitly afterward
+
+That is, introduce a block point.
+
+Once you do that, the test stops being "something that happens to pass by accident" and becomes "something that must pass through this point under these conditions."
+
+What matters in concurrent systems is not only making the test resemble reality.  
+It is **being able to control where the observation takes place**.
+
+### 6-3. Honest disclosure also has to apply to tests
+
+The most important point in this chapter is that honest disclosure does not apply only to the article's narrative.
+
+Even when a test is green, there may still be room for doubt:
+
+- is that green deterministic?
+- did it merely slip past the race by chance?
+- would it turn red if the observation point moved?
+
+If you skip those questions and just say "everything passed, so it's fine," then the ground falls away beneath the article no matter how often it preaches honest disclosure.
+
+> In the same way you distrust suspiciously good numbers, you should also distrust suspiciously green tests.
+
+That mapping is probably one of the more important ones in this entire article.
+
+### 6-4. The takeaway from this chapter
+
+This chapter reduces to three points:
+
+- the greenness of a concurrent test can be produced not only by functional correctness, but also by accidental ordering
+- without block points that fix the observation site, tests become fundamentally prone to flakiness
+- honest disclosure should be applied not only to prose, but also to how test results are interpreted
+
+At this point, the six chapters of material extracted from the incident are in place.  
+Next, we generalize them into nine principles so this incident response does not remain just an `llterm`-specific memo.
+
+### ☕ Break point
+
+Distrust not only the numbers, but also the greenness of the tests.  
+By this point, `honest disclosure` should be visible not as a writing trick, but as an operating discipline.
