@@ -539,3 +539,120 @@ Next, we generalize them into nine principles so this incident response does not
 
 Distrust not only the numbers, but also the greenness of the tests.  
 By this point, `honest disclosure` should be visible not as a writing trick, but as an operating discipline.
+
+---
+
+## 7. Nine loop-engineering principles extracted from the incident response
+
+To avoid leaving everything above as an `llterm`-specific incident memo, we pull the lessons out as principles.  
+None of them is flashy magic. Quite the opposite: **if you are going to run self-driving AI in production, these are the plain principles that should be written into the blueprint from the start**.
+
+### Principle 1. Design turn boundaries as the unit of control
+
+In systems built around a headless CLI, ordinary human intervention tends to snap first to the turn boundary.  
+So the first thing to design is not "how should it think?" but "**where does it proceed to the next turn?**"
+
+Instead of daydreaming about mid-turn injections, it is more robust to fix:
+
+- where one turn closes
+- what must be read with top priority in the next turn
+- whether human beings can observe that boundary
+
+### Principle 2. If a metric exceeds physical limits, doubt the measurement first
+
+The lesson from `ctx 2549%` is simple.  
+**The more an abnormal value looks like an amazing number, the more you should distrust the measurement failure rather than imagine a winning story.**
+
+Around AI in particular, people easily mistake "we do not really understand it, but a huge number appeared" for value.  
+But occupancy has to mean occupancy as an instantaneous value. Otherwise it cannot be used for control.
+
+### Principle 3. Do not double-wrap external management around a component that already manages itself
+
+If the inner component already has its own logic for continuation, compression, and resumption, the outer harness should avoid layering yet another management boundary on top of it.  
+Just as codex-side self-compression collided with `llterm`-side rotate, once a session has two managers, it usually degenerates.
+
+In practical terms, separate:
+
+- the responsibilities entrusted to the inside
+- the responsibilities held by the outside
+
+Supervision is necessary, but the lesson here was that **overprotective supervision makes the whole system less free**.
+
+### Principle 4. Design review by scope, not by quantity
+
+Multi-AI review is valuable in itself. The problem begins when the same review intensity is applied to everything.  
+If implementation turns and handoff turns are pushed into the same orchestra, what comes to the foreground is not quality but simple latency and rate consumption.
+
+What matters in review design is:
+
+- which changes contain design judgment
+- which changes are mere formatting
+- where sign-off should be requested again
+
+Not the number of reviews, but **where scrutiny is applied**, determines the health of the loop.
+
+### Principle 5. Starvation is defined not by "it was queued" but by whether it can reach a consumption point
+
+Pushing something into a queue does not mean it was processed.  
+Rotate, exception paths, resume prompts, priority gaps: unless there is a consumption point that is guaranteed to pick it up across those conditions, the task will starve quietly.
+
+This principle is not limited to AI loops.  
+The expectation that "it should get picked up eventually" is not design. Without proof of the consumption point, it is only wishful thinking.
+
+### Principle 6. Supervisability has to be built by embedding telemetry into the architecture
+
+Per-line timestamps and rotate logs are not convenience features that decorate operations.  
+They are architecture-level materials that let human beings explain afterward what actually happened.
+
+If you want supervision, you cannot depend on the supervisor's intuition.  
+You have to **install traceability as a mechanism**.
+
+### Principle 7. Dig outward from production observations, not from guesses
+
+This one is not tied to just a single chapter. It is the meta-principle that ran across Chapters 1 through 6.
+
+This time, too, the entry point was simply "the progress summary never came back."  
+But because we did not stop at "the AI was capricious" and instead followed the production observations, we could see the chain all the way through:
+
+- starvation
+- measurement failure
+- over-review
+- flaky tests
+
+Do not confine one incident inside one bug.  
+The stance of **pulling on the thread from observation to structure** is the basic way to avoid solo AI judgment.
+
+### Principle 8. In concurrent tests, first distrust anything that is "green by accident"
+
+If production contains races, the greenness of the tests may also be supported by races.  
+So in concurrent tests, before asking "did it pass?" you need to ask "**under what ordering was this observed?**"
+
+Put in block points and make it deterministic.  
+Without that, green wears the face of quality while really being only accident.
+
+### Principle 9. Use honest disclosure not as a result, but as a decision criterion
+
+`honest disclosure` is not an ornament added at the end of an article just to say "it is not fixed yet."  
+It is a **discipline of judgment**: do not exaggerate when you see an abnormal value, do not celebrate too early when you see a green test, and do not mix what is confirmed with what remains unresolved.
+
+In this case, that meant drawing the line explicitly:
+
+- the rotate causality is confirmed
+- the calculation breakdown behind `2549%` remains unresolved
+- the occupancy display on the codex side is still provisional
+
+That line-drawing itself was the practice of this principle.
+
+### 7-1. Compressing the nine principles into one line
+
+If you compress everything above even further, it becomes this:
+
+> **To build self-driving AI is not to line up smart AIs, but to implement boundaries at which human beings can intervene, stop, and observe.**
+
+Most of the nine principles are already inside that one line.
+
+### ☕ Break point
+
+You do not need to memorize all nine principles right now. This is enough for a first pass:
+
+> **Before adding smarter AI, implement boundaries where human beings can break in.**
