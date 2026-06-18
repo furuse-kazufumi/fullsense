@@ -171,11 +171,13 @@ nav_order: 95
    `捨てた数字` 実演へ落とす open loop、evidence ladder から corpus-first の条件付き優位へ渡す橋、
    A/B/C 統合から `手綱 / 輪 / 知` の3点要約へ畳む順序、次回予告と参考節で閉じる終盤構造まで、
    日本語正本に対する新たな factual / translation drift は見つかっていない。
-   ここまでで、handoff 上で再開候補になりやすい #43 の seam は一巡した。少なくとも
+   ここまでで、handoff がこれまで再開候補として列挙してきた #43 の seam 範囲は一巡した。少なくとも
    `導入 → 第0章`、`第0章末 → 第1章頭`、`第1章末 → 第2章頭`、`2-7 → ★ honest disclosure`、
-   独立 honest disclosure → 第3章頭、`3-1 → 3-2`、`3-2 → 3-3`、`3-3 → 3-4`、
-   `3-4 → 統合章`、統合章 → まとめ、まとめ → 次回予告 / 参考 は 4 言語で spot-check 済みで、
-   handoff が列挙してきた seam 候補は実質的に出尽くした。
+   `/goal` 節 → 独立 honest disclosure、独立 honest disclosure → 第3章頭、`3-1 → 3-2`、
+   `3-2 → 3-3`、`3-3 → 3-4`、`3-4 → 統合章`、統合章 → まとめ、まとめ → 次回予告 / 参考 は
+   4 言語で spot-check 済みである。ただし、新規 seam 候補の網羅までは保証しない。
+   最小根跡として、確認観点は `ja/en/zh/ko` の見出し語順、★/独立 honest disclosure の節境界、
+   引用 / コードブロックの有無、直前直後の橋渡し文の追従である。
    なお、統合レビューで触れられた「翻訳版は blockquote 内 inline link / 正本は blockquote 下 raw URL」という形式差は、
    今回の修正で生じたものではなく既存スタイル差なので、このターンの修正対象にはしない。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
@@ -188,11 +190,11 @@ nav_order: 95
    も 4 言語で spot-check 済みで、`desired / actual / drift / repair` の対応、
    PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、
    直後の「捨てた数字」節への橋渡しまで日本語正本に追従している。
-   代表的な細い橋渡し段は一巡済みで、handoff が列挙してきた seam 候補も実質的に出尽くした。
+   代表的な細い橋渡し段は一巡済みだが、これは網羅保証ではない。
    ここから残るのは、「それでも未確認帯が本当にあるのか」を疑う棚卸しか、
    4 言語 line 単位 re-diff を追加で回すかの判断である。
-   `2-7 → ★ honest disclosure`、`3-3 → 3-4`、統合章 → まとめ、まとめ → 次回予告 / 参考 も
-   spot-check 済みなので、以後は未確認帯の実在有無そのものを疑う段階として読む。
+   `2-7 → ★ honest disclosure`、`/goal` 節 → 独立 honest disclosure、`3-3 → 3-4`、
+   統合章 → まとめ、まとめ → 次回予告 / 参考 も seam spot-check 一巡の確認済み候補として読む。
    日本語正本に対する最終棚卸しで未確認帯なしを確認したら、
    その後に en/zh/ko の `ignorePublish: false` を戻して同期判断へ進む。
 3. 出自不明の front matter 整形差分が再発した場合は、
