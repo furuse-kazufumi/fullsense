@@ -95,6 +95,7 @@
   - ここで確認したのは日本語正本に対する訳文追従であり、`Anti-Circulation Safeguards` / `thought circulation` / `RAD` の外部一次情報ベースの factual 検証ではない。
   - 追加 spot-check で、Karpathy 帰属のヘッジ、`設計段階` の限定、製品対応づけの「私のマッピング / 主観」表現も en/zh/ko で保持されていることを確認した。
 - さらに統合章〜結語も spot-check し、A/B/C の統合表、`手綱 / 輪 / 知` の3点整理、`Bölük 10×` を捨てた設計思想、次回予告の `設計段階` ヘッジまで en/zh/ko が日本語正本に追従していることを確認した。
+- さらに導入部（「使うのをやめた数字」 / 一次情報に錨を下ろす / 第2章後の独立 honest disclosure 節で全開示する予告）も spot-check し、異常値を捨てる作法と本稿の主題提示まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第0章（`prompt → context → harness → loop` の階段 / `Agent = Model + Harness` の二次情報ヘッジ / automation vs loop / 章末 honest disclosure）も spot-check し、階段図の説明、二次情報の留保、`verifiable goal` の橋渡し、実務ブログと学術定義を分ける温度感まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第1章前半（`harness engineering` 命名経緯 / `vibe coding` 区別 / RAPTOR 2層 / `ハーネス型バイブコーディング` の説明）も spot-check し、Hashimoto/OpenAI まわりのヘッジ、Karpathy との差異、fail-closed の説明、ユーザー側3能力の導入まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` の定義 / `Semantic Governance` 導入 / `llterm` honest disclosure）も spot-check し、比喩・留保・戦略説明まで en/zh/ko が日本語正本に追従していることを確認した。
@@ -126,7 +127,7 @@
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 第0章（`prompt → context → harness → loop` / automation vs loop / 章末 honest disclosure） / 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `loop engineering` をもう一段深く〜strategy names〜security face〜`llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 導入（「捨てた数字」フック / 一次情報への錨 / 第2章後の独立 honest disclosure 節への前振り） / 第0章（`prompt → context → harness → loop` / automation vs loop / 章末 honest disclosure） / 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `loop engineering` をもう一段深く〜strategy names〜security face〜`llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
 4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human gate を伴う publish 判断が中心になった。
