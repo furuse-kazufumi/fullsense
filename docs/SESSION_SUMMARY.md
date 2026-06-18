@@ -37,7 +37,8 @@
 - さらに、まだ handoff に明示していなかった seam として、`2-7. /goal` → ★ honest disclosure 節、`3-3. RAPTOR` → `3-4. corpus-first advantage`、統合章 → まとめ、まとめ → 次回予告 / 参考 も 4 言語で spot-check した。`検証可能なゴール` から `捨てた数字` 実演へ落とす open loop、evidence ladder から corpus-first の条件付き優位へ渡す橋、A/B/C 統合から `手綱 / 輪 / 知` の3点要約へ畳む順序、次回予告と参考節で閉じる終盤構造まで、日本語正本に対する新たな factual / translation drift は見つかっていない。
 - 上記までで、handoff がこれまで再開候補として列挙してきた #43 の seam 範囲は一巡した。少なくとも `導入 → 第0章`、`第0章末 → 第1章頭`、`第1章末 → 第2章頭`、`2-7 → ★ honest disclosure`、`/goal` 節 → 独立 honest disclosure、独立 honest disclosure → 第3章頭、`3-1 → 3-2`、`3-2 → 3-3`、`3-3 → 3-4`、`3-4 → 統合章`、統合章 → まとめ、まとめ → 次回予告 / 参考 は 4 言語で spot-check 済みである。ただし、新規 seam 候補の網羅までは保証しない。
 - この seam spot-check の最小根跡として、確認観点は `ja/en/zh/ko` 4 言語の見出し語順、★/独立 honest disclosure の節境界、引用 / コードブロックの有無、直前直後の橋渡し文の追従に置いた。
-- 追加の機械点検として、4 言語の見出し数 / 引用ブロック数 / コードフェンス数 / table 行数も比較した。`headings=47`、`quotes=54`、`codefence=4`、`table_lines=26` は 4 言語で一致し、section 単位の bullet / quote 分布も本文側は揃っている。機械差分として残ったのは、先頭タグ列で日本語正本だけ `個人開発` が 1 本多いこと（`ja bullets=81`、en/zh/ko=`80`）で、現時点では translation drift というより metadata 差として扱う。
+- 追加の機械点検として、4 言語の見出し数 / 引用ブロック数 / コードフェンス数 / table 行数も比較した。`headings=47`、`quotes=54`、`codefence=4`、`table_lines=26`（`|` 含有行ベース）は 4 言語で一致し、section 単位の bullet / quote 分布も本文側は揃っている。front matter タグの既知差は 2 種で、①本数差 = ja のみ `個人開発` が 1 本多い（`ja bullets=81`、en/zh/ko=`80`）、②ローカライズ差 = `AIエージェント`（ja）↔ `Agent`（en/zh/ko）である。いずれも translation drift というより想定内の metadata / ローカライズ差として扱う。
+- `個人開発` タグは、現時点では ja 固有タグとして現状維持する。4 言語タグの完全一致は要件にせず、将来 line 単位 re-diff を回す際は `個人開発` と `AIエージェント` ↔ `Agent` の両方を既知差として除外する。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで監査済み、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで監査済み、Team stock 3 本は local draft / dry-run / provenance spot-check まで完了。未解決の外部アクションは、human-gate を要する #46 の publish 判断、Qiita Team POST、dev.to 英語版 update / publish 判断である。
 - dev.to 英語版の残件定義も実ファイルと一致している。`tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.devto.json` は `id: 3915834` / `published: false` / dev.to URL 付きの sidecar として残っており、公開前に human-gate を要する draft 状態である。
 - `NEXT_SESSION.md` の旧 operator queue 見出しは `old context / current scope outside (2026-06-12 stale)` へ更新し、asciinema 録画 / production 起動 / credential 復旧は **ローカル operator 作業の旧メモ**であって、現行の human-gate 外部アクション 3 件とは別カテゴリ・現行優先ではないことを明記した。
@@ -170,7 +171,7 @@
 
 1. #43 en/zh/ko の次の再開点は、既に handoff に列挙済みの帯を機械的に再監査せず、handoff 上の seam 一巡で取りこぼしがないかを改めて疑うこと。次にやるなら「新しい seam 候補の発見」か「4 言語 line 単位 re-diff」を一度回し、その後に再監査対象を本当に閉じるかを判断する。
    - `2-7 → ★ honest disclosure`、`/goal` 節 → 独立 honest disclosure、`3-3 → 3-4`、統合章 → まとめ、まとめ → 次回予告 / 参考 は、少なくとも seam spot-check 一巡の確認済み候補として扱う。
-   - 機械比較では本文構造の異常は見つかっておらず、直近の差分候補は日本語正本先頭タグの `個人開発` 1 本だけである。line 単位 re-diff を切るなら、この metadata 差を除いた本文比較として扱う。
+   - 機械比較では本文構造の異常は見つかっておらず、直近の既知差は日本語正本先頭タグの `個人開発` と、`AIエージェント` ↔ `Agent` のローカライズ差である。line 単位 re-diff を切るなら、この metadata 差を除いた本文比較として扱う。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
 4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human-gate を伴う publish 判断が中心になった。

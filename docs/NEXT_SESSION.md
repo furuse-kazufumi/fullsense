@@ -179,10 +179,12 @@ nav_order: 95
    最小根跡として、確認観点は `ja/en/zh/ko` の見出し語順、★/独立 honest disclosure の節境界、
    引用 / コードブロックの有無、直前直後の橋渡し文の追従である。
    追加の機械点検として、4 言語の見出し数 / 引用ブロック数 / コードフェンス数 / table 行数も比較した。
-   `headings=47`、`quotes=54`、`codefence=4`、`table_lines=26` は 4 言語で一致し、section 単位の
-   bullet / quote 分布も本文側は揃っていた。機械差分として残ったのは、先頭タグ列で日本語正本だけ
-   `個人開発` が 1 本多いこと（`ja bullets=81`、en/zh/ko=`80`）で、現時点では translation drift というより
-   metadata 差として扱う。
+   `headings=47`、`quotes=54`、`codefence=4`、`table_lines=26`（`|` 含有行ベース）は 4 言語で一致し、
+   section 単位の bullet / quote 分布も本文側は揃っていた。front matter タグの既知差は 2 種で、
+   ①本数差 = ja のみ `個人開発` が 1 本多い（`ja bullets=81`、en/zh/ko=`80`）、
+   ②ローカライズ差 = `AIエージェント`（ja）↔ `Agent`（en/zh/ko）である。いずれも
+   translation drift というより想定内の metadata / ローカライズ差として扱う。
+   `個人開発` タグは ja 固有タグとして現状維持し、4 言語タグの完全一致は要件にしない。
    なお、統合レビューで触れられた「翻訳版は blockquote 内 inline link / 正本は blockquote 下 raw URL」という形式差は、
    今回の修正で生じたものではなく既存スタイル差なので、このターンの修正対象にはしない。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
@@ -200,7 +202,7 @@ nav_order: 95
    4 言語 line 単位 re-diff を追加で回すかの判断である。
    `2-7 → ★ honest disclosure`、`/goal` 節 → 独立 honest disclosure、`3-3 → 3-4`、
    統合章 → まとめ、まとめ → 次回予告 / 参考 も seam spot-check 一巡の確認済み候補として読む。
-   line 単位 re-diff を切る場合は、既知差として日本語正本先頭タグの `個人開発` を除外し、
+   line 単位 re-diff を切る場合は、既知差として `個人開発` と `AIエージェント` ↔ `Agent` を除外し、
    本文比較の価値が本当にあるかから判断する。
    日本語正本に対する最終棚卸しで未確認帯なしを確認したら、
    その後に en/zh/ko の `ignorePublish: false` を戻して同期判断へ進む。
