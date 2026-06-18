@@ -2,6 +2,11 @@
 
 Qiita Team 向けに「難しい内容を後で個別公開できるよう stock しておく」ための local queue。
 
+## この文書の役割
+
+- **正本**: 投稿待ち一覧と現在の blocker をここに集約する
+- `team_stock_publish_plan.md`: 公開順・human gate 条件・rollback 注意の正本
+
 ## 状態定義
 
 - `local_draft`: repo 内に草稿あり。外部 POST はまだしていない

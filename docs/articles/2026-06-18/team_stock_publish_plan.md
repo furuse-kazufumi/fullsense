@@ -3,11 +3,11 @@
 `tools/qiita-cli-poc/public/` に切った Team stock 用 source-only draft を、
 後で Qiita Team `fullsense` へ流すときの順番と注意点をまとめる。
 
-## 対象
+## この文書の役割
 
-1. `team_stock_semantic_governance.md`
-2. `team_stock_llm_wiki_anti_circulation.md`
-3. `team_stock_ctx2549_postmortem.md`
+- **正本**: 公開順・human gate 条件・rollback 注意をここに集約する
+- `team_stock_queue.md`: 投稿待ち一覧の正本
+- `next_plan.md` / `SESSION_SUMMARY.md`: この正本への参照だけを持つ
 
 ## なぜこの 3 本か
 
@@ -41,9 +41,19 @@
 
 ## human gate 前提の注意
 
-1. `tools/qiita_team_post.py` は `ignorePublish: true` を尊重しない
-2. `private: true` の Team 上での実効可視範囲は未確定
-3. よって、実 POST 前に user GO が必要
+1. `ignorePublish` は公式 qiita-cli 側の草稿ガードだが、`tools/qiita_team_post.py` はこれを読まない
+2. つまり `tools/qiita_team_post.py post --yes` は、`ignorePublish: true` の草稿でもそのまま外部 POST する
+3. `private: true` の Team 上での実効可視範囲は未確定
+4. よって、実 POST 前に user GO が必要
+
+## POST 前に確認すること
+
+- user GO があること
+- `private: true` の可視範囲が未確定なまま送ることを user が理解していること
+- rollback 経路を確認してあること
+  - POST 後に取り消すなら、少なくとも item `id` を控えた上で `PATCH /items/:id` で private / title / body を更新できる前提を取る
+  - 必要なら Team UI または API で即時に非表示化 / 差し替えできることを先に確認する
+- 承認者は current user 本人、承認基準は「可視範囲未確定のままでも Team stock を優先するか」である
 
 ## POST 後に追記すること
 
