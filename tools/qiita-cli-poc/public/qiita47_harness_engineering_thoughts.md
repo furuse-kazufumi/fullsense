@@ -12,12 +12,12 @@ ignorePublish: true
 ---
 <!-- draft:theme="harness-is-human-discipline" -->
 <!-- draft:image="docs/articles/assets/bazue_all/157.jpg" -->
-<!-- draft:status="local-only" -->
+<!-- draft:status="independent-short-draft" -->
 
 # ハーネスエンジニアリングについて思うこと — しつけが必要なのは AI より人類かもしれない
 
 > **この草稿の位置づけ**
-> #43 の companion として切り出した local-only draft です。`006.jpg` が「ハーネスを通した途端に AI が賢そうに見える瞬間」を受け持つのに対し、この草稿は `157.jpg` を使って「本当にしつけが必要なのは誰か」を人間側へ反転させます。
+> #43 から派生した独立短稿の local-only draft です。`006.jpg` が「ハーネスを通した途端に AI が賢そうに見える瞬間」を受け持つのに対し、この草稿は `157.jpg` を使って「本当にしつけが必要なのは誰か」を人間側へ反転させます。
 
 > **前提**
 > ここで言う harness engineering は、LLM の外側に決定論的な runtime 層を置き、観測・制約・再試行・差し戻しを設計する実務を指します。
