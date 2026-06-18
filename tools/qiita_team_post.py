@@ -100,20 +100,26 @@ def norm_tags(meta: dict) -> list[dict]:
     return out[:5]  # Qiita allows at most 5 tags
 
 
-def real_id(meta: dict) -> str | None:
-    """Frontmatter id, treating 'null'/'none'/'' as ABSENT (so we POST-create, not PATCH /items/null)."""
-    v = meta.get("id") or meta.get("qiita_item_id")
+def _clean_nullish_scalar(v) -> str | None:
     if v is None:
         return None
     v = str(v).strip()
     return v if v and v.lower() not in ("null", "none") else None
 
 
+def real_id(meta: dict) -> str | None:
+    """Frontmatter id, treating 'null'/'none'/'' as ABSENT (so we POST-create, not PATCH /items/null)."""
+    return _clean_nullish_scalar(meta.get("id")) or _clean_nullish_scalar(meta.get("qiita_item_id"))
+
+
 def as_bool(v, default=True) -> bool:
     if isinstance(v, bool):
         return v
     if isinstance(v, str):
-        return v.strip().lower() in ("true", "yes", "1")
+        s = v.strip().lower()
+        if not s:
+            return default
+        return s in ("true", "yes", "1")
     return default
 
 

@@ -109,6 +109,8 @@ def test_qiita_public_post_build_payload_uses_public_private_only():
 def test_qiita_team_post_real_id_treats_nullish_as_absent():
     assert qtp.real_id({"id": "team-item-id"}) == "team-item-id"
     assert qtp.real_id({"id": " none "}) is None
+    assert qtp.real_id({"id": " none ", "qiita_item_id": "fallback-id"}) == "fallback-id"
+    assert qtp.real_id({"id": "null"}) is None
     assert qtp.real_id({"qiita_item_id": "fallback-id"}) == "fallback-id"
 
 
@@ -121,6 +123,27 @@ def test_qiita_team_post_build_payload_uses_private_flag_directly():
     assert private_payload["private"] is True
     assert public_payload["private"] is False
     assert default_payload["private"] is True
+
+
+def test_qiita_team_post_build_payload_treats_blank_private_as_default_true():
+    body = "body\n"
+    payload = qtp.build_payload({"title": "hello", "tags": ["AI"], "private": ""}, body)
+    assert payload["private"] is True
+
+
+def test_qiita_team_post_frontmatter_string_false_maps_to_public():
+    text = (
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "---\n"
+        "body\n"
+    )
+    meta, body = qtp.split_frontmatter(text)
+    payload = qtp.build_payload(meta, body)
+    assert payload["private"] is False
 
 
 def test_qiita_public_post_dry_run_surfaces_legacy_id_warning(tmp_path, capsys):
