@@ -241,7 +241,7 @@ nav_order: 95
    冒頭の拾い読みガイドも追加済みで、節番号 + 実見出し名でも辿れる text TOC にしてある。
    ただし annotation / 参考文献節は追加済みで、残タスクは
    一次 URL 確認と著者帰属の整備。
-8. `qiita47_harness_engineering_thoughts.md` は `#43` から派生した local-only の independent short draft として新設済みで、いまは独立短稿として最低限読める具体節に加え、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例まで入った状態。
+8. `qiita47_harness_engineering_thoughts.md` は `#43` から派生した local-only の independent short draft として新設済みで、いまは独立短稿として最低限読める具体節に加え、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例と、その比喩が clean / dirty の観測までしか言い切れず、ズレの意味づけや優先順位づけまでは自動化しないという破綻点まで入った状態。
    現状の spine は「ハーネスは AI を賢くする技術というより、人類側の曖昧な運用を二度と通さない discipline である」。
    canonical ledger 2 正本への `513546f..e6aad8e` 回収は完了済みで、次に触るときはこの短稿の参考整形か公開水準化から始めればよい。
    次にやるなら、`#43` へ戻す判断ではなく、独立短稿として参考導線を足して育てるかを決める。現段階では publish / Team stock へは送らず、`157.jpg` の使いどころ定義、RAPTOR / `llterm` / `/goal` の具体節、`desired-actual-drift-repair` の最小 loop 説明までで止めている。
