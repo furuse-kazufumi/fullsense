@@ -660,3 +660,83 @@ block point 를 두고 결정론화한다.
 9가지를 전부 외우지 않아도 일단은 이것이면 충분하다.
 
 > **더 똑똑한 AI를 붙이기 전에, 인간이 끼어들 수 있는 경계를 구현한다.**
+
+---
+
+## 8. honest disclosure 는 "패배 선언"이 아니라 감독의 일부다
+
+마지막으로, 이 연재에서 반복해서 등장하는 `honest disclosure` 를 이번 incident 와 직접 연결해 다시 정리해 보려 한다.
+
+이 말은 자칫하면 "잘 안된 것에 대한 변명"처럼 보일 수 있다.  
+하지만 실제로는 거의 반대다. 이것은 **자율주행 AI를 감독 가능하게 유지하기 위해 필요한 태도 자체**에 가깝다.
+
+### 8-1. 미해결을 미해결로 남겨 두는 것은 약함이 아니다
+
+이번 경우만 해도 아직 남아 있다.
+
+- `ctx 2549%` 의 산정 내역은 끝까지 완전히 분해되지 않았다
+- codex 쪽 occupancy 표시는 잠정적이며, 더 가볍게 만들 여지가 남아 있다
+- 이 설계 지식은 특히 headless CLI 를 turn 경계로 구동하는 loop 에 강하게 듣는 것이지, 모든 agent runtime 에 그대로 일반화할 수 있는 것은 아니다
+
+이런 항목들을 남겨 두면 글은 다소 덜 깔끔해 보인다.  
+모든 것이 완전히 닫힌 이야기가 읽을거리로는 더 보기 좋기 때문이다.
+
+그럼에도 남겨 두는 이유는 하나다.  
+**닫히지 않은 것을 닫혔다고 쓰는 순간 감독 가능성이 깨지기 때문**이다.
+
+### 8-2. "전부 고쳤다"보다 "어디까지 고쳤는가"가 더 중요하다
+
+AI 관련 글은 쉽게 성공담으로 기울어진다.  
+하지만 실제 운용에서 필요한 것은 승리 선언이 아니라 경계선이다.
+
+- 어디까지 재현했는가
+- 어디까지 인과가 확인되었는가
+- 어디부터는 아직 가설인가
+- 어디부터는 다른 issue 인가
+
+이 구분이 없으면 다음 설계 판단이 전부 흐릿해진다.  
+그래서 `honest disclosure` 는 미덕이라기보다 **다음 수정을 가능하게 만드는 bookkeeping** 에 더 가깝다.
+
+### 8-3. loop engineering 의 본체는 결국 여기로 돌아온다
+
+이 글을 한 줄로 닫는다면, 처음의 결론과 같은 자리로 돌아온다.
+
+> 자율주행 AI의 본체는 추론의 영리함이 아니라 **감독 가능한 구조** 에 있다.
+
+그 구조 안에는 다음이 전부 포함된다.
+
+- 개입 경계
+- 정지 조건
+- telemetry
+- 테스트의 결정론화
+- 리뷰 적용 범위의 설계
+- honest disclosure 의 선 긋기
+
+즉 loop engineering 은 "AI를 오래 일하게 만드는 법"의 기술이 아니다.  
+그것은 **인간이 그것을 놓치지 않게 만드는 법**의 기술이다.
+
+`llterm` 의 incident 는 그 사실을 꽤 아프게 가르쳐 주었다.  
+그래서 이 #46 을 단순한 장애 대응 기록이 아니라, "자율주행 AI를 감독 가능하게 설계한다는 것은 무엇인가"에 대한 첫 번째 정리로 남겨 두고 싶다.
+
+---
+
+## 관련 글의 입구
+
+- [FullSense 개발 기사 — 읽는 순서 가이드](https://qiita.com/furuse-kazufumi/items/ac398349ec42e40913f1)
+- [#43 2026년, 업계는 AI에게 "고삐"와 "바퀴"라는 이름을 붙였다 — harness/loop engineering 시제품 스택을 로컬에 짜기 시작한 이야기](https://qiita.com/furuse-kazufumi/items/a96a15cb771fe5a57df6)
+- [#45 인간과 AI의 개발 사고 패턴집 — handoff / human gate / honest disclosure 를 다시 설계한 이야기](https://qiita.com/furuse-kazufumi/items/67365e2423d540aa6416)
+
+## 참고문헌 / 참고 리소스
+
+- [#43 2026년, 업계는 AI에게 "고삐"와 "바퀴"라는 이름을 붙였다 — harness/loop engineering 시제품 스택을 로컬에 짜기 시작한 이야기](https://qiita.com/furuse-kazufumi/items/a96a15cb771fe5a57df6)
+  - `harness engineering` / `loop engineering` / `llterm` 의 전체 위치를 먼저 보고 싶다면 가장 좋은 입구다.
+- [#45 인간과 AI의 개발 사고 패턴집 — handoff / human gate / honest disclosure 를 다시 설계한 이야기](https://qiita.com/furuse-kazufumi/items/67365e2423d540aa6416)
+  - handoff / human gate / suspiciously good 한 숫자를 어떻게 의심할 것인가에 대한 운영 측면의 전편.
+- [FullSense 개발 기사 — 읽는 순서 가이드](https://qiita.com/furuse-kazufumi/items/ac398349ec42e40913f1)
+  - 연재 전체의 입구.
+- RAD 코퍼스 재접지 메모:
+  - `article_craft_corpus_v2` 에서는 through-line, re-hook, one-idea-per-paragraph, micro-payoff 관련 노트를 참조해 이 장문을 incident → principles → pull-back 순서로 조직했다.
+- 구현 레벨의 저층 근거에 대하여:
+  - 이 글의 `ctx 2549%`, rotate, flaky test, 리뷰 이중 담금질에 관한 구체 사실은 내부 로그와 로컬 evidence snapshot 에 근거한다. 현재 외부에 재현 가능한 공개 로그 묶음은 준비되어 있지 않으므로, 저층 원시 로그 자체는 비공개다.
+
+<!-- llive:meta.tags=["ai-agent","llterm","loop-engineering","human-in-the-loop","honest-disclosure","telemetry"] target=any -->

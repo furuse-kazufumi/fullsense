@@ -656,3 +656,83 @@ Most of the nine principles are already inside that one line.
 You do not need to memorize all nine principles right now. This is enough for a first pass:
 
 > **Before adding smarter AI, implement boundaries where human beings can break in.**
+
+---
+
+## 8. Honest disclosure is not a "statement of defeat." It is part of supervision
+
+Finally, I want to reframe `honest disclosure`, which keeps appearing throughout this series, through the lens of this incident.
+
+The phrase can easily look like a fancy way of saying "here is my excuse for what did not go well."  
+In reality it is almost the opposite. It is close to **the stance required to keep self-driving AI supervisable at all**.
+
+### 8-1. Leaving unresolved things unresolved is not weakness
+
+In this case, several items still remain:
+
+- the calculation breakdown behind `ctx 2549%` was not fully decomposed in the end
+- the occupancy display on the codex side is still provisional and can likely be made leaner
+- these design lessons apply especially strongly to loops driven through headless CLI turn boundaries, and cannot automatically be generalized to every agent runtime as-is
+
+Admitting those points makes the article feel slightly untidy.  
+A perfectly closed story is usually more pleasant as a piece of writing.
+
+Even so, there is one reason to leave them visible:  
+**the moment you write that a still-open thing is closed, supervisability breaks.**
+
+### 8-2. "How far it was fixed" matters more than "everything is fixed"
+
+Articles about AI drift easily toward success stories.  
+But what real operations need is not a victory declaration. They need boundaries.
+
+- what was reproduced
+- what causality was confirmed
+- what is still hypothesis
+- what belongs to a different issue from here on
+
+Without those distinctions, every later design decision becomes blurry.  
+So `honest disclosure` is less a virtue than a form of **bookkeeping that makes the next repair possible**.
+
+### 8-3. In the end, loop engineering comes back here
+
+If I close this article in one line, it returns to the same place as the opening conclusion:
+
+> The core of self-driving AI is not the cleverness of inference, but **a structure that can be supervised**.
+
+That structure includes all of the following:
+
+- intervention boundaries
+- stop conditions
+- telemetry
+- deterministic testing
+- review scope design
+- the line-drawing discipline of honest disclosure
+
+In other words, loop engineering is not the craft of "how to make AI work for a long time."  
+It is the craft of **how to keep human beings from losing sight of it**.
+
+The `llterm` incident taught that lesson in a fairly painful way.  
+That is why I want to leave this #46 not merely as an incident record, but as a first organized note on what it means to design self-driving AI so that it remains supervisable.
+
+---
+
+## Related Reading
+
+- [FullSense Development Series — Reading Guide](https://qiita.com/furuse-kazufumi/items/ac398349ec42e40913f1)
+- [#43 In 2026, the Industry Named the AI's "Reins" and "Wheel" — How I Started Assembling a Prototype harness/loop engineering Stack Locally](https://qiita.com/furuse-kazufumi/items/a96a15cb771fe5a57df6)
+- [#45 Human–AI Development Incident Patterns — Redesigning handoff, human gate, and honest disclosure](https://qiita.com/furuse-kazufumi/items/67365e2423d540aa6416)
+
+## References / Further Reading
+
+- [#43 In 2026, the Industry Named the AI's "Reins" and "Wheel" — How I Started Assembling a Prototype harness/loop engineering Stack Locally](https://qiita.com/furuse-kazufumi/items/a96a15cb771fe5a57df6)
+  - The best entry point if you want the positioning of `harness engineering`, `loop engineering`, and `llterm` first.
+- [#45 Human–AI Development Incident Patterns — Redesigning handoff, human gate, and honest disclosure](https://qiita.com/furuse-kazufumi/items/67365e2423d540aa6416)
+  - The operational preface for handoff, human gate, and how to distrust suspiciously good numbers.
+- [FullSense Development Series — Reading Guide](https://qiita.com/furuse-kazufumi/items/ac398349ec42e40913f1)
+  - The entry point to the series as a whole.
+- Notes from RAD corpus re-grounding:
+  - In `article_craft_corpus_v2`, I referred to notes on through-lines, re-hooks, one-idea-per-paragraph, and micro-payoffs in order to shape this long-form piece along the arc incident → principles → pull-back.
+- On the low-level implementation evidence:
+  - The concrete facts in this article around `ctx 2549%`, rotate, flaky tests, and double-dipped review are based on internal logs and local evidence snapshots. At this point, no externally reproducible public log bundle has been prepared, so the raw low-level logs themselves remain private.
+
+<!-- llive:meta.tags=["ai-agent","llterm","loop-engineering","human-in-the-loop","honest-disclosure","telemetry"] target=any -->
