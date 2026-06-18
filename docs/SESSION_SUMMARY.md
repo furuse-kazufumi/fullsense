@@ -14,7 +14,7 @@
 - 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` / `a07f0c7` / `0232814` / `bafacdd` / `ac7cb80` / `7200d5d` / `40f580e` / `e2d1887` / `c37d084` に加え、`c37d084..119ad03`（計72 commit。deindex / llterm seed screening / article 46 多言語 / Team stock drafts / article 43 監査群を含む。末尾マイルストーン `d50c31f` / `204d9b7` / `119ad03`）として保存済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - git push は local-first 運用のため未実施のまま据え置いており、human-gate を要する外部アクション集合には数えない。新規記事の新規 publish / Qiita Team 書き込みは **未実施**。test については**この差分では未実施**で、前バッチで追加した frontmatter 回帰テストとは切り分ける。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
-- Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`tools/qiita_team_post.py dry-run` では 3 本とも registration-safe だったが、実 Team POST はまだ行っていない。投稿待ち一覧の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。
+- Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`tools/qiita_team_post.py dry-run` では 3 本とも registration-safe だったが、実 Team POST はまだ行っていない。投稿待ち一覧の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human-gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。
 - Team stock 正本 2 枚には preflight runbook / 実行コマンド / rollback notes / POST 後の記録欄まで追加済み。通常 POST はその 2 枚で回せるが、rollback 実施時のみ handoff にも 1 行転記する。
 - Team stock 3 本は source article と大筋整合していることを spot-check 済み。対応は `team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` = #43、`team_stock_ctx2549_postmortem.md` = #46。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
 - さらに 3 本とも `この記事で話さないこと` を足し、難所の切り出し範囲を local draft の段階で固定した。
@@ -34,8 +34,8 @@
 - さらに参考文献節と末尾 hedge note も 4 言語で spot-check し、`alu.jp` crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に維持され、OpenAI 403 / RAD `47,097 docs` / `人間優位3点` 観察ベースなどの留保も日本語正本に追従していることを確認した。`GPT-5.5` についてはこのターンで OpenAI 公式一次情報によりモデル名の実在を確認し、留保を「モデル名未確認」から「比較値の一次計測元・計測条件未確認」へ締め直した。
 - 残ブリッジ棚卸しとして、`第1章末 → 第2章頭`（`なぜ` → `どう` への橋渡し）、`3-1. RAD コーパス → 3-2. LLM Wiki`、`3-4. corpus-first advantage → 統合章` の 3 接続を 4 言語で再確認した。第1章の補助線から第2章の制御論へ移る温度感、`集めた知識は放っておくとただの山` から LLM Wiki へ入る導入、`A/B/C が1本に繋がる` から統合章へ畳む着地まで、日本語正本に対する新たな factual / translation drift は見つかっていない。
 - さらに最終棚卸しとして、導入 → 第0章、第0章末 → 第1章頭、`/goal` 節 → 独立 honest disclosure、独立 honest disclosure → 第3章頭、`3-2. LLM Wiki` → `3-3. RAPTOR` の局所接続も 4 言語で spot-check した。一次情報に錨を下ろす作法から用語地図へ入る導入、`実務ブログも査読論文も鵜呑みにしない` から harness engineering の命名確認へ移る接続、`mystery graph` から `捨てた数字` 検証へ降りる橋、`無知の知` から knowledge stack へ移る着地、thought circulation 警告から RAPTOR の evidence ladder へ渡す流れまで、日本語正本に対する新たな factual / translation drift は見つかっていない。
-- 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで監査済み、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで監査済み、Team stock 3 本は local draft / dry-run / provenance spot-check まで完了。未解決の外部アクションは、human gate を要する #46 の publish 判断、Qiita Team POST、dev.to 英語版 update / publish 判断である。
-- dev.to 英語版の残件定義も実ファイルと一致している。`tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.devto.json` は `id: 3915834` / `published: false` / dev.to URL 付きの sidecar として残っており、公開前に human gate を要する draft 状態である。
+- 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで監査済み、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで監査済み、Team stock 3 本は local draft / dry-run / provenance spot-check まで完了。未解決の外部アクションは、human-gate を要する #46 の publish 判断、Qiita Team POST、dev.to 英語版 update / publish 判断である。
+- dev.to 英語版の残件定義も実ファイルと一致している。`tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.devto.json` は `id: 3915834` / `published: false` / dev.to URL 付きの sidecar として残っており、公開前に human-gate を要する draft 状態である。
 - `NEXT_SESSION.md` の旧 operator queue 見出しは `old context / current scope outside (2026-06-12 stale)` へ更新し、asciinema 録画 / production 起動 / credential 復旧は **ローカル operator 作業の旧メモ**であって、現行の human-gate 外部アクション 3 件とは別カテゴリ・現行優先ではないことを明記した。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
@@ -58,7 +58,7 @@
 - #43:
   - 第3章導入〜`3-2. LLM Wiki` 本体の主要段落を日本語正本→en→zh→ko の順で spot-check し、3層スタック説明、`RAD_INDEX.md` / `65 RAD corpora` 導入、`47,097 docs` と `32,503 files` の内訳、`hacker_corpus` の raw 集約ファイルという留保、Karpathy 帰属のヘッジ付き `LLM Wiki` 3層導入、thought circulation / Anti-Circulation Safeguards、製品対応づけまで多言語 draft が日本語正本に追従していることを確認した
   - en/zh/ko に欠落していた「半信×半疑」の引用ブロックと URL を既存の inline 引用形式へ揃えて日本語正本へ同期し、末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を追加した。`3-2. LLM Wiki` 本体は quote block と参考導線を含む主要論点まで局所確認済みとして扱える状態になった
-  - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、英語版には `public_id` も明示した。`tools/_frontmatter.py` を新設して poster / converter 4 経路へ共有化し、`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストを追加した。human gate 後の public PATCH と API / HTML 確認まで完了した
+  - 公開済み英語版 Qiita item `2622da17495d61480fa2` のタイトル崩れ（`# >-` 表示）を再現し、原因を front matter `title: >-` と poster 側の最小パーサ不一致と特定した。英語版 / 韓国語版 source は single-quoted title へ修正し、英語版には `public_id` も明示した。`tools/_frontmatter.py` を新設して poster / converter 4 経路へ共有化し、`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストを追加した。human-gate 後の public PATCH と API / HTML 確認まで完了した
   - #43 本文の旧名称 `llloop` / 起動コマンド `lll` を、最終名称 `llterm` へ 4 言語草稿で一括置換した。あわせて handoff 内の現行進捗説明も `llterm` 表記へ揃え、archive 扱いの旧メモは温存した
   - さらに #43 の `llloop` / `llterm` 関係を補足し、`llloop` は terminal 内で回していた TUI 試作、`llterm` は TUI の入力・表示・観測で行き詰まりを感じて作り直した GUI 版だと 4 言語本文へ明記した
   - あわせて llterm 実 repo (`D:/projects/llterm`) を一次確認し、`pyproject.toml` の `gui-scripts` と `src/llterm/gui/app.py` の実装に合わせて、#43 の `2-6` 起動説明を「console script の対話メニュー」から「PySide6 GUI エントリポイント」へ修正した。`term` が残るのは terminal 起点の名残、という補足も追加した
@@ -89,7 +89,7 @@
   - `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は一次確認し、セリフ `『そういうお前も好きやで…』激オチ『頑ななあの娘へ』2章12節から.. 聖書の引用みたいになってる…!` の存在を確認した。今後このコマを記事に使う場合、出典として支えられるのはこのセリフまでで、`honest disclosure` を毎回持ち出す感じ / chapter-verse のように引用する感じ、等の上乗せ解釈は筆者側の比喩として分離して書く
 - Team stock:
   - #43 から `Semantic Governance` 単独記事と `LLM Wiki / thought circulation` 単独記事、#46 から ``ctx 2549%`` postmortem 単独記事の 3 本を source-only draft として `tools/qiita-cli-poc/public/` に追加した
-  - 3 本とも `private: true` / `ignorePublish: true` のまま `tools/qiita_team_post.py dry-run` を通し、title / tags / body の登録安全性だけ確認した。実際の Team 投稿は human gate 待ち
+  - 3 本とも `private: true` / `ignorePublish: true` のまま `tools/qiita_team_post.py dry-run` を通し、title / tags / body の登録安全性だけ確認した。実際の Team 投稿は human-gate 待ち
   - 注意: `qiita_team_post.py` は `ignorePublish` を gate にしていないため、`post --yes` はそのまま外部 POST になる。さらに `private: true` の Team 上での実効可視範囲も十分に確定できていない。詳細条件は `team_stock_publish_plan.md` を正本とする
 - deindex:
   - ユーザー承認後、`.llterm/loop_ledger.jsonl` に対して `git rm --cached` を実行し、`.gitignore` にファイル単位の ignore を追加した。ログファイル本体は残したまま Git 追跡だけを外す形で、毎セッションの tracked ノイズ差分を止める恒久対策へ切り替えた
@@ -167,8 +167,8 @@
 1. #43 en/zh/ko の次の再開点は、既に handoff に列挙済みの帯を再監査せず、未確認扱いのまま残っている橋渡し段が本当にあるかを最終棚卸しすること。`第1章末 → 第2章頭`、`3-1 → 3-2`、`3-4 → 統合章` の代表ブリッジは再確認済みなので、それ以外の局所接続だけを見る。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
-4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human gate を伴う publish 判断が中心になった。
-5. 難しい論点の Team stock は local draft 化まで完了した。次の外部アクションは、3 本 (`Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem) を実際に Qiita Team へ POST するかの human gate 判断になる。回答が来るまでは queue / publish plan / local draft の整合維持だけを行う。
+4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human-gate を伴う publish 判断が中心になった。
+5. 難しい論点の Team stock は local draft 化まで完了した。次の外部アクションは、3 本 (`Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem) を実際に Qiita Team へ POST するかの human-gate 判断になる。回答が来るまでは queue / publish plan / local draft の整合維持だけを行う。
 6. `NEXT_SESSION.md` の 2026-06-12 旧 operator セクションは stale 扱いを明示済みなので、asciinema 録画 / production 起動 / credential 復旧は「現行 3 件の human-gate 外部アクション」と混同しない。現行の残件集合は #46 publish 判断 / Qiita Team POST / dev.to 英語版 update・publish 判断で固定して読む。
 
 - 翻訳 QA:

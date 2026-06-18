@@ -24,7 +24,7 @@ nav_order: 95
 ## ⭐ 2026-06-17 昼 — #43 継続の再開地点
 
 > **この節が現時点の最優先の再開地点。** 下の 2026-06-12 節は旧文脈の記録として残している。
-> **2026-06-18 このターンの変更範囲:** #43 多言語 draft の引用同期と handoff 更新に続き、公開済み英語版 `https://qiita.com/furuse-kazufumi/items/2622da17495d61480fa2` のタイトル崩れ（表示が `# >-` になる不具合）を切り分けた。原因は front matter の `title: >-` と poster 側の最小パーサ不一致で、repo 規約 (`MULTILINGUAL_ROLLOUT_SPEC.md`) に反して英語版と韓国語版が block scalar title を持っていたこと。手元 source は single-quoted title へ修正し、poster / converter 4 経路で共有する `tools/_frontmatter.py` を新設、`tools/qiita_public_post.py` / `tools/qiita_team_post.py` / `tools/qiita-cli-poc/convert_to_qiita_cli.py` / `scripts/publish/zenn_convert.py` を shared parser へ切替えた。`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストも追加した。そのうえで human gate 後に public PATCH を実行し、Qiita API / HTML (`<title>` / `og:title` / `<h1>`) で本来のタイトル文字列へ復旧したことを確認した。なお live 反映確認は、このセッションでの API/HTML 自己確認ログに基づく。加えて `docs/articles/assets/bazue_all/index.md` に、`081.jpg` = バイブコーディング、`006.jpg` = ハーネスエンジニアリング、`163.jpg` = AIオーケストラ、`025.jpg` = ループエンジニアリング実践中、というユーザー確認済みの挿絵対応メモを追記した。
+> **2026-06-18 このターンの変更範囲:** #43 多言語 draft の引用同期と handoff 更新に続き、公開済み英語版 `https://qiita.com/furuse-kazufumi/items/2622da17495d61480fa2` のタイトル崩れ（表示が `# >-` になる不具合）を切り分けた。原因は front matter の `title: >-` と poster 側の最小パーサ不一致で、repo 規約 (`MULTILINGUAL_ROLLOUT_SPEC.md`) に反して英語版と韓国語版が block scalar title を持っていたこと。手元 source は single-quoted title へ修正し、poster / converter 4 経路で共有する `tools/_frontmatter.py` を新設、`tools/qiita_public_post.py` / `tools/qiita_team_post.py` / `tools/qiita-cli-poc/convert_to_qiita_cli.py` / `scripts/publish/zenn_convert.py` を shared parser へ切替えた。`tests/test_qiita_frontmatter.py` で folded scalar / single-quote escaping / block list の回帰テストも追加した。そのうえで human-gate 後に public PATCH を実行し、Qiita API / HTML (`<title>` / `og:title` / `<h1>`) で本来のタイトル文字列へ復旧したことを確認した。なお live 反映確認は、このセッションでの API/HTML 自己確認ログに基づく。加えて `docs/articles/assets/bazue_all/index.md` に、`081.jpg` = バイブコーディング、`006.jpg` = ハーネスエンジニアリング、`163.jpg` = AIオーケストラ、`025.jpg` = ループエンジニアリング実践中、というユーザー確認済みの挿絵対応メモを追記した。
 
 **再確認した状態:**
 - `#43` 日本語記事 `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md` は
@@ -97,13 +97,13 @@ nav_order: 95
 **次回ここから再開:**
 1. dev.to 英語版を更新または publish する前に、
    `published: false` の sidecar draft が残っている前提を確認しつつ、
-   「外部公開/外部書き込みは human gate」という運用を守る。
+   「外部公開などの外部アクションは human-gate を要する」という運用を守る。
 2. #46 (`qiita46_llterm_supervision_first.md`) は JA / en / zh / ko / kamikudaki の本文と endmatter まで同期済みで、
    `ctx 2549%` / `turn boundary` / `interrupt` / `block point` の用語固定も一巡している。
    `025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 を確認済み、
    `kamikudaki_shishi.svg` も raw URL の HTTP 200 を確認済み。
    最終見直しパスでも新たな重大 drift は未検出なので、次の外部アクションは
-   human gate を伴う publish 判断になる。
+   human-gate を伴う publish 判断になる。
 3. 難しい論点は後で個別公開できるよう Team stock へ切り出し始めた。
    `tools/qiita-cli-poc/public/team_stock_semantic_governance.md`、
    `team_stock_llm_wiki_anti_circulation.md`、
@@ -118,7 +118,7 @@ nav_order: 95
    また `team_stock_queue.md` / `team_stock_publish_plan.md` / local draft 3 本の
    title・source anchor・`private: true`・`ignorePublish: true` も相互に矛盾していない。
    ただし実際の Qiita Team POST は未実施で、ここも human-gate を要する
-   外部アクションなので human gate が必要。
+   外部アクションである。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
    en/zh/ko の translation sync note は本文から外してあり、publish へ進めるときは
@@ -194,7 +194,7 @@ nav_order: 95
    現状は進化計算の総論ハブで、歴史記録より「用語と構造の説明」を優先。
    冒頭の急ぐ人向け導線は追加済みで、節番号 + 実見出し名でも辿れる text TOC にしてある。
 7. `qiita45_human_ai_dev_incident_patterns.md` を必要なら推敲する。
-   現状は handoff / human gate / diff / checkpoint と llcore 教訓をまとめた
+   現状は handoff / human-gate / diff / checkpoint と llcore 教訓をまとめた
    問題集で、成功談より再開導線を重視。RAD 由来の
    unsupported success / verifier / durable write / checkpoint 系も追記済み。
    ただし主張強度はコーパス要約ベースへ弱めてあり、一次確認前提を維持する。
