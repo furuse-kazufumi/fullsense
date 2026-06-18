@@ -51,7 +51,7 @@
   - さらに同 draft に `4. 多AIレビューは質だが、無条件に重ねるとただ遅い`、`5. 追えないなら監督ではない`、`6. テストも「たまたま緑」を疑う` を追記した。記録ターンへのフルレビュー二度漬け、全行タイムスタンプ / ローテログの architecture-level 意味、並行テストの block point と suspiciously green の疑い方まで prose 化し、第6章まで一本の流れになった
   - さらに同 draft に `7. 障害対応から抽出した、loop engineering 9原則` と `8. honest disclosure は「敗北宣言」ではなく、監督の一部` を追記し、9 原則の本文化、未解決境界、適用条件、短い締めまで含めて日本語草稿を最後まで通した。残りは publish gate 向けのかみくだき / 多言語 / 挿絵 / 参考文献 / HTML annotation などの派生整備が中心になった
   - その後の wording 調整で、`2549%` まわりの確信度をさらに締めた。rotate 因果は確認済み、`cache 再読込の重複加算` は有力な膨張機序だが `2549%` への算定内訳までは未確定、という二段の境界へ統一し、原則7にも「全章横断のメタ原則」という 1 行を補った
-  - さらに publish gate の軽い体裁要素として、#46 本文に `☕ 休憩ポイント` を 3 箇所追加し、末尾へ `関連記事の入口`、`参考文献 / 参考リソース`、HTML annotation メタタグを追加した。その後 `025.jpg` も本文導入に実投入し、残る gate 項目は、かみくだき版 / en-zh-ko の仕上げが中心になった
+  - さらに publish gate の軽い体裁要素として、#46 本文に `☕ 休憩ポイント` を 3 箇所追加し、末尾へ `関連記事の入口`、`参考文献 / 参考リソース`、HTML annotation メタタグを追加した。その後 `025.jpg` も本文導入に実投入し、クレジットを `Snack Basue` に統一、raw URL の HTTP 200 も確認した。画像 URL は既存運用どおり `raw.githubusercontent.com/.../main/...` を維持し、残る gate 項目は、かみくだき版 / en-zh-ko の仕上げが中心になった
   - 続けて `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first_kamikudaki.md` を新規追加し、#46 の 10 分短縮版 draft を起こした。結論を「AI を賢くするより、人間が見失わない境界を作る」に絞り、通常注入 / 異常値 / 審査強度 / telemetry の 4 点だけを先に掴める構成にした
   - その後の publish gate 補正で、#46 本文の「実装レベルの低層根拠」は内部ログにつき非公開だと明示し、第7章末尾に `☕ 休憩ポイント` を追加した。`kamikudaki` 側では重複していた関連記事 URL を整理し、完全版 #46 の公開 URL は未発行のため publish 時追記と明記した。あわせて `kamikudaki_shishi.svg` の raw URL は 2026-06-18 時点で HTTP 200 を確認済み
   - さらに `kamikudaki` 版を磨き、冒頭ナビを `1 分 version / 境界設計 / 4原則 / 完全版で掘る 3 点 / 覚えて帰るポイント` に整理した。途中で「境界を作る」とは何かを 3 行で砕き、完全版側へ送る論点も 3 点に固定した
@@ -121,4 +121,4 @@
 1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
-4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`qiita46_llterm_supervision_first_kamikudaki.md` の skeleton も作成済みなので、次は publish gate 残作業（かみくだき版の磨き込み / en-zh-ko）の順に整える。
+4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` はクレジットを `Snack Basue` に統一し、raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` の skeleton も作成済みなので、次は publish gate 残作業（かみくだき版の磨き込み / en-zh-ko）の順に整える。
