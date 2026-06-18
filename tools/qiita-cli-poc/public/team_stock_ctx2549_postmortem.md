@@ -57,6 +57,10 @@ ignorePublish: true
 ## source
 
 - 完全版: `qiita46_llterm_supervision_first.md` 第2章 `ターン境界と緊急割り込みは、最初から別物として設計する` / 第3章 `ctx 2549% は「AI が太った」のではなく、計測が壊れていた` / 第6章 `テストも「たまたま緑」を疑う`
+- 切り出しの核:
+  - `turn boundary` と `interrupt` を分ける incident
+  - `ctx 2549%` の rotate 因果と算定未解決の二段構え
+  - `block point` が無いテストは `たまたま緑` に見えるという incident
 - 根拠スナップショット: `docs/articles/2026-06-18/llterm_seed6_evidence.md`
 
 ## honest disclosure
