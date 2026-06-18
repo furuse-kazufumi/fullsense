@@ -50,7 +50,7 @@ AI agent の安全性を語るとき、つい ACL や権限管理の話に寄り
 - 完全版: `qiita43_harness_loop_stack.md` 第2章前半 `2-2. loop engineering にもセキュリティの顔がある`
 - 切り出しの核:
   - Verloy の警句 `scaling risk at machine speed`
-  - `Semantic Governance` を「意味管理」として要約する段落
+  - `意味論的ガバナンス（Semantic Governance）` を要約する段落
   - そこから `llterm` の fail-closed 安全層へ橋を架ける段落
 - 橋渡し先:
   - `MAPE-K` と fail-closed 安全層
