@@ -37,7 +37,7 @@
 
 ## 次の具体的な一手
 
-1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
+1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、residual translation drift が本当に残っているかの最終棚卸しを優先する。
 2. #43 en/zh/ko の次の再開点は、**既に handoff に列挙済みの帯を再監査しない**こと。`第1章末 → 第2章頭`、`3-1 → 3-2`、`3-4 → 統合章` の代表ブリッジは再確認済みなので、未確認対象はそれ以外の局所接続が本当に残っているかの最終棚卸しに寄せる。
 3. llterm 記事シードは、まず **種 #6「自走 AI ループの作り方と落とし穴」** を先に育てる。種 #1「注入タスク飢餓」は #6 の導入 incident としていったん吸収し、単独先出しは当面しない。
 4. 種 #6 の ja draft は `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first.md` として第8章まで通し、`2549%` 記述も「rotate 因果は確認済み / 膨張機序は有力推定 / 算定内訳は未確定」の境界へ締め直した。JA 正本側の `☕ 休憩ポイント` / 参考文献 / HTML annotation / 挿絵 `025.jpg` は投入済みで、`025.jpg` は多言語ごとに作品名表記を分けつつ raw URL の HTTP 200 も確認済み。URL は既存運用どおり `raw.githubusercontent.com/.../main/...` を維持する。`qiita46_llterm_supervision_first_kamikudaki.md` も冒頭ナビ・「完全版で掘る 3 点」・内部語の 1 行グロスまで磨き込み済み、`kamikudaki_shishi.svg` raw URL の HTTP 200 も確認済み。さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期し、最終見直しパスでも新たな重大 drift は未検出だった。次の外部アクションは human gate を伴う publish 判断になる。

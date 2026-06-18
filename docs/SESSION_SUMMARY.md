@@ -100,7 +100,7 @@
 
 - commit `bab1557` は **11 ファイル / 1909 insertions / 76 deletions** の doc batch。
 - `NEXT_SESSION.md` には publish gate（外部 URL / 著者帰属 / raw 200 / translation drift / dev.to draft 状態）が残っている。
-- #43 en/zh/ko は発行済み限定共有 draft のまま translation drift を残して凍結しているので、公開線へ戻す前に drift 解消が必要。
+- #43 en/zh/ko は発行済み限定共有 draft のまま凍結しており、公開線へ戻す前に residual translation drift が本当に残っているかの最終棚卸しが必要。
 - `qiita44` の参考文献節には canonical 入口を追加済み。
   - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME の代表文献を最低 1 本ずつ置いた。
   - 残りは URL を本文へどこまで出すか、lexicase まで足すかの粒度調整。
@@ -151,7 +151,7 @@
 - RAD 研究接地としては、`article_craft_corpus_v2` の narrative architecture / but-therefore rule / seeds of curiosity を再確認し、今回の監査対象も「and then」で列挙せず、章間の因果と橋渡し段の整合を優先して確認した。
 - `alu.jp` crop URL 数の 16 本基準は、日本語正本を source of truth として **本文 8 本 + 参考節 8 本 = 計 16 本（unique は 8 本、各 URL が本文と参考で 2 回ずつ出現）** と確認したうえで、en/zh/ko も同じ構成かを照合した。
 - `promise-progress-payoff` / `ending-payoff` の再確認では、終盤の `観察ベースの3点` → H4Pix 引用 → `まとめ：手綱と、輪と、知` の 3 箇条 → `Bölük` 数字を捨てた payoff 文 → `次回予告的な余韻` → 参考文献節、という鎖を 4 言語で突き合わせた。
-- これで #43 en/zh/ko は、handoff に列挙した主要帯に加え endmatter まで一巡しており、残る translation drift 候補は「未確認の細い橋渡し段」が本当に残っているかの再棚卸しに近づいた。
+- これで #43 en/zh/ko は、handoff に列挙した主要帯に加え endmatter まで一巡しており、残る論点は「未確認の細い橋渡し段」や局所接続が本当に残っているかの最終棚卸しに近づいた。
 - 上記 3 接続の再確認も終えたことで、少なくとも handoff で「未確認候補」として残していた代表的な細い橋渡し段は一巡した。以後の #43 は、新規 drift 修正よりも「本当に未確認帯が残っているか」の最終棚卸しと、live draft を触る場合の publish gate 管理が中心になる。
 - 上記の追加 spot-check まで含めると、手元 handoff で再開候補になりやすい章境界の局所接続はほぼ一巡した。#43 の残タスクは、drift 修正そのものよりも「まだ未確認と呼べる帯が本当に残っているか」の確認と、live draft を再開する際の publish gate 管理が中心である。
 - さらに参考文献節と末尾注記（`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙）も spot-check し、4 言語とも出典束と留保注記が日本語正本に追従していることを確認した。
