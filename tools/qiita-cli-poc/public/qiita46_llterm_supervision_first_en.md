@@ -386,3 +386,81 @@ More review is not automatically more virtuous.
 > **Heavy scrutiny belongs only on heavy turns.**
 
 In the next chapter we turn to the opposite side of the problem. Even if you lighten review, that still does not count as supervision if nothing can be traced afterward.
+
+---
+
+## 5. If you cannot trace it afterward, it is not supervision
+
+When people write about self-driving AI, the discussion tends to drift toward "how should we make it think?"
+But in real operation, what matters just as much is **whether you can reconstruct what happened afterward**.
+
+If human beings are going to intervene midway, stop the loop, and revise the design, then at minimum they must be able to recover:
+
+- what was emitted, and when
+- what happened in which turn
+- where the system first began to go wrong
+
+### 5-1. Per-line timestamps are mundane, but they form the foundation of supervision
+
+That is why we added **timestamps on every output line**.
+
+At first glance this sounds boring.
+But whether those timestamps exist drastically changes how an incident can be read.
+
+For example:
+
+- which AI returned first
+- at which turn boundary an injection was actually read
+- what happened before and after rotate
+- how much longer a handoff turn was than it needed to be
+
+Without timestamps at line heads, those questions become vague very quickly.
+
+What makes this dangerous is that vagueness still lets you feel as if you "basically understood it."
+That is exactly why traceability must not be treated as a convenience feature. It is **a structure that forces guesses to move closer to observation**.
+
+### 5-2. Rotate logs are not for blaming the past. They are for fixing the future
+
+On top of that, `llterm` is also moving toward leaving a rotate log on an hourly cadence.
+
+The important point here is not to turn logs into a tool for surveillance or blame.
+Logs matter less for deciding "who was at fault" than for finding **what must be changed so the same failure does not recur**.
+
+In this starvation incident, if the logs had been sloppy, it would have been easy to blur the explanation into one of these:
+
+- maybe it was only slow this one time
+- maybe the model was just capricious
+- the queue was populated, so perhaps the implementation was correct
+
+But because the record was traceable, the failure could be driven all the way down to "the consumption point did not exist."
+That is the essence of supervision.
+
+> Traceability is needed not to accuse the past, but to repair the design of the future.
+
+### 5-3. If telemetry is not fail-safe, it becomes an obstacle in production
+
+That said, traceability can also become too heavy.
+
+Suppose you decide logging matters so much that:
+
+- the GUI dies whenever the disk starts filling
+- a permissions error stops the entire loop
+- failure to write logs takes the main execution path down with it
+
+At that point telemetry stops being an aid to supervision and becomes a brand-new fault source.
+
+So telemetry needs to be designed as "mandatory, but not the protagonist."
+The main path must keep running, while enough information is still preserved to reconstruct what happened afterward. That balance is the point.
+
+### 5-4. The takeaway from this chapter
+
+This chapter reduces to three points:
+
+- if you claim to supervise self-driving AI, the ability to reconstruct what happened afterward is a prerequisite
+- per-line timestamps and rotate logs form part of the architecture-level substrate for that reconstruction
+- telemetry fails if it is either too weak or too strong; it has to be designed toward fail-safe behavior
+
+In other words, supervisability cannot be improvised out of "smart humans will manage somehow."
+You have to **embed traceability into the system as a mechanism**.
+
+Next we move to the way that same traceability loops back into testing. In other words: was that green test really green?
