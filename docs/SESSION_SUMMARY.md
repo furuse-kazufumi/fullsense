@@ -31,6 +31,7 @@
 - さらに `1-4` 後半の `AI成長マネジメント` / 4理由 / `First, Break All the Rules` ヘッジ / `アンチパターン` / 第2章への橋渡しも 4 言語で spot-check し、日本語正本に対する新たな factual / translation drift は見当たらないことを確認した。
 - さらに終盤の `なぜ「手綱を握るのは人間」だと言えるのか — 観察ベースの3点` から、H4Pix 引用を挟んだ結語導入まで 4 言語で spot-check し、`常時並列 / 長射程の伏線回収 / 常時稼働の危険予知` の 3 点、`観察された傾向` というヘッジ、`ルール（構造）で縛る` への橋渡しまで日本語正本に追従していることを確認した。
 - さらに参考文献節と末尾 hedge note も 4 言語で spot-check し、`alu.jp` crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に維持され、OpenAI 403 / RAD `47,097 docs` / `人間優位3点` 観察ベースなどの留保も日本語正本に追従していることを確認した。`GPT-5.5` についてはこのターンで OpenAI 公式一次情報によりモデル名の実在を確認し、留保を「モデル名未確認」から「比較値の一次計測元・計測条件未確認」へ締め直した。
+- 残ブリッジ棚卸しとして、`第1章末 → 第2章頭`（`なぜ` → `どう` への橋渡し）、`3-1. RAD コーパス → 3-2. LLM Wiki`、`3-4. corpus-first advantage → 統合章` の 3 接続を 4 言語で再確認した。第1章の補助線から第2章の制御論へ移る温度感、`集めた知識は放っておくとただの山` から LLM Wiki へ入る導入、`A/B/C が1本に繋がる` から統合章へ畳む着地まで、日本語正本に対する新たな factual / translation drift は見つかっていない。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで監査済み、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで監査済み、Team stock 3 本は local draft / dry-run / provenance spot-check まで完了。未解決の外部アクションは human gate 待ちの Qiita Team POST だけ。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
@@ -148,6 +149,7 @@
 - `alu.jp` crop URL 数の 16 本基準は、日本語正本を source of truth として **本文 8 本 + 参考節 8 本 = 計 16 本（unique は 8 本、各 URL が本文と参考で 2 回ずつ出現）** と確認したうえで、en/zh/ko も同じ構成かを照合した。
 - `promise-progress-payoff` / `ending-payoff` の再確認では、終盤の `観察ベースの3点` → H4Pix 引用 → `まとめ：手綱と、輪と、知` の 3 箇条 → `Bölük` 数字を捨てた payoff 文 → `次回予告的な余韻` → 参考文献節、という鎖を 4 言語で突き合わせた。
 - これで #43 en/zh/ko は、handoff に列挙した主要帯に加え endmatter まで一巡しており、残る translation drift 候補は「未確認の細い橋渡し段」が本当に残っているかの再棚卸しに近づいた。
+- 上記 3 接続の再確認も終えたことで、少なくとも handoff で「未確認候補」として残していた代表的な細い橋渡し段は一巡した。以後の #43 は、新規 drift 修正よりも「本当に未確認帯が残っているか」の最終棚卸しと、live draft を触る場合の publish gate 管理が中心になる。
 - さらに参考文献節と末尾注記（`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙）も spot-check し、4 言語とも出典束と留保注記が日本語正本に追従していることを確認した。
 - `loop_ledger` の恒久対策は commit `7745f84` で実施済み。`git rm --cached .llterm/loop_ledger.jsonl` と `.gitignore` 追記により、以後は tracked ノイズを発生させず local-only telemetry として保持する。
   - 運用ルール: `git add .` は引き続き避け、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
@@ -157,7 +159,7 @@
 
 ## 次の具体的な一手
 
-1. #43 en/zh/ko の次の再開点は、既に handoff に列挙済みの帯を再監査せず、未確認の細い橋渡し段だけを対象に factual / translation drift を詰めること。優先帯は第1章〜第2章の節間つなぎと、第3章 `3-2` 本体外の残ブリッジ。
+1. #43 en/zh/ko の次の再開点は、既に handoff に列挙済みの帯を再監査せず、未確認扱いのまま残っている橋渡し段が本当にあるかを最終棚卸しすること。`第1章末 → 第2章頭`、`3-1 → 3-2`、`3-4 → 統合章` の代表ブリッジは再確認済みなので、それ以外の局所接続だけを見る。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
 4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human gate を伴う publish 判断が中心になった。
