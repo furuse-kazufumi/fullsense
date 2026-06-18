@@ -12,7 +12,7 @@
 - 今回の作業は **Qiita 草稿 / poster スクリプト / handoff 文書の整合調整**に加え、**llterm 記事シードのスクリーニング**。本命長編は種 #6、単独中編候補は種 #1 と判断した。
 - 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` / `a07f0c7` / `0232814` / `bafacdd` / `ac7cb80` / `7200d5d` / `40f580e` / `e2d1887` / `c37d084` として保存済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
-- git push / 新規記事の新規 publish / Qiita Team 書き込み / test は **未実施**。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
+- git push / 新規記事の新規 publish / Qiita Team 書き込みは **未実施**。test については**この差分では未実施**で、前バッチで追加した frontmatter 回帰テストとは切り分ける。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
@@ -21,6 +21,7 @@
   - `qiita43_harness_loop_stack_kamikudaki.md` = `private: true` + `ignorePublish: true`
   - `qiita44_evolutionary_programs_block_diagram.md` = `private: true` + `ignorePublish: true`
   - `qiita45_human_ai_dev_incident_patterns.md` = `private: true` + `ignorePublish: true`
+  - `qiita46_llterm_supervision_first.md` = `private: true` + `ignorePublish: true`
   - #43 en/zh/ko draft も `ignorePublish: true`
 
 ## いま worktree に残っている差分
