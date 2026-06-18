@@ -37,8 +37,8 @@ nav_order: 95
   `https://dev.to/kzfm_frs_d1afeb3fc/43-in-2026-the-industry-named-the-ais-reins-and-wheel-how-i-started-assembling-a-prototype-3mcd-temp-slug-6156556`。
 - `#43` の en/zh/ko 草稿は、いずれも **日本語版
   `qiita43_harness_loop_stack.md` を正本**として 2026-06-17 時点の章立て /
-  主張 / honest disclosure に合わせる方針へ整理した。現時点ではまだ
-  翻訳ドリフトが残る。翻訳差分を直すときは
+  主張 / honest disclosure に合わせる方針へ整理した。現時点では
+  residual translation drift が本当に残るかを最終棚卸しする段階にある。翻訳差分を触るときは
   まず日本語 source を見て、次に英語、その後 zh/ko を追従させる。
 - `qiita43_harness_loop_stack_en.md` と `qiita43_harness_loop_stack_ko.md` の front matter `title:` は
   repo 規約どおり **single-quoted 1 行 title** へ修正済み。英語版は
@@ -50,10 +50,10 @@ nav_order: 95
 - `tools/qiita-cli-poc/convert_to_qiita_cli.py` と `scripts/publish/zenn_convert.py` も
   同じ shared parser へ切替済み。`title: >-` を文字列 `">-"` のまま持ち回る
   sibling 側の root-cause は除去した。
-- `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md` は、翻訳ドリフトを
-  直すまで accidental publish を避けるため `ignorePublish: true` に倒した。
+- `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md` は、最終棚卸しが終わるまで
+  accidental publish を避けるため `ignorePublish: true` に倒した。
   ただし `id:` を持つ発行済み限定共有 draft のため、これは **同期凍結**であって
-  既発行 URL 上の translation drift が消えるわけではない。
+  既発行 URL 側の状態は別管理であり、residual translation drift の有無は棚卸しで確認する。
   2026-06-18 に手元 source では `47,097 docs` ベースへ factual drift を詰めたが、
   それは **ローカル working copy の修正**であり、既発行の限定共有 URL まではまだ更新していない。
 - `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_kamikudaki.md` を
@@ -180,8 +180,8 @@ nav_order: 95
    直後の「捨てた数字」節への橋渡しまで日本語正本に追従している。
    代表的な細い橋渡し段は一巡済みで、残っているのはそれ以外の局所接続に
    未確認帯が本当に残っているかの最終棚卸しである。
-   日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため
-   en/zh/ko の `ignorePublish: false` を先に戻してから同期する。
+   日本語正本に対する最終棚卸しで未確認帯なしを確認したら、
+   その後に en/zh/ko の `ignorePublish: false` を戻して同期判断へ進む。
 3. 出自不明の front matter 整形差分が再発した場合は、
    1 行化を採らず repo 既存形式に戻してから扱う。
 5. `qiita43_harness_loop_stack_kamikudaki.md` を必要なら推敲する。
@@ -221,7 +221,7 @@ nav_order: 95
     この 2 つは `qiita-cli-poc` 草稿ラインで使っているローカル運用フィールド
     （Qiita 公式 API の公開状態そのものではなく、ローカルの同期・公開手順を止めるための安全柵）
     として扱う。
-    既発行の限定共有 draft そのものを撤回するフラグではないため、不完全な翻訳 drift を残したまま
+    既発行の限定共有 draft そのものを撤回するフラグではないため、未確認帯が残る状態のまま
     `ignorePublish: false` に戻さない。
     #43 多言語 draft の翻訳 drift と
     draft-only 注記の除去漏れがないかもこのタイミングで確認する。

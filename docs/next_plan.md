@@ -37,7 +37,7 @@
 
 ## 次の具体的な一手
 
-1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、residual translation drift が本当に残っているかの最終棚卸しを優先する。
+1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままだが、residual translation drift が本当に残っているかの最終棚卸しを優先する。
 2. #43 en/zh/ko の次の再開点は、**既に handoff に列挙済みの帯を再監査しない**こと。`第1章末 → 第2章頭`、`3-1 → 3-2`、`3-4 → 統合章` の代表ブリッジは再確認済みなので、未確認対象はそれ以外の局所接続が本当に残っているかの最終棚卸しに寄せる。
 3. llterm 記事シードは、まず **種 #6「自走 AI ループの作り方と落とし穴」** を先に育てる。種 #1「注入タスク飢餓」は #6 の導入 incident としていったん吸収し、単独先出しは当面しない。
 4. 種 #6 の ja draft は `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first.md` として第8章まで通し、`2549%` 記述も「rotate 因果は確認済み / 膨張機序は有力推定 / 算定内訳は未確定」の境界へ締め直した。JA 正本側の `☕ 休憩ポイント` / 参考文献 / HTML annotation / 挿絵 `025.jpg` は投入済みで、`025.jpg` は多言語ごとに作品名表記を分けつつ raw URL の HTTP 200 も確認済み。URL は既存運用どおり `raw.githubusercontent.com/.../main/...` を維持する。`qiita46_llterm_supervision_first_kamikudaki.md` も冒頭ナビ・「完全版で掘る 3 点」・内部語の 1 行グロスまで磨き込み済み、`kamikudaki_shishi.svg` raw URL の HTTP 200 も確認済み。さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期し、最終見直しパスでも新たな重大 drift は未検出だった。次の外部アクションは human gate を伴う publish 判断になる。
@@ -137,8 +137,8 @@
   - 残りは URL 明記をどこまで入れるか、lexicase まで補うかの粒度調整。
 - `qiita43_harness_loop_stack_kamikudaki.md` は ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。
-- #43 en/zh/ko は発行済み限定共有 draft の translation drift を解消してから `ignorePublish: false` に戻す。
-  - `47,097 docs` ベースの factual drift 修正は **ローカル source 側のみ** で、live URL はまだ旧表現を残している。
+- #43 en/zh/ko は発行済み限定共有 draft のまま凍結し、residual translation drift が本当に残っているかの最終棚卸しを通してから `ignorePublish: false` を判断する。
+  - `47,097 docs` ベースの factual drift 修正は **ローカル source 側のみ** で、live URL には旧表現が残っている可能性がある。
   - en/zh/ko とも対応する honest-disclosure 節は実在している。
     - 根拠: en `qiita43_harness_loop_stack_en.md` の `#### honest disclosure (Handling the "About 49k Items" Number)`、zh `qiita43_harness_loop_stack_zh.md` の `#### honest disclosure（关于「约49k件」这个数字的处理）`、ko `qiita43_harness_loop_stack_ko.md` の `#### honest disclosure("약 49k건"이라는 숫자의 취급)`。
   - `47,097 docs` honest-disclosure 節と直後の橋渡し段は局所確認済みで、日本語正本に大筋追従している。
