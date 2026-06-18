@@ -121,6 +121,8 @@ nav_order: 95
    `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）も本文と末尾参考へ同期した。
    これで crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に揃っている。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
+   導入部（「捨てた数字」フック / 一次情報への錨 / 第2章後の独立 honest disclosure 節への前振り）も
+   4 言語で spot-check 済みで、異常値を捨てる作法と本稿の主題提示まで日本語正本に追従している。
    第0章（`prompt → context → harness → loop` / automation vs loop / 章末 honest disclosure）と、
    第2章前半の `loop engineering` をもう一段深く〜strategy names〜security face〜`llterm` 導入〜
    MAPE-K 骨格も spot-check 済みで、用語の橋渡し・二次情報ヘッジ・Verloy 出典導線まで日本語正本に追従している。
