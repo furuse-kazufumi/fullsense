@@ -244,7 +244,7 @@ nav_order: 95
 10. `qiita44` / `qiita45` の末尾 HTML annotation と参考文献節は追加済み。
    `qiita44` は GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME /
    lexicase の一次導線 URL まで補強済みで、CMA-ES も arXiv `1604.00772` へ差し替え済みなので、publish 前は本文の言い回しと
-   参考導線の最終突合を確認する。残タスクは MIT Press 2 件の到達性確認と、本文の主張強度の最終微調整だけでよい。2026-06-18 時点では browser UA 付き GET でも 403 のため、実ブラウザ確認か別の公式導線への差し替えを publish 前に決める。
+   参考導線の最終突合を確認する。残タスクは MIT Press 2 件の到達性確認と、本文の主張強度の最終微調整だけでよい。2026-06-18 時点では `https://mitpress.mit.edu/9780262082136/adaptation-in-natural-and-artificial-systems/` と `https://mitpress.mit.edu/9780262111706/genetic-programming/` に対し、PowerShell `Invoke-WebRequest` + UA `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36` + Cookie なしでも 403 だった。原因は bot 判定だけでなく、購読 / 認証 / 地域制限を含む複合要因の可能性があるため、実ブラウザ確認か別の公式導線への差し替えを publish 前に決める。IP / ISP / VPN 状態まではこの時点で未固定。
    references 節にある外部 URL 群も、この publish gate の一次確認対象に含める。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で
    annotation / 参考導線 / 参考文献テンプレの有無を確認する。
