@@ -86,6 +86,12 @@ def test_qiita_public_post_real_public_id_uses_public_id_only():
     assert qpp.real_public_id({"public_id": " none "}) is None
 
 
+def test_qiita_public_post_warns_on_legacy_id_without_public_id():
+    assert qpp.legacy_id_without_public_id({"id": "team-or-legacy-id"}) == "team-or-legacy-id"
+    assert qpp.legacy_id_without_public_id({"id": "legacy", "public_id": "public"}) is None
+    assert qpp.legacy_id_without_public_id({"id": " none "}) is None
+
+
 def test_qiita_public_post_build_payload_uses_public_private_only():
     body = "body\n"
     meta = {"title": "hello", "tags": ["AI"], "private": True}
@@ -98,6 +104,25 @@ def test_qiita_public_post_build_payload_uses_public_private_only():
 
     forced_payload = qpp.build_payload(meta_with_public_private, body, force_private=True)
     assert forced_payload["private"] is True
+
+
+def test_qiita_public_post_dry_run_surfaces_legacy_id_warning(tmp_path, capsys):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "id: legacy-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qpp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "POST create (new public article)" in out
+    assert "WARNING: frontmatter has id=legacy-id but no public_id" in out
 
 
 def test_convert_to_qiita_cli_parses_folded_title():

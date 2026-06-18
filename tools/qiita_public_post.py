@@ -98,6 +98,19 @@ def real_public_id(meta: dict) -> str | None:
     return v if v and v.lower() not in ("null", "none") else None
 
 
+def legacy_id_without_public_id(meta: dict) -> str | None:
+    """Return legacy/team-style id when public_id is absent, so callers can warn before accidental POST-create."""
+    if real_public_id(meta):
+        return None
+    v = meta.get("id")
+    if isinstance(v, list):
+        v = v[0] if v else None
+    if v is None:
+        return None
+    v = str(v).strip()
+    return v if v and v.lower() not in ("null", "none") else None
+
+
 def as_bool(v, default=False) -> bool:
     if isinstance(v, bool):
         return v
@@ -191,11 +204,14 @@ def cmd_dry_run(args: list[str]) -> int:
     p = build_payload(meta, body, force_private)
     finds = safety_findings(meta, body)
     pid = real_public_id(meta)
+    legacy_id = legacy_id_without_public_id(meta)
     print(f"target: PUBLIC qiita.com ({API_BASE})")
     print(f"action: {'PATCH update public_id=' + str(pid) if pid else 'POST create (new public article)'}")
     print(f"title : {p['title']}")
     print(f"tags  : {[t['name'] for t in p['tags']]}")
     print(f"private: {p['private']}   body chars: {len(body)}")
+    if legacy_id:
+        print(f"WARNING: frontmatter has id={legacy_id} but no public_id. This path will POST-create, not PATCH-update.")
     if finds:
         print("WARNINGS:")
         for x in finds:
@@ -250,6 +266,9 @@ def cmd_post(args: list[str]) -> int:
         return 1
     p = build_payload(meta, body, force_private)
     pid = real_public_id(meta)
+    legacy_id = legacy_id_without_public_id(meta)
+    if legacy_id:
+        print(f"WARNING: frontmatter has id={legacy_id} but no public_id. This request will POST-create a new public item.")
     if pid:
         code, res = _req("PATCH", f"/items/{pid}", token, p)
     else:
