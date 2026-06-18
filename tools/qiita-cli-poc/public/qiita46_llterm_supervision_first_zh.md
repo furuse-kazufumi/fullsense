@@ -5,7 +5,7 @@ tags:
   - LLM
   - ClaudeCode
   - Codex
-  - AIAgent
+  - Agent
 private: true
 slide: false
 ignorePublish: true
