@@ -100,9 +100,11 @@ nav_order: 95
 - editorial 方針としては、「公開済みの短い companion 記事は、十分に長い本編へ統合できるなら統合を優先し、空いた item は新記事の器として再利用する」を採用した。ただし `#37` については、**`4 文指示 / 実験 3 本 / PoC 裏方 / 17〜19 倍 / 0 円 / safety tax 本文接続` は完全版へ吸収済みでも、EN/ZH/KO 多言語スイッチャーと curated 関連ニュース節は未吸収**だと確認したため、即 redirect ではなく本文保全を優先する。
 - ここで触っている `qiita43/46/47` の差分は **local source の内部 polish のみ**で、外部 publish / PATCH / 統合実行は #37 統合判断とは別件の未着手タスクとして切り分ける。
 - 上の前提は一次情報で確認済みである。`qiita37_gpu_triple_run_gate_price_kamikudaki.md` は front matter 上 `private:false` / `id:f06ca92ea208c7646fcd` で、Qiita live HTML / API も 2026-06-19 に `200` を返した。`qiita43_harness_loop_stack_kamikudaki.md` / `qiita46_llterm_supervision_first_kamikudaki.md` / `qiita47_harness_engineering_thoughts.md` は front matter 上 `private:true` / `ignorePublish:true` の local draft である。
+- ただし `#37` には local representation が 2 本ある。public short companion の更新対象は `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md` (`id:f06ca92ea208c7646fcd` / 現在 `ignorePublish:true`) で、`docs/articles/QIITA_#37_gpu_triple_run_gate_price_kamikudaki.md` は `id:df687d0ecddb56d5a373` / `qiita_public_id:f06ca92ea208c7646fcd` を持つ **多言語アーカイブ / Team mirror** として別管理する。
 - `#37` の短稿と完全版は本文比較も済ませた。結論は「**核の説明は吸収済みだが、EN/ZH/KO 多言語スイッチャーと curated 関連ニュース節は未吸収なので要保全**」である。したがって現時点の推奨案は redirect ではなく、**短稿本文を残したまま冒頭に canonical 告知だけを足す**線になる。
 - local source では、`qiita37_gpu_triple_run_gate_price_kamikudaki.md` をこの保全案へ戻し、冒頭に「完全版 #37 が正本」告知を追加済みである。Qiita live item `f06ca92ea208c7646fcd` への PATCH はまだ未実行で、front matter `ignorePublish` は human-gate 前流出防止のため一時的に `true` へ退避してある。
 - ここで使っている `ignorePublish` は Qiita 標準属性ではなく、`qiita-cli-poc` ローカル運用の publish 安全柵である。またここで言う `redirect` は HTTP 転送ではなく、**Qiita 本文を統合告知 + canonical 誘導へ差し替える運用語**として使う。
+- PATCH 実行時の既存記事照合は filename ではなく `public_id` 基準で行う。`tools/qiita_public_post.py` は frontmatter `public_id` があれば PATCH、無ければ POST create の経路なので、custom 名ファイルでも `public_id:f06ca92ea208c7646fcd` を持つ public source を使えば重複作成は避けられる。
 - さらに `ac398349ec42e40913f1.md` と `docs/articles/QIITA_SERIES_INDEX.md` の #37 導線も `canonical / companion` 表記へ揃え、local index 上で短稿を「実体記事」扱いしないよう補正した。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため

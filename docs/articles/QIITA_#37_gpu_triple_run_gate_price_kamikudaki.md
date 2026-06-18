@@ -1,5 +1,5 @@
 ---
-title: '【📗かみくだき版】AI が自分で実験を 3 本回した日 — 「AI の安全柵はいくら?」を測ったらシンギュラリティ論のど真ん中だった (#37)'
+title: '【📗かみくだき companion・多言語アーカイブ】AI が自分で実験を 3 本回した日 — 「AI の安全柵はいくら?」を測ったらシンギュラリティ論のど真ん中だった (#37)'
 tags: [FullSense, llcore, Singularity, AI, 解説]
 private: false
 updated_at: '2026-06-06'
@@ -7,8 +7,10 @@ id: df687d0ecddb56d5a373
 qiita_public_id: f06ca92ea208c7646fcd
 organization_url_name: null
 slide: false
-ignorePublish: false
+ignorePublish: true
 ---
+
+> このファイルは `qiita_public_id: f06ca92ea208c7646fcd` を参照する **多言語アーカイブ / Team mirror** です。public short companion の更新対象は `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md` 側です。
 
 言語 / Language / 语言 / 언어: [日本語](#日本語) | [English](#english) | [中文](#中文) | [한국어](#한국어)
 
