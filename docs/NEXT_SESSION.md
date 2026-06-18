@@ -376,7 +376,12 @@ portal 側 (10 commit):
 
 verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 
-## 🧑 Operator actions queued — pick these up first
+## 🧑 Operator actions queued — old context / current scope outside (2026-06-12 stale)
+
+この節の項目はローカル operator 作業の旧メモであり、上位 handoff が言う
+**human-gate を要する外部書き込みアクション 3 件**
+（#46 の publish 判断 / Qiita Team POST / dev.to 英語版 update・publish 判断）
+とは別カテゴリで、現行の最優先ではない。
 
 ### ✅ クローズ済み operator 項目 (要約のみ残置, 2026-06-12 stale 掃除)
 
