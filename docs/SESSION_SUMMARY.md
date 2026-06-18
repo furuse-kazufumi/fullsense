@@ -57,6 +57,7 @@
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
+- バス江挿絵の CTA 整理では、既定の referral 用コマは引き続き `012.jpg`（「ひくわ」）を採用し、`044.jpg` は「押し売り感をわざと過剰化する強め variant」として台帳に別定義した。全記事一括差し替えはせず、個別草稿で opt-in 採用する。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は同じ handoff 群として追うが、**commit range 台帳の正本は `SESSION_SUMMARY.md` / `next_plan.md` の 2 枚だけ**である。`NEXT_SESSION.md` は後続の実質更新で別タイミングに進むため、直近更新 hash を range 注記へ固定しない。`NEXT_SESSION.md` の現在地は、このファイル群の commit range ではなく `NEXT_SESSION.md` 本文側の現況メモを正本として読む。
 - 公開 safety 柵は維持:
   - `qiita43_harness_loop_stack_kamikudaki.md` = `private: true` + `ignorePublish: true`

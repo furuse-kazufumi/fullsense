@@ -74,6 +74,8 @@
 2026-06-18 execution log: `py -3.11 tools/qiita_public_post.py post tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md --yes` で public Qiita item `bf1cfe3b4f40b87f068d` を PATCH 更新した。反映確認は、このセッションで実行した Qiita API / HTML の自己確認ログに基づく。API `GET /api/v2/items/bf1cfe3b4f40b87f068d` の `body` 先頭と、公開 HTML の canonical ID / 「統合・再編しました」文言で redirect 本文への反映を確認した。
 2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。`.llterm/loop_ledger.jsonl` の tracked ノイズを恒久対策として deindex する。実行内容は `git rm --cached .llterm/loop_ledger.jsonl` と `.gitignore` へのファイル単位追記で、push / publish / 追加の削除はこの決定に含めない。
 2026-06-18 execution log: `git rm --cached .llterm/loop_ledger.jsonl` を実行し、`.gitignore` に `.llterm/loop_ledger.jsonl` を追記した。実ファイル末尾は JSONL として読める状態を確認済みで、破損切り分けは不要だった。以後この台帳は on-disk で保持しつつ untracked 運用へ切り替える。
+2026-06-18 decision log: ユーザー選択 `1) 別 egress を含む対話ブラウザで Holland / Koza の canonical permalink を確認し、開けない側にだけ WorldCat / Google Books / archive.org 書誌ページなどの補助導線を併記する` を受領。まず handoff 上はこの方針を固定し、その後に non-local egress からの reader reachability を補助確認して、結果と根拠を handoff へ戻す。
+2026-06-18 note: referral CTA 用のバス江コマは `012.jpg`（「ひくわ」）を既定のまま維持し、`044.jpg` は「押し売り感を意図的に過剰化する強め variant」として台帳に追加定義した。既存 CTAIMG の一括差し替えは行わず、必要な草稿だけ opt-in で差し込む。
 
 ## このターンの実施結果
 
