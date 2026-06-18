@@ -48,6 +48,7 @@
   - `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first.md` を新規作成し、種 #6 の Qiita 草稿を起こし始めた。現時点では front matter つき draft として、冒頭 3 点ボックス、hook + nut graf、`0. まず結論`、`1. 「進捗を要約して」が永久に返らなかった` までを書き、through-line が実際の prose でも立つところまで確認した
   - 同 draft に続けて `2. ターン境界と緊急割り込みは、最初から別物として設計する` と `3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた` を追記した。通常注入と interrupt の分離、sticky cancel の罠、累積 billing 値と瞬間 occupancy の混同、codex 自己圧縮と llterm rotate の二重管理まで prose 化し、中核 3 章がつながった
   - さらに同 draft に `4. 多AIレビューは質だが、無条件に重ねるとただ遅い`、`5. 追えないなら監督ではない`、`6. テストも「たまたま緑」を疑う` を追記した。記録ターンへのフルレビュー二度漬け、全行タイムスタンプ / ローテログの architecture-level 意味、並行テストの block point と suspiciously green の疑い方まで prose 化し、第6章まで一本の流れになった
+  - さらに同 draft に `7. 障害対応から抽出した、loop engineering 9原則` と `8. honest disclosure は「敗北宣言」ではなく、監督の一部` を追記し、9 原則の本文化、未解決境界、適用条件、短い締めまで含めて日本語草稿を最後まで通した。残りは publish gate 向けのかみくだき / 多言語 / 挿絵 / 参考文献 / HTML annotation などの派生整備が中心になった
 - 挿絵索引:
   - `docs/articles/assets/bazue_all/index.md` にユーザー指定の 4 対応を追記した。`081.jpg` をバイブコーディング、`006.jpg` をハーネスエンジニアリング、`163.jpg` を AI オーケストラ、`025.jpg` をループエンジニアリング実践中のイメージとして再利用する方針を、各コマの `使いどころ` に固定した
   - `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は一次確認し、セリフ `『そういうお前も好きやで…』激オチ『頑ななあの娘へ』2章12節から.. 聖書の引用みたいになってる…!` の存在を確認した。今後このコマを記事に使う場合、出典として支えられるのはこのセリフまでで、`honest disclosure` を毎回持ち出す感じ / chapter-verse のように引用する感じ、等の上乗せ解釈は筆者側の比喩として分離して書く
@@ -113,3 +114,4 @@
 1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
+4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し終えたので、次は publish gate 残作業（かみくだき版 / en-zh-ko / 挿絵 `025.jpg` / 参考文献 / HTML annotation / 休憩ポイント）の順に整える。
