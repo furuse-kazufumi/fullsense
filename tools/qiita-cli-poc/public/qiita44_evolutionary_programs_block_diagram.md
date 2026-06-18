@@ -675,16 +675,15 @@ GA / ES / GP / QD の名前を全部覚えなくても、
 > 注: ここでの導線は「一次資料へ辿るための代表入口」であり、古典流派では出版社 / 著者公式の書誌ページを含みます。必ずしも全文無料公開を意味しません。
 
 <!--
-Fallback supplements for the MIT Press reachability gate (use only if the
-separate-egress browser check fails for the canonical permalink):
-- Holland / WorldCat: https://search.worldcat.org/title/Adaptation-in-natural-and-artificial-systems-%3A-an-introductory-analysis-with-applications-to-biology-control-and-artificial-intelligence/oclc/42854623
+Fallback supplements for the MIT Press reachability gate:
+- Holland / WorldCat: https://search.worldcat.org/oclc/42854623
 - Holland / Google Books: https://books.google.com/books/about/Adaptation_in_Natural_and_Artificial_Sys.html?id=5EgGaBkwvWcC
-- Holland / Internet Archive bibliographic page: https://archive.org/details/adaptationinnatu00holl
+- Holland / Internet Archive lending-scan landing: https://archive.org/details/adaptationinnatu00holl
 - Koza / WorldCat: https://search.worldcat.org/oclc/26263956
 - Koza / Google Books: https://books.google.com/books/about/Genetic_Programming.html?id=Bhtxo60BV0EC
-- Koza / Internet Archive bibliographic page: https://archive.org/details/geneticprogrammi0000koza
-Keep DOI/canonical permalink as the primary citation path. These are
-supplementary bibliographic links only.
+- Koza / Internet Archive lending-scan landing: https://archive.org/details/geneticprogrammi0000koza
+Primary citation path remains DOI/canonical permalink. These are supplementary
+bibliographic links only.
 -->
 
 - John H. Holland, [*Adaptation in Natural and Artificial Systems*](https://mitpress.mit.edu/9780262581110/adaptation-in-natural-and-artificial-systems/) (1975 / MIT Press 1992 edition)
