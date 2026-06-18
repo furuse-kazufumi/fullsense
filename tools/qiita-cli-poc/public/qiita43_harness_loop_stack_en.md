@@ -63,6 +63,10 @@ The "maturity" of AI engineering is, as of 2026, generally described along the f
 3. **harness engineering** … designing the LLM's "outer apparatus": the layer responsible for tool invocation, permissions, execution, and feeding results back.
 4. **loop engineering** … designing that apparatus as an "autonomously circulating loop."
 
+![The staircase from prompt → context → harness → loop (2025→2026)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/paradigm_staircase.svg)
+
+*↑ The higher you climb, the more you are designing "outside the LLM." From 2025's prompt / context (what to ask, what to show) to 2026's harness (the outer apparatus) / loop (the autonomously circulating ring). This article is about the upper two steps.*
+
 One explanatory outlet calls this the "fourth paradigm," and LangChain (an agent-development library) summarizes it as **`Agent = Model + Harness`** (confirmed via augmentcode.com's commentary — a **secondary source**. I did not obtain LangChain's primary original text for this article, so I hedge it. Each time I restate this formula below, I'll mark it "secondary" too).
 
 ### Plain Language: What Is a "harness"?

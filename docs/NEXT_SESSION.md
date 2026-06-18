@@ -4,7 +4,7 @@ title: "Next Session Handoff"
 nav_order: 95
 ---
 
-# Next Session Handoff (2026-06-18 時点 → next)
+# Next Session Handoff (2026-06-19 時点 → next)
 
 > Picked up by the next FullSense session. Everything below is ready to
 > resume on. Operator actions are flagged 🧑 (user) vs 🤖 (agent).
@@ -22,11 +22,12 @@ nav_order: 95
 > `docs/next_plan.md` は再開判断メモとして使ってよいが、手動更新のため index 状態がズレることがある。commit 境界の判断に使うときは `git status` で staged / unstaged も併記して読む。
 > `.llterm/loop_ledger.jsonl` は自動ログで記事差分のノイズになりやすかったが、2026-06-18 に `git rm --cached` + `.gitignore` で deindex 済み。今後は on-disk に残る local telemetry として扱い、review / handoff では通常 diff から外れる前提でよい。
 > handoff の commit 台帳は `docs/SESSION_SUMMARY.md` / `docs/next_plan.md` の 2 枚だけが正本で、**最新 1 件の handoff commit が未反映なのは正常状態**である。backfill は実質的な handoff 更新に便乗してのみ行い、台帳追記だけの単独 commit を増やさない。`a0b793a` / `6d9854d` / `c16a69b` / `e150ee4` / `ed1e841` は、そのルールを締め直す前後に残った standalone backfill debt の標本として扱う。以後は同型の commit を増やさず、cleanup が必要なら 1 行 note の積み増しではなく、次の実質的 handoff 更新か別 human-gate 判断の中で 1 回で畳む。`NEXT_SESSION.md` 自身の現在地は、他 2 枚の range 注記ではなく本ファイル本文の現況メモを正本として読む。
+> 2026-06-19 のユーザー判断で、上記 5 件は cleanup 対象として掘り返さず、例外標本として履歴に残す方針に固定した。以後は再発防止だけを維持し、同型の standalone backfill commit を増やさない。
 
 ## ⭐ 2026-06-17 昼 — #43 継続の再開地点
 
 > **この節が現時点の最優先の再開地点。** 下の 2026-06-12 節は旧文脈の記録として残している。
-> **2026-06-19 このターンの変更範囲:** `qiita47_harness_engineering_thoughts.md` の「この比喩はどこで破綻するか」を、§12 の繰り返しではなく **比喩固有の破綻点** へ寄せた。`しつけ` 比喩がまだ効くのは `観測 / 停止 / 修復` の前半までで、何が本当に重要なズレかを決める最後の `意味づけ` は loop の外側に残る、という seam を本文で明示した。さらに「runtime に入れる前に、先に捨てるべき人間側の癖」を 1 節足し、後付け説明 / proxy の本体視 / 例外の雑な一般化を先に捨てるという practical close まで入れた。handoff 3 文書も同じ現在地へ揃えた。
+> **2026-06-19 このターンの変更範囲:** 現在の worktree には前ターンから未 commit の差分が同梱されており、この節の要約もその実差分に合わせて読む。これは commit 境界をまたいだ**暫定バンドル要約**で、次の commit 後に正規の handoff 行へ畳み直す前提で扱う。`qiita47_harness_engineering_thoughts.md` では、「この比喩はどこで破綻するか」を §12 の繰り返しではなく **比喩固有の破綻点** へ寄せ、`しつけ` 比喩がまだ効くのは `観測 / 停止 / 修復` の前半までで、最後の `意味づけ` は loop の外側に残ることを本文で明示した。さらに「runtime に入れる前に、先に捨てるべき人間側の癖」を 1 節足し、その後の local polish で §4→5 / §5→6 / §8→9 / §11→12 に短い forward bridge を足し、0〜4 章の重複も圧縮して前半の spine を「ハーネスは人間側の雑さを通さない器」へ締めた。`qiita45_human_ai_dev_incident_patterns.md` では `human-gate` 表記統一、appendix / 参考節への `VLAA-GUI` / `Resilient Write` / `Crab` / `Measuring the Permission Gate` 追加、`## 2` honest disclosure 前置きの圧縮、`human-gate` を permission-boundary の補助線として扱う整合修正、さらに前半で **運用カテゴリ** と後段の **RAD 接地の分析レイヤ** を分ける 1 文まで反映済みである。あわせて `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md` では `### prompt → context → harness → loop の流れ` の `paradigm_staircase.svg` と caption を同期し、`qiita44_evolutionary_programs_block_diagram.md` では MIT Press gate 文言を `soft-gate` と `別 UI / 別ブラウザ経由の補助観測` に揃えた。handoff 3 文書も同じ現在地へ揃えている。
 > **2026-06-18 追加メモ:** referral CTA 用のバス江コマは `012.jpg`（「ひくわ」）を既定のまま維持し、`044.jpg` は「押し売り感をわざと過剰化する強め variant」として `docs/articles/assets/bazue_all/index.md` に整理した。CTAIMG の一括差し替えはしておらず、必要な草稿だけ opt-in で使う前提。
 > <!-- CTA149_BATCH_STATE_BEGIN -->
 > **2026-06-18 追加メモ 2:** いま手元で整えていた CTA-149 batch は `22d5460384c2cb54a9e6` の live item 修正ではなく、`qiita43/44/45/46/47` の local source 末尾 CTA を整える差分であった。`149.jpg` は opt-in の強め variant に戻し、`1-week free trial` 系の時限断定は「無料で試せる（提供条件は公式参照）」へヘッジした。en/ko CTA キャプションの `\"` も local source では除去済みで、live 再 publish / PATCH はまだ人間承認待ちの外部アクションである。
@@ -44,8 +45,8 @@ nav_order: 95
   `https://dev.to/kzfm_frs_d1afeb3fc/43-in-2026-the-industry-named-the-ais-reins-and-wheel-how-i-started-assembling-a-prototype-3mcd-temp-slug-6156556`。
 - `#43` の en/zh/ko 草稿は、いずれも **日本語版
   `qiita43_harness_loop_stack.md` を正本**として 2026-06-17 時点の章立て /
-  主張 / honest disclosure に合わせる方針へ整理した。現時点では
-  residual translation drift が本当に残るかを最終棚卸しする段階にある。翻訳差分を触るときは
+  主張 / honest disclosure に合わせる方針へ整理した。2026-06-19 の
+  seam spot-check + section fingerprint re-diff までで、**local source 上の residual translation drift 監査は一旦クローズしてよい** 状態になった。翻訳差分を再度触る場合は、
   まず日本語 source を見て、次に英語、その後 zh/ko を追従させる。
 - `qiita43_harness_loop_stack_en.md` と `qiita43_harness_loop_stack_ko.md` の front matter `title:` は
   repo 規約どおり **single-quoted 1 行 title** へ修正済み。英語版は
@@ -60,7 +61,9 @@ nav_order: 95
 - `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md` は、最終棚卸しが終わるまで
   accidental publish を避けるため `ignorePublish: true` に倒した。
   ただし `id:` を持つ発行済み限定共有 draft のため、これは **同期凍結**であって
-  既発行 URL 側の状態は別管理であり、residual translation drift の有無は棚卸しで確認する。
+  既発行 URL 側の状態は別管理である。local source 上の residual translation drift 監査は
+  2026-06-19 の seam spot-check + section fingerprint re-diff までで一旦クローズ済みで、
+  再度触る場合だけ日本語 source → 英語 → zh/ko の順で確認する。
   2026-06-18 に手元 source では `47,097 docs` ベースへ factual drift を詰めたが、
   それは **ローカル working copy の修正**であり、既発行の限定共有 URL まではまだ更新していない。
 - `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_kamikudaki.md` を
@@ -79,7 +82,7 @@ nav_order: 95
   参考文献節は追加済みで、2026-06-18 に GA / ES / GP / NEAT / novelty search /
   MAP-Elites / CMA-ME / lexicase の一次導線 URL まで補強した。CMA-ES は失効証明書の旧 PDF ではなく
   arXiv `1604.00772` へ差し替え済み。publish 前の残りは
-  本文主張と参考導線の最終突合は完了済みで、残るのは MIT Press 2 件の到達性 gate だけである。
+  本文主張と参考導線の最終突合は完了済みで、MIT Press 2 件の到達性 gate は 2026-06-19 時点で **soft-gate** 状態にある。
   本文と参考導線の spot-check では、GA = 固定長遺伝子列、ES / CMA-ES = 変異分布更新、
   GP = 式 / プログラム木進化、NEAT = 構造進化、novelty / MAP-Elites / lexicase = 「何を残すか」の分岐、
   という説明までは整合していた。
@@ -94,6 +97,8 @@ nav_order: 95
   直近の local polish として、本文と図の `human gate` / `Human Gate` は `human-gate` へ統一し、`外部書き込み` も現行 handoff と同じ `外部アクション` の語へ置き換えた。主張や gate 条件は変えず、運用語だけ現行版へ揃えた。
 - `tools/qiita-cli-poc/public/qiita47_harness_engineering_thoughts.md` も新規追加済み。**現在は** `private: true` の local-only な independent short draft で、`006.jpg` を「ハーネスを通した途端に AI が賢そうに見える瞬間」、`157.jpg` を「本当にしつけが必要なのは AI より人類側の運用では」という反転オチへ役割分担させた短稿である。本文には invisible comment (`<!-- draft:... -->`) を残しつつ、冒頭の `前提 / 流れ / ゴール` 3 点契約、（本プロジェクトでの）RAPTOR（判断層と実行層を分けた二層 runtime）/ 試作段階の `llterm`（terminal 起点の名残を名前に残した PySide6 GUI 実装）/ Claude Code 公式 `/goal` / `desired-actual-drift-repair` の最小 loop 節、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例、その比喩が clean / dirty の観測までしか言い切れずズレの意味づけや優先順位づけまでは自動化しないという破綻点、harness を強くしすぎたときの failure mode、さらに「明日 1 個だけ変えるなら何か」と「何を runtime に入れず人間へ残すか」、そして runtime を **観測 → 停止 → 修復 → 意味づけ** の順で一段ずつ育てるという実務ルール（ただし最後の `意味づけ` は runtime に載せず人間へ残す段）に加え、`しつけ` 比喩は §12 の growth order 全体を説明するものではなく、せいぜい `観測 / 停止 / 修復` の前半までに効く比喩で、最後に「何が本当に重要なズレか」を決める `意味づけ` は loop の外側に残る、という seam、そして runtime に入れる前に捨てるべき人間側の癖（後付け説明 / proxy の本体視 / 例外の雑な一般化）まで入り、後から Team / 公開どちらへ育てる場合でも内部構造だけ先に辿れるようにしてある。補助導線の外部 2 本も Distill / Mitchell Hashimoto の実 URL へ揃えてある。
 - `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md` も増補済み。短すぎてアルゴリズム / PoC の量が見えないという指摘を受け、`1 分version` の直後に **「実験 3 本の中身」** と **「AI は裏で何を自走したのか」** を追加し、HD-1 full / HD-1 null / Stage-B、pre-registration / attacker AI 3 体 / major 5 件修正 / Kaggle T4 / 152 runs / `$0` を plain-language で戻してある。
+- editorial 方針としては、「公開済みの短い companion 記事は、十分に長い本編へ統合できるなら統合を優先し、空いた item は新記事の器として再利用する」を採用した。現時点で外部アクション候補として最も筋が良いのは public 済み `qiita37_gpu_triple_run_gate_price_kamikudaki.md` (`id: f06ca92ea208c7646fcd`) → 完全版 `qiita37_gpu_triple_run_gate_price.md` への統合で、`qiita43/46` のかみくだき版と `qiita47` はまだ local-only / private draft なので publish 前の内部判断でよい。
+- ここで触っている `qiita43/46/47` の差分は **local source の内部 polish のみ**で、外部 publish / PATCH / 統合実行は #37 統合判断とは別件の未着手タスクとして切り分ける。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため
   `ignorePublish: true` に統一済み。
@@ -201,6 +206,13 @@ nav_order: 95
    ①本数差 = ja のみ `個人開発` が 1 本多い（`ja bullets=81`、en/zh/ko=`80`）、
    ②ローカライズ差 = `AIエージェント`（ja）↔ `Agent`（en/zh/ko）である。いずれも
    translation drift というより想定内の metadata / ローカライズ差として扱う。
+   さらに 2026-06-19 に section fingerprint ベースの line 単位 re-diff を再実行し、
+   見出し index ごとの `heading / quote / bullet / numbered / table / codefence / image / caption` 分布を比較した。
+   新しく actionable だったのは `### prompt → context → harness → loop の流れ` にある
+   `paradigm_staircase.svg` とその caption が en/zh/ko で欠落していた 1 件だけで、translations 3 本へ同期済み。
+   その後に残った mismatch 8 件は、3 言語が同型の `para-1 / blank-1` 差を示すだけで、
+   `この章の honest disclosure` 節のように raw URL を blockquote 内 inline link へ畳んだ既存スタイル差・段落結合差として説明でき、
+   新しい structural omission は見つからなかった。
    `個人開発` タグは ja 固有タグとして現状維持し、4 言語タグの完全一致は要件にしない。
    なお、統合レビューで触れられた「翻訳版は blockquote 内 inline link / 正本は blockquote 下 raw URL」という形式差は、
    今回の修正で生じたものではなく既存スタイル差なので、このターンの修正対象にはしない。
@@ -215,14 +227,13 @@ nav_order: 95
    PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、
    直後の「捨てた数字」節への橋渡しまで日本語正本に追従している。
    代表的な細い橋渡し段は一巡済みだが、これは網羅保証ではない。
-   ここから残るのは、「それでも未確認帯が本当にあるのか」を疑う棚卸しか、
-   4 言語 line 単位 re-diff を追加で回すかの判断である。
+   ここから残るのは、local source 監査ではなく live draft / live URL 側の未反映差と publish gate 管理である。
    `2-7 → ★ honest disclosure`、`/goal` 節 → 独立 honest disclosure、`3-3 → 3-4`、
    統合章 → まとめ、まとめ → 次回予告 / 参考 も seam spot-check 一巡の確認済み候補として読む。
-   line 単位 re-diff を切る場合は、既知差として `個人開発` と `AIエージェント` ↔ `Agent` を除外し、
-   本文比較の価値が本当にあるかから判断する。
-   日本語正本に対する最終棚卸しで未確認帯なしを確認したら、
-   その後に en/zh/ko の `ignorePublish: false` を戻して同期判断へ進む。
+   今回の line 単位 re-diff では、既知差として `個人開発` と `AIエージェント` ↔ `Agent` を除外したうえで、
+   `paradigm_staircase.svg` 同期漏れ 1 件以外の新規 structural omission は拾っていない。
+   local source 監査は一旦閉じたが、live URL 側の未反映差が残るため、
+   en/zh/ko の `ignorePublish: false` は戻さず同期凍結を維持する。
 3. 出自不明の front matter 整形差分が再発した場合は、
    1 行化を採らず repo 既存形式に戻してから扱う。
 5. `qiita43_harness_loop_stack_kamikudaki.md` を必要なら推敲する。
@@ -238,12 +249,30 @@ nav_order: 95
    現状は handoff / human-gate / diff / checkpoint と llcore 教訓をまとめた
    問題集で、成功談より再開導線を重視。RAD 由来の
    unsupported success / verifier / durable write / checkpoint 系も追記済み。
-   ただし主張強度はコーパス要約ベースへ弱めてあり、一次確認前提を維持する。
+   主要 4 本の実名ソース追加までは完了しているが、
+   内製ラベル側の説明は引き続きコーパス要約ベースの整理として扱う。
    冒頭の拾い読みガイドも追加済みで、節番号 + 実見出し名でも辿れる text TOC にしてある。
-   ただし annotation / 参考文献節は追加済みで、残タスクは
-   一次 URL 確認と著者帰属の整備。
+   annotation / 参考文献節は追加済みで、appendix / 参考節には
+   `VLAA-GUI` / `Resilient Write` / `Crab` / `Measuring the Permission Gate`
+   の 4 本を近い実名ソースとして追加済みである。
+   これら 4 本の arXiv 引用は実在確認済みで、`2604.21375` / `2604.10842` /
+   `2604.28138` / `2604.04978` を一次情報アンカーとして handoff に明示する。
+   `## 2` の honest disclosure 前置きも 1 パス圧縮済みで、
+   main path には「ローカル再集計値」「内製ラベル」「appendix の 4 本実名ソース対応」
+   だけを残し、appendix 参照の重複説明は削った。
+   残タスクは、必要ならこの 4 本より先へ一次ソースを増やすか、
+   逆に内製ラベル側 (`unsupported success` / `human-gate` など) の説明を
+   どこまで簡潔にするかの整形寄りである。
 8. `qiita47_harness_engineering_thoughts.md` は `#43` から派生した local-only の independent short draft として新設済みで、いまは独立短稿として最低限読める具体節に加え、冒頭の `前提 / 流れ / ゴール` 3 点契約、（本プロジェクトでの）RAPTOR / `llterm` / `/goal` の最小グロス、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例、その比喩が clean / dirty の観測までしか言い切れずズレの意味づけや優先順位づけまでは自動化しないという破綻点、harness を強くしすぎたときの failure mode、さらに「明日 1 個だけ変えるなら何か」と「何を runtime に入れず人間へ残すか」、そして runtime を **観測 → 停止 → 修復 → 意味づけ** の順で一段ずつ育てるという実務ルール、さらに runtime に入れる前に人間側で先に捨てるべき癖まで入った状態。
    現状の spine は「ハーネスは AI を賢くする技術というより、人類側の曖昧な運用を二度と通さない discipline であり、最初の一歩は観測できるズレを 1 個だけ増やすこと、次に runtime を 観測 → 停止 → 修復 → 意味づけ の順で一段ずつ育てること（ただし `意味づけ` は runtime に載せず人間に残す段） 、その前に後付け説明 / proxy の本体視 / 例外の雑な一般化のような癖を先に捨てること」である。さらに §13 では、その全部を `しつけ` 比喩で説明し切ろうとすると壊れ、比喩がまだ効くのは `観測 / 停止 / 修復` の前半までだと整理した。
+   直近の軽い圧縮では 0〜4 章の重複だけを削り、列挙で散っていた「人間側の揺れ」を 1 文へ畳み、`AI のための discipline` / `人間のための discipline` の二重言い換えも 1 回へ寄せた。前半の spine は「ハーネスは人間側の雑さを通さない器」と読める粒度へさらに締めている。
+   その後の micro-polish では、forward bridge が `次は...` の定型に寄りすぎていた 3 箇所だけを崩し、接続を保ったまま機械的な反復を弱めた。
+   追加の軽微修正では、§0 だけは bullet の走査性を優先して 4 項目列挙を復元し、§5→6 ブリッジも見出しの `PoC` 反復と近接しすぎない言い回しへ戻した。`qiita45` の対応表では `human-gate / permission boundary` 行を `(補助線)` と明示し、本文の主従と揃えた。
+   続く micro-polish では、`qiita45` の `研究側で特に近い型` / `要するに` 周辺も 1 パスだけ削り、main path が「4 類型を持ち帰る段」だと読み取りやすい粒度へ揃えた。
+   その後の補足では、「5 点」看板が **主線として持ち帰る 4 類型 + 補助線 1 つ（human-gate）** の 4+1 だと本文で一度言い切り、件数の見え方を揃えた。
+   さらに `qiita45` の `## 2` では、`ローカルコーパス要約の上でも` を `ローカルコーパス要約でも` に縮め、`要するに本稿の main path で持ち帰りたいのは` も `要するに持ち帰りたいのは` へ詰めて、説明口調だけを少し落とした。
+   最後の micro-polish では、`qiita45` の `## 2` 冒頭にあった 2 文切りの導入も 1 段へ畳み、main path の論点に入るまでの助走をさらに短くした。
+   追加確認として、`VLAA-GUI` / `Resilient Write` / `Crab` / `Measuring the Permission Gate` の arXiv 4 件は 2026-06-19 に一次情報で URL / title / author を照合済みだと本文へ固定した。あわせて `5 点` は運用カテゴリ、`4+1` は RAD 接地の分析レイヤだと 1 行で明示し、taxonomy の切替が誤読されにくい形へ揃えた。
    canonical ledger 2 正本への `513546f..b5464fa` 回収は完了済みで、次に触るときはこの短稿をさらに短く締めるか、公開水準へ向けて参考整形を詰めるかから始めればよい。
    次にやるなら、`#43` へ戻す判断ではなく、独立短稿として runtime / orchestration の最小グロスを保ったままさらに圧縮するか、外部公開できる水準まで参考整形を進めるかを決める。現段階では publish / Team stock へは送らず、`157.jpg` の使いどころ定義、RAPTOR / `llterm` / `/goal` の具体節、`desired-actual-drift-repair` の最小 loop 説明、green-keeper 比喩の破綻点と failure mode、runtime 成長順の実務ルール、そして runtime に入れる前に先に捨てるべき人間側の癖まで入れたところで止めている。
 9. `qiita37_gpu_triple_run_gate_price_kamikudaki.md` は本文の spine を増補済み。次に触るなら、Kaggle 運用 PoC を本文に残すか `<details>` 層へ逃がすかを 1 回だけ決める。
@@ -262,13 +291,13 @@ nav_order: 95
    claim-strength の最終確認まで通した。直近の pass では、論旨を変えずに `淘汰器が壊れていたら進化はだいたい壊れる` → `探索は鈍りやすい`、`長期でだいたい飽和か monoculture に寄る` → `寄りやすい`、`高次元 descriptor では cell の大半が空になる` → `空になりがち` の 3 箇所だけを弱めた。
    続く最終微調整では、`これはかなり重要です` → `ここは見落としやすい点です`、`これは本当に重要です` → `ここは切り分けを誤りやすい点です`、`かなりクリア` → `だいぶクリア`、結語の `壊れやすい` → `詰まりやすい` まで弱め、断定トーンだけを追加で落とした。
    <!-- QIITA44_GATE_STATE_BEGIN -->
-   参考導線の最終突合と本文の主張強度微調整は完了済みで、`qiita44` に残る論点は MIT Press 2 件の到達性 gate だけである。2026-06-18 時点では、記事側の Holland 導線 `Adaptation in Natural and Artificial Systems`（canonical permalink `https://mitpress.mit.edu/9780262581110/adaptation-in-natural-and-artificial-systems/`、DOI `10.7551/mitpress/1090.001.0001`、resolver `https://doi.org/10.7551/mitpress/1090.001.0001`）と、Koza 導線 `Genetic Programming: On the Programming of Computers by Means of Natural Selection`（canonical permalink `https://mitpress.mit.edu/9780262527910/genetic-programming/`）を対象に、PowerShell `Invoke-WebRequest` + browser UA + Cookie なし、および Microsoft Edge headless で canonical permalink 2 本と Holland DOI resolver の Akamai 403 までは証跡化済みである。ここで確定している事実は **このローカル egress からは Akamai 403 を受けた** ことだけであり、reader にとってリンクが無効だとまでは言えない。Holland の DOI `10.7551/mitpress/1090.001.0001` は 2026-06-18 に Crossref API で `The MIT Press` / `Adaptation in Natural and Artificial Systems` / `John H. Holland` / `1992-04-29` の一致を確認済み。Koza 側は Crossref の title/author 検索と `9780262527910` クエリでは MIT Press 書籍 DOI を特定できていない一方、MIT Press title page では paperback `9780262527910` / hardcover `9780262111706` の同一書誌として確認でき、WorldCat でも OCLC `26263956` の 1992 MIT Press print book として確認できた。したがって現時点では DOI 未固定のまま canonical permalink を主参照として維持し、必要なら補助導線として publisher catalog / WorldCat を併記する。2026-06-18 の追加再観測では、このマシンの同一 egress 上で canonical permalink 2 本に対し PowerShell `Invoke-WebRequest`（browser UA / Cookie なし）を再実行し、どちらも `STATUS=403` を再確認した。これは **ローカル観測の再実行**であって、受領済みの human-gate 選択肢 1 が要求する「別 egress を含む reader reachability 補助確認」まではまだ満たしていない。次のアクションは、受領済みの human-gate 選択肢 1 の**残り**として、別 egress を含む対話ブラウザで reader reachability を 1 回だけ補助確認し、片方だけ失敗したらその 1 件にだけ、2 件とも失敗したら両方に補助導線を併記することである。補助候補は Holland = WorldCat `https://search.worldcat.org/oclc/42854623`（1st MIT Press ed, 1992 の OCLC）、Google Books `https://books.google.com/books/about/Adaptation_in_Natural_and_Artificial_Sys.html?id=5EgGaBkwvWcC`（MIT Press 1992/04/29, 232 pages の書誌一致）、Internet Archive lending-scan landing `https://archive.org/details/adaptationinnatu00holl`（Holland / MIT Press / 1992 の貸出スキャン landing）。Koza = WorldCat `https://search.worldcat.org/oclc/26263956`（MIT Press print book, ©1992）、Google Books `https://books.google.com/books/about/Genetic_Programming.html?id=Bhtxo60BV0EC`（John R. Koza / MIT Press / 1992 の書誌一致）、Internet Archive lending-scan landing `https://archive.org/details/geneticprogrammi0000koza`（Koza / MIT Press / 1992 の貸出スキャン landing）。非 Akamai 系の導線は差し替えではなく補助導線としてだけ併記し、archive.org も全文スキャン直リンクではなく書誌 landing として扱う。再現条件固定での再試行は調査補助手段であって gate 合否根拠には使わない。
+   参考導線の最終突合と本文の主張強度微調整は完了済みで、`qiita44` の MIT Press 到達性 gate は 2026-06-19 時点で **soft-gate** 状態にある。2026-06-18 時点では、記事側の Holland 導線 `Adaptation in Natural and Artificial Systems`（canonical permalink `https://mitpress.mit.edu/9780262581110/adaptation-in-natural-and-artificial-systems/`、DOI `10.7551/mitpress/1090.001.0001`、resolver `https://doi.org/10.7551/mitpress/1090.001.0001`）と、Koza 導線 `Genetic Programming: On the Programming of Computers by Means of Natural Selection`（canonical permalink `https://mitpress.mit.edu/9780262527910/genetic-programming/`）を対象に、PowerShell `Invoke-WebRequest` + browser UA + Cookie なし、および Microsoft Edge headless で canonical permalink 2 本と Holland DOI resolver の Akamai 403 までは証跡化済みである。ここで確定している事実は **このローカル egress からは Akamai 403 を受けた** ことだけであり、reader にとってリンクが無効だとまでは言えない。Holland の DOI `10.7551/mitpress/1090.001.0001` は 2026-06-18 に Crossref API で `The MIT Press` / `Adaptation in Natural and Artificial Systems` / `John H. Holland` / `1992-04-29` の一致を確認済み。Koza 側は Crossref の title/author 検索と `9780262527910` クエリでは MIT Press 書籍 DOI を特定できていない一方、MIT Press title page では paperback `9780262527910` / hardcover `9780262111706` の同一書誌として確認でき、WorldCat でも OCLC `26263956` の 1992 MIT Press print book として確認できた。したがって現時点では Koza DOI 未固定のまま canonical permalink を主参照として維持し、必要なら補助導線として publisher catalog / WorldCat を併記する。2026-06-18 の追加再観測では、このマシンの同一 egress 上で canonical permalink 2 本に対し PowerShell `Invoke-WebRequest`（browser UA / Cookie なし）を再実行し、どちらも `STATUS=403` を再確認した。これは **ローカル観測の再実行**だった。2026-06-19 には **別 UI / 別ブラウザ経由の補助観測**として canonical permalink 2 本を 1 回ずつ開き、どちらもログイン不要の MIT Press 書誌ページとして表示できることを確認した。これは一度きりの観測に留まり、別 egress の恒常的 reachability は未実証である。したがって gate は `ローカル egress 403` と `reader reachability/citation integrity` を分けた **soft-gate** として維持し、非 Akamai 系の導線は本文の staging comment にだけ保持する。観測時の成功条件は、`https://mitpress.mit.edu/9780262581110/adaptation-in-natural-and-artificial-systems/` と `https://mitpress.mit.edu/9780262527910/genetic-programming/` について、ログイン要求や即時 block page ではなく MIT Press の title/bibliographic page と読める画面が出ることだった。
    <!-- QIITA44_GATE_STATE_END -->
    publish 直前の human-gate チェックリスト:
-   1. Holland / Koza の canonical permalink のうち、別 egress 確認で失敗した側だけを特定したか。
-   2. fallback supplement を un-comment したのが失敗した側だけで、もう片側を carry していないか。
-   3. Holland / Koza の取り違えがなく、両側とも失敗した場合にだけ両方へ補助導線を併記しているか。
-   references 節にある外部 URL 群も、この到達性 gate の一次確認内訳として含める。
+   1. 2026-06-19 時点の観測は soft-gate の補助証跡に留まり、別 UI / 別ブラウザ経由の補助観測であって別 egress の恒常的 reachability 実証ではないと明記したか。
+   2. 将来 canonical 側で片側障害が再発した場合、fallback supplement を un-comment したのが失敗側だけで、成功側を carry していないか。
+   3. Holland / Koza の取り違えがなく、補助導線を露出させるときは canonical permalink と 1:1 で扱っているか。
+   4. `references` 節にある外部 URL 群も、この soft-gate の確認対象に含めて spot-check したか。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で
    annotation / 参考導線 / 参考文献テンプレの有無を確認する。
 11. 草稿を publish へ回すときは、対象記事の `ignorePublish: true` を外し、
@@ -288,7 +317,11 @@ nav_order: 95
     custom アンカーは本文から外してあるので、publish 前は
     見出し階層と限定共有での見え方だけ確認すればよい。
     `qiita43_harness_loop_stack_kamikudaki.md` は短縮版だが、☕ / 参考文献は追加済み。
-    公開線に乗せる前は、一次 URL 確認と著者帰属の整備を優先する。
+    `qiita43_harness_loop_stack_kamikudaki.md` を公開線に乗せる前は、
+    その短縮版で追加した一次 URL と著者帰属の整備を優先する。
+    `qiita45` 側は主要 4 本（`VLAA-GUI` / `Resilient Write` / `Crab` /
+    `Measuring the Permission Gate`）の実名ソース追加までは完了しており、
+    残るのは増補するか内製ラベル説明をさらに簡潔化するかの整形寄り作業である。
 
 ## Archive: 2026-06-12 夜 当時の次回最優先 (ccr で FullSense 選択時 / Qiita 記事ライン)
 

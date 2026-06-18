@@ -675,10 +675,18 @@ GA / ES / GP / QD の名前を全部覚えなくても、
 > 注: ここでの導線は「一次資料へ辿るための代表入口」であり、古典流派では出版社 / 著者公式の書誌ページを含みます。必ずしも全文無料公開を意味しません。
 
 <!--
-Staging only: un-comment ONLY the failing side, and only if the separate-egress
-browser check fails for the canonical permalink.
-If only one side fails, keep the other side commented out instead of carrying
-both fallback sets forward.
+Staging only: keep commented while the MIT Press gate remains in a soft-gate
+state. 2026-06-19 の確認は「別 UI / 別ブラウザ経由の補助観測」で canonical 2 本を
+各 1 回開き、ログイン不要で MIT Press の書誌ページが描画されることを見た、という
+一度きりの観測に留まる。これは local egress の Akamai 403 を reader reachability
+から切り離す補助証跡ではあるが、別 egress の恒常的 reachability は未実証である。
+観測時刻は 2026-06-19 セッション中、対象 URL は
+`https://mitpress.mit.edu/9780262581110/adaptation-in-natural-and-artificial-systems/` と
+`https://mitpress.mit.edu/9780262527910/genetic-programming/`、成功条件は
+「ログイン要求や即時 block page ではなく MIT Press の title/bibliographic page と読める画面が出る」
+であった。If a future publish check finds a failure on only one side, un-comment
+ONLY the failing side and keep the other side commented out instead of carrying
+both supplement sets forward.
 Fallback supplements for the MIT Press reachability gate:
 - Holland / WorldCat: https://search.worldcat.org/oclc/42854623
 - Holland / Google Books: https://books.google.com/books/about/Adaptation_in_Natural_and_Artificial_Sys.html?id=5EgGaBkwvWcC

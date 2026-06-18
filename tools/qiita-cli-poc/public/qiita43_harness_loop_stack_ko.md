@@ -62,6 +62,10 @@ AI 엔지니어링의 "성숙도"는, 2026년 현재, 대체로 다음 계단으
 3. **harness engineering** … LLM의 "바깥의 그릇"을 설계한다. 도구 호출, 권한, 실행, 결과의 되돌림을 담당하는 층.
 4. **loop engineering** … 그 그릇을 "자율적으로 도는 루프"로 설계한다.
 
+![prompt → context → harness → loop의 계단(2025→2026)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/paradigm_staircase.svg)
+
+*↑ 위로 올라갈수록 "LLM 바깥"을 설계하게 된다. 2025년의 prompt / context(무엇을 부탁할지, 무엇을 보여 줄지)에서 2026년의 harness(바깥의 그릇) / loop(자율적으로 도는 고리)로. 이 글은 그 위의 두 계단 이야기다.*
+
 어떤 해설 매체는 이를 "제4의 패러다임"이라 부르고, LangChain(에이전트 개발 라이브러리)은 **`Agent = Model + Harness`(에이전트 = 모델 + 하네스)** 로 요약하고 있다(augmentcode.com의 해설을 거쳐 확인한 **이차 정보**. 일차 출처인 LangChain 원문은 본 글에서는 미취득이므로 헤지한다. 이후 이 식을 다시 실을 때도 "이차"라고 붙인다).
 
 ### 풀어쓰기: "하네스"가 뭐지?
