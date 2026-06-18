@@ -24,6 +24,7 @@
 - Team stock 3 本の local draft `source` 節にも、その「切り出しの核」（Verloy / Semantic Governance / fail-closed、3 層 / thought circulation / safeguards、turn boundary / ctx2549 / block point）を明記し、anchor だけでなく論点束でも原典追跡できるようにした。
 - `team_stock_semantic_governance.md` の `切り出しの核` では、原典追跡精度を優先して `意味管理` ではなく `意味論的ガバナンス（Semantic Governance）` の語へ寄せた。
 - #43 companion の `qiita43_harness_loop_stack_kamikudaki.md` も full article と一次突合し、`RAPTOR / llterm / RAD` の 3 点構造、`手綱 / 輪 / 知識基盤` の圧縮軸、`AI 本体より器と回し方を設計する時代` という結論が current naming / current hedge に追従していることを確認した。
+- そのうえで `qiita43_harness_loop_stack_kamikudaki.md` の `llterm` 初出には、完全版の温度感に合わせて「まだ試作段階のスケルトン」という短い alpha 留保も補った。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
