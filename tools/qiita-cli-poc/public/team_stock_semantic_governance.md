@@ -13,7 +13,7 @@ ignorePublish: true
 # Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」
 
 > **この草稿の位置づけ**
-> #43 の `loop engineering にもセキュリティの顔がある` から切り出した Team stock 用の source-only draft です。限定共有・公開とも未実施で、まずは論点を stock することを優先しています。
+> #43 の `2-2. loop engineering にもセキュリティの顔がある` から切り出した Team stock 用の source-only draft です。限定共有・公開とも未実施で、まずは論点を stock することを優先しています。
 
 > **前提**
 > headless AI agent / harness / loop を自分で回し、安全層も自作する側の文脈を前提にします。
