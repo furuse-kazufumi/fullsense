@@ -147,6 +147,9 @@ nav_order: 95
 5. `qiita43_harness_loop_stack_kamikudaki.md` を必要なら推敲する。
    いまは「手綱 / 輪 / 知識基盤」の 3 点に絞った短縮版で、
    冒頭に拾い読みガイドも追加済みで、節番号 + 実見出し名だけで本文内を追える text TOC にしてある。
+   full article との一次突合でも、`RAPTOR / llterm / RAD` の 3 点構造、
+   `手綱 / 輪 / 知識基盤` の圧縮軸、`AI 本体より器と回し方を設計する時代`
+   という結論は current naming / current hedge に追従しており、大きな drift はない。
 6. `qiita44_evolutionary_programs_block_diagram.md` を必要なら推敲する。
    現状は進化計算の総論ハブで、歴史記録より「用語と構造の説明」を優先。
    冒頭の急ぐ人向け導線は追加済みで、節番号 + 実見出し名でも辿れる text TOC にしてある。

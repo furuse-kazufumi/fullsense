@@ -21,6 +21,7 @@
 - さらに source article 本文との一次突合も回し、`Semantic Governance` は #43 `2-2` の Verloy / Semantic Governance / fail-closed 橋渡し束、`LLM Wiki` は #43 `3-2` の 3 層 / thought circulation / safeguards 束、`ctx2549` postmortem は #46 `2 / 3 / 6` の incident 束を基準に local draft が切り出し範囲から外れていないことを spot-check 済み。
 - Team stock 3 本の local draft `source` 節にも、その「切り出しの核」（Verloy / Semantic Governance / fail-closed、3 層 / thought circulation / safeguards、turn boundary / ctx2549 / block point）を明記し、anchor だけでなく論点束でも原典追跡できるようにした。
 - `team_stock_semantic_governance.md` の `切り出しの核` では、原典追跡精度を優先して `意味管理` ではなく `意味論的ガバナンス（Semantic Governance）` の語へ寄せた。
+- #43 companion の `qiita43_harness_loop_stack_kamikudaki.md` も full article と一次突合し、`RAPTOR / llterm / RAD` の 3 点構造、`手綱 / 輪 / 知識基盤` の圧縮軸、`AI 本体より器と回し方を設計する時代` という結論が current naming / current hedge に追従していることを確認した。
 
 ## 次の具体的な一手
 
