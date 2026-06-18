@@ -29,6 +29,7 @@
 - #43 companion の `qiita43_harness_loop_stack_kamikudaki.md` も full article と一次突合し、`RAPTOR / llterm / RAD` の 3 点構造、`手綱 / 輪 / 知識基盤` の圧縮軸、`AI 本体より器と回し方を設計する時代` という結論が current naming / current hedge に追従していることを確認した。
 - そのうえで `qiita43_harness_loop_stack_kamikudaki.md` の `llterm` 初出には、完全版の温度感に合わせて「まだ試作段階のスケルトン」という短い alpha 留保も補った。
 - `qiita45_human_ai_dev_incident_patterns.md` は publish gate 前の local polish として、本文と図の `human gate` / `Human Gate` 表記を `human-gate` へ統一し、`外部書き込み` も現行 handoff と同じ `外部アクション` の語へ置き換えた。主張や gate 条件は変えず、運用語だけ現行版へ揃えた。
+- `qiita47_harness_engineering_thoughts.md` を local-only draft として追加した。`006.jpg` を「賢そうに見える瞬間」、`157.jpg` を「しつけが必要なのは人類側」という反転オチへ役割分担させ、invisible comment で内部整理しながら companion の spine だけ先に固めている。
 - #43 の `2-6. 起動と実証タスク green-keeper` / `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装` も 4 言語で spot-check し、`desired / actual / drift / repair` の対応、PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、直後の「捨てた数字」節への橋渡しまで日本語正本に追従していることを確認した。
 - 追加 spot-check で、`2-5` honest disclosure 末尾の `2qlJjBwdpYGOVjBkyhhL` 引用が en/zh/ko では第3章直前へ誤配置されていたことを確認した。translations 側は誤配置ブロックを除去し、`2-5` 末尾の本来位置へ戻した。末尾参考の URL 自体は維持している。
 - さらに `1-4` 後半の `AI成長マネジメント` / 4理由 / `First, Break All the Rules` ヘッジ / `アンチパターン` / 第2章への橋渡しも 4 言語で spot-check し、日本語正本に対する新たな factual / translation drift は見当たらないことを確認した。
@@ -65,6 +66,7 @@
    - ko 版では、第5章の `운영 환경` / `본 처리` も最終見直しで固定済み。
    - zh 版では、`算定内情` / `饥饿` も第3章〜第7章で統一済み。
    - zh 版では、第8章末尾の `故障处理记录` まで含めて日本語混在を解消済み。
+14. `qiita47_harness_engineering_thoughts.md` は local-only companion として置いてある。次に進めるなら、`#43` 本編へ戻す論点か、独立短稿として参考導線を足して育てるかを決める。現時点では publish / Team stock へは載せず、`157.jpg` の使いどころを `docs/articles/assets/bazue_all/index.md` 側まで定義した段階で止めてある。
 
 2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。公開中の Qiita 英語版記事 `2622da17495d61480fa2` に対して、local で復旧済みの正しいタイトルを public PATCH で反映する。対象は Qiita API の記事更新 1 件のみで、push / publish 範囲拡大 / deindex はこの決定に含めない。
 2026-06-18 execution log: `tools/qiita_public_post.py post ... --yes` で public Qiita item `2622da17495d61480fa2` を PATCH 更新し、Qiita API `GET /api/v2/items/2622da17495d61480fa2` と HTML の `<title>` / `og:title` / `<h1>` で正しい英語タイトルへの反映を確認した。
