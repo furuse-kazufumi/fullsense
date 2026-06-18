@@ -55,7 +55,7 @@
   - 続けて `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first_kamikudaki.md` を新規追加し、#46 の 10 分短縮版 draft を起こした。結論を「AI を賢くするより、人間が見失わない境界を作る」に絞り、通常注入 / 異常値 / 審査強度 / telemetry の 4 点だけを先に掴める構成にした
   - その後の publish gate 補正で、#46 本文の「実装レベルの低層根拠」は内部ログにつき非公開だと明示し、第7章末尾に `☕ 休憩ポイント` を追加した。`kamikudaki` 側では重複していた関連記事 URL を整理し、完全版 #46 の公開 URL は未発行のため publish 時追記と明記した。あわせて `kamikudaki_shishi.svg` の raw URL は 2026-06-18 時点で HTTP 200 を確認済み
   - さらに `kamikudaki` 版を磨き、冒頭ナビを `1 分 version / 境界設計 / 4原則 / 完全版で掘る 3 点 / 覚えて帰るポイント` に整理した。途中で「境界を作る」とは何かを 3 行で砕き、完全版側へ送る論点も 3 点に固定した
-  - 続けて #46 の en/zh/ko draft を新規作成し、タイトル、冒頭 3 点ボックス、`honest disclosure`、第0章、`025.jpg` キャプション、第1章前半（注入飢餓の導入と `2549%` 露出）まで同期した。その後さらに 3 言語とも第1章末尾〜第2章（turn 境界 / queue / `cancel` vs `interrupt` / `☕ 休憩ポイント`）まで伸ばし、通常注入と緊急割り込みの分離を同じ粒度で読める状態にした
+  - 続けて #46 の en/zh/ko draft を新規作成し、タイトル、冒頭 3 点ボックス、`honest disclosure`、第0章、`025.jpg` キャプション、第1章前半（注入飢餓の導入と `2549%` 露出）まで同期した。その後さらに 3 言語とも第1章末尾〜第2章（turn 境界 / queue / `cancel` vs `interrupt` / `☕ 休憩ポイント`）まで同期し、対応する節を 3 言語で訳了した。続く第3章でも、`2549%` を「確認済みの rotate 因果」と「未解決の算定内訳」に分ける二段の確信度を維持したまま 3 言語へ同期した
   - さらに `kamikudaki` 側の内部語へ 1 行グロスを足し、`注入飢餓` / `ctx 2549%` / `flaky test 露出` が何を指すかを短縮版単体でも判断できるようにした。TL;DR でも「9 原則のうち 4 本を抜粋した短縮版」だと先に明示した
 - 挿絵索引:
   - `docs/articles/assets/bazue_all/index.md` にユーザー指定の 4 対応を追記した。`081.jpg` をバイブコーディング、`006.jpg` をハーネスエンジニアリング、`163.jpg` を AI オーケストラ、`025.jpg` をループエンジニアリング実践中のイメージとして再利用する方針を、各コマの `使いどころ` に固定した
@@ -122,4 +122,4 @@
 1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
-4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` はクレジットを `Snack Basue` に統一し、raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第2章まで同期したので、次は多言語本文の第3章以降を章単位で追う。
+4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第3章まで同期したので、次は多言語本文の第4章以降を章単位で追う。

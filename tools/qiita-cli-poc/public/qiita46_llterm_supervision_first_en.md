@@ -210,3 +210,89 @@ The one-line takeaway is enough:
 > **Ordinary injection goes to the turn boundary. Emergency injection goes to interrupt. Split those two rails first.**
 
 Next we return to the `ctx 2549%` figure that was breaking that very intervention point. From there, the story flips from "the AI was too smart" to "the human measurement was broken."
+
+---
+
+## 3. `ctx 2549%` did not mean "the AI got fat." It meant the measurement was broken
+
+If you keep tracing injection starvation, sooner or later you hit `ctx 2549%`.
+
+What makes this number nasty is that at a glance it looks only like "something seems very bad." But once a context-occupancy gauge displays 2549%, the meaning is actually fairly clear:
+
+> **When a metric exceeds its physical ceiling, suspect the measurement first.**
+
+Here, `ctx` was supposed to mean "what fraction of the context window is occupied right now." If that display truly represented occupancy, it should never exceed 100%. Even 200% would already be absurd. So 2549% did not signal improvement or growth. It signaled that **the meaning of the metric itself had broken down**.
+
+### 3-1. What was broken was not the AI. It was the definition of occupancy
+
+At the principle level, the first break was that a **cumulative** token count intended for billing had been fed directly into occupancy control.
+
+A cumulative billing counter is fine if you want to know "how many tokens have been spent so far." But occupancy is asking something different: **how much of the context window is occupied right now, at this moment**.
+
+Those are similar, but not the same:
+
+- cumulative value: total consumption so far
+- occupancy: current instantaneous usage
+
+In systems that resend context across tool round-trips and resume hops, cumulative values naturally swell.
+If you read that cumulative number as occupancy, you get a principled failure mode: "the current turn still fits in the window, but the indicator alone keeps inflating by multiples."
+
+And at the implementation level, the record suggests that **double counting during cache reread** was a strong candidate mechanism behind the observed swelling.
+So there are really two layers here:
+
+- **design-level mistake**: feeding a billing cumulative value into occupancy control
+- **observed-value swelling mechanism**: cache reread double counting is a strong candidate, but the exact arithmetic path to 2549% is still unresolved
+
+The most natural reading is that `2549%` appeared where those two layers met.
+
+### 3-2. The rotate causality is confirmed. What remains unresolved is the breakdown of the displayed arithmetic
+
+This is where the confidence levels must be separated.
+
+- **confirmed**: the broken `ctx` display was being used for threshold control, so rotate fired every turn
+- **unresolved**: even if cache reread double counting is the strongest candidate, what exact stack of rereads and resends inflated the number all the way to 2549%
+
+So "the full arithmetic behind the displayed number remains unresolved" does **not** mean "the direct cause of rotate is still unknown."
+The causality that triggered rotate is confirmed. What remains open is how rigorously we can decompose the way that grotesque number grew.
+
+If you blur that line, honest disclosure itself becomes blurry.
+Overstating the unresolved part is inaccurate, but so is refusing to mark the confirmed part as confirmed.
+
+### 3-3. If you stack an outer rotate on top of a component that already self-compresses, the system degenerates
+
+Another principle became visible here:
+
+> **Do not double-manage a component that already manages itself.**
+
+Systems like Codex already carry their own internal logic for session continuation and context compression on the `exec resume` side.
+If an outer harness then forces rotate again from the outside based on an occupancy threshold, the management boundary becomes duplicated.
+
+Then this happens:
+
+- the inner side believes "this session can still continue"
+- the outer side decides "this should already be cut"
+- the outer side cuts every turn
+- the result degenerates into one session equaling one turn
+
+That is not a model-capability problem. It is **a conflict between management boundaries**.
+
+Put differently, a smarter harness is not automatically better.
+If the outer layer tries to take over responsibilities the inner layer already owns, it crushes the freedom of the loop as a whole.
+
+### 3-4. The takeaway from this chapter
+
+The chapter reduces to three points:
+
+- 2549% was not "an impressive number"; it was "a broken number"
+- if you confuse cumulative values with instantaneous occupancy, rotate control breaks
+- if you add an outer rotate to a component that already self-compresses, the boundaries conflict and the system degenerates
+
+In other words, before prompt design, the first thing to design in a self-driving AI loop is **what you measure, how you measure it, and what control authority you assign to that number**.
+
+### ☕ Break point
+
+The one-line summary is this:
+
+> **2549% was not evidence of a strong AI. It was a sign that broken measurement had been wired directly into control.**
+
+Next we move to another reversal: the way "review for quality" can, under some conditions, become nothing more than an expensive second dip.

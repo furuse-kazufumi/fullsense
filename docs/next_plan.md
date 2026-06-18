@@ -16,13 +16,13 @@
 1. #43 en/zh/ko は「ローカル草稿整合」ではなく、**発行済み限定共有 draft の同期凍結**として扱う。live URL は残ったままなので、translation drift 解消を優先する。
 2. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を優先して詰める。
 3. llterm 記事シードは、まず **種 #6「自走 AI ループの作り方と落とし穴」** を先に育てる。種 #1「注入タスク飢餓」は #6 の導入 incident としていったん吸収し、単独先出しは当面しない。
-4. 種 #6 の ja draft は `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first.md` として第8章まで通し、`2549%` 記述も「rotate 因果は確認済み / 膨張機序は有力推定 / 算定内訳は未確定」の境界へ締め直した。本文側の `☕ 休憩ポイント` / 参考文献 / HTML annotation / 挿絵 `025.jpg` も投入済みで、`025.jpg` はクレジットを `Snack Basue` に統一し raw URL の HTTP 200 も確認済み。URL は既存運用どおり `raw.githubusercontent.com/.../main/...` を維持する。`qiita46_llterm_supervision_first_kamikudaki.md` も冒頭ナビ・「完全版で掘る 3 点」・内部語の 1 行グロスまで磨き込み済み、`kamikudaki_shishi.svg` raw URL の HTTP 200 も確認済み。さらに en/zh/ko draft を第2章まで同期したので、次は publish gate 残作業として、多言語本文の第3章以降を順に整える。
+4. 種 #6 の ja draft は `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first.md` として第8章まで通し、`2549%` 記述も「rotate 因果は確認済み / 膨張機序は有力推定 / 算定内訳は未確定」の境界へ締め直した。本文側の `☕ 休憩ポイント` / 参考文献 / HTML annotation / 挿絵 `025.jpg` も投入済みで、`025.jpg` は多言語ごとに作品名表記を分けつつ raw URL の HTTP 200 も確認済み。URL は既存運用どおり `raw.githubusercontent.com/.../main/...` を維持する。`qiita46_llterm_supervision_first_kamikudaki.md` も冒頭ナビ・「完全版で掘る 3 点」・内部語の 1 行グロスまで磨き込み済み、`kamikudaki_shishi.svg` raw URL の HTTP 200 も確認済み。さらに en/zh/ko draft を第3章まで同期したので、次は publish gate 残作業として、多言語本文の第4章以降を順に整える。
 5. handoff commit では `git add .` を使わず、対象 docs の名指し add に固定する。
 6. push / publish / 外部書き込みは引き続き human gate のまま維持する。
 7. レビュー依頼時は `.llterm/loop_ledger.jsonl` の未 commit ノイズ diff ではなく、対象 commit の `git show` を提示して docs 差分を分離する。
 8. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
 9. バス江コマを比喩に使う場合は、一次確認できたセリフと筆者解釈を混ぜない。たとえば `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は「聖書の引用みたいになってる…!」までは出典化できるが、`honest disclosure` を毎回持ち出す感じ等は筆者比喩として明示する。
-10. `qiita46_llterm_supervision_first.md` は第8章まで執筆済みで、参考文献・HTML annotation・休憩ポイント・挿絵 `025.jpg` も投入済み。`025.jpg` はクレジット修正と raw URL の HTTP 200 確認まで済ませ、URL は既存運用どおり `raw.githubusercontent.com/.../main/...` を維持する。`qiita46_llterm_supervision_first_kamikudaki.md` は短縮版として磨き込み済み、`kamikudaki_shishi.svg` raw URL の HTTP 200 も確認済み。en/zh/ko draft も第2章まで同期した。publish gate 解除前に残るのは、多言語本文の後半同期と最終見直し。
+10. #46 の publish gate 状態は項目 `4` を正本として追う。解除前に残るのは、多言語本文の第4章以降、末尾 HTML メタタグ付与、最終見直し。
 
 2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。公開中の Qiita 英語版記事 `2622da17495d61480fa2` に対して、local で復旧済みの正しいタイトルを public PATCH で反映する。対象は Qiita API の記事更新 1 件のみで、push / publish 範囲拡大 / deindex はこの決定に含めない。
 2026-06-18 execution log: `tools/qiita_public_post.py post ... --yes` で public Qiita item `2622da17495d61480fa2` を PATCH 更新し、Qiita API `GET /api/v2/items/2622da17495d61480fa2` と HTML の `<title>` / `og:title` / `<h1>` で正しい英語タイトルへの反映を確認した。
