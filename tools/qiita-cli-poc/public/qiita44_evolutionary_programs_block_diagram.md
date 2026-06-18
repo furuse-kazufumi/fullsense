@@ -675,6 +675,10 @@ GA / ES / GP / QD の名前を全部覚えなくても、
 > 注: ここでの導線は「一次資料へ辿るための代表入口」であり、古典流派では出版社 / 著者公式の書誌ページを含みます。必ずしも全文無料公開を意味しません。
 
 <!--
+Staging only: un-comment ONLY the failing side, and only if the separate-egress
+browser check fails for the canonical permalink.
+If only one side fails, keep the other side commented out instead of carrying
+both fallback sets forward.
 Fallback supplements for the MIT Press reachability gate:
 - Holland / WorldCat: https://search.worldcat.org/oclc/42854623
 - Holland / Google Books: https://books.google.com/books/about/Adaptation_in_Natural_and_Artificial_Sys.html?id=5EgGaBkwvWcC
