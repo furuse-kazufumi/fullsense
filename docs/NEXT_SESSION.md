@@ -244,7 +244,7 @@ nav_order: 95
    一次 URL 確認と著者帰属の整備。
 8. `qiita47_harness_engineering_thoughts.md` は `#43` から派生した local-only の independent short draft として新設済みで、いまは独立短稿として最低限読める具体節に加え、（本プロジェクトでの）RAPTOR / `llterm` / `/goal` の最小グロス、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例、その比喩が clean / dirty の観測までしか言い切れずズレの意味づけや優先順位づけまでは自動化しないという破綻点、harness を強くしすぎたときの failure mode、さらに「明日 1 個だけ変えるなら何か」と「何を runtime に入れず人間へ残すか」、そして runtime を **観測 → 停止 → 修復 → 意味づけ** の順で一段ずつ育てるという実務ルールまで入った状態。
    現状の spine は「ハーネスは AI を賢くする技術というより、人類側の曖昧な運用を二度と通さない discipline であり、最初の一歩は観測できるズレを 1 個だけ増やすこと、次に runtime を 観測 → 停止 → 修復 → 意味づけ の順で一段ずつ育てること（ただし `意味づけ` は runtime に載せず人間に残す段） 」である。
-   canonical ledger 2 正本への `513546f..4ceef74` 回収は完了済みで、次に触るときはこの短稿をさらに短く締めるか、公開水準へ向けて参考整形を詰めるかから始めればよい。
+   canonical ledger 2 正本への `513546f..8f02481` 回収は完了済みで、次に触るときはこの短稿をさらに短く締めるか、公開水準へ向けて参考整形を詰めるかから始めればよい。
    次にやるなら、`#43` へ戻す判断ではなく、独立短稿として runtime / orchestration の最小グロスを保ったままさらに圧縮するか、外部公開できる水準まで参考整形を進めるかを決める。現段階では publish / Team stock へは送らず、`157.jpg` の使いどころ定義、RAPTOR / `llterm` / `/goal` の具体節、`desired-actual-drift-repair` の最小 loop 説明、green-keeper 比喩の破綻点と failure mode、runtime 成長順の実務ルールまでで止めている。
 9. `qiita37_gpu_triple_run_gate_price_kamikudaki.md` は本文の spine を増補済み。次に触るなら、Kaggle 運用 PoC を本文に残すか `<details>` 層へ逃がすかを 1 回だけ決める。
    この一次確認は references 節に列挙した外部 URL 群にも同じく適用する。
