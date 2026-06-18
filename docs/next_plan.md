@@ -16,6 +16,7 @@
 - Team stock 3 本は source article と大筋整合していることを spot-check 済み。対応は `team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` = #43、`team_stock_ctx2549_postmortem.md` = #46。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
 - Team stock 3 本には `この記事で話さないこと` も追加し、難所の切り出し範囲を local draft の段階で固定した。
 - Team stock 3 本の source anchor も明記し、#43 `2-2. loop engineering にもセキュリティの顔がある` / #43 `3-2. LLM Wiki — 「育つ知識」のパターン` / #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` のどこから切り出したかを queue で追えるようにした。
+- local draft 側の `この草稿の位置づけ` / `source` でも、#43 `3-2. LLM Wiki — 「育つ知識」のパターン` と #46 `2 / 3 / 6` の実見出し粒度まで揃え、queue 正本と同じ anchor で辿れる状態にした。
 
 ## 次の具体的な一手
 

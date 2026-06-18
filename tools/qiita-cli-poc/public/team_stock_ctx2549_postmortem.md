@@ -13,7 +13,7 @@ ignorePublish: true
 # `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録
 
 > **この草稿の位置づけ**
-> #46 の `ctx 2549%` / turn boundary / interrupt / flaky test を、後で個別公開できるよう Team stock に退避する source-only draft です。
+> #46 の `2. ターン境界と緊急割り込みは、最初から別物として設計する` / `3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた` / `6. テストも「たまたま緑」を疑う` を、後で個別公開できるよう Team stock に退避する source-only draft です。
 
 > **前提**
 > `claude -p --resume` や `codex exec` のような headless CLI を turn 境界で回し続ける自走 AI harness の文脈を前提にします。
@@ -56,7 +56,7 @@ ignorePublish: true
 
 ## source
 
-- 完全版: `qiita46_llterm_supervision_first.md` 第3章 `ctx 2549%` / 第2章 `turn boundary と interrupt` / 第6章 `flaky test`
+- 完全版: `qiita46_llterm_supervision_first.md` 第2章 `ターン境界と緊急割り込みは、最初から別物として設計する` / 第3章 ``ctx 2549%` は「AI が太った」のではなく、計測が壊れていた`` / 第6章 `テストも「たまたま緑」を疑う`
 - 根拠スナップショット: `docs/articles/2026-06-18/llterm_seed6_evidence.md`
 
 ## honest disclosure
