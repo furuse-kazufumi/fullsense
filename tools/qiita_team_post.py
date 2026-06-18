@@ -8,7 +8,8 @@
 SECURITY (CLAUDE.md / reference_qiita_cli 運用ルール厳守):
   - 生トークンをコードに書かない。env `QIITA_TEAM_TOKEN` か D:/api-keys.json の `qiita_team_token` から読む。
   - publish は外部公開 = ユーザーが GO。本ツールは既定で **dry-run / scan のみ**。実 POST は明示 `--yes` 必須。
-  - 新規は private:true 既定 (限定共有)。既存更新 (frontmatter に id) は可視性を変えない。
+  - 新規は private:true を既定送信するが、Qiita Team での実効可視範囲は別途一次確認が必要。
+  - 既存更新 (frontmatter に id) も payload には `private` を含むが、Qiita Team 側で visibility flip に効くかは未検証。rollback は runbook の確認手順を前提にする。
 
 Qiita API v2 (一次確認 2026-06-04, https://qiita.com/api/v2/docs):
   POST  /api/v2/items            新規作成   body={title, body, tags:[{name,versions}], private, tweet,

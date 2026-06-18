@@ -51,16 +51,18 @@
 - user GO があること
 - `private: true` の可視範囲が未確定なまま送ることを user が理解していること
 - rollback 経路を確認してあること
-  - POST 後に取り消すなら、少なくとも item `id` を控えた上で `PATCH /items/:id` で private / title / body を更新できる前提を取る
-- 必要なら Team UI または API で即時に非表示化 / 差し替えできることを先に確認する
+  - POST 後に取り消すなら、少なくとも item `id` を控えた上で Team UI または API で body / title を即時差し替えできることを確認する
+  - `private` flip は Qiita Team API docs 上で確認できていないため、rollback の主経路として前提にしない
 - 承認者は current user 本人、承認基準は「可視範囲未確定のままでも Team stock を優先するか」である
 
 ## preflight runbook
 
-1. `py -3.11 tools/qiita_team_post.py dry-run <file>` を再実行して title / tags / body 形式を確認する
-2. frontmatter の `private: true` / `ignorePublish: true` を見直し、`ignorePublish` は Team poster では無効だと再確認する
-3. POST 後に記録する `id` / URL / visible range の記入先が `team_stock_queue.md` にあることを確認する
-4. rollback 手段が Team UI か API のどちらで取れるかを先に決める
+1. `py -3.11 tools/qiita_team_post.py verify` を実行し、トークン疎通と team 名を確認する
+2. `py -3.11 tools/qiita_team_post.py dry-run <file>` を再実行して title / tags / body 形式を確認する
+3. frontmatter の `private: true` / `ignorePublish: true` を見直し、`ignorePublish` は Team poster では無効だと再確認する
+4. POST 後に記録する `id` / `URL` / `visible range` の記入先が `team_stock_queue.md` にあることを確認する
+5. rollback 手段が Team UI か API のどちらで取れるかを先に決める
+6. `private` flip を rollback として使わずに済むか、必要なら Team UI での即時差し替え手順を先に確認する
 
 ## execution commands
 
@@ -75,13 +77,12 @@
 ## rollback notes
 
 - 最低限、POST 直後に返る `id` を控える
-- rollback は delete 前提ではなく、まず `PATCH /items/:id` で body / title / private を差し替えられるかを確認する
+- rollback は delete 前提ではなく、まず Team UI または API で body / title を差し替えられるかを確認する
+- `private` の変更で可視範囲を狭められるかは未検証なので、rollback の主手段としては使わない
 - 可視範囲が想定より広い場合は、即座に Team UI または API で非表示化 / 差し替えを行う
 - rollback 実施時は、理由と結果を `team_stock_queue.md` と handoff に 1 行残す
 
-## POST 後に追記すること
+## POST 後の記録先
 
-- 各ファイルの `id`
-- Team 上の URL
-- visible range について実地でわかったこと
-- local draft から public/Team 公開向けに追加した但し書きの有無
+- `id` / Team URL / visible range / rollback の要否は `team_stock_queue.md` の `POST 後の記録欄` を正本として更新する
+- local draft から public/Team 公開向けに追加した但し書きの有無も、同欄の `note` へ集約する
