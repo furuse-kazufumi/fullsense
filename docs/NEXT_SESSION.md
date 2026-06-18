@@ -117,8 +117,8 @@ nav_order: 95
    local draft が切り出し範囲から外れていないことを spot-check 済み。
    また `team_stock_queue.md` / `team_stock_publish_plan.md` / local draft 3 本の
    title・source anchor・`private: true`・`ignorePublish: true` も相互に矛盾していない。
-   ただし実際の Qiita Team POST は未実施で、ここも外部書き込みなので
-   human gate が必要。
+   ただし実際の Qiita Team POST は未実施で、ここも human-gate を要する
+   外部アクションなので human gate が必要。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
    en/zh/ko の translation sync note は本文から外してあり、publish へ進めるときは
