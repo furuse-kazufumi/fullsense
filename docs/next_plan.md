@@ -184,7 +184,7 @@
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。
-- 次は #43 en/zh/ko のうち、既に spot-check 済みの 導入（「捨てた数字」フック / 一次情報への錨 / 第2章後の独立 honest disclosure 節への前振り） / 第0章（`prompt → context → harness → loop` / automation vs loop / 章末 honest disclosure） / 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `loop engineering` をもう一段深く〜strategy names〜security face〜`llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
+- 次は #43 en/zh/ko について、代表的な細い橋渡し段は一巡済みという前提で、**それ以外の局所接続に未確認帯が本当に残っているか**を最終棚卸しする。既に spot-check 済みの導入 / 第0章 / 第1章前半〜第2章冒頭 / 第2章前半〜中盤 / 独立 honest disclosure 節 / `47,097 docs` 節 / `50手法 vs 96ノート` / 第3章前半主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記は再監査対象に戻さない。
 - `.llterm/loop_ledger.jsonl` の恒久対策は commit `7745f84` で実施済み。今後は `.gitignore` 管理の local telemetry として扱う。
 
 ## 注意

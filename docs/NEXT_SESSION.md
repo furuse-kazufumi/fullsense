@@ -170,7 +170,8 @@ nav_order: 95
    も 4 言語で spot-check 済みで、`desired / actual / drift / repair` の対応、
    PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、
    直後の「捨てた数字」節への橋渡しまで日本語正本に追従している。
-   残っているのは、それ以外の未確認箇所にある factual / translation drift である。
+   代表的な細い橋渡し段は一巡済みで、残っているのはそれ以外の局所接続に
+   未確認帯が本当に残っているかの最終棚卸しである。
    日本語正本への追従が完了したら、qiita-cli 同期対象へ戻すため
    en/zh/ko の `ignorePublish: false` を先に戻してから同期する。
 3. 出自不明の front matter 整形差分が再発した場合は、
