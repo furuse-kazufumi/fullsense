@@ -27,6 +27,7 @@
 11. 翻訳 QA は、JA 原文と各節を逐次照合し、専門用語 (`ctx 2549%` / `turn boundary` / `interrupt` / `sign-off` / `block point`) を固定しながら反映する。
    - ko 版では、第5章の `운영 환경` / `본 처리` も最終見直しで固定済み。
    - zh 版では、`算定内情` / `饥饿` も第3章〜第7章で統一済み。
+   - zh 版では、第8章末尾の `故障处理记录` まで含めて日本語混在を解消済み。
 
 2026-06-18 decision log: ユーザー選択 `1) 実行する` を受領。公開中の Qiita 英語版記事 `2622da17495d61480fa2` に対して、local で復旧済みの正しいタイトルを public PATCH で反映する。対象は Qiita API の記事更新 1 件のみで、push / publish 範囲拡大 / deindex はこの決定に含めない。
 2026-06-18 execution log: `tools/qiita_public_post.py post ... --yes` で public Qiita item `2622da17495d61480fa2` を PATCH 更新し、Qiita API `GET /api/v2/items/2622da17495d61480fa2` と HTML の `<title>` / `og:title` / `<h1>` で正しい英語タイトルへの反映を確認した。
