@@ -122,7 +122,64 @@ def test_qiita_public_post_dry_run_surfaces_legacy_id_warning(tmp_path, capsys):
     out = capsys.readouterr().out
     assert rc == 0
     assert "POST create (new public article)" in out
-    assert "WARNING: frontmatter has id=legacy-id but no public_id" in out
+    assert qpp.LEGACY_ID_WARNING_TEMPLATE.format(legacy_id="legacy-id") in out
+
+
+def test_qiita_public_post_cmd_post_blocks_legacy_id_without_allow_create(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "id: legacy-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    called = {"req": False}
+
+    def _boom(*_args, **_kwargs):
+        called["req"] = True
+        raise AssertionError("_req should not run without --allow-create")
+
+    monkeypatch.setattr(qpp, "_req", _boom)
+    rc = qpp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.LEGACY_ID_WARNING_TEMPLATE.format(legacy_id="legacy-id") in out
+    assert qpp.LEGACY_ID_BLOCK in out
+    assert called["req"] is False
+
+
+def test_qiita_public_post_cmd_post_allows_legacy_id_with_allow_create(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "id: legacy-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+
+    def _fake_req(method, path, token, payload):
+        assert method == "POST"
+        assert path == "/items"
+        assert token == "fake-token"
+        assert payload["private"] is False
+        return 201, {"id": "new-public-id", "url": "https://example.test/items/new-public-id"}
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    rc = qpp.cmd_post([str(path), "--yes", "--allow-create"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert qpp.LEGACY_ID_WARNING_TEMPLATE.format(legacy_id="legacy-id") in out
+    assert "OK (201) [PUBLIC(一般公開)]" in out
 
 
 def test_convert_to_qiita_cli_parses_folded_title():

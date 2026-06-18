@@ -109,7 +109,7 @@ nav_order: 95
 - `qiita_public_post.py` の frontmatter `private:` はこの public poster では payload に使われない。可視性の既定値は frontmatter **`public_private:`** で与え、**CLI の `--private` はそれを強制 override** する。`#37` companion は一般公開 PATCH が前提なので、ここでは `public_private` 既定 false / `--private` なしで読む。
 - human-gate 後に実際に `--yes` を打つ前には、`https://qiita.com/furuse-kazufumi/items/f06ca92ea208c7646fcd` をブラウザで開き、表示されている live item が **完全版 `6f44575d440a9ebf5228` ではなく short companion 本文**だと目視確認してから PATCH する。dry-run は network なしなので、この目視確認が `public_id` 取り違え防止の最終ゲートになる。
 - 2026-06-19 に `tests/test_qiita_frontmatter.py` へ最小回帰テストも追加し、`qiita_public_post.py` が **`public_id` 有りなら PATCH / `id` だけでは POST create 扱い**になること、および frontmatter `private:` ではなく `public_private` / CLI `--private` だけが公開可視性を切り替えることを固定した。
-- 続く safety polish で、`qiita_public_post.py` は **`id` はあるが `public_id` が無い** source を dry-run / post したとき、`POST create` に倒れる前に warning を出すようにした。`#37` companion は `public_id` 付きなのでこの warning は出ず、PATCH source として読める。
+- 続く safety polish で、`qiita_public_post.py` は **`id` はあるが `public_id` が無い** source を dry-run したとき warning を出し、実 `post --yes` では **`--allow-create` が無い限り fail-closed で停止**するようにした。これは初回 public 化でも起こりうる正常 warning / gate で、`public_id` は Qiita API の公式 frontmatter 名ではなく **このラッパーの PATCH 識別子**である。`#37` companion は `public_id` 付きなのでこの warning / gate に掛からず、PATCH source として読める。
 - さらに `ac398349ec42e40913f1.md` と `docs/articles/QIITA_SERIES_INDEX.md` の #37 導線も `canonical / companion` 表記へ揃え、local index 上で短稿を「実体記事」扱いしないよう補正した。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため

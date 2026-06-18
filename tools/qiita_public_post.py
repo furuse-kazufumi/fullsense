@@ -9,6 +9,7 @@ qiita_team_post.py の公開 (qiita.com) 版。Team poster とは独立に動き
   - 冪等キーは frontmatter **`public_id:`** (Team の `id:` は触らない)。
     → 初回 POST 成功時に `public_id:` を書き戻し、以後は PATCH (重複作成防止)。
   - 本ツールは PUBLIC poster なので `private` 既定 = **false (一般公開)**。`--private` で限定共有。
+  - `public_id` 無しで `id:` だけがある source は accidental create の危険があるため、実 POST には `--allow-create` を追加要求する。
   - 公開 = 不可逆な外部公開アクション。既定 dry-run、実 POST/PATCH は `--yes` 必須 (ユーザー GO)。
   - fail-closed: NO TITLE / NO TAGS / OVER CHAR / 非公開画像 / ローカルパス があれば BLOCK。
 
@@ -17,6 +18,7 @@ qiita_team_post.py の公開 (qiita.com) 版。Team poster とは独立に動き
   py -3.11 qiita_public_post.py dry-run <file.md>            # payload + 警告 (network なし)
   py -3.11 qiita_public_post.py post <file.md> --yes         # 実 POST/PATCH (private=false)
   py -3.11 qiita_public_post.py post <file.md> --yes --private   # 限定共有で投稿
+  py -3.11 qiita_public_post.py post <file.md> --yes --allow-create  # `public_id` 無し create を明示許可
 """
 from __future__ import annotations
 
@@ -41,6 +43,14 @@ def _utf8() -> None:
 
 API_BASE = "https://qiita.com/api/v2"
 CHAR_LIMIT = 2_000_000
+LEGACY_ID_WARNING_TEMPLATE = (
+    "WARNING: frontmatter has id={legacy_id} but no public_id. "
+    "This path will POST-create, not PATCH-update."
+)
+LEGACY_ID_BLOCK = (
+    "BLOCKED: legacy/team-style id without public_id requires --allow-create "
+    "before creating a new public item."
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -211,7 +221,7 @@ def cmd_dry_run(args: list[str]) -> int:
     print(f"tags  : {[t['name'] for t in p['tags']]}")
     print(f"private: {p['private']}   body chars: {len(body)}")
     if legacy_id:
-        print(f"WARNING: frontmatter has id={legacy_id} but no public_id. This path will POST-create, not PATCH-update.")
+        print(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
     if finds:
         print("WARNINGS:")
         for x in finds:
@@ -247,7 +257,7 @@ def _writeback_public_id(path: str, item_id: str) -> None:
 def cmd_post(args: list[str]) -> int:
     files = [a for a in args if not a.startswith("--")]
     if not files:
-        print("usage: post <file.md> --yes [--private]")
+        print("usage: post <file.md> --yes [--private] [--allow-create]")
         return 2
     if "--yes" not in args:
         print("refusing: --yes required (公開は外部公開アクション。ユーザーが GO を出す)")
@@ -268,7 +278,10 @@ def cmd_post(args: list[str]) -> int:
     pid = real_public_id(meta)
     legacy_id = legacy_id_without_public_id(meta)
     if legacy_id:
-        print(f"WARNING: frontmatter has id={legacy_id} but no public_id. This request will POST-create a new public item.")
+        print(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
+        if "--allow-create" not in args:
+            print(LEGACY_ID_BLOCK)
+            return 1
     if pid:
         code, res = _req("PATCH", f"/items/{pid}", token, p)
     else:
