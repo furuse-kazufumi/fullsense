@@ -20,7 +20,7 @@ nav_order: 95
 > ただしコミット時点で更新が止まっていることもあるため、最新ターンの現況とみなして鵜呑みにはしない。
 > `docs/next_plan.md` は再開判断メモとして使ってよいが、手動更新のため index 状態がズレることがある。commit 境界の判断に使うときは `git status` で staged / unstaged も併記して読む。
 > `.llterm/loop_ledger.jsonl` は自動ログで記事差分のノイズになりやすかったが、2026-06-18 に `git rm --cached` + `.gitignore` で deindex 済み。今後は on-disk に残る local telemetry として扱い、review / handoff では通常 diff から外れる前提でよい。
-> handoff の commit 台帳は `docs/SESSION_SUMMARY.md` / `docs/next_plan.md` の 2 枚だけが正本で、**最新 1 件の handoff commit が未反映なのは正常状態**である。backfill は実質的な handoff 更新に便乗してのみ行い、台帳追記だけの単独 commit を増やさない。`a0b793a` / `6d9854d` はそのルールを締め直す前後に残った standalone backfill の標本として扱い、以後は繰り返さない。
+> handoff の commit 台帳は `docs/SESSION_SUMMARY.md` / `docs/next_plan.md` の 2 枚だけが正本で、**最新 1 件の handoff commit が未反映なのは正常状態**である。backfill は実質的な handoff 更新に便乗してのみ行い、台帳追記だけの単独 commit を増やさない。`a0b793a` / `6d9854d` はそのルールを締め直す前後に残った standalone backfill の標本として扱い、以後は繰り返さない。`NEXT_SESSION.md` 自身の現在地は、他 2 枚の range 注記ではなく本ファイル本文の現況メモを正本として読む。
 
 ## ⭐ 2026-06-17 昼 — #43 継続の再開地点
 
