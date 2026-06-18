@@ -153,10 +153,10 @@ LLM が「何を見るか」「何を優先するか」を決め、Python 実行
 
 ### llterm で試しているもの
 
-自作の `llterm` では、もう少し露骨に人間側の雑さを止めにいっています。
+自作の `llterm` では、まだ試作段階のスケルトンながら、もう少し露骨に人間側の雑さを止めにいっています。
 
 - green-keeper のように「あるべき状態」と「今の状態」の差だけを見る
-- `/goal` 的に、達成条件を先に言語化してからループを回す
+- Claude Code 公式の `/goal` に倣って、達成条件を先に言語化してからループを回す
 - ログと引き継ぎを残し、あとから「そういうつもりだった」と言い逃れしにくくする
 
 このへんは全部、AI の知能を底上げするというより、  
@@ -167,22 +167,14 @@ LLM が「何を見るか」「何を優先するか」を決め、Python 実行
 
 ## 参考導線
 
-- 完全版: `qiita43_harness_loop_stack.md`
-- 関連節:
+- 本編内部参照:
+  - 完全版: `qiita43_harness_loop_stack.md`
   - `1-3. RAPTOR — harness の「実物」がここにある`
   - `2-6. 起動と実証タスク green-keeper`
   - `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装`
 - 補助的な外部導線:
   - Chris Olah / Shan Carter, `Research Debt` (Distill, 2017)
   - Mitchell Hashimoto, `My AI Adoption Journey`
-
-## source
-
-- 完全版: `qiita43_harness_loop_stack.md`
-- とくに近い束:
-  - `2-2. loop engineering にもセキュリティの顔がある`
-  - `2-6. 起動と実証タスク green-keeper`
-  - `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装`
 - 補助メモ:
   - `docs/articles/assets/bazue_all/index.md` の `006.jpg` / `157.jpg`
 
