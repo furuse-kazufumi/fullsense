@@ -103,6 +103,7 @@ nav_order: 95
 - `#37` の短稿と完全版は本文比較も済ませた。結論は「**核の説明は吸収済みだが、EN/ZH/KO 多言語スイッチャーと curated 関連ニュース節は未吸収なので要保全**」である。したがって現時点の推奨案は redirect ではなく、**短稿本文を残したまま冒頭に canonical 告知だけを足す**線になる。
 - local source では、`qiita37_gpu_triple_run_gate_price_kamikudaki.md` をこの保全案へ戻し、冒頭に「完全版 #37 が正本」告知を追加済みである。Qiita live item `f06ca92ea208c7646fcd` への PATCH はまだ未実行で、front matter `ignorePublish` は human-gate 前流出防止のため一時的に `true` へ退避してある。
 - ここで使っている `ignorePublish` は Qiita 標準属性ではなく、`qiita-cli-poc` ローカル運用の publish 安全柵である。またここで言う `redirect` は HTTP 転送ではなく、**Qiita 本文を統合告知 + canonical 誘導へ差し替える運用語**として使う。
+- さらに `ac398349ec42e40913f1.md` と `docs/articles/QIITA_SERIES_INDEX.md` の #37 導線も `canonical / companion` 表記へ揃え、local index 上で短稿を「実体記事」扱いしないよう補正した。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため
   `ignorePublish: true` に統一済み。

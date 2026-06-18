@@ -50,6 +50,7 @@
 - `#37` の本文比較まで進めると、短稿側の核だった `指示 4 文 / 実験 3 本の役割分担 / PoC 裏方 / 17〜19 倍 / 0 円 / safety tax 接続` は完全版へ吸収済みだが、**EN/ZH/KO 多言語スイッチャーと curated 関連ニュース節は未吸収**だった。したがって現時点の推奨実行案は redirect ではなく、**短稿本文を残したまま冒頭に canonical 告知だけを足す**形になる。
 - local source 側では、この保全案に沿って `qiita37_gpu_triple_run_gate_price_kamikudaki.md` を本文保全版へ戻し、冒頭に canonical 告知を追加済みである。front matter `ignorePublish` は human-gate 前流出防止のため一時的に `true` へ退避してあり、残る外部アクションは live item `f06ca92ea208c7646fcd` への PATCH 実行だけである。
 - ここで使う `ignorePublish` は Qiita 標準属性ではなく、`qiita-cli-poc` ローカル運用の publish 安全柵である。また「redirect」は HTTP 転送ではなく、Qiita 本文を統合告知 + canonical 誘導へ差し替える運用語として使う。
+- `ac398349ec42e40913f1.md` と `docs/articles/QIITA_SERIES_INDEX.md` の #37 導線も `canonical / companion` 表記へ更新済みで、local index 上では完全版を正本、かみくだき版を companion として扱う。
 - #43 の `2-6. 起動と実証タスク green-keeper` / `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装` も 4 言語で spot-check し、`desired / actual / drift / repair` の対応、PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、直後の「捨てた数字」節への橋渡しまで日本語正本に追従していることを確認した。
 - 追加 spot-check で、`2-5` honest disclosure 末尾の `2qlJjBwdpYGOVjBkyhhL` 引用が en/zh/ko では第3章直前へ誤配置されていたことを確認した。translations 側は誤配置ブロックを除去し、`2-5` 末尾の本来位置へ戻した。末尾参考の URL 自体は維持している。
 - さらに `1-4` 後半の `AI成長マネジメント` / 4理由 / `First, Break All the Rules` ヘッジ / `アンチパターン` / 第2章への橋渡しも 4 言語で spot-check し、日本語正本に対する新たな factual / translation drift は見当たらないことを確認した。
