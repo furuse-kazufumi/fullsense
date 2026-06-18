@@ -60,7 +60,7 @@
 9. バス江コマを比喩に使う場合は、一次確認できたセリフと筆者解釈を混ぜない。たとえば `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は「聖書の引用みたいになってる…!」までは出典化できるが、`honest disclosure` を毎回持ち出す感じ等は筆者比喩として明示する。
 10. #46 の publish gate 状態は項目 `4` を正本として追う。JA 正本の HTML annotation は完了済み。翻訳版の最終見直しと用語 drift 監査は一巡し、新たな重大差分は未検出。残る外部アクションは human-gate を伴う publish 判断。
 11. 難しい論点は Team 向けに個別 stock する。現時点での 3 本 (`Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem) は Team POST 済みで、投稿待ち一覧 / POST 後の記録欄の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human-gate 条件・rollback 注意は `docs/articles/2026-06-18/team_stock_publish_plan.md` を正本とする。追加の外部操作が要る場合は、rollback / visibility tightening の判断だけを別 human-gate で扱う。
-12. `NEXT_SESSION.md` の 2026-06-12 旧 operator セクションは stale 扱いを明示済みなので、asciinema 録画 / production 起動 / credential 復旧は現行優先の残件に数えない。外部アクション集合は #46 publish 判断 / dev.to 英語版 update・publish 判断の 2 件だけを正として読む。Qiita Team 3 本の rollback / visibility tightening は、必要になった場合のみ別の human-gate 外部アクションとして追加する。
+12. `NEXT_SESSION.md` の 2026-06-12 旧 operator セクションは stale 扱いを明示済みなので、asciinema 録画 / production 起動 / credential 復旧は現行優先の残件に数えない。既に human-gate 外部アクションとして並べている集合は #46 publish 判断 / dev.to 英語版 update・publish 判断の 2 件だけを正として読む。Qiita Team 3 本の `private:false` 着地は current blocker だが、この rollback / visibility tightening は、必要だと人間が判断した時点で別の human-gate 外部アクションとして追加する。
 13. 翻訳 QA は、JA 原文と各節を逐次照合し、専門用語 (`ctx 2549%` / `turn boundary` / `interrupt` / `sign-off` / `block point`) を固定しながら反映する。
    - ko 版では、第5章の `운영 환경` / `본 처리` も最終見直しで固定済み。
    - zh 版では、`算定内情` / `饥饿` も第3章〜第7章で統一済み。

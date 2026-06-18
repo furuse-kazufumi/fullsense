@@ -415,9 +415,10 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 ## 🧑 Operator actions queued — old context / current scope outside (2026-06-12 stale)
 
 この節の項目はローカル operator 作業の旧メモであり、上位 handoff が言う
-**human-gate を要する外部アクション 2 件**
+**既に human-gate を要する外部アクションとして並べている 2 件**
 （#46 の publish 判断 / dev.to 英語版 update・publish 判断）
-とは別カテゴリで、現行の最優先ではない。
+とは別カテゴリで、現行の最優先ではない。Qiita Team 3 本の `private:false` 着地は current blocker だが、
+rollback / visibility tightening は必要だと人間が判断した時点で別の human-gate 外部アクションとして追加する。
 
 ### ✅ クローズ済み operator 項目 (要約のみ残置, 2026-06-12 stale 掃除)
 
