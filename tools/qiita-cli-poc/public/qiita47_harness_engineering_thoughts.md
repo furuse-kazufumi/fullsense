@@ -274,8 +274,8 @@ AI を立派に見せられるからではありません。
   - `2-6. 起動と実証タスク green-keeper`
   - `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装`
 - 補助的な外部導線:
-  - Chris Olah / Shan Carter, `Research Debt` (Distill, 2017)
-  - Mitchell Hashimoto, `My AI Adoption Journey`
+  - [Chris Olah / Shan Carter, `Research Debt` (Distill, 2017)](https://distill.pub/2017/research-debt/)
+  - [Mitchell Hashimoto, `My AI Adoption Journey`](https://mitchellh.com/writing/my-ai-adoption-journey)
 - 補助メモ:
   - `docs/articles/assets/bazue_all/index.md` の `006.jpg` / `157.jpg`
 
