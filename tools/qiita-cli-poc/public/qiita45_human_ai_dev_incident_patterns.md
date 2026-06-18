@@ -85,7 +85,7 @@ flowchart LR
     A[Agent]
     P[Plan / Next Session]
     S[Source of Truth]
-    G[Human Gate]
+    G[human-gate]
     R[Run / Bench / Edit]
     L[Ledger / Diff]
 

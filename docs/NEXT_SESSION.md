@@ -79,7 +79,7 @@ nav_order: 95
   を足し、テーマを「AI と一緒に開発すると事故る 5 点」へ寄せ直した。
   さらに「今ならこう直す」を追加し、失敗談を postmortem 的に再利用しやすくした。
   冒頭には拾い読みガイドも追加済み。挿絵は意図的に 0 コマへ戻している。
-  直近の local polish として、本文の `human gate` は `human-gate` へ統一し、`外部書き込み` も現行 handoff と同じ `外部アクション` の語へ寄せた。主張や gate 条件は変えていない。
+  直近の local polish として、本文と図の `human gate` / `Human Gate` は `human-gate` へ統一し、`外部書き込み` も現行 handoff と同じ `外部アクション` の語へ置き換えた。主張や gate 条件は変えず、運用語だけ現行版へ揃えた。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため
   `ignorePublish: true` に統一済み。
