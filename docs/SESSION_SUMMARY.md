@@ -46,6 +46,7 @@
   - `docs/articles/2026-06-18/llterm_seed6_evidence.md` を追加し、`13 分` / `ctx 2549%` / `billing 累積値の occupancy 誤用` / `race 依存の緑` など公開直結の具体主張を、llterm 側 `ARTICLE_SEEDS.md` から fullsense repo 内へ根拠スナップショットとして固定した
   - `tools/qiita-cli-poc/public/qiita46_llterm_supervision_first.md` を新規作成し、種 #6 の Qiita 草稿を起こし始めた。現時点では front matter つき draft として、冒頭 3 点ボックス、hook + nut graf、`0. まず結論`、`1. 「進捗を要約して」が永久に返らなかった` までを書き、through-line が実際の prose でも立つところまで確認した
   - 同 draft に続けて `2. ターン境界と緊急割り込みは、最初から別物として設計する` と `3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた` を追記した。通常注入と interrupt の分離、sticky cancel の罠、累積 billing 値と瞬間 occupancy の混同、codex 自己圧縮と llterm rotate の二重管理まで prose 化し、中核 3 章がつながった
+  - さらに同 draft に `4. 多AIレビューは質だが、無条件に重ねるとただ遅い`、`5. 追えないなら監督ではない`、`6. テストも「たまたま緑」を疑う` を追記した。記録ターンへのフルレビュー二度漬け、全行タイムスタンプ / ローテログの architecture-level 意味、並行テストの block point と suspiciously green の疑い方まで prose 化し、第6章まで一本の流れになった
 - 挿絵索引:
   - `docs/articles/assets/bazue_all/index.md` にユーザー指定の 4 対応を追記した。`081.jpg` をバイブコーディング、`006.jpg` をハーネスエンジニアリング、`163.jpg` を AI オーケストラ、`025.jpg` をループエンジニアリング実践中のイメージとして再利用する方針を、各コマの `使いどころ` に固定した
   - `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は一次確認し、セリフ `『そういうお前も好きやで…』激オチ『頑ななあの娘へ』2章12節から.. 聖書の引用みたいになってる…!` の存在を確認した。今後このコマを記事に使う場合、出典として支えられるのはこのセリフまでで、`honest disclosure` を毎回持ち出す感じ / chapter-verse のように引用する感じ、等の上乗せ解釈は筆者側の比喩として分離して書く
