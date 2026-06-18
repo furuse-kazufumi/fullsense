@@ -1,5 +1,5 @@
 ---
-title: "【\U0001F4D7かみくだき版】AI が自分で実験を 3 本回した日 — 「AI の安全柵はいくら?」を測ったらシンギュラリティ論のど真ん中だった (#37)"
+title: "【📗かみくだき版】AI が自分で実験を 3 本回した日 — 「AI の安全柵はいくら?」を測ったらシンギュラリティ論のど真ん中だった (#37)"
 tags:
   - 機械学習
   - AI
@@ -11,8 +11,14 @@ updated_at: '2026-06-14T23:29:22+09:00'
 id: f06ca92ea208c7646fcd
 organization_url_name: null
 slide: false
-ignorePublish: false
+ignorePublish: true
 ---
+> 📌 **この短稿の正本は完全版 #37 です。**
+>
+> 数値・統計・実験設計を含む canonical はこちら → https://qiita.com/furuse-kazufumi/items/6f44575d440a9ebf5228
+>
+> このページは、関連ニュース節と EN / 中文 / 한국어 への導線を残した companion として維持します。
+
 > 🌐 English / 中文 / 한국어 の読者へ: このアークのやさしい解説は各言語の「かみくだき総集編」にあります → [English](https://qiita.com/furuse-kazufumi/items/bdfad6db3f2e70c40511) / [中文](https://qiita.com/furuse-kazufumi/items/fa0890f136636d495ea6) / [한국어](https://qiita.com/furuse-kazufumi/items/e5093e4816b25c1bd4d0)
 
 ![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
