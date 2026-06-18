@@ -652,6 +652,12 @@ block point を置いて決定論化する。
 
 この 1 行に、9 原則の大半が入っています。
 
+### ☕ 休憩ポイント
+
+9 原則を全部覚えなくても、いったんはこれで十分です。
+
+> **賢い AI を足す前に、人間が割り込める境界を実装する。**
+
 ---
 
 ## 8. honest disclosure は「敗北宣言」ではなく、監督の一部
@@ -730,6 +736,6 @@ AI まわりの記事は、つい成功譚に寄りがちです。
 - RAD コーパス再接地メモ:
   - `article_craft_corpus_v2` では through-line / re-hook / one-idea-per-paragraph / micro-payoff のノートを参照し、この長文を incident → 原則 → pull-back の順で組んだ。
 - 実装レベルの低層根拠について:
-  - 本稿の `ctx 2549%` / rotate / flaky test / review 二度漬けの具体事実は、公開済み外部 URL ではなく、ローカル incident log と evidence snapshot をもとに整理している。
+  - 本稿の `ctx 2549%` / rotate / flaky test / review 二度漬けの具体事実は、内部ログとローカル evidence snapshot に基づく。現時点では公開可能な外部再現ログは用意していないため、低層の生ログ自体は非公開である。
 
 <!-- llive:meta.tags=["ai-agent","llterm","loop-engineering","human-in-the-loop","honest-disclosure","telemetry"] target=any -->
