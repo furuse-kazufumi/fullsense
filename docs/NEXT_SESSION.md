@@ -114,6 +114,8 @@ nav_order: 95
    `LLM Wiki` は #43 `3-2`（3 層 / thought circulation / safeguards 束）、
    `ctx2549` postmortem は #46 `2 / 3 / 6`（incident 束）を基準に、
    local draft が切り出し範囲から外れていないことを spot-check 済み。
+   また `team_stock_queue.md` / `team_stock_publish_plan.md` / local draft 3 本の
+   title・source anchor・`private: true`・`ignorePublish: true` も相互に矛盾していない。
    ただし実際の Qiita Team POST は未実施で、ここも外部書き込みなので
    human gate が必要。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
