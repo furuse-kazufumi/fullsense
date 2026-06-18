@@ -15,6 +15,15 @@ ignorePublish: true
 > **この草稿の位置づけ**
 > #46 の `ctx 2549%` / turn boundary / interrupt / flaky test を、後で個別公開できるよう Team stock に退避する source-only draft です。
 
+> **前提**
+> `claude -p --resume` や `codex exec` のような headless CLI を turn 境界で回し続ける自走 AI harness の文脈を前提にします。
+>
+> **流れ**
+> `ctx 2549%` を入口に、rotate 因果、`sticky cancel`、`block point` の順で incident を切り分けます。
+>
+> **ゴール**
+> 「異常値を AI の賢さと誤認せず、まず計測破綻として疑う」という監督側の態度を、具体 incident として持ち帰れるようにします。
+
 最初の異常は、AI が止まったことではありませんでした。  
 目に入ったのは `ctx 2549%` という、物理的にありえない占有率表示です。
 

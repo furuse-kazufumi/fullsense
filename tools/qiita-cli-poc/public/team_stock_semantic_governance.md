@@ -15,6 +15,15 @@ ignorePublish: true
 > **この草稿の位置づけ**
 > #43 の `loop engineering にもセキュリティの顔がある` から切り出した Team stock 用の source-only draft です。限定共有・公開とも未実施で、まずは論点を stock することを優先しています。
 
+> **前提**
+> headless AI agent / harness / loop を自分で回し、安全層も自作する側の文脈を前提にします。
+>
+> **流れ**
+> `権限管理` と `意味管理` の差を先に切り出し、その後で `llterm` の fail-closed 安全層や `RAPTOR` の evidence ladder へ橋を架けます。
+>
+> **ゴール**
+> `Semantic Governance` を単なる流行語としてではなく、「何を監視し、どこを fail-closed にすべきか」という設計判断へ落として持ち帰れるようにします。
+
 AI agent の安全性を語るとき、つい ACL や権限管理の話に寄りがちです。もちろんそれは必要です。ですが、loop が速く回る世界では、それだけでは足りません。  
 本当に怖いのは、**許可された権限の中で、意味的に危ない挙動を量産すること**です。
 
