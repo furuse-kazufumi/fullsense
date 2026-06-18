@@ -1,0 +1,53 @@
+---
+title: '`ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録'
+tags:
+  - AI
+  - LLM
+  - ClaudeCode
+  - Codex
+  - Agent
+private: true
+slide: false
+ignorePublish: true
+---
+# `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録
+
+> **この草稿の位置づけ**
+> #46 の `ctx 2549%` / turn boundary / interrupt / flaky test を、後で個別公開できるよう Team stock に退避する source-only draft です。
+
+最初の異常は、AI が止まったことではありませんでした。  
+目に入ったのは `ctx 2549%` という、物理的にありえない占有率表示です。
+
+この数字を見た瞬間、つい「モデルが太った」「context が爆発した」と言いたくなります。  
+でも実際に追うべきだったのは AI の賢さではなく、**人間が置いた計測の壊れ方**でした。
+
+## この記事で切り出す軸
+
+1. `ctx 2549%` は何が確認済みで、何が未解決なのか
+2. `rotate` を誘発した因果と、表示数値の膨張機序を分けて書く
+3. `turn boundary` と `interrupt` を同じレールで扱うと、なぜ `sticky cancel` になるのか
+4. `block point` が無いと、なぜ flaky test は「たまたま緑」に見えるのか
+
+## この草稿の狙い
+
+#46 本編は「自走 AI をどう監督するか」という 9 原則の線でまとめています。  
+そのぶん、`ctx 2549%` 自体の postmortem はどうしても圧縮されています。
+
+そこでこの別稿では、
+
+- 計測破綻
+- rotate 条件
+- cancel / interrupt の切り分け
+- suspiciously green なテスト
+
+を、監督原則の一般論ではなく **障害対応の切り分け記録** として掘り直します。
+
+## source
+
+- 完全版: `qiita46_llterm_supervision_first.md`
+- 根拠スナップショット: `docs/articles/2026-06-18/llterm_seed6_evidence.md`
+
+## honest disclosure
+
+`ctx 2549%` について、現時点で確認済みなのは「この異常表示が rotate を誘発していた」ことまでです。  
+一方で、**その表示値をどう算定した結果 2549% まで膨れたのか** はまだ完全分解していません。公開時も、この二段の確信度は崩さず書きます。

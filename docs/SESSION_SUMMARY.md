@@ -13,6 +13,7 @@
 - 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` / `a07f0c7` / `0232814` / `bafacdd` / `ac7cb80` / `7200d5d` / `40f580e` / `e2d1887` / `c37d084` として保存済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - git push / 新規記事の新規 publish / Qiita Team 書き込みは **未実施**。test については**この差分では未実施**で、前バッチで追加した frontmatter 回帰テストとは切り分ける。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
+- Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`tools/qiita_team_post.py dry-run` では 3 本とも registration-safe だったが、実 Team POST はまだ行っていない。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
@@ -63,6 +64,9 @@
 - 挿絵索引:
   - `docs/articles/assets/bazue_all/index.md` にユーザー指定の 4 対応を追記した。`081.jpg` をバイブコーディング、`006.jpg` をハーネスエンジニアリング、`163.jpg` を AI オーケストラ、`025.jpg` をループエンジニアリング実践中のイメージとして再利用する方針を、各コマの `使いどころ` に固定した
   - `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は一次確認し、セリフ `『そういうお前も好きやで…』激オチ『頑ななあの娘へ』2章12節から.. 聖書の引用みたいになってる…!` の存在を確認した。今後このコマを記事に使う場合、出典として支えられるのはこのセリフまでで、`honest disclosure` を毎回持ち出す感じ / chapter-verse のように引用する感じ、等の上乗せ解釈は筆者側の比喩として分離して書く
+- Team stock:
+  - #43 から `Semantic Governance` 単独記事と `LLM Wiki / thought circulation` 単独記事、#46 から ``ctx 2549%`` postmortem 単独記事の 3 本を source-only draft として `tools/qiita-cli-poc/public/` に追加した
+  - 3 本とも `private: true` / `ignorePublish: true` のまま `tools/qiita_team_post.py dry-run` を通し、title / tags / body の登録安全性だけ確認した。実際の Team 投稿は human gate 待ち
 - deindex:
   - ユーザー承認後、`.llterm/loop_ledger.jsonl` に対して `git rm --cached` を実行し、`.gitignore` にファイル単位の ignore を追加した。ログファイル本体は残したまま Git 追跡だけを外す形で、毎セッションの tracked ノイズ差分を止める恒久対策へ切り替えた
 - handoff:
@@ -131,6 +135,7 @@
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
 4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human gate を伴う publish 判断が中心になった。
+5. 難しい論点の Team stock は local draft 化まで完了した。次の外部アクションは、3 本 (`Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem) を実際に Qiita Team へ POST するかの human gate 判断になる。
 
 - 翻訳 QA:
   - #46 多言語同期は、JA 原文を基準に各節を逐次照合し、`ctx 2549%` / `turn boundary` / `interrupt` / `block point` などの用語を訳語固定しながら反映している。

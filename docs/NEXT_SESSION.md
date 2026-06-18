@@ -103,7 +103,15 @@ nav_order: 95
    `kamikudaki_shishi.svg` も raw URL の HTTP 200 を確認済み。
    最終見直しパスでも新たな重大 drift は未検出なので、次の外部アクションは
    human gate を伴う publish 判断になる。
-3. #43 の多言語差分を触るときは、日本語版を source of truth として
+3. 難しい論点は後で個別公開できるよう Team stock へ切り出し始めた。
+   `tools/qiita-cli-poc/public/team_stock_semantic_governance.md`、
+   `team_stock_llm_wiki_anti_circulation.md`、
+   `team_stock_ctx2549_postmortem.md`
+   を local draft として追加済みで、`tools/qiita_team_post.py dry-run` では
+   3 本とも registration-safe を確認済み。
+   ただし実際の Qiita Team POST は未実施で、ここも外部書き込みなので
+   human gate が必要。
+4. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
    en/zh/ko の translation sync note は本文から外してあり、publish へ進めるときは
    `ignorePublish: true` / `private: true` を外す前に
@@ -131,13 +139,13 @@ nav_order: 95
    en/zh/ko の `ignorePublish: false` を先に戻してから同期する。
 3. 出自不明の front matter 整形差分が再発した場合は、
    1 行化を採らず repo 既存形式に戻してから扱う。
-4. `qiita43_harness_loop_stack_kamikudaki.md` を必要なら推敲する。
+5. `qiita43_harness_loop_stack_kamikudaki.md` を必要なら推敲する。
    いまは「手綱 / 輪 / 知識基盤」の 3 点に絞った短縮版で、
    冒頭に拾い読みガイドも追加済みで、節番号 + 実見出し名だけで本文内を追える text TOC にしてある。
-5. `qiita44_evolutionary_programs_block_diagram.md` を必要なら推敲する。
+6. `qiita44_evolutionary_programs_block_diagram.md` を必要なら推敲する。
    現状は進化計算の総論ハブで、歴史記録より「用語と構造の説明」を優先。
    冒頭の急ぐ人向け導線は追加済みで、節番号 + 実見出し名でも辿れる text TOC にしてある。
-6. `qiita45_human_ai_dev_incident_patterns.md` を必要なら推敲する。
+7. `qiita45_human_ai_dev_incident_patterns.md` を必要なら推敲する。
    現状は handoff / human gate / diff / checkpoint と llcore 教訓をまとめた
    問題集で、成功談より再開導線を重視。RAD 由来の
    unsupported success / verifier / durable write / checkpoint 系も追記済み。
@@ -148,19 +156,19 @@ nav_order: 95
    この一次確認は references 節に列挙した外部 URL 群にも同じく適用する。
    参考メモ節は、いまは appendix として外部系統メモと背景メモを分けた状態。
    `## 2` の外部用語帰属も、`ignorePublish` を外す前に appendix の外部系統メモと照合する。
-7. 公開作業を止める場合は、#43 の多言語版 /
+8. 公開作業を止める場合は、#43 の多言語版 /
    既存記事リンク導線のローカル整備を先に進める。
-8. publish 前 gate として、`qiita43_harness_loop_stack_kamikudaki.md` の
+9. publish 前 gate として、`qiita43_harness_loop_stack_kamikudaki.md` の
    `kamikudaki_shishi.svg` が main 反映後に raw URL で HTTP 200 を返すか確認する。
    `qiita44` はバス江コマをいったん本文から外したので、再投入する場合だけ
    その時点でコマ選定・クレジット・転載許諾 / 利用条件の一次確認をやり直す。
-9. `qiita44` / `qiita45` の末尾 HTML annotation と参考文献節は追加済み。
+10. `qiita44` / `qiita45` の末尾 HTML annotation と参考文献節は追加済み。
    publish 前は一次確認と出典 URL / 著者帰属の整備を残タスクとして確認する。
    references 節にある外部 URL 群も、この publish gate の一次確認対象に含める。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で
    annotation / 参考導線 / 参考文献テンプレの有無を確認する。
    `qiita44` は参考文献節がまだ薄いので、各流派の一次文献を最低 1 本ずつ補う。
-10. 草稿を publish へ回すときは、対象記事の `ignorePublish: true` を外し、
+11. 草稿を publish へ回すときは、対象記事の `ignorePublish: true` を外し、
     公開方針に合わせて `private: true/false` を決める。
     この 2 つは `qiita-cli-poc` 草稿ラインで使っているローカル運用フィールド
     （Qiita 公式 API の公開状態そのものではなく、ローカルの同期・公開手順を止めるための安全柵）
@@ -170,9 +178,9 @@ nav_order: 95
     #43 多言語 draft の翻訳 drift と
     draft-only 注記の除去漏れがないかもこのタイミングで確認する。
     あわせて、冒頭の拾い読み導線が `##` / `###` の見出し階層だけでも意味を持つか見直す。
-11. `qiita45` の `## 2` にある外部用語帰属と、appendix の外部系統メモを
+12. `qiita45` の `## 2` にある外部用語帰属と、appendix の外部系統メモを
     `ignorePublish` 解除前に突き合わせる。
-12. `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` の
+13. `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` の
     冒頭導線は、**いまは text TOC として読める形を優先**している。
     custom アンカーは本文から外してあるので、publish 前は
     見出し階層と限定共有での見え方だけ確認すればよい。
