@@ -678,7 +678,7 @@ GA / ES / GP / QD の名前を全部覚えなくても、
   - GA の古典的な出発点。この記事の「固定長遺伝子列を交叉と変異で回す」説明の原点。
 - Nikolaus Hansen, ["The CMA Evolution Strategy: A Tutorial"](https://arxiv.org/abs/1604.00772) (2016)
   - ES / CMA-ES 系の代表的な入口。連続最適化で「変異分布まで更新する」感覚を掴みやすい。
-- John R. Koza, [*Genetic Programming: On the Programming of Computers by Means of Natural Selection*](https://mitpress.mit.edu/9780262111706/genetic-programming/) (1992)
+- John R. Koza, [*Genetic Programming: On the Programming of Computers by Means of Natural Selection*](https://mitpress.mit.edu/9780262527910/genetic-programming/) (1992)
   - GP の古典。式やプログラム木そのものを進化させる発想の出発点。
 - Kenneth O. Stanley, Risto Miikkulainen, ["Evolving Neural Networks through Augmenting Topologies"](https://nn.cs.utexas.edu/?stanley%3Aec02=) (2002)
   - NEAT の代表的な原典。重みだけでなく構造も進化させる流れの入口。
