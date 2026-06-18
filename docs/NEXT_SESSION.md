@@ -245,6 +245,7 @@ nav_order: 95
    `qiita44` は GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME /
    lexicase の一次導線 URL まで補強済みで、CMA-ES も arXiv `1604.00772` へ差し替え済みなので、publish 前は本文の言い回しと
    参考導線の最終突合を確認する。残タスクは MIT Press 2 件の到達性確認と、本文の主張強度の最終微調整だけでよい。2026-06-18 時点では、記事側の Holland 導線を現行の MIT Press permalink `https://mitpress.mit.edu/9780262581110/adaptation-in-natural-and-artificial-systems/` へ、Koza 導線を `https://mitpress.mit.edu/9780262527910/genetic-programming/` へ更新したうえでも、両 URL に対し、PowerShell `Invoke-WebRequest` + UA `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36` + Cookie なしでも 403 だった。さらに代替公式導線として、DOI `https://doi.org/10.7551/mitpress/1090.001.0001` は 302 で `https://direct.mit.edu/books/book/2574/Adaptation-in-Natural-and-Artificial-SystemsAn` へ解決され、最終到達先 `direct.mit.edu` が同条件で 403 だった。`https://direct.mit.edu/books/book/2574/Adaptation-in-Natural-and-Artificial-SystemsAn` も同条件で 403 だった。原因は bot 判定だけでなく、購読 / 認証 / 地域制限を含む複合要因の可能性がある。IP / ISP / VPN 状態まではこの時点で未固定なので、publish 前に残る主な選択肢は「再現条件を固定して再試行する」「実ブラウザ確認のうえ canonical permalink を維持する」「別の公式導線へ差し替える」である。
+   いまの `qiita44` に残る論点は reference permalink の不一致ではなく、この到達性 gate と本文の最終微調整だけである。
    references 節にある外部 URL 群も、この publish gate の一次確認対象に含める。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で
    annotation / 参考導線 / 参考文献テンプレの有無を確認する。
