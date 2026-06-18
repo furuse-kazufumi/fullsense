@@ -799,5 +799,3 @@ atomic commit する pair-programming で **連続 19 本投稿完走** (公開 
 - **`0i` (新規)** Qiita Web 上の #24-00 / #24-01 タイトルを `#24-NN` →
   `(0)` / `(1)` に手動修正 (ローカル draft は commit e359bd5 で統一済)
 - **`0j` (新規)** LinkedIn 既存告知記事の GitHub blob link を Qiita 公開 URL に差替
-
-
