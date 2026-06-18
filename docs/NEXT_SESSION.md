@@ -88,6 +88,7 @@ nav_order: 95
   冒頭には拾い読みガイドも追加済み。挿絵は意図的に 0 コマへ戻している。
   直近の local polish として、本文と図の `human gate` / `Human Gate` は `human-gate` へ統一し、`外部書き込み` も現行 handoff と同じ `外部アクション` の語へ置き換えた。主張や gate 条件は変えず、運用語だけ現行版へ揃えた。
 - `tools/qiita-cli-poc/public/qiita47_harness_engineering_thoughts.md` も新規追加済み。**現在は** `private: true` の local-only companion で、`006.jpg` を「ハーネスを通した途端に AI が賢そうに見える瞬間」、`157.jpg` を「本当にしつけが必要なのは AI より人類側の運用では」という反転オチへ役割分担させた短稿である。本文には invisible comment (`<!-- draft:... -->`) を残し、後から Team / 公開どちらへ育てる場合でも内部構造だけ先に辿れるようにしてある。
+- `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md` も増補済み。短すぎてアルゴリズム / PoC の量が見えないという指摘を受け、`1 分version` の直後に **「実験 3 本の中身」** と **「AI は裏で何を自走したのか」** を追加し、HD-1 full / HD-1 null / Stage-B、pre-registration / attacker AI 3 体 / major 5 件修正 / Kaggle T4 / 152 runs / `$0` を plain-language で戻してある。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため
   `ignorePublish: true` に統一済み。
@@ -239,6 +240,7 @@ nav_order: 95
 8. `qiita47_harness_engineering_thoughts.md` は local-only companion として新設済み。
    現状の spine は「ハーネスは AI を賢くする技術というより、人類側の曖昧な運用を二度と通さない discipline である」。
    次にやるなら、`#43` へ戻す補助論点として畳むか、独立短稿として参考導線を足すかを決める。現段階では publish / Team stock へは送らず、`157.jpg` の使いどころ定義までで止めている。
+9. `qiita37_gpu_triple_run_gate_price_kamikudaki.md` は本文の spine を増補済み。次に触るなら、Kaggle 運用 PoC を本文に残すか `<details>` 層へ逃がすかを 1 回だけ決める。
    この一次確認は references 節に列挙した外部 URL 群にも同じく適用する。
    参考メモ節は、いまは appendix として外部系統メモと背景メモを分けた状態。
    `## 2` の外部用語帰属も、`ignorePublish` を外す前に appendix の外部系統メモと照合する。
