@@ -98,6 +98,7 @@
 - さらに第0章（`prompt → context → harness → loop` の階段 / `Agent = Model + Harness` の二次情報ヘッジ / automation vs loop / 章末 honest disclosure）も spot-check し、階段図の説明、二次情報の留保、`verifiable goal` の橋渡し、実務ブログと学術定義を分ける温度感まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第1章前半（`harness engineering` 命名経緯 / `vibe coding` 区別 / RAPTOR 2層 / `ハーネス型バイブコーディング` の説明）も spot-check し、Hashimoto/OpenAI まわりのヘッジ、Karpathy との差異、fail-closed の説明、ユーザー側3能力の導入まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第1章後半〜第2章冒頭（ユーザー側3能力 / AI成長マネジメント / anti-pattern / `loop engineering` の定義 / `Semantic Governance` 導入 / `llterm` honest disclosure）も spot-check し、比喩・留保・戦略説明まで en/zh/ko が日本語正本に追従していることを確認した。
+- さらに第2章前半の `loop engineering` をもう一段深く（`react` / `reflexion` / `plan_execute_verify` の差し替え比較 / strategy names のかみくだき）も spot-check し、「固定レシピ」との対比、速さと安全性の二軸、各戦略の平易化まで en/zh/ko が日本語正本に追従していることを確認した。
 - さらに第2章前半の `loop engineering` security face（Filip Verloy 引用 / `scaling risk at machine speed` / `Semantic Governance`）も spot-check し、警句・出典導線・自作ハーネスの設計動機への橋渡しまで en/zh/ko が日本語正本に追従していることを確認した。
   - 確認方法: JA `qiita43_harness_loop_stack.md:313-323, 687-695` と en/zh/ko の対応段落・参考文献行を横並びで突き合わせ、本文リンクと末尾出典の両方に Verloy Medium URL があることまで確認した。
 - さらに第2章中盤（`fail-closed` 安全層 / `現状の実装では` の条件付き留保 / `green-keeper` / `/goal`）も spot-check し、SafetyPolicy の 3 段判定、CircuitBreaker / Budget / 認証要求検知、`Executor` 条件付きの honest disclosure、GitOps reconciliation 比喩、`Haiku` 既定の `/goal` 説明まで en/zh/ko が日本語正本に追従していることを確認した。
@@ -125,7 +126,7 @@
 
 ## 次の具体的な一手
 
-1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 第0章（`prompt → context → harness → loop` / automation vs loop / 章末 honest disclosure） / 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `loop engineering` security face〜`llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
+1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 第0章（`prompt → context → harness → loop` / automation vs loop / 章末 honest disclosure） / 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `loop engineering` をもう一段深く〜strategy names〜security face〜`llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
 4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human gate を伴う publish 判断が中心になった。
