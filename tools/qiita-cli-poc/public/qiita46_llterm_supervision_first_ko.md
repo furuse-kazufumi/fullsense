@@ -740,3 +740,25 @@ AI 관련 글은 쉽게 성공담으로 기울어진다.
   - 이 글의 `ctx 2549%`, rotate, flaky test, 리뷰 이중 담금질에 관한 구체 사실은 내부 로그와 로컬 evidence snapshot 에 근거한다. 현재 외부에 재현 가능한 공개 로그 묶음은 준비되어 있지 않으므로, 저층 원시 로그 자체는 비공개다.
 
 <!-- llive:meta.tags=["ai-agent","llterm","loop-engineering","human-in-the-loop","honest-disclosure","telemetry"] target=any -->
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ 이 시리즈는 Claude Code와 함께 작성합니다
+>
+> 글 속의 구현·검증·시각화는 **Claude Code**(Anthropic의 AI 코딩 환경)와 함께 진행하고 있습니다.
+> Claude Code는 무료로 사용해 볼 수 있습니다(제공 조건은 시기나 지역에 따라 달라질 수 있으므로 최신 정보는 공식 안내를 참고하세요). 마음에 들어 아래 추천 링크를 통해 유료 플랜에 가입하시면,
+> 저자에게 「개발을 이어가기 위한 크레딧」이 적립되어 이 시리즈의 지속에 도움이 됩니다.
+>
+> 👉 **무료로 사용해 보기 / 추천 링크** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![아케미가 웃으며 말한다: "백만 엔 앞에선 사소한 일이야! 인간 도덕의 시세는 백만 엔 이하니까♥"](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *"백만 엔 앞에선 사소한 일이야!" — 추천 링크 크레딧 앞에서 내 도덕 시세마저 흥정되는 것 같다는, 좀 더 독한 셀프디스.*（© Forbidden shibukawa / SHUEISHA・스낵 바스에）
+
+<!-- /CTAIMG -->

@@ -693,3 +693,25 @@ suspicion(의심)
 - "사회라는 건 이런 것이기도 한가... 룰이 보이기 시작했어...": https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
 > ※ 본문 중에서 헤지한 "이차 정보뿐 / 일차 미확인"의 주요 항목은 다음과 같다: OpenAI 기사의 본문·태그라인·규모 수치(일차는 HTTP 403), LangChain의 `Agent = Model + Harness` 식과 각 하네스 벤치의 계측 출처·계측 조건(**`GPT-5.5`라는 모델명 자체의 실재는 OpenAI 공식으로 확인했지만, 본문에서 언급한 약 61% / 약 87% 비교의 일차 계측 출처·계측 조건은 여전히 미확인**), Claude Code v2.1.139의 릴리스 날짜, llterm의 테스트 녹색의 최신 상태(재실행은 미실시), RAD 총 documents 수(현재 로컬 재집계는 **2026년 6월 17일 기준 47,097 docs**이며, 오래된 prose에는 여전히 "약 49k"가 남아 있을 수 있음), Karpathy 씨 LLM Wiki Gist의 제안자·날짜, 캐논 "삼자의 정신"과 *First, Break All the Rules* 4원칙의 출처 페이지, 제3장의 "인간 우위 3점"(measured가 아니라 관찰 기반). 일차 정보로 확정되는 대로, 갱신한다.
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ 이 시리즈는 Claude Code와 함께 작성합니다
+>
+> 글 속의 구현·검증·시각화는 **Claude Code**(Anthropic의 AI 코딩 환경)와 함께 진행하고 있습니다.
+> Claude Code는 무료로 사용해 볼 수 있습니다(제공 조건은 시기나 지역에 따라 달라질 수 있으므로 최신 정보는 공식 안내를 참고하세요). 마음에 들어 아래 추천 링크를 통해 유료 플랜에 가입하시면,
+> 저자에게 「개발을 이어가기 위한 크레딧」이 적립되어 이 시리즈의 지속에 도움이 됩니다.
+>
+> 👉 **무료로 사용해 보기 / 추천 링크** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![아케미가 웃으며 말한다: "백만 엔 앞에선 사소한 일이야! 인간 도덕의 시세는 백만 엔 이하니까♥"](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *"백만 엔 앞에선 사소한 일이야!" — 추천 링크 크레딧이 걸리는 순간, 내 도덕 시세도 흔들리는 것 같다는 쓴웃음 섞인 셀프디스.*（© Forbidden shibukawa / SHUEISHA・스낵 바스에）
+
+<!-- /CTAIMG -->

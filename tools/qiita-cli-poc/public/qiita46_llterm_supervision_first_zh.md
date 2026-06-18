@@ -738,3 +738,25 @@ AI 相关的文章，很容易一路滑向成功叙事。
   - 本文中 `ctx 2549%`、rotate、flaky test、review 二度过油等具体事实，基于内部日志与本地 evidence snapshot。当前还没有准备对外可复现的公开日志包，因此低层原始日志本身暂不公开。
 
 <!-- llive:meta.tags=["ai-agent","llterm","loop-engineering","human-in-the-loop","honest-disclosure","telemetry"] target=any -->
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ 这一连载是和 Claude Code 一起写出来的
+>
+> 文中的实现、验证与可视化，都是和 **Claude Code**（Anthropic 的 AI 编码环境）一起推进的。
+> Claude Code 可以免费试用（提供条件会随时间或地区变化，最新信息请以官方说明为准）。如果你用下面的推荐链接注册付费方案，
+> 作者会得到继续开发用的 credits，也就能把这条连载继续写下去。
+>
+> 👉 **免费试用 / 推荐链接** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![明美笑着说「在一百万日元面前都是小事！人类的道德行情还不到一百万呢♥」](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *「在一百万日元面前都是小事！」——更露骨一点的自嘲：一旦推荐链接带来的 credits 摆上桌，连我自己的道德行情都显得可以谈价。*（© Forbidden shibukawa / SHUEISHA・《スナックバス江》）
+
+<!-- /CTAIMG -->

@@ -693,3 +693,25 @@ suspicion（怀疑）
 - 「社会也会是这么回事吗……我开始看见规则了……」: https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
 > ※ 正文中作过对冲的「仅二次信息／一次未确认」的主要项目如下：OpenAI 文章的正文 · 标语 · 规模数值（一次为 HTTP 403）、LangChain 的 `Agent = Model + Harness` 公式与各 harness 基准的计测来源 · 计测条件（**`GPT-5.5` 这一模型名本身已由 OpenAI 官方确认存在，但文中提到的约61% / 约87% 比较仍未追到一次计测来源与计测条件**）、Claude Code v2.1.139 的发布日、llterm 测试为绿的最新状态（重新跑尚未实施）、RAD 总 documents 数（当前手元重计为 **2026年6月17日的 47,097 docs**，较旧的 prose 里仍可能写作「约49k」）、Karpathy 先生 LLM Wiki Gist 的提案者 · 日期、佳能「三自精神」与 *First, Break All the Rules* 四原则的出处页码、第3章的「人类优越三点」（并非 measured 而是基于观察）。一旦能以一次信息源确定，便即更新。
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ 这一连载是和 Claude Code 一起写出来的
+>
+> 文中的实现、验证与可视化，都是和 **Claude Code**（Anthropic 的 AI 编码环境）一起推进的。
+> Claude Code 可以免费试用（提供条件会随时间或地区变化，最新信息请以官方说明为准）。如果你用下面的推荐链接注册付费方案，
+> 作者会得到继续开发用的 credits，也就能把这条连载继续写下去。
+>
+> 👉 **免费试用 / 推荐链接** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![明美笑着说「在一百万日元面前都是小事！人类的道德行情还不到一百万呢♥」](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *「在一百万日元面前都是小事！」——一种更露骨的自嘲：一想到推荐链接带来的 credits，连我自己的道德行情都好像开始浮动了。*（© Forbidden shibukawa / SHUEISHA・《スナックバス江》）
+
+<!-- /CTAIMG -->

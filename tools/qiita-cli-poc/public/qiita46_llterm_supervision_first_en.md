@@ -736,3 +736,25 @@ That is why I want to leave this #46 not merely as an incident record, but as a 
   - The concrete facts in this article around `ctx 2549%`, rotate, flaky tests, and double-dipped review are based on internal logs and local evidence snapshots. At this point, no externally reproducible public log bundle has been prepared, so the raw low-level logs themselves remain private.
 
 <!-- llive:meta.tags=["ai-agent","llterm","loop-engineering","human-in-the-loop","honest-disclosure","telemetry"] target=any -->
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ This series is written hand-in-hand with Claude Code
+>
+> The implementation, verification, and visualization in these articles are done together with **Claude Code** (Anthropic's AI coding environment).
+> Claude Code can be tried for free (availability and offer terms depend on the current official conditions). If you like it and subscribe to a paid plan via the referral link below,
+> the author receives credits to keep development going — which helps this series continue.
+>
+> 👉 **Try it free / referral link** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![Akemi grins: "Before a million yen, it's all trivial! Human morals go for under a million yen, after all♥"](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *"Before a million yen, it's all trivial!" — a harsher self-own: once referral credits show up, even my own moral market starts looking negotiable.*（© Forbidden shibukawa / SHUEISHA・Snack Basue）
+
+<!-- /CTAIMG -->

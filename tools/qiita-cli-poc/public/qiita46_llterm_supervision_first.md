@@ -748,3 +748,25 @@ AI まわりの記事は、つい成功譚に寄りがちです。
   - 本稿の `ctx 2549%` / rotate / flaky test / review 二度漬けの具体事実は、内部ログとローカル evidence snapshot に基づく。現時点では公開可能な外部再現ログは用意していないため、低層の生ログ自体は非公開である。
 
 <!-- llive:meta.tags=["ai-agent","llterm","loop-engineering","human-in-the-loop","honest-disclosure","telemetry"] target=any -->
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は無料で試せます（提供条件は時期や地域で変わるため、最新の案内は公式を参照）。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![「百万円の前では些細な事だわ…！ 人間のモラルの相場は百万円以下だものね♥」という明美](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *「百万円の前では些細な事だわ…！」— 紹介リンク由来の credits を前にすると、こちらのモラル相場まで問われる感じがしてちょっと危うい、という強めのセルフツッコミ。*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+
+<!-- /CTAIMG -->

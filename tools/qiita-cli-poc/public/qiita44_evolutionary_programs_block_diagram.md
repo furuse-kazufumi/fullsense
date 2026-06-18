@@ -694,3 +694,25 @@ GA / ES / GP / QD の名前を全部覚えなくても、
   - `evolutionary_computation_corpus_v2` と `evolution_corpus_v2` では、QD / novelty / CMA-ME / LLM 併用進化が厚く、この記事の差別化軸は新規手法提案ではなく**流派の位置関係を初心者向けに 1 本へ束ねること**にある。
 
 <!-- llive:meta.tags=["evolutionary-computation","genetic-algorithm","map-elites","llcore","lldarwin"] target=any -->
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は無料で試せます（提供条件は時期や地域で変わるため、最新の案内は公式を参照）。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![「百万円の前では些細な事だわ…！ 人間のモラルの相場は百万円以下だものね♥」という明美](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *「百万円の前では些細な事だわ…！」— 紹介リンク経由の credits が絡むと、こちらのモラル相場まで値札付きになる感じがして危うい、という強めのセルフツッコミ。*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+
+<!-- /CTAIMG -->

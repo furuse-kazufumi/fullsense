@@ -702,3 +702,25 @@ AI と一緒に開発していて共有価値が高いのは、**成功談その
 - unsupported success / verifier / durable write / checkpoint 系の外部研究との対応づけは、現時点ではローカルコーパス要約上の整理として扱っている
 
 <!-- llive:meta.tags=["ai-agent","handoff","human-gate","honest-disclosure","checkpoint"] target=any -->
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ この連載は Claude Code と二人三脚で書いています
+>
+> 記事中の実装・検証・可視化は **Claude Code**(Anthropic の AI コーディング環境)と一緒に進めています。
+> Claude Code は無料で試せます（提供条件は時期や地域で変わるため、最新の案内は公式を参照）。気に入って有料プランに登録される際、
+> 下の紹介リンク経由だと筆者に「開発を続けるためのクレジット」が入り、この連載の継続を後押しできます。
+>
+> 👉 **無料で試す / 紹介リンク** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![「百万円の前では些細な事だわ…！ 人間のモラルの相場は百万円以下だものね♥」という明美](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *「百万円の前では些細な事だわ…！」— 紹介リンク由来の credits を前にすると、こっちのモラル相場まで試される感じがして笑えない、という強めのセルフツッコミ。*（© Forbidden shibukawa / SHUEISHA・『スナックバス江』）
+
+<!-- /CTAIMG -->

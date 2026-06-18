@@ -694,3 +694,25 @@ Hold the reins, circulate the wheel safely, and grow the knowledge. All of it, w
 - "So this is what society is like too... I can see the rules now...": https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
 > ※ The main items hedged in the text as "secondary-only / primary unconfirmed" are as follows: the OpenAI article's text, tagline, and scale figures (the primary returns HTTP 403); LangChain's `Agent = Model + Harness` formula and the measurement sources and conditions of each harness benchmark (**the existence of the GPT-5.5 model name itself is now confirmed by OpenAI, but the article's cited ~61% / ~87% comparison still lacks a primary measurement source and conditions**); the release date of Claude Code v2.1.139; the latest status of llterm's tests being green (no re-run performed); RAD's total document count (the current local recount is **47,097 docs as of June 17, 2026**, while older prose may still refer to "about 49k"); the proposer and date of Karpathy's LLM Wiki Gist; the source pages for Canon's "Spirit of the Three Selfs" and the four principles of *First, Break All the Rules*; and Chapter 3's "three points of human advantage" (observation-based, not measured). I will update them as soon as I can confirm them with primary sources.
+
+<!-- REFERRAL -->
+
+---
+
+> ### ⚡ This series is written hand-in-hand with Claude Code
+>
+> The implementation, verification, and visualization in these articles are done together with **Claude Code** (Anthropic's AI coding environment).
+> Claude Code can be tried for free (availability and offer terms depend on the current official conditions). If you like it and subscribe to a paid plan via the referral link below,
+> the author receives credits to keep development going — which helps this series continue.
+>
+> 👉 **Try it free / referral link** → https://claude.ai/referral/0sqPw8E_lw
+
+<!-- /REFERRAL -->
+
+<!-- CTAIMG -->
+<!-- CTAIMG_VARIANT: 149 -->
+
+![Akemi grins: "Before a million yen, it's all trivial! Human morals go for under a million yen, after all♥"](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/149.jpg)
+> 🗒️ *"Before a million yen, it's all trivial!" — a deliberately nastier self-own: once referral credits enter the room, even my own moral market starts wobbling a little.*（© Forbidden shibukawa / SHUEISHA・Snack Basue）
+
+<!-- /CTAIMG -->
