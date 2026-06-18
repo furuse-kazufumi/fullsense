@@ -154,8 +154,8 @@
 
 - `qiita44` は参考文献節へ canonical 入口を追加済み。
   - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME / lexicase の代表文献を最低 1 本ずつ置き、一次導線 URL まで補った。CMA-ES は失効証明書の旧 PDF ではなく arXiv `1604.00772` を使う。
-- <!-- QIITA44_GATE_STATE_BEGIN -->
-- 本文の言い回しと参考導線の最終突合は完了済みで、残るのは MIT Press 2 件の到達性 gate だけである。
+  <!-- QIITA44_GATE_STATE_BEGIN -->
+  - 本文の言い回しと参考導線の最終突合は完了済みで、残るのは MIT Press 2 件の到達性 gate だけである。
   - 本文と参考導線の spot-check では、GA = 固定長遺伝子列、ES / CMA-ES = 変異分布更新、GP = 式 / プログラム木進化、NEAT = 構造進化、novelty / MAP-Elites / lexicase = 「何を残すか」の分岐、という説明までは整合していた。
   - claim-strength pass では、論旨を変えずに過強な断定を 3 箇所だけ弱めた。`淘汰器が壊れていたら進化はだいたい壊れる` は `探索は鈍りやすい` へ、`長期でだいたい飽和か monoculture に寄る` は `寄りやすい` へ、`高次元 descriptor では cell の大半が空になる` は `空になりがち` へ調整済み。
   - 追加の最終微調整では、断定トーンが先行していた 4 箇所も弱めた。`これはかなり重要です` は `ここは見落としやすい点です`、`これは本当に重要です` は `ここは切り分けを誤りやすい点です`、`かなりクリア` は `だいぶクリア`、結語の `壊れやすい` は `詰まりやすい` へ調整済み。
@@ -164,7 +164,7 @@
 - この gate の基線は **canonical permalink / DOI を引用上の主参照として維持する** ことであり、我々の 1 網からの自動 403 だけでは citation integrity を崩さない。非 Akamai 系の導線は差し替えではなく補助導線としてだけ併記し、archive.org も全文スキャン直リンクではなく書誌ページ扱いに留める。IP / VPN / Cookie など再現条件固定での再試行は調査補助手段であって gate 合否根拠には使わない。現時点で human-gate の選択肢 1 は受領済みで、未確定なのは選択ではなく別 egress を含む対話ブラウザ確認の実行結果である。
 - 2026-06-18 の追加再観測では、このマシンの同一 egress 上で canonical permalink 2 本に対し PowerShell `Invoke-WebRequest`（browser UA / Cookie なし）を再実行し、どちらも `STATUS=403` を再確認した。これは **ローカル観測の再実行**であって、受領済みの選択肢 1 が要求する「別 egress を含む reader reachability 補助確認」まではまだ満たしていない。
 - 次セッションの最初の一手は、受領済みの選択肢 1 の**残り**として、別 egress を含む対話ブラウザで 2 件の canonical permalink を 1 回ずつ開き、`ログイン不要で書誌ページが表示されるか` を reader reachability の補助証跡として handoff に戻すことである。片方だけ失敗したらその 1 件にだけ、2 件とも失敗したら両方に補助導線を併記する。補助候補は Holland = WorldCat `https://search.worldcat.org/oclc/42854623`（1st MIT Press ed, 1992 の OCLC）、Google Books `https://books.google.com/books/about/Adaptation_in_Natural_and_Artificial_Sys.html?id=5EgGaBkwvWcC`（MIT Press 1992/04/29, 232 pages の書誌一致）、Internet Archive lending-scan landing `https://archive.org/details/adaptationinnatu00holl`（Holland / MIT Press / 1992 の貸出スキャン landing）。Koza = WorldCat `https://search.worldcat.org/oclc/26263956`（MIT Press print book, ©1992）、Google Books `https://books.google.com/books/about/Genetic_Programming.html?id=Bhtxo60BV0EC`（John R. Koza / MIT Press / 1992 の書誌一致）、Internet Archive lending-scan landing `https://archive.org/details/geneticprogrammi0000koza`（Koza / MIT Press / 1992 の貸出スキャン landing）。Koza 側の DOI は、この時点では Crossref で未特定・MIT Press title page / WorldCat までは確認済み、という粒度を固定して追記すれば足りる。
-- <!-- QIITA44_GATE_STATE_END -->
+  <!-- QIITA44_GATE_STATE_END -->
 - `qiita43_harness_loop_stack_kamikudaki.md` は ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。
 - #43 en/zh/ko は発行済み限定共有 draft のまま凍結し、residual translation drift が本当に残っているかの最終棚卸しを通してから `ignorePublish: false` を判断する。
