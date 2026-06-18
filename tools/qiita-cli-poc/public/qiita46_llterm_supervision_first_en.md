@@ -115,3 +115,98 @@ Being in the queue is not safety. In practice, what matters is:
 Only when those conditions line up can you honestly say the task will be processed.
 
 In this incident, what broke was less the injected task itself than **the designer's expectation**. I assumed it would be picked up at the next turn boundary. In reality, there was no path that reliably reached that boundary. Once you misread that, self-driving AI is no longer "delegated." It is merely "lost from sight."
+
+### 1-3. One bug led to three more structural holes
+
+This incident did not end with a one-line fix.
+Once I started tracing injection starvation, at least three structural problems came into view in a chain:
+
+1. the collapse of occupancy measurement into `ctx 2549%`
+2. over-review that fired on every rotate
+3. flaky tests exposed the moment I moved an observation point
+
+So "the progress summary never came back" was only the entrance.
+The real subject was the **structure of an unsupervisable self-driving loop** that became visible through that entrance.
+
+In the next chapter, I will look at why human intervention naturally sticks to turn boundaries, and why things break when "stop" and "emergency interruption" are treated as the same mechanism.
+
+---
+
+## 2. Turn boundaries and emergency interrupts must be designed as different things from the start
+
+The first thing this injection-starvation incident made clear was that, in a loop built around headless CLIs, the place where human intervention naturally takes effect is **the turn boundary**.
+
+Once launched, tools like `claude -p --resume` and `codex exec` do not accept fresh input from the outside until that turn ends. You may want to jump in midway and say, "stop that topic for now and prioritize this instead," but in the default setup that message cannot get through. It reaches the system only at the moment the process returns once and begins the next turn.
+
+Looked at from the other side, that means ordinary injections naturally belong in **a queue read at turn boundaries**:
+
+- let the current turn run to completion
+- read the queue at the next boundary
+- make that injected request the highest-priority context of the following turn
+
+That model itself is not bad. The problem begins when you stuff **cases that truly must stop right now** into that same box.
+
+### 2-1. If you implement "stop" and "emergency interrupt" as the same thing, the loop dies
+
+The first tempting move is to reuse `cancel` directly in order to stop the currently running turn. But there is a trap here.
+
+There are two different meanings of "stop":
+
+1. **Permanent stop**
+   You want to stop the loop itself. No further `run_turn` should launch.
+2. **One-shot interruption**
+   You want to cut only the current turn and make the next turn prioritize another injected task.
+
+If you drive both with the same flag, you usually end up with **sticky cancel**. In other words, the flag you raised intending only "stop now" remains alive afterward as well, and **future `run_turn`s stop launching at all**. Reusing that for emergency interrupts is the worst shape: you only wanted to cut the current turn, but you silently killed the whole loop.
+
+That is why `llterm` had to split the two:
+
+- `cancel()`: permanent stop; no later `run_turn` launches
+- `interrupt()`: one-shot interruption; kill the current process, but still allow the next `run_turn`
+
+This distinction is not an implementation quirk. It is a loop-engineering principle.
+
+> **A turn-boundary queue and an immediate interrupt must be designed as different things.**
+
+Ordinary injections say: "respect the current turn, then pick this up at the next boundary."
+Emergency injections say: "cut the current turn if necessary, because the next thing must become top priority now."
+
+Both are "human intervention," but they do not mean the same thing. If you do not separate them, the human's intervention right becomes too coarse and ends up being useless for both purposes.
+
+### 2-2. Emergency injection is powerful. That is exactly why it should not be the default
+
+Another important point is that emergency interrupt is a strong tool.
+
+It is convenient. But convenience is exactly why it must not mean the same thing as an ordinary Send. To interrupt is to discard work and thought that are currently in progress.
+
+For example:
+
+- a turn that is just about to finish applying a patch
+- a turn that is consolidating a long review
+- a turn in the middle of final sign-off
+
+If interrupt is the default in those contexts, a single short human message can destroy an AI-side piece of work that was just reaching coherence. That is not "easy to intervene in." It is "easy to break carelessly."
+
+So in `llterm`, ordinary Send is routed to the turn-boundary queue, while only the urgent path is exposed as an explicit separate action.
+That design is not a cosmetic UX trick. It means **making the cost of intervention visible in the UI**.
+
+> Being able to intervene is not the same as being free to intervene lightly.
+
+If you want self-driving AI to become something you can genuinely entrust work to, then the human side's intervention rights also need to be tiered.
+
+### 2-3. The takeaway from this chapter
+
+The chapter reduces to two points:
+
+- ordinary injection into a headless CLI naturally attaches to the turn boundary first
+- emergency interrupt must be designed as a separate path, or it gets entangled with stop and breaks
+
+In other words, the first thing to design in a self-driving AI loop is not only what the AI should think about. It is **at what granularity the human can intervene**.
+
+### ☕ Break point
+
+The one-line takeaway is enough:
+
+> **Ordinary injection goes to the turn boundary. Emergency injection goes to interrupt. Split those two rails first.**
+
+Next we return to the `ctx 2549%` figure that was breaking that very intervention point. From there, the story flips from "the AI was too smart" to "the human measurement was broken."
