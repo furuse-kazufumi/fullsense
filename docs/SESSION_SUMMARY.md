@@ -10,7 +10,7 @@
 ## 現況
 
 - 今回の作業は **Qiita 草稿 / poster スクリプト / handoff 文書の整合調整**に加え、**llterm 記事シードのスクリーニング**。本命長編は種 #6、単独中編候補は種 #1 と判断した。
-- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` / `a07f0c7` / `0232814` / `bafacdd` / `ac7cb80` / `7200d5d` / `40f580e` / `e2d1887` / `c37d084` として保存済み。
+- 文書バッチは commit `bab1557` / `e4e3968` / `7e7931c` / `0478fa1` / `426be90` / `e942370` / `496ca41` / `fded95b` / `e0b0ee5` / `7ce6ee1` / `31e974e` / `e871b12` / `23998cd` / `ed0159a` / `ed1caab` / `cdcc389` / `2f92ee2` / `7f82f6e` / `85eb5e3` / `521d318` / `9af1bbd` / `7d281c3` / `d2cec49` / `e7dfdef` / `d92192f` / `20afd3e` / `dc70dc0` / `83f510b` / `16f2b52` / `5a4aedf` / `409b628` / `79cb31d` / `a07f0c7` / `0232814` / `bafacdd` / `ac7cb80` / `7200d5d` / `40f580e` / `e2d1887` / `c37d084` / `d50c31f` / `204d9b7` / `119ad03` として保存済み。
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - git push / 新規記事の新規 publish / Qiita Team 書き込みは **未実施**。test については**この差分では未実施**で、前バッチで追加した frontmatter 回帰テストとは切り分ける。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
 - Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`tools/qiita_team_post.py dry-run` では 3 本とも registration-safe だったが、実 Team POST はまだ行っていない。投稿待ち一覧の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。
@@ -28,6 +28,7 @@
 - #43 の `2-6. 起動と実証タスク green-keeper` / `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装` も 4 言語で spot-check し、`desired / actual / drift / repair` の対応、PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、直後の「捨てた数字」節への橋渡しまで日本語正本に追従していることを確認した。
 - 追加 spot-check で、`2-5` honest disclosure 末尾の `2qlJjBwdpYGOVjBkyhhL` 引用が en/zh/ko では本来位置から落ち、第3章直前へ誤配置されていたことを確認した。translations 側は誤配置ブロックを除去し、`2-5` 末尾の本来位置へ戻した。末尾参考の URL 自体は維持している。
 - さらに `1-4` 後半の `AI成長マネジメント` / 4理由 / `First, Break All the Rules` ヘッジ / `アンチパターン` / 第2章への橋渡しも 4 言語で spot-check し、日本語正本に対する新たな factual / translation drift は見当たらないことを確認した。
+- さらに終盤の `なぜ「手綱を握るのは人間」だと言えるのか — 観察ベースの3点` から、H4Pix 引用を挟んだ結語導入まで 4 言語で spot-check し、`常時並列 / 長射程の伏線回収 / 常時稼働の危険予知` の 3 点、`観察された傾向` というヘッジ、`ルール（構造）で縛る` への橋渡しまで日本語正本に追従していることを確認した。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで監査済み、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで監査済み、Team stock 3 本は local draft / dry-run / provenance spot-check まで完了。未解決の外部アクションは human gate 待ちの Qiita Team POST だけ。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
@@ -141,6 +142,7 @@
   - crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に揃い、引用導線の非対称は解消した。
 - その後の再監査で、`2qlJjBwdpYGOVjBkyhhL` は「未同期」ではなく、en/zh/ko で **`2-5` から第3章直前へ位置ずれした状態** だったことが分かった。現在は 3 言語とも `2-5` honest disclosure 末尾の本来位置へ戻し、第3章直前の誤配置は除去済み。
 - 統合レビューで挙がった「翻訳版は blockquote 内 inline link / 正本は blockquote 下 raw URL」という形式差は、今回の修正で生じたものではなく同ファイル内の既存スタイル差でもあるため、actionable な修正指摘としては採らなかった。
+- RAD 研究接地としては、`article_craft_corpus_v2` の narrative architecture / but-therefore rule / seeds of curiosity を再確認し、今回の監査対象も「and then」で列挙せず、章間の因果と橋渡し段の整合を優先して確認した。
 - さらに参考文献節と末尾注記（`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙）も spot-check し、4 言語とも出典束と留保注記が日本語正本に追従していることを確認した。
 - `loop_ledger` の恒久対策は commit `7745f84` で実施済み。`git rm --cached .llterm/loop_ledger.jsonl` と `.gitignore` 追記により、以後は tracked ノイズを発生させず local-only telemetry として保持する。
   - 運用ルール: `git add .` は引き続き避け、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。
