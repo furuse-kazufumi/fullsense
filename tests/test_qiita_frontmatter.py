@@ -80,6 +80,26 @@ def test_qiita_posters_parse_folded_title_and_tags():
         assert body == "body\n"
 
 
+def test_qiita_public_post_real_public_id_uses_public_id_only():
+    assert qpp.real_public_id({"id": "f06ca92ea208c7646fcd"}) is None
+    assert qpp.real_public_id({"public_id": "f06ca92ea208c7646fcd"}) == "f06ca92ea208c7646fcd"
+    assert qpp.real_public_id({"public_id": " none "}) is None
+
+
+def test_qiita_public_post_build_payload_uses_public_private_only():
+    body = "body\n"
+    meta = {"title": "hello", "tags": ["AI"], "private": True}
+    payload = qpp.build_payload(meta, body, force_private=False)
+    assert payload["private"] is False
+
+    meta_with_public_private = {"title": "hello", "tags": ["AI"], "public_private": True}
+    payload = qpp.build_payload(meta_with_public_private, body, force_private=None)
+    assert payload["private"] is True
+
+    forced_payload = qpp.build_payload(meta_with_public_private, body, force_private=True)
+    assert forced_payload["private"] is True
+
+
 def test_convert_to_qiita_cli_parses_folded_title():
     fm_lines, _body = qconv.split_frontmatter(FOLDED_TEXT)
     meta = qconv.parse_frontmatter(fm_lines)

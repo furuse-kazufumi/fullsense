@@ -55,6 +55,7 @@
 - その確認も先回りで済ませ、`tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md` に `public_id:f06ca92ea208c7646fcd` を追記した。これで public poster の dry-run でも `PATCH update public_id=f06ca92ea208c7646fcd` と読める。
 - `qiita_public_post.py` の frontmatter `private:` はこの public poster では payload に使われず、限定共有の切替は CLI の `--private` フラグだけである。`#37` companion の live 更新は一般公開 PATCH を前提に読む。
 - human-gate 後に実行へ進むときは、`https://qiita.com/furuse-kazufumi/items/f06ca92ea208c7646fcd` をブラウザで開き、表示されている live item が **完全版 `6f44575d440a9ebf5228` ではなく short companion 本文**だと目視確認してから `post ... --yes` を打つ。dry-run は network なしなので、この確認を `public_id` 取り違え防止の最終ゲートとする。
+- さらに `tests/test_qiita_frontmatter.py` に最小回帰テストを追加し、`qiita_public_post.py` が **`public_id` を PATCH キーとして使い、`id` だけでは POST create 扱い**になることと、frontmatter `private:` ではなく `public_private` / CLI `--private` だけが公開可視性を切り替えることを固定した。
 - `ac398349ec42e40913f1.md` と `docs/articles/QIITA_SERIES_INDEX.md` の #37 導線も `canonical / companion` 表記へ更新済みで、local index 上では完全版を正本、かみくだき版を companion として扱う。
 - #43 の `2-6. 起動と実証タスク green-keeper` / `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装` も 4 言語で spot-check し、`desired / actual / drift / repair` の対応、PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、直後の「捨てた数字」節への橋渡しまで日本語正本に追従していることを確認した。
 - 追加 spot-check で、`2-5` honest disclosure 末尾の `2qlJjBwdpYGOVjBkyhhL` 引用が en/zh/ko では第3章直前へ誤配置されていたことを確認した。translations 側は誤配置ブロックを除去し、`2-5` 末尾の本来位置へ戻した。末尾参考の URL 自体は維持している。
