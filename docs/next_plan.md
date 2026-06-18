@@ -142,7 +142,7 @@
 ## publish gate 送り
 
 - `qiita44` は参考文献節へ canonical 入口を追加済み。
-  - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME / lexicase の代表文献を最低 1 本ずつ置き、一次導線 URL まで補った。
+  - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME / lexicase の代表文献を最低 1 本ずつ置き、一次導線 URL まで補った。CMA-ES は失効証明書の旧 PDF ではなく arXiv `1604.00772` を使う。
   - 残りは参考節の薄さではなく、本文の言い回しと参考導線の最終突合である。
 - `qiita43_harness_loop_stack_kamikudaki.md` は ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。

@@ -109,9 +109,9 @@
 - commit `bab1557` は **11 ファイル / 1909 insertions / 76 deletions** の doc batch。
 - `NEXT_SESSION.md` には publish gate（外部 URL / 著者帰属 / raw 200 / translation drift / dev.to draft 状態）が残っている。
 - #43 en/zh/ko は発行済み限定共有 draft のまま凍結しており、公開線へ戻す前に residual translation drift が本当に残っているかの最終棚卸しが必要。
-- `qiita44` の参考文献節には canonical 入口を追加済み。
-  - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME の代表文献を最低 1 本ずつ置いた。
-  - 残りは URL を本文へどこまで出すか、lexicase まで足すかの粒度調整。
+- `qiita44` の参考文献節には canonical 入口を追加済みで、2026-06-18 に GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME / lexicase の一次導線 URL まで補強した。
+  - CMA-ES は失効証明書の旧 PDF をやめ、arXiv `1604.00772` の安定導線へ差し替えた。
+  - 残りは参考節の薄さではなく、本文の言い回しと参考導線の最終突合である。
 - `qiita43_harness_loop_stack_kamikudaki.md` には ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし短縮版のため、一次情報の細目は完全版 #43 側へ寄せる方針を維持。
 - `qiita43` en/zh/ko の終盤 hedged note に残っていた RAD 総件数の古い表現は、`47,097 docs` ベースへ更新済み。

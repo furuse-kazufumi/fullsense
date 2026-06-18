@@ -71,7 +71,8 @@ nav_order: 95
   着地しやすい形に寄せた。冒頭には拾い読みガイドも追加済み。
   `llcore` / `lldarwin` という名称は、本文がリンクしている既公開 Qiita 記事名と一致するため維持。
   参考文献節は追加済みで、2026-06-18 に GA / ES / GP / NEAT / novelty search /
-  MAP-Elites / CMA-ME / lexicase の一次導線 URL まで補強した。publish 前の残りは
+  MAP-Elites / CMA-ME / lexicase の一次導線 URL まで補強した。CMA-ES は失効証明書の旧 PDF ではなく
+  arXiv `1604.00772` へ差し替え済み。publish 前の残りは
   参考節そのものの欠落ではなく、本文主張と参考導線の最終突合である。
 - `tools/qiita-cli-poc/public/qiita45_human_ai_dev_incident_patterns.md` を
   新規追加済み。**現在は** `private: true` のローカル草稿で、
@@ -239,7 +240,7 @@ nav_order: 95
    その時点でコマ選定・クレジット・転載許諾 / 利用条件の一次確認をやり直す。
 10. `qiita44` / `qiita45` の末尾 HTML annotation と参考文献節は追加済み。
    `qiita44` は GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME /
-   lexicase の一次導線 URL まで補強済みなので、publish 前は本文の言い回しと
+   lexicase の一次導線 URL まで補強済みで、CMA-ES も arXiv `1604.00772` へ差し替え済みなので、publish 前は本文の言い回しと
    参考導線の最終突合を確認する。
    references 節にある外部 URL 群も、この publish gate の一次確認対象に含める。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で

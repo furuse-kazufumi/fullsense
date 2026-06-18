@@ -672,9 +672,11 @@ GA / ES / GP / QD の名前を全部覚えなくても、
 
 ## 11. 参考文献 / 参考リソース
 
+> 注: ここでの導線は「一次資料へ辿るための代表入口」であり、古典流派では出版社 / 著者公式の書誌ページを含みます。必ずしも全文無料公開を意味しません。
+
 - John H. Holland, [*Adaptation in Natural and Artificial Systems*](https://mitpress.mit.edu/9780262082136/adaptation-in-natural-and-artificial-systems/) (1975 / MIT Press 1992 edition)
   - GA の古典的な出発点。この記事の「固定長遺伝子列を交叉と変異で回す」説明の原点。
-- Nikolaus Hansen, Andreas Ostermeier, ["Completely Derandomized Self-Adaptation in Evolution Strategies"](https://www.cmap.polytechnique.fr/~nikolaus.hansen/cmaartic.pdf) (2001)
+- Nikolaus Hansen, ["The CMA Evolution Strategy: A Tutorial"](https://arxiv.org/abs/1604.00772) (2016)
   - ES / CMA-ES 系の代表的な入口。連続最適化で「変異分布まで更新する」感覚を掴みやすい。
 - John R. Koza, [*Genetic Programming: On the Programming of Computers by Means of Natural Selection*](https://mitpress.mit.edu/9780262111706/genetic-programming/) (1992)
   - GP の古典。式やプログラム木そのものを進化させる発想の出発点。
@@ -684,7 +686,7 @@ GA / ES / GP / QD の名前を全部覚えなくても、
   - novelty search の代表的な入口。性能だけでなく「新しさ」を報酬にする理由が分かりやすい。
 - Jean-Baptiste Mouret, Jeff Clune, ["Illuminating search spaces by mapping elites"](https://arxiv.org/abs/1504.04909) (2015)
   - MAP-Elites の代表的な原典。この記事の「棚に分けて elite を残す」説明に対応。
-- William La Cava, Thomas Helmuth, Lee Spector, Jason H. Moore, ["A Probabilistic and Multi-Objective Analysis of Lexicase Selection and Epsilon-Lexicase Selection"](https://arxiv.org/abs/1709.05394) (2019)
+- William La Cava, Thomas Helmuth, Lee Spector, Jason H. Moore, ["A Probabilistic and Multi-Objective Analysis of Lexicase Selection and Epsilon-Lexicase Selection"](https://arxiv.org/abs/1709.05394) (2017 preprint / 2019 journal)
   - lexicase / ε-lexicase の入口。平均点でなく「特定ケースの specialist を残す」仕組みを、Pareto front 的にどう読むかまで追える。
 - Matthew C. Fontaine, Julian Togelius, Stefanos Nikolaidis, Amy K. Hoover, ["Covariance Matrix Adaptation for the Rapid Illumination of Behavior Space"](https://arxiv.org/abs/1912.02400) (GECCO 2020)
   - CMA-ME 系の入口。MAP-Elites と CMA-ES をどう接続するかを追うときの補助線。
