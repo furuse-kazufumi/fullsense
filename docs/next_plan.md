@@ -142,8 +142,8 @@
 ## publish gate 送り
 
 - `qiita44` は参考文献節へ canonical 入口を追加済み。
-  - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME の代表文献を最低 1 本ずつ置いた。
-  - 残りは URL 明記をどこまで入れるか、lexicase まで補うかの粒度調整。
+  - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME / lexicase の代表文献を最低 1 本ずつ置き、一次導線 URL まで補った。
+  - 残りは参考節の薄さではなく、本文の言い回しと参考導線の最終突合である。
 - `qiita43_harness_loop_stack_kamikudaki.md` は ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。
 - #43 en/zh/ko は発行済み限定共有 draft のまま凍結し、residual translation drift が本当に残っているかの最終棚卸しを通してから `ignorePublish: false` を判断する。
@@ -193,7 +193,7 @@
 ## 次回の開始メモ
 
 - 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
-- publish gate は着手済みで、`qiita44` の参考文献補強は RAD 接地後に着手した。
+- publish gate は着手済みで、`qiita44` の参考文献補強は RAD 接地後に反映済み。
 - `kamikudaki` の ☕ / 参考文献は最小補強まで完了した。
 - #43 en/zh/ko では、終盤 hedged note の RAD 件数を `47,097 docs` へ更新済み。
 - #43 JA 正本の hedge note も `47,097 docs` ベースへ更新済み。

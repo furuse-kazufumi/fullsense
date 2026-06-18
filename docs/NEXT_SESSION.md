@@ -70,8 +70,9 @@ nav_order: 95
   あわせて「最初の 1 本を実装するなら」節を追加し、入門者が次の一歩へ
   着地しやすい形に寄せた。冒頭には拾い読みガイドも追加済み。
   `llcore` / `lldarwin` という名称は、本文がリンクしている既公開 Qiita 記事名と一致するため維持。
-  参考文献節は追加済みだが、現状は外部系譜の系統名整理が中心で、publish 前には
-  GA / ES / GP / MAP-Elites など各流派の一次文献補強が必要。
+  参考文献節は追加済みで、2026-06-18 に GA / ES / GP / NEAT / novelty search /
+  MAP-Elites / CMA-ME / lexicase の一次導線 URL まで補強した。publish 前の残りは
+  参考節そのものの欠落ではなく、本文主張と参考導線の最終突合である。
 - `tools/qiita-cli-poc/public/qiita45_human_ai_dev_incident_patterns.md` を
   新規追加済み。**現在は** `private: true` のローカル草稿で、
   人間 + AI 開発の実務教訓を **症状 / 真因 / 対策 / 残した再開導線** 形式で共有する記事。
@@ -237,11 +238,12 @@ nav_order: 95
    `qiita44` はバス江コマをいったん本文から外したので、再投入する場合だけ
    その時点でコマ選定・クレジット・転載許諾 / 利用条件の一次確認をやり直す。
 10. `qiita44` / `qiita45` の末尾 HTML annotation と参考文献節は追加済み。
-   publish 前は一次確認と出典 URL / 著者帰属の整備を残タスクとして確認する。
+   `qiita44` は GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME /
+   lexicase の一次導線 URL まで補強済みなので、publish 前は本文の言い回しと
+   参考導線の最終突合を確認する。
    references 節にある外部 URL 群も、この publish gate の一次確認対象に含める。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で
    annotation / 参考導線 / 参考文献テンプレの有無を確認する。
-   `qiita44` は参考文献節がまだ薄いので、各流派の一次文献を最低 1 本ずつ補う。
 11. 草稿を publish へ回すときは、対象記事の `ignorePublish: true` を外し、
     公開方針に合わせて `private: true/false` を決める。
     この 2 つは `qiita-cli-poc` 草稿ラインで使っているローカル運用フィールド

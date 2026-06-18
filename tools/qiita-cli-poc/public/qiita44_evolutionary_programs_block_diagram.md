@@ -672,19 +672,21 @@ GA / ES / GP / QD の名前を全部覚えなくても、
 
 ## 11. 参考文献 / 参考リソース
 
-- John H. Holland, *Adaptation in Natural and Artificial Systems* (1975)
+- John H. Holland, [*Adaptation in Natural and Artificial Systems*](https://mitpress.mit.edu/9780262082136/adaptation-in-natural-and-artificial-systems/) (1975 / MIT Press 1992 edition)
   - GA の古典的な出発点。この記事の「固定長遺伝子列を交叉と変異で回す」説明の原点。
-- Nikolaus Hansen, Andreas Ostermeier, "Completely Derandomized Self-Adaptation in Evolution Strategies" (2001)
+- Nikolaus Hansen, Andreas Ostermeier, ["Completely Derandomized Self-Adaptation in Evolution Strategies"](https://www.cmap.polytechnique.fr/~nikolaus.hansen/cmaartic.pdf) (2001)
   - ES / CMA-ES 系の代表的な入口。連続最適化で「変異分布まで更新する」感覚を掴みやすい。
-- John R. Koza, *Genetic Programming: On the Programming of Computers by Means of Natural Selection* (1992)
+- John R. Koza, [*Genetic Programming: On the Programming of Computers by Means of Natural Selection*](https://mitpress.mit.edu/9780262111706/genetic-programming/) (1992)
   - GP の古典。式やプログラム木そのものを進化させる発想の出発点。
-- Kenneth O. Stanley, Risto Miikkulainen, "Evolving Neural Networks through Augmenting Topologies" (2002)
+- Kenneth O. Stanley, Risto Miikkulainen, ["Evolving Neural Networks through Augmenting Topologies"](https://nn.cs.utexas.edu/?stanley%3Aec02=) (2002)
   - NEAT の代表的な原典。重みだけでなく構造も進化させる流れの入口。
-- Joel Lehman, Kenneth O. Stanley, "Abandoning Objectives: Evolution through the Search for Novelty Alone" (2011)
+- Joel Lehman, Kenneth O. Stanley, ["Abandoning Objectives: Evolution through the Search for Novelty Alone"](https://www.cs.swarthmore.edu/~meeden/DevelopmentalRobotics/lehman_ecj11.pdf) (2011)
   - novelty search の代表的な入口。性能だけでなく「新しさ」を報酬にする理由が分かりやすい。
-- Jean-Baptiste Mouret, Jeff Clune, "Illuminating search spaces by mapping elites" (2015)
+- Jean-Baptiste Mouret, Jeff Clune, ["Illuminating search spaces by mapping elites"](https://arxiv.org/abs/1504.04909) (2015)
   - MAP-Elites の代表的な原典。この記事の「棚に分けて elite を残す」説明に対応。
-- Matthew C. Fontaine, Julian Togelius, Stefanos Nikolaidis, Amy K. Hoover, "Covariance Matrix Adaptation for the Rapid Illumination of Behavior Space" (GECCO 2020, arXiv:1912.02400)
+- William La Cava, Thomas Helmuth, Lee Spector, Jason H. Moore, ["A Probabilistic and Multi-Objective Analysis of Lexicase Selection and Epsilon-Lexicase Selection"](https://arxiv.org/abs/1709.05394) (2019)
+  - lexicase / ε-lexicase の入口。平均点でなく「特定ケースの specialist を残す」仕組みを、Pareto front 的にどう読むかまで追える。
+- Matthew C. Fontaine, Julian Togelius, Stefanos Nikolaidis, Amy K. Hoover, ["Covariance Matrix Adaptation for the Rapid Illumination of Behavior Space"](https://arxiv.org/abs/1912.02400) (GECCO 2020)
   - CMA-ME 系の入口。MAP-Elites と CMA-ES をどう接続するかを追うときの補助線。
 - RAD コーパスでの再確認メモ:
   - `evolutionary_computation_corpus_v2` と `evolution_corpus_v2` では、QD / novelty / CMA-ME / LLM 併用進化が厚く、この記事の差別化軸は新規手法提案ではなく**流派の位置関係を初心者向けに 1 本へ束ねること**にある。
