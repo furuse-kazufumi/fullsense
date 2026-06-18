@@ -244,7 +244,7 @@ nav_order: 95
 10. `qiita44` / `qiita45` の末尾 HTML annotation と参考文献節は追加済み。
    `qiita44` は GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME /
    lexicase の一次導線 URL まで補強済みで、CMA-ES も arXiv `1604.00772` へ差し替え済みなので、publish 前は本文の言い回しと
-   参考導線の最終突合を確認する。残タスクは MIT Press 2 件の実ブラウザ到達確認と、本文の主張強度の最終微調整だけでよい。
+   参考導線の最終突合を確認する。残タスクは MIT Press 2 件の到達性確認と、本文の主張強度の最終微調整だけでよい。2026-06-18 時点では browser UA 付き GET でも 403 のため、実ブラウザ確認か別の公式導線への差し替えを publish 前に決める。
    references 節にある外部 URL 群も、この publish gate の一次確認対象に含める。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で
    annotation / 参考導線 / 参考文献テンプレの有無を確認する。

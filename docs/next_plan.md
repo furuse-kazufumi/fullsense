@@ -145,7 +145,7 @@
   - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME / lexicase の代表文献を最低 1 本ずつ置き、一次導線 URL まで補った。CMA-ES は失効証明書の旧 PDF ではなく arXiv `1604.00772` を使う。
   - 残りは参考節の薄さではなく、本文の言い回しと参考導線の最終突合である。
   - 本文と参考導線の spot-check では、GA = 固定長遺伝子列、ES / CMA-ES = 変異分布更新、GP = 式 / プログラム木進化、NEAT = 構造進化、novelty / MAP-Elites / lexicase = 「何を残すか」の分岐、という説明までは整合していた。
-  - publish 前の残タスクは MIT Press 2 件の実ブラウザ到達確認と、主張強度の最終微調整だけである。
+  - publish 前の残タスクは MIT Press 2 件の到達性確認と、主張強度の最終微調整だけである。2026-06-18 時点では browser UA 付き GET でも 403 のため、実ブラウザ確認か別の公式導線への差し替えを要する。
 - `qiita43_harness_loop_stack_kamikudaki.md` は ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。
 - #43 en/zh/ko は発行済み限定共有 draft のまま凍結し、residual translation drift が本当に残っているかの最終棚卸しを通してから `ignorePublish: false` を判断する。
