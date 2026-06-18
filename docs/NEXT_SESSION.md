@@ -126,8 +126,8 @@ nav_order: 95
    title・source anchor・`private: true`・`ignorePublish: true` も相互に矛盾していなかった。
    2026-06-18 に human-gate 後の Team POST まで完了し、item id は
    `6f67e54e538c10b8f1c3` / `b35b429dc6dc1fde207a` / `6fe79ab04443f7654eca`。
-   ただし API GET では 3 本とも `private:false` で返ったため、可視範囲の絞り込みや rollback が必要なら、
-   以後は別の human-gate 外部アクションとして扱う。
+   ただし API GET では 3 本とも `private:false` で返ったため、これは想定より広い可視範囲で着地しうる失敗教訓として扱う。
+   可視範囲の絞り込みや rollback が必要なら、以後は別の human-gate 外部アクションとして扱う。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
    en/zh/ko の translation sync note は本文から外してあり、publish へ進めるときは

@@ -10,12 +10,13 @@
 - 現在の worktree は clean。deindex は commit `7745f84`、記事シードのスクリーニングは commit `b4d1241` で確定済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済みで、以後は local-only telemetry として `.gitignore` 管理へ移行する。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。ただし最新レンジ `855ffae..c6f32d6` の 2 commit は `docs/SESSION_SUMMARY.md` / `docs/next_plan.md` のみで、`docs/NEXT_SESSION.md` の直近更新は `855ffae`（同レンジの除外端）である。
-- git push は local-first 運用のため未実施のまま据え置いており、human-gate を要する外部アクション集合には数えない。新規記事の新規 publish も未実施で、既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH だけ実施済み。
+- git push は local-first 運用のため未実施のまま据え置いており、human-gate を要する外部アクション集合には数えない。一般 Qiita への新規 publish は未実施だが、Qiita Team stock 3 本の POST は 2026-06-18 に完了している。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH だけ実施済み。
 - Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加し、2026-06-18 に Qiita Team `fullsense` へ POST 済み。item id は `6f67e54e538c10b8f1c3` / `b35b429dc6dc1fde207a` / `6fe79ab04443f7654eca` で、追跡先は `docs/articles/2026-06-18/team_stock_queue.md`。
 - Team stock の公開順・human-gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。投稿待ち一覧の正本は `docs/articles/2026-06-18/team_stock_queue.md`。
 - Team stock 正本 2 枚には preflight runbook / 実行コマンド / rollback notes / POST 後の記録欄まで追加済み。通常 POST はその 2 枚で回せるが、rollback 実施時のみ handoff にも 1 行転記する。
 - 2026-06-18 の human-gate 回答では「3 本すべて POSTする」を採用した。実行順は publish plan の推奨どおり `team_stock_semantic_governance.md` → `team_stock_llm_wiki_anti_circulation.md` → `team_stock_ctx2549_postmortem.md` とし、POST 前に `verify` と 3 本の `dry-run` を再実行する。POST 後は `team_stock_queue.md` の `status / item id / Team URL / visible range memo / rollback needed / note` を即時更新し、可視範囲が想定より広い場合は rollback runbook に従って差し替え判断へ移る。
 - 実行結果として、3 本とも 201 Created で item 作成に成功した。POST 後の API GET では 3 本とも `private:false` で返っており、frontmatter `private:true` は Team create 後の可視範囲を保証しなかった。queue 正本には item id / URL / visible range memo を記録済みで、rollback が必要なら以後は別の human-gate 外部アクションとして扱う。
+- これは単なる記録ではなく、`private:true` / `ignorePublish:true` を安全柵だと誤信したまま控えツールを使うと、想定より広い可視範囲で着地しうるという失敗教訓でもある。以後の Team poster 利用時は、この露出可能性を blocker として先に明示する。
 - Team stock 3 本は source article と大筋整合していることを spot-check 済み。対応は `team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` = #43、`team_stock_ctx2549_postmortem.md` = #46。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
 - Team stock 3 本には `この記事で話さないこと` も追加し、難所の切り出し範囲を local draft の段階で固定した。
 - Team stock 3 本の source anchor も明記し、#43 `2-2. loop engineering にもセキュリティの顔がある` / #43 `3-2. LLM Wiki — 「育つ知識」のパターン` / #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` のどこから切り出したかを queue で追えるようにした。

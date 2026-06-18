@@ -79,8 +79,18 @@
 - 最低限、POST 直後に返る `id` を控える
 - rollback は delete 前提ではなく、まず Team UI または API で body / title を差し替えられるかを確認する
 - `private` の変更で可視範囲を狭められるかは未検証なので、rollback の主手段としては使わない
-- 可視範囲が想定より広い場合は、即座に Team UI または API で非表示化 / 差し替えを行う
+- 可視範囲が想定より広い場合は、その事実を blocker として queue / handoff に即記録し、続く非表示化 / 差し替えは別の human-gate 外部アクションとして切り出す
 - rollback 実施時は、理由と結果を `team_stock_queue.md` と handoff に 1 行残す
+
+## 2026-06-18 実行結果メモ
+
+- 3 本とも `post --yes` は 201 Created で成功した
+- 返却 item id:
+  - `6f67e54e538c10b8f1c3`
+  - `b35b429dc6dc1fde207a`
+  - `6fe79ab04443f7654eca`
+- POST 後の API GET では 3 本とも `private:false` で返った
+- したがって「frontmatter `private:true` でも Team 上では可視範囲が広い可能性がある」ことが現行 blocker であり、rollback / visibility tightening は別の human-gate 外部アクションとして扱う
 
 ## POST 後の記録先
 

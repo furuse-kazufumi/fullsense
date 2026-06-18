@@ -6,7 +6,7 @@ tags:
   - KnowledgeGraph
   - Agent
   - ClaudeCode
-private: true
+private: false
 slide: false
 ignorePublish: true
 id: b35b429dc6dc1fde207a
@@ -14,7 +14,7 @@ id: b35b429dc6dc1fde207a
 # LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」
 
 > **この草稿の位置づけ**
-> #43 の `3-2. LLM Wiki — 「育つ知識」のパターン` から切り出した Team stock 用の source-only draft です。公開前提ではなく、難所の論点を先に保存するための下書きです。
+> #43 の `3-2. LLM Wiki — 「育つ知識」のパターン` から切り出した Team stock 用の source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `b35b429dc6dc1fde207a`、API GET では `private:false` を返しています。local source では accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
 
 > **前提**
 > RAG より一段先の「育つ知識基盤」を考えていて、要約・概念ページ・相互リンクを自前で持ちたい文脈を前提にします。

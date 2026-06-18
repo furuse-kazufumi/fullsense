@@ -35,7 +35,8 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 1. `tools/qiita_team_post.py` は `ignorePublish` を読まず、`post --yes` でそのまま外部 POST した
 2. 2026-06-18 の API GET では 3 本とも `private:false` で返っており、frontmatter `private:true` は Team create 後の可視範囲を保証しなかった
-3. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
+3. local source は accidental な `qiita publish` を避けるため `ignorePublish: true` を残している。このフラグは「未投稿」を意味せず、Team poster 専用の source freeze として扱う
+4. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
 
 ## 状態更新ルール
 
