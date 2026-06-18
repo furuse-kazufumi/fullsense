@@ -10,7 +10,7 @@
 - 現在の worktree は clean。deindex は commit `7745f84`、記事シードのスクリーニングは commit `b4d1241` で確定済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済みで、以後は local-only telemetry として `.gitignore` 管理へ移行する。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
-- git push / 新規記事の新規 publish は未実施。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
+- git push は local-first 運用のため未実施のまま据え置いており、human-gate を要する外部アクション集合には数えない。新規記事の新規 publish も未実施で、既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH だけ実施済み。
 - Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`py -3.11 tools/qiita_team_post.py dry-run ...` では 3 本とも registration-safe だが、実際の Qiita Team POST は未実施。追跡先は `docs/articles/2026-06-18/team_stock_queue.md`。
 - Team stock の公開順・human gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。投稿待ち一覧の正本は `docs/articles/2026-06-18/team_stock_queue.md`。
 - Team stock 正本 2 枚には preflight runbook / 実行コマンド / rollback notes / POST 後の記録欄まで追加済み。通常 POST はその 2 枚で回せるが、rollback 実施時のみ handoff にも 1 行転記する。
