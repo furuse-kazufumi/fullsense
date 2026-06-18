@@ -143,12 +143,12 @@
 
 - `qiita44` は参考文献節へ canonical 入口を追加済み。
   - GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME / lexicase の代表文献を最低 1 本ずつ置き、一次導線 URL まで補った。CMA-ES は失効証明書の旧 PDF ではなく arXiv `1604.00772` を使う。
-  - 残りは参考節の薄さではなく、本文の言い回しと参考導線の最終突合である。
+  - 本文の言い回しと参考導線の最終突合は完了済みで、残るのは MIT Press 2 件の到達性 gate だけである。
   - 本文と参考導線の spot-check では、GA = 固定長遺伝子列、ES / CMA-ES = 変異分布更新、GP = 式 / プログラム木進化、NEAT = 構造進化、novelty / MAP-Elites / lexicase = 「何を残すか」の分岐、という説明までは整合していた。
   - claim-strength pass では、論旨を変えずに過強な断定を 3 箇所だけ弱めた。`淘汰器が壊れていたら進化はだいたい壊れる` は `探索は鈍りやすい` へ、`長期でだいたい飽和か monoculture に寄る` は `寄りやすい` へ、`高次元 descriptor では cell の大半が空になる` は `空になりがち` へ調整済み。
   - 追加の最終微調整では、断定トーンが先行していた 4 箇所も弱めた。`これはかなり重要です` は `ここは見落としやすい点です`、`これは本当に重要です` は `ここは切り分けを誤りやすい点です`、`かなりクリア` は `だいぶクリア`、結語の `壊れやすい` は `詰まりやすい` へ調整済み。
   - Holland / Koza の MIT Press permalink は本文と handoff で一致済み。現時点で `qiita44` に残る論点は MIT Press 2 件の到達性 gate である。
-  - (1) 到達性 gate については、2026-06-18 時点で記事側の Holland 導線を現行の MIT Press permalink `https://mitpress.mit.edu/9780262581110/adaptation-in-natural-and-artificial-systems/` へ、Koza 導線を `https://mitpress.mit.edu/9780262527910/genetic-programming/` へ更新したうえでも、両 URL に対し、PowerShell `Invoke-WebRequest` + UA `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36` + Cookie なしでも 403 だった。さらに代替公式導線として、DOI `https://doi.org/10.7551/mitpress/1090.001.0001` は 302 で `https://direct.mit.edu/books/book/2574/Adaptation-in-Natural-and-Artificial-SystemsAn` へ解決され、最終到達先 `direct.mit.edu` が同条件で 403 だった。`https://direct.mit.edu/books/book/2574/Adaptation-in-Natural-and-Artificial-SystemsAn` も同条件で 403 だった。原因は bot 判定だけでなく、購読 / 認証 / 地域制限を含む複合要因の可能性がある。IP / ISP / VPN 状態まではこの時点で未固定なので、残る主な選択肢は「再現条件を固定して再試行する」「実ブラウザ確認のうえ canonical permalink を維持する」「別の公式導線へ差し替える」である。
+  - 到達性 gate については、2026-06-18 時点で記事側の Holland 導線を現行の MIT Press permalink `https://mitpress.mit.edu/9780262581110/adaptation-in-natural-and-artificial-systems/` へ、Koza 導線を `https://mitpress.mit.edu/9780262527910/genetic-programming/` へ更新したうえでも、両 URL に対し、PowerShell `Invoke-WebRequest` + UA `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36` + Cookie なしでも 403 だった。さらに代替公式導線として、DOI `https://doi.org/10.7551/mitpress/1090.001.0001` は 302 で `https://direct.mit.edu/books/book/2574/Adaptation-in-Natural-and-Artificial-SystemsAn` へ解決され、最終到達先 `direct.mit.edu` が同条件で 403 だった。`https://direct.mit.edu/books/book/2574/Adaptation-in-Natural-and-Artificial-SystemsAn` も同条件で 403 だった。原因は bot 判定だけでなく、購読 / 認証 / 地域制限を含む複合要因の可能性がある。IP / ISP / VPN 状態まではこの時点で未固定なので、残る主な選択肢は「再現条件を固定して再試行する」「実ブラウザ確認のうえ canonical permalink を維持する」「別の公式導線へ差し替える」である。
 - `qiita43_harness_loop_stack_kamikudaki.md` は ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。
 - #43 en/zh/ko は発行済み限定共有 draft のまま凍結し、residual translation drift が本当に残っているかの最終棚卸しを通してから `ignorePublish: false` を判断する。
