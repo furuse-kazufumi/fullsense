@@ -36,6 +36,7 @@
 - さらに最終棚卸しとして、導入 → 第0章、第0章末 → 第1章頭、`/goal` 節 → 独立 honest disclosure、独立 honest disclosure → 第3章頭、`3-2. LLM Wiki` → `3-3. RAPTOR` の局所接続も 4 言語で spot-check した。一次情報に錨を下ろす作法から用語地図へ入る導入、`実務ブログも査読論文も鵜呑みにしない` から harness engineering の命名確認へ移る接続、`mystery graph` から `捨てた数字` 検証へ降りる橋、`無知の知` から knowledge stack へ移る着地、thought circulation 警告から RAPTOR の evidence ladder へ渡す流れまで、日本語正本に対する新たな factual / translation drift は見つかっていない。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで監査済み、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで監査済み、Team stock 3 本は local draft / dry-run / provenance spot-check まで完了。未解決の外部アクションは、human gate を要する #46 の publish 判断、Qiita Team POST、dev.to 英語版 update / publish 判断である。
 - dev.to 英語版の残件定義も実ファイルと一致している。`tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.devto.json` は `id: 3915834` / `published: false` / dev.to URL 付きの sidecar として残っており、公開前に human gate を要する draft 状態である。
+- `NEXT_SESSION.md` の旧 operator queue 見出しは `old context / current scope outside (2026-06-12 stale)` へ更新し、asciinema 録画 / production 起動 / credential 復旧は **ローカル operator 作業の旧メモ**であって、現行の human-gate 外部書き込みアクション 3 件とは別カテゴリ・現行優先ではないことを明記した。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
@@ -168,6 +169,7 @@
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
 4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human gate を伴う publish 判断が中心になった。
 5. 難しい論点の Team stock は local draft 化まで完了した。次の外部アクションは、3 本 (`Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem) を実際に Qiita Team へ POST するかの human gate 判断になる。回答が来るまでは queue / publish plan / local draft の整合維持だけを行う。
+6. `NEXT_SESSION.md` の 2026-06-12 旧 operator セクションは stale 扱いを明示済みなので、asciinema 録画 / production 起動 / credential 復旧は「現行 3 件の human-gate 外部アクション」と混同しない。現行の残件集合は #46 publish 判断 / Qiita Team POST / dev.to 英語版 update・publish 判断で固定して読む。
 
 - 翻訳 QA:
   - #46 多言語同期は、JA 原文を基準に各節を逐次照合し、`ctx 2549%` / `turn boundary` / `interrupt` / `block point` などの用語を訳語固定しながら反映している。

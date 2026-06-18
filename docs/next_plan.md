@@ -34,6 +34,7 @@
 - さらに最終棚卸しとして、導入 → 第0章、第0章末 → 第1章頭、`/goal` 節 → 独立 honest disclosure、独立 honest disclosure → 第3章頭、`3-2. LLM Wiki` → `3-3. RAPTOR` の局所接続も 4 言語で spot-check した。一次情報に錨を下ろす作法から用語地図へ入る導入、`実務ブログも査読論文も鵜呑みにしない` から harness engineering の命名確認へ移る接続、`mystery graph` から `捨てた数字` 検証へ降りる橋、`無知の知` から knowledge stack へ移る着地、thought circulation 警告から RAPTOR の evidence ladder へ渡す流れまで、日本語正本に対する新たな factual / translation drift は見つかっていない。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで、Team stock 3 本は local draft / dry-run / provenance spot-check まで監査済み。未解決の外部アクションは、human gate を要する #46 の publish 判断、Qiita Team POST、dev.to 英語版 update / publish 判断である。
 - dev.to 英語版の残件定義も実ファイルと一致している。`tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.devto.json` は `id: 3915834` / `published: false` / dev.to URL 付きの sidecar として残っており、公開前に human gate を要する draft 状態である。
+- `NEXT_SESSION.md` の旧 operator queue 見出しは `old context / current scope outside (2026-06-12 stale)` へ更新済みで、asciinema 録画 / production 起動 / credential 復旧は **ローカル operator 作業の旧メモ**として現行スコープ外に退避した。現行の human-gate 外部アクション 3 件とは別カテゴリで読む。
 
 ## 次の具体的な一手
 
@@ -48,8 +49,8 @@
 9. バス江コマを比喩に使う場合は、一次確認できたセリフと筆者解釈を混ぜない。たとえば `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は「聖書の引用みたいになってる…!」までは出典化できるが、`honest disclosure` を毎回持ち出す感じ等は筆者比喩として明示する。
 10. #46 の publish gate 状態は項目 `4` を正本として追う。JA 正本の HTML annotation は完了済み。翻訳版の最終見直しと用語 drift 監査は一巡し、新たな重大差分は未検出。残る外部アクションは human gate を伴う publish 判断。
 11. 難しい論点は Team 向けに個別 stock する。現時点での local draft 候補は `Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem の 3 本。投稿待ち一覧は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human gate 条件・rollback 注意は `docs/articles/2026-06-18/team_stock_publish_plan.md` を正本とする。実 POST は引き続き human gate 回答待ちで、回答が来るまでは queue / publish plan / local draft の整合維持だけを行う。
-
-12. 翻訳 QA は、JA 原文と各節を逐次照合し、専門用語 (`ctx 2549%` / `turn boundary` / `interrupt` / `sign-off` / `block point`) を固定しながら反映する。
+12. `NEXT_SESSION.md` の 2026-06-12 旧 operator セクションは stale 扱いを明示済みなので、asciinema 録画 / production 起動 / credential 復旧は現行優先の残件に数えない。外部アクション集合は #46 publish 判断 / Qiita Team POST / dev.to 英語版 update・publish 判断の 3 件だけを正として読む。
+13. 翻訳 QA は、JA 原文と各節を逐次照合し、専門用語 (`ctx 2549%` / `turn boundary` / `interrupt` / `sign-off` / `block point`) を固定しながら反映する。
    - ko 版では、第5章の `운영 환경` / `본 처리` も最終見直しで固定済み。
    - zh 版では、`算定内情` / `饥饿` も第3章〜第7章で統一済み。
    - zh 版では、第8章末尾の `故障处理记录` まで含めて日本語混在を解消済み。
