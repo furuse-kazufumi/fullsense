@@ -15,6 +15,7 @@ nav_order: 95
 > 再開時は、まず会話上位の system / developer / `AGENTS.md` 指示があればそちらを優先し、
 > そのうえで repo 内の handoff 正本は本ファイルを使い、
 > `docs/articles/IDEAS_2026_06_15_harness_loop_raptor.md` は補足・背景メモとして参照する。
+> ただし ideation 段階の着想メモで、旧フレーミングや旧 naming を含みうる。現行の語彙・位置づけは本ファイルと canonical handoff 2 正本を正本とする。
 > 環境依存の個人メモ類は、あっても参考扱いに留め、再開判断の正本には含めない。
 > `docs/SESSION_SUMMARY.md` は Stop hook が自動生成するスナップショットとして参照可。
 > ただしコミット時点で更新が止まっていることもあるため、最新ターンの現況とみなして鵜呑みにはしない。
