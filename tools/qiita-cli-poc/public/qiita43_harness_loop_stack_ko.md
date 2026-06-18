@@ -447,7 +447,7 @@ Claude Code 공식의 `/goal` 명령이, 이것의 교과서적인 구현이다.
 그럼 하네스에 정말 위력이 없는가? 그렇지 않다. **"모델을 고정하고, 주변 런타임(하네스)만 바꾸면 큰 성능 차가 난다"는 것 자체는, 다른 소스로 뒷받침이 있다.** 다만 이하의 수치는, 내가 따라갈 수 있었던 것은 이차 정보의 인용까지이고, 일차의 계측 출처·계측 조건까지는 거슬러 올라가지 못했다. 그래서 전부 "**~에 의한 보고(이차 인용)**"로 다룬다.
 
 - LangChain이, 코딩 에이전트를 Terminal-Bench 2.0에서 **52.8% → 66.5%**(동일 모델, 하네스 재구축만)로 늘렸다, 는 보고(**이차 인용·계측 조건 미확인**).
-- 동일 작업에서 **GPT-5.5**로 여겨지는 모델이, 어느 하네스에서 약 61%, 다른 하네스에서 약 87%였다, 는 비교도 유통되고 있지만, **모델명 "GPT-5.5" 자체가 내 지식의 범위 밖이라 요검증**, 게다가 수치도 이차뿐이므로, 이 글에서는 구체값을 논증 재료로 쓰지 않는다("하네스 차이로 크게 움직이는 예로 이야기되고 있다" 정도로 그친다).
+- 동일 작업에서 **GPT-5.5**가 어느 하네스에서 약 61%, 다른 하네스에서 약 87%였다는 비교도 유통되고 있다. **`GPT-5.5`라는 모델명 자체는 이제 OpenAI 공식 발표와 릴리스 노트로 실재를 확인할 수 있다.** 다만 그 비교값의 **일차 계측 출처·계측 조건은 여전히 추적하지 못했고, 수치 자체도 이차 정보에 머물러 있으므로**, 이 글에서는 구체값을 논증 재료로 쓰지 않는다("하네스 차이로 크게 움직이는 예로 이야기되고 있다" 정도로 그친다).
 - 전용 벤치 *Harness-Bench*([arXiv:2605.27922](https://arxiv.org/abs/2605.27922))는 실재.
 - 관련 논문 *From Model Scaling to System Scaling: Scaling the Harness in Agentic AI*([arXiv:2605.26112](https://arxiv.org/abs/2605.26112), 제1저자 Shangding Gu 씨, 2026-05-25)도 실재. 다만 **이 초록에도 "10×"의 수치는 없고**, 저자의 소속은 **abstract 페이지에 기재가 없으므로**, 자주 병기되는 "UC Berkeley"는 **이차 정보**로 다룬다(본 글 집필 시에 abstract 페이지를 재확인).
 
@@ -671,6 +671,7 @@ suspicion(의심)
 - Data Science Dojo, *Agentic Loops Explained: From ReAct to Loop Engineering (2026 Guide)*(2026-06-09): https://datasciencedojo.com/blog/agentic-loops-explained-from-react-to-loop-engineering-2026-guide/
 - Filip Verloy, *From Prompt Engineering to Loop Engineering*(2026-06, "scaling risk at machine speed"): https://medium.com/@filipv_74515/from-prompt-engineering-to-loop-engineering-why-the-agent-era-demands-a-new-security-paradigm-816385040e3d
 - Claude Code 공식 docs, `/goal`(v2.1.139 이후, Haiku 판정의 자율 반복. 버전 요건과 Haiku를 일차 확인): https://code.claude.com/docs/en/goal
+- OpenAI, *Introducing GPT-5.5*(2026-04-23. GPT-5.5 / GPT-5.5 Pro의 실재와 API rollout 업데이트를 일차 확인): https://openai.com/index/introducing-gpt-5-5/
 - arXiv:2605.18747 *Code as Agent Harness*(Xuying Ning 외 총 42명, 2026-05-18. 본 글 집필 시에 재확인. ※"Bölük", "10×"는 모두 본 논문에 **존재하지 않는다**): https://arxiv.org/abs/2605.18747
 - arXiv:2605.26112 *From Model Scaling to System Scaling: Scaling the Harness in Agentic AI*(제1저자 Shangding Gu, 2026-05-25. 소속은 abstract 페이지 미기재 = "UC Berkeley"는 이차 정보): https://arxiv.org/abs/2605.26112
 - arXiv:2605.27922 *Harness-Bench*: https://arxiv.org/abs/2605.27922
@@ -691,4 +692,4 @@ suspicion(의심)
 - "반신×반의": https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 - "사회라는 건 이런 것이기도 한가... 룰이 보이기 시작했어...": https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
-> ※ 본문 중에서 헤지한 "이차 정보뿐 / 일차 미확인"의 주요 항목은 다음과 같다: OpenAI 기사의 본문·태그라인·규모 수치(일차는 HTTP 403), LangChain의 `Agent = Model + Harness` 식과 각 하네스 벤치의 계측 출처·계측 조건(GPT-5.5로 여겨지는 모델명을 포함), Claude Code v2.1.139의 릴리스 날짜, llterm의 테스트 녹색의 최신 상태(재실행은 미실시), RAD 총 documents 수(현재 로컬 재집계는 **2026년 6월 17일 기준 47,097 docs**이며, 오래된 prose에는 여전히 "약 49k"가 남아 있을 수 있음), Karpathy 씨 LLM Wiki Gist의 제안자·날짜, 캐논 "삼자의 정신"과 *First, Break All the Rules* 4원칙의 출처 페이지, 제3장의 "인간 우위 3점"(measured가 아니라 관찰 기반). 일차 정보로 확정되는 대로, 갱신한다.
+> ※ 본문 중에서 헤지한 "이차 정보뿐 / 일차 미확인"의 주요 항목은 다음과 같다: OpenAI 기사의 본문·태그라인·규모 수치(일차는 HTTP 403), LangChain의 `Agent = Model + Harness` 식과 각 하네스 벤치의 계측 출처·계측 조건(**`GPT-5.5`라는 모델명 자체의 실재는 OpenAI 공식으로 확인했지만, 본문에서 언급한 약 61% / 약 87% 비교의 일차 계측 출처·계측 조건은 여전히 미확인**), Claude Code v2.1.139의 릴리스 날짜, llterm의 테스트 녹색의 최신 상태(재실행은 미실시), RAD 총 documents 수(현재 로컬 재집계는 **2026년 6월 17일 기준 47,097 docs**이며, 오래된 prose에는 여전히 "약 49k"가 남아 있을 수 있음), Karpathy 씨 LLM Wiki Gist의 제안자·날짜, 캐논 "삼자의 정신"과 *First, Break All the Rules* 4원칙의 출처 페이지, 제3장의 "인간 우위 3점"(measured가 아니라 관찰 기반). 일차 정보로 확정되는 대로, 갱신한다.

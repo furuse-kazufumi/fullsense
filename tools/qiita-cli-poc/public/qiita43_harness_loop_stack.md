@@ -460,7 +460,7 @@ https://alu.jp/series/スナックバス江/crop/UfjgydbJNoh5HDTItAlf
 ではハーネスに本当に威力がないのか? そうではありません。**「モデルを固定し、周辺ランタイム（ハーネス）だけを変えると大きな性能差が出る」こと自体は、別ソースで裏付けがあります。**ただし以下の数値は、私が辿れたのは二次情報の引用までで、一次の計測元・計測条件まで遡れていません。だから全て「**〜による報告（二次引用）**」として扱います。
 
 - LangChain が、コーディングエージェントを Terminal-Bench 2.0 で **52.8% → 66.5%**（同一モデル、ハーネス再構築のみ）に伸ばした、という報告（**二次引用・計測条件未確認**）。
-- 同一作業で **GPT-5.5** とされるモデルが、あるハーネスで約61%、別のハーネスで約87%だった、という比較も流通していますが、**モデル名「GPT-5.5」自体が私の知識の範囲外で要検証**、かつ数値も二次のみのため、本記事では具体値を論証材料に使いません（「ハーネス差で大きく動く例として語られている」程度に留めます）。
+- 同一作業で **GPT-5.5** の比較として、あるハーネスで約61%、別のハーネスで約87%だった、という話も流通しています。**GPT-5.5 というモデル名自体は OpenAI 公式リリースノートと公式発表で実在を確認できました**。ただし、この比較値の**一次の計測元・計測条件までは辿れておらず、数値自体は二次情報のまま**です。したがって本記事では具体値を論証材料に使わず（「ハーネス差で大きく動く例として語られている」程度に留めます）。
 - 専用ベンチ *Harness-Bench*（[arXiv:2605.27922](https://arxiv.org/abs/2605.27922)）は実在。
 - 関連論文 *From Model Scaling to System Scaling: Scaling the Harness in Agentic AI*（[arXiv:2605.26112](https://arxiv.org/abs/2605.26112)、第一著者 Shangding Gu 氏、2026-05-25）も実在。ただし**この抄録にも「10×」の数値はなく**、著者の所属は **abstract ページに記載がない**ため、よく併記される「UC Berkeley」は **二次情報** として扱います（本稿執筆時に abstract ページを再確認）。
 
@@ -692,6 +692,7 @@ https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 - Data Science Dojo, *Agentic Loops Explained: From ReAct to Loop Engineering (2026 Guide)*（2026-06-09）: https://datasciencedojo.com/blog/agentic-loops-explained-from-react-to-loop-engineering-2026-guide/
 - Filip Verloy, *From Prompt Engineering to Loop Engineering*（2026-06、"scaling risk at machine speed"）: https://medium.com/@filipv_74515/from-prompt-engineering-to-loop-engineering-why-the-agent-era-demands-a-new-security-paradigm-816385040e3d
 - Claude Code 公式 docs, `/goal`（v2.1.139 以降、Haiku 判定の自律反復。バージョン要件と Haiku を一次確認）: https://code.claude.com/docs/en/goal
+- OpenAI, *Introducing GPT-5.5*（2026-04-23。GPT-5.5 / GPT-5.5 Pro の存在と API 展開更新を一次確認）: https://openai.com/index/introducing-gpt-5-5/
 - arXiv:2605.18747 *Code as Agent Harness*（Xuying Ning ほか計42名、2026-05-18。本稿執筆時に再確認。※「Bölük」「10×」はいずれも本論文に**存在しない**）: https://arxiv.org/abs/2605.18747
 - arXiv:2605.26112 *From Model Scaling to System Scaling: Scaling the Harness in Agentic AI*（第一著者 Shangding Gu, 2026-05-25。所属は abstract ページ未記載＝「UC Berkeley」は二次情報）: https://arxiv.org/abs/2605.26112
 - arXiv:2605.27922 *Harness-Bench*: https://arxiv.org/abs/2605.27922
@@ -712,4 +713,4 @@ https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 - 「半信×半疑」: https://alu.jp/series/スナックバス江/crop/Ud7lZLbei1F5xaFuAq3i
 - 「社会とはこういう事でもあるのか… ルールが見えて来たぜ…」: https://alu.jp/series/スナックバス江/crop/H4Pix38XWLRS077emoZC
 
-> ※ 本文中でヘッジした「二次情報のみ／一次未確認」の主な項目は次の通りです：OpenAI 記事の本文・タグライン・規模数値（一次は HTTP 403）、LangChain の `Agent = Model + Harness` 式と各ハーネスベンチの計測元・計測条件（GPT-5.5 とされるモデル名を含む）、Claude Code v2.1.139 のリリース日、llterm のテスト緑の最新状態（再実行は未実施）、RAD 総 documents 数（現在のローカル再集計は **2026年6月17日時点で 47,097 docs** で、古い prose には「約49k」が残ることがある）、Karpathy 氏 LLM Wiki Gist の提案者・日付、キヤノン「三自の精神」と *First, Break All the Rules* 4原則の出典頁、第3章の「人間優位3点」（measured ではなく観察ベース）。一次情報で確定でき次第、更新します。
+> ※ 本文中でヘッジした「二次情報のみ／一次未確認」の主な項目は次の通りです：OpenAI 記事の本文・タグライン・規模数値（一次は HTTP 403）、LangChain の `Agent = Model + Harness` 式と各ハーネスベンチの計測元・計測条件（**GPT-5.5 というモデル名の実在自体は OpenAI 公式で確認済みだが、本文で触れた約61% / 約87%比較の一次計測元・計測条件は未確認**）、Claude Code v2.1.139 のリリース日、llterm のテスト緑の最新状態（再実行は未実施）、RAD 総 documents 数（現在のローカル再集計は **2026年6月17日時点で 47,097 docs** で、古い prose には「約49k」が残ることがある）、Karpathy 氏 LLM Wiki Gist の提案者・日付、キヤノン「三自の精神」と *First, Break All the Rules* 4原則の出典頁、第3章の「人間優位3点」（measured ではなく観察ベース）。一次情報で確定でき次第、更新します。

@@ -28,7 +28,7 @@
 - 追加 spot-check で、`2-5` honest disclosure 末尾の `2qlJjBwdpYGOVjBkyhhL` 引用が en/zh/ko では第3章直前へ誤配置されていたことを確認した。translations 側は誤配置ブロックを除去し、`2-5` 末尾の本来位置へ戻した。末尾参考の URL 自体は維持している。
 - さらに `1-4` 後半の `AI成長マネジメント` / 4理由 / `First, Break All the Rules` ヘッジ / `アンチパターン` / 第2章への橋渡しも 4 言語で spot-check し、日本語正本に対する新たな factual / translation drift は見当たらないことを確認した。
 - さらに終盤の `なぜ「手綱を握るのは人間」だと言えるのか — 観察ベースの3点` から、H4Pix 引用を挟んだ結語導入まで 4 言語で spot-check し、`常時並列 / 長射程の伏線回収 / 常時稼働の危険予知` の 3 点、`観察された傾向` というヘッジ、`ルール（構造）で縛る` への橋渡しまで日本語正本に追従していることを確認した。
-- さらに参考文献節と末尾 hedge note も 4 言語で spot-check し、`alu.jp` crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に維持され、OpenAI 403 / `GPT-5.5` 要検証 / RAD `47,097 docs` / `人間優位3点` 観察ベースなどの留保も日本語正本に追従していることを確認した。
+- さらに参考文献節と末尾 hedge note も 4 言語で spot-check し、`alu.jp` crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に維持され、OpenAI 403 / RAD `47,097 docs` / `人間優位3点` 観察ベースなどの留保も日本語正本に追従していることを確認した。`GPT-5.5` についてはこのターンで OpenAI 公式一次情報によりモデル名の実在を確認し、留保を「モデル名未確認」から「比較値の一次計測元・計測条件未確認」へ締め直した。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで、Team stock 3 本は local draft / dry-run / provenance spot-check まで監査済み。未解決の外部アクションは human gate 待ちの Qiita Team POST だけ。
 
 ## 次の具体的な一手
@@ -157,7 +157,7 @@
   - さらに `2-6. 起動と実証タスク green-keeper` / `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装` も spot-check し、`desired / actual / drift / repair` の4項対応、PySide6 GUI / `term` 名残の補足、`/goal` の Haiku 既定・turn cap・直後の honest disclosure 節への橋渡しまで en/zh/ko が日本語正本に追従していることを確認した。
   - 冒頭〜第1章前寄り（捨てた数字の導入 / `prompt → context → harness → loop` の階段 / automation と loop の差分 / Hashimoto 起点の `harness engineering` / OpenAI 403 に伴う二次情報ヘッジ / RAPTOR 二層構造の導入）も局所確認済みで、一次情報アンカー・二次情報ヘッジ・`Agent = Model + Harness` の注意書きまで日本語正本に追従している。
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、Hashimoto/OpenAI/Karpathy/RAPTOR の一次情報を各翻訳ターンで再取得したわけではない。
-  - 「捨てた数字」の独立 honest disclosure 節も局所確認済みで、arXiv `2605.18747` / `2605.27922` / `2605.26112`、`Bölük 10x` 否定、`GPT-5.5` 要検証、一次と二次の線引きまで日本語正本に追従している。
+  - 「捨てた数字」の独立 honest disclosure 節も局所確認済みで、arXiv `2605.18747` / `2605.27922` / `2605.26112`、`Bölük 10x` 否定、`GPT-5.5` 実在確認済み / 比較値の一次計測元・条件は未確認、一次と二次の線引きまで日本語正本に追従している。
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、各論文やベンチの一次ページをこの翻訳監査ターンで再取得したわけではない。
   - 第3章後半（RAD の運用ルール / `LLM Wiki` の 3 層 / thought circulation と Anti-Circulation Safeguards / RAPTOR の evidence ladder / `corpus-first advantage` / 統合章の A-B-C 表）も局所確認済みで、K² サイジング、`rad_prune.py` の dry-run、`39 documents / 12 clusters` 注記、llive の主観マッピング、`suspicion → patch_validated` の証拠段階、`47,097 docs` を含む統合表まで日本語正本に追従している。
     - ここでも確認したのは主に日本語正本に対する訳文追従であり、Karpathy Gist / llive 要件 / RAPTOR 実装の一次情報をこの翻訳監査ターンで再取得したわけではない。
@@ -169,7 +169,9 @@
   - その後の再監査で、`2qlJjBwdpYGOVjBkyhhL` は「未同期」ではなく、en/zh/ko で **`2-5` から第3章直前へ位置ずれした状態** だったことが分かった。現在は 3 言語とも `2-5` honest disclosure 末尾の本来位置へ戻し、第3章直前の誤配置は除去済み。
   - 統合レビューで挙がった「翻訳版は blockquote 内 inline link / 正本は blockquote 下 raw URL」という形式差は、今回の修正に起因するものではなく、同ファイル内の既存スタイル差でもあるため、このターンの actionable な修正対象には含めない。
   - さらに終盤の `観察ベースの3点` と H4Pix 引用を挟んだ結語導入も局所確認済みで、3 点の内容、`観察された傾向` のヘッジ、`ルール（構造）で縛る` への橋渡しまで日本語正本に追従している。
-  - さらに参考文献節と末尾 hedge note も局所確認済みで、`alu.jp` crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に維持され、OpenAI 403 / `GPT-5.5` 要検証 / RAD `47,097 docs` / `人間優位3点` 観察ベースなどの留保も日本語正本に追従している。
+  - さらに参考文献節と末尾 hedge note も局所確認済みで、`alu.jp` crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に維持され、OpenAI 403 / RAD `47,097 docs` / `人間優位3点` 観察ベースなどの留保も日本語正本に追従している。`GPT-5.5` は OpenAI 公式で実在確認済みで、未確認として残るのは比較値の一次計測元・計測条件だけ。
+  - `alu.jp` crop URL 数の 16 本基準は、日本語正本を source of truth として **本文 8 本 + 参考節 8 本 = 計 16 本（unique は 8 本、各 URL が本文と参考で 2 回ずつ出現）** と確認したうえで、en/zh/ko も同じ構成かを照合した。
+  - `promise-progress-payoff` / `ending-payoff` の再確認では、終盤の `観察ベースの3点` → H4Pix 引用 → `まとめ：手綱と、輪と、知` の 3 箇条 → `Bölük` 数字を捨てた payoff 文 → `次回予告的な余韻` → 参考文献節、という鎖を 4 言語で突き合わせた。
   - 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 
