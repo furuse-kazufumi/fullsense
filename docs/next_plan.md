@@ -10,7 +10,7 @@
 - `.llterm/loop_ledger.jsonl` は deindex 実行済みで、以後は local-only telemetry として `.gitignore` 管理へ移行する。
 - handoff 3 文書（`docs/NEXT_SESSION.md` / `docs/SESSION_SUMMARY.md` / `docs/next_plan.md`）は上記 commit 群に含めた。
 - git push / 新規記事の新規 publish は未実施。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
-- Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`py -3.11 tools/qiita_team_post.py dry-run ...` では 3 本とも registration-safe だが、実際の Qiita Team POST は未実施。
+- Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`py -3.11 tools/qiita_team_post.py dry-run ...` では 3 本とも registration-safe だが、実際の Qiita Team POST は未実施。追跡先は `docs/articles/2026-06-18/team_stock_queue.md`。
 
 ## 次の具体的な一手
 
@@ -24,7 +24,9 @@
 8. 外部公開フェーズで audit 系語を使う場合は、records-retention 監査との誤読を避けるため定義を添える。
 9. バス江コマを比喩に使う場合は、一次確認できたセリフと筆者解釈を混ぜない。たとえば `alu.jp` crop `1DLuaYTNfWIQz3tqCv1h` は「聖書の引用みたいになってる…!」までは出典化できるが、`honest disclosure` を毎回持ち出す感じ等は筆者比喩として明示する。
 10. #46 の publish gate 状態は項目 `4` を正本として追う。JA 正本の HTML annotation は完了済み。翻訳版の最終見直しと用語 drift 監査は一巡し、新たな重大差分は未検出。残る外部アクションは human gate を伴う publish 判断。
-11. 難しい論点は Team 向けに個別 stock する。現時点での local draft 候補は `Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem の 3 本。実 Team 書き込みは human gate 後に `tools/qiita_team_post.py post <file> --yes` で行う。
+11. 難しい論点は Team 向けに個別 stock する。現時点での local draft 候補は `Semantic Governance` / `LLM Wiki と thought circulation` / ``ctx 2549%`` postmortem の 3 本。追跡先は `docs/articles/2026-06-18/team_stock_queue.md`。
+   - ただし `tools/qiita_team_post.py` は `ignorePublish` を尊重しないため、`post --yes` は「草稿の公開禁止印を無視して外部 POST する」挙動になる。この点を質問文で明示してから human gate を取る。
+   - さらに `private: true` の Qiita Team `fullsense` 上での実効可視範囲は、Qiita Help / API docs を見ても十分に確定できていない。少なくとも現時点では「限定共有」と断言せず、可視範囲未確定のまま POST するかを user に明示確認する。
 
 12. 翻訳 QA は、JA 原文と各節を逐次照合し、専門用語 (`ctx 2549%` / `turn boundary` / `interrupt` / `sign-off` / `block point`) を固定しながら反映する。
    - ko 版では、第5章の `운영 환경` / `본 처리` も最終見直しで固定済み。
