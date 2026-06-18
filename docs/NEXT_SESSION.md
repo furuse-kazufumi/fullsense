@@ -379,7 +379,7 @@ verify_publication.sh: **ALL CHECKS PASSED** 継続維持。
 ## 🧑 Operator actions queued — old context / current scope outside (2026-06-12 stale)
 
 この節の項目はローカル operator 作業の旧メモであり、上位 handoff が言う
-**human-gate を要する外部書き込みアクション 3 件**
+**human-gate を要する外部アクション 3 件**
 （#46 の publish 判断 / Qiita Team POST / dev.to 英語版 update・publish 判断）
 とは別カテゴリで、現行の最優先ではない。
 
@@ -585,6 +585,8 @@ bash scripts/verify_publication.sh
 | 9 | Anthropic / Gemini / OpenAI credential 復旧 → bench 再走 | 外部 |
 | 10 | asciinema 録画 (COG-MESH demo 9 セクション + llive demo + LoveApp+env) | operator |
 
+※ #9-10 は 2026-06-12 時点で stale 扱いへ移した operator 項目の旧記録。現行スコープ外として `old context / current scope outside` 節を正本に読む。
+
 ### 関連 memory (本セッション新規 / 更新)
 
 - `project_15h_marathon_2026_05_21` (本セッション総括)
@@ -648,6 +650,7 @@ M8.1 完成度:
 - E2E integration test 1 件で M8.1〜M8.9 chain 動作確認
 
 **残作業 (操作者作業)**:
+※ この節の operator 項目は 2026-06-12 時点で stale 扱いへ移した旧記録。現行スコープ外として `old context / current scope outside` 節を正本に読む。
 - asciinema 録画 (llive demo / llove cog_mesh_demo / LoveApp+env の 3 本)
 - 実 production 起動 (env を operator 設定するだけ):
   ```
