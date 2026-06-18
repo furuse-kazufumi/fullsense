@@ -100,6 +100,7 @@ nav_order: 95
 - editorial 方針としては、「公開済みの短い companion 記事は、十分に長い本編へ統合できるなら統合を優先し、空いた item は新記事の器として再利用する」を採用した。現時点で外部アクション候補として最も筋が良いのは public 済み `qiita37_gpu_triple_run_gate_price_kamikudaki.md` (`id: f06ca92ea208c7646fcd`) → 完全版 `qiita37_gpu_triple_run_gate_price.md` への統合で、`qiita43/46` のかみくだき版と `qiita47` はまだ local-only / private draft なので publish 前の内部判断でよい。
 - ここで触っている `qiita43/46/47` の差分は **local source の内部 polish のみ**で、外部 publish / PATCH / 統合実行は #37 統合判断とは別件の未着手タスクとして切り分ける。
 - 上の前提は一次情報で確認済みである。`qiita37_gpu_triple_run_gate_price_kamikudaki.md` は front matter 上 `private:false` / `id:f06ca92ea208c7646fcd` で、Qiita live HTML / API も 2026-06-19 に `200` を返した。`qiita43_harness_loop_stack_kamikudaki.md` / `qiita46_llterm_supervision_first_kamikudaki.md` / `qiita47_harness_engineering_thoughts.md` は front matter 上 `private:true` / `ignorePublish:true` の local draft である。
+- `#37` の短稿と完全版は本文比較も済ませた。短稿の独自価値だった `指示 4 文 / 実験 3 本の役割分担 / PoC 裏方 / 17〜19 倍 / 0 円 / safety tax 接続` は完全版の各節へおおむね吸収済みなので、次の外部アクション案は **完全版への大規模追記ではなく、短稿 item `f06ca92ea208c7646fcd` を redirect / 索引本文へ差し替えて、完全版 `6f44575d440a9ebf5228` を正本に寄せる**線になる。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため
   `ignorePublish: true` に統一済み。
