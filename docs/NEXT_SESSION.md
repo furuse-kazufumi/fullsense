@@ -92,7 +92,7 @@ nav_order: 95
   さらに「今ならこう直す」を追加し、失敗談を postmortem 的に再利用しやすくした。
   冒頭には拾い読みガイドも追加済み。挿絵は意図的に 0 コマへ戻している。
   直近の local polish として、本文と図の `human gate` / `Human Gate` は `human-gate` へ統一し、`外部書き込み` も現行 handoff と同じ `外部アクション` の語へ置き換えた。主張や gate 条件は変えず、運用語だけ現行版へ揃えた。
-- `tools/qiita-cli-poc/public/qiita47_harness_engineering_thoughts.md` も新規追加済み。**現在は** `private: true` の local-only な independent short draft で、`006.jpg` を「ハーネスを通した途端に AI が賢そうに見える瞬間」、`157.jpg` を「本当にしつけが必要なのは AI より人類側の運用では」という反転オチへ役割分担させた短稿である。本文には invisible comment (`<!-- draft:... -->`) を残しつつ、RAPTOR（判断層と実行層を分けた二層 runtime）/ 試作段階の `llterm`（terminal 起点の名残を名前に残した PySide6 GUI 実装）/ Claude Code 公式 `/goal` / `desired-actual-drift-repair` の最小 loop 節、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例、harness を強くしすぎたときの failure mode、さらに「明日 1 個だけ変えるなら何か」まで入り、後から Team / 公開どちらへ育てる場合でも内部構造だけ先に辿れるようにしてある。補助導線の外部 2 本も Distill / Mitchell Hashimoto の実 URL へ揃えてある。
+- `tools/qiita-cli-poc/public/qiita47_harness_engineering_thoughts.md` も新規追加済み。**現在は** `private: true` の local-only な independent short draft で、`006.jpg` を「ハーネスを通した途端に AI が賢そうに見える瞬間」、`157.jpg` を「本当にしつけが必要なのは AI より人類側の運用では」という反転オチへ役割分担させた短稿である。本文には invisible comment (`<!-- draft:... -->`) を残しつつ、（本プロジェクトでの）RAPTOR（判断層と実行層を分けた二層 runtime）/ 試作段階の `llterm`（terminal 起点の名残を名前に残した PySide6 GUI 実装）/ Claude Code 公式 `/goal` / `desired-actual-drift-repair` の最小 loop 節、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例、harness を強くしすぎたときの failure mode、さらに「明日 1 個だけ変えるなら何か」まで入り、後から Team / 公開どちらへ育てる場合でも内部構造だけ先に辿れるようにしてある。補助導線の外部 2 本も Distill / Mitchell Hashimoto の実 URL へ揃えてある。
 - `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md` も増補済み。短すぎてアルゴリズム / PoC の量が見えないという指摘を受け、`1 分version` の直後に **「実験 3 本の中身」** と **「AI は裏で何を自走したのか」** を追加し、HD-1 full / HD-1 null / Stage-B、pre-registration / attacker AI 3 体 / major 5 件修正 / Kaggle T4 / 152 runs / `$0` を plain-language で戻してある。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため
@@ -242,9 +242,9 @@ nav_order: 95
    冒頭の拾い読みガイドも追加済みで、節番号 + 実見出し名でも辿れる text TOC にしてある。
    ただし annotation / 参考文献節は追加済みで、残タスクは
    一次 URL 確認と著者帰属の整備。
-8. `qiita47_harness_engineering_thoughts.md` は `#43` から派生した local-only の independent short draft として新設済みで、いまは独立短稿として最低限読める具体節に加え、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例、その比喩が clean / dirty の観測までしか言い切れずズレの意味づけや優先順位づけまでは自動化しないという破綻点、harness を強くしすぎたときの failure mode、さらに「明日 1 個だけ変えるなら何か」まで入った状態。
+8. `qiita47_harness_engineering_thoughts.md` は `#43` から派生した local-only の independent short draft として新設済みで、いまは独立短稿として最低限読める具体節に加え、（本プロジェクトでの）RAPTOR / `llterm` / `/goal` の最小グロス、`green-keeper` を `main` に対する clean / dirty を見張る最小監視ループとして読む最小具体例、その比喩が clean / dirty の観測までしか言い切れずズレの意味づけや優先順位づけまでは自動化しないという破綻点、harness を強くしすぎたときの failure mode、さらに「明日 1 個だけ変えるなら何か」まで入った状態。
    現状の spine は「ハーネスは AI を賢くする技術というより、人類側の曖昧な運用を二度と通さない discipline であり、最初の一歩は観測できるズレを 1 個だけ増やすこと」である。
-   canonical ledger 2 正本への `513546f..0512ede` 回収は完了済みで、次に触るときはこの短稿をさらに短く締めるか、公開水準へ向けて参考整形を詰めるかから始めればよい。
+   canonical ledger 2 正本への `513546f..9006649` 回収は完了済みで、次に触るときはこの短稿をさらに短く締めるか、公開水準へ向けて参考整形を詰めるかから始めればよい。
    次にやるなら、`#43` へ戻す判断ではなく、独立短稿として runtime / orchestration の最小グロスを保ったままさらに圧縮するか、外部公開できる水準まで参考整形を進めるかを決める。現段階では publish / Team stock へは送らず、`157.jpg` の使いどころ定義、RAPTOR / `llterm` / `/goal` の具体節、`desired-actual-drift-repair` の最小 loop 説明、green-keeper 比喩の破綻点と failure mode までで止めている。
 9. `qiita37_gpu_triple_run_gate_price_kamikudaki.md` は本文の spine を増補済み。次に触るなら、Kaggle 運用 PoC を本文に残すか `<details>` 層へ逃がすかを 1 回だけ決める。
    この一次確認は references 節に列挙した外部 URL 群にも同じく適用する。
