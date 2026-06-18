@@ -74,6 +74,9 @@ nav_order: 95
   MAP-Elites / CMA-ME / lexicase の一次導線 URL まで補強した。CMA-ES は失効証明書の旧 PDF ではなく
   arXiv `1604.00772` へ差し替え済み。publish 前の残りは
   参考節そのものの欠落ではなく、本文主張と参考導線の最終突合である。
+  本文と参考導線の spot-check では、GA = 固定長遺伝子列、ES / CMA-ES = 変異分布更新、
+  GP = 式 / プログラム木進化、NEAT = 構造進化、novelty / MAP-Elites / lexicase = 「何を残すか」の分岐、
+  という説明までは整合していた。
 - `tools/qiita-cli-poc/public/qiita45_human_ai_dev_incident_patterns.md` を
   新規追加済み。**現在は** `private: true` のローカル草稿で、
   人間 + AI 開発の実務教訓を **症状 / 真因 / 対策 / 残した再開導線** 形式で共有する記事。
@@ -241,7 +244,7 @@ nav_order: 95
 10. `qiita44` / `qiita45` の末尾 HTML annotation と参考文献節は追加済み。
    `qiita44` は GA / ES / GP / NEAT / novelty search / MAP-Elites / CMA-ME /
    lexicase の一次導線 URL まで補強済みで、CMA-ES も arXiv `1604.00772` へ差し替え済みなので、publish 前は本文の言い回しと
-   参考導線の最終突合を確認する。
+   参考導線の最終突合を確認する。残タスクは MIT Press 2 件の実ブラウザ到達確認と、本文の主張強度の最終微調整だけでよい。
    references 節にある外部 URL 群も、この publish gate の一次確認対象に含める。
    `qiita43_harness_loop_stack_kamikudaki.md` も、公開線へ回すなら同じ粒度で
    annotation / 参考導線 / 参考文献テンプレの有無を確認する。
