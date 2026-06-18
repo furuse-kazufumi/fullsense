@@ -97,7 +97,13 @@ nav_order: 95
 **次回ここから再開:**
 1. dev.to 英語版を更新または publish する前に、
    「外部公開/外部書き込みは human gate」という運用を守る。
-2. #43 の多言語差分を触るときは、日本語版を source of truth として
+2. #46 (`qiita46_llterm_supervision_first.md`) は JA / en / zh / ko / kamikudaki の本文と endmatter まで同期済みで、
+   `ctx 2549%` / `turn boundary` / `interrupt` / `block point` の用語固定も一巡している。
+   `025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 を確認済み、
+   `kamikudaki_shishi.svg` も raw URL の HTTP 200 を確認済み。
+   最終見直しパスでも新たな重大 drift は未検出なので、次の外部アクションは
+   human gate を伴う publish 判断になる。
+3. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
    en/zh/ko の translation sync note は本文から外してあり、publish へ進めるときは
    `ignorePublish: true` / `private: true` を外す前に
