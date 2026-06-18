@@ -17,6 +17,7 @@
 - Team stock 3 本には `この記事で話さないこと` も追加し、難所の切り出し範囲を local draft の段階で固定した。
 - Team stock 3 本の source anchor も明記し、#43 `2-2. loop engineering にもセキュリティの顔がある` / #43 `3-2. LLM Wiki — 「育つ知識」のパターン` / #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` のどこから切り出したかを queue で追えるようにした。
 - local draft 側の `この草稿の位置づけ` / `source` でも、#43 `3-2. LLM Wiki — 「育つ知識」のパターン` と #46 `2 / 3 / 6` の実見出し粒度まで揃え、queue 正本と同じ anchor で辿れる状態にした。
+- `team_stock_ctx2549_postmortem.md` の `source` 行に残っていた `ctx 2549%` のネスト backtick も外し、queue 正本と同じ inner-backtick 無し表記へ揃えた。
 
 ## 次の具体的な一手
 

@@ -19,6 +19,7 @@
 - さらに 3 本とも `この記事で話さないこと` を足し、難所の切り出し範囲を local draft の段階で固定した。
 - さらに source anchor も明記し、#43 `2-2. loop engineering にもセキュリティの顔がある` / #43 `3-2. LLM Wiki — 「育つ知識」のパターン` / #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` のどこから切り出したかを queue で追えるようにした。
 - local draft 側の `この草稿の位置づけ` / `source` でも、#43 `3-2. LLM Wiki — 「育つ知識」のパターン` と #46 `2 / 3 / 6` の実見出し粒度まで揃え、queue 正本と同じ anchor で辿れる状態にした。
+- `team_stock_ctx2549_postmortem.md` の `source` 行に残っていた `ctx 2549%` のネスト backtick も外し、queue 正本と同じ inner-backtick 無し表記へ揃えた。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
