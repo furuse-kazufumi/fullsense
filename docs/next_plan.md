@@ -138,7 +138,7 @@
 - `qiita43_harness_loop_stack_kamikudaki.md` は ☕ 休憩ポイントと参考文献節を追加済み。
   - ただし完全版 #43 への導線を優先した短縮版のため、一次情報の細目は引き続き完全版側へ寄せる。
 - #43 en/zh/ko は発行済み限定共有 draft のまま凍結し、residual translation drift が本当に残っているかの最終棚卸しを通してから `ignorePublish: false` を判断する。
-  - `47,097 docs` ベースの factual drift 修正は **ローカル source 側のみ** で、live URL には旧表現が残っている可能性がある。
+  - `47,097 docs` ベースの factual drift 修正は **ローカル source 側のみ** で、live URL には旧 factual 値が**確実に残っている**（別管理）。これとは別に、residual translation drift が本当に残るかは最終棚卸しで未確認。
   - en/zh/ko とも対応する honest-disclosure 節は実在している。
     - 根拠: en `qiita43_harness_loop_stack_en.md` の `#### honest disclosure (Handling the "About 49k Items" Number)`、zh `qiita43_harness_loop_stack_zh.md` の `#### honest disclosure（关于「约49k件」这个数字的处理）`、ko `qiita43_harness_loop_stack_ko.md` の `#### honest disclosure("약 49k건"이라는 숫자의 취급)`。
   - `47,097 docs` honest-disclosure 節と直後の橋渡し段は局所確認済みで、日本語正本に大筋追従している。
