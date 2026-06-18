@@ -125,7 +125,7 @@
 1. publish gate 用の別バッチとして、#43 en/zh/ko のうち既に spot-check 済みの 冒頭〜第1章前寄り / 第1章前半 / 第1章後半〜第2章冒頭 / 第2章前半の `llterm` 導入〜 MAPE-K 骨格 / 第2章中盤（安全層〜`/goal`）/ 「捨てた数字」の独立 honest disclosure 節 / `47,097 docs` honest-disclosure 節 / `50手法 vs 96ノート` / 第3章前半の導入〜`3-2` 本体主要論点 / 第3章後半（RAD 運用ルール〜統合章）/ 参考文献節と末尾注記 を除く未確認箇所の factual / translation drift を詰める。
 2. 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 3. deindex 後の運用を維持し、review / handoff では `loop_ledger` を通常 diff に混ぜない。
-4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。残る publish gate は、多言語最終見直しと用語 drift の最終監査が中心になった。
+4. `qiita46_llterm_supervision_first.md` は日本語草稿を第8章まで通し、休憩ポイント / 参考文献 / HTML annotation / `025.jpg` まで入った。`025.jpg` は言語ごとに作品名を localize しつつ raw URL の HTTP 200 も確認済み。`qiita46_llterm_supervision_first_kamikudaki.md` は磨き込み済み、さらに en/zh/ko draft も第8章と翻訳版 endmatter 一式まで同期した。最終見直しパスでも新たな重大 drift は未検出で、残る外部アクションは human gate を伴う publish 判断が中心になった。
 
 - 翻訳 QA:
   - #46 多言語同期は、JA 原文を基準に各節を逐次照合し、`ctx 2549%` / `turn boundary` / `interrupt` / `block point` などの用語を訳語固定しながら反映している。
