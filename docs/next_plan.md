@@ -12,7 +12,7 @@
 - git push / 新規記事の新規 publish は未実施。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
 - Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`py -3.11 tools/qiita_team_post.py dry-run ...` では 3 本とも registration-safe だが、実際の Qiita Team POST は未実施。追跡先は `docs/articles/2026-06-18/team_stock_queue.md`。
 - Team stock の公開順・human gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。投稿待ち一覧の正本は `docs/articles/2026-06-18/team_stock_queue.md`。
-- Team stock 3 本は source article と大筋整合していることを spot-check 済み。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
+- Team stock 3 本は source article と大筋整合していることを spot-check 済み。対応は `team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` = #43、`team_stock_ctx2549_postmortem.md` = #46。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
 
 ## 次の具体的な一手
 

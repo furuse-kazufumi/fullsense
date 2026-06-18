@@ -14,7 +14,7 @@
 - handoff は構造上、最新の handoff commit 自身を同一 commit 内には列挙できない。直近 1 件は次回 handoff 更新で backfill する。
 - git push / 新規記事の新規 publish / Qiita Team 書き込みは **未実施**。test については**この差分では未実施**で、前バッチで追加した frontmatter 回帰テストとは切り分ける。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
 - Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加した。`tools/qiita_team_post.py dry-run` では 3 本とも registration-safe だったが、実 Team POST はまだ行っていない。投稿待ち一覧の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。
-- Team stock 3 本は source article (#43 / #46) と大筋整合していることを再確認し、公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
+- Team stock 3 本は source article と大筋整合していることを spot-check 済み。対応は `team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` = #43、`team_stock_ctx2549_postmortem.md` = #46。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
 - `tools/qiita-cli-poc/public/bf1cfe3b4f40b87f068d.md` は canonical 誘導案の local source として整備済み。
