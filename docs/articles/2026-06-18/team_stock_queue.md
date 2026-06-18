@@ -21,6 +21,14 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 | `team_stock_llm_wiki_anti_circulation.md` | LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」 | #43 | `local_draft / dry_run_ok / blocked_human_gate` | anti-circulation の境界を公開前に再確認 |
 | `team_stock_ctx2549_postmortem.md` | `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった | #46 | `local_draft / dry_run_ok / blocked_human_gate` | internal logs / evidence snapshot の非公開境界を維持 |
 
+## POST 後の記録欄
+
+| slug | item id | Team URL | visible range memo | rollback needed | note |
+| --- | --- | --- | --- | --- | --- |
+| `team_stock_semantic_governance.md` |  |  |  |  |  |
+| `team_stock_llm_wiki_anti_circulation.md` |  |  |  |  |  |
+| `team_stock_ctx2549_postmortem.md` |  |  |  |  |  |
+
 ## blockers
 
 1. `tools/qiita_team_post.py` は `ignorePublish` を読まず、`post --yes` でそのまま外部 POST する
