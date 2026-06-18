@@ -296,3 +296,93 @@ The one-line summary is this:
 > **2549% was not evidence of a strong AI. It was a sign that broken measurement had been wired directly into control.**
 
 Next we move to another reversal: the way "review for quality" can, under some conditions, become nothing more than an expensive second dip.
+
+---
+
+## 4. Multi-AI review improves quality, but if you stack it unconditionally it only makes everything slower
+
+What the `ctx 2549%` episode revealed was that once measurement breaks, rotate breaks with it.
+But when rotate breaks, the truly painful part is not merely that "the loop spins too often." It is that **every spin drags an expensive review bundle along with it**.
+
+In rough outline, one orchestra-mode turn looks like this:
+
+1. a conductor AI implements
+2. multiple AIs review in parallel
+3. a responsible AI issues an integrated judgment
+4. the conductor AI applies revisions
+5. if needed, the system requests final sign-off
+
+As a quality pipeline, that is defensible.
+The problem was that **the same review intensity was being applied to every kind of turn**.
+
+### 4-1. We were running full review even on turns that merely recorded state
+
+The handoff and EXIT formatting that become necessary after rotate are, in essence:
+
+- update `SESSION_SUMMARY.md`
+- update `next_plan.md`
+- shape the working context for the next turn
+
+The crucial point is that these are less "new design decisions" than tasks that **shape and preserve what already happened**.
+And yet, at that time, those turns were still going through the entire orchestra review bundle.
+
+So what actually happened was this:
+
+- one full review on the implementation turn
+- then another full review on the record-keeping turn caused by rotate
+
+That was not a problem of review quality. It was **a problem of scope**.
+
+### 4-2. Review should not be maximized by volume. It should be designed by scope
+
+The lesson here is blunt:
+
+> **Review is not designed by volume. It is designed by scope.**
+
+It is reasonable for implementation turns to receive heavy review.
+But once you apply that same intensity to record-keeping turns like handoff, time and rate-limit cost balloon before quality gains do.
+
+This is equally true of human review:
+
+- a patch with real design changes
+- a simple log-formatting edit
+- a comment fix
+- a handoff update
+
+Any organization that throws the same review body at all four usually becomes slow.
+AI orchestration is no different. Simply increasing the number of reviews is not quality engineering. It becomes design only when you decide **what depth of scrutiny belongs to what kind of work**.
+
+On the `llterm` side, that led us toward an unreviewed path for record-keeping turns.
+That is better described not as "reducing review," but as **returning review responsibilities to the places where they actually belong**.
+
+### 4-3. Double-dipping sign-off was the same class of problem
+
+The same lens forced a rethink of the default behavior of final sign-off.
+
+If the responsible AI has already issued an integrated judgment, but every later revision turn still receives another unconditional sign-off, the system drifts toward "reviewing the review."
+Of course large changes may still require re-confirmation. But if that becomes the default, the whole flow grows heavy.
+
+Again, the key distinction is not yes or no. It is scope:
+
+- sign-off that is always required
+- sign-off that is required only under conditions
+
+If you fail to design that distinction and instead fall back to "check everything just in case," the AIs will happily keep working and the processing system will become heavier without the human even noticing.
+
+### 4-4. The takeaway from this chapter
+
+This chapter reduces to three points:
+
+- full review is a tool for quality, but it should not be applied uniformly to every turn
+- record-keeping turns such as handoff and EXIT should use a different review intensity from implementation turns
+- sign-off, too, is healthier for the whole loop when it becomes conditional rather than default-stacked
+
+In other words, the quality of self-driving AI is not determined by **how many reviewers you attached**, but by **what kind of scrutiny you assign to what kind of moment**.
+
+### ☕ Break point
+
+More review is not automatically more virtuous.
+
+> **Heavy scrutiny belongs only on heavy turns.**
+
+In the next chapter we turn to the opposite side of the problem. Even if you lighten review, that still does not count as supervision if nothing can be traced afterward.
