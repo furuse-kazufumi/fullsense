@@ -388,6 +388,10 @@ llterm 的安全层 `safety.py` 里的 `SafetyPolicy.classify`，会把每个动
 
 「LLM 无法绕过安全层」，作为代码上的路径（`LLMStrategy → parse_action → runner.SafetyPolicy`）在结构上有保证。不过这依赖于「**只经由 llterm 的 Executor 执行命令**」这一前提，是一个 **有条件的命题**。`codex exec` 本身被设计为在 `-s read-only` 的沙箱中不产生副作用，但若将来在 Executor 之外添加让LLM直接敲 shell 的路径，保证就会崩坏。**当前的实现没有那条路径**——所以我把标题写成「在当前实现下无法绕过」，而非无条件的「无法绕过」。
 
+> 🗨️ 「成果呢？可以撒谎吗？去确认反而更诚实……」 — [Snack Bus-e ／ Forbidden Shibukawa（Alu）](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
+>
+> （闲话休题）「去确认」不是软弱，而是**诚实**。llterm 的 `CONFIRM` 也是一样——拿不准就先停下再问。把判断还给握缰绳的人类，这就是「无法绕过的刹车」的作法。
+
 ### 2-6. 启动与验证任务 green-keeper
 
 llterm 的启动命令是 `llterm`。在现行实现里，它作为 **PySide6 的 GUI 入口**启动，由窗口来处理项目选择、`next_plan` / `last_outcome` 的承接显示，以及默认30秒后的活跃项目自动继续。名字里还保留着 `term`，只是因为它出身于 terminal 那条线。首个验证任务是 **green-keeper**。
@@ -456,10 +460,6 @@ harness 很强大。但要讲它的强大，并不需要错误的权威背书。
 > 🗨️ 「无知之知。」 — [Snack Bus-e ／ Forbidden Shibukawa（Alu）](https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l)
 >
 > （闲话休题）「知道自己一无所知」——这就是 honest disclosure 的精神。AI连自己不知道的事都能流畅地讲出来。所以人类一侧需要一双能划出「这里尚未验证」界线的眼睛。第1章的「算法理解」，我想归根结底也是这种 **无知之知** 的一种形态。
-
-> 🗨️ 「成果呢？可以撒谎吗？去确认反而更诚实……」 — [Snack Bus-e ／ Forbidden Shibukawa（Alu）](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
->
-> （闲话休题）「去确认」不是软弱，而是**诚实**。llterm 的 `CONFIRM` 也是一样——拿不准就先停下再问。把判断还给握缰绳的人类，这就是「无法绕过的刹车」的作法。
 
 ---
 

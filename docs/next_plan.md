@@ -24,6 +24,7 @@
 - #43 companion の `qiita43_harness_loop_stack_kamikudaki.md` も full article と一次突合し、`RAPTOR / llterm / RAD` の 3 点構造、`手綱 / 輪 / 知識基盤` の圧縮軸、`AI 本体より器と回し方を設計する時代` という結論が current naming / current hedge に追従していることを確認した。
 - そのうえで `qiita43_harness_loop_stack_kamikudaki.md` の `llterm` 初出には、完全版の温度感に合わせて「まだ試作段階のスケルトン」という短い alpha 留保も補った。
 - #43 の `2-6. 起動と実証タスク green-keeper` / `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装` も 4 言語で spot-check し、`desired / actual / drift / repair` の対応、PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、直後の「捨てた数字」節への橋渡しまで日本語正本に追従していることを確認した。
+- 追加 spot-check で、`2-5` honest disclosure 末尾の `2qlJjBwdpYGOVjBkyhhL` 引用が en/zh/ko では第3章直前へ誤配置されていたことを確認した。translations 側は誤配置ブロックを除去し、`2-5` 末尾の本来位置へ戻した。末尾参考の URL 自体は維持している。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで、Team stock 3 本は local draft / dry-run / provenance spot-check まで監査済み。未解決の外部アクションは human gate 待ちの Qiita Team POST だけ。
 
 ## 次の具体的な一手
@@ -161,6 +162,7 @@
   - `3-2. LLM Wiki` 本体は、3層説明と thought circulation / Anti-Circulation Safeguards 節、製品対応づけ、「半信×半疑」の引用ブロックと URL、末尾参考リストまで局所確認・同期済みで、未確認対象はそれ以外の細い橋渡し段に絞られている。
   - 追加 spot-check で、en/zh/ko に欠落していた「半信×半疑」の引用ブロックと `alu.jp` URL を日本語正本に合わせて補い、新規ブロックを各翻訳ファイルの既存引用スタイルへ揃えた。
   - 続く追補で、未同期だった 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）も本文と末尾参考へ同期した。crop URL 数も日本語正本 16 / en 16 / zh 16 / ko 16 に揃った。
+  - その後の再監査で、`2qlJjBwdpYGOVjBkyhhL` は「未同期」ではなく、en/zh/ko で **`2-5` から第3章直前へ位置ずれした状態** だったことが分かった。現在は 3 言語とも `2-5` honest disclosure 末尾の本来位置へ戻し、第3章直前の誤配置は除去済み。
   - 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
   - 残っているのは、それ以外の未確認箇所にある細い factual / translation drift。
 

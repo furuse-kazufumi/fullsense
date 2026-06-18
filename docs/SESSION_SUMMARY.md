@@ -26,6 +26,7 @@
 - #43 companion の `qiita43_harness_loop_stack_kamikudaki.md` も full article と一次突合し、`RAPTOR / llterm / RAD` の 3 点構造、`手綱 / 輪 / 知識基盤` の圧縮軸、`AI 本体より器と回し方を設計する時代` という結論が current naming / current hedge に追従していることを確認した。
 - そのうえで `qiita43_harness_loop_stack_kamikudaki.md` の `llterm` 初出には、完全版の温度感に合わせて「まだ試作段階のスケルトン」という短い alpha 留保も補った。
 - #43 の `2-6. 起動と実証タスク green-keeper` / `2-7. 「検証可能なゴール」を持つループ — /goal という公式実装` も 4 言語で spot-check し、`desired / actual / drift / repair` の対応、PySide6 GUI / `term` 名残の補足、Haiku 既定と turn cap を含む `/goal` 説明、直後の「捨てた数字」節への橋渡しまで日本語正本に追従していることを確認した。
+- 追加 spot-check で、`2-5` honest disclosure 末尾の `2qlJjBwdpYGOVjBkyhhL` 引用が en/zh/ko では本来位置から落ち、第3章直前へ誤配置されていたことを確認した。translations 側は誤配置ブロックを除去し、`2-5` 末尾の本来位置へ戻した。末尾参考の URL 自体は維持している。
 - 2026-06-18 の終了時点で worktree は clean。#43 は companion / `green-keeper` / `/goal` 帯まで監査済み、#46 は JA/en/zh/ko/kamikudaki の本文と endmatter まで監査済み、Team stock 3 本は local draft / dry-run / provenance spot-check まで完了。未解決の外部アクションは human gate 待ちの Qiita Team POST だけ。
 - public Qiita 記事 `bf1cfe3b4f40b87f068d` への本文更新は実施済み。
 - `.llterm/loop_ledger.jsonl` は deindex 実行済み。`.gitignore` にファイル単位で追記し、local-only telemetry として on-disk では保持しつつ Git 追跡から外す運用へ切り替えた。
@@ -137,6 +138,7 @@
 - さらに末尾参考リストにも `Ud7lZLbei1F5xaFuAq3i` を同期し、新規ブロックの `Snack Bus-e / Forbidden Shibukawa (Alu)` 表記と埋込リンク形式を各翻訳ファイル内の既存引用スタイルへ揃えた。
 - 続く追補で、未同期だった 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` / `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）も本文と末尾参考へ同期した。
   - crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に揃い、引用導線の非対称は解消した。
+- その後の再監査で、`2qlJjBwdpYGOVjBkyhhL` は「未同期」ではなく、en/zh/ko で **`2-5` から第3章直前へ位置ずれした状態** だったことが分かった。現在は 3 言語とも `2-5` honest disclosure 末尾の本来位置へ戻し、第3章直前の誤配置は除去済み。
 - さらに参考文献節と末尾注記（`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙）も spot-check し、4 言語とも出典束と留保注記が日本語正本に追従していることを確認した。
 - `loop_ledger` の恒久対策は commit `7745f84` で実施済み。`git rm --cached .llterm/loop_ledger.jsonl` と `.gitignore` 追記により、以後は tracked ノイズを発生させず local-only telemetry として保持する。
   - 運用ルール: `git add .` は引き続き避け、handoff は `git add docs/SESSION_SUMMARY.md docs/next_plan.md` のような名指し add に固定する。

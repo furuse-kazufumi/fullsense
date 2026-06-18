@@ -133,6 +133,9 @@ nav_order: 95
    その後の追補で、未同期だった 4 件（`MDsuuBm0xXPgngwyQve0` / `2qlJjBwdpYGOVjBkyhhL` /
    `CPon283udq6PfvfKrxAP` / `H4Pix38XWLRS077emoZC`）も本文と末尾参考へ同期した。
    これで crop URL 数は日本語正本 16 / en 16 / zh 16 / ko 16 に揃っている。
+   ただし再監査で、`2qlJjBwdpYGOVjBkyhhL` は単純な未同期ではなく、
+   en/zh/ko で **`2-5` honest disclosure 末尾から第3章直前へ位置ずれ**していたことが判明した。
+   現在は 3 言語とも `2-5` 末尾の本来位置へ戻し、第3章直前の誤配置は除去済み。
    参考文献節と末尾の留保注記も 4 言語で spot-check 済みで、今後の drift 対象からはいったん外している。
    導入部（「捨てた数字」フック / 一次情報への錨 / 第2章後の独立 honest disclosure 節への前振り）も
    4 言語で spot-check 済みで、異常値を捨てる作法と本稿の主題提示まで日本語正本に追従している。

@@ -388,6 +388,10 @@ llterm의 안전 층 `safety.py`의 `SafetyPolicy.classify`는, 각 액션을 **
 
 "LLM이 안전 층을 우회할 수 없다"는, 코드상의 경로(`LLMStrategy → parse_action → runner.SafetyPolicy`)로서 구조적으로 보증되어 있다. 다만 이것은 "**llterm의 Executor를 거쳐서만 명령을 실행한다**"는 전제에 의존하는, **조건부 명제**다. `codex exec` 자체는 `-s read-only`의 샌드박스로 부작용을 일으키지 않는 설계지만, 만약 장래에 Executor 바깥에서 LLM에게 직접 셸을 두드리게 하는 경로를 더하면, 보증은 무너진다. **현 상태의 구현에 그 경로는 없다** — 그래서 제목을 무조건의 "우회할 수 없다"가 아니라 "현 상태의 구현에서는 우회할 수 없다"로 해 두었다.
 
+> 🗨️ "성과는? 거짓말해도 돼? 확인을 구하는 건 오히려 정직하다..." — [스낵 버스에 / 포비든 시부카와(Forbidden Shibukawa, Alu)](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
+>
+> (막간) "확인을 구한다"는 것은 약함이 아니라 **정직함**이다. llterm의 `CONFIRM`도 같다 — 망설여지면 멈추고 묻는다. 고삐를 쥔 인간에게 판단을 되돌려 주는 것, 이것이 "우회할 수 없는 브레이크"의 작법이다.
+
 ### 2-6. 기동과 실증 태스크 green-keeper
 
 llterm의 기동 명령은 `llterm` 이다. 현행 구현에서는 이것이 **PySide6 GUI 엔트리포인트**로 기동하며, 창 안에서 프로젝트 선택, `next_plan` / `last_outcome`의 인계 표시, 기본 30초 뒤 활성 프로젝트 자동 계속을 다룬다. 이름에 `term` 이 남아 있는 것은 terminal 계열에서 출발한 흔적일 뿐이다. 첫 실증 태스크는 **green-keeper** 다.
@@ -456,10 +460,6 @@ Claude Code 공식의 `/goal` 명령이, 이것의 교과서적인 구현이다.
 > 🗨️ "무지의 지(無知의 知)" — [스낵 버스에 / 포비든 시부카와(Forbidden Shibukawa, Alu)](https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l)
 >
 > (막간) "나는 모른다, 는 것을 알고 있다" — 이것이 honest disclosure의 정신이다. AI는 모르는 것도 유창하게 말해 버릴 수 있다. 그래서 인간 쪽에 "여기는 미검증이다"라고 선을 긋는 눈이 필요하다. 제1장의 "알고리즘 이해"도, 결국은 이 **무지의 지**의 한 형태인 것이라고 생각한다.
-
-> 🗨️ "성과는? 거짓말해도 돼? 확인을 구하는 건 오히려 정직하다..." — [스낵 버스에 / 포비든 시부카와(Forbidden Shibukawa, Alu)](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
->
-> (막간) "확인을 구한다"는 것은 약함이 아니라 **정직함**이다. llterm의 `CONFIRM`도 같다 — 망설여지면 멈추고 묻는다. 고삐를 쥔 인간에게 판단을 되돌려 주는 것, 이것이 "우회할 수 없는 브레이크"의 작법이다.
 
 ---
 

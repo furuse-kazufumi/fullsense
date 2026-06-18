@@ -389,6 +389,10 @@ In fact, the tests demonstrate that "**even if the LLM proposes a dangerous dele
 
 "The LLM cannot bypass the safety layer" is structurally guaranteed as a code path (`LLMStrategy → parse_action → runner.SafetyPolicy`). But this is a **conditional proposition** that depends on the premise that "**commands are executed only via llterm's Executor.**" `codex exec` itself is designed not to cause side effects, running in an `-s read-only` sandbox, but if a path were added in the future to let the LLM hit the shell directly outside the Executor, the guarantee would collapse. **There is no such path in the current implementation** — so I made the heading not the unconditional "cannot be bypassed" but "cannot be bypassed in the current implementation."
 
+> 🗨️ "Results? Is it okay to lie? Asking for confirmation is, on the contrary, honest..." — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
+>
+> (Interlude) "Asking for confirmation" is not weakness but **honesty**. llterm's `CONFIRM` is the same — when in doubt, stop and ask. Returning the judgment to the human holding the reins is the discipline of an "unbypassable brake."
+
 ### 2-6. Launch and the Demonstration Task green-keeper
 
 llterm's launch command is `llterm`. In the current implementation it starts as a **PySide6 GUI entry point**, where the window handles project selection, carry-over display of `next_plan` / `last_outcome`, and automatic continuation of the active project after the default 30 seconds. The name still contains `term` as a remnant of its terminal-origin line. The first demonstration task is **green-keeper**.
@@ -457,10 +461,6 @@ The harness is powerful. But to speak of that power, you don't need false attrib
 > 🗨️ "Knowing that one does not know." — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/JRY5aSqHgjWRo1QnfR2l)
 >
 > (Interlude) "Knowing that you don't know" — this is the spirit of honest disclosure. An AI can fluently hold forth even on what it doesn't know. That's why the human side needs an eye that draws the line: "this part is unverified." Chapter 1's "algorithmic understanding," too, is in the end, I think, one form of this **knowing-that-one-does-not-know**.
-
-> 🗨️ "Results? Is it okay to lie? Asking for confirmation is, on the contrary, honest..." — [Snack Bus-e / Forbidden Shibukawa (Alu)](https://alu.jp/series/スナックバス江/crop/2qlJjBwdpYGOVjBkyhhL)
->
-> (Interlude) "Asking for confirmation" is not weakness but **honesty**. llterm's `CONFIRM` is the same: when in doubt, stop and ask. Returning the judgment to the human holding the reins is the discipline of an "unbypassable brake."
 
 ---
 
