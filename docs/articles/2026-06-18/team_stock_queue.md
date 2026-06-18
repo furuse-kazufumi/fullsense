@@ -19,9 +19,9 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 | slug | title | source | status | note |
 | --- | --- | --- | --- | --- |
-| `team_stock_semantic_governance.md` | Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」 | #43 `2-2. security face` | `local_draft / dry_run_ok / blocked_human_gate` | `ignorePublish: true` のまま。実 POST は user GO 待ち |
+| `team_stock_semantic_governance.md` | Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」 | #43 `2-2. loop engineering にもセキュリティの顔がある` | `local_draft / dry_run_ok / blocked_human_gate` | `ignorePublish: true` のまま。実 POST は user GO 待ち |
 | `team_stock_llm_wiki_anti_circulation.md` | LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」 | #43 `3-2. LLM Wiki` | `local_draft / dry_run_ok / blocked_human_gate` | anti-circulation の境界を公開前に再確認 |
-| `team_stock_ctx2549_postmortem.md` | `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった | #46 `ctx 2549% / turn boundary / flaky test` | `local_draft / dry_run_ok / blocked_human_gate` | internal logs / evidence snapshot の非公開境界を維持 |
+| `team_stock_ctx2549_postmortem.md` | `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった | #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` | `local_draft / dry_run_ok / blocked_human_gate` | internal logs / evidence snapshot の非公開境界を維持 |
 
 ## POST 後の記録欄
 
