@@ -447,6 +447,20 @@ def _read_item(item_id: str, token: str) -> tuple[int, dict | str]:
     return _req("GET", f"/items/{item_id}", token)
 
 
+def _normalize_private_readback(v) -> tuple[bool | None, str | None]:
+    if isinstance(v, bool):
+        return v, None
+    if v is None:
+        return None, "private field missing"
+    if isinstance(v, str):
+        s = v.strip().lower()
+        if s in ("true", "yes", "1"):
+            return True, None
+        if s in ("false", "no", "0"):
+            return False, None
+    return None, f"private field is non-bool ({v!r})"
+
+
 def _format_item_readback(item_id: str, code: int, res: dict | str, *, expected_private: bool | None = None) -> tuple[bool, str]:
     if code == 401:
         return False, f"AUTH FAIL ({code}): token invalid or expired for team '{TEAM}'"
@@ -467,13 +481,15 @@ def _format_item_readback(item_id: str, code: int, res: dict | str, *, expected_
         expected_host = f"https://{TEAM}.qiita.com/"
         if not url.startswith(expected_host):
             return False, f"FAIL ({code}): item url host drifted outside team '{TEAM}': {url}"
-        private_value = res.get("private")
-        if expected_private is not None and private_value is not expected_private:
+        private_value, private_error = _normalize_private_readback(res.get("private"))
+        if private_error:
+            return False, f"FAIL ({code}): item id={item_id} {private_error}; cannot confirm Team visibility"
+        if expected_private is not None and private_value != expected_private:
             return False, (
                 f"FAIL ({code}): item id={item_id} readback private={private_value} "
                 f"did not match intended private={expected_private}"
             )
-        state_hint = "READABLE PRIVATE" if private_value is True else "READABLE"
+        state_hint = "READABLE PRIVATE" if private_value else "READABLE"
         return True, (
             f"{state_hint} ({code}): {url}  id={res_id}  "
             f"title={res.get('title')}  {format_team_visibility(res)}"
@@ -729,13 +745,20 @@ def cmd_post(args: list[str]) -> int:
         code, res = _req("POST", "/items", token, p)
     if code in (200, 201) and isinstance(res, dict):
         readback_id = str(res.get("id") or item_id or "").strip()
-        ok, line = _format_item_readback(readback_id, code, res, expected_private=private_value)
-        if not item_id and res.get("id"):
-            _writeback_id(files[0], res.get("id"))  # persist create id even if readback blocks, to avoid duplicate create
+        rb_code, rb_res = _read_item(readback_id, token)
+        ok, line = _format_item_readback(readback_id, rb_code, rb_res, expected_private=private_value)
         if not ok:
             print(line)
+            if not item_id and readback_id:
+                print(
+                    "post: create succeeded but verification failed; "
+                    f"item may already be live on team (id={readback_id}). "
+                    "frontmatter id was NOT persisted; investigate before retrying."
+                )
             return 1
-        print(f"OK ({code}): {res.get('url')}  id={res.get('id')}  {format_team_visibility(res)}")
+        if not item_id and readback_id:
+            _writeback_id(files[0], readback_id)
+        print(f"OK ({code}): {res.get('url')}  id={res.get('id')}  {format_team_visibility(rb_res if isinstance(rb_res, dict) else res)}")
         return 0
     print(f"FAIL ({code}): {res}")
     return 1

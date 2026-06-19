@@ -731,7 +731,7 @@ def test_qiita_team_post_cmd_post_patch_does_not_resend_group_url_name(tmp_path,
 
     assert rc == 0
     assert "OK (200)" in out
-    assert len(calls) == 1
+    assert len(calls) == 2
     method, req_path, token, payload = calls[0]
     assert method == "PATCH"
     assert req_path == "/items/team-item-id"
@@ -742,6 +742,7 @@ def test_qiita_team_post_cmd_post_patch_does_not_resend_group_url_name(tmp_path,
     assert payload["private"] is False
     assert payload["tweet"] is False
     assert "group_url_name" not in payload
+    assert calls[1] == ("GET", "/items/team-item-id", "fake-token", None)
 
 
 def test_qiita_team_post_cmd_post_patch_can_resend_group_url_name_with_opt_in(tmp_path, capsys, monkeypatch):
@@ -1030,7 +1031,7 @@ def test_qiita_team_post_cmd_post_surfaces_visibility_readback(tmp_path, capsys,
     )
     monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
-    def fake_req(method, path, token, payload):
+    def fake_req(method, path, token, payload=None):
         return 200, {
             "id": "team-item-id",
             "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
@@ -1066,7 +1067,7 @@ def test_qiita_team_post_cmd_post_create_surfaces_visibility_readback(tmp_path, 
     )
     monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
-    def fake_req(method, path, token, payload):
+    def fake_req(method, path, token, payload=None):
         return 201, {
             "id": "team-item-id",
             "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
@@ -1384,6 +1385,47 @@ def test_qiita_team_post_cmd_show_blocks_empty_url_readback(capsys, monkeypatch)
     assert "returned without url; cannot confirm team host identity" in out
 
 
+def test_qiita_team_post_cmd_show_blocks_missing_private_readback(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, path, token, payload=None):
+        return 200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_show(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "private field missing" in out
+
+
+def test_qiita_team_post_cmd_show_blocks_non_bool_private_readback(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, path, token, payload=None):
+        return 200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": "maybe",
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_show(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "private field is non-bool" in out
+
+
 def test_qiita_team_post_cmd_scan_default_accepts_md_bak_and_normalizes_name(tmp_path, capsys, monkeypatch):
     article = tmp_path / "nested" / "QIITA_#32_llcore_cpu_poc_battery.md.bak"
     article.parent.mkdir(parents=True)
@@ -1514,7 +1556,7 @@ def test_qiita_team_post_cmd_post_blocks_on_qiita_token_fallback(tmp_path, capsy
     assert "post: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
 
 
-def test_qiita_team_post_cmd_post_persists_create_id_before_empty_url_readback_block(tmp_path, capsys, monkeypatch):
+def test_qiita_team_post_cmd_post_does_not_persist_create_id_when_get_readback_blocks(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(
         "---\n"
@@ -1531,9 +1573,10 @@ def test_qiita_team_post_cmd_post_persists_create_id_before_empty_url_readback_b
     writeback_calls = []
 
     def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
         return 201, {
             "id": "team-item-id",
-            "url": "",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
             "title": "hello",
             "private": True,
             "group": {"url_name": "general", "private": False},
@@ -1541,6 +1584,14 @@ def test_qiita_team_post_cmd_post_persists_create_id_before_empty_url_readback_b
         }
 
     monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item", lambda item_id, token: (200, {
+        "id": item_id,
+        "url": "",
+        "title": "hello",
+        "private": True,
+        "group": {"url_name": "general", "private": False},
+        "organization_url_name": None,
+    }))
     monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
 
     rc = qtp.cmd_post([str(path), "--yes"])
@@ -1548,10 +1599,11 @@ def test_qiita_team_post_cmd_post_persists_create_id_before_empty_url_readback_b
 
     assert rc == 1
     assert "returned without url; cannot confirm team host identity" in out
-    assert writeback_calls == [(str(path), "team-item-id")]
+    assert "frontmatter id was NOT persisted" in out
+    assert writeback_calls == []
 
 
-def test_qiita_team_post_cmd_post_blocks_private_readback_mismatch_after_persisting_id(tmp_path, capsys, monkeypatch):
+def test_qiita_team_post_cmd_post_blocks_private_get_readback_mismatch_without_persisting_id(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(
         "---\n"
@@ -1568,16 +1620,25 @@ def test_qiita_team_post_cmd_post_blocks_private_readback_mismatch_after_persist
     writeback_calls = []
 
     def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
         return 201, {
             "id": "team-item-id",
             "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
             "title": "hello",
-            "private": False,
+            "private": True,
             "group": {"url_name": "general", "private": False},
             "organization_url_name": None,
         }
 
     monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item", lambda item_id, token: (200, {
+        "id": item_id,
+        "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+        "title": "hello",
+        "private": False,
+        "group": {"url_name": "general", "private": False},
+        "organization_url_name": None,
+    }))
     monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
 
     rc = qtp.cmd_post([str(path), "--yes"])
@@ -1585,6 +1646,53 @@ def test_qiita_team_post_cmd_post_blocks_private_readback_mismatch_after_persist
 
     assert rc == 1
     assert "did not match intended private=True" in out
+    assert "frontmatter id was NOT persisted" in out
+    assert writeback_calls == []
+
+
+def test_qiita_team_post_cmd_post_persists_create_id_only_after_get_readback_passes(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+    writeback_calls = []
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item", lambda item_id, token: (200, {
+        "id": item_id,
+        "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+        "title": "hello",
+        "private": True,
+        "group": {"url_name": "general", "private": False},
+        "organization_url_name": None,
+    }))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "OK (201)" in out
     assert writeback_calls == [(str(path), "team-item-id")]
 
 
