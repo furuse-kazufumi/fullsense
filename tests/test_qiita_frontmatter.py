@@ -750,8 +750,9 @@ def test_qiita_team_post_cmd_post_patch_does_not_resend_group_url_name(tmp_path,
 
     assert rc == 0
     assert "OK (200)" in out
-    assert len(calls) == 2
-    method, req_path, token, payload = calls[0]
+    assert len(calls) == 3
+    assert calls[0] == ("GET", "/items/team-item-id", "fake-token", None)
+    method, req_path, token, payload = calls[1]
     assert method == "PATCH"
     assert req_path == "/items/team-item-id"
     assert token == "fake-token"
@@ -761,7 +762,7 @@ def test_qiita_team_post_cmd_post_patch_does_not_resend_group_url_name(tmp_path,
     assert payload["private"] is False
     assert payload["tweet"] is False
     assert "group_url_name" not in payload
-    assert calls[1] == ("GET", "/items/team-item-id", "fake-token", None)
+    assert calls[2] == ("GET", "/items/team-item-id", "fake-token", None)
 
 
 def test_qiita_team_post_cmd_post_patch_can_resend_group_url_name_with_opt_in(tmp_path, capsys, monkeypatch):
@@ -797,7 +798,7 @@ def test_qiita_team_post_cmd_post_patch_can_resend_group_url_name_with_opt_in(tm
 
     assert rc == 0
     assert "OK (200)" in out
-    assert calls[0][3]["group_url_name"] == "general"
+    assert calls[1][3]["group_url_name"] == "general"
 
 
 def test_qiita_team_post_cmd_post_patch_blocks_opt_in_without_group_target(tmp_path, capsys, monkeypatch):
@@ -1031,7 +1032,7 @@ def test_qiita_team_post_cmd_post_patch_preserves_private_true(tmp_path, capsys,
 
     assert rc == 0
     assert "OK (200)" in out
-    assert calls[0][3]["private"] is True
+    assert calls[1][3]["private"] is True
 
 
 def test_qiita_team_post_cmd_post_surfaces_visibility_readback(tmp_path, capsys, monkeypatch):
@@ -1874,6 +1875,15 @@ def test_qiita_team_post_cmd_post_blocks_patch_response_id_mismatch(tmp_path, ca
     monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
     def fake_req(method, req_path, token, payload=None):
+        if method == "GET":
+            return 200, {
+                "id": "expected-item-id",
+                "url": "https://fullsense.qiita.com/furuse-kazufumi/items/expected-item-id",
+                "title": "hello",
+                "private": True,
+                "group": {"url_name": "general", "private": False},
+                "organization_url_name": None,
+            }
         assert method == "PATCH"
         return 200, {
             "id": "wrong-item-id",
@@ -2053,8 +2063,136 @@ def test_qiita_team_post_cmd_post_blocks_unverified_patch_until_readback_recover
     out = capsys.readouterr().out
 
     assert rc == 1
-    assert "marked qiita_team_verified=false" in out
+    assert "qiita_team_verified=false" in out
     assert "authoritative pre-PATCH readback failed" in out
+
+
+def test_qiita_team_post_cmd_post_blocks_marker_missing_patch_until_readback_recovers(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+    monkeypatch.setattr(qtp, "_read_item_with_retry", lambda item_id, token: (404, "not found"))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "qiita_team_verified=missing" in out
+    assert "authoritative pre-PATCH readback failed" in out
+
+
+def test_qiita_team_post_cmd_post_allows_corrective_patch_drift_when_readable(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+    req_calls = []
+
+    def fake_req(method, req_path, token, payload=None):
+        req_calls.append((method, req_path, payload))
+        assert method == "PATCH"
+        return 200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    read_results = [
+        (200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": False,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }),
+        (200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }),
+    ]
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item_with_retry", lambda item_id, token: read_results.pop(0))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert req_calls[0][0] == "PATCH"
+    assert "pre-PATCH drift detected: private False -> intended True." in out
+    assert "OK (200)" in out
+
+
+def test_qiita_team_post_cmd_post_patch_without_group_assert_keeps_verified_false(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "PATCH"
+        return 200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": False,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item_with_retry", lambda item_id, token: (200, {
+        "id": item_id,
+        "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+        "title": "hello",
+        "private": False,
+        "group": {"url_name": "general", "private": False},
+        "organization_url_name": None,
+    }))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "leaving qiita_team_verified=false" in out
+    text = path.read_text(encoding="utf-8")
+    assert "qiita_team_verified: false" in text
 
 
 def test_qiita_team_post_cmd_post_reports_writeback_io_failure_after_create(tmp_path, capsys, monkeypatch):
@@ -2126,7 +2264,7 @@ def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path,
 
     assert rc == 0
     assert "OK (200)" in out
-    assert calls[0][3]["private"] is True
+    assert calls[1][3]["private"] is True
 
 
 def test_qiita_team_post_parse_private_bool_returns_private_on_error():

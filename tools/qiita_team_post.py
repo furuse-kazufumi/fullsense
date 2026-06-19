@@ -472,12 +472,15 @@ def _read_item_with_retry(item_id: str, token: str, *, attempts: int = 3, delay_
     # Retry only the "just wrote it and the read path has not converged yet" case.
     # We intentionally do not retry code=0 transport failures or stale 200 payloads here;
     # those stay fail-closed and must be investigated as real readback mismatches.
-    for attempt in range(attempts):
+    last_code: int = 404
+    last_res: dict | str = "not found"
+    for attempt in range(max(attempts, 1)):
         code, res = _read_item(item_id, token)
+        last_code, last_res = code, res
         if code != 404 or attempt == attempts - 1:
             return code, res
         time.sleep(delay_s * (attempt + 1))
-    raise AssertionError("unreachable")
+    return last_code, last_res
 
 
 def _normalize_private_readback(v) -> tuple[bool | None, str | None]:
@@ -543,6 +546,37 @@ def _format_item_readback(
             f"title={res.get('title')}  {format_team_visibility(res)}"
         )
     return False, f"FAIL ({code}): {res}"
+
+
+def _current_group_url_name(res: dict | str) -> str | None:
+    if not isinstance(res, dict):
+        return None
+    group = res.get("group")
+    if not isinstance(group, dict):
+        return None
+    return _clean_nullish_scalar(group.get("url_name"))
+
+
+def _visibility_drift_notes(
+    res: dict | str,
+    *,
+    expected_private: bool,
+    expected_group_url_name: str | None,
+) -> list[str]:
+    if not isinstance(res, dict):
+        return []
+    notes: list[str] = []
+    private_value, private_error = _normalize_private_readback(res.get("private"))
+    if private_error:
+        notes.append(f"private unreadable ({private_error})")
+    elif private_value != expected_private:
+        notes.append(f"private {private_value} -> intended {expected_private}")
+    current_group_url_name = _current_group_url_name(res)
+    if expected_group_url_name is not None and current_group_url_name != expected_group_url_name:
+        notes.append(
+            f"group.url_name {current_group_url_name or '(none)'} -> intended {expected_group_url_name}"
+        )
+    return notes
 
 
 def cmd_preflight(args: list[str]) -> int:
@@ -707,12 +741,12 @@ def _writeback_scalar(path: str, key: str, value: str, *, skip_if_real: bool = F
     if end == -1:
         return
     head, fm, tail = text[:3], text[3:end], text[end:]
-    m = re.search(rf"^(\s*{re.escape(key)}:\s*)(.*)$", fm, re.M)
+    m = re.search(rf"^(\s*{re.escape(key)}:\s*)([^#\n]*?)(\s*(#.*)?)$", fm, re.M)
     if m:
-        cur = m.group(2).split("#", 1)[0].strip().strip("'\"")
+        cur = m.group(2).strip().strip("'\"")
         if skip_if_real and cur and cur.lower() not in ("null", "none"):
             return
-        fm = fm[:m.start()] + m.group(1) + value + fm[m.end():]
+        fm = fm[:m.start()] + m.group(1) + value + m.group(3) + fm[m.end():]
     else:
         fm = fm + f"\n{key}: {value}"
     with open(path, "w", encoding="utf-8") as f:
@@ -810,19 +844,38 @@ def cmd_post(args: list[str]) -> int:
     if resend_patch_group and patch_group_target is None:
         print(f"BLOCKED: {PATCH_GROUP_URL_NAME_BLOCK}")
         return 1
-    if item_id and verified_state is False:
+    if item_id and verified_state is not True:
         pre_code, pre_res = _read_item_with_retry(item_id, token)
         pre_ok, pre_line = _format_item_readback(
             item_id,
             pre_code,
             pre_res,
+        )
+        if not pre_ok:
+            marker_state = "missing" if verified_state is None else "false"
+            print(
+                f"BLOCKED: item id={item_id} has qiita_team_verified={marker_state} "
+                f"and authoritative pre-PATCH readback failed: {pre_line}"
+            )
+            print("post: resolve the existing Team visibility mismatch before sending another PATCH.")
+            return 1
+        drift_notes = _visibility_drift_notes(
+            pre_res,
             expected_private=private_value,
             expected_group_url_name=expected_group_target,
         )
-        if not pre_ok:
-            print(f"BLOCKED: item id={item_id} is marked qiita_team_verified=false and authoritative pre-PATCH readback failed: {pre_line}")
-            print("post: resolve the existing Team visibility mismatch before sending another PATCH.")
-            return 1
+        if drift_notes:
+            print(
+                "pre-PATCH drift detected: "
+                + "; ".join(drift_notes)
+                + ". PATCH will overwrite the current Team state."
+            )
+        elif not resend_patch_group:
+            current_group = _current_group_url_name(pre_res)
+            print(
+                "pre-PATCH readback: current visibility is readable, but "
+                f"group.url_name remains unverified for this PATCH path (current={current_group or '(none)'})."
+            )
     if item_id:
         code, res = _req("PATCH", f"/items/{item_id}", token, p)
     else:
@@ -873,12 +926,21 @@ def cmd_post(args: list[str]) -> int:
                     "re-running the same PATCH is idempotent, but verify visibility before retrying."
                 )
             return 1
+        fully_verified = expected_group_target is not None
         try:
-            _writeback_team_verified(files[0], True)
+            _writeback_team_verified(files[0], fully_verified)
         except OSError as e:
-            print(f"FAIL ({code}): authoritative readback passed but local verification marker writeback failed for id={readback_id}: {e}")
+            print(
+                f"FAIL ({code}): authoritative readback passed but local verification marker "
+                f"writeback failed for id={readback_id}: {e}"
+            )
             print(f"post: server state for id={readback_id} is already updated; fix the local file before retrying.")
             return 1
+        if not fully_verified:
+            print(
+                "post: authoritative readback passed for private/url/id, but group.url_name was not "
+                "asserted on this PATCH path; leaving qiita_team_verified=false."
+            )
         print(f"OK ({code}): {rb_res.get('url')}  id={readback_id}  {format_team_visibility(rb_res)}")
         return 0
     print(f"FAIL ({code}): {res}")
