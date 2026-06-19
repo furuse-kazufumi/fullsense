@@ -4,7 +4,7 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 ## この文書の役割
 
-- **正本**: 投稿待ち一覧と現在の blocker をここに集約する。外部判断の記録は **POST 後の記録欄 `note`** を canonical field とする
+- **正本**: 投稿待ち一覧と現在の blocker をここに集約する。外部判断の記録の canonical field は **POST 後の記録欄 `visible range memo` / `rollback needed` / `note`** とする
 - `team_stock_publish_plan.md`: 公開順・human gate 条件・rollback 注意の正本
 
 ## 状態定義
@@ -71,12 +71,12 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 8. 2026-06-19 の local draft 再確認では、3 本とも frontmatter に `group_url_name` が無く、`dry-run ... --patch-group-url-name` は全件 `PATCH_GROUP_URL_NAME_BLOCK` で停止した。つまり opt-in PATCH 経路は実装済みだが、**human が concrete target を決めて source に入れるまでは実行不能**である
 9. 次の外部 remediation 順序は **containment first / Team UI second / opt-in PATCH last** とする。未認証 HTML GET / public direct probe で positive が出た記事はその記事だけ即 containment 候補に上げる。opt-in PATCH はローカル実装と fail-closed guard までは確認済みだが、既共有 item に対する締め直し効果が一次未確認だからである
 10. Team UI remediation に進む場合は、`team_stock_publish_plan.md` の **Team UI remediation checklist** を正本として、変更前後の Team API GET / Team UI / 未認証 HTML GET / direct probe / source frontmatter の差分だけを記録する
-11. **diagnosis 完了**は、対象 3 本それぞれで **5 ソース** `Team UI の share target / private state`、`Team API GET の group.url_name / private / organization_url_name`、`未認証 HTML GET`、`public direct probe`、`source frontmatter の private / group_url_name`（intended state ラベル）を同じターンで並べ、share target 起因か private state 起因か、または未確定かを 1 行で判定できる状態を指す
+11. **diagnosis 完了**は、対象 3 本それぞれで **5 ソース** `Team UI の share target / private state`、`Team API GET の group.url_name / private / organization_url_name`、`未認証 HTML GET`、`public direct probe`、`source frontmatter の private / group_url_name`（intended state ラベル）を同じターンで並べ、share target 起因か private state 起因か、または未確定かを 1 行で判定できる状態を指す。`Team API GET / 未認証 HTML GET / public direct probe` は **3 種再取得ソース**として同ターンで採り直す
 12. 判定基準は project-local rule として暫定固定する。`share target 起因` は intended `private` 意図が揃っているのに target だけが intended target から外れている場合、`private state 起因` は target が揃っているのに Team UI / API の `private` 系だけが intended state から外れている場合とする。frontmatter は intended state のラベルであり、実露出の証拠には使わない
-13. 5 ソースが矛盾したときの裁定順も project-local rule として暫定固定する。優先順位は `未認証 HTML GET / public direct probe の外形的事実` > `Team UI 表示` > `Team API GET` > `source frontmatter` とし、`200` かつ対象記事の title / body 断片を読めた場合だけ `positive` とする。`302 / 403 / 404` や空本文は **未確定** であり、安全証明に使わない
+13. 5 ソースが矛盾したときの裁定順も **我々のローカル運用ルール**として暫定固定する。優先順位は `未認証 HTML GET / public direct probe の外形的事実` > `Team UI 表示` > `Team API GET` > `source frontmatter` とし、**実 Team 記事 URL** への `200` かつ対象記事の title / body 断片を読めた場合だけ `positive` とする。`302 / 403 / 404` や空本文は **未確定** であり、安全証明に使わない。public 面しか叩けない probe は `無情報` と記録する
 14. `未確定` は catch-all の保留ではなく、default で **fail-closed 候補**に送る。`現状維持で記録だけ続ける` を選ぶ場合は、`POST 後の記録欄` の `note` に **今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る** と、次回の解禁条件を 1 行で残す。同じ理由での no-op retain は 1 回までとし、2 回目に入る前に **暫定 private 化してから再診断する** 選択肢を必ず human-gate に出す。時間上限は次回 human-gate までとする
 15. 3 本は一括処理しない。**1 本でも positive が出たらその記事だけ containment / remediation**、残りは diagnosis 継続とする
-16. intended state の baseline は option 選択前に 3 本それぞれで固定する。source frontmatter の `private` / `group_url_name` と、人間が意図した公開範囲メモを同じ行で扱う
+16. intended state の baseline は option 選択前に 3 本それぞれで固定する。source frontmatter の `private` / `group_url_name` と、人間が意図した公開範囲メモを同じ行で扱う。frontmatter は intended state の根拠であり、実露出の証拠には使わない
 
 補足:
 
@@ -89,7 +89,7 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 - POST 成功後:
   - Queue 表の `status` を `published` に更新する
   - `POST 後の記録欄` に `item id` / Team URL / visible range / rollback needed / note を記入する
-  - `visible range memo` には `observed_at` / `api_status` / `html_status` / `direct_status` / `verdict` を構造化して残す
+  - `visible range memo` には `observed_at` / `team_url` / `api_status` / `html_status` / `direct_status` / `cache_bust` / `verdict` を構造化して残す
   - blockers から解消済み事項を外すか、残る不確実性だけに絞る
 - rollback 実施後:
   - Queue 表の `status` を `rollback_applied` に更新する
