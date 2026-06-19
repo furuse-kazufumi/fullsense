@@ -254,13 +254,19 @@ def cmd_verify(_args: list[str]) -> int:
 
 
 def build_payload(meta: dict, body: str) -> dict:
-    return {
+    payload = {
         "title": infer_title(meta, body),
         "body": body,
         "tags": norm_tags(meta),
         "private": as_bool(meta.get("private"), default=True),
         "tweet": False,
     }
+    # Team visibility can depend on an explicit share target. Require callers
+    # to spell out group_url_name on create instead of relying on implicit
+    # Team defaults such as "General".
+    if "group_url_name" in meta:
+        payload["group_url_name"] = _clean_nullish_scalar(meta.get("group_url_name"))
+    return payload
 
 
 def cmd_dry_run(args: list[str]) -> int:
@@ -272,18 +278,23 @@ def cmd_dry_run(args: list[str]) -> int:
     p = build_payload(meta, body)
     finds = safety_findings(meta, body)
     item_id = real_id(meta)
+    has_group_url_name = "group_url_name" in meta
     gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
     gate_key_error = find_ignore_publish_key_issue(meta)
     print(f"action: {'PATCH update id=' + str(item_id) if item_id else 'POST create'} on team '{TEAM}'")
     print(f"title : {p['title']}")
     print(f"tags  : {[t['name'] for t in p['tags']]}")
     print(f"private: {p['private']}   body chars: {len(body)}")
+    if "group_url_name" in p:
+        print(f"group_url_name: {p['group_url_name']}")
     if gate_key_error:
         print(f"BLOCKED: {gate_key_error}")
     elif gate_error:
         print(f"BLOCKED: {gate_error}")
     elif gate_value is True:
         print(IGNORE_PUBLISH_WARNING)
+    if not item_id and not has_group_url_name:
+        print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit group_url_name (or null) to avoid implicit sharing defaults.")
     if finds:
         print("WARNINGS:")
         for x in finds:
@@ -291,7 +302,7 @@ def cmd_dry_run(args: list[str]) -> int:
     else:
         print("registration-safe: no findings")
     print("\n(dry-run: nothing sent. add `post <file> --yes` to actually publish.)")
-    return 1 if gate_key_error or gate_error else 0
+    return 1 if gate_key_error or gate_error or (not item_id and not has_group_url_name) else 0
 
 
 def _writeback_id(path: str, item_id: str) -> None:
@@ -351,6 +362,9 @@ def cmd_post(args: list[str]) -> int:
             return 1
     p = build_payload(meta, body)
     item_id = real_id(meta)
+    if not item_id and "group_url_name" not in meta:
+        print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit group_url_name (or null) to avoid implicit sharing defaults.")
+        return 1
     if item_id:
         code, res = _req("PATCH", f"/items/{item_id}", token, p)
     else:

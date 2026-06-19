@@ -44,6 +44,7 @@
 1. `ignorePublish` は公式 qiita-cli 側の草稿ガードだが、2026-06-19 時点の `tools/qiita_team_post.py` もこれを読み、`--force-ignore-publish` 無しでは fail-closed で停止する
 2. つまり Team poster で `post --yes` を通すには、`ignorePublish: true` の source に対して **human-gate 後の `--force-ignore-publish`** が別途必要である
 3. `private: true` の Team 上での実効可視範囲は未確定
+4. 2026-06-19 以降の Team create は、`group_url_name` 未指定の implicit share target を避けるため **explicit `group_url_name` 必須**へ fail-closed 化した
 4. よって、実 POST 前に user GO が必要
 
 ## POST 前に確認すること
@@ -90,11 +91,13 @@
   - `b35b429dc6dc1fde207a`
   - `6fe79ab04443f7654eca`
 - POST 後の API GET では 3 本とも `private:false` で返った
+- 同じ API GET では 3 本とも `group.url_name: general` / `group.private:false` / `organization_url_name:null` も返った
 - 2026-06-19 12:41:22 +09:00 の未認証 HTML GET では、3 本とも Team URL に対して `302` / `Location: /login?redirect_to=...` が返った
 - 2026-06-19 12:41:22 +09:00 の direct probe では、`https://qiita.com/furuse-kazufumi/items/<id>` 側に 3 本とも `404` が返った
 - ただし Team サブドメイン全体が private/public にかかわらず auth gate される可能性は残る。したがって Login redirect だけでは item の可視範囲を断定できず、**team-only と positively 確認できるまでは過剰露出の疑いを優先**する
 - なおこの `qiita.com` 側 `404` は Team scope item なら team-only / 過剰露出のどちらでも起こりうるため、**over-exposure 判定の弁別力は無い**。今回 probe した 3 本について、同時点で public 側の対応記事を直URLでは確認できなかった、という記録としてのみ使う
 - `private:false` の意味づけ自体も一次情報待ちであり、ここで言う `visibility semantics` は **プロジェクト内用語**に過ぎない。rollback / visibility tightening は別の human-gate 外部アクションとして扱う
+- 追加の現時点仮説として、2026-06-18 の poster payload では `group_url_name` を明示しておらず、観測された `group.url_name: general` は implicit General sharing を示している可能性がある。これは root-cause 仮説であって、team-only の証明でも否定でもない
 
 ## POST 後の記録先
 
