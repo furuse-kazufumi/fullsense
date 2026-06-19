@@ -80,9 +80,10 @@
   - 変更前に Team UI と Team API GET の両方で、対象 3 本の `title` / `private` / `group.url_name` / `organization_url_name` を控える
   - human が intended share target と intended private state を 3 本それぞれで明示してから UI を触る
   - remediation 中は delete を使わず、まず UI 上で share target / private state / body 差し替えのどれが可能かを切り分ける
+  - `body 差し替え` を行った場合は、変更前後の本文または該当 anchor / セクション差分も同ターンで控える
   - 変更直後に Team UI を再読込し、Team API GET でも同じ値になったことを確認する
-  - 未認証 HTML GET と `qiita.com/furuse-kazufumi/items/<id>` direct probe も再取得し、前回 2026-06-19 12:41:22 +09:00 probe との差分だけを記録する
-  - 結果は成功/失敗にかかわらず `team_stock_queue.md` の `visible range` / `rollback needed` / `note` と handoff へ同ターンで反映する
+  - 未認証 HTML GET と `qiita.com/furuse-kazufumi/items/<id>` direct probe も再取得し、**直近の visibility probe evidence の時刻**との差分だけを記録する
+  - 結果は成功/失敗にかかわらず、`team_stock_queue.md` の `visible range` / `rollback needed` / `note` へ先に反映し、その後 `docs/next_plan.md`、最後に `docs/SESSION_SUMMARY.md` の順で同ターンに反映する
 - remediation patch template (human-gate 後のみ):
   - `py -3.11 tools/qiita_team_post.py dry-run tools/qiita-cli-poc/public/team_stock_semantic_governance.md --patch-group-url-name`
   - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_semantic_governance.md --yes --force-ignore-publish --patch-group-url-name`
