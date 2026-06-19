@@ -27,16 +27,36 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 | slug | item id | Team URL | visible range memo | rollback needed | note |
 | --- | --- | --- | --- | --- | --- |
-| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | API GET で `private:false`。2026-06-19 の未認証 HTML GET は Login ページ | conditional | Team API 表示と未認証ブラウザ到達性が食い違う。rollback は別 human-gate 判断 |
-| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | API GET で `private:false`。2026-06-19 の未認証 HTML GET は Login ページ | conditional | Team API 表示と未認証ブラウザ到達性が食い違う。rollback は別 human-gate 判断 |
-| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | API GET で `private:false`。2026-06-19 の未認証 HTML GET は Login ページ | conditional | Team API 表示と未認証ブラウザ到達性が食い違う。rollback は別 human-gate 判断 |
+| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。Team API / visibility semantics の不一致は副次論点。rollback は別 human-gate 判断 |
+| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。Team API / visibility semantics の不一致は副次論点。rollback は別 human-gate 判断 |
+| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。Team API / visibility semantics の不一致は副次論点。rollback は別 human-gate 判断 |
+
+### 2026-06-19 visibility probe evidence
+
+- timestamp:
+  - `2026-06-19 12:41:22 +09:00`
+- command (API):
+  - `py -3.11 -c "import json,sys,urllib.request; sys.path.insert(0, 'tools'); from qiita_team_post import get_token; ... GET https://fullsense.qiita.com/api/v2/items/<id> with Bearer token ..."`
+- command (HTML):
+  - `Invoke-WebRequest -Uri https://fullsense.qiita.com/furuse-kazufumi/items/<id> -MaximumRedirection 0 -SkipHttpErrorCheck`
+- observed API results:
+  - `6f67e54e538c10b8f1c3` → `200`, `private:false`
+  - `b35b429dc6dc1fde207a` → `200`, `private:false`
+  - `6fe79ab04443f7654eca` → `200`, `private:false`
+- observed HTML results:
+  - `6f67e54e538c10b8f1c3` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../6f67e54e538c10b8f1c3`
+  - `b35b429dc6dc1fde207a` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../b35b429dc6dc1fde207a`
+  - `6fe79ab04443f7654eca` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../6fe79ab04443f7654eca`
+- hedge:
+  - Team サブドメインは private/public によらず auth gate される可能性があるため、この Login redirect だけでは item 可視範囲を確定できない
 
 ## blockers
 
 1. 2026-06-19 時点の `tools/qiita_team_post.py` は `ignorePublish` を読み、`ignorePublish:true` の source は `--force-ignore-publish` 無しでは fail-closed で停止する。したがってこのフラグは「未投稿」を意味せず、Team poster でも明示 override を要する source freeze として扱う
 2. 2026-06-18 の API GET では 3 本とも `private:false` で返っており、frontmatter `private:true` は Team create 後の可視範囲を保証しなかった
-3. 2026-06-19 の未認証 HTML GET では 3 本とも Login ページへ落ちたため、「一般公開で即読める」ことまでは確認されていない。current blocker は **Team API / visibility semantics の不一致** として扱う
-4. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
+3. 2026-06-19 の未認証 HTML GET では 3 本とも Login ページへ落ちたが、これは Team サブドメイン全体の auth gate でも説明できる。したがって team-only と positively 確認できるまでは **過剰露出の疑いを優先**し、`private:false` の意味づけは一次情報待ちとする
+4. current blocker の主語は「Team API / visibility semantics（プロジェクト内用語）の不一致」ではなく、**過剰露出の疑いを否定できないこと**に置く。不一致は副次論点として記録する
+5. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
 
 ## 状態更新ルール
 

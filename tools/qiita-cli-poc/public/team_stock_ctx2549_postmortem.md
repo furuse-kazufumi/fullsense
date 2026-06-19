@@ -15,7 +15,7 @@ id: 6fe79ab04443f7654eca
 # `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録
 
 > **この草稿の位置づけ**
-> #46 の `2. ターン境界と緊急割り込みは、最初から別物として設計する` / `3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた` / `6. テストも「たまたま緑」を疑う` を、後で個別公開できるよう Team stock に退避した source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `6fe79ab04443f7654eca`、API GET では `private:false` を返しています。local source では accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
+> #46 の `2. ターン境界と緊急割り込みは、最初から別物として設計する` / `3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた` / `6. テストも「たまたま緑」を疑う` を、後で個別公開できるよう Team stock に退避した source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `6fe79ab04443f7654eca`、2026-06-19 12:41:22 +09:00 の再確認では Team API GET が `private:false` を返し、未認証 HTML GET は `302 /login?redirect_to=...` でした。ただし Team サブドメイン全体の auth gate でも説明できるため、team-only と positively 確認できるまでは **過剰露出の疑いを優先**します。`private:false` の意味づけ自体は一次情報待ちで、ここで言う `visibility semantics` はプロジェクト内用語です。local source では accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
 
 > **前提**
 > `claude -p --resume` や `codex exec` のような headless CLI を turn 境界で回し続ける自走 AI harness の文脈を前提にします。

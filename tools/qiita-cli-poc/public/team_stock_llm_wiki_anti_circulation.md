@@ -15,7 +15,7 @@ id: b35b429dc6dc1fde207a
 # LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」
 
 > **この草稿の位置づけ**
-> #43 の `3-2. LLM Wiki — 「育つ知識」のパターン` から切り出した Team stock 用の source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `b35b429dc6dc1fde207a`、API GET では `private:false` を返しています。local source では accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
+> #43 の `3-2. LLM Wiki — 「育つ知識」のパターン` から切り出した Team stock 用の source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `b35b429dc6dc1fde207a`、2026-06-19 12:41:22 +09:00 の再確認では Team API GET が `private:false` を返し、未認証 HTML GET は `302 /login?redirect_to=...` でした。ただし Team サブドメイン全体の auth gate でも説明できるため、team-only と positively 確認できるまでは **過剰露出の疑いを優先**します。`private:false` の意味づけ自体は一次情報待ちで、ここで言う `visibility semantics` はプロジェクト内用語です。local source では accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
 
 > **前提**
 > RAG より一段先の「育つ知識基盤」を考えていて、要約・概念ページ・相互リンクを自前で持ちたい文脈を前提にします。

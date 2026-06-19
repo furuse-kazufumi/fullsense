@@ -55,7 +55,7 @@ nav_order: 95
   `title: >-` / `|` と single-quoted YAML の `''` エスケープを解釈できるよう修正済み。
   2026-06-18 の dry-run と public PATCH 後の API / HTML 確認では、
   英語版タイトルを正しく表示することを確認した。
-- さらに 2026-06-19 に `tests/test_qiita_frontmatter.py` へ `qiita_team_post.py` の回帰も追加し、`real_id` の nullish fallback、frontmatter `private: false` の文字列パース経路、そして **空 `private:` は default=True へ倒す**修正まで固定した。よって Team stock 3 本の `private:false` incident は、少なくとも現在の Team poster 実装では再現しない層のバグとして切り分けられ、以後は Team API / visibility semantics 側の問題として読む。
+- さらに 2026-06-19 に `tests/test_qiita_frontmatter.py` へ `qiita_team_post.py` の回帰も追加し、`real_id` の nullish fallback、frontmatter `private: false` の文字列パース経路、そして **空 `private:` は default=True へ倒す**修正まで固定した。よって Team stock 3 本の `private:false` incident は、少なくとも現在の Team poster 実装では再現しない層のバグとして切り分けられるが、だからといって可視範囲の疑いが解消したとは扱わない。
 - さらに同日、Team poster の `ignorePublish` gate も fail-closed 化し、`dry-run` でも不正値や key typo を exit 非 0 で返すようにした。`ignorePublish:true` の source は Team poster でも `--force-ignore-publish` 無しでは送れない。
 - `tools/qiita-cli-poc/convert_to_qiita_cli.py` と `scripts/publish/zenn_convert.py` も
   同じ shared parser へ切替済み。`title: >-` を文字列 `">-"` のまま持ち回る
@@ -177,7 +177,7 @@ nav_order: 95
    `6f67e54e538c10b8f1c3` / `b35b429dc6dc1fde207a` / `6fe79ab04443f7654eca`。
    2026-06-19 時点の `tools/qiita_team_post.py` は `ignorePublish:true` も読み、
    `post --yes --force-ignore-publish` を明示しない限り fail-closed で停止する。
-   ただし API GET では 3 本とも `private:false` で返り、2026-06-19 の未認証 HTML GET では 3 本とも Login ページへ落ちたため、これは「即一般公開」そのものより **Team API / visibility semantics の不一致**として扱う。
+   ただし API GET では 3 本とも `private:false` で返り、2026-06-19 12:41:22 +09:00 の未認証 HTML GET では 3 本とも `302 /login?redirect_to=...` だった。これは Team サブドメイン全体の auth gate でも説明できるため、team-only と positively 確認できるまでは **過剰露出の疑いを優先**する。`visibility semantics` は副次論点として残す。
    可視範囲の絞り込みや rollback が必要なら、以後は別の human-gate 外部アクションとして扱う。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
