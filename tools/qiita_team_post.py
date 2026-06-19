@@ -65,6 +65,20 @@ ARTICLES_DIR = os.environ.get(
     os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs", "articles")),
 )
 CHAR_LIMIT = 2_000_000  # Qiita 1 記事上限 (feedback_qiita_char_limit)
+DEFAULT_SCAN_STEMS = (
+    "QIITA_#28",
+    "QIITA_#29",
+    "QIITA_#30",
+    "QIITA_#31",
+    "QIITA_#32",
+    "QIITA_#33",
+    "QIITA_#34",
+    "QIITA_#38",
+    "QIITA_#39",
+    "QIITA_#40",
+    "QIITA_#41",
+    "QIITA_#42",
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -251,11 +265,35 @@ def safety_findings(meta: dict, body: str) -> list[str]:
 
 
 def cmd_scan(args: list[str]) -> int:
-    pattern = args[0] if args else os.path.join(ARTICLES_DIR, "QIITA_*.md")
-    files = sorted(f for f in _glob.glob(pattern, recursive=True)
-                   if "archive" not in f and ".worktrees" not in f)
+    if args:
+        patterns = args
+        files = []
+        seen = set()
+        for pattern in patterns:
+            for f in sorted(_glob.glob(pattern, recursive=True)):
+                if "archive" in f or ".worktrees" in f:
+                    continue
+                if f in seen:
+                    continue
+                seen.add(f)
+                files.append(f)
+        pattern_label = ", ".join(patterns)
+    else:
+        files = []
+        seen = set()
+        for stem in DEFAULT_SCAN_STEMS:
+            for suffix in (".md", ".md.bak"):
+                pattern = os.path.join(ARTICLES_DIR, "**", f"{stem}*{suffix}")
+                for f in sorted(_glob.glob(pattern, recursive=True)):
+                    if "archive" in f or ".worktrees" in f:
+                        continue
+                    if f in seen:
+                        continue
+                    seen.add(f)
+                    files.append(f)
+        pattern_label = ", ".join(DEFAULT_SCAN_STEMS)
     safe = 0
-    print(f"scan: {len(files)} files (pattern={pattern})\n")
+    print(f"scan: {len(files)} files (pattern={pattern_label})\n")
     report = []
     for f in files:
         try:
@@ -265,6 +303,8 @@ def cmd_scan(args: list[str]) -> int:
         meta, body = split_frontmatter(text)
         finds = safety_findings(meta, body)
         base = os.path.basename(f)
+        if base.endswith(".md.bak"):
+            base = base[:-4]
         if finds:
             print(f"[NEEDS-FIX] {base}  ({len(body)} chars)")
             for x in finds:

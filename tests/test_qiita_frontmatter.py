@@ -1165,12 +1165,79 @@ def test_qiita_team_post_cmd_scan_explicit_glob_keeps_qiita_cli_poc_files(tmp_pa
         encoding="utf-8",
     )
 
-    rc = qtp.cmd_scan([str(tmp_path / "**" / "team_stock_*.md")])
+    old_file = qtp.__file__
+    qtp.__file__ = str(tmp_path / "shadow_qtp.py")
+    try:
+        rc = qtp.cmd_scan([str(tmp_path / "**" / "team_stock_*.md")])
+    finally:
+        qtp.__file__ = old_file
     out = capsys.readouterr().out
 
     assert rc == 0
     assert "scan: 1 files" in out
     assert "summary: 1/1 registration-safe" in out
+
+
+def test_qiita_team_post_cmd_scan_default_targets_curated_qiita_range(tmp_path, capsys, monkeypatch):
+    article_28 = tmp_path / "QIITA_#28_sample.md"
+    article_42 = tmp_path / "QIITA_#42_sample.md"
+    article_35 = tmp_path / "QIITA_#35_sample.md"
+    for path in (article_28, article_42, article_35):
+        path.write_text(
+            "---\n"
+            "title: example\n"
+            "tags:\n"
+            "  - AI\n"
+            "private: true\n"
+            "group_url_name: general\n"
+            "---\n"
+            "body\n",
+            encoding="utf-8",
+        )
+
+    monkeypatch.setattr(qtp, "ARTICLES_DIR", str(tmp_path))
+    old_file = qtp.__file__
+    qtp.__file__ = str(tmp_path / "shadow_qtp.py")
+    try:
+        rc = qtp.cmd_scan([])
+    finally:
+        qtp.__file__ = old_file
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "scan: 2 files" in out
+    assert "QIITA_#28" in out
+    assert "QIITA_#42" in out
+    assert "summary: 2/2 registration-safe" in out
+
+
+def test_qiita_team_post_cmd_scan_default_accepts_md_bak_and_normalizes_name(tmp_path, capsys, monkeypatch):
+    article = tmp_path / "nested" / "QIITA_#32_llcore_cpu_poc_battery.md.bak"
+    article.parent.mkdir(parents=True)
+    article.write_text(
+        "---\n"
+        "title: example\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "See [local](./note.md)\n",
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(qtp, "ARTICLES_DIR", str(tmp_path))
+    old_file = qtp.__file__
+    qtp.__file__ = str(tmp_path / "shadow_qtp.py")
+    try:
+        rc = qtp.cmd_scan([])
+    finally:
+        qtp.__file__ = old_file
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "QIITA_#32_llcore_cpu_poc_battery.md" in out
+    assert "LOCAL PATH in body" in out
 
 
 def test_qiita_team_post_cmd_post_surfaces_nonblocking_warnings(tmp_path, capsys, monkeypatch):
