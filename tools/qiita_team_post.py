@@ -745,22 +745,17 @@ def cmd_post(args: list[str]) -> int:
         code, res = _req("POST", "/items", token, p)
     if code in (200, 201) and isinstance(res, dict):
         readback_id = str(res.get("id") or item_id or "").strip()
-        if not item_id and readback_id:
-            _writeback_id(files[0], readback_id)
-        ok, line = _format_item_readback(readback_id, code, res, expected_private=private_value)
-        if not ok:
-            print(line)
-            if not item_id and readback_id:
-                print(
-                    f"post: create already persisted frontmatter id={readback_id}; "
-                    "investigate response/readback mismatch before retrying."
-                )
+        if not readback_id:
+            print(f"FAIL ({code}): write response missing item id; cannot perform authoritative readback: {res}")
             return 1
-        print(f"OK ({code}): {res.get('url')}  id={res.get('id')}  {format_team_visibility(res)}")
         rb_code, rb_res = _read_item(readback_id, token)
         rb_ok, rb_line = _format_item_readback(readback_id, rb_code, rb_res, expected_private=private_value)
         if not rb_ok:
-            print(f"post: advisory read-after-write check failed: {rb_line}")
+            print(f"FAIL ({code}): authoritative read-after-write check failed: {rb_line}")
+            return 1
+        if not item_id:
+            _writeback_id(files[0], readback_id)
+        print(f"OK ({code}): {rb_res.get('url')}  id={readback_id}  {format_team_visibility(rb_res)}")
         return 0
     print(f"FAIL ({code}): {res}")
     return 1
