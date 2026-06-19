@@ -130,6 +130,9 @@ UNRECOGNIZED_IGNORE_PUBLISH_BLOCK = "UNRECOGNIZED_IGNORE_PUBLISH_BLOCK: ignorePu
 
 
 def parse_gate_bool(v) -> tuple[bool | None, str | None]:
+    # Intentional split: `private` uses as_bool(default=True) so malformed values
+    # collapse to the safer private side, while `ignorePublish` is an operator
+    # gate and must surface malformed values as explicit errors.
     if v is None:
         return None, None
     if isinstance(v, bool):
@@ -144,6 +147,14 @@ def parse_gate_bool(v) -> tuple[bool | None, str | None]:
             return False, None
         return None, UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value=v)
     return None, UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value=v)
+
+
+def find_ignore_publish_key_issue(meta: dict) -> str | None:
+    for key in meta.keys():
+        stripped = str(key).strip()
+        if stripped.casefold() == "ignorepublish" and stripped != "ignorePublish":
+            return f"IGNORE_PUBLISH_KEY_BLOCK: use exact frontmatter key 'ignorePublish', not '{key}'"
+    return None
 
 
 # --------------------------------------------------------------------------- #
@@ -262,11 +273,14 @@ def cmd_dry_run(args: list[str]) -> int:
     finds = safety_findings(meta, body)
     item_id = real_id(meta)
     gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
+    gate_key_error = find_ignore_publish_key_issue(meta)
     print(f"action: {'PATCH update id=' + str(item_id) if item_id else 'POST create'} on team '{TEAM}'")
     print(f"title : {p['title']}")
     print(f"tags  : {[t['name'] for t in p['tags']]}")
     print(f"private: {p['private']}   body chars: {len(body)}")
-    if gate_error:
+    if gate_key_error:
+        print(f"BLOCKED: {gate_key_error}")
+    elif gate_error:
         print(f"BLOCKED: {gate_error}")
     elif gate_value is True:
         print(IGNORE_PUBLISH_WARNING)
@@ -277,7 +291,7 @@ def cmd_dry_run(args: list[str]) -> int:
     else:
         print("registration-safe: no findings")
     print("\n(dry-run: nothing sent. add `post <file> --yes` to actually publish.)")
-    return 0
+    return 1 if gate_key_error or gate_error else 0
 
 
 def _writeback_id(path: str, item_id: str) -> None:
@@ -321,6 +335,10 @@ def cmd_post(args: list[str]) -> int:
     finds = [x for x in safety_findings(meta, body) if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR"))]
     if finds:
         print("BLOCKED (fix first): " + "; ".join(finds))
+        return 1
+    gate_key_error = find_ignore_publish_key_issue(meta)
+    if gate_key_error:
+        print(f"BLOCKED: {gate_key_error}")
         return 1
     gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
     if gate_error:

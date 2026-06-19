@@ -237,6 +237,62 @@ def test_qiita_team_post_dry_run_warns_on_ignore_publish(tmp_path, capsys):
     assert qtp.IGNORE_PUBLISH_WARNING in out
 
 
+def test_qiita_team_post_dry_run_without_ignore_publish_stays_ok(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "BLOCKED:" not in out
+
+
+def test_qiita_team_post_dry_run_blocks_unrecognized_ignore_publish(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "ignorePublish: ture\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value="ture") in out
+
+
+def test_qiita_team_post_dry_run_blocks_ignore_publish_key_typo(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "ignorepublish: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "IGNORE_PUBLISH_KEY_BLOCK" in out
+
+
 def test_qiita_team_post_cmd_post_blocks_ignore_publish_without_override(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(
@@ -304,6 +360,26 @@ def test_qiita_team_post_cmd_post_blocks_unrecognized_ignore_publish(tmp_path, c
     out = capsys.readouterr().out
     assert rc == 1
     assert qtp.UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value="ture") in out
+
+
+def test_qiita_team_post_cmd_post_blocks_ignore_publish_key_typo(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "IgnorePublish: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "IGNORE_PUBLISH_KEY_BLOCK" in out
 
 
 def test_qiita_public_post_dry_run_surfaces_legacy_id_warning(tmp_path, capsys):

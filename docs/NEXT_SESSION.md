@@ -56,6 +56,7 @@ nav_order: 95
   2026-06-18 の dry-run と public PATCH 後の API / HTML 確認では、
   英語版タイトルを正しく表示することを確認した。
 - さらに 2026-06-19 に `tests/test_qiita_frontmatter.py` へ `qiita_team_post.py` の回帰も追加し、`real_id` の nullish fallback、frontmatter `private: false` の文字列パース経路、そして **空 `private:` は default=True へ倒す**修正まで固定した。よって Team stock 3 本の `private:false` incident は、少なくとも現在の Team poster 実装では再現しない層のバグとして切り分けられ、以後は Team API / visibility semantics 側の問題として読む。
+- さらに同日、Team poster の `ignorePublish` gate も fail-closed 化し、`dry-run` でも不正値や key typo を exit 非 0 で返すようにした。`ignorePublish:true` の source は Team poster でも `--force-ignore-publish` 無しでは送れない。
 - `tools/qiita-cli-poc/convert_to_qiita_cli.py` と `scripts/publish/zenn_convert.py` も
   同じ shared parser へ切替済み。`title: >-` を文字列 `">-"` のまま持ち回る
   sibling 側の root-cause は除去した。
