@@ -106,6 +106,17 @@ def test_qiita_public_post_build_payload_uses_public_private_only():
     assert forced_payload["private"] is True
 
 
+def test_qiita_public_post_tag_signatures_normalize_case_and_commas():
+    meta = {"tags": ["AI, FullSense", "llcore", "AI"]}
+    payload = {"tags": [{"name": "ai"}, {"name": "FULLSENSE"}, {"name": "llcore"}]}
+    api_tags = [{"name": "AI"}, {"name": "fullsense"}, {"name": "LLCORE"}]
+
+    expected = ("ai", "fullsense", "llcore")
+    assert qpp._tag_name_signature_from_meta(meta) == expected
+    assert qpp._tag_name_signature_from_payload(payload) == expected
+    assert qpp._tag_name_signature_from_api(api_tags) == expected
+
+
 def test_qiita_public_post_parse_visibility_is_strict():
     assert qpp.parse_visibility("true") == (True, None)
     assert qpp.parse_visibility("false") == (False, None)
