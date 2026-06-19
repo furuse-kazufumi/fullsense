@@ -423,7 +423,7 @@ def _resolve_baseline_path(meta: dict, source_path: str) -> tuple[Path | None, s
     return base_path, None
 
 
-def _refresh_remote_baseline(meta: dict, source_path: str, token: str | None) -> tuple[list[str], bool]:
+def _refresh_remote_baseline(meta: dict, source_path: str, payload: dict, token: str | None) -> tuple[list[str], bool]:
     path, err = _resolve_baseline_path(meta, source_path)
     if not path:
         return ([err] if err else []), bool(err)
@@ -439,26 +439,60 @@ def _refresh_remote_baseline(meta: dict, source_path: str, token: str | None) ->
     title = str(res.get("title") or "")
     tags = res.get("tags") or []
     private = bool(res.get("private"))
+    live_url = str(res.get("url") or "")
+    live_id = str(res.get("id") or "")
     updated_at = str(res.get("updated_at") or "")
-    lines = ["---", f"title: {_yaml_quote_single(title)}", "tags:"]
+    report_lines = [f"baseline_refresh_status: {code}"]
+    report_lines.append(f"baseline_refresh_api_id: {live_id}")
+    report_lines.append(f"baseline_refresh_title: {title}")
+    report_lines.append(f"baseline_refresh_private: {private}")
+    report_lines.append(f"baseline_refresh_url: {live_url}")
+    blocked = False
+    if live_id and live_id != pid:
+        blocked = True
+        report_lines.append("BLOCKED: live baseline refresh returned a different item id")
+    if title != str(payload["title"]):
+        blocked = True
+        report_lines.append(LIVE_TITLE_BLOCK)
+    if private != bool(payload["private"]):
+        blocked = True
+        report_lines.append(LIVE_VISIBILITY_BLOCK)
+    if not live_url:
+        blocked = True
+        report_lines.append("BLOCKED: live baseline refresh returned no live URL")
+    else:
+        html_status, _html_headers, html_text = _http_get(live_url)
+        report_lines.append(f"baseline_refresh_html_status: {html_status}")
+        if html_status != 200:
+            blocked = True
+        preflight_marker = str(meta.get("preflight_marker") or "").strip()
+        if preflight_marker:
+            report_lines.append(f"baseline_refresh_marker_present: {preflight_marker in html_text}")
+    if blocked:
+        return report_lines, True
+
+    baseline_lines = ["---", f"title: {_yaml_quote_single(title)}", "tags:"]
     for tag in tags:
         name = str((tag or {}).get("name") or "").strip()
         if name:
-            lines.append(f"  - {name}")
-    lines.extend([
+            baseline_lines.append(f"  - {name}")
+    baseline_lines.extend([
         f"private: {'true' if private else 'false'}",
         f"public_private: {'true' if private else 'false'}",
     ])
     if updated_at:
-        lines.append(f"updated_at: {_yaml_quote_single(updated_at)}")
-    lines.extend([
+        baseline_lines.append(f"updated_at: {_yaml_quote_single(updated_at)}")
+    baseline_lines.extend([
         f"id: {pid}",
         f"public_id: {pid}",
         "---",
         body,
     ])
-    path.write_text("\n".join(lines).rstrip("\n") + "\n", encoding="utf-8")
-    return [f"baseline_refresh_status: {code}", f"baseline_refreshed: {path}"], False
+    tmp_path = path.with_suffix(path.suffix + ".tmp")
+    tmp_path.write_text("\n".join(baseline_lines).rstrip("\n") + "\n", encoding="utf-8")
+    tmp_path.replace(path)
+    report_lines.append(f"baseline_refreshed: {path}")
+    return report_lines, False
 
 
 def _baseline_body_report(meta: dict, body: str, source_path: str) -> tuple[list[str], bool]:
@@ -630,7 +664,7 @@ def cmd_preflight(args: list[str]) -> int:
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
     if "--refresh-baseline" in args:
-        refresh_lines, refresh_blocked = _refresh_remote_baseline(meta, files[0], get_token())
+        refresh_lines, refresh_blocked = _refresh_remote_baseline(meta, files[0], p, get_token())
         for line in refresh_lines:
             print(line)
         if refresh_blocked:
