@@ -177,7 +177,7 @@ nav_order: 95
    `6f67e54e538c10b8f1c3` / `b35b429dc6dc1fde207a` / `6fe79ab04443f7654eca`。
    2026-06-19 時点の `tools/qiita_team_post.py` は `ignorePublish:true` も読み、
    `post --yes --force-ignore-publish` を明示しない限り fail-closed で停止する。
-   ただし API GET では 3 本とも `private:false` で返り、2026-06-19 12:41:22 +09:00 の未認証 HTML GET では 3 本とも `302 /login?redirect_to=...` だった。これは Team サブドメイン全体の auth gate でも説明できるため、team-only と positively 確認できるまでは **過剰露出の疑いを優先**する。`visibility semantics` は副次論点として残す。
+   ただし API GET では 3 本とも `private:false` で返り、2026-06-19 12:41:22 +09:00 の未認証 HTML GET では 3 本とも `302 /login?redirect_to=...`、`https://qiita.com/furuse-kazufumi/items/<id>` の direct probe は 3 本とも `404` だった。前者は Team サブドメイン全体の auth gate でも説明できるため、team-only と positively 確認できるまでは **過剰露出の疑いを優先**する。`visibility semantics` は副次論点として残す。
    可視範囲の絞り込みや rollback が必要なら、以後は別の human-gate 外部アクションとして扱う。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。

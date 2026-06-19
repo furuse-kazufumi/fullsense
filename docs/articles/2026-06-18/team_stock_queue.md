@@ -39,6 +39,8 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
   - `py -3.11 -c "import json,sys,urllib.request; sys.path.insert(0, 'tools'); from qiita_team_post import get_token; ... GET https://fullsense.qiita.com/api/v2/items/<id> with Bearer token ..."`
 - command (HTML):
   - `Invoke-WebRequest -Uri https://fullsense.qiita.com/furuse-kazufumi/items/<id> -MaximumRedirection 0 -SkipHttpErrorCheck`
+- command (public mirror probe):
+  - `Invoke-WebRequest -Uri https://qiita.com/furuse-kazufumi/items/<id> -MaximumRedirection 0 -SkipHttpErrorCheck`
 - observed API results:
   - `6f67e54e538c10b8f1c3` → `200`, `private:false`
   - `b35b429dc6dc1fde207a` → `200`, `private:false`
@@ -47,8 +49,13 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
   - `6f67e54e538c10b8f1c3` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../6f67e54e538c10b8f1c3`
   - `b35b429dc6dc1fde207a` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../b35b429dc6dc1fde207a`
   - `6fe79ab04443f7654eca` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../6fe79ab04443f7654eca`
+- observed public mirror results:
+  - `https://qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` → `404`
+  - `https://qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` → `404`
+  - `https://qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` → `404`
 - hedge:
   - Team サブドメインは private/public によらず auth gate される可能性があるため、この Login redirect だけでは item 可視範囲を確定できない
+  - ただし少なくとも `qiita.com/furuse-kazufumi/items/<id>` 直URLの public mirror は 2026-06-19 12:41 JST 時点で 404 だった
 
 ## blockers
 

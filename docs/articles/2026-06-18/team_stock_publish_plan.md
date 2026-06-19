@@ -91,6 +91,7 @@
   - `6fe79ab04443f7654eca`
 - POST 後の API GET では 3 本とも `private:false` で返った
 - 2026-06-19 12:41:22 +09:00 の未認証 HTML GET では、3 本とも Team URL に対して `302` / `Location: /login?redirect_to=...` が返った
+- 2026-06-19 12:41 JST の direct probe では、`https://qiita.com/furuse-kazufumi/items/<id>` 側に 3 本とも `404` が返り、少なくとも public `qiita.com` 直URLミラーは確認できなかった
 - ただし Team サブドメイン全体が private/public にかかわらず auth gate される可能性は残る。したがって Login redirect だけでは item の可視範囲を断定できず、**team-only と positively 確認できるまでは過剰露出の疑いを優先**する
 - `private:false` の意味づけ自体も一次情報待ちであり、ここで言う `visibility semantics` は **プロジェクト内用語**に過ぎない。rollback / visibility tightening は別の human-gate 外部アクションとして扱う
 
