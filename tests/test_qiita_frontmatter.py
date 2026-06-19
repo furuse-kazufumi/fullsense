@@ -335,6 +335,49 @@ def test_qiita_team_post_dry_run_patch_surfaces_non_resent_group_target(tmp_path
     assert "PATCH does not resend this field" in out
 
 
+def test_qiita_team_post_dry_run_patch_surfaces_missing_group_target_note(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "PATCH update id=team-item-id" in out
+    assert "group_url_name(frontmatter): (none)" in out
+    assert "PATCH does not resend this field" in out
+
+
+def test_qiita_team_post_dry_run_patch_normalizes_null_group_target_note(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "group_url_name: null\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "PATCH update id=team-item-id" in out
+    assert "group_url_name(frontmatter): (none)" in out
+    assert "PATCH does not resend this field" in out
+
+
 def test_qiita_team_post_dry_run_blocks_unrecognized_ignore_publish(tmp_path, capsys):
     path = tmp_path / "team.md"
     path.write_text(

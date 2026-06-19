@@ -294,6 +294,7 @@ def cmd_dry_run(args: list[str]) -> int:
     meta, body = split_frontmatter(text)
     item_id = real_id(meta)
     create_group_target = explicit_group_target(meta) if not item_id else None
+    patch_group_target = explicit_group_target(meta) if item_id else None
     p = build_payload(meta, body, include_group_url_name=not item_id)
     finds = safety_findings(meta, body)
     gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
@@ -304,8 +305,9 @@ def cmd_dry_run(args: list[str]) -> int:
     print(f"private: {p['private']}   body chars: {len(body)}")
     if create_group_target is not None:
         print(f"group_url_name: {p['group_url_name']}")
-    elif item_id and "group_url_name" in meta:
-        print(f"group_url_name(frontmatter): {meta.get('group_url_name')}   note: PATCH does not resend this field")
+    elif item_id:
+        shown_target = patch_group_target if patch_group_target is not None else "(none)"
+        print(f"group_url_name(frontmatter): {shown_target}   note: PATCH does not resend this field")
     if gate_key_error:
         print(f"BLOCKED: {gate_key_error}")
     elif gate_error:
