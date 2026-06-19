@@ -21,7 +21,8 @@ Qiita API v2 (一次確認 2026-06-04, https://qiita.com/api/v2/docs):
   py -3.11 qiita_team_post.py scan  [glob]      # 登録安全性スキャン (read-only, network なし)
   py -3.11 qiita_team_post.py verify            # トークン疎通 (GET authenticated_user)
   py -3.11 qiita_team_post.py dry-run <file.md> # payload + 警告を表示 (network なし)
-  py -3.11 qiita_team_post.py post <file.md> --yes   # 実 POST/PATCH (ユーザーが GO したときのみ)
+  py -3.11 qiita_team_post.py post <file.md> --yes [--force-ignore-publish]
+                                                # 実 POST/PATCH (ユーザーが GO したときのみ)
 
 team 既定 = fullsense。env `QIITA_TEAM` で上書き。
 """
@@ -121,6 +122,28 @@ def as_bool(v, default=True) -> bool:
             return default
         return s in ("true", "yes", "1")
     return default
+
+
+IGNORE_PUBLISH_WARNING = "WARNING: frontmatter ignorePublish: true is a qiita-cli gate; Team post requires explicit override."
+IGNORE_PUBLISH_BLOCK = "IGNORE_PUBLISH_BLOCK: add --force-ignore-publish only after human approval for this Team POST."
+UNRECOGNIZED_IGNORE_PUBLISH_BLOCK = "UNRECOGNIZED_IGNORE_PUBLISH_BLOCK: ignorePublish value '{value}' is not recognized"
+
+
+def parse_gate_bool(v) -> tuple[bool | None, str | None]:
+    if v is None:
+        return None, None
+    if isinstance(v, bool):
+        return v, None
+    if isinstance(v, str):
+        s = v.strip().lower()
+        if not s:
+            return None, None
+        if s in ("true", "yes", "1"):
+            return True, None
+        if s in ("false", "no", "0"):
+            return False, None
+        return None, UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value=v)
+    return None, UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value=v)
 
 
 # --------------------------------------------------------------------------- #
@@ -238,10 +261,15 @@ def cmd_dry_run(args: list[str]) -> int:
     p = build_payload(meta, body)
     finds = safety_findings(meta, body)
     item_id = real_id(meta)
+    gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
     print(f"action: {'PATCH update id=' + str(item_id) if item_id else 'POST create'} on team '{TEAM}'")
     print(f"title : {p['title']}")
     print(f"tags  : {[t['name'] for t in p['tags']]}")
     print(f"private: {p['private']}   body chars: {len(body)}")
+    if gate_error:
+        print(f"BLOCKED: {gate_error}")
+    elif gate_value is True:
+        print(IGNORE_PUBLISH_WARNING)
     if finds:
         print("WARNINGS:")
         for x in finds:
@@ -279,7 +307,7 @@ def _writeback_id(path: str, item_id: str) -> None:
 def cmd_post(args: list[str]) -> int:
     files = [a for a in args if not a.startswith("--")]
     if not files:
-        print("usage: post <file.md> --yes")
+        print("usage: post <file.md> --yes [--force-ignore-publish]")
         return 2
     if "--yes" not in args:
         print("refusing: --yes required (publish is an external action; you give the GO).")
@@ -294,6 +322,15 @@ def cmd_post(args: list[str]) -> int:
     if finds:
         print("BLOCKED (fix first): " + "; ".join(finds))
         return 1
+    gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
+    if gate_error:
+        print(f"BLOCKED: {gate_error}")
+        return 1
+    if gate_value is True:
+        print(IGNORE_PUBLISH_WARNING)
+        if "--force-ignore-publish" not in args:
+            print(IGNORE_PUBLISH_BLOCK)
+            return 1
     p = build_payload(meta, body)
     item_id = real_id(meta)
     if item_id:

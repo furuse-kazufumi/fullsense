@@ -218,6 +218,94 @@ def test_qiita_team_post_frontmatter_string_false_maps_to_public():
     assert payload["private"] is False
 
 
+def test_qiita_team_post_dry_run_warns_on_ignore_publish(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "ignorePublish: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert qtp.IGNORE_PUBLISH_WARNING in out
+
+
+def test_qiita_team_post_cmd_post_blocks_ignore_publish_without_override(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "ignorePublish: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.IGNORE_PUBLISH_WARNING in out
+    assert qtp.IGNORE_PUBLISH_BLOCK in out
+
+
+def test_qiita_team_post_cmd_post_allows_ignore_publish_with_override(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "ignorePublish: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    calls = []
+
+    def _fake_req(method, path, token, payload=None):
+        calls.append((method, path, payload))
+        return 201, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+
+    monkeypatch.setattr(qtp, "_req", _fake_req)
+    rc = qtp.cmd_post([str(path), "--yes", "--force-ignore-publish"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert any(call[0] == "POST" and call[1] == "/items" for call in calls)
+    assert qtp.IGNORE_PUBLISH_WARNING in out
+
+
+def test_qiita_team_post_cmd_post_blocks_unrecognized_ignore_publish(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "ignorePublish: ture\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value="ture") in out
+
+
 def test_qiita_public_post_dry_run_surfaces_legacy_id_warning(tmp_path, capsys):
     path = tmp_path / "sample.md"
     path.write_text(

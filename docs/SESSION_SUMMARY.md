@@ -16,7 +16,7 @@
 - 2026-06-18 の Team stock POST では、`private:true` を意図した 3 本が API GET ではすべて `private:false` で着地した。これは `tools/qiita_team_post.py` と Team 側可視範囲の組み合わせが、想定より広い外部露出を起こしうることを示す失敗教訓として扱う。
 - 2026-06-19 に `tests/test_qiita_frontmatter.py` へ `qiita_team_post.py` の回帰も追加し、`real_id` の nullish fallback、frontmatter `private: false` の文字列パース経路、そして **空 `private:` は default=True へ倒す**修正まで固定した。したがって上記の `private:false` incident は、少なくとも現在の Team poster 実装では再現しない層のバグとして切り分けられ、以後は Team API / visibility semantics 側の問題として読む。
 - git push は local-first 運用のため未実施のまま据え置いており、human-gate を要する外部アクション集合には数えない。新規記事の新規 publish は **未実施**だが、Qiita Team stock 3 本の POST は 2026-06-18 に実施済みで、item id は `6f67e54e538c10b8f1c3` / `b35b429dc6dc1fde207a` / `6fe79ab04443f7654eca` である。test については**この差分では未実施**で、前バッチで追加した frontmatter 回帰テストとは切り分ける。既存 public Qiita item `2622da17495d61480fa2` のタイトル修正 PATCH と `bf1cfe3b4f40b87f068d` の redirect 本文 PATCH は実施済み。
-- Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加し、`tools/qiita_team_post.py dry-run` を経て 2026-06-18 に Team POST まで完了した。投稿待ち一覧と POST 後の記録欄の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human-gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。
+- Team 向けの難所 stock として、`team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` / `team_stock_ctx2549_postmortem.md` を local draft として追加し、`tools/qiita_team_post.py dry-run` を経て 2026-06-18 に Team POST まで完了した。投稿待ち一覧と POST 後の記録欄の正本は `docs/articles/2026-06-18/team_stock_queue.md`、公開順・human-gate 条件・rollback 注意の正本は `docs/articles/2026-06-18/team_stock_publish_plan.md`。2026-06-19 時点の Team poster は `ignorePublish:true` も読み、`--force-ignore-publish` 無しでは fail-closed で停止する。
 - Team stock 正本 2 枚には preflight runbook / 実行コマンド / rollback notes / POST 後の記録欄まで追加済み。通常 POST はその 2 枚で回せるが、rollback 実施時のみ handoff にも 1 行転記する。
 - 2026-06-18 の human-gate 回答「3本すべて POSTする」に従い、推奨順どおり `team_stock_semantic_governance.md` → `team_stock_llm_wiki_anti_circulation.md` → `team_stock_ctx2549_postmortem.md` を Qiita Team `fullsense` へ POST した。返却 id / URL は queue 正本へ記録済みで、local draft 3 本の frontmatter にも `id:` を書き戻し、サーバ実体に合わせて `private:false` へ更新した。
 - Team stock 3 本は source article と大筋整合していることを spot-check 済み。対応は `team_stock_semantic_governance.md` / `team_stock_llm_wiki_anti_circulation.md` = #43、`team_stock_ctx2549_postmortem.md` = #46。公開前の読みやすさだけ先に上げるため、3 本とも冒頭へ `前提 / 流れ / ゴール` の 3 点ボックスを追加した。
@@ -159,7 +159,7 @@
 - Team stock:
   - #43 から `Semantic Governance` 単独記事と `LLM Wiki / thought circulation` 単独記事、#46 から ``ctx 2549%`` postmortem 単独記事の 3 本を source-only draft として `tools/qiita-cli-poc/public/` に追加した
   - 3 本とも `private: true` / `ignorePublish: true` のまま `tools/qiita_team_post.py dry-run` を通し、title / tags / body の登録安全性だけ確認した。実際の Team 投稿は human-gate 待ち
-  - 注意: `qiita_team_post.py` は `ignorePublish` を gate にしていないため、`post --yes` はそのまま外部 POST になる。さらに `private: true` の Team 上での実効可視範囲も十分に確定できていない。詳細条件は `team_stock_publish_plan.md` を正本とする
+- 注意: 2026-06-19 時点の `qiita_team_post.py` は `ignorePublish:true` を読み、`post --yes --force-ignore-publish` を明示しない限り fail-closed で停止する。ただし `private: true` の Team 上での実効可視範囲は十分に確定できていない。詳細条件は `team_stock_publish_plan.md` を正本とする
 - deindex:
   - ユーザー承認後、`.llterm/loop_ledger.jsonl` に対して `git rm --cached` を実行し、`.gitignore` にファイル単位の ignore を追加した。ログファイル本体は残したまま Git 追跡だけを外す形で、毎セッションの tracked ノイズ差分を止める恒久対策へ切り替えた
 - handoff:

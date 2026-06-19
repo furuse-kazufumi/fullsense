@@ -41,8 +41,8 @@
 
 ## human gate 前提の注意
 
-1. `ignorePublish` は公式 qiita-cli 側の草稿ガードだが、`tools/qiita_team_post.py` はこれを読まない
-2. つまり `tools/qiita_team_post.py post --yes` は、`ignorePublish: true` の草稿でもそのまま外部 POST する
+1. `ignorePublish` は公式 qiita-cli 側の草稿ガードだが、2026-06-19 時点の `tools/qiita_team_post.py` もこれを読み、`--force-ignore-publish` 無しでは fail-closed で停止する
+2. つまり Team poster で `post --yes` を通すには、`ignorePublish: true` の source に対して **human-gate 後の `--force-ignore-publish`** が別途必要である
 3. `private: true` の Team 上での実効可視範囲は未確定
 4. よって、実 POST 前に user GO が必要
 
@@ -59,7 +59,7 @@
 
 1. `py -3.11 tools/qiita_team_post.py verify` を実行し、トークン疎通と team 名を確認する
 2. `py -3.11 tools/qiita_team_post.py dry-run <file>` を再実行して title / tags / body 形式を確認する
-3. frontmatter の `private: true` / `ignorePublish: true` を見直し、`ignorePublish` は Team poster では無効だと再確認する
+3. frontmatter の `private: true` / `ignorePublish: true` を見直し、`ignorePublish: true` の source を送る時は `--force-ignore-publish` が必要だと再確認する
 4. POST 後に記録する `id` / `URL` / `visible range` の記入先が `team_stock_queue.md` にあることを確認する
 5. rollback 手段が Team UI か API のどちらで取れるかを先に決める
 6. `private` flip を rollback として使わずに済むか、必要なら Team UI での即時差し替え手順を先に確認する
@@ -67,9 +67,9 @@
 ## execution commands
 
 - create:
-  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_semantic_governance.md --yes`
-  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_llm_wiki_anti_circulation.md --yes`
-  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_ctx2549_postmortem.md --yes`
+  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_semantic_governance.md --yes --force-ignore-publish`
+  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_llm_wiki_anti_circulation.md --yes --force-ignore-publish`
+  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_ctx2549_postmortem.md --yes --force-ignore-publish`
 - verify:
   - Team API / UI で title, private 状態, URL を確認する
   - `team_stock_queue.md` に `id` / URL / visible range を転記する
