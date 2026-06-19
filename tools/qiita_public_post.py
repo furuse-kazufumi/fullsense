@@ -107,6 +107,10 @@ PREFLIGHT_BASELINE_REFRESH_WRITE_BLOCK = (
 PREFLIGHT_BASELINE_BODY_BLOCK = (
     "BLOCKED: local body no longer preserves the required remote baseline body sequence: {path}"
 )
+PREFLIGHT_BASELINE_TAGS_BLOCK = (
+    "BLOCKED: local tags no longer match the required remote baseline tags: {path}"
+)
+LIVE_TAGS_BLOCK = "BLOCKED: live tags differ from payload tags"
 ASSET_CONTENT_TYPE_BLOCK = (
     "BLOCKED: asset does not look like an image content-type: {content_type!r} ({url})"
 )
@@ -154,6 +158,25 @@ def norm_tags(meta: dict) -> list[dict]:
                 seen.add(name)
                 out.append({"name": name, "versions": []})
     return out[:5]
+
+
+def _tag_name_signature_from_meta(meta: dict) -> tuple[str, ...]:
+    return tuple(sorted(t["name"] for t in norm_tags(meta)))
+
+
+def _tag_name_signature_from_payload(payload: dict) -> tuple[str, ...]:
+    return tuple(sorted(str((t or {}).get("name") or "") for t in (payload.get("tags") or []) if str((t or {}).get("name") or "").strip()))
+
+
+def _tag_name_signature_from_api(tags) -> tuple[str, ...]:
+    names: list[str] = []
+    seen: set[str] = set()
+    for tag in tags or []:
+        name = re.sub(r"\s+", "_", str((tag or {}).get("name") or "").strip())
+        if name and name not in seen:
+            seen.add(name)
+            names.append(name)
+    return tuple(sorted(names))
 
 
 def real_public_id(meta: dict) -> str | None:
@@ -455,6 +478,9 @@ def _refresh_remote_baseline(meta: dict, source_path: str, payload: dict, token:
     report_lines.append(f"baseline_refresh_title: {title}")
     report_lines.append(f"baseline_refresh_private: {private}")
     report_lines.append(f"baseline_refresh_url: {live_url}")
+    live_tag_sig = _tag_name_signature_from_api(tags)
+    payload_tag_sig = _tag_name_signature_from_payload(payload)
+    report_lines.append(f"baseline_refresh_tags: {list(live_tag_sig)}")
     blocked = False
     if live_id and live_id != pid:
         blocked = True
@@ -465,6 +491,9 @@ def _refresh_remote_baseline(meta: dict, source_path: str, payload: dict, token:
     if private != bool(payload["private"]):
         blocked = True
         report_lines.append(LIVE_VISIBILITY_BLOCK)
+    if live_tag_sig != payload_tag_sig:
+        blocked = True
+        report_lines.append(LIVE_TAGS_BLOCK)
     if not live_url:
         blocked = True
         report_lines.append("BLOCKED: live baseline refresh returned no live URL")
@@ -530,6 +559,27 @@ def _baseline_body_report(meta: dict, body: str, source_path: str) -> tuple[list
     return lines, not ok
 
 
+def _baseline_tags_report(meta: dict, payload: dict, source_path: str) -> tuple[list[str], bool]:
+    path, err = _resolve_baseline_path(meta, source_path)
+    if not path:
+        return ([err] if err else []), bool(err)
+    try:
+        text = path.read_text(encoding="utf-8-sig")
+        base_meta, _base_body = split_frontmatter(text)
+    except (OSError, ValueError):
+        lines = [f"baseline_path: {path}", PREFLIGHT_BASELINE_REQUIRED_BLOCK.format(path=path)]
+        return lines, True
+    lines = [f"baseline_tag_path: {path}"]
+    baseline_sig = _tag_name_signature_from_meta(base_meta)
+    payload_sig = _tag_name_signature_from_payload(payload)
+    ok = baseline_sig == payload_sig
+    lines.append(f"baseline_tags_match: {ok}")
+    lines.append(f"baseline_tags: {list(baseline_sig)}")
+    if not ok:
+        lines.append(PREFLIGHT_BASELINE_TAGS_BLOCK.format(path=path))
+    return lines, not ok
+
+
 def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool, source_path: str) -> tuple[list[str], bool]:
     lines: list[str] = []
     finds = safety_findings(meta, body)
@@ -548,6 +598,9 @@ def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool
     baseline_lines, baseline_blocked = _baseline_body_report(meta, body, source_path)
     lines.extend(baseline_lines)
     blocked = blocked or baseline_blocked
+    baseline_tag_lines, baseline_tag_blocked = _baseline_tags_report(meta, payload, source_path)
+    lines.extend(baseline_tag_lines)
+    blocked = blocked or baseline_tag_blocked
     if legacy_id:
         lines.append(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
     ignore_publish, ignore_publish_bad = parse_gate_bool(meta.get("ignorePublish"))
@@ -591,12 +644,18 @@ def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool
                 lines.append(f"api_title: {api_title}")
                 lines.append(f"api_url  : {live_url}")
                 lines.append(f"api_private: {live_private}")
+                api_tag_sig = _tag_name_signature_from_api(api_obj.get("tags") or [])
+                payload_tag_sig = _tag_name_signature_from_payload(payload)
+                lines.append(f"api_tags: {list(api_tag_sig)}")
                 if api_title != str(payload["title"]):
                     blocked = True
                     lines.append(LIVE_TITLE_BLOCK)
                 if live_private != bool(payload["private"]):
                     blocked = True
                     lines.append(LIVE_VISIBILITY_BLOCK)
+                if api_tag_sig != payload_tag_sig:
+                    blocked = True
+                    lines.append(LIVE_TAGS_BLOCK)
             except json.JSONDecodeError:
                 blocked = True
                 lines.append("BLOCKED: API 200 but JSON decode failed")

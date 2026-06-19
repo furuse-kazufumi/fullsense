@@ -346,7 +346,7 @@ def test_qiita_public_post_preflight_checks_live_and_assets(tmp_path, capsys, mo
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title> canonical-marker"
         raise AssertionError(f"unexpected URL: {url}")
@@ -430,7 +430,7 @@ def test_qiita_public_post_preflight_blocks_when_marker_required_but_missing_fro
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -667,7 +667,7 @@ def test_qiita_public_post_preflight_surfaces_ignore_publish_warning(tmp_path, c
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -702,7 +702,7 @@ def test_qiita_public_post_preflight_blocks_unrecognized_ignore_publish(tmp_path
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -789,7 +789,7 @@ def test_qiita_public_post_cmd_post_allows_ignore_publish_with_override(tmp_path
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -891,7 +891,7 @@ def test_qiita_public_post_preflight_blocks_on_non_image_content_type(tmp_path, 
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -992,7 +992,7 @@ def test_qiita_public_post_preflight_blocks_when_remote_baseline_body_is_not_pre
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -1038,7 +1038,7 @@ def test_qiita_public_post_preflight_blocks_remote_baseline_path_escape(tmp_path
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -1085,7 +1085,7 @@ def test_qiita_public_post_preflight_blocks_when_baseline_path_is_nested_under_r
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -1169,7 +1169,7 @@ def test_qiita_public_post_preflight_refreshes_remote_baseline_from_live_api(tmp
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -1185,6 +1185,117 @@ def test_qiita_public_post_preflight_refreshes_remote_baseline_from_live_api(tmp
     refreshed = baseline.read_text(encoding="utf-8")
     assert "live body line 1" in refreshed
     assert "public_id: existing-public-id" in refreshed
+
+
+def test_qiita_public_post_preflight_refresh_blocks_when_live_tags_drift(tmp_path, capsys, monkeypatch):
+    remote_dir = tmp_path / ".remote"
+    remote_dir.mkdir()
+    baseline = remote_dir / "existing-public-id.md"
+    baseline.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "---\n"
+        "live body line 1\n",
+        encoding="utf-8",
+    )
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "  - Agent\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "preflight_remote_baseline: .remote/existing-public-id.md\n"
+        "---\n"
+        "live body line 1\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        if method == "GET" and path == "/authenticated_user":
+            return 200, {"id": "furuse-kazufumi"}
+        if method == "GET" and path == "/items/existing-public-id":
+            return 200, {
+                "id": "existing-public-id",
+                "title": "hello",
+                "private": False,
+                "url": "https://qiita.com/example/items/existing-public-id",
+                "updated_at": "2026-06-19T00:00:00+09:00",
+                "tags": [{"name": "AI"}],
+                "body": "live body line 1\n",
+            }
+        raise AssertionError(f"unexpected _req: {method} {path}")
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path), "--refresh-baseline"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.LIVE_TAGS_BLOCK in out
+    assert "preflight: BLOCKED" in out
+
+
+def test_qiita_public_post_preflight_blocks_when_baseline_tags_drift(tmp_path, capsys, monkeypatch):
+    remote_dir = tmp_path / ".remote"
+    remote_dir.mkdir()
+    baseline = remote_dir / "existing-public-id.md"
+    baseline.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "---\n"
+        "live body line 1\n",
+        encoding="utf-8",
+    )
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "  - Agent\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "preflight_remote_baseline: .remote/existing-public-id.md\n"
+        "---\n"
+        "live body line 1\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"},{"name":"Agent"}]}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.PREFLIGHT_BASELINE_TAGS_BLOCK.format(path=baseline) in out
+    assert "baseline_tags_match: False" in out
+    assert "preflight: BLOCKED" in out
 
 
 def test_qiita_public_post_preflight_refresh_blocks_when_baseline_write_fails(tmp_path, capsys, monkeypatch):
@@ -1349,7 +1460,7 @@ def test_qiita_public_post_preflight_preserves_blank_lines_in_baseline_check(tmp
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
@@ -1384,7 +1495,7 @@ def test_qiita_public_post_preflight_blocks_when_asset_content_type_is_missing(t
 
     def _fake_http_get(url, token=None):
         if url == f"{qpp.API_BASE}/items/existing-public-id":
-            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id","tags":[{"name":"AI"}]}'
         if url == "https://qiita.com/example/items/existing-public-id":
             return 200, {}, "<title>hello - Qiita</title>"
         raise AssertionError(f"unexpected URL: {url}")
