@@ -181,6 +181,26 @@ def format_team_visibility(res: dict) -> str:
     )
 
 
+def _parse_optional_bool(v, field_name: str) -> tuple[bool | None, str | None]:
+    if v is None:
+        return None, None
+    if isinstance(v, bool):
+        return v, None
+    if isinstance(v, int):
+        if v in (0, 1):
+            return bool(v), None
+        return None, f"{field_name} must be bool-like, got {v!r}"
+    if isinstance(v, str):
+        s = v.strip().lower()
+        if not s:
+            return None, None
+        if s in ("true", "yes", "1"):
+            return True, None
+        if s in ("false", "no", "0"):
+            return False, None
+    return None, f"{field_name} must be bool-like, got {v!r}"
+
+
 IGNORE_PUBLISH_WARNING = "WARNING: frontmatter ignorePublish: true is a qiita-cli gate; Team post requires explicit override."
 IGNORE_PUBLISH_BLOCK = "IGNORE_PUBLISH_BLOCK: add --force-ignore-publish only after human approval for this Team POST."
 UNRECOGNIZED_IGNORE_PUBLISH_BLOCK = "UNRECOGNIZED_IGNORE_PUBLISH_BLOCK: ignorePublish value '{value}' is not recognized"
@@ -449,15 +469,15 @@ def _read_item(item_id: str, token: str) -> tuple[int, dict | str]:
 
 
 def _read_item_with_retry(item_id: str, token: str, *, attempts: int = 3, delay_s: float = 0.2) -> tuple[int, dict | str]:
-    last_code: int | None = None
-    last_res: dict | str = ""
+    # Retry only the "just wrote it and the read path has not converged yet" case.
+    # We intentionally do not retry code=0 transport failures or stale 200 payloads here;
+    # those stay fail-closed and must be investigated as real readback mismatches.
     for attempt in range(attempts):
         code, res = _read_item(item_id, token)
-        last_code, last_res = code, res
         if code != 404 or attempt == attempts - 1:
             return code, res
         time.sleep(delay_s * (attempt + 1))
-    return last_code or 404, last_res
+    raise AssertionError("unreachable")
 
 
 def _normalize_private_readback(v) -> tuple[bool | None, str | None]:
@@ -474,7 +494,14 @@ def _normalize_private_readback(v) -> tuple[bool | None, str | None]:
     return None, f"private field is non-bool ({v!r})"
 
 
-def _format_item_readback(item_id: str, code: int, res: dict | str, *, expected_private: bool | None = None) -> tuple[bool, str]:
+def _format_item_readback(
+    item_id: str,
+    code: int,
+    res: dict | str,
+    *,
+    expected_private: bool | None = None,
+    expected_group_url_name: str | None = None,
+) -> tuple[bool, str]:
     if code == 401:
         return False, f"AUTH FAIL ({code}): token invalid or expired for team '{TEAM}'"
     if code == 403:
@@ -502,6 +529,14 @@ def _format_item_readback(item_id: str, code: int, res: dict | str, *, expected_
                 f"FAIL ({code}): item id={item_id} readback private={private_value} "
                 f"did not match intended private={expected_private}"
             )
+        if expected_group_url_name is not None:
+            group = res.get("group")
+            group_url_name = group.get("url_name") if isinstance(group, dict) else None
+            if str(group_url_name or "").strip() != expected_group_url_name:
+                return False, (
+                    f"FAIL ({code}): item id={item_id} readback group.url_name={group_url_name!r} "
+                    f"did not match intended group_url_name={expected_group_url_name!r}"
+                )
         state_hint = "READABLE PRIVATE" if private_value else "READABLE"
         return True, (
             f"{state_hint} ({code}): {url}  id={res_id}  "
@@ -649,13 +684,21 @@ def cmd_dry_run(args: list[str]) -> int:
     else:
         print("registration-safe: no findings")
     print("\n(dry-run: nothing sent. add `post <file> --yes` to actually publish.)")
-    return 1 if gate_key_error or gate_error or (not item_id and create_group_target is None) or (resend_patch_group and patch_group_target is None) else 0
+    blocking_finds = [
+        x for x in finds
+        if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH"))
+    ]
+    return 1 if (
+        gate_key_error
+        or gate_error
+        or (not item_id and create_group_target is None)
+        or (resend_patch_group and patch_group_target is None)
+        or blocking_finds
+    ) else 0
 
 
-def _writeback_id(path: str, item_id: str) -> None:
-    """Store the new id in frontmatter so re-posts PATCH (idempotent). Replaces `id: null`/empty,
-    inserts if absent, leaves a pre-existing real id untouched."""
-    if not item_id:
+def _writeback_scalar(path: str, key: str, value: str, *, skip_if_real: bool = False) -> None:
+    if not value:
         return
     text = open(path, "r", encoding="utf-8-sig").read()
     if not text.startswith("---"):
@@ -664,16 +707,26 @@ def _writeback_id(path: str, item_id: str) -> None:
     if end == -1:
         return
     head, fm, tail = text[:3], text[3:end], text[end:]
-    m = re.search(r"^(\s*id:\s*)(.*)$", fm, re.M)
+    m = re.search(rf"^(\s*{re.escape(key)}:\s*)(.*)$", fm, re.M)
     if m:
-        cur = m.group(2).strip().strip("'\"")
-        if cur and cur.lower() not in ("null", "none"):
-            return  # a real id is already present
-        fm = fm[:m.start()] + m.group(1) + item_id + fm[m.end():]  # replace id: null
+        cur = m.group(2).split("#", 1)[0].strip().strip("'\"")
+        if skip_if_real and cur and cur.lower() not in ("null", "none"):
+            return
+        fm = fm[:m.start()] + m.group(1) + value + fm[m.end():]
     else:
-        fm = fm + f"\nid: {item_id}"
+        fm = fm + f"\n{key}: {value}"
     with open(path, "w", encoding="utf-8") as f:
         f.write(head + fm + tail)
+
+
+def _writeback_id(path: str, item_id: str) -> None:
+    """Store the new id in frontmatter so re-posts PATCH (idempotent). Replaces `id: null`/empty,
+    inserts if absent, leaves a pre-existing real id untouched."""
+    _writeback_scalar(path, "id", item_id, skip_if_real=True)
+
+
+def _writeback_team_verified(path: str, verified: bool) -> None:
+    _writeback_scalar(path, "qiita_team_verified", "true" if verified else "false")
 
 
 def cmd_post(args: list[str]) -> int:
@@ -736,10 +789,15 @@ def cmd_post(args: list[str]) -> int:
             print(IGNORE_PUBLISH_BLOCK)
             return 1
     item_id = real_id(meta)
+    verified_state, verified_error = _parse_optional_bool(meta.get("qiita_team_verified"), "qiita_team_verified")
+    if verified_error:
+        print(f"BLOCKED: {verified_error}")
+        return 1
     create_group_target = explicit_group_target(meta) if not item_id else None
     patch_group_target = explicit_group_target(meta) if item_id else None
     patch_group_flag = wants_patch_group_url_name(args)
     resend_patch_group = bool(item_id and patch_group_flag)
+    expected_group_target = create_group_target if not item_id else (patch_group_target if resend_patch_group else None)
     p = build_payload(meta, body, include_group_url_name=(not item_id) or resend_patch_group)
     if patch_group_flag and not item_id:
         print(PATCH_GROUP_URL_NAME_CREATE_NOTE)
@@ -752,6 +810,19 @@ def cmd_post(args: list[str]) -> int:
     if resend_patch_group and patch_group_target is None:
         print(f"BLOCKED: {PATCH_GROUP_URL_NAME_BLOCK}")
         return 1
+    if item_id and verified_state is False:
+        pre_code, pre_res = _read_item_with_retry(item_id, token)
+        pre_ok, pre_line = _format_item_readback(
+            item_id,
+            pre_code,
+            pre_res,
+            expected_private=private_value,
+            expected_group_url_name=expected_group_target,
+        )
+        if not pre_ok:
+            print(f"BLOCKED: item id={item_id} is marked qiita_team_verified=false and authoritative pre-PATCH readback failed: {pre_line}")
+            print("post: resolve the existing Team visibility mismatch before sending another PATCH.")
+            return 1
     if item_id:
         code, res = _req("PATCH", f"/items/{item_id}", token, p)
     else:
@@ -769,9 +840,26 @@ def cmd_post(args: list[str]) -> int:
             print(f"FAIL ({code}): write response missing item id; cannot perform authoritative readback: {res}")
             return 1
         if not item_id:
-            _writeback_id(files[0], readback_id)
+            try:
+                _writeback_id(files[0], readback_id)
+                _writeback_team_verified(files[0], False)
+            except OSError as e:
+                print(
+                    f"FAIL ({code}): local frontmatter writeback failed after create id={readback_id}: {e}"
+                )
+                print(
+                    f"post: item is already live on team with id={readback_id}; "
+                    "recover the id manually before retrying."
+                )
+                return 1
         rb_code, rb_res = _read_item_with_retry(readback_id, token)
-        rb_ok, rb_line = _format_item_readback(readback_id, rb_code, rb_res, expected_private=private_value)
+        rb_ok, rb_line = _format_item_readback(
+            readback_id,
+            rb_code,
+            rb_res,
+            expected_private=private_value,
+            expected_group_url_name=expected_group_target,
+        )
         if not rb_ok:
             print(f"FAIL ({code}): authoritative read-after-write check failed: {rb_line}")
             if not item_id:
@@ -779,6 +867,17 @@ def cmd_post(args: list[str]) -> int:
                     f"post: create already persisted frontmatter id={readback_id}; "
                     "item is live on team, investigate read-after-write mismatch before retrying."
                 )
+            else:
+                print(
+                    f"post: PATCH may already be live on team for id={readback_id}; "
+                    "re-running the same PATCH is idempotent, but verify visibility before retrying."
+                )
+            return 1
+        try:
+            _writeback_team_verified(files[0], True)
+        except OSError as e:
+            print(f"FAIL ({code}): authoritative readback passed but local verification marker writeback failed for id={readback_id}: {e}")
+            print(f"post: server state for id={readback_id} is already updated; fix the local file before retrying.")
             return 1
         print(f"OK ({code}): {rb_res.get('url')}  id={readback_id}  {format_team_visibility(rb_res)}")
         return 0

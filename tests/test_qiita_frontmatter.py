@@ -326,6 +326,25 @@ def test_qiita_team_post_dry_run_blocks_create_without_group_url_name(tmp_path, 
     assert "GROUP_URL_NAME_BLOCK" in out
 
 
+def test_qiita_team_post_dry_run_blocks_local_path_warning(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "See [local](./note.md)\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "LOCAL PATH in body" in out
+
+
 def test_qiita_team_post_dry_run_blocks_create_with_null_group_url_name(tmp_path, capsys):
     path = tmp_path / "team.md"
     path.write_text(
@@ -1652,6 +1671,54 @@ def test_qiita_team_post_cmd_post_blocks_on_private_get_readback_mismatch_after_
     assert writeback_calls == [(str(path), "team-item-id")]
 
 
+def test_qiita_team_post_cmd_post_blocks_on_group_get_readback_mismatch_after_persisting_id(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: target-group\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+    writeback_calls = []
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "target-group", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item", lambda item_id, token: (200, {
+        "id": item_id,
+        "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+        "title": "hello",
+        "private": True,
+        "group": {"url_name": "general", "private": False},
+        "organization_url_name": None,
+    }))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "authoritative read-after-write check failed" in out
+    assert "did not match intended group_url_name='target-group'" in out
+    assert "create already persisted frontmatter id=team-item-id" in out
+    assert writeback_calls == [(str(path), "team-item-id")]
+
+
 def test_qiita_team_post_cmd_post_persists_create_id_after_authoritative_get_readback(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(
@@ -1696,6 +1763,52 @@ def test_qiita_team_post_cmd_post_persists_create_id_after_authoritative_get_rea
     assert rc == 0
     assert "OK (201)" in out
     assert writeback_calls == [(str(path), "team-item-id")]
+
+
+def test_qiita_team_post_cmd_post_marks_verified_true_after_authoritative_get_readback(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item", lambda item_id, token: (200, {
+        "id": item_id,
+        "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+        "title": "hello",
+        "private": True,
+        "group": {"url_name": "general", "private": False},
+        "organization_url_name": None,
+    }))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "OK (201)" in out
+    text = path.read_text(encoding="utf-8")
+    assert "id: team-item-id" in text
+    assert "qiita_team_verified: true" in text
 
 
 def test_qiita_team_post_cmd_post_uses_authoritative_get_over_response_private_mismatch(tmp_path, capsys, monkeypatch):
@@ -1917,6 +2030,68 @@ def test_qiita_team_post_cmd_post_blocks_create_when_response_id_missing(tmp_pat
     assert rc == 1
     assert "write response missing item id; cannot perform authoritative readback" in out
     assert writeback_calls == []
+
+
+def test_qiita_team_post_cmd_post_blocks_unverified_patch_until_readback_recovers(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "qiita_team_verified: false\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+    monkeypatch.setattr(qtp, "_read_item_with_retry", lambda item_id, token: (404, "not found"))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "marked qiita_team_verified=false" in out
+    assert "authoritative pre-PATCH readback failed" in out
+
+
+def test_qiita_team_post_cmd_post_reports_writeback_io_failure_after_create(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (_ for _ in ()).throw(OSError("disk full")))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "local frontmatter writeback failed after create id=team-item-id" in out
+    assert "item is already live on team with id=team-item-id" in out
 
 
 def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path, capsys, monkeypatch):
