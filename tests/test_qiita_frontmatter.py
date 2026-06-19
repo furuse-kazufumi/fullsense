@@ -681,6 +681,70 @@ def test_qiita_public_post_preflight_surfaces_ignore_publish_warning(tmp_path, c
     assert qpp.IGNORE_PUBLISH_WARNING in out
 
 
+def test_qiita_public_post_cmd_post_blocks_ignore_publish_without_override(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "ignorePublish: true\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.IGNORE_PUBLISH_WARNING in out
+    assert qpp.IGNORE_PUBLISH_BLOCK in out
+
+
+def test_qiita_public_post_cmd_post_allows_ignore_publish_with_override(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "ignorePublish: true\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    calls = []
+
+    def _fake_req(method, path, token, payload=None):
+        calls.append((method, path))
+        if method == "GET":
+            return 200, {"id": "furuse-kazufumi"}
+        assert method == "PATCH"
+        return 200, {"id": "existing-public-id", "url": "https://example.test/items/existing-public-id"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    rc = qpp.cmd_post([str(path), "--yes", "--force-ignore-publish"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert ("PATCH", "/items/existing-public-id") in calls
+    assert "OK (200) [PUBLIC(一般公開)]" in out
+
+
 def test_qiita_public_post_post_requires_passing_preflight(tmp_path, capsys, monkeypatch):
     path = tmp_path / "sample.md"
     path.write_text(
@@ -749,6 +813,49 @@ def test_qiita_public_post_http_probe_asset_falls_back_after_head_403(monkeypatc
     ]
 
 
+def test_qiita_public_post_preflight_blocks_on_non_image_content_type(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "![img](https://example.test/a.svg)\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    def _fake_probe_asset(url):
+        return 200, {"Content-Type": "text/html"}
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "_http_probe_asset", _fake_probe_asset)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.ASSET_CONTENT_TYPE_BLOCK.format(content_type="text/html", url="https://example.test/a.svg") in out
+
+
+def test_qiita_public_post_safety_findings_uses_normalized_asset_url():
+    body = "![a](<https://example.test/a path.svg> \"title\")\n"
+    assert qpp.safety_findings({"title": "hello", "tags": ["AI"]}, body) == []
+
+
 def test_convert_to_qiita_cli_parses_folded_title():
     fm_lines, _body = qconv.split_frontmatter(FOLDED_TEXT)
     meta = qconv.parse_frontmatter(fm_lines)
@@ -778,3 +885,9 @@ def test_public_patch_sources_define_public_private_and_match_private():
         assert public_private_bad is None, f"{path.name} has invalid public_private: {meta.get('public_private')!r}"
         assert private_val == public_private_val, f"{path.name} private/public_private mismatch"
     assert checked > 0
+
+
+def test_qiita37_full_source_has_public_id():
+    path = ROOT / "tools" / "qiita-cli-poc" / "public" / "qiita37_gpu_triple_run_gate_price.md"
+    meta, _body = qpp.split_frontmatter(path.read_text(encoding="utf-8-sig"))
+    assert meta["public_id"] == "6f44575d440a9ebf5228"

@@ -73,6 +73,9 @@ WRITE_AUTH_WARNING = (
 IGNORE_PUBLISH_WARNING = (
     "WARNING: frontmatter ignorePublish: true is a qiita-cli gate, not a qiita_public_post.py gate."
 )
+IGNORE_PUBLISH_BLOCK = (
+    "BLOCKED: frontmatter ignorePublish: true requires --force-ignore-publish before qiita_public_post.py can send."
+)
 LIVE_TITLE_BLOCK = (
     "BLOCKED: live title differs from payload title. Resolve live-only edits or align source before PATCH."
 )
@@ -81,6 +84,9 @@ LIVE_VISIBILITY_BLOCK = (
 )
 PREFLIGHT_MARKER_REQUIRED_BLOCK = (
     "BLOCKED: --require-marker was requested but frontmatter preflight_marker: is missing."
+)
+ASSET_CONTENT_TYPE_BLOCK = (
+    "BLOCKED: asset does not look like an image content-type: {content_type!r} ({url})"
 )
 
 
@@ -217,7 +223,8 @@ def safety_findings(meta: dict, body: str) -> list[str]:
     if n > CHAR_LIMIT:
         out.append(f"OVER CHAR LIMIT ({n} > {CHAR_LIMIT})")
     for raw in scan_image_targets(body):
-        if not raw.startswith("http"):
+        url = _strip_markdown_title(raw)
+        if not url.startswith("http"):
             out.append(f"NON-PUBLIC IMAGE: {raw[:80]} (public URL か Qiita 直アップが必要)")
     if _LOCALPATH_RE.search(body):
         out.append("LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)")
@@ -366,7 +373,8 @@ def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool
     lines.append(f"private: {payload['private']}   body chars: {len(body)}")
     if legacy_id:
         lines.append(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
-    if as_bool(meta.get("ignorePublish"), default=False):
+    ignore_publish = as_bool(meta.get("ignorePublish"), default=False)
+    if ignore_publish:
         lines.append(IGNORE_PUBLISH_WARNING)
     lines.extend(privacy_finds)
     if finds:
@@ -439,9 +447,14 @@ def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool
     lines.append(f"asset_count: {len(asset_urls)}")
     for url in asset_urls:
         code, headers = _http_probe_asset(url)
-        lines.append(f"asset_status: {code}  content-type={headers.get('Content-Type', '')}  url={url}")
+        content_type = headers.get("Content-Type", "")
+        lines.append(f"asset_status: {code}  content-type={content_type}  url={url}")
         if code not in (200, 206):
             blocked = True
+            continue
+        if content_type and not content_type.lower().startswith("image/"):
+            blocked = True
+            lines.append(ASSET_CONTENT_TYPE_BLOCK.format(content_type=content_type, url=url))
     return lines, blocked
 
 
@@ -550,6 +563,10 @@ def cmd_post(args: list[str]) -> int:
         if "--allow-create" not in args:
             print(LEGACY_ID_BLOCK)
             return 1
+    if as_bool(meta.get("ignorePublish"), default=False) and "--force-ignore-publish" not in args:
+        print(IGNORE_PUBLISH_WARNING)
+        print(IGNORE_PUBLISH_BLOCK)
+        return 1
     preflight_lines, preflight_blocked = _preflight_report(meta, body, p, require_marker=False)
     for line in preflight_lines:
         print(line)
