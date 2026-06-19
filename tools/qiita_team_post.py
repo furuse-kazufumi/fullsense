@@ -862,7 +862,12 @@ def cmd_post(args: list[str]) -> int:
             pre_res,
         )
         if not pre_ok:
-            marker_state = "missing" if verified_state is None else "false"
+            if verified_state is None:
+                marker_state = "missing"
+            elif verified_state is True:
+                marker_state = "true"
+            else:
+                marker_state = "false"
             print(
                 f"BLOCKED: item id={item_id} has qiita_team_verified={marker_state} "
                 f"and authoritative pre-PATCH readback failed: {pre_line}"
@@ -907,14 +912,24 @@ def cmd_post(args: list[str]) -> int:
         if not item_id:
             try:
                 _writeback_id(files[0], readback_id)
-                _writeback_team_verified(files[0], False)
             except OSError as e:
                 print(
-                    f"FAIL ({code}): local frontmatter writeback failed after create id={readback_id}: {e}"
+                    f"FAIL ({code}): local id writeback failed after create id={readback_id}: {e}"
                 )
                 print(
                     f"post: item is already live on team with id={readback_id}; "
-                    "recover the id manually before retrying."
+                    "id was not persisted locally, recover it manually before retrying."
+                )
+                return 1
+            try:
+                _writeback_team_verified(files[0], False)
+            except OSError as e:
+                print(
+                    f"FAIL ({code}): local verification-marker writeback failed after create id={readback_id}: {e}"
+                )
+                print(
+                    f"post: item id={readback_id} is already persisted locally; "
+                    "do not re-POST. Fix qiita_team_verified manually before retrying."
                 )
                 return 1
         rb_code, rb_res = _read_item_with_retry(readback_id, token)

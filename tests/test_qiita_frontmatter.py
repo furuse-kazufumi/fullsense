@@ -2159,6 +2159,31 @@ def test_qiita_team_post_cmd_post_blocks_marker_missing_patch_until_readback_rec
     assert "authoritative pre-PATCH readback failed" in out
 
 
+def test_qiita_team_post_cmd_post_reports_true_marker_on_failed_pre_patch_readback(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+    monkeypatch.setattr(qtp, "_read_item_with_retry", lambda item_id, token: (404, "not found"))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "qiita_team_verified=true" in out
+    assert "authoritative pre-PATCH readback failed" in out
+
+
 def test_qiita_team_post_cmd_post_allows_corrective_patch_drift_when_readable(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(
@@ -2356,8 +2381,54 @@ def test_qiita_team_post_cmd_post_reports_writeback_io_failure_after_create(tmp_
     out = capsys.readouterr().out
 
     assert rc == 1
-    assert "local frontmatter writeback failed after create id=team-item-id" in out
+    assert "local id writeback failed after create id=team-item-id" in out
     assert "item is already live on team with id=team-item-id" in out
+    assert "id was not persisted locally" in out
+
+
+def test_qiita_team_post_cmd_post_reports_verified_writeback_failure_after_create(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    real_writeback_id = qtp._writeback_id
+
+    def fake_writeback_verified(*args):
+        raise OSError("disk full")
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_writeback_id", real_writeback_id)
+    monkeypatch.setattr(qtp, "_writeback_team_verified", fake_writeback_verified)
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "local verification-marker writeback failed after create id=team-item-id" in out
+    assert "item id=team-item-id is already persisted locally; do not re-POST" in out
+    text = path.read_text(encoding="utf-8")
+    assert "id: team-item-id" in text
 
 
 def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path, capsys, monkeypatch):
