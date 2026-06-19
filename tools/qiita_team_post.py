@@ -447,7 +447,7 @@ def _read_item(item_id: str, token: str) -> tuple[int, dict | str]:
     return _req("GET", f"/items/{item_id}", token)
 
 
-def _format_item_readback(item_id: str, code: int, res: dict | str) -> tuple[bool, str]:
+def _format_item_readback(item_id: str, code: int, res: dict | str, *, expected_private: bool | None = None) -> tuple[bool, str]:
     if code == 401:
         return False, f"AUTH FAIL ({code}): token invalid or expired for team '{TEAM}'"
     if code == 403:
@@ -468,6 +468,11 @@ def _format_item_readback(item_id: str, code: int, res: dict | str) -> tuple[boo
         if not url.startswith(expected_host):
             return False, f"FAIL ({code}): item url host drifted outside team '{TEAM}': {url}"
         private_value = res.get("private")
+        if expected_private is not None and private_value is not expected_private:
+            return False, (
+                f"FAIL ({code}): item id={item_id} readback private={private_value} "
+                f"did not match intended private={expected_private}"
+            )
         state_hint = "READABLE PRIVATE" if private_value is True else "READABLE"
         return True, (
             f"{state_hint} ({code}): {url}  id={res_id}  "
@@ -676,7 +681,10 @@ def cmd_post(args: list[str]) -> int:
         print(f"BLOCKED: {private_error}")
         return 1
     all_finds = safety_findings(meta, body)
-    blocking_finds = [x for x in all_finds if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR"))]
+    blocking_finds = [
+        x for x in all_finds
+        if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH"))
+    ]
     if blocking_finds:
         print("BLOCKED (fix first): " + "; ".join(blocking_finds))
         return 1
@@ -721,12 +729,12 @@ def cmd_post(args: list[str]) -> int:
         code, res = _req("POST", "/items", token, p)
     if code in (200, 201) and isinstance(res, dict):
         readback_id = str(res.get("id") or item_id or "").strip()
-        ok, line = _format_item_readback(readback_id, code, res)
+        ok, line = _format_item_readback(readback_id, code, res, expected_private=private_value)
+        if not item_id and res.get("id"):
+            _writeback_id(files[0], res.get("id"))  # persist create id even if readback blocks, to avoid duplicate create
         if not ok:
             print(line)
             return 1
-        if not item_id and res.get("id"):
-            _writeback_id(files[0], res.get("id"))  # idempotent re-posts (create -> store id -> future PATCH)
         print(f"OK ({code}): {res.get('url')}  id={res.get('id')}  {format_team_visibility(res)}")
         return 0
     print(f"FAIL ({code}): {res}")
