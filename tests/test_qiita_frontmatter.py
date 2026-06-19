@@ -1007,6 +1007,102 @@ def test_qiita_public_post_preflight_blocks_when_remote_baseline_body_is_not_pre
     assert qpp.PREFLIGHT_BASELINE_BODY_BLOCK.format(path=remote_dir / "existing-public-id.md") in out
 
 
+def test_qiita_public_post_preflight_blocks_remote_baseline_path_escape(tmp_path, capsys, monkeypatch):
+    outside = tmp_path / "outside.md"
+    outside.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "---\n"
+        "outside\n",
+        encoding="utf-8",
+    )
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "preflight_remote_baseline: ../outside.md\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.PREFLIGHT_BASELINE_PATH_BLOCK.format(path="../outside.md") in out
+    assert "preflight: BLOCKED" in out
+
+
+def test_qiita_public_post_preflight_preserves_blank_lines_in_baseline_check(tmp_path, capsys, monkeypatch):
+    remote_dir = tmp_path / ".remote"
+    remote_dir.mkdir()
+    (remote_dir / "existing-public-id.md").write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "---\n"
+        "line 1\n"
+        "\n"
+        "line 2\n",
+        encoding="utf-8",
+    )
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "preflight_remote_baseline: .remote/existing-public-id.md\n"
+        "---\n"
+        "line 1\n"
+        "line 2\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "baseline_body_preserved: False" in out
+    assert qpp.PREFLIGHT_BASELINE_BODY_BLOCK.format(path=remote_dir / "existing-public-id.md") in out
+
+
 def test_qiita_public_post_preflight_blocks_when_asset_content_type_is_missing(tmp_path, capsys, monkeypatch):
     path = tmp_path / "sample.md"
     path.write_text(

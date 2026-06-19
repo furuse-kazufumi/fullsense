@@ -94,6 +94,9 @@ PREFLIGHT_MARKER_REQUIRED_BLOCK = (
 PREFLIGHT_BASELINE_REQUIRED_BLOCK = (
     "BLOCKED: frontmatter preflight_remote_baseline: is set but baseline file is missing or unreadable: {path}"
 )
+PREFLIGHT_BASELINE_PATH_BLOCK = (
+    "BLOCKED: frontmatter preflight_remote_baseline: must stay under .remote/ and may not escape: {path}"
+)
 PREFLIGHT_BASELINE_BODY_BLOCK = (
     "BLOCKED: local body no longer preserves the required remote baseline body sequence: {path}"
 )
@@ -386,7 +389,7 @@ def build_payload(meta: dict, body: str, force_private: bool | None) -> dict:
 
 
 def _normalize_body_lines(body: str) -> list[str]:
-    return [line.strip() for line in body.splitlines() if line.strip()]
+    return body.replace("\r\n", "\n").replace("\r", "\n").split("\n")
 
 
 def _is_line_subsequence(needles: list[str], haystack: list[str]) -> bool:
@@ -405,8 +408,15 @@ def _baseline_body_report(meta: dict, body: str, source_path: str) -> tuple[list
     rel = str(meta.get("preflight_remote_baseline") or "").strip()
     if not rel:
         return [], False
-    base_path = Path(source_path).resolve().parent / rel
+    source_dir = Path(source_path).resolve().parent
+    allowed_dir = (source_dir / ".remote").resolve()
+    rel_path = Path(rel)
+    base_path = (source_dir / rel_path).resolve()
     lines = [f"baseline_path: {base_path}"]
+    rel_norm = rel.replace("\\", "/")
+    if rel_path.is_absolute() or ".." in rel_path.parts or not rel_norm.startswith(".remote/") or base_path.parent != allowed_dir:
+        lines.append(PREFLIGHT_BASELINE_PATH_BLOCK.format(path=rel))
+        return lines, True
     try:
         text = base_path.read_text(encoding="utf-8-sig")
         _base_meta, base_body = split_frontmatter(text)
