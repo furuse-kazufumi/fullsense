@@ -27,9 +27,9 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 | slug | item id | Team URL | visible range memo | rollback needed | note |
 | --- | --- | --- | --- | --- | --- |
-| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。Team API / visibility semantics の不一致は副次論点。rollback は別 human-gate 判断 |
-| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。Team API / visibility semantics の不一致は副次論点。rollback は別 human-gate 判断 |
-| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。Team API / visibility semantics の不一致は副次論点。rollback は別 human-gate 判断 |
+| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。生 evidence は下の `2026-06-19 visibility probe evidence` を参照。`visibility semantics` の不一致は副次論点。rollback は別 human-gate 判断 |
+| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。生 evidence は下の `2026-06-19 visibility probe evidence` を参照。`visibility semantics` の不一致は副次論点。rollback は別 human-gate 判断 |
+| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | API GET で `private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。生 evidence は下の `2026-06-19 visibility probe evidence` を参照。`visibility semantics` の不一致は副次論点。rollback は別 human-gate 判断 |
 
 ### 2026-06-19 visibility probe evidence
 
@@ -55,7 +55,8 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
   - `https://qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` → `404`
 - hedge:
   - Team サブドメインは private/public によらず auth gate される可能性があるため、この Login redirect だけでは item 可視範囲を確定できない
-  - ただし少なくとも `qiita.com/furuse-kazufumi/items/<id>` 直URLの public mirror は 2026-06-19 12:41 JST 時点で 404 だった
+  - `qiita.com/furuse-kazufumi/items/<id>` の direct `404` は、Team scope item なら team-only / 過剰露出のどちらでも起こりうるため、**over-exposure 判定の弁別力は無い**
+  - したがってこの probe は「今回 probe した 3 本について、2026-06-19 12:41:22 +09:00 時点で public 側の対応記事を直URLでは確認できなかった」という記録に留める
 
 ## blockers
 
