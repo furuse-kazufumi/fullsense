@@ -116,6 +116,10 @@ def _print_token_source(context: str, source: str | None) -> None:
         print(f"{context}: WARNING qiita.com personal token fallback is in use; Team auth / membership results may be misleading.")
 
 
+def _is_personal_token_source(source: str | None) -> bool:
+    return bool(source and source.endswith(":qiita_token"))
+
+
 def infer_title(meta: dict, body: str) -> str:
     if meta.get("title"):
         return str(meta["title"])
@@ -316,6 +320,10 @@ def _format_stem_ranges(stems: set[str]) -> str:
     return ",".join(parts)
 
 
+def _format_missing_stems(stems: set[str]) -> str:
+    return _format_stem_ranges(stems)
+
+
 def cmd_scan(args: list[str]) -> int:
     if args:
         patterns = args
@@ -346,13 +354,15 @@ def cmd_scan(args: list[str]) -> int:
         pattern_label = ", ".join(DEFAULT_SCAN_STEMS)
         existing_stems = _all_qiita_stems()
         excluded_stems = existing_stems - DEFAULT_SCAN_STEM_SET
+        missing_stems = DEFAULT_SCAN_STEM_SET - existing_stems
     safe = 0
     print(f"scan: {len(files)} files (pattern={pattern_label})\n")
     if not args:
         print(
             "scan coverage: queued "
             f"{len(DEFAULT_SCAN_STEM_SET)} / existing {len(existing_stems)} stem(s); "
-            f"excluded {len(excluded_stems)} ({_format_stem_ranges(excluded_stems)})\n"
+            f"excluded {len(excluded_stems)} ({_format_stem_ranges(excluded_stems)}); "
+            f"queued-but-missing {len(missing_stems)} ({_format_missing_stems(missing_stems)})\n"
         )
     report = []
     for f in files:
@@ -426,6 +436,11 @@ def _format_item_readback(item_id: str, code: int, res: dict | str) -> tuple[boo
         return False, f"AUTH FAIL ({code}): token invalid or expired for team '{TEAM}'"
     if code == 403:
         return False, f"AUTH FAIL ({code}): token lacks scope or membership for team '{TEAM}'"
+    if code == 404:
+        return False, (
+            f"NOT FOUND ({code}): item id={item_id} is not readable on team '{TEAM}' "
+            f"(possible delete / wrong team context / private-or-membership mismatch): {res}"
+        )
     if code == 200 and isinstance(res, dict):
         res_id = str(res.get("id") or "").strip()
         if res_id != item_id:
@@ -434,8 +449,10 @@ def _format_item_readback(item_id: str, code: int, res: dict | str) -> tuple[boo
         expected_host = f"https://{TEAM}.qiita.com/"
         if url and not url.startswith(expected_host):
             return False, f"FAIL (200): item url host drifted outside team '{TEAM}': {url}"
+        private_value = res.get("private")
+        state_hint = "READABLE PRIVATE" if private_value is True else "READABLE"
         return True, (
-            f"OK ({code}): {url}  id={res_id}  "
+            f"{state_hint} ({code}): {url}  id={res_id}  "
             f"title={res.get('title')}  {format_team_visibility(res)}"
         )
     return False, f"FAIL ({code}): {res}"
@@ -450,6 +467,10 @@ def cmd_preflight(args: list[str]) -> int:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
     _print_token_source("preflight", token_source)
+    if _is_personal_token_source(token_source):
+        print("preflight: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility.")
+        print("preflight: diagnosis cannot start until QIITA_TEAM_TOKEN or qiita_team_token is configured.")
+        return 1
     code, body = _req("GET", "/authenticated_user", token)
     if code != 200 or not isinstance(body, dict):
         print(f"preflight: BLOCKED auth ({code}): {body}")

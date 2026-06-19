@@ -1078,7 +1078,7 @@ def test_qiita_team_post_cmd_show_surfaces_visibility_readback(capsys, monkeypat
     out = capsys.readouterr().out
 
     assert rc == 0
-    assert "OK (200)" in out
+    assert "READABLE (200)" in out
     assert "title=hello" in out
     assert "private=False" in out
     assert "group.url_name=general" in out
@@ -1207,36 +1207,56 @@ def test_qiita_team_post_cmd_scan_default_targets_curated_qiita_range(tmp_path, 
 
     assert rc == 0
     assert "scan: 2 files" in out
-    assert "scan coverage: queued 12 / existing 3 stem(s); excluded 1 (#35)" in out
+    assert "scan coverage: queued 12 / existing 3 stem(s); excluded 1 (#35); queued-but-missing 10 (#29–34,#38–41)" in out
     assert "QIITA_#28" in out
     assert "QIITA_#42" in out
     assert "summary: 2/2 registration-safe" in out
 
 
-def test_qiita_team_post_cmd_preflight_warns_on_qiita_token_fallback(capsys, monkeypatch):
+def test_qiita_team_post_cmd_preflight_blocks_on_qiita_token_fallback(capsys, monkeypatch):
     monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
-
-    def fake_req(method, path, token, payload=None):
-        if path == "/authenticated_user":
-            return 200, {"id": "furuse-kazufumi"}
-        if path == "/items/team-item-id":
-            return 200, {
-                "id": "team-item-id",
-                "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
-                "title": "hello",
-                "private": False,
-                "group": {"url_name": "general", "private": False},
-                "organization_url_name": None,
-            }
-        raise AssertionError(path)
-
-    monkeypatch.setattr(qtp, "_req", fake_req)
     rc = qtp.cmd_preflight(["team-item-id"])
     out = capsys.readouterr().out
 
-    assert rc == 0
+    assert rc == 1
     assert "preflight: token_source=D:/api-keys.json:qiita_token" in out
     assert "WARNING qiita.com personal token fallback is in use" in out
+    assert "preflight: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
+
+
+def test_qiita_team_post_cmd_show_labels_readable_private(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, path, token, payload=None):
+        return 200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_show(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "READABLE PRIVATE (200)" in out
+
+
+def test_qiita_team_post_cmd_show_surfaces_not_found_hint(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, path, token, payload=None):
+        return 404, {"message": "not found"}
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_show(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "NOT FOUND (404): item id=team-item-id is not readable on team 'fullsense'" in out
 
 
 def test_qiita_team_post_cmd_scan_default_accepts_md_bak_and_normalizes_name(tmp_path, capsys, monkeypatch):
