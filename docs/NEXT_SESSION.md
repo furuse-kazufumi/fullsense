@@ -118,6 +118,7 @@ nav_order: 95
   3. `python tools/qiita_public_post.py post tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md --yes`
      `public_id` 付き source なので `--allow-create` は不要。
   4. API / HTML で canonical 告知反映と item id 不変を確認し、あわせて live SVG / 画像 (`kamikudaki_shishi.svg`) が描画されるか目視確認する。Qiita / imgix 側キャッシュで非表示や古い描画が残る場合は、画像 URL に `?v=20260619N` を足して再 publish する。
+- 2026-06-19 の pre-patch baseline として、`python tools/qiita_public_post.py dry-run ...` は引き続き `PATCH update public_id=f06ca92ea208c7646fcd` / warning 無し / `private: False` を返し、live HTML / API も `f06ca92...` の現 title で `200`、raw `kamikudaki_shishi.svg` も `image/svg+xml` / `200` を返した。
 - 未吸収 2 ブロック（多言語スイッチャー / curated 関連ニュース節）は **完全版 `6f44575d440a9ebf5228` 側の将来課題**であって、short companion 側の欠落ではない。したがって現行 option 1 は、companion 本文を欠落させず canonical 告知だけを live へ反映する選択として読む。
 - さらに `ac398349ec42e40913f1.md` と `docs/articles/QIITA_SERIES_INDEX.md` の #37 導線も `canonical / companion` 表記へ揃え、local index 上で短稿を「実体記事」扱いしないよう補正した。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
