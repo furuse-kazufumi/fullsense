@@ -120,7 +120,8 @@ nav_order: 95
      ここでの確認対象は本文同一性だけではなく、**PATCH が source からの title / tags / body 全置換**であることを踏まえ、live-only 編集を失ってよい状態かも含む。
   3. `python tools/qiita_public_post.py post tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md --yes`
      `public_id` 付き source なので `--allow-create` は不要。
-  4. API / HTML で canonical 告知反映と item id 不変を確認し、あわせて live SVG / 画像 (`kamikudaki_shishi.svg`) が描画されるか目視確認する。Qiita / imgix 側キャッシュで非表示や古い描画が残る場合は、画像 URL に `?v=20260619N` を足して再 publish する。
+  4. `python tools/qiita_public_post.py preflight tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md --require-marker`
+     で `marker_present: True` と `preflight: OK` を確認し、あわせて live SVG / 画像 (`kamikudaki_shishi.svg`) が描画されるか目視確認する。Qiita / imgix 側キャッシュで非表示や古い描画が残る場合は、画像 URL に `?v=20260619N` を足して再 publish する。
 - 2026-06-19 の pre-patch baseline として、`python tools/qiita_public_post.py preflight ...` は `PATCH update public_id=f06ca92ea208c7646fcd` / warning 無し / `private: False` / `api_status: 200` / `html_status: 200` / `asset_count: 3` / `preflight: OK` を返し、asset 3 件 (`kamikudaki_shishi.svg`, `191.jpg`, `192.jpg`) もすべて `200` だった。
 - 未吸収 2 ブロック（多言語スイッチャー / curated 関連ニュース節）は **完全版 `6f44575d440a9ebf5228` 側の将来課題**であって、short companion 側の欠落ではない。したがって現行 option 1 は、companion 本文を欠落させず canonical 告知だけを live へ反映する選択として読む。
 - raw asset URL は `origin/main` を解決する。local `main` が `origin/main` より 263 commits ahead でも、今回参照する `kamikudaki_shishi.svg` / `191.jpg` / `192.jpg` はすでに remote `main` 側で `200` を返しているため、この PATCH runbook の asset 参照には影響しない。

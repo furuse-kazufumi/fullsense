@@ -11,6 +11,7 @@ public_private: false
 updated_at: '2026-06-14T23:29:22+09:00'
 id: f06ca92ea208c7646fcd
 public_id: f06ca92ea208c7646fcd
+preflight_marker: "この短稿の正本は完全版 #37 です。"
 organization_url_name: null
 slide: false
 ignorePublish: true

@@ -17,6 +17,7 @@ qiita_team_post.py の公開 (qiita.com) 版。Team poster とは独立に動き
   py -3.11 qiita_public_post.py verify                       # 公開トークン疎通
   py -3.11 qiita_public_post.py dry-run <file.md>            # payload + 警告 (network なし)
   py -3.11 qiita_public_post.py preflight <file.md>          # dry-run + live/API/assets 事前確認
+  py -3.11 qiita_public_post.py preflight <file.md> --require-marker  # live HTML に marker 反映まで要求
   py -3.11 qiita_public_post.py post <file.md> --yes         # 実 POST/PATCH (private=false)
   py -3.11 qiita_public_post.py post <file.md> --yes --private   # 限定共有で投稿
   py -3.11 qiita_public_post.py post <file.md> --yes --allow-create  # `public_id` 無し create を明示許可
@@ -28,6 +29,7 @@ import os
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 
 from _frontmatter import split_frontmatter
@@ -63,6 +65,10 @@ CONFLICTING_PRIVATE_BLOCK = (
 UNRECOGNIZED_VISIBILITY_BLOCK = (
     "BLOCKED: frontmatter {field}: has unrecognized visibility value {value!r}. "
     "Use true/false (or yes/no/1/0)."
+)
+WRITE_AUTH_WARNING = (
+    "WARNING: preflight does not prove PATCH auth unless /authenticated_user succeeds. "
+    "Run `verify` or use preflight with a valid token before posting."
 )
 
 
@@ -198,20 +204,42 @@ def safety_findings(meta: dict, body: str) -> list[str]:
     n = len(body)
     if n > CHAR_LIMIT:
         out.append(f"OVER CHAR LIMIT ({n} > {CHAR_LIMIT})")
-    for m in _IMG_RE.finditer(body):
-        url = m.group(1) or m.group(2) or ""
-        if not url.startswith("http"):
-            out.append(f"NON-PUBLIC IMAGE: {url[:80]} (public URL か Qiita 直アップが必要)")
+    for raw in scan_image_targets(body):
+        if not raw.startswith("http"):
+            out.append(f"NON-PUBLIC IMAGE: {raw[:80]} (public URL か Qiita 直アップが必要)")
     if _LOCALPATH_RE.search(body):
         out.append("LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)")
     return out
 
 
+def _strip_markdown_title(raw: str) -> str:
+    raw = raw.strip()
+    if raw.startswith("<") and raw.endswith(">"):
+        raw = raw[1:-1].strip()
+    if '"' in raw:
+        head, _quote, _tail = raw.partition('"')
+        if head.strip().startswith(("http://", "https://")):
+            return head.strip()
+    return raw
+
+
+def scan_image_targets(body: str) -> list[str]:
+    targets: list[str] = []
+    seen: set[str] = set()
+    for m in _IMG_RE.finditer(body):
+        raw = (m.group(1) or m.group(2) or "").strip()
+        if not raw or raw in seen:
+            continue
+        seen.add(raw)
+        targets.append(raw)
+    return targets
+
+
 def scan_asset_urls(body: str) -> list[str]:
     urls: list[str] = []
     seen: set[str] = set()
-    for m in _IMG_RE.finditer(body):
-        url = (m.group(1) or m.group(2) or "").strip()
+    for raw in scan_image_targets(body):
+        url = _strip_markdown_title(raw)
         if not url.startswith("http"):
             continue
         if url in seen:
@@ -257,6 +285,28 @@ def _http_get(url: str, token: str | None = None) -> tuple[int, dict[str, str], 
         return e.code, dict(e.headers.items()) if e.headers else {}, data
     except urllib.error.URLError as e:
         return 0, {}, f"URLError: {e}"
+
+
+def _http_probe_asset(url: str) -> tuple[int, dict[str, str]]:
+    req = urllib.request.Request(url, method="HEAD")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.status, dict(r.headers.items())
+    except urllib.error.HTTPError as e:
+        if e.code not in (405, 501):
+            return e.code, dict(e.headers.items()) if e.headers else {}
+    except urllib.error.URLError:
+        pass
+
+    req = urllib.request.Request(url, method="GET")
+    req.add_header("Range", "bytes=0-0")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.status, dict(r.headers.items())
+    except urllib.error.HTTPError as e:
+        return e.code, dict(e.headers.items()) if e.headers else {}
+    except urllib.error.URLError:
+        return 0, {}
 
 
 def cmd_verify(_args: list[str]) -> int:
@@ -322,6 +372,7 @@ def cmd_preflight(args: list[str]) -> int:
         print("usage: preflight <file.md>")
         return 2
     force_private = True if "--private" in args else None
+    require_marker = "--require-marker" in args
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
@@ -330,6 +381,7 @@ def cmd_preflight(args: list[str]) -> int:
     pid = real_public_id(meta)
     legacy_id = legacy_id_without_public_id(meta)
     asset_urls = scan_asset_urls(body)
+    preflight_marker = str(meta.get("preflight_marker") or "").strip()
 
     print(f"target: PUBLIC qiita.com ({API_BASE})")
     print(f"action: {'PATCH update public_id=' + str(pid) if pid else 'POST create (new public article)'}")
@@ -348,11 +400,23 @@ def cmd_preflight(args: list[str]) -> int:
         print("registration-safe: no findings")
 
     blocked = bool(finds or privacy_finds)
+    auth_ok = False
+    auth_token = get_token()
+    if auth_token:
+        auth_code, _auth_body = _req("GET", "/authenticated_user", auth_token)
+        print(f"auth_status: {auth_code}")
+        auth_ok = auth_code == 200
+        if not auth_ok:
+            blocked = True
+            print(WRITE_AUTH_WARNING)
+    else:
+        print("auth_status: missing-token")
+        blocked = True
+        print(WRITE_AUTH_WARNING)
     if not pid:
         print("live-check: skipped (no public_id; create path has no existing live item)")
     else:
-        token = get_token()
-        api_status, _api_headers, api_text = _http_get(f"{API_BASE}/items/{pid}", token=token)
+        api_status, _api_headers, api_text = _http_get(f"{API_BASE}/items/{pid}", token=auth_token)
         print(f"api_status: {api_status}")
         live_url = ""
         api_title = ""
@@ -377,6 +441,11 @@ def cmd_preflight(args: list[str]) -> int:
                 if start != -1 and end != -1:
                     html_title = html_text[start + 7:end]
                     print(f"html_title: {html_title}")
+                if preflight_marker:
+                    marker_ok = preflight_marker in html_text
+                    print(f"marker_present: {marker_ok}")
+                    if require_marker and not marker_ok:
+                        blocked = True
             else:
                 blocked = True
         else:
@@ -384,9 +453,9 @@ def cmd_preflight(args: list[str]) -> int:
 
     print(f"asset_count: {len(asset_urls)}")
     for url in asset_urls:
-        code, headers, _body = _http_get(url)
+        code, headers = _http_probe_asset(url)
         print(f"asset_status: {code}  content-type={headers.get('Content-Type', '')}  url={url}")
-        if code != 200:
+        if code not in (200, 206):
             blocked = True
 
     if blocked:
