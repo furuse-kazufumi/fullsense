@@ -17,6 +17,7 @@ qiita_team_post.py の公開 (qiita.com) 版。Team poster とは独立に動き
   py -3.11 qiita_public_post.py verify                       # 公開トークン疎通
   py -3.11 qiita_public_post.py dry-run <file.md>            # payload + 警告 (network なし)
   py -3.11 qiita_public_post.py preflight <file.md>          # dry-run + live/API/assets 事前確認
+  py -3.11 qiita_public_post.py preflight <file.md> --refresh-baseline  # live API 本文で .remote baseline を更新
   py -3.11 qiita_public_post.py preflight <file.md> --require-marker  # live HTML に marker 反映まで要求
   py -3.11 qiita_public_post.py post <file.md> --yes         # 実 POST/PATCH (private=false)
   py -3.11 qiita_public_post.py post <file.md> --yes --private   # 限定共有で投稿
@@ -404,29 +405,77 @@ def _is_line_subsequence(needles: list[str], haystack: list[str]) -> bool:
     return False
 
 
-def _baseline_body_report(meta: dict, body: str, source_path: str) -> tuple[list[str], bool]:
+def _yaml_quote_single(v: str) -> str:
+    return "'" + v.replace("'", "''") + "'"
+
+
+def _resolve_baseline_path(meta: dict, source_path: str) -> tuple[Path | None, str | None]:
     rel = str(meta.get("preflight_remote_baseline") or "").strip()
     if not rel:
-        return [], False
+        return None, None
     source_dir = Path(source_path).resolve().parent
     allowed_dir = (source_dir / ".remote").resolve()
     rel_path = Path(rel)
     base_path = (source_dir / rel_path).resolve()
-    lines = [f"baseline_path: {base_path}"]
     rel_norm = rel.replace("\\", "/")
     if rel_path.is_absolute() or ".." in rel_path.parts or not rel_norm.startswith(".remote/") or base_path.parent != allowed_dir:
-        lines.append(PREFLIGHT_BASELINE_PATH_BLOCK.format(path=rel))
-        return lines, True
+        return None, PREFLIGHT_BASELINE_PATH_BLOCK.format(path=rel)
+    return base_path, None
+
+
+def _refresh_remote_baseline(meta: dict, source_path: str, token: str | None) -> tuple[list[str], bool]:
+    path, err = _resolve_baseline_path(meta, source_path)
+    if not path:
+        return ([err] if err else []), bool(err)
+    pid = real_public_id(meta)
+    if not pid:
+        return ["baseline_refresh: skipped (no public_id)"], False
+    if not token:
+        return ["baseline_refresh: skipped (missing token)"], True
+    code, res = _req("GET", f"/items/{pid}", token)
+    if code != 200 or not isinstance(res, dict):
+        return [f"baseline_refresh_status: {code}", "BLOCKED: failed to refresh live baseline via API"], True
+    body = str(res.get("body") or "")
+    title = str(res.get("title") or "")
+    tags = res.get("tags") or []
+    private = bool(res.get("private"))
+    updated_at = str(res.get("updated_at") or "")
+    lines = ["---", f"title: {_yaml_quote_single(title)}", "tags:"]
+    for tag in tags:
+        name = str((tag or {}).get("name") or "").strip()
+        if name:
+            lines.append(f"  - {name}")
+    lines.extend([
+        f"private: {'true' if private else 'false'}",
+        f"public_private: {'true' if private else 'false'}",
+    ])
+    if updated_at:
+        lines.append(f"updated_at: {_yaml_quote_single(updated_at)}")
+    lines.extend([
+        f"id: {pid}",
+        f"public_id: {pid}",
+        "---",
+        body,
+    ])
+    path.write_text("\n".join(lines).rstrip("\n") + "\n", encoding="utf-8")
+    return [f"baseline_refresh_status: {code}", f"baseline_refreshed: {path}"], False
+
+
+def _baseline_body_report(meta: dict, body: str, source_path: str) -> tuple[list[str], bool]:
+    path, err = _resolve_baseline_path(meta, source_path)
+    if not path:
+        return ([err] if err else []), bool(err)
     try:
-        text = base_path.read_text(encoding="utf-8-sig")
+        text = path.read_text(encoding="utf-8-sig")
         _base_meta, base_body = split_frontmatter(text)
     except (OSError, ValueError):
-        lines.append(PREFLIGHT_BASELINE_REQUIRED_BLOCK.format(path=base_path))
+        lines = [f"baseline_path: {path}", PREFLIGHT_BASELINE_REQUIRED_BLOCK.format(path=path)]
         return lines, True
+    lines = [f"baseline_path: {path}"]
     ok = _is_line_subsequence(_normalize_body_lines(base_body), _normalize_body_lines(body))
     lines.append(f"baseline_body_preserved: {ok}")
     if not ok:
-        lines.append(PREFLIGHT_BASELINE_BODY_BLOCK.format(path=base_path))
+        lines.append(PREFLIGHT_BASELINE_BODY_BLOCK.format(path=path))
     return lines, not ok
 
 
@@ -580,6 +629,13 @@ def cmd_preflight(args: list[str]) -> int:
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
+    if "--refresh-baseline" in args:
+        refresh_lines, refresh_blocked = _refresh_remote_baseline(meta, files[0], get_token())
+        for line in refresh_lines:
+            print(line)
+        if refresh_blocked:
+            print("preflight: BLOCKED")
+            return 1
     lines, blocked = _preflight_report(meta, body, p, require_marker=require_marker, source_path=files[0])
     for line in lines:
         print(line)

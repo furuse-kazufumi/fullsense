@@ -1053,6 +1053,69 @@ def test_qiita_public_post_preflight_blocks_remote_baseline_path_escape(tmp_path
     assert "preflight: BLOCKED" in out
 
 
+def test_qiita_public_post_preflight_refreshes_remote_baseline_from_live_api(tmp_path, capsys, monkeypatch):
+    remote_dir = tmp_path / ".remote"
+    remote_dir.mkdir()
+    baseline = remote_dir / "existing-public-id.md"
+    baseline.write_text(
+        "---\n"
+        "title: stale\n"
+        "tags:\n"
+        "  - AI\n"
+        "---\n"
+        "stale body\n",
+        encoding="utf-8",
+    )
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "preflight_remote_baseline: .remote/existing-public-id.md\n"
+        "---\n"
+        "live body line 1\n"
+        "live body line 2\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        if method == "GET" and path == "/authenticated_user":
+            return 200, {"id": "furuse-kazufumi"}
+        if method == "GET" and path == "/items/existing-public-id":
+            return 200, {
+                "id": "existing-public-id",
+                "title": "hello",
+                "private": False,
+                "updated_at": "2026-06-19T00:00:00+09:00",
+                "tags": [{"name": "AI"}],
+                "body": "live body line 1\nlive body line 2\n",
+            }
+        raise AssertionError(f"unexpected _req: {method} {path}")
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path), "--refresh-baseline"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert f"baseline_refreshed: {baseline}" in out
+    assert "baseline_body_preserved: True" in out
+    refreshed = baseline.read_text(encoding="utf-8")
+    assert "live body line 1" in refreshed
+    assert "public_id: existing-public-id" in refreshed
+
+
 def test_qiita_public_post_preflight_preserves_blank_lines_in_baseline_check(tmp_path, capsys, monkeypatch):
     remote_dir = tmp_path / ".remote"
     remote_dir.mkdir()
