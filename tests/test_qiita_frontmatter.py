@@ -222,6 +222,16 @@ def test_qiita_team_post_build_payload_treats_blank_private_as_default_true():
     assert payload["private"] is True
 
 
+def test_qiita_team_post_build_payload_blocks_unrecognized_private_value():
+    body = "body\n"
+    try:
+        qtp.build_payload({"title": "hello", "tags": ["AI"], "private": "ture"}, body)
+    except ValueError as e:
+        assert "UNRECOGNIZED_PRIVATE_BLOCK" in str(e)
+    else:
+        raise AssertionError("expected ValueError for malformed private")
+
+
 def test_qiita_team_post_frontmatter_string_false_maps_to_public():
     text = (
         "---\n"
@@ -235,6 +245,47 @@ def test_qiita_team_post_frontmatter_string_false_maps_to_public():
     meta, body = qtp.split_frontmatter(text)
     payload = qtp.build_payload(meta, body)
     assert payload["private"] is False
+
+
+def test_qiita_team_post_dry_run_blocks_unrecognized_private_value(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: ture\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "UNRECOGNIZED_PRIVATE_BLOCK" in out
+
+
+def test_qiita_team_post_cmd_post_blocks_unrecognized_private_value(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: on\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "UNRECOGNIZED_PRIVATE_BLOCK" in out
 
 
 def test_qiita_team_post_dry_run_warns_on_ignore_publish(tmp_path, capsys):
@@ -1033,6 +1084,20 @@ def test_qiita_team_post_cmd_show_surfaces_visibility_readback(capsys, monkeypat
     assert "group.url_name=general" in out
     assert "group.private=False" in out
     assert "organization_url_name=None" in out
+
+
+def test_qiita_team_post_cmd_show_distinguishes_auth_failures(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+
+    def fake_req(method, path, token, payload=None):
+        return 403, {"message": "forbidden"}
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_show(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "AUTH FAIL (403)" in out
 
 
 def test_qiita_team_post_cmd_post_surfaces_nonblocking_warnings(tmp_path, capsys, monkeypatch):

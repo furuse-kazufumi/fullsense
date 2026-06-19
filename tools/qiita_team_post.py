@@ -143,20 +143,10 @@ def format_team_visibility(res: dict) -> str:
     )
 
 
-def as_bool(v, default=True) -> bool:
-    if isinstance(v, bool):
-        return v
-    if isinstance(v, str):
-        s = v.strip().lower()
-        if not s:
-            return default
-        return s in ("true", "yes", "1")
-    return default
-
-
 IGNORE_PUBLISH_WARNING = "WARNING: frontmatter ignorePublish: true is a qiita-cli gate; Team post requires explicit override."
 IGNORE_PUBLISH_BLOCK = "IGNORE_PUBLISH_BLOCK: add --force-ignore-publish only after human approval for this Team POST."
 UNRECOGNIZED_IGNORE_PUBLISH_BLOCK = "UNRECOGNIZED_IGNORE_PUBLISH_BLOCK: ignorePublish value '{value}' is not recognized"
+UNRECOGNIZED_PRIVATE_BLOCK = "UNRECOGNIZED_PRIVATE_BLOCK: private value '{value}' is not recognized"
 PATCH_GROUP_URL_NAME_BLOCK = (
     "PATCH_GROUP_URL_NAME_BLOCK: --patch-group-url-name requires explicit non-empty group_url_name in frontmatter"
 )
@@ -167,9 +157,8 @@ UNKNOWN_FLAG_BLOCK = "UNKNOWN_FLAG_BLOCK: unsupported flag '{flag}'"
 
 
 def parse_gate_bool(v) -> tuple[bool | None, str | None]:
-    # Intentional split: `private` uses as_bool(default=True) so malformed values
-    # collapse to the safer private side, while `ignorePublish` is an operator
-    # gate and must surface malformed values as explicit errors.
+    # Operator gate values must never silently degrade to an allowed state.
+    # Unrecognized values stay blocked until the caller spells them correctly.
     if v is None:
         return None, None
     if isinstance(v, bool):
@@ -184,6 +173,23 @@ def parse_gate_bool(v) -> tuple[bool | None, str | None]:
             return False, None
         return None, UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value=v)
     return None, UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value=v)
+
+
+def parse_private_bool(v, default=True) -> tuple[bool, str | None]:
+    if v is None:
+        return default, None
+    if isinstance(v, bool):
+        return v, None
+    if isinstance(v, str):
+        s = v.strip().lower()
+        if not s:
+            return default, None
+        if s in ("true", "yes", "1"):
+            return True, None
+        if s in ("false", "no", "0"):
+            return False, None
+        return False, UNRECOGNIZED_PRIVATE_BLOCK.format(value=v)
+    return False, UNRECOGNIZED_PRIVATE_BLOCK.format(value=v)
 
 
 def find_ignore_publish_key_issue(meta: dict) -> str | None:
@@ -318,6 +324,12 @@ def cmd_show(args: list[str]) -> int:
         return 2
     item_id = args[0].strip()
     code, res = _req("GET", f"/items/{item_id}", token)
+    if code == 401:
+        print(f"AUTH FAIL ({code}): token invalid or expired for team '{TEAM}'")
+        return 1
+    if code == 403:
+        print(f"AUTH FAIL ({code}): token lacks scope or membership for team '{TEAM}'")
+        return 1
     if code == 200 and isinstance(res, dict):
         print(
             f"OK ({code}): {res.get('url')}  id={res.get('id')}  "
@@ -329,11 +341,14 @@ def cmd_show(args: list[str]) -> int:
 
 
 def build_payload(meta: dict, body: str, *, include_group_url_name: bool = False) -> dict:
+    private_value, private_error = parse_private_bool(meta.get("private"), default=True)
+    if private_error:
+        raise ValueError(private_error)
     payload = {
         "title": infer_title(meta, body),
         "body": body,
         "tags": norm_tags(meta),
-        "private": as_bool(meta.get("private"), default=True),
+        "private": private_value,
         "tweet": False,
     }
     # Team visibility can depend on an explicit share target. Require callers
@@ -362,11 +377,15 @@ def cmd_dry_run(args: list[str]) -> int:
         return 2
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
+    private_value, private_error = parse_private_bool(meta.get("private"), default=True)
     item_id = real_id(meta)
     create_group_target = explicit_group_target(meta) if not item_id else None
     patch_group_target = explicit_group_target(meta) if item_id else None
     patch_group_flag = wants_patch_group_url_name(args)
     resend_patch_group = bool(item_id and patch_group_flag)
+    if private_error:
+        print(f"BLOCKED: {private_error}")
+        return 1
     p = build_payload(meta, body, include_group_url_name=(not item_id) or resend_patch_group)
     finds = safety_findings(meta, body)
     gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
@@ -374,7 +393,7 @@ def cmd_dry_run(args: list[str]) -> int:
     print(f"action: {'PATCH update id=' + str(item_id) if item_id else 'POST create'} on team '{TEAM}'")
     print(f"title : {p['title']}")
     print(f"tags  : {[t['name'] for t in p['tags']]}")
-    print(f"private: {p['private']}   body chars: {len(body)}")
+    print(f"private: {private_value}   body chars: {len(body)}")
     if create_group_target is not None:
         print(f"group_url_name: {p['group_url_name']}")
     elif resend_patch_group and patch_group_target is not None:
@@ -457,6 +476,10 @@ def cmd_post(args: list[str]) -> int:
         return 2
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
+    private_value, private_error = parse_private_bool(meta.get("private"), default=True)
+    if private_error:
+        print(f"BLOCKED: {private_error}")
+        return 1
     all_finds = safety_findings(meta, body)
     blocking_finds = [x for x in all_finds if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR"))]
     if blocking_finds:
