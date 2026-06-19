@@ -1151,6 +1151,17 @@ def test_qiita_team_post_cmd_show_distinguishes_auth_failures(capsys, monkeypatc
     assert "AUTH FAIL (403)" in out
 
 
+def test_qiita_team_post_cmd_show_blocks_unknown_flag(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    rc = qtp.cmd_show(["team-item-id", "--foo"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "UNKNOWN_FLAG_BLOCK" in out
+    assert "usage: show <item_id>" in out
+
+
 def test_qiita_team_post_cmd_preflight_checks_auth_and_item_readback(capsys, monkeypatch):
     monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     calls = []
@@ -1181,6 +1192,17 @@ def test_qiita_team_post_cmd_preflight_checks_auth_and_item_readback(capsys, mon
     assert "organization_url_name=None" in out
     assert calls[0][1] == "/authenticated_user"
     assert calls[1][1] == "/items/team-item-id"
+
+
+def test_qiita_team_post_cmd_preflight_blocks_unknown_flag(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    rc = qtp.cmd_preflight(["team-item-id", "--foo"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "UNKNOWN_FLAG_BLOCK" in out
+    assert "usage: preflight <item_id> [item_id...]" in out
 
 
 def test_qiita_team_post_cmd_preflight_blocks_on_item_auth_failure(capsys, monkeypatch):
@@ -1273,6 +1295,26 @@ def test_qiita_team_post_cmd_preflight_blocks_on_qiita_token_fallback(capsys, mo
     assert "preflight: token_source=D:/api-keys.json:qiita_token" in out
     assert "WARNING qiita.com personal token fallback is in use" in out
     assert "preflight: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
+
+
+def test_qiita_team_post_resolve_token_skips_whitespace_only_env_and_uses_file_fallback(tmp_path, monkeypatch):
+    api_keys = tmp_path / "api-keys.json"
+    api_keys.write_text('{"qiita_team_token":"team-token"}\n', encoding="utf-8")
+    monkeypatch.setenv("QIITA_TEAM_TOKEN", "   ")
+    monkeypatch.setattr(qtp.os.path, "expanduser", lambda _: str(api_keys))
+    real_open = open
+
+    def fake_open(path, *args, **kwargs):
+        if path == "D:/api-keys.json":
+            raise OSError("blocked for test isolation")
+        return real_open(path, *args, **kwargs)
+
+    monkeypatch.setattr("builtins.open", fake_open)
+
+    token, source = qtp.resolve_token()
+
+    assert token == "team-token"
+    assert source == f"{api_keys}:qiita_team_token"
 
 
 def test_qiita_team_post_resolve_token_prefers_team_key_over_personal(tmp_path, monkeypatch):

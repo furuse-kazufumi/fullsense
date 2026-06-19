@@ -98,7 +98,7 @@ def _load_api_keys_json(path: str) -> dict | None:
 
 def resolve_token() -> tuple[str | None, str | None]:
     t = os.environ.get("QIITA_TEAM_TOKEN")
-    if t:
+    if t and t.strip():
         return t.strip(), "env:QIITA_TEAM_TOKEN"
     paths = (r"D:/api-keys.json", os.path.expanduser("~/api-keys.json"))
     api_keys = [(p, _load_api_keys_json(p)) for p in paths]
@@ -533,9 +533,8 @@ def _format_item_readback(
                 f"did not match intended private={expected_private}"
             )
         if expected_group_url_name is not None:
-            group = res.get("group")
-            group_url_name = group.get("url_name") if isinstance(group, dict) else None
-            if str(group_url_name or "").strip() != expected_group_url_name:
+            group_url_name = _current_group_url_name(res)
+            if group_url_name != expected_group_url_name:
                 return False, (
                     f"FAIL ({code}): item id={item_id} readback group.url_name={group_url_name!r} "
                     f"did not match intended group_url_name={expected_group_url_name!r}"
@@ -580,6 +579,11 @@ def _visibility_drift_notes(
 
 
 def cmd_preflight(args: list[str]) -> int:
+    flag_error = validate_flags(args, allowed_flags=set())
+    if flag_error:
+        print(f"BLOCKED: {flag_error}")
+        print("usage: preflight <item_id> [item_id...]")
+        return 1
     if not args:
         print("usage: preflight <item_id> [item_id...]")
         return 2
@@ -613,6 +617,11 @@ def cmd_preflight(args: list[str]) -> int:
 
 
 def cmd_show(args: list[str]) -> int:
+    flag_error = validate_flags(args, allowed_flags=set())
+    if flag_error:
+        print(f"BLOCKED: {flag_error}")
+        print("usage: show <item_id>")
+        return 1
     if len(args) != 1:
         print("usage: show <item_id>")
         return 2
