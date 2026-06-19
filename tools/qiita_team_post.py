@@ -95,7 +95,7 @@ def resolve_token() -> tuple[str | None, str | None]:
         try:
             with open(p, "r", encoding="utf-8-sig") as f:
                 d = json.load(f)
-            for k in ("qiita_team_token", "qiita_token", "QIITA_TEAM_TOKEN"):
+            for k in ("qiita_team_token", "QIITA_TEAM_TOKEN", "qiita_token"):
                 if d.get(k):
                     return str(d[k]).strip(), f"{p}:{k}"
         except (OSError, ValueError):
@@ -419,6 +419,10 @@ def cmd_verify(_args: list[str]) -> int:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
     _print_token_source("verify", token_source)
+    if _is_personal_token_source(token_source):
+        print("verify: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility.")
+        print("verify: configure QIITA_TEAM_TOKEN or qiita_team_token before using Team diagnosis output.")
+        return 1
     code, body = _req("GET", "/authenticated_user", token)
     if code == 200 and isinstance(body, dict):
         print(f"OK: authenticated as @{body.get('id')} on team '{TEAM}' ({API_BASE})")
@@ -500,6 +504,10 @@ def cmd_show(args: list[str]) -> int:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
     _print_token_source("show", token_source)
+    if _is_personal_token_source(token_source):
+        print("show: BLOCKED personal-token fallback cannot prove Team visibility on this workspace.")
+        print("show: configure QIITA_TEAM_TOKEN or qiita_team_token before trusting readback output.")
+        return 1
     item_id = args[0].strip()
     code, res = _read_item(item_id, token)
     ok, line = _format_item_readback(item_id, code, res)

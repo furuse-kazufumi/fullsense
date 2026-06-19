@@ -1224,6 +1224,56 @@ def test_qiita_team_post_cmd_preflight_blocks_on_qiita_token_fallback(capsys, mo
     assert "preflight: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
 
 
+def test_qiita_team_post_resolve_token_prefers_team_key_over_personal(tmp_path, monkeypatch):
+    api_keys = tmp_path / "api-keys.json"
+    api_keys.write_text(
+        '{\n'
+        '  "qiita_token": "personal-token",\n'
+        '  "QIITA_TEAM_TOKEN": "team-token"\n'
+        '}\n',
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("QIITA_TEAM_TOKEN", raising=False)
+    monkeypatch.setattr(qtp.os.path, "expanduser", lambda _: str(api_keys))
+    real_open = open
+
+    def fake_open(path, *args, **kwargs):
+        if path == "D:/api-keys.json":
+            raise OSError("blocked for test isolation")
+        return real_open(path, *args, **kwargs)
+
+    monkeypatch.setattr("builtins.open", fake_open)
+
+    token, source = qtp.resolve_token()
+
+    assert token == "team-token"
+    assert source == f"{api_keys}:QIITA_TEAM_TOKEN"
+
+
+def test_qiita_team_post_cmd_verify_blocks_on_qiita_token_fallback(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
+
+    rc = qtp.cmd_verify([])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "verify: token_source=D:/api-keys.json:qiita_token" in out
+    assert "WARNING qiita.com personal token fallback is in use" in out
+    assert "verify: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
+
+
+def test_qiita_team_post_cmd_show_blocks_on_qiita_token_fallback(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
+
+    rc = qtp.cmd_show(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "show: token_source=D:/api-keys.json:qiita_token" in out
+    assert "WARNING qiita.com personal token fallback is in use" in out
+    assert "show: BLOCKED personal-token fallback cannot prove Team visibility on this workspace." in out
+
+
 def test_qiita_team_post_cmd_show_labels_readable_private(capsys, monkeypatch):
     monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
