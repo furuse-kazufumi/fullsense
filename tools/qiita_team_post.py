@@ -43,6 +43,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 
@@ -447,6 +448,18 @@ def _read_item(item_id: str, token: str) -> tuple[int, dict | str]:
     return _req("GET", f"/items/{item_id}", token)
 
 
+def _read_item_with_retry(item_id: str, token: str, *, attempts: int = 3, delay_s: float = 0.2) -> tuple[int, dict | str]:
+    last_code: int | None = None
+    last_res: dict | str = ""
+    for attempt in range(attempts):
+        code, res = _read_item(item_id, token)
+        last_code, last_res = code, res
+        if code != 404 or attempt == attempts - 1:
+            return code, res
+        time.sleep(delay_s * (attempt + 1))
+    return last_code or 404, last_res
+
+
 def _normalize_private_readback(v) -> tuple[bool | None, str | None]:
     if isinstance(v, bool):
         return v, None
@@ -744,17 +757,29 @@ def cmd_post(args: list[str]) -> int:
     else:
         code, res = _req("POST", "/items", token, p)
     if code in (200, 201) and isinstance(res, dict):
-        readback_id = str(res.get("id") or item_id or "").strip()
+        response_id = str(res.get("id") or "").strip()
+        if item_id and response_id and response_id != item_id:
+            print(
+                f"FAIL ({code}): write response id mismatch; requested id={item_id} "
+                f"but API returned id={response_id}"
+            )
+            return 1
+        readback_id = response_id or item_id or ""
         if not readback_id:
             print(f"FAIL ({code}): write response missing item id; cannot perform authoritative readback: {res}")
             return 1
-        rb_code, rb_res = _read_item(readback_id, token)
+        if not item_id:
+            _writeback_id(files[0], readback_id)
+        rb_code, rb_res = _read_item_with_retry(readback_id, token)
         rb_ok, rb_line = _format_item_readback(readback_id, rb_code, rb_res, expected_private=private_value)
         if not rb_ok:
             print(f"FAIL ({code}): authoritative read-after-write check failed: {rb_line}")
+            if not item_id:
+                print(
+                    f"post: create already persisted frontmatter id={readback_id}; "
+                    "item is live on team, investigate read-after-write mismatch before retrying."
+                )
             return 1
-        if not item_id:
-            _writeback_id(files[0], readback_id)
         print(f"OK ({code}): {rb_res.get('url')}  id={readback_id}  {format_team_visibility(rb_res)}")
         return 0
     print(f"FAIL ({code}): {res}")
