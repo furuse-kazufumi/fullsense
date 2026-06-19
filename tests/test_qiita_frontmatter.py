@@ -601,7 +601,7 @@ def test_qiita_team_post_cmd_post_allows_ignore_publish_with_override(tmp_path, 
 
     def _fake_req(method, path, token, payload=None):
         calls.append((method, path, payload))
-        return 201, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+        return 201, {"id": "team-item-id", "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id"}
 
     monkeypatch.setattr(qtp, "_req", _fake_req)
     rc = qtp.cmd_post([str(path), "--yes", "--force-ignore-publish"])
@@ -711,7 +711,7 @@ def test_qiita_team_post_cmd_post_patch_does_not_resend_group_url_name(tmp_path,
 
     def _fake_req(method, req_path, token, payload=None):
         calls.append((method, req_path, token, payload))
-        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id"}
 
     monkeypatch.setattr(qtp, "_req", _fake_req)
     rc = qtp.cmd_post([str(path), "--yes"])
@@ -751,7 +751,7 @@ def test_qiita_team_post_cmd_post_patch_can_resend_group_url_name_with_opt_in(tm
 
     def _fake_req(method, req_path, token, payload=None):
         calls.append((method, req_path, token, payload))
-        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id"}
 
     monkeypatch.setattr(qtp, "_req", _fake_req)
     rc = qtp.cmd_post([str(path), "--yes", "--patch-group-url-name"])
@@ -943,7 +943,7 @@ def test_qiita_team_post_cmd_post_create_notes_patch_group_url_name_is_ignored(t
 
     def _fake_req(method, req_path, token, payload=None):
         calls.append((method, req_path, token, payload))
-        return 201, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+        return 201, {"id": "team-item-id", "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id"}
 
     monkeypatch.setattr(qtp, "_req", _fake_req)
     rc = qtp.cmd_post([str(path), "--yes", "--patch-group-url-name"])
@@ -973,7 +973,7 @@ def test_qiita_team_post_cmd_post_patch_preserves_private_true(tmp_path, capsys,
 
     def _fake_req(method, req_path, token, payload=None):
         calls.append((method, req_path, token, payload))
-        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id"}
 
     monkeypatch.setattr(qtp, "_req", _fake_req)
     rc = qtp.cmd_post([str(path), "--yes"])
@@ -1250,6 +1250,30 @@ def test_qiita_team_post_resolve_token_prefers_team_key_over_personal(tmp_path, 
     assert source == f"{api_keys}:QIITA_TEAM_TOKEN"
 
 
+def test_qiita_team_post_resolve_token_prefers_team_key_in_later_file_over_personal(tmp_path, monkeypatch):
+    first = tmp_path / "api-keys.json"
+    second_dir = tmp_path / "home"
+    second_dir.mkdir()
+    second = second_dir / "api-keys.json"
+    first.write_text('{"qiita_token":"personal-token"}\n', encoding="utf-8")
+    second.write_text('{"qiita_team_token":"team-token"}\n', encoding="utf-8")
+    monkeypatch.delenv("QIITA_TEAM_TOKEN", raising=False)
+    monkeypatch.setattr(qtp.os.path, "expanduser", lambda _: str(second))
+    real_open = open
+
+    def fake_open(path, *args, **kwargs):
+        if path == "D:/api-keys.json":
+            return real_open(first, *args, **kwargs)
+        return real_open(path, *args, **kwargs)
+
+    monkeypatch.setattr("builtins.open", fake_open)
+
+    token, source = qtp.resolve_token()
+
+    assert token == "team-token"
+    assert source == f"{second}:qiita_team_token"
+
+
 def test_qiita_team_post_cmd_verify_blocks_on_qiita_token_fallback(capsys, monkeypatch):
     monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
 
@@ -1461,6 +1485,43 @@ def test_qiita_team_post_cmd_post_blocks_on_qiita_token_fallback(tmp_path, capsy
     assert "post: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
 
 
+def test_qiita_team_post_cmd_post_blocks_empty_url_readback_and_skips_writeback(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+    writeback_calls = []
+
+    def fake_req(method, req_path, token, payload=None):
+        return 201, {
+            "id": "team-item-id",
+            "url": "",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "returned without url; cannot confirm team host identity" in out
+    assert writeback_calls == []
+
+
 def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(
@@ -1479,7 +1540,7 @@ def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path,
 
     def _fake_req(method, req_path, token, payload=None):
         calls.append((method, req_path, token, payload))
-        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id"}
 
     monkeypatch.setattr(qtp, "_req", _fake_req)
     rc = qtp.cmd_post([str(path), "--yes"])
@@ -1488,6 +1549,13 @@ def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path,
     assert rc == 0
     assert "OK (200)" in out
     assert calls[0][3]["private"] is True
+
+
+def test_qiita_team_post_parse_private_bool_returns_private_on_error():
+    value, error = qtp.parse_private_bool("ture", default=True)
+
+    assert value is True
+    assert "UNRECOGNIZED_PRIVATE_BLOCK" in error
 
 
 def test_qiita_public_post_dry_run_surfaces_legacy_id_warning(tmp_path, capsys):

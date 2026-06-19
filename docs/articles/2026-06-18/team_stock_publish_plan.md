@@ -60,6 +60,7 @@
 
 1. `py -3.11 tools/qiita_team_post.py preflight <item_id> [item_id...]` を実行し、トークン疎通・対象 team item の readback・対象 item 同一性をコードで確認する。ここで fail した場合は **診断不成立で停止**し、visibility 判定へ進まない
    - `preflight` / `verify` / `show` / `post` は **採用した token source** も表示する。`qiita_token` への fallback は Team 診断と Team write の誤判定要因になりうるため、4 コマンドともこの条件を **BLOCK** し、その turn の diagnosis / PATCH / POST を進めない
+   - `resolve_token()` は env `QIITA_TEAM_TOKEN` を最優先し、その後は **複数 api-keys ファイル全体を横断して Team token キーを先に探索**してから personal fallback を見る。`post` も read-only コマンドと同じ fail-closed を使い、write 応答を readback 検証してからでないと `id` を書き戻さない
 2. `py -3.11 tools/qiita_team_post.py dry-run <file>` を再実行して title / tags / body 形式を確認する
 3. diagnosis 時の Team API GET は `py -3.11 tools/qiita_team_post.py show <item_id>` を使い、`private` / `group.url_name` / `group.private` / `organization_url_name` を read-only に再取得する
 4. frontmatter の `private: true` / `ignorePublish: true` を見直し、`ignorePublish: true` の source を送る時は `--force-ignore-publish` が必要だと再確認する

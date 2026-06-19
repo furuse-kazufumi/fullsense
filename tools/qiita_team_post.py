@@ -87,19 +87,27 @@ DEFAULT_SCAN_STEM_SET = set(DEFAULT_SCAN_STEMS)
 # --------------------------------------------------------------------------- #
 
 
+def _load_api_keys_json(path: str) -> dict | None:
+    try:
+        with open(path, "r", encoding="utf-8-sig") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
 def resolve_token() -> tuple[str | None, str | None]:
     t = os.environ.get("QIITA_TEAM_TOKEN")
     if t:
         return t.strip(), "env:QIITA_TEAM_TOKEN"
-    for p in (r"D:/api-keys.json", os.path.expanduser("~/api-keys.json")):
-        try:
-            with open(p, "r", encoding="utf-8-sig") as f:
-                d = json.load(f)
-            for k in ("qiita_team_token", "QIITA_TEAM_TOKEN", "qiita_token"):
+    paths = (r"D:/api-keys.json", os.path.expanduser("~/api-keys.json"))
+    api_keys = [(p, _load_api_keys_json(p)) for p in paths]
+    for keys in (("qiita_team_token", "QIITA_TEAM_TOKEN"), ("qiita_token",)):
+        for p, d in api_keys:
+            if not d:
+                continue
+            for k in keys:
                 if d.get(k):
                     return str(d[k]).strip(), f"{p}:{k}"
-        except (OSError, ValueError):
-            continue
     return None, None
 
 
@@ -217,8 +225,8 @@ def parse_private_bool(v, default=True) -> tuple[bool, str | None]:
             return True, None
         if s in ("false", "no", "0"):
             return False, None
-        return False, UNRECOGNIZED_PRIVATE_BLOCK.format(value=v)
-    return False, UNRECOGNIZED_PRIVATE_BLOCK.format(value=v)
+        return default, UNRECOGNIZED_PRIVATE_BLOCK.format(value=v)
+    return default, UNRECOGNIZED_PRIVATE_BLOCK.format(value=v)
 
 
 def find_ignore_publish_key_issue(meta: dict) -> str | None:
@@ -344,6 +352,9 @@ def cmd_scan(args: list[str]) -> int:
                     if "archive" in f or ".worktrees" in f:
                         continue
                     base = os.path.basename(f)
+                    m = _SCAN_STEM_RE.search(base)
+                    if not m or m.group(1) != stem:
+                        continue
                     normalized_stem = base[:-4] if base.endswith(".md.bak") else base
                     if normalized_stem in seen_stems:
                         continue
@@ -446,16 +457,16 @@ def _format_item_readback(item_id: str, code: int, res: dict | str) -> tuple[boo
             f"NOT FOUND ({code}): item id={item_id} is not readable on team '{TEAM}' "
             f"(possible delete / wrong team context / private-or-membership mismatch): {res}"
         )
-    if code == 200 and isinstance(res, dict):
+    if code in (200, 201) and isinstance(res, dict):
         res_id = str(res.get("id") or "").strip()
         if res_id != item_id:
-            return False, f"FAIL (200): requested id={item_id} but API returned id={res_id or '(missing)'}"
+            return False, f"FAIL ({code}): requested id={item_id} but API returned id={res_id or '(missing)'}"
         url = str(res.get("url") or "")
         if not url:
-            return False, f"FAIL (200): item id={item_id} returned without url; cannot confirm team host identity"
+            return False, f"FAIL ({code}): item id={item_id} returned without url; cannot confirm team host identity"
         expected_host = f"https://{TEAM}.qiita.com/"
         if not url.startswith(expected_host):
-            return False, f"FAIL (200): item url host drifted outside team '{TEAM}': {url}"
+            return False, f"FAIL ({code}): item url host drifted outside team '{TEAM}': {url}"
         private_value = res.get("private")
         state_hint = "READABLE PRIVATE" if private_value is True else "READABLE"
         return True, (
@@ -709,6 +720,11 @@ def cmd_post(args: list[str]) -> int:
     else:
         code, res = _req("POST", "/items", token, p)
     if code in (200, 201) and isinstance(res, dict):
+        readback_id = str(res.get("id") or item_id or "").strip()
+        ok, line = _format_item_readback(readback_id, code, res)
+        if not ok:
+            print(line)
+            return 1
         if not item_id and res.get("id"):
             _writeback_id(files[0], res.get("id"))  # idempotent re-posts (create -> store id -> future PATCH)
         print(f"OK ({code}): {res.get('url')}  id={res.get('id')}  {format_team_visibility(res)}")
