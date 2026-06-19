@@ -45,7 +45,7 @@
 2. つまり Team poster で `post --yes` を通すには、`ignorePublish: true` の source に対して **human-gate 後の `--force-ignore-publish`** が別途必要である
 3. `private: true` の Team 上での実効可視範囲は未確定
 4. 2026-06-19 以降の Team create は、`group_url_name` 未指定の implicit share target を避けるため **explicit `group_url_name` 必須**へ fail-closed 化した
-4. よって、実 POST 前に user GO が必要
+5. よって、実 POST 前に user GO が必要
 
 ## POST 前に確認すること
 
@@ -60,21 +60,22 @@
 
 1. `py -3.11 tools/qiita_team_post.py verify` を実行し、トークン疎通と team 名を確認する
 2. `py -3.11 tools/qiita_team_post.py dry-run <file>` を再実行して title / tags / body 形式を確認する
-3. frontmatter の `private: true` / `ignorePublish: true` を見直し、`ignorePublish: true` の source を送る時は `--force-ignore-publish` が必要だと再確認する
-4. POST 後に記録する `id` / `URL` / `visible range` の記入先が `team_stock_queue.md` にあることを確認する
-5. rollback 手段が Team UI か API のどちらで取れるかを先に決める
-6. `private` flip を rollback として使わずに済むか、必要なら Team UI での即時差し替え手順を先に確認する
-7. `--patch-group-url-name` を使う remediation 案に進むなら、**先に human が concrete な `group_url_name` を決める**。2026-06-19 時点の local draft 3 本にはこの field が入っていないため、そのままの dry-run / post は fail-closed で `PATCH_GROUP_URL_NAME_BLOCK` になる
-8. 実行順は条件分岐で固定する。**露出シグナル確定なら containment first、露出シグナル未確定なら diagnosis first、opt-in PATCH は last** とする。ただし **diagnosis gate** と **temporary tightening gate** は別の human-gate として扱い、`暫定 private 化 → 再診断` を 1 回の選択で束ねない。temporary tightening 後の after-state は root-cause 判定ではなく **containment 完了確認**として読む
-9. ここで言う `visibility blocker` は **internal hypothesis / internal safety policy** であり、Qiita 公式仕様名ではない。最初にこの blocker の性質を 1 行で確定する。2026-06-19 時点の Qiita API docs 一次確認では、item の `private` は **only available on Qiita**、`group_url_name` は **Qiita Team 上で share item する group（null で public）** と読める。ただしこれは **診断前の暫定仮説**であり、**team-only を positive に確認できるまでは過剰露出疑いを優先**する安全側ポリシーとして扱う。`private:false` 単体は漏洩兆候と断定しない
-10. **diagnosis 完了**の定義は、対象 3 本それぞれについて **5 ソース** `(a) Team UI 上で確認できた share target / team-visible state` `(b) Team API GET で返る `group.url_name` / `private` / `organization_url_name`` `(c) 未認証 HTML GET の観測結果（status と Location）` `(d) public direct probe の観測結果` `(e) source frontmatter の `private` / `group_url_name`（intended state ラベル）` を同じターンで並べ、**Team 全体共有 / 特定グループ共有 / 外部公開(qiita.com public)** の3区分を前提に、`share target 起因 / org membership or token failure / group_url_name default drift / 外部公開シグナルあり / team-only positive / 未確定` を **primary + contributing** で残せる状態にすることとする。ここで `(b)(c)(d)` は **3 種再取得ソース**、5 ソース突合はその後段の判定ステップとして区別する
-11. 上記 10 を満たすまでは、opt-in PATCH は「実行候補」ではなく **診断後の従属候補**としてのみ扱う。temporary tightening が必要でも、先に diagnosis gate で before-state を固め、その次の human-gate で実行する
-12. 診断の第 0 工程は **共通 preflight gate**とする。`token validity / Team 権限健全性 / 対象 team membership / 判定に十分な read scope` を記事ループ前に確認し、ここで失敗した場合は **診断不成立で停止**する。最低限 `read_qiita_team` 相当の Team item 読取権限が必要だと明記し、`401 / 403` をそのまま可視性判定へ混ぜず、token 期限切れ・権限喪失・認証失敗を 먼저切り分ける。`Team API GET=200` だけで有効とは扱わない
-13. intended state baseline の正本は **frontmatter + 実 POST 記録(team_stock_queue.md)** とし、両者が不整合なら `team_stock_queue.md` を優先しつつ **未確定** を併記する。**実 API 現値は observed 側**であり baseline に混ぜない。human が明示した intended share target / intended private state メモは補助情報とする。Team UI は actual-state 証跡として扱う。frontmatter は **intended state** のラベルであり、実露出の証拠としては数えない
-14. 判定基準は project-local rule として暫定固定する。`share target 起因` は Team UI / API / intended state の target 意図が揃っているのに、share target だけが intended target から外れている場合。`group_url_name default drift` は frontmatter の `group_url_name` 未設定と Team API の current target が食い違い、かつ Team UI でも intended target が別に確認できた場合に限る。`外部公開シグナルあり` は **真の外部公開(qiita.com public)** と **Team 全体共有(内部全公開)** を切り分けたうえで、前者にだけ使う。独立一次根拠を追加できないラベルは **未確定** に統合する
-15. 5 ソースが矛盾したときの裁定順も **我々のローカル運用ルール**として暫定固定する。優先順位は `未認証 HTML GET / public direct probe の外形的事実` > `Team UI 表示` > `Team API GET` > `frontmatter / 実 POST 記録` とする。ここでいう `positive` は、**clean 未認証環境**からの **public direct probe** `https://qiita.com/furuse-kazufumi/items/<id>` が `200` かつ対象記事の title / 本文断片を content fingerprint として読める場合に限る。未認証 HTML GET / public direct probe は **cookie 完全クリア + no-cache + raw 直叩き**を必須条件とし、imgix 等プロキシ経由を禁止する。`302` は **Location が login か公開先か**まで確認して初めて判定材料に使う。`403 / 404` や空本文は **negative ではなく未確定** として扱い、安全証明に使わない。さらに `site:` index / 非メンバー検索 / 外部キャッシュ確認も補助 probe として残す
-16. `未確定` は catch-all の保留ではなく、**default で fail-closed 候補**に送る。`外部公開シグナルあり` は **即時 containment fast path**、`未確定` は **human 判断つき containment 候補**として別レーンに分ける。`team-only positive` 確認済みの記事だけが retain 候補になる。no-op retain は例外扱いで、同じ理由での no-op retain は 1 回まで、かつ retain 期限は **次回 human-gate まで**に留める。2 回目に入る前に **暫定 private 化**の human-gate を必ず出す
-17. diagnosis 結果ごとの最終処置も記事ごとに分ける。`share target 起因` は Team UI remediation または opt-in PATCH 候補、`org membership or token failure` は復旧担当へエスカレーション、`group_url_name default drift` は group target 決定の human-gate へ送る。`外部公開シグナルあり` は **即 containment**、`未確定` は **再診断または human 判断を挟んだ containment** に送る。`team-only positive` のみが retain 候補である。解除は intended state と before/after evidence が揃ってから別 gate で判断する
+3. diagnosis 時の Team API GET は `py -3.11 tools/qiita_team_post.py show <item_id>` を使い、`private` / `group.url_name` / `group.private` / `organization_url_name` を read-only に再取得する
+4. frontmatter の `private: true` / `ignorePublish: true` を見直し、`ignorePublish: true` の source を送る時は `--force-ignore-publish` が必要だと再確認する
+5. POST 後に記録する `id` / `URL` / `visible range` の記入先が `team_stock_queue.md` にあることを確認する
+6. rollback 手段が Team UI か API のどちらで取れるかを先に決める
+7. `private` flip を rollback として使わずに済むか、必要なら Team UI での即時差し替え手順を先に確認する
+8. `--patch-group-url-name` を使う remediation 案に進むなら、**先に human が concrete な `group_url_name` を決める**。2026-06-19 時点の local draft 3 本にはこの field が入っていないため、そのままの dry-run / post は fail-closed で `PATCH_GROUP_URL_NAME_BLOCK` になる
+9. 実行順は条件分岐で固定する。**露出シグナル確定なら containment first、露出シグナル未確定なら diagnosis first、opt-in PATCH は last** とする。ただし **diagnosis gate** と **temporary tightening gate** は別の human-gate として扱い、`暫定 private 化 → 再診断` を 1 回の選択で束ねない。temporary tightening 後の after-state は root-cause 判定ではなく **containment 完了確認**として読む
+10. ここで言う `visibility blocker` は **internal hypothesis / internal safety policy** であり、Qiita 公式仕様名ではない。最初にこの blocker の性質を 1 行で確定する。2026-06-19 時点の Qiita API docs 一次確認では、item の `private` は **only available on Qiita**、`group_url_name` は **Qiita Team 上で share item する group（null で public）** と読める。ただしこれは **診断前の暫定仮説（要出典）**であり、**team-only を positive に確認できるまでは過剰露出疑いを優先**する安全側ポリシーとして扱う。`private:false` 単体は漏洩兆候と断定しない
+11. **diagnosis 完了**の定義は、対象 3 本それぞれについて **5 source classes / 6 signals** を同じターンで並べ、**Team 全体共有 / 特定グループ共有 / 外部公開(qiita.com public)** の3区分を前提に、`share target 起因 / org membership or token failure / group_url_name default drift / 外部公開シグナルあり / team-only positive / 未確定` を **primary + contributing** で残せる状態にすることとする。内訳は `(a) intended baseline bundle = frontmatter + 実 POST 記録` `(b) Team UI 上で確認できた share target / team-visible state` `(c) Team API GET で返る group.url_name / private / organization_url_name` `(d) 未認証 HTML GET の観測結果（status と Location）` `(e) public direct probe の観測結果` で、ここで `(c)(d)(e)` は **3 種再取得ソース**、5 source classes 突合はその後段の判定ステップとして区別する
+12. 上記 11 を満たすまでは、opt-in PATCH は「実行候補」ではなく **診断後の従属候補**としてのみ扱う。temporary tightening が必要でも、先に diagnosis gate で before-state を固め、その次の human-gate で実行する
+13. 診断の第 0 工程は **共通 preflight gate**とする。`token validity / Team 権限健全性 / 対象 team membership / 判定に十分な read scope` を記事ループ前に確認し、ここで失敗した場合は **診断不成立で停止**する。最低限 `read_qiita_team` 相当の Team item 読取権限が必要だと明記し、`401 / 403` をそのまま可視性判定へ混ぜず、token 期限切れ・権限喪失・認証失敗を 먼저切り分ける。`Team API GET=200` だけで有効とは扱わない
+14. intended state baseline の正本は **frontmatter + 実 POST 記録(team_stock_queue.md)** とし、両者が不整合なら `team_stock_queue.md` を優先しつつ **未確定** を併記する。**実 API 現値は observed 側**であり baseline に混ぜない。human が明示した intended share target / intended private state メモは補助情報とする。Team UI は actual-state 証跡として扱う。frontmatter は **intended state** のラベルであり、実露出の証拠としては数えない
+15. 判定基準は project-local rule として暫定固定する。`share target 起因` は Team UI / API / intended state の target 意図が揃っているのに、share target だけが intended target から外れている場合。`group_url_name default drift` は frontmatter の `group_url_name` 未設定と Team API の current target が食い違い、かつ Team UI でも intended target が別に確認できた場合に限る。`外部公開シグナルあり` は **真の外部公開(qiita.com public)** と **Team 全体共有(内部全公開)** を切り分けたうえで、前者にだけ使う。独立一次根拠を追加できないラベルは **未確定** に統合する
+16. 5 source classes が矛盾したときの裁定順も **我々のローカル運用ルール**として暫定固定する。優先順位は `未認証 HTML GET / public direct probe の外形的事実` > `Team UI 表示` > `Team API GET` > `intended baseline bundle(frontmatter / 実 POST 記録)` とする。ここでいう `positive` は、**clean 未認証環境**からの **public direct probe** `https://qiita.com/furuse-kazufumi/items/<id>` が `200` かつ対象記事の title / 本文断片を content fingerprint として読める場合に限る。未認証 HTML GET / public direct probe は **cookie 完全クリア + no-cache + raw 直叩き**を必須条件とし、imgix 等プロキシ経由を禁止する。`302` は **Location が login か公開先か**まで確認して初めて判定材料に使う。`403 / 404` や空本文は **negative ではなく未確定** として扱い、安全証明に使わない。さらに `site:` index / 非メンバー検索 / 外部キャッシュ確認も補助 probe として残す
+17. `未確定` は catch-all の保留ではなく、**default で fail-closed 候補**に送る。`外部公開シグナルあり` は **即時 containment fast path**、`未確定` は **human 判断つき containment 候補**として別レーンに分ける。`team-only positive` 確認済みの記事だけが retain 候補になる。no-op retain は例外扱いで、同じ理由での no-op retain は 1 回まで、かつ retain 期限は **次回 human-gate まで**に留める。2 回目に入る前に **暫定 private 化**の human-gate を必ず出す
+18. diagnosis 結果ごとの最終処置も記事ごとに分ける。`share target 起因` は Team UI remediation または opt-in PATCH 候補、`org membership or token failure` は復旧担当へエスカレーション、`group_url_name default drift` は group target 決定の human-gate へ送る。`外部公開シグナルあり` は **即 containment**、`未確定` は **再診断または human 判断を挟んだ containment** に送る。`team-only positive` のみが retain 候補である。解除は intended state と before/after evidence が揃ってから別 gate で判断する
 
 ## execution commands
 
@@ -86,12 +87,12 @@
   - Team API / UI で title, private 状態, URL を確認する
   - `team_stock_queue.md` に `id` / URL / visible range を転記する
 - Team UI remediation checklist (human-gate 後のみ):
-  - この checklist は Team UI の read-only diagnosis と remediation の両方に適用する。変更を入れない read-only turn でも、5 ソースの before snapshot は同じ粒度で取る
+  - この checklist は Team UI の read-only diagnosis と remediation の両方に適用する。変更を入れない read-only turn でも、5 source classes / 6 signals の before snapshot は同じ粒度で取る
   - probe 実行前に対象を固定する: `GET https://fullsense.qiita.com/api/v2/items/<id>`、`GET https://fullsense.qiita.com/furuse-kazufumi/items/<id>`、`GET https://qiita.com/furuse-kazufumi/items/<id>`。静的 mirror の cache-bust は `?v=<ts>` を併用してよいが、**API / 認証エンドポイントでは query cache-bust を過信せず実レスポンス本文と取得時刻を残す**
   - Team 面 URL に打てていることを先に確認する。public 面しか叩けない probe は `無情報` とラベルし、可視性判定の根拠には使わない
   - **変更前**に token validity を確認し、Team API GET の成功だけでなく対象 team membership / org scope まで控える。判定に必要な scope 不足時は **診断不成立で停止**する
   - **変更前**に Team UI と Team API GET の両方で、対象 3 本の `title` / `private` / `group.url_name` / `organization_url_name` を控える。Team UI before-state は **human が同ターンで read-only 実見し、取得時刻・対象 URL・認証状態付きスクリーンショットを供給**する。スクリーンショットは保存先と命名規則を固定する
-  - **変更前**に同じターンで未認証 HTML GET / direct probe / source frontmatter (`private` / `group_url_name`) も控え、`記事ID / 取得時刻 / HTTP status / Location / 認証有無 / share target / verdict / raw headers` を固定列とする **JSON または CSV** で 5 ソースを 3 本ぶん横並びにする
+  - **変更前**に同じターンで未認証 HTML GET / direct probe / source frontmatter (`private` / `group_url_name`) も控え、`記事ID / 取得時刻 / HTTP status / Location / 認証有無 / share target / verdict / raw headers` を固定列とする **JSON または CSV** で 5 source classes / 6 signals を 3 本ぶん横並びにする
   - human が intended share target と intended private state を 3 本それぞれで明示してから UI を触る。source frontmatter の `group_url_name` 未設定時は、その未設定自体を diagnosis 項目として残す
   - Team UI 上で `private` 変更が実際に可視範囲 tightening として効くかを、その turn の before/after evidence で一次確認する。効力未確認のまま PATCH 経路へ飛ばない
   - remediation 中は delete を使わず、まず UI 上で share target / private state / body 差し替えのどれが可能かを切り分ける

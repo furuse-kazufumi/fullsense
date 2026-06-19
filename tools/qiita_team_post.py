@@ -22,6 +22,7 @@ Qiita API v2 (一次確認 2026-06-04, https://qiita.com/api/v2/docs):
   py -3.11 qiita_team_post.py verify            # トークン疎通 (GET authenticated_user)
   py -3.11 qiita_team_post.py dry-run <file.md> [--patch-group-url-name]
                                                 # payload + 警告を表示 (network なし)
+  py -3.11 qiita_team_post.py show <item_id>    # read-only Team API GET (visibility readback)
   py -3.11 qiita_team_post.py post <file.md> --yes [--force-ignore-publish]
                                                 [--patch-group-url-name]
                                                 # 実 POST/PATCH (ユーザーが GO したときのみ)
@@ -133,10 +134,12 @@ def format_team_visibility(res: dict) -> str:
     if isinstance(group, dict):
         group_url_name = group.get("url_name")
         group_private = group.get("private")
+    organization_url_name = res.get("organization_url_name")
     return (
         f"private={res.get('private')} "
         f"group.url_name={group_url_name} "
-        f"group.private={group_private}"
+        f"group.private={group_private} "
+        f"organization_url_name={organization_url_name}"
     )
 
 
@@ -305,6 +308,26 @@ def cmd_verify(_args: list[str]) -> int:
     return 1
 
 
+def cmd_show(args: list[str]) -> int:
+    if len(args) != 1:
+        print("usage: show <item_id>")
+        return 2
+    token = get_token()
+    if not token:
+        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
+        return 2
+    item_id = args[0].strip()
+    code, res = _req("GET", f"/items/{item_id}", token)
+    if code == 200 and isinstance(res, dict):
+        print(
+            f"OK ({code}): {res.get('url')}  id={res.get('id')}  "
+            f"title={res.get('title')}  {format_team_visibility(res)}"
+        )
+        return 0
+    print(f"FAIL ({code}): {res}")
+    return 1
+
+
 def build_payload(meta: dict, body: str, *, include_group_url_name: bool = False) -> dict:
     payload = {
         "title": infer_title(meta, body),
@@ -434,10 +457,16 @@ def cmd_post(args: list[str]) -> int:
         return 2
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
-    finds = [x for x in safety_findings(meta, body) if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR"))]
-    if finds:
-        print("BLOCKED (fix first): " + "; ".join(finds))
+    all_finds = safety_findings(meta, body)
+    blocking_finds = [x for x in all_finds if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR"))]
+    if blocking_finds:
+        print("BLOCKED (fix first): " + "; ".join(blocking_finds))
         return 1
+    warn_finds = [x for x in all_finds if x not in blocking_finds]
+    if warn_finds:
+        print("WARNINGS:")
+        for x in warn_finds:
+            print(f"  - {x}")
     gate_key_error = find_ignore_publish_key_issue(meta)
     if gate_key_error:
         print(f"BLOCKED: {gate_key_error}")
@@ -487,8 +516,14 @@ def main() -> int:
         print(__doc__)
         return 0
     cmd, rest = sys.argv[1], sys.argv[2:]
-    return {"scan": cmd_scan, "verify": cmd_verify, "dry-run": cmd_dry_run,
-            "post": cmd_post}.get(cmd, lambda a: (print(f"unknown cmd {cmd}"), 2)[1])(rest)
+    return {
+        "scan": cmd_scan,
+        "verify": cmd_verify,
+        "dry-run": cmd_dry_run,
+        "show": cmd_show,
+        "get": cmd_show,
+        "post": cmd_post,
+    }.get(cmd, lambda a: (print(f"unknown cmd {cmd}"), 2)[1])(rest)
 
 
 if __name__ == "__main__":
