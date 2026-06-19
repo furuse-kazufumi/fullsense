@@ -202,17 +202,18 @@ def test_qiita_team_post_build_payload_preserves_group_url_name():
     payload = qtp.build_payload(
         {"title": "hello", "tags": ["AI"], "private": False, "group_url_name": "general"},
         body,
+        include_group_url_name=True,
     )
     assert payload["group_url_name"] == "general"
 
 
-def test_qiita_team_post_build_payload_allows_explicit_null_group_url_name():
+def test_qiita_team_post_build_payload_skips_group_url_name_without_create_intent():
     body = "body\n"
     payload = qtp.build_payload(
-        {"title": "hello", "tags": ["AI"], "private": False, "group_url_name": "null"},
+        {"title": "hello", "tags": ["AI"], "private": False, "group_url_name": "general"},
         body,
     )
-    assert payload["group_url_name"] is None
+    assert "group_url_name" not in payload
 
 
 def test_qiita_team_post_build_payload_treats_blank_private_as_default_true():
@@ -264,6 +265,25 @@ def test_qiita_team_post_dry_run_blocks_create_without_group_url_name(tmp_path, 
         "tags:\n"
         "  - AI\n"
         "private: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "GROUP_URL_NAME_BLOCK" in out
+
+
+def test_qiita_team_post_dry_run_blocks_create_with_null_group_url_name(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: null\n"
         "---\n"
         "body\n",
         encoding="utf-8",
@@ -434,6 +454,26 @@ def test_qiita_team_post_cmd_post_blocks_create_without_group_url_name(tmp_path,
         "tags:\n"
         "  - AI\n"
         "private: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "GROUP_URL_NAME_BLOCK" in out
+
+
+def test_qiita_team_post_cmd_post_blocks_create_with_null_group_url_name(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: null\n"
         "---\n"
         "body\n",
         encoding="utf-8",

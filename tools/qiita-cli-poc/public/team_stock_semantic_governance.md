@@ -8,7 +8,6 @@ tags:
   - ClaudeCode
 private: false
 public_private: false
-group_url_name: general
 slide: false
 ignorePublish: true
 id: 6f67e54e538c10b8f1c3
@@ -16,7 +15,7 @@ id: 6f67e54e538c10b8f1c3
 # Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」
 
 > **この草稿の位置づけ**
-> #43 の `2-2. loop engineering にもセキュリティの顔がある` から切り出した Team stock 用の source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `6f67e54e538c10b8f1c3`、2026-06-19 12:41:22 +09:00 の再確認では Team API GET が `private:false` と `group.url_name: general` / `group.private: false` を返し、未認証 HTML GET は `302 /login?redirect_to=...` でした。poster payload では `group_url_name` を明示していなかったため、現在の local source では観測済み share target として `group_url_name: general` を固定しています。ただし Team サブドメイン全体の auth gate でも説明できるため、team-only と positively 確認できるまでは **過剰露出の疑いを優先**します。`private:false` の意味づけ自体は一次情報待ちで、ここで言う `visibility semantics` はプロジェクト内用語です。local source では accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
+> #43 の `2-2. loop engineering にもセキュリティの顔がある` から切り出した Team stock 用の source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `6f67e54e538c10b8f1c3`、2026-06-19 12:41:22 +09:00 の再確認では Team API GET が `private:false` と `group.url_name: general` / `group.private: false` を返し、未認証 HTML GET は `302 /login?redirect_to=...` でした。poster payload では `group_url_name` を明示していなかったため、implicit General sharing が起きた可能性を current 仮説として追います。ただしこれは root-cause 仮説であって、team-only の証明でも否定でもありません。local source は観測値を再宣言しないよう `group_url_name` を固定せず、accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
 
 > **前提**
 > headless AI agent / harness / loop を自分で回し、安全層も自作する側の文脈を前提にします。

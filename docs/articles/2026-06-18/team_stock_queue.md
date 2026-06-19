@@ -57,7 +57,7 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
   - Team サブドメインは private/public によらず auth gate される可能性があるため、この Login redirect だけでは item 可視範囲を確定できない
   - `qiita.com/furuse-kazufumi/items/<id>` の direct `404` は、Team scope item なら team-only / 過剰露出のどちらでも起こりうるため、**over-exposure 判定の弁別力は無い**
   - したがってこの probe は「今回 probe した 3 本について、2026-06-19 12:41:22 +09:00 時点で public 側の対応記事を直URLでは確認できなかった」という記録に留める
-  - 追加で、poster payload 側では当時 `group_url_name` を送っていなかった。`group.url_name: general` / `group.private:false` の観測は、implicit General sharing が起きた可能性を示す **現時点の仮説**として扱う
+  - 追加で、poster payload 側では当時 `group_url_name` を送っていなかった。`group.url_name: general` / `group.private:false` の観測は、implicit General sharing が起きた可能性を示す **現時点の仮説**として扱う。local source にはこの観測値を再送信既定値として固定しない
 
 ## blockers
 
@@ -65,7 +65,7 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 2. 2026-06-18 の API GET では 3 本とも `private:false` で返っており、frontmatter `private:true` は Team create 後の可視範囲を保証しなかった
 3. 2026-06-19 の未認証 HTML GET では 3 本とも Login ページへ落ちたが、これは Team サブドメイン全体の auth gate でも説明できる。したがって team-only と positively 確認できるまでは **過剰露出の疑いを優先**し、`private:false` の意味づけは一次情報待ちとする
 4. current blocker の主語は「Team API / visibility semantics（プロジェクト内用語）の不一致」ではなく、**過剰露出の疑いを否定できないこと**に置く。不一致は副次論点として記録する
-5. 2026-06-19 以降の Team create は、poster が `group_url_name` を明示しないまま implicit share target に依存しないよう fail-closed 化済みで、local source 3 本にも `group_url_name: general` を固定した
+5. 2026-06-19 以降の Team create は、poster が `group_url_name` を明示しないまま implicit share target に依存しないよう fail-closed 化済みで、`group_url_name` の未指定 / `null` / 空値は BLOCK する
 6. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
 
 ## 状態更新ルール

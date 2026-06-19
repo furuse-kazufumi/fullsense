@@ -97,7 +97,7 @@
 - ただし Team サブドメイン全体が private/public にかかわらず auth gate される可能性は残る。したがって Login redirect だけでは item の可視範囲を断定できず、**team-only と positively 確認できるまでは過剰露出の疑いを優先**する
 - なおこの `qiita.com` 側 `404` は Team scope item なら team-only / 過剰露出のどちらでも起こりうるため、**over-exposure 判定の弁別力は無い**。今回 probe した 3 本について、同時点で public 側の対応記事を直URLでは確認できなかった、という記録としてのみ使う
 - `private:false` の意味づけ自体も一次情報待ちであり、ここで言う `visibility semantics` は **プロジェクト内用語**に過ぎない。rollback / visibility tightening は別の human-gate 外部アクションとして扱う
-- 追加の現時点仮説として、2026-06-18 の poster payload では `group_url_name` を明示しておらず、観測された `group.url_name: general` は implicit General sharing を示している可能性がある。これは root-cause 仮説であって、team-only の証明でも否定でもない
+- 追加の現時点仮説として、2026-06-18 の poster payload では `group_url_name` を明示しておらず、観測された `group.url_name: general` は implicit General sharing を示している可能性がある。これは root-cause 仮説であって、team-only の証明でも否定でもない。local source にはこの観測値を resend default として固定せず、将来の create は explicit target を再判断する
 
 ## POST 後の記録先
 

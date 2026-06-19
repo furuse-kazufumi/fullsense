@@ -108,6 +108,12 @@ def _clean_nullish_scalar(v) -> str | None:
     return v if v and v.lower() not in ("null", "none") else None
 
 
+def explicit_group_target(meta: dict) -> str | None:
+    if "group_url_name" not in meta:
+        return None
+    return _clean_nullish_scalar(meta.get("group_url_name"))
+
+
 def real_id(meta: dict) -> str | None:
     """Frontmatter id, treating 'null'/'none'/'' as ABSENT (so we POST-create, not PATCH /items/null)."""
     return _clean_nullish_scalar(meta.get("id")) or _clean_nullish_scalar(meta.get("qiita_item_id"))
@@ -184,6 +190,10 @@ def safety_findings(meta: dict, body: str) -> list[str]:
             out.append(f"NON-PUBLIC IMAGE: {url[:80]} (Qiita は local/相対パスを読めない → public URL か Qiita 直アップ)")
     if _LOCALPATH_RE.search(body):
         out.append("LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)")
+    if not real_id(meta) and "group_url_name" not in meta:
+        out.append("MISSING GROUP TARGET: Team create requires explicit group_url_name")
+    elif not real_id(meta) and "group_url_name" in meta and explicit_group_target(meta) is None:
+        out.append("INVALID GROUP TARGET: group_url_name must be a non-empty concrete share target")
     return out
 
 
@@ -253,7 +263,7 @@ def cmd_verify(_args: list[str]) -> int:
     return 1
 
 
-def build_payload(meta: dict, body: str) -> dict:
+def build_payload(meta: dict, body: str, *, include_group_url_name: bool = False) -> dict:
     payload = {
         "title": infer_title(meta, body),
         "body": body,
@@ -264,8 +274,10 @@ def build_payload(meta: dict, body: str) -> dict:
     # Team visibility can depend on an explicit share target. Require callers
     # to spell out group_url_name on create instead of relying on implicit
     # Team defaults such as "General".
-    if "group_url_name" in meta:
-        payload["group_url_name"] = _clean_nullish_scalar(meta.get("group_url_name"))
+    if include_group_url_name:
+        group_url_name = explicit_group_target(meta)
+        if group_url_name is not None:
+            payload["group_url_name"] = group_url_name
     return payload
 
 
@@ -275,17 +287,17 @@ def cmd_dry_run(args: list[str]) -> int:
         return 2
     text = open(args[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
-    p = build_payload(meta, body)
-    finds = safety_findings(meta, body)
     item_id = real_id(meta)
-    has_group_url_name = "group_url_name" in meta
+    create_group_target = explicit_group_target(meta) if not item_id else None
+    p = build_payload(meta, body, include_group_url_name=not item_id)
+    finds = safety_findings(meta, body)
     gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
     gate_key_error = find_ignore_publish_key_issue(meta)
     print(f"action: {'PATCH update id=' + str(item_id) if item_id else 'POST create'} on team '{TEAM}'")
     print(f"title : {p['title']}")
     print(f"tags  : {[t['name'] for t in p['tags']]}")
     print(f"private: {p['private']}   body chars: {len(body)}")
-    if "group_url_name" in p:
+    if create_group_target is not None:
         print(f"group_url_name: {p['group_url_name']}")
     if gate_key_error:
         print(f"BLOCKED: {gate_key_error}")
@@ -293,8 +305,10 @@ def cmd_dry_run(args: list[str]) -> int:
         print(f"BLOCKED: {gate_error}")
     elif gate_value is True:
         print(IGNORE_PUBLISH_WARNING)
-    if not item_id and not has_group_url_name:
-        print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit group_url_name (or null) to avoid implicit sharing defaults.")
+    if not item_id and "group_url_name" not in meta:
+        print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit non-empty group_url_name to avoid implicit sharing defaults.")
+    elif not item_id and create_group_target is None:
+        print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit non-empty group_url_name to avoid implicit sharing defaults.")
     if finds:
         print("WARNINGS:")
         for x in finds:
@@ -302,7 +316,7 @@ def cmd_dry_run(args: list[str]) -> int:
     else:
         print("registration-safe: no findings")
     print("\n(dry-run: nothing sent. add `post <file> --yes` to actually publish.)")
-    return 1 if gate_key_error or gate_error or (not item_id and not has_group_url_name) else 0
+    return 1 if gate_key_error or gate_error or (not item_id and create_group_target is None) else 0
 
 
 def _writeback_id(path: str, item_id: str) -> None:
@@ -360,10 +374,14 @@ def cmd_post(args: list[str]) -> int:
         if "--force-ignore-publish" not in args:
             print(IGNORE_PUBLISH_BLOCK)
             return 1
-    p = build_payload(meta, body)
     item_id = real_id(meta)
+    create_group_target = explicit_group_target(meta) if not item_id else None
+    p = build_payload(meta, body, include_group_url_name=not item_id)
     if not item_id and "group_url_name" not in meta:
-        print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit group_url_name (or null) to avoid implicit sharing defaults.")
+        print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit non-empty group_url_name to avoid implicit sharing defaults.")
+        return 1
+    if not item_id and create_group_target is None:
+        print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit non-empty group_url_name to avoid implicit sharing defaults.")
         return 1
     if item_id:
         code, res = _req("PATCH", f"/items/{item_id}", token, p)

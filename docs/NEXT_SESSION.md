@@ -56,7 +56,7 @@ nav_order: 95
   2026-06-18 の dry-run と public PATCH 後の API / HTML 確認では、
   英語版タイトルを正しく表示することを確認した。
 - さらに 2026-06-19 に `tests/test_qiita_frontmatter.py` へ `qiita_team_post.py` の回帰も追加し、`real_id` の nullish fallback、frontmatter `private: false` の文字列パース経路、そして **空 `private:` は default=True へ倒す**修正まで固定した。よって Team stock 3 本の `private:false` incident は、少なくとも現在の Team poster 実装では再現しない層のバグとして切り分けられるが、だからといって可視範囲の疑いが解消したとは扱わない。
-- 追加の観測では、3 本とも Team API GET が `group.url_name: general` / `group.private:false` / `organization_url_name:null` も返した。2026-06-18 の poster payload は `group_url_name` を明示していなかったため、implicit General sharing が起きた可能性を current 仮説として追う。ただしこれは root-cause 仮説であって、team-only の証明でも否定でもない。
+- 追加の観測では、3 本とも Team API GET が `group.url_name: general` / `group.private:false` / `organization_url_name:null` も返した。2026-06-18 の poster payload は `group_url_name` を明示していなかったため、implicit General sharing が起きた可能性を current 仮説として追う。ただしこれは root-cause 仮説であって、team-only の証明でも否定でもない。local source にはこの観測値を resend default として固定しない。
 - さらに同日、Team poster の `ignorePublish` gate も fail-closed 化し、`dry-run` でも不正値や key typo を exit 非 0 で返すようにした。`ignorePublish:true` の source は Team poster でも `--force-ignore-publish` 無しでは送れない。
 - `tools/qiita-cli-poc/convert_to_qiita_cli.py` と `scripts/publish/zenn_convert.py` も
   同じ shared parser へ切替済み。`title: >-` を文字列 `">-"` のまま持ち回る
@@ -174,14 +174,14 @@ nav_order: 95
    `LLM Wiki` は #43 `3-2`（3 層 / thought circulation / safeguards 束）、
    `ctx2549` postmortem は #46 `2 / 3 / 6`（incident 束）を基準に、
    local draft が切り出し範囲から外れていないことを spot-check 済み。
-   また `team_stock_queue.md` / `team_stock_publish_plan.md` / local draft 3 本の
-   title・source anchor・`private: true`・`ignorePublish: true` も相互に矛盾していなかった。
+   また `team_stock_queue.md` / `team_stock_publish_plan.md` / local source 3 本の
+   title・source anchor・現在の frontmatter mirror（`private:false` / `public_private:false` / `ignorePublish:true` / `id:`）も相互に矛盾していなかった。
    2026-06-18 に human-gate 後の Team POST まで完了し、item id は
    `6f67e54e538c10b8f1c3` / `b35b429dc6dc1fde207a` / `6fe79ab04443f7654eca`。
    2026-06-19 時点の `tools/qiita_team_post.py` は `ignorePublish:true` も読み、
    `post --yes --force-ignore-publish` を明示しない限り fail-closed で停止する。
    確認済みの事実は、API GET では 3 本とも `private:false`、2026-06-19 12:41:22 +09:00 の未認証 HTML GET では 3 本とも `302 /login?redirect_to=...`、`https://qiita.com/furuse-kazufumi/items/<id>` の direct probe は 3 本とも `404`、という挙動だけである。前者は Team サブドメイン全体の auth gate でも説明でき、後者は Team scope item なら team-only / 過剰露出のどちらでも起こりうるため弁別力が無い。したがって「未認証一般ユーザーへ実露出している」とまでは確認できていないが、**team-only と positively 確認できるまでは過剰露出の疑いを優先**する。`visibility semantics` は副次論点として残す。
-   追加で API は `group.url_name: general` / `group.private:false` / `organization_url_name:null` も返したため、現時点では `group_url_name` omission による implicit General sharing 仮説を追う。ただし blocker の主語は引き続き **過剰露出疑いを否定できないこと**である。
+   追加で API は `group.url_name: general` / `group.private:false` / `organization_url_name:null` も返したため、現時点では `group_url_name` omission による implicit General sharing 仮説を追う。ただし blocker の主語は引き続き **過剰露出疑いを否定できないこと**であり、local source に `general` を resend default として固定しない。
    可視範囲の絞り込みや rollback が必要なら、以後は別の human-gate 外部アクションとして扱う。
 4. #43 の多言語差分を触るときは、日本語版を source of truth として
    章立て / 主張 / honest disclosure / front matter の順で同期する。
