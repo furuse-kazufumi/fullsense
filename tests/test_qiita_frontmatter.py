@@ -949,3 +949,98 @@ def test_qiita37_full_source_has_public_id():
     path = ROOT / "tools" / "qiita-cli-poc" / "public" / "qiita37_gpu_triple_run_gate_price.md"
     meta, _body = qpp.split_frontmatter(path.read_text(encoding="utf-8-sig"))
     assert meta["public_id"] == "6f44575d440a9ebf5228"
+
+
+def test_qiita37_companion_source_has_public_id_and_remote_baseline():
+    path = ROOT / "tools" / "qiita-cli-poc" / "public" / "qiita37_gpu_triple_run_gate_price_kamikudaki.md"
+    meta, _body = qpp.split_frontmatter(path.read_text(encoding="utf-8-sig"))
+    assert meta["public_id"] == "f06ca92ea208c7646fcd"
+    assert meta["preflight_remote_baseline"] == ".remote/f06ca92ea208c7646fcd.md"
+
+
+def test_qiita_public_post_preflight_blocks_when_remote_baseline_body_is_not_preserved(tmp_path, capsys, monkeypatch):
+    remote_dir = tmp_path / ".remote"
+    remote_dir.mkdir()
+    (remote_dir / "existing-public-id.md").write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "---\n"
+        "baseline line 1\n"
+        "baseline line 2\n",
+        encoding="utf-8",
+    )
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "preflight_remote_baseline: .remote/existing-public-id.md\n"
+        "---\n"
+        "baseline line 1\n"
+        "extra local line\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "baseline_body_preserved: False" in out
+    assert qpp.PREFLIGHT_BASELINE_BODY_BLOCK.format(path=remote_dir / "existing-public-id.md") in out
+
+
+def test_qiita_public_post_preflight_blocks_when_asset_content_type_is_missing(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "![a](https://example.test/a.svg)\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    def _fake_probe_asset(url):
+        assert url == "https://example.test/a.svg"
+        return 200, {}
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "_http_probe_asset", _fake_probe_asset)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.ASSET_CONTENT_TYPE_BLOCK.format(content_type="", url="https://example.test/a.svg") in out

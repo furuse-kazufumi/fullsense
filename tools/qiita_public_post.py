@@ -21,11 +21,13 @@ qiita_team_post.py の公開 (qiita.com) 版。Team poster とは独立に動き
   py -3.11 qiita_public_post.py post <file.md> --yes         # 実 POST/PATCH (private=false)
   py -3.11 qiita_public_post.py post <file.md> --yes --private   # 限定共有で投稿
   py -3.11 qiita_public_post.py post <file.md> --yes --allow-create  # `public_id` 無し create を明示許可
+  py -3.11 qiita_public_post.py post <file.md> --yes --force-ignore-publish  # ignorePublish:true を override
 """
 from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 import re
 import sys
 import urllib.error
@@ -88,6 +90,12 @@ LIVE_VISIBILITY_BLOCK = (
 )
 PREFLIGHT_MARKER_REQUIRED_BLOCK = (
     "BLOCKED: --require-marker was requested but frontmatter preflight_marker: is missing."
+)
+PREFLIGHT_BASELINE_REQUIRED_BLOCK = (
+    "BLOCKED: frontmatter preflight_remote_baseline: is set but baseline file is missing or unreadable: {path}"
+)
+PREFLIGHT_BASELINE_BODY_BLOCK = (
+    "BLOCKED: local body no longer preserves the required remote baseline body sequence: {path}"
 )
 ASSET_CONTENT_TYPE_BLOCK = (
     "BLOCKED: asset does not look like an image content-type: {content_type!r} ({url})"
@@ -377,7 +385,42 @@ def build_payload(meta: dict, body: str, force_private: bool | None) -> dict:
     }
 
 
-def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool) -> tuple[list[str], bool]:
+def _normalize_body_lines(body: str) -> list[str]:
+    return [line.strip() for line in body.splitlines() if line.strip()]
+
+
+def _is_line_subsequence(needles: list[str], haystack: list[str]) -> bool:
+    if not needles:
+        return True
+    i = 0
+    for line in haystack:
+        if line == needles[i]:
+            i += 1
+            if i == len(needles):
+                return True
+    return False
+
+
+def _baseline_body_report(meta: dict, body: str, source_path: str) -> tuple[list[str], bool]:
+    rel = str(meta.get("preflight_remote_baseline") or "").strip()
+    if not rel:
+        return [], False
+    base_path = Path(source_path).resolve().parent / rel
+    lines = [f"baseline_path: {base_path}"]
+    try:
+        text = base_path.read_text(encoding="utf-8-sig")
+        _base_meta, base_body = split_frontmatter(text)
+    except (OSError, ValueError):
+        lines.append(PREFLIGHT_BASELINE_REQUIRED_BLOCK.format(path=base_path))
+        return lines, True
+    ok = _is_line_subsequence(_normalize_body_lines(base_body), _normalize_body_lines(body))
+    lines.append(f"baseline_body_preserved: {ok}")
+    if not ok:
+        lines.append(PREFLIGHT_BASELINE_BODY_BLOCK.format(path=base_path))
+    return lines, not ok
+
+
+def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool, source_path: str) -> tuple[list[str], bool]:
     lines: list[str] = []
     finds = safety_findings(meta, body)
     privacy_finds = privacy_field_findings(meta)
@@ -392,6 +435,9 @@ def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool
     lines.append(f"title : {payload['title']}")
     lines.append(f"tags  : {[t['name'] for t in payload['tags']]}")
     lines.append(f"private: {payload['private']}   body chars: {len(body)}")
+    baseline_lines, baseline_blocked = _baseline_body_report(meta, body, source_path)
+    lines.extend(baseline_lines)
+    blocked = blocked or baseline_blocked
     if legacy_id:
         lines.append(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
     ignore_publish, ignore_publish_bad = parse_gate_bool(meta.get("ignorePublish"))
@@ -476,7 +522,7 @@ def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool
         if code not in (200, 206):
             blocked = True
             continue
-        if content_type and not content_type.lower().startswith("image/"):
+        if not content_type or not content_type.lower().startswith("image/"):
             blocked = True
             lines.append(ASSET_CONTENT_TYPE_BLOCK.format(content_type=content_type, url=url))
     return lines, blocked
@@ -524,7 +570,7 @@ def cmd_preflight(args: list[str]) -> int:
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
-    lines, blocked = _preflight_report(meta, body, p, require_marker=require_marker)
+    lines, blocked = _preflight_report(meta, body, p, require_marker=require_marker, source_path=files[0])
     for line in lines:
         print(line)
     if blocked:
@@ -559,7 +605,7 @@ def _writeback_public_id(path: str, item_id: str) -> None:
 def cmd_post(args: list[str]) -> int:
     files = [a for a in args if not a.startswith("--")]
     if not files:
-        print("usage: post <file.md> --yes [--private] [--allow-create]")
+        print("usage: post <file.md> --yes [--private] [--allow-create] [--force-ignore-publish]")
         return 2
     if "--yes" not in args:
         print("refusing: --yes required (公開は外部公開アクション。ユーザーが GO を出す)")
@@ -595,7 +641,7 @@ def cmd_post(args: list[str]) -> int:
         print(IGNORE_PUBLISH_WARNING)
         print(IGNORE_PUBLISH_BLOCK)
         return 1
-    preflight_lines, preflight_blocked = _preflight_report(meta, body, p, require_marker=False)
+    preflight_lines, preflight_blocked = _preflight_report(meta, body, p, require_marker=False, source_path=files[0])
     for line in preflight_lines:
         print(line)
     if preflight_blocked:
