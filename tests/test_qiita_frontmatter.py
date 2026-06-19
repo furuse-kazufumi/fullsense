@@ -2258,7 +2258,67 @@ def test_qiita_team_post_cmd_post_patch_without_group_assert_keeps_verified_fals
     out = capsys.readouterr().out
 
     assert rc == 0
+    assert "group.url_name will be asserted as unchanged for this PATCH path" in out
     assert "leaving qiita_team_verified=false" in out
+    text = path.read_text(encoding="utf-8")
+    assert "qiita_team_verified: false" in text
+
+
+def test_qiita_team_post_cmd_post_patch_without_group_blocks_on_group_drift_and_resets_verified(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "PATCH"
+        return 200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": False,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    read_results = [
+        (200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": False,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }),
+        (200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": False,
+            "group": {"url_name": "drifted-group", "private": False},
+            "organization_url_name": None,
+        }),
+    ]
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item_with_retry", lambda item_id, token: read_results.pop(0))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "authoritative read-after-write check failed" in out
+    assert "did not match intended group_url_name='general'" in out
     text = path.read_text(encoding="utf-8")
     assert "qiita_team_verified: false" in text
 

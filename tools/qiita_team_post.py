@@ -841,6 +841,7 @@ def cmd_post(args: list[str]) -> int:
     patch_group_flag = wants_patch_group_url_name(args)
     resend_patch_group = bool(item_id and patch_group_flag)
     expected_group_target = create_group_target if not item_id else (patch_group_target if resend_patch_group else None)
+    asserted_group_target = expected_group_target
     p = build_payload(meta, body, include_group_url_name=(not item_id) or resend_patch_group)
     if patch_group_flag and not item_id:
         print(PATCH_GROUP_URL_NAME_CREATE_NOTE)
@@ -853,7 +854,7 @@ def cmd_post(args: list[str]) -> int:
     if resend_patch_group and patch_group_target is None:
         print(f"BLOCKED: {PATCH_GROUP_URL_NAME_BLOCK}")
         return 1
-    if item_id and verified_state is not True:
+    if item_id:
         pre_code, pre_res = _read_item_with_retry(item_id, token)
         pre_ok, pre_line = _format_item_readback(
             item_id,
@@ -868,6 +869,8 @@ def cmd_post(args: list[str]) -> int:
             )
             print("post: resolve the existing Team visibility mismatch before sending another PATCH.")
             return 1
+        if not resend_patch_group:
+            asserted_group_target = _current_group_url_name(pre_res)
         drift_notes = _visibility_drift_notes(
             pre_res,
             expected_private=private_value,
@@ -880,10 +883,10 @@ def cmd_post(args: list[str]) -> int:
                 + ". PATCH will overwrite the current Team state."
             )
         elif not resend_patch_group:
-            current_group = _current_group_url_name(pre_res)
+            current_group = asserted_group_target
             print(
-                "pre-PATCH readback: current visibility is readable, but "
-                f"group.url_name remains unverified for this PATCH path (current={current_group or '(none)'})."
+                "pre-PATCH readback: current visibility is readable, and "
+                f"group.url_name will be asserted as unchanged for this PATCH path (current={current_group or '(none)'})."
             )
     if item_id:
         code, res = _req("PATCH", f"/items/{item_id}", token, p)
@@ -920,9 +923,21 @@ def cmd_post(args: list[str]) -> int:
             rb_code,
             rb_res,
             expected_private=private_value,
-            expected_group_url_name=expected_group_target,
+            expected_group_url_name=asserted_group_target,
         )
         if not rb_ok:
+            if item_id:
+                try:
+                    _writeback_team_verified(files[0], False)
+                except OSError as e:
+                    print(
+                        f"FAIL ({code}): authoritative read-after-write check failed: {rb_line}"
+                    )
+                    print(
+                        f"post: PATCH may already be live on team for id={readback_id}, and local "
+                        f"qiita_team_verified=false writeback also failed: {e}"
+                    )
+                    return 1
             print(f"FAIL ({code}): authoritative read-after-write check failed: {rb_line}")
             if not item_id:
                 print(
