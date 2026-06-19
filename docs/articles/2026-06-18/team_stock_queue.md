@@ -70,9 +70,10 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 7. rollback / 可視範囲の絞り込み自体は、引き続き別の human-gate 外部アクションとして扱う
 8. 2026-06-19 の local draft 再確認では、3 本とも frontmatter に `group_url_name` が無く、`dry-run ... --patch-group-url-name` は全件 `PATCH_GROUP_URL_NAME_BLOCK` で停止した。つまり opt-in PATCH 経路は実装済みだが、**human が concrete target を決めて source に入れるまでは実行不能**である
 9. 次の外部 remediation 順序は **Team UI first / opt-in PATCH second** とする。opt-in PATCH はローカル実装と fail-closed guard までは確認済みだが、既共有 item に対する締め直し効果が一次未確認だからである
-10. Team UI remediation に進む場合は、`team_stock_publish_plan.md` の **Team UI remediation checklist** を正本として、変更前後の Team API GET / Team UI / 未認証 HTML GET / direct probe の差分だけを記録する
-11. **diagnosis 完了**は、対象 3 本それぞれで `Team UI の share target / private state` と `Team API GET の group.url_name / private / organization_url_name`、さらに `未認証 HTML GET / direct probe` を同じターンで並べ、share target 起因か private state 起因か、または未確定かを 1 行で判定できる状態を指す
-12. `現状維持で記録だけ続ける` を選ぶ場合は、`POST 後の記録欄` の `note` に **今回も診断未了のため no-op retain** と、次回の解禁条件を 1 行で残す
+10. Team UI remediation に進む場合は、`team_stock_publish_plan.md` の **Team UI remediation checklist** を正本として、変更前後の Team API GET / Team UI / 未認証 HTML GET / direct probe / source frontmatter の差分だけを記録する
+11. **diagnosis 完了**は、対象 3 本それぞれで `Team UI の share target / private state`、`Team API GET の group.url_name / private / organization_url_name`、`未認証 HTML GET / direct probe`、`source frontmatter の private / group_url_name` を同じターンで並べ、share target 起因か private state 起因か、または未確定かを 1 行で判定できる状態を指す
+12. 判定基準は project-local rule として暫定固定する。`share target 起因` は `private` 意図が揃っているのに target だけが intended target から外れている場合、`private state 起因` は target が揃っているのに `private` 系だけが intended state から外れている場合、食い違いが残る場合は `未確定` とする
+13. `現状維持で記録だけ続ける` を選ぶ場合は、`POST 後の記録欄` の `note` に **今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る** と、次回の解禁条件を 1 行で残す。同じ理由での no-op retain は 1 回までとし、次回は Team UI diagnosis を優先する
 
 補足:
 

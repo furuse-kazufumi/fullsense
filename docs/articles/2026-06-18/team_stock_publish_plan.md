@@ -66,8 +66,10 @@
 6. `private` flip を rollback として使わずに済むか、必要なら Team UI での即時差し替え手順を先に確認する
 7. `--patch-group-url-name` を使う remediation 案に進むなら、**先に human が concrete な `group_url_name` を決める**。2026-06-19 時点の local draft 3 本にはこの field が入っていないため、そのままの dry-run / post は fail-closed で `PATCH_GROUP_URL_NAME_BLOCK` になる
 8. 実行順は **Team UI first / opt-in PATCH second** を原則にする。opt-in PATCH はローカル実装済みだが、既共有 item に対する締め直し効果が一次未確認なため、まず UI 上で intended share target / private state を確認・是正できるかを先に見る
-9. **diagnosis 完了**の定義は、対象 3 本それぞれについて `(a) Team UI 上で確認できた share target / private state` `(b) Team API GET で返る `group.url_name` / `private` / `organization_url_name`` `(c) 未認証 HTML GET / direct probe の観測結果` を同じターンで並べ、**share target 起因か private state 起因か、または未確定か**を 1 行で判定できる状態にすることとする
+9. **diagnosis 完了**の定義は、対象 3 本それぞれについて `(a) Team UI 上で確認できた share target / private state` `(b) Team API GET で返る `group.url_name` / `private` / `organization_url_name`` `(c) 未認証 HTML GET / direct probe の観測結果` `(d) source frontmatter の `private` / `group_url_name`` を同じターンで並べ、**share target 起因か private state 起因か、または未確定か**を 1 行で判定できる状態にすることとする
 10. 上記 9 を満たすまでは、opt-in PATCH は「実行候補」ではなく **診断後の従属候補**としてのみ扱う
+11. 判定基準は project-local rule として暫定固定する。`share target 起因` は Team UI / API / frontmatter の `private` 意図が揃っているのに、share target だけが intended target から外れている場合。`private state 起因` は share target が intended target と揃っているのに、Team UI / API / frontmatter の `private` 系が intended state から外れている場合。どちらにも断定できない、または Team UI と API が食い違う場合は `未確定` とし、診断結果だけを持ち帰って別 human-gate で扱う
+12. `未確定` のまま no-op retain を選ぶ場合でも、それを無期限の既定逃げ道にしない。次回は原則として Team UI diagnosis を先に実行し、同じ理由での no-op retain は 1 回までに留める
 
 ## execution commands
 
@@ -79,17 +81,20 @@
   - Team API / UI で title, private 状態, URL を確認する
   - `team_stock_queue.md` に `id` / URL / visible range を転記する
 - Team UI remediation checklist (human-gate 後のみ):
+  - この checklist は Team UI の read-only diagnosis と remediation の両方に適用する。変更を入れない read-only turn でも、4 レグの before snapshot は同じ粒度で取る
+  - probe 実行前に対象を固定する: `GET https://fullsense.qiita.com/api/v2/items/<id>`、`GET https://fullsense.qiita.com/furuse-kazufumi/items/<id>`、`GET https://qiita.com/furuse-kazufumi/items/<id>`。期待値は API=`200`、未認証 HTML=`302 or content`、public mirror=`404 or content` とし、結果をそのまま記録する
   - 変更前に Team UI と Team API GET の両方で、対象 3 本の `title` / `private` / `group.url_name` / `organization_url_name` を控える
+  - 同じターンで未認証 HTML GET / direct probe / source frontmatter (`private` / `group_url_name`) も控え、4 レグを 3 本ぶん横並びにする
   - human が intended share target と intended private state を 3 本それぞれで明示してから UI を触る
   - remediation 中は delete を使わず、まず UI 上で share target / private state / body 差し替えのどれが可能かを切り分ける
   - `body 差し替え` を行った場合は、変更前後の本文または該当 anchor / セクション差分も同ターンで控える
   - 変更直後に Team UI を再読込し、Team API GET でも同じ値になったことを確認する
   - 未認証 HTML GET と `qiita.com/furuse-kazufumi/items/<id>` direct probe も再取得し、**直近の visibility probe evidence の時刻**との差分だけを記録する
-  - 結果は成功/失敗にかかわらず、`team_stock_queue.md` の `visible range` / `rollback needed` / `note` へ先に反映し、その後 `docs/next_plan.md`、最後に `docs/SESSION_SUMMARY.md` の順で同ターンに反映する
+  - 結果は成功/失敗にかかわらず、`team_stock_queue.md` の `visible range` / `rollback needed` / `note` を正本として先に反映し、その後 `docs/next_plan.md`、最後に `docs/SESSION_SUMMARY.md` では queue の該当行参照だけを同ターンに反映する
 - no-op retain checklist (human-gate 後のみ):
-  - 新しい外部 remediation を打たず、`team_stock_queue.md` の各行と `2026-06-19 visibility probe evidence` を見直し、**今回も診断未了のため現状維持**だと 1 行追記する
-  - `note` には「なぜ今回は動かなかったか」「次回の解禁条件は何か」を短く残す
-  - その後 `docs/next_plan.md`、`docs/SESSION_SUMMARY.md` の順で、今回 no-op retain を選んだことと、次に必要な診断条件だけを追記する
+  - 新しい外部 remediation を打たず、`team_stock_queue.md` の各行と `2026-06-19 visibility probe evidence` を見直し、**今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る**と 1 行追記する
+  - `note` には「なぜ今回は動かなかったか」「次回の解禁条件は何か」「次回は Team UI diagnosis を優先する」までを短く残す
+  - その後 `docs/next_plan.md`、`docs/SESSION_SUMMARY.md` の順で、queue の該当 note を参照しつつ、今回 no-op retain を選んだことと次に必要な診断条件だけを追記する
 - remediation patch template (human-gate 後のみ):
   - `py -3.11 tools/qiita_team_post.py dry-run tools/qiita-cli-poc/public/team_stock_semantic_governance.md --patch-group-url-name`
   - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_semantic_governance.md --yes --force-ignore-publish --patch-group-url-name`
