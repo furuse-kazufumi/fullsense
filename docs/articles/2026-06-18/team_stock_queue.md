@@ -69,13 +69,14 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 6. 2026-06-19 のローカル改修で、通常 PATCH はそのままに **`--patch-group-url-name` 付きの opt-in remediation 経路**を追加した。frontmatter に concrete `group_url_name` が無ければ fail-closed で停止するため、既存 item の可視範囲を寄せ直す候補は `Team UI` と `human-gate 後の opt-in PATCH` の二択になった
 7. rollback / 可視範囲の絞り込み自体は、引き続き別の human-gate 外部アクションとして扱う
 8. 2026-06-19 の local draft 再確認では、3 本とも frontmatter に `group_url_name` が無く、`dry-run ... --patch-group-url-name` は全件 `PATCH_GROUP_URL_NAME_BLOCK` で停止した。つまり opt-in PATCH 経路は実装済みだが、**human が concrete target を決めて source に入れるまでは実行不能**である
-9. 次の外部 remediation 順序は **Team UI first / opt-in PATCH second** とする。opt-in PATCH はローカル実装と fail-closed guard までは確認済みだが、既共有 item に対する締め直し効果が一次未確認だからである
+9. 次の外部 remediation 順序は **containment first / Team UI second / opt-in PATCH last** とする。未認証 HTML GET / public direct probe で positive が出た記事はその記事だけ即 containment 候補に上げる。opt-in PATCH はローカル実装と fail-closed guard までは確認済みだが、既共有 item に対する締め直し効果が一次未確認だからである
 10. Team UI remediation に進む場合は、`team_stock_publish_plan.md` の **Team UI remediation checklist** を正本として、変更前後の Team API GET / Team UI / 未認証 HTML GET / direct probe / source frontmatter の差分だけを記録する
 11. **diagnosis 完了**は、対象 3 本それぞれで `Team UI の share target / private state`、`Team API GET の group.url_name / private / organization_url_name`、`未認証 HTML GET / direct probe`、`source frontmatter の private / group_url_name` を同じターンで並べ、share target 起因か private state 起因か、または未確定かを 1 行で判定できる状態を指す
 12. 判定基準は project-local rule として暫定固定する。`share target 起因` は `private` 意図が揃っているのに target だけが intended target から外れている場合、`private state 起因` は target が揃っているのに `private` 系だけが intended state から外れている場合、食い違いが残る場合は `未確定` とする
 13. 5 ソースが矛盾したときの裁定順も project-local rule として暫定固定する。優先順位は `未認証 HTML GET / public direct probe の外形的事実` > `Team UI 表示` > `Team API GET` > `source frontmatter` とし、未認証アクセス可能 (`200` / 本文取得) が出た記事は Team UI 完了を待たず **その記事だけ** remediation gate へ送る
-14. `現状維持で記録だけ続ける` を選ぶ場合は、`POST 後の記録欄` の `note` に **今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る** と、次回の解禁条件を 1 行で残す。同じ理由での no-op retain は 1 回までとし、2 回目に入る前に **暫定 private 化してから再診断する** 選択肢を必ず human-gate に出す
+14. `現状維持で記録だけ続ける` を選ぶ場合は、`POST 後の記録欄` の `note` に **今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る** と、次回の解禁条件を 1 行で残す。同じ理由での no-op retain は 1 回までとし、2 回目に入る前に **暫定 private 化してから再診断する** 選択肢を必ず human-gate に出す。時間上限は次回 human-gate までとする
 15. 3 本は一括処理しない。**1 本でも positive が出たらその記事だけ remediation**、残りは diagnosis 継続とする
+16. intended state の baseline は option 選択前に 3 本それぞれで固定する。source frontmatter の `private` / `group_url_name` と、人間が意図した公開範囲メモを同じ行で扱う
 
 補足:
 
