@@ -172,7 +172,7 @@ def norm_tags(meta: dict) -> list[dict]:
 
 
 def _tag_name_signature_from_meta(meta: dict) -> tuple[str, ...]:
-    return tuple(sorted(t["name"] for t in norm_tags(meta)))
+    return tuple(sorted(_normalized_tag_names(meta.get("tags"), fold=True)))
 
 
 def _tag_name_signature_from_payload(payload: dict) -> tuple[str, ...]:
