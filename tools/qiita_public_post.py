@@ -146,7 +146,7 @@ def infer_title(meta: dict, body: str) -> str:
     return ""
 
 
-def _normalized_tag_names(raw_tags) -> list[str]:
+def _normalized_tag_names(raw_tags, *, fold: bool = False) -> list[str]:
     tags = raw_tags or []
     if isinstance(tags, str):
         tags = [tags]
@@ -156,15 +156,19 @@ def _normalized_tag_names(raw_tags) -> list[str]:
     for t in tags:
         value = (t or {}).get("name") if isinstance(t, dict) else t
         for part in str(value).split(","):
-            name = re.sub(r"\s+", "_", part.strip()).casefold()
-            if name and name != "TODO_TAG" and name not in seen:
-                seen.add(name)
-                out.append(name)
+            cleaned = re.sub(r"\s+", "_", part.strip())
+            if not cleaned or cleaned == "TODO_TAG":
+                continue
+            key = cleaned.casefold()
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(key if fold else cleaned)
     return out[:5]
 
 
 def norm_tags(meta: dict) -> list[dict]:
-    return [{"name": name, "versions": []} for name in _normalized_tag_names(meta.get("tags"))]
+    return [{"name": name, "versions": []} for name in _normalized_tag_names(meta.get("tags"), fold=False)]
 
 
 def _tag_name_signature_from_meta(meta: dict) -> tuple[str, ...]:
@@ -172,11 +176,11 @@ def _tag_name_signature_from_meta(meta: dict) -> tuple[str, ...]:
 
 
 def _tag_name_signature_from_payload(payload: dict) -> tuple[str, ...]:
-    return tuple(sorted(_normalized_tag_names(payload.get("tags"))))
+    return tuple(sorted(_normalized_tag_names(payload.get("tags"), fold=True)))
 
 
 def _tag_name_signature_from_api(tags) -> tuple[str, ...]:
-    return tuple(sorted(_normalized_tag_names(tags)))
+    return tuple(sorted(_normalized_tag_names(tags, fold=True)))
 
 
 def real_public_id(meta: dict) -> str | None:

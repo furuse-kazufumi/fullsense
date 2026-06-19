@@ -117,6 +117,22 @@ def test_qiita_public_post_tag_signatures_normalize_case_and_commas():
     assert qpp._tag_name_signature_from_api(api_tags) == expected
 
 
+def test_qiita_public_post_norm_tags_preserves_case_and_dedups_case_insensitively():
+    meta = {"tags": ["AI, FullSense", "fullsense", "llcore", "AI"]}
+    assert qpp.norm_tags(meta) == [
+        {"name": "AI", "versions": []},
+        {"name": "FullSense", "versions": []},
+        {"name": "llcore", "versions": []},
+    ]
+
+
+def test_qiita_public_post_norm_tags_excludes_todo_tag_placeholder():
+    meta = {"tags": ["TODO_TAG", "AI", "TODO_TAG"]}
+    assert qpp.norm_tags(meta) == [
+        {"name": "AI", "versions": []},
+    ]
+
+
 def test_qiita_public_post_parse_visibility_is_strict():
     assert qpp.parse_visibility("true") == (True, None)
     assert qpp.parse_visibility("false") == (False, None)
