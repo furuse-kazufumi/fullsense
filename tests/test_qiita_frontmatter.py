@@ -1652,7 +1652,7 @@ def test_qiita_team_post_cmd_post_warns_on_private_get_readback_mismatch_after_p
     assert writeback_calls == [(str(path), "team-item-id")]
 
 
-def test_qiita_team_post_cmd_post_persists_create_id_only_after_get_readback_passes(tmp_path, capsys, monkeypatch):
+def test_qiita_team_post_cmd_post_persists_create_id_before_advisory_get_readback(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(
         "---\n"
@@ -1698,7 +1698,7 @@ def test_qiita_team_post_cmd_post_persists_create_id_only_after_get_readback_pas
     assert writeback_calls == [(str(path), "team-item-id")]
 
 
-def test_qiita_team_post_cmd_post_blocks_private_response_mismatch_before_persisting_id(tmp_path, capsys, monkeypatch):
+def test_qiita_team_post_cmd_post_blocks_private_response_mismatch_after_persisting_id(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(
         "---\n"
