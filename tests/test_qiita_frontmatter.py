@@ -313,6 +313,28 @@ def test_qiita_team_post_dry_run_without_ignore_publish_stays_ok(tmp_path, capsy
     assert "BLOCKED:" not in out
 
 
+def test_qiita_team_post_dry_run_patch_surfaces_non_resent_group_target(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "PATCH update id=team-item-id" in out
+    assert "group_url_name(frontmatter): general" in out
+    assert "PATCH does not resend this field" in out
+
+
 def test_qiita_team_post_dry_run_blocks_unrecognized_ignore_publish(tmp_path, capsys):
     path = tmp_path / "team.md"
     path.write_text(

@@ -25,6 +25,11 @@ Qiita API v2 (一次確認 2026-06-04, https://qiita.com/api/v2/docs):
                                                 # 実 POST/PATCH (ユーザーが GO したときのみ)
 
 team 既定 = fullsense。env `QIITA_TEAM` で上書き。
+
+NOTE:
+  - create (`id` なし) は explicit `group_url_name` を payload へ送る
+  - PATCH (`id` あり) は `group_url_name` を既定送信しない。既存 item の share target
+    を寄せ直す remediation は Team UI か別改修が必要
 """
 from __future__ import annotations
 
@@ -299,6 +304,8 @@ def cmd_dry_run(args: list[str]) -> int:
     print(f"private: {p['private']}   body chars: {len(body)}")
     if create_group_target is not None:
         print(f"group_url_name: {p['group_url_name']}")
+    elif item_id and "group_url_name" in meta:
+        print(f"group_url_name(frontmatter): {meta.get('group_url_name')}   note: PATCH does not resend this field")
     if gate_key_error:
         print(f"BLOCKED: {gate_key_error}")
     elif gate_error:
