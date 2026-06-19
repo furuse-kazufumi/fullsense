@@ -27,15 +27,16 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 | slug | item id | Team URL | visible range memo | rollback needed | note |
 | --- | --- | --- | --- | --- | --- |
-| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | API GET で `private:false`。実ブラウザ範囲は未確認 | conditional | `private:true` frontmatter でも Team create 後は public-like state に見える。rollback は別 human-gate 判断 |
-| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | API GET で `private:false`。実ブラウザ範囲は未確認 | conditional | `private:true` frontmatter でも Team create 後は public-like state に見える。rollback は別 human-gate 判断 |
-| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | API GET で `private:false`。実ブラウザ範囲は未確認 | conditional | `private:true` frontmatter でも Team create 後は public-like state に見える。rollback は別 human-gate 判断 |
+| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | API GET で `private:false`。2026-06-19 の未認証 HTML GET は Login ページ | conditional | Team API 表示と未認証ブラウザ到達性が食い違う。rollback は別 human-gate 判断 |
+| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | API GET で `private:false`。2026-06-19 の未認証 HTML GET は Login ページ | conditional | Team API 表示と未認証ブラウザ到達性が食い違う。rollback は別 human-gate 判断 |
+| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | API GET で `private:false`。2026-06-19 の未認証 HTML GET は Login ページ | conditional | Team API 表示と未認証ブラウザ到達性が食い違う。rollback は別 human-gate 判断 |
 
 ## blockers
 
 1. 2026-06-19 時点の `tools/qiita_team_post.py` は `ignorePublish` を読み、`ignorePublish:true` の source は `--force-ignore-publish` 無しでは fail-closed で停止する。したがってこのフラグは「未投稿」を意味せず、Team poster でも明示 override を要する source freeze として扱う
 2. 2026-06-18 の API GET では 3 本とも `private:false` で返っており、frontmatter `private:true` は Team create 後の可視範囲を保証しなかった
-3. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
+3. 2026-06-19 の未認証 HTML GET では 3 本とも Login ページへ落ちたため、「一般公開で即読める」ことまでは確認されていない。current blocker は **Team API / visibility semantics の不一致** として扱う
+4. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
 
 ## 状態更新ルール
 

@@ -90,7 +90,8 @@
   - `b35b429dc6dc1fde207a`
   - `6fe79ab04443f7654eca`
 - POST 後の API GET では 3 本とも `private:false` で返った
-- したがって「frontmatter `private:true` でも Team 上では可視範囲が広い可能性がある」ことが現行 blocker であり、rollback / visibility tightening は別の human-gate 外部アクションとして扱う
+- 2026-06-19 の未認証 HTML GET では 3 本とも Login ページへ落ちた
+- したがって現行 blocker は「frontmatter `private:true` でも Team API では `private:false` が返る一方、未認証ブラウザでは即読めない」という **Team API / visibility semantics の不一致** であり、rollback / visibility tightening は別の human-gate 外部アクションとして扱う
 
 ## POST 後の記録先
 
