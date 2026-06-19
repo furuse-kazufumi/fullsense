@@ -107,7 +107,7 @@ def resolve_token() -> tuple[str | None, str | None]:
             if not d:
                 continue
             for k in keys:
-                if d.get(k):
+                if d.get(k) and str(d[k]).strip():
                     return str(d[k]).strip(), f"{p}:{k}"
     return None, None
 

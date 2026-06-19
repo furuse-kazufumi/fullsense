@@ -1317,6 +1317,32 @@ def test_qiita_team_post_resolve_token_skips_whitespace_only_env_and_uses_file_f
     assert source == f"{api_keys}:qiita_team_token"
 
 
+def test_qiita_team_post_resolve_token_skips_whitespace_only_file_token_and_falls_back(tmp_path, monkeypatch):
+    api_keys = tmp_path / "api-keys.json"
+    api_keys.write_text(
+        '{\n'
+        '  "qiita_team_token": "   ",\n'
+        '  "qiita_token": "personal-token"\n'
+        '}\n',
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("QIITA_TEAM_TOKEN", raising=False)
+    monkeypatch.setattr(qtp.os.path, "expanduser", lambda _: str(api_keys))
+    real_open = open
+
+    def fake_open(path, *args, **kwargs):
+        if path == "D:/api-keys.json":
+            raise OSError("blocked for test isolation")
+        return real_open(path, *args, **kwargs)
+
+    monkeypatch.setattr("builtins.open", fake_open)
+
+    token, source = qtp.resolve_token()
+
+    assert token == "personal-token"
+    assert source == f"{api_keys}:qiita_token"
+
+
 def test_qiita_team_post_resolve_token_prefers_team_key_over_personal(tmp_path, monkeypatch):
     api_keys = tmp_path / "api-keys.json"
     api_keys.write_text(
