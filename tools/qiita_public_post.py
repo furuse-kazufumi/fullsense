@@ -96,7 +96,7 @@ PREFLIGHT_BASELINE_REQUIRED_BLOCK = (
     "BLOCKED: frontmatter preflight_remote_baseline: is set but baseline file is missing or unreadable: {path}"
 )
 PREFLIGHT_BASELINE_PATH_BLOCK = (
-    "BLOCKED: frontmatter preflight_remote_baseline: must stay under .remote/ and may not escape: {path}"
+    "BLOCKED: frontmatter preflight_remote_baseline: must be a direct child of .remote/ and may not escape: {path}"
 )
 PREFLIGHT_BASELINE_BODY_BLOCK = (
     "BLOCKED: local body no longer preserves the required remote baseline body sequence: {path}"

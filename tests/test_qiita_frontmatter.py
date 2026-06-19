@@ -1053,6 +1053,53 @@ def test_qiita_public_post_preflight_blocks_remote_baseline_path_escape(tmp_path
     assert "preflight: BLOCKED" in out
 
 
+def test_qiita_public_post_preflight_blocks_when_baseline_path_is_nested_under_remote(tmp_path, capsys, monkeypatch):
+    remote_dir = tmp_path / ".remote" / "nested"
+    remote_dir.mkdir(parents=True)
+    (remote_dir / "existing-public-id.md").write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "preflight_remote_baseline: .remote/nested/existing-public-id.md\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.PREFLIGHT_BASELINE_PATH_BLOCK.format(path=".remote/nested/existing-public-id.md") in out
+    assert "preflight: BLOCKED" in out
+
+
 def test_qiita_public_post_preflight_refreshes_remote_baseline_from_live_api(tmp_path, capsys, monkeypatch):
     remote_dir = tmp_path / ".remote"
     remote_dir.mkdir()
