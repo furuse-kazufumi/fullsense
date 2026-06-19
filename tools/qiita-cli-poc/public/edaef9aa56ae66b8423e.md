@@ -9,6 +9,7 @@ tags:
   - Anthropic
   - ollama
 private: false
+public_private: false
 updated_at: '2026-06-15T00:30:42+09:00'
 id: edaef9aa56ae66b8423e
 organization_url_name: null

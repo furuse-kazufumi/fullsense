@@ -7,6 +7,7 @@ tags:
   - honest_disclosure
   - かみくだき
 private: false
+public_private: false
 updated_at: '2026-06-14T22:50:25+09:00'
 id: bfb20aca3cf1df510c26
 organization_url_name: null

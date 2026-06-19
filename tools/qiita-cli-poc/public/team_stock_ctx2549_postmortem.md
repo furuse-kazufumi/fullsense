@@ -7,6 +7,7 @@ tags:
   - Codex
   - Agent
 private: false
+public_private: false
 slide: false
 ignorePublish: true
 id: 6fe79ab04443f7654eca

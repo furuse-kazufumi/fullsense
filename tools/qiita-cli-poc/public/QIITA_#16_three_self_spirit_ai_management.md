@@ -5,6 +5,7 @@ tags:
   - llive
   - 解説
 private: true
+public_private: true
 id: null
 organization_url_name: null
 slide: false

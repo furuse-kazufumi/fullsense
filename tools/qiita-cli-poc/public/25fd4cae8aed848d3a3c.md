@@ -7,6 +7,7 @@ tags:
   - 業務効率化
   - 認知科学
 private: false
+public_private: false
 updated_at: '2026-06-14T22:27:07+09:00'
 id: 25fd4cae8aed848d3a3c
 organization_url_name: null

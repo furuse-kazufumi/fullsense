@@ -7,6 +7,7 @@ tags:
   - Agent
   - ClaudeCode
 private: false
+public_private: false
 slide: false
 ignorePublish: true
 id: b35b429dc6dc1fde207a

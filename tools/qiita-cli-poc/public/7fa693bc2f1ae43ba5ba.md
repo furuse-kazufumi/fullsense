@@ -9,6 +9,7 @@ tags:
   - FullSense
   - HonestDisclosure
 private: false
+public_private: false
 updated_at: '2026-06-14T22:31:47+09:00'
 id: 7fa693bc2f1ae43ba5ba
 organization_url_name: null

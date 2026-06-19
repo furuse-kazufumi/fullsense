@@ -3,6 +3,7 @@ title: ARCHITECTURE_LANDSCAPE (preview)
 tags:
   - preview
 private: true
+public_private: true
 updated_at: ''
 id: architecturelandscap
 organization_url_name: null

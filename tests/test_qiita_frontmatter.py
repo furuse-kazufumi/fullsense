@@ -106,10 +106,25 @@ def test_qiita_public_post_build_payload_uses_public_private_only():
     assert forced_payload["private"] is True
 
 
+def test_qiita_public_post_parse_visibility_is_strict():
+    assert qpp.parse_visibility("true") == (True, None)
+    assert qpp.parse_visibility("false") == (False, None)
+    assert qpp.parse_visibility(" yes ") == (True, None)
+    assert qpp.parse_visibility("0") == (False, None)
+    assert qpp.parse_visibility("ture") == (None, "'ture'")
+    assert qpp.parse_visibility("限定共有")[0] is None
+
+
 def test_qiita_public_post_privacy_field_findings_require_public_private():
     assert qpp.privacy_field_findings({"private": True}) == [qpp.AMBIGUOUS_PRIVATE_BLOCK]
     assert qpp.privacy_field_findings({"private": True, "public_private": False}) == [qpp.CONFLICTING_PRIVATE_BLOCK]
     assert qpp.privacy_field_findings({"private": False, "public_private": False}) == []
+    assert qpp.privacy_field_findings({"private": "ture", "public_private": False}) == [
+        qpp.UNRECOGNIZED_VISIBILITY_BLOCK.format(field="private", value="ture")
+    ]
+    assert qpp.privacy_field_findings({"private": False, "public_private": "限定共有"}) == [
+        qpp.UNRECOGNIZED_VISIBILITY_BLOCK.format(field="public_private", value="限定共有")
+    ]
 
 
 def test_qiita_team_post_real_id_treats_nullish_as_absent():
@@ -227,6 +242,35 @@ def test_qiita_public_post_cmd_post_blocks_ambiguous_private_without_public_priv
     assert called["req"] is False
 
 
+def test_qiita_public_post_cmd_post_blocks_unrecognized_public_private(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: ture\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    called = {"req": False}
+
+    def _boom(*_args, **_kwargs):
+        called["req"] = True
+        raise AssertionError("_req should not run when visibility is invalid")
+
+    monkeypatch.setattr(qpp, "_req", _boom)
+    rc = qpp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.UNRECOGNIZED_VISIBILITY_BLOCK.format(field="public_private", value="ture") in out
+    assert called["req"] is False
+
+
 def test_qiita_public_post_cmd_post_allows_legacy_id_with_allow_create(tmp_path, capsys, monkeypatch):
     path = tmp_path / "sample.md"
     path.write_text(
@@ -268,3 +312,20 @@ def test_zenn_convert_parses_folded_title():
     meta = zc.parse_frontmatter(fm_lines)
     assert meta["title"] == "AI's first line second line\nthird paragraph"
     assert meta["tags"] == ["AI", "AI's"]
+
+
+def test_public_patch_sources_define_public_private_and_match_private():
+    public_dir = ROOT / "tools" / "qiita-cli-poc" / "public"
+    checked = 0
+    for path in sorted(public_dir.glob("*.md")):
+        meta, _body = qpp.split_frontmatter(path.read_text(encoding="utf-8-sig"))
+        if "public_id" not in meta:
+            continue
+        checked += 1
+        assert "public_private" in meta, f"{path.name} missing public_private"
+        private_val, private_bad = qpp.parse_visibility(meta.get("private"))
+        public_private_val, public_private_bad = qpp.parse_visibility(meta.get("public_private"))
+        assert private_bad is None, f"{path.name} has invalid private: {meta.get('private')!r}"
+        assert public_private_bad is None, f"{path.name} has invalid public_private: {meta.get('public_private')!r}"
+        assert private_val == public_private_val, f"{path.name} private/public_private mismatch"
+    assert checked > 0

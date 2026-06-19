@@ -7,6 +7,7 @@ tags:
   - AIエージェント
   - かみくだき
 private: true
+public_private: true
 slide: false
 ignorePublish: true
 ---

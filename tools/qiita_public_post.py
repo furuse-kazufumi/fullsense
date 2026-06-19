@@ -59,6 +59,10 @@ CONFLICTING_PRIVATE_BLOCK = (
     "BLOCKED: frontmatter private: and public_private: disagree. "
     "Resolve visibility before posting."
 )
+UNRECOGNIZED_VISIBILITY_BLOCK = (
+    "BLOCKED: frontmatter {field}: has unrecognized visibility value {value!r}. "
+    "Use true/false (or yes/no/1/0)."
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -137,16 +141,39 @@ def as_bool(v, default=False) -> bool:
     return default
 
 
+def parse_visibility(v) -> tuple[bool | None, str | None]:
+    if isinstance(v, bool):
+        return v, None
+    if v is None:
+        return None, None
+    if isinstance(v, str):
+        s = v.strip().lower()
+        if s in ("true", "yes", "1"):
+            return True, None
+        if s in ("false", "no", "0"):
+            return False, None
+        if not s:
+            return None, None
+        return None, repr(v)
+    return None, repr(v)
+
+
 def privacy_field_findings(meta: dict) -> list[str]:
     out: list[str] = []
     has_private = "private" in meta
     has_public_private = "public_private" in meta
+    private_val, private_bad = parse_visibility(meta.get("private"))
+    public_private_val, public_private_bad = parse_visibility(meta.get("public_private"))
+    if has_private and private_bad is not None:
+        out.append(UNRECOGNIZED_VISIBILITY_BLOCK.format(field="private", value=meta.get("private")))
+    if has_public_private and public_private_bad is not None:
+        out.append(UNRECOGNIZED_VISIBILITY_BLOCK.format(field="public_private", value=meta.get("public_private")))
+    if out:
+        return out
     if has_private and not has_public_private:
         out.append(AMBIGUOUS_PRIVATE_BLOCK)
         return out
     if has_private and has_public_private:
-        private_val = as_bool(meta.get("private"), default=False)
-        public_private_val = as_bool(meta.get("public_private"), default=False)
         if private_val != public_private_val:
             out.append(CONFLICTING_PRIVATE_BLOCK)
     return out
@@ -216,7 +243,8 @@ def cmd_verify(_args: list[str]) -> int:
 
 
 def build_payload(meta: dict, body: str, force_private: bool | None) -> dict:
-    private = force_private if force_private is not None else as_bool(meta.get("public_private"), default=False)
+    public_private, _bad = parse_visibility(meta.get("public_private"))
+    private = force_private if force_private is not None else (public_private if public_private is not None else False)
     return {
         "title": infer_title(meta, body),
         "body": body,
@@ -295,6 +323,8 @@ def cmd_post(args: list[str]) -> int:
     force_private = True if "--private" in args else None
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
+    # safety_findings currently returns only hard blockers. Keep the prefix filter explicit
+    # so future soft warnings do not silently become publish-blocking.
     hard = [x for x in safety_findings(meta, body)
             if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH"))]
     hard.extend(privacy_field_findings(meta))

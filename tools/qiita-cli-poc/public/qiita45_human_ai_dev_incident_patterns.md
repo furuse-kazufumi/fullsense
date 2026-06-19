@@ -7,6 +7,7 @@ tags:
   - 個人開発
   - 開発
 private: true
+public_private: true
 slide: false
 ignorePublish: true
 ---

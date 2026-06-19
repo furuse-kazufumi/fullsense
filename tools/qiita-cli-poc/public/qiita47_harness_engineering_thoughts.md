@@ -7,6 +7,7 @@ tags:
   - HonestDisclosure
   - 個人開発
 private: true
+public_private: true
 slide: false
 ignorePublish: true
 ---

@@ -5,6 +5,7 @@ tags:
   - llive
   - 解説
 private: true
+public_private: true
 updated_at: '2026-05-22'
 id: bdfad6db3f2e70c40511
 organization_url_name: null

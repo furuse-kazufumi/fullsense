@@ -5,6 +5,7 @@ tags:
   - llive
   - FullSense
 private: true
+public_private: true
 updated_at: '2026-06-14T22:34:12+09:00'
 id: 1e7af6bde0f9ffcbd913
 organization_url_name: null

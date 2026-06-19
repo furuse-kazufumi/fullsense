@@ -7,6 +7,7 @@ tags:
   - FullSense
   - llcore
 private: false
+public_private: false
 updated_at: '2026-06-16T08:20:20+09:00'
 id: 6f44575d440a9ebf5228
 organization_url_name: null

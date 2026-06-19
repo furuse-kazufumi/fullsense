@@ -7,6 +7,7 @@ tags:
   - 進化計算
   - 遺伝的アルゴリズム
 private: true
+public_private: true
 slide: false
 ignorePublish: true
 ---

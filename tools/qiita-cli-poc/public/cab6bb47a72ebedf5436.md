@@ -7,6 +7,7 @@ tags:
   - LLM
   - 開発履歴
 private: false
+public_private: false
 updated_at: '2026-06-14T22:26:33+09:00'
 id: cab6bb47a72ebedf5436
 organization_url_name: null

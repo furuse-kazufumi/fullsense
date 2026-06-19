@@ -6,6 +6,7 @@ tags:
   - LLM
   - ClaudeCode
 private: true
+public_private: true
 updated_at: '2026-06-16T06:48:30+09:00'
 id: 5d522525c53a98c09ff0
 organization_url_name: null

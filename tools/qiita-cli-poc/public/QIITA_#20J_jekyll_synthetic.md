@@ -4,6 +4,7 @@ tags:
   - FullSense
   - Jekyll
 private: true
+public_private: true
 id: null
 organization_url_name: null
 slide: false
