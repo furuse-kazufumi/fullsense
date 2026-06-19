@@ -1733,7 +1733,47 @@ def test_qiita_team_post_cmd_post_blocks_private_response_mismatch_before_persis
 
     assert rc == 1
     assert "did not match intended private=True" in out
-    assert writeback_calls == []
+    assert "create already persisted frontmatter id=team-item-id" in out
+    assert writeback_calls == [(str(path), "team-item-id")]
+
+
+def test_qiita_team_post_cmd_post_persists_create_id_before_empty_url_response_block(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+    writeback_calls = []
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "returned without url; cannot confirm team host identity" in out
+    assert "create already persisted frontmatter id=team-item-id" in out
+    assert writeback_calls == [(str(path), "team-item-id")]
 
 
 def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path, capsys, monkeypatch):
