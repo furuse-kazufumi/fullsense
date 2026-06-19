@@ -103,11 +103,6 @@ def resolve_token() -> tuple[str | None, str | None]:
     return None, None
 
 
-def get_token() -> str | None:
-    token, _source = resolve_token()
-    return token
-
-
 def _print_token_source(context: str, source: str | None) -> None:
     if not source:
         return
@@ -341,14 +336,20 @@ def cmd_scan(args: list[str]) -> int:
     else:
         files = []
         seen = set()
+        seen_stems = set()
         for stem in DEFAULT_SCAN_STEMS:
             for suffix in (".md", ".md.bak"):
                 pattern = os.path.join(ARTICLES_DIR, "**", f"{stem}*{suffix}")
                 for f in sorted(_glob.glob(pattern, recursive=True)):
                     if "archive" in f or ".worktrees" in f:
                         continue
+                    base = os.path.basename(f)
+                    normalized_stem = base[:-4] if base.endswith(".md.bak") else base
+                    if normalized_stem in seen_stems:
+                        continue
                     if f in seen:
                         continue
+                    seen_stems.add(normalized_stem)
                     seen.add(f)
                     files.append(f)
         pattern_label = ", ".join(DEFAULT_SCAN_STEMS)
@@ -450,8 +451,10 @@ def _format_item_readback(item_id: str, code: int, res: dict | str) -> tuple[boo
         if res_id != item_id:
             return False, f"FAIL (200): requested id={item_id} but API returned id={res_id or '(missing)'}"
         url = str(res.get("url") or "")
+        if not url:
+            return False, f"FAIL (200): item id={item_id} returned without url; cannot confirm team host identity"
         expected_host = f"https://{TEAM}.qiita.com/"
-        if url and not url.startswith(expected_host):
+        if not url.startswith(expected_host):
             return False, f"FAIL (200): item url host drifted outside team '{TEAM}': {url}"
         private_value = res.get("private")
         state_hint = "READABLE PRIVATE" if private_value is True else "READABLE"
@@ -651,6 +654,10 @@ def cmd_post(args: list[str]) -> int:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
     _print_token_source("post", token_source)
+    if _is_personal_token_source(token_source):
+        print("post: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility.")
+        print("post: configure QIITA_TEAM_TOKEN or qiita_team_token before attempting Team PATCH/POST.")
+        return 1
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     private_value, private_error = parse_private_bool(meta.get("private"), default=True)

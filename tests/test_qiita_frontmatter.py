@@ -1309,6 +1309,27 @@ def test_qiita_team_post_cmd_show_surfaces_not_found_hint(capsys, monkeypatch):
     assert "NOT FOUND (404): item id=team-item-id is not readable on team 'fullsense'" in out
 
 
+def test_qiita_team_post_cmd_show_blocks_empty_url_readback(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, path, token, payload=None):
+        return 200, {
+            "id": "team-item-id",
+            "url": "",
+            "title": "hello",
+            "private": False,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_show(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "returned without url; cannot confirm team host identity" in out
+
+
 def test_qiita_team_post_cmd_scan_default_accepts_md_bak_and_normalizes_name(tmp_path, capsys, monkeypatch):
     article = tmp_path / "nested" / "QIITA_#32_llcore_cpu_poc_battery.md.bak"
     article.parent.mkdir(parents=True)
@@ -1336,6 +1357,50 @@ def test_qiita_team_post_cmd_scan_default_accepts_md_bak_and_normalizes_name(tmp
     assert rc == 0
     assert "QIITA_#32_llcore_cpu_poc_battery.md" in out
     assert "LOCAL PATH in body" in out
+
+
+def test_qiita_team_post_cmd_scan_default_prefers_md_over_md_bak(tmp_path, capsys, monkeypatch):
+    current = tmp_path / "nested" / "QIITA_#32_llcore_cpu_poc_battery.md"
+    backup = tmp_path / "nested" / "QIITA_#32_llcore_cpu_poc_battery.md.bak"
+    current.parent.mkdir(parents=True)
+    current.write_text(
+        "---\n"
+        "title: current\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "current body\n",
+        encoding="utf-8",
+    )
+    backup.write_text(
+        "---\n"
+        "title: stale\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "stale body with [local](./note.md)\n",
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(qtp, "ARTICLES_DIR", str(tmp_path))
+    old_file = qtp.__file__
+    qtp.__file__ = str(tmp_path / "shadow_qtp.py")
+    try:
+        rc = qtp.cmd_scan([])
+    finally:
+        qtp.__file__ = old_file
+    out = capsys.readouterr().out
+    report = qtp.json.loads((tmp_path / "qiita_registration_safety_report.json").read_text(encoding="utf-8"))
+
+    assert rc == 0
+    assert "LOCAL PATH in body" not in out
+    assert "summary: 1/1 registration-safe" in out
+    assert len(report["files"]) == 1
+    assert report["files"][0]["file"] == "QIITA_#32_llcore_cpu_poc_battery.md"
 
 
 def test_qiita_team_post_cmd_post_surfaces_nonblocking_warnings(tmp_path, capsys, monkeypatch):
@@ -1369,6 +1434,31 @@ def test_qiita_team_post_cmd_post_surfaces_nonblocking_warnings(tmp_path, capsys
     assert rc == 0
     assert "WARNINGS:" in out
     assert "LOCAL PATH in body" in out
+
+
+def test_qiita_team_post_cmd_post_blocks_on_qiita_token_fallback(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "id: team-item-id\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "post: token_source=D:/api-keys.json:qiita_token" in out
+    assert "WARNING qiita.com personal token fallback is in use" in out
+    assert "post: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
 
 
 def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path, capsys, monkeypatch):
