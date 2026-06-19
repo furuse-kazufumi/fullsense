@@ -64,6 +64,8 @@
 4. POST 後に記録する `id` / `URL` / `visible range` の記入先が `team_stock_queue.md` にあることを確認する
 5. rollback 手段が Team UI か API のどちらで取れるかを先に決める
 6. `private` flip を rollback として使わずに済むか、必要なら Team UI での即時差し替え手順を先に確認する
+7. `--patch-group-url-name` を使う remediation 案に進むなら、**先に human が concrete な `group_url_name` を決める**。2026-06-19 時点の local draft 3 本にはこの field が入っていないため、そのままの dry-run / post は fail-closed で `PATCH_GROUP_URL_NAME_BLOCK` になる
+8. 実行順は **Team UI first / opt-in PATCH second** を原則にする。opt-in PATCH はローカル実装済みだが、既共有 item に対する締め直し効果が一次未確認なため、まず UI 上で intended share target / private state を確認・是正できるかを先に見る
 
 ## execution commands
 
@@ -74,6 +76,14 @@
 - verify:
   - Team API / UI で title, private 状態, URL を確認する
   - `team_stock_queue.md` に `id` / URL / visible range を転記する
+- remediation patch template (human-gate 後のみ):
+  - `py -3.11 tools/qiita_team_post.py dry-run tools/qiita-cli-poc/public/team_stock_semantic_governance.md --patch-group-url-name`
+  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_semantic_governance.md --yes --force-ignore-publish --patch-group-url-name`
+  - `py -3.11 tools/qiita_team_post.py dry-run tools/qiita-cli-poc/public/team_stock_llm_wiki_anti_circulation.md --patch-group-url-name`
+  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_llm_wiki_anti_circulation.md --yes --force-ignore-publish --patch-group-url-name`
+  - `py -3.11 tools/qiita_team_post.py dry-run tools/qiita-cli-poc/public/team_stock_ctx2549_postmortem.md --patch-group-url-name`
+  - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_ctx2549_postmortem.md --yes --force-ignore-publish --patch-group-url-name`
+  - 前提: 実行前に対象 source の frontmatter へ human が選んだ concrete `group_url_name` を入れておく。現状の local source は未設定なので、そのままでは全件 BLOCK する
 
 ## rollback notes
 
@@ -98,6 +108,10 @@
 - なおこの `qiita.com` 側 `404` は Team scope item なら team-only / 過剰露出のどちらでも起こりうるため、**over-exposure 判定の弁別力は無い**。今回 probe した 3 本について、同時点で public 側の対応記事を直URLでは確認できなかった、という記録としてのみ使う
 - `private:false` の意味づけ自体も一次情報待ちであり、ここで言う `visibility semantics` は **プロジェクト内用語**に過ぎない。rollback / visibility tightening は別の human-gate 外部アクションとして扱う
 - 追加の現時点仮説として、2026-06-18 の poster payload では `group_url_name` を明示しておらず、観測された `group.url_name: general` は implicit General sharing を示している可能性がある。これは root-cause 仮説であって、team-only の証明でも否定でもない。local source にはこの観測値を resend default として固定せず、将来の create は explicit target を再判断する
+- 2026-06-19 のローカル改修で、**既定 PATCH は維持したまま** `--patch-group-url-name` を付けたときだけ `group_url_name` を再送できる remediation 経路を追加した。これは **共有先 (`group_url_name`) を寄せ直すための経路**であり、`private` 範囲の tightening そのものではない。dry-run でも `private` は frontmatter 値を再送する旨を明示する。現在の 3 本は source が `private:false` のため、この経路だけでは露出疑いを縮めず、`private:true` へ直す別アクションが要る
+- Qiita API docs の `PATCH /api/v2/items/:item_id` に `group_url_name` 記載がある可能性はあるが、この点自体は現時点で一次未確認である。したがって現状ここで確定しているのは、ローカル実装として resend 経路を持たせたことだけであり、**既に共有済み item に対し、この PATCH が実際に共有先や可視範囲を締め直す効果を持つかは一次未確認**のまま扱う
+- 従って、以後の remediation 候補は Team UI と **human-gate 後の opt-in PATCH** の二択まで狭まったが、後者を「visibility 是正が実証済み」とは扱わない。frontmatter に concrete target が無い場合は fail-closed で停止し、通常更新では再送しない
+- 2026-06-19 のローカル dry-run 再確認では、local draft 3 本すべてが `--patch-group-url-name` 付きで `PATCH_GROUP_URL_NAME_BLOCK` になった。理由は source 側 frontmatter に `group_url_name` が無いからであり、これは意図どおりの fail-closed 挙動である
 
 ## POST 後の記録先
 

@@ -20,16 +20,18 @@ Qiita API v2 (一次確認 2026-06-04, https://qiita.com/api/v2/docs):
 使い方:
   py -3.11 qiita_team_post.py scan  [glob]      # 登録安全性スキャン (read-only, network なし)
   py -3.11 qiita_team_post.py verify            # トークン疎通 (GET authenticated_user)
-  py -3.11 qiita_team_post.py dry-run <file.md> # payload + 警告を表示 (network なし)
+  py -3.11 qiita_team_post.py dry-run <file.md> [--patch-group-url-name]
+                                                # payload + 警告を表示 (network なし)
   py -3.11 qiita_team_post.py post <file.md> --yes [--force-ignore-publish]
+                                                [--patch-group-url-name]
                                                 # 実 POST/PATCH (ユーザーが GO したときのみ)
 
 team 既定 = fullsense。env `QIITA_TEAM` で上書き。
 
 NOTE:
   - create (`id` なし) は explicit `group_url_name` を payload へ送る
-  - PATCH (`id` あり) は `group_url_name` を既定送信しない。既存 item の share target
-    を寄せ直す remediation は Team UI か別改修が必要
+  - PATCH (`id` あり) は `group_url_name` を既定送信しない。share target を寄せ直す
+    ときだけ `--patch-group-url-name` を明示し、frontmatter の concrete target を再送する
 """
 from __future__ import annotations
 
@@ -138,6 +140,13 @@ def as_bool(v, default=True) -> bool:
 IGNORE_PUBLISH_WARNING = "WARNING: frontmatter ignorePublish: true is a qiita-cli gate; Team post requires explicit override."
 IGNORE_PUBLISH_BLOCK = "IGNORE_PUBLISH_BLOCK: add --force-ignore-publish only after human approval for this Team POST."
 UNRECOGNIZED_IGNORE_PUBLISH_BLOCK = "UNRECOGNIZED_IGNORE_PUBLISH_BLOCK: ignorePublish value '{value}' is not recognized"
+PATCH_GROUP_URL_NAME_BLOCK = (
+    "PATCH_GROUP_URL_NAME_BLOCK: --patch-group-url-name requires explicit non-empty group_url_name in frontmatter"
+)
+PATCH_GROUP_URL_NAME_CREATE_NOTE = (
+    "note: --patch-group-url-name is a no-op on CREATE (group_url_name is already sent from frontmatter; the flag only adds resend on PATCH/update)"
+)
+UNKNOWN_FLAG_BLOCK = "UNKNOWN_FLAG_BLOCK: unsupported flag '{flag}'"
 
 
 def parse_gate_bool(v) -> tuple[bool | None, str | None]:
@@ -165,6 +174,20 @@ def find_ignore_publish_key_issue(meta: dict) -> str | None:
         stripped = str(key).strip()
         if stripped.casefold() == "ignorepublish" and stripped != "ignorePublish":
             return f"IGNORE_PUBLISH_KEY_BLOCK: use exact frontmatter key 'ignorePublish', not '{key}'"
+    return None
+
+
+def wants_patch_group_url_name(args: list[str]) -> bool:
+    return "--patch-group-url-name" in args
+
+
+def validate_flags(args: list[str], *, allowed_flags: set[str]) -> str | None:
+    for arg in args:
+        if not arg.startswith("-"):
+            continue
+        if arg in allowed_flags:
+            continue
+        return UNKNOWN_FLAG_BLOCK.format(flag=arg)
     return None
 
 
@@ -287,15 +310,23 @@ def build_payload(meta: dict, body: str, *, include_group_url_name: bool = False
 
 
 def cmd_dry_run(args: list[str]) -> int:
-    if not args:
-        print("usage: dry-run <file.md>")
+    flag_error = validate_flags(args, allowed_flags={"--patch-group-url-name"})
+    if flag_error:
+        print(f"BLOCKED: {flag_error}")
+        print("usage: dry-run <file.md> [--patch-group-url-name]")
+        return 1
+    files = [a for a in args if not a.startswith("--")]
+    if not files:
+        print("usage: dry-run <file.md> [--patch-group-url-name]")
         return 2
-    text = open(args[0], "r", encoding="utf-8-sig").read()
+    text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     item_id = real_id(meta)
     create_group_target = explicit_group_target(meta) if not item_id else None
     patch_group_target = explicit_group_target(meta) if item_id else None
-    p = build_payload(meta, body, include_group_url_name=not item_id)
+    patch_group_flag = wants_patch_group_url_name(args)
+    resend_patch_group = bool(item_id and patch_group_flag)
+    p = build_payload(meta, body, include_group_url_name=(not item_id) or resend_patch_group)
     finds = safety_findings(meta, body)
     gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
     gate_key_error = find_ignore_publish_key_issue(meta)
@@ -305,9 +336,17 @@ def cmd_dry_run(args: list[str]) -> int:
     print(f"private: {p['private']}   body chars: {len(body)}")
     if create_group_target is not None:
         print(f"group_url_name: {p['group_url_name']}")
-    elif item_id:
+    elif resend_patch_group and patch_group_target is not None:
+        print(
+            "group_url_name(patch): "
+            f"{p['group_url_name']}   note: PATCH will resend this field (--patch-group-url-name); "
+            f"private is still resent from frontmatter ({p['private']})"
+        )
+    elif item_id and not resend_patch_group:
         shown_target = patch_group_target if patch_group_target is not None else "(none)"
         print(f"group_url_name(frontmatter): {shown_target}   note: PATCH does not resend this field")
+    if patch_group_flag and not item_id:
+        print(PATCH_GROUP_URL_NAME_CREATE_NOTE)
     if gate_key_error:
         print(f"BLOCKED: {gate_key_error}")
     elif gate_error:
@@ -318,6 +357,8 @@ def cmd_dry_run(args: list[str]) -> int:
         print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit non-empty group_url_name to avoid implicit sharing defaults.")
     elif not item_id and create_group_target is None:
         print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit non-empty group_url_name to avoid implicit sharing defaults.")
+    elif resend_patch_group and patch_group_target is None:
+        print(f"BLOCKED: {PATCH_GROUP_URL_NAME_BLOCK}")
     if finds:
         print("WARNINGS:")
         for x in finds:
@@ -325,7 +366,7 @@ def cmd_dry_run(args: list[str]) -> int:
     else:
         print("registration-safe: no findings")
     print("\n(dry-run: nothing sent. add `post <file> --yes` to actually publish.)")
-    return 1 if gate_key_error or gate_error or (not item_id and create_group_target is None) else 0
+    return 1 if gate_key_error or gate_error or (not item_id and create_group_target is None) or (resend_patch_group and patch_group_target is None) else 0
 
 
 def _writeback_id(path: str, item_id: str) -> None:
@@ -353,13 +394,18 @@ def _writeback_id(path: str, item_id: str) -> None:
 
 
 def cmd_post(args: list[str]) -> int:
+    flag_error = validate_flags(args, allowed_flags={"--yes", "--force-ignore-publish", "--patch-group-url-name"})
+    if flag_error:
+        print(f"BLOCKED: {flag_error}")
+        print("usage: post <file.md> --yes [--force-ignore-publish] [--patch-group-url-name]")
+        return 1
     files = [a for a in args if not a.startswith("--")]
     if not files:
-        print("usage: post <file.md> --yes [--force-ignore-publish]")
+        print("usage: post <file.md> --yes [--force-ignore-publish] [--patch-group-url-name]")
         return 2
     if "--yes" not in args:
         print("refusing: --yes required (publish is an external action; you give the GO).")
-        return cmd_dry_run(files[:1])
+        return cmd_dry_run(files[:1] + (["--patch-group-url-name"] if "--patch-group-url-name" in args else []))
     token = get_token()
     if not token:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
@@ -385,12 +431,20 @@ def cmd_post(args: list[str]) -> int:
             return 1
     item_id = real_id(meta)
     create_group_target = explicit_group_target(meta) if not item_id else None
-    p = build_payload(meta, body, include_group_url_name=not item_id)
+    patch_group_target = explicit_group_target(meta) if item_id else None
+    patch_group_flag = wants_patch_group_url_name(args)
+    resend_patch_group = bool(item_id and patch_group_flag)
+    p = build_payload(meta, body, include_group_url_name=(not item_id) or resend_patch_group)
+    if patch_group_flag and not item_id:
+        print(PATCH_GROUP_URL_NAME_CREATE_NOTE)
     if not item_id and "group_url_name" not in meta:
         print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit non-empty group_url_name to avoid implicit sharing defaults.")
         return 1
     if not item_id and create_group_target is None:
         print("BLOCKED: GROUP_URL_NAME_BLOCK: Team create requires explicit non-empty group_url_name to avoid implicit sharing defaults.")
+        return 1
+    if resend_patch_group and patch_group_target is None:
+        print(f"BLOCKED: {PATCH_GROUP_URL_NAME_BLOCK}")
         return 1
     if item_id:
         code, res = _req("PATCH", f"/items/{item_id}", token, p)

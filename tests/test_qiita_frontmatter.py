@@ -335,6 +335,28 @@ def test_qiita_team_post_dry_run_patch_surfaces_non_resent_group_target(tmp_path
     assert "PATCH does not resend this field" in out
 
 
+def test_qiita_team_post_dry_run_patch_can_resend_group_target_with_opt_in(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path), "--patch-group-url-name"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "group_url_name(patch): general" in out
+    assert "PATCH will resend this field" in out
+    assert "private is still resent from frontmatter (False)" in out
+
+
 def test_qiita_team_post_dry_run_patch_surfaces_missing_group_target_note(tmp_path, capsys):
     path = tmp_path / "team.md"
     path.write_text(
@@ -354,6 +376,54 @@ def test_qiita_team_post_dry_run_patch_surfaces_missing_group_target_note(tmp_pa
     assert "PATCH update id=team-item-id" in out
     assert "group_url_name(frontmatter): (none)" in out
     assert "PATCH does not resend this field" in out
+
+
+def test_qiita_team_post_dry_run_patch_blocks_opt_in_without_group_target(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path), "--patch-group-url-name"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.PATCH_GROUP_URL_NAME_BLOCK in out
+    assert "PATCH does not resend this field" not in out
+
+
+def test_qiita_team_post_dry_run_flag_only_returns_usage(capsys):
+    rc = qtp.cmd_dry_run(["--patch-group-url-name"])
+    out = capsys.readouterr().out
+    assert rc == 2
+    assert "usage: dry-run <file.md> [--patch-group-url-name]" in out
+
+
+def test_qiita_team_post_dry_run_blocks_unknown_flag(capsys):
+    rc = qtp.cmd_dry_run(["sample.md", "--patch-group-url-nme"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.UNKNOWN_FLAG_BLOCK.format(flag="--patch-group-url-nme") in out
+
+
+def test_qiita_team_post_dry_run_blocks_single_dash_flag_typo(capsys):
+    rc = qtp.cmd_dry_run(["sample.md", "-patch-group-url-name"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.UNKNOWN_FLAG_BLOCK.format(flag="-patch-group-url-name") in out
+
+
+def test_qiita_team_post_dry_run_blocks_value_form_flag(capsys):
+    rc = qtp.cmd_dry_run(["sample.md", "--patch-group-url-name=general"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.UNKNOWN_FLAG_BLOCK.format(flag="--patch-group-url-name=general") in out
 
 
 def test_qiita_team_post_dry_run_patch_normalizes_null_group_target_note(tmp_path, capsys):
@@ -588,6 +658,208 @@ def test_qiita_team_post_cmd_post_patch_does_not_resend_group_url_name(tmp_path,
     assert payload["private"] is False
     assert payload["tweet"] is False
     assert "group_url_name" not in payload
+
+
+def test_qiita_team_post_cmd_post_patch_can_resend_group_url_name_with_opt_in(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    calls = []
+
+    def _fake_req(method, req_path, token, payload=None):
+        calls.append((method, req_path, token, payload))
+        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+
+    monkeypatch.setattr(qtp, "_req", _fake_req)
+    rc = qtp.cmd_post([str(path), "--yes", "--patch-group-url-name"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "OK (200)" in out
+    assert calls[0][3]["group_url_name"] == "general"
+
+
+def test_qiita_team_post_cmd_post_patch_blocks_opt_in_without_group_target(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    rc = qtp.cmd_post([str(path), "--yes", "--patch-group-url-name"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert qtp.PATCH_GROUP_URL_NAME_BLOCK in out
+
+
+def test_qiita_team_post_cmd_post_without_yes_preserves_patch_group_url_name_preview(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_post([str(path), "--patch-group-url-name"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "refusing: --yes required" in out
+    assert "group_url_name(patch): general" in out
+    assert "PATCH will resend this field" in out
+
+
+def test_qiita_team_post_cmd_post_without_yes_ignores_force_ignore_publish_in_preview(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_post([str(path), "--force-ignore-publish"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "refusing: --yes required" in out
+    assert "UNKNOWN_FLAG_BLOCK" not in out
+    assert "PATCH update id=team-item-id" in out
+
+
+def test_qiita_team_post_cmd_post_blocks_unknown_flag(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_post([str(path), "--yes", "--patch-group-url-nme"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.UNKNOWN_FLAG_BLOCK.format(flag="--patch-group-url-nme") in out
+
+
+def test_qiita_team_post_cmd_post_blocks_single_dash_flag_typo(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_post([str(path), "--yes", "-patch-group-url-name"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.UNKNOWN_FLAG_BLOCK.format(flag="-patch-group-url-name") in out
+
+
+def test_qiita_team_post_cmd_post_blocks_value_form_flag(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_post([str(path), "--yes", "--patch-group-url-name=general"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qtp.UNKNOWN_FLAG_BLOCK.format(flag="--patch-group-url-name=general") in out
+
+
+def test_qiita_team_post_dry_run_create_notes_patch_group_url_name_is_ignored(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_dry_run([str(path), "--patch-group-url-name"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert qtp.PATCH_GROUP_URL_NAME_CREATE_NOTE in out
+    assert "group_url_name is already sent from frontmatter" in out
+
+
+def test_qiita_team_post_cmd_post_create_notes_patch_group_url_name_is_ignored(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    calls = []
+
+    def _fake_req(method, req_path, token, payload=None):
+        calls.append((method, req_path, token, payload))
+        return 201, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+
+    monkeypatch.setattr(qtp, "_req", _fake_req)
+    rc = qtp.cmd_post([str(path), "--yes", "--patch-group-url-name"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert qtp.PATCH_GROUP_URL_NAME_CREATE_NOTE in out
+    assert calls[0][0] == "POST"
+    assert "group_url_name" in calls[0][3]
 
 
 def test_qiita_team_post_cmd_post_patch_preserves_private_true(tmp_path, capsys, monkeypatch):

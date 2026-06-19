@@ -66,7 +66,16 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 3. 2026-06-19 の未認証 HTML GET では 3 本とも Login ページへ落ちたが、これは Team サブドメイン全体の auth gate でも説明できる。したがって team-only と positively 確認できるまでは **過剰露出の疑いを優先**し、`private:false` の意味づけは一次情報待ちとする
 4. current blocker の主語は「Team API / visibility semantics（プロジェクト内用語）の不一致」ではなく、**過剰露出の疑いを否定できないこと**に置く。不一致は副次論点として記録する
 5. 2026-06-19 以降の Team create は、poster が `group_url_name` を明示しないまま implicit share target に依存しないよう fail-closed 化済みで、`group_url_name` の未指定 / `null` / 空値は BLOCK する
-6. rollback / 可視範囲の絞り込みが必要なら、以後は別の human-gate 外部アクションとして扱う
+6. 2026-06-19 のローカル改修で、通常 PATCH はそのままに **`--patch-group-url-name` 付きの opt-in remediation 経路**を追加した。frontmatter に concrete `group_url_name` が無ければ fail-closed で停止するため、既存 item の可視範囲を寄せ直す候補は `Team UI` と `human-gate 後の opt-in PATCH` の二択になった
+7. rollback / 可視範囲の絞り込み自体は、引き続き別の human-gate 外部アクションとして扱う
+8. 2026-06-19 の local draft 再確認では、3 本とも frontmatter に `group_url_name` が無く、`dry-run ... --patch-group-url-name` は全件 `PATCH_GROUP_URL_NAME_BLOCK` で停止した。つまり opt-in PATCH 経路は実装済みだが、**human が concrete target を決めて source に入れるまでは実行不能**である
+9. 次の外部 remediation 順序は **Team UI first / opt-in PATCH second** とする。opt-in PATCH はローカル実装と fail-closed guard までは確認済みだが、既共有 item に対する締め直し効果が一次未確認だからである
+
+補足:
+
+- 上記 opt-in PATCH は **共有先 (`group_url_name`) を寄せ直すためのローカル経路**であり、`private` 範囲の tightening を保証しない
+- Qiita API docs に `PATCH /api/v2/items/:item_id` の `group_url_name` 記載がある可能性はあるが、この点自体は現時点で一次未確認であり、**既共有 item に対して実際に締め直し効果を持つかも一次未確認**
+- local source へ `general` を既定値として焼き戻すことはしない。観測値の local default 化を避けるため、target は human decision が入るまで空のまま維持する
 
 ## 状態更新ルール
 
