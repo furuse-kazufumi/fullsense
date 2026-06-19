@@ -70,6 +70,18 @@ WRITE_AUTH_WARNING = (
     "WARNING: preflight does not prove PATCH auth unless /authenticated_user succeeds. "
     "Run `verify` or use preflight with a valid token before posting."
 )
+IGNORE_PUBLISH_WARNING = (
+    "WARNING: frontmatter ignorePublish: true is a qiita-cli gate, not a qiita_public_post.py gate."
+)
+LIVE_TITLE_BLOCK = (
+    "BLOCKED: live title differs from payload title. Resolve live-only edits or align source before PATCH."
+)
+LIVE_VISIBILITY_BLOCK = (
+    "BLOCKED: live private visibility differs from payload visibility. Resolve before PATCH."
+)
+PREFLIGHT_MARKER_REQUIRED_BLOCK = (
+    "BLOCKED: --require-marker was requested but frontmatter preflight_marker: is missing."
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -214,13 +226,16 @@ def safety_findings(meta: dict, body: str) -> list[str]:
 
 def _strip_markdown_title(raw: str) -> str:
     raw = raw.strip()
-    if raw.startswith("<") and raw.endswith(">"):
-        raw = raw[1:-1].strip()
-    if '"' in raw:
-        head, _quote, _tail = raw.partition('"')
-        if head.strip().startswith(("http://", "https://")):
-            return head.strip()
-    return raw
+    if raw.startswith("<"):
+        end = raw.find(">")
+        if end != -1:
+            head = raw[1:end].strip()
+            if head.startswith(("http://", "https://")):
+                return head
+    m = re.match(r"^(https?://\S+?)(?:\s+['\"].*)?$", raw)
+    if m:
+        return m.group(1).strip()
+    return raw.strip()
 
 
 def scan_image_targets(body: str) -> list[str]:
@@ -293,7 +308,7 @@ def _http_probe_asset(url: str) -> tuple[int, dict[str, str]]:
         with urllib.request.urlopen(req, timeout=30) as r:
             return r.status, dict(r.headers.items())
     except urllib.error.HTTPError as e:
-        if e.code not in (405, 501):
+        if e.code not in (400, 403, 405, 501):
             return e.code, dict(e.headers.items()) if e.headers else {}
     except urllib.error.URLError:
         pass
@@ -332,6 +347,102 @@ def build_payload(meta: dict, body: str, force_private: bool | None) -> dict:
         "private": private,
         "tweet": False,
     }
+
+
+def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool) -> tuple[list[str], bool]:
+    lines: list[str] = []
+    finds = safety_findings(meta, body)
+    privacy_finds = privacy_field_findings(meta)
+    pid = real_public_id(meta)
+    legacy_id = legacy_id_without_public_id(meta)
+    asset_urls = scan_asset_urls(body)
+    preflight_marker = str(meta.get("preflight_marker") or "").strip()
+    blocked = bool(finds or privacy_finds)
+
+    lines.append(f"target: PUBLIC qiita.com ({API_BASE})")
+    lines.append(f"action: {'PATCH update public_id=' + str(pid) if pid else 'POST create (new public article)'}")
+    lines.append(f"title : {payload['title']}")
+    lines.append(f"tags  : {[t['name'] for t in payload['tags']]}")
+    lines.append(f"private: {payload['private']}   body chars: {len(body)}")
+    if legacy_id:
+        lines.append(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
+    if as_bool(meta.get("ignorePublish"), default=False):
+        lines.append(IGNORE_PUBLISH_WARNING)
+    lines.extend(privacy_finds)
+    if finds:
+        lines.append("WARNINGS:")
+        lines.extend([f"  - {x}" for x in finds])
+    else:
+        lines.append("registration-safe: no findings")
+
+    auth_ok = False
+    auth_token = get_token()
+    if auth_token:
+        auth_code, _auth_body = _req("GET", "/authenticated_user", auth_token)
+        lines.append(f"auth_status: {auth_code}")
+        auth_ok = auth_code == 200
+        if not auth_ok:
+            blocked = True
+            lines.append(WRITE_AUTH_WARNING)
+    else:
+        lines.append("auth_status: missing-token")
+        blocked = True
+        lines.append(WRITE_AUTH_WARNING)
+    if not pid:
+        lines.append("live-check: skipped (no public_id; create path has no existing live item)")
+    else:
+        api_status, _api_headers, api_text = _http_get(f"{API_BASE}/items/{pid}", token=auth_token)
+        lines.append(f"api_status: {api_status}")
+        live_url = ""
+        if api_status == 200:
+            try:
+                api_obj = json.loads(api_text)
+                live_url = str(api_obj.get("url") or "")
+                api_title = str(api_obj.get("title") or "")
+                live_private = bool(api_obj.get("private"))
+                lines.append(f"api_title: {api_title}")
+                lines.append(f"api_url  : {live_url}")
+                lines.append(f"api_private: {live_private}")
+                if api_title != str(payload["title"]):
+                    blocked = True
+                    lines.append(LIVE_TITLE_BLOCK)
+                if live_private != bool(payload["private"]):
+                    blocked = True
+                    lines.append(LIVE_VISIBILITY_BLOCK)
+            except json.JSONDecodeError:
+                blocked = True
+                lines.append("BLOCKED: API 200 but JSON decode failed")
+        else:
+            blocked = True
+        if live_url:
+            html_status, _html_headers, html_text = _http_get(live_url)
+            lines.append(f"html_status: {html_status}")
+            if html_status == 200:
+                start = html_text.find("<title>")
+                end = html_text.find("</title>", start)
+                if start != -1 and end != -1:
+                    html_title = html_text[start + 7:end]
+                    lines.append(f"html_title: {html_title}")
+                if preflight_marker:
+                    marker_ok = preflight_marker in html_text
+                    lines.append(f"marker_present: {marker_ok}")
+                    if require_marker and not marker_ok:
+                        blocked = True
+                elif require_marker:
+                    blocked = True
+                    lines.append(PREFLIGHT_MARKER_REQUIRED_BLOCK)
+            else:
+                blocked = True
+        else:
+            blocked = True
+
+    lines.append(f"asset_count: {len(asset_urls)}")
+    for url in asset_urls:
+        code, headers = _http_probe_asset(url)
+        lines.append(f"asset_status: {code}  content-type={headers.get('Content-Type', '')}  url={url}")
+        if code not in (200, 206):
+            blocked = True
+    return lines, blocked
 
 
 def cmd_dry_run(args: list[str]) -> int:
@@ -376,88 +487,9 @@ def cmd_preflight(args: list[str]) -> int:
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
-    finds = safety_findings(meta, body)
-    privacy_finds = privacy_field_findings(meta)
-    pid = real_public_id(meta)
-    legacy_id = legacy_id_without_public_id(meta)
-    asset_urls = scan_asset_urls(body)
-    preflight_marker = str(meta.get("preflight_marker") or "").strip()
-
-    print(f"target: PUBLIC qiita.com ({API_BASE})")
-    print(f"action: {'PATCH update public_id=' + str(pid) if pid else 'POST create (new public article)'}")
-    print(f"title : {p['title']}")
-    print(f"tags  : {[t['name'] for t in p['tags']]}")
-    print(f"private: {p['private']}   body chars: {len(body)}")
-    if legacy_id:
-        print(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
-    for x in privacy_finds:
-        print(x)
-    if finds:
-        print("WARNINGS:")
-        for x in finds:
-            print(f"  - {x}")
-    else:
-        print("registration-safe: no findings")
-
-    blocked = bool(finds or privacy_finds)
-    auth_ok = False
-    auth_token = get_token()
-    if auth_token:
-        auth_code, _auth_body = _req("GET", "/authenticated_user", auth_token)
-        print(f"auth_status: {auth_code}")
-        auth_ok = auth_code == 200
-        if not auth_ok:
-            blocked = True
-            print(WRITE_AUTH_WARNING)
-    else:
-        print("auth_status: missing-token")
-        blocked = True
-        print(WRITE_AUTH_WARNING)
-    if not pid:
-        print("live-check: skipped (no public_id; create path has no existing live item)")
-    else:
-        api_status, _api_headers, api_text = _http_get(f"{API_BASE}/items/{pid}", token=auth_token)
-        print(f"api_status: {api_status}")
-        live_url = ""
-        api_title = ""
-        if api_status == 200:
-            try:
-                api_obj = json.loads(api_text)
-                live_url = str(api_obj.get("url") or "")
-                api_title = str(api_obj.get("title") or "")
-                print(f"api_title: {api_title}")
-                print(f"api_url  : {live_url}")
-            except json.JSONDecodeError:
-                blocked = True
-                print("BLOCKED: API 200 but JSON decode failed")
-        else:
-            blocked = True
-        if live_url:
-            html_status, _html_headers, html_text = _http_get(live_url)
-            print(f"html_status: {html_status}")
-            if html_status == 200:
-                start = html_text.find("<title>")
-                end = html_text.find("</title>", start)
-                if start != -1 and end != -1:
-                    html_title = html_text[start + 7:end]
-                    print(f"html_title: {html_title}")
-                if preflight_marker:
-                    marker_ok = preflight_marker in html_text
-                    print(f"marker_present: {marker_ok}")
-                    if require_marker and not marker_ok:
-                        blocked = True
-            else:
-                blocked = True
-        else:
-            blocked = True
-
-    print(f"asset_count: {len(asset_urls)}")
-    for url in asset_urls:
-        code, headers = _http_probe_asset(url)
-        print(f"asset_status: {code}  content-type={headers.get('Content-Type', '')}  url={url}")
-        if code not in (200, 206):
-            blocked = True
-
+    lines, blocked = _preflight_report(meta, body, p, require_marker=require_marker)
+    for line in lines:
+        print(line)
     if blocked:
         print("preflight: BLOCKED")
         return 1
@@ -518,6 +550,12 @@ def cmd_post(args: list[str]) -> int:
         if "--allow-create" not in args:
             print(LEGACY_ID_BLOCK)
             return 1
+    preflight_lines, preflight_blocked = _preflight_report(meta, body, p, require_marker=False)
+    for line in preflight_lines:
+        print(line)
+    if preflight_blocked:
+        print("BLOCKED: post requires a passing preflight before PATCH/POST.")
+        return 1
     if pid:
         code, res = _req("PATCH", f"/items/{pid}", token, p)
     else:

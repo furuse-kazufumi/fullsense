@@ -128,6 +128,17 @@ def test_qiita_public_post_scan_asset_urls_deduplicates_http_images():
     ]
 
 
+def test_qiita_public_post_scan_asset_urls_handles_single_quote_and_angle_brackets():
+    body = (
+        "![a](<https://example.test/a path.svg> \"title\")\n"
+        "![b](https://example.test/b.jpg 'caption')\n"
+    )
+    assert qpp.scan_asset_urls(body) == [
+        "https://example.test/a path.svg",
+        "https://example.test/b.jpg",
+    ]
+
+
 def test_qiita_public_post_privacy_field_findings_require_public_private():
     assert qpp.privacy_field_findings({"private": True}) == [qpp.AMBIGUOUS_PRIVATE_BLOCK]
     assert qpp.privacy_field_findings({"private": True, "public_private": False}) == [qpp.CONFLICTING_PRIVATE_BLOCK]
@@ -298,10 +309,14 @@ def test_qiita_public_post_cmd_post_allows_legacy_id_with_allow_create(tmp_path,
     )
     monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
 
-    def _fake_req(method, path, token, payload):
+    def _fake_req(method, path, token, payload=None):
+        assert token == "fake-token"
+        if method == "GET":
+            assert path == "/authenticated_user"
+            return 200, {"id": "furuse-kazufumi"}
         assert method == "POST"
         assert path == "/items"
-        assert token == "fake-token"
+        assert payload is not None
         assert payload["private"] is False
         return 201, {"id": "new-public-id", "url": "https://example.test/items/new-public-id"}
 
@@ -398,6 +413,41 @@ def test_qiita_public_post_preflight_requires_marker_when_requested(tmp_path, ca
     assert "preflight: BLOCKED" in out
 
 
+def test_qiita_public_post_preflight_blocks_when_marker_required_but_missing_from_frontmatter(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path), "--require-marker"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.PREFLIGHT_MARKER_REQUIRED_BLOCK in out
+    assert "preflight: BLOCKED" in out
+
+
 def test_qiita_public_post_preflight_blocks_without_write_auth(tmp_path, capsys, monkeypatch):
     path = tmp_path / "sample.md"
     path.write_text(
@@ -489,6 +539,74 @@ def test_qiita_public_post_preflight_blocks_on_html_404(tmp_path, capsys, monkey
     assert "preflight: BLOCKED" in out
 
 
+def test_qiita_public_post_preflight_blocks_on_live_title_mismatch(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"different","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>different - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.LIVE_TITLE_BLOCK in out
+
+
+def test_qiita_public_post_preflight_blocks_on_live_visibility_mismatch(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":true,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.LIVE_VISIBILITY_BLOCK in out
+
+
 def test_qiita_public_post_preflight_blocks_on_asset_404(tmp_path, capsys, monkeypatch):
     path = tmp_path / "sample.md"
     path.write_text(
@@ -526,6 +644,109 @@ def test_qiita_public_post_preflight_blocks_on_asset_404(tmp_path, capsys, monke
     assert rc == 1
     assert "asset_status: 404" in out
     assert "preflight: BLOCKED" in out
+
+
+def test_qiita_public_post_preflight_surfaces_ignore_publish_warning(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "ignorePublish: true\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert qpp.IGNORE_PUBLISH_WARNING in out
+
+
+def test_qiita_public_post_post_requires_passing_preflight(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    called = {"req": 0}
+
+    def _fake_req(method, path, token, payload=None):
+        called["req"] += 1
+        if method == "GET" and path == "/authenticated_user":
+            return 200, {"id": "furuse-kazufumi"}
+        raise AssertionError("PATCH/POST should not run when preflight blocks")
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"different","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>different - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    rc = qpp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "BLOCKED: post requires a passing preflight before PATCH/POST." in out
+    assert called["req"] == 1
+
+
+def test_qiita_public_post_http_probe_asset_falls_back_after_head_403(monkeypatch):
+    calls = []
+
+    class _Resp:
+        def __init__(self, status, headers=None):
+            self.status = status
+            self.headers = headers or {"Content-Type": "image/svg+xml"}
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+    def _fake_urlopen(req, timeout=30):
+        calls.append((req.get_method(), req.full_url, req.headers.get("Range")))
+        if req.get_method() == "HEAD":
+            raise qpp.urllib.error.HTTPError(req.full_url, 403, "forbidden", hdrs={}, fp=None)
+        return _Resp(206)
+
+    monkeypatch.setattr(qpp.urllib.request, "urlopen", _fake_urlopen)
+    status, _headers = qpp._http_probe_asset("https://example.test/a.svg")
+    assert status == 206
+    assert calls == [
+        ("HEAD", "https://example.test/a.svg", None),
+        ("GET", "https://example.test/a.svg", "bytes=0-0"),
+    ]
 
 
 def test_convert_to_qiita_cli_parses_folded_title():
