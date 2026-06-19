@@ -800,7 +800,7 @@ def test_qiita_team_post_cmd_post_without_yes_preserves_patch_group_url_name_pre
     rc = qtp.cmd_post([str(path), "--patch-group-url-name"])
     out = capsys.readouterr().out
 
-    assert rc == 0
+    assert rc == 3
     assert "refusing: --yes required" in out
     assert "group_url_name(patch): general" in out
     assert "PATCH will resend this field" in out
@@ -821,7 +821,7 @@ def test_qiita_team_post_cmd_post_without_yes_ignores_force_ignore_publish_in_pr
     )
     rc = qtp.cmd_post([str(path), "--force-ignore-publish"])
     out = capsys.readouterr().out
-    assert rc == 0
+    assert rc == 3
     assert "refusing: --yes required" in out
     assert "UNKNOWN_FLAG_BLOCK" not in out
     assert "PATCH update id=team-item-id" in out
@@ -1098,6 +1098,79 @@ def test_qiita_team_post_cmd_show_distinguishes_auth_failures(capsys, monkeypatc
 
     assert rc == 1
     assert "AUTH FAIL (403)" in out
+
+
+def test_qiita_team_post_cmd_preflight_checks_auth_and_item_readback(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    calls = []
+
+    def fake_req(method, path, token, payload=None):
+        calls.append((method, path, token, payload))
+        if path == "/authenticated_user":
+            return 200, {"id": "furuse-kazufumi"}
+        if path == "/items/team-item-id":
+            return 200, {
+                "id": "team-item-id",
+                "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+                "title": "hello",
+                "private": False,
+                "group": {"url_name": "general", "private": False},
+                "organization_url_name": None,
+            }
+        raise AssertionError(path)
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_preflight(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "preflight auth: OK user=@furuse-kazufumi team='fullsense'" in out
+    assert "preflight item: OK" in out
+    assert "organization_url_name=None" in out
+    assert calls[0][1] == "/authenticated_user"
+    assert calls[1][1] == "/items/team-item-id"
+
+
+def test_qiita_team_post_cmd_preflight_blocks_on_item_auth_failure(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+
+    def fake_req(method, path, token, payload=None):
+        if path == "/authenticated_user":
+            return 200, {"id": "furuse-kazufumi"}
+        if path == "/items/team-item-id":
+            return 403, {"message": "forbidden"}
+        raise AssertionError(path)
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_preflight(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "preflight item: BLOCKED  AUTH FAIL (403)" in out
+    assert "preflight: BLOCKED" in out
+
+
+def test_qiita_team_post_cmd_scan_explicit_glob_keeps_qiita_cli_poc_files(tmp_path, capsys):
+    article = tmp_path / "qiita-cli-poc" / "public" / "team_stock_example.md"
+    article.parent.mkdir(parents=True)
+    article.write_text(
+        "---\n"
+        "title: example\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    rc = qtp.cmd_scan([str(tmp_path / "**" / "team_stock_*.md")])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "scan: 1 files" in out
+    assert "summary: 1/1 registration-safe" in out
 
 
 def test_qiita_team_post_cmd_post_surfaces_nonblocking_warnings(tmp_path, capsys, monkeypatch):

@@ -20,6 +20,8 @@ Qiita API v2 (一次確認 2026-06-04, https://qiita.com/api/v2/docs):
 使い方:
   py -3.11 qiita_team_post.py scan  [glob]      # 登録安全性スキャン (read-only, network なし)
   py -3.11 qiita_team_post.py verify            # トークン疎通 (GET authenticated_user)
+  py -3.11 qiita_team_post.py preflight <item_id> [item_id...]
+                                                # auth / membership / readable item の共通 gate
   py -3.11 qiita_team_post.py dry-run <file.md> [--patch-group-url-name]
                                                 # payload + 警告を表示 (network なし)
   py -3.11 qiita_team_post.py show <item_id>    # read-only Team API GET (visibility readback)
@@ -251,7 +253,7 @@ def safety_findings(meta: dict, body: str) -> list[str]:
 def cmd_scan(args: list[str]) -> int:
     pattern = args[0] if args else os.path.join(ARTICLES_DIR, "QIITA_*.md")
     files = sorted(f for f in _glob.glob(pattern, recursive=True)
-                   if "archive" not in f and ".worktrees" not in f and "qiita-cli-poc" not in f)
+                   if "archive" not in f and ".worktrees" not in f)
     safe = 0
     print(f"scan: {len(files)} files (pattern={pattern})\n")
     report = []
@@ -314,6 +316,58 @@ def cmd_verify(_args: list[str]) -> int:
     return 1
 
 
+def _read_item(item_id: str, token: str) -> tuple[int, dict | str]:
+    return _req("GET", f"/items/{item_id}", token)
+
+
+def _format_item_readback(item_id: str, code: int, res: dict | str) -> tuple[bool, str]:
+    if code == 401:
+        return False, f"AUTH FAIL ({code}): token invalid or expired for team '{TEAM}'"
+    if code == 403:
+        return False, f"AUTH FAIL ({code}): token lacks scope or membership for team '{TEAM}'"
+    if code == 200 and isinstance(res, dict):
+        res_id = str(res.get("id") or "").strip()
+        if res_id != item_id:
+            return False, f"FAIL (200): requested id={item_id} but API returned id={res_id or '(missing)'}"
+        url = str(res.get("url") or "")
+        expected_host = f"https://{TEAM}.qiita.com/"
+        if url and not url.startswith(expected_host):
+            return False, f"FAIL (200): item url host drifted outside team '{TEAM}': {url}"
+        return True, (
+            f"OK ({code}): {url}  id={res_id}  "
+            f"title={res.get('title')}  {format_team_visibility(res)}"
+        )
+    return False, f"FAIL ({code}): {res}"
+
+
+def cmd_preflight(args: list[str]) -> int:
+    if not args:
+        print("usage: preflight <item_id> [item_id...]")
+        return 2
+    token = get_token()
+    if not token:
+        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
+        return 2
+    code, body = _req("GET", "/authenticated_user", token)
+    if code != 200 or not isinstance(body, dict):
+        print(f"preflight: BLOCKED auth ({code}): {body}")
+        print("preflight: diagnosis cannot start until auth / membership / scope are confirmed.")
+        return 1
+    print(f"preflight auth: OK user=@{body.get('id')} team='{TEAM}'")
+    blocked = False
+    for raw_item_id in args:
+        item_id = raw_item_id.strip()
+        code, res = _read_item(item_id, token)
+        ok, line = _format_item_readback(item_id, code, res)
+        print(f"preflight item: {'OK' if ok else 'BLOCKED'}  {line}")
+        blocked = blocked or (not ok)
+    if blocked:
+        print("preflight: BLOCKED (diagnosis preflight failed; retry after fixing auth / membership / item target)")
+        return 1
+    print("preflight: OK")
+    return 0
+
+
 def cmd_show(args: list[str]) -> int:
     if len(args) != 1:
         print("usage: show <item_id>")
@@ -323,21 +377,10 @@ def cmd_show(args: list[str]) -> int:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
     item_id = args[0].strip()
-    code, res = _req("GET", f"/items/{item_id}", token)
-    if code == 401:
-        print(f"AUTH FAIL ({code}): token invalid or expired for team '{TEAM}'")
-        return 1
-    if code == 403:
-        print(f"AUTH FAIL ({code}): token lacks scope or membership for team '{TEAM}'")
-        return 1
-    if code == 200 and isinstance(res, dict):
-        print(
-            f"OK ({code}): {res.get('url')}  id={res.get('id')}  "
-            f"title={res.get('title')}  {format_team_visibility(res)}"
-        )
-        return 0
-    print(f"FAIL ({code}): {res}")
-    return 1
+    code, res = _read_item(item_id, token)
+    ok, line = _format_item_readback(item_id, code, res)
+    print(line)
+    return 0 if ok else 1
 
 
 def build_payload(meta: dict, body: str, *, include_group_url_name: bool = False) -> dict:
@@ -469,7 +512,8 @@ def cmd_post(args: list[str]) -> int:
         return 2
     if "--yes" not in args:
         print("refusing: --yes required (publish is an external action; you give the GO).")
-        return cmd_dry_run(files[:1] + (["--patch-group-url-name"] if "--patch-group-url-name" in args else []))
+        preview_rc = cmd_dry_run(files[:1] + (["--patch-group-url-name"] if "--patch-group-url-name" in args else []))
+        return 3 if preview_rc == 0 else preview_rc
     token = get_token()
     if not token:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
@@ -542,6 +586,7 @@ def main() -> int:
     return {
         "scan": cmd_scan,
         "verify": cmd_verify,
+        "preflight": cmd_preflight,
         "dry-run": cmd_dry_run,
         "show": cmd_show,
         "get": cmd_show,
