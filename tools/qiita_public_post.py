@@ -17,7 +17,7 @@ qiita_team_post.py の公開 (qiita.com) 版。Team poster とは独立に動き
   py -3.11 qiita_public_post.py verify                       # 公開トークン疎通
   py -3.11 qiita_public_post.py dry-run <file.md>            # payload + 警告 (network なし)
   py -3.11 qiita_public_post.py preflight <file.md>          # dry-run + live/API/assets 事前確認
-  py -3.11 qiita_public_post.py preflight <file.md> --refresh-baseline  # live API 本文で .remote baseline を更新
+  py -3.11 qiita_public_post.py preflight <file.md> --refresh-baseline  # live API 本文で .remote baseline を更新（append-only gate）
   py -3.11 qiita_public_post.py preflight <file.md> --require-marker  # live HTML に marker 反映まで要求
   py -3.11 qiita_public_post.py post <file.md> --yes         # 実 POST/PATCH (private=false)
   py -3.11 qiita_public_post.py post <file.md> --yes --private   # 限定共有で投稿
@@ -97,6 +97,12 @@ PREFLIGHT_BASELINE_REQUIRED_BLOCK = (
 )
 PREFLIGHT_BASELINE_PATH_BLOCK = (
     "BLOCKED: frontmatter preflight_remote_baseline: must be a direct child of .remote/ and may not escape: {path}"
+)
+PREFLIGHT_BASELINE_REFRESH_REQUIRED_BLOCK = (
+    "BLOCKED: --refresh-baseline requires both public_id: and preflight_remote_baseline:."
+)
+PREFLIGHT_BASELINE_REFRESH_WRITE_BLOCK = (
+    "BLOCKED: failed to update remote baseline file: {path}"
 )
 PREFLIGHT_BASELINE_BODY_BLOCK = (
     "BLOCKED: local body no longer preserves the required remote baseline body sequence: {path}"
@@ -426,10 +432,12 @@ def _resolve_baseline_path(meta: dict, source_path: str) -> tuple[Path | None, s
 def _refresh_remote_baseline(meta: dict, source_path: str, payload: dict, token: str | None) -> tuple[list[str], bool]:
     path, err = _resolve_baseline_path(meta, source_path)
     if not path:
+        if err is None:
+            return [PREFLIGHT_BASELINE_REFRESH_REQUIRED_BLOCK], True
         return ([err] if err else []), bool(err)
     pid = real_public_id(meta)
     if not pid:
-        return ["baseline_refresh: skipped (no public_id)"], False
+        return [PREFLIGHT_BASELINE_REFRESH_REQUIRED_BLOCK], True
     if not token:
         return ["baseline_refresh: skipped (missing token)"], True
     code, res = _req("GET", f"/items/{pid}", token)
@@ -489,8 +497,17 @@ def _refresh_remote_baseline(meta: dict, source_path: str, payload: dict, token:
         body,
     ])
     tmp_path = path.with_suffix(path.suffix + ".tmp")
-    tmp_path.write_text("\n".join(baseline_lines).rstrip("\n") + "\n", encoding="utf-8")
-    tmp_path.replace(path)
+    try:
+        tmp_path.write_text("\n".join(baseline_lines).rstrip("\n") + "\n", encoding="utf-8")
+        tmp_path.replace(path)
+    except OSError:
+        try:
+            if tmp_path.exists():
+                tmp_path.unlink()
+        except OSError:
+            pass
+        report_lines.append(PREFLIGHT_BASELINE_REFRESH_WRITE_BLOCK.format(path=path))
+        return report_lines, True
     report_lines.append(f"baseline_refreshed: {path}")
     return report_lines, False
 
