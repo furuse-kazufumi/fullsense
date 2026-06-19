@@ -51,6 +51,14 @@ LEGACY_ID_BLOCK = (
     "BLOCKED: legacy/team-style id without public_id requires --allow-create "
     "before creating a new public item."
 )
+AMBIGUOUS_PRIVATE_BLOCK = (
+    "BLOCKED: frontmatter private: is ignored by qiita_public_post.py. "
+    "Set public_private: true/false explicitly."
+)
+CONFLICTING_PRIVATE_BLOCK = (
+    "BLOCKED: frontmatter private: and public_private: disagree. "
+    "Resolve visibility before posting."
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -127,6 +135,21 @@ def as_bool(v, default=False) -> bool:
     if isinstance(v, str):
         return v.strip().lower() in ("true", "yes", "1")
     return default
+
+
+def privacy_field_findings(meta: dict) -> list[str]:
+    out: list[str] = []
+    has_private = "private" in meta
+    has_public_private = "public_private" in meta
+    if has_private and not has_public_private:
+        out.append(AMBIGUOUS_PRIVATE_BLOCK)
+        return out
+    if has_private and has_public_private:
+        private_val = as_bool(meta.get("private"), default=False)
+        public_private_val = as_bool(meta.get("public_private"), default=False)
+        if private_val != public_private_val:
+            out.append(CONFLICTING_PRIVATE_BLOCK)
+    return out
 
 
 # --------------------------------------------------------------------------- #
@@ -213,6 +236,7 @@ def cmd_dry_run(args: list[str]) -> int:
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
     finds = safety_findings(meta, body)
+    privacy_finds = privacy_field_findings(meta)
     pid = real_public_id(meta)
     legacy_id = legacy_id_without_public_id(meta)
     print(f"target: PUBLIC qiita.com ({API_BASE})")
@@ -222,6 +246,8 @@ def cmd_dry_run(args: list[str]) -> int:
     print(f"private: {p['private']}   body chars: {len(body)}")
     if legacy_id:
         print(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
+    for x in privacy_finds:
+        print(x)
     if finds:
         print("WARNINGS:")
         for x in finds:
@@ -271,6 +297,7 @@ def cmd_post(args: list[str]) -> int:
     meta, body = split_frontmatter(text)
     hard = [x for x in safety_findings(meta, body)
             if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH"))]
+    hard.extend(privacy_field_findings(meta))
     if hard:
         print("BLOCKED (fix first): " + "; ".join(hard))
         return 1

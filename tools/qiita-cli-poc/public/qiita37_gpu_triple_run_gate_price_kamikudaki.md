@@ -7,6 +7,7 @@ tags:
   - llcore
   - かみくだき
 private: false
+public_private: false
 updated_at: '2026-06-14T23:29:22+09:00'
 id: f06ca92ea208c7646fcd
 public_id: f06ca92ea208c7646fcd

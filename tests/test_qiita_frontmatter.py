@@ -106,6 +106,12 @@ def test_qiita_public_post_build_payload_uses_public_private_only():
     assert forced_payload["private"] is True
 
 
+def test_qiita_public_post_privacy_field_findings_require_public_private():
+    assert qpp.privacy_field_findings({"private": True}) == [qpp.AMBIGUOUS_PRIVATE_BLOCK]
+    assert qpp.privacy_field_findings({"private": True, "public_private": False}) == [qpp.CONFLICTING_PRIVATE_BLOCK]
+    assert qpp.privacy_field_findings({"private": False, "public_private": False}) == []
+
+
 def test_qiita_team_post_real_id_treats_nullish_as_absent():
     assert qtp.real_id({"id": "team-item-id"}) == "team-item-id"
     assert qtp.real_id({"id": " none "}) is None
@@ -190,6 +196,34 @@ def test_qiita_public_post_cmd_post_blocks_legacy_id_without_allow_create(tmp_pa
     assert rc == 1
     assert qpp.LEGACY_ID_WARNING_TEMPLATE.format(legacy_id="legacy-id") in out
     assert qpp.LEGACY_ID_BLOCK in out
+    assert called["req"] is False
+
+
+def test_qiita_public_post_cmd_post_blocks_ambiguous_private_without_public_private(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    called = {"req": False}
+
+    def _boom(*_args, **_kwargs):
+        called["req"] = True
+        raise AssertionError("_req should not run when visibility is ambiguous")
+
+    monkeypatch.setattr(qpp, "_req", _boom)
+    rc = qpp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.AMBIGUOUS_PRIVATE_BLOCK in out
     assert called["req"] is False
 
 

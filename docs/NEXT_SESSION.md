@@ -108,6 +108,7 @@ nav_order: 95
 - PATCH 実行時の既存記事照合は filename ではなく `public_id` 基準で行う。`tools/qiita_public_post.py` は frontmatter `public_id` があれば PATCH、無ければ POST create の経路なので、custom 名ファイルでも `public_id:f06ca92ea208c7646fcd` を持つ public source を使えば重複作成は避けられる。
 - `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md` にも `public_id:f06ca92ea208c7646fcd` を追記し、poster 実装上も **dry-run で PATCH update と読める source** へ揃えた。`id:` は既存 metadata 互換のため残し、public poster の冪等キーは `public_id` を正とする。
 - `qiita_public_post.py` の frontmatter `private:` はこの public poster では payload に使われない。可視性の既定値は frontmatter **`public_private:`** で与え、**CLI の `--private` はそれを強制 override** する。`#37` companion は一般公開 PATCH が前提なので、ここでは `public_private` 既定 false / `--private` なしで読む。
+- 2026-06-19 の hardening で、`qiita_public_post.py` は `private:` だけがあり `public_private:` が無い source、または両者が矛盾する source を **fail-closed で拒否**するようにした。`#37` source には `public_private: false` を明示済みである。
 - human-gate 後に実際に `--yes` を打つ前には、`https://qiita.com/furuse-kazufumi/items/f06ca92ea208c7646fcd` をブラウザで開き、表示されている live item が **完全版 `6f44575d440a9ebf5228` ではなく short companion 本文**だと目視確認してから PATCH する。dry-run は network なしなので、この目視確認が `public_id` 取り違え防止の最終ゲートになる。
 - 2026-06-19 に `tests/test_qiita_frontmatter.py` へ最小回帰テストも追加し、`qiita_public_post.py` が **`public_id` 有りなら PATCH / `id` だけでは POST create 扱い**になること、および frontmatter `private:` ではなく `public_private` / CLI `--private` だけが公開可視性を切り替えることを固定した。
 - 続く safety polish で、`qiita_public_post.py` は **`id` はあるが `public_id` が無い** source を dry-run したとき warning を出し、実 `post --yes` では **`--allow-create` が無い限り fail-closed で停止**するようにした。これは初回 public 化でも起こりうる正常 warning / gate で、`public_id` は Qiita API の公式 frontmatter 名ではなく **このラッパーの PATCH 識別子**である。`#37` companion は `public_id` 付きなのでこの warning / gate に掛からず、PATCH source として読める。
@@ -115,11 +116,14 @@ nav_order: 95
   1. `python tools/qiita_public_post.py dry-run tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md`
      `PATCH update public_id=f06ca92ea208c7646fcd` / warning 無し / `private: False` を再確認する。
   2. `https://qiita.com/furuse-kazufumi/items/f06ca92ea208c7646fcd` をブラウザで開き、live item が完全版 `6f44575d440a9ebf5228` ではなく short companion 本文であることを目視確認する。
+     ここでの確認対象は本文同一性だけではなく、**PATCH が source からの title / tags / body 全置換**であることを踏まえ、live-only 編集を失ってよい状態かも含む。
   3. `python tools/qiita_public_post.py post tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md --yes`
      `public_id` 付き source なので `--allow-create` は不要。
   4. API / HTML で canonical 告知反映と item id 不変を確認し、あわせて live SVG / 画像 (`kamikudaki_shishi.svg`) が描画されるか目視確認する。Qiita / imgix 側キャッシュで非表示や古い描画が残る場合は、画像 URL に `?v=20260619N` を足して再 publish する。
-- 2026-06-19 の pre-patch baseline として、`python tools/qiita_public_post.py dry-run ...` は引き続き `PATCH update public_id=f06ca92ea208c7646fcd` / warning 無し / `private: False` を返し、live HTML / API も `f06ca92...` の現 title で `200`、raw `kamikudaki_shishi.svg` も `image/svg+xml` / `200` を返した。
+- 2026-06-19 の pre-patch baseline として、`python tools/qiita_public_post.py dry-run ...` は引き続き `PATCH update public_id=f06ca92ea208c7646fcd` / warning 無し / `private: False` を返し、live HTML / API も `f06ca92...` の現 title で `200`、raw asset 3 件 (`kamikudaki_shishi.svg`, `191.jpg`, `192.jpg`) も `200` を返した。
 - 未吸収 2 ブロック（多言語スイッチャー / curated 関連ニュース節）は **完全版 `6f44575d440a9ebf5228` 側の将来課題**であって、short companion 側の欠落ではない。したがって現行 option 1 は、companion 本文を欠落させず canonical 告知だけを live へ反映する選択として読む。
+- raw asset URL は `origin/main` を解決する。local `main` が `origin/main` より 263 commits ahead でも、今回参照する `kamikudaki_shishi.svg` / `191.jpg` / `192.jpg` はすでに remote `main` 側で `200` を返しているため、この PATCH runbook の asset 参照には影響しない。
+- このターンで言う RAD grounding は、主に `D:/docs/loop_engineering_corpus_v2/` の `fail-closed`, `human_in_the_loop_approval_gate`, `progressive_delivery_canary_metric_gate` と `D:/docs/article_craft_corpus_v2/136_ablations_baselines_as_honesty_*.md` を指す。
 - さらに `ac398349ec42e40913f1.md` と `docs/articles/QIITA_SERIES_INDEX.md` の #37 導線も `canonical / companion` 表記へ揃え、local index 上で短稿を「実体記事」扱いしないよう補正した。
 - `qiita43_harness_loop_stack_kamikudaki.md` / `qiita44_*` / `qiita45_*` も含め、
   現在の `private: true` 草稿は accidental publish 防止のため
