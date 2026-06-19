@@ -485,6 +485,42 @@ def test_qiita_team_post_cmd_post_blocks_create_with_null_group_url_name(tmp_pat
     assert "GROUP_URL_NAME_BLOCK" in out
 
 
+def test_qiita_team_post_cmd_post_patch_does_not_resend_group_url_name(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    calls = []
+
+    def _fake_req(method, req_path, token, payload=None):
+        calls.append((method, req_path, token, payload))
+        return 200, {"id": "team-item-id", "url": "https://fullsense.qiita.com/example/items/team-item-id"}
+
+    monkeypatch.setattr(qtp, "_req", _fake_req)
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "OK (200)" in out
+    assert calls == [("PATCH", "/items/team-item-id", "fake-token", {
+        "title": "hello",
+        "body": "body\n",
+        "tags": [{"name": "AI", "versions": []}],
+        "private": False,
+        "tweet": False,
+    })]
+
+
 def test_qiita_public_post_dry_run_surfaces_legacy_id_warning(tmp_path, capsys):
     path = tmp_path / "sample.md"
     path.write_text(
