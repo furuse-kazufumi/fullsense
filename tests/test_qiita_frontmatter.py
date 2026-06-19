@@ -933,6 +933,40 @@ def test_qiita_team_post_cmd_post_patch_preserves_private_true(tmp_path, capsys,
     assert calls[0][3]["private"] is True
 
 
+def test_qiita_team_post_cmd_post_surfaces_visibility_readback(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "id: team-item-id\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+
+    def fake_req(method, path, token, payload):
+        return 200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "private": False,
+            "group": {"url_name": "general", "private": False},
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "private=False" in out
+    assert "group.url_name=general" in out
+    assert "group.private=False" in out
+
+
 def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path, capsys, monkeypatch):
     path = tmp_path / "team.md"
     path.write_text(

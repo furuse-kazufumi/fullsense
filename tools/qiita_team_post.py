@@ -126,6 +126,20 @@ def real_id(meta: dict) -> str | None:
     return _clean_nullish_scalar(meta.get("id")) or _clean_nullish_scalar(meta.get("qiita_item_id"))
 
 
+def format_team_visibility(res: dict) -> str:
+    group = res.get("group")
+    group_url_name = None
+    group_private = None
+    if isinstance(group, dict):
+        group_url_name = group.get("url_name")
+        group_private = group.get("private")
+    return (
+        f"private={res.get('private')} "
+        f"group.url_name={group_url_name} "
+        f"group.private={group_private}"
+    )
+
+
 def as_bool(v, default=True) -> bool:
     if isinstance(v, bool):
         return v
@@ -461,7 +475,7 @@ def cmd_post(args: list[str]) -> int:
     if code in (200, 201) and isinstance(res, dict):
         if not item_id and res.get("id"):
             _writeback_id(files[0], res.get("id"))  # idempotent re-posts (create -> store id -> future PATCH)
-        print(f"OK ({code}): {res.get('url')}  id={res.get('id')}")
+        print(f"OK ({code}): {res.get('url')}  id={res.get('id')}  {format_team_visibility(res)}")
         return 0
     print(f"FAIL ({code}): {res}")
     return 1
