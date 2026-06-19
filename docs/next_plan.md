@@ -22,6 +22,7 @@
 - 従って current blocker の次の候補は `Team UI` か `human-gate 後の opt-in PATCH` の二択まで狭まったが、後者を「visibility 是正が実証済み」とは扱わない。frontmatter に concrete target が無い PATCH は fail-closed で停止する
 - 2026-06-19 のローカル再確認では、Team stock 3 本の source frontmatter にはまだ `group_url_name` が無く、`py -3.11 tools/qiita_team_post.py dry-run <file> --patch-group-url-name` は 3 本とも `PATCH_GROUP_URL_NAME_BLOCK` で停止した。したがって opt-in PATCH 経路は実装済みだが、**human が concrete target を決めて source に入れるまでは実行不能**である
 - 実行順の判断としては、**外部 remediation の first choice は Team UI** に置く。理由は、opt-in PATCH は `group_url_name` 再送のローカル経路までは実装済みでも、既共有 item に対する締め直し効果が一次未確認だからである。したがって次の human-gate は、(1) Team UI で intended share target / private state を確認・是正できるかを先に見る、(2) UI で表現できない、または再現性ある API 経路を残す必要がある場合だけ、concrete group_url_name を source に入れた opt-in PATCH を検討する、の順で扱う
+- 次の human-gate に備え、`docs/articles/2026-06-18/team_stock_publish_plan.md` へ **Team UI remediation checklist** も追加した。変更前後の Team API GET / Team UI / 未認証 HTML GET / direct probe を同じターンで取り、queue / handoff へ差分だけを落とす順で運用する
 - この段階で `general` を local source へ焼き戻すことはしない。理由は、観測値を resend default に固定しないという current rule を保つためである
 - 2026-06-19 の最終到達点として、`#37` short companion の public PATCH は完了済みで、`tests/test_qiita_frontmatter.py` は再実行で `91 passed` だった。本差分の docs / tests / tools 更新が残っているため worktree は clean ではない。従って次セッションの主対象は `#37` ではなく、**Qiita Team 3 本の visibility blocker** のみで読む。
 - handoff 系 docs のテスト件数は、今回の更新で **`76 passed` → `91 passed`** へ同期した。`docs/articles/2026-05-23/INTEGRATION_AUDIT.md` にある `88 passed` は別文脈の過去監査記録であり、今回の同期対象には含めていない

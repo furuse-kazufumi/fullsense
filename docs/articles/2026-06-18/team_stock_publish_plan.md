@@ -76,6 +76,13 @@
 - verify:
   - Team API / UI で title, private 状態, URL を確認する
   - `team_stock_queue.md` に `id` / URL / visible range を転記する
+- Team UI remediation checklist (human-gate 後のみ):
+  - 変更前に Team UI と Team API GET の両方で、対象 3 本の `title` / `private` / `group.url_name` / `organization_url_name` を控える
+  - human が intended share target と intended private state を 3 本それぞれで明示してから UI を触る
+  - remediation 中は delete を使わず、まず UI 上で share target / private state / body 差し替えのどれが可能かを切り分ける
+  - 変更直後に Team UI を再読込し、Team API GET でも同じ値になったことを確認する
+  - 未認証 HTML GET と `qiita.com/furuse-kazufumi/items/<id>` direct probe も再取得し、前回 2026-06-19 12:41:22 +09:00 probe との差分だけを記録する
+  - 結果は成功/失敗にかかわらず `team_stock_queue.md` の `visible range` / `rollback needed` / `note` と handoff へ同ターンで反映する
 - remediation patch template (human-gate 後のみ):
   - `py -3.11 tools/qiita_team_post.py dry-run tools/qiita-cli-poc/public/team_stock_semantic_governance.md --patch-group-url-name`
   - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_semantic_governance.md --yes --force-ignore-publish --patch-group-url-name`
@@ -112,6 +119,7 @@
 - Qiita API docs の `PATCH /api/v2/items/:item_id` に `group_url_name` 記載がある可能性はあるが、この点自体は現時点で一次未確認である。したがって現状ここで確定しているのは、ローカル実装として resend 経路を持たせたことだけであり、**既に共有済み item に対し、この PATCH が実際に共有先や可視範囲を締め直す効果を持つかは一次未確認**のまま扱う
 - 従って、以後の remediation 候補は Team UI と **human-gate 後の opt-in PATCH** の二択まで狭まったが、後者を「visibility 是正が実証済み」とは扱わない。frontmatter に concrete target が無い場合は fail-closed で停止し、通常更新では再送しない
 - 2026-06-19 のローカル dry-run 再確認では、local draft 3 本すべてが `--patch-group-url-name` 付きで `PATCH_GROUP_URL_NAME_BLOCK` になった。理由は source 側 frontmatter に `group_url_name` が無いからであり、これは意図どおりの fail-closed 挙動である
+- 2026-06-19 のローカル整理として、次の human-gate に向けた **Team UI remediation checklist** もこの runbook に追加した。趣旨は、UI 編集それ自体よりも前後の evidence capture と queue / handoff 反映順を固定することにある
 
 ## POST 後の記録先
 

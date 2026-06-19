@@ -70,6 +70,7 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 7. rollback / 可視範囲の絞り込み自体は、引き続き別の human-gate 外部アクションとして扱う
 8. 2026-06-19 の local draft 再確認では、3 本とも frontmatter に `group_url_name` が無く、`dry-run ... --patch-group-url-name` は全件 `PATCH_GROUP_URL_NAME_BLOCK` で停止した。つまり opt-in PATCH 経路は実装済みだが、**human が concrete target を決めて source に入れるまでは実行不能**である
 9. 次の外部 remediation 順序は **Team UI first / opt-in PATCH second** とする。opt-in PATCH はローカル実装と fail-closed guard までは確認済みだが、既共有 item に対する締め直し効果が一次未確認だからである
+10. Team UI remediation に進む場合は、`team_stock_publish_plan.md` の **Team UI remediation checklist** を正本として、変更前後の Team API GET / Team UI / 未認証 HTML GET / direct probe の差分だけを記録する
 
 補足:
 
