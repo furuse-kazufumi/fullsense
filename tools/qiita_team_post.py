@@ -79,6 +79,7 @@ DEFAULT_SCAN_STEMS = (
     "QIITA_#41",
     "QIITA_#42",
 )
+DEFAULT_SCAN_STEM_SET = set(DEFAULT_SCAN_STEMS)
 
 
 # --------------------------------------------------------------------------- #
@@ -86,20 +87,33 @@ DEFAULT_SCAN_STEMS = (
 # --------------------------------------------------------------------------- #
 
 
-def get_token() -> str | None:
+def resolve_token() -> tuple[str | None, str | None]:
     t = os.environ.get("QIITA_TEAM_TOKEN")
     if t:
-        return t.strip()
+        return t.strip(), "env:QIITA_TEAM_TOKEN"
     for p in (r"D:/api-keys.json", os.path.expanduser("~/api-keys.json")):
         try:
             with open(p, "r", encoding="utf-8-sig") as f:
                 d = json.load(f)
             for k in ("qiita_team_token", "qiita_token", "QIITA_TEAM_TOKEN"):
                 if d.get(k):
-                    return str(d[k]).strip()
+                    return str(d[k]).strip(), f"{p}:{k}"
         except (OSError, ValueError):
             continue
-    return None
+    return None, None
+
+
+def get_token() -> str | None:
+    token, _source = resolve_token()
+    return token
+
+
+def _print_token_source(context: str, source: str | None) -> None:
+    if not source:
+        return
+    print(f"{context}: token_source={source}")
+    if source.endswith(":qiita_token"):
+        print(f"{context}: WARNING qiita.com personal token fallback is in use; Team auth / membership results may be misleading.")
 
 
 def infer_title(meta: dict, body: str) -> str:
@@ -264,6 +278,44 @@ def safety_findings(meta: dict, body: str) -> list[str]:
     return out
 
 
+_SCAN_STEM_RE = re.compile(r"(QIITA_#\d+)")
+
+
+def _all_qiita_stems() -> set[str]:
+    stems: set[str] = set()
+    for suffix in ("*.md", "*.md.bak"):
+        pattern = os.path.join(ARTICLES_DIR, "**", f"QIITA_#*{suffix}")
+        for f in _glob.glob(pattern, recursive=True):
+            if "archive" in f or ".worktrees" in f:
+                continue
+            m = _SCAN_STEM_RE.search(os.path.basename(f))
+            if m:
+                stems.add(m.group(1))
+    return stems
+
+
+def _format_stem_ranges(stems: set[str]) -> str:
+    nums = sorted({int(s.split("#", 1)[1]) for s in stems})
+    if not nums:
+        return "(none)"
+    ranges = []
+    start = prev = nums[0]
+    for n in nums[1:]:
+        if n == prev + 1:
+            prev = n
+            continue
+        ranges.append((start, prev))
+        start = prev = n
+    ranges.append((start, prev))
+    parts = []
+    for start, end in ranges:
+        if start == end:
+            parts.append(f"#{start:02d}")
+        else:
+            parts.append(f"#{start:02d}–{end:02d}")
+    return ",".join(parts)
+
+
 def cmd_scan(args: list[str]) -> int:
     if args:
         patterns = args
@@ -292,8 +344,16 @@ def cmd_scan(args: list[str]) -> int:
                     seen.add(f)
                     files.append(f)
         pattern_label = ", ".join(DEFAULT_SCAN_STEMS)
+        existing_stems = _all_qiita_stems()
+        excluded_stems = existing_stems - DEFAULT_SCAN_STEM_SET
     safe = 0
     print(f"scan: {len(files)} files (pattern={pattern_label})\n")
+    if not args:
+        print(
+            "scan coverage: queued "
+            f"{len(DEFAULT_SCAN_STEM_SET)} / existing {len(existing_stems)} stem(s); "
+            f"excluded {len(excluded_stems)} ({_format_stem_ranges(excluded_stems)})\n"
+        )
     report = []
     for f in files:
         try:
@@ -344,10 +404,11 @@ def _req(method: str, path: str, token: str, payload: dict | None = None) -> tup
 
 
 def cmd_verify(_args: list[str]) -> int:
-    token = get_token()
+    token, token_source = resolve_token()
     if not token:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
+    _print_token_source("verify", token_source)
     code, body = _req("GET", "/authenticated_user", token)
     if code == 200 and isinstance(body, dict):
         print(f"OK: authenticated as @{body.get('id')} on team '{TEAM}' ({API_BASE})")
@@ -384,10 +445,11 @@ def cmd_preflight(args: list[str]) -> int:
     if not args:
         print("usage: preflight <item_id> [item_id...]")
         return 2
-    token = get_token()
+    token, token_source = resolve_token()
     if not token:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
+    _print_token_source("preflight", token_source)
     code, body = _req("GET", "/authenticated_user", token)
     if code != 200 or not isinstance(body, dict):
         print(f"preflight: BLOCKED auth ({code}): {body}")
@@ -412,10 +474,11 @@ def cmd_show(args: list[str]) -> int:
     if len(args) != 1:
         print("usage: show <item_id>")
         return 2
-    token = get_token()
+    token, token_source = resolve_token()
     if not token:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
+    _print_token_source("show", token_source)
     item_id = args[0].strip()
     code, res = _read_item(item_id, token)
     ok, line = _format_item_readback(item_id, code, res)
@@ -554,10 +617,11 @@ def cmd_post(args: list[str]) -> int:
         print("refusing: --yes required (publish is an external action; you give the GO).")
         preview_rc = cmd_dry_run(files[:1] + (["--patch-group-url-name"] if "--patch-group-url-name" in args else []))
         return 3 if preview_rc == 0 else preview_rc
-    token = get_token()
+    token, token_source = resolve_token()
     if not token:
         print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
         return 2
+    _print_token_source("post", token_source)
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     private_value, private_error = parse_private_bool(meta.get("private"), default=True)

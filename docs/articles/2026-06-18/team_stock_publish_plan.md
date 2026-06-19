@@ -59,6 +59,7 @@
 ## preflight runbook
 
 1. `py -3.11 tools/qiita_team_post.py preflight <item_id> [item_id...]` を実行し、トークン疎通・対象 team item の readback・対象 item 同一性をコードで確認する。ここで fail した場合は **診断不成立で停止**し、visibility 判定へ進まない
+   - `preflight` / `verify` は **採用した token source** も表示する。`qiita_token` への fallback は Team 診断の誤判定要因になりうるため、警告が出たらその turn の diagnosis を進めない
 2. `py -3.11 tools/qiita_team_post.py dry-run <file>` を再実行して title / tags / body 形式を確認する
 3. diagnosis 時の Team API GET は `py -3.11 tools/qiita_team_post.py show <item_id>` を使い、`private` / `group.url_name` / `group.private` / `organization_url_name` を read-only に再取得する
 4. frontmatter の `private: true` / `ignorePublish: true` を見直し、`ignorePublish: true` の source を送る時は `--force-ignore-publish` が必要だと再確認する
@@ -75,7 +76,8 @@
 15. 判定基準は project-local rule として暫定固定する。`share target 起因` は Team UI / API / intended state の target 意図が揃っているのに、share target だけが intended target から外れている場合。`group_url_name default drift` は frontmatter の `group_url_name` 未設定と Team API の current target が食い違い、かつ Team UI でも intended target が別に確認できた場合に限る。`外部公開シグナルあり` は **真の外部公開(qiita.com public)** と **Team 全体共有(内部全公開)** を切り分けたうえで、前者にだけ使う。`302 -> Location=login` は contributing signal に留め、単独では「非公開の証明」に使わない。独立一次根拠を追加できないラベルは **未確定** に統合する
 16. 5 source classes が矛盾したときの裁定順も **我々のローカル運用ルール**として暫定固定する。優先順位は `public direct probe / 未認証 HTML GET の外形的事実` > `Team UI 表示` > `Team API GET` > `intended baseline bundle(frontmatter / 実 POST 記録)` とする。ここでいう `positive` は、**clean 未認証環境**からの **public direct probe** `https://qiita.com/furuse-kazufumi/items/<id>` が `200` かつ対象記事の title / 本文断片を content fingerprint として読める場合に限る。未認証 HTML GET / public direct probe は **cookie 完全クリア + no-cache + raw 直叩き**を必須条件とし、`User-Agent` / `Accept: text/html` / `redirect policy=manual` / `GET` を固定して再現性を残す。imgix 等プロキシ経由を禁止する。`302` は **Location が login か公開先か**まで確認して初めて判定材料に使うが、単独では「非公開の証明」にしない。`403 / 404` や空本文は **negative ではなく未確定** として扱い、安全証明に使わない。さらに `site:` index / 非メンバー検索 / 外部キャッシュ確認も補助 probe として残す
 17. `未確定` は catch-all の保留ではなく、**default で fail-closed 候補**に送る。`外部公開シグナルあり` は **即時 containment fast path**、`未確定` は **human 判断つき containment 候補**として別レーンに分ける。`team-only positive` 確認済みの記事だけが retain 候補になる。no-op retain は例外扱いで、同じ理由での no-op retain は 1 回まで、かつ retain 期限は **次回 human-gate まで**に留める。2 回目に入る前に **暫定 private 化**の human-gate を必ず出す
-18. diagnosis 結果ごとの最終処置も記事ごとに分ける。`share target 起因` は Team UI remediation または opt-in PATCH 候補、`org membership or token failure` は復旧担当へエスカレーション、`group_url_name default drift` は group target 決定の human-gate へ送る。`外部公開シグナルあり` は **即 containment**、`未確定` は **再診断または human 判断を挟んだ containment** に送る。`team-only positive` のみが retain 候補である。解除は intended state と before/after evidence が揃ってから別 gate で判断する
+18. `scan` の既定対象は **queue 対象 12 stem** に限る。これは silent cap ではなく curated coverage であり、実行時には `scan coverage: queued <n> / existing <m>; excluded <k>` を出して分母と除外件数を明示する。全件安全性確認が必要な turn では明示 glob で全 `QIITA_#*` を渡す
+19. diagnosis 結果ごとの最終処置も記事ごとに分ける。`share target 起因` は Team UI remediation または opt-in PATCH 候補、`org membership or token failure` は復旧担当へエスカレーション、`group_url_name default drift` は group target 決定の human-gate へ送る。`外部公開シグナルあり` は **即 containment**、`未確定` は **再診断または human 判断を挟んだ containment** に送る。`team-only positive` のみが retain 候補である。解除は intended state と before/after evidence が揃ってから別 gate で判断する
 
 ## execution commands
 

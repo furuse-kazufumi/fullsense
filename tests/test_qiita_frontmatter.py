@@ -280,7 +280,7 @@ def test_qiita_team_post_cmd_post_blocks_unrecognized_private_value(tmp_path, ca
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
 
@@ -574,7 +574,7 @@ def test_qiita_team_post_cmd_post_blocks_ignore_publish_without_override(tmp_pat
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
     assert rc == 1
@@ -596,7 +596,7 @@ def test_qiita_team_post_cmd_post_allows_ignore_publish_with_override(tmp_path, 
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     calls = []
 
     def _fake_req(method, path, token, payload=None):
@@ -625,7 +625,7 @@ def test_qiita_team_post_cmd_post_blocks_unrecognized_ignore_publish(tmp_path, c
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
     assert rc == 1
@@ -646,7 +646,7 @@ def test_qiita_team_post_cmd_post_blocks_ignore_publish_key_typo(tmp_path, capsy
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
     assert rc == 1
@@ -665,7 +665,7 @@ def test_qiita_team_post_cmd_post_blocks_create_without_group_url_name(tmp_path,
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
     assert rc == 1
@@ -685,7 +685,7 @@ def test_qiita_team_post_cmd_post_blocks_create_with_null_group_url_name(tmp_pat
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
     assert rc == 1
@@ -706,7 +706,7 @@ def test_qiita_team_post_cmd_post_patch_does_not_resend_group_url_name(tmp_path,
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     calls = []
 
     def _fake_req(method, req_path, token, payload=None):
@@ -746,7 +746,7 @@ def test_qiita_team_post_cmd_post_patch_can_resend_group_url_name_with_opt_in(tm
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     calls = []
 
     def _fake_req(method, req_path, token, payload=None):
@@ -775,7 +775,7 @@ def test_qiita_team_post_cmd_post_patch_blocks_opt_in_without_group_target(tmp_p
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     rc = qtp.cmd_post([str(path), "--yes", "--patch-group-url-name"])
     out = capsys.readouterr().out
 
@@ -938,7 +938,7 @@ def test_qiita_team_post_cmd_post_create_notes_patch_group_url_name_is_ignored(t
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     calls = []
 
     def _fake_req(method, req_path, token, payload=None):
@@ -968,7 +968,7 @@ def test_qiita_team_post_cmd_post_patch_preserves_private_true(tmp_path, capsys,
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     calls = []
 
     def _fake_req(method, req_path, token, payload=None):
@@ -998,7 +998,7 @@ def test_qiita_team_post_cmd_post_surfaces_visibility_readback(tmp_path, capsys,
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
     def fake_req(method, path, token, payload):
         return 200, {
@@ -1034,7 +1034,7 @@ def test_qiita_team_post_cmd_post_create_surfaces_visibility_readback(tmp_path, 
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
     def fake_req(method, path, token, payload):
         return 201, {
@@ -1059,7 +1059,7 @@ def test_qiita_team_post_cmd_post_create_surfaces_visibility_readback(tmp_path, 
 
 
 def test_qiita_team_post_cmd_show_surfaces_visibility_readback(capsys, monkeypatch):
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
     def fake_req(method, path, token, payload=None):
         assert method == "GET"
@@ -1087,7 +1087,7 @@ def test_qiita_team_post_cmd_show_surfaces_visibility_readback(capsys, monkeypat
 
 
 def test_qiita_team_post_cmd_show_distinguishes_auth_failures(capsys, monkeypatch):
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
     def fake_req(method, path, token, payload=None):
         return 403, {"message": "forbidden"}
@@ -1101,7 +1101,7 @@ def test_qiita_team_post_cmd_show_distinguishes_auth_failures(capsys, monkeypatc
 
 
 def test_qiita_team_post_cmd_preflight_checks_auth_and_item_readback(capsys, monkeypatch):
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     calls = []
 
     def fake_req(method, path, token, payload=None):
@@ -1124,6 +1124,7 @@ def test_qiita_team_post_cmd_preflight_checks_auth_and_item_readback(capsys, mon
     out = capsys.readouterr().out
 
     assert rc == 0
+    assert "preflight: token_source=env:QIITA_TEAM_TOKEN" in out
     assert "preflight auth: OK user=@furuse-kazufumi team='fullsense'" in out
     assert "preflight item: OK" in out
     assert "organization_url_name=None" in out
@@ -1132,7 +1133,7 @@ def test_qiita_team_post_cmd_preflight_checks_auth_and_item_readback(capsys, mon
 
 
 def test_qiita_team_post_cmd_preflight_blocks_on_item_auth_failure(capsys, monkeypatch):
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
     def fake_req(method, path, token, payload=None):
         if path == "/authenticated_user":
@@ -1206,9 +1207,36 @@ def test_qiita_team_post_cmd_scan_default_targets_curated_qiita_range(tmp_path, 
 
     assert rc == 0
     assert "scan: 2 files" in out
+    assert "scan coverage: queued 12 / existing 3 stem(s); excluded 1 (#35)" in out
     assert "QIITA_#28" in out
     assert "QIITA_#42" in out
     assert "summary: 2/2 registration-safe" in out
+
+
+def test_qiita_team_post_cmd_preflight_warns_on_qiita_token_fallback(capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
+
+    def fake_req(method, path, token, payload=None):
+        if path == "/authenticated_user":
+            return 200, {"id": "furuse-kazufumi"}
+        if path == "/items/team-item-id":
+            return 200, {
+                "id": "team-item-id",
+                "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+                "title": "hello",
+                "private": False,
+                "group": {"url_name": "general", "private": False},
+                "organization_url_name": None,
+            }
+        raise AssertionError(path)
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    rc = qtp.cmd_preflight(["team-item-id"])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "preflight: token_source=D:/api-keys.json:qiita_token" in out
+    assert "WARNING qiita.com personal token fallback is in use" in out
 
 
 def test_qiita_team_post_cmd_scan_default_accepts_md_bak_and_normalizes_name(tmp_path, capsys, monkeypatch):
@@ -1253,7 +1281,7 @@ def test_qiita_team_post_cmd_post_surfaces_nonblocking_warnings(tmp_path, capsys
         "See [local](./note.md)\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
 
     def fake_req(method, path, token, payload=None):
         return 200, {
@@ -1286,7 +1314,7 @@ def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path,
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "get_token", lambda: "fake-token")
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
     calls = []
 
     def _fake_req(method, req_path, token, payload=None):
