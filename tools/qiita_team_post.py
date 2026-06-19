@@ -319,6 +319,10 @@ def cmd_dry_run(args: list[str]) -> int:
     if not files:
         print("usage: dry-run <file.md> [--patch-group-url-name]")
         return 2
+    if len(files) != 1:
+        print(f"BLOCKED: exactly one file expected, got {len(files)}")
+        print("usage: dry-run <file.md> [--patch-group-url-name]")
+        return 2
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     item_id = real_id(meta)
@@ -401,6 +405,10 @@ def cmd_post(args: list[str]) -> int:
         return 1
     files = [a for a in args if not a.startswith("--")]
     if not files:
+        print("usage: post <file.md> --yes [--force-ignore-publish] [--patch-group-url-name]")
+        return 2
+    if len(files) != 1:
+        print(f"BLOCKED: exactly one file expected, got {len(files)}")
         print("usage: post <file.md> --yes [--force-ignore-publish] [--patch-group-url-name]")
         return 2
     if "--yes" not in args:

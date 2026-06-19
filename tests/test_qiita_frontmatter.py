@@ -405,6 +405,27 @@ def test_qiita_team_post_dry_run_flag_only_returns_usage(capsys):
     assert "usage: dry-run <file.md> [--patch-group-url-name]" in out
 
 
+def test_qiita_team_post_dry_run_blocks_multiple_files(tmp_path, capsys):
+    path1 = tmp_path / "team1.md"
+    path2 = tmp_path / "team2.md"
+    for path in (path1, path2):
+        path.write_text(
+            "---\n"
+            "title: hello\n"
+            "tags:\n"
+            "  - AI\n"
+            "private: false\n"
+            "id: team-item-id\n"
+            "---\n"
+            "body\n",
+            encoding="utf-8",
+        )
+    rc = qtp.cmd_dry_run([str(path1), str(path2)])
+    out = capsys.readouterr().out
+    assert rc == 2
+    assert "BLOCKED: exactly one file expected, got 2" in out
+
+
 def test_qiita_team_post_dry_run_blocks_unknown_flag(capsys):
     rc = qtp.cmd_dry_run(["sample.md", "--patch-group-url-nme"])
     out = capsys.readouterr().out
@@ -753,6 +774,27 @@ def test_qiita_team_post_cmd_post_without_yes_ignores_force_ignore_publish_in_pr
     assert "refusing: --yes required" in out
     assert "UNKNOWN_FLAG_BLOCK" not in out
     assert "PATCH update id=team-item-id" in out
+
+
+def test_qiita_team_post_cmd_post_blocks_multiple_files(tmp_path, capsys):
+    path1 = tmp_path / "team1.md"
+    path2 = tmp_path / "team2.md"
+    for path in (path1, path2):
+        path.write_text(
+            "---\n"
+            "title: hello\n"
+            "tags:\n"
+            "  - AI\n"
+            "private: false\n"
+            "id: team-item-id\n"
+            "---\n"
+            "body\n",
+            encoding="utf-8",
+        )
+    rc = qtp.cmd_post([str(path1), str(path2), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 2
+    assert "BLOCKED: exactly one file expected, got 2" in out
 
 
 def test_qiita_team_post_cmd_post_blocks_unknown_flag(tmp_path, capsys):
