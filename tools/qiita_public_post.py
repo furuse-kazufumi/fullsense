@@ -66,6 +66,10 @@ UNRECOGNIZED_VISIBILITY_BLOCK = (
     "BLOCKED: frontmatter {field}: has unrecognized visibility value {value!r}. "
     "Use true/false (or yes/no/1/0)."
 )
+UNRECOGNIZED_IGNORE_PUBLISH_BLOCK = (
+    "BLOCKED: frontmatter ignorePublish: has unrecognized gate value {value!r}. "
+    "Use true/false (or yes/no/1/0)."
+)
 WRITE_AUTH_WARNING = (
     "WARNING: preflight does not prove PATCH auth unless /authenticated_user succeeds. "
     "Run `verify` or use preflight with a valid token before posting."
@@ -167,6 +171,23 @@ def as_bool(v, default=False) -> bool:
 
 
 def parse_visibility(v) -> tuple[bool | None, str | None]:
+    if isinstance(v, bool):
+        return v, None
+    if v is None:
+        return None, None
+    if isinstance(v, str):
+        s = v.strip().lower()
+        if s in ("true", "yes", "1"):
+            return True, None
+        if s in ("false", "no", "0"):
+            return False, None
+        if not s:
+            return None, None
+        return None, repr(v)
+    return None, repr(v)
+
+
+def parse_gate_bool(v) -> tuple[bool | None, str | None]:
     if isinstance(v, bool):
         return v, None
     if v is None:
@@ -373,8 +394,11 @@ def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool
     lines.append(f"private: {payload['private']}   body chars: {len(body)}")
     if legacy_id:
         lines.append(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
-    ignore_publish = as_bool(meta.get("ignorePublish"), default=False)
-    if ignore_publish:
+    ignore_publish, ignore_publish_bad = parse_gate_bool(meta.get("ignorePublish"))
+    if ignore_publish_bad is not None:
+        blocked = True
+        lines.append(UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value=meta.get("ignorePublish")))
+    elif ignore_publish:
         lines.append(IGNORE_PUBLISH_WARNING)
     lines.extend(privacy_finds)
     if finds:
@@ -563,7 +587,11 @@ def cmd_post(args: list[str]) -> int:
         if "--allow-create" not in args:
             print(LEGACY_ID_BLOCK)
             return 1
-    if as_bool(meta.get("ignorePublish"), default=False) and "--force-ignore-publish" not in args:
+    ignore_publish, ignore_publish_bad = parse_gate_bool(meta.get("ignorePublish"))
+    if ignore_publish_bad is not None:
+        print(UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value=meta.get("ignorePublish")))
+        return 1
+    if ignore_publish and "--force-ignore-publish" not in args:
         print(IGNORE_PUBLISH_WARNING)
         print(IGNORE_PUBLISH_BLOCK)
         return 1

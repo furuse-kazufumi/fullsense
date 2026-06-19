@@ -681,6 +681,42 @@ def test_qiita_public_post_preflight_surfaces_ignore_publish_warning(tmp_path, c
     assert qpp.IGNORE_PUBLISH_WARNING in out
 
 
+def test_qiita_public_post_preflight_blocks_unrecognized_ignore_publish(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "ignorePublish: ture\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    def _fake_req(method, path, token, payload=None):
+        return 200, {"id": "furuse-kazufumi"}
+
+    def _fake_http_get(url, token=None):
+        if url == f"{qpp.API_BASE}/items/existing-public-id":
+            return 200, {}, '{"id":"existing-public-id","title":"hello","private":false,"url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_req", _fake_req)
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value="ture") in out
+    assert "preflight: BLOCKED" in out
+
+
 def test_qiita_public_post_cmd_post_blocks_ignore_publish_without_override(tmp_path, capsys, monkeypatch):
     path = tmp_path / "sample.md"
     path.write_text(
@@ -702,6 +738,28 @@ def test_qiita_public_post_cmd_post_blocks_ignore_publish_without_override(tmp_p
     assert rc == 1
     assert qpp.IGNORE_PUBLISH_WARNING in out
     assert qpp.IGNORE_PUBLISH_BLOCK in out
+
+
+def test_qiita_public_post_cmd_post_blocks_unrecognized_ignore_publish(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "ignorePublish: ture\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qpp, "get_token", lambda: "fake-token")
+    rc = qpp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.UNRECOGNIZED_IGNORE_PUBLISH_BLOCK.format(value="ture") in out
 
 
 def test_qiita_public_post_cmd_post_allows_ignore_publish_with_override(tmp_path, capsys, monkeypatch):
