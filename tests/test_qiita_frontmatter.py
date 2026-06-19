@@ -2283,7 +2283,8 @@ def test_qiita_team_post_cmd_post_patch_without_group_assert_keeps_verified_fals
     out = capsys.readouterr().out
 
     assert rc == 0
-    assert "group.url_name will be asserted as unchanged for this PATCH path" in out
+    assert "group.url_name is observed as general on this PATCH path" in out
+    assert "cannot promote qiita_team_verified=true" in out
     assert "leaving qiita_team_verified=false" in out
     text = path.read_text(encoding="utf-8")
     assert "qiita_team_verified: false" in text

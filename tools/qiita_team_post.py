@@ -891,7 +891,9 @@ def cmd_post(args: list[str]) -> int:
             current_group = asserted_group_target
             print(
                 "pre-PATCH readback: current visibility is readable, and "
-                f"group.url_name will be asserted as unchanged for this PATCH path (current={current_group or '(none)'})."
+                f"group.url_name is observed as {current_group or '(none)'} on this PATCH path. "
+                "Because --patch-group-url-name was not supplied, this run will not re-send group_url_name and cannot "
+                "promote qiita_team_verified=true."
             )
     if item_id:
         code, res = _req("PATCH", f"/items/{item_id}", token, p)
