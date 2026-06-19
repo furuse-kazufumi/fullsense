@@ -115,6 +115,19 @@ def test_qiita_public_post_parse_visibility_is_strict():
     assert qpp.parse_visibility("限定共有")[0] is None
 
 
+def test_qiita_public_post_scan_asset_urls_deduplicates_http_images():
+    body = (
+        "![a](https://example.test/a.svg)\n"
+        "<img src=\"https://example.test/b.jpg\">\n"
+        "![dup](https://example.test/a.svg)\n"
+        "![local](./local.png)\n"
+    )
+    assert qpp.scan_asset_urls(body) == [
+        "https://example.test/a.svg",
+        "https://example.test/b.jpg",
+    ]
+
+
 def test_qiita_public_post_privacy_field_findings_require_public_private():
     assert qpp.privacy_field_findings({"private": True}) == [qpp.AMBIGUOUS_PRIVATE_BLOCK]
     assert qpp.privacy_field_findings({"private": True, "public_private": False}) == [qpp.CONFLICTING_PRIVATE_BLOCK]
@@ -298,6 +311,41 @@ def test_qiita_public_post_cmd_post_allows_legacy_id_with_allow_create(tmp_path,
     assert rc == 0
     assert qpp.LEGACY_ID_WARNING_TEMPLATE.format(legacy_id="legacy-id") in out
     assert "OK (201) [PUBLIC(一般公開)]" in out
+
+
+def test_qiita_public_post_preflight_checks_live_and_assets(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "sample.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "public_private: false\n"
+        "public_id: existing-public-id\n"
+        "---\n"
+        "![img](https://example.test/a.svg)\n",
+        encoding="utf-8",
+    )
+
+    def _fake_http_get(url, token=None):
+        if url.endswith("/items/existing-public-id"):
+            return 200, {}, '{"id":"existing-public-id","title":"hello","url":"https://qiita.com/example/items/existing-public-id"}'
+        if url == "https://qiita.com/example/items/existing-public-id":
+            return 200, {}, "<title>hello - Qiita</title>"
+        if url == "https://example.test/a.svg":
+            return 200, {"Content-Type": "image/svg+xml"}, "<svg/>"
+        raise AssertionError(f"unexpected URL: {url}")
+
+    monkeypatch.setattr(qpp, "_http_get", _fake_http_get)
+    monkeypatch.setattr(qpp, "get_token", lambda: None)
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "api_status: 200" in out
+    assert "html_status: 200" in out
+    assert "asset_count: 1" in out
+    assert "preflight: OK" in out
 
 
 def test_convert_to_qiita_cli_parses_folded_title():

@@ -16,6 +16,7 @@ qiita_team_post.py の公開 (qiita.com) 版。Team poster とは独立に動き
 使い方:
   py -3.11 qiita_public_post.py verify                       # 公開トークン疎通
   py -3.11 qiita_public_post.py dry-run <file.md>            # payload + 警告 (network なし)
+  py -3.11 qiita_public_post.py preflight <file.md>          # dry-run + live/API/assets 事前確認
   py -3.11 qiita_public_post.py post <file.md> --yes         # 実 POST/PATCH (private=false)
   py -3.11 qiita_public_post.py post <file.md> --yes --private   # 限定共有で投稿
   py -3.11 qiita_public_post.py post <file.md> --yes --allow-create  # `public_id` 無し create を明示許可
@@ -206,6 +207,20 @@ def safety_findings(meta: dict, body: str) -> list[str]:
     return out
 
 
+def scan_asset_urls(body: str) -> list[str]:
+    urls: list[str] = []
+    seen: set[str] = set()
+    for m in _IMG_RE.finditer(body):
+        url = (m.group(1) or m.group(2) or "").strip()
+        if not url.startswith("http"):
+            continue
+        if url in seen:
+            continue
+        seen.add(url)
+        urls.append(url)
+    return urls
+
+
 # --------------------------------------------------------------------------- #
 # API
 # --------------------------------------------------------------------------- #
@@ -227,6 +242,21 @@ def _req(method: str, path: str, token: str, payload: dict | None = None) -> tup
             return e.code, str(e)
     except urllib.error.URLError as e:
         return 0, f"URLError: {e}"
+
+
+def _http_get(url: str, token: str | None = None) -> tuple[int, dict[str, str], str]:
+    req = urllib.request.Request(url, method="GET")
+    if token:
+        req.add_header("Authorization", f"Bearer {token}")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            data = r.read().decode("utf-8", errors="replace")
+            return r.status, dict(r.headers.items()), data
+    except urllib.error.HTTPError as e:
+        data = e.read().decode("utf-8", errors="replace")
+        return e.code, dict(e.headers.items()) if e.headers else {}, data
+    except urllib.error.URLError as e:
+        return 0, {}, f"URLError: {e}"
 
 
 def cmd_verify(_args: list[str]) -> int:
@@ -283,6 +313,86 @@ def cmd_dry_run(args: list[str]) -> int:
     else:
         print("registration-safe: no findings")
     print("\n(dry-run: nothing sent. `post <file> --yes` to publish.)")
+    return 0
+
+
+def cmd_preflight(args: list[str]) -> int:
+    files = [a for a in args if not a.startswith("--")]
+    if not files:
+        print("usage: preflight <file.md>")
+        return 2
+    force_private = True if "--private" in args else None
+    text = open(files[0], "r", encoding="utf-8-sig").read()
+    meta, body = split_frontmatter(text)
+    p = build_payload(meta, body, force_private)
+    finds = safety_findings(meta, body)
+    privacy_finds = privacy_field_findings(meta)
+    pid = real_public_id(meta)
+    legacy_id = legacy_id_without_public_id(meta)
+    asset_urls = scan_asset_urls(body)
+
+    print(f"target: PUBLIC qiita.com ({API_BASE})")
+    print(f"action: {'PATCH update public_id=' + str(pid) if pid else 'POST create (new public article)'}")
+    print(f"title : {p['title']}")
+    print(f"tags  : {[t['name'] for t in p['tags']]}")
+    print(f"private: {p['private']}   body chars: {len(body)}")
+    if legacy_id:
+        print(LEGACY_ID_WARNING_TEMPLATE.format(legacy_id=legacy_id))
+    for x in privacy_finds:
+        print(x)
+    if finds:
+        print("WARNINGS:")
+        for x in finds:
+            print(f"  - {x}")
+    else:
+        print("registration-safe: no findings")
+
+    blocked = bool(finds or privacy_finds)
+    if not pid:
+        print("live-check: skipped (no public_id; create path has no existing live item)")
+    else:
+        token = get_token()
+        api_status, _api_headers, api_text = _http_get(f"{API_BASE}/items/{pid}", token=token)
+        print(f"api_status: {api_status}")
+        live_url = ""
+        api_title = ""
+        if api_status == 200:
+            try:
+                api_obj = json.loads(api_text)
+                live_url = str(api_obj.get("url") or "")
+                api_title = str(api_obj.get("title") or "")
+                print(f"api_title: {api_title}")
+                print(f"api_url  : {live_url}")
+            except json.JSONDecodeError:
+                blocked = True
+                print("BLOCKED: API 200 but JSON decode failed")
+        else:
+            blocked = True
+        if live_url:
+            html_status, _html_headers, html_text = _http_get(live_url)
+            print(f"html_status: {html_status}")
+            if html_status == 200:
+                start = html_text.find("<title>")
+                end = html_text.find("</title>", start)
+                if start != -1 and end != -1:
+                    html_title = html_text[start + 7:end]
+                    print(f"html_title: {html_title}")
+            else:
+                blocked = True
+        else:
+            blocked = True
+
+    print(f"asset_count: {len(asset_urls)}")
+    for url in asset_urls:
+        code, headers, _body = _http_get(url)
+        print(f"asset_status: {code}  content-type={headers.get('Content-Type', '')}  url={url}")
+        if code != 200:
+            blocked = True
+
+    if blocked:
+        print("preflight: BLOCKED")
+        return 1
+    print("preflight: OK")
     return 0
 
 
@@ -359,7 +469,7 @@ def main() -> int:
         print(__doc__)
         return 0
     cmd, rest = sys.argv[1], sys.argv[2:]
-    return {"verify": cmd_verify, "dry-run": cmd_dry_run, "post": cmd_post}.get(
+    return {"verify": cmd_verify, "dry-run": cmd_dry_run, "preflight": cmd_preflight, "post": cmd_post}.get(
         cmd, lambda a: (print(f"unknown cmd {cmd}"), 2)[1])(rest)
 
 
