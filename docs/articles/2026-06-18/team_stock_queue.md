@@ -4,7 +4,7 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 ## この文書の役割
 
-- **正本**: 投稿待ち一覧と現在の blocker をここに集約する
+- **正本**: 投稿待ち一覧と現在の blocker をここに集約する。外部判断の記録は **POST 後の記録欄 `note`** を canonical field とする
 - `team_stock_publish_plan.md`: 公開順・human gate 条件・rollback 注意の正本
 
 ## 状態定義
@@ -73,7 +73,9 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 10. Team UI remediation に進む場合は、`team_stock_publish_plan.md` の **Team UI remediation checklist** を正本として、変更前後の Team API GET / Team UI / 未認証 HTML GET / direct probe / source frontmatter の差分だけを記録する
 11. **diagnosis 完了**は、対象 3 本それぞれで `Team UI の share target / private state`、`Team API GET の group.url_name / private / organization_url_name`、`未認証 HTML GET / direct probe`、`source frontmatter の private / group_url_name` を同じターンで並べ、share target 起因か private state 起因か、または未確定かを 1 行で判定できる状態を指す
 12. 判定基準は project-local rule として暫定固定する。`share target 起因` は `private` 意図が揃っているのに target だけが intended target から外れている場合、`private state 起因` は target が揃っているのに `private` 系だけが intended state から外れている場合、食い違いが残る場合は `未確定` とする
-13. `現状維持で記録だけ続ける` を選ぶ場合は、`POST 後の記録欄` の `note` に **今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る** と、次回の解禁条件を 1 行で残す。同じ理由での no-op retain は 1 回までとし、次回は Team UI diagnosis を優先する
+13. 5 ソースが矛盾したときの裁定順も project-local rule として暫定固定する。優先順位は `未認証 HTML GET / public direct probe の外形的事実` > `Team UI 表示` > `Team API GET` > `source frontmatter` とし、未認証アクセス可能 (`200` / 本文取得) が出た記事は Team UI 完了を待たず **その記事だけ** remediation gate へ送る
+14. `現状維持で記録だけ続ける` を選ぶ場合は、`POST 後の記録欄` の `note` に **今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る** と、次回の解禁条件を 1 行で残す。同じ理由での no-op retain は 1 回までとし、2 回目に入る前に **暫定 private 化してから再診断する** 選択肢を必ず human-gate に出す
+15. 3 本は一括処理しない。**1 本でも positive が出たらその記事だけ remediation**、残りは diagnosis 継続とする
 
 補足:
 

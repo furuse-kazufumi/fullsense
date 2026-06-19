@@ -7,7 +7,7 @@
 
 - **正本**: 公開順・human gate 条件・rollback 注意をここに集約する
 - `team_stock_queue.md`: 投稿待ち一覧の正本
-- `next_plan.md` / `SESSION_SUMMARY.md`: この正本への参照だけを持つ
+- `next_plan.md` / `SESSION_SUMMARY.md`: `team_stock_queue.md` の **POST 後の記録欄 `note`** を参照するだけに留める
 
 ## なぜこの 3 本か
 
@@ -68,8 +68,9 @@
 8. 実行順は **Team UI first / opt-in PATCH second** を原則にする。opt-in PATCH はローカル実装済みだが、既共有 item に対する締め直し効果が一次未確認なため、まず UI 上で intended share target / private state を確認・是正できるかを先に見る
 9. **diagnosis 完了**の定義は、対象 3 本それぞれについて `(a) Team UI 上で確認できた share target / private state` `(b) Team API GET で返る `group.url_name` / `private` / `organization_url_name`` `(c) 未認証 HTML GET / direct probe の観測結果` `(d) source frontmatter の `private` / `group_url_name`` を同じターンで並べ、**share target 起因か private state 起因か、または未確定か**を 1 行で判定できる状態にすることとする
 10. 上記 9 を満たすまでは、opt-in PATCH は「実行候補」ではなく **診断後の従属候補**としてのみ扱う
-11. 判定基準は project-local rule として暫定固定する。`share target 起因` は Team UI / API / frontmatter の `private` 意図が揃っているのに、share target だけが intended target から外れている場合。`private state 起因` は share target が intended target と揃っているのに、Team UI / API / frontmatter の `private` 系が intended state から外れている場合。どちらにも断定できない、または Team UI と API が食い違う場合は `未確定` とし、診断結果だけを持ち帰って別 human-gate で扱う
-12. `未確定` のまま no-op retain を選ぶ場合でも、それを無期限の既定逃げ道にしない。次回は原則として Team UI diagnosis を先に実行し、同じ理由での no-op retain は 1 回までに留める
+11. 判定基準は project-local rule として暫定固定する。`share target 起因` は Team UI / API / frontmatter の `private` 意図が揃っているのに、share target だけが intended target から外れている場合。`private state 起因` は share target が intended target と揃っているのに、Team UI / API / frontmatter の `private` 系だけが intended state から外れている場合。どちらにも断定できない、または Team UI と API が食い違う場合は `未確定` とし、診断結果だけを持ち帰って別 human-gate で扱う
+12. 5 ソースが矛盾したときの裁定順も project-local rule として暫定固定する。優先順位は `未認証 HTML GET / public direct probe の外形的事実` > `Team UI 表示` > `Team API GET` > `source frontmatter` とし、外形的に未認証アクセス可能 (`200` / 本文取得) が出た場合は Team UI diagnosis 完了を待たず **その記事だけ** remediation gate へ直送する
+13. `未確定` のまま no-op retain を選ぶ場合でも、それを無期限の既定逃げ道にしない。同じ理由での no-op retain は 1 回までに留め、2 回目に入る前に **暫定 private 化してから再診断する** 選択肢を必ず human-gate に出す
 
 ## execution commands
 
@@ -91,10 +92,17 @@
   - 変更直後に Team UI を再読込し、Team API GET でも同じ値になったことを確認する
   - 未認証 HTML GET と `qiita.com/furuse-kazufumi/items/<id>` direct probe も再取得し、**直近の visibility probe evidence の時刻**との差分だけを記録する
   - 結果は成功/失敗にかかわらず、`team_stock_queue.md` の `visible range` / `rollback needed` / `note` を正本として先に反映し、その後 `docs/next_plan.md`、最後に `docs/SESSION_SUMMARY.md` では queue の該当行参照だけを同ターンに反映する
+- article-by-article handling:
+  - 3 本は一括で扱わず、**1 本ごとに** `positive / unresolved / cleared` を判定する
+  - 1 本でも未認証 HTML GET / public direct probe で positive が出たら、その記事だけ即 remediation gate へ送る
+  - 残りの記事は diagnosis を継続し、一括 retain に巻き戻さない
 - no-op retain checklist (human-gate 後のみ):
   - 新しい外部 remediation を打たず、`team_stock_queue.md` の各行と `2026-06-19 visibility probe evidence` を見直し、**今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る**と 1 行追記する
-  - `note` には「なぜ今回は動かなかったか」「次回の解禁条件は何か」「次回は Team UI diagnosis を優先する」までを短く残す
+  - `note` には「なぜ今回は動かなかったか」「次回の解禁条件は何か」「retain 何回目か」「次回は Team UI diagnosis を優先する」までを短く残す
   - その後 `docs/next_plan.md`、`docs/SESSION_SUMMARY.md` の順で、queue の該当 note を参照しつつ、今回 no-op retain を選んだことと次に必要な診断条件だけを追記する
+- fail-closed temporary tightening (human-gate 後のみ):
+  - 診断未了のまま retain を繰り返さないため、必要なら **暫定 private 化してから再診断する**
+  - この分岐は Team UI diagnosis と別の外部状態変更なので、必ず別 human-gate で GO を取ってから触る
 - remediation patch template (human-gate 後のみ):
   - `py -3.11 tools/qiita_team_post.py dry-run tools/qiita-cli-poc/public/team_stock_semantic_governance.md --patch-group-url-name`
   - `py -3.11 tools/qiita_team_post.py post tools/qiita-cli-poc/public/team_stock_semantic_governance.md --yes --force-ignore-publish --patch-group-url-name`
