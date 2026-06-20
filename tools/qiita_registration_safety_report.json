@@ -2,125 +2,13 @@
   "team": "fullsense",
   "files": [
     {
-      "file": "QIITA_#28_lldarwin_v2_phase1_orchestra.md",
-      "chars": 35401,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#29_falsification_goodhart_proxy_limits.md",
-      "chars": 89919,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#29_falsification_goodhart_proxy_limits_kamikudaki.md",
-      "chars": 34804,
-      "title": true,
-      "tags": 4,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#30_evolution_visualization_history.md",
-      "chars": 23579,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#31_codex_two_pillar_orchestration.md",
-      "chars": 21730,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#32_llcore_cpu_poc_battery.md",
-      "chars": 13121,
+      "file": "QIITA_honest_proxy_ja.md",
+      "chars": 7433,
       "title": true,
       "tags": 5,
       "findings": [
-        "LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)"
+        "MISSING GROUP TARGET: Team create requires explicit group_url_name"
       ]
-    },
-    {
-      "file": "QIITA_#33_llcore_third_axis_settle.md",
-      "chars": 88931,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#33_llcore_third_axis_settle_kamikudaki.md",
-      "chars": 35493,
-      "title": true,
-      "tags": 4,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#34_third_axis_arc_overview.md",
-      "chars": 101200,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#34_third_axis_arc_overview_kamikudaki.md",
-      "chars": 47920,
-      "title": true,
-      "tags": 4,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#38_defensive_disclosure_verified_memory.md",
-      "chars": 54366,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#39_verified_plasticity_small_n_wall.md",
-      "chars": 47231,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#40_capability_negative_strong_gradient.md",
-      "chars": 28412,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#41_verified_plasticity_langton_ant_meta.md",
-      "chars": 58156,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#41_verified_plasticity_langton_ant_meta_kamikudaki.md",
-      "chars": 15781,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#42_llmviz_fork_to_build_llm.md",
-      "chars": 7553,
-      "title": true,
-      "tags": 5,
-      "findings": []
-    },
-    {
-      "file": "QIITA_#42_llterm_kobanashi.md",
-      "chars": 23164,
-      "title": true,
-      "tags": 5,
-      "findings": []
     }
   ]
 }

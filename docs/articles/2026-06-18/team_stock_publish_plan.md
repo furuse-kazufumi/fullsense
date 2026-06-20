@@ -7,7 +7,7 @@
 
 - **正本**: 公開順・human gate 条件・rollback 注意をここに集約する
 - `team_stock_queue.md`: 投稿待ち一覧と実行記録の正本。canonical field は **POST 後の記録欄 `visible range memo` / `rollback needed` / `note`**
-- `next_plan.md` / `SESSION_SUMMARY.md`: `team_stock_queue.md` の **POST 後の記録欄 `note`** を参照するだけに留める
+- `next_plan.md` / `SESSION_SUMMARY.md`: `team_stock_queue.md` の **POST 後の記録欄 `visible range memo` / `rollback needed` / `note` の 3 欄**を参照するだけに留める
 
 ## なぜこの 3 本か
 

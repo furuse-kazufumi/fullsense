@@ -11,11 +11,15 @@ public_private: false
 slide: false
 ignorePublish: true
 id: b35b429dc6dc1fde207a
+# internal marker written by tools/qiita_team_post.py:
+# opt-in PATCH is not applied on this current local draft, and Team UI confirmation
+# is still missing. This is not a Qiita official field and does not prove Team UI visibility.
+qiita_team_verified: false
 ---
 # LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」
 
 > **この草稿の位置づけ**
-> #43 の `3-2. LLM Wiki — 「育つ知識」のパターン` から切り出した Team stock 用の source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `b35b429dc6dc1fde207a`、2026-06-19 12:41:22 +09:00 の再確認では Team API GET が `private:false` と `group.url_name: general` / `group.private: false` を返し、未認証 HTML GET は `302 /login?redirect_to=...` でした。poster payload では `group_url_name` を明示していなかったため、implicit General sharing が起きた可能性を current 仮説として追います。ただしこれは root-cause 仮説であって、team-only の証明でも否定でもありません。local source は観測値を再宣言しないよう `group_url_name` を固定せず、accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
+> #43 の `3-2. LLM Wiki — 「育つ知識」のパターン` から切り出した Team stock 用の source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `b35b429dc6dc1fde207a` です。運用上の incident / visibility / rollback 記録は publish source ではなく `docs/articles/2026-06-18/team_stock_queue.md` を正本とします。accidental な `qiita publish` を避けるため `ignorePublish: true` を維持しています。
 
 > **前提**
 > RAG より一段先の「育つ知識基盤」を考えていて、要約・概念ページ・相互リンクを自前で持ちたい文脈を前提にします。

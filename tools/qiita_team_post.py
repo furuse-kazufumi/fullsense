@@ -25,6 +25,8 @@ Qiita API v2 (一次確認 2026-06-04, https://qiita.com/api/v2/docs):
   py -3.11 qiita_team_post.py dry-run <file.md> [--patch-group-url-name]
                                                 # payload + 警告を表示 (network なし)
   py -3.11 qiita_team_post.py show <item_id>    # read-only Team API GET (visibility readback)
+  py -3.11 qiita_team_post.py invalidate-marker <file.md> [file2.md ...]
+                                                # local marker bookkeeping only (remote 非接触)
   py -3.11 qiita_team_post.py post <file.md> --yes [--force-ignore-publish]
                                                 [--patch-group-url-name]
                                                 # 実 POST/PATCH (ユーザーが GO したときのみ)
@@ -740,36 +742,168 @@ def cmd_dry_run(args: list[str]) -> int:
     ) else 0
 
 
-def _writeback_scalar(path: str, key: str, value: str, *, skip_if_real: bool = False) -> None:
+def _frontmatter_scalar_match(fm: str, key: str) -> re.Match[str] | None:
+    return re.search(rf"^(\s*{re.escape(key)}:\s*)([^#\n]*?)(\s*(#.*)?)$", fm, re.M)
+
+
+def _writeback_scalar(path: str, key: str, value: str, *, skip_if_real: bool = False) -> bool:
     if not value:
-        return
+        return False
     text = open(path, "r", encoding="utf-8-sig").read()
     if not text.startswith("---"):
-        return
+        return False
     end = text.find("\n---", 3)
     if end == -1:
-        return
+        return False
     head, fm, tail = text[:3], text[3:end], text[end:]
-    m = re.search(rf"^(\s*{re.escape(key)}:\s*)([^#\n]*?)(\s*(#.*)?)$", fm, re.M)
+    m = _frontmatter_scalar_match(fm, key)
     if m:
         cur = m.group(2).strip().strip("'\"")
         if skip_if_real and cur and cur.lower() not in ("null", "none"):
-            return
+            return False
         fm = fm[:m.start()] + m.group(1) + value + m.group(3) + fm[m.end():]
     else:
+        try:
+            meta, _body = split_frontmatter(text)
+        except Exception:
+            meta = {}
+        if key in meta:
+            return False
         fm = fm + f"\n{key}: {value}"
     with open(path, "w", encoding="utf-8") as f:
         f.write(head + fm + tail)
+    return True
 
 
-def _writeback_id(path: str, item_id: str) -> None:
+def _frontmatter_has_key(path: str, key: str) -> bool:
+    text = open(path, "r", encoding="utf-8-sig").read()
+    if not text.startswith("---"):
+        return False
+    try:
+        meta, _body = split_frontmatter(text)
+    except Exception:
+        return False
+    return key in meta
+
+
+def _frontmatter_scalar_value(path: str, key: str):
+    text = open(path, "r", encoding="utf-8-sig").read()
+    if not text.startswith("---"):
+        return None
+    try:
+        meta, _body = split_frontmatter(text)
+    except Exception:
+        return None
+    return meta.get(key)
+
+
+def _normalized_marker_path(path: str) -> str:
+    return os.path.normcase(os.path.realpath(path))
+
+
+def _is_allowed_marker_path(path: str) -> bool:
+    target = _normalized_marker_path(path)
+    public_root = _normalized_marker_path(os.path.join(os.path.dirname(__file__), "qiita-cli-poc", "public"))
+    basename = os.path.basename(target)
+    # Normalize case before prefix checks so Windows drive/path casing drift does not false-BLOCK.
+    # Team stock drafts and ordinary public articles share the same tree, so narrow the allowlist
+    # to the explicit team_stock_* naming convention as a second guard beyond the marker-key check.
+    return (
+        (target == public_root or target.startswith(public_root + os.sep))
+        and basename.startswith("team_stock_")
+        and basename.endswith(".md")
+    )
+
+
+def _writeback_id(path: str, item_id: str) -> bool:
     """Store the new id in frontmatter so re-posts PATCH (idempotent). Replaces `id: null`/empty,
     inserts if absent, leaves a pre-existing real id untouched."""
-    _writeback_scalar(path, "id", item_id, skip_if_real=True)
+    return _writeback_scalar(path, "id", item_id, skip_if_real=True)
 
 
-def _writeback_team_verified(path: str, verified: bool) -> None:
-    _writeback_scalar(path, "qiita_team_verified", "true" if verified else "false")
+def _writeback_team_verified(path: str, verified: bool) -> bool:
+    return _writeback_scalar(path, "qiita_team_verified", "true" if verified else "false")
+
+
+def cmd_invalidate_marker(args: list[str]) -> int:
+    flag_error = validate_flags(args, allowed_flags=set())
+    if flag_error:
+        print(f"BLOCKED: {flag_error}")
+        print("usage: invalidate-marker <file.md> [file2.md ...]  # local bookkeeping only — does not touch remote/Team API state")
+        return 1
+    files = [a for a in args if not a.startswith("--")]
+    # Keep first-seen order but avoid duplicate local bookkeeping/output for the same file.
+    seen_paths: set[str] = set()
+    deduped_files: list[str] = []
+    for path in files:
+        normalized = _normalized_marker_path(path)
+        if normalized in seen_paths:
+            continue
+        seen_paths.add(normalized)
+        deduped_files.append(path)
+    files = deduped_files
+    if not files:
+        print("usage: invalidate-marker <file.md> [file2.md ...]  # local bookkeeping only — does not touch remote/Team API state")
+        return 2
+    failed = False
+    ready: list[tuple[str, str | None, bool]] = []
+    applied: list[str] = []
+    for path in files:
+        try:
+            if not _is_allowed_marker_path(path):
+                failed = True
+                print(f"BLOCKED: invalidate-marker path outside allowed roots: {path}")
+                continue
+            if not _frontmatter_has_key(path, "qiita_team_verified"):
+                failed = True
+                print(f"BLOCKED: no frontmatter marker written for {path}")
+                continue
+            existing_verified = _frontmatter_scalar_value(path, "qiita_team_verified")
+            _existing_verified_state, existing_verified_error = _parse_optional_bool(
+                existing_verified, "qiita_team_verified"
+            )
+            warning = None
+            if existing_verified_error:
+                warning = (
+                    "WARNING: existing qiita_team_verified value was malformed "
+                    f"({existing_verified!r}) - resetting to false"
+                )
+            ready.append((path, warning, existing_verified == "false"))
+        except OSError as e:
+            failed = True
+            print(f"FAIL: marker invalidate read failed for {path}: {e}")
+    if failed:
+        print("FAIL: no markers were invalidated (fail-closed).")
+        return 1
+    for path, warning, already_false in ready:
+        try:
+            # This second-phase False should be unreachable unless the file changes between
+            # validation and writeback. Treat it as defensive drift detection, not a normal path.
+            # Cross-file rollback is intentionally absent here: a late OSError can leave some
+            # files invalidated and others still true. Later files are still attempted after an
+            # earlier write failure because this command is local bookkeeping only.
+            if warning:
+                print(warning)
+            wrote = _writeback_team_verified(path, False)
+            if wrote:
+                applied.append(path)
+                if already_false:
+                    print(f"marker already invalidated (no-op): {path}")
+                else:
+                    print(f"marker invalidated: {path}")
+            else:
+                failed = True
+                print(f"FAIL: marker invalidate validation/writeback drift for {path}")
+        except OSError as e:
+            failed = True
+            print(f"FAIL: marker invalidate writeback failed for {path}: {e}")
+    if failed:
+        if applied:
+            print(f"FAIL: invalidate-marker partially applied; invalidated: {', '.join(applied)}")
+        pending = [path for path, _warning, _already_false in ready if path not in applied]
+        if pending:
+            print(f"FAIL: invalidate-marker not invalidated: {', '.join(pending)}")
+    return 1 if failed else 0
 
 
 def cmd_post(args: list[str]) -> int:
@@ -786,6 +920,12 @@ def cmd_post(args: list[str]) -> int:
         print(f"BLOCKED: exactly one file expected, got {len(files)}")
         print("usage: post <file.md> --yes [--force-ignore-publish] [--patch-group-url-name]")
         return 2
+    if not _is_allowed_marker_path(files[0]):
+        print(
+            "BLOCKED: Team poster post is only supported for "
+            "tools/qiita-cli-poc/public/team_stock_*.md sources."
+        )
+        return 1
     if "--yes" not in args:
         print("refusing: --yes required (publish is an external action; you give the GO).")
         preview_rc = cmd_dry_run(files[:1] + (["--patch-group-url-name"] if "--patch-group-url-name" in args else []))
@@ -913,7 +1053,7 @@ def cmd_post(args: list[str]) -> int:
             return 1
         if not item_id:
             try:
-                _writeback_id(files[0], readback_id)
+                wrote_id = _writeback_id(files[0], readback_id)
             except OSError as e:
                 print(
                     f"FAIL ({code}): local id writeback failed after create id={readback_id}: {e}"
@@ -923,15 +1063,34 @@ def cmd_post(args: list[str]) -> int:
                     "id was not persisted locally, recover it manually before retrying."
                 )
                 return 1
+            if not wrote_id:
+                print(
+                    f"FAIL ({code}): local id writeback made no change after create id={readback_id}"
+                )
+                print(
+                    f"post: item is already live on team with id={readback_id}; "
+                    "frontmatter id not persisted locally (frontmatter missing/invalid or local writeback drift), investigate the local writeback path before retrying."
+                )
+                return 1
             try:
-                _writeback_team_verified(files[0], False)
+                wrote_marker = _writeback_team_verified(files[0], False)
             except OSError as e:
                 print(
                     f"FAIL ({code}): local verification-marker writeback failed after create id={readback_id}: {e}"
                 )
                 print(
                     f"post: item id={readback_id} is already persisted locally; "
-                    "do not re-POST. Fix qiita_team_verified manually before retrying."
+                    "do not re-POST. Investigate and repair the qiita_team_verified writeback path before retrying."
+                )
+                return 1
+            if not wrote_marker:
+                print(
+                    f"FAIL ({code}): local verification-marker writeback skipped after create id={readback_id} "
+                    "(frontmatter missing/invalid)"
+                )
+                print(
+                    f"post: item id={readback_id} is already persisted locally; "
+                    "do not re-POST. Investigate and repair the qiita_team_verified writeback path before retrying."
                 )
                 return 1
         rb_code, rb_res = _read_item_with_retry(readback_id, token)
@@ -945,7 +1104,7 @@ def cmd_post(args: list[str]) -> int:
         if not rb_ok:
             if item_id:
                 try:
-                    _writeback_team_verified(files[0], False)
+                    wrote_marker = _writeback_team_verified(files[0], False)
                 except OSError as e:
                     print(
                         f"FAIL ({code}): authoritative read-after-write check failed: {rb_line}"
@@ -953,6 +1112,13 @@ def cmd_post(args: list[str]) -> int:
                     print(
                         f"post: PATCH may already be live on team for id={readback_id}, and local "
                         f"qiita_team_verified=false writeback also failed: {e}"
+                    )
+                    return 1
+                if not wrote_marker:
+                    print(f"FAIL ({code}): authoritative read-after-write check failed: {rb_line}")
+                    print(
+                        f"post: PATCH may already be live on team for id={readback_id}, and local "
+                        "qiita_team_verified=false writeback was skipped (frontmatter missing/invalid)."
                     )
                     return 1
             print(f"FAIL ({code}): authoritative read-after-write check failed: {rb_line}")
@@ -969,11 +1135,18 @@ def cmd_post(args: list[str]) -> int:
             return 1
         fully_verified = expected_group_target is not None
         try:
-            _writeback_team_verified(files[0], fully_verified)
+            wrote_marker = _writeback_team_verified(files[0], fully_verified)
         except OSError as e:
             print(
                 f"FAIL ({code}): authoritative readback passed but local verification marker "
                 f"writeback failed for id={readback_id}: {e}"
+            )
+            print(f"post: server state for id={readback_id} is already updated; fix the local file before retrying.")
+            return 1
+        if not wrote_marker:
+            print(
+                f"FAIL ({code}): authoritative readback passed but local verification marker "
+                f"writeback was skipped for id={readback_id} (frontmatter missing/invalid)"
             )
             print(f"post: server state for id={readback_id} is already updated; fix the local file before retrying.")
             return 1
@@ -999,6 +1172,7 @@ def main() -> int:
         "verify": cmd_verify,
         "preflight": cmd_preflight,
         "dry-run": cmd_dry_run,
+        "invalidate-marker": cmd_invalidate_marker,
         "show": cmd_show,
         "get": cmd_show,
         "post": cmd_post,

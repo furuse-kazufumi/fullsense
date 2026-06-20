@@ -11,11 +11,15 @@ public_private: false
 slide: false
 ignorePublish: true
 id: 6fe79ab04443f7654eca
+# internal marker written by tools/qiita_team_post.py:
+# opt-in PATCH is not applied on this current local draft, and Team UI confirmation
+# is still missing. This is not a Qiita official field and does not prove Team UI visibility.
+qiita_team_verified: false
 ---
 # `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録
 
 > **この草稿の位置づけ**
-> #46 の `2. ターン境界と緊急割り込みは、最初から別物として設計する` / `3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた` / `6. テストも「たまたま緑」を疑う` を、後で個別公開できるよう Team stock に退避した source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `6fe79ab04443f7654eca`、2026-06-19 12:41:22 +09:00 の再確認では Team API GET が `private:false` と `group.url_name: general` / `group.private: false` を返し、未認証 HTML GET は `302 /login?redirect_to=...` でした。poster payload では `group_url_name` を明示していなかったため、implicit General sharing が起きた可能性を current 仮説として追います。ただしこれは root-cause 仮説であって、team-only の証明でも否定でもありません。local source は観測値を再宣言しないよう `group_url_name` を固定せず、accidental な `qiita publish` を避けるため `ignorePublish: true` を残しています。
+> #46 の `2. ターン境界と緊急割り込みは、最初から別物として設計する` / `3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた` / `6. テストも「たまたま緑」を疑う` を、後で個別公開できるよう Team stock に退避した source draft です。2026-06-18 に Qiita Team `fullsense` へ POST 済みで、item id は `6fe79ab04443f7654eca` です。運用上の incident / visibility / rollback 記録は publish source ではなく `docs/articles/2026-06-18/team_stock_queue.md` を正本とします。accidental な `qiita publish` を避けるため `ignorePublish: true` を維持しています。
 
 > **前提**
 > `claude -p --resume` や `codex exec` のような headless CLI を turn 境界で回し続ける自走 AI harness の文脈を前提にします。

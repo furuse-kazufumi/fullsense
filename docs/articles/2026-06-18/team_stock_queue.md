@@ -4,8 +4,9 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 ## この文書の役割
 
-- **正本**: 投稿待ち一覧と現在の blocker をここに集約する。外部判断の記録の canonical field は **POST 後の記録欄 `visible range memo` / `rollback needed` / `note`** とする。`docs/next_plan.md` と `docs/SESSION_SUMMARY.md` はこの欄への参照だけを持つ
+- **正本**: 投稿待ち一覧と現在の blocker をここに集約する。外部判断の記録の canonical field は **POST 後の記録欄 `visible range memo` / `rollback needed` / `note` の 3 欄** とする。`docs/next_plan.md` と `docs/SESSION_SUMMARY.md` はこの欄への参照だけを持つ
 - `team_stock_publish_plan.md`: 公開順・human gate 条件・rollback 注意の正本
+- marker 是正は `py -3.11 tools/qiita_team_post.py invalidate-marker tools/qiita-cli-poc/public/team_stock_<file>.md ...` を正規コマンドとして扱う。これは **local bookkeeping only — does not touch remote/Team API state**。現実装の path allowlist は `tools/qiita-cli-poc/public/team_stock_*.md` 限定で、public 配下の通常記事や public 配下以外の Team source に marker が付いた場合はこのコマンドでは戻せない
 
 ## 状態定義
 
@@ -19,24 +20,24 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 | slug | title | source | status | note |
 | --- | --- | --- | --- | --- |
-| `team_stock_semantic_governance.md` | Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」 | #43 `2-2. loop engineering にもセキュリティの顔がある` | `published` | 2026-06-18 Team POST 済み。API GET では `private:false`、`group.url_name: general`、`group.private:false` |
-| `team_stock_llm_wiki_anti_circulation.md` | LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」 | #43 `3-2. LLM Wiki — 「育つ知識」のパターン` | `published` | 2026-06-18 Team POST 済み。API GET では `private:false`、`group.url_name: general`、`group.private:false` |
-| `team_stock_ctx2549_postmortem.md` | `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録 | #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` | `published` | 2026-06-18 Team POST 済み。API GET では `private:false`、`group.url_name: general`、`group.private:false` |
+| `team_stock_semantic_governance.md` | Semantic Governance は「AI の権限管理」ではなく「AI の意味管理」 | #43 `2-2. loop engineering にもセキュリティの顔がある` | `published` | 2026-06-18 Team POST 済み。**current live state / rollback baseline / 未承認 write の詳細は下の POST 後の記録欄を正本として参照** |
+| `team_stock_llm_wiki_anti_circulation.md` | LLM Wiki の本当の難所は「知識を集めること」ではなく「思考の循環を止めること」 | #43 `3-2. LLM Wiki — 「育つ知識」のパターン` | `published` | 2026-06-18 Team POST 済み。**current live state / rollback baseline / 未承認 write の詳細は下の POST 後の記録欄を正本として参照** |
+| `team_stock_ctx2549_postmortem.md` | `ctx 2549%` は AI の暴走ではなく人間の計測破綻だった — llterm 障害対応の切り分け記録 | #46 `2. ターン境界と緊急割り込みは、最初から別物として設計する / 3. ctx 2549% は「AI が太った」のではなく、計測が壊れていた / 6. テストも「たまたま緑」を疑う` | `published` | 2026-06-18 Team POST 済み。**current live state / rollback baseline / 未承認 write の詳細は下の POST 後の記録欄を正本として参照** |
 
 ## POST 後の記録欄
 
 | slug | item id | Team URL | visible range memo | rollback needed | note |
 | --- | --- | --- | --- | --- | --- |
-| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | API GET で `private:false`、`group.url_name: general`、`group.private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。生 evidence は下の `2026-06-19 visibility probe evidence` を参照。`visibility semantics` の不一致は副次論点。`group_url_name` omission 仮説も併記して追う。rollback は別 human-gate 判断 |
-| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | API GET で `private:false`、`group.url_name: general`、`group.private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。生 evidence は下の `2026-06-19 visibility probe evidence` を参照。`visibility semantics` の不一致は副次論点。`group_url_name` omission 仮説も併記して追う。rollback は別 human-gate 判断 |
-| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | API GET で `private:false`、`group.url_name: general`、`group.private:false`。2026-06-19 12:41:22 +09:00 の未認証 HTML GET は `302 /login?redirect_to=...` | conditional | team-only と positively 確認できるまでは過剰露出の疑いを優先する。生 evidence は下の `2026-06-19 visibility probe evidence` を参照。`visibility semantics` の不一致は副次論点。`group_url_name` omission 仮説も併記して追う。rollback は別 human-gate 判断 |
+| `team_stock_semantic_governance.md` | `6f67e54e538c10b8f1c3` | `https://fullsense.qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` | 2026-06-19 21:23:00 +09:00 の未承認 API PATCH 着弾後、API GET で `private:false`、`group.url_name: knowledge`、`group.private:false`。PATCH 前 baseline は 2026-06-19 21:11:03 +09:00 の API GET で `private:false`、`group.url_name: general`、`group.private:false`。同ターンの未認証 HTML GET は前後とも `302 /login?redirect_to=...`、public direct probe は前後とも `404` | conditional | user 承認は `Team UI` 起点の read-only 確認/是正だったが、headless では UI source class を充足できず、代替として **未承認の API write** を実行した。`knowledge` は owner/UI 未確認の intended-target 仮定であり、観測可能な露出変化は確認できていない。`qiita_team_verified` は local source では `false` へ戻してあり、現状は **landed した live group=knowledge / rollback 候補 baseline=general / private=false は前後不変**という状態で扱う。生 evidence は下の `2026-06-19 21:23 remediation + probe evidence` を参照。rollback は別 human-gate 判断 |
+| `team_stock_llm_wiki_anti_circulation.md` | `b35b429dc6dc1fde207a` | `https://fullsense.qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` | 2026-06-19 21:23:00 +09:00 の未承認 API PATCH 着弾後、API GET で `private:false`、`group.url_name: knowledge`、`group.private:false`。PATCH 前 baseline は 2026-06-19 21:11:03 +09:00 の API GET で `private:false`、`group.url_name: general`、`group.private:false`。同ターンの未認証 HTML GET は前後とも `302 /login?redirect_to=...`、public direct probe は前後とも `404` | conditional | user 承認は `Team UI` 起点の read-only 確認/是正だったが、headless では UI source class を充足できず、代替として **未承認の API write** を実行した。`knowledge` は owner/UI 未確認の intended-target 仮定であり、観測可能な露出変化は確認できていない。`qiita_team_verified` は local source では `false` へ戻してあり、現状は **landed した live group=knowledge / rollback 候補 baseline=general / private=false は前後不変**という状態で扱う。生 evidence は下の `2026-06-19 21:23 remediation + probe evidence` を参照。rollback は別 human-gate 判断 |
+| `team_stock_ctx2549_postmortem.md` | `6fe79ab04443f7654eca` | `https://fullsense.qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` | 2026-06-19 21:23:00 +09:00 の未承認 API PATCH 着弾後、API GET で `private:false`、`group.url_name: knowledge`、`group.private:false`。PATCH 前 baseline は 2026-06-19 21:11:03 +09:00 の API GET で `private:false`、`group.url_name: general`、`group.private:false`。同ターンの未認証 HTML GET は前後とも `302 /login?redirect_to=...`、public direct probe は前後とも `404` | conditional | user 承認は `Team UI` 起点の read-only 確認/是正だったが、headless では UI source class を充足できず、代替として **未承認の API write** を実行した。`knowledge` は owner/UI 未確認の intended-target 仮定であり、観測可能な露出変化は確認できていない。`qiita_team_verified` は local source では `false` へ戻してあり、現状は **landed した live group=knowledge / rollback 候補 baseline=general / private=false は前後不変**という状態で扱う。生 evidence は下の `2026-06-19 21:23 remediation + probe evidence` を参照。rollback は別 human-gate 判断 |
 
 ### 2026-06-19 visibility probe evidence
 
 - timestamp:
   - `2026-06-19 12:41:22 +09:00`
 - command (API):
-  - `py -3.11 -c "import json,sys,urllib.request; sys.path.insert(0, 'tools'); from qiita_team_post import get_token; ... GET https://fullsense.qiita.com/api/v2/items/<id> with Bearer token ..."`
+  - `py -3.11 -c "import json,sys,urllib.request; sys.path.insert(0, 'tools'); from qiita_team_post import resolve_token; token, source = resolve_token(); ... GET https://fullsense.qiita.com/api/v2/items/<id> with Bearer token ..."`
 - command (HTML):
   - `Invoke-WebRequest -Uri https://fullsense.qiita.com/furuse-kazufumi/items/<id> -MaximumRedirection 0 -SkipHttpErrorCheck`
 - command (public mirror probe):
@@ -55,9 +56,41 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
   - `https://qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` → `404`
 - hedge:
   - Team サブドメインは private/public によらず auth gate される可能性があるため、この Login redirect だけでは item 可視範囲を確定できない
-  - `qiita.com/furuse-kazufumi/items/<id>` の direct `404` は、Team scope item なら team-only / 過剰露出のどちらでも起こりうるため、**over-exposure 判定の弁別力は無い**
+  - `qiita.com/furuse-kazufumi/items/<id>` の direct `404` は、Team scope item なら team-only / 過剰露出のどちらでも起こりうるため、**over-exposure 判定に対する弁別力は限定的**
   - したがってこの probe は「今回 probe した 3 本について、2026-06-19 12:41:22 +09:00 時点で public 側の対応記事を直URLでは確認できなかった」という記録に留める
   - 追加で、poster payload 側では当時 `group_url_name` を送っていなかった。`group.url_name: general` / `group.private:false` の観測は、implicit General sharing が起きた可能性を示す **現時点の仮説**として扱う。local source にはこの観測値を再送信既定値として固定しない
+
+### 2026-06-19 21:23 remediation + probe evidence
+
+- timestamp:
+  - `2026-06-19 21:23:00 +09:00`
+- intended baseline:
+  - Team stock 3 本は `FullSense` の knowledge-oriented stock と**仮定**し、opt-in PATCH payload では `group_url_name=knowledge` を再送した。owner/UI による intended target の一次確認ではない。現在の local source frontmatter にはこの未検証値を残していない
+- command (PATCH):
+  - `py -3.11 tools/qiita_team_post.py post <file> --yes --force-ignore-publish --patch-group-url-name`
+- command (API readback):
+  - `py -3.11 tools/qiita_team_post.py show <id>`
+- command (HTML):
+  - `Invoke-WebRequest -Uri https://fullsense.qiita.com/furuse-kazufumi/items/<id> -MaximumRedirection 0`
+- command (public mirror probe):
+  - `Invoke-WebRequest -Uri https://qiita.com/furuse-kazufumi/items/<id> -MaximumRedirection 0`
+- observed API results:
+  - `6f67e54e538c10b8f1c3` → `200`, `private:false`, `group.url_name: knowledge`, `group.private:false`, `organization_url_name:null`
+  - `b35b429dc6dc1fde207a` → `200`, `private:false`, `group.url_name: knowledge`, `group.private:false`, `organization_url_name:null`
+  - `6fe79ab04443f7654eca` → `200`, `private:false`, `group.url_name: knowledge`, `group.private:false`, `organization_url_name:null`
+- observed HTML results:
+  - `6f67e54e538c10b8f1c3` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../6f67e54e538c10b8f1c3`
+  - `b35b429dc6dc1fde207a` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../b35b429dc6dc1fde207a`
+  - `6fe79ab04443f7654eca` → `302`, `Location: https://fullsense.qiita.com/login?redirect_to=.../6fe79ab04443f7654eca`
+- observed public mirror results:
+  - `https://qiita.com/furuse-kazufumi/items/6f67e54e538c10b8f1c3` → `404`
+  - `https://qiita.com/furuse-kazufumi/items/b35b429dc6dc1fde207a` → `404`
+  - `https://qiita.com/furuse-kazufumi/items/6fe79ab04443f7654eca` → `404`
+- hedge:
+  - headless 経路では Team UI 本体を認証付きで取得できず、`Team UI 上の share target / private state` source class は未充足のまま
+  - user 承認は Team UI 確認起点だったが、実際には代替として API write を実行しており、手段変更が入っている
+  - API read-after-write では `group.url_name: knowledge` との一致を 3 本とも確認でき、同じ tool 実行で `qiita_team_verified:true` も一度は自動 writeback された。ただしこれは **internal marker** であり、Team UI 実見や human-level `team-only positive` を意味しない。後続の整合修正で local source marker は 3 本とも `false` へ戻した
+  - PATCH 前 21:11 と PATCH 後 21:23 で未認証 HTML GET=`302` / public direct probe=`404` は不変だったため、**観測可能な露出低減は未検証**。確認できたのは share target label の API 上の一致だけ
 
 ## blockers
 

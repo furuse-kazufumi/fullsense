@@ -6,6 +6,8 @@ import importlib.util
 import sys
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS_DIR = ROOT / "tools"
@@ -27,6 +29,16 @@ qpp = _load("qiita_public_post", TOOLS_DIR / "qiita_public_post.py")
 qtp = _load("qiita_team_post", TOOLS_DIR / "qiita_team_post.py")
 qconv = _load("convert_to_qiita_cli", TOOLS_DIR / "qiita-cli-poc" / "convert_to_qiita_cli.py")
 zc = _load("zenn_convert", ROOT / "scripts" / "publish" / "zenn_convert.py")
+
+
+def _public_root() -> Path:
+    return TOOLS_DIR / "qiita-cli-poc" / "public"
+
+
+@pytest.fixture(autouse=True)
+def _allow_marker_paths_in_cmd_post_tests(request, monkeypatch):
+    if "cmd_post" in request.node.name:
+        monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
 
 
 FOLDED_TEXT = """\
@@ -265,6 +277,426 @@ def test_qiita_team_post_dry_run_blocks_unrecognized_private_value(tmp_path, cap
 
     assert rc == 1
     assert "UNRECOGNIZED_PRIVATE_BLOCK" in out
+
+
+def test_qiita_team_post_invalidate_marker_writes_false_and_exits_zero(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_invalidate_marker([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert f"marker invalidated: {path}" in out
+    assert "qiita_team_verified: false" in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_blocks_without_frontmatter_marker(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "plain.md"
+    path.write_text("body\n", encoding="utf-8")
+    rc = qtp.cmd_invalidate_marker([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert f"BLOCKED: no frontmatter marker written for {path}" in out
+
+
+def test_qiita_team_post_invalidate_marker_usage_without_files(capsys):
+    rc = qtp.cmd_invalidate_marker([])
+    out = capsys.readouterr().out
+    assert rc == 2
+    assert "usage: invalidate-marker <file.md> [file2.md ...]" in out
+    assert "does not touch remote/Team API state" in out
+
+
+def test_qiita_team_post_invalidate_marker_blocks_flag_errors(capsys):
+    rc = qtp.cmd_invalidate_marker(["--bogus"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert "BLOCKED:" in out
+    assert "usage: invalidate-marker <file.md> [file2.md ...]" in out
+
+
+def test_qiita_team_post_invalidate_marker_multiple_files_fail_if_any_write_is_blocked(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    ok = tmp_path / "ok.md"
+    ok.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    bad = tmp_path / "bad.md"
+    bad.write_text("body\n", encoding="utf-8")
+    rc = qtp.cmd_invalidate_marker([str(ok), str(bad)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert f"BLOCKED: no frontmatter marker written for {bad}" in out
+    assert f"marker invalidated: {ok}" not in out
+    assert "qiita_team_verified: true" in ok.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_blocks_when_frontmatter_lacks_marker_key(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_invalidate_marker([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert f"BLOCKED: no frontmatter marker written for {path}" in out
+    assert "qiita_team_verified:" not in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_blocks_paths_outside_allowed_roots(tmp_path, capsys):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    rc = qtp.cmd_invalidate_marker([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert f"BLOCKED: invalidate-marker path outside allowed roots: {path}" in out
+    assert "qiita_team_verified: true" in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_allowed_marker_path_normalizes_case(monkeypatch):
+    root = str(_public_root())
+    target = str(_public_root() / "team_stock_example.md")
+    monkeypatch.setattr(qtp.os.path, "realpath", lambda path: root if str(path).endswith("public") else target)
+    monkeypatch.setattr(qtp.os.path, "normcase", lambda path: path.lower())
+    assert qtp._is_allowed_marker_path(str(_public_root() / "team_stock_example.md").upper()) is True
+
+
+def test_qiita_team_post_allowed_marker_path_rejects_non_team_stock_public_articles(monkeypatch):
+    root = str(_public_root())
+    target = str(_public_root() / "22d5460384c2cb54a9e6.md")
+    monkeypatch.setattr(qtp.os.path, "realpath", lambda path: root if str(path).endswith("public") else target)
+    monkeypatch.setattr(qtp.os.path, "normcase", lambda path: path.lower())
+    assert qtp._is_allowed_marker_path(str(_public_root() / "22d5460384c2cb54a9e6.md").upper()) is False
+
+
+def test_qiita_team_post_allowed_marker_path_rejects_team_stock_backups(monkeypatch):
+    root = str(_public_root())
+    target = str(_public_root() / "team_stock_example.md.bak")
+    monkeypatch.setattr(qtp.os.path, "realpath", lambda path: root if str(path).endswith("public") else target)
+    monkeypatch.setattr(qtp.os.path, "normcase", lambda path: path.lower())
+    assert qtp._is_allowed_marker_path(str(_public_root() / "team_stock_example.md.bak").upper()) is False
+
+
+def test_qiita_team_post_invalidate_marker_reports_partial_apply_on_late_oserror(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    first = tmp_path / "first.md"
+    second = tmp_path / "second.md"
+    for path in (first, second):
+        path.write_text(
+            "---\n"
+            "title: hello\n"
+            "qiita_team_verified: true\n"
+            "---\n"
+            "body\n",
+            encoding="utf-8",
+        )
+    real_writeback = qtp._writeback_team_verified
+    calls = {"count": 0}
+
+    def flaky_writeback(path, verified):
+        calls["count"] += 1
+        if calls["count"] == 2:
+            raise OSError("disk full")
+        return real_writeback(path, verified)
+
+    monkeypatch.setattr(qtp, "_writeback_team_verified", flaky_writeback)
+    rc = qtp.cmd_invalidate_marker([str(first), str(second)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert f"marker invalidated: {first}" in out
+    assert f"FAIL: marker invalidate writeback failed for {second}: disk full" in out
+    assert f"FAIL: invalidate-marker partially applied; invalidated: {first}" in out
+    assert f"FAIL: invalidate-marker not invalidated: {second}" in out
+    assert "qiita_team_verified: false" in first.read_text(encoding="utf-8")
+    assert "qiita_team_verified: true" in second.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_reports_phase1_read_failure(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    real_has_key = qtp._frontmatter_has_key
+
+    def flaky_has_key(candidate, key):
+        if str(candidate) == str(path):
+            raise OSError("access denied")
+        return real_has_key(candidate, key)
+
+    monkeypatch.setattr(qtp, "_frontmatter_has_key", flaky_has_key)
+    rc = qtp.cmd_invalidate_marker([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert f"FAIL: marker invalidate read failed for {path}: access denied" in out
+    assert "FAIL: no markers were invalidated (fail-closed)." in out
+    assert "qiita_team_verified: true" in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_continues_after_midstream_oserror(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    first = tmp_path / "first.md"
+    second = tmp_path / "second.md"
+    third = tmp_path / "third.md"
+    for path in (first, second, third):
+        path.write_text(
+            "---\n"
+            "title: hello\n"
+            "qiita_team_verified: true\n"
+            "---\n"
+            "body\n",
+            encoding="utf-8",
+        )
+    real_writeback = qtp._writeback_team_verified
+    calls = {"count": 0}
+
+    def flaky_writeback(path, verified):
+        calls["count"] += 1
+        if calls["count"] == 2:
+            raise OSError("disk full")
+        return real_writeback(path, verified)
+
+    monkeypatch.setattr(qtp, "_writeback_team_verified", flaky_writeback)
+    rc = qtp.cmd_invalidate_marker([str(first), str(second), str(third)])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert f"marker invalidated: {first}" in out
+    assert f"FAIL: marker invalidate writeback failed for {second}: disk full" in out
+    assert f"marker invalidated: {third}" in out
+    assert f"FAIL: invalidate-marker partially applied; invalidated: {first}, {third}" in out
+    assert f"FAIL: invalidate-marker not invalidated: {second}" in out
+    assert "qiita_team_verified: false" in first.read_text(encoding="utf-8")
+    assert "qiita_team_verified: true" in second.read_text(encoding="utf-8")
+    assert "qiita_team_verified: false" in third.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_reports_validation_writeback_drift(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "_writeback_team_verified", lambda candidate, verified: False)
+
+    rc = qtp.cmd_invalidate_marker([str(path)])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert f"FAIL: marker invalidate validation/writeback drift for {path}" in out
+    assert f"FAIL: invalidate-marker not invalidated: {path}" in out
+    assert "qiita_team_verified: true" in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_deduplicates_same_file(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    rc = qtp.cmd_invalidate_marker([str(path), str(path)])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert out.count(f"marker invalidated: {path}") == 1
+    assert "qiita_team_verified: false" in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_deduplicates_same_realpath_alias(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "team.md"
+    alias = tmp_path / "." / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: true\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    rc = qtp.cmd_invalidate_marker([str(path), str(alias)])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert out.count("marker invalidated:") == 1
+    assert "qiita_team_verified: false" in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_warns_on_malformed_marker_value(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: maybe\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    rc = qtp.cmd_invalidate_marker([str(path)])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert "WARNING: existing qiita_team_verified value was malformed ('maybe') - resetting to false" in out
+    assert f"marker invalidated: {path}" in out
+    assert "qiita_team_verified: false" in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_reports_noop_when_already_false(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: false\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+
+    rc = qtp.cmd_invalidate_marker([str(path)])
+    out = capsys.readouterr().out
+
+    assert rc == 0
+    assert f"marker already invalidated (no-op): {path}" in out
+    assert f"marker invalidated: {path}" not in out
+    assert "qiita_team_verified: false" in path.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_invalidate_marker_defers_malformed_warning_until_write_phase(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda path: True)
+    malformed = tmp_path / "malformed.md"
+    malformed.write_text(
+        "---\n"
+        "title: hello\n"
+        "qiita_team_verified: maybe\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    blocked = tmp_path / "blocked.md"
+    blocked.write_text("body\n", encoding="utf-8")
+
+    rc = qtp.cmd_invalidate_marker([str(malformed), str(blocked)])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "WARNING: existing qiita_team_verified value was malformed" not in out
+    assert f"BLOCKED: no frontmatter marker written for {blocked}" in out
+    assert "FAIL: no markers were invalidated (fail-closed)." in out
+    assert "qiita_team_verified: maybe" in malformed.read_text(encoding="utf-8")
+
+
+def test_qiita_team_post_writeback_team_verified_blocks_yaml_regex_drift(tmp_path):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "notes: hello\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    original_split_frontmatter = qtp.split_frontmatter
+    qtp.split_frontmatter = lambda text: ({"qiita_team_verified": "maybe"}, "body\n")
+    try:
+        wrote = qtp._writeback_team_verified(str(path), False)
+    finally:
+        qtp.split_frontmatter = original_split_frontmatter
+
+    assert wrote is False
+    text = path.read_text(encoding="utf-8")
+    assert text.count("qiita_team_verified:") == 0
+    assert "notes: hello" in text
+
+
+def test_qiita_team_post_main_dispatches_invalidate_marker(monkeypatch):
+    calls = {}
+
+    def fake_invalidate(args):
+        calls["args"] = args
+        return 7
+
+    monkeypatch.setattr(qtp, "cmd_invalidate_marker", fake_invalidate)
+    monkeypatch.setattr(qtp.sys, "argv", ["qiita_team_post.py", "invalidate-marker", "team_stock_example.md"])
+
+    rc = qtp.main()
+
+    assert rc == 7
+    assert calls["args"] == ["team_stock_example.md"]
+
+
+def test_qiita_team_post_cmd_post_blocks_marker_writeback_outside_allowlist(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: false\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "_is_allowed_marker_path", lambda candidate: False)
+
+    def unexpected_resolve_token():
+        raise AssertionError("resolve_token should not run when the source path is outside the marker allowlist")
+
+    monkeypatch.setattr(qtp, "resolve_token", unexpected_resolve_token)
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert (
+        "BLOCKED: Team poster post is only supported for "
+        "tools/qiita-cli-poc/public/team_stock_*.md sources."
+    ) in out
 
 
 def test_qiita_team_post_cmd_post_blocks_unrecognized_private_value(tmp_path, capsys, monkeypatch):
@@ -1680,7 +2112,7 @@ def test_qiita_team_post_cmd_post_persists_create_id_even_if_authoritative_get_r
         "group": {"url_name": "general", "private": False},
         "organization_url_name": None,
     }))
-    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (writeback_calls.append(args) or True))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
@@ -1728,7 +2160,7 @@ def test_qiita_team_post_cmd_post_blocks_on_private_get_readback_mismatch_after_
         "group": {"url_name": "general", "private": False},
         "organization_url_name": None,
     }))
-    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (writeback_calls.append(args) or True))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
@@ -1776,7 +2208,7 @@ def test_qiita_team_post_cmd_post_blocks_on_group_get_readback_mismatch_after_pe
         "group": {"url_name": "general", "private": False},
         "organization_url_name": None,
     }))
-    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (writeback_calls.append(args) or True))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
@@ -1824,7 +2256,7 @@ def test_qiita_team_post_cmd_post_persists_create_id_after_authoritative_get_rea
         "group": {"url_name": "general", "private": False},
         "organization_url_name": None,
     }))
-    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (writeback_calls.append(args) or True))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
@@ -1916,7 +2348,7 @@ def test_qiita_team_post_cmd_post_uses_authoritative_get_over_response_private_m
         "group": {"url_name": "general", "private": False},
         "organization_url_name": None,
     }))
-    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (writeback_calls.append(args) or True))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
@@ -2015,7 +2447,7 @@ def test_qiita_team_post_cmd_post_retries_create_readback_not_found(tmp_path, ca
 
     monkeypatch.setattr(qtp, "_req", fake_req)
     monkeypatch.setattr(qtp, "_read_item", fake_read)
-    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (writeback_calls.append(args) or True))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
@@ -2062,7 +2494,7 @@ def test_qiita_team_post_cmd_post_ignores_empty_response_url_when_authoritative_
         "group": {"url_name": "general", "private": False},
         "organization_url_name": None,
     }))
-    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (writeback_calls.append(args) or True))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
@@ -2100,7 +2532,7 @@ def test_qiita_team_post_cmd_post_blocks_create_when_response_id_missing(tmp_pat
         }
 
     monkeypatch.setattr(qtp, "_req", fake_req)
-    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: writeback_calls.append(args))
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: (writeback_calls.append(args) or True))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
@@ -2430,6 +2862,206 @@ def test_qiita_team_post_cmd_post_reports_verified_writeback_failure_after_creat
     assert "item id=team-item-id is already persisted locally; do not re-POST" in out
     text = path.read_text(encoding="utf-8")
     assert "id: team-item-id" in text
+
+
+def test_qiita_team_post_cmd_post_blocks_when_create_id_writeback_makes_no_change(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_writeback_id", lambda *args: False)
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "local id writeback made no change after create id=team-item-id" in out
+    assert "frontmatter id not persisted locally" in out
+    assert "local writeback drift" in out
+
+
+def test_qiita_team_post_cmd_post_blocks_when_create_marker_writeback_makes_no_change(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_writeback_team_verified", lambda *args: False)
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "local verification-marker writeback skipped after create id=team-item-id" in out
+    assert "frontmatter missing/invalid" in out
+    assert "Investigate and repair the qiita_team_verified writeback path before retrying." in out
+
+
+def test_qiita_team_post_cmd_post_blocks_when_patch_failure_marker_writeback_makes_no_change(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "id: team-item-id\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        if method == "GET":
+            return 200, {
+                "id": "team-item-id",
+                "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+                "title": "hello",
+                "private": True,
+                "group": {"url_name": "general", "private": False},
+                "organization_url_name": None,
+            }
+        assert method == "PATCH"
+        return 200, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    read_calls = []
+
+    def fake_read_with_retry(item_id, token):
+        read_calls.append(item_id)
+        if len(read_calls) == 1:
+            return 200, {
+                "id": item_id,
+                "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+                "title": "hello",
+                "private": True,
+                "group": {"url_name": "general", "private": False},
+                "organization_url_name": None,
+            }
+        return 200, {
+            "id": item_id,
+            "url": "",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item_with_retry", fake_read_with_retry)
+    monkeypatch.setattr(qtp, "_writeback_team_verified", lambda *args: False)
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "authoritative read-after-write check failed" in out
+    assert "qiita_team_verified=false writeback was skipped" in out
+    assert "frontmatter missing/invalid" in out
+
+
+def test_qiita_team_post_cmd_post_blocks_when_success_marker_writeback_makes_no_change(tmp_path, capsys, monkeypatch):
+    path = tmp_path / "team.md"
+    path.write_text(
+        "---\n"
+        "title: hello\n"
+        "tags:\n"
+        "  - AI\n"
+        "private: true\n"
+        "group_url_name: general\n"
+        "---\n"
+        "body\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "env:QIITA_TEAM_TOKEN"))
+
+    def fake_req(method, req_path, token, payload=None):
+        assert method == "POST"
+        return 201, {
+            "id": "team-item-id",
+            "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+            "title": "hello",
+            "private": True,
+            "group": {"url_name": "general", "private": False},
+            "organization_url_name": None,
+        }
+
+    real_writeback_verified = qtp._writeback_team_verified
+    write_calls = []
+
+    def fake_writeback_verified(*args):
+        write_calls.append(args)
+        if len(write_calls) == 1:
+            return real_writeback_verified(*args)
+        return False
+
+    monkeypatch.setattr(qtp, "_req", fake_req)
+    monkeypatch.setattr(qtp, "_read_item", lambda item_id, token: (200, {
+        "id": item_id,
+        "url": "https://fullsense.qiita.com/furuse-kazufumi/items/team-item-id",
+        "title": "hello",
+        "private": True,
+        "group": {"url_name": "general", "private": False},
+        "organization_url_name": None,
+    }))
+    monkeypatch.setattr(qtp, "_writeback_team_verified", fake_writeback_verified)
+
+    rc = qtp.cmd_post([str(path), "--yes"])
+    out = capsys.readouterr().out
+
+    assert rc == 1
+    assert "authoritative readback passed but local verification marker writeback was skipped for id=team-item-id" in out
+    assert "frontmatter missing/invalid" in out
 
 
 def test_qiita_team_post_cmd_post_patch_defaults_blank_private_to_true(tmp_path, capsys, monkeypatch):
