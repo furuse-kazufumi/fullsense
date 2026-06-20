@@ -8,6 +8,8 @@ tags:
   - OSS
 private: true
 group_url_name: general
+id: 80fd5bb191179f2c0fc4
+qiita_team_verified: false
 ---
 
 # perplexity は平気で嘘をつく — 自作LLMの「改良」を正直に測るために、評価器ごと作り直した話
