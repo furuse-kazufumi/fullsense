@@ -203,7 +203,7 @@ def bootstrap_paired_ci(deltas, n_boot=2000, alpha=0.05, seed=0):
 
 ![漫画『スナックバス江』のバス江ママの一コマ（集英社・週刊ヤングジャンプ公式の無料SNS共有パネルより）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/016.jpg)
 
-*出典：『スナックバス江』（©Fogolydays／集英社・週刊ヤングジャンプ）公式の無料SNS共有パネル。非商用利用条件のもと掲載。*
+*出典：『スナックバス江』フォビドゥン澁川（集英社・週刊ヤングジャンプ）公式の無料SNS共有パネル。非商用利用条件のもと掲載。*
 
 ——とはいえ、その「身も蓋もない正解」を**数字で突きつけてくれる装置**を持っているかどうかが、今回の分かれ目でした。
 
