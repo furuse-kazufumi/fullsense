@@ -3,12 +3,10 @@
   "files": [
     {
       "file": "QIITA_honest_proxy_ja.md",
-      "chars": 7433,
+      "chars": 7657,
       "title": true,
       "tags": 5,
-      "findings": [
-        "MISSING GROUP TARGET: Team create requires explicit group_url_name"
-      ]
+      "findings": []
     }
   ]
 }
