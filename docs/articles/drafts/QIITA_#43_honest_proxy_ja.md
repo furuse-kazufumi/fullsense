@@ -375,7 +375,7 @@ S_t = α_t · S_{t-1} + β_t · ( v_t − α_t S_{t-1} k_t ) k_tᵀ
 
 ### 7-1. 最小環境：CPUだけで小型LLMを動かす（Apacheライセンス, 10〜15分）
 
-GPUは要りません。手元のPC（CPU）で、Apacheライセンスの小型モデルを端から端まで動かす最小手順です（これは丸ごと動きます）。
+GPUは要りません。手元のPC（CPU）で、Apacheライセンスの小型モデルを端から端まで動かす最小手順です。**下のコードは実際に走らせて出力を確認しました**（`transformers 5.10.2 / torch 2.12 / Python 3.11`、CPU。出力＝「日本の首都は東京です。」）。
 
 ```bash
 # Python 3.11 推奨。仮想環境を作って依存を入れる:
@@ -386,18 +386,22 @@ pip install torch transformers safetensors accelerate
 
 ```python
 # Qwen2.5-0.5B-Instruct（Apache-2.0・日本語可）を CPU で動かす最小・完結例
+# ※ transformers 5.x で動作確認。初回は Hugging Face から約1GB をダウンロードします（要ネット接続）。
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
 name = "Qwen/Qwen2.5-0.5B-Instruct"
 tok = AutoTokenizer.from_pretrained(name)
-model = AutoModelForCausalLM.from_pretrained(name, torch_dtype=torch.float32)  # CPU は fp32
+model = AutoModelForCausalLM.from_pretrained(name, dtype=torch.float32)  # CPU は fp32（4.x は torch_dtype=）
 
 msg = [{"role": "user", "content": "日本の首都はどこ？一言で。"}]
-ids = tok.apply_chat_template(msg, add_generation_prompt=True, return_tensors="pt")
-out = model.generate(ids, max_new_tokens=20, do_sample=False)
-print(tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True))   # → 東京 など
+# transformers 5.x の apply_chat_template は dict を返すので return_dict=True で受けて ** で渡す
+inputs = tok.apply_chat_template(msg, add_generation_prompt=True, return_tensors="pt", return_dict=True)
+out = model.generate(**inputs, max_new_tokens=20, do_sample=False)
+print(tok.decode(out[0, inputs["input_ids"].shape[1]:], skip_special_tokens=True))   # → 日本の首都は東京です。
 ```
+
+> ☝ 実は、この記事を書いている過程で**最初に貼ったコードは動きませんでした**（transformers 5.x で chat template が dict を返すのに、tensor 前提で `.shape` を呼んで `KeyError`）。「動くはず」で載せかけたのを、**実行して気づいて直した**——本記事のテーマそのものです。コードもまた、**走らせて確かめるまで信じてはいけない**。
 
 - **メモリの目安**：0.5B は fp32 で約2GB、1.5B で約6GB。手元16GBのPCなら1.5Bまで快適。
 - **CPUで速く回したいなら**：`llama.cpp`（GGUF量子化）が実用解。`pip install llama-cpp-python` ＋ Hugging Face の `*-GGUF` リポジトリ（量子化は `Q4_K_M` が定番）を落とすと、ネイティブ整数カーネルで体感速度が出ます（第6章の「int8でも遅い」問題の実用的な回避）。
