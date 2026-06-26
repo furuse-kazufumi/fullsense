@@ -7,9 +7,11 @@ tags:
   - 統計
   - OSS
 private: true
+public_private: true
 group_url_name: general
 id: 80fd5bb191179f2c0fc4
 qiita_team_verified: false
+public_id: c53c97d9eab745404982
 ---
 
 # AIは平気で嘘をつく — 自作LLMの「改良」を正直に測るために、評価器ごと作り直した話
