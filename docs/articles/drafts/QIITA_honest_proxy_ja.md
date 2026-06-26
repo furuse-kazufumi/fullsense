@@ -7,7 +7,7 @@ tags:
   - 統計
   - OSS
 private: true
-public_private: true
+public_private: false
 group_url_name: general
 id: 80fd5bb191179f2c0fc4
 qiita_team_verified: false
