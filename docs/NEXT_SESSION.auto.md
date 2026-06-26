@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-06-16 08:21:18
+- **生成時刻**: 2026-06-25 12:41:47
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,22 +20,26 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-0d7381e docs(#37): embed HD-1 null-control figure (figure 2)
-b6d7629 auto: qiita37_gpu_triple_run_gate_price.md 編集前 (2026-06-16 08:19)
-de4eb96 auto: collect_research_seeds.py 編集前 (2026-06-16 08:04)
-5f10609 docs(#43): publish public + add paradigm staircase figure; add HD-1 null figure asset
-604e9b8 auto: qiita43_harness_loop_stack.md 編集前 (2026-06-16 07:26)
-998a630 auto: qiita43_harness_loop_stack.md 編集前 (2026-06-16 07:25)
-27c148a docs(#37): embed HD-1 result figure (rho vs n SVG) + mark Kaggle links as raw evidence
-8371cbd auto: qiita37_gpu_triple_run_gate_price.md 編集前 (2026-06-15 23:27)
-5a830f4 auto: qiita37_gpu_triple_run_gate_price.md 編集前 (2026-06-15 23:25)
-67b5bb9 auto: IDEAS_2026_06_15_harness_loop_raptor.md 編集前 (2026-06-15 22:53)
+778f188 docs(articles): token_economy 記事 honest-disclosure レビュー反映 + en/zh/ko 多言語展開
+75d859f auto: team_stock_honest_proxy.md 編集前 (2026-06-20 22:10)
+8bc6f3a auto: team_stock_honest_proxy.md 編集前 (2026-06-20 22:10)
+8be2c3d auto: team_stock_honest_proxy.md 編集前 (2026-06-20 22:08)
+f1263f6 auto: team_stock_honest_proxy.md 編集前 (2026-06-20 22:06)
+b200a60 auto: team_stock_honest_proxy.md 編集前 (2026-06-20 22:06)
+deb5eac auto: team_stock_honest_proxy.md 編集前 (2026-06-20 22:04)
+41e3a8f auto: team_stock_honest_proxy.md 編集前 (2026-06-20 22:02)
+e2556b1 auto: team_stock_honest_proxy.md 編集前 (2026-06-20 22:00)
+ac9808a auto: QIITA_honest_proxy_ja.md 編集前 (2026-06-20 21:58)
 ```
 
 ### git status (porcelain)
 
 ```
-M tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
+ M docs/articles/drafts/QIITA_honest_proxy_ja.md
+ M tools/qiita-cli-poc/public/team_stock_honest_proxy.md
+?? docs/articles/drafts/QIITA_token_economy_ja.md.pre_review.bak
 ```
 
 
@@ -70,26 +74,8 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `08:20` `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price.md`
-- `08:20` `tools/qiita-cli-poc/public/.remote/6f44575d440a9ebf5228.md`
-- `08:20` `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_zh.md`
-- `08:20` `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_ko.md`
-- `08:20` `tools/qiita-cli-poc/public/qiita43_harness_loop_stack_en.md`
-- `08:20` `tools/qiita-cli-poc/public/qiita43_harness_loop_stack.md`
-- `08:20` `tools/qiita-cli-poc/public/qiita37_gpu_triple_run_gate_price_kamikudaki.md`
-- `08:20` `tools/qiita-cli-poc/public/fcb43968a5c642610762.md`
-- `08:20` `tools/qiita-cli-poc/public/fa0890f136636d495ea6.md`
-- `08:20` `tools/qiita-cli-poc/public/edaef9aa56ae66b8423e.md`
-- `08:20` `tools/qiita-cli-poc/public/e5093e4816b25c1bd4d0.md`
-- `08:20` `tools/qiita-cli-poc/public/e49b7ab9027d93594402.md`
-- `08:20` `tools/qiita-cli-poc/public/da2a2822dabe7b17b8c8.md`
-- `08:20` `tools/qiita-cli-poc/public/cdeea496af01dd424a09.md`
-- `08:20` `tools/qiita-cli-poc/public/cd954f57f510e03954e6.md`
-- `08:20` `tools/qiita-cli-poc/public/cc0713ab78a5b390df76.md`
-- `08:20` `tools/qiita-cli-poc/public/cab6bb47a72ebedf5436.md`
-- `08:20` `tools/qiita-cli-poc/public/c5f2077a3399d3fc9b26.md`
-- `08:20` `tools/qiita-cli-poc/public/c543014188744262ec83.md`
-- `08:20` `tools/qiita-cli-poc/public/bfb20aca3cf1df510c26.md`
+- `12:24` `docs/SESSION_SUMMARY.md`
+- `12:24` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
