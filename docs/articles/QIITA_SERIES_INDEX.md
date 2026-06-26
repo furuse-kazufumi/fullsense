@@ -82,6 +82,7 @@ nav_order: 1
 | verified-plasticity arc | verified 構造進化の small-n 壁 (Phase 1) | [drafts/#39](./drafts/QIITA_%2339_verified_plasticity_small_n_wall.md) | draft |
 | verified-plasticity arc | capability NEGATIVE — 強い勾配が進化に勝つ (実 SmolLM2-CE, ARTIFACT+NEGATIVE) | [drafts/#40](./drafts/QIITA_%2340_capability_negative_strong_gradient.md) | draft |
 | verified-plasticity arc | **verified-plasticity = ラングトンの蟻の幻** — 経験 gate は発散の84%を見逃す capstone メタ記事 (JA/EN/ZH/KO + かみくだき) | [drafts/#41](./drafts/QIITA_%2341_verified_plasticity_langton_ant_meta.md) / [かみくだき](./drafts/QIITA_%2341_verified_plasticity_langton_ant_meta_kamikudaki.md) | draft |
+| honest arc | **限定共有** AIは平気で嘘をつく — 評価器を作り直し、2026 効率アーキ地図の中で自分の立ち位置を正直に測る（TTT→Gated DeltaNet 自己訂正 / 手法は LoLCATs 車輪の再発明 / plateau の犯人は訓練法） | [#43](./drafts/QIITA_%2343_honest_proxy_ja.md) ([limited](https://qiita.com/furuse-kazufumi/private/c53c97d9eab745404982)) | limited-share |
 
 ## メンテナンス note
 
