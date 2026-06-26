@@ -472,11 +472,11 @@ flowchart TB
     HF["🎹 HF transformers<br/>generate() ＝ ブラックボックス<br/>（中の層は触れない）"]
     subgraph NAT["🎻 llcore 自前 forward（runtime/qwen2.py）＝ 自作の演奏者"]
         direction TB
-        E["embedding"] --> LY["層1 … 層N：各層 ＝ attn▣ ＋ MLP<br/>▣ ＝ 自分で握る差し替えスロット"] --> O["norm → lm_head"]
+        E["embedding"] --> LY["層1 … 層N：各層 ＝ attn□ ＋ MLP<br/>□ ＝ 自分で握る差し替えスロット"] --> O["norm → lm_head"]
     end
     HF <-.->|"同じ入力 → 同じ出力／logits差 1e-4<br/>✅ 一致を証明済み（土台が正しい）"| NAT
     NAT --> MOD
-    subgraph MOD["▣ スロットに乗せる改造（HF generate では不可能）"]
+    subgraph MOD["□ スロットに乗せる改造（HF generate では不可能）"]
         direction TB
         M1["① attention → 定数状態/線形<br/>メモリ O(T)→O(1)<br/>🔧 実装済・品質コスト評価中"]
         M2["② int8 量子化<br/>RAM 5.7→2.4GB<br/>🔧 実装済・CPUは遅い(0.7tok/s)"]
