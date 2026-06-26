@@ -369,6 +369,103 @@ S_t = α_t · S_{t-1} + β_t · ( v_t − α_t S_{t-1} k_t ) k_tᵀ
 
 ---
 
+## 第7章：ここから持ち帰れる技術 — 自分のモデルに使える4つのレシピ
+
+ここまで「正直さ」の話をしてきましたが、それは精神論ではなく**再利用できる道具**に落ちています。あなた自身のモデル改良に今日から使えるものを、動くコードと実測値で4つ置いていきます。**ここがこの記事の"おみやげ"です。**
+
+### 7-1. 改良を正直に測る：ペア化ブートストラップ（コピペ可）
+
+「改良したら良くなった?」を1点で測ると嘘をつく（第1章）。最小の正直化は**「同じ窓で改造前後を測り、窓ごとに引き算（ペア化）して、信頼区間を出す」**こと。窓の難易度という最大の雑音が相殺され、少ない標本でも差が見えます。
+
+```python
+import numpy as np
+
+def paired_improvement(metric_before, metric_after, n_boot=2000, seed=0):
+    """改造前後を「同じ窓」で測った配列を渡す。返り値の ci が 0 をまたいだら『差があるとは言えない』。"""
+    d = np.asarray(metric_after) - np.asarray(metric_before)   # 窓ごとの差(ペア化)
+    rng = np.random.default_rng(seed)
+    boot = d[rng.integers(0, len(d), size=(n_boot, len(d)))].mean(axis=1)  # 差を重複ありで再標本
+    return {"mean": d.mean(),
+            "ci": (np.quantile(boot, 0.025), np.quantile(boot, 0.975)),
+            "p_worse": float((boot > 0).mean())}   # 悪化している確率
+```
+
+> ★鉄則：**この評価器を、他人でなく最初に自分の成果へ向ける**。私はこれで「+34%の勝利」が「+2.8%、CIは0をまたがないが標本不足で自己格下げ」に縮みました。さらに**探索で最良を選んだ数字は、必ず別の新鮮な窓（holdout）で測り直す**（勝者の呪い対策）——選抜時の上振れが剥がれます。
+
+### 7-2. 「自分のモデルのどの層なら線形化できるか」を測る
+
+事前学習済みモデルを定数状態化したいとき、**全層を一気に線形化すると壊れます**（先行研究 SUPRA でも MMLU が崩壊）。賢いのは**層ごとの"線形化耐性"を測って、痛みの少ない層から線形化する**こと。やり方は単純——1層だけ線形アテンションに差し替え（**その層の q/k/v/o を再利用**）、品質劣化 Δnll を測り、全層スイープします。
+
+```python
+base = eval_nll(model, ids)
+for i in range(model.n_layers):
+    swap_attention_to_linear(model, i)          # その層の事前学習済み射影を再利用
+    delta = eval_nll(model, ids) - base         # Δnll: 小さいほど線形化に強い層
+    print(f"layer {i}: Δnll={delta:+.4f}")
+    restore_attention(model, i)
+```
+
+実測で出た**意外な発見**（Qwen2.5、手元計測）：
+
+- **層0は壊滅的**（1.5Bで Δnll +13.8＝ほぼ崩壊）。入力直後の層は線形化してはいけない。
+- **中〜後段の多くはほぼタダ**（Δnll +0.001〜0.04）。ここから線形化すべき。
+- **大きいモデルほど線形化に強い**（1.5Bの方が0.5Bより少数層線形化の劣化が小さい＝先行研究 Liger の「規模↑で gap↓」と整合）。
+
+> つまり「どの層を線形化し、どの層を softmax のまま残すか」は**測ってから決める**。一律に全層やるのは、最も弱い層に巻き込まれて損をします。
+
+### 7-3. 最小の「定数状態アテンション」— 動く Gated DeltaNet セル
+
+KVキャッシュ O(T) を **O(d²) の固定状態**に畳む、最小の実装です（第6章 6-1.5 の delta rule + データ依存ゲートの実体）。会話がどれだけ伸びても状態サイズは一定。そのまま試せます。
+
+```python
+import torch, torch.nn.functional as F
+from torch import nn
+
+class GatedDeltaNetCell(nn.Module):
+    """定数状態アテンション1層: 状態 S∈[B,d,d] を delta rule + データ依存ゲートで更新。"""
+    def __init__(self, d_model, d_state):
+        super().__init__()
+        self.k, self.v, self.q = (nn.Linear(d_model, d_state) for _ in range(3))
+        self.a = nn.Linear(d_model, 1)              # decay α_t を入力から決める
+        self.b = nn.Linear(d_model, 1)              # 書込強度 β_t を入力から決める
+        self.A_log = nn.Parameter(torch.zeros(1))
+        self.out = nn.Linear(d_state, d_model)
+
+    def step(self, x, S):                            # x:[B,d_model], S:[B,d_state,d_state]
+        k = F.normalize(self.k(x), dim=-1)           # L2正規化 = 上書き精度の要
+        q = F.normalize(self.q(x), dim=-1)
+        v = self.v(x)
+        alpha = torch.exp(-self.A_log.exp() * F.softplus(self.a(x)))   # ∈(0,1) 減衰
+        beta  = torch.sigmoid(self.b(x))                               # ∈(0,1) 書込強度
+        pred  = torch.einsum('bij,bj->bi', S, k)                       # 今の状態が k に返す予測
+        # delta rule: 予測の「外した分」だけを書き戻す（ただ足さない＝濁らない）
+        S = alpha[..., None] * S + beta[..., None] * torch.einsum('bi,bj->bij', v - alpha * pred, k)
+        o = torch.einsum('bij,bj->bi', S, q)         # 更新後の状態を q で読む
+        return self.out(o), S                        # 次の状態 S を持ち回る（O(d²)定数）
+```
+
+> 設計の勘どころ（私が踏んだ落とし穴）：**α・β は"入力から動的に"決める**こと。固定の減衰にすると、訓練窓の統計に最適化されて「いつ忘れ、いつ覚えるか」を切り替えられず、長文脈で頭打ちになります（私はここを静的にしていて詰まった＝6-4）。`alpha`/`beta` を定数にした版と差し替えて比べると、データ依存ゲートの効きが体感できます。
+
+### 7-4. feature map が「平ら過ぎないか」を1分で診断する
+
+線形アテンションは softmax を feature map φ で近似しますが、**φ が平ら（一様）すぎると、特定のトークンに注意を集中できず性能が出ません**（Hedgehog の指摘）。あなたの φ が健全かは、softmax と並べて「注意の尖り」を測れば1分で分かります。
+
+```python
+d = q.shape[-1]
+A_sm  = torch.softmax(q @ k.transpose(-1,-2) / d**0.5, dim=-1)          # 真のsoftmax(causal masked)
+phi = lambda t: F.elu(t) + 1
+W = phi(q) @ phi(k).transpose(-1,-2); A_lin = W / W.sum(-1, keepdim=True)  # 線形(正規化)
+print("top1 mass  softmax:", A_sm.max(-1).values.mean().item(),
+      " linear:",            A_lin.max(-1).values.mean().item())
+# softmax は 0.2〜0.8（尖っている）、線形(elu+1)は ~1/T（ほぼ一様）なら、φ が平ら過ぎる証拠
+```
+
+手元の実測（Qwen2.5-0.5B）では **softmax の top-1 質量 0.18〜0.82 に対し、elu+1 は約0.017（ほぼ一様）**。つまり素の elu+1 は出発点として平らすぎ、蒸留で尖らせる距離が大きい——という診断になりました。対策は学習可能な feature map（per-head の全結合 + softmax 正規化など）に上げること。
+
+> この4つは全部、**「すごい新手法」ではなく「自分の状態を正直に測る道具」**です。派手さはありませんが、定数状態モデルを実際に動かすとき、最初に効くのはこの種の地味な計測でした。
+
+---
+
 ## まとめと次
 
 - **perplexityは平気で嘘をつく**。特に定数状態アテンションのような「長文脈でしか弱点が出ない」対象を、短い窓1点で測ると、**痛みが出ない場所で痛みを測る**ことになる。
