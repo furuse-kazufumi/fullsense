@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="Segoe UI, Hiragino Kaku Gothic ProN, Meiryo, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 468" font-family="Segoe UI, Hiragino Kaku Gothic ProN, Meiryo, sans-serif">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#161b22"/>
     </linearGradient>
   </defs>
-  <rect width="760" height="440" fill="url(#bg)"/>
+  <rect width="760" height="468" fill="url(#bg)"/>
 
-  <text x="34" y="40" fill="#e6edf3" font-size="22" font-weight="700">amortization ── recurrent は decode で O(1) に落ちる、GPT は落ちない</text>
+  <text x="34" y="40" fill="#e6edf3" font-size="20.5" font-weight="700">amortization ── recurrent は decode で O(1) に落ちる、GPT は落ちない</text>
   <text x="34" y="64" fill="#8b949e" font-size="13.5">同一ラン内で prefill(状態構築)と decode(次の 1 トークン)を計測。各線を T=128 で正規化(指数ベースの理想線)</text>
 
   <!-- plot area: x 90..710 (log2 128..2048), y 100..360 (log10 x1..x100) -->
@@ -63,5 +63,6 @@
 
   <!-- footer -->
   <line x1="34" y1="398" x2="726" y2="398" stroke="#21262d" stroke-width="1"/>
-  <text x="34" y="420" fill="#8b949e" font-size="12.5">honest: <tspan fill="#c9d1d9" font-weight="700">cross-mode の絶対時間は比較不可</tspan>・GPT 絶対 growth は混雑でばらつく。load-bearing は「各モード内の指数」と「GPT は prefill≒decode / recurrent だけ decode 平坦」。</text>
+  <text x="34" y="420" fill="#8b949e" font-size="12.5">honest: <tspan fill="#c9d1d9" font-weight="700">cross-mode の絶対時間は比較不可</tspan>・GPT 絶対 growth は混雑でばらつく。</text>
+  <text x="34" y="440" fill="#8b949e" font-size="12.5">load-bearing は「各モード内の指数」と「GPT は prefill≒decode / recurrent だけ decode 平坦」。</text>
 </svg>

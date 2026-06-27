@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="Segoe UI, Hiragino Kaku Gothic ProN, Meiryo, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" font-family="Segoe UI, Hiragino Kaku Gothic ProN, Meiryo, sans-serif">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#161b22"/>
     </linearGradient>
   </defs>
-  <rect width="760" height="440" fill="url(#bg)"/>
+  <rect width="760" height="470" fill="url(#bg)"/>
 
   <text x="34" y="40" fill="#e6edf3" font-size="22" font-weight="700">「6%→100%」のはずが「95%→100%」— ゲートの出番が無かった</text>
   <text x="34" y="64" fill="#8b949e" font-size="13.5">Z3 で発散しない構造だけ通す安全ゲート(自宅 CPU PoC)。目的関数が既に安全側を報酬 → ゲートは冗長に。</text>
@@ -63,5 +63,6 @@
 
   <!-- footer -->
   <line x1="34" y1="398" x2="726" y2="398" stroke="#21262d" stroke-width="1"/>
-  <text x="34" y="420" fill="#8b949e" font-size="12.5">安全ゲートが効くのは<tspan fill="#c9d1d9" font-weight="700">目的関数が危険(発散)側を好むとき</tspan>。目的が既に安全を報酬していれば、ゲートは出番が無い(Z3 は健全に稼働・196 中 71 棄却)。</text>
+  <text x="34" y="420" fill="#8b949e" font-size="12.5">安全ゲートが効くのは<tspan fill="#c9d1d9" font-weight="700">目的関数が危険(発散)側を好むとき</tspan>。</text>
+  <text x="34" y="440" fill="#8b949e" font-size="12.5">目的が既に安全を報酬していれば、ゲートは出番が無い(Z3 は健全に稼働・196 中 71 棄却)。</text>
 </svg>

@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="Segoe UI, Hiragino Kaku Gothic ProN, Meiryo, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 465" font-family="Segoe UI, Hiragino Kaku Gothic ProN, Meiryo, sans-serif">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#161b22"/>
     </linearGradient>
   </defs>
-  <rect width="760" height="440" fill="url(#bg)"/>
+  <rect width="760" height="465" fill="url(#bg)"/>
 
   <text x="34" y="40" fill="#e6edf3" font-size="22" font-weight="700">時間でも同じ向き — GPT は超線形、recurrent 系は線形</text>
   <text x="34" y="64" fill="#8b949e" font-size="13.5">推論レイテンシのスケーリング(両対数)。各モードを T=128 で正規化=増え方の「形」だけを比較</text>
@@ -62,5 +62,6 @@
 
   <!-- footer -->
   <line x1="34" y1="398" x2="726" y2="398" stroke="#21262d" stroke-width="1"/>
-  <text x="34" y="420" fill="#8b949e" font-size="12.5">honest: cross-mode の<tspan fill="#c9d1d9" font-weight="700">絶対時間は比較不可</tspan>(recurrent 系は Python per-step ループ計測)。読むのは各モード内の傾き(scaling 指数)だけ。</text>
+  <text x="34" y="420" fill="#8b949e" font-size="12.5">honest: cross-mode の<tspan fill="#c9d1d9" font-weight="700">絶対時間は比較不可</tspan>(recurrent 系は Python per-step ループ計測)。</text>
+  <text x="34" y="440" fill="#8b949e" font-size="12.5">読むのは各モード内の傾き(scaling 指数)だけ。</text>
 </svg>
