@@ -476,7 +476,7 @@ flowchart TB
     end
     HF <-.->|"✅ logits差 最大1e-4 で一致"| NAT
     NAT --> MOD
-    subgraph MOD["□ スロットに乗せる改造（HF generate では不可能）"]
+    subgraph MOD["□ 改造スロット（HF では不可）"]
         direction TB
         M1["① attention → 定数状態/線形<br/>メモリ O(T)→O(1)<br/>🔧 実装済・品質コスト評価中"]
         M2["② int8 量子化<br/>RAM 5.7→2.4GB<br/>🔧 実装済・CPUは遅い(0.7tok/s)"]
