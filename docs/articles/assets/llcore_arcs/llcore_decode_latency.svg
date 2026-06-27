@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="Segoe UI, Hiragino Kaku Gothic ProN, Meiryo, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#161b22"/>
+    </linearGradient>
+  </defs>
+  <rect width="760" height="440" fill="url(#bg)"/>
+
+  <text x="34" y="40" fill="#e6edf3" font-size="22" font-weight="700">amortization ── recurrent は decode で O(1) に落ちる、GPT は落ちない</text>
+  <text x="34" y="64" fill="#8b949e" font-size="13.5">同一ラン内で prefill(状態構築)と decode(次の 1 トークン)を計測。各線を T=128 で正規化(指数ベースの理想線)</text>
+
+  <!-- plot area: x 90..710 (log2 128..2048), y 100..360 (log10 x1..x100) -->
+  <line x1="90" y1="360" x2="710" y2="360" stroke="#30363d" stroke-width="2"/>
+  <line x1="90" y1="100" x2="90" y2="360" stroke="#30363d" stroke-width="2"/>
+  <text x="700" y="384" fill="#6e7681" font-size="12" text-anchor="end">文脈長 T (tok, 対数)</text>
+  <text x="34" y="108" fill="#6e7681" font-size="12">相対コスト (×, 対数)</text>
+
+  <!-- y gridlines at x1,x3,x10,x30,x100 -->
+  <line x1="90" y1="360.0" x2="710" y2="360.0" stroke="#21262d" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="84" y="364" fill="#6e7681" font-size="11" text-anchor="end">×1</text>
+  <line x1="90" y1="298.0" x2="710" y2="298.0" stroke="#21262d" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="84" y="302" fill="#6e7681" font-size="11" text-anchor="end">×3</text>
+  <line x1="90" y1="230.0" x2="710" y2="230.0" stroke="#21262d" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="84" y="234" fill="#6e7681" font-size="11" text-anchor="end">×10</text>
+  <line x1="90" y1="168.0" x2="710" y2="168.0" stroke="#21262d" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="84" y="172" fill="#6e7681" font-size="11" text-anchor="end">×30</text>
+  <line x1="90" y1="100.0" x2="710" y2="100.0" stroke="#21262d" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="84" y="104" fill="#6e7681" font-size="11" text-anchor="end">×100</text>
+
+  <!-- x ticks 128,256,512,1024,2048 -->
+  <text x="90"  y="378" fill="#6e7681" font-size="11" text-anchor="middle">128</text>
+  <text x="245" y="378" fill="#6e7681" font-size="11" text-anchor="middle">256</text>
+  <text x="400" y="378" fill="#6e7681" font-size="11" text-anchor="middle">512</text>
+  <text x="555" y="378" fill="#6e7681" font-size="11" text-anchor="middle">1024</text>
+  <text x="710" y="378" fill="#6e7681" font-size="11" text-anchor="middle">2048</text>
+
+  <!-- GPT prefill == decode (overlap), p~1.37 (clean runner): to ~x44.5 -->
+  <polyline points="90,360.0 245,306.4 400,252.8 555,199.3 710,145.7" fill="none" stroke="#f85149" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="90" cy="360.0" r="4.5" fill="#f85149"/>
+  <circle cx="710" cy="145.7" r="4.5" fill="#f85149"/>
+  <text x="700" y="138" fill="#f85149" font-size="12" font-weight="700" text-anchor="end">GPT prefill ≒ decode(p≈1.37, 分離不可)</text>
+
+  <!-- recurrent / RWKV prefill, p~1.0 (O(T)): medium slope to ~x15.6 -->
+  <polyline points="90,360.0 245,321.2 400,282.4 555,243.7 710,204.9" fill="none" stroke="#3fb950" stroke-width="2.5" stroke-dasharray="7 5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="710" cy="204.9" r="4.5" fill="#3fb950"/>
+  <text x="700" y="199" fill="#3fb950" font-size="12" font-weight="700" text-anchor="end">recurrent / RWKV prefill(p≈1.0, O(T))</text>
+
+  <!-- recurrent / RWKV decode, p~0 (O(1)): flat at x1 -->
+  <polyline points="90,357.0 245,357.0 400,357.0 555,357.0 710,357.0" fill="none" stroke="#3fb950" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="90" cy="357.0" r="4.5" fill="#3fb950"/>
+  <circle cx="710" cy="357.0" r="4.5" fill="#3fb950"/>
+  <text x="420" y="349" fill="#3fb950" font-size="12" font-weight="700" text-anchor="middle">recurrent / RWKV decode(p≈0, O(1)= amortized)</text>
+
+  <!-- amortization gap annotation -->
+  <line x1="710" y1="211" x2="710" y2="351" stroke="#d29922" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="704" y="280" fill="#d29922" font-size="11" text-anchor="end">この差 = amortization</text>
+
+  <!-- legend -->
+  <rect x="110" y="120" width="14" height="14" rx="3" fill="#f85149"/>
+  <text x="130" y="132" fill="#e6edf3" font-size="13">GPT(KV cache 無)= decode は prefill と同一計算(全文脈の再 forward)→ 分離できない</text>
+  <rect x="110" y="144" width="14" height="14" rx="3" fill="#3fb950"/>
+  <text x="130" y="156" fill="#e6edf3" font-size="13">recurrent / RWKV = prefill O(T) で状態構築 → decode は O(1)。長い生成ほど効く</text>
+
+  <!-- footer -->
+  <line x1="34" y1="398" x2="726" y2="398" stroke="#21262d" stroke-width="1"/>
+  <text x="34" y="420" fill="#8b949e" font-size="12.5">honest: <tspan fill="#c9d1d9" font-weight="700">cross-mode の絶対時間は比較不可</tspan>・GPT 絶対 growth は混雑でばらつく。load-bearing は「各モード内の指数」と「GPT は prefill≒decode / recurrent だけ decode 平坦」。</text>
+</svg>
