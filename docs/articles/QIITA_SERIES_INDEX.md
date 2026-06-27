@@ -82,7 +82,8 @@ nav_order: 1
 | verified-plasticity arc | verified 構造進化の small-n 壁 (Phase 1) | [drafts/#39](./drafts/QIITA_%2339_verified_plasticity_small_n_wall.md) | draft |
 | verified-plasticity arc | capability NEGATIVE — 強い勾配が進化に勝つ (実 SmolLM2-CE, ARTIFACT+NEGATIVE) | [drafts/#40](./drafts/QIITA_%2340_capability_negative_strong_gradient.md) | draft |
 | verified-plasticity arc | **verified-plasticity = ラングトンの蟻の幻** — 経験 gate は発散の84%を見逃す capstone メタ記事 (JA/EN/ZH/KO + かみくだき) | [drafts/#41](./drafts/QIITA_%2341_verified_plasticity_langton_ant_meta.md) / [かみくだき](./drafts/QIITA_%2341_verified_plasticity_langton_ant_meta_kamikudaki.md) | draft |
-| honest arc | **限定共有** AIは平気で嘘をつく — 評価器を作り直し、2026 効率アーキ地図の中で自分の立ち位置を正直に測る（TTT→Gated DeltaNet 自己訂正 / 手法は LoLCATs 車輪の再発明 / plateau の犯人は訓練法） | [#43](./drafts/QIITA_%2343_honest_proxy_ja.md) ([limited](https://qiita.com/furuse-kazufumi/private/c53c97d9eab745404982)) | limited-share |
+| honest arc | **公開済(2026-06-27 flip)** #44 AIは平気で嘘をつく — 評価器を作り直し、2026 効率アーキ地図の中で自分の立ち位置を正直に測る（TTT→Gated DeltaNet 自己訂正 / 手法は LoLCATs 車輪の再発明 / plateau の犯人は訓練法） | [#44](./drafts/QIITA_%2344_honest_proxy_ja.md) ([live](https://qiita.com/furuse-kazufumi/items/c53c97d9eab745404982)) | public |
+| honest arc 総集編 | **非公開(Qiita Team)** #45 honest disclosure 総集編 — S/A/B/C 4 アーク（個別 48 本を 1 本に集約）。測り方を疑う→構造で勝つ→負けを見せる→技術の外へ。#44 のフルテキスト深掘り版。画像は fullsense/main raw URL 化済 | [#45](./drafts/QIITA_%2345_honest_disclosure_anthology_ja.md) | draft / Team |
 
 ## メンテナンス note
 
