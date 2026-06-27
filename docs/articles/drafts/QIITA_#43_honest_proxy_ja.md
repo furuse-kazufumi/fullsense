@@ -470,7 +470,7 @@ flowchart TB
     W --> HF
     W --> NAT
     HF["🎹 HF transformers<br/>generate() ＝ ブラックボックス<br/>（中の層は触れない）"]
-    subgraph NAT["🎻 llcore 自前 forward（runtime/qwen2.py）＝ 自作の演奏者"]
+    subgraph NAT["🎻 自作 forward ＝ 演奏者"]
         direction TB
         E["embedding"] --> LY["層1 … 層N：各層 ＝ attn□ ＋ MLP<br/>□ ＝ 自分で握る差し替えスロット"] --> O["norm → lm_head"]
     end
