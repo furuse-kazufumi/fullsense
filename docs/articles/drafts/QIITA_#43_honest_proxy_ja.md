@@ -474,7 +474,7 @@ flowchart TB
         direction TB
         E["embedding"] --> LY["層1 … 層N：各層 ＝ attn□ ＋ MLP<br/>□ ＝ 自分で握る差し替えスロット"] --> O["norm → lm_head"]
     end
-    HF <-.->|"同じ入力 → 同じ出力／logits差 最大1e-4<br/>✅ 実測で一致を確認（土台が正しい）"| NAT
+    HF <-.->|"✅ logits差 最大1e-4 で一致"| NAT
     NAT --> MOD
     subgraph MOD["□ スロットに乗せる改造（HF generate では不可能）"]
         direction TB
