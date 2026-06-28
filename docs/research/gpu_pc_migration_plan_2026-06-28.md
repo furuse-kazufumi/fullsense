@@ -13,21 +13,27 @@
 - **即始動準備済(2026-06-27)**: 自前 forward が HF transformers と golden 一致(CPU 実証)/ 改造①〜④(linearize/quant/loader-mmap/distill)実装 / 正直な評価器 proxy v2 整備。GPU 到来で「黄/赤ブロックを緑にする本走」を即投入可。
 - **移行元(実測 2026-06-28)**: HP ノート **i7-1065G7 (4C/8T, 1.3GHz, 15W mobile) / RAM 16GB(オンボード=増設不可)/ Intel Iris(CUDA GPU 無し)/ Win11 Pro**。C: 568/952GB free、D: 1075/1863GB free(used ~788GB)。py: **3.11 が default**(+3.14/3.9/uv 3.12)。**このノートが CPU 本走 6–9h の真因**=流用ゼロ・新規デスクトップ必須。
 
-## 1. ハードウェア(★購入確定 2026-06-28 — 組立後出荷待ち)
+## 1. ハードウェア(★購入確定 — 注文明細 2026-06-28、組立後出荷待ち)
 
-**Ark BTO「GeForce RTX 5090 Founders Edition 標準搭載ハイエンドPC」 税込 ¥978,000**
-(<https://www.ark-pc.co.jp/i/72003600/>)。当初推奨(中古3090/4090・24GB)を大きく上回るハイエンド構成 → 開いていたハード判断(§9 旧版)は**すべて解決**。
+**arkhive Gaming Limited GL-I7G59M Founders Edition(型番 AG-IA24D2TB86MGB9F-CF4) 税込 ¥978,000**
+(<https://www.ark-pc.co.jp/i/72003600/>)。当初推奨(中古3090/4090・24GB)を大きく上回るハイエンド → 開いていたハード判断は**すべて解決**。
 
 | 部品 | 確定スペック | 計画への含意 |
 |---|---|---|
-| **GPU** | **GeForce RTX 5090 Founders Edition / 32GB GDDR7(Blackwell, sm_120)** | VRAM 32GB = 射程拡大(3B 快適・7–14B fine-tune 可・70B int4 は際どい)。★ソフト=cu128 必須(下記) |
-| **CPU** | **Intel Core Ultra 7 270K**(Arrow Lake, LGA1851)| ノート 15W i7-1065G7 比で桁違い。CPU 前処理/データ load も高速化 |
-| **RAM** | **64GB DDR5-5600**(最大 128GB)| ★当初の「32GB 開始・後追い」不要。64GB 確保済=大コーパス前処理も安心。将来 128GB 増設余地あり |
-| **SSD** | **2TB NVMe** | working set(projects+docs+.claude ~数十GB)+ checkpoint/corpus に十分 |
-| **電源** | **1000W** | RTX 5090 TGP ~575W + transient に必要十分 |
+| **GPU** | **GeForce RTX 5090 Founders Edition / 32GB GDDR7(Blackwell, sm_120)** | VRAM 32GB = 3B 快適・7–14B fine-tune 可・70B int4 は際どい。★ソフト=**driver R570+ & torch cu128 必須**(§4) |
+| **CPU** | **Intel Core Ultra 7 270K Plus**(Arrow Lake, LGA1851)| 旧ノート 15W i7-1065G7 比で桁違い。前処理/データ load も加速 |
+| **RAM** | **128GB DDR5-5600(64GB×2 Crucial Pro CL46 EXPO ※OCメモリ)** | 大コーパス前処理・CPU offload に大余裕。★EXPO は AMD 系プロファイル=Intel B860 では XMP/手動で定格化、無ければ JEDEC で動く(BIOS 確認) |
+| **マザボ** | **ASRock B860M Steel Legend WiFi(Micro-ATX, WiFi/BT 内蔵)** | M.2 追加スロットあり(後で 2nd SSD = D: 増設可。§2)|
+| **SSD** | **2TB NVMe PCIe4.0 x4(Princeton PHD-ISM2G4)1 本のみ・パーティション分割なし** | ★**既定で C: だけ・D: が無い**=パス温存に対策必須(§2)|
+| **電源** | **1000W 80+ GOLD(Cooler Master Elite Gold 1000)** | RTX 5090 TGP ~575W + transient に十分 |
+| **CPUクーラー** | Cooler Master V4 Alpha 3DHP(デュアル 12cm サイドフロー)| 空冷・標準 |
+| **ケース** | **Cooler Master MasterFrame 400 Mesh Silver【入荷待ち】** | ★ケース入荷待ち=出荷遅延リスク(§7)|
+| **OS** | **Windows 11 Pro 64bit DSP プリインストール** | ★OS インストール不要。dev 環境を載せるだけ |
+| 保証 | 通常保証 1年(標準構成)| 周辺機器/Office/セキュリティ無し |
 
-- **VRAM 32GB(24GB 想定→拡大)**: llcore 射程 ≤32B の線形化/量子化/蒸留に余裕。3B 本走・StateX continued-train・proxy v2 フル走を快適に。70B は int4 で際どい(Claude 代替不可なので無理に狙わない)。
-- **速度**: 旧ノート CPU 本走 6–9h は、3090 想定で 1–2h。**RTX 5090 は 3090 比 ~2–3×** なので、本日プローブ級は**数分〜数十分**見込み(forward 律速分のみ加速=Amdahl、楽観しない)。
+- **VRAM 32GB**: llcore 射程 ≤32B の線形化/量子化/蒸留に余裕。3B 本走・StateX continued-train・proxy v2 フル走を快適に。70B は int4 で際どい(Claude 代替不可なので無理に狙わない)。
+- **速度**: 旧ノート CPU 本走 6–9h は、3090 想定で 1–2h。**RTX 5090 は 3090 比 ~2–3×** → 本日プローブ級は**数分〜数十分**見込み(forward 律速分のみ加速=Amdahl、楽観しない)。
+- **128GB RAM** が効く場面: 大コーパス(RAD/aozora)前処理、複数モデル同時 load、CPU-offload による大型モデルの一部実行、データ生成。
 
 ## 2. パス戦略(★最重要 — 破損回避の鍵)
 
