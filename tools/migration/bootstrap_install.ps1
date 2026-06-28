@@ -315,7 +315,7 @@ Write-Host "   [warn] 現機の C:\Users\puruy\.semgrep\settings.yml は破損 (
 # ----------------------------------------------------------------------------
 Write-Head "11. scholar-search-mcp (MCP scholar-search / py3.11 常駐)"
 $hasScholar = $false
-try { $hasScholar = [bool](& py -3.11 -c "import scholar_search_mcp" 2>$null; $LASTEXITCODE -eq 0) } catch {}
+try { & py -3.11 -c "import scholar_search_mcp" 2>$null; $hasScholar = ($LASTEXITCODE -eq 0) } catch {}
 Step -Name "scholar-search-mcp 0.1.3" `
      -Check { $hasScholar }.GetNewClosure() `
      -CmdText "py -3.11 -m pip install scholar-search-mcp" `
