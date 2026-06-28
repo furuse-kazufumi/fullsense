@@ -7,6 +7,17 @@
 > 関連 = `gpu_pc_migration_plan_2026-06-28.md` / `migration_manifest_2026-06-28.md`
 > / memory `project_llcore_efficient_arch_landscape_2026_06_26` / `project_fullsense_unified_model_vision`。
 
+## RAD コーパス拡充(着手済 2026-06-28)
+
+GPU フェーズの研究基盤を厚くする低 compute 作業(fetch=I/O・probe 非干渉)。
+- **ツール検証済**: `fetch_arxiv_topical.py`(動作 OK)/ deps OK(py -3.11: numpy 2.4.4 / sklearn 1.8.0 / anthropic)。
+- **知見**: 既存ドメインの `arxiv_queries.txt` は live 木にも `D:/backup/raptor-corpus-20260510/` にも**無い** → 拡充は**クエリ新規作成**が前提。
+- **新規 focused ドメイン `efficient_seqmodels`** 作成(クエリ 14 本 = 線形 attn / SSM・Mamba / DeltaNet・gated delta / TTT / RWKV・gated linear recurrence / 線形化(LoLCATs・SUPRA・MOHAWK・Mamba-in-Llama)/ 蒸留 / KV 圧縮 / 長文脈 / chunkwise / associative recall / length extrapolation)。
+  - クエリ: `.claude/skills/corpus/efficient_seqmodels_corpus/arxiv_queries.txt`
+  - **fetch 進行中**(background, ~1120 papers, `--since 2023-01-01`)→ `.../papers/`、log `.../fetch.log`。
+  - **次(probe 完了後・CPU+haiku API)**: `PYTHONIOENCODING=utf-8 py -3.11 raptor_corpus2skill.py --source .claude/skills/corpus/efficient_seqmodels_corpus/papers --name efficient_seqmodels_corpus_v2 --overwrite --max-depth 2 --min-cluster-size 5 --max-clusters 8` → `D:/docs/efficient_seqmodels_corpus_v2/`(rad-research が即検索可)。
+- **追加候補**(次セッション): `open_model_architectures` / `llm` の recent refresh(クエリ新規作成 + `--since 2025-01-01`)、VLM 系(`multimodal` / manga・comic、T6 pursue 時)。
+
 ## 優先順位つきタスク(低 compute・GPU 不要)
 
 ### T1. ★GPU 実験の事前登録設計(最優先・純 design)
