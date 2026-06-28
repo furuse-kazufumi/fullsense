@@ -474,25 +474,183 @@ catch {
     Add-Result -Id '7' -Name $name7 -Status 'Fail' -Detail ("例外: {0}" -f $_.Exception.Message)
 }
 
-# ============================== サマリ =====================================
-$passN = @($script:Results | Where-Object { $_.Status -eq 'Pass' }).Count
-$failN = @($script:Results | Where-Object { $_.Status -eq 'Fail' }).Count
-$skipN = @($script:Results | Where-Object { $_.Status -eq 'Skip' }).Count
+# ============================== Check 8 ====================================
+# .claude.json (.claude\ の外・57KB) = MCP 配線/oauth/trust の本体。
+# 存在 + mcpServers のキー数を確認 (Connected 状態は `claude mcp list` で確認)。
+$name8 = '.claude.json 存在 + mcpServers 配線 (MCP 本体)'
+try {
+    if (-not (Test-Path -LiteralPath $ClaudeJsonPath -PathType Leaf)) {
+        Add-Result -Id '8' -Name $name8 -Status 'Fail' -Detail ("{0} が無い — MCP 配線/oauth/trust 未復元" -f $ClaudeJsonPath)
+    }
+    else {
+        $mcpCount = $null
+        try {
+            $cj = Get-Content -LiteralPath $ClaudeJsonPath -Raw -ErrorAction Stop | ConvertFrom-Json
+            if ($cj.PSObject.Properties.Name -contains 'mcpServers' -and $null -ne $cj.mcpServers) {
+                $mcpCount = @($cj.mcpServers.PSObject.Properties).Count
+            }
+            else { $mcpCount = 0 }
+        }
+        catch { $mcpCount = $null }
 
-Write-Host ''
-Write-Host '============================ Summary ========================'
-foreach ($r in $script:Results) {
-    $sym = switch ($r.Status) { 'Pass' { '✓' } 'Fail' { '✗' } 'Skip' { '-' } default { '?' } }
-    Write-Host ("  {0} {1,-4} {2}. {3}" -f $sym, $r.Status, $r.Id, $r.Name)
+        if ($null -eq $mcpCount) {
+            Add-Result -Id '8' -Name $name8 -Status 'Warn' -Detail '.claude.json はあるが JSON 解析不可 — 目視確認 (claude mcp list)'
+        }
+        elseif ($mcpCount -gt 0) {
+            Add-Result -Id '8' -Name $name8 -Status 'Pass' -Detail (".claude.json あり、mcpServers={0} 件 (確認: claude mcp list で Connected)" -f $mcpCount)
+        }
+        else {
+            Add-Result -Id '8' -Name $name8 -Status 'Warn' -Detail '.claude.json はあるが mcpServers が空 — MCP 未配線'
+        }
+    }
 }
-Write-Host '------------------------------------------------------------'
-Write-Host ("  Pass={0}  Fail={1}  Skip={2}  (total {3})" -f $passN, $failN, $skipN, $script:Results.Count)
-if ($failN -gt 0) {
-    Write-Host ("  result: {0} 件の Fail あり — 上記 detail を確認して緑化する" -f $failN)
+catch {
+    Add-Result -Id '8' -Name $name8 -Status 'Fail' -Detail ("例外: {0}" -f $_.Exception.Message)
 }
-else {
-    Write-Host '  result: Fail なし (Skip は環境差/未実装の許容範囲)'
+
+# ============================== Check 9 ====================================
+# .codex (Codex 二本柱の核) + browser-use の alpaca_state.json (trading の
+# live state。code 本体は D:\projects 側=travels だが live state は C: 常駐)。
+$name9 = '.codex 存在 + browser-use alpaca_state (Codex 核 / trading live)'
+try {
+    $codexOk  = Test-Path -LiteralPath $CodexDir -PathType Container
+    $alpacaOk = Test-Path -LiteralPath $BrowserUseState -PathType Leaf
+    if ($codexOk -and $alpacaOk) {
+        Add-Result -Id '9' -Name $name9 -Status 'Pass' -Detail ('.codex あり / alpaca_state.json 復元済')
+    }
+    else {
+        $miss = [System.Collections.Generic.List[string]]::new()
+        if (-not $codexOk) { $miss.Add($CodexDir) }
+        if (-not $alpacaOk) { $miss.Add($BrowserUseState) }
+        Add-Result -Id '9' -Name $name9 -Status 'Fail' -Detail ("欠落: {0}" -f ($miss -join ', '))
+    }
 }
-Write-Host '============================================================'
+catch {
+    Add-Result -Id '9' -Name $name9 -Status 'Fail' -Detail ("例外: {0}" -f $_.Exception.Message)
+}
+
+# ============================== Check 10 ===================================
+# User scope の平文 secret 3 キー。ファイルでない=D: travels で拾えないため
+# 新機で再設定/再発行が必要。プロセス env でなく User scope を直接読む。
+$name10 = 'User env secret 3 キー (ANTHROPIC/TELEGRAM/SOCIALDATA)'
+try {
+    $envKeys = @('ANTHROPIC_API_KEY', 'TELEGRAM_BOT_TOKEN', 'SOCIALDATA_API_KEY')
+    $setList = [System.Collections.Generic.List[string]]::new()
+    $unset   = [System.Collections.Generic.List[string]]::new()
+    foreach ($k in $envKeys) {
+        $v = [Environment]::GetEnvironmentVariable($k, 'User')
+        if ([string]::IsNullOrWhiteSpace($v)) { $unset.Add($k) }
+        else { $setList.Add(("{0}(len{1})" -f $k, $v.Length)) }
+    }
+    if ($unset.Count -eq 0) {
+        Add-Result -Id '10' -Name $name10 -Status 'Pass' -Detail ("set: {0}" -f ($setList -join ', '))
+    }
+    else {
+        $d = ("未設定: {0}" -f ($unset -join ', '))
+        if ($setList.Count -gt 0) { $d += (" | set: {0}" -f ($setList -join ', ')) }
+        Add-Result -Id '10' -Name $name10 -Status 'Fail' -Detail $d
+    }
+}
+catch {
+    Add-Result -Id '10' -Name $name10 -Status 'Fail' -Detail ("例外: {0}" -f $_.Exception.Message)
+}
+
+# ============================== Check 11 ===================================
+# gh auth (再auth 可) と git user.email (再設定可)。両方欠けは Fail、片方は
+# 復旧容易のため Warn (exit code に影響させない)。
+$name11 = 'gh auth status OK / .gitconfig user.email 設定済'
+try {
+    $ghOk = $false; $ghDetail = 'gh 未導入'
+    if (Get-Command gh -ErrorAction SilentlyContinue) {
+        $null = & gh auth status 2>&1
+        if ($LASTEXITCODE -eq 0) { $ghOk = $true; $ghDetail = 'gh auth OK' }
+        else { $ghDetail = 'gh 未ログイン (gh auth login)' }
+    }
+    $email = ''
+    if (Get-Command git -ErrorAction SilentlyContinue) {
+        $email = (& git config --global user.email 2>$null | Out-String).Trim()
+    }
+    $emailOk = -not [string]::IsNullOrWhiteSpace($email)
+    $detail11 = ("{0} | git user.email={1}" -f $ghDetail, $(if ($emailOk) { $email } else { '(未設定)' }))
+
+    if ($ghOk -and $emailOk) {
+        Add-Result -Id '11' -Name $name11 -Status 'Pass' -Detail $detail11
+    }
+    elseif (-not $ghOk -and -not $emailOk) {
+        Add-Result -Id '11' -Name $name11 -Status 'Fail' -Detail $detail11
+    }
+    else {
+        Add-Result -Id '11' -Name $name11 -Status 'Warn' -Detail ("{0} (片方欠落 — gh/git は復旧容易)" -f $detail11)
+    }
+}
+catch {
+    Add-Result -Id '11' -Name $name11 -Status 'Fail' -Detail ("例外: {0}" -f $_.Exception.Message)
+}
+
+# ============================== Check 12 ===================================
+# Scheduled Tasks が Ready + action が D:\tools\raptor を指すか。
+# 旧機では RAPTOR-Backup/CorpusUpdate の action が壊れた C: 依存
+# (C:\Python314\python.exe / 不在の C:\Users\puruy\raptor\...) を指す可能性が
+# あり、新機では py -3.11 + D:\tools\raptor\libexec へ是正されている必要がある。
+$name12 = 'Scheduled Tasks Ready + action が D:\tools\raptor を参照'
+try {
+    $wantTasks = @('FullSense-StatusTelegram', 'RAPTOR-Backup', 'RAPTOR-CorpusUpdate')
+    $lines    = [System.Collections.Generic.List[string]]::new()
+    $anyFail  = $false
+    $anyWarn  = $false
+
+    foreach ($tn in $wantTasks) {
+        $t = $null
+        try { $t = Get-ScheduledTask -TaskName $tn -ErrorAction Stop } catch { $t = $null }
+        if ($null -eq $t) {
+            $lines.Add(("{0}=未登録" -f $tn)); $anyFail = $true; continue
+        }
+
+        $state = [string]$t.State
+        $actStr = ''
+        foreach ($a in @($t.Actions)) {
+            $exe = ''; $arg = ''
+            if ($a.PSObject.Properties.Name -contains 'Execute' -and $null -ne $a.Execute) { $exe = [string]$a.Execute }
+            if ($a.PSObject.Properties.Name -contains 'Arguments' -and $null -ne $a.Arguments) { $arg = [string]$a.Arguments }
+            $actStr += ("{0} {1} " -f $exe, $arg)
+        }
+
+        $tag = ("{0}=[{1}]" -f $tn, $state)
+        if ($state -ne 'Ready') { $tag += '(not Ready)'; $anyWarn = $true }
+
+        # RAPTOR 系のみ action パス是正を検証 (FullSense-StatusTelegram は state のみ)
+        if ($tn -ne 'FullSense-StatusTelegram') {
+            $pointsRaptor = $actStr -match 'D:\\tools\\raptor'
+            $cDep         = ($actStr -match 'C:\\Users\\puruy\\raptor') -or ($actStr -match 'C:\\Python314')
+            if ($pointsRaptor) {
+                $tag += ' action->D:\tools\raptor OK'
+            }
+            elseif ($cDep) {
+                $tag += ' action=旧C:依存(要是正: py -3.11 + D:\tools\raptor\libexec)'; $anyWarn = $true
+            }
+            else {
+                $tag += ' action=?(D:\tools\raptor 不参照 — 要確認)'; $anyWarn = $true
+            }
+        }
+        $lines.Add($tag)
+    }
+
+    $detail12 = ($lines -join ' | ')
+    if ($anyFail) {
+        Add-Result -Id '12' -Name $name12 -Status 'Fail' -Detail $detail12
+    }
+    elseif ($anyWarn) {
+        Add-Result -Id '12' -Name $name12 -Status 'Warn' -Detail $detail12
+    }
+    else {
+        Add-Result -Id '12' -Name $name12 -Status 'Pass' -Detail $detail12
+    }
+}
+catch {
+    Add-Result -Id '12' -Name $name12 -Status 'Fail' -Detail ("例外: {0}" -f $_.Exception.Message)
+}
+
+# ============================== サマリ =====================================
+$failN = Show-Summary
 
 if ($failN -gt 0) { exit 1 } else { exit 0 }
