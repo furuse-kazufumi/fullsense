@@ -75,10 +75,10 @@
 
 ## 4. 環境セットアップ(新機 OS 後)
 
-1. **OS = Windows 11 を維持**(現と統一。PowerShell/Git Bash 二本立て・パス互換・tool-guard/ccr/全スクリプトが Windows 前提)。Linux dual-boot は GPU 僅差有利だが移行コスト大 → 非推奨。
-2. **NVIDIA driver**(最新 Studio/Game Ready、**CUDA 12.4+ 対応版**)。CUDA toolkit は PyTorch wheel 同梱のため **driver のみで可**。
+1. **OS = Windows 11 Pro(プリインストール済 → インストール不要)**。現と統一で PowerShell/Git Bash 二本立て・パス互換・tool-guard/ccr/全スクリプトが Windows 前提。初回セットアップで **ユーザー名 `puruy`**(§2-1)。Linux は移行コスト大 → 非推奨。
+2. **★NVIDIA driver = Blackwell 対応 R570 以降**(RTX 5090 = sm_120)。CUDA toolkit は PyTorch wheel 同梱のため driver のみで可。
 3. **Python**: `py -3.11`(全 FullSense)+ 3.14/3.9/uv 3.12 を現状踏襲。
-4. **torch CUDA 版**: `py -3.11 -m pip install torch --index-url https://download.pytorch.org/whl/cu124`(現 CPU torch 2.12 → CUDA 版。版整合を確認)。
+4. **★torch CUDA 版 = cu128(Blackwell 必須・cu124 不可)**: `py -3.11 -m pip install torch --index-url https://download.pytorch.org/whl/cu128`(2026 時点で安定 wheel あり。現 CPU torch 2.12 → cu128 版へ)。**検証**: `torch.cuda.get_device_capability()` が **(12, 0)** を返し、簡単な GEMM が `no kernel image` エラーを出さないこと(出たら torch 版が sm_120 未対応=cu128/nightly に上げる)。
 5. **各 project 依存再構築**(pyproject から venv 再生成)。llcore は src レイアウト(`PYTHONPATH=src` or editable install)。
 6. **ツール群再導入**: Git Bash / Node.js v24 / Rust 1.94 / uv / rtk(token killer)/ ccr(node-pty, zx build)。
 7. **環境変数**: `RAPTOR_DIR` / `RAPTOR_CALLER_DIR` / `ANTHROPIC_API_KEY`(`settings.local.json`)/ `api-keys.json`。
