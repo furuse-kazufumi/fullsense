@@ -96,11 +96,11 @@ function Add-Result {
     param(
         [Parameter(Mandatory)][string]$Id,
         [Parameter(Mandatory)][string]$Name,
-        [Parameter(Mandatory)][ValidateSet('Pass', 'Fail', 'Skip')][string]$Status,
+        [Parameter(Mandatory)][ValidateSet('Pass', 'Fail', 'Skip', 'Warn')][string]$Status,
         [string]$Detail = ''
     )
     $script:Results.Add([pscustomobject]@{ Id = $Id; Name = $Name; Status = $Status; Detail = $Detail })
-    $sym = switch ($Status) { 'Pass' { '✓' } 'Fail' { '✗' } 'Skip' { '-' } default { '?' } }
+    $sym = switch ($Status) { 'Pass' { '✓' } 'Fail' { '✗' } 'Skip' { '-' } 'Warn' { '!' } default { '?' } }
     Write-Host ("  [{0} {1,-4}] {2}. {3}" -f $sym, $Status, $Id, $Name)
     if ($Detail) { Write-Host ("          -> {0}" -f $Detail) }
 }
