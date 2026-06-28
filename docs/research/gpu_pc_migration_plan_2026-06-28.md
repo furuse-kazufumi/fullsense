@@ -44,16 +44,54 @@
 - ccr / raptor が `RAPTOR_DIR` / `RAPTOR_CALLER_DIR`、多数の `D:/` 絶対パス、`D:/api-keys.json`、`D:/docs`(RAD)、`D:/tools/raptor-analytics.db`。
 - llcore/fullsense スクリプトの `D:/projects/...`、Task Scheduler ジョブの絶対パス。
 
-→ 新機でも **C:/Users/puruy/** と **D:/** を同名で用意。パス変更は最小限に(変えるなら一括 grep して洗い出し)。
+→ 新機でも **C:/Users/puruy/** と **D:/** を同名で用意。**D: は内蔵分割でなく外付け SSD 本体を物理接続してレター D: を温存する**(§2-2)ので、`D:/` 配下のハードコードは robocopy 不要でそのまま成立する。C: 常駐分のみ展開(§3)。パス変更は原則しない(変えるなら一括 grep して洗い出し)。
 
-**★新機の前提と対策(注文明細で判明 — 2TB 1 本・パーティション分割なし=既定で C: だけ・D: 無し)**:
+### 2-1. Windows ユーザー名は `puruy`(★最優先)
 
-1. **Windows ユーザー名を `puruy` で作成**(初回セットアップ時)。グローバル hook が `C:/Users/puruy/.claude/hooks/...`、memory が `C:/Users/puruy/.claude/projects/...` を参照するため、ユーザー名が違うと全 hook/memory パスが破損。**最優先**。
-2. **D: ボリュームを用意**(`D:/` ハードコードが大量=tool-guard グローバル hook の絶対パス含む)。2 案:
-   - **(A) 2TB を C:+D: に分割(推奨・追加費用ゼロ)**: Win11 の「ディスクの管理」で C: を縮小 → 未割当に **D: を作成**(例 C: 800GB / D: 1.1TB)。移行データ(projects+docs+.claude ~数十GB+将来 checkpoint)に D: 1TB+ は十分。
-   - **(B) 2nd M.2 SSD を増設して D: に割当**: B860M は M.2 追加スロットあり(注文では「追加SSD 未選択」)。物理分離で I/O 余裕・後から可。急がば (A) で開始し後日 (B) も可。
-3. C:/D: を揃えたら **§3 のデータを同一絶対パスへ展開** → ハードコード破損ゼロ。
-4. 残る環境差(`C:/Python314` 等の py インストール先、`RAPTOR_DIR`)は §4 で再設定。
+- **Windows ユーザー名を `puruy` で作成**(初回セットアップ時)。グローバル hook が `C:/Users/puruy/.claude/hooks/...`、memory が `C:/Users/puruy/.claude/projects/...` を参照するため、ユーザー名が違うと全 hook/memory/`.claude.json`/gh/gitconfig パスが破損。**最優先**。
+- ★**MS アカウントで OOBE すると `C:\Users\<先頭5字>`(例 `C:\Users\puruy` にならず `C:\Users\furus` 等)になり全 hook/memory/.claude.json/gh/gitconfig が破損する** → **必ずローカルアカウント `puruy` で作成**(OOBE でネット切断 or「サインインオプション→オフライン アカウント」)。
+- C: を揃えたら **§3 の C: 常駐 inventory を同一絶対パスへ展開**、`D:/` 配下はレター固定だけで温存。残る環境差(`C:/Python314` 等の py インストール先、`RAPTOR_DIR`)は §4 で再設定。
+
+### 2-2. Day-of: D: レター確認・固定(★全手順の前提)
+
+外付け SanDisk Extreme(exFAT/USB)を接続し、**レター D: を確実に割り当てる**。新機は内蔵 2TB が C: 単一なので D: は空いている公算が高いが、他 removable と衝突し得るため固定する。
+
+1. **他の removable / USB ストレージを全部外し**、外付け SanDisk を**単独**接続する(レター取り合いを排除)。
+2. 確認: `Get-Disk` / `Get-Partition` / `Get-Volume`(SanDisk Extreme 55AE / exFAT / Size ~2.0TB を識別)。
+3. SanDisk が **E: 等になっていたら D: へ付け替え**(GptId 束縛で永続):
+   ```powershell
+   Set-Partition -DiskNumber <n> -PartitionNumber 1 -NewDriveLetter D
+   ```
+4. **D: が別ボリュームに取られていた**ら、先に解放してから付与:
+   ```powershell
+   Remove-PartitionAccessPath -DiskNumber <別disk> -PartitionNumber <p> -AccessPath 'D:\'
+   Set-Partition -DiskNumber <n> -PartitionNumber 1 -NewDriveLetter D
+   ```
+   diskpart 版: `diskpart` → `list volume` → `select volume <n>` → `assign letter=D`。
+5. **温存確認(sentinel)**: `Test-Path D:\tools\raptor`(true なら本物の作業ディスクが D: にマウントされている)。`fsutil fsinfo volumeinfo D:` で exFAT を再確認。
+6. exFAT は非ジャーナル=破損に弱い。当面 USB 運用のまま検証し、安定後に §2-3 の内蔵 NVMe 化で恒久化する。
+
+### 2-3. Phase 2: D: を内蔵 NVMe(NTFS)へ移管(後日・安定化/冗長化/exFAT 脱却)
+
+外付け筐体(SanDisk Extreme Portable)は封止・基板直付けの公算大=分解 harvest は見込み薄。よって **別途内蔵 NVMe を増設し D:→内蔵へ copy** してレタースワップする(harvest でなく copy)。
+
+1. **内蔵 NVMe を B860M の空き M.2 に増設** → NTFS で初期化し一時レター **X:** を割当。
+2. **全コピー**(ジャンクション保護・属性保持):
+   ```powershell
+   robocopy D:\ X:\ /MIR /XJ /R:1 /W:1 /COPY:DAT /DCOPY:DAT
+   ```
+3. **レタースワップ**: 外付けを **Y: に降格** → 内蔵 X: を **D: に昇格**(`Set-Partition ... -NewDriveLetter`)。
+4. **内蔵 D: を BitLocker 暗号化** + `Enable-BitLockerAutoUnlock -MountPoint D`(平文 exFAT 脱却 + at-rest 保護)。
+5. **外付け Y: は backup として退役温存**(旧ノートが緑化するまで唯一コピーを潰さない)。
+6. **当面 USB 運用の固め**(Phase 2 まで外付けを酷使しないための堅牢化):
+   - USB selective suspend を無効化:
+     ```powershell
+     powercfg /SETACVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0
+     powercfg /SETACTIVE SCHEME_CURRENT
+     ```
+   - standby/hibernate を AC=0 に / デバイスマネージャで該当 USB の「電源オフを許可」をオフ / ポリシーを Better performance に。
+   - BIOS 起動順=**内蔵 NVMe 最優先**(外付けから起動しない)。
+   - checkpoint / HF cache の書込先は **内蔵 C:** へ(外付けの write 摩耗と USB 律速を回避)。
 
 ## 3. データ移行(現 C:/D: → 新機)
 
