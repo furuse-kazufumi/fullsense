@@ -145,6 +145,32 @@ function Restore-AbsPathFromRel {
     return ('{0}:\{1}' -f $parts[0], $parts[1])
 }
 
+function Write-UserEnvSecret {
+    # User scope の env secret を <stage>\SECRET_user_env.txt に NAME=VALUE 形式で書き出す。
+    # 設定済みのキーのみ含める。1 つも無ければファイルを作らず $false を返す。
+    # ★値はログに出さない(キー名と件数のみ表示)。
+    param([Parameter(Mandatory)][string]$StageDir)
+
+    $lines    = @()
+    $included = @()
+    foreach ($name in $SecretEnvNames) {
+        $val = [Environment]::GetEnvironmentVariable($name, 'User')
+        if (-not [string]::IsNullOrEmpty($val)) {
+            $lines    += ('{0}={1}' -f $name, $val)
+            $included += $name
+        }
+    }
+    if ($included.Count -eq 0) {
+        Write-Host ('  User env secret: 設定済みのキーが無いため {0} は作成しません。' -f $SecretEnvFileName) -ForegroundColor DarkYellow
+        return $false
+    }
+    $dst = Join-Path $StageDir $SecretEnvFileName
+    Set-Content -LiteralPath $dst -Value $lines -Encoding utf8
+    Write-Host ('  含める: User env {0} キー [{1}] -> {2}(値は非表示)' -f `
+        $included.Count, ($included -join ', '), $SecretEnvFileName) -ForegroundColor Green
+    return $true
+}
+
 # ================================================================== BUNDLE
 function Invoke-Bundle {
     if (-not $Out) {
