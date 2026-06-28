@@ -184,7 +184,9 @@
 - **データ移行中の trading 欠損** → paper なので実害小だが、移行ウィンドウは旧機継続 or 明示一本化。
 - **パス不一致による hardcode 破損** → **D:/ レイアウト完全温存**で回避(tool-guard グローバル hook の絶対パス含む)。移行後 `torch.cuda` + tool-guard + ccr の 3 点をまず確認。
 - **torch CUDA × driver 版不整合** → driver は CUDA 12.4+ 対応、torch は cu124 wheel。
-- **秘密の移送** → `api-keys.json` は外付け一括コピーに混ぜず別経路(暗号化 USB / パスワード zip)。
+- **★D: 唯一コピーの単一障害** → D: は **平文 exFAT の携帯 SSD**(現在ダーティビット SET / "Full Repair Needed")で**唯一コピー**。落下/不正取り外し/exFAT 修復失敗で **ボリューム喪失=全データ単一障害**。緩和: 移送前 read-only スキャン(`Repair-Volume -DriveLetter D -Scan`)+ **off-disk 保険**(secret 暗号化バンドル / 未push git bundle / RAD 一部を別媒体)+ 「ハードウェアの安全な取り外し」+ chain-of-custody(手持ち移送)+ **着荷直後に鍵ローテ** + Phase 2 で内蔵 NTFS 化(§2-3)。**旧ノートは新機が全緑になるまでワイプ禁止**(実質バックアップ)。
+- **★C: 常駐 secret の at-rest 露出** → `.codex\auth.json`/`.ssh\id_ed25519`/`.claude\.credentials.json`/User env 3 キーは staging に平文で置かず `migrate_secrets.ps1 -Mode Bundle`(7z AES-256・ヘッダ暗号化)で運ぶ。`D:\api-keys.json`/raptor `settings.local.json` は D: 上=travels だが落下保険としてバンドルにも同梱。鍵は到着直後にローテ。
+- **★USB 外付け D: 常時運用の切断** → USB selective-suspend や緩み/抜けで D: が一時消失すると `D:/` 絶対パス参照が一斉に失敗。**tool-guard hook が D: 不在で fail-open すると保護が無音で消える**(fail-closed 確認必須)。緩和: §2-3 の selective-suspend 無効化・「電源オフを許可」オフ・Better performance、そして安定後の内蔵 NVMe 化。
 
 ## 9. 残る意思決定(ハードは購入確定済み)
 
