@@ -184,6 +184,34 @@ function Invoke-LlcoreDeviceScript {
     }
 }
 
+# --- サマリ出力 (末尾 + Check 0a の early-abort 双方から呼ぶ) ----------------
+function Show-Summary {
+    $passN = @($script:Results | Where-Object { $_.Status -eq 'Pass' }).Count
+    $failN = @($script:Results | Where-Object { $_.Status -eq 'Fail' }).Count
+    $warnN = @($script:Results | Where-Object { $_.Status -eq 'Warn' }).Count
+    $skipN = @($script:Results | Where-Object { $_.Status -eq 'Skip' }).Count
+
+    Write-Host ''
+    Write-Host '============================ Summary ========================'
+    foreach ($r in $script:Results) {
+        $sym = switch ($r.Status) { 'Pass' { '✓' } 'Fail' { '✗' } 'Skip' { '-' } 'Warn' { '!' } default { '?' } }
+        Write-Host ("  {0} {1,-4} {2}. {3}" -f $sym, $r.Status, $r.Id, $r.Name)
+    }
+    Write-Host '------------------------------------------------------------'
+    Write-Host ("  Pass={0}  Fail={1}  Warn={2}  Skip={3}  (total {4})" -f $passN, $failN, $warnN, $skipN, $script:Results.Count)
+    if ($failN -gt 0) {
+        Write-Host ("  result: {0} 件の Fail あり — 上記 detail を確認して緑化する" -f $failN)
+    }
+    elseif ($warnN -gt 0) {
+        Write-Host ("  result: Fail なし / Warn {0} 件 (exit 0。D: が USB/exFAT 等 = Phase 2 で内蔵 NTFS 化を検討)" -f $warnN)
+    }
+    else {
+        Write-Host '  result: Fail なし (Skip は環境差/未実装の許容範囲)'
+    }
+    Write-Host '============================================================'
+    return $failN
+}
+
 # ============================== バナー =====================================
 Write-Host ''
 Write-Host '============================================================'
