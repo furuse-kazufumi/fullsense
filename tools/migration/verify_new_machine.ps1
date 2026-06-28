@@ -223,6 +223,85 @@ Write-Host (" llcoreDir : {0}" -f $LlcoreDir)
 Write-Host (" mode      : {0}" -f ($(if ($SkipGpu) { 'GPU checks SKIPPED (-SkipGpu / dry-run)' } else { 'full (GPU expected)' })))
 Write-Host '------------------------------------------------------------'
 
+# ============================== Check 0a ===================================
+# D: ドライブ レター/FileSystem/HealthStatus/BusType + sentinel。
+# 新前提: D: は外付け SanDisk Extreme 55AE (exFAT/平文/USB) を物理移送しレター
+# D: を温存。D:\ 不在 = 外付け未接続/レター未固定 = 以降全項目が無意味 -> 即 Fail
+# で中止する。USB / exFAT / HealthStatus!=Healthy は (移行は可だが) Warn。
+$name0a = 'D: ドライブ レター/FS/Health/BusType + sentinel (外付け本体温存)'
+try {
+    if (-not (Test-Path -LiteralPath 'D:\')) {
+        Add-Result -Id '0a' -Name $name0a -Status 'Fail' `
+            -Detail 'D:\ が存在しない — 外付け SSD 未接続/レター未固定 (plan §2-2 で Set-Partition -NewDriveLetter D)。以降のチェックを中止する'
+        Write-Host ''
+        Write-Host '  [!] D: 不在のため以降のチェック (0b-12) を中止します'
+        [void](Show-Summary)
+        exit 1
+    }
+
+    # ボリューム情報 (FileSystem / HealthStatus)
+    $fsLabel = '?'; $health = '?'
+    try {
+        $vol = Get-Volume -DriveLetter D -ErrorAction Stop
+        if ($null -ne $vol.FileSystem) { $fsLabel = [string]$vol.FileSystem }
+        if ($null -ne $vol.HealthStatus) { $health = [string]$vol.HealthStatus }
+    }
+    catch { $fsLabel = '(Get-Volume 失敗)' }
+
+    # BusType (D: を載せる物理ディスク。取得失敗は unknown に degrade — 表示のみ)
+    $busType = 'unknown'
+    try {
+        $bt = (Get-Partition -DriveLetter D -ErrorAction Stop |
+            Get-Disk -ErrorAction Stop |
+            Get-PhysicalDisk -ErrorAction Stop).BusType
+        if ($null -ne $bt) { $busType = [string]$bt }
+    }
+    catch { $busType = 'unknown' }
+
+    # sentinel: D: が本物の作業ディスクか (別ボリュームの D: 化けを検出)
+    $sentinel = Test-Path -LiteralPath $RaptorRoot -PathType Container
+    $detail0a = ("FileSystem={0} Health={1} BusType={2} sentinel({3})={4}" -f $fsLabel, $health, $busType, $RaptorRoot, $sentinel)
+
+    if (-not $sentinel) {
+        Add-Result -Id '0a' -Name $name0a -Status 'Fail' `
+            -Detail ("{0} — sentinel 不在: D: が別ボリュームに誤マウントの可能性 (本物の作業ディスクでない)" -f $detail0a)
+    }
+    else {
+        $warns = [System.Collections.Generic.List[string]]::new()
+        if ($busType -eq 'USB') { $warns.Add('USB 接続 (Phase 2 で内蔵 NVMe へ移管推奨)') }
+        if ($fsLabel -eq 'exFAT') { $warns.Add('exFAT (非ジャーナル/平文 — 内蔵 NTFS 化推奨)') }
+        if ($health -ne '?' -and $health -ne 'Healthy') { $warns.Add(("HealthStatus={0} (Repair-Volume -Scan を検討)" -f $health)) }
+        if ($warns.Count -gt 0) {
+            Add-Result -Id '0a' -Name $name0a -Status 'Warn' -Detail ("{0} | 注意: {1}" -f $detail0a, ($warns -join ' / '))
+        }
+        else {
+            Add-Result -Id '0a' -Name $name0a -Status 'Pass' -Detail $detail0a
+        }
+    }
+}
+catch {
+    Add-Result -Id '0a' -Name $name0a -Status 'Fail' -Detail ("例外: {0}" -f $_.Exception.Message)
+}
+
+# ============================== Check 0b ===================================
+# ユーザー名 fail-closed。MS アカウント OOBE だと C:\Users\<別名> になり
+# 全 hook/memory/.claude.json/gh/gitconfig の固定パスが破綻するため、
+# ローカルアカウント puruy で作成されていることを確認する。
+$name0b = 'ユーザー名 == puruy (fail-closed / OOBE ローカルアカウント)'
+try {
+    $who = [string]$env:USERNAME
+    if ($who -eq 'puruy') {
+        Add-Result -Id '0b' -Name $name0b -Status 'Pass' -Detail ("USERNAME={0}" -f $who)
+    }
+    else {
+        Add-Result -Id '0b' -Name $name0b -Status 'Fail' `
+            -Detail ("USERNAME='{0}' (期待 'puruy') — MS アカウント OOBE で別名になると全固定パスが破損。ローカルアカウント puruy で作り直すこと" -f $who)
+    }
+}
+catch {
+    Add-Result -Id '0b' -Name $name0b -Status 'Fail' -Detail ("例外: {0}" -f $_.Exception.Message)
+}
+
 # ============================== Check 1 ====================================
 $name1 = 'torch.cuda.is_available() / get_device_name(0)'
 if (Test-GpuGate '1' $name1) {
