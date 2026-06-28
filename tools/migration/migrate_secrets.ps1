@@ -302,11 +302,27 @@ function Invoke-Restore {
             throw "未対応の拡張子: $ext(.7z か .zip)"
         }
 
-        # ステージ配下の <drive>\<rel> を元の絶対パスへ配置(MANIFEST.txt は除く)
+        # User env secret(SECRET_user_env.txt)を User scope へ再適用(値はログに出さない)。
+        # SetEnvironmentVariable は setx と異なり 1024 文字超でも切り詰めず永続化する。
+        $envApplied = 0
+        $envFile = Join-Path $stage $SecretEnvFileName
+        if (Test-Path -LiteralPath $envFile) {
+            foreach ($line in (Get-Content -LiteralPath $envFile)) {
+                if ($line -match '^\s*([^=#\s][^=]*)=(.*)$') {
+                    $name  = $matches[1].Trim()
+                    $value = $matches[2]
+                    [Environment]::SetEnvironmentVariable($name, $value, 'User')
+                    Write-Host ('  User env 設定(User scope): {0}(値は非表示)' -f $name) -ForegroundColor Green
+                    $envApplied++
+                }
+            }
+        }
+
+        # ステージ配下の <drive>\<rel> を元の絶対パスへ配置(MANIFEST.txt / env ファイルは除く)
         $restored = @()
         Get-ChildItem -LiteralPath $stage -Recurse -File | ForEach-Object {
             $rel = $_.FullName.Substring($stage.Length).TrimStart('\', '/')
-            if ($rel -ieq 'MANIFEST.txt') { return }
+            if ($rel -ieq 'MANIFEST.txt' -or $rel -ieq $SecretEnvFileName) { return }
             $abs = Restore-AbsPathFromRel -RelPath $rel
             $absDir = [System.IO.Path]::GetDirectoryName($abs)
 
