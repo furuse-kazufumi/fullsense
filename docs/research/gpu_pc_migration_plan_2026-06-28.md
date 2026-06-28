@@ -12,6 +12,7 @@
 - **CUDA C はほぼ不要**: ①動かす=自前 forward は PyTorch なので `model.to("cuda")` で自動 GPU(cuBLAS/cuDNN)/②高速化=Triton or 既存lib(bitsandbytes / flash-linear-attention / llama.cpp)/③CUDA C 自作は最後の手段で射程外。**forward を PyTorch で書いたことが移植性として効く**。
 - **即始動準備済(2026-06-27)**: 自前 forward が HF transformers と golden 一致(CPU 実証)/ 改造①〜④(linearize/quant/loader-mmap/distill)実装 / 正直な評価器 proxy v2 整備。GPU 到来で「黄/赤ブロックを緑にする本走」を即投入可。
 - **移行元(実測 2026-06-28)**: HP ノート **i7-1065G7 (4C/8T, 1.3GHz, 15W mobile) / RAM 16GB(オンボード=増設不可)/ Intel Iris(CUDA GPU 無し)/ Win11 Pro**。C: 568/952GB free、D: 1075/1863GB free(used ~788GB)。py: **3.11 が default**(+3.14/3.9/uv 3.12)。**このノートが CPU 本走 6–9h の真因**=流用ゼロ・新規デスクトップ必須。
+- **★移送方式(2026-06-28 一次検証で確定)**: **D: は外付け SSD 本体(SanDisk Extreme 55AE, exFAT, 平文, BusType=USB)を新機へ物理接続しレター D: を温存する**。内蔵 2TB は **C: 単一(分割しない)**。`D:/` の robocopy は不要 = **D: ごと travels**。残作業は **C: 常駐分のステージング** のみ(`.claude`/`.claude.json`/`.codex`/browser-use live state/ssh/env 等)。D: は現在 **HealthStatus=Warning / ダーティビット SET / 唯一コピー** のため移送前に read-only スキャン + off-disk 保険が必須(§8)。
 
 ## 1. ハードウェア(★購入確定 — 注文明細 2026-06-28、組立後出荷待ち)
 
