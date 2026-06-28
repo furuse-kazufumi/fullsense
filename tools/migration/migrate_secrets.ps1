@@ -342,8 +342,12 @@ function Invoke-Restore {
         } else {
             Write-Host '配置対象がありません(既存スキップ or 空アーカイブ)。' -ForegroundColor Yellow
         }
+        if ($envApplied -gt 0) {
+            Write-Host ("User env を {0} キー再適用しました(新しいプロセスから有効)。" -f $envApplied) -ForegroundColor Green
+        }
         Write-Host '★移行を機に API キーのローテーションを検討してください(plan/manifest §5)。' -ForegroundColor Yellow
-        Write-Host '★展開した平文 zip は転送後すぐ安全に破棄してください。' -ForegroundColor Yellow
+        Write-Host '★.credentials.json は端末紐づきのため、新機では claude 再ログインが前提です。' -ForegroundColor Yellow
+        Write-Host '★展開した平文バンドルは転送後すぐ安全に破棄してください。' -ForegroundColor Yellow
     }
     finally {
         if (Test-Path -LiteralPath $stage) { Remove-Item -LiteralPath $stage -Recurse -Force }
