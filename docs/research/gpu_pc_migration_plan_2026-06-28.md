@@ -106,7 +106,7 @@
 - **StateX continued-train / 3B スケール**。
 - **proxy v2 フル走**(K≥12、context sweep 2048–4096=SUPRA 級長文脈崩壊帯)。
 
-> ★初手の前提 = **llcore 学習スクリプトの device 配線**(`Trainer`/`TBPTTTrainer`/plateau experiment が現状 CPU-only)。詳細・必要変更は `migration_manifest_2026-06-28.md` §6。着荷後 Day 1 か本日プローブ完了後に実装(backward-compatible・~30分)。
+> ★初手の前提 = **llcore 学習スクリプトの device 配線** → **✅ 実装済(2026-06-28、移行準備セッション)**。`Trainer`/`TBPTTTrainer`/eval/longctx/3 entry script に `--device auto`(cuda if available)を backward-compatible に配線、CPU byte-identical(既存スイート全 green)+ mypy/ruff PASS。**着荷後 Day 1 は GPU 本走コマンドに `--device cuda` を付けるだけ**。詳細 = `migration_manifest_2026-06-28.md` §6。
 
 **新ブランチ候補(北極星とは別モダリティ — 意図的に選んでから着手)**:
 - **VLM(Vision-Language)検証**: 32GB は 7B 級 VLM(Qwen2.5-VL-7B / InternVL2.5-8B / Llama-3.2-11B-Vision / Pixtral / MiniCPM-V)を full 精度で推論+LoRA、~32B を int4 で推論可。**FullSense 接続点** = manga-md(コマ画像→構造理解、`vlm_comic_comprehension`/`manga_craft`/`visual_narrative` corpus 既存)/ llove(SVG・図の VLM 批評)/ llterm・browser-use(スクショ grounding)/ 記事 craft(挿絵検証)。**全て on-prem=哲学合致**。
