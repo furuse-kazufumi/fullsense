@@ -29,7 +29,7 @@
 
 ## 着荷後の実行順(初手 GPU ワークロード、migration plan §6)
 
-1. device 配線(§6、~30分)→ `prove_native_matches_hf.py` GPU golden 一致 + 小 step smoke で検証。
-2. **実験 1(plateau full)** — 本日プローブの直接の続き、方向を最も解決する。
+1. device 検証 — 実験 1 経路は配線済なので `verify_new_machine.ps1`(`prove_native_matches_hf.py --device cuda` GPU golden 一致 + plateau 小 step smoke)を走らせるだけ。実験 2/3 経路は `nas_pareto.py`/`linearize_tolerance.py` に device 追加(~30分)。
+2. **実験 1(plateau full)** — 本日プローブの直接の続き、方向を最も解決する。配線済=即走行可。
 3. **実験 3(proxy v2 full)** — NAS の中心主張を holdout で確定。
 4. **実験 2(linearization distill)** — 既存=出力 MSE 蒸留の右シフトをまず確定、logit-KD/LoRA は要実装後。
