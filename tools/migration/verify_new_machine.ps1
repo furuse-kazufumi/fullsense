@@ -53,8 +53,16 @@
     pwsh -NoProfile -File D:\projects\fullsense\tools\migration\verify_new_machine.ps1 -SkipGpu
 
 .NOTES
-    終了コード: Fail が 1 件でもあれば 1、無ければ 0 (Skip は許容)。
+    終了コード: Fail が 1 件でもあれば 1、無ければ 0 (Skip / Warn は許容)。
+    Warn = 移行は進められるが要注意 (例: D: が USB/exFAT のまま = Phase 2 で
+    内蔵 NVMe/NTFS 化推奨)。exit code には影響しない。
     git 操作・破壊的操作・外部送信は一切しない (読み取り専用の検証)。
+
+    パス参照 (実機一次検証 2026-06-28):
+      rtk 実体     : C:\tools\rtk\rtk.exe (+ %USERPROFILE%\.cargo\bin)
+      python 3.11  : py launcher 経由 (`py -3.11`) — Check 7 で launcher +
+                     3.11 起動可否を確認 (専用の実体パスはハードコードしない)
+      claude.exe   : C:\Users\puruy\.local\bin\claude.exe (native installer)
 #>
 [CmdletBinding()]
 param(
