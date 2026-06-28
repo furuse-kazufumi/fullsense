@@ -53,13 +53,16 @@
 |---|---|---|
 | node/npm | `C:/Program Files/nodejs` | Node v24 installer |
 | git | `C:/Program Files/Git`(Git Bash 同梱)| installer |
-| gh | `C:/Program Files/GitHub CLI` | installer |
-| rustc/cargo/**rtk** | `C:/Users/puruy/.cargo/bin` | rustup + `cargo install`(rtk=token killer)|
+| gh | `C:/Program Files/GitHub CLI` | installer(再 auth)|
+| rustc/cargo | `C:/Users/puruy/.cargo/bin` | rustup |
+| **rtk**(token killer) | 実体 `C:/tools/rtk/rtk.exe`(+ `.cargo/bin` shim)| build → `C:/tools/rtk/` 配置(+ PATH)|
 | uv | `C:/Users/puruy/.local/bin` | uv installer |
+| **Claude Code 本体** | `C:/Users/puruy/.local/bin/claude.exe` | **native installer**(npm 版でない)|
+| **Codex CLI**(二本柱の部下)| (CLI) | **再導入**(`.codex\` config/auth は §2-B で copy)|
 | semgrep | `C:/Python314/Scripts`(pip)| `py -3.14 -m pip install semgrep` |
 | codeql | **未導入**(startup ✗)| 必要時に導入 |
 | py | 3.11(default)/3.14/3.9/uv3.12 | python.org + uv |
-| ccr | (zx build + node-pty)| 再ビルド |
+| ccr | (zx build + node-pty)| 再ビルド。**node-pty は native ABI = 新機 Node v24 で `npm rebuild`**(古い prebuilt は ABI 不一致で落ちる)|
 
 ## 4. 環境変数 / scheduled tasks
 
