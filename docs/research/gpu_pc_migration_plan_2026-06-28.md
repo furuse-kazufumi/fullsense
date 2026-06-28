@@ -93,24 +93,27 @@
    - BIOS 起動順=**内蔵 NVMe 最優先**(外付けから起動しない)。
    - checkpoint / HF cache の書込先は **内蔵 C:** へ(外付けの write 摩耗と USB 律速を回避)。
 
-## 3. データ移行(現 C:/D: → 新機)
+## 3. データ移行(★方式転換 — D: 本体は travels / C: 常駐分のみ staging)
 
-**移行対象**(working set):
+**D: 配下(`D:/projects`・`D:/tools/raptor`・`D:/tools`・`D:/docs`(RAD)・`D:/api-keys.json`・`D:/api-manager`)は外付け SSD 本体に載ったまま新機へ物理移送する = `D:` 本体で温存・移送不要(travels)**。robocopy も別経路コピーも不要で、絶対パスのハードコードはレター固定だけで成立する。**移行作業の対象は C: 常駐分のステージングだけ**。
 
-| 対象 | 中身 | 備考 |
-|---|---|---|
-| `C:/Users/puruy/.claude/` | memory(`projects/<...>/memory/`)、`settings.json`(グローバル hook + **tool-guard 配線**)、skills(superpowers/gsd/find-skills/raptor)、keybindings | ★ccr 自律・tool-guard の核。最優先 |
-| `D:/projects/` | llcore, fullsense, llive, llove, llmesh, llloop, llterm, mcp-3d, browser-use-project(Alpaca) | FullSense 一式 |
-| `D:/tools/raptor/` | raptor framework + tool-guard + libexec + corpus skills | |
-| `D:/docs/` | RAD ~48,800 docs / 80+ `*_corpus_v2/` + hacker_corpus | 大容量・ファイル数多 |
-| `D:/api-keys.json` / `D:/api-manager/` | APIキー一元管理 + sync スクリプト | ★秘密。安全に移送(暗号化 USB 等) |
-| `D:/tools/` | raptor-analytics.db / codeql / osv-mcp | |
-| HF model cache | Qwen 0.5B/1.5B 等(`~/.cache/huggingface` か指定先)| 再DL 可だが移送が速い |
-| ccr 本体 + node-pty | 自走端末 | 再ビルドでも可 |
-| `D:/backup/` | バックアップ | 任意(再生成可なら skip) |
+**C: 常駐 inventory(実機で全実在確認済 2026-06-28 — これを staging で運ぶ)**:
 
-- **転送手段**: **外付け NVMe SSD で一括コピー → 新機で同パスに展開**(最速・数百GB)。LAN(robocopy /MIR)は代替。クラウドは大容量で非推奨。**api-keys.json は別経路で安全に**。
-- 容量目安: 現 D: used ~788GB(全部は不要)。working set は projects + docs + .claude が主。→ **2TB SSD 推奨**。正確値は du 集計(別途)で確定。
+| C: 常駐 | 分類 | secret | 備考 |
+|---|---|---|---|
+| `.claude\`(hooks/memory/settings.json/skills/.credentials.json) | copy | 一部 | 1.5G・ccr/tool-guard 核 |
+| `.claude.json`(57KB) | copy(別ファイル) | ★ | MCP 配線・oauth・trust の本体。`.claude\` の **外** |
+| `.codex\`(config.toml/auth.json/memories/goals/state) | copy+CLI 再導入 | ★auth | Codex 二本柱の核 |
+| `browser-use-project\`(alpaca_state.json/telegram_offset.json) | copy | 一部 | trading live state・**code は `D:\projects`=travels** |
+| `.ssh\`(id_ed25519) | copy | ★ | |
+| `.gitconfig` / gh `hosts.yml` / PS profile / Win Terminal / `.config\` | copy(gh は再auth 可) | — | |
+| `.cache\huggingface`(9G)/ `.ollama\models` | copy(再DL可) | — | 任意 |
+| User env 3 secret + PATH | 再設定(secret は再発行推奨) | ★ | **ファイルでない=travels で拾えない** |
+| Scheduled Tasks(Ready 4本) | XML export→import + action 是正 | — | |
+
+- **転送手段**: C: 常駐分を **`D:\_c_migration\` へ staging**(`backup_working_set.ps1`)→ D: ごと travels → 新機で `restore_working_set.ps1` が同一絶対パスへ復元。LAN や別外付けは代替。
+- **secret は staging に平文で置かない**: `.credentials.json` / `.codex\auth.json` / `.ssh\id_ed25519` / User env 3 キーは `migrate_secrets.ps1 -Mode Bundle` の暗号化バンドルへ(§8 / manifest §5)。
+- 容量目安: C: 常駐の staging 主体は `.claude`(~1.5G)+ `.cache\huggingface`(~9G、任意)。D: 本体 used ~847GB は travels で運ぶため staging 容量に含めない。
 
 ## 4. 環境セットアップ(新機 OS 後)
 
