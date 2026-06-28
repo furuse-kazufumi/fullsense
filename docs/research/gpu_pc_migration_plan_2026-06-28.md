@@ -106,6 +106,12 @@
 - **StateX continued-train / 3B スケール**。
 - **proxy v2 フル走**(K≥12、context sweep 2048–4096=SUPRA 級長文脈崩壊帯)。
 
+> ★初手の前提 = **llcore 学習スクリプトの device 配線**(`Trainer`/`TBPTTTrainer`/plateau experiment が現状 CPU-only)。詳細・必要変更は `migration_manifest_2026-06-28.md` §6。着荷後 Day 1 か本日プローブ完了後に実装(backward-compatible・~30分)。
+
+**新ブランチ候補(北極星とは別モダリティ — 意図的に選んでから着手)**:
+- **VLM(Vision-Language)検証**: 32GB は 7B 級 VLM(Qwen2.5-VL-7B / InternVL2.5-8B / Llama-3.2-11B-Vision / Pixtral / MiniCPM-V)を full 精度で推論+LoRA、~32B を int4 で推論可。**FullSense 接続点** = manga-md(コマ画像→構造理解、`vlm_comic_comprehension`/`manga_craft`/`visual_narrative` corpus 既存)/ llove(SVG・図の VLM 批評)/ llterm・browser-use(スクショ grounding)/ 記事 craft(挿絵検証)。**全て on-prem=哲学合致**。
+  - 着手順序(`feedback_claude_max_compute_priority`): まず (b)hello-world(7B を `.to("cuda")` で動かす smoke)→ 価値を見て (a)`rad-research`「ローカル VLM SOTA×manga 理解」で本腰スコープ。北極星(llcore GPU 本走)を先に緑化してから。
+
 ## 7. タイムライン(発注済・組立後出荷待ち / 2–3 週間先)
 
 > ★**出荷はケース「Cooler Master MasterFrame 400 Mesh Silver」の入荷待ちに依存**。Ark に入荷/出荷予定日を確認し、着荷日を起点にスケジュールを確定する(2–3 週間=ユーザー予定と整合)。
