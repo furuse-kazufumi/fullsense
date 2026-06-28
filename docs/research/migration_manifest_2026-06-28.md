@@ -17,6 +17,8 @@
 
 → 合計 ~100GB+(+ D:/docs)。**外付け 2TB SSD で余裕**、2TB 新機 SSD にも余裕。
 
+**D: ボリュームの事実(実機一次検証・確定)**: SanDisk Extreme 55AE / **exFAT** / HealthStatus=Warning / OperationalStatus="Full Repair Needed" / **★ダーティビット SET**(`fsutil dirty query D:` → "Volume - D: is Dirty")/ BitLocker None(**平文**・ProtectionStatus Off)/ BusType=**USB** / GPT 単一 basic-data 2.0TB(used ~847GB / 残 ~1.15TB)。**物理移送=robocopy 不要だが、唯一コピー+非ジャーナル(exFAT)の単一障害点**。移送前に **read-only スキャン**(`Repair-Volume -DriveLetter D -Scan`)+ **off-disk 保険**(secret bundle・未push git bundle・RAD 一部を別媒体)を取る。
+
 ## 2. 移行ディレクトリ(★絶対パス温存)
 
 - `C:/Users/puruy/.claude/`(memory `projects/<...>/memory/`, `settings.json`[グローバル hook + **tool-guard 配線**], skills)
