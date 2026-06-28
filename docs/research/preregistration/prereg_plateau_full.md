@@ -189,3 +189,14 @@ foreach ($s in 1337,1338,1339) {
 - `D:/projects/llcore/out/plateau_full/cm_chunk128x{2,4,8}_seed*/comparison_carry_on.json`(compute-matched)
 - `D:/projects/llcore/out/plateau_full/carryoff_seed*/comparison_carry_off.json`
 - 集計・図・CI は別途 `out/plateau_full/ANALYSIS.md`(seed 集計 + bootstrap CI + 二元配置プロット)。本走後に MODEL_LANDSCAPE §13(4) を「交絡解消済み」で更新。
+
+---
+
+## 8. 追補(2026-06-28 T4 landscape refresh 由来。凍結コア §2-§7 は不変、本節は補足)
+
+> 凍結宣言の趣旨を守るため、§2 の主仮説・主要指標・成功基準は変更しない。本節は (a) コード照合での明確化 (b) 任意の補完アーム (c) null 時の next-lever を honest に追記するもの。
+
+- **コード照合での明確化(T4 批判への回答)**: T4 は「chunk_size>128 単独は誤操作=chunkwise の chunk_size はタイリングで勾配は系列全長(arXiv 2406.06484)」と指摘したが、これは **llcore の `tbptt.py` を誤読**。llcore の TBPTT は chunk 境界で **state を `detach`** するため `chunk_size` は実際に **勾配 truncation 窓**(§13(4)/§1 のとおり credit assignment を切る)。∴ 本 prereg の「chunk_size を広げて credit 窓を伸ばす × §3.2 compute-matched 対照で多 compute を差し引く」設計は妥当(2406.06484 の chunkwise-parallel は線形 attn の計算等価タイリングであり、TBPTT truncation とは別概念)。
+- **任意の補完アーム(cleaner 設計、pre-registration 後の追加=主結論には使わない)**: truncation 交絡を**ゼロ**にする代替として「**full-BPTT over segment × `seg_len`/`train_seq_len` 掃引**」(chunk 内 detach せず segment 全長で逆伝播し、segment 長を {256,512,1024,2048} で掃引)を補助比較に置ける。chunk_size アプローチ(truncate + compute 対照で補正)と full-BPTT アプローチ(truncate なし・メモリ O(seg_len))が **同じ結論**を出せば頑健性が上がる。これは探索的扱いとし、§5 の PASS/NULL 判定は §2 の主指標でのみ行う。
+- **null 時の next-lever(landscape 由来)**: 本実験が NULL(chunk/state-carry で plateau 動かず)なら、T4 landscape の現ベストは **機構**側 = ① cell を **忠実 Gated DeltaNet → Gated DeltaNet-2 型**(2605.22791)へ、② 長文脈アームに **TTT-Linear(test-time training)**(plateau を破る一次証拠は TTT-E2E 2512.23675=GatedDeltaNet/Mamba2 は context scaling せず、TTT-E2E は full-attn 同様にスケール)。本 prereg の arm に `gated-deltanet`(忠実版 §14)は既存だが、**Gated DeltaNet-2 セル / TTT-Linear セルを NAS allele として追加**するのが next 実験。RoPE は LAWCAT(2509.18467)が「長文脈に有害(3K 崩壊)」を一次実測 → 線形 student では RoPE 除去アームも分離測定(prereg_linearization_distill §5-4)。
+- **honest**: 上記 next-lever は landscape 調査(一次裏取り)由来の **仮説**であり、本 plateau 実験の結果が出る前に機構を増やさない(p-hacking 回避)。詳細 = `../efficient_arch_landscape_refresh_2026-06-28.md` / `../linearization_recipes_2026-06-28.md`。
