@@ -49,6 +49,8 @@
 
 ## 3. ツール(再導入先・現機実測)
 
+> ★**要インストール物の正本 = `migration_dependencies_2026-06-28.md`**(2026-06-28 実環境 grounding: Python 全依存=torch cu128 / システムツール / MCP / ccr・rtk・Ollama、+ draft `tools/migration/bootstrap_install.ps1`)。本表は要点のみ。
+
 | ツール | 現パス | 再導入 |
 |---|---|---|
 | node/npm | `C:/Program Files/nodejs` | Node v24 installer |
