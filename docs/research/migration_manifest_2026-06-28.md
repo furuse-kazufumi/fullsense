@@ -54,9 +54,10 @@
 
 - `research/*.py`(verifier_navigability_gpu / internalization_poc / third_axis_gpu / rllm_stage_b 等)= `DEVICE = "cuda" if torch.cuda.is_available() else "cpu"`(**自動 GPU**)。
 - `lm/` models(ttt.py / rwkv.py / recurrent.py)= `init_state(batch, *, device=...)` 対応。
-- **★未配線**: 学習 entry(`scripts/tbptt_plateau_experiment.py` / `ttt_plateau_experiment.py`)+ `Trainer` / `TBPTTTrainer` は **CPU-only**(model/batch を device に移していない)。**初手 = ここに device を通す**。
-  - **必要変更(backward-compatible)**: ① experiment に `--device`(default `auto = "cuda" if torch.cuda.is_available() else "cpu"`)② trainer で `model.to(device)` + 各 batch を `.to(device)` + `init_state(device=device)` ③ eval/longctx も device 統一。CPU 機では auto→cpu で **byte-identical**(現プローブの方法論に影響なし)。
-  - **実装タイミング**: 本日プローブ(`blj04yepr`)完了後に実装+CPU smoke(走行中は CPU 競合回避のため未実施)、または着荷後 Day 1 の最初のコードタスク。所要 ~30分+smoke。
+- **✅ 配線済(2026-06-28、移行準備セッション)**: 学習 entry + `Trainer` / `TBPTTTrainer` / eval / longctx に device を backward-compatible に通した。**着荷後 Day 1 は `--device auto`(or `cuda`)を付けるだけで GPU 本走可能**。
+  - **実装内容**: 新規 `src/llcore/lm/device.py`(`resolve_device("auto"|"cpu"|"cuda"|"cuda:N")` + `model_device(model)`)。`Trainer`/`TBPTTTrainer`/`estimate_loss`/`held_out_nll`/`held_out_report_any`/`held_out_top1_report`/`longctx_eval`(`nll_at_positions_with_context`/`context_length_curve`/`block_reset_nll`/`streaming_metrics_by_band`/`gpt_sliding_window_nll`)が **model の device を推論し各 batch を `.to(device)`**。RNG/index sampling は CPU 据え置きで乱数ストリーム不変。3 entry script(`tbptt_plateau_experiment.py`/`ttt_plateau_experiment.py`/`prove_native_matches_hf.py`)に `--device`(default `auto = cuda if available else cpu`)。
+  - **検証(CPU)**: 既存 LM スイート全 green(resume 系 `atol=0` 含む)= **CPU byte-identical**(現プローブの方法論に影響なし)/ mypy strict・ruff PASS / `--device cpu` で experiment end-to-end smoke 成功。**GPU 上の cross-device 一致は着荷後 Day 1 に `verify_new_machine.ps1`(§7-8 / plan §5-2,3)で確認**。
+  - 設計根拠: 全モデルの `init_state(batch, *, device=...)` が既に device 対応のため、穴は「学習/評価グルーが batch を CPU に置いたまま」だけだった。
 
 ## 7. 新機 bootstrap チェックリスト(着荷後・順に)
 
