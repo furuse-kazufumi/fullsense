@@ -95,9 +95,26 @@ $ErrorActionPreference = 'Stop'
 # 各エントリ: 元の絶対パス。アーカイブ内は <drive>\<rel> の相対構造で保持し、
 # Restore 時に元の絶対パスへ戻す(restore_working_set と同じドライブレター展開規則)。
 $SecretFiles = @(
+    # (A) off-disk 損失保険: D: 上 secret(D: ごと travels するが、ダーティ exFAT の
+    #     唯一コピー喪失に備えた保険コピー)
     'D:\api-keys.json',
-    'D:\tools\raptor\.claude\settings.local.json'
+    'D:\tools\raptor\.claude\settings.local.json',
+
+    # (B) C: 常駐 secret: D: と一緒に travels しない。新機で復元が必須。
+    'C:\Users\puruy\.codex\auth.json',            # ★Codex 二本柱の認証
+    'C:\Users\puruy\.claude\.credentials.json',   # ★Claude 資格情報(端末紐づき・新機は再ログイン前提でも保険)
+    'C:\Users\puruy\.ssh\id_ed25519',             # ★SSH 秘密鍵
+    'C:\Users\puruy\.ssh\id_ed25519.pub'          # SSH 公開鍵
 )
+
+# User env の平文 secret(ファイルでないため SECRET_user_env.txt としてバンドル内へ同梱)。
+# Restore 時に User scope へ再適用する(値は再発行推奨)。
+$SecretEnvNames   = @(
+    'ANTHROPIC_API_KEY',
+    'TELEGRAM_BOT_TOKEN',
+    'SOCIALDATA_API_KEY'
+)
+$SecretEnvFileName = 'SECRET_user_env.txt'
 
 # ------------------------------------------------------------------ helpers
 
