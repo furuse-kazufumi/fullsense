@@ -9,21 +9,34 @@
            D:/projects/fullsense/docs/research/migration_manifest_2026-06-28.md (§6,§7)
 
     各ステップは失敗しても続行し、最後にサマリ表を出す。色つき (赤/緑) は
-    使わず、記号 (✓ Pass / ✗ Fail / - Skip) と文字で状態を示す
+    使わず、記号 (✓ Pass / ✗ Fail / ! Warn / - Skip) と文字で状態を示す
     (RAPTOR OUTPUT STYLE: ALL_CAPS status 禁止 / 🔴🟢 禁止)。
 
-    チェック項目 (plan §5 の順):
-      1. torch.cuda.is_available() + get_device_name(0)            [GPU]
-      2. capability == (12,0) + 小 GEMM (gpu_smoke.py 呼び出し)     [GPU]
-      3. llcore native forward GPU golden 一致 (prove_native_...)   [GPU]
-      4. plateau smoke (tbptt_plateau_experiment --max-iters 5)     [GPU]
-      5. tool-guard live (本体存在 + settings.json PreToolUse 配線)
-      6. RAD corpus アクセス (D:\docs + *_corpus_v2 数)
-      7. ツール存在 (node/git/gh/cargo/rtk/uv/semgrep/py 3.11)
+    チェック項目 (実行順):
+      0a. D: ドライブ レター/FileSystem/HealthStatus/BusType + sentinel
+          (D:\tools\raptor) — 外付け本体温存確認。D: 不在は即 Fail で以降中止。
+          USB / exFAT / HealthStatus!=Healthy は Warn (内蔵 NTFS 化を促す)。
+      0b. ユーザー名 == puruy (fail-closed / OOBE ローカルアカウント確認)
+      1.  torch.cuda.is_available() + get_device_name(0)            [GPU]
+      2.  capability == (12,0) + 小 GEMM (gpu_smoke.py 呼び出し)     [GPU]
+      3.  llcore native forward GPU golden 一致 (prove_native_...)   [GPU]
+      4.  plateau smoke (tbptt_plateau_experiment --max-iters 5)     [GPU]
+      5.  tool-guard live (本体存在 + settings.json PreToolUse 配線)
+      6.  RAD corpus アクセス (D:\docs + *_corpus_v2 数)
+      7.  ツール存在 (node/git/gh/cargo/rtk/uv/semgrep/py 3.11)
+      8.  .claude.json 存在 + mcpServers 配線 (MCP 本体・57KB / .claude\ の外)
+      9.  .codex 存在 + browser-use alpaca_state.json (C: live state)
+      10. User env secret 3 キー (ANTHROPIC/TELEGRAM/SOCIALDATA)
+      11. gh auth status OK / .gitconfig user.email 設定済
+      12. Scheduled Tasks Ready + action が D:\tools\raptor を参照
 
     GPU 項目 (1-4) は -SkipGpu 指定時にすべて SKIP になる (現機=GPU 無しでの
     ドライラン確認用)。3/4 が呼ぶ llcore スクリプトの --device 引数は別作業で
     追加予定のため、未実装 (argparse の unrecognized arguments) なら SKIP 扱い。
+
+    Check 0a/0b は新前提 (D: 外付け SanDisk Extreme 55AE を物理移送しレター D:
+    を温存 / OOBE はローカルアカウント puruy) の Day-of ガード。詳細は
+    gpu_pc_migration_plan_2026-06-28.md §2-2 / migration_manifest_2026-06-28.md §7-1。
 
 .PARAMETER LlcoreDir
     llcore リポジトリのパス。default D:\projects\llcore
