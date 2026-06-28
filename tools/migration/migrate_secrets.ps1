@@ -264,6 +264,8 @@ function Invoke-Bundle {
                 [System.IO.Directory]::CreateDirectory([System.IO.Path]::GetDirectoryName($dst)) | Out-Null
                 Copy-Item -LiteralPath $f -Destination $dst -Force
             }
+            # User env 3 キーも同梱(★この zip は平文。暗号化 USB 上でのみ扱うこと)
+            Write-UserEnvSecret -StageDir $stage | Out-Null
             Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $archive -Force
         }
         finally {
