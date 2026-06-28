@@ -219,12 +219,17 @@ function Invoke-Bundle {
                 [System.IO.Directory]::CreateDirectory([System.IO.Path]::GetDirectoryName($dst)) | Out-Null
                 Copy-Item -LiteralPath $f -Destination $dst -Force
             }
+            # User env 3 キーを SECRET_user_env.txt としてバンドル内へ同梱
+            $envIncluded = Write-UserEnvSecret -StageDir $stage
             # manifest(キー値は書かない。元パスとローテーション注意のみ)
             $manifest = @(
                 '# fullsense secrets bundle',
                 ("# created : {0}" -f (Get-Date -Format 'o')),
                 '# files (restored to these absolute paths by migrate_secrets.ps1 -Mode Restore):'
             ) + ($present | ForEach-Object { "#   $_" }) + @(
+                '#',
+                ('# user env (restored to User scope by -Mode Restore; key 値は非表示): {0}' -f `
+                    ($(if ($envIncluded) { $SecretEnvFileName } else { '(none set)' }))),
                 '#',
                 '# ★移行を機に API キーのローテーションを検討すること(plan/manifest §5)。'
             )
