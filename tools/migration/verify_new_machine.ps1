@@ -287,15 +287,24 @@ catch {
 # ユーザー名 fail-closed。MS アカウント OOBE だと C:\Users\<別名> になり
 # 全 hook/memory/.claude.json/gh/gitconfig の固定パスが破綻するため、
 # ローカルアカウント puruy で作成されていることを確認する。
-$name0b = 'ユーザー名 == puruy (fail-closed / OOBE ローカルアカウント)'
+#
+# ★破損の決定要因は固定パス C:\Users\puruy\... を生むプロファイルフォルダ名
+#   (USERPROFILE の末尾) であり、ログイン名 (USERNAME) ではない。アカウント改名で
+#   両者は乖離しうる (実機 2026-06-28 検証: USERNAME='puruyan' / USERPROFILE=
+#   C:\Users\puruy で全固定パス健全)。よって fail-closed gate は USERPROFILE の
+#   末尾 == 'puruy' とし、USERNAME は参考表示にとどめる (spec §2-6 の意図=固定
+#   パス整合の保証を、より頑健に満たす)。
+$name0b = 'プロファイル/ユーザー名 == puruy (fail-closed / 固定パス整合)'
 try {
+    $profileLeaf = [string](Split-Path -Path $env:USERPROFILE -Leaf)
     $who = [string]$env:USERNAME
-    if ($who -eq 'puruy') {
-        Add-Result -Id '0b' -Name $name0b -Status 'Pass' -Detail ("USERNAME={0}" -f $who)
+    if ($profileLeaf -eq 'puruy') {
+        $note = if ($who -ne 'puruy') { (" (USERNAME='{0}' はアカウント改名由来 — パス整合に影響なし)" -f $who) } else { '' }
+        Add-Result -Id '0b' -Name $name0b -Status 'Pass' -Detail ("USERPROFILE=C:\Users\{0}{1}" -f $profileLeaf, $note)
     }
     else {
         Add-Result -Id '0b' -Name $name0b -Status 'Fail' `
-            -Detail ("USERNAME='{0}' (期待 'puruy') — MS アカウント OOBE で別名になると全固定パスが破損。ローカルアカウント puruy で作り直すこと" -f $who)
+            -Detail ("USERPROFILE=C:\Users\{0} (期待 'puruy') / USERNAME='{1}' — MS アカウント OOBE で別名になると全固定パスが破損。ローカルアカウント puruy で作り直すこと" -f $profileLeaf, $who)
     }
 }
 catch {
