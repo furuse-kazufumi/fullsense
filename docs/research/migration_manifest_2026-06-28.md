@@ -74,9 +74,16 @@
 - **MCP servers**: `.claude.json`(57KB・MCP 配線本体)を **コピーすれば再現(手再設定不要)** → `claude mcp list` で主要サーバ Connected を確認。
 - **trading(Alpaca 20分サイクル)= MCP cron(Job1–5)で schtasks 外** → `browser-use-project` 側で再設定。移行中は二重起動回避(旧機/クラウド残置)。
 
-## 5. secrets(★安全移送・暗号化/別経路)
+## 5. secrets(★物理移送前提に全面改訂)
 
-- `D:/api-keys.json`、raptor `.claude/settings.local.json`(**ANTHROPIC_API_KEY 平文**)、env。外付け一括コピーに混ぜず別経路で移送。**移行を機に key ローテーションを検討**(平文露出の衛生)。
+**D: 上の secret は travels(別送不要)**:
+- `D:\api-keys.json` / raptor `.claude\settings.local.json`(**ANTHROPIC_API_KEY 平文**)は **どちらも D: 上=travels**。旧設計の「ミラー除外して別送」目的は消滅。
+
+新前提の secret 課題は 2 つ:
+- **(a) D: 平文携帯ディスクの at-rest 露出**: D: は BitLocker None(平文)exFAT の **唯一コピー** → **chain-of-custody**(預け荷物にしない・手持ち移送)+ **着荷直後の鍵ローテ**。
+- **(b) C: 常駐 secret の暗号化バンドル**(`migrate_secrets.ps1` を再スコープ): `.codex\auth.json` / `.ssh\id_ed25519` / `.claude\.credentials.json` / User env 3キー を **7z AES-256(`-mhe=on`・ヘッダ暗号化)** でバンドル。`.credentials.json` は **端末紐づき=新機は claude 再ログイン前提**(復元しても無効になり得る)。
+- **off-disk 損失保険**: `api-keys.json` / raptor `settings.local.json` + 未push git bundle(任意)を別媒体に退避(落下/exFAT 修復失敗での単一障害に備える)。
+- **鍵ローテ**: 旧 manifest の『検討』→『**到着直後に手順化**』へ格上げ。
 
 ## 6. GPU コード準備度(llcore)— ★初手 GPU 本走の前提
 
