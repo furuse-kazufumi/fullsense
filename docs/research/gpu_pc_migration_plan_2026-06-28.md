@@ -158,10 +158,24 @@
 
 > ★**出荷はケース「Cooler Master MasterFrame 400 Mesh Silver」の入荷待ちに依存**。Ark に入荷/出荷予定日を確認し、着荷日を起点にスケジュールを確定する(2–3 週間=ユーザー予定と整合)。
 
-- **着荷まで(現機で先行作業)**: ①外付け 2TB SSD 入手 ②**データ移行リハーサル**=現機 working set(`.claude/`+`D:/projects`+`D:/tools/raptor`+`D:/docs`)を外付けへコピー開始(ダウンタイム短縮)③`api-keys.json` の安全移送経路を準備 ④移行手順書(本 doc)を最終化。
-- **着荷後 Day 1–2**: ①初期セットアップ(**ユーザー名 `puruy`**)②**2TB を C:+D: 分割**(§2-2A)③driver R570+ 導入 ④`torch cu128` 入れて `torch.cuda` 検証。
-- **Day 3–5**: ①データ展開(**同一絶対パス**)②`py -3.11` + 各 venv/ccr/MCP/Task 再構築 ③検証チェックリスト(§5)緑化。
-- **Day 6–7**: ①trading 系切替(二重起動回避)②**初手 GPU ワークロード**=本日プローブのフル版(3 arch×chunk×≥3seed)③旧ノートは予備/退役。
+- **着荷まで(現機で先行作業)**: ① **C: 常駐分を `D:\_c_migration\` へ staging**(`backup_working_set.ps1 -Dest D:\_c_migration` + reference export = PATH / scheduled tasks XML / 非 secret env)②**off-disk 保険**=secret 暗号化バンドル(`migrate_secrets.ps1 -Mode Bundle`)+ 未push git bundle + RAD 一部を**別媒体**へ(D: は唯一コピー・ダーティビット SET ゆえ必須)③**D: read-only スキャン**(`Repair-Volume -DriveLetter D -Scan`、ダーティ/修復必要なら保険確保後に `-OfflineScanAndFix`)④移行手順書(本 doc)を最終化。
+- **着荷後 Day 1–2**: ①初期セットアップ(**ローカルアカウント ユーザー名 `puruy`** / §2-1)②**外付け D: 接続 → レター D: 固定**(§2-2)→ `verify_new_machine.ps1` Check 0(D: レター/健全性/sentinel)緑 ③driver R570+ 導入 ④`torch cu128` 入れて `torch.cuda` 検証(`get_device_capability()==(12,0)`)。**Day 1 は外付け USB のまま検証**(内蔵化は後日 §2-3)。
+- **Day 3–5**: ① **C: 常駐分を復元**(`restore_working_set.ps1 -Source D:\_c_migration` + `migrate_secrets.ps1 -Mode Restore` + env3キー setx/再発行 + tasks XML import & action 是正)②`py -3.11` + 各 venv/ccr(node-pty `npm rebuild`)/MCP(`.claude.json` コピーで再現)/Task 再構築 ③検証チェックリスト(§5)緑化。`.credentials.json` は端末紐づき=**claude 再ログイン**前提。
+- **Day 6–7**: ①trading 系切替(二重起動回避・`alpaca_state.json` 復元確認)②**初手 GPU ワークロード**=本日プローブのフル版(3 arch×chunk×≥3seed、`--device cuda`)③**旧ノートは新機が全緑になるまでワイプ禁止**(実質バックアップ)。
+- **(後日)Phase 2**: 内蔵 NVMe 増設 → `robocopy D:\ X:\ /MIR` → レタースワップ → 内蔵 D: を BitLocker(§2-3)。外付けは backup 退役。
+
+**Day-of マスターチェックリスト(順序付き・出発当日)**:
+
+1. **旧機(出発前)**: ① `Repair-Volume -DriveLetter D -Scan`(read-only)→ ダーティ/修復必要なら先に off-disk 保険(secret bundle・未push git bundle・RAD 一部を別媒体)→ 必要時 `-OfflineScanAndFix`。② `backup_working_set.ps1 -Dest D:\_c_migration`(C: 常駐分 staging + reference export)。③ 旧機 trading 停止(`alpaca_state.json` 凍結)。④ 新機 C: BitLocker 回復キー控え方針を決定。
+2. **シャットダウン → 「ハードウェアの安全な取り外し」で D: 取り外し**(exFAT は怠ると破損)。chain-of-custody で手持ち移送(預け荷物にしない)。
+3. **新機セットアップ**: OOBE で **ローカルアカウント `puruy`**。`manage-bde -status C:` → 回復キー escrow(MS アカウント + PW マネージャ + 紙)。
+4. **D: 接続・レター固定**(§2-2): 他 removable を全外し外付け単独接続 → `Set-Partition ... -NewDriveLetter D` → `Test-Path D:\tools\raptor` 温存確認。
+5. **C: 常駐分復元**: `restore_working_set.ps1 -Source D:\_c_migration` → `migrate_secrets.ps1 -Mode Restore` → env3キー `setx`(または再発行)→ tasks XML import + action 是正。`.credentials.json` は新機で **claude 再ログイン**前提。
+6. **GPU 基盤**: NVIDIA driver R570+ → `torch cu128` → `get_device_capability()==(12,0)`。
+7. **ツール再導入**: Node v24(+`npm rebuild` node-pty)/ git / gh(再auth)/ rustup+rtk / uv / semgrep / Claude Code native installer / Codex CLI。MCP は `.claude.json` コピーで再現。User PATH を reference から再構築。
+8. **検証**: `verify_new_machine.ps1`(Check0=D: レター/健全性→緑、以降全項目)。
+9. **初手 GPU**: plateau プローブを `--device cuda` でフル(device 配線 ✅ 済 = §6)。
+10. **(後日)Phase 2**: 内蔵 NVMe 増設 → robocopy → レタースワップ → 内蔵 D: を BitLocker。外付けは backup 退役。旧ノートはこの緑化まで温存。
 
 ## 8. リスク・コンティンジェンシー
 
