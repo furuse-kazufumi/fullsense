@@ -277,10 +277,14 @@ if (-not (Test-Path -LiteralPath $srcRoot)) {
     throw "Source '$srcRoot' が存在しません。staging(D:\_c_migration)を作成済みか、正しいルートを指定してください。"
 }
 
-# plan §2-1: Windows ユーザー名 puruy の確認 → fail-closed(throw)。
-# 違うと .claude / .claude.json / gh / memory のハードコードパスが破損する。
-if ($env:USERNAME -ne 'puruy') {
-    throw ("実行ユーザーが '{0}' です。本スクリプトはユーザー名 'puruy' を要求します(違うと hook/memory/.claude.json/gh パスが破損 — plan §2-1)。ローカルアカウント 'puruy' で OOBE してから再実行してください。" -f $env:USERNAME)
+# plan §2-1: プロファイルディレクトリが C:\Users\puruy であることを確認 → fail-closed(throw)。
+# ハードコードパスの真の決定要因は **ログイン名(USERNAME)でなくプロファイル末尾(USERPROFILE)**。
+# 現開発機は USERNAME='puruyan' だが USERPROFILE='C:\Users\puruy' で全パスが成立しているため、
+# 判定は USERPROFILE 末尾で行う(verify_new_machine.ps1 Check 0b と同一基準)。新機ではローカル
+# アカウント 'puruy' を作れば両者一致。違うと .claude / .claude.json / gh / memory のパスが破損。
+$profileLeaf = Split-Path $env:USERPROFILE -Leaf
+if ($profileLeaf -ne 'puruy') {
+    throw ("プロファイルが 'C:\Users\{0}' です。本スクリプトは C:\Users\puruy を要求します(違うと hook/memory/.claude.json/gh パスが破損 — plan §2-1)。新機はローカルアカウント 'puruy' で OOBE してから再実行してください。" -f $profileLeaf)
 }
 if (-not (Test-Path -LiteralPath 'C:\Users\puruy')) {
     Write-Host '警告: C:\Users\puruy が存在しません。復元先プロファイルが無いとパスが破損します(plan §2-1)。' -ForegroundColor Red
