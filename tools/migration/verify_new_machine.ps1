@@ -83,6 +83,12 @@ $SettingsPath  = 'C:\Users\puruy\.claude\settings.json'
 $DocsDir       = 'D:\docs'
 $GpuSmokePath  = Join-Path $PSScriptRoot 'gpu_smoke.py'
 
+# --- C: 常駐リソース (移行後に復元されているべきもの / manifest §2-1 inventory) -
+$RaptorRoot      = 'D:\tools\raptor'                                          # D: sentinel (別ボリューム誤マウント検出用)
+$ClaudeJsonPath  = 'C:\Users\puruy\.claude.json'                             # 57KB・MCP 配線/oauth/trust 本体 (.claude\ の外)
+$CodexDir        = 'C:\Users\puruy\.codex'                                   # Codex 二本柱の核
+$BrowserUseState = 'C:\Users\puruy\browser-use-project\alpaca_state.json'    # trading live state (code は D: 側=travels)
+
 # --- 結果収集 --------------------------------------------------------------
 $script:Results = [System.Collections.Generic.List[object]]::new()
 
