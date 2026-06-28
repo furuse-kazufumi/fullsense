@@ -21,11 +21,31 @@
 
 ## 2. 移行ディレクトリ(★絶対パス温存)
 
-- `C:/Users/puruy/.claude/`(memory `projects/<...>/memory/`, `settings.json`[グローバル hook + **tool-guard 配線**], skills)
-- `D:/projects/`(llcore, fullsense, llive, llove, llmesh, llloop, llterm, mcp-3d, browser-use-project[Alpaca trading])
-- `D:/tools/raptor/`(75G)/ `D:/tools/`(raptor-analytics.db, osv-mcp)
+> **新前提**: D: は外付け SSD 本体を物理移送しレター D: を温存 → **D: 配下は robocopy 不要(D: ごと travels)**。移送対象は **C: 常駐分のみ**。
+
+### 2-A. D: 配下(travels=移送対象外)
+
+- `D:/projects/`(llcore, fullsense, llive, llove, llmesh, llloop, llterm, mcp-3d, **browser-use-project の code 本体**[Alpaca trading])
+- `D:/tools/raptor/`(75G)/ `D:/tools/`(raptor-analytics.db, osv-mcp)— rtk 実体は C: 側=§3 参照
 - `D:/docs/`(RAD)/ `D:/api-keys.json` / `D:/api-manager/`
-- `C:/Users/puruy/.cache/huggingface`(モデル重み)
+
+### 2-B. C: 常駐 inventory(★要移送=staging 対象)
+
+`C:` 配下は D: travels で拾えない → `D:\_c_migration\` へ staging(`backup_working_set.ps1`)。`settings.json` の **グローバル hook + tool-guard 配線**、memory `projects/<...>/memory/`、skills は `.claude\` に内包。
+
+| C: 常駐 | 分類 | secret | 備考 |
+|---|---|---|---|
+| `.claude\`(hooks/memory/settings.json/skills/.credentials.json) | copy | 一部 | 1.5G・ccr/tool-guard 核 |
+| `.claude.json`(57KB) | copy(別ファイル) | ★ | MCP 配線・oauth・trust の本体。`.claude\` の外 |
+| `.codex\`(config.toml/auth.json/memories/goals/state) | copy+CLI 再導入 | ★auth | Codex 二本柱の核 |
+| `browser-use-project\`(alpaca_state.json/telegram_offset.json) | copy | 一部 | **trading live state**・code は `D:\projects`(travels) |
+| `.ssh\`(id_ed25519) | copy | ★ | |
+| `.gitconfig` / gh `hosts.yml` / PS profile / Win Terminal / `.config\` | copy(gh は再auth 可) | — | |
+| `.cache\huggingface`(9G)/ `.ollama\models` | copy(再DL可) | — | 任意 |
+| User env 3 secret + PATH | 再設定(secret は再発行推奨) | ★ | ファイルでない=travels で拾えない |
+| Scheduled Tasks(Ready 4本) | XML export→import + action 是正 | — | |
+
+> **★browser-use の二分**: code=`D:\projects\...\browser-use-project`(travels)/ **live state**=`C:\Users\puruy\browser-use-project\`(`alpaca_state.json` 等=C: 常駐=要移送)。両者を混同すると trading 状態を失う。
 
 ## 3. ツール(再導入先・現機実測)
 
