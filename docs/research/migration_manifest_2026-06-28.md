@@ -66,9 +66,12 @@
 
 ## 4. 環境変数 / scheduled tasks
 
-- **env**(ccr/raptor 起動時に設定): `RAPTOR_CALLER_DIR`(ccr が user cwd を保存)、`RAPTOR_DIR`(ccr 起動時)、`CLAUDE_ENV_FILE=.claude/raptor.env`、`CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1`、`ANTHROPIC_API_KEY`。
-- **再登録すべき task**(現機 Ready): **`FullSense-StatusTelegram`**(平日11:30)/ **`RAPTOR-Backup`** / **`RAPTOR-CorpusUpdate`**。
-- 移さない: `FullSense-TelegramInbound`(Disabled・廃止)、`BatteryStatus*`(★ノート専用=デスクトップ不要)、ClaudeCode*(大半 Disabled)。
+- **env(プロセス用・ccr/raptor 起動時に設定)**: `RAPTOR_CALLER_DIR`(ccr が user cwd を保存)、`RAPTOR_DIR`(ccr 起動時)、`CLAUDE_ENV_FILE=.claude/raptor.env`、`CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1`。
+- **★User env 平文 secret 3キー**(ファイルでない=travels で拾えない→新機で再設定、**移行を機に再発行推奨**): `ANTHROPIC_API_KEY`(len108)/ `TELEGRAM_BOT_TOKEN`(len46)/ `SOCIALDATA_API_KEY`(len53)。User PATH も reference から再構築。
+- **再登録すべき task**(現機 Ready 4本): **`FullSense-StatusTelegram`**(平日11:30)/ **`RAPTOR-Backup`** / **`RAPTOR-CorpusUpdate`** / **`ClaudeCodeUpdate`**(Ready=**要判断**)。
+  - ★**action の C: 依存を是正**: `RAPTOR-Backup` / `RAPTOR-CorpusUpdate` は `C:\Python314\python.exe` + **不在の** `C:\Users\puruy\raptor\...`(`raptor-backup` 等)を指し壊れている → 新機では `py -3.11` + `D:\tools\raptor\libexec\...` へ書換。
+- 移さない: `FullSense-TelegramInbound`(Disabled・廃止)、`BatteryStatus*`(★ノート専用=デスクトップ不要)、その他 ClaudeCode*(大半 Disabled)。
+- **MCP servers**: `.claude.json`(57KB・MCP 配線本体)を **コピーすれば再現(手再設定不要)** → `claude mcp list` で主要サーバ Connected を確認。
 - **trading(Alpaca 20分サイクル)= MCP cron(Job1–5)で schtasks 外** → `browser-use-project` 側で再設定。移行中は二重起動回避(旧機/クラウド残置)。
 
 ## 5. secrets(★安全移送・暗号化/別経路)
