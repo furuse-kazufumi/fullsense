@@ -17,7 +17,7 @@
 
 ## 共通の前提・honest 注記
 
-- **device 配線(★全実験の前提・コード要追加)**: `scripts/tbptt_plateau_experiment.py` / `ttt_plateau_experiment.py` と `Trainer`/`TBPTTTrainer` は **CPU-only**(`--device` 引数が存在しない — 実コードで確認)。`nas_pareto.py` / `linearize_tolerance.py` も `load_qwen2` の to(device) が未配線。`migration_manifest_2026-06-28.md` §6 の backward-compatible 配線(`--device auto = cuda if available`)が **着荷後 Day 1 の初手**。CPU 機では auto→cpu で byte-identical(現プローブ方法論に影響なし)。
+- **device 配線(★全実験の前提)**: **実験 1(plateau)経路は ✅ 配線済(2026-06-28)** — `scripts/tbptt_plateau_experiment.py` / `ttt_plateau_experiment.py` / `prove_native_matches_hf.py` に `--device`(default `auto = cuda if available`)、`Trainer`/`TBPTTTrainer`/`eval`/`longctx_eval` が model device を推論し batch を移動(新規 `src/llcore/lm/device.py`)。CPU byte-identical(既存スイート全 green)+ mypy/ruff PASS で確認済。**実験 2/3 経路は未配線**: `nas_pareto.py` / `linearize_tolerance.py` / `evolve_linearization.py` は `load_qwen2` の `to(device)` 未配線 — 着荷後 Day 1 に同様 backward-compatible に追加(`migration_manifest_2026-06-28.md` §6 のパターン踏襲)。
 - **実装状態の正直開示**(`feedback_implementation_status_record`): 実験 2 の **logit-KD / LoRA Step2 / end-to-end 本訓練は未実装**(現 distill は per-layer の attention 出力 MSE = LoLCATs Step1 相当のみ)。これらは要実装で、完了後に該当 md を改訂して別 run。
 - **要用意データ**: 実験 2/3 の `--cross-corpus` 用 **disjoint コーパス**(aozora と非重複)。
 - **検証済み参照コード/doc**(本 prereg が引用した一次ソース):
