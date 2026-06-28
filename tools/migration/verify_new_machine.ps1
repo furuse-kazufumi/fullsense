@@ -494,9 +494,11 @@ try {
     else {
         $mcpCount = $null
         try {
-            $cj = Get-Content -LiteralPath $ClaudeJsonPath -Raw -ErrorAction Stop | ConvertFrom-Json
-            if ($cj.PSObject.Properties.Name -contains 'mcpServers' -and $null -ne $cj.mcpServers) {
-                $mcpCount = @($cj.mcpServers.PSObject.Properties).Count
+            # -AsHashtable: .claude.json は空文字プロパティ名を含み得るため必須
+            # (ConvertFrom-Json 既定は empty-string key で例外を投げる)。
+            $cj = Get-Content -LiteralPath $ClaudeJsonPath -Raw -ErrorAction Stop | ConvertFrom-Json -AsHashtable
+            if ($cj.ContainsKey('mcpServers') -and $null -ne $cj['mcpServers']) {
+                $mcpCount = @($cj['mcpServers'].Keys).Count
             }
             else { $mcpCount = 0 }
         }
