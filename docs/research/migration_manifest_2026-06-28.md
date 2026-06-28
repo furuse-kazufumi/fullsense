@@ -57,7 +57,9 @@
 | git | `C:/Program Files/Git`(Git Bash 同梱)| installer |
 | gh | `C:/Program Files/GitHub CLI` | installer(再 auth)|
 | rustc/cargo | `C:/Users/puruy/.cargo/bin` | rustup |
-| **rtk**(token killer) | 実体 `C:/tools/rtk/rtk.exe`(+ `.cargo/bin` shim)| build → `C:/tools/rtk/` 配置(+ PATH)|
+| **rtk**(token killer) | 実体 `C:/Users/puruy/.cargo/bin/rtk.exe`(cargo install v0.34.1, rev 6444c4b0)。`C:/tools/rtk/rtk.exe` は古い重複=再現不要 | `cargo install`(rtk-ai/rtk)→ `.cargo/bin`(PATH 済)|
+| **7-Zip** | `C:/Program Files/7-Zip`(PATH 未登録)| installer。★`migrate_secrets.ps1` の AES-256 バンドルが依存 |
+| **global npm**(6本)| nodejs `-g` | `npm i -g`: `@openai/codex` / `zx` / `@github/copilot` / `@google/gemini-cli` / `@mermaid-js/mermaid-cli` / `bun` |
 | uv | `C:/Users/puruy/.local/bin` | uv installer |
 | **Claude Code 本体** | `C:/Users/puruy/.local/bin/claude.exe` | **native installer**(npm 版でない)|
 | **Codex CLI**(二本柱の部下)| (CLI) | **再導入**(`.codex\` config/auth は §2-B で copy)|
