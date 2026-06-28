@@ -96,11 +96,13 @@
 
 ## 7. 新機 bootstrap チェックリスト(着荷後・順に)
 
-1. Win11 初期セットアップ: **ユーザー名 `puruy`**(C:/Users/puruy 温存)。
-2. **2TB を C:+D: 分割**(ディスクの管理。例 C:800/D:1100GB)。
-3. **NVIDIA driver R570+**(Blackwell)。
-4. py(3.11 default)導入 → **`torch cu128`** → `torch.cuda.get_device_capability()==(12,0)` 確認。
-5. 外付けから **C:/D: 同一絶対パス**へ展開、`api-keys.json` は別経路。
-6. node/git/gh/cargo(rtk)/uv/semgrep 再導入、ccr 再ビルド。
-7. MCP servers + scheduled tasks 再登録(FullSense-StatusTelegram / RAPTOR-Backup / CorpusUpdate)、trading は二重起動回避。
-8. 検証(plan §5)→ **llcore device 配線**(§6)→ 初手 = 本日プローブの GPU フル版。
+1. Win11 初期セットアップ: **ローカルアカウント `puruy`**(C:/Users/puruy 温存)。★**MS アカウントで OOBE すると `C:\Users\<先頭5字>` 等になり全 hook/memory/.claude.json/gh/gitconfig が破損** → 必ずローカルアカウント `puruy` で作成。
+2. **新機 C: BitLocker 回復キー escrow**(Day-1 初手): Win11 Pro は Device Encryption 既定 ON の可能性 → `manage-bde -status C:` 確認 → 回復キーを MS アカウント+PW マネージャ+紙に控える。
+3. **外付け D: 接続 → レター D: 固定**: 他 removable を全外し外付け単独接続 → `Set-Partition ... -NewDriveLetter D` → `Test-Path D:\tools\raptor` で温存確認(2TB の C:+D: 分割は **行わない**=D: ごと travels)。
+4. **NVIDIA driver R570+**(Blackwell)。
+5. py(3.11 default)導入 → **`torch cu128`** → `torch.cuda.get_device_capability()==(12,0)` 確認。
+6. **C: 常駐分復元**(§2-B): `restore_working_set.ps1 -Source D:\_c_migration` → `migrate_secrets.ps1 -Mode Restore` → env 3キー再設定/再発行 → tasks XML import + action 是正。`.credentials.json` は claude 再ログイン前提。
+7. node/git/gh/cargo/**rtk**/uv/semgrep/**Claude Code(native)**/**Codex CLI** 再導入、ccr 再ビルド(node-pty `npm rebuild`)。MCP は `.claude.json` コピーで再現。
+8. scheduled tasks 再登録(FullSense-StatusTelegram / RAPTOR-Backup / CorpusUpdate / ClaudeCodeUpdate)、trading は二重起動回避。
+9. 検証(`verify_new_machine.ps1` / plan §5)→ **llcore device 配線**(§6)→ 初手 = 本日プローブの GPU フル版。
+10. **(後日)Phase 2**: 内蔵 NVMe 増設 → robocopy → レタースワップ → 内蔵 D: を BitLocker。外付けは backup 退役。旧ノートはこの緑化まで温存。
