@@ -113,3 +113,23 @@ verdict flip は **N3 の 1 件のみ**。他は全 finding が adversarial revi
 ## 8. 更新 next_plan 案(claude-projects.json 用)
 
 > option-b deep-dive 検証完了(12 task, primary-source+adversarial)。**PoC-1 read 機構は非新規**(N3 flip: Resonator/VSA が codebook sparse-recovery 反復read を既占有; CCQ/MesaNet/CS-VLM も read 側に密集)→「first iterative read」主張禁止、honest framing=蒸留LLM凍結 linear-attn 状態への domain-transfer + P7 不可逆飽和を避け gated/delta 状態へ適用。P6 kill-risk は非転移(a-priori-dead 否定, ただし softmax-only 防御も無効)。**Write側は飽和せず**(P2 GDN-2/+Qwen EDA, contradicts prior)。**Base 乗換は Qwen3.5=multimodal+75%GatedDeltaNet で NO-GO → Qwen3-0.6B/1.7B**(Apache-2.0, 全層softmax)に変更。VLM(T6)は PARK→GPU+text PoC signal で shallow-prototype。**次: P5(STAR) 基盤の NAS-allele(evolve_linearization/nas_pareto)を機構新規性の本命候補として再評価 + read側 citing-graph 深掘り**。
+
+---
+
+## 9. ★N3 再検証 — re-flip(深掘り WF wdhj0hmdp, 6 probe + 2 一次 spot-check, 2026-06-29)
+
+§7-1 の N3 flip(「PoC-1 read 機構は占有済み」)を、setting 軸で深掘り再検証した結果 **over-reach と判明 → down-grade(re-flip)**。
+
+**★HINGE 結論**: VSA/Resonator/cleanup-memory ライン全体が **KNOWN・hand-designed・near-orthogonal な codebook 前提**で、recovery 保証は near-orthogonality に依存(VSA survey 2111.06077 一次確認)。**PoC-1 の「学習・非直交・designed-codebook 無しの蒸留状態」はこの前提外=VSA 理論がカバーしない regime**。学習・非直交辞書上の反復 sparse recovery は古典 dictionary-learning/LISTA 系(1808.10038/2106.00058)にしか無く、**蒸留 linear-attention LLM 状態への適用前例ゼロ**。flip が誤った理由 = 文献跨ぎ(Schlag=WRITE/構造の事実 → VSA cleanup=KNOWN codebook 上の READ、鎖は codebook で切れる)。
+
+**補強**: fast-weight/linear-attn/TTT の READ は常に single inner-product(Schlag Eq.25「No iterative loops」/ 2501.12352 verbatim 確認)、iteration は全て WRITE 側。Borobia 2605.01192 が「学習非直交 superposition の nonlinear/iterative recovery は OPEN」と独立支持。
+
+**一次 spot-check(`feedback_external_ai_verify` 履行)**:
+- **CCQ 2606.01294 forward-citation = 0**(scholar-search 空配列確認)→ niche は文字通り未占有(~4 週・fast-moving ゆえ 2-3 ヶ月後再 crawl 推奨)。
+- **Lexico 2412.08890**(Papailiopoulos ら)= **標準 softmax KV cache の OMP sparse 圧縮**で read も softmax →「linear-attn Σkvᵀ・no softmax」を外す = 非占有(partial)。最近接 killer 候補だが kill せず。
+
+**最終 novelty 判定 = (b) mechanism_occupied_wrapper_open(narrow だが real, confidence MEDIUM)**。6 probe 独立収束。生き残る差別化軸 = ① 凍結(非更新)蒸留 linear-attn Σkvᵀ ② post-hoc decode-time ③ 学習・非直交・codebook 無し key を辞書 ④ 反復 K=3-5 ⑤ no softmax ⑥ 追加重学習 read-network 無し。
+
+**フォーク含意(firm)**: **A(PoC-1 go-with-caveats)を支持・強化**(read 側 post-hoc wrapper が唯一残る open niche)/ **B(anticipatory write gate)は弱化**(write 側は delta-rule/MesaNet/OVQ/KalmaNet/FwPKM で過密)/ **C(NAS-allele)は直交・独立**。→ **推奨 = A**(§0 framing 規律 + CCQ 差別化を必須条件として付帯)。PoC-1 pre-registration = `llcore docs/research/preregistration/prereg_poc1_testtime_read_2026-06-29.md`(作成済)。
+
+**honest 留保**: verdict は absence-in-targeted-search + 構造論証で、決定的 foreclosing 論文は無い。深掘り probe は abstract ベース(本パスで Lexico/CCQ-cite の 2 点のみ一次 spot-check)。多数の 2026 preprint ID はカットオフ後で probe 報告依存。
