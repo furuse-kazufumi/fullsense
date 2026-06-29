@@ -95,3 +95,34 @@
 - **post-cutoff papers(title/abstract のみ)**: Gated DeltaNet-2 2605.22791 / Routing Mamba 2506.18145 / Distilling-to-Byte 2602.01007 等は内部主張未確認。"Retrieval-Aware Distillation 2602.11374" は**未検証=引用禁止**。
 - **JP specialist のライセンス/入手性**(Sarashina/Qwen3-4B-JP class)は依存前に要再確認。
 - **llcore 接地(本セッション確認)**: `distill.py`(6.2KB)は O1 のみ(fusion/dpo/logit_kd 無し)=greenfield。`nas_pareto/eval/longctx_eval/linearize/ttt` + `Qwen2.5-0.5B/1.5B-Instruct` 在存。
+
+---
+
+## 8. ★Firming update(敵対 prior-art + 理論導出, WF wudmz9dmh 6 agents, 2026-06-29)
+
+§4 の net-new 2 本と §3 の境界・§3 の staging を一次・敵対検証して**精緻化**(調査のみ)。
+
+### 8.1 net-new の確定
+- **T1(operator-union write-rule)= FIRMED(medium, killer 無し)**。3 leg は pairwise 占有も **triple(多教師 UNION × attention-operator × DeltaNet write rule)の交差は genuine gap**。firmed-by-structure(両親分野が 2026 も活発ゆえ交差の持続的空白が意味を持つ negative)。差別化 cite: **Attention-to-Mamba 2604.14191 + Taylor-Calibrate 2606.16429**(単一教師 operator→linear、これを ensemble に一般化)/ **FuseChat 2408.07990**(多教師だが output-level、これを operator 階層へ降ろす)。
+- **X1(CDMA)= DOWNGRADED → application-only novelty**。機構は occupied folklore(Frady/Kleyko VSA-in-RNN 1803.00412 / CDMA↔VSA MAC framing 2111.06077 / Schlag 2102.11174 / Cheung 2019 1902.05522 / Task-Projected HDC 2004.14252)。**「発明」と呼ばない**。残る slice=「per-teacher コードで蒸留中に bounded linear-attn student state を teacher 別 allocate」のみ=実装技法。**naive shared-write 比較 ablation で勝てなければ CDMA framing を捨てる**。
+- **staging-rule = ADOPT(既知)+ 小 empirical**。要訂正: 絶対形「同 optimizer step を共有してはならない」は**誤り**(PCGrad/CAGrad は gradient surgery で対立勾配を co-train 可)→「default。cos≥0 なら merge 可、attention-MSE 回復 vs 融合は cos<0 で stage、recovery-CE vs 融合は cos≥0 で merge 可」の cosine-gated recipe + ablation に軟化。
+
+### 8.2 ★in-state↔external 境界の計算ルール(physics=high confidence)
+bounded state W=Σvkᵀ(d×d 連想記憶)。容量則は VSA / 統計物理 / linear-attn で収束:
+- **SNR = d/M**(M=格納連想数, Frady 2018)。
+- **信頼容量 N_assoc ≈ d/(2·ln d)**(McEliece/Clarkson)、error-tolerant ~0.138d(Hopfield)、hard ceiling ≤ d。
+- **使える数値**: d=64 → ~8 / d=128 → ~13 / d=256 → ~23(信頼)。512→~41, 1024→~74, 2048→~134。
+- **hot/cold 閾値**: top **r\* ≈ d/(2 ln d)** を HOT(in-state)、rank>r\* を llive へ。**頻度形**: probability-mass share < **(2 ln d)/d** を cold(d=128 なら ~7.7% 未満)。**recency 形**: Gated DeltaNet 忘却 λ ≈ 1−(2 ln d)/d。
+- **regime**: HOT=bounded state(線形容量 O(d/log d), dense 高頻度共通知識)/ COLD=llive softmax/kNN store(指数容量 ~2^{d/2}, long-tail/factual/polysemous)。
+- confidence: 法則と「線形 vs 指数の cut」=high、定数は band d/(2–7 ln d)、数値頻度 cutoff=medium、「rare/polysemous→cold」=high。
+
+### 8.3 post-cutoff 確定(5/5 実在)
+**★capstone の「2602.11374 引用禁止」は overturned = 実在で引用可**。Retrieval-Aware Distillation for Transformer-SSM Hybrids(2026-02-11): retrieval-critical Gather-and-Aggregate head ~2% を model 内に残し他を recur → state 8× 縮小・net 5-6× memory。**境界アーキの partial prior art に再分類**。差別化: 私は cut を **d/log d 容量則から導出**し cold を **llive 外部**へ routing(2602.11374 は dedicated head で in-model 保持)。**2603.22056 Dual-Space KD**(cross-tokenizer)= T1 の多教師 cross-tokenizer mechanics の partial prior art=tokenizer-alignment baseline として cite。Routing Mamba 2506.18145 / Distilling-to-Byte 2602.01007 / MossNet 2510.26182 も real。
+
+### 8.4 ★first-PoC を変更(X1 でなく T1 主導)
+1. **2-3 教師の attention operator の ensemble を 1 つの DeltaNet/Gated-DeltaNet student に蒸留**(Taylor-Calibrate/Attention-to-Mamba の init を multi-teacher に一般化)。
+2. bounded state を**容量則でサイズ決定**(d/(2 ln d) ≥ 目標 hot-association budget となる d)、long-tail は (2 ln d)/d cutoff で llive へ。
+3. 単一教師 operator→linear baseline + **2602.11374**(retrieval-offload hybrid)に対し明示差別化。
+4. **X1 の per-teacher CDMA は ablated variant**(coded vs naive shared write)として、headline でなく付帯。staging も同様に ablation-backed の design choice。
+
+**更新 next_plan(1 行)**: `llcore fusion PoC は T1 主導に変更: 2-3教師の attention operator を 1つの (Gated)DeltaNet student に ensemble 蒸留(Taylor-Calibrate/Attention-to-Mamba を多教師一般化)、state 幅は容量則 d/(2 ln d)≥hot予算で決定、long-tail は (2 ln d)/d 頻度 cutoff で llive 外部へ。baseline=単一教師 operator→linear + 2602.11374(retrieval-offload)。X1 CDMA と cosine-gated staging は ablation 付帯(naive 共有 write/joint+surgery に勝てねば捨てる)。FuseChat-3.0 IMF backbone は不変、GPU 段は rented。`
