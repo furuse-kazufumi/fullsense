@@ -25,7 +25,8 @@ description: スナックバス江 (bazue_all) のコマ画像を技術記事の
 
 ```markdown
 ![<alt: コマの1行説明>](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/bazue_all/NNN.jpg)
-> 🗒️ *"<index の該当言語キャプション>" — <この記事の論点との1行の結びつけ>*（© Forbidden shibukawa / SHUEISHA・Snack Basue）
+> 🗒️ *"<index の該当言語キャプション>" — <この記事の論点との1行の結びつけ>*
+> — 出典: 《スナックバス江》／フォビドゥン澁川・集英社（[公式](https://youngjump.jp/info/bazue/)）
 ```
 
 - `NNN` = ゼロ埋め 3 桁（例 `046`）。
