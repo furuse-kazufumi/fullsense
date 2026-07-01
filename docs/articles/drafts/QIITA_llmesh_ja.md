@@ -248,7 +248,7 @@ python -c "from llmesh.llm import OllamaBackend; print(OllamaBackend(model='llam
 
 - GitHub: <https://github.com/furuse-kazufumi/llmesh>
 - PyPI: <https://pypi.org/project/llmesh-mcp/>
-- License: MIT
+- License: Apache-2.0 + Commercial (dual-license)
 - Issue 歓迎: <https://github.com/furuse-kazufumi/llmesh/issues>
 
 ---
@@ -559,7 +559,7 @@ python -c "from llmesh import PromptFirewall; print(PromptFirewall().check('sk-t
 - GitHub: <https://github.com/furuse-kazufumi/llmesh>
 - PyPI: <https://pypi.org/project/llmesh-mcp/>
 - Issue: <https://github.com/furuse-kazufumi/llmesh/issues>
-- License: MIT
+- License: Apache-2.0 + Commercial (dual-license)
 
 ---
 
@@ -835,7 +835,7 @@ CI artifact にも `bench-report.json` を残しています（`docs/PERFORMANCE
 - GitHub: <https://github.com/furuse-kazufumi/llmesh>
 - PyPI: <https://pypi.org/project/llmesh-mcp/>
 - 仕様: `docs/API_STABILITY.md` / `docs/PERFORMANCE.md`
-- License: MIT
+- License: Apache-2.0 + Commercial (dual-license)
 
 ---
 
@@ -1162,7 +1162,7 @@ pip install "llmesh-mcp[industrial,vision,presidio,rag]"
 
 - GitHub: <https://github.com/furuse-kazufumi/llmesh>
 - PyPI: <https://pypi.org/project/llmesh-mcp/>
-- License: MIT
+- License: Apache-2.0 + Commercial (dual-license)
 
 ---
 
@@ -1578,7 +1578,7 @@ python -m llmesh.cli.doctor
 - GitHub: <https://github.com/furuse-kazufumi/llmesh>
 - PyPI: <https://pypi.org/project/llmesh-mcp/>
 - Issue: <https://github.com/furuse-kazufumi/llmesh/issues>
-- License: MIT
+- License: Apache-2.0 + Commercial (dual-license)
 
 ---
 
