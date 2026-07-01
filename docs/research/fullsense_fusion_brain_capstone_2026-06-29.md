@@ -126,3 +126,37 @@ bounded state W=Σvkᵀ(d×d 連想記憶)。容量則は VSA / 統計物理 / l
 4. **X1 の per-teacher CDMA は ablated variant**(coded vs naive shared write)として、headline でなく付帯。staging も同様に ablation-backed の design choice。
 
 **更新 next_plan(1 行)**: `llcore fusion PoC は T1 主導に変更: 2-3教師の attention operator を 1つの (Gated)DeltaNet student に ensemble 蒸留(Taylor-Calibrate/Attention-to-Mamba を多教師一般化)、state 幅は容量則 d/(2 ln d)≥hot予算で決定、long-tail は (2 ln d)/d 頻度 cutoff で llive 外部へ。baseline=単一教師 operator→linear + 2602.11374(retrieval-offload)。X1 CDMA と cosine-gated staging は ablation 付帯(naive 共有 write/joint+surgery に勝てねば捨てる)。FuseChat-3.0 IMF backbone は不変、GPU 段は rented。`
+
+> **⚠ §9 が §8.4 の「T1 主導」を SUPERSEDE する（下記 redirect）。**
+
+---
+
+## 9. ★T1 REDIRECT — 「正しい層か」の理論判定（WF wbgmo37m4 5 agents, high confidence, 2026-06-29）
+
+§8 は T1（多教師 operator-union）を novel と firm したが、**novelty ≠ value**。「T1 は正しい層を狙っているか」を局在化文献で詰めた結果 **= REDIRECT(B)・high confidence**。理論で PoC 前に headline を補正。
+
+### 9.1 判定（high）: 融合価値は FFN/output に住む
+7+ の独立系列が収束: ① 知識局在=mid-layer FFN（ROME 2202.05262 / MEMIT 2210.07229 / Geva FFN=KV 2012.14913 / Knowledge Neurons 2104.08696）、attention=recall/copy/routing（induction 2209.11895 / retrieval heads 2404.15574=ablate で検索/CoT 崩壊も「intrinsic 知識は無傷」）。② **線形化レシピが答えを実装**: LoLCATs/MOHAWK/Mamba-in-Llama は例外なく **FFN を freeze** し attention を **single-teacher** MSE 蒸留、capability は別の FFN/logit 回復段で戻る = **operator は mixing/recall を運ぶが capability を運ばない**。③ 実在 fusion は全て FFN/output（FuseChat logit+DPO+param merge / BTX FFN→MoE・attention は平均 / Expert-Merging は深層 MLP）= **attention operator を teacher 間 union する前例ゼロ**。
+
+### 9.2 T1 = REDIRECT(B)（(A) でも (C) でもない）
+- **(A) でない**: operator-union は output/FFN fusion が運べないものを足さない（capability は operator に無い）。
+- **(C)（両方）でもない**: multi-teacher operator-union は **recall に対しても misdirected** — ① teacher は各自 basis で attend → 正準 union 不在で fused-operator MSE target が**内部不整合** ② 有界状態の信頼連想数 ~**23(d=256)** に multi-teacher routing を詰めるのは容量と戦う ③ recall は計画上すでに llive へ外部化する次元。recall に要るのは **single-teacher operator 蒸留**（fusion でない）。
+- narrow residual: teacher 間で in-context retrieval が違えば operator の**選択**は効きうるが、union でなく「最強 teacher の operator 選択 or HALO 流 selective full-attention 層保持」で扱う。
+
+### 9.3 ★真の headline 貢献（機構でなく配置理論 + 統合契約）
+operator-union は前例ゼロかつ理論的 misdirected ゆえ headline にできない。新規性は **placement rule + 統合契約**に置く:
+> **容量導出 hot/cold 境界に基づく layer-targeted fusion contract** — どの teacher 価値をどの層に置くかを `d/(2 ln d)` 容量則で形式的に正当化し、CPU 完結・constant-state・JP-capable な linearized student として統合。
+1. **operator = single-teacher**（LoLCATs/HALO 流 attention-transfer to Gated DeltaNet、FFN freeze。役割=efficiency + recall 保存のみ）。
+2. **fusion = FFN/output**（FuseChat-3.0 logit-KD + DPO、任意で BTX/BAR/task-vector の FFN merge）= capability が住み非冗長な唯一の層。
+3. **rare/world recall = llive 外部**（23-slot 容量則が形式的根拠）。
+
+差別化の核 = **capacity-derived placement + llive co-design 外部化**であって operator-union ではない（過剰主張せず honest disclosure 整合）。
+
+### 9.4 ★first-PoC を再変更（§8.4 を置換）: RIGHT question を測る
+- **Step 0（ほぼゼロコスト well-posedness 診断・まずこれ）**: union target がそもそも存在するか。小 teacher 2 体の同一入力 attention 出力を取り「両者 mean を single linear-attention で MSE 一致させる irreducible floor」を測る。basis 非整合なら floor 大 → **学習前に operator-union は ill-posed と判明**。
+- **Step 1（gain 分解 ablation）**: 小 base + teacher 2-3 体。(A) single-teacher operator linearization のみ=baseline / (B) A + output 多教師 KD / (C) A + operator-union(T1) / (D) A + 両方。recall-light reasoning/JP + recall-heavy で評価。**予測: capability で B≫A, C≈A(recall-heavy では C<A もあり), D≈B = gain は output fusion 由来・operator-union delta≈0**。これを commit 前の必須 gate に。
+
+### 9.5 honest 留保
+- A/B 直接実験は文献に**不在** → redirect は収束的 mechanistic 証拠 + operator-fusion 前例の不在に依拠（単一決定 study でない)→ §9.4 ablation を commit gate に（必須）。
+- 分割は statistical（Geva 2023: 一部 head が subject→attribute / Hase 2023: 局在は編集位置を予測せず）。operator は capability-void でない（mixer 除去 >35,000x ppl）= single-teacher operator 蒸留は essential、軽視しない。redirect の主張は「operator が無価値」でなく「**teacher 間 capability 差は operator に無い**」。
+- verdict-bearing 論文（2408.10189/2408.15237/2410.10254/2412.06464/2012.14913/2403.07816/2401.10491/2408.07990）は pre-cutoff・確認済で redirect は成立。RAD corpus は interpretability 未収録 → 上記 + 局在化 8 本を `raptor-rad-ingest` で取込推奨（`feedback_research_to_rad_autoingest`）。
