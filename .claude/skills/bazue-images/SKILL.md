@@ -31,7 +31,7 @@ description: スナックバス江 (bazue_all) のコマ画像を技術記事の
 
 - `NNN` = ゼロ埋め 3 桁（例 `046`）。
 - **alt と blockquote は記事の言語に合わせる**（en 記事は en、ja は ja、zh/ko も同様。index.md にキャプション訳あり）。
-- **クレジット `（© Forbidden shibukawa / SHUEISHA・Snack Basue）` は必須**（毎コマ併記）。
+- **クレジット(出典行)は必須**（毎コマ併記）:「— 出典: 《スナックバス江》／フォビドゥン澁川・集英社（[公式](https://youngjump.jp/info/bazue/)）」。★2026-07-01 統一: 旧英語©表記から、集英社公式無料素材の法的根拠(公式ページ)をリンクする和文出典形式へ統一(cf. PANEL_PLACEMENT_PLAN「2026-06-19 標準」/ [[reference_alu_manga_crops]])。
 - raw URL が **HTTP 200** か確認（画像 200 必須＝memory `feedback_qiita_svg_path_and_cache`）。
 
 ## 4. コマ選定と再利用ルール
