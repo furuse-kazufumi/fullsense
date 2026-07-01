@@ -512,7 +512,7 @@ def memetic_search(layers, mixers=("softmax", "sliding_window", "linear")):
     return population       # 貪欲解の一歩先の、非分離な組み合わせを含むフロント
 ```
 
-### honest な内訳（都合のいいところだけ言わない）
+### 正直な内訳（都合のいいところだけ言わない）
 
 この「負けて、勝った」弧にも、正直な留保をつけます。
 
