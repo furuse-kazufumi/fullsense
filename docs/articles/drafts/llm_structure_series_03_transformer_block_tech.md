@@ -7,6 +7,8 @@
 > 誤差ゼロで再現した一次体験を土台に、大規模言語モデル(LLM: Large Language Model)の部品を一つずつ
 > 分解して見せる連載です。一般版が絵で腑に落とす担当、この技術版は数式・擬似コード・実測値で納得する担当です。
 
+![Transformer ブロックの全体像 ― 注意機構と順伝播層に残差とRMSNormを付けた1ブロックをN層積む](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/hero_03_block.svg)
+
 私は 25 年ほど、計測・制御の現場で「カメラで見て、機械を動かす」装置を作ってきたエンジニアです。
 多項式近似・スプライン補間・フーリエ変換・主成分分析といった数値アルゴリズムを、必要に応じて自分で
 実装してきました。今回の主役である順伝播層(FFN)は、その数理解析の延長線上にあります。「関数を近似する箱」
