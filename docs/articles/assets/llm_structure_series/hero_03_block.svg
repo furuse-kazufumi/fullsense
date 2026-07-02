@@ -26,45 +26,45 @@
   <rect x="56" y="110" width="660" height="204" rx="16" fill="#172033" stroke="#475569" stroke-width="1.5"/>
 
   <!-- residual stream + adders -->
-  <path d="M96,158 L678,158" stroke="#3aa0a0" stroke-width="2.5" fill="none" stroke-dasharray="7 5"/>
+  <path d="M96,158 L666,158" stroke="#3aa0a0" stroke-width="2.5" fill="none" stroke-dasharray="7 5"/>
   <text x="104" y="150" fill="#7fcccc" font-size="11">残差ストリーム（元を捨てず足し込む）</text>
   <path d="M96,224 L96,158" stroke="#3aa0a0" stroke-width="2" fill="none"/>
-  <path d="M360,158 L360,205" stroke="#3aa0a0" stroke-width="2" fill="none" marker-end="url(#ahT)"/>
-  <path d="M650,158 L650,205" stroke="#3aa0a0" stroke-width="2" fill="none" marker-end="url(#ahT)"/>
+  <path d="M362,158 L362,211" stroke="#3aa0a0" stroke-width="2" fill="none" marker-end="url(#ahT)"/>
+  <path d="M654,158 L654,211" stroke="#3aa0a0" stroke-width="2" fill="none" marker-end="url(#ahT)"/>
 
   <!-- flow: input -> RMSNorm -> Attention -> (+) -> RMSNorm -> FFN -> (+) -> out -->
-  <text x="76" y="214" fill="#94a3b8" font-size="11" text-anchor="middle">入力 x</text>
-  <path d="M60,224 L100,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+  <text x="78" y="214" fill="#94a3b8" font-size="11" text-anchor="middle">入力 x</text>
+  <path d="M60,224 L96,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
 
-  <rect x="100" y="210" width="70" height="28" rx="8" fill="#10202e" stroke="#3aa0a0" stroke-width="1.5"/>
-  <text x="135" y="228" fill="#8fd0d0" font-size="9.5" text-anchor="middle">RMSNorm</text>
-  <path d="M170,224 L188,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+  <rect x="98" y="210" width="60" height="28" rx="8" fill="#10202e" stroke="#3aa0a0" stroke-width="1.5"/>
+  <text x="128" y="228" fill="#8fd0d0" font-size="9.5" text-anchor="middle">RMSNorm</text>
+  <path d="M158,224 L172,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
 
-  <rect x="190" y="196" width="168" height="56" rx="10" fill="#1b2b47" stroke="#2f6fb0" stroke-width="2"/>
-  <text x="274" y="220" fill="#cfe0f2" font-size="14" font-weight="700" text-anchor="middle">注意機構 (attention)</text>
-  <text x="274" y="239" fill="#9fb4cf" font-size="11" text-anchor="middle">検索・ルーティング</text>
+  <rect x="174" y="196" width="168" height="56" rx="10" fill="#1b2b47" stroke="#2f6fb0" stroke-width="2"/>
+  <text x="258" y="220" fill="#cfe0f2" font-size="13" font-weight="700" text-anchor="middle">注意機構 (attention)</text>
+  <text x="258" y="239" fill="#9fb4cf" font-size="11" text-anchor="middle">検索・ルーティング</text>
 
-  <circle cx="360" cy="224" r="13" fill="#0f172a" stroke="#3aa0a0" stroke-width="2"/>
-  <text x="360" y="229" fill="#7fcccc" font-size="14" text-anchor="middle">＋</text>
-  <path d="M373,224 L388,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+  <circle cx="362" cy="224" r="12" fill="#0f172a" stroke="#3aa0a0" stroke-width="2"/>
+  <text x="362" y="229" fill="#7fcccc" font-size="14" text-anchor="middle">＋</text>
+  <path d="M374,224 L388,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
 
-  <rect x="388" y="210" width="70" height="28" rx="8" fill="#10202e" stroke="#3aa0a0" stroke-width="1.5"/>
-  <text x="423" y="228" fill="#8fd0d0" font-size="9.5" text-anchor="middle">RMSNorm</text>
-  <path d="M458,224 L468,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+  <rect x="390" y="210" width="60" height="28" rx="8" fill="#10202e" stroke="#3aa0a0" stroke-width="1.5"/>
+  <text x="420" y="228" fill="#8fd0d0" font-size="9.5" text-anchor="middle">RMSNorm</text>
+  <path d="M450,224 L464,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
 
-  <rect x="470" y="196" width="168" height="56" rx="10" fill="#2e2716" stroke="#d99a2b" stroke-width="2"/>
-  <text x="554" y="220" fill="#f0d9a8" font-size="14" font-weight="700" text-anchor="middle">順伝播層 (FFN)</text>
-  <text x="554" y="239" fill="#d8c39a" font-size="11" text-anchor="middle">知識の貯蔵庫</text>
+  <rect x="466" y="196" width="168" height="56" rx="10" fill="#2e2716" stroke="#d99a2b" stroke-width="2"/>
+  <text x="550" y="220" fill="#f0d9a8" font-size="13" font-weight="700" text-anchor="middle">順伝播層 (FFN)</text>
+  <text x="550" y="239" fill="#d8c39a" font-size="11" text-anchor="middle">知識の貯蔵庫</text>
 
-  <circle cx="650" cy="224" r="13" fill="#0f172a" stroke="#3aa0a0" stroke-width="2"/>
-  <text x="650" y="229" fill="#7fcccc" font-size="14" text-anchor="middle">＋</text>
-  <path d="M663,224 L702,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+  <circle cx="654" cy="224" r="12" fill="#0f172a" stroke="#3aa0a0" stroke-width="2"/>
+  <text x="654" y="229" fill="#7fcccc" font-size="14" text-anchor="middle">＋</text>
+  <path d="M666,224 L706,224" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
 
-  <text x="386" y="286" fill="#94a3b8" font-size="11" text-anchor="middle">各モジュール：手前に RMSNorm（正規化）→ 通した結果を残差で足し戻す（pre-norm）</text>
+  <text x="384" y="286" fill="#94a3b8" font-size="11" text-anchor="middle">各モジュール：手前に RMSNorm（正規化）→ 通した結果を残差で足し戻す（pre-norm）</text>
 
   <!-- connector A -> B (stack N) -->
-  <path d="M716,224 L810,150" stroke="#3aa0a0" stroke-width="2.5" fill="none" marker-end="url(#ahT)"/>
-  <text x="758" y="176" fill="#7fcccc" font-size="12" font-weight="700" text-anchor="middle">×N 積む</text>
+  <path d="M708,222 L806,150" stroke="#3aa0a0" stroke-width="2.5" fill="none" marker-end="url(#ahT)"/>
+  <text x="760" y="180" fill="#7fcccc" font-size="12" font-weight="700" text-anchor="middle">×N 積む</text>
 
   <!-- Section B: stacked layers -->
   <text x="958" y="104" fill="#cbd5e1" font-size="14" font-weight="700" text-anchor="middle">この 1 段を N 層くり返す（例 24 層）</text>
