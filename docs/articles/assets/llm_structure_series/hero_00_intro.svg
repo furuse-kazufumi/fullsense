@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="作って分かった LLM の中身 ― 自作言語モデルで覗く構造 シリーズ hero" style="width:100%;height:auto;max-width:1200px" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <title>作って分かった LLM の中身 ― 自作言語モデルで覗く構造</title>
+  <desc>推論エンジンを自分で組み直し、公式実装と実測して誤差ゼロ（logits 2e-4 / max|Δ|=0.0）で再現した一次体験から、LLM の構造を分解するシリーズの表紙。静的完成形。</desc>
+  <defs>
+    <linearGradient id="bg00" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="ribbon00" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3aa0a0" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#3aa0a0" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#3aa0a0" stop-opacity="0"/>
+    </linearGradient>
+    <marker id="a00" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bg00)"/>
+
+  <!-- title -->
+  <text x="70" y="86" fill="#e2e8f0" font-size="40" font-weight="800">作って分かった LLM の中身</text>
+  <text x="72" y="122" fill="#94a3b8" font-size="19">― 自作言語モデルで覗く構造</text>
+
+  <!-- pipeline motif -->
+  <g transform="translate(70,168)">
+    <g font-size="13" fill="#cbd5e1" text-anchor="middle">
+      <rect x="0" y="0" width="150" height="46" rx="9" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.6"/>
+      <text x="75" y="28">①トークン化</text>
+      <rect x="182" y="0" width="150" height="46" rx="9" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.6"/>
+      <text x="257" y="28">②埋め込み</text>
+      <rect x="364" y="0" width="150" height="46" rx="9" fill="#0f172a" stroke="#d99a2b" stroke-width="2"/>
+      <text x="439" y="28" fill="#fcd9a3">③注意機構 ★</text>
+      <rect x="546" y="0" width="150" height="46" rx="9" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.6"/>
+      <text x="621" y="28">④順伝播層</text>
+      <rect x="728" y="0" width="150" height="46" rx="9" fill="#0f172a" stroke="#3a6a53" stroke-width="1.6"/>
+      <text x="803" y="28">⑤次の一語</text>
+    </g>
+    <g stroke="#64748b" stroke-width="1.8" marker-end="url(#a00)">
+      <line x1="152" y1="23" x2="180" y2="23"/>
+      <line x1="334" y1="23" x2="362" y2="23"/>
+      <line x1="516" y1="23" x2="544" y2="23"/>
+      <line x1="698" y1="23" x2="726" y2="23"/>
+    </g>
+    <!-- loop back -->
+    <path d="M803,46 L803,70 L75,70 L75,48" fill="none" stroke="#3a6a53" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#a00)"/>
+    <text x="439" y="66" fill="#7f9c8b" font-size="11" text-anchor="middle">一語出すたび入口へ戻る（自己回帰）</text>
+  </g>
+
+  <!-- verification badges -->
+  <g transform="translate(958,150)">
+    <rect x="0" y="0" width="182" height="60" rx="10" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.6"/>
+    <text x="16" y="26" fill="#93c5e8" font-size="13">自作 vs 公式</text>
+    <text x="16" y="48" fill="#e2e8f0" font-size="20" font-weight="700">logits 2e-4</text>
+    <rect x="0" y="70" width="182" height="60" rx="10" fill="#0f172a" stroke="#3a9a86" stroke-width="1.6"/>
+    <text x="16" y="96" fill="#8fd3c2" font-size="13">最適化ローダー</text>
+    <text x="16" y="118" fill="#e2e8f0" font-size="20" font-weight="700">max|Δ| = 0.0</text>
+  </g>
+
+  <!-- ribbon accent (decorative; static-visible base) -->
+  <rect x="0" y="300" width="1200" height="2" fill="url(#ribbon00)"/>
+
+  <!-- footer -->
+  <text x="70" y="336" fill="#cbd5e1" font-size="14" font-weight="600">組み直して、公式実装と実測して誤差ゼロで再現した ― だから中身を説明できる</text>
+  <text x="1130" y="336" fill="#64748b" font-size="12" text-anchor="end">著者: 古瀬 和文（ぷるやん）</text>
+</svg>
