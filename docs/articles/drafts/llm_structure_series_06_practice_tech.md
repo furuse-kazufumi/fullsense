@@ -424,6 +424,8 @@ proxy-v2 は、その戒めをコードにしたものです。**測れる範囲
 そして三つを畳み込んだ **proxy-v2**（paired 多窓・CI・勝者の呪い補正・honest_verdict でスコープ固定）で、
 **「言えないことを言わせない」評価装置**にする。良い数字が出たら、喜ぶ前に測り方を疑う。
 
+![評価の罠 ― 勝者の呪い（最良は楽観に偏る→新鮮な holdout で再評価）と、PPL だけのゲートの危険（2bit は PPL 通過でも top-1 −13.5pp 崩落→top-1 保持で fail-closed）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/diagram_06_eval_traps.svg)
+
 ---
 
 ## ③-4 判断の合間に：進化 × 構造 ― 負けと、その先の勝ち（memetic NAS）
