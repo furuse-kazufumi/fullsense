@@ -69,7 +69,7 @@
     <text x="532" y="240" fill="#41506a" font-size="14" font-weight="600">PPL</text>
     <rect x="596" y="229" width="250" height="14" rx="7" fill="#e6ebf3"/>
     <rect x="596" y="229" width="250" height="14" rx="7" fill="#5b6a86"/>
-    <text x="854" y="240" fill="#3a6a53" font-size="13" font-weight="700" text-anchor="end">ゲート通過 ✓</text>
+    <text x="838" y="240" fill="#3a6a53" font-size="13" font-weight="700" text-anchor="end">ゲート通過 ✓</text>
 
     <!-- meter: top-1 collapses -->
     <text x="532" y="276" fill="#41506a" font-size="14" font-weight="600">top-1</text>
