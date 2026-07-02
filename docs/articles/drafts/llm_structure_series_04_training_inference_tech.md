@@ -283,6 +283,8 @@ flowchart LR
 図の左上の入口が**テキストの量**、ループの回転数が**計算量**。
 私の自宅実験が届かなかったのは、この2つの規模でした。設計（図の形）は正しくても、**入口の量と回転数が桁違いに足りなかった**。
 
+![学習ループ＝校正ループの図：予測→損失→重み補正の循環と、自宅CPU文字LM（11.9M・ppl38）が会話に届かなかった正直な失敗](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/diagram_04_training_loop.svg)
+
 ### 3-7. 推論 ― 固定した重みで、一語ずつ
 
 学習が終わると、重みは**凍結**します。推論(inference)では、この固定重みを使って、実際に文章を生成する。
