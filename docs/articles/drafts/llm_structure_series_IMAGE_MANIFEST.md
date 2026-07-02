@@ -36,6 +36,22 @@
 | `diagram_05_kv_growth.svg` | KVキャッシュ膨張（4.72→37.75MB ×8 vs 定数状態平坦・交差点227） | 技術版#5 |
 | `diagram_06_eval_traps.svg` | 評価の罠（勝者の呪い / PPLだけは危険 2bit top1 -13.5pp） | 技術版#6 |
 
+### 補助図（ライト 960×540）＝ tech 記事の各節に配線済み
+| ファイル | 内容 | 配線先 |
+|---|---|---|
+| `aux_01_tied_embeddings.svg` | 重み共有＝入口と出口が同じ1枚の行列（ゴースト第2行列で「二重に持たない」を可視化） | 技術版#1 §3-4 |
+| `aux_02_template_matching.svg` | 相関（テンプレートマッチング）↔ 注意スコアの左右対比＋argmax/softmax | 技術版#2 §3.2 |
+| `aux_02_rope_phase_clock.svg` | RoPE＝周波数ごとの位相時計（針角度は厳密計算・シフト定理） | 技術版#2 §3.6 |
+| `aux_02_cost_curves.svg` | 計算 O(T²) 放物線 vs メモリ O(T) 直線（概形・→第5回） | 技術版#2 §3.8 |
+| `aux_03_swiglu_gate.svg` | SwiGLU「広げて畳む」＝門番の枝×素材の枝の要素積 | 技術版#3 |
+| `aux_04_pretrain_vs_scratch.svg` | ゼロから学習（11.9M・ppl38＝会話不能）vs 事前学習済み（差は重み） | 技術版#4 |
+| `aux_04_sampling.svg` | 次トークン分布と greedy / temperature・top-p の選び方 | 技術版#4 |
+| `aux_05_crossover.svg` | per-token 損益分岐（交差点≈227トークン、T=8192で36×） | 技術版#5 |
+| `aux_05_bitwidth_cliff.svg` | 量子化ビット幅の崖（int8安全牌／3bit=PTQ床／2bit=QAT領域＋97%ゲート） | 技術版#5 |
+| `aux_06_context_sweep.svg` | 文脈長スイープ（短文脈proxyは長文脈コストを過小検出） | 技術版#6 |
+| `aux_06_knowledge_injection.svg` | RAG vs 微調整 vs 蒸留の三択比較 | 技術版#6 |
+| `aux_06_responsible_pillars.svg` | 責任ある設計の四柱（ローカル完結・HITL・fail-closed・誠実な開示） | 技術版#6 |
+
 ---
 
 ## Mermaid（各記事の本文に埋め込み済み・そのまま描画）
