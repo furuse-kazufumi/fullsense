@@ -10,32 +10,32 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-02 08:26:14
+- **生成時刻**: 2026-07-02 08:53:13
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `6	0`
+- HEAD vs upstream (左=ahead 右=behind): `25	0`
 
 ```
-32d9960 auto: llm_structure_series_00_intro_general.md 編集前 (2026-07-02 08:22)
-10f11d7 docs(bazue): スナックバス江クレジットを canonical 和文出典形式に統一
-5c08f31 auto: index.md 編集前 (2026-07-01 21:28)
-13d2cfc auto: SKILL.md 編集前 (2026-07-01 21:28)
-26efef2 auto: SKILL.md 編集前 (2026-07-01 21:28)
-c1c268a docs(qiita): llmesh 記事のライセンス表記を Apache-2.0 + Commercial dual に更新
-eedc03e auto: fullsense_fusion_brain_capstone_2026-06-29.md 編集前 (2026-06-29 18:48)
-d91583a auto: fullsense_fusion_brain_capstone_2026-06-29.md 編集前 (2026-06-29 18:23)
-3eb7d4e auto: index.md 編集前 (2026-06-29 13:11)
-b904472 auto: index.md 編集前 (2026-06-29 13:06)
+a0513e5 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 08:51)
+2fb2614 auto: llm_structure_series_00_intro_tech.md 編集前 (2026-07-02 08:51)
+84826d6 auto: llm_structure_series_05_memory_speed_tech.md 編集前 (2026-07-02 08:49)
+b9a7c2b auto: llm_structure_series_05_memory_speed_general.md 編集前 (2026-07-02 08:49)
+79e0aa2 auto: llm_structure_series_02_attention_general.md 編集前 (2026-07-02 08:49)
+3c69a5a auto: llm_structure_series_01_tokens_embeddings_general.md 編集前 (2026-07-02 08:49)
+780da45 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 08:49)
+6cae8c8 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 08:49)
+441d6c4 auto: llm_structure_series_03_transformer_block_tech.md 編集前 (2026-07-02 08:49)
+1e83b56 auto: llm_structure_series_03_transformer_block_tech.md 編集前 (2026-07-02 08:49)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/drafts/llm_structure_series_00_intro_general.md
+M docs/articles/drafts/llm_structure_series_06_practice_tech.md
 ```
 
 
@@ -70,6 +70,22 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `08:51` `docs/articles/drafts/llm_structure_series_06_practice_tech.md`
+- `08:51` `docs/articles/drafts/llm_structure_series_00_intro_tech.md`
+- `08:50` `docs/articles/drafts/llm_structure_series_05_memory_speed_tech.md`
+- `08:49` `docs/articles/drafts/llm_structure_series_05_memory_speed_general.md`
+- `08:49` `docs/articles/drafts/llm_structure_series_02_attention_general.md`
+- `08:49` `docs/articles/drafts/llm_structure_series_01_tokens_embeddings_general.md`
+- `08:49` `docs/articles/drafts/llm_structure_series_03_transformer_block_tech.md`
+- `08:49` `docs/articles/drafts/llm_structure_series_01_tokens_embeddings_tech.md`
+- `08:40` `docs/articles/drafts/llm_structure_series_IMAGE_PROMPTS.md`
+- `08:39` `docs/articles/drafts/llm_structure_series_06_practice_general.md`
+- `08:35` `docs/articles/drafts/llm_structure_series_03_transformer_block_general.md`
+- `08:34` `docs/articles/drafts/llm_structure_series_04_training_inference_general.md`
+- `08:31` `docs/articles/drafts/llm_structure_series_02_attention_tech.md`
+- `08:31` `docs/articles/drafts/llm_structure_series_04_training_inference_tech.md`
+- `08:26` `docs/SESSION_SUMMARY.md`
+- `08:26` `docs/NEXT_SESSION.auto.md`
 - `08:22` `docs/articles/drafts/llm_structure_series_00_intro_general.md`
 - `08:21` `docs/articles/drafts/llm_structure_series_INDEX.md`
 - `08:20` `docs/articles/drafts/_llm_structure_series_kit.md`

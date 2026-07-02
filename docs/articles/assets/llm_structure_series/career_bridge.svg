@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <!-- 静的表示: authored=最終可視。SMIL不使用。赤緑の善悪対比なし。 -->
+  <defs>
+    <marker id="bi" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#8a6a2b"/>
+    </marker>
+  </defs>
+  <rect width="960" height="560" fill="#f7f9fc"/>
+  <rect x="0" y="0" width="960" height="86" fill="#1f2a44"/>
+  <text x="40" y="40" fill="#ffffff" font-size="27" font-weight="700">現場の道具は、AI の中で顔を出す</text>
+  <text x="40" y="70" fill="#aebaccd0" font-size="16">25 年の計測・制御エンジニアリング  ×  LLM の内部構造</text>
+
+  <!-- column headers -->
+  <rect x="40" y="104" width="380" height="34" rx="8" fill="#2f6fb0"/>
+  <text x="230" y="127" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle">計測・制御の現場でずっと使ってきた道具</text>
+  <rect x="540" y="104" width="380" height="34" rx="8" fill="#3a6a53"/>
+  <text x="730" y="127" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle">LLM の中の部品</text>
+
+  <!-- rows -->
+  <g font-size="15">
+    <!-- row 1 -->
+    <rect x="40" y="152" width="380" height="60" rx="10" fill="#eaf1fb" stroke="#c9d3e2"/>
+    <text x="60" y="178" fill="#1f2a44" font-weight="700">フーリエ変換／位相・周波数</text>
+    <text x="60" y="200" fill="#41506a" font-size="13">信号を周波数で捉える</text>
+    <rect x="540" y="152" width="380" height="60" rx="10" fill="#e6f2ee" stroke="#c9d3e2"/>
+    <text x="560" y="178" fill="#1f2a44" font-weight="700">RoPE（回転位置埋め込み）</text>
+    <text x="560" y="200" fill="#41506a" font-size="13">位置を回転＝位相で符号化</text>
+    <line x1="424" y1="182" x2="536" y2="182" stroke="#8a6a2b" stroke-width="2.5" marker-end="url(#bi)" marker-start="url(#bi)"/>
+
+    <!-- row 2 -->
+    <rect x="40" y="222" width="380" height="60" rx="10" fill="#eaf1fb" stroke="#c9d3e2"/>
+    <text x="60" y="248" fill="#1f2a44" font-weight="700">相関／テンプレートマッチング</text>
+    <text x="60" y="270" fill="#41506a" font-size="13">似た形を掛け合わせて探す</text>
+    <rect x="540" y="222" width="380" height="60" rx="10" fill="#e6f2ee" stroke="#c9d3e2"/>
+    <text x="560" y="248" fill="#1f2a44" font-weight="700">注意スコア（QKᵀ の内積）</text>
+    <text x="560" y="270" fill="#41506a" font-size="13">Q と K の合い具合＝内積類似度</text>
+    <line x1="424" y1="252" x2="536" y2="252" stroke="#8a6a2b" stroke-width="2.5" marker-end="url(#bi)" marker-start="url(#bi)"/>
+
+    <!-- row 3 -->
+    <rect x="40" y="292" width="380" height="60" rx="10" fill="#eaf1fb" stroke="#c9d3e2"/>
+    <text x="60" y="318" fill="#1f2a44" font-weight="700">主成分分析（PCA）／次元圧縮</text>
+    <text x="60" y="340" fill="#41506a" font-size="13">意味のある軸に分解する</text>
+    <rect x="540" y="292" width="380" height="60" rx="10" fill="#e6f2ee" stroke="#c9d3e2"/>
+    <text x="560" y="318" fill="#1f2a44" font-weight="700">埋め込み空間（意味の座標）</text>
+    <text x="560" y="340" fill="#41506a" font-size="13">言葉を意味のベクトルに置く</text>
+    <line x1="424" y1="322" x2="536" y2="322" stroke="#8a6a2b" stroke-width="2.5" marker-end="url(#bi)" marker-start="url(#bi)"/>
+
+    <!-- row 4 -->
+    <rect x="40" y="362" width="380" height="60" rx="10" fill="#eaf1fb" stroke="#c9d3e2"/>
+    <text x="60" y="388" fill="#1f2a44" font-weight="700">キャリブレーション（校正ループ）</text>
+    <text x="60" y="410" fill="#41506a" font-size="13">誤差を測って補正を繰り返す</text>
+    <rect x="540" y="362" width="380" height="60" rx="10" fill="#e6f2ee" stroke="#c9d3e2"/>
+    <text x="560" y="388" fill="#1f2a44" font-weight="700">学習ループ（loss→勾配降下）</text>
+    <text x="560" y="410" fill="#41506a" font-size="13">予測の誤差を測って重みを直す</text>
+    <line x1="424" y1="392" x2="536" y2="392" stroke="#8a6a2b" stroke-width="2.5" marker-end="url(#bi)" marker-start="url(#bi)"/>
+
+    <!-- row 5 -->
+    <rect x="40" y="432" width="380" height="60" rx="10" fill="#eaf1fb" stroke="#c9d3e2"/>
+    <text x="60" y="458" fill="#1f2a44" font-weight="700">「不良を取りこぼさない」品質規律</text>
+    <text x="60" y="480" fill="#41506a" font-size="13">怪しい測定値はまず校正を疑う</text>
+    <rect x="540" y="432" width="380" height="60" rx="10" fill="#e6f2ee" stroke="#c9d3e2"/>
+    <text x="560" y="458" fill="#1f2a44" font-weight="700">honest 評価ゲート／fail-closed</text>
+    <text x="560" y="480" fill="#41506a" font-size="13">うますぎる結果は内訳を疑う</text>
+    <line x1="424" y1="462" x2="536" y2="462" stroke="#8a6a2b" stroke-width="2.5" marker-end="url(#bi)" marker-start="url(#bi)"/>
+  </g>
+
+  <text x="480" y="528" fill="#6b7688" font-size="14" text-anchor="middle">「測って・動かす」を 25 年やってきた規律で、そのまま LLM を分解する</text>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <!-- 静的表示: authored=最終可視。SMIL不使用。赤緑の善悪対比なし。 -->
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6a86"/>
+    </marker>
+  </defs>
+  <rect width="960" height="560" fill="#f7f9fc"/>
+  <rect x="0" y="0" width="960" height="78" fill="#1f2a44"/>
+  <text x="40" y="42" fill="#ffffff" font-size="28" font-weight="700">LLM の処理の流れ ── 次の一語を当て続ける</text>
+  <text x="40" y="66" fill="#aebaccd0" font-size="16">入口から出口まで。③④を何十層も重ね、一語出すたび入口へ戻る（自己回帰）。</text>
+
+  <!-- stage boxes -->
+  <g font-size="15" text-anchor="middle">
+    <!-- box template: rect + title + subtitle + chapter pill -->
+    <g>
+      <rect x="24" y="150" width="128" height="88" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+      <text x="88" y="188" fill="#1f2a44" font-weight="700">あなたの</text>
+      <text x="88" y="208" fill="#1f2a44" font-weight="700">文章</text>
+    </g>
+    <g>
+      <rect x="170" y="150" width="128" height="88" rx="12" fill="#eaf1fb" stroke="#2f6fb0" stroke-width="2"/>
+      <text x="234" y="184" fill="#1f2a44" font-weight="700">①トークン化</text>
+      <text x="234" y="206" fill="#41506a" font-size="12">言葉のかけらに刻む</text>
+      <rect x="204" y="216" width="60" height="18" rx="9" fill="#2f6fb0"/><text x="234" y="229" fill="#fff" font-size="11" font-weight="700">#1</text>
+    </g>
+    <g>
+      <rect x="316" y="150" width="128" height="88" rx="12" fill="#eaf1fb" stroke="#2f6fb0" stroke-width="2"/>
+      <text x="380" y="184" fill="#1f2a44" font-weight="700">②埋め込み</text>
+      <text x="380" y="206" fill="#41506a" font-size="12">意味の座標に変換</text>
+      <rect x="350" y="216" width="60" height="18" rx="9" fill="#2f6fb0"/><text x="380" y="229" fill="#fff" font-size="11" font-weight="700">#1</text>
+    </g>
+    <g>
+      <rect x="462" y="150" width="128" height="88" rx="12" fill="#fdeede" stroke="#d99a2b" stroke-width="2.5"/>
+      <text x="526" y="182" fill="#1f2a44" font-weight="700">③注意機構</text>
+      <text x="526" y="202" fill="#a5701a" font-size="12" font-weight="700">★心臓</text>
+      <rect x="496" y="214" width="60" height="18" rx="9" fill="#d99a2b"/><text x="526" y="227" fill="#fff" font-size="11" font-weight="700">#2</text>
+    </g>
+    <g>
+      <rect x="608" y="150" width="128" height="88" rx="12" fill="#eaf1fb" stroke="#2f6fb0" stroke-width="2"/>
+      <text x="672" y="184" fill="#1f2a44" font-weight="700">④順伝播層</text>
+      <text x="672" y="206" fill="#41506a" font-size="12">知識を引き出す</text>
+      <rect x="642" y="216" width="60" height="18" rx="9" fill="#2f6fb0"/><text x="672" y="229" fill="#fff" font-size="11" font-weight="700">#3</text>
+    </g>
+    <g>
+      <rect x="754" y="150" width="128" height="88" rx="12" fill="#e6f2ee" stroke="#3a6a53" stroke-width="2"/>
+      <text x="818" y="182" fill="#1f2a44" font-weight="700">⑤次の一語</text>
+      <text x="818" y="202" fill="#41506a" font-size="12">点数をつけて選ぶ</text>
+      <rect x="788" y="214" width="60" height="18" rx="9" fill="#3a6a53"/><text x="818" y="227" fill="#fff" font-size="11" font-weight="700">#4</text>
+    </g>
+  </g>
+
+  <!-- arrows between stages -->
+  <g stroke="#5b6a86" stroke-width="2.5" marker-end="url(#arr)">
+    <line x1="152" y1="194" x2="168" y2="194"/>
+    <line x1="298" y1="194" x2="314" y2="194"/>
+    <line x1="444" y1="194" x2="460" y2="194"/>
+    <line x1="590" y1="194" x2="606" y2="194"/>
+    <line x1="736" y1="194" x2="752" y2="194"/>
+  </g>
+
+  <!-- N-layer bracket over ③④ -->
+  <path d="M462,140 L462,128 L736,128 L736,140" fill="none" stroke="#8a93a6" stroke-width="2"/>
+  <text x="599" y="120" fill="#5b6a86" font-size="13" text-anchor="middle">③④をN層くり返す（例: 0.5B で 24 層）</text>
+
+  <!-- loop back arrow from ⑤ to ① -->
+  <path d="M818,238 L818,286 L234,286 L234,240" fill="none" stroke="#3a6a53" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arr)"/>
+  <text x="526" y="278" fill="#3a6a53" font-size="13" text-anchor="middle" font-weight="600">一語出すたび入口へ戻る（自己回帰）</text>
+
+  <!-- reality band -->
+  <text x="40" y="356" fill="#1f2a44" font-size="17" font-weight="700">そして現実の壁 ──</text>
+  <g>
+    <rect x="40" y="372" width="420" height="120" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+    <text x="60" y="404" fill="#1f2a44" font-size="17" font-weight="700">⑥ メモリと速度の壁</text>
+    <text x="60" y="430" fill="#41506a" font-size="14">長い会話で重くなる正体＝KVキャッシュ。</text>
+    <text x="60" y="452" fill="#41506a" font-size="14">量子化・線形化で「軽く」する（タダではない）。</text>
+    <rect x="60" y="462" width="66" height="20" rx="10" fill="#3a6a53"/><text x="93" y="476" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">#5</text>
+  </g>
+  <g>
+    <rect x="500" y="372" width="420" height="120" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+    <text x="520" y="404" fill="#1f2a44" font-size="17" font-weight="700">⑦ 実務として使う</text>
+    <text x="520" y="430" fill="#41506a" font-size="14">モデル選定（ライセンス）・評価の罠・</text>
+    <text x="520" y="452" fill="#41506a" font-size="14">RAG／蒸留・責任ある設計。</text>
+    <rect x="520" y="462" width="66" height="20" rx="10" fill="#3a6a53"/><text x="553" y="476" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">#6</text>
+  </g>
+
+  <text x="480" y="528" fill="#6b7688" font-size="14" text-anchor="middle">シリーズ「作って分かった LLM の中身 ― 自作言語モデルで覗く構造」全体地図</text>
+</svg>
