@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <!-- 静的表示（家訓）: authored 属性が最終可視状態。SMIL/reveal-gate 不使用。赤緑の善悪対比なし。数値はキット実測のみ。 -->
+  <rect width="960" height="540" fill="#f7f9fc"/>
+
+  <!-- Title band -->
+  <rect x="0" y="0" width="960" height="92" fill="#1f2a44"/>
+  <text x="40" y="46" fill="#ffffff" font-size="28" font-weight="700">知識の入れ方 三択 ── 貸すか、焼くか</text>
+  <text x="40" y="76" fill="#aebacc" font-size="16">RAG＝外から貸す（来歴が残る）／微調整・蒸留＝重みに焼く</text>
+
+  <!-- ===== Card 1: RAG ===== -->
+  <g>
+    <rect x="40" y="120" width="280" height="300" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+    <rect x="40" y="120" width="280" height="52" rx="14" fill="#2f6fb0"/>
+    <rect x="40" y="150" width="280" height="22" fill="#2f6fb0"/>
+    <text x="62" y="153" fill="#ffffff" font-size="18" font-weight="700">RAG ― 検索で貸す</text>
+    <text x="58" y="196" fill="#41506a" font-size="14">知識を外に置き、検索で差し込む</text>
+    <text x="58" y="228" fill="#41506a" font-size="13">・重みは触らない</text>
+    <text x="58" y="252" fill="#41506a" font-size="13">・安い・すぐ更新できる</text>
+    <text x="58" y="276" fill="#41506a" font-size="13">・来歴が残る（辿れる）</text>
+    <rect x="54" y="352" width="252" height="44" rx="8" fill="#eaf1fb"/>
+    <text x="180" y="379" fill="#2f6fb0" font-size="13.5" font-weight="700" text-anchor="middle">大きく変わる知識向き</text>
+  </g>
+
+  <!-- ===== Card 2: 微調整 ===== -->
+  <g>
+    <rect x="340" y="120" width="280" height="300" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+    <rect x="340" y="120" width="280" height="52" rx="14" fill="#3aa0a0"/>
+    <rect x="340" y="150" width="280" height="22" fill="#3aa0a0"/>
+    <text x="362" y="153" fill="#ffffff" font-size="18" font-weight="700">微調整 ― 重みに焼く</text>
+    <text x="358" y="196" fill="#41506a" font-size="14">重みを追加データで学習し直す</text>
+    <text x="358" y="228" fill="#41506a" font-size="13">・作法・知識を焼き込む</text>
+    <text x="358" y="252" fill="#41506a" font-size="13">・コスト中〜高（再学習）</text>
+    <text x="358" y="276" fill="#41506a" font-size="13">・更新は遅い/来歴薄い</text>
+    <rect x="354" y="352" width="252" height="44" rx="8" fill="#e6f2ee"/>
+    <text x="480" y="379" fill="#3aa0a0" font-size="13.5" font-weight="700" text-anchor="middle">作法を重みに焼く時</text>
+  </g>
+
+  <!-- ===== Card 3: 蒸留 ===== -->
+  <g>
+    <rect x="640" y="120" width="280" height="300" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+    <rect x="640" y="120" width="280" height="52" rx="14" fill="#d99a2b"/>
+    <rect x="640" y="150" width="280" height="22" fill="#d99a2b"/>
+    <text x="662" y="153" fill="#ffffff" font-size="18" font-weight="700">蒸留 ― 能力を移す</text>
+    <text x="658" y="196" fill="#41506a" font-size="14">教師の出力を生徒に真似させる</text>
+    <text x="658" y="228" fill="#41506a" font-size="13">・能力そのものを移植</text>
+    <text x="658" y="252" fill="#41506a" font-size="13">・教師の出力許諾が命</text>
+    <text x="658" y="276" fill="#41506a" font-size="13">・生徒 ≤ 教師（天井）</text>
+    <rect x="654" y="352" width="252" height="44" rx="8" fill="#fdeede"/>
+    <text x="780" y="379" fill="#a5701a" font-size="13.5" font-weight="700" text-anchor="middle">出力の許諾を必ず確認</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="40" y="452" width="880" height="60" rx="12" fill="#1f2a44"/>
+  <text x="480" y="481" fill="#ffffff" font-size="16.5" font-weight="600" text-anchor="middle">本体の許諾（判断1）と 教師出力の許諾（判断2）は 別のゲート</text>
+  <text x="480" y="502" fill="#aebacc" font-size="13" text-anchor="middle">どちらも通って初めて、生徒モデルは商用で使える</text>
+</svg>
