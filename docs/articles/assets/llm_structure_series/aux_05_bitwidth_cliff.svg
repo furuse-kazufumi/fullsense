@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <!-- 静的表示: authored=最終可視。SMIL/reveal-gate 不使用。赤緑の善悪対比なし。概念図(縦軸は目盛りなしの定性)。数値はキット§4第5章の実測値のみ。 -->
+  <defs>
+    <linearGradient id="bgc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f9fc"/>
+      <stop offset="1" stop-color="#eef2f8"/>
+    </linearGradient>
+    <marker id="cliffar" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#6b7688"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="url(#bgc)"/>
+
+  <!-- Title band -->
+  <rect x="0" y="0" width="960" height="78" fill="#1f2a44"/>
+  <text x="40" y="38" fill="#ffffff" font-size="25" font-weight="700">ビット幅の崖 ― 3bit が PTQ の床、2bit は QAT 領域</text>
+  <text x="40" y="64" fill="#aebacc" font-size="14">int8 は安全牌（~3.9× 圧縮・PPL 劣化 &lt;0.1%）。低ビットほど崖が近づく。</text>
+
+  <!-- ===== terrain card ===== -->
+  <rect x="32" y="98" width="896" height="300" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+  <text x="52" y="126" fill="#6b7688" font-size="11.5">縦＝能力（top-1 保持）／ 横＝ビット幅（右ほど低ビット・強い圧縮）</text>
+
+  <!-- terrain fill (plateau then cliff to a low ledge) -->
+  <path d="M90,372 L90,152 L150,150 L330,168 L500,192 L560,320 L720,322 L900,326 L900,372 Z"
+        fill="#2f6fb0" opacity="0.09"/>
+  <polyline points="90,152 150,150 330,168 500,192 560,320 720,322 900,326"
+            fill="none" stroke="#5b6a86" stroke-width="2.5"/>
+
+  <!-- 97% capability gate -->
+  <line x1="90" y1="230" x2="900" y2="230" stroke="#d99a2b" stroke-width="1.6" stroke-dasharray="7 5"/>
+  <text x="900" y="222" fill="#a5701a" font-size="12" font-weight="700" text-anchor="end">97% 能力保持ゲート</text>
+
+  <!-- 8bit (int8) marker -->
+  <circle cx="150" cy="150" r="5.5" fill="#2f6fb0"/>
+  <text x="150" y="140" fill="#2f6fb0" font-size="13" font-weight="700" text-anchor="middle">int8 (8bit)</text>
+
+  <!-- 4bit marker -->
+  <circle cx="330" cy="168" r="5" fill="#3aa0a0"/>
+  <text x="330" y="158" fill="#41506a" font-size="12" text-anchor="middle">4bit</text>
+
+  <!-- 3bit marker (PTQ floor) -->
+  <circle cx="500" cy="192" r="5.5" fill="#d99a2b"/>
+  <text x="500" y="182" fill="#a5701a" font-size="13" font-weight="700" text-anchor="middle">3bit ＝ PTQ の床</text>
+
+  <!-- cliff drop -->
+  <path d="M540,208 C 548,255 552,285 556,306" fill="none" stroke="#6b7688" stroke-width="2" marker-end="url(#cliffar)"/>
+  <text x="588" y="262" fill="#6b7688" font-size="12" text-anchor="middle">崖 (cliff)</text>
+
+  <!-- 2bit marker (QAT region, below gate) -->
+  <circle cx="720" cy="322" r="5.5" fill="#1f2a44"/>
+  <text x="720" y="312" fill="#1f2a44" font-size="13" font-weight="700" text-anchor="middle">2bit ＝ QAT 領域</text>
+  <text x="720" y="346" fill="#6b7688" font-size="11.5" text-anchor="middle">PTQ では崖の下・小モデルは 97% 未達</text>
+
+  <!-- x-axis hint -->
+  <text x="480" y="388" fill="#6b7688" font-size="12" text-anchor="middle">← ビット幅が減る（圧縮が強くなる）</text>
+
+  <!-- ===== bottom callout row ===== -->
+  <!-- C1: int8 safe -->
+  <rect x="32" y="414" width="288" height="84" rx="12" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+  <rect x="32" y="414" width="288" height="28" rx="12" fill="#2f6fb0"/>
+  <rect x="32" y="428" width="288" height="14" fill="#2f6fb0"/>
+  <text x="46" y="434" fill="#ffffff" font-size="13.5" font-weight="700">int8 ＝ 安全牌</text>
+  <text x="46" y="462" fill="#1f2a44" font-size="12.5">~3.9×（74–75%）圧縮</text>
+  <text x="46" y="484" fill="#41506a" font-size="12.5">held-out PPL 劣化 &lt;0.1%</text>
+
+  <!-- C2: PPL-only gate is dangerous -->
+  <rect x="336" y="414" width="288" height="84" rx="12" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+  <rect x="336" y="414" width="288" height="28" rx="12" fill="#d99a2b"/>
+  <rect x="336" y="428" width="288" height="14" fill="#d99a2b"/>
+  <text x="350" y="434" fill="#ffffff" font-size="13.5" font-weight="700">PPL だけのゲートは危険</text>
+  <text x="350" y="460" fill="#1f2a44" font-size="12.5">2bit は PPL 通過でも top-1 −13.5pp 崩壊</text>
+  <text x="350" y="482" fill="#41506a" font-size="12.5">→ top-1 保持で fail-closed 検収</text>
+
+  <!-- C3: cliff depends on model size -->
+  <rect x="640" y="414" width="288" height="84" rx="12" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+  <rect x="640" y="414" width="288" height="28" rx="12" fill="#3a6a53"/>
+  <rect x="640" y="428" width="288" height="14" fill="#3a6a53"/>
+  <text x="654" y="434" fill="#ffffff" font-size="13.5" font-weight="700">崖はモデルサイズ依存</text>
+  <text x="654" y="460" fill="#1f2a44" font-size="12.5">大きいモデルほど低ビットに頑健</text>
+  <text x="654" y="482" fill="#41506a" font-size="12.5">（崖が低ビット側へずれる）</text>
+
+  <!-- Footer -->
+  <text x="480" y="524" fill="#6b7688" font-size="13" text-anchor="middle">ビットは減らせるだけ減らせばいいわけではない。モデルサイズと手法（PTQ/QAT）で越えられる崖が変わる。</text>
+</svg>

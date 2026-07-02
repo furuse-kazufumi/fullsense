@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <!-- 静的表示: authored=最終可視。SMIL/reveal-gate 不使用。赤緑の善悪対比なし。 -->
+  <defs>
+    <marker id="apr" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6a86"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="#f7f9fc"/>
+
+  <!-- title band -->
+  <rect x="0" y="0" width="960" height="78" fill="#1f2a44"/>
+  <text x="40" y="42" fill="#ffffff" font-size="25" font-weight="700">同じランタイムでも、賢さは「重み」で決まる</text>
+  <text x="40" y="66" fill="#aebacc" font-size="15">検証済みの自作ランタイムで両方を駆動。違いは『重みが巨大な事前学習を通ったか』だけ。</text>
+
+  <!-- section caption -->
+  <text x="480" y="110" text-anchor="middle" fill="#1f2a44" font-size="14" font-weight="700">同じ本体に、重みを差し替えるだけ</text>
+
+  <!-- === left card: scratch === -->
+  <g>
+    <rect x="40" y="150" width="300" height="210" rx="14" fill="#ffffff" stroke="#2f6fb0" stroke-width="2"/>
+    <text x="60" y="182" fill="#1f2a44" font-size="16" font-weight="700">自宅CPUでゼロから学習</text>
+    <line x1="60" y1="196" x2="320" y2="196" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="60" y="222" fill="#41506a" font-size="13">パラメータ 約 11.9M</text>
+    <text x="60" y="246" fill="#41506a" font-size="13">ppl 38（基準 215 から低下）</text>
+    <text x="60" y="290" fill="#1f2a44" font-size="14" font-weight="700">結果 ― 文語の物真似どまり</text>
+    <text x="60" y="314" fill="#41506a" font-size="13">会話には届かなかった</text>
+  </g>
+
+  <!-- === right card: pretrained === -->
+  <g>
+    <rect x="620" y="150" width="300" height="210" rx="14" fill="#ffffff" stroke="#3a6a53" stroke-width="2"/>
+    <text x="640" y="182" fill="#1f2a44" font-size="16" font-weight="700">既製の事前学習済みモデル</text>
+    <line x1="640" y1="196" x2="900" y2="196" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="640" y="222" fill="#41506a" font-size="13">パラメータ 0.5B ／ 1.5B</text>
+    <text x="640" y="246" fill="#41506a" font-size="13">同じ自作ランタイムで駆動</text>
+    <text x="640" y="290" fill="#1f2a44" font-size="14" font-weight="700">結果 ― 質問に答えられる</text>
+    <text x="640" y="314" fill="#41506a" font-size="13">簡単な算数・指示追従もこなす</text>
+  </g>
+
+  <!-- === center runtime engine === -->
+  <g>
+    <rect x="390" y="180" width="180" height="150" rx="14" fill="#e6f2ee" stroke="#3aa0a0" stroke-width="2"/>
+    <!-- CPU chip glyph -->
+    <g stroke="#3aa0a0" stroke-width="2">
+      <line x1="470" y1="190" x2="470" y2="197"/><line x1="480" y1="190" x2="480" y2="197"/><line x1="490" y1="190" x2="490" y2="197"/>
+      <line x1="470" y1="227" x2="470" y2="234"/><line x1="480" y1="227" x2="480" y2="234"/><line x1="490" y1="227" x2="490" y2="234"/>
+      <line x1="457" y1="204" x2="464" y2="204"/><line x1="457" y1="212" x2="464" y2="212"/><line x1="457" y1="220" x2="464" y2="220"/>
+      <line x1="496" y1="204" x2="503" y2="204"/><line x1="496" y1="212" x2="503" y2="212"/><line x1="496" y1="220" x2="503" y2="220"/>
+    </g>
+    <rect x="464" y="197" width="32" height="30" rx="4" fill="#3aa0a0"/>
+    <rect x="472" y="205" width="16" height="14" rx="2" fill="#ffffff"/>
+    <text x="480" y="256" text-anchor="middle" fill="#1f2a44" font-size="15" font-weight="700">自作の推論</text>
+    <text x="480" y="276" text-anchor="middle" fill="#1f2a44" font-size="15" font-weight="700">ランタイム</text>
+    <text x="480" y="300" text-anchor="middle" fill="#2f7f7f" font-size="12">検証済み</text>
+    <text x="480" y="318" text-anchor="middle" fill="#2f7f7f" font-size="12">2e-4 で一致</text>
+  </g>
+
+  <!-- arrows: weights plug into the shared runtime -->
+  <g fill="none" stroke="#5b6a86" stroke-width="2.4" marker-end="url(#apr)">
+    <path d="M340,255 L386,255"/>
+    <path d="M620,255 L574,255"/>
+  </g>
+
+  <!-- === bottom takeaway banner === -->
+  <rect x="40" y="392" width="880" height="116" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+  <rect x="40" y="392" width="9" height="116" rx="4" fill="#3aa0a0"/>
+  <text x="64" y="424" fill="#1f2a44" font-size="17" font-weight="700">差は一点 ── 重みが巨大な事前学習を通ったか</text>
+  <text x="64" y="454" fill="#41506a" font-size="14">同じ設計・同じ自作ランタイムでも、賢さは湧いてこない。</text>
+  <text x="64" y="486" fill="#1f2a44" font-size="15" font-weight="700">→ 賢さは、巨大な事前学習を通った重みに宿る。</text>
+
+  <!-- footer -->
+  <text x="480" y="528" text-anchor="middle" fill="#6b7688" font-size="13">シリーズ「作って分かった LLM の中身」第4回 ― なぜ事前学習が効くのか</text>
+</svg>

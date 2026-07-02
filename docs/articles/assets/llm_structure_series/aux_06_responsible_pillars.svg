@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <!-- 静的表示（家訓）: authored 属性が最終可視状態。SMIL/reveal-gate 不使用。赤緑の善悪対比なし。数値はキット実測のみ。 -->
+  <rect width="960" height="540" fill="#f7f9fc"/>
+
+  <!-- Title band -->
+  <rect x="0" y="0" width="960" height="92" fill="#1f2a44"/>
+  <text x="40" y="46" fill="#ffffff" font-size="28" font-weight="700">責任ある設計の四本柱</text>
+  <text x="40" y="76" fill="#aebacc" font-size="16">賢さは重み由来、責任は設計で担保する（別の仕事）</text>
+
+  <text x="480" y="120" fill="#41506a" font-size="15" text-anchor="middle">『賢くする』だけでなく『責任を持つ』を、構造で担保する</text>
+
+  <!-- ===== Pillar 1: ローカル完結 ===== -->
+  <g>
+    <rect x="40" y="142" width="205" height="248" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+    <rect x="40" y="142" width="205" height="50" rx="14" fill="#2f6fb0"/>
+    <rect x="40" y="170" width="205" height="22" fill="#2f6fb0"/>
+    <text x="58" y="174" fill="#ffffff" font-size="17" font-weight="700">ローカル完結</text>
+    <text x="58" y="224" fill="#1f2a44" font-size="14">データを外に出さない</text>
+    <text x="58" y="250" fill="#41506a" font-size="12.5">個人情報・機密・</text>
+    <text x="58" y="270" fill="#41506a" font-size="12.5">センサーデータを守る</text>
+    <rect x="54" y="340" width="178" height="38" rx="8" fill="#eaf1fb"/>
+    <text x="143" y="364" fill="#2f6fb0" font-size="12.5" font-weight="700" text-anchor="middle">外に出さない</text>
+  </g>
+
+  <!-- ===== Pillar 2: 人間の承認点 ===== -->
+  <g>
+    <rect x="265" y="142" width="205" height="248" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+    <rect x="265" y="142" width="205" height="50" rx="14" fill="#3aa0a0"/>
+    <rect x="265" y="170" width="205" height="22" fill="#3aa0a0"/>
+    <text x="283" y="174" fill="#ffffff" font-size="17" font-weight="700">人間の承認点</text>
+    <text x="283" y="224" fill="#1f2a44" font-size="14">HITL / 承認バス</text>
+    <text x="283" y="250" fill="#41506a" font-size="12.5">重要な行動の前に</text>
+    <text x="283" y="270" fill="#41506a" font-size="12.5">人間の承認を挟む</text>
+    <rect x="279" y="340" width="178" height="38" rx="8" fill="#e6f2ee"/>
+    <text x="368" y="364" fill="#3aa0a0" font-size="12.5" font-weight="700" text-anchor="middle">迂回できない</text>
+  </g>
+
+  <!-- ===== Pillar 3: fail-closed ===== -->
+  <g>
+    <rect x="490" y="142" width="205" height="248" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+    <rect x="490" y="142" width="205" height="50" rx="14" fill="#d99a2b"/>
+    <rect x="490" y="170" width="205" height="22" fill="#d99a2b"/>
+    <text x="508" y="174" fill="#ffffff" font-size="17" font-weight="700">fail-closed</text>
+    <text x="508" y="224" fill="#1f2a44" font-size="14">迷ったら止める</text>
+    <text x="508" y="250" fill="#41506a" font-size="12.5">判定に迷ったら</text>
+    <text x="508" y="270" fill="#41506a" font-size="12.5">通さない側に倒す</text>
+    <rect x="504" y="340" width="178" height="38" rx="8" fill="#fdeede"/>
+    <text x="593" y="364" fill="#a5701a" font-size="12.5" font-weight="700" text-anchor="middle">疑わしきは通さない</text>
+  </g>
+
+  <!-- ===== Pillar 4: 誠実な開示 ===== -->
+  <g>
+    <rect x="715" y="142" width="205" height="248" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+    <rect x="715" y="142" width="205" height="50" rx="14" fill="#3a6a53"/>
+    <rect x="715" y="170" width="205" height="22" fill="#3a6a53"/>
+    <text x="733" y="174" fill="#ffffff" font-size="17" font-weight="700">誠実な開示</text>
+    <text x="733" y="224" fill="#1f2a44" font-size="14">数字を盛らない</text>
+    <text x="733" y="250" fill="#41506a" font-size="12.5">失敗も留保も</text>
+    <text x="733" y="270" fill="#41506a" font-size="12.5">隠さず開示する</text>
+    <rect x="711" y="340" width="178" height="38" rx="8" fill="#eef3f0"/>
+    <text x="800" y="364" fill="#3a6a53" font-size="12.5" font-weight="700" text-anchor="middle">盛らない・隠さない</text>
+  </g>
+
+  <!-- Base bar -->
+  <rect x="40" y="400" width="880" height="36" rx="10" fill="#1f2a44"/>
+  <text x="480" y="423" fill="#ffffff" font-size="15" text-anchor="middle">中身が見える正直なランタイム ＝ 四本柱を自分で検証できる</text>
+
+  <!-- Footer (measurement-quality parallel) -->
+  <rect x="40" y="450" width="880" height="64" rx="12" fill="#eef2f8" stroke="#d5dde8" stroke-width="1.5"/>
+  <text x="480" y="478" fill="#1f2a44" font-size="15.5" font-weight="600" text-anchor="middle">計測装置の品質思想と同型 ── 機密・安全インタロック・疑わしきは不良・校正</text>
+  <text x="480" y="500" fill="#41506a" font-size="13" text-anchor="middle">賢さは重み由来、責任は設計で担保する ── 別の仕事を、両立させる</text>
+</svg>
