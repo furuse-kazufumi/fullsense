@@ -52,8 +52,9 @@
     <path d="M206,272 C250,268 280,286 312,300" fill="none" stroke="#5b6a86" stroke-width="2" marker-end="url(#arrT)"/>
     <text x="232" y="244" fill="#41506a" font-size="12.5" font-weight="600">→ 新鮮な holdout で再評価</text>
 
-    <text x="62" y="384" fill="#1f2a44" font-size="24" font-weight="800">選定時の最良 ＞ 実力</text>
-    <text x="62" y="408" fill="#41506a" font-size="14">最良値 ＝ 実力 ＋ 幸運なノイズ。<tspan font-weight="700">選定に使っていない</tspan>データで測り直す。</text>
+    <text x="62" y="378" fill="#1f2a44" font-size="22" font-weight="800">選定時の最良 ＞ 実力</text>
+    <text x="62" y="399" fill="#41506a" font-size="13">最良値 ＝ 実力 ＋ 幸運なノイズ。</text>
+    <text x="62" y="416" fill="#41506a" font-size="13"><tspan font-weight="700">選定に使っていない</tspan>データで測り直す。</text>
   </g>
 
   <!-- ===== Card B: PPL-only gate ===== -->
