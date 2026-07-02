@@ -21,9 +21,10 @@
   <!-- Input X -->
   <g>
     <rect x="32" y="168" width="118" height="110" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
-    <text x="91" y="212" fill="#1f2a44" font-size="18" font-weight="700" text-anchor="middle">入力 X</text>
-    <text x="91" y="236" fill="#41506a" font-size="12" text-anchor="middle">各トークンの埋め込み</text>
-    <text x="91" y="254" fill="#41506a" font-size="12" text-anchor="middle">(T × d)</text>
+    <text x="91" y="204" fill="#1f2a44" font-size="18" font-weight="700" text-anchor="middle">入力 X</text>
+    <text x="91" y="228" fill="#41506a" font-size="12" text-anchor="middle">各トークンの</text>
+    <text x="91" y="246" fill="#41506a" font-size="12" text-anchor="middle">埋め込み</text>
+    <text x="91" y="266" fill="#41506a" font-size="12" text-anchor="middle">(T × d)</text>
   </g>
 
   <!-- Q / K / V projections -->
