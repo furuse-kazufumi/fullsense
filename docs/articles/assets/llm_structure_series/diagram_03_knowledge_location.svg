@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <!-- 静的表示: authored 属性が最終可視状態。SMIL/reveal-gate 不使用。赤緑の善悪対比なし。 -->
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6a86"/>
+    </marker>
+    <linearGradient id="hedge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3aa0a0" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#3aa0a0" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="#f7f9fc"/>
+
+  <!-- title band -->
+  <rect x="0" y="0" width="960" height="80" fill="#1f2a44"/>
+  <text x="40" y="44" fill="#ffffff" font-size="27" font-weight="700">知識はどこに住むか ── 注目と記憶の分業</text>
+  <text x="40" y="68" fill="#aebacc" font-size="15">attention＝どこを見るか（検索）／ 順伝播層(FFN)＝何を思い出すか（知識の貯蔵庫）</text>
+
+  <!-- Left: one block with two modules -->
+  <text x="300" y="106" fill="#1f2a44" font-size="16" font-weight="700" text-anchor="middle">1 ブロック（1 段）＝ 気配り役 ＋ 物知り役</text>
+  <rect x="40" y="116" width="520" height="340" rx="14" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+
+  <!-- residual stream (bypass on the left) -->
+  <path d="M64,150 L64,420" stroke="#3aa0a0" stroke-width="3" fill="none" stroke-dasharray="7 5"/>
+  <path d="M64,205 L96,205" stroke="#3aa0a0" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <path d="M64,360 L96,360" stroke="#3aa0a0" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="70" y="440" fill="#3a8a8a" font-size="12">残差＝元を捨てず足し込む</text>
+
+  <!-- Attention module -->
+  <rect x="96" y="150" width="440" height="110" rx="12" fill="#eaf1fb" stroke="#2f6fb0" stroke-width="2.5"/>
+  <text x="116" y="182" fill="#1f2a44" font-size="18" font-weight="700">注意機構 (attention)</text>
+  <text x="116" y="208" fill="#2f6fb0" font-size="14" font-weight="700">検索・ルーティング</text>
+  <text x="116" y="230" fill="#41506a" font-size="13">どの語を見るか（自分は答えを持たない・案内係）</text>
+  <text x="116" y="251" fill="#6b7688" font-size="11.5">手前に RMSNorm ／ 通した結果を残差で足し戻す</text>
+  <!-- routing/magnifier icon -->
+  <circle cx="486" cy="196" r="15" fill="none" stroke="#2f6fb0" stroke-width="2.5"/>
+  <path d="M497,207 L508,218" stroke="#2f6fb0" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- arrow between modules -->
+  <path d="M300,262 L300,296" stroke="#5b6a86" stroke-width="2.5" fill="none" marker-end="url(#arr)"/>
+  <text x="312" y="284" fill="#5b6a86" font-size="12">集めた材料を渡す</text>
+
+  <!-- FFN module -->
+  <rect x="96" y="300" width="440" height="120" rx="12" fill="#fdeede" stroke="#d99a2b" stroke-width="2.5"/>
+  <text x="116" y="332" fill="#1f2a44" font-size="18" font-weight="700">順伝播層 (FFN / SwiGLU)</text>
+  <text x="116" y="358" fill="#a5701a" font-size="14" font-weight="700">知識の貯蔵庫</text>
+  <text x="116" y="380" fill="#41506a" font-size="13">何を思い出すか（事実・世界知識を上乗せする・司書）</text>
+  <text x="116" y="401" fill="#6b7688" font-size="11.5">モデルのパラメータの多くがここに集中 ／ RMSNorm＋残差付き</text>
+  <!-- book / knowledge icon -->
+  <rect x="470" y="344" width="34" height="26" rx="2" fill="none" stroke="#d99a2b" stroke-width="2.5"/>
+  <path d="M487,344 L487,370 M470,357 L504,357" stroke="#d99a2b" stroke-width="2"/>
+
+  <!-- link left block -> stack -->
+  <path d="M560,286 L634,200" stroke="#5b6a86" stroke-width="2.5" fill="none" marker-end="url(#arr)"/>
+  <text x="600" y="258" fill="#5b6a86" font-size="12" font-weight="600" text-anchor="middle">この 1 段を</text>
+  <text x="600" y="274" fill="#5b6a86" font-size="12" font-weight="600" text-anchor="middle">N 回積む</text>
+
+  <!-- Right: stacked N layers -->
+  <text x="770" y="140" fill="#1f2a44" font-size="16" font-weight="700" text-anchor="middle">×N 層（例 24 層）</text>
+
+  <g>
+    <rect x="636" y="158" width="268" height="52" rx="8" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+    <rect x="636" y="158" width="130" height="52" rx="8" fill="#eaf1fb"/>
+    <rect x="636" y="158" width="10" height="52" rx="5" fill="#2f6fb0"/>
+    <text x="700" y="189" fill="#2f6fb0" font-size="12.5" font-weight="700" text-anchor="middle">注意</text>
+    <text x="835" y="189" fill="#a5701a" font-size="12.5" font-weight="700" text-anchor="middle">順伝播</text>
+    <rect x="766" y="158" width="138" height="52" rx="8" fill="#fdeede" opacity="0.9"/>
+    <text x="700" y="189" fill="#2f6fb0" font-size="12.5" font-weight="700" text-anchor="middle">注意</text>
+    <text x="835" y="189" fill="#a5701a" font-size="12.5" font-weight="700" text-anchor="middle">順伝播</text>
+    <text x="648" y="150" fill="#6b7688" font-size="11">層 0</text>
+  </g>
+
+  <path d="M770,210 L770,222" stroke="#5b6a86" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+
+  <g>
+    <rect x="636" y="224" width="268" height="52" rx="8" fill="#eaf1fb" stroke="#c9d3e2" stroke-width="2"/>
+    <rect x="766" y="224" width="138" height="52" rx="8" fill="#fdeede"/>
+    <rect x="636" y="224" width="10" height="52" rx="5" fill="#2f6fb0"/>
+    <text x="700" y="255" fill="#2f6fb0" font-size="12.5" font-weight="700" text-anchor="middle">注意</text>
+    <text x="835" y="255" fill="#a5701a" font-size="12.5" font-weight="700" text-anchor="middle">順伝播</text>
+    <text x="648" y="216" fill="#6b7688" font-size="11">層 1</text>
+  </g>
+
+  <text x="770" y="300" fill="#8a93a6" font-size="20" font-weight="700" text-anchor="middle">⋮</text>
+
+  <g>
+    <rect x="636" y="312" width="268" height="52" rx="8" fill="#eaf1fb" stroke="#c9d3e2" stroke-width="2"/>
+    <rect x="766" y="312" width="138" height="52" rx="8" fill="#fdeede"/>
+    <rect x="636" y="312" width="10" height="52" rx="5" fill="#2f6fb0"/>
+    <text x="700" y="343" fill="#2f6fb0" font-size="12.5" font-weight="700" text-anchor="middle">注意</text>
+    <text x="835" y="343" fill="#a5701a" font-size="12.5" font-weight="700" text-anchor="middle">順伝播</text>
+    <text x="648" y="304" fill="#6b7688" font-size="11">層 23</text>
+  </g>
+
+  <path d="M770,364 L770,384" stroke="#5b6a86" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="770" y="402" fill="#41506a" font-size="12" text-anchor="middle">最終 RMSNorm → 出力層（次の一語, #4）</text>
+
+  <!-- hedge note band -->
+  <rect x="40" y="470" width="880" height="40" rx="10" fill="url(#hedge)" stroke="#cdd8e6" stroke-width="1.5"/>
+  <text x="60" y="495" fill="#41506a" font-size="13">※ 知識の局在は複数研究の総合＝断定でなく留保付き。知識は複数の層に分散し、境界はぼやける。</text>
+
+  <text x="480" y="530" fill="#6b7688" font-size="13" text-anchor="middle">シリーズ「作って分かった LLM の中身 ― 自作言語モデルで覗く構造」#3 概念図</text>
+</svg>

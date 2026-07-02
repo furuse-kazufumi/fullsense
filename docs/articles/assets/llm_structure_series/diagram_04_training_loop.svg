@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <!-- 静的表示: authored 属性が最終可視状態。SMIL/reveal-gate 不使用。赤緑の善悪対比なし。 -->
+  <defs>
+    <marker id="arrd" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6a86"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="#f7f9fc"/>
+
+  <!-- title band -->
+  <rect x="0" y="0" width="960" height="78" fill="#1f2a44"/>
+  <text x="40" y="42" fill="#ffffff" font-size="27" font-weight="700">学習ループ ＝ 校正ループ ── 測って、少し直す</text>
+  <text x="40" y="66" fill="#aebaccd0" font-size="15">次の一語を予測 → 誤差(loss)を測る → 重みを直す をくり返す。計測現場の校正と同じ形。</text>
+
+  <!-- === cyclic loop (left) === -->
+  <!-- node A: predict (top) -->
+  <g>
+    <rect x="220" y="124" width="160" height="52" rx="12" fill="#eaf1fb" stroke="#2f6fb0" stroke-width="2"/>
+    <text x="300" y="147" text-anchor="middle" fill="#1f2a44" font-size="15" font-weight="700">① 次の一語を予測</text>
+    <text x="300" y="166" text-anchor="middle" fill="#41506a" font-size="11">ここまでを読み、次を当てる</text>
+  </g>
+  <!-- node B: loss (lower-right) -->
+  <g>
+    <rect x="350" y="279" width="160" height="52" rx="12" fill="#e4f2f2" stroke="#3aa0a0" stroke-width="2"/>
+    <text x="430" y="302" text-anchor="middle" fill="#1f2a44" font-size="15" font-weight="700">② 誤差(loss)を測る</text>
+    <text x="430" y="321" text-anchor="middle" fill="#41506a" font-size="11">正解とのズレ＝損失</text>
+  </g>
+  <!-- node C: fix weights (lower-left) -->
+  <g>
+    <rect x="90" y="279" width="160" height="52" rx="12" fill="#fdeede" stroke="#d99a2b" stroke-width="2"/>
+    <text x="170" y="302" text-anchor="middle" fill="#1f2a44" font-size="15" font-weight="700">③ 重みを少し直す</text>
+    <text x="170" y="321" text-anchor="middle" fill="#41506a" font-size="11">減る向きへ勾配降下</text>
+  </g>
+
+  <!-- loop arrows (triangle cycle) -->
+  <g fill="none" stroke="#5b6a86" stroke-width="2.4" marker-end="url(#arrd)">
+    <path d="M372,178 C430,215 448,245 442,275"/>
+    <path d="M348,309 L254,309"/>
+    <path d="M158,277 C152,245 170,215 228,178"/>
+  </g>
+
+  <!-- loop center label -->
+  <text x="300" y="233" text-anchor="middle" fill="#1f2a44" font-size="17" font-weight="700">校正ループ</text>
+  <text x="300" y="255" text-anchor="middle" fill="#6b7688" font-size="13">×数十億回</text>
+
+  <!-- === mapping panel (right) === -->
+  <g>
+    <rect x="560" y="112" width="360" height="216" rx="14" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+    <text x="582" y="146" fill="#1f2a44" font-size="18" font-weight="700">＝ キャリブレーション</text>
+    <text x="582" y="168" fill="#41506a" font-size="13">誤差を測って補正する ── 同じ形（同型）</text>
+
+    <!-- column headers -->
+    <text x="640" y="198" text-anchor="middle" fill="#6b7688" font-size="12" font-weight="700">計測・制御の校正</text>
+    <text x="838" y="198" text-anchor="middle" fill="#6b7688" font-size="12" font-weight="700">LLM の学習</text>
+    <line x1="582" y1="208" x2="898" y2="208" stroke="#e2e8f0" stroke-width="1.5"/>
+
+    <!-- rows -->
+    <g font-size="14" fill="#1f2a44">
+      <text x="640" y="234" text-anchor="middle">測る</text>
+      <text x="740" y="234" text-anchor="middle" fill="#5b6a86" font-size="15">→</text>
+      <text x="838" y="234" text-anchor="middle">次の語を予測</text>
+
+      <text x="640" y="266" text-anchor="middle">ズレ(誤差)</text>
+      <text x="740" y="266" text-anchor="middle" fill="#5b6a86" font-size="15">→</text>
+      <text x="838" y="266" text-anchor="middle">損失(loss)</text>
+
+      <text x="640" y="298" text-anchor="middle">関節角を直す</text>
+      <text x="740" y="298" text-anchor="middle" fill="#5b6a86" font-size="15">→</text>
+      <text x="838" y="298" text-anchor="middle">重みを更新</text>
+    </g>
+    <text x="582" y="320" fill="#41506a" font-size="12">背骨は同じ：測って、減る向きに少し直す。</text>
+  </g>
+
+  <!-- === honest null callout (bottom) === -->
+  <rect x="40" y="372" width="880" height="132" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+  <rect x="40" y="372" width="9" height="132" rx="4" fill="#d99a2b"/>
+  <text x="68" y="402" fill="#1f2a44" font-size="17" font-weight="700">正直な失敗（honest null）── 自宅 CPU でゼロから作った文字LM</text>
+  <text x="68" y="430" fill="#41506a" font-size="14">約 11.9M パラメータ・ppl 38（単文字頻度基準 215 比）。学習は効いた（215→38）が、文語の物真似止まりで会話に届かず。</text>
+  <text x="68" y="456" fill="#41506a" font-size="14">ボトルネックは設計（アーキ）ではなく、規模・データ・計算。校正ループの形は正しくても、回数と量が桁違いに足りない。</text>
+  <text x="68" y="484" fill="#1f2a44" font-size="15" font-weight="700">→ 賢さは、巨大な事前学習を通った重みに宿る（規模・データ由来）。</text>
+
+  <!-- series footer -->
+  <text x="480" y="528" text-anchor="middle" fill="#6b7688" font-size="13">シリーズ「作って分かった LLM の中身 ― 自作言語モデルで覗く構造」第04回 ── 学習と推論</text>
+</svg>

@@ -145,8 +145,7 @@ KVは全体の一部なので、KV が 8 倍でも全体は 2.65 倍に薄まる
 もっと文脈を伸ばすと差は開きます。**T=4096 で、softmax 型は常駐 ~1.67GB、定数状態は 205MB。約 8 倍の開き**です。
 長文脈になるほど、O(T) と O(1) の差は容赦なく効いてきます。
 
-**[画像プレースホルダ]** *キャプション: KVキャッシュのメモリ膨張 ― softmax型は文脈長に比例して直線的に上昇（T=256で4.72MB→T=2048で37.75MB、×8）、定数状態型は水平のまま。横軸=文脈長 T、縦軸=メモリ。*
-<!-- 画像生成意図: 折れ線グラフ。横軸 context length (256, 512, 1024, 2048, 4096)、縦軸 memory。青い直線が右肩上がりで softmax KV cache（4.72→37.75MB付近を通り T=4096 で ~1.67GB peak RSS 注記）、緑の水平線が constant-state（205MB flat）。交点や倍率注記（×8, RSS×2.65）を控えめに。静的な完成状態が一目で分かる棒/線チャート。色は赤緑の善悪対比を避け、青と緑の中立配色。 -->
+![KVキャッシュのメモリ膨張 ― softmax型は文脈長Tに線形O(T)で膨張（T=256:4.72MB→T=2048:37.75MB, ×8）、定数状態(recurrent)は平坦O(1)。交差点≈227トークン、プロセス全体(RSS)では T=4096 softmax~1.67GB vs 定数状態205MB≒×8。](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/diagram_05_kv_growth.svg)
 
 ### 持ち帰り（壁1）
 

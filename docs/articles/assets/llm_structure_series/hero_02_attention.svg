@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="注意機構の正体 ― 文脈を配る仕組み。各トークンが過去の語へ注目を配り、注意機構は LLM の心臓。シリーズ第02回ヒーロー" style="width:100%;height:auto;max-width:1200px" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif">
+  <title>注意機構の正体 ― 文脈を配る仕組み（シリーズ「作って分かった LLM の中身」第02回）</title>
+  <desc>各トークンが過去の語へ注目線を配る様子と、注意機構＝LLM の心臓を表すヒーローバナー。静的表示で完成形が見える。赤緑の善悪対比は使わない。</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="heart2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3aa0a0"/>
+      <stop offset="1" stop-color="#2f6fb0"/>
+    </linearGradient>
+    <linearGradient id="ribbon2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3aa0a0" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#3aa0a0" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#3aa0a0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bg2)"/>
+
+  <!-- title -->
+  <text x="60" y="52" fill="#e2e8f0" font-size="30" font-weight="700">注意機構の正体 ― 文脈を配る仕組み</text>
+  <text x="62" y="80" fill="#94a3b8" font-size="15">各トークンが「過去のどの語に、どれだけ注目するか」を毎回えらび直す ― LLM の心臓</text>
+
+  <!-- flowing accent ribbon (static line is fully visible without SMIL) -->
+  <rect x="0" y="96" width="1200" height="2" fill="url(#ribbon2)">
+    <animate attributeName="x" from="-1200" to="1200" dur="7s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- attention arcs: from the current token それ back to each past word (thickness = 注目の強さ) -->
+  <g fill="none">
+    <path d="M956,214 Q548,124 150,214" stroke="#2f6fb0" stroke-width="1.5" opacity="0.42"/>
+    <path d="M956,212 Q628,104 300,212" stroke="#3aa0a0" stroke-width="4.5" opacity="0.95"/>
+    <path d="M956,216 Q712,150 470,216" stroke="#2f6fb0" stroke-width="2" opacity="0.5"/>
+    <path d="M956,216 Q800,166 636,216" stroke="#2f6fb0" stroke-width="1.6" opacity="0.42"/>
+    <path d="M956,216 Q876,184 792,216" stroke="#2f6fb0" stroke-width="1.6" opacity="0.42"/>
+  </g>
+  <text x="360" y="150" fill="#7fd0d0" font-size="13" text-anchor="middle" font-weight="600">強く注目 → 花瓶</text>
+
+  <!-- token row (the sentence) -->
+  <g font-size="16" text-anchor="middle">
+    <g>
+      <rect x="104" y="216" width="92" height="46" rx="10" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+      <text x="150" y="245" fill="#cbd5e1">棚</text>
+    </g>
+    <g>
+      <rect x="254" y="216" width="92" height="46" rx="10" fill="#13303a" stroke="#3aa0a0" stroke-width="2"/>
+      <text x="300" y="245" fill="#e2e8f0" font-weight="700">花瓶</text>
+    </g>
+    <g>
+      <rect x="424" y="216" width="92" height="46" rx="10" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+      <text x="470" y="245" fill="#cbd5e1">置いた</text>
+    </g>
+    <g>
+      <rect x="590" y="216" width="92" height="46" rx="10" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+      <text x="636" y="245" fill="#cbd5e1">落ちて</text>
+    </g>
+    <g>
+      <rect x="746" y="216" width="92" height="46" rx="10" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+      <text x="792" y="245" fill="#cbd5e1">割れた</text>
+    </g>
+    <!-- current token -->
+    <g>
+      <rect x="906" y="208" width="100" height="60" rx="12" fill="#1f2a44" stroke="#d99a2b" stroke-width="2.5"/>
+      <text x="956" y="234" fill="#f4d7a1" font-weight="700">それ</text>
+      <text x="956" y="255" fill="#c9a86a" font-size="11">今の語</text>
+    </g>
+  </g>
+  <text x="956" y="292" fill="#94a3b8" font-size="12" text-anchor="middle">＝ 過去へ注目を配る</text>
+
+  <!-- heart emblem: 注意機構 = ★心臓 -->
+  <g>
+    <circle cx="1092" cy="150" r="42" fill="none" stroke="#d99a2b" stroke-width="1.2" opacity="0.5">
+      <animate attributeName="r" values="40;52;40" dur="2.6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="2.6s" repeatCount="indefinite"/>
+    </circle>
+    <g transform="translate(1060,124) scale(2)">
+      <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" fill="url(#heart2)"/>
+    </g>
+    <text x="1092" y="204" fill="#f4d7a1" font-size="13" text-anchor="middle" font-weight="700">★心臓</text>
+    <text x="1092" y="224" fill="#94a3b8" font-size="12" text-anchor="middle">注意機構 attention</text>
+  </g>
+
+  <!-- formula chip -->
+  <g>
+    <rect x="60" y="300" width="352" height="34" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="76" y="323" fill="#cbd5e1" font-size="15" font-family="'Consolas','SFMono-Regular',monospace">注目 = softmax( Q·Kᵀ / √d ) · V</text>
+  </g>
+
+  <!-- series footer -->
+  <text x="1140" y="326" fill="#64748b" font-size="12" text-anchor="end">シリーズ「作って分かった LLM の中身」／ 第02回</text>
+</svg>
