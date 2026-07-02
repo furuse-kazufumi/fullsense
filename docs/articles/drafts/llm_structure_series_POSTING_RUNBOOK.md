@@ -1,39 +1,42 @@
 # 投稿ランブック ― 連載「作って分かった LLM の中身」
 
-> このシリーズ（技術版 #0-6 / 一般版 #0-6 / 総目次）を Qiita に出すときの手順書。
-> 汎用手順は `QIITA_POST_GUIDE.md`、画像規律は `llm_structure_series_IMAGE_MANIFEST.md` が正本。ここはシリーズ固有の順序とチェックだけ。
+> **投稿方針(2026-07-02 ユーザー確定): 投稿回数は最小化＝完全版2本のみ。**
+> Qiita の上限(1MB)に対し余裕があるため、分割15本でなく **技術版・完全版**と**一般版・完全版**の2記事に統合して投稿する。
+> 分割版(#0-6 × 2トラック + INDEX)はリポジトリ内のアーカイブ/編集単位として残す(単体投稿はしない)。
+> 汎用手順は `QIITA_POST_GUIDE.md`、画像規律は `llm_structure_series_IMAGE_MANIFEST.md` が正本。
 
-## 0. 前提（push が先）
+## 0. 前提(完了済み)
 
-1. **assets/llm_structure_series/*.svg と drafts/ を origin/main に push**（raw URL は push 前は 404）。
-2. push 後、任意の1枚を `https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/hero_00_intro.svg` で HTTP 200 確認。
+- assets/llm_structure_series/*.svg(28枚)+ drafts/ は **push 済み・全28枚 HTTP 200 確認済み**(2026-07-02)。
 
-## 1. 投稿順（推奨）
+## 1. 投稿するもの(2本だけ)
 
-```
-一般版 #0（導入・軽い）→ 技術版 #0（序章・検証哲学）
-  → 以降、回ごとに 一般版 #N → 技術版 #N（N=1..6）
-  → 最後に 総目次(INDEX)（全 URL が揃ってから）
-```
+| 記事 | ファイル | 規模目安 |
+|---|---|---|
+| **技術版・完全版** | `llm_structure_series_MEGA_tech.md` | 約12万字(第0部〜第6部) |
+| **一般版・完全版** | `llm_structure_series_MEGA_general.md` | 約5万字(第0部〜第6部) |
 
-- 各記事は**限定共有 → Qiita 実機プレビュー確認 → 全体公開**の2段階（house 標準）。
-- プレビューで確認する点: (a) SVG が表示されるか（imgix ラスタライズ・JP フォント） (b) Mermaid が描画されるか (c) 表崩れ。
-- SVG の JP フォントが崩れた場合のみ、その1枚を PNG/GIF に差し替え（`IMAGE_MANIFEST.md` 参照）。
+- 相互参照は本文中の `<<LINK:MEGA_T>>` / `<<LINK:MEGA_G>>` プレースホルダ(下記手順で置換)。
+- 目次は本文冒頭に内蔵(+Qiita の自動サイドバー目次)。INDEX 記事の単独投稿は**しない**。
 
-## 2. 各記事の投稿時チェック
+## 2. 投稿手順
 
-- [ ] タイトル: 1行目から `# ` を外してコピー（80字以内は確認済み）
-- [ ] 本文: 2行目以降（フッターの `<<LINK:…>>` ナビは**投稿済み分だけ URL 置換、未投稿分は行ごと削除**）
-- [ ] タグ: `llm_structure_series_LINK_MAP.md` の推奨タグ表から5件
-- [ ] 投稿後すぐ LINK_MAP の該当行に URL を記入
+1. **一般版・完全版**を「限定共有」で投稿 → Qiita 実機プレビューで (a)SVG表示/JPフォント (b)Mermaid描画 (c)表崩れ を確認 → URL を LINK_MAP の `MEGA_G` に記入。
+2. **技術版・完全版**の `<<LINK:MEGA_G>>` を確定 URL に置換 → 「限定共有」で投稿 → 同様に確認 → URL を `MEGA_T` に記入。
+3. 一般版の `<<LINK:MEGA_T>>` を確定 URL に置換 → 記事を編集更新。
+4. 両方に問題なければ **2本とも「全体公開」に切替**。
+5. SVG の JP フォントが崩れた場合のみ、その1枚を PNG/GIF に差し替え(`IMAGE_MANIFEST.md` 参照)+ URL に `?v=2` cache-bust。
 
-## 3. 投稿後
+## 3. 各記事の投稿時チェック
 
-1. LINK_MAP が全部埋まったら、各記事の `<<LINK:…>>` を確定 URL に一括置換して再投稿（編集）。
-2. INDEX（総目次）を最後に投稿し、全記事の冒頭ナビから INDEX へリンク。
-3. 画像を後から差し替えた場合は URL に `?v=2` を付けて cache-bust（imgix キャッシュ対策）。
+- [ ] タイトル: 1行目から `# ` を外してコピー
+- [ ] 本文: 2行目以降(`<<LINK:…>>` が未置換のまま公開しない)
+- [ ] タグ(5件・スペース区切り):
+  - 技術版・完全版: `LLM Transformer ローカルLLM 機械学習 量子化`
+  - 一般版・完全版: `AI LLM 入門 機械学習 解説`
+- [ ] ライセンス CC BY / コメント許可 ON
 
-## 4. 番号運用
+## 4. 補足
 
-既存 Qiita 連載の最大は ~#46。本シリーズは独立ブランド「作って分かった LLM の中身 #N」で運用し、
-QIITA_#NN 通し番号とは独立（衝突しない）。
+- 長尺は歓迎(ユーザー方針「長ければ長いほど良い」「まとめてサイズを大きくして良い」)。1MB 上限に対し技術版完全版でも余裕。
+- 分割版を将来単体投稿したくなった場合は、旧 `<<LINK:Txx/Gxx>>` ナビが分割版側に残っているので LINK_MAP の台帳で復活可能。
