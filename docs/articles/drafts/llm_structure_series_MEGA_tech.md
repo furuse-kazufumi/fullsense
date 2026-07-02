@@ -6,7 +6,7 @@ tags:
   - ローカルLLM
   - 機械学習
   - 量子化
-public_private: true
+public_private: false
 public_id: de27af958332c9c38e33
 ---
 著者: 古瀬 和文（ぷるやん）

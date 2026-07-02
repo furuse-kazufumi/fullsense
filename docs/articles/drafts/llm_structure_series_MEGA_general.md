@@ -6,7 +6,7 @@ tags:
   - 入門
   - 機械学習
   - 解説
-public_private: true
+public_private: false
 public_id: f660b18890687cfd1ed0
 ---
 著者: 古瀬 和文（ぷるやん）
