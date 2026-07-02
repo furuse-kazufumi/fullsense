@@ -6,6 +6,8 @@
 > 大規模言語モデル（LLM: Large Language Model）を、フレームワークの中身に頼らず推論エンジンごと自分で組み直し、
 > 公式実装と実測して誤差ゼロで再現した一次体験をもとに、部品を一つずつ分解します。今回は心臓部――注意機構です。
 
+![注意機構の正体 ― 文脈を配る仕組み（シリーズ「作って分かった LLM の中身」第02回ヒーロー）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/hero_02_attention.svg)
+
 前回 #1 で、言葉は「意味の座標（埋め込みベクトル）」に変換されるところまで来ました。
 ただし、この段階のベクトルは **一語ずつ孤立** しています。「銀行」というトークンのベクトルは、
 それが「川の土手（bank）」なのか「金融機関（bank）」なのかを、まだ自分では区別できません。
