@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif">
+  <!-- 静的表示: authored=最終可視。SMIL不使用。赤緑の善悪対比なし。 -->
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6a86"/>
+    </marker>
+    <marker id="at" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#3aa0a0"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="#f7f9fc"/>
+
+  <!-- title band -->
+  <rect x="0" y="0" width="960" height="78" fill="#1f2a44"/>
+  <text x="40" y="38" fill="#ffffff" font-size="26" font-weight="700">注意機構の一枚図 ― QKV で「文脈を配る」</text>
+  <text x="40" y="64" fill="#aebacc" font-size="15">各トークンが Q/K/V を作り、似ている語を探して(相関)、その中身を加重平均で取り寄せる。</text>
+
+  <!-- master formula -->
+  <text x="480" y="102" fill="#1f2a44" font-size="18" font-weight="700" text-anchor="middle" font-family="'Consolas','SFMono-Regular',monospace">Attention(Q, K, V) = softmax( Q·Kᵀ / √d ) · V</text>
+
+  <!-- Input X -->
+  <g>
+    <rect x="32" y="168" width="118" height="110" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+    <text x="91" y="212" fill="#1f2a44" font-size="18" font-weight="700" text-anchor="middle">入力 X</text>
+    <text x="91" y="236" fill="#41506a" font-size="12" text-anchor="middle">各トークンの埋め込み</text>
+    <text x="91" y="254" fill="#41506a" font-size="12" text-anchor="middle">(T × d)</text>
+  </g>
+
+  <!-- Q / K / V projections -->
+  <g>
+    <rect x="190" y="150" width="150" height="48" rx="10" fill="#eaf1fb" stroke="#2f6fb0" stroke-width="2"/>
+    <text x="204" y="172" fill="#1f2a44" font-size="15" font-weight="700" font-family="'Consolas','SFMono-Regular',monospace">Q = X·W_Q</text>
+    <text x="204" y="190" fill="#41506a" font-size="12">問い (query)</text>
+  </g>
+  <g>
+    <rect x="190" y="210" width="150" height="48" rx="10" fill="#eaf1fb" stroke="#2f6fb0" stroke-width="2"/>
+    <text x="204" y="232" fill="#1f2a44" font-size="15" font-weight="700" font-family="'Consolas','SFMono-Regular',monospace">K = X·W_K</text>
+    <text x="204" y="250" fill="#41506a" font-size="12">見出し (key)</text>
+  </g>
+  <g>
+    <rect x="190" y="270" width="150" height="48" rx="10" fill="#e6f2ee" stroke="#3aa0a0" stroke-width="2"/>
+    <text x="204" y="292" fill="#1f2a44" font-size="15" font-weight="700" font-family="'Consolas','SFMono-Regular',monospace">V = X·W_V</text>
+    <text x="204" y="310" fill="#41506a" font-size="12">中身 (value)</text>
+  </g>
+
+  <!-- X -> Q/K/V arrows -->
+  <g stroke="#5b6a86" stroke-width="2" marker-end="url(#a)" fill="none">
+    <path d="M150,200 L188,174"/>
+    <path d="M150,223 L188,234"/>
+    <path d="M150,248 L188,294"/>
+  </g>
+
+  <!-- RoPE aside (applied to Q,K) -->
+  <text x="366" y="140" fill="#3a6a53" font-size="12" text-anchor="middle" font-weight="700">⟳ RoPE</text>
+  <text x="366" y="156" fill="#4a6a58" font-size="10" text-anchor="middle">Q,K を回転</text>
+
+  <!-- Q,K -> Score -->
+  <g stroke="#5b6a86" stroke-width="2" marker-end="url(#a)" fill="none">
+    <path d="M340,178 L392,210"/>
+    <path d="M340,234 L392,244"/>
+  </g>
+  <text x="368" y="200" fill="#2f6fb0" font-size="14" font-weight="700" text-anchor="middle" font-family="'Consolas','SFMono-Regular',monospace">Q·Kᵀ</text>
+
+  <!-- Score matrix (T x T) -->
+  <g>
+    <rect x="392" y="168" width="176" height="140" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+    <text x="480" y="192" fill="#1f2a44" font-size="14" font-weight="700" text-anchor="middle">スコア表 (T × T)</text>
+    <!-- heatmap grid (neutral blue shades; no red/green semantics) -->
+    <g>
+      <rect x="432" y="202" width="22" height="22" fill="#2f6fb0" opacity="0.85"/>
+      <rect x="456" y="202" width="22" height="22" fill="#2f6fb0" opacity="0.28"/>
+      <rect x="480" y="202" width="22" height="22" fill="#2f6fb0" opacity="0.5"/>
+      <rect x="504" y="202" width="22" height="22" fill="#2f6fb0" opacity="0.18"/>
+      <rect x="432" y="226" width="22" height="22" fill="#2f6fb0" opacity="0.32"/>
+      <rect x="456" y="226" width="22" height="22" fill="#2f6fb0" opacity="0.78"/>
+      <rect x="480" y="226" width="22" height="22" fill="#2f6fb0" opacity="0.22"/>
+      <rect x="504" y="226" width="22" height="22" fill="#2f6fb0" opacity="0.44"/>
+      <rect x="432" y="250" width="22" height="22" fill="#2f6fb0" opacity="0.4"/>
+      <rect x="456" y="250" width="22" height="22" fill="#2f6fb0" opacity="0.2"/>
+      <rect x="480" y="250" width="22" height="22" fill="#2f6fb0" opacity="0.88"/>
+      <rect x="504" y="250" width="22" height="22" fill="#2f6fb0" opacity="0.3"/>
+      <rect x="432" y="274" width="22" height="22" fill="#2f6fb0" opacity="0.24"/>
+      <rect x="456" y="274" width="22" height="22" fill="#2f6fb0" opacity="0.5"/>
+      <rect x="480" y="274" width="22" height="22" fill="#2f6fb0" opacity="0.3"/>
+      <rect x="504" y="274" width="22" height="22" fill="#2f6fb0" opacity="0.82"/>
+    </g>
+  </g>
+  <text x="480" y="328" fill="#41506a" font-size="12" text-anchor="middle">＝ 内積類似度 ＝ 相関（テンプレートマッチング）</text>
+
+  <!-- Score -> softmax -->
+  <g stroke="#5b6a86" stroke-width="2" marker-end="url(#a)" fill="none">
+    <path d="M568,238 L614,230"/>
+  </g>
+
+  <!-- softmax -->
+  <g>
+    <rect x="616" y="196" width="150" height="66" rx="10" fill="#fdeede" stroke="#d99a2b" stroke-width="2"/>
+    <text x="691" y="224" fill="#1f2a44" font-size="14" font-weight="700" text-anchor="middle">softmax（行ごと）</text>
+    <text x="691" y="246" fill="#a5701a" font-size="12" text-anchor="middle">＝ 注意の重み(合計1)</text>
+  </g>
+
+  <!-- softmax -> output -->
+  <g stroke="#5b6a86" stroke-width="2" marker-end="url(#a)" fill="none">
+    <path d="M766,229 L804,222"/>
+  </g>
+
+  <!-- output -->
+  <g>
+    <rect x="806" y="176" width="126" height="104" rx="12" fill="#eef3f0" stroke="#3a6a53" stroke-width="2"/>
+    <text x="869" y="208" fill="#1f2a44" font-size="16" font-weight="700" text-anchor="middle">出力</text>
+    <text x="869" y="232" fill="#1f2a44" font-size="13" text-anchor="middle" font-family="'Consolas','SFMono-Regular',monospace">= 重み · V</text>
+    <text x="869" y="254" fill="#41506a" font-size="12" text-anchor="middle">文脈込み</text>
+    <text x="869" y="270" fill="#41506a" font-size="11" text-anchor="middle">ベクトル (T×d)</text>
+  </g>
+
+  <!-- V -> output (weighted average of V) -->
+  <path d="M340,300 C 520,356 690,356 806,262" stroke="#3aa0a0" stroke-width="2.5" marker-end="url(#at)" fill="none"/>
+  <text x="560" y="352" fill="#2f7f7f" font-size="12" text-anchor="middle" font-weight="600">V を加重平均（× V）</text>
+
+  <!-- bottom-left: cross-domain bridges -->
+  <g>
+    <rect x="40" y="372" width="486" height="120" rx="12" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+    <text x="60" y="398" fill="#1f2a44" font-size="15" font-weight="700">現場の道具と地続き（異分野ブリッジ）</text>
+    <text x="60" y="424" fill="#41506a" font-size="13">・QKᵀ ＝ 内積類似度 ＝ 相関（テンプレートマッチング）</text>
+    <text x="60" y="450" fill="#41506a" font-size="13">・RoPE ＝ 位置を回転＝位相で符号化 ≒ フーリエ変換</text>
+    <text x="60" y="476" fill="#41506a" font-size="13">・GQA ＝ K,V ヘッドを共有して KV キャッシュを節約</text>
+  </g>
+
+  <!-- bottom-right: cost of long context -->
+  <g>
+    <rect x="542" y="372" width="378" height="120" rx="12" fill="#fdeede" stroke="#d99a2b" stroke-width="2"/>
+    <text x="562" y="398" fill="#1f2a44" font-size="15" font-weight="700">長文で重くなる正体</text>
+    <text x="562" y="426" fill="#7a5a1a" font-size="13">計算量 O(T²)：総当たり照合（二乗で重い）</text>
+    <text x="562" y="452" fill="#7a5a1a" font-size="13">KV キャッシュ O(T)：文脈長に比例して増える</text>
+    <text x="562" y="478" fill="#a5701a" font-size="12">→ 第5回「メモリと速度の壁」へ</text>
+  </g>
+
+  <!-- footer -->
+  <text x="480" y="522" fill="#6b7688" font-size="13" text-anchor="middle">シリーズ「作って分かった LLM の中身」第2回 ― 自己注意 (self-attention) の一枚図</text>
+</svg>
