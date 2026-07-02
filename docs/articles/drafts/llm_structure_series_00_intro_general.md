@@ -16,6 +16,8 @@
 > 面白いことに、現場で使ってきた道具（フーリエ変換や相関、校正の考え方）が、
 > AI の中でそのまま顔を出します。その驚きも一緒にお裾分けできればと思います。
 
+![作って分かった LLM の中身 ― 自作言語モデルで覗く構造（シリーズ表紙）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/hero_00_intro.svg)
+
 ## この記事で覚えて帰ってほしい言葉
 
 - **LLM（Large Language Model / 大規模言語モデル）** … ChatGPT などの中身。膨大な文章で訓練された「言葉の予測装置」。
