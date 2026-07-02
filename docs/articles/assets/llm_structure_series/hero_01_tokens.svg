@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="第01回ヒーロー — 言葉を座標に変える: 文章 → かけら(トークン) → 意味の座標(ベクトル)。入口=出口の重み共有(tied embeddings)。" style="width:100%;height:auto;max-width:1200px" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
+  <title>言葉を座標に変える ── トークン化と埋め込み（シリーズ第01回 hero）</title>
+  <desc>静的表示: authored 属性が最終可視状態。SMIL は補助で、無しでも完成形が見える。赤緑の善悪対比なし。文章をトークンに刻み、各トークンIDを hidden 次元のベクトル（意味の座標）へ。入口の埋め込みと出口の出力層は同じ行列を共有する（tied embeddings）。</desc>
+
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3aa0a0" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#3aa0a0" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#3aa0a0" stop-opacity="0"/>
+    </linearGradient>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bgGrad)"/>
+
+  <!-- title -->
+  <text x="600" y="42" fill="#e2e8f0" font-size="26" font-weight="700" text-anchor="middle">言葉を座標に変える ── トークン化と埋め込み</text>
+  <text x="600" y="66" fill="#94a3b8" font-size="14" text-anchor="middle">文章 → かけら（トークン）→ 意味の座標（ベクトル）</text>
+
+  <!-- flowing accent ribbon (optional; static frame shows a faint teal line) -->
+  <rect x="0" y="78" width="1200" height="2" fill="url(#ribbon)">
+    <animate attributeName="x" from="-1200" to="1200" dur="7s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- ===== Panel A: 文章 (text) ===== -->
+  <g>
+    <rect x="40" y="90" width="250" height="156" rx="14" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="56" y="116" fill="#e2e8f0" font-size="15" font-weight="700">① 文章 (text)</text>
+    <rect x="56" y="132" width="218" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="165" y="169" fill="#cbd5e1" font-size="18" text-anchor="middle">「今日はいい天気」</text>
+    <text x="56" y="222" fill="#94a3b8" font-size="12">生の文字列（そのままでは計算できない）</text>
+  </g>
+
+  <!-- arrow A -> B -->
+  <line x1="294" y1="168" x2="330" y2="168" stroke="#94a3b8" stroke-width="2.4" marker-end="url(#ah)"/>
+
+  <!-- ===== Panel B: トークン (token) ===== -->
+  <g>
+    <rect x="336" y="90" width="330" height="156" rx="14" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="352" y="116" fill="#e2e8f0" font-size="15" font-weight="700">② トークン (token)</text>
+    <text x="352" y="134" fill="#94a3b8" font-size="12">言葉のかけら＋背番号（ID）</text>
+    <!-- 4 chips -->
+    <g font-size="16" text-anchor="middle">
+      <g>
+        <rect x="358" y="146" width="64" height="60" rx="10" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.5"/>
+        <text x="390" y="175" fill="#cbd5e1" font-weight="700">今日</text>
+        <text x="390" y="196" fill="#7f9bc4" font-size="12">5147</text>
+      </g>
+      <g>
+        <rect x="432" y="146" width="64" height="60" rx="10" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.5"/>
+        <text x="464" y="175" fill="#cbd5e1" font-weight="700">は</text>
+        <text x="464" y="196" fill="#7f9bc4" font-size="12">33</text>
+      </g>
+      <g>
+        <rect x="506" y="146" width="64" height="60" rx="10" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.5"/>
+        <text x="538" y="175" fill="#cbd5e1" font-weight="700">いい</text>
+        <text x="538" y="196" fill="#7f9bc4" font-size="12">1892</text>
+      </g>
+      <g>
+        <rect x="580" y="146" width="64" height="60" rx="10" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.5"/>
+        <text x="612" y="175" fill="#cbd5e1" font-weight="700">天気</text>
+        <text x="612" y="196" fill="#7f9bc4" font-size="12">774</text>
+      </g>
+    </g>
+    <text x="352" y="228" fill="#94a3b8" font-size="12">1トークン ≠ 1単語（日本語は細かく割れやすい）</text>
+  </g>
+
+  <!-- arrow B -> C -->
+  <line x1="670" y1="168" x2="706" y2="168" stroke="#94a3b8" stroke-width="2.4" marker-end="url(#ah)"/>
+
+  <!-- ===== Panel C: 意味の座標 (vector) ===== -->
+  <g>
+    <rect x="712" y="90" width="448" height="156" rx="14" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="728" y="116" fill="#e2e8f0" font-size="15" font-weight="700">③ 意味の座標 (vector)</text>
+    <text x="728" y="134" fill="#94a3b8" font-size="12">各ID → hidden 次元の数の並び＝空間の一点</text>
+
+    <!-- vector column -->
+    <g font-family="'Consolas','SFMono-Regular',monospace">
+      <path d="M 752 150 L 744 150 L 744 226 L 752 226" fill="none" stroke="#7f9bc4" stroke-width="1.5"/>
+      <path d="M 862 150 L 870 150 L 870 226 L 862 226" fill="none" stroke="#7f9bc4" stroke-width="1.5"/>
+      <text x="807" y="168" fill="#cbd5e1" font-size="14" text-anchor="middle">0.12</text>
+      <text x="807" y="186" fill="#cbd5e1" font-size="14" text-anchor="middle">−0.34</text>
+      <text x="807" y="204" fill="#cbd5e1" font-size="14" text-anchor="middle">0.51</text>
+      <text x="807" y="221" fill="#94a3b8" font-size="14" text-anchor="middle">⋮</text>
+    </g>
+
+    <!-- mini scatter -->
+    <g>
+      <line x1="940" y1="220" x2="1132" y2="220" stroke="#475569" stroke-width="1.2"/>
+      <line x1="948" y1="150" x2="948" y2="226" stroke="#475569" stroke-width="1.2"/>
+      <line x1="948" y1="220" x2="1012" y2="180" stroke="#3aa0a0" stroke-width="2" marker-end="url(#ah)"/>
+      <circle cx="1012" cy="180" r="5" fill="#3aa0a0"/>
+      <circle cx="1040" cy="188" r="5" fill="#3aa0a0"/>
+      <circle cx="1100" cy="162" r="5" fill="#2f6fb0"/>
+      <text x="1036" y="214" fill="#94a3b8" font-size="11" text-anchor="middle">似た意味は近く</text>
+    </g>
+  </g>
+
+  <!-- ===== tied embeddings bar ===== -->
+  <rect x="40" y="260" width="1120" height="42" rx="11" fill="#122036" stroke="#3aa0a0" stroke-width="1.2"/>
+  <text x="600" y="286" fill="#d7e2ef" font-size="14" text-anchor="middle">入口 ＝ 出口 ── 重み共有 (tied embeddings)：同じ「座標表」を行きと帰りで使い回し、巨大行列を二重に持たない</text>
+
+  <!-- footer -->
+  <text x="600" y="328" fill="#64748b" font-size="12" text-anchor="middle">シリーズ「作って分かった LLM の中身 ― 自作言語モデルで覗く構造」／ 第01回</text>
+</svg>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="メモリと速度の壁 — KVキャッシュ・量子化・線形化。長い会話でメモリが膨らむ壁と、圧縮/定数状態での対策" style="width:100%;height:auto;max-width:1200px" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif">
+  <title>メモリと速度の壁 ― KVキャッシュ・量子化・線形化（シリーズ「作って分かった LLM の中身」第05回）</title>
+  <desc>長い会話でメモリが膨らむ三つの壁（KVキャッシュの線形膨張・重みサイズの量子化・softmaxの二次コストの線形化）と、圧縮/定数状態での対策を静的に示すダークバナー。authored属性が最終可視状態。赤緑の善悪対比は不使用。</desc>
+
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="ribbon05" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3aa0a0" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#3aa0a0" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#3aa0a0" stop-opacity="0"/>
+    </linearGradient>
+    <marker id="ar05" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bg05)"/>
+
+  <!-- title -->
+  <g fill="#e2e8f0" text-anchor="middle">
+    <text x="600" y="50" font-size="30" font-weight="700">メモリと速度の壁</text>
+    <text x="600" y="80" font-size="14" fill="#94a3b8">KVキャッシュ・量子化・線形化 ── 長い会話でメモリが膨らむ壁と、圧縮／定数状態での対策</text>
+  </g>
+
+  <!-- accent ribbon (static-complete: authored x=0 shows full band) -->
+  <rect x="0" y="96" width="1200" height="2" fill="url(#ribbon05)">
+    <animate attributeName="x" from="-1200" to="1200" dur="7s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- 壁1 KVキャッシュ -->
+  <g transform="translate(48,118)">
+    <rect x="0" y="0" width="350" height="180" rx="14" fill="#0f172a" stroke="#2f6fb0" stroke-width="1.6"/>
+    <text x="24" y="38" font-size="18" font-weight="700" fill="#e2e8f0">壁1　KVキャッシュ</text>
+    <text x="24" y="61" font-size="13" fill="#9fb2c9">文脈が伸びるほど線形膨張 O(T)</text>
+    <g fill="#2f6fb0">
+      <rect x="26" y="146" width="24" height="16"/>
+      <rect x="62" y="126" width="24" height="36"/>
+      <rect x="98" y="102" width="24" height="60"/>
+      <rect x="134" y="80" width="24" height="82"/>
+    </g>
+    <text x="26" y="176" font-size="11" fill="#94a3b8">文脈長 T →</text>
+    <text x="196" y="112" font-size="13" font-weight="700" fill="#7fb0dd">×8（線形）</text>
+    <text x="196" y="138" font-size="12" fill="#cbd5e1">T=256 : 4.72MB</text>
+    <text x="196" y="158" font-size="12" fill="#cbd5e1">T=2048 : 37.75MB</text>
+  </g>
+
+  <!-- 壁2 量子化 -->
+  <g transform="translate(425,118)">
+    <rect x="0" y="0" width="350" height="180" rx="14" fill="#0f172a" stroke="#d99a2b" stroke-width="1.6"/>
+    <text x="24" y="38" font-size="18" font-weight="700" fill="#e2e8f0">壁2　量子化</text>
+    <text x="24" y="61" font-size="13" fill="#9fb2c9">重みの器を小さく（int8 で圧縮）</text>
+    <rect x="32" y="84" width="72" height="72" rx="7" fill="#d99a2b" opacity="0.9"/>
+    <text x="68" y="120" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">fp32</text>
+    <text x="68" y="172" font-size="12" fill="#cbd5e1" text-anchor="middle">5.7GB</text>
+    <line x1="116" y1="120" x2="156" y2="120" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar05)"/>
+    <rect x="166" y="102" width="42" height="42" rx="6" fill="#d99a2b"/>
+    <text x="187" y="128" font-size="11" font-weight="700" fill="#0f172a" text-anchor="middle">int8</text>
+    <text x="187" y="172" font-size="12" fill="#cbd5e1" text-anchor="middle">2.44GB</text>
+    <text x="232" y="120" font-size="12" fill="#e2e8f0">PPL だけで</text>
+    <text x="232" y="140" font-size="12" fill="#e2e8f0">合格にしない</text>
+    <text x="232" y="160" font-size="12" fill="#e0ad4a">→ top-1 で検収</text>
+  </g>
+
+  <!-- 壁3 線形化 -->
+  <g transform="translate(802,118)">
+    <rect x="0" y="0" width="350" height="180" rx="14" fill="#0f172a" stroke="#3aa0a0" stroke-width="1.6"/>
+    <text x="24" y="38" font-size="18" font-weight="700" fill="#e2e8f0">壁3　線形化</text>
+    <text x="24" y="61" font-size="13" fill="#9fb2c9">定数状態 O(1)。ただしタダではない</text>
+    <polyline points="30,152 74,138 118,116 162,92" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="150" y="86" font-size="10" fill="#8496ac">softmax O(T)</text>
+    <polyline points="30,148 200,148" fill="none" stroke="#3aa0a0" stroke-width="3"/>
+    <circle cx="30" cy="148" r="3.5" fill="#3aa0a0"/>
+    <circle cx="115" cy="148" r="3.5" fill="#3aa0a0"/>
+    <circle cx="200" cy="148" r="3.5" fill="#3aa0a0"/>
+    <text x="34" y="140" font-size="11" fill="#5fc0c0">定数状態: 文脈長に不変</text>
+    <text x="232" y="120" font-size="12" fill="#e2e8f0">利得＝長文脈</text>
+    <text x="232" y="140" font-size="12" fill="#e2e8f0">代償＝品質・短文脈</text>
+    <text x="232" y="160" font-size="12" fill="#5fc0c0">交差点 ≈227 tok</text>
+  </g>
+
+  <!-- footer caption -->
+  <text x="48" y="338" font-size="12" fill="#94a3b8">シリーズ「作って分かった LLM の中身 ― 自作言語モデルで覗く構造」／ 第05回</text>
+  <text x="1152" y="338" font-size="11" fill="#64748b" text-anchor="end">著者: 古瀬 和文（ぷるやん）</text>
+</svg>
