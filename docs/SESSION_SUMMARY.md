@@ -3,44 +3,49 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-07-02 11:39:52
+- **最終更新**: 2026-07-02 12:00:57
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
-7f8d3e1 auto: llm_structure_series_INDEX.md 編集前 (2026-07-02 11:11)
-5ba4775 auto: llm_structure_series_INDEX.md 編集前 (2026-07-02 11:11)
-b18efbe auto: llm_structure_series_00_intro_tech.md 編集前 (2026-07-02 11:11)
-a0513e5 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 08:51)
-2fb2614 auto: llm_structure_series_00_intro_tech.md 編集前 (2026-07-02 08:51)
-84826d6 auto: llm_structure_series_05_memory_speed_tech.md 編集前 (2026-07-02 08:49)
-b9a7c2b auto: llm_structure_series_05_memory_speed_general.md 編集前 (2026-07-02 08:49)
-79e0aa2 auto: llm_structure_series_02_attention_general.md 編集前 (2026-07-02 08:49)
-3c69a5a auto: llm_structure_series_01_tokens_embeddings_general.md 編集前 (2026-07-02 08:49)
-780da45 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 08:49)
+9c95e5e auto: llm_structure_series_IMAGE_MANIFEST.md 編集前 (2026-07-02 11:59)
+61ceee0 auto: llm_structure_series_00_intro_general.md 編集前 (2026-07-02 11:59)
+731e8f5 auto: llm_structure_series_00_intro_tech.md 編集前 (2026-07-02 11:59)
+b178468 auto: llm_structure_series_06_practice_general.md 編集前 (2026-07-02 11:51)
+d160c4b auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 11:50)
+4540a9e auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 11:50)
+67ce4b6 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 11:50)
+794df02 auto: llm_structure_series_02_attention_general.md 編集前 (2026-07-02 11:46)
+86e33fe auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 11:46)
+5372786 auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 11:46)
 ```
 
 ## 現在の git status
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
- M docs/articles/drafts/llm_structure_series_INDEX.md
+M docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-11:12 docs/NEXT_SESSION.auto.md
-11:12 docs/SESSION_SUMMARY.md
-11:11 docs/articles/drafts/llm_structure_series_INDEX.md
-11:11 docs/articles/drafts/llm_structure_series_00_intro_tech.md
-11:09 docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md
-11:08 docs/articles/assets/llm_structure_series/career_bridge.svg
-11:07 docs/articles/assets/llm_structure_series/pipeline_map.svg
-11:06 docs/articles/assets/llm_structure_series/two_kinds_of_zero.svg
+11:59 docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md
+11:59 docs/articles/drafts/llm_structure_series_00_intro_general.md
+11:59 docs/articles/drafts/llm_structure_series_00_intro_tech.md
+11:58 docs/articles/assets/llm_structure_series/hero_00_intro.svg
+11:51 docs/articles/drafts/llm_structure_series_06_practice_general.md
+11:50 docs/articles/drafts/llm_structure_series_06_practice_tech.md
+11:49 docs/articles/assets/llm_structure_series/diagram_06_eval_traps.svg
+11:49 docs/articles/assets/llm_structure_series/hero_06_practice.svg
+11:46 docs/articles/drafts/llm_structure_series_02_attention_general.md
+11:46 docs/articles/drafts/llm_structure_series_02_attention_tech.md
+11:46 docs/articles/drafts/llm_structure_series_03_transformer_block_general.md
+11:46 docs/articles/drafts/llm_structure_series_03_transformer_block_tech.md
+11:46 docs/articles/assets/llm_structure_series/diagram_02_qkv_attention.svg
+11:45 docs/articles/drafts/llm_structure_series_04_training_inference_general.md
+11:45 docs/articles/drafts/llm_structure_series_04_training_inference_tech.md
 ```
 
 ---

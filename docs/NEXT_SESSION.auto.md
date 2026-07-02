@@ -10,34 +10,32 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-02 11:39:53
+- **生成時刻**: 2026-07-02 12:00:58
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `28	0`
+- HEAD vs upstream (左=ahead 右=behind): `51	0`
 
 ```
-7f8d3e1 auto: llm_structure_series_INDEX.md 編集前 (2026-07-02 11:11)
-5ba4775 auto: llm_structure_series_INDEX.md 編集前 (2026-07-02 11:11)
-b18efbe auto: llm_structure_series_00_intro_tech.md 編集前 (2026-07-02 11:11)
-a0513e5 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 08:51)
-2fb2614 auto: llm_structure_series_00_intro_tech.md 編集前 (2026-07-02 08:51)
-84826d6 auto: llm_structure_series_05_memory_speed_tech.md 編集前 (2026-07-02 08:49)
-b9a7c2b auto: llm_structure_series_05_memory_speed_general.md 編集前 (2026-07-02 08:49)
-79e0aa2 auto: llm_structure_series_02_attention_general.md 編集前 (2026-07-02 08:49)
-3c69a5a auto: llm_structure_series_01_tokens_embeddings_general.md 編集前 (2026-07-02 08:49)
-780da45 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 08:49)
+9c95e5e auto: llm_structure_series_IMAGE_MANIFEST.md 編集前 (2026-07-02 11:59)
+61ceee0 auto: llm_structure_series_00_intro_general.md 編集前 (2026-07-02 11:59)
+731e8f5 auto: llm_structure_series_00_intro_tech.md 編集前 (2026-07-02 11:59)
+b178468 auto: llm_structure_series_06_practice_general.md 編集前 (2026-07-02 11:51)
+d160c4b auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 11:50)
+4540a9e auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 11:50)
+67ce4b6 auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 11:50)
+794df02 auto: llm_structure_series_02_attention_general.md 編集前 (2026-07-02 11:46)
+86e33fe auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 11:46)
+5372786 auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 11:46)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
- M docs/articles/drafts/llm_structure_series_INDEX.md
+M docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md
 ```
 
 
@@ -72,26 +70,26 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `11:12` `docs/NEXT_SESSION.auto.md`
-- `11:12` `docs/SESSION_SUMMARY.md`
-- `11:11` `docs/articles/drafts/llm_structure_series_INDEX.md`
-- `11:11` `docs/articles/drafts/llm_structure_series_00_intro_tech.md`
-- `11:09` `docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md`
-- `11:08` `docs/articles/assets/llm_structure_series/career_bridge.svg`
-- `11:07` `docs/articles/assets/llm_structure_series/pipeline_map.svg`
-- `11:06` `docs/articles/assets/llm_structure_series/two_kinds_of_zero.svg`
-- `08:51` `docs/articles/drafts/llm_structure_series_06_practice_tech.md`
-- `08:50` `docs/articles/drafts/llm_structure_series_05_memory_speed_tech.md`
-- `08:49` `docs/articles/drafts/llm_structure_series_05_memory_speed_general.md`
-- `08:49` `docs/articles/drafts/llm_structure_series_02_attention_general.md`
-- `08:49` `docs/articles/drafts/llm_structure_series_01_tokens_embeddings_general.md`
-- `08:49` `docs/articles/drafts/llm_structure_series_03_transformer_block_tech.md`
-- `08:49` `docs/articles/drafts/llm_structure_series_01_tokens_embeddings_tech.md`
-- `08:40` `docs/articles/drafts/llm_structure_series_IMAGE_PROMPTS.md`
-- `08:39` `docs/articles/drafts/llm_structure_series_06_practice_general.md`
-- `08:35` `docs/articles/drafts/llm_structure_series_03_transformer_block_general.md`
-- `08:34` `docs/articles/drafts/llm_structure_series_04_training_inference_general.md`
-- `08:31` `docs/articles/drafts/llm_structure_series_02_attention_tech.md`
+- `11:59` `docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md`
+- `11:59` `docs/articles/drafts/llm_structure_series_00_intro_general.md`
+- `11:59` `docs/articles/drafts/llm_structure_series_00_intro_tech.md`
+- `11:58` `docs/articles/assets/llm_structure_series/hero_00_intro.svg`
+- `11:51` `docs/articles/drafts/llm_structure_series_06_practice_general.md`
+- `11:50` `docs/articles/drafts/llm_structure_series_06_practice_tech.md`
+- `11:49` `docs/articles/assets/llm_structure_series/diagram_06_eval_traps.svg`
+- `11:49` `docs/articles/assets/llm_structure_series/hero_06_practice.svg`
+- `11:46` `docs/articles/drafts/llm_structure_series_02_attention_general.md`
+- `11:46` `docs/articles/drafts/llm_structure_series_02_attention_tech.md`
+- `11:46` `docs/articles/drafts/llm_structure_series_03_transformer_block_general.md`
+- `11:46` `docs/articles/drafts/llm_structure_series_03_transformer_block_tech.md`
+- `11:46` `docs/articles/assets/llm_structure_series/diagram_02_qkv_attention.svg`
+- `11:45` `docs/articles/drafts/llm_structure_series_04_training_inference_general.md`
+- `11:45` `docs/articles/drafts/llm_structure_series_04_training_inference_tech.md`
+- `11:45` `docs/articles/assets/llm_structure_series/diagram_03_knowledge_location.svg`
+- `11:45` `docs/articles/assets/llm_structure_series/hero_02_attention.svg`
+- `11:45` `docs/articles/assets/llm_structure_series/diagram_04_training_loop.svg`
+- `11:44` `docs/articles/drafts/llm_structure_series_05_memory_speed_tech.md`
+- `11:44` `docs/articles/drafts/llm_structure_series_05_memory_speed_general.md`
 
 
 ## Cross-references
