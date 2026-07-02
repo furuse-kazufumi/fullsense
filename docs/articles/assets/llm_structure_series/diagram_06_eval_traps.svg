@@ -45,7 +45,8 @@
     <!-- reference line from best-top to holdout region + drop bracket -->
     <line x1="153" y1="262" x2="360" y2="262" stroke="#8a93a6" stroke-width="1.4" stroke-dasharray="5 4"/>
     <path d="M360,262 L360,296" stroke="#8a93a6" stroke-width="1.4"/>
-    <text x="368" y="284" fill="#6b7688" font-size="12">上振れが剥がれる</text>
+    <text x="400" y="280" fill="#6b7688" font-size="12" text-anchor="middle">上振れが</text>
+    <text x="400" y="296" fill="#6b7688" font-size="12" text-anchor="middle">剥がれる</text>
 
     <!-- arrow best -> holdout -->
     <path d="M206,272 C250,268 280,286 312,300" fill="none" stroke="#5b6a86" stroke-width="2" marker-end="url(#arrT)"/>
