@@ -144,7 +144,7 @@
 
 ### モデル正本化（全フェーズの橋）: URDF ＋ MJCF を正本として同期
 
-- **URDF** = ROS/Gazebo/実機の lingua franca（物理表現は貧弱）。**MJCF** = MuJoCo/MJX ネイティブ（接触・アクチュエータ表現が最豊富、locomotion 研究の主流）。**MuJoCo は URDF を直接読まない**ので URDF→MJCF は手当てが必要（ROS2 側 `make_mjcf_from_robot_description`、複雑モデルは手調整前提）。2025 に DeepMind が **mujoco-usd-converter**（MJCF↔USD）を公開し、将来の USD（Isaac/Newton）へも橋渡し可能。
+- **URDF** = ROS/Gazebo/実機の lingua franca（物理表現は貧弱）。**MJCF** = MuJoCo/MJX ネイティブ（接触・アクチュエータ表現が最豊富、locomotion 研究の主流）。**MuJoCo は URDF を `mj_loadXML`/`from_xml_path` で直接読める**（形式は先頭要素 `<robot>`/`<mujoco>` で自動判別）が、**URDF 対応は限定的**（actuator/sensor が落ち、接触・アクチュエータ・collision 設定は `<mujoco>` 拡張ブロックが要る）ため、実用歩行モデルは URDF→MJCF 化＋手調整が前提（ROS2 側 `make_mjcf_from_robot_description`、複雑モデルは手調整必須）。2025 に DeepMind が **mujoco-usd-converter**（MJCF↔USD）を公開し、将来の USD（Isaac/Newton）へも橋渡し可能。
 出典: [control.ros.org tools](https://control.ros.org/rolling/doc/mujoco_ros2_control/mujoco_ros2_control/docs/tools.html) / [mujoco discussion #3176](https://github.com/google-deepmind/mujoco/discussions/3176) / [NVIDIA Omniverse libraries blog](https://developer.nvidia.com/blog/developers-build-fast-and-reliable-robot-simulations-with-nvidia-omniverse-libraries/)。
 
 ---
