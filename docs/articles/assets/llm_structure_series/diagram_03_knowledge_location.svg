@@ -59,12 +59,9 @@
   <text x="770" y="140" fill="#1f2a44" font-size="16" font-weight="700" text-anchor="middle">×N 層（例 24 層）</text>
 
   <g>
-    <rect x="636" y="158" width="268" height="52" rx="8" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
-    <rect x="636" y="158" width="130" height="52" rx="8" fill="#eaf1fb"/>
+    <rect x="636" y="158" width="268" height="52" rx="8" fill="#eaf1fb" stroke="#c9d3e2" stroke-width="2"/>
+    <rect x="766" y="158" width="138" height="52" rx="8" fill="#fdeede"/>
     <rect x="636" y="158" width="10" height="52" rx="5" fill="#2f6fb0"/>
-    <text x="700" y="189" fill="#2f6fb0" font-size="12.5" font-weight="700" text-anchor="middle">注意</text>
-    <text x="835" y="189" fill="#a5701a" font-size="12.5" font-weight="700" text-anchor="middle">順伝播</text>
-    <rect x="766" y="158" width="138" height="52" rx="8" fill="#fdeede" opacity="0.9"/>
     <text x="700" y="189" fill="#2f6fb0" font-size="12.5" font-weight="700" text-anchor="middle">注意</text>
     <text x="835" y="189" fill="#a5701a" font-size="12.5" font-weight="700" text-anchor="middle">順伝播</text>
     <text x="648" y="150" fill="#6b7688" font-size="11">層 0</text>
