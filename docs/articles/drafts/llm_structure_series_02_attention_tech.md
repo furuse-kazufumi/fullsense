@@ -144,6 +144,8 @@ def self_attention(X, W_q, W_k, W_v):
     return out
 ```
 
+![注意機構の一枚図 ― 入力 X から Q/K/V を作り、softmax(QKᵀ/√d) で重みを出し、V を加重平均して文脈込みベクトルを得る（QKᵀ＝相関、RoPE＝位相、O(T²)/KVキャッシュ O(T)）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/diagram_02_qkv_attention.svg)
+
 ### 3.2 QKᵀ ＝ 内積類似度 ＝ 相関（テンプレートマッチング）
 
 `Q·Kᵀ` の一つ一つの成分は、2本のベクトルの **内積** です。内積は「掛けて足す」だけの操作ですが、
