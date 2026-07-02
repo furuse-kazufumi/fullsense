@@ -10,9 +10,13 @@
 
 ## URL 台帳（投稿したら埋める）
 
+> **投稿は完全版2本のみ**(2026-07-02 確定)。MEGA_T / MEGA_G が本番。以下の分割版キーはアーカイブ用(単体投稿しない限り未使用)。
+
 | キー | ローカルファイル | タイトル | Qiita URL |
 |---|---|---|---|
-| INDEX | llm_structure_series_INDEX.md | シリーズ総目次 | (未投稿) |
+| **MEGA_T** | llm_structure_series_MEGA_tech.md | **技術版・完全版** | (未投稿) |
+| **MEGA_G** | llm_structure_series_MEGA_general.md | **一般版・完全版** | (未投稿) |
+| INDEX | llm_structure_series_INDEX.md | シリーズ総目次(投稿しない) | — |
 | T00 | llm_structure_series_00_intro_tech.md | 技術版 #0 序章 | (未投稿) |
 | T01 | llm_structure_series_01_tokens_embeddings_tech.md | 技術版 #1 トークンと埋め込み | (未投稿) |
 | T02 | llm_structure_series_02_attention_tech.md | 技術版 #2 注意機構 | (未投稿) |

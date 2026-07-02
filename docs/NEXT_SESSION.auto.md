@@ -10,16 +10,18 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-02 18:18:39
+- **生成時刻**: 2026-07-02 18:22:26
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `2	0`
 
 ```
+d550f2a auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 18:22)
+ecf1ead auto: llm_structure_series_POSTING_RUNBOOK.md 編集前 (2026-07-02 18:21)
 3116f40 docs(series): 作って分かったLLMの中身 — 記事15本+SVG28枚+運用ドキュメント(LINK_MAP/RUNBOOK)完成
 f604673 auto: llm_structure_series_IMAGE_MANIFEST.md 編集前 (2026-07-02 17:55)
 8486c0c auto: llm_structure_series_IMAGE_MANIFEST.md 編集前 (2026-07-02 17:55)
@@ -28,14 +30,12 @@ f0d4b4c auto: llm_structure_series_06_practice_tech.md 編集前 (2026-07-02 17:
 7f6a9e2 auto: llm_structure_series_05_memory_speed_tech.md 編集前 (2026-07-02 17:54)
 b05d235 auto: llm_structure_series_01_tokens_embeddings_tech.md 編集前 (2026-07-02 17:54)
 d1adb06 auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 17:51)
-75042f1 auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 17:51)
-74d9763 auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 17:51)
 ```
 
 ### git status (porcelain)
 
 ```
-(clean)
+M docs/articles/drafts/llm_structure_series_LINK_MAP.md
 ```
 
 
@@ -70,8 +70,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `17:57` `docs/NEXT_SESSION.auto.md`
-- `17:56` `docs/SESSION_SUMMARY.md`
+- `18:22` `docs/articles/drafts/llm_structure_series_LINK_MAP.md`
+- `18:22` `docs/articles/drafts/llm_structure_series_POSTING_RUNBOOK.md`
+- `18:18` `docs/NEXT_SESSION.auto.md`
+- `18:18` `docs/SESSION_SUMMARY.md`
 - `17:55` `docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md`
 - `17:55` `docs/articles/drafts/llm_structure_series_06_practice_tech.md`
 - `17:55` `docs/articles/drafts/llm_structure_series_06_practice_general.md`
@@ -88,8 +90,6 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 - `17:55` `docs/articles/drafts/llm_structure_series_00_intro_tech.md`
 - `17:55` `docs/articles/drafts/llm_structure_series_00_intro_general.md`
 - `17:50` `docs/articles/assets/llm_structure_series/aux_02_rope_phase_clock.svg`
-- `17:48` `docs/articles/assets/llm_structure_series/aux_05_crossover.svg`
-- `17:48` `docs/articles/assets/llm_structure_series/aux_02_cost_curves.svg`
 
 
 ## Cross-references
