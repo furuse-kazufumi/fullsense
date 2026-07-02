@@ -7,6 +7,8 @@
 > 「教科書の図では分からなかったこと」を、比喩と実感で語り直す試みです。数式は技術版に譲り、
 > この一般版では**絵で腑に落とす**ことだけを目指します。
 
+![Transformer ブロックの全体像 ― 注意機構と順伝播層に残差とRMSNormを付けた1ブロックをN層積む](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/hero_03_block.svg)
+
 > 🧑‍🔧 **書いている人**
 > 私はこの 25 年、工場のラインで「カメラで見て、機械を動かす」装置を作ってきたエンジニアです。
 > 検査や位置決め、三次元計測やレーザ計測――「不良を見逃さない、ラインを止めない」ために、
