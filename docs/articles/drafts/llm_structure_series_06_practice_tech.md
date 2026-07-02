@@ -579,8 +579,7 @@ flowchart TD
     Trust --> Goal["賢くする『かつ』責任を持つ"]
 ```
 
-**[画像プレースホルダ]** *キャプション: 責任ある設計の四つの柱（ローカル完結・人間の承認点・fail-closed・誠実な開示）と、計測装置の品質思想（機密・安全インタロック・疑わしきは不良・校正）が同型であることを並べた図。*
-<!-- 画像生成意図: 左右対比の図。左列に計測装置のアイコン（オンプレのデータ金庫・安全インタロックのボタン・不良を弾くゲート・校正基準器）、右列に対応する LLM 設計（ローカル完結・承認バス・fail-closed・honest disclosure）を横線で結ぶ。「同じ品質思想」という中央の帯。静謐で技術的、青と金属色、赤緑の善悪対比なし。静的な完成図。 -->
+![責任ある設計の四つの柱（ローカル完結・人間の承認点・fail-closed・誠実な開示）と、計測装置の品質思想（機密・安全インタロック・疑わしきは不良・校正）が同型であることを並べた図。](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/aux_06_responsible_pillars.svg)
 
 ### 持ち帰り（判断4）
 

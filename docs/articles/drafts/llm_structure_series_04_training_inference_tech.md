@@ -351,9 +351,7 @@ flowchart LR
     A -->|末尾に足して読み直す| F
 ```
 
-<!-- 画像生成意図: 推論の自己回帰ループを1枚で。プロンプト→順伝播→確率分布（棒グラフで『東京40%/京都6%/大阪5%…』のイメージ）→選び方の分岐（greedy＝一番高い棒を指す／sampling＝サイコロで確率的に選ぶ）→出したトークンを列の末尾に足して矢印が forward へ戻る。温度ノブ（小＝尖った分布、大＝平らな分布）を小さなインセットで対比。計測器のダイヤル風の落ち着いた意匠。自賛・攻撃的表現なし。 -->
-
-![推論の自己回帰ループ図：分布から一語を選び、末尾に足してまた読み直す](placeholder_inference_loop.svg)
+![サンプリングの選び方図：同じ確率分布から greedy と温度・top-p でどう一語を選ぶか](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/llm_structure_series/aux_04_sampling.svg)
 *図: 推論は固定した重みで一語ずつ。「分布から選ぶ」ノブが温度と top-p。選び方を変えても賢さ（重み）は変わらない。*
 
 ---
