@@ -35,7 +35,7 @@
     <text x="56" y="116" fill="#e2e8f0" font-size="15" font-weight="700">① 文章 (text)</text>
     <rect x="56" y="132" width="218" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
     <text x="165" y="169" fill="#cbd5e1" font-size="18" text-anchor="middle">「今日はいい天気」</text>
-    <text x="56" y="222" fill="#94a3b8" font-size="12">生の文字列（そのままでは計算できない）</text>
+    <text x="56" y="222" fill="#94a3b8" font-size="11">生の文字列（そのままでは計算できない）</text>
   </g>
 
   <!-- arrow A -> B -->
