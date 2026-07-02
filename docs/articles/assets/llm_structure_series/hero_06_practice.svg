@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="実務編 ヒーロー — モデル選定・評価・進化・責任ある設計。道具として選ぶ・疑う・任せる" style="width:100%;height:auto;max-width:1200px" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif">
+  <title>実務編 ― モデルを選び・評価し・進化させ、責任を持つ</title>
+  <desc>連載「作って分かった LLM の中身」第06回のヒーローバナー。四つの実務判断（選定・評価・進化・責任ある設計）を、道具として「選ぶ・疑う・任せる」規律で並べた静的な一枚絵。赤緑の善悪対比は使わない。</desc>
+
+  <!-- 静的表示（家訓）: authored 属性が最終可視状態。SMIL は装飾のみで、無くても完成形が見える。 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="ribbon6" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3aa0a0" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#3aa0a0" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#3aa0a0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bg6)"/>
+
+  <!-- ribbon accent（静止で可視。任意でドリフト） -->
+  <rect x="0" y="98" width="1200" height="2" fill="url(#ribbon6)">
+    <animate attributeName="x" from="-1200" to="1200" dur="7s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- title -->
+  <g text-anchor="middle">
+    <text x="600" y="52" font-size="30" font-weight="700" fill="#e2e8f0">実務編 ― モデルを選び・評価し・進化させ、責任を持つ</text>
+    <text x="600" y="82" font-size="15" fill="#94a3b8">中身が分かったからこそ、道具として  選ぶ・疑う・任せる</text>
+  </g>
+
+  <!-- 四つの実務判断カード -->
+  <g text-anchor="middle">
+
+    <!-- (1) 選定 / Select -->
+    <g transform="translate(40,116)">
+      <rect width="262" height="176" rx="14" fill="#1e293b" stroke="#2f6fb0" stroke-width="1.6"/>
+      <rect width="262" height="6" rx="3" fill="#2f6fb0"/>
+      <path d="M113 24 H149 L136 42 V52 H126 V42 Z" fill="none" stroke="#2f6fb0" stroke-width="2" stroke-linejoin="round"/>
+      <text x="131" y="92" font-size="22" font-weight="700" fill="#2f6fb0">選定</text>
+      <text x="131" y="110" font-size="11" fill="#94a3b8">Select</text>
+      <text x="131" y="136" font-size="12" fill="#cbd5e1">ライセンスで通す</text>
+      <rect x="97" y="150" width="68" height="24" rx="12" fill="none" stroke="#2f6fb0" stroke-width="1.4"/>
+      <text x="131" y="166" font-size="12.5" font-weight="700" fill="#2f6fb0">選ぶ</text>
+    </g>
+
+    <!-- (2) 評価 / Evaluate -->
+    <g transform="translate(326,116)">
+      <rect width="262" height="176" rx="14" fill="#1e293b" stroke="#3aa0a0" stroke-width="1.6"/>
+      <rect width="262" height="6" rx="3" fill="#3aa0a0"/>
+      <path d="M114 50 A18 18 0 0 1 148 50" fill="none" stroke="#3aa0a0" stroke-width="2"/>
+      <line x1="131" y1="50" x2="142" y2="33" stroke="#3aa0a0" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="131" cy="50" r="2.6" fill="#3aa0a0"/>
+      <text x="131" y="92" font-size="22" font-weight="700" fill="#3aa0a0">評価</text>
+      <text x="131" y="110" font-size="11" fill="#94a3b8">Evaluate</text>
+      <text x="131" y="136" font-size="12" fill="#cbd5e1">うますぎる結果を疑う</text>
+      <rect x="97" y="150" width="68" height="24" rx="12" fill="none" stroke="#3aa0a0" stroke-width="1.4"/>
+      <text x="131" y="166" font-size="12.5" font-weight="700" fill="#3aa0a0">疑う</text>
+    </g>
+
+    <!-- (3) 進化 / Evolve -->
+    <g transform="translate(612,116)">
+      <rect width="262" height="176" rx="14" fill="#1e293b" stroke="#d99a2b" stroke-width="1.6"/>
+      <rect width="262" height="6" rx="3" fill="#d99a2b"/>
+      <path d="M131 54 V44 M131 44 L119 30 M131 44 L143 30" fill="none" stroke="#d99a2b" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="119" cy="30" r="2.6" fill="#d99a2b"/>
+      <circle cx="143" cy="30" r="2.6" fill="#d99a2b"/>
+      <circle cx="131" cy="54" r="2.6" fill="#d99a2b"/>
+      <text x="131" y="92" font-size="22" font-weight="700" fill="#d99a2b">進化</text>
+      <text x="131" y="110" font-size="11" fill="#94a3b8">Evolve</text>
+      <text x="131" y="136" font-size="12" fill="#cbd5e1">非分離だけを磨く</text>
+      <rect x="97" y="150" width="68" height="24" rx="12" fill="none" stroke="#d99a2b" stroke-width="1.4"/>
+      <text x="131" y="166" font-size="12.5" font-weight="700" fill="#d99a2b">磨く</text>
+    </g>
+
+    <!-- (4) 責任 / Responsible -->
+    <g transform="translate(898,116)">
+      <rect width="262" height="176" rx="14" fill="#1e293b" stroke="#3a6a53" stroke-width="1.6"/>
+      <rect width="262" height="6" rx="3" fill="#3a6a53"/>
+      <path d="M131 24 L145 29 V43 C145 51 138 55 131 57 C124 55 117 51 117 43 V29 Z" fill="none" stroke="#3a6a53" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M124 41 L129 46 L138 35" fill="none" stroke="#3a6a53" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="131" y="92" font-size="22" font-weight="700" fill="#3a6a53">責任</text>
+      <text x="131" y="110" font-size="11" fill="#94a3b8">Responsible</text>
+      <text x="131" y="136" font-size="12" fill="#cbd5e1">承認点で締める</text>
+      <rect x="97" y="150" width="68" height="24" rx="12" fill="none" stroke="#3a6a53" stroke-width="1.4"/>
+      <text x="131" y="166" font-size="12.5" font-weight="700" fill="#3a6a53">任せる</text>
+    </g>
+
+  </g>
+
+  <!-- footer: series / chapter -->
+  <text x="40" y="330" font-size="13" fill="#64748b">シリーズ「作って分かった LLM の中身」／ 第06回</text>
+  <text x="1160" y="330" font-size="13" fill="#3aa0a0" text-anchor="end" font-weight="600">道具として ― 選ぶ・疑う・任せる</text>
+</svg>
