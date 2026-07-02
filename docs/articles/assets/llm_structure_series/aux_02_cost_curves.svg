@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif">
+  <!-- 静的表示: authored=最終可視。SMIL不使用。赤緑の善悪対比なし。 概形のみ・数値目盛りなし。 -->
+  <defs>
+    <marker id="ax" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6a86"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="#f7f9fc"/>
+
+  <!-- title band -->
+  <rect x="0" y="0" width="960" height="78" fill="#1f2a44"/>
+  <text x="40" y="38" fill="#ffffff" font-size="25" font-weight="700">計算は二乗・メモリは線形 ― 長文で重くなる正体</text>
+  <text x="40" y="64" fill="#aebacc" font-size="15">文脈長 T が伸びると、注意の計算は二乗で急に、KV キャッシュのメモリは線形で増える（概形）。</text>
+
+  <!-- axes -->
+  <line x1="140" y1="430" x2="866" y2="430" stroke="#5b6a86" stroke-width="2" marker-end="url(#ax)"/>
+  <line x1="140" y1="430" x2="140" y2="106" stroke="#5b6a86" stroke-width="2" marker-end="url(#ax)"/>
+  <text x="150" y="102" fill="#41506a" font-size="13">コスト（大きいほど重い）</text>
+  <text x="792" y="456" fill="#41506a" font-size="13">文脈長 T</text>
+
+  <!-- O(T) line: KV cache memory (teal) -->
+  <line x1="140" y1="430" x2="820" y2="304" stroke="#3aa0a0" stroke-width="3"/>
+  <text x="792" y="296" fill="#2f7f7f" font-size="13" font-weight="700" text-anchor="middle">線形</text>
+
+  <!-- O(T^2) curve: attention compute (blue) -->
+  <polyline points="140,430 208,427 276,418 344,403 412,382 480,355 548,322 616,283 684,238 752,187 820,130"
+            fill="none" stroke="#2f6fb0" stroke-width="3"/>
+  <text x="792" y="150" fill="#2f6fb0" font-size="13" font-weight="700" text-anchor="middle">二乗で急増</text>
+
+  <!-- inline annotation -->
+  <text x="600" y="250" fill="#2f6fb0" font-size="13" font-weight="600" text-anchor="middle">T が2倍 → 計算はおよそ4倍</text>
+
+  <!-- legend -->
+  <rect x="150" y="118" width="372" height="86" rx="10" fill="#ffffff" stroke="#c9d3e2" stroke-width="2"/>
+  <rect x="166" y="140" width="24" height="12" fill="#2f6fb0"/>
+  <text x="200" y="151" fill="#1f2a44" font-size="14">O(T²)：注意の計算（総当たりで二乗）</text>
+  <rect x="166" y="174" width="24" height="12" fill="#3aa0a0"/>
+  <text x="200" y="185" fill="#1f2a44" font-size="14">O(T)：KV キャッシュ（線形で増える）</text>
+
+  <!-- bottom pointer band -->
+  <rect x="140" y="468" width="680" height="36" rx="10" fill="#fdeede" stroke="#d99a2b" stroke-width="2"/>
+  <text x="480" y="491" fill="#7a5a1a" font-size="13" text-anchor="middle">→ 第5回「メモリと速度の壁」で、この二乗の壁とどう付き合うか。</text>
+
+  <!-- footer -->
+  <text x="480" y="526" fill="#6b7688" font-size="13" text-anchor="middle">シリーズ「作って分かった LLM の中身」第2回 ― 長文で重くなる正体</text>
+</svg>
