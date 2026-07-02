@@ -17,8 +17,8 @@
   <rect x="32" y="98" width="596" height="392" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
   <text x="52" y="126" fill="#1f2a44" font-size="15" font-weight="700">メモリ／層（KB, 1KB=1024B）― T が小さい近景を拡大</text>
 
-  <!-- shaded zone: T < 227 では定数状態が大きい -->
-  <rect x="108" y="140" width="109" height="290" fill="#3aa0a0" opacity="0.07"/>
+  <!-- shaded zone: T < 227 では定数状態が大きい (path, not a text container) -->
+  <path d="M108,140 H217 V430 H108 Z" fill="#3aa0a0" opacity="0.07"/>
 
   <!-- y grid + ticks (0..1024 KB) -->
   <g stroke="#e4e9f1" stroke-width="1">
