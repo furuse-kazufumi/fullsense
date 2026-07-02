@@ -60,14 +60,10 @@
 
 ---
 
-## 残りの任意スロット（未配線・非ブロッキング）
-
-一部の tech 記事本文に、担当図と重複しない補助スロットが `**[画像プレースホルダ]**`（太字テキスト）として残っている（例: #2 の RoPE 時計・相関対比、#4 の pretrain_vs_scratch、#5 の per-token 損益分岐、#6 の RAG 三択・文脈長スイープ・責任四柱）。**壊れ画像にはならない**（画像リンクでなく太字テキスト）。必要なら後日 SVG 追加 or 削除。プロンプトは `IMAGE_PROMPTS.md` に残置。
-
----
-
 ## 配線状態（まとめ）
 
-- **SVG 16 枚すべて作成・整形式検証済み・raw URL で配線済み**（INDEX / #0 tech・general / #1-6 tech は hero+diagram / #1-6 general は hero）。
+- **SVG 28 枚すべて作成・整形式検証済み・文字はみ出し検査 0 件・raw URL で配線済み**
+  （INDEX / #0-6 tech = hero+diagram+aux / #0-6 general = hero）。**残プレースホルダ 0 件**（機械確認済み）。
+- 品質検査は2層: (1) `xml.dom.minidom` 整形式 (2) 推定描画幅 vs 箱/viewBox のはみ出し検出（全角≈1.05×/半角≈0.6×フォントサイズ、anchor/translate 解決）。
 - **未 push**: raw URL は push 前は 404。**push は要ユーザー判断**（no-push 規律）。push 後、Qiita 実機で SVG 表示（特に JP フォント）を確認し、落ちるものだけ PNG フォールバックへ。
-- ラスタ生成は不要になった（ベクターで統一）。`IMAGE_PROMPTS.md` は予備として残置。
+- ラスタ生成は不要（ベクターで統一）。`IMAGE_PROMPTS.md` は予備として残置。投稿手順 = `llm_structure_series_POSTING_RUNBOOK.md` / URL・タグ台帳 = `llm_structure_series_LINK_MAP.md`。
