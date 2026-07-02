@@ -183,7 +183,7 @@
 - **到達点**: 「複数歩行ロボット × 進化最適化」の将来像を、進化コア（MJX+QDax）と実機/統合層（ROS 2）の役割分担アーキで実現。Newton の成熟を見つつ移行を判断。
 - **確信度**: 中（Newton 成熟度・バージョンは 2026 要再確認）。
 
-**reality gap の分水嶺（Phase 2 の勘所・確信度: 高）**: アクチュエータが reality gap の主因。Hwangbo et al.(ANYmal, Science Robotics 2019) の **actuator net**（位置/速度誤差履歴→実トルクを予測する NN をシムに挿入）が四足 RL の分水嶺。理想トルク源のまま学習した歩容は実機で崩れる。**制御25年の勘所どおりモータ/減速機/帯域のモデル化が命**。出典: [survey arXiv:2406.01152](https://arxiv.org/pdf/2406.01152) / [RAI Institute Spot arXiv:2511.04831](https://arxiv.org/pdf/2511.04831)（5.2 m/s zero-shot、**self-report 含む**）。
+**reality gap の分水嶺（Phase 2 の勘所・確信度: 高）**: アクチュエータが reality gap の主因。Hwangbo et al.(ANYmal, Science Robotics 2019) の **actuator net**（位置/速度誤差履歴→実トルクを予測する NN をシムに挿入）が四足 RL の分水嶺。理想トルク源のまま学習した歩容は実機で崩れる。**制御25年の勘所どおりモータ/減速機/帯域のモデル化が命**。出典: [survey arXiv:2406.01152](https://arxiv.org/pdf/2406.01152) / [RAI Institute Spot arXiv:2504.17857](https://arxiv.org/pdf/2504.17857)（"High-Performance RL on Spot", ICRA 2025, 5.2 m/s zero-shot ≈既定上限の約3倍、**self-report 含む**。IEEE Spectrum が第三者で追認）。**注: 旧稿はこの Spot 論文を arXiv:2511.04831 と誤記していたが、2511.04831 は Isaac Lab フレームワーク論文であり訂正**。
 
 ---
 
