@@ -13,7 +13,7 @@
 
 ---
 
-## SVG 一覧（`docs/articles/assets/llm_structure_series/`）＝ 全 16 枚・配線済み
+## SVG 一覧（`docs/articles/assets/llm_structure_series/`）＝ 全 28 枚・配線済み・はみ出し検査 0 件
 
 ### シリーズ横断（#0 / INDEX）
 | ファイル | 役割 | 配線先 |
