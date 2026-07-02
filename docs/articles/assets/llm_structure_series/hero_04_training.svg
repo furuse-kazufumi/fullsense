@@ -47,7 +47,7 @@
   <!-- stage C: fix weights -->
   <g>
     <rect x="530" y="150" width="190" height="72" rx="12" fill="#0f172a" stroke="#d99a2b" stroke-width="1.6"/>
-    <text x="625" y="184" text-anchor="middle" fill="#e6b968" font-size="17" font-weight="700">③ 重みを直す</text>
+    <text x="625" y="184" text-anchor="middle" fill="#e6b968" font-size="16" font-weight="700">③ 重みを直す</text>
     <text x="625" y="206" text-anchor="middle" fill="#94a3b8" font-size="12">adjust weights</text>
   </g>
 
