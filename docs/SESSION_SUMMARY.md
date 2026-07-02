@@ -3,13 +3,14 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-07-02 17:56:44
+- **最終更新**: 2026-07-02 18:18:37
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+3116f40 docs(series): 作って分かったLLMの中身 — 記事15本+SVG28枚+運用ドキュメント(LINK_MAP/RUNBOOK)完成
 f604673 auto: llm_structure_series_IMAGE_MANIFEST.md 編集前 (2026-07-02 17:55)
 8486c0c auto: llm_structure_series_IMAGE_MANIFEST.md 編集前 (2026-07-02 17:55)
 cda3a71 auto: llm_structure_series_IMAGE_MANIFEST.md 編集前 (2026-07-02 17:55)
@@ -19,18 +20,19 @@ b05d235 auto: llm_structure_series_01_tokens_embeddings_tech.md 編集前 (2026-
 d1adb06 auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 17:51)
 75042f1 auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 17:51)
 74d9763 auto: llm_structure_series_02_attention_tech.md 編集前 (2026-07-02 17:51)
-e559f6e auto: llm_structure_series_05_memory_speed_tech.md 編集前 (2026-07-02 17:50)
 ```
 
 ## 現在の git status
 
 ```
-M docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md
+(clean)
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
+17:57 docs/NEXT_SESSION.auto.md
+17:56 docs/SESSION_SUMMARY.md
 17:55 docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md
 17:55 docs/articles/drafts/llm_structure_series_06_practice_tech.md
 17:55 docs/articles/drafts/llm_structure_series_06_practice_general.md
@@ -44,8 +46,6 @@ M docs/articles/drafts/llm_structure_series_IMAGE_MANIFEST.md
 17:55 docs/articles/drafts/llm_structure_series_02_attention_general.md
 17:55 docs/articles/drafts/llm_structure_series_01_tokens_embeddings_tech.md
 17:55 docs/articles/drafts/llm_structure_series_01_tokens_embeddings_general.md
-17:55 docs/articles/drafts/llm_structure_series_00_intro_tech.md
-17:55 docs/articles/drafts/llm_structure_series_00_intro_general.md
 ```
 
 ---
