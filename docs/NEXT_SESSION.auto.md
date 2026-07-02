@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-02 22:00:55
+- **生成時刻**: 2026-07-02 22:39:57
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,8 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+993f86f docs(series): 完全版2本を全体公開(public_private:false・LINK_MAP更新)
+9dbf115 auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 22:06)
 89346f8 fix(series): 相互リンク16箇所を明示Markdownリンク化(全角括弧・後続文がURLに巻き込まれるQiitaオートリンク不具合の修正)
 4322f12 docs(series): 完全版2本をQiitaへ限定共有投稿(public_id記録・相互リンク確定URL置換・LINK_MAP更新)
 5b07212 auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 19:18)
@@ -28,8 +30,6 @@ d8d4a56 docs(series): 完全版2本に統合(技術版12.2万字/一般版5.3万
 a20060a auto: llm_structure_series_MEGA_general.md 編集前 (2026-07-02 18:38)
 d550f2a auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 18:22)
 ecf1ead auto: llm_structure_series_POSTING_RUNBOOK.md 編集前 (2026-07-02 18:21)
-3116f40 docs(series): 作って分かったLLMの中身 — 記事15本+SVG28枚+運用ドキュメント(LINK_MAP/RUNBOOK)完成
-f604673 auto: llm_structure_series_IMAGE_MANIFEST.md 編集前 (2026-07-02 17:55)
 ```
 
 ### git status (porcelain)
@@ -71,13 +71,11 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `21:46` `docs/NEXT_SESSION.auto.md`
-- `21:46` `docs/SESSION_SUMMARY.md`
-- `21:45` `docs/articles/drafts/llm_structure_series_MEGA_tech.md`
-- `21:45` `docs/articles/drafts/llm_structure_series_MEGA_general.md`
-- `19:18` `docs/articles/drafts/llm_structure_series_LINK_MAP.md`
-- `18:38` `docs/articles/drafts/llm_structure_series_04_training_inference_general.md`
-- `18:22` `docs/articles/drafts/llm_structure_series_POSTING_RUNBOOK.md`
+- `22:35` `docs/SESSION_SUMMARY.md`
+- `22:35` `docs/NEXT_SESSION.auto.md`
+- `22:06` `docs/articles/drafts/llm_structure_series_LINK_MAP.md`
+- `22:03` `docs/articles/drafts/llm_structure_series_MEGA_tech.md`
+- `22:03` `docs/articles/drafts/llm_structure_series_MEGA_general.md`
 
 
 ## Cross-references
