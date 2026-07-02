@@ -14,8 +14,8 @@
 
 | キー | ローカルファイル | タイトル | Qiita URL |
 |---|---|---|---|
-| **MEGA_T** | llm_structure_series_MEGA_tech.md | **技術版・完全版** | (未投稿) |
-| **MEGA_G** | llm_structure_series_MEGA_general.md | **一般版・完全版** | (未投稿) |
+| **MEGA_T** | llm_structure_series_MEGA_tech.md | **技術版・完全版** | https://qiita.com/furuse-kazufumi/items/de27af958332c9c38e33 （限定共有中: /private/de27af958332c9c38e33） |
+| **MEGA_G** | llm_structure_series_MEGA_general.md | **一般版・完全版** | https://qiita.com/furuse-kazufumi/items/f660b18890687cfd1ed0 （限定共有中: /private/f660b18890687cfd1ed0） |
 | INDEX | llm_structure_series_INDEX.md | シリーズ総目次(投稿しない) | — |
 | T00 | llm_structure_series_00_intro_tech.md | 技術版 #0 序章 | (未投稿) |
 | T01 | llm_structure_series_01_tokens_embeddings_tech.md | 技術版 #1 トークンと埋め込み | (未投稿) |
