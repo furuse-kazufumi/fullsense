@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif">
-  <!-- 静的表示: authored 属性が最終可視状態。SMIL/reveal-gate 不使用。赤緑の善悪対比なし。 -->
+  <!-- 静的表示: authored 属性が最終可視状態。SMIL/reveal-gate 不使用。赤緑の善悪対比なし。文字は全て箱・viewBox内に8px余白で収める。 -->
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#f7f9fc"/>
@@ -10,46 +10,48 @@
 
   <!-- Title band -->
   <rect x="0" y="0" width="960" height="92" fill="#1f2a44"/>
-  <text x="40" y="46" fill="#ffffff" font-size="30" font-weight="700">二種類の「ゼロ」── 測って確かめた再現</text>
-  <text x="40" y="76" fill="#aebaccd0" font-size="17">自作した推論エンジンが、公式リファレンス実装とどれだけ一致したか</text>
+  <text x="40" y="46" fill="#ffffff" font-size="29" font-weight="700">二種類の「ゼロ」── 測って確かめた再現</text>
+  <text x="40" y="76" fill="#aebacc" font-size="16">自作した推論エンジンが、公式リファレンス実装とどれだけ一致したか</text>
 
   <!-- Card A -->
   <g>
     <rect x="40" y="120" width="410" height="300" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
-    <rect x="40" y="120" width="410" height="52" rx="14" fill="#2f6fb0"/>
-    <rect x="40" y="150" width="410" height="22" fill="#2f6fb0"/>
-    <text x="62" y="153" fill="#ffffff" font-size="20" font-weight="700">① 自作 forward  vs  公式実装</text>
-    <text x="62" y="204" fill="#41506a" font-size="16">出力（logits）を全トークンで突き合わせ</text>
+    <rect x="40" y="134" width="410" height="44" rx="12" fill="#2f6fb0"/>
+    <rect x="40" y="160" width="410" height="18" fill="#2f6fb0"/>
+    <text x="62" y="163" fill="#ffffff" font-size="18" font-weight="700">① 自作 forward vs 公式実装</text>
+    <text x="62" y="208" fill="#41506a" font-size="15">出力（logits）を全トークンで突き合わせ</text>
 
     <!-- two nearly-overlapping curves -->
-    <polyline points="66,300 120,250 174,286 228,236 282,278 336,244 390,262 424,252" fill="none" stroke="#2f6fb0" stroke-width="3"/>
-    <polyline points="66,302 120,252 174,288 228,238 282,280 336,246 390,264 424,254" fill="none" stroke="#3aa0a0" stroke-width="3" stroke-dasharray="6 5"/>
-    <text x="66" y="330" fill="#6b7688" font-size="13">実線＝自作／破線＝公式（ほぼ完全に重なる）</text>
+    <polyline points="66,300 120,254 174,288 228,240 282,280 336,248 390,264 424,256" fill="none" stroke="#2f6fb0" stroke-width="3"/>
+    <polyline points="66,302 120,256 174,290 228,242 282,282 336,250 390,266 424,258" fill="none" stroke="#3aa0a0" stroke-width="3" stroke-dasharray="6 5"/>
+    <text x="66" y="326" fill="#6b7688" font-size="12">実線＝自作／破線＝公式（ほぼ完全に重なる）</text>
 
-    <text x="62" y="376" fill="#1f2a44" font-size="40" font-weight="800">logits 2e-4</text>
-    <text x="62" y="402" fill="#41506a" font-size="15">浮動小数点の丸め誤差の域＝<tspan font-weight="700">実質ゼロ</tspan>。次の一語も完全一致。</text>
+    <text x="62" y="372" fill="#1f2a44" font-size="38" font-weight="800">logits 2e-4</text>
+    <text x="62" y="398" fill="#41506a" font-size="13">浮動小数点の丸め誤差の域＝<tspan font-weight="700">実質ゼロ</tspan>。</text>
+    <text x="62" y="414" fill="#41506a" font-size="13">次の一語（greedy）も完全一致。</text>
   </g>
 
   <!-- Card B -->
   <g>
     <rect x="510" y="120" width="410" height="300" rx="14" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
-    <rect x="510" y="120" width="410" height="52" rx="14" fill="#3a6a53"/>
-    <rect x="510" y="150" width="410" height="22" fill="#3a6a53"/>
-    <text x="532" y="153" fill="#ffffff" font-size="20" font-weight="700">② メモリ最適化ローダー  vs  素の実装</text>
-    <text x="532" y="204" fill="#41506a" font-size="16">同じ精度のまま「置き方」だけを効率化</text>
+    <rect x="510" y="134" width="410" height="44" rx="12" fill="#3a6a53"/>
+    <rect x="510" y="160" width="410" height="18" fill="#3a6a53"/>
+    <text x="532" y="163" fill="#ffffff" font-size="18" font-weight="700">② メモリ最適化ローダー vs 素の実装</text>
+    <text x="532" y="208" fill="#41506a" font-size="15">同じ精度のまま「置き方」だけを効率化</text>
 
     <!-- identical bit rows -->
     <g font-family="'Consolas','SFMono-Regular',monospace" font-size="18" fill="#1f2a44">
-      <text x="532" y="250">1 0 1 1 0 0 1 0 1 1 0 1</text>
-      <text x="532" y="278">1 0 1 1 0 0 1 0 1 1 0 1</text>
+      <text x="532" y="256">1 0 1 1 0 0 1 0 1 1 0 1</text>
+      <text x="532" y="284">1 0 1 1 0 0 1 0 1 1 0 1</text>
     </g>
-    <text x="532" y="306" fill="#6b7688" font-size="13">上＝素の実装／下＝最適化版（一致）</text>
+    <text x="532" y="312" fill="#6b7688" font-size="12">上＝素の実装／下＝最適化版（一致）</text>
 
-    <text x="532" y="376" fill="#1f2a44" font-size="40" font-weight="800">max|Δ| = 0.0</text>
-    <text x="532" y="402" fill="#41506a" font-size="15"><tspan font-weight="700">1ビットも違わない</tspan>＝文字通りゼロ。※圧縮(int8)は別で極小の損失あり。</text>
+    <text x="532" y="372" fill="#1f2a44" font-size="38" font-weight="800">max|Δ| = 0.0</text>
+    <text x="532" y="398" fill="#41506a" font-size="13"><tspan font-weight="700">1ビットも違わない</tspan>＝文字通りゼロ。</text>
+    <text x="532" y="414" fill="#41506a" font-size="13">※ int8 圧縮は別で極小の損失あり。</text>
   </g>
 
   <!-- Footer -->
   <rect x="40" y="452" width="880" height="60" rx="12" fill="#1f2a44"/>
-  <text x="480" y="489" fill="#ffffff" font-size="19" font-weight="600" text-anchor="middle">組み直して同じ出力が出た＝各部品の役割を取り違えていない、という証明</text>
+  <text x="480" y="489" fill="#ffffff" font-size="18" font-weight="600" text-anchor="middle">組み直して同じ出力が出た＝各部品の役割を取り違えていない証明</text>
 </svg>
