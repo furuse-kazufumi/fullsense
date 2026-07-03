@@ -76,7 +76,7 @@
 
 **実機の ROS 2 対応**: **Unitree Go2/B2/G1/H1** は公式 [`unitree_ros2`](https://github.com/unitreerobotics/unitree_ros2)（CycloneDDS ベース）+ コミュニティ SDK 多数で **入門実機として最も厚い**。G1（二足）は [`g1pilot`](https://github.com/hucebot/g1pilot) 等。ANYmal は研究界の標準脚ロボだが ROS 2 一次情報が薄く商用寄り（**留保・確信度: 中**）。
 
-**distro 選択 = Jazzy Jalisco（LTS, EOL 2029-05）が本命**。WSL2 Ubuntu 24.04 にそのまま乗り、`gz_ros2_control`・Nav2・Unitree パッケージ・チュートリアルが最も揃う（[endoflife.date/ros-2](https://endoflife.date/ros-2) / [control.ros.org/jazzy](https://control.ros.org/jazzy/)、確信度: 高）。Kilted Kaiju は非LTS で 2026-12 EOL のため回避。Lyrical Luth（2026-05 新 LTS, EOL 2031、Ubuntu 版は 26.04 と推定）は長寿命が魅力だが今始めるなら成熟度で Jazzy（**Ubuntu 版は secondary source 間で 24.04/26.04 の食い違い、採用前に docs.ros.org で一次確認・確信度: 低**）。
+**distro 選択 = Jazzy Jalisco（LTS, EOL 2029-05）が本命**。WSL2 Ubuntu 24.04 にそのまま乗り、`gz_ros2_control`・Nav2・Unitree パッケージ・チュートリアルが最も揃う（[endoflife.date/ros-2](https://endoflife.date/ros-2) / [control.ros.org/jazzy](https://control.ros.org/jazzy/)、確信度: 高）。Kilted Kaiju は非LTS で 2026-11 EOL（公式は "November 2026"）のため回避。Lyrical Luth（2026-05 新 LTS, EOL 2031、Ubuntu 版は 26.04 と推定）は長寿命が魅力だが今始めるなら成熟度で Jazzy（**Ubuntu 版は secondary source 間で 24.04/26.04 の食い違い、採用前に docs.ros.org で一次確認・確信度: 低**）。
 
 **使わない判断（明記）**: **Gazebo を進化のロールアウト基盤にはしない**。実時間寄り・1 体志向で数千ロールアウトに向かないため。進化は MuJoCo/MJX 直叩き、Gazebo は上位個体の検証・可視化に限定する。
 

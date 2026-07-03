@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-02 22:39:57
+- **生成時刻**: 2026-07-03 20:50:13
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `4	0`
 
 ```
+58468cd auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
+f83ae25 auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
+7bd0bcf auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
+aadf816 auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
 993f86f docs(series): 完全版2本を全体公開(public_private:false・LINK_MAP更新)
 9dbf115 auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 22:06)
 89346f8 fix(series): 相互リンク16箇所を明示Markdownリンク化(全角括弧・後続文がURLに巻き込まれるQiitaオートリンク不具合の修正)
 4322f12 docs(series): 完全版2本をQiitaへ限定共有投稿(public_id記録・相互リンク確定URL置換・LINK_MAP更新)
 5b07212 auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 19:18)
 d8d4a56 docs(series): 完全版2本に統合(技術版12.2万字/一般版5.3万字)・投稿は2回のみ体制
-4c12ccf auto: llm_structure_series_04_training_inference_general.md 編集前 (2026-07-02 18:38)
-a20060a auto: llm_structure_series_MEGA_general.md 編集前 (2026-07-02 18:38)
-d550f2a auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 18:22)
-ecf1ead auto: llm_structure_series_POSTING_RUNBOOK.md 編集前 (2026-07-02 18:21)
 ```
 
 ### git status (porcelain)
@@ -37,6 +37,7 @@ ecf1ead auto: llm_structure_series_POSTING_RUNBOOK.md 編集前 (2026-07-02 18:2
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
+ M docs/research/physical_ai_stack_decision_2026-07-02.md
 ```
 
 
@@ -71,11 +72,8 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `22:35` `docs/SESSION_SUMMARY.md`
-- `22:35` `docs/NEXT_SESSION.auto.md`
-- `22:06` `docs/articles/drafts/llm_structure_series_LINK_MAP.md`
-- `22:03` `docs/articles/drafts/llm_structure_series_MEGA_tech.md`
-- `22:03` `docs/articles/drafts/llm_structure_series_MEGA_general.md`
+- `20:41` `docs/SESSION_SUMMARY.md`
+- `20:41` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
