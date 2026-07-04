@@ -25,6 +25,7 @@ has_children: true
 
 | File | 内容 |
 |---|---|
+| [Grok「AI革新的機能スタック」検証 (2026-07-03)]({{ '/research/grok_capability_stack_verification_2026-07-03' | relative_url }}) | claude-loop タスク経由の Grok 提案(agent/physical-AI/量子/BCI)を raptor Workflow 8 agent で一次情報裏取り。**Grok の手軽さ順は概ね正だが量子/BCI を実行可能 phase として並べた点が誇張**。ユーザー価値順=①on-prem reasoning model(gpt-oss-20b で Qwen 障壁回避)②GPU 並列 QD(既決 MuJoCo→MJX→Isaac は Newton 1.0 GA で補強)③framework 導入(置換で低価値)④量子=SKIP(QML 優位ゼロ/BP-free は古典模倣可)⑤BCI=SKIP(thought-to-text は teacher-forcing インフレ)。誇張補正=vLLM 19x→single-stream 同等/AutoGen 1.0 は存在せず MS Agent Framework/Cosmos 5090 で 2B すら borderline |
 | [lleval — SOTA Survey]({{ '/research/lleval_sota' | relative_url }}) | LLM eval framework (OpenAI Evals / lmsys / HELM / promptfoo / DeepEval / Phoenix / Langfuse / TruLens / Ragas) の SOTA matrix + LM-as-judge bias + 推奨 fork base |
 | [llgrow — Prior Art Survey]({{ '/research/llgrow_prior_art' | relative_url }}) | HITL content automation (Jasper / Mautic / Langfuse 等) と academic 2025 研究を比較し、個人開発者 OSS 配信 vertical の gap を整理 |
 | [Cognitive Mesh vs SOTA]({{ '/research/cognitive_mesh_vs_sota' | relative_url }}) | llive v0.8 Cognitive Mesh (M8.1〜M8.9) を MemGPT / Generative Agents / A-MEM / Reflexion / Constitutional AI 等と sub-system 毎に対応づけた比較 |
