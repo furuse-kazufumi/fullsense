@@ -10,16 +10,17 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-04 18:33:03
+- **生成時刻**: 2026-07-04 19:19:46
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `6	0`
+- HEAD vs upstream (左=ahead 右=behind): `7	0`
 
 ```
+be41f95 auto: index.md 編集前 (2026-07-04 19:05)
 4fa5c55 auto: index.md 編集前 (2026-07-04 17:09)
 9968fc3 auto: index.md 編集前 (2026-07-03 21:03)
 58468cd auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
@@ -29,15 +30,12 @@ aadf816 auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:
 993f86f docs(series): 完全版2本を全体公開(public_private:false・LINK_MAP更新)
 9dbf115 auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 22:06)
 89346f8 fix(series): 相互リンク16箇所を明示Markdownリンク化(全角括弧・後続文がURLに巻き込まれるQiitaオートリンク不具合の修正)
-4322f12 docs(series): 完全版2本をQiitaへ限定共有投稿(public_id記録・相互リンク確定URL置換・LINK_MAP更新)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
- M docs/research/index.md
+M docs/research/index.md
 ```
 
 
@@ -72,9 +70,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `18:05` `docs/SESSION_SUMMARY.md`
-- `18:05` `docs/NEXT_SESSION.auto.md`
-- `17:09` `docs/research/index.md`
+- `19:06` `docs/research/index.md`
+- `19:05` `docs/research/qd_of_merges_real_llm_poc_2026-07-04.md`
+- `18:33` `docs/NEXT_SESSION.auto.md`
+- `18:33` `docs/SESSION_SUMMARY.md`
 - `17:08` `docs/research/llm_model_fusion_landscape_2026-07-04.md`
 
 
