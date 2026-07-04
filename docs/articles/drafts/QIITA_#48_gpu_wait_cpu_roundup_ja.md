@@ -139,11 +139,29 @@ flowchart TD
 
 > 余談(デバッグの副産物): ROS 制御スタックに載せる過程で、シミュレータ + 制御プラグインの**バグ**を踏み抜きました。`strlen(NULL)` 相当のクラッシュを追っていくと、**名前のないアクチュエータ**を参照した時に NULL 参照で落ちる、という上流の不具合でした。原因を独立に切り分けて特定できたので、悪くないおまけです。
 
-### 3-4. 環境は作った、でも「登る」のは GPU 待ち(正直な現状)
+### 3-4. 坂と階段 ― 「登る」のは道半ば(正直な現状)
 
-平地を歩くのはできても、**階段や不整地**はまだです。下の GIF は、階段を用意した環境で walker2d を動かしてみたところ ── 見てのとおり、**階段の手前でこけています**。地形を上る歩容は探索空間がぐっと広く、まともに学習させるには CPU では厳しい。**環境(MJCF の階段・接触設定)を作るところまでが CPU 期の仕事**で、本格的な学習は GPU 待ちです。準備段階なので、こけている姿も正直に載せておきます:
+平地を歩くのはできても、**坂や階段**はまだ道半ばです。まず**10 度の坂**。少しは登りますが、まだ 1m ちょっと(斜面用に探索した歩容で、平地ほど滑らかではありません):
+
+![10度の坂をよちよち登る walker2d](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/climb_incline.gif)
+
+**階段**になると、もっと厳しい。下の GIF は、階段を用意した環境で動かしてみたところ ── 見てのとおり、**手前でこけています**。地形を上る歩容は探索空間がぐっと広く、まともに学習させるには CPU では荷が重い。**環境(MJCF の坂・階段・接触設定)を作るところまでが CPU 期の仕事**で、本格的な学習は GPU 待ちです。準備段階なので、こけている姿も正直に載せておきます:
 
 ![階段環境を作ったが、まだ登れずに手前でこけている walker2d](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/stairs_wip.gif)
+
+### 3-5. 新しい身体を「その場で」作ってみた ― 尺取り虫と多脚
+
+せっかくなので、この記事を書きながら**新しい身体プランを 2 つ、CPU で作ってみました**。エンジン(MAP-Elites + CPG コントローラ)は一切いじらず、**身体定義(MJCF)を書いて、前進する動きを軽く探索するだけ**です。まずは**尺取り虫**。水平な多節チェーンで、関節の位相差で進行波を作って這います(側面と、視点を変えた斜め上から):
+
+![尺取り虫が這って前進する(側面)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/inchworm2d.gif)
+
+![同じ尺取り虫を斜め上から(視点変更)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/inchworm2d_persp.gif)
+
+次に**多脚(センチピード)**。水平な胴体に 6 本の脚を付けて、脚が順番に動く波(metachronal wave)で前進させます。カメラをゆっくり回り込ませて立体的に:
+
+![6本脚の多脚が波状に脚を動かして前進する(カメラ回り込み)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/centipede2d.gif)
+
+どちらも、ランダムに数百通りの動き方を試して「いちばん前に進んだやつ」を選んだだけの、**簡単なレベル**です(尺取り虫で約 5m、多脚で約 4.5m 前進)。それでも、**同じ骨格のまま身体だけ差し替えれば、這うやつも多脚も動く**というのは気持ちいい。身体プランを増やすのは CPU でも今できるので、次は昆虫っぽい脚の関節を増やしたり、尺取り虫の節を増やしたりして遊ぶ予定です。
 
 ---
 
