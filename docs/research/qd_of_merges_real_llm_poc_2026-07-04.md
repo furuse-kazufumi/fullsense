@@ -134,6 +134,29 @@ frankenmerge では別の結末があり得る=未検証。プロット `gaitlab
 
 再現: `PYTHONPATH=. python scripts/merge_llm_multi.py --grid 4 --n-init 8 --n-gen 2 --batch 6`(CPU ≈ 8 分)。
 
+## 8. persona=steering(#25)— 別基質(活性空間)は綺麗に効く
+
+重み空間マージ(§3–§7)は追加機構が baseline に勝てなかったが、**別の融合基質=活性空間の操舵**
+(ActAdd 2308.10248 / RepE 2310.01405, 融合調査 lead #4)は CPU で綺麗に働く。実装
+`gaitlab/persona_steer.py` + `scripts/persona_steer_demo.py` + `tests/test_persona_steer.py`(3 件)。
+
+**手法**: 対照プロンプト対(pos: "I love this, wonderful and…" vs neg: "I hate this, terrible and…")の
+層 L 隠れ状態差 v = mean(h_pos) − mean(h_neg) を作り、推論時に層 L 出力へ α·v を足す forward hook を張る
+(hook を外せば完全復元=可逆・再訓練不要)。SmolLM2-135M-Instruct, 層 8。
+
+**結果(seed 固定, greedy)**:
+- **感情の次トークン log-prob(pos語−neg語)が α に沿って動く**: α=0 で +2.85 → α=+0.5/+1/+2 で
+  +3.95/+5.14/+6.81(正側は単調, 全体相関 +0.94)。
+- **完全に可逆**: hook 除去後 α=0 が baseline と厳密一致(diff = 0.0)。重みは一切変えない。
+- **生成も一貫**: 中立プロンプト "My day was" → α=+3 で "filled with peace, and a beautiful
+  celebration… a simple joy"(明確に positive・coherent)。
+- **honest 限界**: 強い負 α(−3)は over-steer で崩壊("it' is it' is…" の退化反復)。小 |α| で使う。
+  層/α に効果依存。135M ゆえ効果幅は限定的だが機構は明快。
+
+→ **weight-space の追加機構(TIES/QD)は null だったが、activation-space の steering は「可逆・再訓練
+不要・base 非依存」の融合基質として実際に機能する**(重みマージが同一 base 必須だったのと対照的)。
+llove 対話ランタイムに forward hook として直挿しでき、"persona ダイヤル" を CPU で提供できる(#25 の芽)。
+
 ## 6. 次段
 
 - ✅ **細粒度 global-λ sweep 完了**(§3.5)= 層別優位は偽陽性と判明。
