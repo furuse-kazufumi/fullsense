@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-05 07:13:48
+- **生成時刻**: 2026-07-05 07:21:40
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,6 +20,9 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+89eefeb docs(article): #48 を視覚リッチな長編に改稿(GIF3+グラフ2+Mermaid5, 4744→8360字)
+9c5ff60 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 07:20)
+e867e26 assets(qiita_48): #48 記事用 歩行GIF3本+結果PNG3枚(gaitlab private→public配信)
 3c3e5d9 docs(article): #48 GPU待ちCPU小ネタ集(歩行進化/LLMマージ/性格ダイヤル)を一般公開
 a98960c docs(research): persona ダイヤル(複数trait合成)を §8 に追記
 304dbb7 auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-05 07:03)
@@ -27,9 +30,6 @@ ab2e20c docs(article): #47 QD-of-merges honest 記事ドラフト(ja)
 c0a7d5b docs(research): persona=steering(#25)追記 §8 — 活性空間の別基質は綺麗に効く
 50c5cb0 auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-04 21:39)
 4390a86 docs(research): 多エキスパート TIES(#22完成形)= これも honest null(§7)
-649a171 auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-04 21:32)
-9f2dfbe auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-04 21:31)
-ebc1c04 docs(research): 実LLM QD-of-merges PoC + honest訂正(細粒度均一sweepが層別QDを上回る)
 ```
 
 ### git status (porcelain)
@@ -70,7 +70,15 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `07:12` `docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md`
+- `07:20` `docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md`
+- `07:17` `docs/articles/assets/qiita_48/multiwalker_humanoid_x24.gif`
+- `07:17` `docs/articles/assets/qiita_48/merge_llm_qd.png`
+- `07:17` `docs/articles/assets/qiita_48/merge_llm_multi.png`
+- `07:17` `docs/articles/assets/qiita_48/lexicase_factorial.png`
+- `07:17` `docs/articles/assets/qiita_48/evolution_humanoid_gen0-100.gif`
+- `07:17` `docs/articles/assets/qiita_48/chimera_quadruped_fused.gif`
+- `07:13` `docs/SESSION_SUMMARY.md`
+- `07:13` `docs/NEXT_SESSION.auto.md`
 - `07:03` `docs/research/qd_of_merges_real_llm_poc_2026-07-04.md`
 
 
