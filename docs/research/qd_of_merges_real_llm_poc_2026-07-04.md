@@ -95,11 +95,51 @@ PYTHONUNBUFFERED=1 PYTHONUTF8=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPA
 ```
 テスト(torch↔numpy マージ数学の parity): `pytest tests/test_llm_merge.py`(8 件)。所要 ≈ 8 分(CPU, budget 54, per-eval ≈ 4.5s)。細粒度 sweep のみは ≈ 2 分。
 
+## 7. ★多エキスパート TIES(#22 完成形)— これも honest null
+
+単一 τ の層別が割に合わなかった(§3.5)ので、**2 エキスパートの符号選挙**に土俵を移した。TIES は
+複数 τ の符号衝突を多数決で解消する手法で、toy(`merge_recipe.py --conflict`)では uniform を上回った。
+これを実 LLM で検証する。実装 `gaitlab/llm_merge_multi.py` + `scripts/merge_llm_multi.py` +
+`tests/test_llm_merge_multi.py`(3 件, torch↔numpy parity)。
+
+**セットアップ**: base に無い第 2 エキスパートを **自作**(再現・制御のため DL でなく CPU finetune)。
+`SmolLM2-135M` base を stdlib Python コーパス 123KB で 120 step CPU finetune → **code-expert**
+(held-out code PPL 10.18→5.16 = 特化を確認)。base + chat-expert(instruct, τ_chat)+ code-expert
+(τ_code)の 3 点。metric = chat PPL(chat-expert が勝つ)/ code PPL(code-expert が勝つ)。
+genome = [density, drop_p, λ_chat, λ_code](toy と同型)。fitness = 調和平均(chat, code goodness)。
+
+**結果(seed 0, 前景)**:
+
+| arm | fit | chat PPL | code PPL | 備考 |
+|---|---|---|---|---|
+| chat-expert 単体 | 0.000 | **1.686** | 9.867 | chat 特化・code 弱 |
+| code-expert 単体 | 0.000 | 3.895 | **6.874** | code 特化・chat 弱 |
+| **naive linear (0.5,0.5)** | **0.746** | 1.904 | 7.478 | ★**task-arithmetic が両立で最良** |
+| TIES uniform (0.5,0.5) | 0.000 | 2.085 | 13.741 | 符号選挙で code が悪化 |
+| TIES 2D grid best (4×4) | 0.000 | — | — | **全格子点が fit 0**(TIES 全滅) |
+| QD-TIES best | 0.662 | 1.711 | 7.905 | density0.89/drop0.82 で linear に近づくが届かず |
+
+→ **naive 線形 task-arithmetic(0.746)が全 TIES(uniform 0.000 / grid 全 0.000 / QD-TIES 0.662)を
+上回る**。TIES 符号選挙は**ここでは有害**(code PPL を 13.7 まで悪化させる)。機構(観測からの解釈):
+chat と code のエキスパートは**相補的**(両方の更新を残したい)であって、TIES が想定する「衝突=片方が
+ノイズ」ではない。符号が食い違う座標で選挙が片側(magnitude の大きい chat)を採り code の有用な更新を
+捨てるため、両立が崩れる。**TIES は衝突解消が要る時のみ有効**で、相補的エキスパートには素朴平均が勝つ。
+
+**#1 全体の honest な結末**: 単一 τ(§3.5)でも複数 τ(§7)でも、**適切に調整した簡単なベースライン
+(細粒度均一 λ / naive 線形 task-arithmetic)が QD/TIES の追加機構を上回った**。この小モデル・同一 base
+兄弟の設定では、QD-of-merges の探索自由度は割に合わない。**残る価値は honest disclosure そのもの**
+(粗ベースラインの偽陽性→細ベースラインで null、TIES 万能論の反証)と、実重み harness・自作 expert
+パイプライン・torch↔numpy parity。より大きなモデルや**真に衝突する**エキスパート、healing 付き
+frankenmerge では別の結末があり得る=未検証。プロット `gaitlab/results/merge_llm_multi.png`。
+
+再現: `PYTHONPATH=. python scripts/merge_llm_multi.py --grid 4 --n-init 8 --n-gen 2 --batch 6`(CPU ≈ 8 分)。
+
 ## 6. 次段
 
-- ✅ **細粒度 global-λ sweep 完了**(§3.5)= 層別優位は偽陽性と判明。層別の価値を主張するには次項が要る。
-- **多エキスパート TIES 化(本命)**: SmolLM2-135M の第 2 finetune(JP or code)を DL し、真の符号選挙マージを実測。単一 τ ではなく 2 つ以上の τ を混ぜる設定なら層別/QD 自由度が効く余地がある(#22 の完成形)。
-- **llive 進化マージ(#23)**: マージ係数 genome を lldarwin ε-lexicase+QD の選択圧に載せる(Sakana CMA-ES の代替)。
-- **記事化(#26)**: 「形態融合 ↔ frankenmerge」の構造対応 + 本 honest 実験(均一=破壊的 / 層別=QD が救う)を career-grade 教材に。
+- ✅ **細粒度 global-λ sweep 完了**(§3.5)= 層別優位は偽陽性と判明。
+- ✅ **多エキスパート TIES 完了**(§7)= これも null(naive 線形が TIES/QD を上回る)。
+- **llive 進化マージ(#23)**: マージ係数 genome を lldarwin ε-lexicase+QD の選択圧に載せる(Sakana CMA-ES の代替)。より大/真に衝突する expert 集合で QD の価値を再検証。
+- **persona=steering(#25)**: 活性空間の別基質(重みマージの null とは独立)。
+- **記事化(#26)**: 「転移成功 → 粗ベースラインの偽陽性 → 細ベースラインで null → TIES 万能論の反証」= career-grade の honest-disclosure アーク。
 
 関連: memory `reference_llm_model_fusion_2026_07_04` / `project_gaitlab_derivative_plan_2026_07_03` / `project_ros_physical_ai_2026_07_02` / `feedback_benchmark_honest_disclosure`。正本 landscape = `llm_model_fusion_landscape_2026-07-04.md`。
