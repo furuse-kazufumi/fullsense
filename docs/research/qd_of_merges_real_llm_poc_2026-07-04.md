@@ -155,7 +155,26 @@ frankenmerge では別の結末があり得る=未検証。プロット `gaitlab
 
 → **weight-space の追加機構(TIES/QD)は null だったが、activation-space の steering は「可逆・再訓練
 不要・base 非依存」の融合基質として実際に機能する**(重みマージが同一 base 必須だったのと対照的)。
-llove 対話ランタイムに forward hook として直挿しでき、"persona ダイヤル" を CPU で提供できる(#25 の芽)。
+
+**複数 trait の合成(persona ダイヤル)**: `PersonaDial`(`gaitlab/persona_steer.py`)で感情 × 形式度の
+2 軸を独立に作り、同一層の trait を加法合成して一括注入した(`scripts/persona_dial_demo.py`、テスト 5 件)。
+
+| 設定 | sentiment 軸 | formality 軸 |
+|---|---|---|
+| all 0 | +2.82 | −3.00 |
+| sentiment +1 | **+5.26** | −2.97 |
+| sentiment −1 | +1.21 | −3.45 |
+| formality +1 | +2.78 | **+5.09** |
+| formality −1 | +2.51 | **−7.31** |
+| pos+formal(合成) | +4.39 | +6.14 |
+| pos+casual(合成) | +3.08 | −7.36 |
+
+**各ダイヤルは主に自分の軸を動かし(cross-talk 小)、合成も加法的に効く**。生成にも register が出る
+(pos+casual→"going to be so awesome. I love it" / formal→"Mr. …")。honest: 135M ゆえ長文は反復に
+崩れやすく、強い合成は over-steer。**軸レベルの定量合成は綺麗・生成は穏当な α で方向が見える**。
+→ これが **llove 対話ランタイムの "性格ダイヤル" 原型**(#25)。ただし llove は現状ローカル transformers
+backend を持たず(計画中の anthropic/ollama API は活性フック不可)、**直挿しには llove 側にローカル
+モデル backend が要る**=次の統合ステップ。
 
 ## 6. 次段
 
