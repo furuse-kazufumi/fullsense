@@ -3,38 +3,38 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-07-04 19:19:46
+- **最終更新**: 2026-07-04 19:36:08
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+ebc1c04 docs(research): 実LLM QD-of-merges PoC + honest訂正(細粒度均一sweepが層別QDを上回る)
+68056ba auto: index.md 編集前 (2026-07-04 19:33)
+f70e2e4 auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-04 19:31)
+ba8e453 auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-04 19:30)
+b7966a5 auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-04 19:30)
+8aa957a auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-04 19:29)
+fd34f1c auto: qd_of_merges_real_llm_poc_2026-07-04.md 編集前 (2026-07-04 19:29)
 be41f95 auto: index.md 編集前 (2026-07-04 19:05)
 4fa5c55 auto: index.md 編集前 (2026-07-04 17:09)
 9968fc3 auto: index.md 編集前 (2026-07-03 21:03)
-58468cd auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
-f83ae25 auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
-7bd0bcf auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
-aadf816 auto: physical_ai_stack_decision_2026-07-02.md 編集前 (2026-07-02 22:48)
-993f86f docs(series): 完全版2本を全体公開(public_private:false・LINK_MAP更新)
-9dbf115 auto: llm_structure_series_LINK_MAP.md 編集前 (2026-07-02 22:06)
-89346f8 fix(series): 相互リンク16箇所を明示Markdownリンク化(全角括弧・後続文がURLに巻き込まれるQiitaオートリンク不具合の修正)
 ```
 
 ## 現在の git status
 
 ```
-M docs/research/index.md
+(clean)
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-19:06 docs/research/index.md
-19:05 docs/research/qd_of_merges_real_llm_poc_2026-07-04.md
-18:33 docs/NEXT_SESSION.auto.md
-18:33 docs/SESSION_SUMMARY.md
+19:33 docs/research/index.md
+19:31 docs/research/qd_of_merges_real_llm_poc_2026-07-04.md
+19:19 docs/SESSION_SUMMARY.md
+19:19 docs/NEXT_SESSION.auto.md
 ```
 
 ---
