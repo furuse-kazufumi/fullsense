@@ -162,7 +162,7 @@ llove 対話ランタイムに forward hook として直挿しでき、"persona 
 - ✅ **細粒度 global-λ sweep 完了**(§3.5)= 層別優位は偽陽性と判明。
 - ✅ **多エキスパート TIES 完了**(§7)= これも null(naive 線形が TIES/QD を上回る)。
 - **llive 進化マージ(#23)**: マージ係数 genome を lldarwin ε-lexicase+QD の選択圧に載せる(Sakana CMA-ES の代替)。より大/真に衝突する expert 集合で QD の価値を再検証。
-- **persona=steering(#25)**: 活性空間の別基質(重みマージの null とは独立)。
-- **記事化(#26)**: 「転移成功 → 粗ベースラインの偽陽性 → 細ベースラインで null → TIES 万能論の反証」= career-grade の honest-disclosure アーク。
+- ✅ **persona=steering(#25)完了**(§8)= 活性空間の別基質は可逆・再訓練不要で機能。**llove 対話ランタイムへの直挿し(persona ダイヤル)が次の応用**。
+- **記事化(#26)**: 「転移成功 → 粗ベースラインの偽陽性 → 細ベースラインで null → TIES 万能論の反証 → 別基質(steering)は効く」= career-grade の honest-disclosure アーク。
 
 関連: memory `reference_llm_model_fusion_2026_07_04` / `project_gaitlab_derivative_plan_2026_07_03` / `project_ros_physical_ai_2026_07_02` / `feedback_benchmark_honest_disclosure`。正本 landscape = `llm_model_fusion_landscape_2026-07-04.md`。
