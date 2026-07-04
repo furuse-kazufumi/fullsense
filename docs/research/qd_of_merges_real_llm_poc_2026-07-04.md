@@ -7,11 +7,12 @@ parent: "Research"
 # 実 LLM QD-of-merges — gaitlab の MAP-Elites でモデル融合を照らす(SmolLM2-135M)
 
 > 作成: 2026-07-04(ccr, Fable 5)。融合調査 `llm_model_fusion_landscape_2026-07-04` の最有力 lead #1「QD-of-merges」を、toy(numpy 線形回帰 2 エキスパート)から **実 LLM 重み**へ載せた CPU PoC。派生計画 memory `project_gaitlab_derivative_plan_2026_07_03` #22「実 LLM 化」。honest-disclosure 準拠(memory `feedback_benchmark_honest_disclosure`)。
-> 実装: `gaitlab/gaitlab/llm_merge.py` + `scripts/merge_llm_qd.py` + `tests/test_llm_merge.py`(8 件)。成果物: `gaitlab/out/merge_llm_qd/{merge_llm_qd.json,merge_llm_qd.png}`。local commit のみ(push は human-go)。
+> 実装: `gaitlab/gaitlab/llm_merge.py` + `scripts/merge_llm_qd.py` + `tests/test_llm_merge.py`(8 件)。成果物: `gaitlab/out/merge_llm_qd/{merge_llm_qd.json,merge_llm_finegrid.json,merge_llm_qd.png}`。local commit のみ(push は human-go)。
+> ★**2026-07-04 夜 honest 訂正(§3.5)**: 当初「層別 QD が均一補間を上回る」と結論したが、**細粒度(51 点)均一 λ sweep を追試したところ λ≈0.68 で fit 0.838 に達し、層別 QD の 0.797 を上回った**。当初の優位は **7 点グリッドが均一最適 λ を跨いで見落とした解像度アーティファクト**だった。本文はこの訂正を反映済み。
 
 ## 0. 結論(TL;DR)
 
-**gaitlab の歩容進化に使った `MapElitesArchive` を一字も変えず、実 LLM の重みマージへ転用でき、そこで非自明な発見が出た。** 同一 base 兄弟(SmolLM2-135M base ↔ Instruct)を「単一 task-vector の**層別**グラフト」で融合し、held-out perplexity の実トレードオフ(素テキスト=base 有利 / 指示応答=instruct 有利)を MAP-Elites で照らした。**均一な補間(全層同一 λ)は概ね破壊的**(λ=0.22 で素テキスト PPL が 6.40→7.77 に悪化=部分グラフトがモデルを壊す)で、7 点グリッド中まともなのは λ=0.65 の 1 点(balanced fitness 0.727)のみ。対して **QD は「早期層は base 保持・後期層は instruct 接ぎ木」という層別配分を自動発見**し(band λ=[0.09, 0.0, 0.86, 1.18, 0.71, 1.06])、均一曲線の外側に balanced fitness 0.797 の点(plain 6.582 / chat 3.904)を置いた。**均一補間では届かない釣り合い点に、層別自由度で到達できる**という honest な結果。ただし単一 seed・小コーパス・balanced fitness 定義依存の限界は §4。
+**gaitlab の歩容進化に使った `MapElitesArchive` を一字も変えず、実 LLM の重みマージへ転用できた(枠組みの転移は成立)。だが「層別 QD が均一補間に勝つ」という当初の主張は、正しく分解能を上げた均一ベースラインで消えた。** 同一 base 兄弟(SmolLM2-135M base ↔ Instruct)を「単一 task-vector の層別グラフト」で融合し、held-out perplexity の実トレードオフ(素テキスト=base 有利 / 指示応答=instruct 有利)を照らした。**均一な補間(全層同一 λ)は大半の λ で破壊的**(λ=0.22 で素テキスト PPL が 6.40→7.77 に悪化)だが、**λ≈0.68 付近に鋭い最適があり fit 0.838(plain 6.669 / chat 3.433)**。層別 QD が見つけた非一様配分(band λ=[0.09, 0.0, 0.86, 1.18, 0.71, 1.06], fit 0.797 / plain 6.582 / chat 3.904)は、**当初対照にした粗い 7 点グリッド(best 0.727)には勝ったが、細粒度均一 sweep には負けた(gap −0.040)**。→ **単一 task-vector のグラフトは実質 1 次元で、層別自由度はこの設定では割に合わない**という honest な null。教訓: **粗いベースラインは偽陽性を生む**(§3.5)。枠組みの価値・実重み harness の正しさ(端点厳密再現・torch↔numpy parity)は残る。多エキスパート TIES は未測(§6)。
 
 ## 1. なぜこの PoC か
 
