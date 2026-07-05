@@ -269,10 +269,10 @@ flowchart TD
 | Unitree A1 | 四足 | Unitree(中国) | 12(位置) | 軽量な犬型 | 歩く ◎ |
 | ANYbotics ANYmal C | 四足 | ANYbotics(スイス) | 12(位置) | 産業点検用の大型犬型 | 歩く ○(背が高く不安定) |
 | Boston Dynamics Spot | 四足 | Boston Dynamics(米国) | 12(位置) | 有名な黄色い犬型・重量級 | 立つ ○/歩行は要調整 |
-| Franka Emika Panda | アーム | Franka(ドイツ) | 7+グリッパ | 定番の協働ロボット | 作業動作 ◎ |
-| Universal Robots UR5e | アーム | UR(デンマーク) | 6 | 産業用 6 軸の定番 | 作業動作 ◎ |
-| KUKA iiwa 14 | アーム | KUKA(ドイツ) | 7 | 力覚付き 7 軸 | 作業動作 ◎ |
-| Kinova Gen3 | アーム | Kinova(カナダ) | 7 | 軽量 7 軸 | 作業動作 ◎ |
+| Franka Emika Panda | アーム | Franka(ドイツ) | 7+グリッパ | 定番の協働ロボット | pick-and-place ◎(掴む/運ぶ/積む) |
+| Universal Robots UR5e | アーム | UR(デンマーク) | 6 | 産業用 6 軸の定番 | 到達 ◎(把持は Franka のみ) |
+| KUKA iiwa 14 | アーム | KUKA(ドイツ) | 7 | 力覚付き 7 軸 | 到達 ◎(把持は Franka のみ) |
+| Kinova Gen3 | アーム | Kinova(カナダ) | 7 | 軽量 7 軸 | 到達 ○(~2.3cm・把持は Franka のみ) |
 
 四足は「歩く」ための前進歩容を機体ごとに(足先の動きから符号を自動較正して)合わせ込み、アームは位置制御で作業動作。**同じ土台に多様な実機が載る**こと自体が、生産ライン AI への足場です。
 
