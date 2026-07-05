@@ -207,7 +207,7 @@ flowchart TD
 
 ここまでに登場した(あるいは同じ土台で動かせる)実機ロボを、一堂に並べてみました。奥が四足、手前が産業用アームです:
 
-![対応する実機ロボの全機種ロスター。四足5種(Go2/Go1/A1/ANYmal C/Spot)と産業用アーム4種(Franka/UR5e/KUKA iiwa/Kinova)が並ぶ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/robot_roster.gif)
+![対応する実機ロボの全機種ロスター。四足5種(Go2/Go1/A1/ANYmal C/Spot)と産業用アーム4種(Franka/UR5e/KUKA iiwa/Kinova)が並ぶ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/robot_roster.png)
 
 すべて **MuJoCo Menagerie**(実機メーカー監修の高品質モデル)から。同じ 1 つのエンジンで、犬型もアームも読み込めます:
 
