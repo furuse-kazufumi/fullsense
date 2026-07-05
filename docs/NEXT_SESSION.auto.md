@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-05 08:35:39
+- **生成時刻**: 2026-07-05 10:04:24
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,16 +20,16 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+856375e article(#48): §3-6 実在ロボ相撲/格闘ゲーム節 + GIF3点(歩行/相撲/格闘demo)
+3bacd3c auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 09:22)
+2c833c9 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 09:22)
+21522eb auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 09:22)
+79594d5 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 09:21)
 26714ab docs(article): #48 に自作身体プラン節(§3-5)+坂登り追加(13145→14362字)
 56d8125 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 07:56)
 2b53067 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 07:56)
 2f1f4fb assets(qiita_48): 自作身体プランGIF(尺取り虫側面/斜め・多脚orbit・山登り)追加
 524b235 docs(article): #48 を大幅拡張(4744→13145字, 視覚9点)
-afbe6ac auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 07:35)
-6ff1bea auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 07:35)
-9080e6c assets(qiita_48): 階段WIP(環境構築のみ・まだ登れず転倒)GIF追加
-c6468c0 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-05 07:33)
-0a2a1c9 assets(qiita_48): 魚遊泳GIF + persona αスイープ図 追加
 ```
 
 ### git status (porcelain)
@@ -71,9 +71,12 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `08:33` `docs/NEXT_SESSION.auto.md`
-- `08:33` `docs/SESSION_SUMMARY.md`
-- `07:56` `docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md`
+- `09:37` `docs/SESSION_SUMMARY.md`
+- `09:37` `docs/NEXT_SESSION.auto.md`
+- `09:23` `docs/articles/assets/qiita_48/sumo_go2_ringout.gif`
+- `09:23` `docs/articles/assets/qiita_48/robot_walk_go2.gif`
+- `09:23` `docs/articles/assets/qiita_48/robot_fight_demo.gif`
+- `09:22` `docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md`
 - `07:55` `docs/articles/assets/qiita_48/inchworm2d_persp.gif`
 - `07:55` `docs/articles/assets/qiita_48/inchworm2d.gif`
 - `07:55` `docs/articles/assets/qiita_48/climb_incline.gif`
