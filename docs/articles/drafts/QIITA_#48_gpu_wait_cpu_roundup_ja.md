@@ -216,7 +216,7 @@ flowchart TD
 
 #### 掴む ― gripper を下に向けて、上から掴む
 
-手順はシンプルで、**上空へ移動 → 真上から降下 → 指を閉じて掴む → 持ち上げる → 運ぶ → 降ろす → 指を開いて放す**、という「経由点(waypoint)」を順にたどるだけ。ポイントは、掴む瞬間に **gripper(指)を真下に向ける**こと。これには手先の「位置」だけでなく「向き(姿勢)」まで合わせる **6-DOF(6 自由度)IK** が要ります。
+手順はシンプルで、**上空へ移動 → 真上から降下 → 指を閉じて掴む → 持ち上げる → 運ぶ → 降ろす → 指を開いて放す**、という「経由点(waypoint)」を順にたどるだけ。ポイントは、掴む瞬間に **gripper(指)を真下に向ける**こと。これには手先の「位置」だけでなく「向き(姿勢)」まで合わせる **6-DOF(6 自由度 / six Degrees of Freedom)IK** が要ります。
 
 ![Franka が箱を掴んで別の場所へ運ぶ pick-and-place](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/pick_place_franka.gif)
 
