@@ -203,6 +203,28 @@ flowchart TD
 
 正直に言うと、**組み立てや把持の「賢い」制御は GPU 着荷後**です。でも「実機のアームを、手元の CPU だけで読み込んで動かせる場」までは来られた ── これは FullSense の「工場や現場のロボットも、外部に頼らずローカルで」という狙い(llmesh の MQTT/OPC-UA 産業 IoT とも地続き)に、ちゃんと繋がる一歩だと思っています。
 
+### 3-8. 使える機体、勢ぞろい ― 全機種紹介
+
+ここまでに登場した(あるいは同じ土台で動かせる)実機ロボを、一堂に並べてみました。奥が四足、手前が産業用アームです:
+
+![対応する実機ロボの全機種ロスター。四足5種(Go2/Go1/A1/ANYmal C/Spot)と産業用アーム4種(Franka/UR5e/KUKA iiwa/Kinova)が並ぶ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/robot_roster.gif)
+
+すべて **MuJoCo Menagerie**(実機メーカー監修の高品質モデル)から。同じ 1 つのエンジンで、犬型もアームも読み込めます:
+
+| 機体 | 種別 | メーカー | 関節 | ひとこと | 現状 |
+|---|---|---|---|---|---|
+| Unitree Go2 | 四足 | Unitree(中国) | 12(トルク) | 犬型・いちばん映える | 歩く・相撲 ◎ |
+| Unitree Go1 | 四足 | Unitree(中国) | 12(位置) | Go2 の前世代 | 歩く ◎ |
+| Unitree A1 | 四足 | Unitree(中国) | 12(位置) | 軽量な犬型 | 歩く ◎ |
+| ANYbotics ANYmal C | 四足 | ANYbotics(スイス) | 12(位置) | 産業点検用の大型犬型 | 歩く ○(背が高く不安定) |
+| Boston Dynamics Spot | 四足 | Boston Dynamics(米国) | 12(位置) | 有名な黄色い犬型・重量級 | 立つ ○/歩行は要調整 |
+| Franka Emika Panda | アーム | Franka(ドイツ) | 7+グリッパ | 定番の協働ロボット | 作業動作 ◎ |
+| Universal Robots UR5e | アーム | UR(デンマーク) | 6 | 産業用 6 軸の定番 | 作業動作 ◎ |
+| KUKA iiwa 14 | アーム | KUKA(ドイツ) | 7 | 力覚付き 7 軸 | 作業動作 ◎ |
+| Kinova Gen3 | アーム | Kinova(カナダ) | 7 | 軽量 7 軸 | 作業動作 ◎ |
+
+四足は「歩く」ための前進歩容を機体ごとに(足先の動きから符号を自動較正して)合わせ込み、アームは位置制御で作業動作。**同じ土台に多様な実機が載る**こと自体が、生産ライン AI への足場です。
+
 ---
 
 ## 4. LLM って混ぜられるの? ― 理論はシンプル、実験は正直つらい
