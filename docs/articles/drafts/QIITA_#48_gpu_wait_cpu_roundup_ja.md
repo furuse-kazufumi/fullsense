@@ -225,37 +225,51 @@ flowchart TD
 
 四足は「歩く」ための前進歩容を機体ごとに(足先の動きから符号を自動較正して)合わせ込み、アームは位置制御で作業動作。**同じ土台に多様な実機が載る**こと自体が、生産ライン AI への足場です。
 
-### 3-9. 遊んでみたい人へ ― 動かし方(インストール)
+### 3-9. 遊んでみたい人へ ― 動かし方(インストール・操作)
 
-うれしいことに、**実機のロボット本体は要りません**(高価だし、ぶつけ合ったら壊れる)。**GPU も不要で、全部 CPU で動きます**。用意するのはこれだけ:
+**コードを OSS 公開しました** 👉 GitHub: <https://github.com/furuse-kazufumi/gaitlab-arena> / PyPI: `gaitlab`(Apache-2.0)。**実機のロボット本体は不要・GPU も不要、全部 CPU で動きます。**
+
+以下は「まっさらな状態から clone して実際に動くこと」を確認した手順です。**動作確認環境: Python 3.11.3(対応 3.10〜3.12)/ mujoco 3.10 / Windows 11**。
 
 ```bash
-# 1) 依存ライブラリ(Python 3.10+)
-pip install mujoco numpy imageio pillow
+# 1) コードを取得して依存ごとインストール(mujoco>=3.10 / numpy / imageio / pillow)
+git clone https://github.com/furuse-kazufumi/gaitlab-arena
+cd gaitlab-arena
+pip install -e .
 
-# 2) 実機ロボの 3D モデル集(MuJoCo Menagerie, Apache-2.0)を取得
+# 2) 実在ロボの 3D モデル集(MuJoCo Menagerie, Apache-2.0)を隣に置く
+#    (cwd / ホーム / リポジトリの隣 を自動探索。別の場所なら MENAGERIE_DIR で指定)
 git clone https://github.com/google-deepmind/mujoco_menagerie
-# → このパスを環境変数 MENAGERIE_DIR に指定する
 ```
 
-あとは、動かすだけ(Windows は描画に `MUJOCO_GL=glfw` を付けます):
+**動かす**(Windows は描画に `MUJOCO_GL=glfw` を付ける):
 
 ```bash
 # ロボット相撲(Go2 vs Go2)を GIF 化
-MUJOCO_GL=glfw MENAGERIE_DIR=/path/to/mujoco_menagerie \
-  python scripts/sumo_match.py --a go2 --b go2 --out sumo.gif
+MUJOCO_GL=glfw python scripts/sumo_match.py --a go2 --b go2 --out sumo.gif
 
 # 産業用アームの生産ライン(4 機種)を GIF 化
-python scripts/production_line.py --arms franka ur5e iiwa14 kinova --out line.gif
+MUJOCO_GL=glfw python scripts/production_line.py --arms franka ur5e iiwa14 kinova --out line.gif
 
-# 全機種ロスター(集合写真)/ 単体で歩かせる
-python scripts/robot_roster.py --out roster.gif
+# 全機種ロスター(集合写真)
+MUJOCO_GL=glfw python scripts/robot_roster.py --out roster.gif
 
-# ロボット格闘ゲーム(要ディスプレイ):W/S=前後 A/D=旋回 Space=しゃがみ X=停止
+# 使える機体の一覧 / 描画なし(速い・結果だけ)
+python scripts/sumo_match.py --list
+python scripts/sumo_match.py --a go2 --b go2 --headless
+```
+
+**操作方法(ロボット格闘ゲーム)**:自機をキーボードで操作して AI と対戦します(要ディスプレイ)。
+
+```bash
 python scripts/robot_fight.py --player go2 --ai go2
 ```
 
-> コード一式(`gaitlab`)は現在 **OSS 公開の準備中**です(ライセンス整備・依存の切り出し中)。公開したらこの記事にリンクを追記します。「実機は高価で危険 → シミュなら只」なので、**手元の PC だけで本物のロボが相撲を取り、産業用アームが並ぶ**のを、ぜひ触ってみてほしいところです。
+- **W / S** = 前進 / 後退  ・  **A / D** = 左旋回 / 右旋回  ・  **Space** = しゃがみ  ・  **X** = 停止  ・  **R** = リセット
+- ディスプレイなしで動作確認だけしたいときは `--demo`(台本操作で GIF 化):
+  `MUJOCO_GL=glfw python scripts/robot_fight.py --demo --out fight.gif`
+
+ライブラリとしても使えます(`pip install gaitlab` → `from gaitlab.arena import build_arena, MatchEngine ...`)。「実機は高価で危険 → シミュなら只」なので、**手元の PC だけで本物のロボが相撲を取り、産業用アームが並ぶ**のを、ぜひ触ってみてください。
 
 ---
 
