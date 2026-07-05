@@ -283,8 +283,8 @@ flowchart TD
 | Unitree Go2 | 四足 | Unitree(中国) | 12(トルク) | 犬型・いちばん映える | 歩く・相撲 ◎ |
 | Unitree Go1 | 四足 | Unitree(中国) | 12(位置) | Go2 の前世代 | 歩く ◎ |
 | Unitree A1 | 四足 | Unitree(中国) | 12(位置) | 軽量な犬型 | 歩く ◎ |
-| ANYbotics ANYmal C | 四足 | ANYbotics(スイス) | 12(位置) | 産業点検用の大型犬型 | 歩く ○(背が高く不安定) |
-| Boston Dynamics Spot | 四足 | Boston Dynamics(米国) | 12(位置) | 有名な黄色い犬型・重量級 | 立つ ○/歩行は要調整 |
+| ANYbotics ANYmal C | 四足 | ANYbotics(スイス) | 12(位置) | 産業点検用の大型犬型 | 歩行 △(背が高く開ループ gait では不安定・転倒しやすい) |
+| Boston Dynamics Spot | 四足 | Boston Dynamics(米国) | 12(位置) | 有名な黄色い犬型・重量級 | 歩く ○(約 4m 前進・直立維持を実測) |
 | Franka Emika Panda | アーム | Franka(ドイツ) | 7+グリッパ | 定番の協働ロボット | pick-and-place ◎(掴む/運ぶ/積む) |
 | Universal Robots UR5e | アーム | UR(デンマーク) | 6 | 産業用 6 軸の定番 | 到達 ◎(把持は Franka のみ) |
 | KUKA iiwa 14 | アーム | KUKA(ドイツ) | 7 | 力覚付き 7 軸 | 到達 ◎(把持は Franka のみ) |
