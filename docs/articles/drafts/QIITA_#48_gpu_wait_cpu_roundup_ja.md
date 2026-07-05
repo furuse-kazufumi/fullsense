@@ -232,9 +232,9 @@ flowchart TD
 
 ![Franka が 2 個の箱をそれぞれの目的地へ順に運ぶ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/pick_place_multi.gif)
 
-さらに、置くときに**箱を狙った向きに回して置く**こともできます(部品を向き揃えて並べる、生産ラインでよくある要求)。下は 3 個を 90° 回して整列配置:
+さらに、置くときに**箱を狙った向きに回して置く**こともできます(部品を向き揃えて並べる、生産ラインでよくある要求)。下は 3 個を **45° 回して**整列配置 ── 正方形の箱でも 45° なら「ダイヤ向き」になるので、揃えた向きが見て取れます(90° だと正方形は自分自身に重なって見た目が変わらないので、あえて 45° にしています):
 
-![3 個の箱を 90 度回して向き揃えで整列配置](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/pick_place_oriented.gif)
+![3 個の箱を 45 度回して「ダイヤ向き」に揃えて整列配置](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_48/pick_place_oriented.gif)
 
 #### 積む ― パレタイジング、そして「めり込んで弾け飛ぶ」罠
 
