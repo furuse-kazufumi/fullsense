@@ -10,16 +10,19 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-06 07:24:14
+- **生成時刻**: 2026-07-06 11:38:48
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `14	0`
+- HEAD vs upstream (左=ahead 右=behind): `17	0`
 
 ```
+7f3bb1b auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:50)
+8b67a55 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:49)
+d5347c6 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:42)
 f81d977 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:22)
 81f6d2b auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:00)
 7066274 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:00)
@@ -27,15 +30,14 @@ f81d977 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:22)
 5d0e080 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:59)
 80c79fd auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:58)
 7e3700a auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:49)
-12f3c1d auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:49)
-89f252b auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:49)
-7be6638 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:38)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
+ M docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md
 ```
 
 
@@ -70,15 +72,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `07:22` `docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md`
-- `07:22` `docs/articles/assets/qiita_48/pick_place_bins.gif`
-- `07:01` `docs/SESSION_SUMMARY.md`
-- `07:01` `docs/NEXT_SESSION.auto.md`
-- `06:58` `docs/articles/assets/qiita_48/pick_place_sort.gif`
-- `06:49` `docs/articles/assets/qiita_48/pick_place_oriented.gif`
-- `06:18` `docs/articles/assets/qiita_48/pick_place_stack.gif`
-- `06:18` `docs/articles/assets/qiita_48/pick_place_multi.gif`
-- `06:18` `docs/articles/assets/qiita_48/pick_place_franka.gif`
+- `11:20` `docs/SESSION_SUMMARY.md`
+- `11:20` `docs/NEXT_SESSION.auto.md`
+- `07:50` `docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md`
+- `07:41` `docs/articles/assets/qiita_48/reach_fail_closed.gif`
 
 
 ## Cross-references
