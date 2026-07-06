@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 560" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">
+  <rect width="860" height="560" fill="#fdf7ee"/>
+  <text x="430" y="42" text-anchor="middle" font-size="26" font-weight="700" fill="#2c3e50">進化ループ ＝ AI が自分で回す「料理コンテスト」</text>
+  <text x="430" y="70" text-anchor="middle" font-size="15" fill="#7f8c8d">案を作る → 味見で採点 → 良いのを棚に残す → また作る、をぐるぐる</text>
+
+  <!-- center label -->
+  <circle cx="430" cy="310" r="66" fill="#fff" stroke="#bdc3c7" stroke-width="2"/>
+  <text x="430" y="300" text-anchor="middle" font-size="20" font-weight="700" fill="#2c3e50">進化</text>
+  <text x="430" y="324" text-anchor="middle" font-size="20" font-weight="700" fill="#2c3e50">ループ</text>
+  <text x="430" y="348" text-anchor="middle" font-size="12" fill="#95a5a6">evolution loop</text>
+
+  <!-- Node 1: chef / LLM (top) -->
+  <g>
+    <rect x="300" y="110" width="260" height="92" rx="14" fill="#fdebd9" stroke="#e8804d" stroke-width="2.5"/>
+    <text x="430" y="140" text-anchor="middle" font-size="30">🍳</text>
+    <text x="430" y="168" text-anchor="middle" font-size="17" font-weight="700" fill="#b35a26">① 料理人＝AI が案を作る</text>
+    <text x="430" y="190" text-anchor="middle" font-size="12.5" fill="#8a6d3b">変異(mutation)：いまの皿を少しだけ作り変える</text>
+  </g>
+
+  <!-- Node 2: judge / evaluator (right) -->
+  <g>
+    <rect x="600" y="252" width="242" height="116" rx="14" fill="#fbe1de" stroke="#c0392b" stroke-width="3"/>
+    <text x="721" y="284" text-anchor="middle" font-size="30">👅</text>
+    <text x="721" y="312" text-anchor="middle" font-size="17" font-weight="700" fill="#a03328">② 審査員＝評価器 ★主役</text>
+    <text x="721" y="333" text-anchor="middle" font-size="12.5" fill="#8a3a32">接地(grounding)：口でなく</text>
+    <text x="721" y="351" text-anchor="middle" font-size="12.5" fill="#8a3a32">実際に動かして採点する</text>
+  </g>
+
+  <!-- Node 3: shelf / archive-QD (bottom) -->
+  <g>
+    <rect x="300" y="418" width="260" height="100" rx="14" fill="#dcecf7" stroke="#2e86c1" stroke-width="2.5"/>
+    <text x="430" y="450" text-anchor="middle" font-size="28">🗄️</text>
+    <text x="430" y="478" text-anchor="middle" font-size="17" font-weight="700" fill="#1f6391">③ 棚＝良い皿を残す</text>
+    <text x="430" y="500" text-anchor="middle" font-size="12.5" fill="#2a6f9e">QD／MAP-Elites：総合1位でなくタイプ別の名人を並べる</text>
+  </g>
+
+  <!-- Node 4: repeat (left) -->
+  <g>
+    <rect x="18" y="252" width="242" height="116" rx="14" fill="#dff3e6" stroke="#27ae60" stroke-width="2.5"/>
+    <text x="139" y="286" text-anchor="middle" font-size="28">🔁</text>
+    <text x="139" y="314" text-anchor="middle" font-size="17" font-weight="700" fill="#1e8449">④ 上位を親に、また①へ</text>
+    <text x="139" y="335" text-anchor="middle" font-size="12.5" fill="#227a48">選択圧(selection pressure)：</text>
+    <text x="139" y="353" text-anchor="middle" font-size="12.5" fill="#227a48">どれを残すかの基準が強さを決める</text>
+  </g>
+
+  <!-- cycle arrows -->
+  <defs>
+    <marker id="ah" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#7f8c8d"/>
+    </marker>
+  </defs>
+  <path d="M560 175 Q 690 200 715 248" fill="none" stroke="#7f8c8d" stroke-width="3" marker-end="url(#ah)"/>
+  <path d="M700 372 Q 640 440 564 462" fill="none" stroke="#7f8c8d" stroke-width="3" marker-end="url(#ah)"/>
+  <path d="M300 470 Q 175 440 150 372" fill="none" stroke="#7f8c8d" stroke-width="3" marker-end="url(#ah)"/>
+  <path d="M160 248 Q 250 195 300 178" fill="none" stroke="#7f8c8d" stroke-width="3" marker-end="url(#ah)"/>
+
+  <text x="430" y="548" text-anchor="middle" font-size="12" fill="#95a5a6">FunSearch(2023)→ELM が原型。AlphaEvolve / ASI-Arch / DGM は皆この 1 つのループの派生</text>
+</svg>

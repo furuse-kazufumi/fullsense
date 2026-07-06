@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">
+  <rect width="900" height="470" fill="#fdf7ee"/>
+  <text x="450" y="40" text-anchor="middle" font-size="25" font-weight="700" fill="#2c3e50">あなたは 4 部品のうち 2 つを、もう持っている</text>
+  <text x="450" y="68" text-anchor="middle" font-size="15" fill="#7f8c8d">足すのは「パラメータいじり → コードを書き換える AI」の 1 つだけ</text>
+
+  <!-- 4 cards -->
+  <!-- Card 1: mutation (add) -->
+  <g>
+    <rect x="30" y="100" width="200" height="150" rx="14" fill="#fdebd9" stroke="#e8804d" stroke-width="3"/>
+    <text x="130" y="132" text-anchor="middle" font-size="30">🍳</text>
+    <text x="130" y="162" text-anchor="middle" font-size="15" font-weight="700" fill="#b35a26">① 料理人＝変異</text>
+    <text x="130" y="185" text-anchor="middle" font-size="12" fill="#8a6d3b">案を作り変える</text>
+    <rect x="46" y="200" width="168" height="36" rx="8" fill="#e8804d"/>
+    <text x="130" y="223" text-anchor="middle" font-size="13.5" font-weight="700" fill="#fff">★ここを足す</text>
+  </g>
+  <!-- Card 2: evaluator (have-ish) -->
+  <g>
+    <rect x="250" y="100" width="200" height="150" rx="14" fill="#fbe1de" stroke="#c0392b" stroke-width="2.5"/>
+    <text x="350" y="132" text-anchor="middle" font-size="30">👅</text>
+    <text x="350" y="162" text-anchor="middle" font-size="15" font-weight="700" fill="#a03328">② 審査員＝評価器</text>
+    <text x="350" y="185" text-anchor="middle" font-size="12" fill="#8a3a32">実際に動かし採点</text>
+    <rect x="266" y="200" width="168" height="36" rx="8" fill="#f2d7d3"/>
+    <text x="350" y="223" text-anchor="middle" font-size="12.5" font-weight="700" fill="#a03328">○ 歩行なら既にある</text>
+  </g>
+  <!-- Card 3: shelf/QD (have) -->
+  <g>
+    <rect x="470" y="100" width="200" height="150" rx="14" fill="#dcecf7" stroke="#2e86c1" stroke-width="2.5"/>
+    <text x="570" y="132" text-anchor="middle" font-size="28">🗄️</text>
+    <text x="570" y="162" text-anchor="middle" font-size="15" font-weight="700" fill="#1f6391">③ 棚＝QD</text>
+    <text x="570" y="185" text-anchor="middle" font-size="12" fill="#2a6f9e">名人を並べる</text>
+    <rect x="486" y="200" width="168" height="36" rx="8" fill="#2e86c1"/>
+    <text x="570" y="223" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">✓ 持っている</text>
+  </g>
+  <!-- Card 4: selection (have) -->
+  <g>
+    <rect x="690" y="100" width="200" height="150" rx="14" fill="#dff3e6" stroke="#27ae60" stroke-width="2.5"/>
+    <text x="790" y="132" text-anchor="middle" font-size="28">🔁</text>
+    <text x="790" y="162" text-anchor="middle" font-size="15" font-weight="700" fill="#1e8449">④ 選抜＝選択圧</text>
+    <text x="790" y="185" text-anchor="middle" font-size="12" fill="#227a48">残すものを決める</text>
+    <rect x="706" y="200" width="168" height="36" rx="8" fill="#27ae60"/>
+    <text x="790" y="223" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">✓ 持っている</text>
+  </g>
+
+  <!-- connectors -->
+  <line x1="230" y1="175" x2="250" y2="175" stroke="#bdc3c7" stroke-width="2.5"/>
+  <line x1="450" y1="175" x2="470" y2="175" stroke="#bdc3c7" stroke-width="2.5"/>
+  <line x1="670" y1="175" x2="690" y2="175" stroke="#bdc3c7" stroke-width="2.5"/>
+
+  <!-- mapping to tools -->
+  <text x="130" y="292" text-anchor="middle" font-size="13" fill="#5d6d7e">↑ 今：パラメータいじり</text>
+  <text x="130" y="312" text-anchor="middle" font-size="13.5" font-weight="700" fill="#b35a26">→ コードを LLM に書換えさせる</text>
+  <text x="350" y="292" text-anchor="middle" font-size="13" fill="#5d6d7e">gaitlab の</text>
+  <text x="350" y="312" text-anchor="middle" font-size="13.5" font-weight="700" fill="#a03328">fitness proxy(MuJoCo)</text>
+  <text x="570" y="292" text-anchor="middle" font-size="13" fill="#5d6d7e">gaitlab の</text>
+  <text x="570" y="312" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1f6391">MapElitesArchive</text>
+  <text x="790" y="292" text-anchor="middle" font-size="13" fill="#5d6d7e">lldarwin の</text>
+  <text x="790" y="312" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e8449">ε-lexicase ＋ QD</text>
+
+  <rect x="150" y="352" width="600" height="86" rx="12" fill="#fff" stroke="#f0a860" stroke-width="2"/>
+  <text x="450" y="382" text-anchor="middle" font-size="15" font-weight="700" fill="#b35a26">今週の最小構成:pip install openevolve</text>
+  <text x="450" y="406" text-anchor="middle" font-size="13" fill="#5d6d7e">既存の採点関数を審査員に差す＋歩行コードを EVOLVE-BLOCK で囲む＋変異は Gemini-Flash の API</text>
+  <text x="450" y="427" text-anchor="middle" font-size="13" fill="#5d6d7e">→ 生成を API にすれば 手元 GPU なしの CPU 完結で回せる(gaitlab)</text>
+</svg>

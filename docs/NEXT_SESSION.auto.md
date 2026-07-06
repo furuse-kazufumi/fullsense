@@ -10,16 +10,18 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-06 11:38:48
+- **生成時刻**: 2026-07-06 16:32:14
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `17	0`
+- HEAD vs upstream (左=ahead 右=behind): `19	0`
 
 ```
+6591a6c auto: doc_map.md 編集前 (2026-07-06 11:44)
+b9e2522 auto: index.md 編集前 (2026-07-06 11:44)
 7f3bb1b auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:50)
 8b67a55 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:49)
 d5347c6 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:42)
@@ -28,8 +30,6 @@ f81d977 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:22)
 7066274 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:00)
 38da985 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:59)
 5d0e080 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:59)
-80c79fd auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:58)
-7e3700a auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:49)
 ```
 
 ### git status (porcelain)
@@ -37,7 +37,9 @@ f81d977 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:22)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- M docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md
+ M docs/doc_map.md
+?? docs/articles/assets/evolution_loop/
+?? docs/articles/drafts/QIITA_evolution_loop_cooking_ja.md
 ```
 
 
@@ -72,10 +74,8 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `11:20` `docs/SESSION_SUMMARY.md`
-- `11:20` `docs/NEXT_SESSION.auto.md`
-- `07:50` `docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md`
-- `07:41` `docs/articles/assets/qiita_48/reach_fail_closed.gif`
+- `16:31` `docs/NEXT_SESSION.auto.md`
+- `16:30` `docs/SESSION_SUMMARY.md`
 
 
 ## Cross-references

@@ -130,6 +130,7 @@ nav_order: 3
 
 | File | What's in it |
 |---|---|
+| `evolution_loop_auto_evaluator_landscape_2026-07-06` | 進化ループ×自動評価器(AlphaEvolve/ASI-Arch/DGM/FunSearch/ELM/QDAIF/OpenEvolve/ShinkaEvolve)を6系統一次情報精読+検証。共通ループの系譜、評価器=選択圧の反ハッキング・ツールキット、gaitlab/lldarwin/llcore/llive へのマッピング、CPU 完結の最小構成(openevolve+既存 fitness proxy)、honest 訂正込み |
 | `repir_mcp_compat_2026_05_23` | llrepr MCP structuredContent 配線 + RepIR→llrepr 改名経緯 |
 | `spec_mesh_wiring_2026_05_25` | SPEC-MESH-02/03/04 配線完了 + security 修正報告 |
 | `evolution_research_openendedness_2026_05_25` | proxy 進化の自明収束分析 + open-endedness 手法 (novelty/QD/MAP-Elites) 整理 |
