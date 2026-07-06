@@ -114,7 +114,7 @@ $$C \approx 6 \times 1.24\times10^{8} \times 10^{10} \approx 7.4\times10^{18}\ \
 | **S1** toy 世界モデル | VAE+RNN の潜在動力学(World Models 再現) | CPU〜1枚 | CPU で数時間〜1日 | 潜在化・遷移予測・KL 均衡・teacher forcing | 復元は良いが**予測**が悪い、rollout 発散 |
 | **S2** 物理シム MBRL | DreamerV3 / TD-MPC2 を MuJoCo・gaitlab に | 5090 1枚 | タスク当たり数時間〜1日 | RSSM・imagination・actor-critic・報酬正規化 | model exploitation、sim2real、報酬設計 |
 | **S3** 自作シム 生成世界モデル | 行動条件付き動画(IRIS/DIAMOND 流) | 5090 1枚(VRAM/データが律速) | 数時間〜数日(要検証) | VQ-VAE トークナイザ・自己回帰/拡散動力学・長期一貫性 | **VRAM/データ律速**、compounding error、記憶長不足 |
-| **S4** 効率化・規模拡張 | SSM/線形注意で長rollout・省メモリ(llcore) | 5090 1枚 | 継続 | O(L) 系列・蒸留・量子化・KV-cache 除去 | 「速い=正しい」誤認、表現力とのトレードオフ |
+| **S4** 効率化・規模拡張 | 状態空間モデル(State-Space Model、SSM)/線形注意で長rollout・省メモリ(llcore) | 5090 1枚 | 継続 | O(L) 系列・蒸留・量子化・KV-cache(Key-Value キャッシュ)除去 | 「速い=正しい」誤認、表現力とのトレードオフ |
 
 **S0 — 生成AI内製の素振り**。まずは言語モデルで、**学習ループそのもの**を体に入れます。nanoGPT / build-nanoGPT(Karpathy)で char-level Shakespeare を CPU で end-to-end に回し、次に FineWeb-Edu 10B トークンで GPT-2(124M)を 5090 で再現する。「世界モデルと言語モデルは無関係では?」と思うかもしれませんが、**「符号化 → 系列予測 → 答え合わせ」という骨格は、世界モデルとまったく同型**です。ここで得るのは、混合精度・勾配クリップ・学習率スケジュール、そして何より $6ND$ の体感です。この体感が、後段の見積もりの精度を決めます。
 
