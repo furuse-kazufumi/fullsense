@@ -110,7 +110,7 @@ $$C \approx 6 \times 1.24\times10^{8} \times 10^{10} \approx 7.4\times10^{18}\ \
 
 | 段 | 何を作る | 前提GPU | 所要(桁感) | 学べる核 | 主な落とし穴 |
 |---|---|---|---|---|---|
-| **S0** 素振り | nanoGPT で GPT-2 系再現 / 小型SLM | CPU(tiny)→5090 | char-LM:CPU 数時間 / GPT-2 124M:5090 約1日 | 学習ループ・混合精度・scaling 感覚 | 「lossが下がった=賢い」誤認、tokenizer の罠 |
+| **S0** 素振り | nanoGPT で GPT-2 系再現 / 小型言語モデル(Small Language Model、SLM) | CPU(tiny)→5090 | char-LM:CPU 数時間 / GPT-2 124M:5090 約1日 | 学習ループ・混合精度・scaling 感覚 | 「lossが下がった=賢い」誤認、tokenizer の罠 |
 | **S1** toy 世界モデル | VAE+RNN の潜在動力学(World Models 再現) | CPU〜1枚 | CPU で数時間〜1日 | 潜在化・遷移予測・KL 均衡・teacher forcing | 復元は良いが**予測**が悪い、rollout 発散 |
 | **S2** 物理シム MBRL | DreamerV3 / TD-MPC2 を MuJoCo・gaitlab に | 5090 1枚 | タスク当たり数時間〜1日 | RSSM・imagination・actor-critic・報酬正規化 | model exploitation、sim2real、報酬設計 |
 | **S3** 自作シム 生成世界モデル | 行動条件付き動画(IRIS/DIAMOND 流) | 5090 1枚(VRAM/データが律速) | 数時間〜数日(要検証) | VQ-VAE トークナイザ・自己回帰/拡散動力学・長期一貫性 | **VRAM/データ律速**、compounding error、記憶長不足 |
