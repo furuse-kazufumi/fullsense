@@ -130,6 +130,8 @@ nav_order: 3
 
 | File | What's in it |
 |---|---|
+| `genai_internals_deepdive_2026-07-06` | 生成AI内部原理を第一原理から体系化(約33万字10節)。31 agent workflow(執筆→辛口査読→修正)。Qiita「作って分かったLLMの中身」の source 資料 |
+| `genai_insourcing_worldmodel_2026-07-06` | 生成AIの内製方法×世界モデル(約24万字9節)。自宅1枚GPUから世界モデルへの S-1→S4 ロードマップ(フェルミ)。最初の一手=World Models CarRacing CPU再現。Qiita 連載「生成AIを内製する」source + drafts=`docs/articles/drafts/genai_insourcing_series/` |
 | `evolution_loop_auto_evaluator_landscape_2026-07-06` | 進化ループ×自動評価器(AlphaEvolve/ASI-Arch/DGM/FunSearch/ELM/QDAIF/OpenEvolve/ShinkaEvolve)を6系統一次情報精読+検証。共通ループの系譜、評価器=選択圧の反ハッキング・ツールキット、gaitlab/lldarwin/llcore/llive へのマッピング、CPU 完結の最小構成(openevolve+既存 fitness proxy)、honest 訂正込み |
 | `repir_mcp_compat_2026_05_23` | llrepr MCP structuredContent 配線 + RepIR→llrepr 改名経緯 |
 | `spec_mesh_wiring_2026_05_25` | SPEC-MESH-02/03/04 配線完了 + security 修正報告 |
