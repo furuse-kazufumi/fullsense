@@ -74,7 +74,7 @@ gaitlab の四足歩行なら、「関節角と接地状態」という潜在で
 | B. 生成的動画 / ゲームエンジン | 次フレーム画像 | IRIS(離散Transformer, Micheli et al., 2023)、DIAMOND(拡散, Alonso et al., 2024)、GameNGen(拡散, Valevski et al., 2024) | ○ toy〜中規模なら | 見せる・自作シム・データ生成 |
 | C. 非生成(JEPA) | 表現空間の未来 | V-JEPA 2(Meta, 2025)(要検証:能力の細部) | △ 事前学習は重い | 表現学習・robot 方策 |
 
-**基礎の原点は World Models(Ha & Schmidhuber, 2018)** です。VAE で画像を潜在化し、MDN-RNN(混合密度RNN)で潜在の遷移を学ぶ——今読んでも美しい、世界モデル内製の "Hello World" です。
+**基礎の原点は World Models(Ha & Schmidhuber, 2018)** です。VAE で画像を潜在化し、MDN-RNN(Mixture Density Network RNN、混合密度回帰型ネットワーク)で潜在の遷移を学ぶ——今読んでも美しい、世界モデル内製の "Hello World" です。
 
 ただし、この論文には**正直に帰属を分けておきたい点**があります。世間では「AIが夢の中でゲームを解いた」という一文で語られがちですが、**完全な想像内(dream)訓練——世界モデルの中だけで方策を学習——を実証したのは VizDoom(DoomTakeCover)のみ**です。もう一方の CarRacing では、世界モデルの潜在特徴 $[z_t, h_t]$ を入力にして、コントローラ(方策)を**実環境のロールアウト上で CMA-ES 最適化**しており、これは想像内訓練ではありません(論文自身、dream 版は生成温度の調整が要って難しいと報告しています)。この区別は、後で S1 の設計に効いてきます。
 
