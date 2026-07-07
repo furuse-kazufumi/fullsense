@@ -51,7 +51,7 @@ public_id: 40ba7cc91ac577274b74
 
 図にするとこうです。
 
-![進化ループ=AIが自分で回す料理コンテストの図。料理人=変異、審査員=評価器、棚=QD、選抜=選択圧の4つをぐるぐる回す](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evolution_loop/fig1_loop_cooking.png)
+![進化ループ=AIが自分で回す料理コンテストの図。料理人=変異、審査員=評価器、棚=QD、選抜=選択圧の4つをぐるぐる回す](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evolution_loop/fig1_loop_cooking.png?v=2)
 
 これを何百回も回すと、**人間が思いつかなかった良い解**が出てきます。実際、Google DeepMind の **AlphaEvolve** は、**56 年間破られなかった行列のかけ算アルゴリズムの記録を更新**しました(4×4 のかけ算を 49 回 → 48 回に。1969 年の Strassen 以来の更新です)。
 
