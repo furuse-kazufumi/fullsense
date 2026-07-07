@@ -14,7 +14,7 @@
     <rect x="300" y="110" width="260" height="92" rx="14" fill="#fdebd9" stroke="#e8804d" stroke-width="2.5"/>
     <text x="430" y="140" text-anchor="middle" font-size="30">🍳</text>
     <text x="430" y="168" text-anchor="middle" font-size="17" font-weight="700" fill="#b35a26">① 料理人＝AI が案を作る</text>
-    <text x="430" y="190" text-anchor="middle" font-size="12.5" fill="#8a6d3b">変異(mutation)：いまの皿を少しだけ作り変える</text>
+    <text x="430" y="190" text-anchor="middle" font-size="11" fill="#8a6d3b">変異(mutation)：いまの皿を少しだけ作り変える</text>
   </g>
 
   <!-- Node 2: judge / evaluator (right) -->
@@ -29,9 +29,10 @@
   <!-- Node 3: shelf / archive-QD (bottom) -->
   <g>
     <rect x="300" y="418" width="260" height="100" rx="14" fill="#dcecf7" stroke="#2e86c1" stroke-width="2.5"/>
-    <text x="430" y="450" text-anchor="middle" font-size="28">🗄️</text>
-    <text x="430" y="478" text-anchor="middle" font-size="17" font-weight="700" fill="#1f6391">③ 棚＝良い皿を残す</text>
-    <text x="430" y="500" text-anchor="middle" font-size="12.5" fill="#2a6f9e">QD／MAP-Elites：総合1位でなくタイプ別の名人を並べる</text>
+    <text x="430" y="448" text-anchor="middle" font-size="28">🗄️</text>
+    <text x="430" y="475" text-anchor="middle" font-size="17" font-weight="700" fill="#1f6391">③ 棚＝良い皿を残す</text>
+    <text x="430" y="496" text-anchor="middle" font-size="12" fill="#2a6f9e">QD／MAP-Elites：総合1位でなく</text>
+    <text x="430" y="512" text-anchor="middle" font-size="12" fill="#2a6f9e">タイプ別の名人を並べる</text>
   </g>
 
   <!-- Node 4: repeat (left) -->
