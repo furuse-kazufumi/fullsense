@@ -6,7 +6,7 @@ tags:
   - ロボット
   - Python
 public_private: false
-public_id:
+public_id:631620c33d20f2694310
 ---
 # 自宅CPUで「世界モデルを作るためのプラットフォーム」を作り、その上で人工生命を進化させ、正直にコケた話
 
