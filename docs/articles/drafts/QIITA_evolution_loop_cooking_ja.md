@@ -88,7 +88,7 @@ public_id: 40ba7cc91ac577274b74
 
 3 つ目が肝心です。審査が甘いと、AI は必ず**抜け道**を見つけます。
 
-![審査員がすべての図。甘い審査(見た目だけ)だと盛り付けだけ豪華で味の悪い料理が勝ってしまう=報酬ハッキング。接地した審査(実際に味見)だと本当に美味しい料理が勝つ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evolution_loop/fig2_reward_hacking.png)
+![審査員がすべての図。甘い審査(見た目だけ)だと盛り付けだけ豪華で味の悪い料理が勝ってしまう=報酬ハッキング。接地した審査(実際に味見)だと本当に美味しい料理が勝つ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evolution_loop/fig2_reward_hacking.png?v=2)
 
 審査員が**味見をせず、見た目だけで採点**したらどうなるか。料理人は「味を良くする」のをやめ、「**盛り付けだけ豪華にする**」方向に進化します。これが **報酬ハッキング(reward hacking)** です。
 
