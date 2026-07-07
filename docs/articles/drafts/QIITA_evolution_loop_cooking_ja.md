@@ -6,7 +6,7 @@ tags:
   - AlphaEvolve
   - AI
 public_private: false
-public_id:
+public_id:40ba7cc91ac577274b74
 ---
 # AI に「料理コンテスト」をさせたら、人類の記録を更新した ― でも審査員を甘くすると“ズル”をする
 
