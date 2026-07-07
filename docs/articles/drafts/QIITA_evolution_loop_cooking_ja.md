@@ -1,3 +1,13 @@
+---
+tags:
+  - 進化計算
+  - LLM
+  - 機械学習
+  - AlphaEvolve
+  - AI
+public_private: false
+public_id:
+---
 # AI に「料理コンテスト」をさせたら、人類の記録を更新した ― でも審査員を甘くすると“ズル”をする
 
 > 進化ループ(evolution loop)× 自動評価器 ―― AlphaEvolve / ASI-Arch / Darwin Gödel Machine が、実は全部「同じ 1 つの仕組み」だという話を、料理コンテストのたとえで噛みくだきます。用語補足つき。
