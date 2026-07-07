@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-06 16:32:14
+- **生成時刻**: 2026-07-06 22:20:17
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `19	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-6591a6c auto: doc_map.md 編集前 (2026-07-06 11:44)
-b9e2522 auto: index.md 編集前 (2026-07-06 11:44)
-7f3bb1b auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:50)
-8b67a55 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:49)
-d5347c6 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:42)
-f81d977 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:22)
-81f6d2b auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:00)
-7066274 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:00)
-38da985 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:59)
-5d0e080 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 06:59)
+7cde58e 生成AI深掘り: research 2本配置 + Qiita内製連載9章 下書き
+82bf2ea auto: chapter_07_07_worldmodel-build_ja.md 編集前 (2026-07-06 17:21)
+fc0d856 auto: chapter_04_04_compute-fermi_ja.md 編集前 (2026-07-06 17:21)
+20d4aee auto: chapter_03_03_training-stack_ja.md 編集前 (2026-07-06 17:21)
+ea87d64 auto: chapter_01_01_build-decision_ja.md 編集前 (2026-07-06 17:21)
+34e6eda auto: chapter_09_09_roadmap_ja.md 編集前 (2026-07-06 17:11)
+df18fdb auto: chapter_09_09_roadmap_ja.md 編集前 (2026-07-06 17:11)
+cdf9a93 auto: chapter_09_09_roadmap_ja.md 編集前 (2026-07-06 17:11)
+3e3cff2 auto: chapter_09_09_roadmap_ja.md 編集前 (2026-07-06 17:11)
+d233c0f auto: chapter_09_09_roadmap_ja.md 編集前 (2026-07-06 17:11)
 ```
 
 ### git status (porcelain)
@@ -37,9 +37,6 @@ f81d977 auto: QIITA_#48_gpu_wait_cpu_roundup_ja.md 編集前 (2026-07-06 07:22)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- M docs/doc_map.md
-?? docs/articles/assets/evolution_loop/
-?? docs/articles/drafts/QIITA_evolution_loop_cooking_ja.md
 ```
 
 
@@ -74,8 +71,8 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `16:31` `docs/NEXT_SESSION.auto.md`
-- `16:30` `docs/SESSION_SUMMARY.md`
+- `22:18` `docs/NEXT_SESSION.auto.md`
+- `22:18` `docs/SESSION_SUMMARY.md`
 
 
 ## Cross-references
