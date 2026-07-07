@@ -108,7 +108,11 @@ public_id:
 
 ![4部品のうち2つは既に持っている図。料理人=変異にコードを書き換えるAIを足すだけ。審査員はfitness proxy、棚はMapElitesArchive、選抜はlldarwinのε-lexicase+QD](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evolution_loop/fig3_you_have_two.png)
 
-- **棚(QD)** は、歩行進化に使っている `MapElitesArchive`(タイプ別の名人を並べる棚)。
+実際、私の手元の「棚(`MapElitesArchive`)」はこう動きます。下は仮想生物の **“体”そのものを進化させ**、「体の節の数」ごとにチャンピオンを別々に残した例です。いちばん速い 1 節だけに全体を潰させず、2 節・3 節……と**タイプ別の名人が共存**します。これがそのまま「棚(QD)」の中身です(CPU だけで回しています)。
+
+![体の節の数ごとにチャンピオンを並べたMAP-Elitesの棚。総合1位のいちばん速い個体に潰されず、節数というタイプ別の名人が共存している](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evolution_loop/qd_creature_zoo.gif)
+
+- **棚(QD)** は、進化に使っている `MapElitesArchive`(タイプ別の名人を並べる棚)。
 - **選抜(選択圧)** は、ε-lexicase + QD という選び方の部品。
 - **審査員(評価器)** は、歩行なら「実際に歩かせて距離を測る」評価がもう手元にある。
 
