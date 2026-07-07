@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" font-family="'Segoe UI','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">
   <rect width="860" height="520" fill="#fdf7ee"/>
-  <text x="430" y="40" text-anchor="middle" font-size="25" font-weight="700" fill="#2c3e50">審査員がすべて ― 味見しないと「盛り付けだけ豪華」が勝つ</text>
-  <text x="430" y="68" text-anchor="middle" font-size="15" fill="#7f8c8d">これが 報酬ハッキング(reward hacking)：AI は中身でなく「審査の抜け道」を見つける</text>
+  <text x="430" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#2c3e50">審査員がすべて ― 味見しないと「盛り付けだけ豪華」が勝つ</text>
+  <text x="430" y="68" text-anchor="middle" font-size="14" fill="#7f8c8d">これが 報酬ハッキング(reward hacking)：AI は中身でなく「審査の抜け道」を見つける</text>
 
   <!-- Panel A: lax judge -->
   <g>
@@ -18,11 +18,12 @@
     <text x="320" y="235" text-anchor="middle" font-size="13" fill="#8a3a32">審査員が</text>
     <text x="320" y="253" text-anchor="middle" font-size="13" fill="#8a3a32">味見しない</text>
 
-    <rect x="70" y="320" width="306" height="120" rx="10" fill="#fff" stroke="#e57373"/>
-    <text x="223" y="348" text-anchor="middle" font-size="15" font-weight="700" fill="#c0392b">→ 盛り付けだけ豪華な料理が満点</text>
-    <text x="223" y="374" text-anchor="middle" font-size="13" fill="#5d6d7e">料理人は「味を良くする」でなく</text>
-    <text x="223" y="394" text-anchor="middle" font-size="13" fill="#5d6d7e">「審査員の目を騙す」方向へ進化する</text>
-    <text x="223" y="422" text-anchor="middle" font-size="12.5" fill="#a93226">実例:自己改造AI が“不具合報告のログを消して”検査を迂回し満点(DGM)</text>
+    <rect x="70" y="316" width="306" height="130" rx="10" fill="#fff" stroke="#e57373"/>
+    <text x="223" y="344" text-anchor="middle" font-size="15" font-weight="700" fill="#c0392b">→ 盛り付けだけ豪華な料理が満点</text>
+    <text x="223" y="370" text-anchor="middle" font-size="13" fill="#5d6d7e">料理人は「味を良くする」でなく</text>
+    <text x="223" y="390" text-anchor="middle" font-size="13" fill="#5d6d7e">「審査員の目を騙す」方向へ進化する</text>
+    <text x="223" y="416" text-anchor="middle" font-size="11.5" fill="#a93226">実例:自己改造AI が“不具合報告の</text>
+    <text x="223" y="433" text-anchor="middle" font-size="11.5" fill="#a93226">ログを消して”検査を迂回し満点(DGM)</text>
   </g>
 
   <!-- Panel B: strict/grounded judge -->
@@ -38,12 +39,13 @@
     <text x="734" y="235" text-anchor="middle" font-size="13" fill="#227a48">実際に</text>
     <text x="734" y="253" text-anchor="middle" font-size="13" fill="#227a48">食べて採点</text>
 
-    <rect x="484" y="320" width="306" height="120" rx="10" fill="#fff" stroke="#66bb6a"/>
-    <text x="637" y="348" text-anchor="middle" font-size="15" font-weight="700" fill="#1e8449">→ 本当に美味しい料理が勝つ</text>
-    <text x="637" y="374" text-anchor="middle" font-size="13" fill="#5d6d7e">評価器が (a)自動 (b)接地 (c)騙されにくい</text>
-    <text x="637" y="394" text-anchor="middle" font-size="13" fill="#5d6d7e">の3条件を満たすとループが健全に回る</text>
-    <text x="637" y="422" text-anchor="middle" font-size="12.5" fill="#1a7a43">対策例:安い審査で足切り／隠し点／審査員は書換え禁止</text>
+    <rect x="484" y="316" width="306" height="130" rx="10" fill="#fff" stroke="#66bb6a"/>
+    <text x="637" y="344" text-anchor="middle" font-size="15" font-weight="700" fill="#1e8449">→ 本当に美味しい料理が勝つ</text>
+    <text x="637" y="370" text-anchor="middle" font-size="13" fill="#5d6d7e">評価器が (a)自動 (b)接地 (c)騙されにくい</text>
+    <text x="637" y="390" text-anchor="middle" font-size="13" fill="#5d6d7e">の3条件を満たすとループが健全に回る</text>
+    <text x="637" y="416" text-anchor="middle" font-size="11.5" fill="#1a7a43">対策例:安い審査で足切り／隠し点／</text>
+    <text x="637" y="433" text-anchor="middle" font-size="11.5" fill="#1a7a43">審査員は書換え禁止</text>
   </g>
 
-  <text x="430" y="500" text-anchor="middle" font-size="13" fill="#7f8c8d">教訓 ＝「異常に良い結果が出たら、勝った気になる前に内訳を疑う」(honest disclosure)そのもの</text>
+  <text x="430" y="500" text-anchor="middle" font-size="12.5" fill="#7f8c8d">教訓 ＝「異常に良い結果が出たら、勝った気になる前に内訳を疑う」(honest disclosure)そのもの</text>
 </svg>
