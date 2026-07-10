@@ -1,8 +1,22 @@
 # next_plan (正本) — fullsense
 
-> 最終更新: 2026-07-09 22:44 JST
+> 最終更新: 2026-07-10 22:08 JST
 
 ## 現在地
+
+- 2026-07-10 の onocollo 草稿修正では、`docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md` の 7.5 追記に対し、統合指示のうち **非不可逆部分**は反映済み。具体的には `greedy < random < QD` を **今回の 5 seed / 今回の評価予算での観測事実**へ弱め、`QD が常に優位` / `探索の問題であって適応度地形の問題ではない` の断定を除去した。`stepping stone` 断定と `elite hypervolume` 参照も外し、本文側は `今回の設定では QD 的な多様性保持が効いた` までに弱めた。
+- 同修正で、7.5 の reference 接地は `MAP-Elites (Mouret & Clune, 2015)` と `QD grasping (Huber et al., 2023)` に揃え、本文中にも著者名・年を入れた。2026-07-10 の追加確認では **arXiv 一次情報** `1504.04909` と `2308.05483` を開き、著者・年・主張対応を再確認済み。`Huber et al. 2023` の要約は「15 手法 / 10 grasping domains の比較で、成功解を優先する MAP-Elites 変種が studied metrics で大きく優位」へ tightening した。`elite hypervolume` は直接根拠として弱いので **不要指摘ではなく妥当指摘として採用し、参照から削除**した。
+- 冗長性表も 2/3/5/6 だけだった不整合を修正し、本文に **図は 1〜6 節全部・表は代表点**だと明記したうえで 4 節を追加、`2 節 0.83 - 0.56 = +0.28` の丸め不整合も `+0.27` へ是正した。`gripped` と `de-tumbled` の別指標性、冗長性が単調でないこと、形態と制御の両方が効くこと、今回結果の限界も結論・disclosure へ反映済み。
+- `本物の実行結果` の表現も tightening し、**今回この場で再実行したのではなく、過去に取得済みの実行結果 / ログ / 図を整理している**と明記した。今回ターンで test / benchmark / script rerun は行っていない。
+- 追加で、最近の project update を最近の Qiita 素材へ接続するため、`docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md` に **gaitlab / spikelab / onocollo** の 3 本立てを明示した。`3 行でいうと` は実質 4 項目化していたので **`4 点でいうと` へ改題**し、末尾の project update 側にも **把持パイプラインは toy スケール / 既取得結果の整理段階**だと 1 文足して onocollo 側 disclosure とトーンを揃えた。
+- 残る未処理の最優先は、`raw.githubusercontent.com` 配下の onocollo 画像 10 枚（`adr_{grasp,heavy,escape,frozen,methods,zoo,redundancy,tumble,fast_tumble,clutter}`）の **404 解消**である。これは **publish / merge blocker** として扱う。ローカル asset 実体は `docs/articles/assets/onocollo/` に存在するが、HTTP 200 確認には **git push が必要**。ただし `docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md` は `public_id:631620c33d20f2694310` を持つ**既公開記事**なので、asset push だけでは §7.5 は公開面へ出ない。工程は **`asset push` → `raw URL 全件 HTTP 200` → `本文差分を commit` → `public_id` 既存 item へ再 publish / PATCH → Qiita 公開面で GIF が表示・アニメーションすることを目視確認** までを 1 本の gate として扱う。`?v=2` が必要になった場合は **該当 URL だけ**を更新し、その本文更新と再 publish / PATCH、公開面の再確認まで追加で要る。
+- 2026-07-10 夜の補足判断として、「Animation GIF を多めに置くと記事の見られ方が良い」という運用方針自体は採用する。ただし新規知見というより、既存の `docs/articles/QIITA_POST_GUIDE.md` にある **画像 / アニメーション SVG の Qiita 表示ルール**の延長である。すなわち、GIF/PNG を増やすほど `raw.githubusercontent` の到達性、push 前提、Qiita の 404 キャッシュ、`?v=N` cache-bust、`Invoke-WebRequest -Head` 等での HTTP 実判定が重要になる。したがって current blocker の優先順位はむしろ上がったと扱う。
+- 2026-07-10 夜の追加確認で、`docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md` の 7.5 節にある新規画像リンク 10 本は **全文点検済み**で、少なくとも現行草稿では URL 断片切れや無効な Markdown 記法は見当たらなかった。懸念が出ていた `![正直な失敗②: 固着した関節では届かない](...)` も、現行ファイル上では `adr_frozen.gif?v=1` まで閉じている。したがって blocker は Markdown 破損ではなく、あくまで remote 未到達性である。
+- push 対象の切り分けも確認済み。`git diff --name-only origin/main..HEAD` では **ahead 1 commit (`eafe178`) に含まれるのは `docs/articles/assets/onocollo/adr_*` の 10 枚だけ**で、現在 dirty な本文差分 (`QIITA_onocollo_worldmodel_alife_ja.md` / `QIITA_#48_gpu_wait_cpu_roundup_ja.md` / `docs/next_plan.md`) は **未コミット** の別レイヤである。よって、human がこのまま push を承認した場合に外へ出るのはまず asset commit だけであり、本文修正を publish 対象へ含めるには別 commit 境界を作る必要がある。
+- 今後の article 運用方針としては、「Animation GIF を沢山置くと読まれやすい」を単なる感覚ではなく **証拠配置ルール**として扱う。つまり、各主張 (`掴める`, `失敗する`, `greedy<random<QD`, `de-tumble は別指標`, `clutter でも挙動が変わる` など) に対して、本文中へ対応する GIF/PNG を **1 claim 1 visual proof** の粒度で差し込む。onocollo 7.5 の 10 本構成はこの方針の最初の実例であり、今後の Qiita 草稿でも同型に展開してよい。ただし GIF を増やすほど publish blocker は画像到達性に集中するため、`raw URL 200 確認` を完了条件に据える current gate は維持する。
+- 2026-07-10 夜の統合判断として、「asset push 未了のまま証拠 GIF 追加を公開差分扱いしない」は妥当指摘として採用する。完了条件は **raw URL の HTTP 200** だけでなく、**Qiita 公開面で GIF が実際に表示され、アニメーションしていることの目視確認**まで含める。不要指摘は特になく、従来 plan の不足は「既公開 `public_id` 記事なのに asset push 後の PATCH 工程を plan に昇格させていなかった」点だったので、ここで補った。
+
+2026-07-10 decision log: ユーザー選択 `1) push を承認する` を受領。これを、直前に提示していた onocollo 7.5 公開 blocker 解消の外部反映シーケンス全体に対する承認として扱う。実行範囲は `docs/articles/assets/onocollo/adr_*` 10 枚の asset push、raw URL 全件 HTTP 200 確認、本文差分の commit 境界作成、`public_id:631620c33d20f2694310` の既公開 Qiita 記事への PATCH、必要時の該当 URL 限定 `?v=2` 更新、および Qiita 公開面での GIF 表示・アニメーション確認までとする。
 
 - Qiita 草稿と handoff 文書の commit 記録ルール: `c37d084` までは連続列挙、それ以降は肥大化回避のため **範囲表記 + マイルストーン**で記録する。
 - handoff 台帳は構造上、**最新 1 件の handoff commit を未反映のまま残すのが正常状態**である。自己増殖を避けるため、backfill は **実質的な handoff 更新を伴う commit に便乗してのみ**行い、台帳追記だけの単独 commit は原則作らない。例外標本は `a0b793a` / `6d9854d` / `c16a69b` / `e150ee4` / `ed1e841` で、いずれも standalone backfill debt の過去標本として扱う。以後は同型の commit を増やさず、cleanup が必要なら 1 行 note を積み増すのではなく、次の実質的 handoff 更新か別 human-gate 判断の中で 1 回で畳む。
