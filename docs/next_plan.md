@@ -1,6 +1,6 @@
-# Next Plan
+# next_plan (正本) — fullsense
 
-最終更新: 2026-06-20
+> 最終更新: 2026-07-09 22:44 JST
 
 ## 現在地
 
@@ -307,10 +307,16 @@
   - さらに、導入 → 第0章、第0章末 → 第1章頭、`/goal` → 独立 honest disclosure、独立 honest disclosure → 第3章頭、`3-2` → `3-3` の局所接続も確認済みで、導入の作法宣言から用語地図、`鵜呑みにしない` から一次情報確認、`mystery graph` から `捨てた数字`、`無知の知` から knowledge stack、thought circulation から evidence ladder への流れまで日本語正本に追従している。
   - `alu.jp` crop URL 数の 16 本基準は、日本語正本を source of truth として **本文 8 本 + 参考節 8 本 = 計 16 本（unique は 8 本、各 URL が本文と参考で 2 回ずつ出現）** と確認したうえで、en/zh/ko も同じ構成かを照合した。
   - `promise-progress-payoff` / `ending-payoff` の再確認では、終盤の `観察ベースの3点` → H4Pix 引用 → `まとめ：手綱と、輪と、知` の 3 箇条 → `Bölük` 数字を捨てた payoff 文 → `次回予告的な余韻` → 参考文献節、という鎖を 4 言語で突き合わせた。
-  - 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
-  - 2026-06-19 の seam spot-check + section fingerprint re-diff までで、代表的な細い橋渡し段と再開候補になりやすい章境界の局所接続は一巡し、**local source 上の residual translation drift 監査は一旦クローズ済み**である。ただし網羅保証ではないため、以後の論点は新しい seam 候補探索ではなく、live draft / live URL 側の未反映差と publish gate 管理へ寄せる。
+- 参考文献節と末尾注記も局所確認済みで、`/goal` docs、arXiv `2605.*` 群、RAPTOR upstream、自著関連記事、バス江引用、`secondary-only / primary unconfirmed` の列挙まで日本語正本に追従している。
+- 2026-06-19 の seam spot-check + section fingerprint re-diff までで、代表的な細い橋渡し段と再開候補になりやすい章境界の局所接続は一巡し、**local source 上の residual translation drift 監査は一旦クローズ済み**である。ただし網羅保証ではないため、以後の論点は新しい seam 候補探索ではなく、live draft / live URL 側の未反映差と publish gate 管理へ寄せる。
 
-## 次回の開始メモ
+## 直近の成果
+
+- `#43` 多言語記事群について、導入から結語・参考文献までの代表 seam spot-check と line 単位 re-diff を完了し、local source 上の residual translation drift 監査を一旦クローズした。
+- `qiita44` の参考文献補強と `kamikudaki` の休憩ポイント / 参考文献補強は反映済みで、publish gate に必要な local source 側の整合は保たれている。
+- `RAPTOR` / `LLM Wiki` / `47,097 docs` まわりの hedged note と honest disclosure は各言語版で日本語正本へ同期済み。
+
+## 次の一手
 
 - 新規の設計・実装・調査へ進む前に、必要な論点があれば RAD コーパスを grep して先行手法を確認する。
 - publish gate は着手済みで、`qiita44` の参考文献補強は RAD 接地後に反映済み。
@@ -321,7 +327,7 @@
 - 直近の機械比較で actionable だったのは上記の図版同期漏れ 1 件だけで、front matter タグ差（`個人開発` と `AIエージェント` ↔ `Agent`）および 8 節の `para-1 / blank-1` 差は既知の metadata / 既存スタイル差として扱う。
 - `.llterm/loop_ledger.jsonl` の恒久対策は commit `7745f84` で実施済み。今後は `.gitignore` 管理の local telemetry として扱う。
 
-## 注意
+## 環境メモ
 
 - `ignorePublish: true` / `private: true` は `qiita-cli-poc` ローカル運用の安全柵。既発行の限定共有 URL を撤回するものではない。
 - `docs/SESSION_SUMMARY.md` は通常 Stop hook に上書きされるため、必要な恒久メモは `NEXT_SESSION.md` と本ファイルを優先する。
