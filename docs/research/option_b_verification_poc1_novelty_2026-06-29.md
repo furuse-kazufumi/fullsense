@@ -133,3 +133,17 @@ verdict flip は **N3 の 1 件のみ**。他は全 finding が adversarial revi
 **フォーク含意(firm)**: **A(PoC-1 go-with-caveats)を支持・強化**(read 側 post-hoc wrapper が唯一残る open niche)/ **B(anticipatory write gate)は弱化**(write 側は delta-rule/MesaNet/OVQ/KalmaNet/FwPKM で過密)/ **C(NAS-allele)は直交・独立**。→ **推奨 = A**(§0 framing 規律 + CCQ 差別化を必須条件として付帯)。PoC-1 pre-registration = `llcore docs/research/preregistration/prereg_poc1_testtime_read_2026-06-29.md`(作成済)。
 
 **honest 留保**: verdict は absence-in-targeted-search + 構造論証で、決定的 foreclosing 論文は無い。深掘り probe は abstract ベース(本パスで Lexico/CCQ-cite の 2 点のみ一次 spot-check)。多数の 2026 preprint ID はカットオフ後で probe 報告依存。
+
+
+---
+
+## PoC-1 実行結果 (2026-07-11): GO 撤回 -> NOT GO
+
+PoC-1 を CPU 実行(Stage1/2/H3)し一旦「GO」到達 -> 敵対的レビュー(WF 39 agents/33 findings)+ 決定実験3本で撤回。
+
+- 当初 gain +0.018〜0.026(8/8有意)は MQAR value 重複の metric artifact: value 非復元(binding-clean)再走で +0.005/1-8、R0 も 0.262->0.163。per-instance=重複+0.155/一意-0.033(binding 破壊)。
+- 機構は sparse cleanup でなく degree-2 spectral read(無調整 poly2=S·SᵀS·q̂ が88%再現、tau=0 選択)。pre-reg §0 novelty regime 不成立。
+- H2 通過は R-CCQ 片側λグリッド artifact。H3 状態依存は本物だが効果自体 null 化。
+
+判定: NOT GO。GPU スケール(Qwen3-1.7B)行わない。次=benchmark を binding-clean 化して再確認 or fork C(NAS-allele)へ pivot。
+正本=llcore research/poc1_testtime_read/POC1_VERDICT.md(commit 1c504d4)。
