@@ -1,6 +1,6 @@
 # next_plan (正本) — fullsense
 
-> 最終更新: 2026-07-11 21:41 JST
+> 最終更新: 2026-07-11 22:04 JST
 
 ## 現在地
 
@@ -18,6 +18,7 @@
 - 2026-07-11 execution result: commit `ee8f50b` (`article(qiita): publish rocket update and project recap`) は **`docs/articles/assets/onocollo/rocket_land.gif` / `docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md` / `docs/articles/drafts/QIITA_#48_gpu_wait_cpu_roundup_ja.md` / `docs/next_plan.md` の 4 件だけ**を含み、`origin/main` へ push 済みである。`rocket_land.gif?v=1` は raw URL で **HTTP 200 / `image/gif`** を確認し、その後 2 本の既公開 Qiita 記事 (`631620c33d20f2694310`, `44508c48f38a68abad35`) へ PATCH `200` を確認した。live HTML でも `onocollo` 記事の `rocket_land.gif?v=1` / `同じ MuJoCo 土台で、今度はロケットを着陸させてみた`、`#48` 記事の `最近の project update` / `ロケット着陸 toy ── nominal では小勝ち、wind held-out では PID が堅い` 見出しが反映済みである。
 - 監査境界メモ: `docs/research/option_b_verification_poc1_novelty_2026-06-29.md` の `PoC-1 = NOT GO` 再フレーミング差分は **`ee8f50b` には含まれていない別件**であり、2026-07-11 21:43 時点では未コミット dirty として切り分けていた。以後これを残す場合は、article publish 系 commit とは別 commit 境界で追跡する。
 2026-07-11 decision log: ユーザー選択 `1) 進める` を再受領。これを、local follow-up commit `cc7e80d` の公開反映と、その前提として未 push の `8cc3556` / `cc7e80d` を `origin/main` へ push する承認として扱う。実行範囲は **(a)** `docs(research): finalize poc1 not-go framing` (`8cc3556`) と `docs: align qiita handoff and fixed references` (`cc7e80d`) の push、**(b)** 既公開 Qiita 記事 `631620c33d20f2694310` / `44508c48f38a68abad35` への再 PATCH、**(c)** live HTML 上で fixed-reference 文言が反映されたことの確認までとする。
+2026-07-11 execution result: follow-up 3 commit (`8cc3556`, `cc7e80d`, `9cef4df`) は `origin/main` へ push 済み。続けて `QIITA_onocollo_worldmodel_alife_ja.md` (`public_id:631620c33d20f2694310`) と `QIITA_#48_gpu_wait_cpu_roundup_ja.md` (`public_id:44508c48f38a68abad35`) を再 PATCH し、どちらも `preflight: OK` / `PATCH 200` を確認した。live HTML では、`onocollo` 記事の `docs/next_plan.md` fixed reference と `rocket_land.gif?v=1`、`#48` 記事の `option_b_verification_poc1_novelty_2026-06-29.md` および `QIITA_onocollo_worldmodel_alife_ja.md` への GitHub 固定参照が反映済みである。
 - 2026-07-10 の onocollo 草稿修正では、`docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md` の 7.5 追記に対し、統合指示のうち **非不可逆部分**は反映済み。具体的には `greedy < random < QD` を **今回の 5 seed / 今回の評価予算での観測事実**へ弱め、`QD が常に優位` / `探索の問題であって適応度地形の問題ではない` の断定を除去した。`stepping stone` 断定と `elite hypervolume` 参照も外し、本文側は `今回の設定では QD 的な多様性保持が効いた` までに弱めた。
 - 同修正で、7.5 の reference 接地は `MAP-Elites (Mouret & Clune, 2015)` と `QD grasping (Huber et al., 2023)` に揃え、本文中にも著者名・年を入れた。2026-07-10 の追加確認では **arXiv 一次情報** `1504.04909` と `2308.05483` を開き、著者・年・主張対応を再確認済み。`Huber et al. 2023` の要約は「15 手法 / 10 grasping domains の比較で、成功解を優先する MAP-Elites 変種が studied metrics で大きく優位」へ tightening した。`elite hypervolume` は直接根拠として弱いので **不要指摘ではなく妥当指摘として採用し、参照から削除**した。
 - 冗長性表も 2/3/5/6 だけだった不整合を修正し、本文に **図は 1〜6 節全部・表は代表点**だと明記したうえで 4 節を追加、`2 節 0.83 - 0.56 = +0.28` の丸め不整合も `+0.27` へ是正した。`gripped` と `de-tumbled` の別指標性、冗長性が単調でないこと、形態と制御の両方が効くこと、今回結果の限界も結論・disclosure へ反映済み。
