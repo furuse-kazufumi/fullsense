@@ -3,23 +3,23 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-07-13 00:19:46
+- **最終更新**: 2026-07-13 06:35:20
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+c77706a auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:35)
+119f21d auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+578cbe1 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+15bde3b auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+07e6148 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+78cfa93 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+6a7ff81 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33)
+e3e28cb auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33)
 0fca68a docs: record push of commit-scope-gate resolution (614545d)
 614545d docs: close commit-scope gate in handoff (resolved by atomic auto-commit 278ab56, verified)
-bdb66af auto: NEXT_SESSION.md 編集前 (2026-07-12 21:37)
-17f3fef auto: next_plan.md 編集前 (2026-07-12 21:37)
-39ec2d5 auto: next_plan.md 編集前 (2026-07-12 21:37)
-5bff78f auto: HANDOFF_LEDGER.md 編集前 (2026-07-12 21:36)
-2ea7f29 auto: next_plan.md 編集前 (2026-07-12 17:46)
-180f951 auto: HANDOFF_LEDGER.md 編集前 (2026-07-12 17:46)
-699fb25 auto: next_plan.md 編集前 (2026-07-12 17:21)
-278ab56 auto: QIITA_onocollo_worldmodel_alife_ja.md 編集前 (2026-07-12 16:41)
 ```
 
 ## 現在の git status
@@ -27,13 +27,14 @@ bdb66af auto: NEXT_SESSION.md 編集前 (2026-07-12 21:37)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
+ M docs/articles/drafts/QIITA_rocket_control_vs_learning_ja.md
+?? docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-00:07 docs/SESSION_SUMMARY.md
-00:07 docs/NEXT_SESSION.auto.md
+(直近 2h の変更なし)
 ```
 
 ---

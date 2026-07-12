@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-13 00:19:46
+- **生成時刻**: 2026-07-13 06:35:20
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `8	0`
 
 ```
+c77706a auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:35)
+119f21d auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+578cbe1 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+15bde3b auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+07e6148 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+78cfa93 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
+6a7ff81 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33)
+e3e28cb auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33)
 0fca68a docs: record push of commit-scope-gate resolution (614545d)
 614545d docs: close commit-scope gate in handoff (resolved by atomic auto-commit 278ab56, verified)
-bdb66af auto: NEXT_SESSION.md 編集前 (2026-07-12 21:37)
-17f3fef auto: next_plan.md 編集前 (2026-07-12 21:37)
-39ec2d5 auto: next_plan.md 編集前 (2026-07-12 21:37)
-5bff78f auto: HANDOFF_LEDGER.md 編集前 (2026-07-12 21:36)
-2ea7f29 auto: next_plan.md 編集前 (2026-07-12 17:46)
-180f951 auto: HANDOFF_LEDGER.md 編集前 (2026-07-12 17:46)
-699fb25 auto: next_plan.md 編集前 (2026-07-12 17:21)
-278ab56 auto: QIITA_onocollo_worldmodel_alife_ja.md 編集前 (2026-07-12 16:41)
 ```
 
 ### git status (porcelain)
@@ -37,6 +37,8 @@ bdb66af auto: NEXT_SESSION.md 編集前 (2026-07-12 21:37)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
+ M docs/articles/drafts/QIITA_rocket_control_vs_learning_ja.md
+?? docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
 ```
 
 
@@ -71,12 +73,7 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `00:07` `docs/SESSION_SUMMARY.md`
-- `00:07` `docs/NEXT_SESSION.auto.md`
-- `21:39` `docs/HANDOFF_LEDGER.md`
-- `21:37` `docs/NEXT_SESSION.md`
-- `21:37` `docs/next_plan.md`
-- `21:35` `.pytest_cache/v/cache/nodeids`
+_(直近 4 時間に変更されたファイル無し)_
 
 
 ## Cross-references
