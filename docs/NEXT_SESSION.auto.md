@@ -10,16 +10,18 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-13 06:35:20
+- **生成時刻**: 2026-07-13 07:37:42
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `8	0`
+- HEAD vs upstream (左=ahead 右=behind): `10	0`
 
 ```
+30a30e0 auto: QIITA_rocket_control_vs_learning_general_ja.md 編集前 (2026-07-13 07:02)
+446d5d9 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 07:02)
 c77706a auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:35)
 119f21d auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
 578cbe1 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
@@ -28,8 +30,6 @@ c77706a auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:35
 78cfa93 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
 6a7ff81 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33)
 e3e28cb auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33)
-0fca68a docs: record push of commit-scope-gate resolution (614545d)
-614545d docs: close commit-scope gate in handoff (resolved by atomic auto-commit 278ab56, verified)
 ```
 
 ### git status (porcelain)
@@ -37,8 +37,7 @@ e3e28cb auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- M docs/articles/drafts/QIITA_rocket_control_vs_learning_ja.md
-?? docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
+ M docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
 ```
 
 
@@ -73,7 +72,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-_(直近 4 時間に変更されたファイル無し)_
+- `07:29` `docs/SESSION_SUMMARY.md`
+- `07:29` `docs/NEXT_SESSION.auto.md`
+- `07:02` `docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md`
+- `07:02` `docs/articles/drafts/QIITA_rocket_control_vs_learning_ja.md`
 
 
 ## Cross-references
