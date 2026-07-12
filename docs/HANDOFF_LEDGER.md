@@ -151,6 +151,14 @@ nav_order: 96
   - Exit-1 risk independently reproduced/confirmed: the 106 `.md` diffs each ADD `project_group:` (their HEAD versions lack it); `requires_project_group` returns True for every non-DRAFTS public article, so a checkout of a code-only commit would flag `GROUP_MISSING` on those articles. Against the **working tree** (new code + new `.md`) preflight reports `total_files:48, warnings:0, exit 0` — i.e. the working tree is internally consistent and the risk materializes ONLY as a partial (code-without-`.md`) committed/checked-out tree, not on local runs. The `is_publish_ready` nullish fix removes the nullish-draft false positive but does not remove the public-article group requirement, so the `.md` still must ship with the code.
   - Mandatory index-hygiene precondition for ANY future commit here: the index currently holds a 4-file mixed partial stage (`HANDOFF_LEDGER.md`, `QIITA_PROJECT_GROUP_INDEX.md`, `tests/test_qiita_preflight.py`, `tools/_qiita_title_guard.py`; the last two are `AM`). A bare `git commit` would produce a broken commit (missing importer `qiita_public_post.py`). Before committing, run `git reset` to clear the index, re-add the intended set via explicit pathspec, and eyeball `git diff --cached --name-only`.
 
+### 2026-07-12 — onocollo §9 next-step candidates public PATCH (COMPLETED)
+
+- Decision: user approved publishing the §9 「次に載せられる候補」 update to the already-public Qiita item `631620c33d20f2694310` (gate answer 「今 publish + 独立検証」, reinforced mid-turn 「公開してよいよ」).
+- Context: a prior session had added the §9 subsection (箸 / 海底 / 多節 / 双腕 candidates — all user-directed 救助ロボ案) to `docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md` locally but could not confirm the live PATCH because that session reported its Bash/scratchpad output was unreliable ("spoofed"). This session re-established ground truth independently: WebFetch showed §9 was NOT live, and a deterministic Bash probe token + git-state cross-check showed Bash output IS trustworthy this session (the spoofing did not reproduce).
+- Execution: pre-PATCH fresh readback via `qiita_public_post.py preflight` = `OK` (auth/api/html `200`, title + tags match, 19 assets all `200`). `post --yes` returned `OK (200) [PUBLIC(一般公開)]` for `public_id=631620c33d20f2694310`.
+- Independent verification: WebFetch of a cache-busted URL (`?v=verify2`, to bypass the 15-min per-URL cache) confirmed the §9 subheading plus all four candidates (箸 / 海底 / 多節 / 双腕) are now live; page `Last updated = 2026-07-12` (was `2026-07-11`). Pending item closed.
+- No git push was performed this session. The article source was already in a committed/clean state; this PATCH sends the local body directly to the Qiita API and does not depend on GitHub push. Any origin push remains a separate gate.
+
 ### 2026-07-11 — linear history push without squash
 
 - Decision: user approved pushing the unsquashed linear history `81e5b40 -> 55e279f -> bca25fb`.
