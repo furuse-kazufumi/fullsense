@@ -10,16 +10,18 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-12 17:21:45
+- **生成時刻**: 2026-07-12 21:31:26
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `2	0`
+- HEAD vs upstream (左=ahead 右=behind): `4	0`
 
 ```
+2ea7f29 auto: next_plan.md 編集前 (2026-07-12 17:46)
+180f951 auto: HANDOFF_LEDGER.md 編集前 (2026-07-12 17:46)
 699fb25 auto: next_plan.md 編集前 (2026-07-12 17:21)
 278ab56 auto: QIITA_onocollo_worldmodel_alife_ja.md 編集前 (2026-07-12 16:41)
 a85434e article(qiita): deepen evolution loop cooking draft
@@ -28,14 +30,14 @@ a01bf5c Add team stock source for onocollo article
 44628d7 Add motion pack figures to onocollo draft
 ff1e719 Add static-safe motion pack assets
 6bd2621 docs: record final push decision
-bf08436 docs: sync next-plan with pushed lineage
-1107518 docs: record linear push approval
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/next_plan.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
+ M docs/next_plan.md
 ```
 
 
@@ -70,18 +72,10 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `17:21` `docs/next_plan.md`
-- `16:41` `docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md`
-- `16:37` `docs/NEXT_SESSION.auto.md`
-- `16:37` `docs/SESSION_SUMMARY.md`
-- `13:52` `.llterm/loop_ledger.jsonl`
-- `13:49` `docs/HANDOFF_LEDGER.md`
-- `13:48` `docs/NEXT_SESSION.md`
-- `13:47` `.pytest_cache/v/cache/nodeids`
-- `13:46` `scripts/qiita_preflight.py`
-- `13:33` `tests/test_qiita_preflight.py`
-- `13:33` `tests/test_qiita_frontmatter.py`
-- `13:32` `tools/qiita_public_post.py`
+- `21:30` `docs/SESSION_SUMMARY.md`
+- `21:30` `docs/NEXT_SESSION.auto.md`
+- `17:46` `docs/next_plan.md`
+- `17:46` `docs/HANDOFF_LEDGER.md`
 
 
 ## Cross-references

@@ -4,12 +4,12 @@
 
 > canonical handoff ではない。再開判断の正本は `docs/NEXT_SESSION.md`、approval / execution / push / rollback 来歴は `docs/HANDOFF_LEDGER.md`、auto snapshot は `docs/NEXT_SESSION.auto.md`。
 
-## ★2026-07-12 夜 — onocollo 記事に次手5候補を反映(local完了)・live投稿は環境異常でpending
+## ✅ 2026-07-12 完了 — onocollo 記事 §9「次に載せられる候補」を live へ PATCH(独立検証済み・クローズ)
 
-- **経緯**: ユーザーが過去セッションで指示した onocollo 上のロボ案5件(海底把持/蛇型救助/箸道具操作/双腕洗濯たたみ/GIF補強)が「レビュー奏者」セッションで本筋と無関係として切り離され生ログにしか無く散逸 → 救出し memory `project_onocollo_robotics_ideation_2026_07_11` に保存 + Workflow 5-agent 評価で優先順位付け(**箸4 > 海底3 ≈ GIF3 > 蛇型2 ≈ 双腕2**)。
-- **記事反映(local 完了・Read 確認済み)**: `docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md`(public `631620c33d20f2694310`)の §9 に「この土台の上に『次に載せられる』候補」小節を追加(箸→海底→蛇型→双腕、構想であることを明示、cliffhanger)。
-- **★live 投稿は未達成(pending)**: 本セッションは **Bash/scratchpad の tool 出力が一貫して汚染(spoof)**され post 結果を検証不能。WebFetch(独立)で live 確認 → §9 候補は **live 未反映**(6フレーズ全て「なし」)。`post.txt`/`verify.txt` の成功表示は信用しない。実害(誤公開)は無い見込み(live 本文は無変更)。
-- **次セッション(正常環境)**: `PYTHONUTF8=1 py -3.11 tools/qiita_public_post.py post docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md --yes` → **WebFetch で https://qiita.com/furuse-kazufumi/items/631620c33d20f2694310 を直読して live 反映を独立検証**(scratchpad を信用しない)。記事 local 反映は保存済みなので post→検証のみ。
+- **経緯**: ユーザーが過去セッションで指示した onocollo 上のロボ案5件(海底把持/蛇型救助/箸道具操作/双腕洗濯たたみ/GIF補強)を救出し memory `project_onocollo_robotics_ideation_2026_07_11` に保存 + Workflow 5-agent 評価で優先順位付け(箸4 > 海底3 ≈ GIF3 > 蛇型2 ≈ 双腕2)。§9 に「この土台の上に『次に載せられる』候補」小節(箸→海底→多節→双腕、構想である旨明示、cliffhanger)を追加。
+- **前セッションが pending にした理由**: Bash/scratchpad の tool 出力汚染(spoof)申告で post 成否を検証不能だった。
+- **本セッション(2026-07-12・正常環境)で完了**: (1)独立チャネル(WebFetch)で §9 が live 未反映を再確認 (2)決定的 probe token + git 状態照合で **Bash 出力は本セッションでは信頼可(spoof 再現せず)** と確認 (3)`preflight` = OK(auth/api/html 200・title/tags 一致・asset 19 全 200)を pre-PATCH fresh readback として実施 (4)ユーザー承認(「今 publish + 独立検証」+「公開してよいよ」)のもと `post --yes` = **`OK (200) [PUBLIC(一般公開)]`** (5)**WebFetch キャッシュ回避 URL(`?v=verify2`)で §9 小見出し + 4候補が live 反映・Last updated 2026-07-12 を独立検証**。
+- **記録**: 承認・実行・検証は `docs/HANDOFF_LEDGER.md` の `2026-07-12 — onocollo §9 next-step candidates public PATCH (COMPLETED)` に記載。**git push は未実施(必要なら別 gate)**。この案件はクローズ。
 
 ## 2026-07-12 第3レビュー対応(独立再現完了・commit なし)
 
