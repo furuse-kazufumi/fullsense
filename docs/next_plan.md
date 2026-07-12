@@ -43,13 +43,13 @@
 
 選択肢2 を一気通しで実行完了。`a85434e`(draft のみ、pathspec 限定)push → `cbfc0f7..a85434e` → 事前 fresh readback `preflight: OK` → `post --yes` = `OK (200) [PUBLIC(一般公開)]` → live 確認(`updated_at:2026-07-12T13:20:52+09:00`、body 23314 chars、深掘りマーカー + fig3 画像を rendered_body で確認)。**evolution loop 案件はクローズ。** 残る派生タスク: (a) code 修正 3 ファイル(title guard / frontmatter escape / tests、`266 passed`)は未 commit の local 変更、(b) index の別案件 4 staged、(c) onocollo Team browser-side visibility 確認 pending。詳細は HANDOFF_LEDGER 参照。
 
-## 現在地
+## 現在地(2026-07-12 夜 更新 — gate クローズ)
 
-- **evolution loop 記事の public PATCH は完了・クローズ**。`public_id 40ba7cc91ac577274b74` へ live PATCH 済み(`OK (200)`、`updated_at:2026-07-12T13:20:52+09:00`、body 23314 chars、fig3 画像 + 深掘り本文を rendered_body で確認)。fig3 asset `cbfc0f7`・article source `a85434e` は push 済み。**HEAD=`a85434e`、origin/main と同期(0 ahead)**。
-- **唯一の未決事項は commit-scope gate**。3 レビューラウンド分の修正を反映したが **まだ 1 つも commit していない**。安全な commit 単位は「7 code + 106 .md + `QIITA_PROJECT_GROUP_INDEX.md` を一括」か「無 commit」の二択に収束。**code-only は checkout 時に既存 public 記事が preflight `GROUP_MISSING` exit-1 になるリスクが確定済み**のため除外。
-- 未 commit code/test = **7 ファイル**(相互 import 依存): `scripts/qiita_preflight.py` / `tools/_frontmatter.py` / `tools/_qiita_title_guard.py`[AM] / `tools/qiita_public_post.py` / `tools/qiita_team_post.py` / `tests/test_qiita_frontmatter.py` / `tests/test_qiita_preflight.py`[AM]。加えて **106 の .md**(各 `project_group:` 追加)+ `docs/articles/QIITA_PROJECT_GROUP_INDEX.md`[A]。うち 4 code + 106 .md は**私が作成/レビューしていない先行 dirty**。
-- index は 4 ファイル mixed partial stage。**素の `git commit` は importer 欠落で壊れる**ため、commit するなら `git reset` → 明示 pathspec re-add → `git diff --cached` 目視が必須。
-- full suite = **`301 passed`**(私が触った修正込み・無回帰)。
+- **commit-scope gate は決着済み(安全な選択肢A で自動確定)**。auto-commit hook が 16:41 の onocollo 記事編集前スナップショットとして、未 commit だった一式(7 code + `QIITA_PROJECT_GROUP_INDEX.md` + `project_group` 追加 .md 群)を **単一 commit `278ab56`(113 files, +3403/-791)** に atomic に取り込んだ。code の group-lint と .md の group 追加が**同一 commit**なので、恐れていた「code-only checkout → 既存 public 記事 `GROUP_MISSING` exit-1」は原理的に発生しない。
+- **HEAD の整合を独立検証済み**: `278ab56` は docs/tests/tools/scripts 配下のみ(secrets/config/バイナリ無し)/ importer `_qiita_title_guard.py` は HEAD に存在 / `pytest tests/` = **301 passed** / `qiita_preflight --json` = `warnings:0` **exit 0**。
+- **現在位置**: `HEAD=2ea7f29`、**origin/main より 4 commit 先行・全て未 push**(`278ab56` 実体 + `699fb25`/`180f951`/`2ea7f29` doc auto-commit)。working tree は auto 生成 docs 3 件以外クリーン。
+- evolution loop 記事(`40ba7cc91ac577274b74`)と onocollo §9 候補(`631620c33d20f2694310`)は **public PATCH 済み・クローズ**。
+- **残る externally-visible な未決は 2 件のみ**: (a) 4 local commit の origin/main への push(human gate) (b) onocollo Team item `f8017acc1f50112f3c9e` の browser-side visibility 確認(認証済み Team ブラウザセッションが必要)。
 
 ## 直近の成果
 
