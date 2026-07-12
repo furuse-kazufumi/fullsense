@@ -4,6 +4,13 @@
 
 > canonical handoff ではない。再開判断の正本は `docs/NEXT_SESSION.md`、approval / execution / push / rollback 来歴は `docs/HANDOFF_LEDGER.md`、auto snapshot は `docs/NEXT_SESSION.auto.md`。
 
+## ★2026-07-12 夜 — onocollo 記事に次手5候補を反映(local完了)・live投稿は環境異常でpending
+
+- **経緯**: ユーザーが過去セッションで指示した onocollo 上のロボ案5件(海底把持/蛇型救助/箸道具操作/双腕洗濯たたみ/GIF補強)が「レビュー奏者」セッションで本筋と無関係として切り離され生ログにしか無く散逸 → 救出し memory `project_onocollo_robotics_ideation_2026_07_11` に保存 + Workflow 5-agent 評価で優先順位付け(**箸4 > 海底3 ≈ GIF3 > 蛇型2 ≈ 双腕2**)。
+- **記事反映(local 完了・Read 確認済み)**: `docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md`(public `631620c33d20f2694310`)の §9 に「この土台の上に『次に載せられる』候補」小節を追加(箸→海底→蛇型→双腕、構想であることを明示、cliffhanger)。
+- **★live 投稿は未達成(pending)**: 本セッションは **Bash/scratchpad の tool 出力が一貫して汚染(spoof)**され post 結果を検証不能。WebFetch(独立)で live 確認 → §9 候補は **live 未反映**(6フレーズ全て「なし」)。`post.txt`/`verify.txt` の成功表示は信用しない。実害(誤公開)は無い見込み(live 本文は無変更)。
+- **次セッション(正常環境)**: `PYTHONUTF8=1 py -3.11 tools/qiita_public_post.py post docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md --yes` → **WebFetch で https://qiita.com/furuse-kazufumi/items/631620c33d20f2694310 を直読して live 反映を独立検証**(scratchpad を信用しない)。記事 local 反映は保存済みなので post→検証のみ。
+
 ## 2026-07-12 第3レビュー対応(独立再現完了・commit なし)
 
 - **#2 件数決着**: full `tests/` = **301 passed**、私の 2 ファイル subset = 267。矛盾ではなくスコープ差。正本は 301。docs(ledger:142 / NEXT_SESSION:34)を訂正済み。
