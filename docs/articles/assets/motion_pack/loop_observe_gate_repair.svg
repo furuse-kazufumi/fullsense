@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" role="img" aria-label="Observe gate repair loop" style="width:100%;height:auto;max-width:1200px">
+  <title>Observe gate repair loop</title>
+  <desc>Static-safe four-stage loop with a circulating token and visible gate pulse.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1c33"/>
+      <stop offset="100%" stop-color="#09111f"/>
+    </linearGradient>
+    
+  </defs>
+  <rect width="960" height="320" fill="url(#bg)"/>
+  
+  <text x="480" y="32" text-anchor="middle" fill="#e5eefc" font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif" font-size="22" font-weight="700">Observe -&gt; Gate -&gt; Repair -&gt; Human Meaning</text>
+  <text x="480" y="54" text-anchor="middle" fill="#93a6c6" font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif" font-size="11">A reusable motion asset for approval-loop articles</text>
+
+  <g font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif" font-size="13" text-anchor="middle">
+    <g transform="translate(90 118)">
+      <rect width="150" height="72" rx="12" fill="#12233d" stroke="#5dd1ff" stroke-opacity="0.35"/>
+      <text x="75" y="31" fill="#e5eefc" font-weight="700">Observe</text>
+      <text x="75" y="50" fill="#93a6c6" font-size="11">desired vs actual drift</text>
+    </g>
+    <g transform="translate(290 118)">
+      <rect width="150" height="72" rx="12" fill="#142942" stroke="#ffd166" stroke-opacity="0.35"/>
+      <text x="75" y="31" fill="#e5eefc" font-weight="700">Gate</text>
+      <text x="75" y="50" fill="#93a6c6" font-size="11">block bad writes first</text>
+    </g>
+    <g transform="translate(490 118)">
+      <rect width="150" height="72" rx="12" fill="#112b26" stroke="#7ee787" stroke-opacity="0.35"/>
+      <text x="75" y="31" fill="#e5eefc" font-weight="700">Repair</text>
+      <text x="75" y="50" fill="#93a6c6" font-size="11">patch smallest safe delta</text>
+    </g>
+    <g transform="translate(690 118)">
+      <rect width="150" height="72" rx="12" fill="#261432" stroke="#8b7dff" stroke-opacity="0.35"/>
+      <text x="75" y="31" fill="#e5eefc" font-weight="700">Meaning</text>
+      <text x="75" y="50" fill="#93a6c6" font-size="11">human stays outside loop</text>
+    </g>
+  </g>
+
+  <g fill="none" stroke="#5dd1ff" stroke-width="2" stroke-linecap="round" opacity="0.7">
+    <path d="M240 154 H290"/>
+    <path d="M440 154 H490"/>
+    <path d="M640 154 H690"/>
+    <path d="M765 204 C765 250 195 250 165 190"/>
+  </g>
+  <g stroke="#5dd1ff" stroke-width="3" fill="#5dd1ff">
+    <circle cx="165" cy="190" r="5">
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0;75 -36;275 -36;475 -36;675 -36;600 18;0 0"
+        dur="7s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.95;0.95;0.55;0.95" dur="7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <g fill="#ef476f" opacity="0.22">
+    <rect x="342" y="102" width="46" height="8" rx="4" opacity="0.22">
+      <animate attributeName="opacity" values="0.22;0.95;0.22" dur="3.2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="344" y="96" width="42" height="20" rx="8" fill="none" stroke="#ef476f" stroke-width="1.5" opacity="0.22">
+      <animate attributeName="opacity" values="0.22;0.95;0.22" dur="3.2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <text x="480" y="292" text-anchor="middle" fill="#93a6c6" font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif" font-size="11">The loop moves on its own, but the final interpretation stays with the operator.</text>
+
+</svg>

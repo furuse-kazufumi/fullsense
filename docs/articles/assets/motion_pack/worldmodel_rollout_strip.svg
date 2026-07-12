@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" role="img" aria-label="World model rollout" style="width:100%;height:auto;max-width:1200px">
+  <title>World model rollout</title>
+  <desc>Current state flows into an imagined rollout box; multiple futures flicker while one branch is selected for real action.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1c33"/>
+      <stop offset="100%" stop-color="#09111f"/>
+    </linearGradient>
+    
+  </defs>
+  <rect width="960" height="320" fill="url(#bg)"/>
+  
+  <text x="480" y="32" text-anchor="middle" fill="#e5eefc" font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif" font-size="22" font-weight="700">World Model Rollout</text>
+  <text x="480" y="54" text-anchor="middle" fill="#93a6c6" font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif" font-size="11">Plan in latent space, then only commit safe steps</text>
+
+  <g font-family="'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif">
+    <rect x="72" y="104" width="180" height="110" rx="14" fill="#13253f" stroke="#5dd1ff" stroke-opacity="0.35"/>
+    <text x="162" y="132" text-anchor="middle" fill="#e5eefc" font-size="18" font-weight="700">Current State</text>
+    <text x="162" y="154" text-anchor="middle" fill="#93a6c6" font-size="11">observation + memory + controls</text>
+
+    <rect x="314" y="86" width="258" height="146" rx="16" fill="#101f35" stroke="#8b7dff" stroke-opacity="0.45"/>
+    <text x="443" y="118" text-anchor="middle" fill="#e5eefc" font-size="18" font-weight="700">Dream Rollout</text>
+    <text x="443" y="138" text-anchor="middle" fill="#93a6c6" font-size="11">multiple imagined futures, one safe branch selected</text>
+
+    <rect x="650" y="104" width="238" height="110" rx="14" fill="#112a24" stroke="#7ee787" stroke-opacity="0.35"/>
+    <text x="769" y="132" text-anchor="middle" fill="#e5eefc" font-size="18" font-weight="700">Commit Action</text>
+    <text x="769" y="154" text-anchor="middle" fill="#93a6c6" font-size="11">real actuator command after filtering</text>
+
+    <path d="M252 159 H314" stroke="#5dd1ff" stroke-width="2" fill="none" opacity="0.75"/>
+    <path d="M572 159 H650" stroke="#7ee787" stroke-width="2" fill="none" opacity="0.75"/>
+
+    <g fill="none" stroke-width="2">
+      <path d="M348 179 C404 209 462 207 522 174" stroke="#8b7dff" opacity="0.48"/>
+      <path d="M348 162 C406 122 462 120 528 151" stroke="#ffd166" opacity="0.62"/>
+      <path d="M350 144 C408 90 468 92 532 134" stroke="#ef476f" opacity="0.42"/>
+    </g>
+
+    <circle cx="350" cy="162" r="5" fill="#ffd166">
+      <animate attributeName="cx" values="350;528;350" dur="4.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="162;151;162" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="352" cy="179" r="4" fill="#8b7dff" opacity="0.55">
+      <animate attributeName="cx" values="352;520;352" dur="5.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="179;174;179" dur="5.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="350" cy="144" r="4" fill="#ef476f" opacity="0.38">
+      <animate attributeName="cx" values="350;532;350" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="144;134;144" dur="6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+</svg>
