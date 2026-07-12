@@ -31,7 +31,9 @@ nav_order: 95
 
 > **この案件は完了・クローズ。** 人間承認のもと選択肢2 を一気通しで実行し、`40ba7cc91ac577274b74` への live PATCH まで完了した(`OK (200)`、`updated_at:2026-07-12T13:20:52+09:00`、fig3 画像 + 深掘り本文を rendered_body で確認)。実行来歴の正本は `docs/HANDOFF_LEDGER.md` の `2026-07-12 — evolution loop public PATCH gate` エントリ。以下の元 gate 記述は参照用に残す。
 >
-> **次セッションの残タスク**: (a) 未 commit の code/test は実態 **7 ファイル**(`scripts/qiita_preflight.py` / `tools/_frontmatter.py` / `tools/_qiita_title_guard.py`[AM] / `tools/qiita_public_post.py` / `tools/qiita_team_post.py` / `tests/test_qiita_frontmatter.py` / `tests/test_qiita_preflight.py`[AM])で相互 import 依存あり。加えて **106 の .md**(`project_group` 追加)+ `docs/articles/QIITA_PROJECT_GROUP_INDEX.md`[A]。full suite = **`301 passed`**。partial(code のみ)commit は checkout 時に既存 public 記事が preflight `GROUP_MISSING` で exit-1 になる相互依存があるため、commit は「7 code + 106 .md 一括」か「無 commit」の二択。commit 前に `git reset` → 明示 pathspec で re-add → `git diff --cached` 目視が必須。(b) onocollo Team item `f8017acc1f50112f3c9e` の browser-side visibility 確認(pending)。
+> **commit-scope gate は決着済み(2026-07-12 夜)**: auto-commit hook が未 commit 一式(7 code + `QIITA_PROJECT_GROUP_INDEX.md` + `project_group` 追加 .md 群)を単一 commit **`278ab56`(113 files)** に atomic に取り込み、恐れていた partial-checkout exit-1 は原理的に解消。HEAD で独立検証済み(`pytest`=301 passed / `qiita_preflight`=warnings:0 exit 0 / secrets 混入なし / importer 存在)。`HEAD=2ea7f29`、**origin/main より 4 commit 先行・全て未 push**。詳細来歴は `docs/HANDOFF_LEDGER.md` の `2026-07-12 — commit-scope gate resolved by atomic auto-commit` 節。
+>
+> **残る externally-visible な未決は 2 件のみ**: (a) 4 local commit の origin/main への push(human gate・不可逆)。(b) onocollo Team item `f8017acc1f50112f3c9e` の browser-side visibility 確認(認証済み Team ブラウザセッションが必要)。どちらにも着手しない場合、本線は完了済みなので次の実作業へ進んでよい。
 
 <details><summary>元 gate 記述(参照用・完了済み)</summary>
 
