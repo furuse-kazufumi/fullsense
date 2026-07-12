@@ -1,12 +1,13 @@
 ---
-title: llmesh 모음 — 로컬/클라우드 통합 × Prompt Firewall × Rust 고속화 × 산업 IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × 에코시스템
+project_group: llmesh
+title: llmesh 모음 — 로컬/클라우드 × Firewall × IoT × Swarm
 tags: OpenAI, LLM, LLaMA, Anthropic, ollama
 private: false
 id: 952c5ea965ca0499df98
 public_id: 99e4558953df57ccaffb
 ---
 
-# llmesh 모음 — 로컬/클라우드 통합 × Prompt Firewall × Rust 고속화 × 산업 IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × 에코시스템
+# llmesh 모음 — 로컬/클라우드 × Firewall × IoT × Swarm
 
 <!-- TOPICNAV -->
 > **🌐 언어**: [日本語](https://qiita.com/furuse-kazufumi/items/fcb43968a5c642610762) | English | 中文 | **한국어**

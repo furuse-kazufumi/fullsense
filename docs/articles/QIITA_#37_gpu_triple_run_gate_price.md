@@ -1,6 +1,7 @@
 ---
 title: 'llcore 検証 arc (#37) — AI が無料 GPU で実験 3 連戦を自走した日: 安全ゲートの代価は「表現力」、後付け証明は 19 倍高い'
 tags: [FullSense, llcore, Singularity, AI, 解説]
+project_group: llcore
 private: false
 updated_at: '2026-06-06'
 id: a0e16b74a23c62bcf59a

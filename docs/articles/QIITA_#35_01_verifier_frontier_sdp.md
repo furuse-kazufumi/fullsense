@@ -1,6 +1,7 @@
 ---
 title: 'llcore 検証 arc (#35-01) — 検査器の梯子: ∞ノルム→2ノルム→SDP→高次SOS→JSR、そして SMT が「飾り」な理由'
 tags: [FullSense, llcore, 解説, 形式手法, 進化計算]
+project_group: llcore
 private: true
 updated_at: '2026-06-04'
 id: 71f05f901fd9a2de6de5

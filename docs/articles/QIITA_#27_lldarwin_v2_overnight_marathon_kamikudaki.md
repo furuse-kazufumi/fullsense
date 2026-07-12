@@ -5,6 +5,7 @@ tags:
   - 進化計算
   - honest_disclosure
   - 解説
+project_group: llive
 private: true
 id: 6b134e5a4f87963681c2
 ---
@@ -15,7 +16,7 @@ id: 6b134e5a4f87963681c2
 
 # 日本語
 
-# 【かみくだき版】一晩で AI 進化を作り直した夜 — 「本物の AI 先生」でテストしてもまた満点で詰んだ話
+# 【📗かみくだき版】一晩で AI 進化を作り直した夜 — 「本物の AI 先生」でテストしてもまた満点で詰んだ話（実 LLM 飽和→開放端への転回）
 
 ![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
 

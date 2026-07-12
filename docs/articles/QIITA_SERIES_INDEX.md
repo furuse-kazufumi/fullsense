@@ -25,7 +25,7 @@ nav_order: 1
 |---|---|---|---|
 | 1 | Brief API 設計と progressive matrix で見える llive の overhead < 1 % | [#01](./QIITA_%2301_brief_api_progressive.md) | root 複製 (原本 2026-05-17) |
 | 2 | 「心理の深層」10 因子で整理する llive 思考層 — 既に 9/10 実装済 | [#02](./QIITA_%2302_cognitive_factors.md) | root 複製 (原本 2026-05-17) |
-| 3 | 数学・単位に強い AI を作る最初の一歩 — MATH-01/08 内蔵計算エンジン | [#03](./QIITA_%2303_math_vertical.md) | root 複製 (原本 2026-05-17) |
+| 3 | 数学・単位に強い AI を作る最初の一歩 | [#03](./QIITA_%2303_math_vertical.md) | root 複製 (原本 2026-05-17) |
 | 4 | Transformer ブロックを高度化する 7 つのアプローチ — CABT 設計予告 | [#04](./QIITA_%2304_next_cabt_block_design.md) | root 複製 (原本 2026-05-17) |
 | 5 | LLM × KJ法 × MindMap で要件定義を自動化する — CREAT 設計予告 | [#05](./QIITA_%2305_next_creat_kj_mindmap.md) | root 複製 (原本 2026-05-17) |
 | 6 | LLM 数式幻覚をどう止めるか — 形式検証ゲート (MATH-02 設計予告) | [#06](./QIITA_%2306_next_math02_formal_gate.md) | root 複製 (原本 2026-05-17) |

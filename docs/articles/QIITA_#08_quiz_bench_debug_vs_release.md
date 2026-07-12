@@ -3,6 +3,7 @@ layout: default
 title: "Quiz bench Debug vs Release 比較 — 統計指標付き 10 問テスト"
 date: 2026-05-17
 tags: [llm, benchmark, debug, release, statistics, mean, stdev, ollama]
+project_group: llive
 id: 87dc2abff45b488f56a4
 ---
 

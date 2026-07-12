@@ -4,6 +4,7 @@ tags:
   - FullSense
   - llive
   - 解説
+project_group: llive
 private: true
 updated_at: '2026-05-23'
 id: c999960660e25bdb5b66

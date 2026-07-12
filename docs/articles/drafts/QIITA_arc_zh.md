@@ -1,4 +1,5 @@
 ---
+project_group: llcore
 title: llcore 验证 arc 合集(#38–#42):防御性公开 × 2ⁿ 壁垒 × 强梯度胜过进化 × 兰顿蚂蚁的幻象
 tags: FullSense, llcore, Singularity, AI, 解説
 private: false

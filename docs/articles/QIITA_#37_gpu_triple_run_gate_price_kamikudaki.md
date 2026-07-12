@@ -1,6 +1,7 @@
 ---
-title: '【📗かみくだき companion・多言語アーカイブ】AI が自分で実験を 3 本回した日 — 「AI の安全柵はいくら?」を測ったらシンギュラリティ論のど真ん中だった (#37)'
+title: '【📗かみくだき companion】AI が自分で実験を 3 本回した日 — 安全柵の値段を測った #37'
 tags: [FullSense, llcore, Singularity, AI, 解説]
+project_group: llcore
 private: false
 updated_at: '2026-06-06'
 id: df687d0ecddb56d5a373

@@ -1,6 +1,7 @@
 ---
 title: 'llcore 検証 arc (#36 かみくだき) — 「関所が重すぎる」問題を、角を全部見ずに解く'
 tags: [FullSense, llcore, 解説, 形式手法, 進化計算]
+project_group: llcore
 private: true
 updated_at: '2026-06-06'
 id: null
@@ -19,7 +20,7 @@ ignorePublish: true
 
 # 日本語
 
-# 「進化する AI の関所が、重すぎて潰れる」問題
+# llcore 検証 arc (#36 かみくだき) — 「関所が重すぎる」問題を、角を全部見ずに解く
 
 ## たとえ話: 関所と、角を全部見て回る門番
 

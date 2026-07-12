@@ -43,13 +43,21 @@ from __future__ import annotations
 import glob as _glob
 import json
 import os
+from pathlib import Path
 import re
 import sys
 import time
 import urllib.error
 import urllib.request
 
-from _frontmatter import split_frontmatter
+from _frontmatter import resolve_body_title, split_frontmatter
+from _qiita_title_guard import (
+    infer_publish_title as _infer_publish_title,
+    meta_has_identity as _meta_has_identity,
+    load_title_baseline_text as _shared_load_baseline_text,
+    normalize_nullish_scalar as _normalize_nullish_scalar,
+    should_block_title_mismatch as _shared_should_block_title_mismatch,
+)
 
 
 def _utf8() -> None:
@@ -127,12 +135,7 @@ def _is_personal_token_source(source: str | None) -> bool:
 
 
 def infer_title(meta: dict, body: str) -> str:
-    if meta.get("title"):
-        return str(meta["title"])
-    for line in body.splitlines():
-        if line.startswith("# "):
-            return line[2:].strip()
-    return ""
+    return _infer_publish_title(meta, body)
 
 
 def norm_tags(meta: dict) -> list[dict]:
@@ -150,10 +153,7 @@ def norm_tags(meta: dict) -> list[dict]:
 
 
 def _clean_nullish_scalar(v) -> str | None:
-    if v is None:
-        return None
-    v = str(v).strip()
-    return v if v and v.lower() not in ("null", "none") else None
+    return _normalize_nullish_scalar(v)
 
 
 def explicit_group_target(meta: dict) -> str | None:
@@ -214,6 +214,7 @@ PATCH_GROUP_URL_NAME_CREATE_NOTE = (
     "note: --patch-group-url-name is a no-op on CREATE (group_url_name is already sent from frontmatter; the flag only adds resend on PATCH/update)"
 )
 UNKNOWN_FLAG_BLOCK = "UNKNOWN_FLAG_BLOCK: unsupported flag '{flag}'"
+TITLE_MISMATCH_BLOCK = "BLOCKED: frontmatter title and publish H1 differ. Align them before posting."
 
 
 def parse_gate_bool(v) -> tuple[bool | None, str | None]:
@@ -306,6 +307,24 @@ def safety_findings(meta: dict, body: str) -> list[str]:
     elif not real_id(meta) and "group_url_name" in meta and explicit_group_target(meta) is None:
         out.append("INVALID GROUP TARGET: group_url_name must be a non-empty concrete share target")
     return out
+
+
+REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+def _has_live_identity(meta: dict) -> bool:
+    return _meta_has_identity(meta, "id", "qiita_item_id")
+
+
+def _load_baseline_text(path: str) -> str | None:
+    return _shared_load_baseline_text(Path(REPO_ROOT), path)
+
+
+def _should_block_title_mismatch(path: str, meta: dict, body: str) -> bool:
+    return _shared_should_block_title_mismatch(
+        meta,
+        body,
+        baseline_text=_load_baseline_text(path),
+        live_identity_keys=("id", "qiita_item_id"),
+    )
 
 
 _SCAN_STEM_RE = re.compile(r"(QIITA_#\d+)")
@@ -678,7 +697,8 @@ def cmd_dry_run(args: list[str]) -> int:
         print(f"BLOCKED: exactly one file expected, got {len(files)}")
         print("usage: dry-run <file.md> [--patch-group-url-name]")
         return 2
-    text = open(files[0], "r", encoding="utf-8-sig").read()
+    path = files[0]
+    text = open(path, "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     private_value, private_error = parse_private_bool(meta.get("private"), default=True)
     item_id = real_id(meta)
@@ -691,6 +711,8 @@ def cmd_dry_run(args: list[str]) -> int:
         return 1
     p = build_payload(meta, body, include_group_url_name=(not item_id) or resend_patch_group)
     finds = safety_findings(meta, body)
+    if _should_block_title_mismatch(path, meta, body):
+        finds.append(TITLE_MISMATCH_BLOCK)
     gate_value, gate_error = parse_gate_bool(meta.get("ignorePublish"))
     gate_key_error = find_ignore_publish_key_issue(meta)
     print(f"action: {'PATCH update id=' + str(item_id) if item_id else 'POST create'} on team '{TEAM}'")
@@ -731,7 +753,7 @@ def cmd_dry_run(args: list[str]) -> int:
     print("\n(dry-run: nothing sent. add `post <file> --yes` to actually publish.)")
     blocking_finds = [
         x for x in finds
-        if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH"))
+        if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH", "BLOCKED: frontmatter title"))
     ]
     return 1 if (
         gate_key_error
@@ -939,16 +961,19 @@ def cmd_post(args: list[str]) -> int:
         print("post: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility.")
         print("post: configure QIITA_TEAM_TOKEN or qiita_team_token before attempting Team PATCH/POST.")
         return 1
-    text = open(files[0], "r", encoding="utf-8-sig").read()
+    path = files[0]
+    text = open(path, "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     private_value, private_error = parse_private_bool(meta.get("private"), default=True)
     if private_error:
         print(f"BLOCKED: {private_error}")
         return 1
     all_finds = safety_findings(meta, body)
+    if _should_block_title_mismatch(path, meta, body):
+        all_finds.append(TITLE_MISMATCH_BLOCK)
     blocking_finds = [
         x for x in all_finds
-        if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH"))
+        if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH", "BLOCKED: frontmatter title"))
     ]
     if blocking_finds:
         print("BLOCKED (fix first): " + "; ".join(blocking_finds))

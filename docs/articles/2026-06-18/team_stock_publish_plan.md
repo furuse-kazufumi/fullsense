@@ -7,7 +7,9 @@
 
 - **正本**: 公開順・human gate 条件・rollback 注意をここに集約する
 - `team_stock_queue.md`: 投稿待ち一覧と実行記録の正本。canonical field は **POST 後の記録欄 `visible range memo` / `rollback needed` / `note`**
-- `next_plan.md` / `SESSION_SUMMARY.md`: `team_stock_queue.md` の **POST 後の記録欄 `visible range memo` / `rollback needed` / `note` の 3 欄**を参照するだけに留める
+- `docs/HANDOFF_LEDGER.md`: 外部 write の approval / execution / push / rollback 来歴を残す正式保存先
+- `docs/NEXT_SESSION.md`: 再開判断の handoff 正本。queue の該当行参照だけを残してよい
+- `docs/next_plan.md`: 実行前サマリ用の working memo。恒久来歴は置かない
 
 ## なぜこの 3 本か
 
@@ -102,7 +104,7 @@
   - `body 差し替え` を行った場合は、変更前後の本文または該当 anchor / セクション差分も同ターンで控える
   - 変更直後に Team UI を再読込し、Team API GET でも同じ値になったことを確認する
   - **変更後**に未認証 HTML GET と `qiita.com/furuse-kazufumi/items/<id>?v=<ts>` direct probe も再取得し、before/after を並べて記録する
-  - 結果は成功/失敗にかかわらず、`team_stock_queue.md` の `visible range` / `rollback needed` / `note` を正本として先に反映し、その後 `docs/next_plan.md`、最後に `docs/SESSION_SUMMARY.md` では queue の該当行参照だけを同ターンに反映する
+  - 結果は成功/失敗にかかわらず、`team_stock_queue.md` の `visible range` / `rollback needed` / `note` を正本として先に反映し、その後 `docs/HANDOFF_LEDGER.md` に approval / execution / push / rollback 来歴を残し、必要なら `docs/NEXT_SESSION.md` では queue の該当行参照だけを同ターンに反映する
 - article-by-article handling:
   - 3 本は一括で扱わず、**1 本ごとに** `positive / unresolved / cleared` を判定する
   - 1 本でも未認証 HTML GET / public direct probe で positive が出たら、その記事だけ即 containment / remediation gate へ送る
@@ -111,7 +113,7 @@
 - no-op retain checklist (human-gate 後のみ):
   - 新しい外部 remediation を打たず、`team_stock_queue.md` の各行と `2026-06-19 visibility probe evidence` を見直し、**今回も診断未了のため no-op retain。過剰露出疑いは未解消のまま残る**と 1 行追記する
   - `note` には「なぜ今回は動かなかったか」「次回の解禁条件は何か」「retain_count=<n>」「retain_deadline=<timestamp>」「human_exemption=<reason/approver>」までを短く残す
-  - その後 `docs/next_plan.md`、`docs/SESSION_SUMMARY.md` の順で、queue の該当 note を参照しつつ、今回 no-op retain を選んだことと次に必要な診断条件だけを追記する
+  - その後 `docs/HANDOFF_LEDGER.md` に retain 判断を残し、`docs/NEXT_SESSION.md` では queue の該当 note を参照しつつ、今回 no-op retain を選んだことと次に必要な診断条件だけを短く追記する
 - fail-closed temporary tightening (human-gate 後のみ):
   - 診断未了のまま retain を繰り返さないため、必要なら **暫定 private 化してから containment 完了確認を取る**
   - この分岐は Team UI diagnosis と別の外部状態変更なので、必ず別 human-gate で GO を取ってから触る

@@ -1,11 +1,12 @@
 ---
-title: lldarwin / 进化 arc 合集 — 单一栽培进化 / 选择压力 / 指挥者合奏 / 证伪与 Goodhart / 进化可视化 / Codex 双柱 / llcore CPU 进化 × 第三个轴
+project_group: llive
+title: lldarwin / 进化 arc 合集
 tags: 解説, 進化計算, llive, FullSense, honest_disclosure
 private: false
 public_id: 93f3cf1bb7b14650bbca
 ---
 
-# lldarwin / 进化 arc 合集 — 单一栽培进化 / 选择压力 / 指挥者合奏 / 证伪与 Goodhart / 进化可视化 / Codex 双柱 / llcore CPU 进化 × 第三个轴
+# lldarwin / 进化 arc 合集
 
 <!-- TOPICNAV -->
 > **🌐 语言**: [日本語](https://qiita.com/furuse-kazufumi/items/6e107c7dfa0c261ee4d7) | [English](https://qiita.com/furuse-kazufumi/items/e49b7ab9027d93594402) | **中文** | [한국어](https://qiita.com/furuse-kazufumi/items/951b94cf66d246723004)

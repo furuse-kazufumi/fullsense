@@ -19,7 +19,7 @@ I'm building **FullSense ™** (a trio of OSS projects: llmesh + llive + llove) 
 - ✅ Append-only ledger records every decision (auditable later)
 - ✅ Dangerous actions gated by a human approval flow
 - ✅ Calculations delegated to a built-in calculator (no LLM math errors)
-- ✅ Unit-dimension checks (auto-rejects "5 m/s + 3 s" type mistakes)
+- ✅ Unit-dimension grounding (how to block "5 m/s + 3 s" type mismatches is tightened in the next iteration)
 - ✅ Keeps working when the internet is down
 
 🎯 **Use cases**:

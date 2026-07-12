@@ -5,6 +5,7 @@ tags:
   - llcore
   - 形式手法
   - 解説
+project_group: llcore
 private: true
 id: 6b48b75c99e5d4b7d6b8
 ---
@@ -15,7 +16,7 @@ id: 6b48b75c99e5d4b7d6b8
 
 # 日本語
 
-# 【かみくだき版】AI の「壊れてないか検査器」を弱い順に並べてみたら
+# 【かみくだき版】AI の「壊れてないか検査器」を弱い順に並べてみたら — 検査器の梯子を山の見え方で読む (llcore #35-01 📗かみくだき版)
 
 ![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
 

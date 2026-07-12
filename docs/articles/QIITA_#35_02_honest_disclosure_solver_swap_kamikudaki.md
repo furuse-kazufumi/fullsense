@@ -5,6 +5,7 @@ tags:
   - llcore
   - honest disclosure
   - 解説
+project_group: llcore
 private: true
 id: 146d5e2b27dabc59e799
 ---
@@ -15,7 +16,7 @@ id: 146d5e2b27dabc59e799
 
 # 日本語
 
-# 【かみくだき版】「良すぎる数値」は勝ちじゃなくて警報 — 計算機を1個入れ替えたら自慢の結果が崩れた話
+# 【📗かみくだき版】「良すぎる数値」は勝ちじゃなくて警報 — 計算機を1個入れ替えたら自慢の結果が崩れた話 (llcore #35-02)
 
 ![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
 

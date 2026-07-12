@@ -1,11 +1,12 @@
 ---
-title: llive 완전 해설 모음 — 잊지 않는 LLM / 10축 사고 / 계산 가능한 모순 / 수렴하는 뇌 / 집단 진화 / 탈Transformer / 심사 붙은 AI / 평가
+project_group: llive
+title: llive 완전 해설 모음
 tags: 解説, llive, FullSense
 private: false
 public_id: c5f2077a3399d3fc9b26
 ---
 
-# llive 완전 해설 모음 — 잊지 않는 LLM / 10축 사고 / 계산 가능한 모순 / 수렴하는 뇌 / 집단 진화 / 탈Transformer / 심사 붙은 AI / 평가
+# llive 완전 해설 모음
 
 <!-- TOPICNAV -->
 > **🌐 언어**: [日本語](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c) | [English](https://qiita.com/furuse-kazufumi/items/07b686ea311e06027f94) | [中文](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8) | **한국어**

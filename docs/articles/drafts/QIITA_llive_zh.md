@@ -1,11 +1,12 @@
 ---
-title: llive 完全解说合集 — 不遗忘的 LLM / 十轴思考 / 可计算的矛盾 / 收敛的大脑 / 群体进化 / 超越 Transformer / 带审查的 AI / 评估
+project_group: llive
+title: llive 完全解说合集
 tags: 解説, llive, FullSense
 private: false
 public_id: 6da5a883fb2ed651edd8
 ---
 
-# llive 完全解说合集 — 不遗忘的 LLM / 十轴思考 / 可计算的矛盾 / 收敛的大脑 / 群体进化 / 超越 Transformer / 带审查的 AI / 评估
+# llive 完全解说合集
 
 <!-- TOPICNAV -->
 > **🌐 语言**: [日本語](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c) | [English](https://qiita.com/furuse-kazufumi/items/07b686ea311e06027f94) | **中文** | [한국어](https://qiita.com/furuse-kazufumi/items/c5f2077a3399d3fc9b26)

@@ -4,8 +4,9 @@ tags:
   - FullSense
   - llive
   - 解説
-  - TODO_TAG
-  - TODO_TAG
+  - AI
+  - ビジョン
+project_group: llive
 private: false
 updated_at: '2026-05-22'
 id: e72192c75ff461d72601

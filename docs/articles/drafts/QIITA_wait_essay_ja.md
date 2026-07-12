@@ -1,4 +1,5 @@
 ---
+project_group: llmesh
 title: 進捗バーが止まったとき、人は何分待てるのか —— 沈黙するAIと「待ち」の工学
 tags: 設計, UX, AI, タイムアウト, ポエム
 private: false

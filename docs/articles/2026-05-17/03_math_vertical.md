@@ -5,14 +5,14 @@ date: 2026-05-17
 tags: [llm, math, units, dimensional-analysis, hallucination]
 ---
 
-# 数学・単位に強い AI を作る最初の一歩 — MATH-01/08 内蔵計算エンジン
+# 数学・単位に強い AI を作る最初の一歩
 
 ## TL;DR
 
 - llive 最初の specialised vertical として「**数学・単位特化 AI**」を選定 (ユーザー戦略指示)
 - 汎用 LLM が苦手な (a) 記号操作の幻覚 (b) 単位次元の取り違え (c) 数値計算の error propagation を **「LLM に計算させない」決定論的サイドカー** で克服
-- 2026-05-17 同セッションで **MATH-01 (SI 単位次元解析)** + **MATH-08 (内蔵計算エンジン = 差別化軸)** の minimal skeleton を実装、47 件テスト追加
-- `5 m/s + 3 s = 8` のような典型的幻覚を **必ず止める** API
+- 2026-05-17 同セッションで **MATH-01 (SI 単位次元解析)** + **MATH-08 (内蔵計算エンジンの最小 skeleton)** を実装、47 件テスト追加
+- `5 m/s + 3 s = 8` のような **cross-quantity mismatch** について、low-level direct reject は実装済み。実 Brief 上でどの mismatch を end-to-end で surface / stop するかは次イテレーションで詰める
 
 ## 動機 — 汎用 LLM の数学的弱点
 
@@ -21,7 +21,7 @@ LLM は言語的に妥当な数式を生成しますが、以下が苦手:
 | 観点 | 汎用 LLM の弱点 | llive 既存資産との合致 |
 |---|---|---|
 | 記号操作の幻覚 | `x² + x = 2x³` のような誤等式 | EVO-04 Z3 静的検証で gate |
-| 単位次元 | `5 m/s + 3 s = 8` | SI 次元解析エンジン (MATH-01) |
+| 単位次元 | `5 m/s + 3 s = 8` | SI 次元 grounding。low-level direct reject は実装済み、end-to-end policy は次イテレーション (MATH-01) |
 | 数値精度 | float 演算誤差を無視 | error propagation tracking (MATH-04) |
 | 公理体系 | 暗黙の前提を混入 | EpistemicType=MATHEMATICAL の strict track |
 | 引用の信頼性 | "CODATA value is X" と適当に答える | RAD math/metrology + provenance |
@@ -33,13 +33,13 @@ LLM は言語的に妥当な数式を生成しますが、以下が苦手:
 ```python
 from llive.math import Quantity, parse_unit, UnitMismatchError
 
-# 速度 + 時間 = 不可能 (典型的 LLM 幻覚)
+# 既知の value+unit を grounded quantity として扱う
 v = Quantity(5.0, parse_unit("m/s"))
 t = Quantity(3.0, parse_unit("s"))
 try:
-    bad = v + t
+    _ = v + t
 except UnitMismatchError as e:
-    print(f"refused: {e}")
+    print(f"refused: {e}")  # direct mismatch は現実装でも reject
 
 # 速度 × 時間 = 距離 (m)
 d = v * t
@@ -52,13 +52,13 @@ E = F * d
 assert E.dimensions.matches(parse_unit("J"))  # ✓ Joule
 ```
 
-実装の核は `Dimensions(m, kg, s, A, K, mol, cd)` の 7 次元ベクトル。演算は次元の加減算 (積/除)。`Quantity.__add__` で次元検算 → 不一致は **必ず raise**。
+実装の核は `Dimensions(m, kg, s, A, K, mol, cd)` の 7 次元ベクトル。**低レベルの `Quantity` API では direct な次元不一致加算をすでに reject** する。一方で、Brief から拾った実文脈の mismatch を **どの粒度で surface / stop するかという end-to-end の方針**は次イテレーションの論点として残している。
 
 ### 派生単位
 
 `N` (kg·m/s²) / `J` (kg·m²/s²) / `W` (kg·m²/s³) / `Pa` (kg/m/s²) / `Hz` (1/s) / `C` (s·A) / `V` (kg·m²/s³/A) / `ohm` を頻出範囲のみ実装。
 
-## MATH-08 — 内蔵計算エンジン (差別化軸最大)
+## MATH-08 — 内蔵計算エンジン (最小 skeleton)
 
 **設計の核**: LLM に **数値計算をさせない**。
 
@@ -97,7 +97,7 @@ Brief.goal にある式 → SafeCalculator が評価 → 結果が augmented goa
 LLM が計算する → 浮動小数点幻覚、桁落ち
 llive が計算する → IEEE 754 精度、再現可能、引用可能
 
-## なぜこれが差別化軸として最強か
+## なぜこれを最初の vertical に選んだか
 
 - 汎用 LLM (GPT / Claude / Gemini) は「LLM が計算する」設計
 - llive は「LLM の出力を **検証**し、必要なら **再計算** する」設計
@@ -111,7 +111,7 @@ llive が計算する → IEEE 754 精度、再現可能、引用可能
 | MATH-01 | SI 単位次元解析エンジン | ✅ 1st 実装済 |
 | MATH-02 | Z3 / Sympy 統合検証層 | 2nd |
 | MATH-05 | 物理定数辞書 (CODATA 2022 + NIST) | 3rd |
-| **MATH-08** | **内蔵計算エンジン (差別化軸)** | ✅ 4th 実装済 |
+| **MATH-08** | **内蔵計算エンジン (計算サイドカーの核)** | ✅ 4th 実装済 |
 | MATH-03 | 数式構文解析 (LaTeX/MathML/Sympy AST) | MED |
 | MATH-04 | 数値計算精度トラッキング (IEEE 754) | MED |
 | MATH-06 | 単位変換 + Buckingham π 無次元化 | MED |

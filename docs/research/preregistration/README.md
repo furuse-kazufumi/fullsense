@@ -23,7 +23,7 @@
 - **検証済み参照コード/doc**(本 prereg が引用した一次ソース):
   - 実験コード: `scripts/tbptt_plateau_experiment.py` / `scripts/ttt_plateau_experiment.py` / `scripts/nas_pareto.py` / `scripts/linearize_tolerance.py` / `scripts/evolve_linearization.py`
   - 指標/中核: `src/llcore/lm/longctx_eval.py`(`context_length_curve` / `past_block_gain` の素・`streaming_metrics_by_band`)/ `src/llcore/lm/eval.py`(`held_out_report_any`)/ `src/llcore/runtime/eval_proxy.py`(proxy-v2)/ `src/llcore/runtime/distill.py` / `src/llcore/runtime/linearize.py`
-  - 知見 doc: `docs/MODEL_LANDSCAPE_2026_06.md` §13(1)(2)(3)(4)・§14 / `docs/next_plan.md` / `docs/CONVERSATIONAL_LLCORE_FINDINGS.md`
+  - 知見 doc: `docs/MODEL_LANDSCAPE_2026_06.md` §13(1)(2)(3)(4)・§14 / `docs/NEXT_SESSION.md` / `docs/CONVERSATIONAL_LLCORE_FINDINGS.md`
   - 本日プローブ(一次確認): `out/ttt_chunk_probe/c128/comparison_carry_on.json`(past_block_gain=0.0、flat)/ `out/ttt_chunk_probe/run.log`(c512 走行途中、val 改善も curve 未書き出し=未確定)
 - **共通 honest 内訳プラン**(`feedback_benchmark_honest_disclosure`): ① compute 交絡(多 compute で良く見えていないか)② 弱ベースライン artifact ③ winner's curse(最良セル cherry-pick 禁止、holdout で語る)④ 短文脈の盲点(長 L で消える改善を「回復」と呼ばない)⑤ 規模の限定性(char-LM/0.5–1.5B/aozora を LLM 一般へ外挿しない)⑥ 失敗(NULL)も削除せず記録。
 

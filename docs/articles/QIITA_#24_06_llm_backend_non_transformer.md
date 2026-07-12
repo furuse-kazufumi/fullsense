@@ -1,9 +1,10 @@
 ---
-title: 'llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ'
+title: 'llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion'
 tags:
   - FullSense
   - llive
   - 解説
+project_group: llive
 private: true
 updated_at: '2026-05-23'
 id: fa9cfbdbdebecf1c7c3b
@@ -18,7 +19,7 @@ ignorePublish: false
 
 # 日本語
 
-# llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion を llive 内側で呼ぶ
+# llive 完全解説 (6) — 「Transformer の外」: Mamba / Jamba / RWKV / Diffusion
 
 ![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_hero.svg)
 
@@ -35,6 +36,8 @@ ignorePublish: false
 > 実 Mamba / Jamba / RWKV backend は **credential / weights 未着地**.
 
 ![theme — non-transformer 4 backend swap + Δ Bridge (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_theme.svg?v=2)
+
+![外側の harness は固定したまま、内側の backend lane だけを差し替える static-safe 補助図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/motion_pack/backend_swap_compare.svg?v=1)
 
 ## 0. 連載中での位置づけ
 
@@ -182,7 +185,7 @@ flowchart LR
 
 # English
 
-# llive Complete Guide (6) — "Beyond the Transformer": Calling Mamba / Jamba / RWKV / Diffusion Inside llive
+# llive Complete Guide (6) — "Beyond the Transformer": Mamba / Jamba / RWKV / Diffusion
 
 ![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_hero_en.svg)
 
@@ -363,7 +366,7 @@ flowchart LR
 
 # 中文
 
-# llive 完全解说 (6) — "Transformer 之外": 在 llive 内部调用 Mamba / Jamba / RWKV / Diffusion
+# llive 完全解说 (6) — "Transformer 之外": Mamba / Jamba / RWKV / Diffusion
 
 ![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_hero_zh.svg)
 
@@ -523,7 +526,7 @@ flowchart LR
 
 # 한국어
 
-# llive 완전 해설 (6) — "Transformer 의 밖": Mamba / Jamba / RWKV / Diffusion 을 llive 내부에서 호출하기
+# llive 완전 해설 (6) — "Transformer 의 밖": Mamba / Jamba / RWKV / Diffusion
 
 ![hero — SSM state stream vs Transformer attention](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_06_hero_ko.svg)
 

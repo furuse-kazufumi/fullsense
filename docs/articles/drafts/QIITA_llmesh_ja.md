@@ -1,11 +1,12 @@
 ---
-title: llmesh 総集編 — ローカル/クラウド統一 × Prompt Firewall × Rust高速化 × 産業IoT(Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × エコシステム
+project_group: llmesh
+title: llmesh 総集編 — ローカル/クラウド × Firewall × IoT × Swarm
 tags: OpenAI, LLM, LLaMA, Anthropic, ollama
 private: false
 public_id: fcb43968a5c642610762
 ---
 
-# llmesh 総集編 — ローカル/クラウド統一 × Prompt Firewall × Rust高速化 × 産業IoT(Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × エコシステム
+# llmesh 総集編 — ローカル/クラウド × Firewall × IoT × Swarm
 
 <!-- TOPICNAV -->
 > **🌐 言語**: **日本語**

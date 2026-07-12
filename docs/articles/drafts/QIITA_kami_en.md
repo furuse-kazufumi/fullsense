@@ -1,11 +1,12 @@
 ---
-title: Plain-Language Digest — Falsification & Goodhart / the Third Axis / Arc Overview / the Langton's-Ant Illusion, made simple
+project_group: llive
+title: Plain-Language Digest — Core Essays Made Simple
 tags: FullSense, evolutionary_computation, honest_disclosure, explainer, plain_language
 private: false
 public_id: bdfad6db3f2e70c40511
 ---
 
-# Plain-Language Digest — Falsification & Goodhart / the Third Axis / Arc Overview / the Langton's-Ant Illusion, made simple
+# Plain-Language Digest — Core Essays Made Simple
 
 <!-- TOPICNAV -->
 > **🌐 Language**: [日本語](https://qiita.com/furuse-kazufumi/items/bfb20aca3cf1df510c26) | **English** | [中文](https://qiita.com/furuse-kazufumi/items/fa0890f136636d495ea6) | [한국어](https://qiita.com/furuse-kazufumi/items/e5093e4816b25c1bd4d0)

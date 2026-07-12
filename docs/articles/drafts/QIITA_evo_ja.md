@@ -1,11 +1,12 @@
 ---
-title: lldarwin / 進化 arc 総集編 — monoculture進化 / 選択圧 / 指揮者合奏 / 反証とGoodhart / 進化可視化 / Codex二本柱 / llcore CPU進化 × 第3の軸
+project_group: llive
+title: lldarwin / 進化 arc 総集編
 tags: 解説, 進化計算, llive, FullSense, honest_disclosure
 private: false
 public_id: 6e107c7dfa0c261ee4d7
 ---
 
-# lldarwin / 進化 arc 総集編 — monoculture進化 / 選択圧 / 指揮者合奏 / 反証とGoodhart / 進化可視化 / Codex二本柱 / llcore CPU進化 × 第3の軸
+# lldarwin / 進化 arc 総集編
 
 ## 目次
 

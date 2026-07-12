@@ -3,6 +3,7 @@ layout: default
 title: "Transformer ブロックを高度化する 7 つのアプローチ — CABT 設計予告"
 date: 2026-05-17
 tags: [llm, transformer, attention, architecture, design]
+project_group: llive
 draft: true
 id: a6804f6b8c47605177a8
 ---

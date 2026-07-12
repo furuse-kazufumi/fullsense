@@ -3,6 +3,7 @@ layout: default
 title: "LLM 数式幻覚をどう止めるか — 形式検証ゲート (MATH-02 設計予告)"
 date: 2026-05-17
 tags: [llm, math, formal-verification, z3, sympy, hallucination]
+project_group: llive
 draft: true
 id: acb5f5e0dabe2020c166
 ---
@@ -37,7 +38,7 @@ id: acb5f5e0dabe2020c166
 | 幻覚タイプ | SafeCalculator で防げるか |
 |---|---|
 | `(2.5 * 7.8) / 0.3 = 12.4` (実際は 65.0) | ✅ 防げる |
-| `5 m/s + 3 s = 8` | ✅ 単位次元 (MATH-01) で防げる |
+| `5 m/s + 3 s = 8` | △ SafeCalculator 単体ではなく、MATH-01 の low-level direct reject で止まる。Brief 文脈での end-to-end policy は次イテレーション |
 | `∫ x² dx = x³/3 + C` (これは正しい) | — (検算不要) |
 | `(x+1)² = x² + 2x` (2x ではなく 2x+1) | ❌ 防げない — **これが MATH-02 の対象** |
 | `lim x→0 sin(x)/x = 0` (実際は 1) | ❌ 防げない — Sympy 必要 |
@@ -138,7 +139,7 @@ But there is another class of hallucination that LLMs commit all the time:
 | Hallucination type | Caught by SafeCalculator? |
 |---|---|
 | `(2.5 * 7.8) / 0.3 = 12.4` (actually 65.0) | ✅ Caught |
-| `5 m/s + 3 s = 8` | ✅ Caught by dimensional units (MATH-01) |
+| `5 m/s + 3 s = 8` | △ Not by SafeCalculator alone: it is rejected by MATH-01's low-level direct-reject path. The end-to-end policy in real Brief context is next iteration |
 | `∫ x² dx = x³/3 + C` (this one is correct) | — (no check needed) |
 | `(x+1)² = x² + 2x` (it's 2x+1, not 2x) | ❌ Not caught — **this is the target of MATH-02** |
 | `lim x→0 sin(x)/x = 0` (actually 1) | ❌ Not caught — needs Sympy |
@@ -238,7 +239,7 @@ and then release it.
 | 幻觉类型 | SafeCalculator 能否防住 |
 |---|---|
 | `(2.5 * 7.8) / 0.3 = 12.4` (实际是 65.0) | ✅ 能防 |
-| `5 m/s + 3 s = 8` | ✅ 用单位量纲 (MATH-01) 能防 |
+| `5 m/s + 3 s = 8` | △ 不是靠 SafeCalculator 单体，而是由 MATH-01 的 low-level direct reject 路径拦下。真实 Brief 语境下的 end-to-end 方针在下一次迭代 |
 | `∫ x² dx = x³/3 + C` (这是正确的) | — (无需核算) |
 | `(x+1)² = x² + 2x` (应是 2x+1 而非 2x) | ❌ 防不住 —— **这正是 MATH-02 的对象** |
 | `lim x→0 sin(x)/x = 0` (实际是 1) | ❌ 防不住 —— 需要 Sympy |
@@ -339,7 +340,7 @@ MATH-02 实现后将解除 draft，并追加：
 | 환각 유형 | SafeCalculator 로 막을 수 있는가 |
 |---|---|
 | `(2.5 * 7.8) / 0.3 = 12.4` (실제는 65.0) | ✅ 막을 수 있음 |
-| `5 m/s + 3 s = 8` | ✅ 단위 차원 (MATH-01) 으로 막을 수 있음 |
+| `5 m/s + 3 s = 8` | △ SafeCalculator 단독이 아니라 MATH-01 의 low-level direct reject 경로에서 막힌다. 실제 Brief 문맥의 end-to-end 방침은 다음 이터레이션 |
 | `∫ x² dx = x³/3 + C` (이것은 옳음) | — (검산 불필요) |
 | `(x+1)² = x² + 2x` (2x 가 아니라 2x+1) | ❌ 막을 수 없음 — **이것이 MATH-02 의 대상** |
 | `lim x→0 sin(x)/x = 0` (실제는 1) | ❌ 막을 수 없음 — Sympy 필요 |

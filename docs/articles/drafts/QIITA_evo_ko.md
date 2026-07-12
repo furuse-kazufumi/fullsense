@@ -1,11 +1,12 @@
 ---
-title: lldarwin / 진화 arc 모음 — monoculture 진화 / 선택압 / 지휘자 합주 / 반증과 Goodhart / 진화 시각화 / Codex 양대 축 / llcore CPU 진화 × 제3의 축
+project_group: llive
+title: lldarwin / 진화 arc 모음
 tags: 解説, 進化計算, llive, FullSense, honest_disclosure
 private: false
 public_id: 951b94cf66d246723004
 ---
 
-# lldarwin / 진화 arc 모음 — monoculture 진화 / 선택압 / 지휘자 합주 / 반증과 Goodhart / 진화 시각화 / Codex 양대 축 / llcore CPU 진화 × 제3의 축
+# lldarwin / 진화 arc 모음
 
 <!-- TOPICNAV -->
 > **🌐 언어**: [日本語](https://qiita.com/furuse-kazufumi/items/6e107c7dfa0c261ee4d7) | [English](https://qiita.com/furuse-kazufumi/items/e49b7ab9027d93594402) | [中文](https://qiita.com/furuse-kazufumi/items/93f3cf1bb7b14650bbca) | **한국어**

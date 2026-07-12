@@ -19,8 +19,11 @@ nav_order: 3
 | [`docs/comparison.md`]({{ '/comparison' | relative_url }}) | honest vs Claude Code / Perplexity / Codex / Gemini + Honest disclosure (2026-05-18) |
 | [`docs/PROGRESS.md`]({{ '/PROGRESS' | relative_url }}) | portal-side changelog (Phase 0.4 まで) |
 | [`docs/NOTES.md`]({{ '/NOTES' | relative_url }}) | design notes, link-rot watch (hub 含む) |
-| [`docs/NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) | handoff to the next agent run (人手, 方向性メモ) |
-| [`docs/NEXT_SESSION.auto.md`]({{ '/NEXT_SESSION.auto' | relative_url }}) | Stop hook 自動上書き (git/test/operator status snapshot) |
+| [`docs/NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) | canonical handoff。再開判断はまずこれを読む |
+| [`docs/NEXT_SESSION.auto.md`]({{ '/NEXT_SESSION.auto' | relative_url }}) | repo 内 auto snapshot。生成元は `scripts/gen_next_session_auto.py` |
+| [`docs/HANDOFF_LEDGER.md`]({{ '/HANDOFF_LEDGER' | relative_url }}) | approval / execution / push / rollback history の保存先 |
+| [`docs/SESSION_SUMMARY.md`]({{ '/SESSION_SUMMARY' | relative_url }}) | opaque auto-generated artifact。参照はできるが、repo 内での再生成経路は現在メンテしていないため正本にしない |
+| [`docs/next_plan.md`]({{ '/next_plan' | relative_url }}) | review / 整理タスク用の手動 working memo。参照用リンクは残すが、handoff 正本ではない |
 | [`docs/doc_map.md`]({{ '/doc_map' | relative_url }}) | this page |
 
 ### Reference hubs (2026-05-18 追加 — drift 防止用)
@@ -186,3 +189,5 @@ nav_order: 3
   Scripts row.
 - When a new maintainer memory is created, add it under the Memory section.
 - One-line entries. Long-form lives in the doc itself.
+- Exception: `docs/SESSION_SUMMARY.md` and `docs/next_plan.md` are listed here as operational artifacts, but they are not normal index targets.
+- `docs/SESSION_SUMMARY.md` may remain plain text without a doc-map link because it is an opaque generated artifact, and `docs/next_plan.md` may remain plain text because it is a disposable working memo rather than canonical documentation.

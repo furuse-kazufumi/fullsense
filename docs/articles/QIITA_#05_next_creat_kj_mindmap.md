@@ -3,6 +3,7 @@ layout: default
 title: "LLM × KJ法 × MindMap で要件定義を自動化する — CREAT 設計予告"
 date: 2026-05-17
 tags: [llm, agent, creative-thinking, kj-method, mindmap, triz]
+project_group: llive
 draft: true
 id: 0c6deb6f462843a71094
 ---

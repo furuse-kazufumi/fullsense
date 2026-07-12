@@ -1,5 +1,6 @@
 ---
-title: "honest disclosure 総集編 — 測り方を疑い、構造で勝ち、負けを見せ、技術の外へ（llcore 連載 S/A/B/C アーク・#45）"
+project_group: llcore
+title: "honest disclosure 総集編 — 測り方を疑い、構造で勝ち、負けを見せ、技術の外へ"
 tags:
   - LLM
   - 機械学習

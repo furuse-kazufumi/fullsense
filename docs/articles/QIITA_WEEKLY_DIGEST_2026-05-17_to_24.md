@@ -34,7 +34,7 @@ id: 1f71a3e5bb830cb51b80
 |---|---|---|
 | Brief API | 外部クライアントが「構造化 work unit」を 6 stage loop に流す薄い接着剤 | overhead < 1 % を 15 セルベンチで実測 |
 | COG-FX 10 思考因子 | 「心理の深層」由来の 10 因子を llive 思考層へマッピング | 土台 5 因子を既に実装済 (9/10) |
-| MATH エンジン | LLM に計算させず決定論サイドカーで止める (AST + SI 次元解析) | `5 m/s + 3 s` を必ず弾く |
+| MATH エンジン | LLM に計算させず決定論サイドカーで止める (AST + SI 次元解析) | known value+unit grounding 済み。direct reject は低レベル API で実装、end-to-end policy は次イテレーション |
 | bench honesty | 当初版が不公平 → 異常 3 件を明示して fair 再走 | honest disclosure の型を確立 |
 
 この時点の llive は「**frozen な LLM コアの周りに被せる認知 OS**」という positioning でした。
@@ -131,7 +131,7 @@ revisits that shift, connecting it back to the three original pillars.
 |---|---|---|
 | Brief API | Thin glue that feeds a structured work unit into the 6-stage loop | < 1 % overhead measured on a 15-cell bench |
 | COG-FX 10 factors | Ten cognitive factors mapped onto llive's thinking layer | 5 foundational factors already implemented (9/10) |
-| MATH engine | Don't let the LLM compute; stop it with a deterministic sidecar (AST + SI dimensional analysis) | Always rejects `5 m/s + 3 s` |
+| MATH engine | Don't let the LLM compute; use a deterministic sidecar (AST + SI dimensional analysis) | known value+unit grounding is in place; direct reject exists at the low-level API, end-to-end policy is next iteration |
 | Bench honesty | First version unfair → 3 anomalies disclosed, fair rerun | Established an honest-disclosure pattern |
 
 Back then llive was positioned as "**a cognitive OS wrapped around a frozen LLM core**".
@@ -232,7 +232,7 @@ Next: wiring (real transport / explainer) and an honest quantification of the ef
 |---|---|---|
 | Brief API | 把结构化工作单元送入 6 阶段循环的薄胶水层 | 15 单元基准实测开销 < 1 % |
 | COG-FX 10 因子 | 将 10 个思维因子映射到 llive 思考层 | 5 个基础因子已实现（9/10） |
-| 数学引擎 | 不让 LLM 计算，用确定性旁路拦截（AST + SI 量纲分析） | 必然拦下 `5 m/s + 3 s` |
+| 数学引擎 | 不让 LLM 计算，用确定性旁路承接（AST + SI 量纲分析） | known value+unit grounding 已接上；低层 API 已有 direct reject，end-to-end 方针在下一次迭代 |
 | 基准诚实性 | 初版不公平 → 明示 3 处异常并公平重跑 | 确立了诚实披露的范式 |
 
 那时 llive 的定位是“**包裹在冻结 LLM 内核之外的认知 OS**”。
@@ -325,7 +325,7 @@ Next: wiring (real transport / explainer) and an honest quantification of the ef
 |---|---|---|
 | Brief API | 구조화된 작업 단위를 6단계 루프에 흘리는 얇은 접착제 | 15셀 벤치에서 오버헤드 < 1 % 실측 |
 | COG-FX 10 인자 | 10가지 사고 인자를 llive 사고층에 매핑 | 토대 5인자 이미 구현(9/10) |
-| 수학 엔진 | LLM에 계산시키지 않고 결정론적 사이드카로 차단(AST + SI 차원해석) | `5 m/s + 3 s`를 반드시 차단 |
+| 수학 엔진 | LLM에 계산시키지 않고 결정론적 사이드카로 받는다(AST + SI 차원해석) | known value+unit grounding 은 연결됨. low-level API 에는 direct reject 가 있고, end-to-end 방침은 다음 이터레이션 |
 | 벤치 정직성 | 초기판 불공정 → 이상 3건 명시 후 공정 재실행 | 정직한 공개(honest disclosure) 패턴 확립 |
 
 그때 llive의 포지셔닝은 "**얼어붙은 LLM 코어를 감싸는 인지 OS**"였다.

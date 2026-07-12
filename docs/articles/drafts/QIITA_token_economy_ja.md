@@ -1,4 +1,5 @@
 ---
+project_group: llmesh
 title: "AIのコストは錯覚だらけ — クレジット・サブスク・圧縮で読み解く「トークン経済」"
 tags:
   - AI

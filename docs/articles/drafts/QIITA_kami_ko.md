@@ -1,4 +1,5 @@
 ---
+project_group: llive
 title: 쉬운 설명 모음 — 반증과 Goodhart / 제3의 축 / arc 조감 / 랭턴의 개미 환상을 쉽게
 tags: FullSense, 진화계산, honest_disclosure, 해설, 쉬운설명
 private: false

@@ -3,6 +3,7 @@ layout: default
 title: "llive vs 他 LLM ベンチマーク 2026-05-17 — 動作確認の罠と honest disclosure"
 date: 2026-05-17
 tags: [llm, benchmark, on-prem, ollama, perplexity, llive, methodology]
+project_group: llive
 id: f2ebf45621d8f85399c9
 ---
 

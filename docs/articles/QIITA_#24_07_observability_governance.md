@@ -1,9 +1,10 @@
 ---
-title: 'llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain'
+title: 'llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519'
 tags:
   - FullSense
   - llive
   - 解説
+project_group: llive
 private: true
 updated_at: '2026-05-23'
 id: f3ef0430798ff9df07ab
@@ -18,7 +19,7 @@ ignorePublish: false
 
 # 日本語
 
-# llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519 audit chain
+# llive 完全解説 (7) — 「審査つき AI」: runtime_metadata × Approval Bus × Ed25519
 
 ![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero.svg?v=2)
 
@@ -36,6 +37,8 @@ ignorePublish: false
 > = **「自己進化する AI が, 自分の決定を全て署名つきで残す」** という珍しい形.
 
 ![theme — Approval Bus + Ed25519 audit chain (animated)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_theme.svg)
+
+![多数の提案が fail-closed の関所を通って 1 つの安全な write に絞られる補助図。Qiita では static-safe 図として読む](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/motion_pack/human_gate_funnel.svg?v=1)
 
 ## 0. 連載中での位置づけ
 
@@ -263,7 +266,7 @@ governance 側で重要なのは:
 
 # English
 
-# llive Complete Guide (7) — "AI with Built-in Review": runtime_metadata × Approval Bus × Ed25519 audit chain
+# llive Complete Guide (7) — "AI with Built-in Review": runtime_metadata × Approval Bus × Ed25519
 
 ![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_en.svg?v=2)
 
@@ -523,7 +526,7 @@ matrix signed in the audit chain fits within the latency budget.
 
 # 中文
 
-# llive 完全解说 (7) — "带审查的 AI": runtime_metadata × Approval Bus × Ed25519 audit chain
+# llive 完全解说 (7) — "带审查的 AI": runtime_metadata × Approval Bus × Ed25519
 
 ![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_zh.svg?v=2)
 
@@ -758,7 +761,7 @@ test (1e-6 tolerance). callers (`CollusionDetector.check`) 计划在下一 commi
 
 # 한국어
 
-# llive 완전 해설 (7) — "심사가 붙은 AI": runtime_metadata × Approval Bus × Ed25519 audit chain
+# llive 완전 해설 (7) — "심사가 붙은 AI": runtime_metadata × Approval Bus × Ed25519
 
 ![hero — Approval Bus verdict flow + Ed25519 audit chain](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_24/qiita_24_07_hero_ko.svg?v=2)
 

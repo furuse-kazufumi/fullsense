@@ -1,3 +1,15 @@
+---
+project_group: llcore
+title: "#47 歩行ロボットの進化エンジンで LLM をマージしたら、正直つらい話になった — QD-of-merges 実験の全記録"
+tags:
+  - FullSense
+  - llcore
+  - honest_disclosure
+  - model_merging
+  - evolutionary_computation
+private: false
+---
+
 # #47 歩行ロボットの進化エンジンで LLM をマージしたら、正直つらい話になった — QD-of-merges 実験の全記録
 
 > 前回(#46)は「異なる LLM は重みでは混ざらない。混ぜられるのは蒸留だけ」という**理論**の話でした。今回はその実証編です。**歩行ロボットを進化させる自作エンジン(MAP-Elites)を、そのまま LLM の「マージレシピ探索」に転用**して、同じ土台の兄弟モデルを実際にマージし、held-out perplexity で測りました。

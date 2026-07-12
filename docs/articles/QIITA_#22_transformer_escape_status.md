@@ -1,11 +1,12 @@
 ---
-title: 「Transformer 脱却した」と「Transformer 脱却が default」のあいだ — 5 案 skeleton + 進化型 GA で脳の構造そのものを進化させる話
+title: Transformer 脱却は default になるか — 5 案 skeleton + 脳構造を進化させる GA
 tags:
   - FullSense
   - llive
   - Mamba
   - RWKV
   - HonestDisclosure
+project_group: llive
 private: false
 updated_at: '2026-05-21'
 id: d84e4d1f8a8f409861b0
@@ -19,6 +20,8 @@ ignorePublish: true
 ---
 
 # 日本語
+
+# Transformer 脱却は default になるか — 5 案 skeleton + 脳構造を進化させる GA
 
 <!--
 Qiita タグ 5 個上限. 本記事の主役順:

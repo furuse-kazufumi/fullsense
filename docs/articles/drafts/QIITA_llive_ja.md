@@ -1,11 +1,12 @@
 ---
-title: llive 完全解説 総集編 — 忘れない LLM / 10軸思考 / 矛盾計算 / 収束する脳 / 集団進化 / 脱Transformer / 審査つきAI / 評価
+project_group: llive
+title: llive 完全解説 総集編
 tags: 解説, llive, FullSense
 private: false
 public_id: 07b4882e872994b27b3c
 ---
 
-# llive 完全解説 総集編 — 忘れない LLM / 10軸思考 / 矛盾計算 / 収束する脳 / 集団進化 / 脱Transformer / 審査つきAI / 評価
+# llive 完全解説 総集編
 
 <!-- TOPICNAV -->
 > **🌐 言語**: **日本語** | [English](https://qiita.com/furuse-kazufumi/items/07b686ea311e06027f94) | [中文](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8) | [한국어](https://qiita.com/furuse-kazufumi/items/c5f2077a3399d3fc9b26)

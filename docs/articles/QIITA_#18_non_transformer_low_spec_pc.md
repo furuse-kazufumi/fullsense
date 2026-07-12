@@ -6,6 +6,7 @@ tags:
   - 解説
   - LLM
   - ローカルLLM
+project_group: llive
 private: false
 updated_at: '2026-05-22'
 id: 2680b5b994d3d4429f56

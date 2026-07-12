@@ -4,7 +4,7 @@ Qiita Team 向けに「難しい内容を後で個別公開できるよう stock
 
 ## この文書の役割
 
-- **正本**: 投稿待ち一覧と現在の blocker をここに集約する。外部判断の記録の canonical field は **POST 後の記録欄 `visible range memo` / `rollback needed` / `note` の 3 欄** とする。`docs/next_plan.md` と `docs/SESSION_SUMMARY.md` はこの欄への参照だけを持つ
+- **正本**: 投稿待ち一覧と現在の blocker をここに集約する。外部判断の記録の canonical field は **POST 後の記録欄 `visible range memo` / `rollback needed` / `note` の 3 欄** とする。approval / execution / push / rollback 来歴は `docs/HANDOFF_LEDGER.md`、再開判断の handoff は `docs/NEXT_SESSION.md`、`docs/next_plan.md` は作業メモに留める
 - `team_stock_publish_plan.md`: 公開順・human gate 条件・rollback 注意の正本
 - marker 是正は `py -3.11 tools/qiita_team_post.py invalidate-marker tools/qiita-cli-poc/public/team_stock_<file>.md ...` を正規コマンドとして扱う。これは **local bookkeeping only — does not touch remote/Team API state**。現実装の path allowlist は `tools/qiita-cli-poc/public/team_stock_*.md` 限定で、public 配下の通常記事や public 配下以外の Team source に marker が付いた場合はこのコマンドでは戻せない
 

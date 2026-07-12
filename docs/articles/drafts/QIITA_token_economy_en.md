@@ -1,5 +1,6 @@
 ---
-title: "AI Costs Are Full of Illusions — Reading the 'Token Economy' Through Credits, Subscriptions, and Compression"
+project_group: llmesh
+title: "AI Costs Are Full of Illusions — Token Economy, Credits, Compression"
 tags:
   - AI
   - LLM
@@ -9,7 +10,7 @@ tags:
 private: true
 ---
 
-# AI Costs Are Full of Illusions — Reading the 'Token Economy' Through Credits, Subscriptions, and Compression
+# AI Costs Are Full of Illusions — Token Economy, Credits, Compression
 
 ## Intro: The first-ever "AI TV host" wasn't AI at all
 

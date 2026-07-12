@@ -1,11 +1,12 @@
 ---
-title: '一晩で AI 進化を作り直した — 実 LLM 12h ランがまた満点で飽和し、6 本の PoC と 4 体の Agent と Perplexity が「独立に同じ結論」へ収束した夜 #27（開放端進化 / ライブ・オーケストラ / honest cross-validation）'
+title: '一晩で AI 進化を作り直した — 実 LLM 12h ランがまた満点で飽和した夜 #27'
 tags:
   - FullSense
   - llive
   - 進化計算
   - honest_disclosure
   - 解説
+project_group: llive
 private: true
 updated_at: '2026-05-27'
 id: 61dda4314c1b786381d0
@@ -22,7 +23,7 @@ ignorePublish: true
 
 > 📗 **お急ぎの方へ**: この記事には [かみくだき版](https://fullsense.qiita.com/furuse-kazufumi/items/6b134e5a4f87963681c2) があります（比喩多め・短時間で要点だけ）。
 ![lldarwin v2 一晩マラソン #27](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/manga/q27_4koma.svg?v=2)
-# 一晩で AI 進化を作り直した — 実 LLM 12h ランがまた満点で飽和し、6 本の PoC と 4 体の Agent と Perplexity が「独立に同じ結論」へ収束した夜 #27
+# 一晩で AI 進化を作り直した — 実 LLM 12h ランがまた満点で飽和した夜 #27
 
 > 📚 **連載ナビ（lldarwin アーク）**: #24-05 集団進化 → #25 monoculture の失敗 → #26 設計編 → **#27 本記事（climax）** → [#28 実装編（オーケストラ型 AI）](drafts/QIITA_#28_lldarwin_v2_phase1_orchestra.md)。※ 各記事は単独でも読めます（リンクは回遊用）。
 

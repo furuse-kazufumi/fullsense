@@ -6,7 +6,7 @@
 - **対象コード(実在確認済)**:
   - `D:/projects/llcore/src/llcore/runtime/eval_proxy.py`(proxy-v2 全関数)
   - `D:/projects/llcore/scripts/nas_pareto.py`(driver、`--proxy-v2` 配線・`_proxy_v2_rigorous`)
-- **正本知見**: eval_proxy.py module docstring(v1 の欠陥分析)/ `MODEL_LANDSCAPE_2026_06.md`(NAS 新規性)/ SUPRA 長文脈崩壊(`next_plan.md` L2)
+- **正本知見**: eval_proxy.py module docstring(v1 の欠陥分析)/ `MODEL_LANDSCAPE_2026_06.md`(NAS 新規性)/ SUPRA 長文脈崩壊(`docs/NEXT_SESSION.md` の現況要約)
 - **honest 規律**: `feedback_benchmark_honest_disclosure`(内訳を疑う)/ eval_proxy.py 自体が honest-disclosure を中核設計
 
 > **凍結宣言**: holdout 数・context sweep・cross-corpus・主要指標・成功 verdict を実行前に固定。eval_proxy.py は **設計段階で解析自由度を凍結する装置**(`build_proxy_v2_report` が scope を pin)。本 prereg はその凍結を実験計画として明文化する。

@@ -1,11 +1,12 @@
 ---
-title: llcore Verification Arc — Collected (#38–#42): Defensive Disclosure × the 2ⁿ Wall × Strong Gradient Beats Evolution × the Langton's-Ant Illusion
+project_group: llcore
+title: "llcore Verification Arc — #38–#42 Collected"
 tags: FullSense, llcore, Singularity, AI, explainer
 private: false
 public_id: 525cd01eda5c1ad707ef
 ---
 
-# llcore Verification Arc — Collected (#38–#42): Defensive Disclosure × the 2ⁿ Wall × Strong Gradient Beats Evolution × the Langton's-Ant Illusion
+# llcore Verification Arc — #38–#42 Collected
 
 <!-- TOPICNAV -->
 > **🌐 Language**: [日本語](https://qiita.com/furuse-kazufumi/items/cc0713ab78a5b390df76) | **English** | [中文](https://qiita.com/furuse-kazufumi/items/29b100b00f0d58306886) | [한국어](https://qiita.com/furuse-kazufumi/items/a5ebb3992e4c28862f47)

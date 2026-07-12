@@ -1,4 +1,5 @@
 ---
+project_group: llcore
 title: "#44 AIは平気で嘘をつく — 自作LLMの土台の「改良」を正直に測るために、評価器ごと作り直した話"
 tags:
   - LLM

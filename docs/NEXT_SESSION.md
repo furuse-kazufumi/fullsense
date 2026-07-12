@@ -1,33 +1,75 @@
 ---
 layout: default
-title: "Next Session Handoff"
+title: "Next Session Handoff (updated 2026-07-12)"
 nav_order: 95
 ---
 
-# Next Session Handoff (2026-06-19 時点 → next)
+# Next Session Handoff (updated 2026-07-12)
 
 > Picked up by the next FullSense session. Everything below is ready to
 > resume on. Operator actions are flagged 🧑 (user) vs 🤖 (agent).
 
-> 運用メモ(環境・会話依存の参考):
-> project 直下には `CLAUDE.md` が見当たらない。
-> ただしグローバル `~/.claude/CLAUDE.md` や、会話上位の system / developer / `AGENTS.md` 規約が存在する実行系では、それらを優先する。
-> 再開時は、まず会話上位の system / developer / `AGENTS.md` 指示があればそちらを優先し、
-> そのうえで repo 内の handoff 正本は本ファイルを使い、
-> `docs/articles/IDEAS_2026_06_15_harness_loop_raptor.md` は補足・背景メモとして参照する。
-> ただし ideation 段階の着想メモで、旧フレーミングや旧 naming を含みうる。現行の語彙・位置づけは本ファイルと canonical handoff 2 正本を正本とする。
-> 環境依存の個人メモ類は、あっても参考扱いに留め、再開判断の正本には含めない。
-> `docs/SESSION_SUMMARY.md` は Stop hook が自動生成するスナップショットとして参照可。
-> ただしコミット時点で更新が止まっていることもあるため、最新ターンの現況とみなして鵜呑みにはしない。
-> `docs/next_plan.md` は再開判断メモとして使ってよいが、手動更新のため index 状態がズレることがある。commit 境界の判断に使うときは `git status` で staged / unstaged も併記して読む。
-> `.llterm/loop_ledger.jsonl` は自動ログで記事差分のノイズになりやすかったが、2026-06-18 に `git rm --cached` + `.gitignore` で deindex 済み。今後は on-disk に残る local telemetry として扱い、review / handoff では通常 diff から外れる前提でよい。
-> handoff の commit 台帳は `docs/SESSION_SUMMARY.md` / `docs/next_plan.md` の 2 枚だけが正本で、**最新 1 件の handoff commit が未反映なのは正常状態**である。backfill は実質的な handoff 更新に便乗してのみ行い、台帳追記だけの単独 commit を増やさない。`a0b793a` / `6d9854d` / `c16a69b` / `e150ee4` / `ed1e841` は、そのルールを締め直す前後に残った standalone backfill debt の標本として扱う。以後は同型の commit を増やさず、cleanup が必要なら 1 行 note の積み増しではなく、次の実質的 handoff 更新か別 human-gate 判断の中で 1 回で畳む。`NEXT_SESSION.md` 自身の現在地は、他 2 枚の range 注記ではなく本ファイル本文の現況メモを正本として読む。
-> 2026-06-19 のユーザー判断で、上記 5 件は cleanup 対象として掘り返さず、例外標本として履歴に残す方針に固定した。以後は再発防止だけを維持し、同型の standalone backfill commit を増やさない。
+> 運用メモ(まずこれだけ読む):
+> 1. 再開判断の正本は **`docs/NEXT_SESSION.md`**。
+> 2. repo 内の自動 snapshot は `docs/NEXT_SESSION.auto.md`。`scripts/gen_next_session_auto.py` が生成元だが、**stale snapshot 前提**で扱う。現在状態の判断には使わず、再生成時刻を確認したうえで差分・git/test 状態の補助参照に留める。
+> 3. `docs/HANDOFF_LEDGER.md` は approval / execution / push / rollback 来歴の保存先。
+> 4. `docs/next_plan.md` は review / 実行前サマリ用の working memo で、正本ではない。
+> 5. `docs/SESSION_SUMMARY.md` は opaque な auto-generated artifact。repo 内での再生成経路は現在メンテしていないため、再開判断の正本には使わない。必要なら「Stop hook が最後に残した断片的 snapshot」以上の意味は持たせない。
+> project 直下には `CLAUDE.md` が見当たらない。会話上位の system / developer / `AGENTS.md` 指示があればそちらを優先する。
+> `docs/articles/IDEAS_2026_06_15_harness_loop_raptor.md` は補足・背景メモ。現行の語彙・位置づけは本ファイルを優先する。
+> `.llterm/loop_ledger.jsonl` は local telemetry として扱い、通常の review / handoff 差分からは外す前提でよい。
+> standalone backfill 例外標本 (`a0b793a` / `6d9854d` / `c16a69b` / `e150ee4` / `ed1e841`) の保持方針は `docs/HANDOFF_LEDGER.md` を参照する。
 
-## ⭐ 2026-06-17 昼 — #43 継続の再開地点
+## Restart Here First
 
-> **この節が現時点の最優先の再開地点。** 下の 2026-06-12 節は旧文脈の記録として残している。
-> **2026-06-19 このターンの変更範囲:** 以下の local source / handoff 更新は commit `2a8b942` (`sync qiita handoff and draft polish`) で確定済みである。`qiita47_harness_engineering_thoughts.md` では、「この比喩はどこで破綻するか」を §12 の繰り返しではなく **比喩固有の破綻点** へ寄せ、`しつけ` 比喩がまだ効くのは `観測 / 停止 / 修復` の前半までで、最後の `意味づけ` は loop の外側に残ることを本文で明示した。さらに「runtime に入れる前に、先に捨てるべき人間側の癖」を 1 節足し、その後の local polish で §4→5 / §5→6 / §8→9 / §11→12 に短い forward bridge を足し、0〜4 章の重複も圧縮して前半の spine を「ハーネスは人間側の雑さを通さない器」へ締めた。`qiita45_human_ai_dev_incident_patterns.md` では `human-gate` 表記統一、appendix / 参考節への `VLAA-GUI` / `Resilient Write` / `Crab` / `Measuring the Permission Gate` 追加、`## 2` honest disclosure 前置きの圧縮、`human-gate` を permission-boundary の補助線として扱う整合修正、さらに前半で **運用カテゴリ** と後段の **RAD 接地の分析レイヤ** を分ける 1 文まで反映済みである。あわせて `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md` では `### prompt → context → harness → loop の流れ` の `paradigm_staircase.svg` と caption を同期し、`qiita44_evolutionary_programs_block_diagram.md` では MIT Press gate 文言を `soft-gate` と `別 UI / 別ブラウザ経由の補助観測` に揃えた。handoff 3 文書も同じ現在地へ揃えている。
+- **最優先の再開地点は `⭐ 2026-07-12 昼 — evolution loop public PATCH gate` 節**。現本線は `docs/articles/drafts/QIITA_evolution_loop_cooking_ja.md` と `public_id 40ba7cc91ac577274b74` の反映準備であり、旧 `#43` 系は補助文脈へ後退した。
+- `External Publish State (snapshot: 2026-07-12)` は **補助的な外部状態メモ**であり、再開判断の正本ではない。外部 publish / Team visibility の現況確認用 snapshot としてだけ読み、そのターンの live 再取得で上書きする前提で扱う。
+- `docs/next_plan.md` は review / 実行前サマリ用の **working memo** であり、再開判断・approval・execution・push 来歴の正本ではない。再開は本ファイル、実行来歴は `docs/HANDOFF_LEDGER.md` を見る。
+- 外部操作へ進む場合は、まず下の `⭐ 2026-07-12 昼 — evolution loop public PATCH gate` を読み、必要なら `External Publish State` と旧文脈節を補助参照する。
+
+## ✅ 2026-07-12 — evolution loop public PATCH gate(CLOSED)
+
+> **この案件は完了・クローズ。** 人間承認のもと選択肢2 を一気通しで実行し、`40ba7cc91ac577274b74` への live PATCH まで完了した(`OK (200)`、`updated_at:2026-07-12T13:20:52+09:00`、fig3 画像 + 深掘り本文を rendered_body で確認)。実行来歴の正本は `docs/HANDOFF_LEDGER.md` の `2026-07-12 — evolution loop public PATCH gate` エントリ。以下の元 gate 記述は参照用に残す。
+>
+> **次セッションの残タスク**: (a) 未 commit の code/test は実態 **7 ファイル**(`scripts/qiita_preflight.py` / `tools/_frontmatter.py` / `tools/_qiita_title_guard.py`[AM] / `tools/qiita_public_post.py` / `tools/qiita_team_post.py` / `tests/test_qiita_frontmatter.py` / `tests/test_qiita_preflight.py`[AM])で相互 import 依存あり。加えて **106 の .md**(`project_group` 追加)+ `docs/articles/QIITA_PROJECT_GROUP_INDEX.md`[A]。full suite = **`301 passed`**。partial(code のみ)commit は checkout 時に既存 public 記事が preflight `GROUP_MISSING` で exit-1 になる相互依存があるため、commit は「7 code + 106 .md 一括」か「無 commit」の二択。commit 前に `git reset` → 明示 pathspec で re-add → `git diff --cached` 目視が必須。(b) onocollo Team item `f8017acc1f50112f3c9e` の browser-side visibility 確認(pending)。
+
+<details><summary>元 gate 記述(参照用・完了済み)</summary>
+
+> 停止理由は、ここから先が `push` を含む外部アクションであり、fail-closed の human gate が必要になったため。
+
+- 主案件は `docs/articles/drafts/QIITA_evolution_loop_cooking_ja.md` の local 深掘りと、対応図版 `docs/articles/assets/evolution_loop/fig3_you_have_three.png/.svg` の公開反映準備。
+- 対象の public item は **`40ba7cc91ac577274b74`**。現時点の「未反映 PATCH」という言い方は **docs 整合ベース**であり、この停止ターンではまだ live API / live HTML の再照合はしていない。したがって「live 未反映」は断定ではなく、**push 前に live 再確認が必要な pending state** として扱う。
+- 本文は raw GitHub の `fig3_you_have_three.png?v=1` を参照するため、順序は **`fig3 asset push -> raw GitHub HTTP 200 -> 草稿 source push -> public PATCH -> live 確認`** に固定する。
+- current index には別案件の staged 追加 (`docs/HANDOFF_LEDGER.md`, `docs/articles/QIITA_PROJECT_GROUP_INDEX.md`, `tests/test_qiita_preflight.py`, `tools/_qiita_title_guard.py`) が混在している。したがって **fig3 asset 用 commit は `fig3_you_have_three.png/.svg` の 2 ファイルだけを明示 add/commit する pathspec 手順で切り分ける**。`git add -A` / `git commit -a` は使わない。
+- human gate に出す未決事項は次の 3 択で固定する。`1.` fig3 asset だけ commit/push して raw `HTTP 200` 確認まで。`2.` fig3 asset push → 草稿 source push → `40ba7cc91ac577274b74` への PATCH → live 確認まで一気通し。`3.` 今回は外部アクションを進めずローカル確認で停止。
+- push 前の確認項目は最低 3 つ。`1.` `git diff -- docs/articles/drafts/QIITA_evolution_loop_cooking_ja.md docs/articles/assets/evolution_loop/fig3_you_have_three.png docs/articles/assets/evolution_loop/fig3_you_have_three.svg` で対象差分だけを見る。`2.` `tools/qiita-cli-poc` 系の live 確認経路で `40ba7cc91ac577274b74` の current title/body を再取得し、local 草稿との差分が本当に pending か確認する。`3.` asset commit 前に `git diff --cached --name-status` を見て、fig3 以外が入っていないことを確認する。
+
+</details>
+
+## External Publish State (snapshot: 2026-07-12)
+
+> 2026-07-12 時点の補助 snapshot。**stale 前提 / 要再確認**で読み、publish 完了や reader-visible を断定する根拠には使わない。
+
+- Qiita public の**新規記事**は未投稿。今回触った `onocollo` 草稿は public create していない。
+- `docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md` の既存 `public_id: 631620c33d20f2694310` については live API を再確認済み。title は現行のまま、body には **`rocket_land.gif` / `docs/next_plan.md` / `repo-fixed reference` / `固定参照`** が残っており、今回の local draft で追加した `motion_pack/worldmodel_rollout_strip.svg` / `motion_pack/rocket_launch_land_cycle.svg` / `公開読者が辿れる参照としては` は **未反映**だった。ここから言えるのは **2026-07-12 時点で local draft 差分は live body に見えていない**ことまでで、PATCH 経路全体の副作用有無は再確認前提で読む。
+- Qiita Team item は `https://fullsense.qiita.com/furuse-kazufumi/items/f8017acc1f50112f3c9e`。Team API readback は `200`, `private=False`, `group.url_name=general`。`rendered_body` には title と `rocket_land.gif` / `motion_pack/rocket_launch_land_cycle.svg` / `motion_pack/worldmodel_rollout_strip.svg` の参照が入っていることまで確認した。
+- Team 側の確認段は **`API readback / rendered_body content` までは確認済み、browser-side 表示確認は未了** で統一する。今後の「投稿完了」判定は、最低でも `rendered_body` 内容確認、できれば browser-side の実表示確認まで含める。
+- ~~`docs/articles/drafts/QIITA_evolution_loop_cooking_ja.md` は既存 public item `40ba7cc91ac577274b74` の pending PATCH~~ → **2026-07-12 13:20 JST に PATCH 完了・クローズ**(fig3 asset push → source push → 事前 fresh readback → `post --yes` = `OK (200)` → live 確認まで実施)。詳細は上の `✅ 2026-07-12 — evolution loop public PATCH gate(CLOSED)` 節と `docs/HANDOFF_LEDGER.md`。この案件は **onocollo Team 状態とは別案件**。
+- 次セッションでの確認アクションは 4 つに固定する。`1.` public item `631620c33d20f2694310` を live API / live HTML / browser で再確認し、local draft 差分が reader-visible かどうかを切り分ける。`2.` Team item `f8017acc1f50112f3c9e` を browser-side で開き、rendered_body と実表示が一致するかを見る。`3.` 外部更新へ進む前に source / Team stock / live item の `title` と identity key (`public_id` or `id`) を再確認する。`4.` public create / PATCH / Team re-post のどれをやるにせよ、この snapshot を正本扱いせず、そのターンの live 再取得結果で上書きしてから判断する。
+
+## Supplemental Technical Memo (onocollo)
+
+> 補助メモ。**今回の docs review 対象そのものではない**が、次セッションで `onocollo` の技術検討へ戻るときの starting point として残す。
+
+- rule-based controller / gait generator / MPC を **そのまま novelty とせず、学習素材化の教師**として使う。
+- 推奨する変換単位は `state / action / phase / contact / safety_flag / failure` を含む trajectory で、**成功例だけでなく失敗と回復も教材化**する。
+- 推奨路線は「flat-ground walking をゼロから学ばせる」ではなく、**OSS の歩行器を teacher / baseline とし、その上に world model と failure prediction を足す**こと。
+- 次の技術タスクは `rule -> dataset schema` の確定、held-out terrain / clutter / unsafe foothold 条件の定義、そして `low-level imitation` と `failure prediction` の分離学習である。
+
+## 2026-06-17 昼 — #43 継続の再開地点(superseded by 2026-07-12)
+
+> **この節はもはや最優先ではない。現時点の最優先の再開地点は上の `⭐ 2026-07-12 昼 — evolution loop public PATCH gate` 節であり、本節は #43 系の補助文脈として残す。** 下の 2026-06-12 節は旧文脈の記録として残している。
+> **2026-06-19 このターンの変更範囲:** 以下の local source / handoff 更新は commit `2a8b942` (`sync qiita handoff and draft polish`) で確定済みである。`qiita47_harness_engineering_thoughts.md` では、「この比喩はどこで破綻するか」を §12 の繰り返しではなく **比喩固有の破綻点** へ寄せ、`しつけ` 比喩がまだ効くのは `観測 / 停止 / 修復` の前半までで、最後の `意味づけ` は loop の外側に残ることを本文で明示した。さらに「runtime に入れる前に、先に捨てるべき人間側の癖」を 1 節足し、その後の local polish で §4→5 / §5→6 / §8→9 / §11→12 に短い forward bridge を足し、0〜4 章の重複も圧縮して前半の spine を「ハーネスは人間側の雑さを通さない器」へ締めた。`qiita45_human_ai_dev_incident_patterns.md` では `human-gate` 表記統一、appendix / 参考節への `VLAA-GUI` / `Resilient Write` / `Crab` / `Measuring the Permission Gate` 追加、`## 2` honest disclosure 前置きの圧縮、`human-gate` を permission-boundary の補助線として扱う整合修正、さらに前半で **運用カテゴリ** と後段の **RAD 接地の分析レイヤ** を分ける 1 文まで反映済みである。あわせて `qiita43_harness_loop_stack_en.md` / `_zh.md` / `_ko.md` では `### prompt → context → harness → loop の流れ` の `paradigm_staircase.svg` と caption を同期し、`qiita44_evolutionary_programs_block_diagram.md` では MIT Press gate 文言を `soft-gate` と `別 UI / 別ブラウザ経由の補助観測` に揃えた。**この時点で揃えたのは handoff 正本 `NEXT_SESSION.md` と補助 snapshot 群であり、`docs/next_plan.md` は handoff 文書に含めない。**
 > **2026-06-18 追加メモ:** referral CTA 用のバス江コマは `012.jpg`（「ひくわ」）を既定のまま維持し、`044.jpg` は「押し売り感をわざと過剰化する強め variant」として `docs/articles/assets/bazue_all/index.md` に整理した。CTAIMG の一括差し替えはしておらず、必要な草稿だけ opt-in で使う前提。
 > <!-- CTA149_BATCH_STATE_BEGIN -->
 > **2026-06-18 追加メモ 2:** いま手元で整えていた CTA-149 batch は `22d5460384c2cb54a9e6` の live item 修正ではなく、`qiita43/44/45/46/47` の local source 末尾 CTA を整える差分であった。`149.jpg` は opt-in の強め variant に戻し、`1-week free trial` 系の時限断定は「無料で試せる（提供条件は公式参照）」へヘッジした。en/ko CTA キャプションの `\"` も local source では除去済みで、live 再 publish / PATCH はまだ人間承認待ちの外部アクションである。
@@ -322,7 +364,7 @@ nav_order: 95
    さらに `qiita45` の `## 2` では、`ローカルコーパス要約の上でも` を `ローカルコーパス要約でも` に縮め、`要するに本稿の main path で持ち帰りたいのは` も `要するに持ち帰りたいのは` へ詰めて、説明口調だけを少し落とした。
    最後の micro-polish では、`qiita45` の `## 2` 冒頭にあった 2 文切りの導入も 1 段へ畳み、main path の論点に入るまでの助走をさらに短くした。
    追加確認として、`VLAA-GUI` / `Resilient Write` / `Crab` / `Measuring the Permission Gate` の arXiv 4 件は 2026-06-19 に一次情報で URL / title / author を照合済みだと本文へ固定した。あわせて `5 点` は運用カテゴリ、`4+1` は RAD 接地の分析レイヤだと 1 行で明示し、taxonomy の切替が誤読されにくい形へ揃えた。
-   canonical ledger 2 正本への `513546f..b5464fa` 回収は完了済みで、次に触るときはこの短稿をさらに短く締めるか、公開水準へ向けて参考整形を詰めるかから始めればよい。
+   `513546f..b5464fa` については **`docs/HANDOFF_LEDGER.md` へ回収済みとは扱わない**。現時点では handoff 文脈側の説明だけが残っているため、次に触るときはこの短稿をさらに短く締めるか、公開水準へ向けて参考整形を詰めるかに加えて、必要なら ledger へ durable に移すべき内容が本当にあるかを再判断する。
    次にやるなら、`#43` へ戻す判断ではなく、独立短稿として runtime / orchestration の最小グロスを保ったままさらに圧縮するか、外部公開できる水準まで参考整形を進めるかを決める。現段階では publish / Team stock へは送らず、`157.jpg` の使いどころ定義、RAPTOR / `llterm` / `/goal` の具体節、`desired-actual-drift-repair` の最小 loop 説明、green-keeper 比喩の破綻点と failure mode、runtime 成長順の実務ルール、そして runtime に入れる前に先に捨てるべき人間側の癖まで入れたところで止めている。
 9. `qiita37_gpu_triple_run_gate_price_kamikudaki.md` は本文の spine を増補済み。次に触るなら、Kaggle 運用 PoC を本文に残すか `<details>` 層へ逃がすかを 1 回だけ決める。
    この一次確認は references 節に列挙した外部 URL 群にも同じく適用する。

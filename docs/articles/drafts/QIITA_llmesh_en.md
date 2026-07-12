@@ -1,12 +1,13 @@
 ---
-title: llmesh Digest — Unified Local/Cloud × Prompt Firewall × Rust Acceleration × Industrial IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × Ecosystem
+project_group: llmesh
+title: llmesh Digest — Local/Cloud, Firewall, IoT, Swarm
 tags: OpenAI, LLM, LLaMA, Anthropic, ollama
 private: false
 id: 8df131193caf4dba5218
 public_id: edaef9aa56ae66b8423e
 ---
 
-# llmesh Digest — Unified Local/Cloud × Prompt Firewall × Rust Acceleration × Industrial IoT (Modbus/OPC-UA/DNP3 GOOSE) × P2P Swarm × Ecosystem
+# llmesh Digest — Local/Cloud, Firewall, IoT, Swarm
 
 <!-- TOPICNAV -->
 > **🌐 Language**: [日本語](https://qiita.com/furuse-kazufumi/items/fcb43968a5c642610762) | **English** | 中文 | 한국어

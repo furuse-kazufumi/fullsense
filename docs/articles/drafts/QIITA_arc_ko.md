@@ -1,4 +1,5 @@
 ---
+project_group: llcore
 title: llcore 검증 arc 모음(#38–#42): 방어적 공개 × 2ⁿ 벽 × 강한 기울기가 진화를 이긴다 × 랭턴의 개미 환상
 tags: FullSense, llcore, Singularity, AI, 解説
 private: false

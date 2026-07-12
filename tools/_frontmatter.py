@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Minimal frontmatter parser shared by Qiita/Zenn helper scripts.
+"""Minimal frontmatter/body-title parser shared by Qiita/Zenn helper scripts.
 
 Supports the subset used in this repo:
 - top-level scalars
@@ -14,21 +14,26 @@ import re
 
 
 _BLOCK_SCALAR_VALUES = {">", ">-", ">+", "|", "|-", "|+"}
+_LANGUAGE_H1S = {"日本語", "English", "中文", "한국어"}
 
 
 def split_frontmatter_lines(text: str) -> tuple[list[str], str]:
     """Split leading `--- ... ---` frontmatter into lines + remaining body."""
     if text.startswith("\ufeff"):
-        text = text.lstrip("\ufeff")
-    lines = text.splitlines()
-    if not lines or lines[0].strip() != "---":
+        text = text[1:]
+    lines = text.splitlines(keepends=True)
+    if not lines or not re.match(r"^[ \t]*---[ \t]*(?:\r?\n|$)", lines[0]):
         return [], text
-    for i in range(1, len(lines)):
-        if lines[i].strip() == "---":
-            fm = lines[1:i]
-            head = "\n".join(lines[: i + 1])
-            body = text[len(head):].lstrip("\n")
-            return fm, body
+    fm_raw: list[str] = []
+    for idx in range(1, len(lines)):
+        if re.match(r"^[ \t]*---[ \t]*(?:\r?\n|$)", lines[idx]):
+            fm_text = "".join(fm_raw)
+            fm_lines = fm_text.splitlines()
+            if not fm_lines:
+                fm_lines = [""]
+            body = "".join(lines[idx + 1 :])
+            return fm_lines, body
+        fm_raw.append(lines[idx])
     return [], text
 
 
@@ -36,6 +41,44 @@ def split_frontmatter(text: str) -> tuple[dict, str]:
     """Return parsed frontmatter metadata and remaining body."""
     fm_lines, body = split_frontmatter_lines(text)
     return parse_frontmatter_lines(fm_lines), body
+
+
+def resolve_body_title(body: str) -> str | None:
+    """Return the publish-title H1 from body text.
+
+    Rules:
+    - ignore headings inside fenced code blocks
+    - if the first H1 is a language marker (`# 日本語` etc), keep scanning
+    - tolerate language nav / prose / anchors before the publish-title H1
+    """
+    in_fence = False
+    fence_marker: str | None = None
+    for line in body.splitlines():
+        fence_match = re.match(r"^\s*(`{3,}|~{3,})", line)
+        if fence_match:
+            marker = fence_match.group(1)
+            if not in_fence:
+                in_fence = True
+                fence_marker = marker
+            elif fence_marker and marker[:1] == fence_marker[:1] and len(marker) >= len(fence_marker):
+                in_fence = False
+                fence_marker = None
+            continue
+        if in_fence:
+            continue
+        stripped = line.strip()
+        if not stripped or stripped.startswith("<!--"):
+            continue
+        if stripped.startswith("<a ") or stripped.startswith("</a>"):
+            continue
+        match = re.match(r"^# (.+)$", line)
+        if not match:
+            continue
+        title = match.group(1).strip()
+        if title in _LANGUAGE_H1S:
+            continue
+        return title
+    return None
 
 
 def parse_frontmatter_lines(fm_lines: list[str]) -> dict:
@@ -69,15 +112,11 @@ def parse_frontmatter_lines(fm_lines: list[str]) -> dict:
             continue
 
         if val.startswith("[") and val.endswith("]"):
-            meta[key] = [
-                _unquote_scalar(part.strip())
-                for part in _split_inline_list(val[1:-1].strip())
-                if part.strip()
-            ]
+            meta[key] = parse_inline_list_value(val)
             i += 1
             continue
 
-        meta[key] = _unquote_scalar(val)
+        meta[key] = parse_scalar_value(val)
         i += 1
     return meta
 
@@ -163,6 +202,94 @@ def _fold_block_scalar(lines: list[str]) -> str:
 
 def _split_inline_list(inner: str) -> list[str]:
     return inner.split(",")
+
+
+def find_quoted_scalar_end(value: str) -> int | None:
+    if not value or value[0] not in ("'", '"'):
+        return None
+    quote = value[0]
+    i = 1
+    while i < len(value):
+        ch = value[i]
+        if quote == "'" and ch == "'" and i + 1 < len(value) and value[i + 1] == "'":
+            i += 2
+            continue
+        if quote == '"' and ch == "\\" and i + 1 < len(value):
+            i += 2
+            continue
+        if ch == quote:
+            return i
+        i += 1
+    return None
+
+
+def strip_unquoted_inline_comment(value: str) -> str:
+    comment = re.search(r"\s+#", value)
+    if not comment:
+        return value.strip()
+    return value[: comment.start()].rstrip()
+
+
+def parse_scalar_value(value: str, *, allow_unquoted_comment: bool = False) -> str:
+    value = value.strip()
+    if not value:
+        return ""
+    if value[0] in ("'", '"'):
+        end = find_quoted_scalar_end(value)
+        if end is not None:
+            value = value[: end + 1]
+    elif allow_unquoted_comment:
+        return strip_unquoted_inline_comment(value)
+    return _unquote_scalar(value)
+
+
+def parse_inline_list_value(value: str) -> list[str]:
+    cleaned = strip_unquoted_inline_comment(value).strip()
+    if cleaned.startswith("[") and cleaned.endswith("]"):
+        cleaned = cleaned[1:-1].strip()
+    if not cleaned:
+        return []
+    items: list[str] = []
+    buf: list[str] = []
+    in_single = False
+    in_double = False
+    i = 0
+    n = len(cleaned)
+    while i < n:
+        ch = cleaned[i]
+        # Inside a double-quoted item, keep a backslash escape (`\"`, `\\`, ...)
+        # verbatim so it does not prematurely toggle in_double. _unquote_scalar
+        # decodes the escape later. Without this, `["a\"b", x]` mis-tracks the
+        # closing quote and drops the following element.
+        if in_double and ch == "\\" and i + 1 < n:
+            buf.append(ch)
+            buf.append(cleaned[i + 1])
+            i += 2
+            continue
+        if ch == "'" and not in_double:
+            in_single = not in_single
+            buf.append(ch)
+            i += 1
+            continue
+        if ch == '"' and not in_single:
+            in_double = not in_double
+            buf.append(ch)
+            i += 1
+            continue
+        if ch == "," and not in_single and not in_double:
+            item = parse_scalar_value("".join(buf), allow_unquoted_comment=True)
+            if item:
+                items.append(item)
+            buf = []
+            i += 1
+            continue
+        buf.append(ch)
+        i += 1
+    if buf:
+        item = parse_scalar_value("".join(buf), allow_unquoted_comment=True)
+        if item:
+            items.append(item)
+    return items
 
 
 def _unquote_scalar(value: str) -> str:

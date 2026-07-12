@@ -30,7 +30,7 @@ draft: true
 | 幻覚タイプ | SafeCalculator で防げるか |
 |---|---|
 | `(2.5 * 7.8) / 0.3 = 12.4` (実際は 65.0) | ✅ 防げる |
-| `5 m/s + 3 s = 8` | ✅ 単位次元 (MATH-01) で防げる |
+| `5 m/s + 3 s = 8` | △ SafeCalculator 単体ではなく、MATH-01 の low-level direct reject で止まる。Brief 文脈での end-to-end policy は次イテレーション |
 | `∫ x² dx = x³/3 + C` (これは正しい) | — (検算不要) |
 | `(x+1)² = x² + 2x` (2x ではなく 2x+1) | ❌ 防げない — **これが MATH-02 の対象** |
 | `lim x→0 sin(x)/x = 0` (実際は 1) | ❌ 防げない — Sympy 必要 |

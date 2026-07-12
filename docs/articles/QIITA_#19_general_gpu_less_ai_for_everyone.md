@@ -6,6 +6,7 @@ tags:
   - 解説
   - AI
   - ローカルAI
+project_group: llive
 private: false
 updated_at: '2026-05-22'
 id: a10147101bb6b81b811c

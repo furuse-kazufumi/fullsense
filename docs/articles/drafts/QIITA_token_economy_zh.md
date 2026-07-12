@@ -1,4 +1,5 @@
 ---
+project_group: llmesh
 title: "AI 的成本全是错觉 —— 用「点数 / 订阅 / 压缩」拆解你的「Token 经济」"
 tags:
   - AI

@@ -5,6 +5,7 @@ tags:
   - llive
   - 進化計算
   - 解説
+project_group: llive
 private: true
 id: 1d9eeb1b739623dbc285
 ---
@@ -15,7 +16,7 @@ id: 1d9eeb1b739623dbc285
 
 # 日本語
 
-# (連載 #26 かみくだき版) 「測れる」と「生き残る」は別物 — AI を進化させる"選抜係"lldarwin を金魚の池でわかる話
+# 【📗かみくだき版】「測れる」と「生き残る」は別物 — AI を進化させる"選抜係"lldarwin を金魚の池でわかる話 #26
 
 ![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
 

@@ -45,7 +45,7 @@ tags: [llm, complementary, on-prem, local, qwen, llive, niche]
 | Qwen の弱点 | llive の補完 |
 |---|---|
 | `(2.5 * 7.8) / 0.3` を間違える | **MATH-08 SafeCalculator** (AST + 決定論) |
-| `5 m/s + 3 s = 8` (次元誤り) | **MATH-01 SI 次元解析** |
+| `5 m/s + 3 s = 8` (次元誤り) | **MATH-01 SI 次元 grounding / 表現層** |
 | `(x+1)² = x² + 2x` (記号幻覚) | **MATH-02 Sympy 検算 + EVO-04 Z3** |
 | CODATA 値の捏造 | **MATH-05 物理定数辞書** (grounded) |
 

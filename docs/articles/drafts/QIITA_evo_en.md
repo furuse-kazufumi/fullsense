@@ -1,11 +1,12 @@
 ---
-title: lldarwin / Evolution Arc — Monoculture Evolution / Selection Pressure / Conductor Ensemble / Falsification & Goodhart / Evolution Visualization / Codex Two-Pillar / llcore CPU Evolution × the Third Axis
+project_group: llive
+title: lldarwin Evolution Arc — Collected Guide
 tags: explainer, evolutionary_computation, llive, FullSense, honest_disclosure
 private: false
 public_id: e49b7ab9027d93594402
 ---
 
-# lldarwin / Evolution Arc — Monoculture Evolution / Selection Pressure / Conductor Ensemble / Falsification & Goodhart / Evolution Visualization / Codex Two-Pillar / llcore CPU Evolution × the Third Axis
+# lldarwin Evolution Arc — Collected Guide
 
 <!-- TOPICNAV -->
 > **🌐 Language**: [日本語](https://qiita.com/furuse-kazufumi/items/6e107c7dfa0c261ee4d7) | **English** | [中文](https://qiita.com/furuse-kazufumi/items/93f3cf1bb7b14650bbca) | [한국어](https://qiita.com/furuse-kazufumi/items/951b94cf66d246723004)

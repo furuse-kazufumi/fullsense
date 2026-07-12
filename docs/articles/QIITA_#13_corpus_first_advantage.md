@@ -3,7 +3,13 @@ layout: default
 title: "コーパス先行戦略 — AI が私の気づかない観点を思考フローに補完する優位性"
 date: 2026-05-17
 author: "古瀬 和文（ぷるやん）"
-tags: AI コーパス 認知科学 開発手法 SixHats
+tags:
+  - AI
+  - コーパス
+  - 認知科学
+  - 開発手法
+  - SixHats
+project_group: llive
 id: 75d682ddefa5aeb738b8
 ---
 

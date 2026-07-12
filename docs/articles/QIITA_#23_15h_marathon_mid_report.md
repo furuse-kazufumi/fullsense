@@ -6,6 +6,7 @@ tags:
   - lleval
   - EvolutionaryAlgorithm
   - HonestDisclosure
+project_group: llive
 private: false
 updated_at: '2026-05-21'
 id: 851b516f96fe54c176be
@@ -19,6 +20,8 @@ ignorePublish: true
 ---
 
 # 日本語
+
+# 15 時間で前倒し実装した話 — Transformer 脱却の足場 (進化型 GA × 5 backend × lleval skeleton)
 
 <!--
 Qiita タグ 5 個上限. 本記事の主役順:

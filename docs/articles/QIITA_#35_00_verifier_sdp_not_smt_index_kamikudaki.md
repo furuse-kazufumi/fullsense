@@ -1,11 +1,12 @@
 ---
-title: '【📗かみくだき版】進化する AI の「壊れてないか検査器」── 最強ソルバ (SMT) より地味な道具 (SDP) が正解だった話 (llcore #35-00)'
+title: '【📗かみくだき版】進化する AI の「壊れてないか検査器」── 地味な道具が正解だった話 (llcore #35-00)'
 tags:
   - FullSense
   - llcore
   - 進化計算
   - 形式手法
   - 解説
+project_group: llcore
 private: true
 id: a8118f557dda5c5e998c
 ---
@@ -16,7 +17,7 @@ id: a8118f557dda5c5e998c
 
 # 日本語
 
-# 【かみくだき版】進化する AI の「壊れてないか検査器」── 最強ソルバより地味な道具が正解だった話
+# 【📗かみくだき版】進化する AI の「壊れてないか検査器」── 地味な道具が正解だった話 (llcore #35-00)
 
 ![かみくだき獅子 — 噛まれた読者に「理解」のご利益](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/mascot/kamikudaki_shishi.svg)
 

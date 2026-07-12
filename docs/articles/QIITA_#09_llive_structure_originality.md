@@ -4,6 +4,7 @@ title: "llive の構造は LLM として独自になっているか — 8 つの
 date: 2026-05-17
 author: "古瀬 和文（ぷるやん）"
 tags: [llm, architecture, originality, cognitive-os, llive]
+project_group: llive
 id: 0c1d5ebd6b0656ba74e1
 ---
 

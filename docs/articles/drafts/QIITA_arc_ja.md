@@ -1,4 +1,5 @@
 ---
+project_group: llcore
 title: llcore 検証 arc 総集編(#38–#42)— 防衛的公開 × 2ⁿ の壁 × 強い勾配 × ラングトンの蟻の幻 + 補遺
 tags: FullSense, llcore, Singularity, AI, 解説
 private: false

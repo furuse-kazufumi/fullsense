@@ -7,7 +7,7 @@
   - `D:/projects/llcore/src/llcore/runtime/linearize.py`(`linearize_qwen2` / `hybridize_qwen2` / `LinearAttention(feature_map="diag"|"full")` / `SlidingWindowAttention` / `WindowLinearAttention`)
   - `D:/projects/llcore/src/llcore/runtime/distill.py`(`distill_layer` / `distill_all_layers`)
   - `D:/projects/llcore/scripts/linearize_tolerance.py`(zero-shot 層別耐性)/ `scripts/evolve_linearization.py`(層別 NAS)/ `scripts/nas_pareto.py --proxy-v2 --distill`(held-out 検証)
-- **正本知見**: `MODEL_LANDSCAPE_2026_06.md` §13(1) 層別耐性 / §13(2) L7 Hedgehog / §14 実装済(WindowLinearAttention, full feature map)/ `next_plan.md`(LoLCATs Step1 同一性の指摘、未実装候補)
+- **正本知見**: `MODEL_LANDSCAPE_2026_06.md` §13(1) 層別耐性 / §13(2) L7 Hedgehog / §14 実装済(WindowLinearAttention, full feature map)/ `docs/NEXT_SESSION.md`(LoLCATs Step1 同一性の指摘、未実装候補の要約)
 - **honest 規律**: `feedback_benchmark_honest_disclosure` / `feedback_implementation_status_record`(実装状態を 4 段で明記)
 
 > **凍結宣言**: レシピ基準・蒸留損失・held-out プロトコル・成功基準を実行前に固定。GPU 着荷後はここに書いた手順のみを実行する。
@@ -16,7 +16,7 @@
 
 ## 1. 背景
 
-constant-state 線形 attention は KV を O(d²) state に畳み込むので会話長が無限でも固定メモリ。代償は **長文脈品質**(SUPRA は全層線形化で MMLU 28 vs 62 へ崩壊 — `next_plan.md` L2 記載)。llcore の戦略は **hybrid**(一部の層だけ線形/SWA に変換)+ **蒸留で回復**。
+constant-state 線形 attention は KV を O(d²) state に畳み込むので会話長が無限でも固定メモリ。代償は **長文脈品質**(SUPRA は全層線形化で MMLU 28 vs 62 へ崩壊 — `docs/NEXT_SESSION.md` の現況要約に記載)。llcore の戦略は **hybrid**(一部の層だけ線形/SWA に変換)+ **蒸留で回復**。
 
 ### 実装状態(`feedback_implementation_status_record`、4 段で明記)
 
@@ -27,11 +27,11 @@ constant-state 線形 attention は KV を O(d²) state に畳み込むので会
 | 出力 MSE 蒸留(per-layer、feature map 学習、base 凍結)| **実装+単体検証済**(`distill_layer`/`distill_all_layers`、`mse_before/after`)| distill.py |
 | full feature map(per-head 全結合 W∈[H,d,d]、恒等初期化)| **実装+単体検証済**(`feature_map="full"`、4 tests)| §14 |
 | WindowLinearAttention(直近 window=softmax + 古い key=線形、単一分母融合)| **実装+単体検証済**(10 tests)| §14 |
-| **LoRA Step2 回復**(projection も微調整)| **未実装**(`next_plan.md` 未実装候補「LoRA Step2 + logit KD (K, distill.py)」)| 要追加 |
+| **LoRA Step2 回復**(projection も微調整)| **未実装**(`docs/NEXT_SESSION.md` 要約の未実装候補「LoRA Step2 + logit KD (K, distill.py)」)| 要追加 |
 | **logit-level KD**(最終 logit / 層別 hidden の蒸留)| **未実装**(現 distill は attention 出力 MSE のみ)| 要追加 |
 | **end-to-end 本訓練**(蒸留後に linearized student を継続学習)| **未実装**(per-layer 蒸留のみ。joint/全体 fine-tune スクリプト無し)| 要追加 |
 
-→ **honest**: 現コードの「蒸留」は **LoLCATs Step1 = attention 出力 MSE transfer に等しい**(`next_plan.md` §「車輪の再発明リスク」が明記)。本 prereg は (a) **既存=出力 MSE 蒸留**の held-out 効果を確定する部分と、(b) **要追加=logit-KD / LoRA / 本訓練**を実装してから測る部分を **分けて** 登録する。混同して「本訓練済み」と report しない。
+→ **honest**: 現コードの「蒸留」は **LoLCATs Step1 = attention 出力 MSE transfer に等しい**(`docs/NEXT_SESSION.md` の現況要約に明記)。本 prereg は (a) **既存=出力 MSE 蒸留**の held-out 効果を確定する部分と、(b) **要追加=logit-KD / LoRA / 本訓練**を実装してから測る部分を **分けて** 登録する。混同して「本訓練済み」と report しない。
 
 ### レシピ基準(どれを基準にするか)
 
@@ -126,7 +126,7 @@ constant-state 線形 attention は KV を O(d²) state に畳み込むので会
 
 1. **winner's curse**: frontier は数百 genome から非劣解を拾う = max-of-N の楽観。**必ず `delta_nll_heldout` と `optimism_gap` で語る**(`reeval_frontier` が fresh holdout で再評価)。選択窓 Δnll を headline にしない。
 2. **短文脈の盲点**: 線形劣化は長文脈で出る(eval_proxy.py docstring: 256 tok は劣化を過小検出)。`--inner-context 1024` + `--context-sweep …2048` で測り、**短窓だけの改善を「回復」と呼ばない**。
-3. **車輪の再発明の正直開示**: 「蒸留が効いた」= LoLCATs Step1 の追試であり llcore 固有の新規性ではない(`next_plan.md` 明記)。**新規性は層別 hybrid NAS(memetic、`evolve_multiobjective`)**にあると正確に位置づける。
+3. **車輪の再発明の正直開示**: 「蒸留が効いた」= LoLCATs Step1 の追試であり llcore 固有の新規性ではない(`docs/NEXT_SESSION.md` の現況要約に明記)。**新規性は層別 hybrid NAS(memetic、`evolve_multiobjective`)**にあると正確に位置づける。
 4. **実装状態の正直開示**: logit-KD / LoRA / end-to-end 本訓練は **未実装**。これらを「やった」と書かない。H4 は実装完了をもって別途登録。
 5. **per-layer 蒸留の限界**: 独立蒸留 student の寄せ集めであり、誤差累積する joint/e2e とは別物。frontier の良さを e2e 品質と読み替えない。
 6. **attention-KL は診断のみ**: `genome_attn_kl` は 256 tok cap・O(T²)・**NAS fitness に絶対 wire しない**(eval_proxy.py 設計)。診断値を品質クレームに昇格させない。

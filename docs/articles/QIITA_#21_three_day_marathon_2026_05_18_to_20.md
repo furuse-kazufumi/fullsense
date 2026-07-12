@@ -6,6 +6,7 @@ tags:
   - ClaudeCode
   - 自律エージェント
   - HonestDisclosure
+project_group: llive
 private: false
 updated_at: '2026-05-20'
 id: 4d4a2083c32acf1d96be
@@ -19,6 +20,8 @@ ignorePublish: true
 ---
 
 # 日本語
+
+# 3 日間で 8 リポを駆け抜けた話 — 火種 / 爆発 / 構造化、AI agent と二人羽織で踊った 72 時間
 
 <!--
 Qiita タグは 5 個上限. 本記事の主役順で:

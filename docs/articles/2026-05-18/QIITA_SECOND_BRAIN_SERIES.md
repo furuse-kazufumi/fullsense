@@ -34,7 +34,7 @@ id: 18dd57dcabbc84af9f02
 | 第 2 部 | **第二の脳** (構築論) | 30 年経験 + Perplexity + Claude Code + TRIZ + RAG/RAD |
 | 第 3 部 | **三自の精神** (運用論) | キヤノン理念 + マネジメント書籍 |
 | 第 4 部 | **Will Caster と Andrew NDR114** (ビジョン論) | 映画 2 本 + LinkedIn 画像 |
-| **第 5 部** | **実装の深層** (MATH-08 grounding 配線) | 「LLM に計算させない」差別化軸の end-to-end |
+| **第 5 部** | **実装の深層** (MATH-08 grounding 配線) | 「LLM に計算させない」計算サイドカーの end-to-end |
 
 各部は独立して読めますが、合わせて読むと「**全景を見て → 設計を理解して → 作って → 運用して → ビジョンに繋いで → 実装まで降りる**」という 6 段の階段になります。**忙しい方は第 0 部だけでも llive の全体像が掴めるよう** に構成しました。
 
@@ -87,7 +87,7 @@ flowchart LR
 | 観点 | 汎用 LLM の弱点 | llive 既存資産との合致 |
 |---|---|---|
 | 記号操作の幻覚 | `x² + x = 2x³` のような誤等式を生成 | EVO-04 Z3 静的検証で gate |
-| 単位次元の取り違え | `5 m/s + 3 s = 8` | SI 次元解析 (MATH-01) |
+| 単位次元の取り違え | `5 m/s + 3 s = 8` | SI 次元 grounding / 表現層 (MATH-01) |
 | 数値精度 | float 演算誤差を無視 | error propagation (MATH-04) |
 | 公理体系 | 暗黙の前提を混入 | EpistemicType=FACTUAL strict track |
 | 引用の信頼性 | "CODATA value is X" と適当に答える | RAD math/metrology + provenance |
@@ -493,7 +493,7 @@ General-purpose LLMs are weak at the following:
 | Aspect | Weakness of general-purpose LLM | Alignment with existing llive assets |
 |---|---|---|
 | Symbolic-manipulation hallucination | Generates false equations like `x² + x = 2x³` | Gated by EVO-04 Z3 static verification |
-| Unit-dimension confusion | `5 m/s + 3 s = 8` | SI dimensional analysis (MATH-01) |
+| Unit-dimension confusion | `5 m/s + 3 s = 8` | SI dimensional grounding / representation layer (MATH-01) |
 | Numerical precision | Ignores floating-point errors | error propagation (MATH-04) |
 | Axiomatic systems | Mixes in implicit premises | EpistemicType=FACTUAL strict track |
 | Citation reliability | Answers "CODATA value is X" arbitrarily | RAD math/metrology + provenance |
@@ -846,7 +846,7 @@ to have implemented the professor's thoughts themselves**; the naming is given w
 | 第 2 部 | **第二大脑**（构建论） | 30 年经验 + Perplexity + Claude Code + TRIZ + RAG/RAD |
 | 第 3 部 | **三自精神**（运维论） | 佳能理念 + 管理类书籍 |
 | 第 4 部 | **Will Caster 与 Andrew NDR114**（愿景论） | 两部电影 + 一张 LinkedIn 图片 |
-| **第 5 部** | **实现深层**（MATH-08 grounding 接线） | “不让 LLM 计算”这一差异化轴的 end-to-end |
+| **第 5 部** | **实现深层**（MATH-08 grounding 接线） | “不让 LLM 计算”这一计算 sidecar 的 end-to-end |
 
 各部可独立阅读，但合起来读会形成一段六级台阶：“**看到全景 → 理解设计 → 构建 → 运维 → 接续到愿景 → 下沉到实现**”。我刻意如此编排，使得 **忙碌的读者仅凭第 0 部也能把握 llive 的整体面貌**。
 
@@ -899,7 +899,7 @@ flowchart LR
 | 观点 | 通用 LLM 的弱点 | 与 llive 既有资产的契合 |
 |---|---|---|
 | 符号操作的幻觉 | 生成 `x² + x = 2x³` 这类错误等式 | 以 EVO-04 Z3 静态验证 gate |
-| 单位量纲的弄错 | `5 m/s + 3 s = 8` | SI 量纲分析（MATH-01） |
+| 单位量纲的弄错 | `5 m/s + 3 s = 8` | SI 量纲 grounding / 表示层（MATH-01） |
 | 数值精度 | 忽视浮点运算误差 | error propagation（MATH-04） |
 | 公理体系 | 混入隐含前提 | EpistemicType=FACTUAL strict track |
 | 引用的可信度 | 随口答 “CODATA value is X” | RAD math/metrology + provenance |
@@ -1251,7 +1251,7 @@ llive 是 Apache 2.0 + Commercial dual-license 的 OSS，仓库为 https://githu
 | 제2부 | **두 번째 뇌**(구축론) | 30년 경험 + Perplexity + Claude Code + TRIZ + RAG/RAD |
 | 제3부 | **삼자 정신**(운영론) | 캐논 이념 + 매니지먼트 서적 |
 | 제4부 | **Will Caster와 Andrew NDR114**(비전론) | 영화 2편 + LinkedIn 이미지 |
-| **제5부** | **구현의 심층**(MATH-08 grounding 배선) | "LLM에게 계산시키지 않는다"는 차별화 축의 end-to-end |
+| **제5부** | **구현의 심층**(MATH-08 grounding 배선) | "LLM에게 계산시키지 않는다"는 계산 sidecar 의 end-to-end |
 
 각 부는 독립적으로 읽을 수 있지만, 함께 읽으면 "**전경을 보고 → 설계를 이해하고 → 만들고 → 운영하고 → 비전으로 잇고 → 구현까지 내려간다**"는 6단의 계단이 됩니다. **바쁜 분은 제0부만으로도 llive의 전체상을 파악할 수 있도록** 구성했습니다.
 
@@ -1304,7 +1304,7 @@ flowchart LR
 | 관점 | 범용 LLM의 약점 | llive 기존 자산과의 합치 |
 |---|---|---|
 | 기호 조작의 환각 | `x² + x = 2x³` 같은 오등식을 생성 | EVO-04 Z3 정적 검증으로 gate |
-| 단위 차원의 혼동 | `5 m/s + 3 s = 8` | SI 차원 해석(MATH-01) |
+| 단위 차원의 혼동 | `5 m/s + 3 s = 8` | SI 차원 grounding / 표현 계층 (MATH-01) |
 | 수치 정밀도 | float 연산 오차를 무시 | error propagation(MATH-04) |
 | 공리 체계 | 암묵적 전제를 혼입 | EpistemicType=FACTUAL strict track |
 | 인용의 신뢰성 | "CODATA value is X"라고 적당히 답함 | RAD math/metrology + provenance |

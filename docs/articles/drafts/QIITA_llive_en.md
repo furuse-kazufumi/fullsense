@@ -1,11 +1,12 @@
 ---
-title: llive Complete Guide — Non-forgetting LLM / 10-Axis Thinking / Computable Contradiction / Converging Brain / Population Evolution / Beyond Transformer / Audited AI / Evaluation
+project_group: llive
+title: llive Complete Guide — Collected Essays
 tags: explainer, llive, FullSense
 private: false
 public_id: 07b686ea311e06027f94
 ---
 
-# llive Complete Guide — Non-forgetting LLM / 10-Axis Thinking / Computable Contradiction / Converging Brain / Population Evolution / Beyond Transformer / Audited AI / Evaluation
+# llive Complete Guide — Collected Essays
 
 <!-- TOPICNAV -->
 > **🌐 Language**: [日本語](https://qiita.com/furuse-kazufumi/items/07b4882e872994b27b3c) | **English** | [中文](https://qiita.com/furuse-kazufumi/items/6da5a883fb2ed651edd8) | [한국어](https://qiita.com/furuse-kazufumi/items/c5f2077a3399d3fc9b26)

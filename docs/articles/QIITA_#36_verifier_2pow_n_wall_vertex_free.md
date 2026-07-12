@@ -1,6 +1,7 @@
 ---
 title: 'llcore 検証 arc (#36) — 2ⁿ の壁を破る: vertex-free 健全証明と「コストを進化の選択圧に」'
 tags: [FullSense, llcore, 解説, 形式手法, 進化計算]
+project_group: llcore
 private: true
 updated_at: '2026-06-06'
 id: null

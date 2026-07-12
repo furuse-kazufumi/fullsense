@@ -1,4 +1,5 @@
 ---
+project_group: llive
 title: かみくだき総集編 — 反証と Goodhart / 第3の軸 / アーク俯瞰 / ラングトンの蟻の幻 をやさしく
 tags: FullSense, 進化計算, honest_disclosure, 解説, かみくだき
 private: false

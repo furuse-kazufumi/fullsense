@@ -1,11 +1,12 @@
 ---
-title: '「眼鏡で測る」だけでは進化しない — 選択圧コンポーネント lldarwin の設計と実測 #26（多目的淘汰 / ε-lexicase / 中立貯蔵庫 / 実 LLM 評価）'
+title: '「眼鏡で測る」だけでは進化しない — 選択圧コンポーネント lldarwin の設計と実測 #26'
 tags:
   - FullSense
   - llive
   - 進化計算
   - 多目的最適化
   - 解説
+project_group: llive
 private: true
 updated_at: '2026-05-26'
 id: 30a41e73d71e0a36f9ba
@@ -29,6 +30,8 @@ ignorePublish: true
 > それが今回の主役、**lldarwin**。ll- ファミリーの新メンバーで、**淘汰（選択圧）専門**のコンポーネントです。
 >
 > この記事で覚えてほしいキーワードは、たった一語。**「集約しない」**。複数の物差しを 1 本に足し算した瞬間、進化は壊れます。なぜそうなるのか、そしてどう実測でそれを乗り越えたのか——失敗の続きから、今度は**実際に動いた**話をします。
+
+![QD archive が cell ごとに育ち、coverage が脈打つように増えることを示す static-safe 補助図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/motion_pack/qd_archive_pulse.svg?v=1)
 
 ---
 

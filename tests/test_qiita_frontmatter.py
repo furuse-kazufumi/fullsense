@@ -77,6 +77,47 @@ def test_shared_split_frontmatter_parses_folded_title():
     assert body == "body\n"
 
 
+def test_shared_split_frontmatter_preserves_crlf_body():
+    text = "---\r\ntitle: hello\r\ntags: [a]\r\n---\r\n# body\r\nline2\r\n"
+    meta, body = fm.split_frontmatter(text)
+    assert meta["title"] == "hello"
+    assert meta["tags"] == ["a"]
+    assert body == "# body\r\nline2\r\n"
+
+
+def test_shared_split_frontmatter_allows_whitespace_around_delimiters():
+    text = "  ---  \n" "title: hello\n" "tags: [a]\n" " --- \n" "# body\n"
+    meta, body = fm.split_frontmatter(text)
+    assert meta["title"] == "hello"
+    assert meta["tags"] == ["a"]
+    assert body == "# body\n"
+
+
+def test_shared_split_frontmatter_keeps_empty_frontmatter_and_body_newline():
+    text = "---\n---\n\n# body\n"
+    meta, body = fm.split_frontmatter(text)
+    assert meta == {}
+    assert body == "\n# body\n"
+
+
+def test_shared_inline_list_preserves_double_quote_escape_and_following_item():
+    # Regression: a backslash-escaped quote inside a double-quoted inline-list
+    # item must not toggle quote tracking off early. Before the fix,
+    # `["a\"b", x]` mis-tracked the closing quote and dropped the `x` element.
+    assert fm.parse_inline_list_value(r'["a\"b", x]') == ['a"b', "x"]
+    # Plain / single-quote-escaped / unescaped-double forms stay intact.
+    assert fm.parse_inline_list_value("[a, b, c]") == ["a", "b", "c"]
+    assert fm.parse_inline_list_value("['a''b', x]") == ["a'b", "x"]
+    assert fm.parse_inline_list_value('["ab", "cd"]') == ["ab", "cd"]
+
+
+def test_shared_parser_keeps_unquoted_title_hash_literal():
+    text = "---\n" "title: QIITA #24 observability governance\n" "---\n" "# body\n"
+    meta, body = fm.split_frontmatter(text)
+    assert meta["title"] == "QIITA #24 observability governance"
+    assert body == "# body\n"
+
+
 def test_shared_parser_restores_single_quote_and_literal_block():
     meta = fm.parse_frontmatter_lines(fm.split_frontmatter_lines(LITERAL_TEXT)[0])
     assert meta["title"] == "AI's title"
@@ -116,6 +157,182 @@ def test_qiita_public_post_build_payload_uses_public_private_only():
 
     forced_payload = qpp.build_payload(meta_with_public_private, body, force_private=True)
     assert forced_payload["private"] is True
+
+
+def test_qiita_public_post_infer_title_prefers_frontmatter_title_over_body_h1():
+    meta = {"title": "Old frontmatter title"}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    assert qpp.infer_title(meta, body) == "Old frontmatter title"
+
+
+def test_qiita_public_post_infer_title_falls_back_to_frontmatter_without_publish_h1():
+    meta = {"title": "Frontmatter title"}
+    body = "body only\n"
+    assert qpp.infer_title(meta, body) == "Frontmatter title"
+
+
+def test_qiita_public_post_safety_findings_do_not_block_title_mismatch_without_path_context():
+    meta = {"title": "Old frontmatter title", "tags": ["AI"], "public_private": False}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    assert qpp.TITLE_MISMATCH_BLOCK not in qpp.safety_findings(meta, body)
+
+
+def test_qiita_public_post_build_payload_uses_frontmatter_title_when_present():
+    meta = {"title": "Old frontmatter title", "tags": ["AI"], "public_private": False}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    payload = qpp.build_payload(meta, body, force_private=None)
+    assert payload["title"] == "Old frontmatter title"
+
+
+def test_qiita_public_post_infer_title_ignores_fenced_code_headings():
+    meta = {"title": "Fallback frontmatter title"}
+    body = (
+        "```md\n"
+        "# Fake title in code\n"
+        "```\n\n"
+        "# 日本語\n\n"
+        "```python\n"
+        "# Another fake title\n"
+        "```\n\n"
+        "# Visible publish title\n"
+    )
+    assert qpp.infer_title(meta, body) == "Fallback frontmatter title"
+
+
+def test_qiita_public_post_infer_title_respects_longer_backtick_fence_length():
+    meta = {"title": "Fallback frontmatter title"}
+    body = (
+        "````md\n"
+        "```inside\n"
+        "# Fake title in code\n"
+        "```\n"
+        "````\n\n"
+        "# 日本語\n\n"
+        "# Visible publish title\n"
+    )
+    assert qpp.infer_title(meta, body) == "Fallback frontmatter title"
+
+
+def test_qiita_public_post_infer_title_skips_multiple_language_headings():
+    meta = {"title": "Fallback frontmatter title"}
+    body = "# English\n\n# 日本語\n\n# Visible publish title\n"
+    assert qpp.infer_title(meta, body) == "Fallback frontmatter title"
+
+
+def test_qiita_public_post_title_mismatch_compat_blocks_when_frontmatter_publish_title_changed(monkeypatch):
+    meta = {"title": "Old frontmatter title", "public_id": "abc123", "tags": ["AI"], "public_private": False}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    baseline = (
+        "---\n"
+        "title: Legacy frontmatter title\n"
+        "public_id: abc123\n"
+        "tags: [AI]\n"
+        "---\n"
+        "# 日本語\n\n# New publish title\n"
+    )
+    monkeypatch.setattr(qpp, "_load_baseline_text", lambda path: baseline)
+    assert qpp._should_block_title_mismatch(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md", meta, body) is True
+
+
+def _write_title_mismatch_source(tmp_path: Path) -> Path:
+    # frontmatter title differs from the body publish H1, with a live public_id.
+    path = tmp_path / "mismatch.md"
+    path.write_text(
+        "---\n"
+        "title: Old frontmatter title\n"
+        "public_id: abc123\n"
+        "tags: [AI]\n"
+        "public_private: false\n"
+        "---\n"
+        "# 日本語\n\n# New publish title\n\nbody\n",
+        encoding="utf-8",
+    )
+    return path
+
+
+def test_qiita_public_post_dry_run_surfaces_title_mismatch_block(tmp_path, capsys, monkeypatch):
+    # Regression: dry-run must surface the same title-mismatch block as post so
+    # a clean dry-run/preflight actually predicts a clean post.
+    monkeypatch.setattr(qpp, "_load_baseline_text", lambda path: None)
+    path = _write_title_mismatch_source(tmp_path)
+    rc = qpp.cmd_dry_run([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0  # dry-run is a preview; it warns rather than exits non-zero
+    assert qpp.TITLE_MISMATCH_BLOCK in out
+
+
+def test_qiita_public_post_preflight_blocks_title_mismatch(tmp_path, capsys, monkeypatch):
+    # Regression: preflight OK must guarantee the post-time title guard passes.
+    # Previously only cmd_post ran the title check, so a title mismatch could
+    # pass preflight and then fail post.
+    monkeypatch.setattr(qpp, "_load_baseline_text", lambda path: None)
+    monkeypatch.setattr(qpp, "_preflight_report", lambda *a, **k: ([], False))
+    path = _write_title_mismatch_source(tmp_path)
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.TITLE_MISMATCH_BLOCK in out
+    assert "preflight: BLOCKED" in out
+
+
+def test_qiita_public_post_preflight_refresh_baseline_not_run_on_title_mismatch(tmp_path, capsys, monkeypatch):
+    # Fail-closed regression: a title-mismatch source that will ultimately BLOCK
+    # must NOT trigger the `.remote` baseline write, even with --refresh-baseline.
+    calls = []
+    monkeypatch.setattr(qpp, "_load_baseline_text", lambda path: None)
+    monkeypatch.setattr(
+        qpp, "_refresh_remote_baseline",
+        lambda *a, **k: (calls.append(a) or (["REFRESHED"], False)),
+    )
+    monkeypatch.setattr(qpp, "_preflight_report", lambda *a, **k: ([], False))
+    monkeypatch.setattr(qpp, "get_token", lambda: "tok")
+    path = _write_title_mismatch_source(tmp_path)
+    rc = qpp.cmd_preflight([str(path), "--refresh-baseline"])
+    out = capsys.readouterr().out
+    assert rc == 1
+    assert qpp.TITLE_MISMATCH_BLOCK in out
+    assert "preflight: BLOCKED" in out
+    assert calls == []  # baseline refresh side effect never fired
+
+
+def test_qiita_public_post_preflight_ok_when_titles_align(tmp_path, capsys, monkeypatch):
+    monkeypatch.setattr(qpp, "_load_baseline_text", lambda path: None)
+    monkeypatch.setattr(qpp, "_preflight_report", lambda *a, **k: ([], False))
+    path = tmp_path / "aligned.md"
+    path.write_text(
+        "---\n"
+        "public_id: abc123\n"
+        "tags: [AI]\n"
+        "public_private: false\n"
+        "---\n"
+        "# Publish title\n\nbody\n",
+        encoding="utf-8",
+    )
+    rc = qpp.cmd_preflight([str(path)])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert "preflight: OK" in out
+
+
+def test_qiita_public_post_live_identity_uses_public_id_only():
+    assert qpp._has_live_identity({"public_id": "abc123"}) is True
+    assert qpp._has_live_identity({"id": "team-only-id"}) is False
+    assert qpp._has_live_identity({"public_id": " null "}) is False
+
+
+def test_qiita_public_post_title_mismatch_compat_blocks_new_publish_title_change_on_live_item(monkeypatch):
+    meta = {"title": "Old frontmatter title", "public_id": "abc123", "tags": ["AI"], "public_private": False}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    baseline = (
+        "---\n"
+        "title: Legacy frontmatter title\n"
+        "public_id: abc123\n"
+        "tags: [AI]\n"
+        "---\n"
+        "# 日本語\n\n# Old publish title\n"
+    )
+    monkeypatch.setattr(qpp, "_load_baseline_text", lambda path: baseline)
+    assert qpp._should_block_title_mismatch(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md", meta, body) is True
 
 
 def test_qiita_public_post_tag_signatures_normalize_case_and_commas():
@@ -209,6 +426,25 @@ def test_qiita_team_post_build_payload_uses_private_flag_directly():
     assert default_payload["private"] is True
 
 
+def test_qiita_team_post_infer_title_prefers_frontmatter_title_over_body_h1():
+    meta = {"title": "Old frontmatter title"}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    assert qtp.infer_title(meta, body) == "Old frontmatter title"
+
+
+def test_qiita_team_post_safety_findings_do_not_block_title_mismatch_without_path_context():
+    meta = {"title": "Old frontmatter title", "tags": ["AI"], "private": False}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    assert qtp.TITLE_MISMATCH_BLOCK not in qtp.safety_findings(meta, body)
+
+
+def test_qiita_team_post_build_payload_uses_frontmatter_title_when_present():
+    meta = {"title": "Old frontmatter title", "tags": ["AI"], "private": False}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    payload = qtp.build_payload(meta, body)
+    assert payload["title"] == "Old frontmatter title"
+
+
 def test_qiita_team_post_build_payload_preserves_group_url_name():
     body = "body\n"
     payload = qtp.build_payload(
@@ -217,6 +453,42 @@ def test_qiita_team_post_build_payload_preserves_group_url_name():
         include_group_url_name=True,
     )
     assert payload["group_url_name"] == "general"
+
+
+def test_qiita_team_post_title_mismatch_compat_blocks_when_frontmatter_publish_title_changed(monkeypatch):
+    meta = {"title": "Old frontmatter title", "id": "team-id-123", "tags": ["AI"], "private": False}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    baseline = (
+        "---\n"
+        "title: Legacy frontmatter title\n"
+        "id: team-id-123\n"
+        "tags: [AI]\n"
+        "---\n"
+        "# 日本語\n\n# New publish title\n"
+    )
+    monkeypatch.setattr(qtp, "_load_baseline_text", lambda path: baseline)
+    assert qtp._should_block_title_mismatch(r"D:\projects\fullsense\docs\articles\QIITA_#02_cognitive_factors.md", meta, body) is True
+
+
+def test_qiita_team_post_live_identity_uses_team_id_only():
+    assert qtp._has_live_identity({"id": "team-id-123"}) is True
+    assert qtp._has_live_identity({"public_id": "public-only-id"}) is False
+    assert qtp._has_live_identity({"id": " none "}) is False
+
+
+def test_qiita_team_post_title_mismatch_compat_blocks_new_publish_title_change_on_live_item(monkeypatch):
+    meta = {"title": "Old frontmatter title", "id": "team-id-123", "tags": ["AI"], "private": False}
+    body = "# 日本語\n\n# New publish title\n\nbody\n"
+    baseline = (
+        "---\n"
+        "title: Legacy frontmatter title\n"
+        "id: team-id-123\n"
+        "tags: [AI]\n"
+        "---\n"
+        "# 日本語\n\n# Old publish title\n"
+    )
+    monkeypatch.setattr(qtp, "_load_baseline_text", lambda path: baseline)
+    assert qtp._should_block_title_mismatch(r"D:\projects\fullsense\docs\articles\QIITA_#02_cognitive_factors.md", meta, body) is True
 
 
 def test_qiita_team_post_build_payload_skips_group_url_name_without_create_intent():

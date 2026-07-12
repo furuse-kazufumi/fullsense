@@ -3,6 +3,7 @@ layout: default
 title: "10 思考因子で整理する llive 思考層"
 date: 2026-05-17
 tags: [llm, agent, cognitive-architecture, design]
+project_group: llive
 id: 4de8dcff1cf4c2ab9bdc
 ---
 
@@ -30,6 +31,8 @@ id: 4de8dcff1cf4c2ab9bdc
 > 探索 / 再構成を強化する前に、構造化 / 不確実性 / 閉ループ / 整合 / 来歴の土台が必要
 
 これがない状態で探索因子や再構成因子を強くすると、面白い案は増えるが、誤差・暴走・非再現性も増える。
+
+この時点で **10 因子のうち 9/10 には既存 FR か同日実装による初期マッピングがある**。ただし **初期マッピング済み = 十分に成熟済み** ではない。とくに「多視点」は強化余地が残り、**未マッピングのまま残っている 1 因子** は「現実接続」で、これは Phase 4 IoT と実環境 integration 側の宿題として切り分ける。
 
 ## 10 因子 × llive マッピング
 
@@ -167,6 +170,8 @@ User observation:
 
 Without this foundation, strengthening the exploration or reframing factors increases the number of interesting ideas, but it also increases error, runaway behavior, and non-reproducibility.
 
+At this point, **9 out of the 10 factors have at least an initial mapping through existing FRs or implementations added on the same day**. However, **having an initial mapping is not the same as being fully mature**. "Multi-perspective" still needs further strengthening, while the **one factor that remains unmapped** is "reality grounding," intentionally split out as homework for the Phase 4 IoT / real-environment integration side.
+
 ## The 10 Factors × llive Mapping
 
 | # | Factor | LLM Role | Existing in llive (implemented) | Added (implemented 2026-05-17) |
@@ -303,6 +308,8 @@ As a framework for "building an AI that doesn't break" before "building an inter
 
 在没有这一基础的状态下增强探索因子或重构因子，有趣的方案会增多，但误差、失控、不可复现性也会随之增多。
 
+在这一时点，**10 个因子中的 9 个已经有既有 FR 或同日实现形成的初始映射**。但 **已有初始映射并不等于已经成熟完成**。其中「多视角」仍有强化空间，而 **尚未映射的那 1 个因子** 是「现实连接」，这部分被有意切分到 Phase 4 IoT / 实环境 integration 一侧，作为后续课题处理。
+
 ## 10 因子 × llive 映射
 
 | # | 因子 | LLM 角色 | llive 既有（已实现） | 新增（2026-05-17 实现） |
@@ -438,6 +445,8 @@ class TraceGraph:
 > 탐색 / 재구성을 강화하기 전에, 구조화 / 불확실성 / 폐루프 / 정합 / 내력의 토대가 필요하다.
 
 이것이 없는 상태에서 탐색 인자나 재구성 인자를 강하게 하면, 흥미로운 안은 늘어나지만 오차・폭주・비재현성도 늘어난다.
+
+이 시점에서 **10 인자 중 9/10 에는 기존 FR 이나 같은 날 구현된 항목을 통한 초기 매핑이 들어가 있다**. 다만 **초기 매핑이 곧 성숙 완료를 뜻하지는 않는다**. 특히 「다관점」은 아직 강화 여지가 남아 있고, **아직 매핑되지 않은 1 인자**는 「현실접속」이며, 이것은 의도적으로 Phase 4 IoT / 실환경 integration 측의 과제로 분리해 둔다.
 
 ## 10 인자 × llive 매핑
 

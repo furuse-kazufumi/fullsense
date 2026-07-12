@@ -6,6 +6,7 @@ tags:
   - ClaudeCode
   - 自律エージェント
   - HonestDisclosure
+project_group: llive
 private: false
 updated_at: '2026-05-20'
 id: 96dc8af5b361ee44877b

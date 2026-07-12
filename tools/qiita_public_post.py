@@ -35,7 +35,14 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from _frontmatter import split_frontmatter
+from _frontmatter import resolve_body_title, split_frontmatter
+from _qiita_title_guard import (
+    infer_publish_title as _infer_publish_title,
+    meta_has_identity as _meta_has_identity,
+    load_title_baseline_text as _shared_load_baseline_text,
+    normalize_nullish_scalar as _normalize_nullish_scalar,
+    should_block_title_mismatch as _shared_should_block_title_mismatch,
+)
 
 
 def _utf8() -> None:
@@ -85,6 +92,9 @@ IGNORE_PUBLISH_BLOCK = (
 )
 LIVE_TITLE_BLOCK = (
     "BLOCKED: live title differs from payload title. Resolve live-only edits or align source before PATCH."
+)
+TITLE_MISMATCH_BLOCK = (
+    "BLOCKED: frontmatter title and publish H1 differ. Align them before posting."
 )
 LIVE_VISIBILITY_BLOCK = (
     "BLOCKED: live private visibility differs from payload visibility. Resolve before PATCH."
@@ -138,12 +148,7 @@ def get_token() -> str | None:
 
 
 def infer_title(meta: dict, body: str) -> str:
-    if meta.get("title"):
-        return str(meta["title"])
-    for line in body.splitlines():
-        if line.startswith("# "):
-            return line[2:].strip()
-    return ""
+    return _infer_publish_title(meta, body)
 
 
 def _normalized_tag_names(raw_tags, *, fold: bool = False) -> list[str]:
@@ -185,26 +190,14 @@ def _tag_name_signature_from_api(tags) -> tuple[str, ...]:
 
 def real_public_id(meta: dict) -> str | None:
     """Frontmatter public_id (PUBLIC qiita.com item id). 'null'/'none'/'' -> ABSENT (POST-create)."""
-    v = meta.get("public_id")
-    if isinstance(v, list):
-        v = v[0] if v else None
-    if v is None:
-        return None
-    v = str(v).strip()
-    return v if v and v.lower() not in ("null", "none") else None
+    return _normalize_nullish_scalar(meta.get("public_id"))
 
 
 def legacy_id_without_public_id(meta: dict) -> str | None:
     """Return legacy/team-style id when public_id is absent, so callers can warn before accidental POST-create."""
     if real_public_id(meta):
         return None
-    v = meta.get("id")
-    if isinstance(v, list):
-        v = v[0] if v else None
-    if v is None:
-        return None
-    v = str(v).strip()
-    return v if v and v.lower() not in ("null", "none") else None
+    return _normalize_nullish_scalar(meta.get("id"))
 
 
 def as_bool(v, default=False) -> bool:
@@ -295,6 +288,24 @@ def safety_findings(meta: dict, body: str) -> list[str]:
     if _LOCALPATH_RE.search(body):
         out.append("LOCAL PATH in body (D:\\ や ./ — feedback_no_local_path_in_public)")
     return out
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+def _has_live_identity(meta: dict) -> bool:
+    return _meta_has_identity(meta, "public_id")
+
+
+def _load_baseline_text(path: str) -> str | None:
+    return _shared_load_baseline_text(REPO_ROOT, path)
+
+
+def _should_block_title_mismatch(path: str, meta: dict, body: str) -> bool:
+    return _shared_should_block_title_mismatch(
+        meta,
+        body,
+        baseline_text=_load_baseline_text(path),
+        live_identity_keys=("public_id",),
+    )
 
 
 def _strip_markdown_title(raw: str) -> str:
@@ -711,6 +722,8 @@ def cmd_dry_run(args: list[str]) -> int:
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
     finds = safety_findings(meta, body)
+    if _should_block_title_mismatch(files[0], meta, body):
+        finds = list(finds) + [TITLE_MISMATCH_BLOCK]
     privacy_finds = privacy_field_findings(meta)
     pid = real_public_id(meta)
     legacy_id = legacy_id_without_public_id(meta)
@@ -743,6 +756,17 @@ def cmd_preflight(args: list[str]) -> int:
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
+    # Source-level block conditions must gate the irreversible `.remote` baseline
+    # write. The title guard is derived purely from the source + git baseline (no
+    # live-data dependency), so a title-mismatch source is refused BEFORE any
+    # `--refresh-baseline` side effect. This keeps preflight's title guard aligned
+    # with cmd_post (a passing preflight predicts a passing post title check) and
+    # is fail-closed: a source that will ultimately BLOCK never mutates `.remote`.
+    title_blocked = _should_block_title_mismatch(files[0], meta, body)
+    if title_blocked:
+        print(TITLE_MISMATCH_BLOCK)
+        print("preflight: BLOCKED")
+        return 1
     if "--refresh-baseline" in args:
         refresh_lines, refresh_blocked = _refresh_remote_baseline(meta, files[0], p, get_token())
         for line in refresh_lines:
@@ -795,12 +819,16 @@ def cmd_post(args: list[str]) -> int:
         print("NO TOKEN")
         return 2
     force_private = True if "--private" in args else None
-    text = open(files[0], "r", encoding="utf-8-sig").read()
+    path = files[0]
+    text = open(path, "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
+    findings = safety_findings(meta, body)
+    if _should_block_title_mismatch(path, meta, body):
+        findings.append(TITLE_MISMATCH_BLOCK)
     # safety_findings currently returns only hard blockers. Keep the prefix filter explicit
     # so future soft warnings do not silently become publish-blocking.
-    hard = [x for x in safety_findings(meta, body)
-            if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH"))]
+    hard = [x for x in findings
+            if x.startswith(("NO TITLE", "NO TAGS", "OVER CHAR", "NON-PUBLIC IMAGE", "LOCAL PATH", "BLOCKED: frontmatter title"))]
     hard.extend(privacy_field_findings(meta))
     if hard:
         print("BLOCKED (fix first): " + "; ".join(hard))

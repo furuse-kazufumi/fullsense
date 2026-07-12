@@ -1,6 +1,7 @@
 ---
 title: llcore 検証 arc (#35-02) — 「良すぎる数値」を疑え: SCS ソルバの罠を多視点 pair-review で捕まえて訂正した話
 tags: [FullSense, llcore, 解説, 形式手法, 進化計算]
+project_group: llcore
 private: true
 updated_at: '2026-06-04'
 id: ffef66ddbc48d7649615

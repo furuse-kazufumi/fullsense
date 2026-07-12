@@ -3,7 +3,13 @@ layout: default
 title: "llive 開発履歴 — 5 日で v0.1 から v0.7 候補へ"
 date: 2026-05-17
 author: "古瀬 和文（ぷるやん）"
-tags: llive 開発履歴 LLM 設計判断 振り返り
+tags:
+  - llive
+  - 開発履歴
+  - LLM
+  - 設計判断
+  - 振り返り
+project_group: llive
 id: 504036f1116fcd976dd3
 ---
 
