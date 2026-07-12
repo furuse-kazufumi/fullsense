@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-12 21:31:26
+- **生成時刻**: 2026-07-13 00:19:46
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `4	0`
+- HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
+0fca68a docs: record push of commit-scope-gate resolution (614545d)
+614545d docs: close commit-scope gate in handoff (resolved by atomic auto-commit 278ab56, verified)
+bdb66af auto: NEXT_SESSION.md 編集前 (2026-07-12 21:37)
+17f3fef auto: next_plan.md 編集前 (2026-07-12 21:37)
+39ec2d5 auto: next_plan.md 編集前 (2026-07-12 21:37)
+5bff78f auto: HANDOFF_LEDGER.md 編集前 (2026-07-12 21:36)
 2ea7f29 auto: next_plan.md 編集前 (2026-07-12 17:46)
 180f951 auto: HANDOFF_LEDGER.md 編集前 (2026-07-12 17:46)
 699fb25 auto: next_plan.md 編集前 (2026-07-12 17:21)
 278ab56 auto: QIITA_onocollo_worldmodel_alife_ja.md 編集前 (2026-07-12 16:41)
-a85434e article(qiita): deepen evolution loop cooking draft
-cbfc0f7 Add fig3 you-have-three asset for evolution loop article
-a01bf5c Add team stock source for onocollo article
-44628d7 Add motion pack figures to onocollo draft
-ff1e719 Add static-safe motion pack assets
-6bd2621 docs: record final push decision
 ```
 
 ### git status (porcelain)
@@ -37,7 +37,6 @@ ff1e719 Add static-safe motion pack assets
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- M docs/next_plan.md
 ```
 
 
@@ -72,10 +71,12 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `21:30` `docs/SESSION_SUMMARY.md`
-- `21:30` `docs/NEXT_SESSION.auto.md`
-- `17:46` `docs/next_plan.md`
-- `17:46` `docs/HANDOFF_LEDGER.md`
+- `00:07` `docs/SESSION_SUMMARY.md`
+- `00:07` `docs/NEXT_SESSION.auto.md`
+- `21:39` `docs/HANDOFF_LEDGER.md`
+- `21:37` `docs/NEXT_SESSION.md`
+- `21:37` `docs/next_plan.md`
+- `21:35` `.pytest_cache/v/cache/nodeids`
 
 
 ## Cross-references
