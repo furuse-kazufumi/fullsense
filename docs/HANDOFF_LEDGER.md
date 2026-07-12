@@ -165,6 +165,14 @@ nav_order: 96
 - Scope: push the three commits as-is without rebase/squash, while treating the two timestamp-only commits as lightweight history noise rather than semantic review units.
 - Result: the branch was pushed up to `1107518`, preserving the unsquashed ancestry.
 
+### 2026-07-12 — commit-scope gate resolved by atomic auto-commit (verified, unpushed)
+
+- Prior state: the commit-scope gate (7 interdependent code/test files + `QIITA_PROJECT_GROUP_INDEX.md` + ~106 `.md` `project_group` additions) was left uncommitted pending a human decision between "commit all as one atomic unit" (option A) and "no commit" (option B). The hazard was a partial code-only commit causing `GROUP_MISSING` exit-1 on existing public articles.
+- What actually happened: the auto-commit hook, firing a "編集前" snapshot before an unrelated onocollo article edit at 16:41 JST, swept the entire pending set into a single commit **`278ab56`** (`auto: QIITA_onocollo_worldmodel_alife_ja.md 編集前`, 113 files, +3403/-791). This is the atomic option A the review recommended — the code group-lint and the `.md` `project_group` additions are in the **same** commit, so the partial-checkout exit-1 hazard cannot materialize.
+- Independent verification at HEAD (this session): (1) `git show --name-only 278ab56` = only `docs/ tests/ tools/ scripts/` paths, no secrets/config/binaries (the `token` grep hits are `QIITA_token_economy_*.md` filenames, not credentials); (2) importer `tools/_qiita_title_guard.py` exists at HEAD; (3) `py -3.11 -m pytest tests/ -q` = **301 passed**; (4) `py -3.11 scripts/qiita_preflight.py --json` = `warnings:0`, **exit 0**. The committed HEAD tree is internally consistent.
+- Current position: `HEAD = 2ea7f29`, **4 commits ahead of `origin/main`, all unpushed** (`278ab56` substantive + `699fb25`/`180f951`/`2ea7f29` doc auto-commits). Working tree is clean except the 3 auto-generated docs snapshots. **No push performed** — push remains a separate human gate.
+- Net: the commit-scope gate is **closed** (resolved as safe option A, local + reversible + verified green). The only genuinely open externally-visible items are: (a) push the 4 local commits to `origin/main` (human gate); (b) onocollo Team item `f8017acc1f50112f3c9e` browser-side visibility confirmation (needs an authenticated Team browser session).
+
 ## Maintenance Rule
 
 - New `approval / execution / push / rollback` entries go here, not into `docs/next_plan.md`.
