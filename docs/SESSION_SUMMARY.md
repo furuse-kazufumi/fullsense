@@ -3,13 +3,15 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-07-13 07:37:42
+- **最終更新**: 2026-07-13 07:43:22
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+5d7445c auto: QIITA_rocket_control_vs_learning_general_ja.md 編集前 (2026-07-13 07:40)
+6493994 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 07:39)
 30a30e0 auto: QIITA_rocket_control_vs_learning_general_ja.md 編集前 (2026-07-13 07:02)
 446d5d9 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 07:02)
 c77706a auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:35)
@@ -18,25 +20,21 @@ c77706a auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:35
 15bde3b auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
 07e6148 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
 78cfa93 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:34)
-6a7ff81 auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33)
-e3e28cb auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 00:33)
 ```
 
 ## 現在の git status
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
- M docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
+M docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-07:29 docs/SESSION_SUMMARY.md
-07:29 docs/NEXT_SESSION.auto.md
-07:02 docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
-07:02 docs/articles/drafts/QIITA_rocket_control_vs_learning_ja.md
+07:40 docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
+07:40 docs/articles/drafts/QIITA_rocket_control_vs_learning_ja.md
+07:37 docs/SESSION_SUMMARY.md
+07:37 docs/NEXT_SESSION.auto.md
 ```
 
 ---
