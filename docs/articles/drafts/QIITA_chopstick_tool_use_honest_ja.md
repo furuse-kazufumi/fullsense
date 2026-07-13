@@ -21,7 +21,7 @@ public_id: 779b380b22c921a26804
 
 ## 0. 3行まとめ（先に結論）
 
-- MuJoCo で **2 本の箸（chopsticks）** に物をつまませ、「手で書いた制御」vs「進化で学習した方策」を、いつもの正直な物差しで比べ始めた。
+- 動機は **「手を失った人の AI 義手（prosthetic hand）が、箸で食事を掴めるか」**。MuJoCo で **AI 義手が 2 本の箸（chopsticks）** で物をつまむ最小リグを組み、「手で書いた制御」vs「進化で学習した方策」を、いつもの正直な物差しで比べ始めた。箸は**本物の持ち方**（下は固定・上だけ動かす）に寄せた。※まだ動く義手ではなくシミュレーションのトイ。
 - まだ易しい入り口（箱をつまむ）だが、早くも**同じ結末の匂い**がする: 手書きのスクリプト制御は箱を自明に掴むのに、ゼロから進化させた素朴な線形方策は**接触までしか届かない**。ロケット着陸の記事と同じ「手作りが素朴な学習に勝つ」が、また顔を出した。
 - でも本題はそこではない。物をつまむ研究は世の中に山ほどある。**私が価値を置くのは「失敗を段階ごとに帰属できる正直な測り方」**——「掴めた」を最終姿勢で判定し、「滑って落とした」と「握り潰した」を**別々に**測る。この記事は、その物差しをどう作ったかの話だ。
 
@@ -114,7 +114,7 @@ slipped  = (not held) and (not crushed) and (contacted or xy_escape > slip_thres
 | 箱＋低い握力上限（cap 0.3N） | **crushed**（同じ握りが上限を超える） |
 | 一度も閉じない制御 | どれでもない＝**clean miss**（誤って「滑った」に数えない） |
 
-![同じ scripted 制御で球をつまもうとすると、転がって握りから逃げる（slipped=失敗）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/sphere_slip.gif?v=3)
+![同じ scripted 制御で球をつまもうとすると、転がって握りから逃げる（slipped=失敗）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/sphere_slip.gif?v=4)
 
 この 4 行が意味するのは、「箱は自明・球は難しい・締めれば潰す」を**別々の指標として観測できている**ということだ。実験として、ここまでが土台。
 
