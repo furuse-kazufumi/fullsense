@@ -14,6 +14,8 @@ public_id: a8549f4ba13860aff741
 
 # AI 的成本全是错觉 —— 用「点数 / 订阅 / 压缩」拆解你的「Token 经济」
 
+![同样意思的句子，按语言（＝token 的切分方式）不同，计费所依据的 token 数也不同：英语 5 个，而日语／韩语约为 2 倍（用 GPT 分词器 cl100k_base 实测）。计费是按 token 数，而不是按字符数。](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/token_economy/tokenization.gif)
+
 ## 引子：史上第一位「AI 节目主持人」,其实根本不是 AI
 
 1985 年 4 月 4 日,英国 Channel 4 的电视电影《Max Headroom: 20 Minutes into the Future》里,出现了一个号称「世界第一」的角色——**「世界首位电脑生成的电视主持人」Max Headroom(马克斯·黑德罗姆)**。他说话一卡一卡的,声音时不时断片,背景跑着数字噪点,一看就是「电脑在说话」的那种感觉。
