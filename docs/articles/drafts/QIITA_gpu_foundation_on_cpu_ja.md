@@ -25,6 +25,8 @@ public_id: a65b9e84428fc7b7e63e
 - まず**推測せず測った**: コード全体は 100% 直列・単一環境の MuJoCo で、律速は ①ロケット評価実験 ②ADR 把持 ③スイマー QD、世界モデル（Dreamer/RSSM）は既に CUDA クリーンだが V→M→C の画素経路に CPU 決め打ちの障害物があった。CPU 上で作れる**移植可能な勝ち**を3つ実装した（stdlib 並列 map / `device="auto"` 配線 / クロスプラットフォームの環境ブートストラップ）。
 - ただし正直に言うと、**GPU の高速化も MJX のバッチ物理も、まだ一度も走らせていない**（GPU がまだ無い）。だから最大の勝ち候補（MJX）は「移植」ではなく「**先に走らせる go/no-go スループット計測**」として出荷した。「測る前に制御ループを移植するな」——このルールを守ったこと自体が、この記事の主題だ。
 
+![CPU で回している `onocollo` のロボ進化シミュ。世代を回して形態と制御を進化させる——この「たくさん試す」計算こそ GPU（MJX のバッチ物理）で並列に踏みたい部分だ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/onocollo/evolving_creature.gif)
+
 ---
 
 ## 1. 用語（先に地図）
