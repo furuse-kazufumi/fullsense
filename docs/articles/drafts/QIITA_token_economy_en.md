@@ -9,6 +9,7 @@ tags:
   - OSS
 private: false
 public_private: false
+public_id: a1e1bee139017654e812
 ---
 
 # AI Costs Are Full of Illusions — Token Economy, Credits, Compression

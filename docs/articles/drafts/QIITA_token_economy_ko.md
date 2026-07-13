@@ -9,6 +9,7 @@ tags:
   - OSS
 private: false
 public_private: false
+public_id: 6bf203c557db204d9502
 ---
 
 # AI 비용은 착각투성이 — 크레딧, 구독, 압축으로 읽는 '토큰 경제학'

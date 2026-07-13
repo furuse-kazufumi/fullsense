@@ -7,7 +7,9 @@ tags:
   - 成本
   - Claude
   - OSS
-private: true
+private: false
+public_private: false
+public_id: a8549f4ba13860aff741
 ---
 
 # AI 的成本全是错觉 —— 用「点数 / 订阅 / 压缩」拆解你的「Token 经济」

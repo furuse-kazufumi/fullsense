@@ -9,6 +9,7 @@ tags:
   - OSS
 private: false
 public_private: false
+public_id: 3f3d48c1db3fa038fe46
 ---
 
 # AIのコストは錯覚だらけ — クレジット・サブスク・圧縮で読み解く「トークン経済」
