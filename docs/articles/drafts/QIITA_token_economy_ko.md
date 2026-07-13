@@ -14,6 +14,8 @@ public_id: 6bf203c557db204d9502
 
 # AI 비용은 착각투성이 — 크레딧, 구독, 압축으로 읽는 '토큰 경제학'
 
+![같은 뜻의 문장이라도 언어(＝토큰이 쪼개지는 방식)에 따라 과금 기준인 토큰 수가 달라진다. 영어 5개에 비해 일본어·한국어는 약 2배(GPT 토크나이저 cl100k_base로 실측). 과금은 글자 수가 아니라 토큰 수로 움직인다.](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/token_economy/tokenization.gif)
+
 ## 들어가며: 역사상 최초의 'AI 진행자'는, AI가 아니었다
 
 1985년 4월 4일, 영국 Channel 4의 TV 영화 『Max Headroom: 20 Minutes into the Future』에 세계 최초를 자처하는 존재가 등장합니다. **"세계 최초의 컴퓨터 생성 TV 진행자" 맥스 헤드룸(Max Headroom)**. 목소리가 뚝뚝 끊기고, 배경에는 디지털 노이즈가 흐르는, 누가 봐도 "컴퓨터가 말하고 있다"는 인상의 캐릭터였습니다.
