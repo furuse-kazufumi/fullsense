@@ -216,7 +216,7 @@ py -3.11 scripts/verify_gpu_env.py
 新箱での初日チェックリストはこれだけ:
 
 1. `setup_gpu_env.py --run` → `verify_gpu_env.py`（`torch CUDA: ok`、Linux なら `jax devices: ok` を期待）。
-2. sanity: `pytest -q`（620 pass。5 件の既知 hygiene fail は後述）。
+2. sanity: `pytest -q`（5 件の既知 hygiene fail 以外は緑。後述）。
 3. 無料の多コア勝ち: ロケット評価を `--workers <cores>` で再走、直列 seed と一致を確認。
 4. torch CUDA 勝ち: `run_pipeline(replace(default_config(), device="auto"))` が GPU に載るのを見て、設定を拡大。
 5. Linux のみ: MJX go/no-go 関門。通れば ロールアウトをバッチ化、駄目なら process-parallel に留まり**理由を記録**。
