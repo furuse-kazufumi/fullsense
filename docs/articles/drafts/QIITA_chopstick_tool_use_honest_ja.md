@@ -72,7 +72,7 @@ world
  block                 （自由関節つき・箱/球/円柱）
 ```
 
-![手が 2 本の箸を道具として持ち、先端で箱を挟んで持ち上げる（scripted 制御・held=成功）。箸は手のところの支点で回る梃子で、力は箸先を介して箱に伝わる](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/box_grasp.gif?v=2)
+![手が 2 本の箸を道具として持ち、先端で箱を挟んで持ち上げる（scripted 制御・held=成功）。箸は手のところの支点で回る梃子で、力は箸先を介して箱に伝わる](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/box_grasp.gif?v=3)
 
 XML はロケット記事と同じく生の f-string で書いた（小さな手作りシーンは、手続き API より読みやすい）。ここで**最初のロボティクスの罠**にはまる。
 
@@ -114,7 +114,7 @@ slipped  = (not held) and (not crushed) and (contacted or xy_escape > slip_thres
 | 箱＋低い握力上限（cap 0.3N） | **crushed**（同じ握りが上限を超える） |
 | 一度も閉じない制御 | どれでもない＝**clean miss**（誤って「滑った」に数えない） |
 
-![同じ scripted 制御で球をつまもうとすると、転がって握りから逃げる（slipped=失敗）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/sphere_slip.gif?v=2)
+![同じ scripted 制御で球をつまもうとすると、転がって握りから逃げる（slipped=失敗）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/sphere_slip.gif?v=3)
 
 この 4 行が意味するのは、「箱は自明・球は難しい・締めれば潰す」を**別々の指標として観測できている**ということだ。実験として、ここまでが土台。
 
