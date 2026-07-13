@@ -3,13 +3,15 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-07-13 12:59:52
+- **最終更新**: 2026-07-13 18:22:14
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+d86d8ff auto: QIITA_chopstick_tool_use_honest_ja.md 編集前 (2026-07-13 18:21)
+6175c4b auto: QIITA_chopstick_tool_use_honest_ja.md 編集前 (2026-07-13 18:21)
 8cb143d auto: QIITA_token_economy_zh.md 編集前 (2026-07-13 12:57)
 3c0695d auto: QIITA_token_economy_ko.md 編集前 (2026-07-13 12:57)
 65c2cda auto: QIITA_token_economy_en.md 編集前 (2026-07-13 12:57)
@@ -18,32 +20,20 @@ d3a6709 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:
 181d059 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:33)
 1cd2671 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:32)
 c3e1931 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:32)
-d61c0f7 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:31)
-b6dbf85 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:31)
 ```
 
 ## 現在の git status
 
 ```
-M docs/articles/drafts/QIITA_token_economy_en.md
- M docs/articles/drafts/QIITA_token_economy_ja.md
- M docs/articles/drafts/QIITA_token_economy_ko.md
- M docs/articles/drafts/QIITA_token_economy_zh.md
+M docs/articles/drafts/QIITA_chopstick_tool_use_honest_ja.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-12:59 docs/articles/drafts/QIITA_token_economy_zh.md
-12:58 docs/articles/drafts/QIITA_token_economy_ko.md
-12:58 docs/articles/drafts/QIITA_token_economy_en.md
-12:58 docs/articles/drafts/QIITA_token_economy_ja.md
-12:35 docs/SESSION_SUMMARY.md
-12:35 docs/NEXT_SESSION.auto.md
-12:34 docs/articles/drafts/QIITA_chopstick_tool_use_honest_ja.md
-12:33 docs/articles/drafts/QIITA_learning_vs_handcraft_honest_ja.md
-12:29 docs/articles/drafts/QIITA_gpu_foundation_on_cpu_ja.md
-12:29 docs/articles/drafts/QIITA_rocket_control_vs_learning_en.md
+18:21 docs/articles/drafts/QIITA_chopstick_tool_use_honest_ja.md
+18:20 docs/articles/assets/chopstick/sphere_slip.gif
+18:20 docs/articles/assets/chopstick/box_grasp.gif
 ```
 
 ---
