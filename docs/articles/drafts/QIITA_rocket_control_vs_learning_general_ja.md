@@ -8,6 +8,7 @@ tags:
   - 読み物
 private: false
 public_private: false
+public_id: 635c59c653346394d911
 ---
 
 # AIにロケットを着陸させてみたら、「手で作ったルール」に勝てなかった —— そして「勝った」と喜んだ自分を、自分でボツにした話

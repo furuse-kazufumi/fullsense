@@ -1,8 +1,21 @@
+---
+title: "I Made an AI Land a Rocket — and It Couldn't Beat the Hand-Crafted Controller. Then I Disproved My Own \"It Won\""
+tags:
+  - AI
+  - MachineLearning
+  - ReinforcementLearning
+  - Robotics
+  - Control
+private: false
+public_private: false
+public_id: 015e44358eb9bcf040a9
+---
+
 # I Made an AI Land a Rocket — and It Couldn't Beat the Hand-Crafted Controller. Then I Disproved My Own "It Won"
 
 > For: anyone curious about reinforcement learning, evolutionary computation, or control engineering / anyone who wants to test the claim "learning beats hand-crafting."
 > Prerequisites: if you can read Python, you're fine. Control terms are unpacked as we go.
-> This is a pre-publish draft (numbers are measured; publishing is a human decision).
+> All numbers are measured locally. I document a robust NULL (learning ties a fair PID) — including the trap I briefly fell into myself.
 
 ---
 

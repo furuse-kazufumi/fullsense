@@ -3,37 +3,51 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-07-13 18:22:14
+- **最終更新**: 2026-07-13 21:21:50
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
-d86d8ff auto: QIITA_chopstick_tool_use_honest_ja.md 編集前 (2026-07-13 18:21)
-6175c4b auto: QIITA_chopstick_tool_use_honest_ja.md 編集前 (2026-07-13 18:21)
-8cb143d auto: QIITA_token_economy_zh.md 編集前 (2026-07-13 12:57)
-3c0695d auto: QIITA_token_economy_ko.md 編集前 (2026-07-13 12:57)
-65c2cda auto: QIITA_token_economy_en.md 編集前 (2026-07-13 12:57)
-84173cc auto: QIITA_token_economy_ja.md 編集前 (2026-07-13 12:57)
-d3a6709 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:33)
-181d059 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:33)
-1cd2671 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:32)
-c3e1931 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 12:32)
+9915357 auto: QIITA_rocket_control_vs_learning_en.md 編集前 (2026-07-13 20:52)
+e16c608 auto: QIITA_rocket_control_vs_learning_general_ja.md 編集前 (2026-07-13 20:52)
+889318a auto: QIITA_rocket_control_vs_learning_ja.md 編集前 (2026-07-13 20:51)
+a56bfef auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-13 20:50)
+e171b53 auto: QIITA_gpu_foundation_on_cpu_ja.md 編集前 (2026-07-13 20:49)
+a09f974 auto: QIITA_gpu_foundation_on_cpu_ja.md 編集前 (2026-07-13 20:49)
+8e88ade auto: QIITA_gpu_foundation_on_cpu_ja.md 編集前 (2026-07-13 20:48)
+4549b8f auto: QIITA_chopstick_tool_use_honest_ja.md 編集前 (2026-07-13 20:47)
+db45526 auto: QIITA_chopstick_tool_use_honest_ja.md 編集前 (2026-07-13 20:46)
+e0ccb7a article: chopstick tool-use draft + box_grasp/sphere_slip GIFs
 ```
 
 ## 現在の git status
 
 ```
-M docs/articles/drafts/QIITA_chopstick_tool_use_honest_ja.md
+M docs/NEXT_SESSION.auto.md
+ M docs/SESSION_SUMMARY.md
+ M docs/articles/drafts/QIITA_rocket_control_vs_learning_en.md
+ M docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
+?? docs/articles/drafts/QIITA_chopstick_tool_use_honest_en.md
+?? docs/articles/drafts/QIITA_gpu_foundation_on_cpu_en.md
+?? docs/articles/drafts/QIITA_learning_vs_handcraft_honest_en.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-18:21 docs/articles/drafts/QIITA_chopstick_tool_use_honest_ja.md
-18:20 docs/articles/assets/chopstick/sphere_slip.gif
-18:20 docs/articles/assets/chopstick/box_grasp.gif
+20:59 docs/SESSION_SUMMARY.md
+20:59 docs/NEXT_SESSION.auto.md
+20:57 docs/articles/drafts/QIITA_learning_vs_handcraft_honest_en.md
+20:56 docs/articles/drafts/QIITA_gpu_foundation_on_cpu_en.md
+20:56 docs/articles/drafts/QIITA_chopstick_tool_use_honest_en.md
+20:53 docs/articles/drafts/QIITA_rocket_control_vs_learning_general_ja.md
+20:53 docs/articles/drafts/QIITA_rocket_control_vs_learning_en.md
+20:52 docs/articles/drafts/QIITA_rocket_control_vs_learning_ja.md
+20:50 docs/articles/drafts/QIITA_learning_vs_handcraft_honest_ja.md
+20:49 docs/articles/drafts/QIITA_gpu_foundation_on_cpu_ja.md
+20:47 docs/articles/drafts/QIITA_chopstick_tool_use_honest_ja.md
 ```
 
 ---
