@@ -15,6 +15,8 @@ public_id: 635c59c653346394d911
 
 > 一般向け（プログラミングの細部は書きません。技術版は別記事）。数値はすべてローカル実測。
 
+![ロケットが弧を描いて戻り、パッドに垂直着陸する様子（人間が手で設計した操縦ルールでの制御）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/rocket/rocket_arc.gif?v=1)
+
 ## この話の要点
 
 コンピュータの中でロケットを何度も着陸させ、**「人間が手で設計した操縦ルール」と「AI が自分で学んだ操縦」のどちらが上手いか**を、正直に競わせました。
