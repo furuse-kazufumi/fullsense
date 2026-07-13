@@ -17,9 +17,9 @@ public_id: f154a91da7ee87dd769f
 > 前提知識: Python が読めれば十分。制御用語は都度かみくだきます。
 > 数値はすべてローカル実測。robust NULL（学習は公平な PID に勝てず引き分け）を、自分が一度はまった罠ごと正直に書きます。
 
-![PD 誘導での着陸: 打上げ→ピッチオーバー→弧を描いて降り、パッドに垂直着陸（手作り制御のベースライン）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/rocket/rocket_arc.gif?v=1)
+![PD 誘導での着陸: 打上げ→ピッチオーバー→弧を描いて降り、パッドに垂直着陸（手作り制御のベースライン）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/rocket/rocket_arc.gif?v=2)
 
-![終端着陸のクローズアップ。脚が接地した瞬間にエンジンをカットする](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/rocket/rocket_land.gif?v=1)
+![終端着陸のクローズアップ。脚が接地した瞬間にエンジンをカットする](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/rocket/rocket_land.gif?v=2)
 
 ---
 
