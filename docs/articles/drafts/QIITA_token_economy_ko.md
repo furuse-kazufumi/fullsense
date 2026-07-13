@@ -7,7 +7,8 @@ tags:
   - 비용
   - Claude
   - OSS
-private: true
+private: false
+public_private: false
 ---
 
 # AI 비용은 착각투성이 — 크레딧, 구독, 압축으로 읽는 '토큰 경제학'
