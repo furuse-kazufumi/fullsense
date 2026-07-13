@@ -7,7 +7,8 @@ tags:
   - Cost
   - Claude
   - OSS
-private: true
+private: false
+public_private: false
 ---
 
 # AI Costs Are Full of Illusions — Token Economy, Credits, Compression
