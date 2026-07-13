@@ -93,9 +93,9 @@ public_id: 339a97dd41242aa3f86c
 
 ### 2.2 箸でのつまみ上げ: 易しい箱ですら scripted に負けた（予備観察）
 
-![実験②箸でのつまみ上げ: 2本のスティックが箱を挟んで持ち上げる（易しい箱ですら、素朴に学習した方策は scripted 制御に勝てなかった。stage-1 予備観察）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/box_grasp.gif)
+![実験②箸でのつまみ上げ: 手が2本の箸を道具として持ち、支点で回る箸の先端で箱を挟んで持ち上げる（易しい箱ですら、素朴に学習した方策は scripted 制御に勝てなかった。stage-1 予備観察）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/box_grasp.gif?v=2)
 
-もう1つのタスクは毛色が違う——**箸で物体をつまんで持ち上げる（tool-use manipulation）**。`onocollo.chopstick` は、2本のスティック先端が y 方向に閉じて（pinch）z 方向に持ち上げる（lift）だけの、3自由度の最小リグだ。
+もう1つのタスクは毛色が違う——**箸で物体をつまんで持ち上げる（tool-use manipulation）**。`onocollo.chopstick` は、手（hand）が箸を道具として保持し、手のところの**支点で 2 本の箸が回転（hinge）して先端が閉じる**（pinch）／手ごと持ち上げる（lift）、3自由度の最小リグだ。駆動は「手→箸（梃子）→物体」で、力は握った箸の先端を介して伝わる（初版は各箸を直動関節で直接動かす実質2本指グリッパだったのを、手が道具を握る形に作り替えた——箸記事に訂正の詳細）。
 
 このタスクの**#1 モデリングリスク**は「箱が2点接触の軸まわりに回ってすり抜ける」こと。だから接触に **condim=6**（torsion＋roll friction、ねじれと転がりの摩擦）を入れて回転を止めている（default の condim 3 だと物体はグリップから転がり出る）。ここは stage-2 で**事前登録のノブ**として扱う——「答えが出るまで摩擦をいじる」のは experimenter DoF（実験者の自由度）による自己欺瞞なので、やらない。
 
