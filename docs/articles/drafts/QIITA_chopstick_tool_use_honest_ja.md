@@ -122,13 +122,14 @@ slipped  = (not held) and (not crushed) and (contacted or xy_escape > slip_thres
 
 ## 5. 学習を足す: 反応する制御を進化させる
 
-手書きのスクリプトは**開ループ**（決め打ちの時間スケジュール）で、球が転がり出しても対応できない。だから**閉ループ**の方策を進化させる。観測（箱の位置・箸の位置・持ち上げ量・両側接触フラグ）から、対称な挟み量と持ち上げ量を出す小さな線形方策だ。最適化は `SimpleGaussianES`（cma があれば CMA-ES）を、ロケットや歩行進化で使ったのと**同じコア**を無改変で流用した。
+手書きのスクリプトは**開ループ**（決め打ちの時間スケジュール）で、球が転がり出しても対応できない。だから**閉ループ**の方策を進化させる。観測（箱の位置・箸の位置・持ち上げ量・両側接触フラグ）から、挟み量（上の箸を動かす量）と持ち上げ量を出す小さな線形方策だ。最適化は `SimpleGaussianES`（cma があれば CMA-ES）を、ロケットや歩行進化で使ったのと**同じコア**を無改変で流用した。
 
 ```python
 def linear_controller(genome, spec):
     w = genome.reshape(2, 6)          # [pinch, lift] × [bias, bx, by, blift, handlift, two_sided]
     def command(t, obs):
         out = w @ features(obs)
+        # pinch は「上の箸」を動かす量。下の箸は固定なので実質 1 自由度＋lift
         return np.array([pinch, pinch, lift])  # クリップは省略
     return command
 ```
