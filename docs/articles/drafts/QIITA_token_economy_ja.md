@@ -7,7 +7,8 @@ tags:
   - コスト
   - Claude
   - OSS
-private: true
+private: false
+public_private: false
 ---
 
 # AIのコストは錯覚だらけ — クレジット・サブスク・圧縮で読み解く「トークン経済」
