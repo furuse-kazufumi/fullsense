@@ -14,6 +14,8 @@ public_id: 3f3d48c1db3fa038fe46
 
 # AIのコストは錯覚だらけ — クレジット・サブスク・圧縮で読み解く「トークン経済」
 
+![同じ意味の文でも、言語（＝トークンの割れ方）で課金の元になるトークン数は変わる。英語5に対し日本語・韓国語は約2倍（GPT トークナイザ cl100k_base で実測）。課金は文字数ではなくトークン数で動く](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/token_economy/tokenization.gif)
+
 ## はじめに：史上初の「AI司会者」は、AIではなかった
 
 1985年4月4日、英Channel 4のテレビ映画『Max Headroom: 20 Minutes into the Future』に、世界初を謳う存在が現れます。**「世界初のコンピューター生成テレビ司会者」Max Headroom（マックス・ヘッドルーム）**。カクカクと声が飛び、背景にデジタルノイズが走る、いかにも「コンピューターが喋っている」キャラクターでした。
