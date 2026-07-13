@@ -14,6 +14,8 @@ public_id: a1e1bee139017654e812
 
 # AI Costs Are Full of Illusions — Token Economy, Credits, Compression
 
+![The same sentence costs a different number of tokens depending on the language (how it splits into tokens): English 5 vs. Japanese/Korean ~2× (measured with the GPT tokenizer, cl100k_base). Billing runs on tokens, not characters.](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/token_economy/tokenization.gif)
+
 ## Intro: The first-ever "AI TV host" wasn't AI at all
 
 On April 4, 1985, a British Channel 4 TV movie called *Max Headroom: 20 Minutes into the Future* introduced something billed as a world first: **Max Headroom, "the world's first computer-generated TV host."** He stuttered and glitched, his voice skipped, digital noise crawled across the background behind him — the very picture of "a computer talking to you."
