@@ -17,6 +17,10 @@ public_id: 015e44358eb9bcf040a9
 > Prerequisites: if you can read Python, you're fine. Control terms are unpacked as we go.
 > All numbers are measured locally. I document a robust NULL (learning ties a fair PID) — including the trap I briefly fell into myself.
 
+![Landing under PD guidance: launch → pitch-over → arc back → vertical touchdown on the pad (the hand-crafted baseline)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/rocket/rocket_arc.gif?v=1)
+
+![Close-up of the terminal descent — the engine cuts the instant the legs touch down](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/rocket/rocket_land.gif?v=1)
+
 ---
 
 ## 0. TL;DR (3 lines)
