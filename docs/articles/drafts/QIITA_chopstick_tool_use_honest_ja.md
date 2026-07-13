@@ -57,6 +57,8 @@ world
  block           （自由関節つき・箱/球/円柱）
 ```
 
+![2 本の箸が箱をつまんで持ち上げる（scripted 制御・held=成功）](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/chopstick/box_grasp.gif?v=1)
+
 XML はロケット記事と同じく生の f-string で書いた（小さな手作りシーンは、手続き API より読みやすい）。ここで**最初のロボティクスの罠**にはまる。
 
 **罠①: 丸い物は握りから「回って」逃げる。** 箸 2 本のつまみは、接触点が 2 つでほぼ一直線。この軸のまわりに物が回る自由が残る。既定の接触（condim=3, 滑り摩擦だけ）だと、球はくるっと回って握りをすり抜ける。止めるには**ねじれ・転がり摩擦（condim=6）**が要る。逆に言えば、ここの摩擦値は「掴める/掴めない」を二値で決める強力なノブで、**答えが出るまで摩擦をいじると、それは実験者の自由度（experimenter's degrees of freedom）＝ズル**になる。だから摩擦は「stage-2 で事前登録するノブ」と決め、stage-1 では固定した。
