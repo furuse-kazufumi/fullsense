@@ -459,6 +459,6 @@ onocollo は、ここまで出てきた**ロケット着陸・宇宙デブリ把
 
 ---
 
-> **honest disclosure:** この記事の数値ブロックはすべて、GPU なし・デーモンなし・ROS 未インストールの CPU で**過去に実行して取得した結果**です。今回この場で再実行していないものも含め、既存のログ・図・GIF を整理して書いています。良い数字(合成環境で勝った/水中で 6.5 倍/ロケット PD が nominal で安定着陸した)も悪い数字(実タスクで負けた/今回設定では `greedy < random < QD` だった/冗長性が単調でなかった/ロケット recurrent が held-out で PID に負けた)も、出たまま載せています。すべて **toy スケール**であり、ベンチマーク性能の主張ではありません。異常に良い結果を見たら、まず内訳を疑ってください。
+> **honest disclosure:** この記事の §1〜§7.6 の数値ブロックは、GPU なし・デーモンなし・ROS 未インストールの CPU で**過去に実行して取得した結果**を整理したものです。**§7.7(多様な体)は本記事の執筆と同じ回に実測したもの**で、その 4 実験のうち 3 つで偽陽性が出て、公開前に自分で潰しました。良い数字(合成環境で勝った/水中で 6.5 倍/ロケット PD が nominal で安定着陸した/蛇が異方性摩擦で 3.65 m 直進した/全身骨格がボトルを掴んで真上へ運んだ)も悪い数字(実タスクで負けた/今回設定では `greedy < random < QD` だった/冗長性が単調でなかった/ロケット recurrent が held-out で PID に負けた/虫は開ループ翼打ちで飛べず、過去の "飛べた" は床の脚押し artifact だった/四足は専用報酬でも 6° の坂を登れなかった)も、出たまま載せています。すべて **toy スケール**であり、ベンチマーク性能の主張ではありません。異常に良い結果を見たら、まず内訳を疑ってください。
 >
-> *参考:World Models(Ha & Schmidhuber, 2018, `arXiv:1803.10122`)/ Dreamer(Hafner ら, `arXiv:1912.01603`)/ DreamerV3(`arXiv:2301.04104`)/ MAP-Elites(Mouret & Clune, 2015, `arXiv:1504.04909`)/ QD grasping(Huber ら, 2023, `arXiv:2308.05483`)/ Karl Sims, Evolved Virtual Creatures(1994)。GIF はすべて自作(CPU 実行の実キャプチャ)です。*
+> *参考:World Models(Ha & Schmidhuber, 2018, `arXiv:1803.10122`)/ Dreamer(Hafner ら, `arXiv:1912.01603`)/ DreamerV3(`arXiv:2301.04104`)/ MAP-Elites(Mouret & Clune, 2015, `arXiv:1504.04909`)/ QD grasping(Huber ら, 2023, `arXiv:2308.05483`)/ Karl Sims, Evolved Virtual Creatures(1994)/ 蛇型ロコモーションと抵抗力理論(Hirose, Biologically Inspired Robots, 1993)/ MS-Human-700 筋骨格(Zuo ら, ICRA 2024)/ flybody(Vaxenburg ら, `arXiv:2412.18208`)。§7.7 の GIF はすべて今回 CPU で実キャプチャした自作です。*
