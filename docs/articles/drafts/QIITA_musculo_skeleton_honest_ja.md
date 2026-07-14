@@ -243,8 +243,10 @@ public_private: false
     「飲む動作」断定を緩和 / 方法(付録)追加。RTF「WRONG」判定は高負荷下測定の交絡で、アイドル実測13xで解消。
   - ★n=3 追試(stand_seeds.json): 積分項の見かけの改善(単一種4.53s)は種ノイズで、best中央値 plain3.55≒integral3.56、
     典型は integral 2.39<plain 2.71。「記憶が効く」は反証。記事§5を全面改稿(n=1に騙されかけた話として正直化)。
-  - 画像を fullsense main の docs/articles/assets/musculo/ に配置済(未push)→ push → raw URL 200 → ?v で cache-bust。
-    必要画像: locomotion_init.png / learning_curves.png / stand_warm.gif / grasp_final.gif (+任意 manipulation_init.png, stand_integ.gif)
+  - 画像を fullsense main の docs/articles/assets/musculo/ に配置済(push 済)→ raw URL 200 → ?v で cache-bust。
+    必要画像: locomotion_init.png / learning_curves.png / stand_warm.gif / grasp_final.gif / place_carry.gif (+任意 manipulation_init.png, stand_integ.gif)
+  - ★2026-07-15 追記: §6.5「運搬(place)= 制御可能な操作」を追加(warm-start で報酬ハッキングを解消、held 3/3・placed 1/3)。
+    §7 分析を3データ点(立位/把持/運搬)に拡張、§0 3行・タイトル・付録も更新。数値は out/musculo/place_warm.json と決定的再評価に照合済み。
   - Qiita は短時間の連続 POST で 429。新規投稿は時間を空ける。frontmatter public_private:false は明示済み。
-  - 残タスク: 立位の複数種検証(n>1)/ 英語版・一般版の派生。
+  - 残タスク: 英語版・一般版の派生 / place GIF の視点調整(任意)。立位の複数種検証(n=3)は反映済み。
 -->
