@@ -212,6 +212,8 @@ public_private: false
     直した点: RTF を条件付き(アイドル1スレ~13x / 7並列~3-5x)に / 立位を n=1 留保・典型値併記 /
     把持を force-closure 検証(9指接触・母指対向)+摩擦μ=1.0開示 / 単一原因を交絡3点で緩和 /
     「飲む動作」断定を緩和 / 方法(付録)追加。RTF「WRONG」判定は高負荷下測定の交絡で、アイドル実測13xで解消。
+  - ★n=3 追試(stand_seeds.json): 積分項の見かけの改善(単一種4.53s)は種ノイズで、best中央値 plain3.55≒integral3.56、
+    典型は integral 2.39<plain 2.71。「記憶が効く」は反証。記事§5を全面改稿(n=1に騙されかけた話として正直化)。
   - 画像を fullsense main の docs/articles/assets/musculo/ に配置済(未push)→ push → raw URL 200 → ?v で cache-bust。
     必要画像: locomotion_init.png / learning_curves.png / stand_warm.gif / grasp_final.gif (+任意 manipulation_init.png, stand_integ.gif)
   - Qiita は短時間の連続 POST で 429。新規投稿は時間を空ける。frontmatter public_private:false は明示済み。
