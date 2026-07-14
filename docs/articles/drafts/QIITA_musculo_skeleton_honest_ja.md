@@ -143,7 +143,7 @@ public_private: false
 | 20 | 0.39 m |
 | 50(収束) | **0.825 m** |
 
-**81本の筋肉の右手が、机の水ボトルを掴み、頭上0.82mまで持ち上げて保持した**。飲む動作にかなり近い。
+**81本の筋肉の右手が、机の水ボトルを掴み、0.82m 持ち上げて静止・保持した**(飲む動作の前段——「口へ運ぶ」の手前まで——に相当する)。
 
 ![操作用の全身筋モデルが、机の水ボトルを掴んで頭上まで持ち上げ、保持する。手のひらとボトルの距離を保ったままの「保持」であって、放り投げではない](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/musculo/grasp_final.gif?v=1)
 
