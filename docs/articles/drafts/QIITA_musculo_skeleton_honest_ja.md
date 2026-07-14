@@ -204,6 +204,10 @@ related_groups:
 
 ![全身骨格の右手が水ボトルを掴んだまま、命令された「真上」の目標へ運んで保持する。放り投げでなく、掴み続けたまま運んでいる](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/musculo/place_carry.gif?v=1)
 
+そして、この運搬のいちばん面白い応用は「**口元へ運ぶ**」——つまり食事・飲む動作だ。命令目標を「体側・口元」に切り替えると、筋骨格の手は掴んだボトルを体の方へ引き寄せようとする(下の GIF)。ただし正直に書くと、これがまさに §6.5 で **0.27 m 手前で止まった最難の目標**で、まだ口までは届かない。「人体模型に道具を持たせて食事の動きをさせる」——箸を握って食べる動作までは、この単一線形シナジーの容量では届いておらず、次の宿題だ(手作りハンドではなく、この解剖学的な手にチェーンさせるのが筋)。
+
+![同じ方策に「体側・口元へ」を命令したとき、掴んだボトルを口元へ引き寄せる "飲む/食べる動作" の芽。honest: 0.27 m 手前で止まり、まだ完全には口へ届かない](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/musculo/musculo_drink.gif?v=1)
+
 ---
 
 ## 7. なぜ一方は負けて、一方は勝てたのか
