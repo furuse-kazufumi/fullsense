@@ -10,7 +10,7 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-15 06:40:19
+- **生成時刻**: 2026-07-15 07:23:17
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
@@ -20,23 +20,22 @@ nav_order: 94
 - HEAD vs upstream (左=ahead 右=behind): `0	0`
 
 ```
-2dc1f30 articles: honest fixes from enrichment fact-check
-4d91ac8 auto: QIITA_chopstick_tool_use_honest_ja.md 編集前 (2026-07-14 20:53)
-141e8d1 article(musculo): n=3 refutes the integral-memory improvement (honest reversal)
-599a105 auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-14 20:39)
-965e67e auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-14 20:39)
-e6baaf8 auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-14 20:38)
-b70fee7 auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-14 20:38)
-d19f88b auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-14 20:38)
-93ddc22 auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-14 20:37)
-5b2ff3b article(musculo): trim honesty-motif repetition (editor P9)
+3d5c11fd article(learning-vs-handcraft): add §2.3 the case where evolution WON + §4.4
+fd401d3b auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-15 07:21)
+c471f5b9 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-15 07:21)
+b0fa7dd3 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-15 07:20)
+a72617a7 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-15 07:20)
+071251fa article(musculo): add §6.5 directed placement (controllable manipulation)
+4dcb99c9 auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-15 07:15)
+0bc0bd89 auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-15 07:15)
+445b8fd0 auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-15 07:15)
+8bf7d92e auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-15 07:14)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
+(clean)
 ```
 
 
@@ -71,8 +70,17 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `05:47` `docs/NEXT_SESSION.auto.md`
-- `05:47` `docs/SESSION_SUMMARY.md`
+- `07:21` `docs/articles/drafts/QIITA_learning_vs_handcraft_honest_ja.md`
+- `07:15` `docs/articles/drafts/QIITA_musculo_skeleton_honest_ja.md`
+- `07:12` `docs/articles/assets/musculo/place_carry.gif`
+- `07:10` `docs/articles/drafts/QIITA_onocollo_worldmodel_alife_ja.md`
+- `07:03` `docs/articles/assets/onocollo/snake_isotropic.gif`
+- `07:03` `docs/articles/assets/onocollo/snake_crawl_last.png`
+- `07:03` `docs/articles/assets/onocollo/snake_crawl.gif`
+- `07:03` `docs/articles/assets/onocollo/musculo_place_last.png`
+- `07:03` `docs/articles/assets/onocollo/musculo_place.gif`
+- `06:40` `docs/NEXT_SESSION.auto.md`
+- `06:40` `docs/SESSION_SUMMARY.md`
 
 
 ## Cross-references
