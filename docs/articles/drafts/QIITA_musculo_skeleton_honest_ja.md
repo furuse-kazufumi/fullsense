@@ -193,8 +193,12 @@ public_private: false
 ---
 
 <!-- 公開前チェックリスト(build note):
-  - 画像を fullsense main の docs/articles/assets/musculo/ に配置し push → raw URL 200 を確認 → ?v で cache-bust
+  - fact-check(2026-07-14, 別プロセス4クラスタ+編集critic)反映済み: 24主張中23 CONFIRMED。
+    直した点: RTF を条件付き(アイドル1スレ~13x / 7並列~3-5x)に / 立位を n=1 留保・典型値併記 /
+    把持を force-closure 検証(9指接触・母指対向)+摩擦μ=1.0開示 / 単一原因を交絡3点で緩和 /
+    「飲む動作」断定を緩和 / 方法(付録)追加。RTF「WRONG」判定は高負荷下測定の交絡で、アイドル実測13xで解消。
+  - 画像を fullsense main の docs/articles/assets/musculo/ に配置済(未push)→ push → raw URL 200 → ?v で cache-bust。
     必要画像: locomotion_init.png / learning_curves.png / stand_warm.gif / grasp_final.gif (+任意 manipulation_init.png, stand_integ.gif)
   - Qiita は短時間の連続 POST で 429。新規投稿は時間を空ける。frontmatter public_private:false は明示済み。
-  - 数値は out/musculo/*.json と実測ログ準拠。fact-check workflow の verdict 反映後に公開。
+  - 残タスク: 立位の複数種検証(n>1)/ 英語版・一般版の派生。
 -->
