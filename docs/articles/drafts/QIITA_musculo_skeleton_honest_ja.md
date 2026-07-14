@@ -9,6 +9,9 @@ tags:
 private: false
 public_private: false
 public_id: 0ecb640dc6e86452a23c
+project_group: onocollo
+related_groups:
+  - gaitlab
 ---
 
 # 700本の筋肉で人体骨格を立たせようとして、正直に転んだ話 — でも手はボトルを掴み、命令した先へ運んだ
