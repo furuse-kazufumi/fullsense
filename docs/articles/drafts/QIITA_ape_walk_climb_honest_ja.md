@@ -17,13 +17,13 @@ group_url_name: general
 
 ## 0. まず 3 行で(結論の先出し)
 
-- **低重心の類人猿型ロボ**は、CPU だけの進化計算で **6°〜8° の坂を登り、6° の坂を制御して下りました**(四足ロボ go2 は 6° すら登れなかった斜面です)。
+- **低重心の類人猿型ロボ**は、CPU だけの進化計算で **6° の坂を堅実に登り(7〜8° はかろうじて前進)、6° の坂を大半は制御して下りました(ただし末端で転倒)**。同じ体を汎用四足ロボ go2 は 6° すら登れませんでした(後述するように、go2 は登坂に特化して調整したものではないので、公平な比較ではありません)。
 - しかし **「筋肉(muscle)」で歩かせる**試みは、**5 通りの設定すべてで 0 歩**。決定実験まで詰めると、壁は「体」でも「観測」でも「重心」でもなく **制御の表現そのもの**でした。
 - **階段・グリップ強化・重心を上げる**——登坂を助けそうな直感はすべて**逆効果**。全部の道が「**綺麗な高クリアランス歩容(mocap 模倣)**」という 1 つの未解決課題に収束しました。
 
-図を先に 3 枚。左から「6° を登る」「6° を下りる」「平地を歩く」。すべて本物のシミュレーション結果です。
+図を先に 3 枚。左から「6° を登る」「6° を下りる(大半は制御・末端で転倒)」「平地を歩く」。すべて本物のシミュレーション結果です。
 
-| 6° 登坂(成功) | 6° 降坂(成功) | 平地歩行 |
+| 6° 登坂(成功) | 6° 降坂(大半は制御・末端で転倒) | 平地歩行 |
 |---|---|---|
 | ![6°の坂を登る低重心ロボ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/ape_locomotion/climb6.gif) | ![6°の坂を下りる低重心ロボ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/ape_locomotion/descent6.gif) | ![平地を歩く低重心ロボ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/ape_locomotion/stride2.gif) |
 
