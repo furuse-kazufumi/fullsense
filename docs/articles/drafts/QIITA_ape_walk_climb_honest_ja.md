@@ -8,6 +8,7 @@ tags:
 project_group: onocollo
 public_private: false
 group_url_name: general
+public_id: d7e3f943e9a2e68aca5d
 ---
 # 重心を下げたら類人猿ロボは歩き、坂を登り、下りた。だが「筋肉」では歩けなかった — 12時間の進化計算 honest ログ
 
