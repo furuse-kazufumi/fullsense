@@ -25,7 +25,9 @@ group_url_name: general
 
 *図1: §8 で到達した基準(baseline)。1.66 m・7 交互ステップ・非転倒の「重心移動を意識した」歩行。今回はこれを出発点に横バランス報酬を足す。*
 
-<!-- 画像: out/robots/latwalk_ceiling14.gif — 今回の天井突破。2.02 m・14 交互ステップ・非転倒・synchro=0・support=0(不正なし)。対照(横バランス報酬なし)は 6 シードすべてで 1.665 m を超えられなかった領域。 -->
+![latwalk_ceiling14 — 2.02m・14交互ステップ・非転倒の天井突破歩容](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/ape_locomotion/latwalk_ceiling14.gif)
+
+*図2: 今回の天井突破。2.02 m・14 交互ステップ・非転倒・synchro=0・support=0(不正なし)。対照(横バランス報酬なし)は 6 シードすべてで 1.665 m を超えられなかった領域。*
 
 ---
 
