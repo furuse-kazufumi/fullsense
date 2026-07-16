@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-16 07:10:26
+- **生成時刻**: 2026-07-17 08:09:53
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `1	0`
 
 ```
-a2f2ae1a article assets: rename go2_climb.gif -> go2_slope6_climb.gif (fresh GitHub raw CDN path for image/gif content-type)
-ee02d45a article assets: shrink go2_climb.gif 15.3MB->7.8MB (GitHub raw served large gif as octet-stream)
-7349a062 articles: add more animation GIFs (go2 walk/climb, drinking motion) + musculo public_id/group
-66969a8b auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-15 08:08)
-1bd6df5b auto: QIITA_onocollo_worldmodel_alife_ja.md 編集前 (2026-07-15 08:07)
-ae6be440 auto: QIITA_onocollo_worldmodel_alife_ja.md 編集前 (2026-07-15 08:07)
-8473d061 auto: QIITA_musculo_skeleton_honest_ja.md 編集前 (2026-07-15 08:00)
-3d5c11fd article(learning-vs-handcraft): add §2.3 the case where evolution WON + §4.4
-fd401d3b auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-15 07:21)
-c471f5b9 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-15 07:21)
+445b92db article(walk lateral-balance audit): ja draft — honest-disclosure story of the lateral-balance experiment
+708e11a4 article(ape walk/climb): write back Qiita public_id d7e3f943e9a2e68aca5d (published)
+d1d84a78 article(ape walk/climb honest log): add 3 GIFs (climb6/descent6/stride2) + ja draft for Qiita
+5b0fe991 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:17)
+c9252687 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:17)
+d4bb5a44 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:17)
+cc7798ce auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:17)
+730b17e0 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:16)
+2c1bc715 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:16)
+94dd250d auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:16)
 ```
 
 ### git status (porcelain)
@@ -37,8 +37,6 @@ c471f5b9 auto: QIITA_learning_vs_handcraft_honest_ja.md 編集前 (2026-07-15 07
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
-?? docs/articles/assets/ape_locomotion/
-?? docs/articles/drafts/QIITA_ape_walk_climb_honest_ja.md
 ```
 
 
@@ -73,10 +71,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `07:08` `docs/articles/assets/ape_locomotion/stride2.gif`
-- `07:08` `docs/articles/assets/ape_locomotion/descent6.gif`
-- `07:08` `docs/articles/assets/ape_locomotion/climb6.gif`
-- `07:07` `docs/articles/drafts/QIITA_ape_walk_climb_honest_ja.md`
+- `08:07` `docs/articles/drafts/QIITA_walk_lateral_balance_audit_honest_ja.md`
+- `08:03` `docs/SESSION_SUMMARY.md`
+- `08:03` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references
