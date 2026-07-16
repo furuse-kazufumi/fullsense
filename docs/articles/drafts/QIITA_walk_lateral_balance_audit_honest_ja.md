@@ -8,6 +8,7 @@ tags:
 project_group: onocollo
 public_private: false
 group_url_name: general
+public_id: 31df6d2abb384faa9569
 ---
 # 2.24 m の「勝ち」は、実は滑っていた — 歩行報酬を敵対的に監査したら、勝ちが小さく正直になった話
 
