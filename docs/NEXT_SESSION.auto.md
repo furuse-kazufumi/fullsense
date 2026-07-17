@@ -10,34 +10,32 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-18 02:48:26
+- **生成時刻**: 2026-07-18 03:15:33
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `9	0`
 
 ```
+ab4be738 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:13)
+d6cda1d8 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:12)
+42142d9f auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:12)
+e16915c9 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:12)
+83694519 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:11)
+aa914f7d auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:11)
+10d4e929 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:11)
+ab948b47 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:11)
+2795b7b5 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:10)
 3ba3655c article(walk lateral-balance): write back Qiita public_id 31df6d2abb384faa9569 (published, public)
-9c1fae85 article(walk lateral-balance): host GIFs + embed raw URLs for Qiita publish
-f24cac3e auto: QIITA_walk_lateral_balance_audit_honest_ja.md 編集前 (2026-07-17 08:16)
-2f23f96e auto: QIITA_walk_lateral_balance_audit_honest_ja.md 編集前 (2026-07-17 08:16)
-c5490177 auto: QIITA_walk_lateral_balance_audit_honest_ja.md 編集前 (2026-07-17 08:16)
-445b92db article(walk lateral-balance audit): ja draft — honest-disclosure story of the lateral-balance experiment
-708e11a4 article(ape walk/climb): write back Qiita public_id d7e3f943e9a2e68aca5d (published)
-d1d84a78 article(ape walk/climb honest log): add 3 GIFs (climb6/descent6/stride2) + ja draft for Qiita
-5b0fe991 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:17)
-c9252687 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:17)
 ```
 
 ### git status (porcelain)
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
-?? docs/articles/drafts/QIITA_musculo_drink_keyframe_bug_honest_ja.md
+M docs/articles/drafts/QIITA_musculo_drink_keyframe_bug_honest_ja.md
 ```
 
 
@@ -72,7 +70,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `02:44` `docs/articles/drafts/QIITA_musculo_drink_keyframe_bug_honest_ja.md`
+- `03:13` `docs/articles/drafts/QIITA_musculo_drink_keyframe_bug_honest_ja.md`
+- `02:48` `docs/SESSION_SUMMARY.md`
+- `02:48` `docs/NEXT_SESSION.auto.md`
 
 
 ## Cross-references

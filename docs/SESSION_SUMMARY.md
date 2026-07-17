@@ -3,37 +3,37 @@
 > 自動生成: `libexec/raptor-auto-summary` (Stop hook)
 > 次回 ccr 起動時に CLAUDE.md SESSION START で自動的に読み取られる。
 
-- **最終更新**: 2026-07-18 02:48:26
+- **最終更新**: 2026-07-18 03:15:32
 - **プロジェクト**: `D:/projects/fullsense`
 - **ブランチ**: `main`
 
 ## 直近の git log
 
 ```
+ab4be738 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:13)
+d6cda1d8 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:12)
+42142d9f auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:12)
+e16915c9 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:12)
+83694519 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:11)
+aa914f7d auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:11)
+10d4e929 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:11)
+ab948b47 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:11)
+2795b7b5 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 03:10)
 3ba3655c article(walk lateral-balance): write back Qiita public_id 31df6d2abb384faa9569 (published, public)
-9c1fae85 article(walk lateral-balance): host GIFs + embed raw URLs for Qiita publish
-f24cac3e auto: QIITA_walk_lateral_balance_audit_honest_ja.md 編集前 (2026-07-17 08:16)
-2f23f96e auto: QIITA_walk_lateral_balance_audit_honest_ja.md 編集前 (2026-07-17 08:16)
-c5490177 auto: QIITA_walk_lateral_balance_audit_honest_ja.md 編集前 (2026-07-17 08:16)
-445b92db article(walk lateral-balance audit): ja draft — honest-disclosure story of the lateral-balance experiment
-708e11a4 article(ape walk/climb): write back Qiita public_id d7e3f943e9a2e68aca5d (published)
-d1d84a78 article(ape walk/climb honest log): add 3 GIFs (climb6/descent6/stride2) + ja draft for Qiita
-5b0fe991 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:17)
-c9252687 auto: QIITA_ape_walk_climb_honest_ja.md 編集前 (2026-07-16 07:17)
 ```
 
 ## 現在の git status
 
 ```
-M docs/NEXT_SESSION.auto.md
- M docs/SESSION_SUMMARY.md
-?? docs/articles/drafts/QIITA_musculo_drink_keyframe_bug_honest_ja.md
+M docs/articles/drafts/QIITA_musculo_drink_keyframe_bug_honest_ja.md
 ```
 
 ## 直近 2 時間に変更されたファイル
 
 ```
-02:44 docs/articles/drafts/QIITA_musculo_drink_keyframe_bug_honest_ja.md
+03:13 docs/articles/drafts/QIITA_musculo_drink_keyframe_bug_honest_ja.md
+02:48 docs/SESSION_SUMMARY.md
+02:48 docs/NEXT_SESSION.auto.md
 ```
 
 ---
