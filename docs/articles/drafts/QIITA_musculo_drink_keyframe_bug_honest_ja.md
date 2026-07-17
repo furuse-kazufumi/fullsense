@@ -8,7 +8,7 @@ tags:
   - 進化計算
 private: false
 public_private: false
-public_id:
+public_id: 30e23eeb64a87c03e061
 project_group: onocollo
 related_groups:
   - gaitlab
