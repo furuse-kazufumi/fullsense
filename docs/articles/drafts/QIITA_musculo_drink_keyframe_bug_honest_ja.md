@@ -253,13 +253,15 @@ fixed  = np.insert(orig_key48, 42, 0.0)         # 42 番目(0-index)に顎の 0 
 <!-- 公開前チェックリスト(build note):
   - この記事は onocollo/musculo 連作の続編。前作=公開済 public_id 0ecb640dc6e86452a23c(把持・立位・運搬)。
     本作は「飲む動作の完成 + keyframe 位置ずれバグの debugging arc」を独立記事として切り出したもの。
-  - ★fact-check 未実施(次ステップで別プロセス/Workflow により一次データ・実コードへ再照合してから公開)。
-    照合対象の主張: (a)腕関節・手位置は元と一致 max0.0 / ボトルだけ z 0.94→-0.63(-1.57) (b)jaw_qadr=42・nq48→49
-    (c)keyframe 48個のまま zero-pad→42番以降シフト (d)修正=42番目に0挿入 (e)修正後 held0.043/口0.048/持上げ+0.62/パリティ0.0
-    (f)render 134frames/min_dist0.031/final_jaw0.6 (g)MOUTH_TARGET (0.07,0,1.46)喉→(0.05,0,1.55)唇。
-  - ★画像を fullsense main の docs/articles/assets/musculo_drink/ に配置 + push(human-gate)してから raw URL 200 を確認→?v で cache-bust。
-    必要画像: drink_jaw_broken.gif(バグ・空振り) / drink_jaw.gif(修正後・飲む) / jaw_open_compare.png(顎の開閉頭部比較)。
-    生成元 = onocollo-complete out/musculo/{drink_jaw_broken.gif, drink_jaw.gif} + head_compare.png(scratchpad, jaw_open_compare.png へリネーム)。
+  - ★fact-check 実施済み(2026-07-18, Workflow=独立3系列 fact-checker + 編集critic、全 opus)。**全14主張 CONFIRMED**(一次データ・実コード・実 keyframe に再照合)。
+    確認済み: (a)腕関節・手位置は元と一致 max0.0 / 130body sweep でボトルのみ差・z 0.94→-0.63(delta 正確に -1.57) (b)jaw_qadr=42・nq48→49
+    (c)keyframe 48個のまま zero-pad→42番以降シフト・-1.57 は objTz(高さ)スロットへ (d)修正=42番目に0挿入=live XMLと byte一致
+    (e)修正後 held0.043/口0.048/持上げ+0.62/パリティ0.0(元モデル口=0.0499≈0.050 に本文修正済) (f)render 134frames/min_dist0.031/final_jaw0.6
+    (g)MOUTH_TARGET (0.07,0,1.46)喉→(0.05,0,1.55)唇(物理的にも整合)。
+    編集critic反映済み(should-fix): §7にスライド関節の相対変位(0.94-1.57=-0.63 が加算になる理由)追記=numerology疑念を予防 / 用語表3行を「日本語(English)」順に / §10に顎の設計可動域+0.05超え+0.6直書き開示 / 付録に実コード snippet追加。
+    nice-to-have反映: §0で81本明記 / 落下量1.57mと床下深さ0.63mを区別 / §8精度<1e-6 / §8元モデル口0.048→0.050。文体=常体(前作0ecb640と一致・維持で可)。
+  - ★画像=最適化済み(<3MB、大GIFの GitHub raw octet-stream/preflight block 回避)。fullsense main の docs/articles/assets/musculo_drink/ に配置 + push(human-gate)してから raw URL 200 を確認→?v で cache-bust。
+    必要画像(scratchpad/article_assets_musculo_drink/ にステージ済): drink_jaw_broken.gif(バグ・空振り, 2.7MB) / drink_jaw.gif(修正後・飲む, 2.8MB) / jaw_open_compare.png(顎の開閉頭部比較, 64KB)。
   - Qiita は短時間の連続 POST で 429。公開は時間を空ける。public_private:false 明示済み。public_id は投稿後に書き戻す。
   - 派生タスク: 英語版(en)/一般版。前作 en 未作成なので合わせて検討。
   - 正本 memory: project_onocollo_musculo_msHuman700_2026_07_14(★★2026-07-17 その3 節)。
