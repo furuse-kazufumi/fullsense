@@ -154,8 +154,15 @@ evis の表情(＞＜ や ◎◎)は、最初は **2D の描き込み**だった
 - **箸で食べる** — CMU の「ソーダを飲む」(手を口へ運ぶ動作)をリターゲットし、evis の手に**箸 2 本 + 食べ物の粒**を握らせた。箸の向きは「手→口」方向を実測して手のローカル座標で固定したので、腕が上がると箸の先が口へ向かう。
 - **物理転倒 + 反応する顔**
 
-<!-- ここに GIF: walk_evis.gif / chopsticks_evis.gif / evis_reel.mp4 -->
-> ※動画は各動作の GIF(Qiita 埋め込み)/ mp4(まとめリール)を用意。ホスティングは公開時に付ける。
+![evis walk](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/walk.gif?v=1)
+
+*↑ 姿勢を直した後の歩行。頭が上がり、脊椎がまっすぐ。動く脚が赤く発火している。*
+
+![evis eats with chopsticks](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=1)
+
+*↑ 箸で食べる。手に握らせた箸 2 本 + 食べ物の粒が、腕が上がると口へ向かう。*
+
+![evis motion showcase](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/evis_motion_showcase.png?v=1)
 
 ---
 
