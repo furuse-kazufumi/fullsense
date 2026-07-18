@@ -185,7 +185,7 @@ keyframe実際:  ... 腕末   0        0        0        -1.57    0.32    0     
 
 「口が開いているか」も、腕とボトルで隠れて見えづらいので、頭部だけを切り出して開始と終了を並べた。
 
-![頭部の比較。左=開始時は口が閉じている。右=終了時は下顎が明確に降りて口が開き、唇にボトルが来ている](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/musculo_drink/jaw_open_compare.png?v=1)
+![頭部の比較。左=開始時は口が閉じている。右=終了時は下顎が明確に降りて口が開き、唇にボトルが来ている](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/musculo_drink/jaw_open_compare2.png?v=1)
 
 左(開始)は口が閉じ、右(終了)は**下顎が降りて口が開き、唇にボトルが届いている**。人間の3つの棄却——口に届かない・口が開かない・何をしているか分からない——は、これで全て解けた。ボトルは唇の高さ(z=1.56m)まで運ばれ、口は開き、三分の一の側面視点で腕の動きが読める。
 
