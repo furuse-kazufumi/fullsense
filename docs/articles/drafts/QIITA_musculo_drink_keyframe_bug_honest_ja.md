@@ -4,7 +4,7 @@ tags:
   - AI
   - MuJoCo
   - ロボット
-  - デバッグ
+  - debug
   - 進化計算
 private: false
 public_private: false
