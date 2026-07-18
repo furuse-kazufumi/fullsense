@@ -181,7 +181,7 @@ keyframe実際:  ... 腕末   0        0        0        -1.57    0.32    0     
 
 修理が済んで、ようやく本来やりたかった絵になる。台の上のボトルへ手を伸ばし、掴み、口元へ運び、そこで顎が開く。
 
-![修正後: 筋骨格の右手が机の水ボトルを掴み、0.62m 持ち上げて唇へ運び、口が開く。81本の筋肉が腕を閉ループで駆動している(顎の開閉のみ台本)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/musculo_drink/drink_jaw.gif?v=1)
+![修正後: 筋骨格の右手が机の水ボトルを掴み、0.62m 持ち上げて唇へ運び、口が開く。81本の筋肉が腕を閉ループで駆動している(顎の開閉のみ台本)](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/musculo_drink/drink_jaw2.gif?v=1)
 
 「口が開いているか」も、腕とボトルで隠れて見えづらいので、頭部だけを切り出して開始と終了を並べた。
 
