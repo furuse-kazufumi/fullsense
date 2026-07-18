@@ -136,7 +136,11 @@ evis の表情(＞＜ や ◎◎)は、最初は **2D の描き込み**だった
 
 投影+深度の 2D 小細工が丸ごと(約 80 行)消えた。感情は 8 種(neutral の丸目 ●●、joy ＞＜、surprise ◎◎、love ♥♥ はカラー絵文字テクスチャ、dead ×× ……)+ 任意の文字。ちなみに全角の ＞＜ が絵文字と誤判定されて薄く描かれるバグもここで直した(判定範囲の取り違え)。
 
+![evis expressions](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/evis_expressions.png?v=1)
+
 物理の転倒 rollout に配線すると、evis が倒れながら **neutral → ◎◎(落下)→ ××(崩落)**と表情を変える"実況"にもなる。
+
+![evis reaction fall](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/reaction.gif?v=1)
 
 ---
 
