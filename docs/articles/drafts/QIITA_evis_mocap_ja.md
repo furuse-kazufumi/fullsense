@@ -30,6 +30,10 @@ related_groups:
 
 honest な但し書き: これは**キネマティック再生**(各フレームの関節角を直接与える)であって、筋肉で駆動しているわけではない。箸も「持っている風」の剛体プロップで、指で握ってはいない。**どこが本物でどこが演出か**は最後に明記する。
 
+![evis motion reel](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/reel.gif?v=1)
+
+*↑ 歩く→走る→跳ぶ→サルサ→キック→箸で食べる。全部同じ evis を、無料の mocap を移し替えて動かしている。*
+
 ---
 
 ## 1. 用語集(先に言葉だけ)
