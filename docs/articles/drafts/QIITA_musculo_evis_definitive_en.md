@@ -3,9 +3,9 @@ title: "Standing, Grasping, Drinking, Dancing a Bones-and-Muscles Human on a Hom
 tags:
   - AI
   - MuJoCo
-  - 強化学習
-  - 進化計算
-  - モーションキャプチャ
+  - MachineLearning
+  - EvolutionaryComputation
+  - MotionCapture
 private: false
 project_group: onocollo
 related_groups:
@@ -471,7 +471,7 @@ In short: **what the muscles are truly driving reaches only as far as "standing 
 Having crossed three peaks, evis got as far as "trying to stand and honestly toppling, grasping, carrying, drinking, dancing, and eating with chopsticks." But the homework I've left is clear.
 
 - **"Actually gripping the chopsticks with the fingers"** is not an extension of the kinematic approach; it's a separate peak that means **learning muscles by evolution**. Can an 81-muscle hand pinch a real pair of chopsticks—not a rigid prop—and carry food to the mouth?
-- **Take back the loss on standing.** Simple integrated memory wasn't enough, so next I'll try a recurrent policy, an explicit ankle/hip strategy, or a hierarchy.
+- **Take back the loss on standing.** Simple integrator-based memory wasn't enough, so next I'll try a recurrent policy, an explicit ankle/hip strategy, or a hierarchy.
 - **Put a face on the evaluation (eval) itself.** Just as I wired evis's expression to toppling this time, when the walking learner falls it goes ×× and when it makes progress it laughs with ＞＜—a mascot where **the simulation narrates itself**.
 
 > Measure, honestly leave the losses in, and climb the next one. Question the breakdown most when the result looks good, and when you get stuck, measure rather than guess—that's the one point I hold to throughout this series. The story of evis, all bones and muscles, still continues.
