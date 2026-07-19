@@ -760,6 +760,7 @@ def cmd_preflight(args: list[str]) -> int:
         return 2
     force_private = True if "--private" in args else None
     require_marker = "--require-marker" in args
+    allow_metadata_change = "--allow-metadata-change" in args
     text = open(files[0], "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
     p = build_payload(meta, body, force_private)
