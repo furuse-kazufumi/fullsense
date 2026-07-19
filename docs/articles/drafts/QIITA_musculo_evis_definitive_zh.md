@@ -7,6 +7,7 @@ tags:
   - 进化计算
   - 动作捕捉
 private: false
+public_private: false
 project_group: onocollo
 related_groups:
   - gaitlab

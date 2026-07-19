@@ -7,6 +7,8 @@ tags:
   - EvolutionaryComputation
   - MotionCapture
 private: false
+public_private: false
+public_id: 30e23eeb64a87c03e061
 project_group: onocollo
 related_groups:
   - gaitlab
