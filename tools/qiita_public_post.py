@@ -595,7 +595,7 @@ def _baseline_tags_report(meta: dict, payload: dict, source_path: str) -> tuple[
     return lines, not ok
 
 
-def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool, source_path: str) -> tuple[list[str], bool]:
+def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool, source_path: str, allow_metadata_change: bool = False) -> tuple[list[str], bool]:
     lines: list[str] = []
     finds = safety_findings(meta, body)
     privacy_finds = privacy_field_findings(meta)
