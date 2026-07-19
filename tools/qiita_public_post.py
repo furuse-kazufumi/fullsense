@@ -663,14 +663,21 @@ def _preflight_report(meta: dict, body: str, payload: dict, require_marker: bool
                 payload_tag_sig = _tag_name_signature_from_payload(payload)
                 lines.append(f"api_tags: {list(api_tag_sig)}")
                 if api_title != str(payload["title"]):
-                    blocked = True
-                    lines.append(LIVE_TITLE_BLOCK)
+                    if allow_metadata_change:
+                        lines.append("WARNING: live title differs from payload title; overridden by --allow-metadata-change (title WILL be changed).")
+                    else:
+                        blocked = True
+                        lines.append(LIVE_TITLE_BLOCK)
                 if live_private != bool(payload["private"]):
+                    # Visibility (public<->private) is NOT covered by --allow-metadata-change: stays fail-closed.
                     blocked = True
                     lines.append(LIVE_VISIBILITY_BLOCK)
                 if api_tag_sig != payload_tag_sig:
-                    blocked = True
-                    lines.append(LIVE_TAGS_BLOCK)
+                    if allow_metadata_change:
+                        lines.append("WARNING: live tags differ from payload tags; overridden by --allow-metadata-change (tags WILL be changed).")
+                    else:
+                        blocked = True
+                        lines.append(LIVE_TAGS_BLOCK)
             except json.JSONDecodeError:
                 blocked = True
                 lines.append("BLOCKED: API 200 but JSON decode failed")
