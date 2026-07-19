@@ -782,7 +782,7 @@ def cmd_preflight(args: list[str]) -> int:
         if refresh_blocked:
             print("preflight: BLOCKED")
             return 1
-    lines, blocked = _preflight_report(meta, body, p, require_marker=require_marker, source_path=files[0])
+    lines, blocked = _preflight_report(meta, body, p, require_marker=require_marker, source_path=files[0], allow_metadata_change=allow_metadata_change)
     for line in lines:
         print(line)
     if blocked:
