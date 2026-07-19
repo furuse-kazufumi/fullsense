@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-19 10:51:22
+- **生成時刻**: 2026-07-19 11:21:22
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `0	0`
+- HEAD vs upstream (左=ahead 右=behind): `7	0`
 
 ```
+30ff142b auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:10)
+85d8ff39 auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
+7d932d52 auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
+980cb6bb auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
+975be656 auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
+e716cda6 auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
+28ae51ed auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
 208ce366 article(evis): append evis mocap-mascot chapter to the skeleton article (published, PATCH)
 b0b98a34 article(evis mocap): host GIFs + ja draft — evis motion library, posture bug, 3-D eyes
 29d4eac3 auto: QIITA_evis_mocap_ja.md 編集前 (2026-07-19 07:21)
-c1373772 auto: QIITA_evis_mocap_ja.md 編集前 (2026-07-19 07:21)
-4e726e70 auto: QIITA_evis_mocap_ja.md 編集前 (2026-07-19 07:21)
-cc0b8a53 article(musculo drink): align frontmatter tag to live (デバッグ->debug) for tag-neutral image update
-6d4dab2c article(musculo drink): swap in corrected-jaw GIF + head compare (jaw was rotating up into skull = disappearing; now opens downward)
-3f93258b auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 13:47)
-851e05a2 auto: QIITA_musculo_drink_keyframe_bug_honest_ja.md 編集前 (2026-07-18 13:47)
-15eb7402 article(musculo drink): write back Qiita public_id 30e23eeb64a87c03e061 (published, public)
 ```
 
 ### git status (porcelain)
@@ -37,9 +37,10 @@ cc0b8a53 article(musculo drink): align frontmatter tag to live (デバッグ->de
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
-?? docs/articles/drafts/QIITA_musculo_evis_definitive_TERMS_ja_en_zh.md
-?? docs/articles/drafts/QIITA_musculo_evis_definitive_ja.CORRUPT.bak
-?? docs/articles/drafts/QIITA_musculo_evis_definitive_ja.md
+ D docs/articles/drafts/QIITA_musculo_evis_definitive_ja.CORRUPT.bak
+ M docs/articles/drafts/QIITA_musculo_evis_definitive_ja.md
+?? docs/articles/drafts/QIITA_musculo_evis_definitive_en.md
+?? docs/articles/drafts/QIITA_musculo_evis_definitive_zh.md
 ```
 
 
@@ -74,19 +75,14 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
+- `11:18` `docs/articles/drafts/QIITA_musculo_evis_definitive_zh.md`
+- `11:18` `docs/articles/drafts/QIITA_musculo_evis_definitive_en.md`
+- `11:14` `docs/SESSION_SUMMARY.md`
+- `11:14` `docs/NEXT_SESSION.auto.md`
+- `11:10` `docs/articles/drafts/QIITA_musculo_evis_definitive_ja.md`
 - `10:50` `docs/articles/drafts/QIITA_musculo_evis_definitive_TERMS_ja_en_zh.md`
-- `10:45` `docs/articles/drafts/QIITA_musculo_evis_definitive_ja.md`
-- `10:14` `docs/SESSION_SUMMARY.md`
-- `10:14` `docs/NEXT_SESSION.auto.md`
-- `09:35` `docs/articles/drafts/QIITA_musculo_evis_definitive_ja.CORRUPT.bak`
 - `08:01` `docs/articles/drafts/QIITA_musculo_skeleton_honest_ja.md`
 - `07:22` `docs/articles/drafts/QIITA_evis_mocap_ja.md`
-- `07:21` `docs/articles/assets/evis_mocap/reaction.gif`
-- `07:21` `docs/articles/assets/evis_mocap/evis_motion_showcase.png`
-- `07:21` `docs/articles/assets/evis_mocap/evis_expressions.png`
-- `07:21` `docs/articles/assets/evis_mocap/reel.gif`
-- `07:21` `docs/articles/assets/evis_mocap/walk.gif`
-- `07:21` `docs/articles/assets/evis_mocap/chopsticks.gif`
 
 
 ## Cross-references

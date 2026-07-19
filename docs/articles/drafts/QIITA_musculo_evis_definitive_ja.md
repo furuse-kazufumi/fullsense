@@ -522,4 +522,12 @@ fixed  = np.insert(orig_key48, 42, 0.0)         # 42 番目(0-index)に顎の 0 
     案C: 何もせず #1/#2 併存のまま(統合版は下書き保管のみ)。
   frontmatter public_id は暫定で 0ecb640(案A 既定)。案B/C 採用時は要変更。
   (B) 統合版から en / zh 版を別記事として作成(feedback_articles_per_language_separate)。
+
+  ★検証+修正(2026-07-19, Fable5/ultracode): .CORRUPT.bak は誤称で中身はクリーン → .md へ復旧。参照画像15枚すべて raw URL HTTP200 + image content-type 確認(7-8.5MB GIF も octet-stream 化なし)。数値 transcription 誤りゼロ(独立 grep 照合)。5次元 × 敵対検証 Workflow(12 agents, 7 raw findings)で統合デルタを精査 → confirmed 1 + 独立判断で計5件を修正:
+    (#4 confirmed) §10 に容量限界の scope-limiter を復元(§3 が覆すのは『口に届かない原因が容量』の誤帰属のみで、任意点3分の1の容量限界そのものは今も有効)。
+    (#3) §23「筋肉が解いている『立つ・掴む・運ぶ』」→「駆動している(立つはただし正直に負け・飲む腕)」= 立位=負けと矛盾しない動詞へ(英訳で solve=成功明言の回避も兼ねる)。
+    (#5) §0「運搬は半分」→ 本文 §7/§8 の「3分の1」に整合。
+    (#6) §16「唇の高さ1.56m」→ §10 定義の唇点1.55m のすぐ上と整合。
+    (#7) §17 house style にアホ毛の初出を補い §23 の宙づり参照を解消。
+  保留2件: タイトル『立たせ』(副題『正直な負けと勝ち』+§0冒頭『立位は正直に負け』で完全開示済) / 付録 place provenance(付録末尾の一般来歴注記でカバー)。JA 決定版はこれでロック。
 -->
