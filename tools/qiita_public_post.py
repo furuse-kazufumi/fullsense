@@ -817,7 +817,7 @@ def _writeback_public_id(path: str, item_id: str) -> None:
 def cmd_post(args: list[str]) -> int:
     files = [a for a in args if not a.startswith("--")]
     if not files:
-        print("usage: post <file.md> --yes [--private] [--allow-create] [--force-ignore-publish]")
+        print("usage: post <file.md> --yes [--private] [--allow-create] [--allow-metadata-change] [--force-ignore-publish]")
         return 2
     if "--yes" not in args:
         print("refusing: --yes required (公開は外部公開アクション。ユーザーが GO を出す)")
