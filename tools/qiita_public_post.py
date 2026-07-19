@@ -827,6 +827,7 @@ def cmd_post(args: list[str]) -> int:
         print("NO TOKEN")
         return 2
     force_private = True if "--private" in args else None
+    allow_metadata_change = "--allow-metadata-change" in args
     path = files[0]
     text = open(path, "r", encoding="utf-8-sig").read()
     meta, body = split_frontmatter(text)
