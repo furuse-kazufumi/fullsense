@@ -858,7 +858,7 @@ def cmd_post(args: list[str]) -> int:
         print(IGNORE_PUBLISH_WARNING)
         print(IGNORE_PUBLISH_BLOCK)
         return 1
-    preflight_lines, preflight_blocked = _preflight_report(meta, body, p, require_marker=False, source_path=files[0])
+    preflight_lines, preflight_blocked = _preflight_report(meta, body, p, require_marker=False, source_path=files[0], allow_metadata_change=allow_metadata_change)
     for line in preflight_lines:
         print(line)
     if preflight_blocked:
