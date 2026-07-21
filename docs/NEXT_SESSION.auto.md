@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-19 11:21:22
+- **生成時刻**: 2026-07-21 20:27:49
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `7	0`
+- HEAD vs upstream (左=ahead 右=behind): `18	0`
 
 ```
-30ff142b auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:10)
-85d8ff39 auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
-7d932d52 auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
-980cb6bb auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
-975be656 auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
-e716cda6 auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
-28ae51ed auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-19 11:08)
-208ce366 article(evis): append evis mocap-mascot chapter to the skeleton article (published, PATCH)
-b0b98a34 article(evis mocap): host GIFs + ja draft — evis motion library, posture bug, 3-D eyes
-29d4eac3 auto: QIITA_evis_mocap_ja.md 編集前 (2026-07-19 07:21)
+1610b923 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
+c1046569 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
+778b88d3 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
+33797b01 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
+81c507ce auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
+ebbf3801 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
+67690da5 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
+98f0d609 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
+b096aaef auto: QIITA_musculo_evis_definitive_en.md 編集前 (2026-07-19 11:58)
+7fb1928c auto: QIITA_musculo_evis_definitive_en.md 編集前 (2026-07-19 11:30)
 ```
 
 ### git status (porcelain)
@@ -37,10 +37,8 @@ b0b98a34 article(evis mocap): host GIFs + ja draft — evis motion library, post
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- D docs/articles/drafts/QIITA_musculo_evis_definitive_ja.CORRUPT.bak
- M docs/articles/drafts/QIITA_musculo_evis_definitive_ja.md
-?? docs/articles/drafts/QIITA_musculo_evis_definitive_en.md
-?? docs/articles/drafts/QIITA_musculo_evis_definitive_zh.md
+ M tools/qiita_public_post.py
+?? docs/articles/drafts/QIITA_swim_honest_negative_ja.md
 ```
 
 
@@ -75,14 +73,7 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `11:18` `docs/articles/drafts/QIITA_musculo_evis_definitive_zh.md`
-- `11:18` `docs/articles/drafts/QIITA_musculo_evis_definitive_en.md`
-- `11:14` `docs/SESSION_SUMMARY.md`
-- `11:14` `docs/NEXT_SESSION.auto.md`
-- `11:10` `docs/articles/drafts/QIITA_musculo_evis_definitive_ja.md`
-- `10:50` `docs/articles/drafts/QIITA_musculo_evis_definitive_TERMS_ja_en_zh.md`
-- `08:01` `docs/articles/drafts/QIITA_musculo_skeleton_honest_ja.md`
-- `07:22` `docs/articles/drafts/QIITA_evis_mocap_ja.md`
+_(直近 4 時間に変更されたファイル無し)_
 
 
 ## Cross-references

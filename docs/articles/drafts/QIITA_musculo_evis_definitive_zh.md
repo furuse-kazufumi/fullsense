@@ -11,6 +11,7 @@ public_private: false
 project_group: onocollo
 related_groups:
   - gaitlab
+public_id: 81e6e603ed93206736c2
 ---
 
 # 用家用 CPU 让一具只有骨与肌的人体站立、抓握、喝水、跳舞的全记录 —— 700 条肌肉、吉祥物“evis”,以及诚实的输与赢

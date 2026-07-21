@@ -22,6 +22,7 @@ qiita_team_post.py の公開 (qiita.com) 版。Team poster とは独立に動き
   py -3.11 qiita_public_post.py post <file.md> --yes         # 実 POST/PATCH (private=false)
   py -3.11 qiita_public_post.py post <file.md> --yes --private   # 限定共有で投稿
   py -3.11 qiita_public_post.py post <file.md> --yes --allow-create  # `public_id` 無し create を明示許可
+  py -3.11 qiita_public_post.py post <file.md> --yes --allow-metadata-change  # 既存記事の title/tags 変更を明示許可 (改題 PATCH。visibility 変更は対象外=fail-closed 維持)
   py -3.11 qiita_public_post.py post <file.md> --yes --force-ignore-publish  # ignorePublish:true を override
 """
 from __future__ import annotations
