@@ -16,6 +16,8 @@ related_groups:
 
 # Standing, Grasping, Drinking, Dancing a Bones-and-Muscles Human on a Home CPU — 700 Muscles, a Mascot Named "evis", and the Honest Wins and Losses
 
+> 🌐 **Other languages**: [日本語](https://qiita.com/furuse-kazufumi/items/0ecb640dc6e86452a23c) / [中文](https://qiita.com/furuse-kazufumi/items/81e6e603ed93206736c2)
+
 > Who this is for: anyone interested in robotics, biomechanics, evolutionary computation, MuJoCo, or motion capture / anyone curious about "human models that move by muscle" or "driving an anatomical human body at home" / anyone who would rather read the **honest breakdown, and the process of getting stuck and fixing it**, than a highlight reel of good results.
 > Prerequisites: if you can read Python, that's enough. I'll unpack the control, biomechanics, and mocap terminology as it comes up.
 > Every number was measured on a laptop CPU. This is not a success story; it's a single continuous record in which **one side honestly lost and one side won — both measured on the same yardstick — and whenever I got stuck I fixed it by measuring, not guessing.**
