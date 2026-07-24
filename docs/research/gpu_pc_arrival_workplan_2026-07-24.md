@@ -247,8 +247,8 @@ gh(`gh auth login`) / claude(`/login`) / codex(`codex login`) / **firecrawl API 
 
 # Part D — 着手順序（Day-by-day）
 
-- **着荷前（現機）**: §A0（未 git repo バックアップ ★ / D: スキャン / C: staging / secret バンドル / 任意 WSL export）+ ★A0-fix 3 件（要 go）。
-- **Day 1**: ローカル `puruy` OOBE / BitLocker escrow → D: レター固定 + sentinel → driver 確認 → **torch cu130 入替 + gpu_smoke.py PASS**（§A3）→ C: 常駐分 restore + secret 復元 + env 再設定。
+- **着荷前（現機）**: §A0（★未 git repo バックアップ / D: スキャン / **`.claude`=memory を D: へコピー** / 任意 WSL export）。暗号化バンドル・A0-fix は使うなら（新方針では optional）。
+- **Day 1**: ローカル `puruy` OOBE / BitLocker escrow → D: レター固定 + sentinel → driver 確認 → **torch cu130 入替 + gpu_smoke.py PASS**（§A3）→ **`.claude`(memory) を C: へ戻す** + env 秘密 3 本を再設定（or 再発行）。
 - **Day 2**: WSL2 Ubuntu 構築 + jax[cuda12] + **matmul 関門** + **MJX spike go/no-go**（§A4）→ 各 project venv 再生成（§A5）→ MCP/CLI 再導入・再認証（§A6）→ `verify_new_machine.ps1` 緑。
 - **Day 3+**: **GPU 初手 = 箸 MJX rollout throughput gate → 通れば閉ループ RL 本丸（P0）**。並走で llcore plateau プローブ overnight（P0）。以降 Part B の優先度順。
 - **全緑後**: 鍵ローテ（§A7）→ 旧ノート退役判断。**旧ノートは全緑 + ローテ完了までワイプ禁止**（実質バックアップ）。
