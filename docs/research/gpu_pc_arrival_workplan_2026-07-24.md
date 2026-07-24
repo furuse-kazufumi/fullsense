@@ -61,25 +61,33 @@
 - **D: レター固定**（外付け SanDisk 単独接続）: `Get-Disk/Partition/Volume` → `Set-Partition -DiskNumber <n> -PartitionNumber 1 -NewDriveLetter D` → **sentinel `Test-Path D:\tools\raptor` が True**。他ボリュームが D: を先取りなら `Remove-PartitionAccessPath` で退かす。
 - **（後日 Phase 2）** 単一 2TB は当面 C: のみ。安定後に内蔵 NVMe 増設 → `robocopy D:\ X:\ /MIR /XJ` → レタースワップ → 内蔵 D: を BitLocker（exFAT 平文脱却）。USB selective-suspend 無効化を新機でも再適用（D: 切断で tool-guard hook が fail-open すると保護が無音消失）。
 
-## A2. C: 常駐物の移行マトリクス（「D: は来るが C: は来ない」の完全棚卸し）
+## A2. C: 常駐物の扱い（★方針: D: 経由で引っ越す or 新規インストールで対応 — ユーザー確定 2026-07-24）
 
-| 対象 | 分類 | 手当て |
+> **方針**: C: 常駐物は各項目ごとに 3 分類。**「再インストール/再認証で復元できない DATA」だけ D: に載せて運び、あとは全部新規導入**。旧計画の暗号化バンドル + backup/restore の仕掛けは**不要（optional に降格）**。
+> **★かけがえのない DATA = `C:\Users\puruy\.claude\projects\...\memory\`（全プロジェクト記憶）**。これだけは必ず D: に載せて運ぶ（fresh install では消える）。
+
+### ① D: に載せて運ぶ（DATA・再現不能 → `robocopy` で D: の staging 領域へコピーして travels）
+| 対象 | 重要度 | 備考 |
 |---|---|---|
-| D:/api-keys.json / raptor settings.local.json | **travels**（保険でバンドルにも同梱） | そのまま |
-| `.claude\`（hooks/memory/settings.json/skills）1.5G | copy | restore_working_set |
-| `.claude.json`（70KB, MCP/oauth/trust 本体） | copy | 同一パスへ。**中に perplexity/alpaca の平文 API キー**=ローテ時は env 値も同時更新（§A6） |
-| `.claude\.credentials.json` | copy=**保険のみ**・**/login 再認証が本線**（コピーは refresh されず 401 の既知 issue） | claude 再ログイン |
-| `.codex\auth.json` | バンドル→復元。**cross-machine 不安定**なら `codex login` | 2 段構え |
-| `.ssh\id_ed25519` | バンドル。復元後 `icacls ... /inheritance:r /grant:r "puruy:F"`（exFAT で ACL 継承が壊れる） | |
-| `.pypirc` / qiita creds | バンドル（★A0-fix で追加）→ 復元 | 単純トークン=copy で動く |
-| `.gitconfig` / gh hosts.yml | copy | gh 本体トークンは keyring=**再 auth**（§A6） |
-| User env 秘密 3 本（ANTHROPIC/SOCIALDATA/TELEGRAM） | **ファイルでない**=バンドルの `SECRET_user_env.txt`→ `SetEnvironmentVariable`（setx は 1024 字切詰めゆえ禁止） | 再設定 |
-| ollama 27G / HF 9G | 再 DL 可 or staging | 帯域と相談。HF は `HF_HUB_DISABLE_XET=1` |
-| Scheduled Tasks 6 本 | XML export→`Register-ScheduledTask -Xml`（失敗時 `-User puruy`）+ **action パス是正**（RAPTOR-* は旧 `C:\Python314\python.exe` 参照=書換要） | import 成功≠動作 |
-| WSL Ubuntu-24.04 / docker-desktop | C: 常駐=来ない | export/import or 新規（§A4） |
+| `.claude\projects\...\memory\`（+ MEMORY.md） | ★★必須 | **全プロジェクト記憶**。最優先で D: へ。単独でも小さい |
+| `.claude\`（hooks/settings.json/skills/statusline 等） | ★推奨 | ccr/tool-guard の挙動。手で再構成も可だが load-bearing |
+| `.claude.json`（70KB, MCP 配線/trust） | ○任意 | コピーで MCP 手再設定を省ける。手動再構成でも可。※中に perplexity/alpaca 平文キー=ローテ時 env 更新 |
+| `.codex\`（memories/goals/state） | ○任意 | Codex の蓄積コンテキストを惜しむなら。auth.json は別途再ログイン |
+| D:/api-keys.json / raptor settings.local.json | 既に D: | travels（何もしない） |
 
-- **二重起動注意**: FullSense-StatusTelegram / trading（alpaca_state.json, telegram_offset.json）は旧機を先に Disable → 新機で有効化。
+### ② 新規インストール（バイナリ/ランタイム・再現可能 → どのみち再導入）
+Node v24 / uv / rust / git / gh(binary) / claude(binary) / codex(binary) / semgrep / scholar-search / rtk / 7zip / **WSL2 Ubuntu(新規)** / Docker Desktop / MCP ランタイム（uvx・npx 自動取得）/ playwright ブラウザ / **ollama models 27G(再 pull)** / **HF cache 9G(再 DL、`HF_HUB_DISABLE_XET=1`)**。→ 詳細は §A6。
+
+### ③ 再認証・再発行（機械紐付き/秘密・コピー無効 or ローテ対象 → 新機で取り直す）
+gh(`gh auth login`) / claude(`/login`) / codex(`codex login`) / **firecrawl API キー(再取得)** / User env 秘密 3 本(ANTHROPIC/SOCIALDATA/TELEGRAM=console 再発行 or 再設定) / PyPI(.pypirc) / Qiita write / GitHub PAT。→ **どうせ着荷後に鍵ローテする**ので「新機で取り直す」が最もクリーン。SSH 鍵も `ssh-keygen` 新規 + GitHub 再登録が clean（惜しむなら `.ssh\id_ed25519` を①で運ぶ）。
+- **例外的に「運ぶ方が楽」**: qiita creds(147B) / `.pypirc`(492B) はローテしないなら①で D: に載せてコピーでも動く（exFAT 平文の at-rest 露出は許容できる範囲、気になるなら再発行）。
+
+### その他（項目固有）
+- **Scheduled Tasks 6 本**: XML export→`Register-ScheduledTask -Xml`（失敗時 `-User puruy`）+ **action パス是正**（RAPTOR-* は旧 `C:\Python314\python.exe` 参照=書換要）。import 成功≠動作。全 6 本を新規登録し直す方が確実な場合も。
+- **二重起動注意**: FullSense-StatusTelegram / trading（trading は廃止済）は旧機を先に Disable → 新機で有効化。
 - **鍵ローテは「新機が全緑になってから」**（先にやると旧機=最後のバックアップが死ぬ）。旧ノートは verify 緑 + ローテ完了までワイプ禁止。
+
+> **単純化の含意**: ①の DATA コピー（実質 `.claude` を D: へ）と未 git repo バックアップ（§A0）さえ済ませれば、あとは新機で **fresh install + 再認証** で組み上がる。`migrate_secrets.ps1`/`backup_working_set.ps1`/`restore_working_set.ps1` は使っても使わなくてもよい（使うなら A0-fix 3 件を先に）。
 
 ## A3. GPU 基盤（driver / torch / sm_120 検証）★深掘り
 
