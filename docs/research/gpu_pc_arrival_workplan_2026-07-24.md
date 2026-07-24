@@ -42,9 +42,15 @@
    - `gaitlab` main は origin より **+266 commits 未 push**（human-gate）／ `onocollo-complete` は origin 同期済（push 済）。移送前に未 push repo の push 判断（human-gate）。
    - off-disk 保険（D: は唯一コピー・dirty bit）: `git bundle create ...--all` を Desktop→暗号化 USB へ。
 2. **D: read-only スキャン**: `Repair-Volume -DriveLetter D -Scan`（dirty なら保険確保後に `-OfflineScanAndFix`）。
-3. **C: 常駐分 staging**: `backup_working_set.ps1 -Dest D:\_c_migration`（着荷直前にもう一度=差分追いつき）。
-4. **秘密の暗号化バンドル**: `migrate_secrets.ps1 -Mode Bundle` → **D: とは別の暗号化 USB** へ。
-5. **（任意）WSL export**: `wsl --shutdown; wsl --export Ubuntu-24.04 D:\_c_migration\wsl\ubuntu-24.04.vhdx --vhd`（中に資産が無ければ skip し新機で新規 install でよい）。
+3. **★DATA を D: に載せる（新方針の要）**: 再インストールで復元できない DATA だけ D: へコピー（§A2 ①）:
+   ```powershell
+   robocopy "C:\Users\puruy\.claude" "D:\_c_migration\.claude" /MIR /XJ /R:1 /W:1   # ★memory 含む .claude 一式
+   Copy-Item "C:\Users\puruy\.claude.json" "D:\_c_migration\.claude.json"           # 任意(MCP 配線省力化)
+   robocopy "C:\Users\puruy\.codex" "D:\_c_migration\.codex" /MIR /XJ                # 任意(Codex 蓄積)
+   ```
+   新機ではこれを `C:\Users\puruy\` へ戻すだけ（暗号化バンドル/backup_working_set/restore は使わなくてよい。使うなら A0-fix 3 件を先に）。
+4. **（任意）WSL export**: `wsl --shutdown; wsl --export Ubuntu-24.04 D:\_c_migration\wsl\ubuntu-24.04.vhdx --vhd`（中に資産が無ければ skip し新機で新規 install でよい）。
+5. **秘密**: どうせ着荷後に鍵ローテするので原則「新機で再発行」（§A2 ③）。ローテしない qiita/.pypirc だけ①で D: に載せてもよい。
 
 ### ★A0-fix: 移行スクリプトの実測ギャップ 3 件（**推奨・要ユーザー go で適用**）
 > RAPTOR 規律「apply patches = ASK FIRST」に従い**未適用**。着荷前に適用推奨（無音のデータ欠落を防ぐ）。
