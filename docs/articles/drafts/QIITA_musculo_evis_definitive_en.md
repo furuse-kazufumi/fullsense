@@ -471,9 +471,9 @@ Once the retargeting works, anything can dance just by swapping the BVH. I gathe
 
 The running, jumping, and dancing above are all **kinematic replay tracing BVH poses** (the red firing is a proxy for "speed," not muscle activation). But swimming is a different kind. This is **genuine physics** with torque evolved by learning — I confirmed via ablation (remove the water's drag and it doesn't move forward) that 100% of the propulsion comes from the water's drag. And the original "swim by muscles" version, which *looked* like it moved forward, turned out to be an artifact that violated conservation of momentum, so I **retracted** it and replaced it with this torque version (don't jump at apparent progress — question the breakdown; that's the house rule).
 
-![evis swims with genuine physics](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=1)
+![evis swims with genuine physics](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=2)
 
-*↑ Genuine torque-driven swimming. Unlike the retracted muscle version, the propulsion comes solely from the water's drag (remove the water and forward motion is −0.001 m).*
+*↑ Genuine torque-driven swimming, re-shot with a **world-fixed camera** (before, a body-tracking camera made it look like swimming in place). It goes from upright into a horizontal, head-first kick and **actually advances** against the checkered seabed (+0.26 m over the 5-second training length). Neutral-buoyancy underwater; the propulsion comes solely from the water's drag — remove the water and forward motion is −0.001 m.*
 
 ---
 

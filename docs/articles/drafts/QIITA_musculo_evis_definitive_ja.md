@@ -472,9 +472,9 @@ evis の表情(＞＜ や ◎◎)は、最初は **2D の描き込み**だった
 
 ここまでの走る・跳ぶ・踊るは、すべて **BVH の姿勢をなぞるキネマティック再生**だ(赤い発火は「速さ」の proxy であって筋活性ではない)。だが水泳だけは種類が違う。これは torque を進化学習させた **本物の物理**——推進力の 100% が水の抗力から来ていることを、ablation(水の抗力を消すと前へ進まない)で確認した genuine な結果だ。しかも当初の「筋肉で泳ぐ」版は、進むように**見えて**実は運動量保存を破るアーティファクトだと分かったので**撤回**し、この torque 版に置き換えている(見かけの前進に飛びつかず内訳を疑う、が家訓)。
 
-![evis swims with genuine physics](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=1)
+![evis swims with genuine physics](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=2)
 
-*↑ torque 駆動の genuine な水泳。撤回した筋版と違い、推進は水の抗力だけから生まれている(水を消すと前進 −0.001 m)。*
+*↑ torque 駆動の genuine な水泳を**ワールド固定カメラ**で撮り直した(以前は体を追うカメラで「その場で泳ぐ」ように見えていた)。立位から、頭を先にした水平の蹴りへ移り、チェッカー模様の海底に対して**実際に前へ進んでいる**のが分かる(訓練尺の 5 秒で +0.26 m)。中立浮力の水中で、推進は水の抗力だけ——水を消すと前進は −0.001 m だ。*
 
 ---
 

@@ -471,9 +471,9 @@ evis 的表情(＞＜ 或 ◎◎)最初是 **2D 的贴画**。把头的 3D 位�
 
 到此为止的奔跑、跳跃、跳舞,全都是**描摹 BVH 姿势的运动学回放**(红色发火是“速度”的替代量,并非肌肉活性)。但唯独游泳种类不同。这是把 torque 进化学习出来的**真正的物理**——我通过 ablation(抹掉水的阻力就无法前进)确认了推进力的 100% 来自水的阻力。而且最初的“用肌肉游泳”版本,**看起来**在前进,其实是违反动量守恒的伪影,于是我**撤回**了它,换成了这个 torque 版本(不要一看到表面上的前进就扑上去,要怀疑其内幕,这是家训)。
 
-![evis 用真实物理游泳](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=1)
+![evis 用真实物理游泳](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=2)
 
-*↑ torque 驱动的真实游泳。与撤回的肌肉版不同,推进力只来自水的阻力(抹掉水,前进为 −0.001 m)。*
+*↑ 把 torque 驱动的真实游泳用**世界固定相机**重新拍了一遍(之前用跟随身体的相机,看起来像在原地游)。它从站立进入水平的、头部朝前的踢腿,并相对于棋盘格的海底**真的在向前推进**(在 5 秒训练时长里前进 +0.26 m)。中性浮力的水下,推进力只来自水的阻力——抹掉水,前进为 −0.001 m。*
 
 ---
 
