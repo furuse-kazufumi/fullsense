@@ -450,11 +450,31 @@ evis の表情(＞＜ や ◎◎)は、最初は **2D の描き込み**だった
 
 *↑ 姿勢を直した後の歩行。頭が上がり、脊椎がまっすぐ。動く脚が赤く発火している。*
 
+![evis run](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=1)
+
+*↑ 走行(subject 9)。1 秒強の短いループだが、接地のたびに動く脚が赤く発火する。*
+
+![evis jump](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=1)
+
+*↑ ジャンプ(subject 13)。踏み切りから着地まで、全身のバランスがキネマティックに再生される。*
+
+![evis dance](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=1)
+
+*↑ モダンダンス。頭が回ってもアホ毛が遅れて揺れ(二次運動)、速く振る腕ほど赤く光る。*
+
 ![evis eats with chopsticks](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=1)
 
-*↑ 箸で食べる。手に握らせた箸 2 本 + 食べ物の粒が、腕が上がると口へ向かう。*
+*↑ 箸で食べる"所作"。手に **剛体プロップとして固定した**箸 2 本 + 食べ物の粒が、腕が上がると口へ向かう。ただし**指で握って動かしているわけではなく、実際に食片を摘み上げてもいない**——箸を巧緻に操る動作そのものは、別トラック(evis 本体の関節化した手 + MyoHand)で挑戦中の**未達のフロンティア**だ(細い 2 本の箸では食片が横に滑って落ちる)。ここでのカットは、あくまで「手を口へ運ぶ」mocap の再生に箸を持たせた演出である。*
 
 ![evis motion showcase](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/evis_motion_showcase.png?v=1)
+
+### 番外: これだけは"演出"ではない —— 物理で泳ぐ evis
+
+ここまでの走る・跳ぶ・踊るは、すべて **BVH の姿勢をなぞるキネマティック再生**だ(赤い発火は「速さ」の proxy であって筋活性ではない)。だが水泳だけは種類が違う。これは torque を進化学習させた **本物の物理**——推進力の 100% が水の抗力から来ていることを、ablation(水の抗力を消すと前へ進まない)で確認した genuine な結果だ。しかも当初の「筋肉で泳ぐ」版は、進むように**見えて**実は運動量保存を破るアーティファクトだと分かったので**撤回**し、この torque 版に置き換えている(見かけの前進に飛びつかず内訳を疑う、が家訓)。
+
+![evis swims with genuine physics](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=1)
+
+*↑ torque 駆動の genuine な水泳。撤回した筋版と違い、推進は水の抗力だけから生まれている(水を消すと前進 −0.001 m)。*
 
 ---
 
@@ -465,7 +485,7 @@ evis の表情(＞＜ や ◎◎)は、最初は **2D の描き込み**だった
 honest disclosure がこのシリーズの核なので、記事全体の境界を1か所に集めて明示する。
 
 - **本物(研究層・筋駆動)**: 第 I 部の立位・把持・運搬、第 II 部の飲む動作の**腕の把持と運搬**は、81(または100)本の筋肉を進化計算で学習させた**閉ループの筋駆動**。IK・force-closure・keyframe パリティの検証も本物。立位の「負け」も、n=3 で反証した「記憶の効果なし」も、誇張せず残した実測だ。
-- **演出(キャラクター層)**: 第 II 部の**顎の開閉**は kinematic(顔面筋非搭載ゆえの台本)で、しかも設計可動域(+0.05 rad)を超える +0.6 rad まで qpos 直書きして開けている——物理を無視した演出だと明記する。第 III 部の evis の踊り・走り・箸は**キネマティック再生**で、筋の赤い発火は「速さ」の proxy(筋活性ではない)、目・アホ毛はリグ、箸は**剛体のプロップ**(指で握ってはいない)。
+- **演出(キャラクター層)**: 第 II 部の**顎の開閉**は kinematic(顔面筋非搭載ゆえの台本)で、しかも設計可動域(+0.05 rad)を超える +0.6 rad まで qpos 直書きして開けている——物理を無視した演出だと明記する。第 III 部の evis の踊り・走り・跳ぶ・箸は**キネマティック再生**で、筋の赤い発火は「速さ」の proxy(筋活性ではない)、目・アホ毛はリグ、箸は**剛体のプロップ**(指で握ってはおらず、食片を摘み上げてもいない=巧緻操作は別トラックの未達フロンティア)。**ただし水泳だけは例外で、torque を進化させた本物の物理**(水の抗力が推進の 100%、ablation で確認済み・筋版は撤回済み)。
 - **「飲む」そのものはしていない**。液体の摂取をシミュレートしているのではなく、ボトルを開いた口元へ運ぶ所作だ。飲む「ジェスチャ」であって、飲む「生理」ではない。
 - **省略**: 胸郭の**肋軟骨**は骨のみモデルなので省略されている(前面がスカスカに見える正体)。解剖図で正しい形(肋骨 1–7 は胸骨へ、8–10 は肋骨弓を作る)まで裏取りしたが、キャラクター向けの近似としては難しく、既定でオフにした。
 

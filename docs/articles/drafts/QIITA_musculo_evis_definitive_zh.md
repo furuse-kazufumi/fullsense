@@ -449,11 +449,31 @@ evis 的表情(＞＜ 或 ◎◎)最初是 **2D 的贴画**。把头的 3D 位�
 
 *↑ 修正姿势后的步行。头抬起来了,脊椎笔直。摆动的腿发红发火。*
 
+![evis 奔跑](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=1)
+
+*↑ 奔跑(subject 9)。虽然只是一秒多的短循环,但每次落地时摆动的腿都发红发火。*
+
+![evis 跳跃](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=1)
+
+*↑ 跳跃(subject 13)。从起跳到落地,全身的平衡以运动学方式回放。*
+
+![evis 跳舞](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=1)
+
+*↑ 现代舞。即使头转动,呆毛也会慢半拍地摇晃(二次运动),手臂挥得越快就发光越红。*
+
 ![evis 用筷子吃饭](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=1)
 
-*↑ 用筷子吃饭。手里握着的两根筷子 + 一粒食物,会在手臂抬起时朝向嘴。*
+*↑ 用筷子吃饭的“所作”。手里的两根筷子是**作为刚体道具固定住的**,加上一粒食物,会在手臂抬起时朝向嘴。但**并不是用手指握住并操控,也没有真的把食片捏起来**——灵巧地操纵筷子这件事本身,是在另一条轨道(evis 本体关节化的手 + MyoHand)上挑战的**未达成的前沿**(两根细筷子会让食片横向滑落)。这里的镜头,只是给「把手运到嘴边」的 mocap 回放让它拿着筷子的演出。*
 
 ![evis 动作集锦](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/evis_motion_showcase.png?v=1)
+
+### 番外:唯独这个不是“演出”——用物理游泳的 evis
+
+到此为止的奔跑、跳跃、跳舞,全都是**描摹 BVH 姿势的运动学回放**(红色发火是“速度”的替代量,并非肌肉活性)。但唯独游泳种类不同。这是把 torque 进化学习出来的**真正的物理**——我通过 ablation(抹掉水的阻力就无法前进)确认了推进力的 100% 来自水的阻力。而且最初的“用肌肉游泳”版本,**看起来**在前进,其实是违反动量守恒的伪影,于是我**撤回**了它,换成了这个 torque 版本(不要一看到表面上的前进就扑上去,要怀疑其内幕,这是家训)。
+
+![evis 用真实物理游泳](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=1)
+
+*↑ torque 驱动的真实游泳。与撤回的肌肉版不同,推进力只来自水的阻力(抹掉水,前进为 −0.001 m)。*
 
 ---
 
@@ -464,7 +484,7 @@ evis 的表情(＞＜ 或 ◎◎)最初是 **2D 的贴画**。把头的 3D 位�
 诚实披露(honest disclosure)是本系列的核心,所以我把整篇文章的边界集中到一处、明确说清楚。
 
 - **真实层(研究层·肌肉驱动)**:第 I 部的站立、抓握、搬运,以及第 II 部喝水动作里的**手臂抓握与搬运**,都是用进化计算学习 81(或 100)条肌肉得到的**闭环肌肉驱动**。IK、力封闭(force-closure)、keyframe 一致性的验证也都是真实的。站立的那次“负”,以及在 n=3 下被反证的“记忆没有效果”,也都是我不加夸大保留下来的实测。
-- **演出层(角色层)**:第 II 部的**下颌开合**是运动学(kinematic)的(因为没有搭载面部肌肉,所以是脚本驱动),而且是把 qpos 直接写死,开到了超过设计可动范围（+0.05 rad)的 +0.6 rad——我明确标注:这是无视物理的演出。第 III 部 evis 的跳舞、奔跑、筷子都是**运动学回放**,肌肉那抹红色发光是“速度”的替代量(proxy)(并非肌肉活性),眼睛、呆毛是绑定(rig),筷子是**刚体道具**(手指并没有真的握住)。
+- **演出层(角色层)**:第 II 部的**下颌开合**是运动学(kinematic)的(因为没有搭载面部肌肉,所以是脚本驱动),而且是把 qpos 直接写死,开到了超过设计可动范围（+0.05 rad)的 +0.6 rad——我明确标注:这是无视物理的演出。第 III 部 evis 的跳舞、奔跑、跳跃、筷子都是**运动学回放**,肌肉那抹红色发光是“速度”的替代量(proxy)(并非肌肉活性),眼睛、呆毛是绑定(rig),筷子是**刚体道具**(手指并没有真的握住,也没有真的把食片捏起来——灵巧操纵是另一条轨道上未达成的前沿)。**但唯独游泳是例外,是把 torque 进化出来的真实物理**(水的阻力占推进的 100%,已由 ablation 确认;肌肉版已撤回)。
 - **它本身并没有在“喝水”**。这并不是在模拟液体的摄入,而是把瓶子搬到张开的嘴边的一个姿态。是喝水的“姿态(gesture)”,而不是喝水的“生理过程(physiology)”。
 - **省略之处**:胸廓的**肋软骨**因为是仅含骨骼的模型而被省略了(这正是正面看起来空荡荡的原因)。我一直查证到解剖图上的正确形状(肋骨 1–7 连到胸骨,8–10 构成肋弓),但作为面向角色的近似来说太难处理,于是默认关掉了它。
 

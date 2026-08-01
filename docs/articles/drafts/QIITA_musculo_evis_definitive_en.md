@@ -449,11 +449,31 @@ Once the retargeting works, anything can dance just by swapping the BVH. I gathe
 
 *↑ The walk after fixing the posture. The head is up, the spine straight. The moving leg fires red.*
 
+![evis run](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=1)
+
+*↑ Running (subject 9). A short loop just over a second, but the moving leg fires red at every footfall.*
+
+![evis jump](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=1)
+
+*↑ A jump (subject 13). From takeoff to landing, the whole-body balance is played back kinematically.*
+
+![evis dance](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=1)
+
+*↑ A modern dance. Even as the head turns, the cowlick sways a beat behind (secondary motion), and the faster an arm swings, the redder it glows.*
+
 ![evis eats with chopsticks](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=1)
 
-*↑ Eating with chopsticks. The two chopsticks gripped in the hand, plus a morsel of food, point toward the mouth as the arm rises.*
+*↑ The "gesture" of eating with chopsticks. The two chopsticks are **fixed in the hand as a rigid prop**, plus a morsel of food, pointing toward the mouth as the arm rises. But **the fingers aren't gripping and moving them, and it isn't actually picking up the morsel** — dexterously manipulating chopsticks is an **unsolved frontier** attempted on a separate track (evis's own articulated hand + MyoHand); with two thin sticks the morsel slips sideways and drops. This clip is a mocap "carry the hand to the mouth" replay with chopsticks placed in the hand.*
 
 ![evis motion showcase](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/evis_motion_showcase.png?v=1)
+
+### Aside: This One Isn't Cosmetic —— evis Swims by Physics
+
+The running, jumping, and dancing above are all **kinematic replay tracing BVH poses** (the red firing is a proxy for "speed," not muscle activation). But swimming is a different kind. This is **genuine physics** with torque evolved by learning — I confirmed via ablation (remove the water's drag and it doesn't move forward) that 100% of the propulsion comes from the water's drag. And the original "swim by muscles" version, which *looked* like it moved forward, turned out to be an artifact that violated conservation of momentum, so I **retracted** it and replaced it with this torque version (don't jump at apparent progress — question the breakdown; that's the house rule).
+
+![evis swims with genuine physics](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/swim.gif?v=1)
+
+*↑ Genuine torque-driven swimming. Unlike the retracted muscle version, the propulsion comes solely from the water's drag (remove the water and forward motion is −0.001 m).*
 
 ---
 
@@ -464,7 +484,7 @@ Once the retargeting works, anything can dance just by swapping the BVH. I gathe
 Honest disclosure is the core of this series, so let me gather the boundary line for the whole article into one place and state it plainly.
 
 - **Genuine (research layer, muscle-driven)**: The standing, grasping, and carrying in Part I, and the **arm grasp and carry** of the drinking motion in Part II, are **closed-loop, muscle-driven** behaviors learned by evolutionary computation over 81 (or 100) muscles. The IK, force-closure, and keyframe-parity verifications are genuine too. The "loss" on standing, and the "no effect of memory" I refuted with n=3, are measurements I've left in without exaggeration.
-- **Cosmetic (character layer)**: The **jaw open-close** in Part II is kinematic (scripted, because there are no facial muscles fitted), and moreover it opens to +0.6 rad—overwriting `qpos` directly—well past the designed range of motion (+0.05 rad); I state clearly that this is cosmetic, ignoring physics. evis's dancing, running, and chopsticks in Part III are **kinematic replay**: the red muscle firing is a proxy for "speed" (not muscle activation), the eyes and cowlick are rig, and the chopsticks are a **rigid prop** (not gripped by the fingers).
+- **Cosmetic (character layer)**: The **jaw open-close** in Part II is kinematic (scripted, because there are no facial muscles fitted), and moreover it opens to +0.6 rad—overwriting `qpos` directly—well past the designed range of motion (+0.05 rad); I state clearly that this is cosmetic, ignoring physics. evis's dancing, running, jumping, and chopsticks in Part III are **kinematic replay**: the red muscle firing is a proxy for "speed" (not muscle activation), the eyes and cowlick are rig, and the chopsticks are a **rigid prop** (not gripped by the fingers, and not actually picking up food — dexterous manipulation is an unsolved frontier on a separate track). **Swimming, however, is the exception: genuine torque-evolved physics** (the water's drag is 100% of the propulsion, confirmed by ablation; the muscle version was retracted).
 - **The "drinking" itself is not happening.** It isn't simulating the intake of liquid; it's the gesture of carrying the bottle to an opened mouth. It's a drinking *gesture*, not the *physiology* of drinking.
 - **Omissions**: The **costal cartilage** of the ribcage is omitted, because this is a bones-only model (which is why the front looks hollow). I traced the anatomy down to the correct form (ribs 1–7 join the sternum, 8–10 form the costal arch), but it was hard to pull off as an approximation aimed at a character, so I left it off by default.
 
