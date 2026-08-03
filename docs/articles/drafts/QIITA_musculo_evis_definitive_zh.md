@@ -433,7 +433,7 @@ evis 的表情(＞＜ 或 ◎◎)最初是 **2D 的贴画**。把头的 3D 位�
 
 接到物理摔倒的 rollout 上之后,evis 一边倒下、一边把表情从 **neutral → ◎◎(下落)→ ××(崩塌)** 地变换,还成了一段“现场解说”。
 
-![evis 摔倒时的反应](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/reaction.gif?v=1)
+![evis 摔倒时的反应](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/reaction.gif?v=2)
 
 ## 22. 动作库 —— 走、跑、跳、跳舞、用筷子吃饭
 
@@ -445,23 +445,23 @@ evis 的表情(＞＜ 或 ◎◎)最初是 **2D 的贴画**。把头的 3D 位�
 - **用筷子吃饭** —— 把 CMU 的「喝苏打水」(把手送到嘴边的动作)做了动作重定向,让 evis 的手握住**两根筷子 + 一粒食物**。筷子的朝向,是把「手→口」方向实测出来、在手的局部坐标里固定的,所以手臂一抬起,筷尖就朝向嘴。
 - **物理摔倒 + 会反应的脸**
 
-![evis 步行](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/walk.gif?v=1)
+![evis 步行](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/walk.gif?v=2)
 
 *↑ 修正姿势后的步行。头抬起来了,脊椎笔直。摆动的腿发红发火。*
 
-![evis 奔跑](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=1)
+![evis 奔跑](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=2)
 
 *↑ 奔跑(subject 9)。虽然只是一秒多的短循环,但每次落地时摆动的腿都发红发火。*
 
-![evis 跳跃](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=1)
+![evis 跳跃](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=2)
 
 *↑ 跳跃(subject 13)。从起跳到落地,全身的平衡以运动学方式回放。*
 
-![evis 跳舞](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=1)
+![evis 跳舞](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=2)
 
 *↑ 现代舞。即使头转动,呆毛也会慢半拍地摇晃(二次运动),手臂挥得越快就发光越红。*
 
-![evis 用筷子吃饭](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=1)
+![evis 用筷子吃饭](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=2)
 
 *↑ 用筷子吃饭的“所作”。手里的两根筷子是**作为刚体道具固定住的**,加上一粒食物,会在手臂抬起时朝向嘴。但**并不是用手指握住并操控,也没有真的把食片捏起来**——灵巧地操纵筷子这件事本身,是在另一条轨道(evis 本体关节化的手 + MyoHand)上挑战的**未达成的前沿**(两根细筷子会让食片横向滑落)。这里的镜头,只是给「把手运到嘴边」的 mocap 回放让它拿着筷子的演出。*
 

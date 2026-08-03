@@ -433,7 +433,7 @@ The 2D projection-plus-depth trickery vanished wholesale (about 80 lines). There
 
 Wired into a physics fall rollout, it even becomes a "live commentary" of evis changing expression as it topples — **neutral → ◎◎ (falling) → ×× (collapse).**
 
-![evis reaction fall](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/reaction.gif?v=1)
+![evis reaction fall](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/reaction.gif?v=2)
 
 ## 22. Motion library — walking, running, jumping, dancing, eating with chopsticks
 
@@ -445,23 +445,23 @@ Once the retargeting works, anything can dance just by swapping the BVH. I gathe
 - **Eating with chopsticks** — I retargeted CMU's "drinking a soda" (the motion of bringing a hand to the mouth) and had evis grip **two chopsticks + a morsel of food** in its hand. I measured the "hand → mouth" direction and fixed the chopsticks' orientation in the hand's local coordinates, so as the arm rises, the tips of the chopsticks point toward the mouth.
 - **A physics fall + a reacting face**
 
-![evis walk](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/walk.gif?v=1)
+![evis walk](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/walk.gif?v=2)
 
 *↑ The walk after fixing the posture. The head is up, the spine straight. The moving leg fires red.*
 
-![evis run](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=1)
+![evis run](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=2)
 
 *↑ Running (subject 9). A short loop just over a second, but the moving leg fires red at every footfall.*
 
-![evis jump](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=1)
+![evis jump](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=2)
 
 *↑ A jump (subject 13). From takeoff to landing, the whole-body balance is played back kinematically.*
 
-![evis dance](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=1)
+![evis dance](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=2)
 
 *↑ A modern dance. Even as the head turns, the cowlick sways a beat behind (secondary motion), and the faster an arm swings, the redder it glows.*
 
-![evis eats with chopsticks](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=1)
+![evis eats with chopsticks](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=2)
 
 *↑ The "gesture" of eating with chopsticks. The two chopsticks are **fixed in the hand as a rigid prop**, plus a morsel of food, pointing toward the mouth as the arm rises. But **the fingers aren't gripping and moving them, and it isn't actually picking up the morsel** — dexterously manipulating chopsticks is an **unsolved frontier** attempted on a separate track (evis's own articulated hand + MyoHand); with two thin sticks the morsel slips sideways and drops. This clip is a mocap "carry the hand to the mouth" replay with chopsticks placed in the hand.*
 

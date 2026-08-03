@@ -434,7 +434,7 @@ evis の表情(＞＜ や ◎◎)は、最初は **2D の描き込み**だった
 
 物理の転倒 rollout に配線すると、evis が倒れながら **neutral → ◎◎(落下)→ ××(崩落)**と表情を変える"実況"にもなる。
 
-![evis reaction fall](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/reaction.gif?v=1)
+![evis reaction fall](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/reaction.gif?v=2)
 
 ## 22. 動作ライブラリ — 歩く・走る・跳ぶ・踊る・箸で食べる
 
@@ -446,23 +446,23 @@ evis の表情(＞＜ や ◎◎)は、最初は **2D の描き込み**だった
 - **箸で食べる** — CMU の「ソーダを飲む」(手を口へ運ぶ動作)をリターゲットし、evis の手に**箸 2 本 + 食べ物の粒**を握らせた。箸の向きは「手→口」方向を実測して手のローカル座標で固定したので、腕が上がると箸の先が口へ向かう。
 - **物理転倒 + 反応する顔**
 
-![evis walk](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/walk.gif?v=1)
+![evis walk](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/walk.gif?v=2)
 
 *↑ 姿勢を直した後の歩行。頭が上がり、脊椎がまっすぐ。動く脚が赤く発火している。*
 
-![evis run](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=1)
+![evis run](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/run.gif?v=2)
 
 *↑ 走行(subject 9)。1 秒強の短いループだが、接地のたびに動く脚が赤く発火する。*
 
-![evis jump](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=1)
+![evis jump](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/jump.gif?v=2)
 
 *↑ ジャンプ(subject 13)。踏み切りから着地まで、全身のバランスがキネマティックに再生される。*
 
-![evis dance](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=1)
+![evis dance](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/dance.gif?v=2)
 
 *↑ モダンダンス。頭が回ってもアホ毛が遅れて揺れ(二次運動)、速く振る腕ほど赤く光る。*
 
-![evis eats with chopsticks](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=1)
+![evis eats with chopsticks](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/evis_mocap/chopsticks.gif?v=2)
 
 *↑ 箸で食べる"所作"。手に **剛体プロップとして固定した**箸 2 本 + 食べ物の粒が、腕が上がると口へ向かう。ただし**指で握って動かしているわけではなく、実際に食片を摘み上げてもいない**——箸を巧緻に操る動作そのものは、別トラック(evis 本体の関節化した手 + MyoHand)で挑戦中の**未達のフロンティア**だ(細い 2 本の箸では食片が横に滑って落ちる)。ここでのカットは、あくまで「手を口へ運ぶ」mocap の再生に箸を持たせた演出である。*
 
