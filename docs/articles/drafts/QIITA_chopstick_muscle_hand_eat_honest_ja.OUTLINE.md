@@ -110,8 +110,8 @@
 
 | 主張 | 数値 | 出典 | ステータス |
 |---|---|---|---|
-| robust champion 二点つまみ | 親指 37% / 人差し指 53% / 8s PASS / held-out 20/20(σ0.02-0.08)/ 筋off 147cm | memory 08-02 + `best_hold_robust_long.npy` | **再検証中**(`verify_robust_champion.py` WSL, bg=bwfvuwcd4) |
-| 筋 ON/OFF ablation 落下 | 143〜147cm | 同上 | 同上で確認 |
+| robust champion 二点つまみ | 親指 37% / 人差し指 53% / 8s PASS / held-out σ0.02:20/20・σ0.05:20/20 / 筋off 147cm | memory 08-02 + `best_hold_robust_long.npy` | **✓ 再現済み(2026-08-11 再検証)** ずれ2.6mm/中央2.6mm。physfix対照=一点寄り70/0%・17-11/20 も再現 |
+| 筋 ON/OFF ablation 落下 | 147cm(champion)/ 148cm(physfix) | 同上 | **✓ 再現済み** |
 | evis firm capture | 保持 6000ms / F 0.52→0.99N / --myo-dy 0.7 | memory 08-03 | 未検証(WSL `eat_sweep.py` 再走要) |
 | 食事失敗の網羅 | 73 設定 / 661 回 / 掴み 0 | gallery ラベル + memory | 未検証(sweep 再走 or ログ確認) |
 | A→B は皿 5cm 下げのズル | plateB_drop=0.062 | memory 08-02(自己訂正) | 記録済(低リスク・narrative) |
