@@ -24,7 +24,7 @@ Usage::
 Briefs are read from docs/benchmarks/2026-05-16{,_b2,_b3,_b4}/_brief.txt.
 
 Requires: Python 3.11, ollama running on localhost:11434 (for ollama),
-codex CLI on PATH (for codex), and D:/api-keys.json or env vars for cloud
+codex CLI on PATH (for codex), and C:/dev/api-keys.json or env vars for cloud
 keys.
 """
 
@@ -50,7 +50,7 @@ if isinstance(sys.stdout, io.TextIOWrapper):
     except Exception:
         pass
 
-ROOT = pathlib.Path("D:/projects/fullsense")
+ROOT = pathlib.Path("C:/dev/projects/fullsense")
 BENCH_ROOT = ROOT / "docs/benchmarks"
 
 # Brief id -> brief text source dir (from 2026-05-16 snapshot)
@@ -63,8 +63,8 @@ BRIEF_SOURCES = {
 
 
 def load_keys() -> dict:
-    """API keys from D:/api-keys.json, fallback to env."""
-    p = pathlib.Path("D:/api-keys.json")
+    """API keys from C:/dev/api-keys.json, fallback to env."""
+    p = pathlib.Path("C:/dev/api-keys.json")
     if p.exists():
         try:
             return json.loads(p.read_text(encoding="utf-8"))
@@ -117,7 +117,7 @@ def run_llive(brief: str, _keys: dict) -> tuple[bool, str, float]:
     # timing). Off by default (release).
     debug_flag = os.environ.get("BENCH_LLIVE_DEBUG", "0") == "1"
     cmd = [
-        "py", "-3.11", "D:/projects/llive/scripts/run_brief.py",
+        "py", "-3.11", "C:/dev/projects/llive/scripts/run_brief.py",
         "--json", "--backend", backend,
     ]
     if debug_flag:

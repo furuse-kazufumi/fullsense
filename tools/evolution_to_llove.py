@@ -26,8 +26,8 @@ honest disclosure ラベルと見極め所見を焼き込む (feedback_benchmark
 ------
     py -3.11 tools/evolution_to_llove.py <run_dir> [--out events.jsonl]
     # 例:
-    py -3.11 tools/evolution_to_llove.py D:/projects/llive/out/evo_seekvalue_2026_05_25
-    llove tail D:/projects/llive/out/evo_seekvalue_2026_05_25/llove_events.jsonl
+    py -3.11 tools/evolution_to_llove.py C:/dev/projects/llive/out/evo_seekvalue_2026_05_25
+    llove tail C:/dev/projects/llive/out/evo_seekvalue_2026_05_25/llove_events.jsonl
 """
 from __future__ import annotations
 

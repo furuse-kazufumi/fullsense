@@ -241,7 +241,7 @@ def test_build_book_chapter_frontmatter_has_title_only():
 # ===========================================================================
 
 def test_find_local_paths_detects_windows_drive():
-    text = "see D:\\projects\\fullsense\\foo.md for details"
+    text = "see C:\\\\dev\\\\projects\\fullsense\\foo.md for details"
     hits = zc.find_local_paths(text)
     assert hits, "D:\\ パスを検出できていない"
 

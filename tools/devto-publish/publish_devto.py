@@ -14,7 +14,7 @@ Options:
     --series SERIES      連載名 (dev.to series)
 
 API key の設定:
-    D:\\api-keys.json の "devto_api_key" に設定 or 環境変数 DEVTO_API_KEY
+    C:\\dev\\api-keys.json の "devto_api_key" に設定 or 環境変数 DEVTO_API_KEY
 
 冪等性:
     初回投稿後、同ディレクトリに <markdown_stem>.devto.json が生成されます。
@@ -52,7 +52,7 @@ def _ensure_utf8_stdout() -> None:
 # ────────────────────────────────────────────────
 
 DEVTO_API_BASE = "https://dev.to/api"
-API_KEYS_PATH = Path(r"D:\api-keys.json")
+API_KEYS_PATH = Path(r"C:\dev\api-keys.json")
 
 # セクション見出しのパターン (# English / ## English / # 英語 等)
 _SECTION_PATTERNS = {
@@ -75,7 +75,7 @@ def load_api_key() -> Optional[str]:
     """
     優先順位:
       1. 環境変数 DEVTO_API_KEY
-      2. D:\\api-keys.json の "devto_api_key"
+      2. C:\\dev\\api-keys.json の "devto_api_key"
     キーが存在しない場合は None を返す (値は絶対にログ出力しない)。
     """
     env_key = os.environ.get("DEVTO_API_KEY", "").strip()
@@ -476,7 +476,7 @@ def main() -> int:
             "       token を設定するには:\n"
             "         1. https://dev.to/settings/extensions を開く\n"
             "         2. 'DEV Community API Keys' > 'Generate API Key'\n"
-            "         3. 発行したキーを D:\\api-keys.json に追記:\n"
+            "         3. 発行したキーを C:\\dev\\api-keys.json に追記:\n"
             '            { "devto_api_key": "<YOUR_KEY>" }\n'
             "         4. または環境変数 DEVTO_API_KEY に設定\n",
             file=sys.stderr,
@@ -509,7 +509,7 @@ def main() -> int:
             print(
                 "[hint] 401 Unauthorized: API token が無効です。\n"
                 "       dev.to の Settings > Extensions で再発行し、\n"
-                "       D:\\api-keys.json の devto_api_key を更新してください。",
+                "       C:\\dev\\api-keys.json の devto_api_key を更新してください。",
                 file=sys.stderr,
             )
         elif status == 422:

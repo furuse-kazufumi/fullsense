@@ -16,7 +16,7 @@ SECURITY / 運用 (qiita_team_post.py と同方針):
 
 使い方:
   py -3.11 qiita_public_team_link.py list                  # 公開記事一覧 (read-only)
-  py -3.11 qiita_public_team_link.py dry-run <id>...       # 挿入プレビュー (D:/tmp/qiita_team_link_preview/)
+  py -3.11 qiita_public_team_link.py dry-run <id>...       # 挿入プレビュー (C:/dev/tmp/qiita_team_link_preview/)
   py -3.11 qiita_public_team_link.py apply <id>... --yes   # 実 PATCH (ユーザー GO 必須)
   py -3.11 qiita_public_team_link.py verify <id>...        # 再 GET で MARKER 存在確認
 """
@@ -40,7 +40,7 @@ def _utf8() -> None:
 
 
 API_BASE = "https://qiita.com/api/v2"
-PREVIEW_DIR = "D:/tmp/qiita_team_link_preview"
+PREVIEW_DIR = "C:/dev/tmp/qiita_team_link_preview"
 MARKER = "<!-- fullsense-team-kb -->"
 
 # 誘導先: Qiita Team の読む順 index (QIITA_INDEX_reading_order.md, team id=90ea260703fb49065346)

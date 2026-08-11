@@ -10,9 +10,9 @@
     一括無人実行は想定しない。
 
 .DESCRIPTION
-    正本 = D:/projects/fullsense/docs/research/migration_dependencies_2026-06-28.md (§5 順序)
-           D:/projects/fullsense/docs/research/gpu_pc_migration_plan_2026-06-28.md     (§4)
-           D:/projects/fullsense/docs/research/migration_manifest_2026-06-28.md        (§3,§6,§7)
+    正本 = C:/dev/projects/fullsense/docs/research/migration_dependencies_2026-06-28.md (§5 順序)
+           C:/dev/projects/fullsense/docs/research/gpu_pc_migration_plan_2026-06-28.md     (§4)
+           C:/dev/projects/fullsense/docs/research/migration_manifest_2026-06-28.md        (§3,§6,§7)
 
     設計方針:
       - 各ステップ = 存在チェック → 未検出なら導入 (冪等寄り)。既存は [skip]。
@@ -50,11 +50,11 @@
 
 .EXAMPLE
     # まず計画を眺める (何も導入しない・安全)
-    pwsh -NoProfile -File D:\projects\fullsense\tools\migration\bootstrap_install.ps1
+    pwsh -NoProfile -File C:\dev\projects\fullsense\tools\migration\bootstrap_install.ps1
 
 .EXAMPLE
     # レビュー後、実際に導入 (1 回通し)
-    pwsh -NoProfile -File D:\projects\fullsense\tools\migration\bootstrap_install.ps1 -Execute
+    pwsh -NoProfile -File C:\dev\projects\fullsense\tools\migration\bootstrap_install.ps1 -Execute
 
 .NOTES
     git 操作・破壊的操作・外部送信はしない。winget/cargo/npm/pip の導入は network が要る。
@@ -171,10 +171,10 @@ CUDA toolkit は PyTorch wheel 同梱のため driver のみで可。
 # 2. D: 温存ガード
 # ----------------------------------------------------------------------------
 Write-Head "2. D: 温存確認 (外付け本体 travels の sentinel)"
-if (Test-Path 'D:\tools\raptor') {
-    Write-Host "   [skip] D:\tools\raptor 検出 — D: が正しくマウントされている"
+if (Test-Path 'C:\dev\tools\raptor') {
+    Write-Host "   [skip] C:\dev\tools\raptor 検出 — D: が正しくマウントされている"
 } else {
-    Write-Host "   [warn] D:\tools\raptor が無い。外付け D: が未接続/未マウントの可能性。"
+    Write-Host "   [warn] C:\dev\tools\raptor が無い。外付け D: が未接続/未マウントの可能性。"
     Write-Host "          plan §2-2 でレター D: を固定してから本スクリプトを続行すること。"
     Write-Host "          editable install (§8) と MCP (§12) は D: 実体に依存するため中断推奨。"
 }
@@ -263,12 +263,12 @@ Write-Head "8. FullSense projects editable install (D: travels 済コードか�
 Write-Host "   ※ torch を 7 で cu128 にした後に実行 (extras の torch が cu128 と整合)。"
 Write-Host "   ※ fullsense は packaging ファイル無し = py3.11 グローバル env に直依存 (独立 venv 無し)。"
 $editables = @(
-    @{ name='llcore'; spec='D:/projects/llcore[z3,sdp,chat,clip,text,ann,dev]' },
-    @{ name='llive';  spec='D:/projects/llive[torch,ingest,llm,mcp,vlm,dev]' },
-    @{ name='llmesh'; spec='D:/projects/llmesh[claude,industrial]' },
-    @{ name='llove';  spec='D:/projects/llove[gui]' },
-    @{ name='llterm'; spec='D:/projects/llterm' },
-    @{ name='llloop'; spec='D:/projects/llloop' }
+    @{ name='llcore'; spec='C:/dev/projects/llcore[z3,sdp,chat,clip,text,ann,dev]' },
+    @{ name='llive';  spec='C:/dev/projects/llive[torch,ingest,llm,mcp,vlm,dev]' },
+    @{ name='llmesh'; spec='C:/dev/projects/llmesh[claude,industrial]' },
+    @{ name='llove';  spec='C:/dev/projects/llove[gui]' },
+    @{ name='llterm'; spec='C:/dev/projects/llterm' },
+    @{ name='llloop'; spec='C:/dev/projects/llloop' }
 )
 foreach ($e in $editables) {
     $dir = ($e.spec -split '\[')[0]
@@ -280,7 +280,7 @@ foreach ($e in $editables) {
 Write-Host ""
 Write-Host "   [manual] rust 拡張 (llmesh-rust cp311-abi3 / llive rust_ext): freeze の wheel は D: travels。"
 Write-Host "            新機 py3.11 で ABI 不整合なら maturin で rebuild:"
-Write-Host "            cd D:/projects/llmesh/rust_ext; maturin develop --release  (llive も同様)"
+Write-Host "            cd C:/dev/projects/llmesh/rust_ext; maturin develop --release  (llive も同様)"
 $script:Manual++
 
 # ----------------------------------------------------------------------------
@@ -288,7 +288,7 @@ $script:Manual++
 # ----------------------------------------------------------------------------
 Write-Head "9. freeze 差分補完 (leaf ツール回収)"
 Manual -Name "pip freeze 差分" -Text @"
-正本 = D:/projects/fullsense/docs/research/migration_pip_freeze_py311_2026-06-28.txt (216 行)。
+正本 = C:/dev/projects/fullsense/docs/research/migration_pip_freeze_py311_2026-06-28.txt (216 行)。
 ★ torch==*+cpu 行と -e/file:// 行を除外してから補完すること:
   (a) 入れ忘れ検出のみ: py -3.11 -m pip check
   (b) leaf を一括補完 (除外フィルタ後): py -3.11 -m pip install -r <filtered.txt>
@@ -326,9 +326,9 @@ Step -Name "scholar-search-mcp 0.1.3" `
 # ----------------------------------------------------------------------------
 Write-Head "12. MCP ランタイム"
 Step -Name "osv-mcp venv (uv sync)" `
-     -Check { Test-Path 'D:\tools\osv-mcp\.venv\Scripts\python.exe' } `
-     -CmdText "cd D:/tools/osv-mcp; uv sync" `
-     -Run { Push-Location 'D:/tools/osv-mcp'; try { & uv sync } finally { Pop-Location } }
+     -Check { Test-Path 'C:\dev\tools\osv-mcp\.venv\Scripts\python.exe' } `
+     -CmdText "cd C:/dev/tools/osv-mcp; uv sync" `
+     -Run { Push-Location 'C:/dev/tools/osv-mcp'; try { & uv sync } finally { Pop-Location } }
 Write-Host "   [warn] osv-mcp の .venv は pyvenv.cfg が死に C: パス (uv py3.13) を指す → uv sync で再生成 (ネット必須)。"
 Manual -Name "uvx/npx pre-warm (任意)" -Text @"
 .claude.json コピーで wiring は再現するが uvx/npx キャッシュは C: 常駐=travels せず。
@@ -372,10 +372,10 @@ Write-Host "   [warn] live state (alpaca_state.json) は C: 常駐 = restore_wor
 # 15. ccr node-pty
 # ----------------------------------------------------------------------------
 Write-Head "15. ccr node-pty (D: travels / ABI 確認)"
-Write-Host "   node-pty 実体 = D:/tools/raptor/node_modules (D: 側)。Node v24 維持なら rebuild は fallback。"
+Write-Host "   node-pty 実体 = C:/dev/tools/raptor/node_modules (D: 側)。Node v24 維持なら rebuild は fallback。"
 if ($Execute) {
     Write-Host "   [run] ロード確認:"
-    Push-Location 'D:/tools/raptor'
+    Push-Location 'C:/dev/tools/raptor'
     try {
         & node -e "require('@homebridge/node-pty-prebuilt-multiarch');console.log('node-pty load OK')"
         if ($LASTEXITCODE -ne 0) {
@@ -385,7 +385,7 @@ if ($Execute) {
     } catch { Write-Host "   [warn] node 未解決か D: 未マウント" }
     finally { Pop-Location }
 } else {
-    Write-Host "   [plan] cd D:\tools\raptor; node -e `"require('@homebridge/node-pty-prebuilt-multiarch')`""
+    Write-Host "   [plan] cd C:\dev\tools\raptor; node -e `"require('@homebridge/node-pty-prebuilt-multiarch')`""
     Write-Host "          通れば rebuild 不要。失敗時のみ: npm rebuild @homebridge/node-pty-prebuilt-multiarch"
 }
 

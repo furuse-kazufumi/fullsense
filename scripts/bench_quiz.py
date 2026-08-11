@@ -32,9 +32,9 @@ if isinstance(sys.stdout, io.TextIOWrapper):
     except Exception:
         pass
 
-BENCH_ROOT = pathlib.Path("D:/projects/fullsense/docs/benchmarks")
+BENCH_ROOT = pathlib.Path("C:/dev/projects/fullsense/docs/benchmarks")
 QUIZ_SET = BENCH_ROOT / "quizzes/quiz_set_v1.json"
-RUN_BRIEF = "D:/projects/llive/scripts/run_brief.py"
+RUN_BRIEF = "C:/dev/projects/llive/scripts/run_brief.py"
 
 CELL_TIMEOUT_S = 300.0
 

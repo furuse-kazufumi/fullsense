@@ -6,10 +6,10 @@
 # 累計 commit を 4 リポへ push する.
 #
 # 実行:
-#   pwsh D:\projects\fullsense\scripts\push_2026_05_19.ps1
+#   pwsh C:\dev\projects\fullsense\scripts\push_2026_05_19.ps1
 #
 # または PowerShell から直接:
-#   D:\projects\fullsense\scripts\push_2026_05_19.ps1
+#   C:\dev\projects\fullsense\scripts\push_2026_05_19.ps1
 #
 # 各リポで以下を順に行う:
 #   1. fetch (origin/main 同期)
@@ -42,25 +42,25 @@ $ErrorActionPreference = "Continue"
 $Repos = @(
     @{
         Name       = "llmesh"
-        Path       = "D:\projects\llmesh"
+        Path       = "C:\dev\projects\llmesh"
         TestCmd    = { py -3.11 -m pytest tests/test_timeline.py --tb=no -q }
         TestNote   = "timeline tests (46 PASS 期待)"
     },
     @{
         Name       = "llive"
-        Path       = "D:\projects\llive"
+        Path       = "C:\dev\projects\llive"
         TestCmd    = { py -3.11 -m pytest tests/unit tests/integration -q --tb=no }
         TestNote   = "unit + integration (1518 PASS 期待, ~60s)"
     },
     @{
         Name       = "llove"
-        Path       = "D:\projects\llove"
+        Path       = "C:\dev\projects\llove"
         TestCmd    = { py -3.11 -m pytest tests --tb=no -q }
         TestNote   = "全 tests (796 passed / 6 failed image_tool baseline 期待)"
     },
     @{
         Name       = "fullsense"
-        Path       = "D:\projects\fullsense"
+        Path       = "C:\dev\projects\fullsense"
         TestCmd    = { bash scripts/verify_publication.sh }
         TestNote   = "verify_publication.sh (ALL CHECKS PASSED 期待)"
     }

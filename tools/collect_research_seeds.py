@@ -15,14 +15,14 @@ import os
 import re
 
 SOURCES = {
-    "llcore": r"D:/projects/llcore/docs/ARTICLE_SEEDS.md",
-    "llive":  r"D:/projects/llive/docs/ARTICLE_SEEDS.md",
-    "llmesh": r"D:/projects/llmesh/docs/ARTICLE_SEEDS.md",
-    "llove":  r"D:/projects/llove/docs/ARTICLE_SEEDS.md",
-    "llloop": r"D:/projects/llloop/docs/ARTICLE_SEEDS.md",
-    "llterm": r"D:/projects/llterm/docs/ARTICLE_SEEDS.md",
+    "llcore": r"C:/dev/projects/llcore/docs/ARTICLE_SEEDS.md",
+    "llive":  r"C:/dev/projects/llive/docs/ARTICLE_SEEDS.md",
+    "llmesh": r"C:/dev/projects/llmesh/docs/ARTICLE_SEEDS.md",
+    "llove":  r"C:/dev/projects/llove/docs/ARTICLE_SEEDS.md",
+    "llloop": r"C:/dev/projects/llloop/docs/ARTICLE_SEEDS.md",
+    "llterm": r"C:/dev/projects/llterm/docs/ARTICLE_SEEDS.md",
 }
-OUT = r"D:/projects/fullsense/docs/articles/INBOX_research_seeds.md"
+OUT = r"C:/dev/projects/fullsense/docs/articles/INBOX_research_seeds.md"
 
 DATE_RE = re.compile(r"^##\s+(\d{4}-\d{2}-\d{2})")
 ENTRY_RE = re.compile(r"^###\s+(.*)")

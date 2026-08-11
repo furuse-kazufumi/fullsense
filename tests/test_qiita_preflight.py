@@ -230,22 +230,22 @@ def test_is_publish_ready_draft_is_false_for_plain_legacy_draft():
 
 
 def test_requires_project_group_skips_link_map_support_doc():
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#24_LINK_MAP.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#24_LINK_MAP.md")
     assert qp.requires_project_group(path, "title: hello\n", include_drafts=False) is False
 
 
 def test_requires_project_group_for_public_article_path_is_true():
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#22_transformer_escape_status.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#22_transformer_escape_status.md")
     assert qp.requires_project_group(path, "title: hello\n", include_drafts=False) is True
 
 
 def test_requires_project_group_for_draft_path_is_false_without_include_drafts():
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
     assert qp.requires_project_group(path, "title: hello\n", include_drafts=False) is False
 
 
 def test_requires_project_group_for_publish_ready_draft_with_group_metadata_is_true():
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
     fm = (
         "related_groups:\n"
         "  - onocollo\n"
@@ -255,7 +255,7 @@ def test_requires_project_group_for_publish_ready_draft_with_group_metadata_is_t
 
 
 def test_requires_project_group_for_public_id_draft_without_group_metadata_is_true():
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_#45_honest_disclosure_anthology_ja.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_#45_honest_disclosure_anthology_ja.md")
     fm = (
         "title: hello\n"
         "public_id: abc123\n"
@@ -265,7 +265,7 @@ def test_requires_project_group_for_public_id_draft_without_group_metadata_is_tr
 
 
 def test_requires_project_group_for_private_only_draft_without_group_metadata_is_true():
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_token_economy_ja.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_token_economy_ja.md")
     fm = (
         "title: hello\n"
         "private: true\n"
@@ -274,7 +274,7 @@ def test_requires_project_group_for_private_only_draft_without_group_metadata_is
 
 
 def test_requires_project_group_for_id_only_draft_without_group_metadata_is_true():
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_token_economy_en.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_token_economy_en.md")
     fm = (
         "title: hello\n"
         "id: draft-id-123\n"
@@ -283,7 +283,7 @@ def test_requires_project_group_for_id_only_draft_without_group_metadata_is_true
 
 
 def test_requires_project_group_for_non_publish_ready_draft_is_false_even_with_group_metadata():
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_legacy_note.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_legacy_note.md")
     fm = (
         "related_groups:\n"
         "  - onocollo\n"
@@ -386,7 +386,7 @@ def test_should_report_title_mismatch_is_false_for_legacy_live_mismatch_without_
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
     assert qp.should_report_title_mismatch(path, fm, body) is False
 
 
@@ -396,7 +396,7 @@ def test_should_report_title_mismatch_is_true_for_unconnected_local_mismatch(mon
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: None)
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_local_only.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_local_only.md")
     assert qp.should_report_title_mismatch(path, fm, body) is True
 
 
@@ -413,7 +413,7 @@ def test_should_report_title_mismatch_is_false_for_team_draft_id_mismatch_withou
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_team_only.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_team_only.md")
     assert qp.should_report_title_mismatch(path, fm, body) is False
 
 
@@ -424,8 +424,8 @@ def test_has_publish_identity_treats_nullish_public_id_as_absent():
 
 
 def test_has_live_identity_normalizes_nullish_ids():
-    draft_path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_team_draft.md")
-    public_path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#01_article.md")
+    draft_path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_team_draft.md")
+    public_path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_article.md")
     assert qp.has_live_identity(draft_path, "id: team-id-123\n") is True
     assert qp.has_live_identity(draft_path, "public_id: abc123\n") is True
     assert qp.has_live_identity(draft_path, "id: none\n") is False
@@ -439,12 +439,12 @@ def test_parse_scalar_value_keeps_unquoted_hash_when_comment_stripping_disabled(
 
 
 def test_requires_title_sync_skips_link_map_support_doc():
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#24_LINK_MAP.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#24_LINK_MAP.md")
     assert qp.requires_title_sync(path) is False
 
 
 def test_requires_title_sync_for_public_article_path_is_true():
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#22_transformer_escape_status.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#22_transformer_escape_status.md")
     assert qp.requires_title_sync(path) is True
 
 
@@ -455,7 +455,7 @@ def test_title_change_requires_human_gate_is_false_for_body_only_diff_when_front
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -466,7 +466,7 @@ def test_title_change_requires_human_gate_is_false_for_team_draft_body_only_diff
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_team_only.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_team_only.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -477,7 +477,7 @@ def test_title_change_requires_human_gate_is_false_for_public_article_id_only_le
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#22_transformer_escape_status.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#22_transformer_escape_status.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -488,7 +488,7 @@ def test_title_change_requires_human_gate_is_false_for_qiita_public_id_only(monk
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#23_15h_marathon_mid_report.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#23_15h_marathon_mid_report.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -502,7 +502,7 @@ def test_title_change_requires_human_gate_is_false_without_publish_identity(monk
         "load_git_text_at_rev",
         lambda rev, path: "---\ntitle: hello\n---\n# 日本語\n\n# Old title\n" if rev == "BASE" else None,
     )
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_onocollo_worldmodel_alife_ja.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_onocollo_worldmodel_alife_ja.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -513,7 +513,7 @@ def test_title_change_requires_human_gate_is_false_for_non_title_h1_addition(mon
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#22_transformer_escape_status.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#22_transformer_escape_status.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -524,7 +524,7 @@ def test_title_change_requires_human_gate_uses_branch_baseline_but_stays_false_f
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#25_monoculture_evolution_lldarwin.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#25_monoculture_evolution_lldarwin.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -541,7 +541,7 @@ def test_title_change_requires_human_gate_is_true_for_frontmatter_only_diff_when
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is True
 
 
@@ -558,7 +558,7 @@ def test_title_change_requires_human_gate_is_true_if_identity_removed_but_publis
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#26_lldarwin_multi_pressure_selection.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#26_lldarwin_multi_pressure_selection.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is True
 
 
@@ -575,7 +575,7 @@ def test_title_change_requires_human_gate_is_false_when_worktree_matches_baselin
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -608,7 +608,7 @@ def test_title_change_requires_human_gate_is_true_when_branch_baseline_diff_chan
         return None
 
     monkeypatch.setattr(qp, "load_git_text_at_rev", fake_load)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is True
 
 
@@ -626,7 +626,7 @@ def test_title_change_requires_human_gate_persists_after_commit_relative_to_bran
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is True
 
 
@@ -642,7 +642,7 @@ def test_title_change_requires_human_gate_for_publish_connected_promotion_from_b
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is True
 
 
@@ -653,7 +653,7 @@ def test_title_change_requires_human_gate_when_frontmatter_is_newly_added_to_leg
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is True
 
 
@@ -664,7 +664,7 @@ def test_title_change_requires_human_gate_is_false_when_frontmatter_added_but_pu
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: baseline if rev == "BASE" else None)
-    path = Path(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is False
 
 
@@ -674,7 +674,7 @@ def test_title_change_requires_human_gate_is_true_for_new_publish_connected_file
     qp.load_hitl_baseline_text.cache_clear()
     monkeypatch.setattr(qp, "resolve_hitl_baseline_commit", lambda: "BASE")
     monkeypatch.setattr(qp, "load_git_text_at_rev", lambda rev, path: None)
-    path = Path(r"D:\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
+    path = Path(r"C:\dev\projects\fullsense\docs\articles\drafts\QIITA_#48_gpu_wait_cpu_roundup_ja.md")
     assert qp.title_change_requires_human_gate(path, fm, body) is True
 
 

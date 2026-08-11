@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 FULLSENSE = Path(__file__).resolve().parents[1]
-MANGAMD = Path("D:/projects/manga-md-poc")
+MANGAMD = Path("C:/dev/projects/manga-md-poc")
 sys.path.insert(0, str(MANGAMD))
 
 import mangamd_poc  # noqa: E402

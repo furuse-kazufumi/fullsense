@@ -5,8 +5,8 @@
     robocopy で staging する(GPU PC 移行・物理移送前提の step 1)。
 
 .DESCRIPTION
-    正本: D:\projects\fullsense\docs\research\gpu_pc_migration_plan_2026-06-28.md (§2/§3/§7)
-          D:\projects\fullsense\docs\research\migration_manifest_2026-06-28.md   (§1/§2/§5)
+    正本: C:\dev\projects\fullsense\docs\research\gpu_pc_migration_plan_2026-06-28.md (§2/§3/§7)
+          C:\dev\projects\fullsense\docs\research\migration_manifest_2026-06-28.md   (§1/§2/§5)
 
     ★新前提(2026-06-28 実機一次検証で確定):
       - D: は外付け SSD 本体(SanDisk Extreme 55AE / exFAT / 平文 / BusType=USB)。
@@ -41,7 +41,7 @@
           * C:\Users\puruy\.ssh\id_ed25519(.pub)       (そもそも $Targets に含めない)
           * User env 平文 3 キー(ANTHROPIC_API_KEY / TELEGRAM_BOT_TOKEN /
             SOCIALDATA_API_KEY)= ファイルでないため reference export からも除外
-      - D:\api-keys.json と raptor の settings.local.json は **D: 上 = travels** のため
+      - C:\dev\api-keys.json と raptor の settings.local.json は **D: 上 = travels** のため
         本スクリプトの対象外(別送不要)。off-disk 損失保険も migrate_secrets.ps1 が担う。
 
     冪等: robocopy /MIR(ディレクトリ)は差分のみ転送。再実行で増分同期。単一ファイルは

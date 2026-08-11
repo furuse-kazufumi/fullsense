@@ -12,8 +12,8 @@ docs/NEXT_SESSION.auto.md を自動生成する Stop hook 用スクリプト.
 
 呼ばれ方:
   - raptor の Stop hook (.claude/settings.json) 経由
-  - 直接呼び出し: `py -3.11 D:/projects/fullsense/scripts/gen_next_session_auto.py`
-  - RAPTOR_CALLER_DIR が "D:/projects/fullsense" 以外なら no-op で 0 exit.
+  - 直接呼び出し: `py -3.11 C:/dev/projects/fullsense/scripts/gen_next_session_auto.py`
+  - RAPTOR_CALLER_DIR が "C:/dev/projects/fullsense" 以外なら no-op で 0 exit.
 
 silent:
   - stdout には何も出さない (Claude UI を汚さない).
@@ -29,13 +29,13 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Iterable
 
-PORTAL_ROOT = Path("D:/projects/fullsense")
+PORTAL_ROOT = Path("C:/dev/projects/fullsense")
 RELATED_PROJECTS: dict[str, Path] = {
-    "llive": Path("D:/projects/llive"),
-    "llove": Path("D:/projects/llove"),
-    "llmesh": Path("D:/projects/llmesh"),
-    "lldesign": Path("D:/projects/lldesign"),
-    "lltrade": Path("D:/projects/lltrade"),
+    "llive": Path("C:/dev/projects/llive"),
+    "llove": Path("C:/dev/projects/llove"),
+    "llmesh": Path("C:/dev/projects/llmesh"),
+    "lldesign": Path("C:/dev/projects/lldesign"),
+    "lltrade": Path("C:/dev/projects/lltrade"),
 }
 
 

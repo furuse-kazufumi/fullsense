@@ -4,7 +4,7 @@
 """
 import sys, json, urllib.request, urllib.error
 
-sys.path.insert(0, r'D:/projects/fullsense/tools')
+sys.path.insert(0, r'C:/dev/projects/fullsense/tools')
 from qiita_public_post import get_token
 
 ITEM = "ab3839f8b5b3ea91311e"

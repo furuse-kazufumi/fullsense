@@ -6,7 +6,7 @@ A 案 (バナー型) は mascot_kamikudaki_build.py が正。本スクリプト�
   B = キャラ単体型 (480x480, ゆるかわ寄り, README 等へ使い回せるマスコット)
   C = 漫画コマ風 (880x320, 既存 mangamd 4 コマとトーン統一: 白黒 + 朱のみ)
   D = 伝統祝祭型 (880x320, 紅白幕・雲文様・落款 = 神事/神憑き全振り)
-出力: D:/tmp/mascot_explore/mascot_B.svg, mascot_C.svg, mascot_D.svg
+出力: C:/dev/tmp/mascot_explore/mascot_B.svg, mascot_C.svg, mascot_D.svg
 方向性確定後は採用案を mascot_kamikudaki_build.py に統合し、本スクリプトの役目は終了。
 """
 from __future__ import annotations
@@ -22,7 +22,7 @@ for s in ("stdout", "stderr"):
     except Exception:
         pass
 
-OUT = "D:/tmp/mascot_explore"
+OUT = "C:/dev/tmp/mascot_explore"
 FONT = "'Hiragino Sans','Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif"
 MINCHO = "'Yu Mincho','Hiragino Mincho ProN',serif"
 

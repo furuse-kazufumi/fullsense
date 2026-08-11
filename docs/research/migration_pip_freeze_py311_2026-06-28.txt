@@ -82,7 +82,7 @@ linkify-it-py==2.1.0
 -e git+ssh://git@github.com/furuse-kazufumi/llmesh.git@cad26cdb7ca2a9d4db1ce4043ca876727337d070#egg=llmesh
 -e git+https://github.com/furuse-kazufumi/llcore.git@d9f6349960ee77cf11f3b2162b13474cfe80134e#egg=llmesh_llcore
 -e git+ssh://git@github.com/furuse-kazufumi/llive.git@2848cd4172eefba2f9d88318edd895fe6ab4aad6#egg=llmesh_llive
-llmesh-rust @ file:///D:/projects/llmesh/rust_ext/target/wheels/llmesh_rust-0.1.0-cp311-abi3-win_amd64.whl
+llmesh-rust @ file:///C:/dev/projects/llmesh/rust_ext/target/wheels/llmesh_rust-0.1.0-cp311-abi3-win_amd64.whl
 -e git+ssh://git@github.com/furuse-kazufumi/llove.git@3f1d8d2037d822f711ac4f112dc6be782553b8b3#egg=llove
 -e git+https://github.com/furuse-kazufumi/llterm.git@bfe545aed6b3f9f2261bd35928214b344e70e9ad#egg=llterm
 lxml==6.1.1

@@ -45,7 +45,7 @@ if isinstance(sys.stdout, io.TextIOWrapper):
 
 
 def load_keys() -> dict:
-    p = pathlib.Path("D:/api-keys.json")
+    p = pathlib.Path("C:/dev/api-keys.json")
     if p.exists():
         try:
             return json.loads(p.read_text(encoding="utf-8"))
@@ -192,7 +192,7 @@ def main(argv: list[str] | None = None) -> int:
     keys = load_keys()
 
     today = time.strftime("%Y-%m-%d")
-    root = args.out or pathlib.Path(f"D:/projects/fullsense/docs/benchmarks/{today}-vlm")
+    root = args.out or pathlib.Path(f"C:/dev/projects/fullsense/docs/benchmarks/{today}-vlm")
     root.mkdir(parents=True, exist_ok=True)
     (root / "_question.txt").write_text(args.question, encoding="utf-8")
     (root / "_image.png").write_bytes(img)

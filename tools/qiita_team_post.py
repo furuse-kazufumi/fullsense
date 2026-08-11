@@ -6,7 +6,7 @@
 本ツールは Qiita Team API v2 (https://<team>.qiita.com/api/v2/) を直接叩く最小クライアント。
 
 SECURITY (CLAUDE.md / reference_qiita_cli 運用ルール厳守):
-  - 生トークンをコードに書かない。env `QIITA_TEAM_TOKEN` か D:/api-keys.json の `qiita_team_token` から読む。
+  - 生トークンをコードに書かない。env `QIITA_TEAM_TOKEN` か C:/dev/api-keys.json の `qiita_team_token` から読む。
   - publish は外部公開 = ユーザーが GO。本ツールは既定で **dry-run / scan のみ**。実 POST は明示 `--yes` 必須。
   - 新規は private:true を既定送信するが、Qiita Team での実効可視範囲は別途一次確認が必要。
   - 既存更新 (frontmatter に id) も payload には `private` を含むが、Qiita Team 側で visibility flip に効くかは未検証。rollback は runbook の確認手順を前提にする。
@@ -110,7 +110,7 @@ def resolve_token() -> tuple[str | None, str | None]:
     t = os.environ.get("QIITA_TEAM_TOKEN")
     if t and t.strip():
         return t.strip(), "env:QIITA_TEAM_TOKEN"
-    paths = (r"D:/api-keys.json", os.path.expanduser("~/api-keys.json"))
+    paths = (r"C:/dev/api-keys.json", os.path.expanduser("~/api-keys.json"))
     api_keys = [(p, _load_api_keys_json(p)) for p in paths]
     for keys in (("qiita_team_token", "QIITA_TEAM_TOKEN"), ("qiita_token",)):
         for p, d in api_keys:
@@ -470,7 +470,7 @@ def _req(method: str, path: str, token: str, payload: dict | None = None) -> tup
 def cmd_verify(_args: list[str]) -> int:
     token, token_source = resolve_token()
     if not token:
-        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
+        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to C:/dev/api-keys.json")
         return 2
     _print_token_source("verify", token_source)
     if _is_personal_token_source(token_source):
@@ -610,7 +610,7 @@ def cmd_preflight(args: list[str]) -> int:
         return 2
     token, token_source = resolve_token()
     if not token:
-        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
+        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to C:/dev/api-keys.json")
         return 2
     _print_token_source("preflight", token_source)
     if _is_personal_token_source(token_source):
@@ -648,7 +648,7 @@ def cmd_show(args: list[str]) -> int:
         return 2
     token, token_source = resolve_token()
     if not token:
-        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
+        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to C:/dev/api-keys.json")
         return 2
     _print_token_source("show", token_source)
     if _is_personal_token_source(token_source):
@@ -954,7 +954,7 @@ def cmd_post(args: list[str]) -> int:
         return 3 if preview_rc == 0 else preview_rc
     token, token_source = resolve_token()
     if not token:
-        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to D:/api-keys.json")
+        print("NO TOKEN: set env QIITA_TEAM_TOKEN or add qiita_team_token to C:/dev/api-keys.json")
         return 2
     _print_token_source("post", token_source)
     if _is_personal_token_source(token_source):

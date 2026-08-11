@@ -10,26 +10,26 @@ nav_order: 94
 > 毎ターン自動上書きします. **手動編集は失われます**.
 > 永続化したい内容は [`NEXT_SESSION.md`]({{ '/NEXT_SESSION' | relative_url }}) 側に書いてください.
 
-- **生成時刻**: 2026-07-24 20:36:54
+- **生成時刻**: 2026-07-24 21:22:17
 - **生成元**: `scripts/gen_next_session_auto.py` (RAPTOR Stop hook)
 
 
 ## 1. portal git snapshot
 
 - ブランチ: `main`
-- HEAD vs upstream (左=ahead 右=behind): `21	0`
+- HEAD vs upstream (左=ahead 右=behind): `25	0`
 
 ```
+ecef22d0 auto: gpu_pc_arrival_workplan_2026-07-24.md 編集前 (2026-07-24 21:14)
+0ab566da auto: gpu_pc_arrival_workplan_2026-07-24.md 編集前 (2026-07-24 21:13)
+f19b2856 auto: gpu_pc_arrival_workplan_2026-07-24.md 編集前 (2026-07-24 21:13)
+ee127980 auto: gpu_pc_arrival_workplan_2026-07-24.md 編集前 (2026-07-24 21:13)
 0c704ed7 auto: QIITA_musculo_evis_definitive_zh.md 編集前 (2026-07-21 20:53)
 e1be9289 auto: QIITA_musculo_evis_definitive_en.md 編集前 (2026-07-21 20:53)
 5222e57b auto: QIITA_musculo_evis_definitive_ja.md 編集前 (2026-07-21 20:53)
 1610b923 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
 c1046569 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
 778b88d3 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
-33797b01 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
-81c507ce auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
-ebbf3801 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
-67690da5 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
 ```
 
 ### git status (porcelain)
@@ -37,7 +37,7 @@ ebbf3801 auto: qiita_public_post.py 編集前 (2026-07-19 12:08)
 ```
 M docs/NEXT_SESSION.auto.md
  M docs/SESSION_SUMMARY.md
- M docs/articles/drafts/QIITA_musculo_evis_definitive_zh.md
+ M docs/research/gpu_pc_arrival_workplan_2026-07-24.md
 ```
 
 
@@ -72,8 +72,9 @@ _本セクションは `NEXT_SESSION.md` の 🧑 見出し配下を毎ターン
 
 ## 5. 直近 4 時間に変更されたファイル (portal)
 
-- `20:36` `docs/SESSION_SUMMARY.md`
-- `20:36` `docs/NEXT_SESSION.auto.md`
+- `21:14` `docs/SESSION_SUMMARY.md`
+- `21:14` `docs/NEXT_SESSION.auto.md`
+- `21:14` `docs/research/gpu_pc_arrival_workplan_2026-07-24.md`
 
 
 ## Cross-references

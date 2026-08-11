@@ -9,7 +9,7 @@ Safety (Telegram 版と同方針 + メール固有の追加):
 - **stdlib only** (imaplib/email)。daemon でなく schedule/on-demand 実行。
 - 各タスクに ``constraints: ["no-push", "needs-human-judgment"]`` = 自律ループは危険/不可逆操作を
   人間確認なしに実行しない。
-- 認証は ``D:/api-keys.json`` から (agent_email / agent_email_password / agent_email_imap_host /
+- 認証は ``C:/dev/api-keys.json`` から (agent_email / agent_email_password / agent_email_imap_host /
   agent_email_imap_port)。値は絶対に print しない。
 - ★**送信元 allowlist (fail-closed)**: メールは誰でも送れる=untrusted。``agent_email_allowed_senders``
   (comma 区切り) に無い差出人は取り込まない。未設定時は保守的 default のみ許可し WARN。
@@ -36,7 +36,7 @@ from email.utils import parsedate_to_datetime, parseaddr
 from datetime import UTC, datetime
 from pathlib import Path
 
-API_KEYS_FILE = Path(r"D:\api-keys.json")
+API_KEYS_FILE = Path(r"C:\dev\api-keys.json")
 DEFAULT_ALLOWED = ("puruyan@live.jp", "kazufumi@furuse.work")  # 未設定時の保守的 default
 MAX_BODY_CHARS = 8000
 MAX_BACKFILL = 50
@@ -46,8 +46,8 @@ def _loop_root() -> Path:
     env = os.environ.get("RAPTOR_LOOP_DIR")
     if env:
         return Path(env)
-    if os.name == "nt" and Path("D:/tools").exists():
-        return Path("D:/tools/claude-loop")
+    if os.name == "nt" and Path("C:/dev/tools").exists():
+        return Path("C:/dev/tools/claude-loop")
     return Path.home() / ".claude-loop"
 
 
@@ -60,7 +60,7 @@ def _ensure_utf8_stdout() -> None:
 
 
 def _secret(name: str, default: str = "") -> str:
-    """D:/api-keys.json 優先 -> env。値は print しない。"""
+    """C:/dev/api-keys.json 優先 -> env。値は print しない。"""
     try:
         keys = json.loads(API_KEYS_FILE.read_text(encoding="utf-8"))
         if keys.get(name):

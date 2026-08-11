@@ -5,8 +5,8 @@
     移行後 Day-1 の環境健全性チェックを順に実行し、PASS/FAIL/SKIP を集計する。
 
 .DESCRIPTION
-    正本 = D:/projects/fullsense/docs/research/gpu_pc_migration_plan_2026-06-28.md (§5)
-           D:/projects/fullsense/docs/research/migration_manifest_2026-06-28.md (§6,§7)
+    正本 = C:/dev/projects/fullsense/docs/research/gpu_pc_migration_plan_2026-06-28.md (§5)
+           C:/dev/projects/fullsense/docs/research/migration_manifest_2026-06-28.md (§6,§7)
 
     各ステップは失敗しても続行し、最後にサマリ表を出す。色つき (赤/緑) は
     使わず、記号 (✓ Pass / ✗ Fail / ! Warn / - Skip) と文字で状態を示す
@@ -14,7 +14,7 @@
 
     チェック項目 (実行順):
       0a. D: ドライブ レター/FileSystem/HealthStatus/BusType + sentinel
-          (D:\tools\raptor) — 外付け本体温存確認。D: 不在は即 Fail で以降中止。
+          (C:\dev\tools\raptor) — 外付け本体温存確認。D: 不在は即 Fail で以降中止。
           USB / exFAT / HealthStatus!=Healthy は Warn (内蔵 NTFS 化を促す)。
       0b. ユーザー名 == puruy (fail-closed / OOBE ローカルアカウント確認)
       1.  torch.cuda.is_available() + get_device_name(0)            [GPU]
@@ -22,13 +22,13 @@
       3.  llcore native forward GPU golden 一致 (prove_native_...)   [GPU]
       4.  plateau smoke (tbptt_plateau_experiment --max-iters 5)     [GPU]
       5.  tool-guard live (本体存在 + settings.json PreToolUse 配線)
-      6.  RAD corpus アクセス (D:\docs + *_corpus_v2 数)
+      6.  RAD corpus アクセス (C:\dev\docs + *_corpus_v2 数)
       7.  ツール存在 (node/git/gh/cargo/rtk/uv/semgrep/py 3.11)
       8.  .claude.json 存在 + mcpServers 配線 (MCP 本体・57KB / .claude\ の外)
       9.  .codex 存在 + browser-use alpaca_state.json (C: live state)
       10. User env secret 3 キー (ANTHROPIC/TELEGRAM/SOCIALDATA)
       11. gh auth status OK / .gitconfig user.email 設定済
-      12. Scheduled Tasks Ready + action が D:\tools\raptor を参照
+      12. Scheduled Tasks Ready + action が C:\dev\tools\raptor を参照
 
     GPU 項目 (1-4) は -SkipGpu 指定時にすべて SKIP になる (現機=GPU 無しでの
     ドライラン確認用)。3/4 が呼ぶ llcore スクリプトの --device 引数は別作業で
@@ -39,18 +39,18 @@
     gpu_pc_migration_plan_2026-06-28.md §2-2 / migration_manifest_2026-06-28.md §7-1。
 
 .PARAMETER LlcoreDir
-    llcore リポジトリのパス。default D:\projects\llcore
+    llcore リポジトリのパス。default C:\dev\projects\llcore
 
 .PARAMETER SkipGpu
     GPU 系チェック (1-4) をすべて SKIP する。現機 (GPU 無し) での配線確認用。
 
 .EXAMPLE
     # 新マシン Day-1 (GPU あり) — フル検証
-    pwsh -NoProfile -File D:\projects\fullsense\tools\migration\verify_new_machine.ps1
+    pwsh -NoProfile -File C:\dev\projects\fullsense\tools\migration\verify_new_machine.ps1
 
 .EXAMPLE
     # 現機ドライラン — GPU 以外 (5/6/7) のみ走らせ GPU はクリーンに SKIP
-    pwsh -NoProfile -File D:\projects\fullsense\tools\migration\verify_new_machine.ps1 -SkipGpu
+    pwsh -NoProfile -File C:\dev\projects\fullsense\tools\migration\verify_new_machine.ps1 -SkipGpu
 
 .NOTES
     終了コード: Fail が 1 件でもあれば 1、無ければ 0 (Skip / Warn は許容)。
@@ -66,7 +66,7 @@
 #>
 [CmdletBinding()]
 param(
-    [string]$LlcoreDir = 'D:\projects\llcore',
+    [string]$LlcoreDir = 'C:\dev\projects\llcore',
     [switch]$SkipGpu
 )
 
@@ -78,13 +78,13 @@ try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch { }
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
 # --- 固定パス (D:\ レイアウト温存前提 / plan §2) ----------------------------
-$ToolGuardPath = 'D:\tools\raptor\libexec\raptor-tool-guard'
+$ToolGuardPath = 'C:\dev\tools\raptor\libexec\raptor-tool-guard'
 $SettingsPath  = 'C:\Users\puruy\.claude\settings.json'
-$DocsDir       = 'D:\docs'
+$DocsDir       = 'C:\dev\docs'
 $GpuSmokePath  = Join-Path $PSScriptRoot 'gpu_smoke.py'
 
 # --- C: 常駐リソース (移行後に復元されているべきもの / manifest §2-1 inventory) -
-$RaptorRoot      = 'D:\tools\raptor'                                          # D: sentinel (別ボリューム誤マウント検出用)
+$RaptorRoot      = 'C:\dev\tools\raptor'                                          # D: sentinel (別ボリューム誤マウント検出用)
 $ClaudeJsonPath  = 'C:\Users\puruy\.claude.json'                             # 57KB・MCP 配線/oauth/trust 本体 (.claude\ の外)
 $CodexDir        = 'C:\Users\puruy\.codex'                                   # Codex 二本柱の核
 $BrowserUseState = 'C:\Users\puruy\browser-use-project\alpaca_state.json'    # trading live state (code は D: 側=travels)
@@ -431,12 +431,12 @@ catch {
 }
 
 # ============================== Check 6 ====================================
-$name6 = 'RAD corpus アクセス (D:\docs + *_corpus_v2 数)'
+$name6 = 'RAD corpus アクセス (C:\dev\docs + *_corpus_v2 数)'
 try {
     if (Test-Path -LiteralPath $DocsDir -PathType Container) {
         $corpora = @(Get-ChildItem -LiteralPath $DocsDir -Directory -Filter '*_corpus_v2' -ErrorAction SilentlyContinue)
         $n = $corpora.Count
-        Add-Result -Id '6' -Name $name6 -Status 'Pass' -Detail ("D:\docs 存在、*_corpus_v2 = {0} 個" -f $n)
+        Add-Result -Id '6' -Name $name6 -Status 'Pass' -Detail ("C:\dev\docs 存在、*_corpus_v2 = {0} 個" -f $n)
     }
     else {
         Add-Result -Id '6' -Name $name6 -Status 'Fail' -Detail ("{0} が無い (RAD 未展開)" -f $DocsDir)
@@ -521,7 +521,7 @@ catch {
 
 # ============================== Check 9 ====================================
 # .codex (Codex 二本柱の核) + browser-use の alpaca_state.json (trading の
-# live state。code 本体は D:\projects 側=travels だが live state は C: 常駐)。
+# live state。code 本体は C:\dev\projects 側=travels だが live state は C: 常駐)。
 $name9 = '.codex 存在 + browser-use alpaca_state (Codex 核 / trading live)'
 try {
     $codexOk  = Test-Path -LiteralPath $CodexDir -PathType Container
@@ -599,11 +599,11 @@ catch {
 }
 
 # ============================== Check 12 ===================================
-# Scheduled Tasks が Ready + action が D:\tools\raptor を指すか。
+# Scheduled Tasks が Ready + action が C:\dev\tools\raptor を指すか。
 # 旧機では RAPTOR-Backup/CorpusUpdate の action が壊れた C: 依存
 # (C:\Python314\python.exe / 不在の C:\Users\puruy\raptor\...) を指す可能性が
-# あり、新機では py -3.11 + D:\tools\raptor\libexec へ是正されている必要がある。
-$name12 = 'Scheduled Tasks Ready + action が D:\tools\raptor を参照'
+# あり、新機では py -3.11 + C:\dev\tools\raptor\libexec へ是正されている必要がある。
+$name12 = 'Scheduled Tasks Ready + action が C:\dev\tools\raptor を参照'
 try {
     $wantTasks = @('FullSense-StatusTelegram', 'RAPTOR-Backup', 'RAPTOR-CorpusUpdate')
     $lines    = [System.Collections.Generic.List[string]]::new()
@@ -631,16 +631,16 @@ try {
 
         # RAPTOR 系のみ action パス是正を検証 (FullSense-StatusTelegram は state のみ)
         if ($tn -ne 'FullSense-StatusTelegram') {
-            $pointsRaptor = $actStr -match 'D:\\tools\\raptor'
+            $pointsRaptor = $actStr -match 'C:\\\\dev\\\\tools\\raptor'
             $cDep         = ($actStr -match 'C:\\Users\\puruy\\raptor') -or ($actStr -match 'C:\\Python314')
             if ($pointsRaptor) {
-                $tag += ' action->D:\tools\raptor OK'
+                $tag += ' action->C:\dev\tools\raptor OK'
             }
             elseif ($cDep) {
-                $tag += ' action=旧C:依存(要是正: py -3.11 + D:\tools\raptor\libexec)'; $anyWarn = $true
+                $tag += ' action=旧C:依存(要是正: py -3.11 + C:\dev\tools\raptor\libexec)'; $anyWarn = $true
             }
             else {
-                $tag += ' action=?(D:\tools\raptor 不参照 — 要確認)'; $anyWarn = $true
+                $tag += ' action=?(C:\dev\tools\raptor 不参照 — 要確認)'; $anyWarn = $true
             }
         }
         $lines.Add($tag)

@@ -231,7 +231,7 @@ def test_qiita_public_post_title_mismatch_compat_blocks_when_frontmatter_publish
         "# 日本語\n\n# New publish title\n"
     )
     monkeypatch.setattr(qpp, "_load_baseline_text", lambda path: baseline)
-    assert qpp._should_block_title_mismatch(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md", meta, body) is True
+    assert qpp._should_block_title_mismatch(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md", meta, body) is True
 
 
 def _write_title_mismatch_source(tmp_path: Path) -> Path:
@@ -332,7 +332,7 @@ def test_qiita_public_post_title_mismatch_compat_blocks_new_publish_title_change
         "# 日本語\n\n# Old publish title\n"
     )
     monkeypatch.setattr(qpp, "_load_baseline_text", lambda path: baseline)
-    assert qpp._should_block_title_mismatch(r"D:\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md", meta, body) is True
+    assert qpp._should_block_title_mismatch(r"C:\dev\projects\fullsense\docs\articles\QIITA_#01_brief_api_progressive.md", meta, body) is True
 
 
 def test_qiita_public_post_tag_signatures_normalize_case_and_commas():
@@ -467,7 +467,7 @@ def test_qiita_team_post_title_mismatch_compat_blocks_when_frontmatter_publish_t
         "# 日本語\n\n# New publish title\n"
     )
     monkeypatch.setattr(qtp, "_load_baseline_text", lambda path: baseline)
-    assert qtp._should_block_title_mismatch(r"D:\projects\fullsense\docs\articles\QIITA_#02_cognitive_factors.md", meta, body) is True
+    assert qtp._should_block_title_mismatch(r"C:\dev\projects\fullsense\docs\articles\QIITA_#02_cognitive_factors.md", meta, body) is True
 
 
 def test_qiita_team_post_live_identity_uses_team_id_only():
@@ -488,7 +488,7 @@ def test_qiita_team_post_title_mismatch_compat_blocks_new_publish_title_change_o
         "# 日本語\n\n# Old publish title\n"
     )
     monkeypatch.setattr(qtp, "_load_baseline_text", lambda path: baseline)
-    assert qtp._should_block_title_mismatch(r"D:\projects\fullsense\docs\articles\QIITA_#02_cognitive_factors.md", meta, body) is True
+    assert qtp._should_block_title_mismatch(r"C:\dev\projects\fullsense\docs\articles\QIITA_#02_cognitive_factors.md", meta, body) is True
 
 
 def test_qiita_team_post_build_payload_skips_group_url_name_without_create_intent():
@@ -1991,12 +1991,12 @@ def test_qiita_team_post_cmd_scan_default_targets_curated_qiita_range(tmp_path, 
 
 
 def test_qiita_team_post_cmd_preflight_blocks_on_qiita_token_fallback(capsys, monkeypatch):
-    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "C:/dev/api-keys.json:qiita_token"))
     rc = qtp.cmd_preflight(["team-item-id"])
     out = capsys.readouterr().out
 
     assert rc == 1
-    assert "preflight: token_source=D:/api-keys.json:qiita_token" in out
+    assert "preflight: token_source=C:/dev/api-keys.json:qiita_token" in out
     assert "WARNING qiita.com personal token fallback is in use" in out
     assert "preflight: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
 
@@ -2009,7 +2009,7 @@ def test_qiita_team_post_resolve_token_skips_whitespace_only_env_and_uses_file_f
     real_open = open
 
     def fake_open(path, *args, **kwargs):
-        if path == "D:/api-keys.json":
+        if path == "C:/dev/api-keys.json":
             raise OSError("blocked for test isolation")
         return real_open(path, *args, **kwargs)
 
@@ -2035,7 +2035,7 @@ def test_qiita_team_post_resolve_token_skips_whitespace_only_file_token_and_fall
     real_open = open
 
     def fake_open(path, *args, **kwargs):
-        if path == "D:/api-keys.json":
+        if path == "C:/dev/api-keys.json":
             raise OSError("blocked for test isolation")
         return real_open(path, *args, **kwargs)
 
@@ -2061,7 +2061,7 @@ def test_qiita_team_post_resolve_token_prefers_team_key_over_personal(tmp_path, 
     real_open = open
 
     def fake_open(path, *args, **kwargs):
-        if path == "D:/api-keys.json":
+        if path == "C:/dev/api-keys.json":
             raise OSError("blocked for test isolation")
         return real_open(path, *args, **kwargs)
 
@@ -2085,7 +2085,7 @@ def test_qiita_team_post_resolve_token_prefers_team_key_in_later_file_over_perso
     real_open = open
 
     def fake_open(path, *args, **kwargs):
-        if path == "D:/api-keys.json":
+        if path == "C:/dev/api-keys.json":
             return real_open(first, *args, **kwargs)
         return real_open(path, *args, **kwargs)
 
@@ -2098,25 +2098,25 @@ def test_qiita_team_post_resolve_token_prefers_team_key_in_later_file_over_perso
 
 
 def test_qiita_team_post_cmd_verify_blocks_on_qiita_token_fallback(capsys, monkeypatch):
-    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "C:/dev/api-keys.json:qiita_token"))
 
     rc = qtp.cmd_verify([])
     out = capsys.readouterr().out
 
     assert rc == 1
-    assert "verify: token_source=D:/api-keys.json:qiita_token" in out
+    assert "verify: token_source=C:/dev/api-keys.json:qiita_token" in out
     assert "WARNING qiita.com personal token fallback is in use" in out
     assert "verify: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
 
 
 def test_qiita_team_post_cmd_show_blocks_on_qiita_token_fallback(capsys, monkeypatch):
-    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "C:/dev/api-keys.json:qiita_token"))
 
     rc = qtp.cmd_show(["team-item-id"])
     out = capsys.readouterr().out
 
     assert rc == 1
-    assert "show: token_source=D:/api-keys.json:qiita_token" in out
+    assert "show: token_source=C:/dev/api-keys.json:qiita_token" in out
     assert "WARNING qiita.com personal token fallback is in use" in out
     assert "show: BLOCKED personal-token fallback cannot prove Team visibility on this workspace." in out
 
@@ -2337,13 +2337,13 @@ def test_qiita_team_post_cmd_post_blocks_on_qiita_token_fallback(tmp_path, capsy
         "body\n",
         encoding="utf-8",
     )
-    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "D:/api-keys.json:qiita_token"))
+    monkeypatch.setattr(qtp, "resolve_token", lambda: ("fake-token", "C:/dev/api-keys.json:qiita_token"))
 
     rc = qtp.cmd_post([str(path), "--yes"])
     out = capsys.readouterr().out
 
     assert rc == 1
-    assert "post: token_source=D:/api-keys.json:qiita_token" in out
+    assert "post: token_source=C:/dev/api-keys.json:qiita_token" in out
     assert "WARNING qiita.com personal token fallback is in use" in out
     assert "post: BLOCKED personal-token fallback cannot prove Team auth / membership / visibility." in out
 

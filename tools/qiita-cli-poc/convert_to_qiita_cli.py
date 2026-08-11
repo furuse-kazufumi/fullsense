@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """convert_to_qiita_cli.py — 既存 FullSense 記事を @qiita/qiita-cli schema へ正規化する PoC。
 
-入力: D:/projects/fullsense/docs/articles/ の記事を **コピー** したもの
+入力: C:/dev/projects/fullsense/docs/articles/ の記事を **コピー** したもの
       (このスクリプトは実記事を一切編集しない。input_copies/ のコピーに対してのみ動く)。
 出力: public/<basename>.md (qiita-cli が publish 対象とするディレクトリ)。
 

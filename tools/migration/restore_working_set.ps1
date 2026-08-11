@@ -11,7 +11,7 @@
 
     ★新前提(物理移送):
       D: は外付け SSD 本体(SanDisk Extreme 55AE / exFAT / 平文 / USB)を新機へ
-      物理接続しレター D: を温存する。よって D:\projects / D:\tools\raptor / D:\docs
+      物理接続しレター D: を温存する。よって C:\dev\projects / C:\dev\tools\raptor / C:\dev\docs
       などは「travels(移送不要)」であり、本スクリプトは **復元しない**。
       本スクリプトが運ぶのは backup_working_set.ps1 が D:\_c_migration\ へ staging した
       **C: 常駐分のみ**(.claude / .claude.json / .codex / browser-use live state /
@@ -29,7 +29,7 @@
     ★前提チェック(fail-closed):
       - 実行ユーザーが 'puruy' でない場合は **throw**(警告から格上げ)。
         ユーザー名が違うと hook/memory/.claude.json/gh パスが破損する(plan §2-1)。
-      - D:\ ボリュームが無い場合は中止。さらに **sentinel(D:\tools\raptor 存在)**で
+      - D:\ ボリュームが無い場合は中止。さらに **sentinel(C:\dev\tools\raptor 存在)**で
         「D: が本物の作業ディスクか」を確認する。別ボリュームが D: に化けている状態で
         走らせると誤った staging を掴む / 旧設計では /MIR purge 事故の温床になるため
         fail-closed で止める(spec §2-4 / §0)。
@@ -38,13 +38,13 @@
       3 secret はこのミラーに **含まれない**(平文 staging しない)。復元後に
       migrate_secrets.ps1 -Mode Restore で配置し、env3キーは setx か再発行する。
       .credentials.json は端末紐づきのため **新機は claude 再ログイン前提**。
-      D:\api-keys.json と raptor settings.local.json は D: 上(travels)で別送不要。
+      C:\dev\api-keys.json と raptor settings.local.json は D: 上(travels)で別送不要。
 
     ★復元後ステップ(-SkipReferenceApply で省略可):
       - reference\user_path.txt / user_env_nonsecret.txt を setx で再適用(secret 除外)。
       - reference\scheduled_tasks\*.xml を Register-ScheduledTask -Xml で再登録。
         ただし action は旧機 C: 依存(C:\Python314\python.exe / C:\Users\puruy\raptor\...)
-        のままなので、D:\tools\raptor\libexec + py -3.11 へ **手修正が必要**と注記する
+        のままなので、C:\dev\tools\raptor\libexec + py -3.11 へ **手修正が必要**と注記する
         (VERIFIED FACTS / manifest §4)。
 
     冪等: robocopy /MIR は差分のみ。単一ファイルは差分コピー。再実行で増分同期。
@@ -256,7 +256,7 @@ function Invoke-ReferenceApply {
         }
         if ($xmls.Count -gt 0) {
             Write-Host '  注記: 登録した task の action は旧機 C: 依存のまま(C:\Python314\python.exe /' -ForegroundColor Yellow
-            Write-Host '        C:\Users\puruy\raptor\... は新機に存在しない)。D:\tools\raptor\libexec +' -ForegroundColor Yellow
+            Write-Host '        C:\Users\puruy\raptor\... は新機に存在しない)。C:\dev\tools\raptor\libexec +' -ForegroundColor Yellow
             Write-Host '        py -3.11 へ手修正が必要(VERIFIED FACTS / manifest §4)。' -ForegroundColor Yellow
             Write-Host '        ClaudeCodeUpdate は Ready のまま要判断。' -ForegroundColor Yellow
         }
@@ -296,8 +296,8 @@ if (-not (Test-Path -LiteralPath 'D:\')) {
 }
 # sentinel: D: が「本物の作業ディスク」かを確認する。別ボリュームが D: に割り当てられた
 # 状態では誤った staging を掴んだり /MIR purge 事故の温床になるため fail-closed で止める。
-if (-not (Test-Path -LiteralPath 'D:\tools\raptor')) {
-    throw 'D:\ は存在しますが sentinel(D:\tools\raptor)が見つかりません。別ボリュームが D: に化けている可能性があります。正しい外付け SSD をレター D: に固定(§2-2)してから再実行してください(spec §2-4 / §0)。'
+if (-not (Test-Path -LiteralPath 'C:\dev\tools\raptor')) {
+    throw 'D:\ は存在しますが sentinel(C:\dev\tools\raptor)が見つかりません。別ボリュームが D: に化けている可能性があります。正しい外付け SSD をレター D: に固定(§2-2)してから再実行してください(spec §2-4 / §0)。'
 }
 
 $LogDir = Join-Path $srcRoot '_restore_logs'
@@ -417,7 +417,7 @@ if ($ListOnly) {
     Write-Host 'C: 常駐分を同一絶対パスへ展開完了。次の手順:' -ForegroundColor Green
     Write-Host '  1) migrate_secrets.ps1 -Mode Restore で secret 配置 + env3キー setx/再発行' -ForegroundColor Yellow
     Write-Host '  2) .credentials.json は端末紐づき → 新機で claude 再ログイン' -ForegroundColor Yellow
-    Write-Host '  3) 登録 scheduled task の action(C: 依存)を D:\tools\raptor + py -3.11 へ手修正' -ForegroundColor Yellow
+    Write-Host '  3) 登録 scheduled task の action(C: 依存)を C:\dev\tools\raptor + py -3.11 へ手修正' -ForegroundColor Yellow
     Write-Host '  4) verify_new_machine.ps1 で移行後チェック(Check0 = D: レター/健全性)' -ForegroundColor Yellow
 }
 exit 0

@@ -9,7 +9,7 @@
 
     ★前提の転換(物理移送):
       D: は外付け SSD 本体(SanDisk Extreme / exFAT / 平文 / USB)を新機へ物理接続し
-      レター D: を温存する。したがって D: 上の secret(D:\api-keys.json /
+      レター D: を温存する。したがって D: 上の secret(C:\dev\api-keys.json /
       raptor settings.local.json)は D: ごと travels = 別経路への「移送」は不要。
       旧設計の「working-set ミラーから除外して別送」目的は消滅した。本スクリプトは
       以下の 2 つの新しい役割に再スコープする。
@@ -27,8 +27,8 @@
         SECRET_user_env.txt としてバンドル内に同梱する(working-set staging では拾えない)。
 
     対象の秘密ファイル(現機実測。実在するもののみ収集):
-      - D:\api-keys.json                                 (A: ★API キー一元管理・D: travels だが保険)
-      - D:\tools\raptor\.claude\settings.local.json      (A: ★ANTHROPIC_API_KEY 平文・同上)
+      - C:\dev\api-keys.json                                 (A: ★API キー一元管理・D: travels だが保険)
+      - C:\dev\tools\raptor\.claude\settings.local.json      (A: ★ANTHROPIC_API_KEY 平文・同上)
       - C:\Users\puruy\.codex\auth.json                  (B: ★Codex 二本柱の認証)
       - C:\Users\puruy\.claude\.credentials.json         (B: ★Claude 資格情報・端末紐づき)
       - C:\Users\puruy\.ssh\id_ed25519                   (B: ★SSH 秘密鍵)
@@ -47,7 +47,7 @@
 
     ★key ローテーション(plan §5 / manifest §5):
       平文露出の衛生として、移行を機に ANTHROPIC_API_KEY / 各 API キーの
-      ローテーション(再発行 + D:\api-keys.json 更新 + 旧キー失効)を行う。とくに
+      ローテーション(再発行 + C:\dev\api-keys.json 更新 + 旧キー失効)を行う。とくに
       .credentials.json は端末紐づきのため、新機では claude 再ログインが前提。
       バンドルはあくまで「移行をブロックしないための保険」であり、理想は新機で鍵を
       新規発行して古いバンドルは安全に破棄する運用。
@@ -73,7 +73,7 @@
 
 .EXAMPLE
     pwsh -File .\migrate_secrets.ps1 -Mode Restore -Source 'E:\fullsense-secrets-20260715-101010.7z'
-    # 新機で展開し .codex\auth.json / .credentials.json / .ssh / D:\api-keys.json 等を
+    # 新機で展開し .codex\auth.json / .credentials.json / .ssh / C:\dev\api-keys.json 等を
     # 元パスへ配置し、User env 3 キーを再適用(復元は restore_working_set の後)。
 #>
 [CmdletBinding()]
@@ -97,8 +97,8 @@ $ErrorActionPreference = 'Stop'
 $SecretFiles = @(
     # (A) off-disk 損失保険: D: 上 secret(D: ごと travels するが、ダーティ exFAT の
     #     唯一コピー喪失に備えた保険コピー)
-    'D:\api-keys.json',
-    'D:\tools\raptor\.claude\settings.local.json',
+    'C:\dev\api-keys.json',
+    'C:\dev\tools\raptor\.claude\settings.local.json',
 
     # (B) C: 常駐 secret: D: と一緒に travels しない。新機で復元が必須。
     'C:\Users\puruy\.codex\auth.json',            # ★Codex 二本柱の認証
@@ -128,7 +128,7 @@ function Find-SevenZip {
 }
 
 function Get-ArchiveRelPath {
-    # D:\api-keys.json -> D\api-keys.json
+    # C:\dev\api-keys.json -> D\api-keys.json
     param([string]$AbsPath)
     $full     = [System.IO.Path]::GetFullPath($AbsPath)
     $pathRoot = [System.IO.Path]::GetPathRoot($full)
@@ -138,7 +138,7 @@ function Get-ArchiveRelPath {
 }
 
 function Restore-AbsPathFromRel {
-    # D\api-keys.json -> D:\api-keys.json
+    # D\api-keys.json -> C:\dev\api-keys.json
     param([string]$RelPath)
     $parts = $RelPath -split '[\\/]', 2
     if ($parts.Count -lt 2) { throw "想定外の相対パス: $RelPath" }

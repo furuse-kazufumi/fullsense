@@ -6,7 +6,7 @@
 GPU 健全性チェック(スタンドアロン)。`verify_new_machine.ps1` のチェック 2
 から呼ばれるが、単体でも実行できる。
 
-正本: D:/projects/fullsense/docs/research/gpu_pc_migration_plan_2026-06-28.md
+正本: C:/dev/projects/fullsense/docs/research/gpu_pc_migration_plan_2026-06-28.md
       (§4-4 torch cu128 検証 / §5 検証チェックリスト)
 
 使い方 (PYTHONUTF8=1 を前置推奨。stdout は UTF-8 で固定する):

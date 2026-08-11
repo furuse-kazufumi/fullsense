@@ -9,7 +9,7 @@
 #   D. About config (Website + 10 individual Topics) for lldesign / lltrade
 #   E. Mermaid family tree actually rendered (not raw fenced source)
 #
-# Usage: bash D:/projects/fullsense/scripts/verify_publication.sh
+# Usage: bash C:/dev/projects/fullsense/scripts/verify_publication.sh
 
 set -u
 

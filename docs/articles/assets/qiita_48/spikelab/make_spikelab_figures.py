@@ -2,7 +2,7 @@
 """Qiita #48 spikelab section figures, generated from real spikelab simulations.
 
 Labels are in English (avoid matplotlib JP font tofu); prose explains in Japanese.
-Run: PYTHONPATH=D:/projects/spikelab/src python make_spikelab_figures.py
+Run: PYTHONPATH=C:/dev/projects/spikelab/src python make_spikelab_figures.py
 """
 from __future__ import annotations
 
