@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 620" font-family="Segoe UI, Hiragino Sans, Meiryo, sans-serif">
+  <rect width="1180" height="620" fill="#ffffff"/>
+
+  <text x="590" y="46" font-size="28" font-weight="600" fill="#1a2733" text-anchor="middle">なぜ「重心が前へ進んだ量」は嘘をつくのか</text>
+  <text x="590" y="76" font-size="16" fill="#5b6b7a" text-anchor="middle">足を床に置いたまま前へ傾くだけで、重心は前進する。足は 1 mm も動いていないのに。</text>
+
+  <!-- ===== left: standing ===== -->
+  <rect x="40" y="104" width="520" height="400" rx="10" fill="#f6f7f9" stroke="#d3dae1" stroke-width="1.5"/>
+  <text x="64" y="140" font-size="18" font-weight="600" fill="#3c4a58">立っている</text>
+
+  <line x1="80" y1="440" x2="520" y2="440" stroke="#8c7a63" stroke-width="2.5"/>
+  <!-- body upright -->
+  <line x1="300" y1="440" x2="300" y2="220" stroke="#3c4a58" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="300" cy="220" r="20" fill="#2c6fb5"/>
+  <text x="330" y="215" font-size="15" fill="#2c6fb5">重心</text>
+  <text x="330" y="236" font-size="13" fill="#7b8b9a">(COM)</text>
+  <!-- foot -->
+  <rect x="264" y="428" width="72" height="14" rx="4" fill="#ffffff" stroke="#3c4a58" stroke-width="2"/>
+  <circle cx="300" cy="440" r="5" fill="#3c4a58"/>
+  <text x="300" y="472" font-size="14" fill="#5b6b7a" text-anchor="middle">足の中点</text>
+  <!-- height -->
+  <line x1="230" y1="220" x2="230" y2="440" stroke="#8b98a6" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="222" y="336" font-size="15" fill="#5b6b7a" text-anchor="end">高さ h</text>
+
+  <!-- ===== right: tipping ===== -->
+  <rect x="600" y="104" width="540" height="400" rx="10" fill="#fdf3e8" stroke="#e8d2b4" stroke-width="1.5"/>
+  <text x="624" y="140" font-size="18" font-weight="600" fill="#4d3a20">同じ足のまま、前へ傾く</text>
+
+  <line x1="640" y1="440" x2="1120" y2="440" stroke="#8c7a63" stroke-width="2.5"/>
+  <!-- ghost upright -->
+  <line x1="800" y1="440" x2="800" y2="220" stroke="#c9d2db" stroke-width="4" stroke-dasharray="6 5"/>
+  <circle cx="800" cy="220" r="16" fill="none" stroke="#b9c7d6" stroke-width="2.5"/>
+  <!-- tipped body: rotate about the foot -->
+  <line x1="800" y1="440" x2="926" y2="260" stroke="#3c4a58" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="926" cy="260" r="20" fill="#c8622f"/>
+  <!-- angle arc -->
+  <path d="M 800 340 A 100 100 0 0 1 852 356" fill="none" stroke="#c8622f" stroke-width="2"/>
+  <text x="836" y="336" font-size="17" font-weight="600" fill="#c8622f">θ</text>
+  <!-- foot unchanged -->
+  <rect x="764" y="428" width="72" height="14" rx="4" fill="#ffffff" stroke="#3c4a58" stroke-width="2"/>
+  <circle cx="800" cy="440" r="5" fill="#3c4a58"/>
+  <text x="800" y="472" font-size="14" font-weight="600" fill="#3c4a58" text-anchor="middle">足の中点は動いていない</text>
+
+  <!-- COM displacement -->
+  <line x1="800" y1="206" x2="926" y2="206" stroke="#c8622f" stroke-width="2"/>
+  <path d="M 918 200 L 928 206 L 918 212 Z" fill="#c8622f"/>
+  <text x="863" y="196" font-size="16" font-weight="700" fill="#c8622f" text-anchor="middle">h·sin θ</text>
+  <text x="863" y="176" font-size="14" fill="#a9762f" text-anchor="middle">重心はこれだけ「前進」する</text>
+
+  <!-- ===== bottom: numbers ===== -->
+  <rect x="40" y="524" width="1100" height="72" rx="8" fill="#1a2733"/>
+  <text x="590" y="554" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">重心の高さが約 1 m の人体なら、20°倒れるだけで重心は約 34 cm 前へ動く。</text>
+  <text x="590" y="580" font-size="15" fill="#c9d8e8" text-anchor="middle">これを「前進」と数えていた。だから前進の報酬は、歩く方策ではなく倒れる方策にも同じだけ払われる。</text>
+</svg>
