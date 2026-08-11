@@ -113,7 +113,7 @@
 | robust champion 二点つまみ | 親指 37% / 人差し指 53% / 8s PASS / held-out σ0.02:20/20・σ0.05:20/20 / 筋off 147cm | memory 08-02 + `best_hold_robust_long.npy` | **✓ 再現済み(2026-08-11 再検証)** ずれ2.6mm/中央2.6mm。physfix対照=一点寄り70/0%・17-11/20 も再現 |
 | 筋 ON/OFF ablation 落下 | 147cm(champion)/ 148cm(physfix) | 同上 | **✓ 再現済み** |
 | evis firm capture(lift付き) | memory=保持6000ms/F末0.99N | memory 08-03 | **✗ 再現せず(2026-08-11)** 同一レシピ再走=掴みF0.37N/保持2273ms/lifted+11.3mm/**F末0.00N・接触0で落とす・掴めた0/1**。memory内部も矛盾(「6秒成立」節 vs 「lift0.03で2117ms落下」節が併存)。→ **記事では「lift で約2秒後に崩れる壁」を検証済み事実として書く。「6秒成立」は AI の過大評価として honest に扱う** |
-| evis 静止保持(lift無し) | memory=6000ms/F0.99N | memory 08-03 | 検証中(`--lift 0.0` bg) — 静止が6秒もつかで壁を厳密特徴づけ |
+| evis 静止保持(lift無し) | memory=6000ms/F0.99N | memory 08-03 | **△ 部分再現(2026-08-11)** 静止=**掴めた1/1・F末0.56N・2点接触**(genuine grab)だが**連続保持は約2841ms**(6秒ではない)。→ 記事: 「静止では2点で掴める・持ち上げると落ちる」を検証済み事実に。数値は6秒でなく約2.8秒 |
 | 食事失敗の網羅 | 73 設定 / 661 回 / 掴み 0 | gallery ラベル + memory | 未検証(sweep 再走 or ログ確認) |
 | A→B は皿 5cm 下げのズル | plateB_drop=0.062 | memory 08-02(自己訂正) | 記録済(低リスク・narrative) |
 | 母指到達 / 手術 | 1.76cm→0.52cm / 1.6 倍延長 | memory 07-23/24 | 未検証(再確認) |
