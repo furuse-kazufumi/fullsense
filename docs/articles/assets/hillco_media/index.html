@@ -1,0 +1,64 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>記録した動画 — 歩行と箸</title>
+<style>
+  body { margin:0; background:#11161c; color:#e8edf2;
+         font-family:"Segoe UI","Hiragino Sans",Meiryo,sans-serif; }
+  header { padding:20px 20px 6px; }
+  h1 { font-size:20px; margin:0 0 6px; }
+  .lead { color:#93a2b1; font-size:14px; line-height:1.7; max-width:70ch; }
+  h2 { font-size:17px; margin:26px 20px 6px; padding-top:14px; border-top:1px solid #243040; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+          gap:16px; padding:10px 20px 20px; }
+  .item { background:#182029; border:1px solid #2a3540; border-radius:10px; overflow:hidden; }
+  .item video, .item img { width:100%; display:block; background:#000; }
+  .body { padding:10px 12px 13px; }
+  .ttl { font-size:14.5px; font-weight:600; margin-bottom:5px; }
+  .desc { font-size:13px; color:#a9b7c4; line-height:1.65; }
+  .tag { display:inline-block; padding:2px 8px; border-radius:999px;
+         font-size:11.5px; font-weight:600; margin-bottom:6px; }
+  .done { background:#1d4e7a; color:#dbeafe; }
+  .attempt { background:#7a4a1d; color:#fde9d0; }
+  .artifact { background:#5c2f2f; color:#f6dede; }
+  footer { padding:18px 20px 34px; color:#7d8b99; font-size:12.5px; line-height:1.8; }
+  a { color:#7fb3e8; }
+</style>
+<header>
+  <h1>記録した動画 — 歩行と箸</h1>
+  <p class="lead">
+    自宅の PC で筋骨格の人体を動かした記録です。<b>見た目が同じでも、達成したもの・まだ達成していないもの・
+    誤りとして残しているものが混ざっています</b>。取り違えないよう、1 本ずつラベルを付けました。
+    どれもモーションキャプチャの再生ではなく、物理を解いた結果です。
+  </p>
+</header>
+
+<h2>歩行</h2>
+<div class='grid'>
+<div class='item'><video src='walk_artifact.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag artifact'>誤りの記録</span><div class='ttl'>重心だけを見ていた頃の「前進」</div><div class='desc'>その場で倒れ込む過程を、重心の水平移動が前進として拾っていた。歩行の成功例ではない。</div></div></div>
+<div class='item'><video src='walk_evis_roll.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag artifact'>誤りの記録</span><div class='ttl'>前進 2 m と報告されたラン(本命 evis)</div><div class='desc'>骨盤のロールが 0 → 204°、頭が 1.46 m から 0.22 m へ。床を転がりながら前へ出ていた。</div></div></div>
+<div class='item'><video src='walk_box_bc3.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag done'>達成</span><div class='ttl'>箱のような足での模倣学習歩行</div><div class='desc'>借り物の体(92 筋)。左右交互に足が出て、どちらかが常に接地している。ただし安定は足の形に支えられている。</div></div></div>
+<div class='item'><video src='walk_anat.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag done'>達成</span><div class='ttl'>解剖学的な足での物理歩行</div><div class='desc'>踵と趾のある足。接地のたびに足裏が床に倣う。ただし持続は数秒で、10 秒は走り切れない。</div></div></div>
+</div>
+<h2>箸 — 持ち方をつくる</h2>
+<div class='grid'>
+<div class='item'><video src='chop_thumb_compare.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag done'>達成</span><div class='ttl'>親指の姿勢 — 修正の前と後</div><div class='desc'>「親指の曲がり方に違和感がある」「先が手のひら側に曲がっていないのでは」という指摘が出発点。持ち方そのものを数値にして進化させた。</div></div></div>
+<div class='item'><video src='chop_closed_loop_v6.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag done'>達成</span><div class='ttl'>開ループでは持てず、閉ループにして決まった持ち方</div><div class='desc'>接触部位を点数にするだけでは悪化した(落下 0.21 → 1.12 cm)。フィードバックを入れて落下 0.00 cm へ。</div></div></div>
+<div class='item'><video src='chop_hold8s.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag done'>達成</span><div class='ttl'>接触の設定を直したあとの保持</div><div class='desc'>「持ち方の完成」は最初 1.5 秒窓の artifact だった。真因は摩擦の次元設定で、直したら保持が伸びた。</div></div></div>
+<div class='item'><video src='chop_compare_onoff.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag done'>達成</span><div class='ttl'>同じ方策の、有無を並べた比較</div><div class='desc'>効いているのが方策なのか環境の親切さなのかを分けるための対照。</div></div></div>
+</div>
+<h2>箸 — 運ぶ</h2>
+<div class='grid'>
+<div class='item'><video src='chop_plate_to_plate.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag done'>達成</span><div class='ttl'>皿 A から皿 B へ豆を運ぶ(達成)</div><div class='desc'>手首を回して運ぶ解釈では崩れ、手の付け根ごと平行に滑らせる形に変えて通った。</div></div></div>
+<div class='item'><video src='chop_pickplace_e2e.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag artifact'>誤りの記録</span><div class='ttl'>数値は通ったが、映像では掴めていなかった回</div><div class='desc'>掴み 16 mm で near-pass と出たが、映像を見ると豆を保持していない。数値だけでは判定できない例。</div></div></div>
+<div class='item'><video src='chop_journey.mp4' controls preload='metadata' playsinline muted loop></video><div class='body'><span class='tag done'>達成</span><div class='ttl'>ここまでの道のり(まとめ)</div><div class='desc'>持ち方から運搬までの経過を通しで。</div></div></div>
+<div class='item'><img src='chop_eat_fail.gif' alt='全身で食事をしようとして、掴めない'><div class='body'><span class='tag attempt'>未達</span><div class='ttl'>全身で食事をしようとして、掴めない</div><div class='desc'>73 設定 661 回の探索で成功 0 回。箸先の幾何が破綻していた可能性があり、まだ確認できていない。</div></div></div>
+</div>
+<footer>
+  <b>ラベルの意味</b> —
+  <span class="tag done">達成</span> 課題を満たした ／
+  <span class="tag attempt">未達</span> まだできていない ／
+  <span class="tag artifact">誤り</span> 成功に見えたが実際は違った記録（消さずに残しています）<br><br>
+  記事: <a href="https://qiita.com/furuse-kazufumi/items/5621780636b374585ede">自作の進化歩行は『美しい嘘』だった</a>
+  ／ 任意視点で見る: <a href="../hillco_walk/walk_series_viewer.html">歩行の系譜ビューア</a>
+</footer>
