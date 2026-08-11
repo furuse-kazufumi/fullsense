@@ -21,7 +21,7 @@
 13. 【要生成/将来】骨格ビューアに「箸」系統を追加(現ビューアは歩行系譜のみ)。箸attempt を任意視点で。=大きめ作業。
 
 ## C. 残る検証(honest 裏取り)
-14. 【自律・実行中】母指到達 1.8cm→0.5cm(手術後)を `opt_thumb.py` 実走で現数値確定(現状 memory値+コード存在のみ)。
+14. 【✓済(一部)】母指到達 = `opt_thumb.py` 再測定で手術後 gap **1.2cm**(THUMB_SURGERY=True既定・memory「4.6→1.2cm」一致)。ch3反映済。★残: native(無手術)値は THUMB_SURGERY=False にして再測すると対比が強い。
 15. 【自律】4ゲート(A/B/C/D)champion 現状値を `gates.py` 実走で確認(ch4/5 の裏取り強化)。
 16. 【自律】force-closure ε の具体値(記事で ε を語るなら実測値が要る)。gates.py が算出。
 17. 【自律・任意】MyoHand「使う(上箸だけ開閉)」の現状(未達だが測ると ch のオチが増える)。
