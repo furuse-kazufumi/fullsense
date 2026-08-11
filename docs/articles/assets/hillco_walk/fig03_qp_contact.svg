@@ -22,7 +22,7 @@
   <text x="64" y="436" font-size="15" fill="#3c4a58">置ける範囲 &#160;&#160;<tspan font-weight="700">広い</tspan></text>
   <text x="64" y="464" font-size="15" fill="#3c4a58">最適化 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan font-weight="700" fill="#2c6fb5">解ける</tspan></text>
   <rect x="64" y="486" width="320" height="42" rx="6" fill="#dce8f5" stroke="#a9c4e0"/>
-  <text x="224" y="513" font-size="15" font-weight="600" fill="#20364d" text-anchor="middle">横방향の安定は、ここで完全に解けた</text>
+  <text x="224" y="513" font-size="15" font-weight="600" fill="#20364d" text-anchor="middle">横方向の安定は、ここで完全に解けた</text>
 
   <!-- ==== panel B: single support ==== -->
   <rect x="436" y="104" width="368" height="440" rx="10" fill="#f6f7f9" stroke="#d3dae1" stroke-width="1.5"/>
