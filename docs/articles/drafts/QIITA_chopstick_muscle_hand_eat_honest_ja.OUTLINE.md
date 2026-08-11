@@ -116,7 +116,8 @@
 | evis 静止保持(lift無し) | memory=6000ms/F0.99N | memory 08-03 | **△ 部分再現(2026-08-11)** 静止=**掴めた1/1・F末0.56N・2点接触**(genuine grab)だが**連続保持は約2841ms**(6秒ではない)。→ 記事: 「静止では2点で掴める・持ち上げると落ちる」を検証済み事実に。数値は6秒でなく約2.8秒 |
 | 食事失敗の網羅 | 記録 3,168 回すべて掴み 0(eat_*.json 73本 + wg_capture_* 自動掃引) | 既存 JSON 集計 | **✓ 確認(2026-08-11)** memory「73設定661回」は控えめ・実際は桁上の全滅 |
 | A→B は皿を下げたズル | plateB を 5.5cm 下げ(`plateB_drop=0.055`) | `pickplace_slide.py:34,51-53` | **✓ コード確認** コメント「運搬中に~4cm沈むので天面をそこに置く」 |
-| 母指到達 / 手術 | 1.76cm→0.52cm / 1.6 倍延長 | memory 07-23/24 + `opt_thumb.py` | 再測定中(`opt_thumb.py` bg) |
+| 母指到達 / 手術 | 延長後 opt gap 1.2cm(棒径0.6cm) | `opt_thumb.py` 再測定 | **✓ 再現(2026-08-11)** THUMB_SURGERY=True既定・gap 1.2cm(memory「4.6→1.2cm」一致)。native無手術値は要toggle再測 |
+| サーベイ(関連研究) | 6次元・引用付き | workflow wbwfn3a3d | **✓ 完了** ch2反映済(Ke ICRA2021/CherryBot/Yang SIGGRAPH2022/MyoChallenge/ISCM/CARBS)。full=journal.jsonl |
 | 両眼視差→距離 | 29.9px→889.3mm / 真値 873.6 / +1.8% | memory 08-03 + `eyes.py` | **✓ 再現(2026-08-11)** 視差29.91px→889.3mm/真値873.6/+1.8% |
 
 > 方針: 本文は検証済み数値で先行執筆し、未検証は明示マーク。**公開前に全数値を native/WSL MuJoCo で裏取り**(『美しい嘘』の全面差替を回避)。native MuJoCo は現在稼働(SAC ブロック解消済み)。
