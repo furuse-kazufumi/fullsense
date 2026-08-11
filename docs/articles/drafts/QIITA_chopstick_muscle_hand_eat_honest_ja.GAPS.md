@@ -6,7 +6,7 @@
 
 ## A. 本文コンテンツ
 1. 【✓済】ch2「関連研究」= サーベイ synthesis(wbwfn3a3d)反映済み。実機箸(Ke ICRA2021 80%/CherryBot)/シミュ箸(Yang SIGGRAPH2022=新規性の gap 規定)/筋ハンド(MyoChallenge 26-34%)/食事支援(ISCM・CARBS +25.8%)の4群 + honest novelty。arXiv 付き。full synthesis=workflow journal.jsonl。★残: 一部 [M]/[L] 引用(CherryBot 会場・HASHI 年・ε 原論文)は公開前に最終確認。
-2. 【自律】文字数の底上げ。現 30.6k字 vs 姉妹編『美しい嘘』72k字。各章に深掘り余地大(特に ch4 ablation / ch5 二点つまみ / ch8-9 壁)。career-grade には +30〜40k 余地。
+2. 【スコープ外=中間報告で維持】72k 化はしない(2026-08-12 確定)。現 約37k字で中間報告として十分。各章の深掘りは、研究が進んで「次回」を書くときに回す。
 3. 【自律】コード断片が未挿入。779b/美しい嘘は f-string XML・ゲート判定コードを見せた。入れると強い箇所: ablation の4行 / 接触力を「箸のみ」に絞る数行 / `plateB_drop`(ズルの証拠) / 二点つまみの接触内訳。
 4. 【自律】用語「日本語(English)」表記と略語展開の全文点検(force-closure ε / condim / capture point / co-adaptation)。
 5. 【自律・逐次】挿絵(bazue)未配置。読みやすさ向上に数コマ。★同コマ偏り防止のため main が逐次に分散決定([[reference_alu_manga_crops]])。
