@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 660" font-family="Segoe UI, Hiragino Sans, Meiryo, sans-serif">
+  <rect width="1240" height="660" fill="#ffffff"/>
+
+  <text x="620" y="46" font-size="29" font-weight="600" fill="#1a2733" text-anchor="middle">全身の最適化は、足が床から離れる瞬間に壊れる</text>
+  <text x="620" y="76" font-size="16" fill="#5b6b7a" text-anchor="middle">支えている面が小さくなると、床を押す力の置き場所が無くなり、解が存在しなくなる</text>
+
+  <!-- ==== panel A: double support ==== -->
+  <rect x="40" y="104" width="368" height="440" rx="10" fill="#eef3f9" stroke="#c9d8e8" stroke-width="1.5"/>
+  <text x="64" y="140" font-size="19" font-weight="600" fill="#20364d">A. 両足で立つ</text>
+  <text x="64" y="164" font-size="14" fill="#5b6b7a">接触点が多い</text>
+
+  <!-- support polygon A -->
+  <polygon points="112,290 208,258 336,258 336,342 208,342 112,318" fill="#c9dcf0" stroke="#5b93cc" stroke-width="2"/>
+  <rect x="108" y="272" width="72" height="46" rx="6" fill="#ffffff" stroke="#3c4a58" stroke-width="2"/>
+  <rect x="268" y="272" width="72" height="46" rx="6" fill="#ffffff" stroke="#3c4a58" stroke-width="2"/>
+  <text x="144" y="262" font-size="13" fill="#5b6b7a" text-anchor="middle">左足</text>
+  <text x="304" y="262" font-size="13" fill="#5b6b7a" text-anchor="middle">右足</text>
+  <circle cx="224" cy="300" r="8" fill="#20364d"/>
+  <text x="224" y="374" font-size="14" fill="#20364d" text-anchor="middle">床を押す力の合力が通る点</text>
+  <text x="224" y="396" font-size="14" fill="#20364d" text-anchor="middle">(圧力中心 = CoP)</text>
+
+  <text x="64" y="436" font-size="15" fill="#3c4a58">置ける範囲 &#160;&#160;<tspan font-weight="700">広い</tspan></text>
+  <text x="64" y="464" font-size="15" fill="#3c4a58">最適化 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan font-weight="700" fill="#2c6fb5">解ける</tspan></text>
+  <rect x="64" y="486" width="320" height="42" rx="6" fill="#dce8f5" stroke="#a9c4e0"/>
+  <text x="224" y="513" font-size="15" font-weight="600" fill="#20364d" text-anchor="middle">横방향の安定は、ここで完全に解けた</text>
+
+  <!-- ==== panel B: single support ==== -->
+  <rect x="436" y="104" width="368" height="440" rx="10" fill="#f6f7f9" stroke="#d3dae1" stroke-width="1.5"/>
+  <text x="460" y="140" font-size="19" font-weight="600" fill="#3c4a58">B. 片足で支える</text>
+  <text x="460" y="164" font-size="14" fill="#7b8b9a">接触点が片足ぶんに減る</text>
+
+  <polygon points="584,272 656,272 656,318 584,318" fill="#dfe6ed" stroke="#8b98a6" stroke-width="2"/>
+  <rect x="584" y="272" width="72" height="46" rx="6" fill="#ffffff" stroke="#3c4a58" stroke-width="2"/>
+  <text x="620" y="262" font-size="13" fill="#7b8b9a" text-anchor="middle">支持脚</text>
+  <circle cx="620" cy="296" r="8" fill="#3c4a58"/>
+  <!-- swing leg hint -->
+  <path d="M 706 262 q 26 26 0 56" stroke="#8b98a6" stroke-width="2" fill="none" stroke-dasharray="5 4"/>
+  <text x="742" y="296" font-size="13" fill="#8b98a6">遊脚</text>
+
+  <text x="460" y="374" font-size="14" fill="#7b8b9a" text-anchor="start">置ける範囲は足裏 1 枚ぶんしかない</text>
+
+  <text x="460" y="436" font-size="15" fill="#3c4a58">置ける範囲 &#160;&#160;<tspan font-weight="700">狭い</tspan></text>
+  <text x="460" y="464" font-size="15" fill="#3c4a58">最適化 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan font-weight="700">ぎりぎり解ける</tspan></text>
+  <rect x="460" y="486" width="320" height="42" rx="6" fill="#e8ecf0" stroke="#c9d2db"/>
+  <text x="620" y="513" font-size="15" font-weight="600" fill="#3c4a58" text-anchor="middle">姿勢のわずかな誤差が致命傷になる</text>
+
+  <!-- ==== panel C: contact vanishes ==== -->
+  <rect x="832" y="104" width="368" height="440" rx="10" fill="#fdf3e8" stroke="#e8d2b4" stroke-width="1.5"/>
+  <text x="856" y="140" font-size="19" font-weight="600" fill="#4d3a20">C. 踏み替えの瞬間</text>
+  <text x="856" y="164" font-size="14" fill="#7a6952">接触が 1 点まで減る</text>
+
+  <!-- toe-only contact -->
+  <path d="M 980 272 L 1052 272 L 1052 300 L 1004 314 Z" fill="#f7e4cc" stroke="#c8622f" stroke-width="2"/>
+  <circle cx="1046" cy="300" r="7" fill="#c8622f"/>
+  <text x="1016" y="262" font-size="13" fill="#7a6952" text-anchor="middle">つま先だけが触れている</text>
+  <text x="1046" y="336" font-size="13" fill="#c8622f" text-anchor="middle">CoP を置く面が消える</text>
+
+  <!-- infeasible mark -->
+  <text x="1016" y="392" font-size="17" font-weight="700" fill="#c8622f" text-anchor="middle">制約を同時に満たす解が</text>
+  <text x="1016" y="416" font-size="17" font-weight="700" fill="#c8622f" text-anchor="middle">存在しない (infeasible)</text>
+
+  <text x="856" y="464" font-size="15" fill="#4d3a20">最適化 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan font-weight="700" fill="#c8622f">解けない</tspan></text>
+  <rect x="856" y="486" width="320" height="42" rx="6" fill="#f7e4cc" stroke="#dcbf98"/>
+  <text x="1016" y="513" font-size="15" font-weight="600" fill="#4d3a20" text-anchor="middle">ここで制御が落ち、1 秒ほどで崩れる</text>
+
+  <!-- flow arrows -->
+  <path d="M 412 324 L 430 324" stroke="#8b98a6" stroke-width="3" fill="none"/>
+  <path d="M 424 317 L 434 324 L 424 331 Z" fill="#8b98a6"/>
+  <path d="M 808 324 L 826 324" stroke="#8b98a6" stroke-width="3" fill="none"/>
+  <path d="M 820 317 L 830 324 L 820 331 Z" fill="#8b98a6"/>
+
+  <!-- bottom band -->
+  <rect x="40" y="566" width="1160" height="66" rx="8" fill="#1a2733"/>
+  <text x="620" y="594" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">立っているあいだは解ける。歩き出した瞬間に解けなくなる。</text>
+  <text x="620" y="620" font-size="15" fill="#c9d8e8" text-anchor="middle">＝ 制御の巧拙ではなく、いつ・どの足が床に触れているかという「接触の予定表」を設計に入れていなかった</text>
+</svg>
