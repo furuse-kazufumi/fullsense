@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 720" font-family="Segoe UI, Hiragino Sans, Meiryo, sans-serif">
+  <rect width="1240" height="720" fill="#ffffff"/>
+
+  <text x="620" y="46" font-size="30" font-weight="600" fill="#1a2733" text-anchor="middle">「歩いている映像」は 4 種類あって、意味がぜんぶ違う</text>
+  <text x="620" y="76" font-size="16" fill="#5b6b7a" text-anchor="middle">同じように見える動画でも、物理を解いているか・誰の体か・達成したのかは別々の問い</text>
+
+  <!-- header -->
+  <line x1="40" y1="104" x2="1200" y2="104" stroke="#c9d2db" stroke-width="1.5"/>
+  <text x="56"  y="130" font-size="14" font-weight="600" fill="#5b6b7a">系統</text>
+  <text x="270" y="130" font-size="14" font-weight="600" fill="#5b6b7a">物理を解いているか</text>
+  <text x="470" y="130" font-size="14" font-weight="600" fill="#5b6b7a">誰の体か</text>
+  <text x="646" y="130" font-size="14" font-weight="600" fill="#5b6b7a">前進した距離</text>
+  <text x="1184" y="130" font-size="14" font-weight="600" fill="#5b6b7a" text-anchor="end">正直な判定</text>
+  <line x1="40" y1="142" x2="1200" y2="142" stroke="#e3e9ef"/>
+
+  <!-- row 1: mocap -->
+  <rect x="40" y="152" width="1160" height="118" fill="#f6f7f9"/>
+  <text x="56" y="192" font-size="19" font-weight="600" fill="#1a2733">mocap 再生</text>
+  <text x="56" y="220" font-size="13" fill="#7b8b9a">人の動きを写して流すだけ</text>
+  <text x="270" y="192" font-size="16" fill="#8c5a2b">解いていない</text>
+  <text x="270" y="216" font-size="13" fill="#7b8b9a">アニメーション</text>
+  <text x="470" y="192" font-size="16" fill="#3c4a58">人間(記録)</text>
+  <text x="646" y="200" font-size="15" fill="#7b8b9a">— 物理量として比較できない —</text>
+  <text x="1184" y="192" font-size="17" font-weight="700" fill="#8c5a2b" text-anchor="end">成果ではない</text>
+  <text x="1184" y="216" font-size="13" fill="#7b8b9a" text-anchor="end">見た目は一番きれい</text>
+
+  <!-- row 2: box foot -->
+  <rect x="40" y="272" width="1160" height="118" fill="#ffffff"/>
+  <text x="56" y="312" font-size="19" font-weight="600" fill="#1a2733">箱の足(box foot)</text>
+  <text x="56" y="340" font-size="13" fill="#7b8b9a">模倣学習 bc3</text>
+  <text x="270" y="312" font-size="16" fill="#2c6fb5">解いている</text>
+  <text x="270" y="336" font-size="13" fill="#7b8b9a">筋で駆動</text>
+  <text x="470" y="312" font-size="16" fill="#3c4a58">借り物</text>
+  <text x="470" y="336" font-size="13" fill="#7b8b9a">LocoMuJoCo</text>
+  <rect x="646" y="298" width="466" height="22" rx="4" fill="#2c6fb5"/>
+  <text x="1120" y="315" font-size="16" font-weight="700" fill="#1a2733">11.66 m</text>
+  <text x="646" y="342" font-size="13" fill="#7b8b9a">平均生存 8.84 秒 / 8 本のうち 10 秒を走り切ったのは 3 本</text>
+  <text x="1184" y="368" font-size="15" font-weight="600" fill="#2c6fb5" text-anchor="end">歩けている。ただし足が「松葉杖」</text>
+
+  <!-- row 3: anatomical foot -->
+  <rect x="40" y="392" width="1160" height="118" fill="#f6f7f9"/>
+  <text x="56" y="432" font-size="19" font-weight="600" fill="#1a2733">解剖学的な足</text>
+  <text x="56" y="460" font-size="13" fill="#7b8b9a">受動機構 + 長時間の学習</text>
+  <text x="270" y="432" font-size="16" fill="#2c6fb5">解いている</text>
+  <text x="270" y="456" font-size="13" fill="#7b8b9a">筋で駆動</text>
+  <text x="470" y="432" font-size="16" fill="#3c4a58">借り物</text>
+  <text x="470" y="456" font-size="13" fill="#7b8b9a">LocoMuJoCo</text>
+  <rect x="646" y="418" width="263" height="22" rx="4" fill="#2c6fb5"/>
+  <text x="917" y="435" font-size="16" font-weight="700" fill="#1a2733">6.59 m</text>
+  <text x="646" y="462" font-size="13" fill="#7b8b9a">生存 5.30 秒 / 11.3 歩 / 判定 walks = TRUE</text>
+  <text x="1184" y="488" font-size="15" font-weight="600" fill="#2c6fb5" text-anchor="end">松葉杖なしで歩けた。ただし短い</text>
+
+  <!-- row 4: evis -->
+  <rect x="40" y="512" width="1160" height="118" fill="#fdf3e8"/>
+  <text x="56" y="552" font-size="19" font-weight="600" fill="#1a2733">evis(本命)</text>
+  <text x="56" y="580" font-size="13" fill="#7a6952">自前・700 筋の人体</text>
+  <text x="270" y="552" font-size="16" fill="#2c6fb5">解いている</text>
+  <text x="270" y="576" font-size="13" fill="#7a6952">全身 QP / 強化学習</text>
+  <text x="470" y="552" font-size="16" font-weight="600" fill="#8c5a2b">自前</text>
+  <text x="470" y="576" font-size="13" fill="#7a6952">Apache-2.0</text>
+  <rect x="646" y="538" width="63" height="22" rx="4" fill="#c8622f"/>
+  <text x="717" y="555" font-size="16" font-weight="700" fill="#4d3a20">1.59 m</text>
+  <text x="646" y="582" font-size="13" fill="#7a6952">3.5 秒で横に倒れる。強化学習でも持続歩行に至っていない</text>
+  <text x="1184" y="608" font-size="15" font-weight="700" fill="#c8622f" text-anchor="end">まだ歩けていない ← 本当の課題はここ</text>
+
+  <line x1="40" y1="640" x2="1200" y2="640" stroke="#c9d2db" stroke-width="1.5"/>
+
+  <!-- scale note -->
+  <text x="646" y="664" font-size="13" fill="#8b98a6">横棒は前進距離の比較(同じ縮尺)。上 2 段は借り物の体なので、私の技術の成果ではなく「到達可能性の確認」にあたる。</text>
+
+  <rect x="40" y="676" width="1160" height="34" rx="6" fill="#1a2733"/>
+  <text x="620" y="699" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">一番よく歩いている映像が、一番「自分の成果ではない」— この順序を隠さないことにしている</text>
+</svg>
