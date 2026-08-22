@@ -7,7 +7,7 @@ tags:
   - 個人開発
   - 強化学習
 private: true
-updated_at: '2026-08-23T02:37:15+09:00'
+updated_at: '2026-08-23T02:39:26+09:00'
 id: 57e2f1e5a09165e58b65
 organization_url_name: null
 slide: false
@@ -1043,6 +1043,11 @@ DeepMimic 論文 [^deepmimic] が広めた訓練テクニックは、手法名�
 | 両方あり | 3/8 | 2/8 | 3/8 | 5.40m | 0.69 |
 | 深度だけ殺す | 4/8 | 1/8 | 2/8 | 4.10m | 1.22 |
 | LiDAR だけ殺す | 4/8 | 0/8 | 4/8 | 5.24m | 0.95 |
+
+同一コースの並走を 1 本の映像にもしました。3 モードとも完走したコース(seed 3)での対比です:
+
+![3 モード並走比較](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/walk14_3mode_compare.gif)
+*動画: 同一の障害物コース・同一の開始姿勢で、殺すセンサだけを変えた 3 並走(左: 両方あり 9.78m / 中: 深度だけ殺す 8.17m / 右: LiDAR だけ殺す 9.22m、8 秒完走)。コースの同一性は障害物データのビット一致で機械検証済み。柱と重なって見える瞬間はカメラの遮蔽で、実クリアランスは常に 0.77m 以上(シミュレーション実測)*
 
 答え合わせの要点は 3 つ。
 
