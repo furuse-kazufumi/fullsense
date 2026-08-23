@@ -3231,7 +3231,7 @@ RealSense 事業の現状:
 *事例: 学習済み歩行方策のロールアウトをフレーム解析するサンプル。「学習の成果物を視覚 op で検品する」という本記事の審判思想そのもの(サンプル実行結果。入力は同じく自前生成のロールアウト動画)*
 
 ![個数検査](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_count_blobs.png)
-*事例: 個数検査(カウント)。二値化 → 連結成分 → 計数という検査装置の一丁目一番地(サンプル実行結果)*
+*事例: 個数検査(カウント)。二値化 → 連結成分 → 計数という検査装置の一丁目一番地(サンプル実行結果。入力は skimage 同梱サンプル coins)*
 
 ![エッジ+自動しきい値](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_edge_sobel_otsu.png)
 *事例: Sobel + Otsu 自動しきい値。照明が変わっても人手調整なしでエッジを取る定番構成(サンプル実行結果)*
