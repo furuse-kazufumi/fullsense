@@ -7,7 +7,7 @@ tags:
   - 個人開発
   - 強化学習
 private: true
-updated_at: '2026-08-23T08:01:39+09:00'
+updated_at: '2026-08-23T09:36:40+09:00'
 id: 57e2f1e5a09165e58b65
 organization_url_name: null
 slide: false
@@ -1705,8 +1705,8 @@ repo-sam.inria.fr(3DGS 公式)/ github.com/graphdeco-inria/gaussian-splatting
 
 言葉より結果画像のほうが早いので、分野を横断して 16 個、入力と出力を並べます(すべて実際に Fullseye のレジストリ経由で実行した結果です)。
 
-![opdemo_01_gauss_image.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_01_gauss_image.png)
-*図: ガウス平滑化 — ノイズをぼかして整える、全処理の下ごしらえ(Fullseye 実行結果)*
+![fops_filters](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_filters.png)
+*図: Filters の実処理例 — 雑音入り入力へ gauss_image を同一 σ で適用。右列は除去された成分(ほぼ雑音のみで、構造はエッジ近傍に限られる)(Fullseye 実出力)。入力は skimage camera と AI 生成画像(Gemini)2 種。*
 
 ![opdemo_02_median_image.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_02_median_image.png)
 *図: メディアンフィルタ — ごま塩ノイズだけを消す(輪郭は保つ)(Fullseye 実行結果)*
@@ -1714,8 +1714,8 @@ repo-sam.inria.fr(3DGS 公式)/ github.com/graphdeco-inria/gaussian-splatting
 ![opdemo_03_sobel_amp.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_03_sobel_amp.png)
 *図: Sobel 勾配強度 — 明るさの変化の強さを描く(Fullseye 実行結果)*
 
-![opdemo_04_canny.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_04_canny.png)
-*図: Canny — エッジを 1 画素幅の線として取り出す(Fullseye 実行結果)*
+![fops_edges](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_edges.png)
+*図: edges の実処理例 — 同じ雑音入り入力に対し、勾配強度の固定閾値ではエッジが太く途切れnoise も拾うが、canny(非最大抑制+ヒステリシス)は細く連続した輪郭を返す(Fullseye 実出力)。入力は skimage camera・AI 生成(Gemini)・自前合成の 3 種。*
 
 ![opdemo_05_threshold_label.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_05_threshold_label.png)
 *図: 二値化+連結成分 — 「何個あるか」を数えられる形にする(色分け=個体識別)(Fullseye 実行結果)*
@@ -1726,14 +1726,14 @@ repo-sam.inria.fr(3DGS 公式)/ github.com/graphdeco-inria/gaussian-splatting
 ![opdemo_07_closing_circle.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_07_closing_circle.png)
 *図: クロージング — 小さな穴を埋める(Fullseye 実行結果)*
 
-![opdemo_08_fft_image.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_08_fft_image.png)
-*図: FFT — 画像を周波数の世界で見る(布目の周期がピークに)(Fullseye 実行結果)*
+![fops_frequency](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_frequency.png)
+*図: frequency の実処理例 — 周期縞ノイズは空間平滑化では消えない(縞ごとボケるだけ)が、FFT 領域でピークを自動ノッチ除去(cx_fft → transfer function → cx_ifft、complexops 章の op)すると縞だけが消える(Fullseye 実出力)。縞の角度・周波数を変えた 3 入力(skimage camera / AI 生成 2 種)に同一の自動ノッチ規則を適用。*
 
 ![opdemo_09_lowpass.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_09_lowpass.png)
 *図: ローパス復元 — 高周波ノイズを周波数側で落とす(エネルギー実測 0.0042→0.0021)(Fullseye 実行結果)*
 
-![opdemo_10_texture_laws.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_10_texture_laws.png)
-*図: Laws テクスチャエネルギー — 模様の「肌理」を数値化(Fullseye 実行結果)*
+![fops_texture](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_texture.png)
+*図: texture の実処理例 — 平均輝度が同じで模様だけが違う領域は二値化では分離できないが、texture_laws(Laws テクスチャエネルギー)は肌理の強さを画像化して分離する(Fullseye 実出力)。入力は自前合成 2 種+同梱サンプル 1 種。*
 
 ![opdemo_11_harris_corners.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_11_harris_corners.png)
 *図: Harris コーナー — 追跡・較正の基準になる角を検出(49 点)(Fullseye 実行結果)*
@@ -1744,8 +1744,8 @@ repo-sam.inria.fr(3DGS 公式)/ github.com/graphdeco-inria/gaussian-splatting
 ![opdemo_13_area_center.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_13_area_center.png)
 *図: 面積・重心計測 — 検査装置の基本、25 個の blob を測る(Fullseye 実行結果)*
 
-![opdemo_14_watersheds.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_14_watersheds.png)
-*図: 分水嶺法 — くっついた領域を稜線で切り分ける(Fullseye 実行結果)*
+![fops_segmentation](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_segmentation.png)
+*図: segmentation の実処理例 — 接触する物体は単純二値化+ラベリングでは 1 塊に融合するが、otsu → distance_transform → local_max → watersheds_marker(マーカー制御分水嶺)の固定パイプラインで個々に分離できる(Fullseye 実出力)。入力は AI 生成画像(Gemini)2 種+自前合成 1 種。*
 
 ![opdemo_15_distance_transform.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_15_distance_transform.png)
 *図: 距離変換 — 各画素から背景までの距離の地図(Fullseye 実行結果)*
@@ -3262,6 +3262,10 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 
 いわゆる「道具箱の道具箱」。座標変換のユーティリティ、型変換、可視化補助など、他の全カテゴリを下支えする雑務 op 群です。パイプラインの接着剤として最も呼ばれる一群でもあります。
 
+
+![fops_tools](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_tools.png)
+*図: Tools の実処理例 — 欠損画素(衛星画像の走査線抜け・キズ)は定数で埋めると継ぎ目が残るが、interpolate_scattered_data_image は残存画素の散布データ補間で滑らかに埋める(Fullseye 実出力)。入力は NASA/JPL-Caltech の火星砂丘(HiRISE, PIA18244, パブリックドメイン)・skimage camera・AI 生成画像(Gemini)。欠損は 3 種とも人工的に付与。*
+
 | op | 説明 |
 |---|---|
 | `abs_funct_1d` | y 値の絶対値(abs_funct_1d)。 |
@@ -3438,6 +3442,10 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 #### Transformations(79 op)
 
 画像の幾何変換(回転・スケール・射影・極座標など)。検査では「ワークの向きを揃えてから測る」の前段として毎回登場します。
+
+
+![fops_transformations](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_transformations.png)
+*図: Transformations の実処理例 — 斜め視点の平面はアフィン変換(6 自由度)では台形歪みが直らず、4 点対応から DLT で推定した射影変換(vector_to_proj_hom_mat2d → gen_image_warp_map)で初めて真上視点に整流できる(Fullseye 実出力)。1 段目は既知ホモグラフィの合成(真値あり)、2-3 段目は AI 生成画像(Gemini)。*
 
 | op | 説明 |
 |---|---|
@@ -3697,6 +3705,10 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 #### Image(59 op)
 
 画像の生成・入出力・チャンネル操作・算術合成など、画像そのものを扱う基礎 op 群。
+
+
+![fops_image_chapter](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_image_chapter.png)
+*図: Image の実処理例 — decompose3 でカラー画像を R/G/B チャネルに分解。チャネルごとに写る情報が違う(眼底では血管と背景のコントラスト配分がチャネルで大きく変わる)(Fullseye 実出力)。入力は scikit-image 同梱 retina+AI 生成画像(Gemini)2 種。診断用途ではなく画像処理デモ。*
 
 | op | 説明 |
 |---|---|
@@ -3962,6 +3974,10 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 
 平滑化専門の一群。ガウス・バイラテラル・異方性拡散など「ノイズは消すがエッジは守る」系の使い分けが肝です。
 
+
+![fops_smoothing](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_smoothing.png)
+*図: smoothing の実処理例 — 同じ雑音入力に対し、ガウス平滑化は輪郭ごとぼかすが、anisotropic_diffusion(異方性拡散)はエッジをまたがずに拡散するため輪郭を保ったまま雑音だけをならす(Fullseye 実出力)。入力は skimage camera+AI 生成画像(Gemini)2 種。*
+
 | op | 説明 |
 |---|---|
 | `anisotropic_diffusion` | smoothing op(HALCON: anisotropic_diffusion) |
@@ -4170,6 +4186,10 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 
 グレースケール形態学など、濃淡画像のまま行う形態学的処理。
 
+
+![fops_gray](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_gray.png)
+*図: gray の実処理例 — 照明ムラ・低コントラストの入力では大域ヒストグラム均等化が破綻(明部の白飛び・ノイズ増幅)しやすいのに対し、clahe(コントラスト制限付き局所適応均等化)は局所ごとに階調を回復する(Fullseye 実出力)。入力は AI 生成(Gemini)2 種+skimage moon(NASA 撮影の月面)。*
+
 | op | 説明 |
 |---|---|
 | `clahe` | gray op(HALCON: -) |
@@ -4260,6 +4280,10 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 #### XLD(35 op)
 
 XLD = サブピクセル精度の輪郭表現。画素より細かい精度で輪郭を扱う、精密計測の要です。
+
+
+![fops_xld](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_xld.png)
+*図: XLD の実処理例 — 二値化した境界は画素格子の階段にしかならないが、threshold_sub_pix はレベル交差位置を画素より細かく(サブピクセル)推定した輪郭(XLD)を返す。真値つき合成円で平均誤差 0.001px を実測。8 倍拡大で階段と滑らかな輪郭線の差が見える(Fullseye 実出力)。入力は自前合成・AI 生成(Gemini)・skimage coins。*
 
 | op | 説明 |
 |---|---|
@@ -4390,6 +4414,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 点・線・円などの幾何プリミティブの当てはめと計算。計測結果を「図形の言葉」にする op 群。
 
+
+![fops_geometry](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_geometry.png)
+*図: geometry の実処理例 — 円周上の構造(ブラックホールのリング輝度、歯車の歯、年輪)は直線用のツールでは測れないが、polar_trans_image で極座標に展開すると横一列になり、1D プロファイルや直線検査がそのまま使える(Fullseye 実出力)。入力は EHT Collaboration の M87*(CC BY 4.0)+AI 生成画像(Gemini)2 種。*
+
 | op | 説明 |
 |---|---|
 | `affine_trans_image` | geometry op(HALCON: affine_trans_image) |
@@ -4458,6 +4486,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 領域処理の HALCON 互換上位セット(region カテゴリの拡張版)。
 
+
+![fops_regions](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_regions.png)
+*図: Regions の実処理例 — 現場の二値画像は粒ノイズと穴だらけで、そのままラベリングすると誤計数する。opening_circle(オープニング)で粒を消し fill_up で穴を埋めてから連結成分に分けるのが領域処理の定石(Fullseye 実出力)。入力は AI 生成(Gemini)2 種+同梱サンプル 1 種の二値化+人工汚し。*
+
 | op | 説明 |
 |---|---|
 | `difference` | 領域差 region \ sub(difference)。 |
@@ -4490,6 +4522,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 #### contour(26 op)
 
 輪郭(contour)の抽出・平滑化・分割・属性計算。
+
+
+![fops_contour](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_contour.png)
+*図: contour の実処理例 — 細い線状構造(血管・翅脈・葉脈・ひび割れ)はエッジ検出だと線の両側の縁が二重に出るが、lines_gauss(Frangi 稜線応答)で線状構造の帯を取り、skeleton で 1 画素幅の中心線に細線化する。血管も翅脈も葉脈もひびも同じ数学で測れる(Fullseye 実出力)。入力は全て AI 生成画像(Gemini)。医療風入力は診断用途ではない。*
 
 | op | 説明 |
 |---|---|
@@ -4733,6 +4769,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 #### Segmentation(14 op)
 
+
+![fops_segmentation_facade](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_segmentation_facade.png)
+*図: Segmentation の実処理例 — 琥珀の中の虫: 強い橙の色かぶり+半透明散乱+気泡・割れの妨害から、最暗部二値化 → opening → 画像縁に接する成分(縁影・割れ)の除外 → 最大成分、の固定パイプラインで虫本体を抜く(Fullseye 実出力)。試行過程の honest 記録: B チャネル+clahe 前処理は琥珀の内部テクスチャを増幅して逆効果だった(clahe が常に正解ではない)。入力は全て AI 生成画像(Gemini)。*
+
 | op | 説明 |
 |---|---|
 | `check_difference` | 基準画像との差が tol を超える画素を領域として返す(check_difference)。 |
@@ -4843,6 +4883,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 #### restoration(12 op)
 
+
+![fops_restoration](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_restoration.png)
+*図: restoration の実処理例 — モーションブラーは畳み込みなので、輪郭強調(unsharp)では復元できず、ブラー PSF を仮定した iv_motion_deblur(Wiener 逆畳み込み)で初めて文字が読めるまで戻る(Fullseye 実出力)。ブレは線形モーション PSF(L=9px, 0°)を畳み込んで付与(convol_fft)。入力は skimage page/camera+AI 生成画像(Gemini)。*
+
 | op | 説明 |
 |---|---|
 | `iv_backproject_superres` | restoration op(HALCON: -) |
@@ -4876,6 +4920,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 #### arithmetic(10 op)
 
+
+![fops_arithmetic](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_arithmetic.png)
+*図: arithmetic の実処理例 — 暗部がつぶれた画像は線形ゲインでは明部が先に白飛びするが、log_image(対数変換)は暗部を持ち上げつつ明部を圧縮するので両立する(Fullseye 実出力)。入力は AI 生成(Gemini)・自前合成・skimage camera 減光の 3 種。*
+
 | op | 説明 |
 |---|---|
 | `abs_image` | arithmetic op(HALCON: abs_image) |
@@ -4890,6 +4938,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `tan_image` | arithmetic op(HALCON: tan_image) |
 
 #### augmentation(10 op)
+
+
+![fops_augmentation](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_augmentation.png)
+*図: augmentation の実処理例 — 1 枚の画像から撮像の悪条件(ショットノイズ・モーションブラー・周辺減光)を物理モデルで再現生成し、学習データを増やす op 群(Fullseye 実出力)。入力は skimage camera+AI 生成画像(Gemini)2 種。*
 
 | op | 説明 |
 |---|---|
@@ -4950,6 +5002,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 #### 2D Metrology(8 op)
 
+
+![fops_metrology](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_metrology.png)
+*図: 2D Metrology の実処理例 — サブピクセル輪郭(threshold_sub_pix)に円を最小二乗フィット(fit_circle)して半径を計測。真値つき合成 6 円で半径誤差を実測(Fullseye 実出力)。入力は合成+AI 生成(Gemini)2 種。*
+
 | op | 説明 |
 |---|---|
 | `add_metrology_object_circle_measure` | 円計測オブジェクトを追加(add_metrology_object_circle_measure)。 |
@@ -4962,6 +5018,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `create_metrology_model` | 空の計測モデルを作る(create_metrology_model)。 |
 
 #### Inspection(8 op)
+
+
+![fops_inspection](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_inspection.png)
+*図: Inspection の実処理例 — ブリスターパック(合成・欠陥注入で真値管理)を格子仕様に沿ってポケット毎に検査: 二値化→面積(欠品/異種)→真円度(欠け)→暗部画素(汚れ)の固定しきい値で合否判定。3 パック合計で注入欠陥 11 件中 11 検出・誤検出 0(Fullseye 実出力)。*
 
 | op | 説明 |
 |---|---|
@@ -4988,6 +5048,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `top_hat` | region - opening(region): 小さな明構造を抽出(top_hat)。 |
 
 #### color(8 op)
+
+
+![fops_color](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_color.png)
+*図: color の実処理例 — 「赤い物だけ選ぶ」は輝度画像では原理的に不可能(等輝度なら二値化で区別できない)だが、trans_from_rgb で HSV に変換し H(色相)チャネルを閾値処理すれば照明の明暗によらず色で選べる(Fullseye 実出力)。入力は AI 生成画像(Gemini)2 種+等輝度の自前合成 1 種。*
 
 | op | 説明 |
 |---|---|
@@ -5028,6 +5092,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 #### measure(8 op)
 
+
+![fops_measure](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_measure.png)
+*図: measure の実処理例 — BGA はんだボールの X 線透過検査(減衰投影+ボイド注入の自前合成 2 種+AI 生成 1 種): ボール毎に内部の明るい画素をボイドとして面積率を計測し、真値と照合(Fullseye 実出力)。検査装置業界の実務そのもの。*
+
 | op | 説明 |
 |---|---|
 | `angle` | Angle of the segment p0 -> p1 in degrees (image y downward), in (-180, 180]. |
@@ -5053,6 +5121,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `sg_watershed_gradient` | segment op(HALCON: -) |
 
 #### 1D Measuring(7 op)
+
+
+![fops_measuring1d](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_measuring1d.png)
+*図: 1D Measuring の実処理例 — 年輪も魚の耳石の輪紋も同じ道具で数えられる: polar_trans_image で展開 → 角度平均の 1D プロファイル → smooth_funct_1d_gauss+local_min_max_funct_1d でピーク計数。真値つき合成で計数精度を確認(Fullseye 実出力)。入力は合成+AI 生成(Gemini)2 種。*
 
 | op | 説明 |
 |---|---|
@@ -5089,6 +5161,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `dc_texture_residual` | decomposition op(HALCON: -) |
 
 #### flow(7 op)
+
+
+![fops_flow](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_flow.png)
+*図: flow の実処理例 — 「理想のハイスピードカメラ」=自前弾道シミュレーション連番(dt=1/240s 既知、実カメラのローリングシャッター/モーションブラーは含まない)から、frame_difference で動体を検出 → 重心追跡 → 放物線フィットで重力加速度 g を推定し真値 9.81 m/s² と照合(Fullseye 実出力)。動画から物理定数を測るハイスピード解析の実務。*
 
 | op | 説明 |
 |---|---|
@@ -5182,6 +5258,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `sp_saddle_points_sub_pix` | subpix op(HALCON: saddle_points_sub_pix) |
 
 #### detect(5 op)
+
+
+![fops_detect](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_detect.png)
+*図: detect の実処理例 — 「分ける(segment_objects)→測る(個体ごとの特徴量)→仕分ける(クラスタ色分け)」の 3 段活用(Fullseye 実出力+numpy k-means)。クラスタは教師なしのグループ分けであり種別の同定ではない。ハッブル深宇宙は NASA/ESA(パブリックドメイン)。*
 
 | op | 説明 |
 |---|---|
