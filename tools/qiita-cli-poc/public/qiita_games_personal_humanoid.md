@@ -7,7 +7,7 @@ tags:
   - 個人開発
   - 強化学習
 private: false
-updated_at: '2026-08-23T12:18:41+09:00'
+updated_at: '2026-08-23T12:29:44+09:00'
 id: 57e2f1e5a09165e58b65
 organization_url_name: null
 slide: false
@@ -1114,7 +1114,7 @@ G1 で作った疑似センサ群は、モデルを差し替えれば他の選�
 *動画: Spot の RL 歩行+実レイキャスト記録(Go2 と同じ受動記録方式 — 方策は円柱を見ていない)(シミュレーション実測)*
 
 ![Barkour RL 歩行](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/barkour_rl_walk.gif)
-*動画: Google Barkour vB の RL 歩行。10 秒 7.20m、転倒なし(シミュレーション実測)*
+*動画: Google Barkour vB の RL 歩行。10 秒 7.20m、転倒なし(シミュレーション実測)。※公開後の見直しで、この個体は**後ろ向きに歩いている**ことが発覚(前脚の付け根は機体 +x 側なのに移動は −x 方向、内積 −0.996 で実測確認)。Go2・Spot は正常に前進。原因調査と再走の顛末は追記予定 — 公開直後に自分の記事を読み返していて気づきました。審判の審判は公開後も続く*
 
 これで四足の RL 歩行は Go2・Spot・Barkour の 3 機種。名鑑の予言(「四足 8 機種は同型、1 本のパイプで横並びスイープできる」)が実証され始めています。
 
