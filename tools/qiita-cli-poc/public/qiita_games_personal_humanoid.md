@@ -3240,7 +3240,7 @@ RealSense 事業の現状:
 *事例: 距離変換。部品同士の「すき間の余裕」を測る、干渉チェックの基礎(サンプル実行結果。入力は skimage 同梱サンプル coins)*
 
 ![イベントカメラ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_event_camera.png)
-*事例: イベントカメラのシミュレーション。輝度変化だけを出力する「変化しか見ない目」を普通の動画から合成(サンプル実行結果)*
+*事例: イベントカメラのシミュレーション。輝度変化だけを出力する「変化しか見ない目」を普通の動画から合成(サンプル実行結果。入力は numpy で自前合成した動画クリップ)*
 
 ![把持姿勢推定](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_grasp_pose.png)
 *事例: 把持姿勢の推定。対象の形から「どこを掴むか」を出す、箸・ハンド競技の裏方になる処理(サンプル実行結果)*
