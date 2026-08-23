@@ -3225,7 +3225,7 @@ RealSense 事業の現状:
 そして、サンプルコード集も「動く事例」で見せます。以下はすべて Studio のサンプルを実行した本物の出力です。
 
 ![G1 歩行への点追跡](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_g1_tracks.png)
-*事例: 本記事の G1 歩行動画に特徴点追跡をかけた出力。ロボットの映像解析(動作ログの自動計測)にそのまま使える構成(サンプル実行結果)*
+*事例: 本記事の G1 歩行動画に特徴点追跡をかけた出力。ロボットの映像解析(動作ログの自動計測)にそのまま使える構成(サンプル実行結果。入力は本記事で自前生成した G1 歩行ロールアウト動画)*
 
 ![方策フレーム解析](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_g1_policy_frames.png)
 *事例: 学習済み歩行方策のロールアウトをフレーム解析するサンプル。「学習の成果物を視覚 op で検品する」という本記事の審判思想そのもの(サンプル実行結果)*
