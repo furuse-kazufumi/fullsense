@@ -3237,7 +3237,7 @@ RealSense 事業の現状:
 *事例: Sobel + Otsu 自動しきい値。照明が変わっても人手調整なしでエッジを取る定番構成(サンプル実行結果。入力は skimage 同梱サンプル coins)*
 
 ![距離変換](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_distance_transform.png)
-*事例: 距離変換。部品同士の「すき間の余裕」を測る、干渉チェックの基礎(サンプル実行結果)*
+*事例: 距離変換。部品同士の「すき間の余裕」を測る、干渉チェックの基礎(サンプル実行結果。入力は skimage 同梱サンプル coins)*
 
 ![イベントカメラ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_event_camera.png)
 *事例: イベントカメラのシミュレーション。輝度変化だけを出力する「変化しか見ない目」を普通の動画から合成(サンプル実行結果)*
