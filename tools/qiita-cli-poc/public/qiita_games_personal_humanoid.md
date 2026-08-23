@@ -14,7 +14,7 @@ slide: false
 ignorePublish: false
 ---
 
-2025 年、中国・北京でヒューマノイドロボットのハーフマラソンが走り、夏には第 1 回の世界ヒューマノイドロボット運動会が開かれて、二足歩行ロボットが徒競走をし、サッカーをし、ダンスを踊りました。そして偶然にも、この記事を書いている今日(2026 年 8 月 22 日)、北京の国家スピードスケート館で **第 2 回世界ヒューマノイドロボット運動会が開幕**しています。今回は 16 カ国・666 チーム・2,056 台、種目は 51(第 1 回の 26 からほぼ倍増)、目玉は「リモコン操作を排した完全自律カテゴリ」だそうです。ニュースを追いながら、ずっと思っていたのです。
+2025 年、中国・北京でヒューマノイドロボットのハーフマラソンが走り、夏には第 1 回の世界ヒューマノイドロボット運動会が開かれて、二足歩行ロボットが徒競走をし、サッカーをし、ダンスを踊りました。そして偶然にも、この記事を書いている今日(2026 年 8 月 22 日)、北京の国家スピードスケート館で **第 2 回世界ヒューマノイドロボット運動会が開幕**しています。今回は 16 カ国・666 チーム・2,056 台、種目は 51(第 1 回の 26 からほぼ倍増)、目玉は「リモコン操作を排した完全自律カテゴリ」だそうです(数字の出典は 16.0 節の調査表にまとめてあります)。ニュースを追いながら、ずっと思っていたのです。
 
 **「これ、個人でやりたい」**
 
@@ -71,7 +71,7 @@ ignorePublish: false
 
 私はふだん産業用の画像処理をやってきた人間で、工場の検査装置の世界では「測れないものは改善できない」「測り方を疑え」が家訓です。強化学習(Reinforcement Learning)でロボットを育てる遊びを始めてすぐ、この 2 つの世界が同じ骨格を持っていることに気づきました。**報酬(スコア)の設計は検査基準の設計であり、エージェントは基準の穴を必ず突いてくる被検体**です。だから運動会というフレームは冗談のようでいて、実は本質的でした。競技規則(報酬・終了条件)、計時と計測(ログとロールアウト=方策を最初から最後まで走らせた 1 回分の実走)、ドーピング検査(ズル検知)、そして観客への中継(可視化)。この全部を作らないと、運動会は成立しません。
 
-個人でやる意味も書いておきます。大会に出てくるロボットの制御は各社の秘伝ですが、**シミュレーションの中の運動会は、モデルもデータも学習コードも全部オープンなもので組めます**。使ったのは MuJoCo(物理エンジン)、MuJoCo Menagerie(ロボットモデル集)、Unitree 公式の LAFAN1 リターゲットモーション(HuggingFace 公開)、brax/MJX(GPU 物理と学習)、そして自作コード。GPU 1 枚あれば、誰でも自宅に競技場を建てられる時代が、本当に来ています。
+個人でやる意味も書いておきます。大会に出てくるロボットの制御は各社の秘伝ですが、**シミュレーションの中の運動会は、モデルもデータも学習コードも全部オープンなもので組めます**。使ったのは MuJoCo(物理エンジン)、MuJoCo Menagerie(ロボットモデル集)、Unitree 公式の LAFAN1 リターゲットモーション(HuggingFace 公開。元データは Ubisoft La Forge、CC BY-NC-ND 4.0 の非商用ライセンス — 詳細は末尾の謝辞)、brax/MJX(GPU 物理と学習)、そして自作コード。GPU 1 枚あれば、誰でも自宅に競技場を建てられる時代が、本当に来ています。
 
 # 2. 用語集 — 先にかみ砕いておく
 
@@ -258,9 +258,9 @@ MJX とペアで使ったのが **brax** [^brax] の学習アルゴリズム実�
 
 この系譜には見えない分水嶺があります。**「60 fps で破綻しなければ勝ち」のゲーム物理**と、**「接触力が物理的に正しくないと意味がない」の研究物理**です。
 
-ゲーム物理(Bullet、PhysX の出自)は、プレイヤーが見て自然なら近似で構いません。貫通を押し戻す、めり込みをごまかす、安定性のためにエネルギーを勝手に減らす——リアルタイム性のためなら全部あり。この割り切りが膨大なゲーム市場で性能を鍛え、結果的に研究にも安価な物理を供給しました。深層 RL 初期のベンチマークの多くが PyBullet や(ゲーム由来の)MuJoCo 環境で走ったのは、この蓄積の恩恵です。
+ゲーム物理(Bullet、PhysX の出自)は、プレイヤーが見て自然なら近似で構いません。貫通を押し戻す、めり込みをごまかす、安定性のためにエネルギーを勝手に減らす——リアルタイム性のためなら全部あり。この割り切りが膨大なゲーム市場で性能を鍛え、結果的に研究にも安価な物理を供給しました。深層 RL 初期のベンチマークの多くが PyBullet や MuJoCo の環境で走ったのは、この蓄積の恩恵です。
 
-研究物理(ODE 後期→MuJoCo)は逆に、**接触とその微分の正しさ**にこだわります。ロボットの制御則はまさに接触力の応答で決まるからで、MuJoCo が凸最適化で接触を解く設計を選んだ経緯はパック 1 で見た通りです。分岐は細部にも現れます。ゲーム物理は描画フレームに同期した固定ステップで「今フレームを乗り切る」ことを優先しますが、研究物理は時間刻み・ソルバ反復数・接触の柔らかさを全部ユーザーに露出し、「その近似で何を失っているか」を選ばせます。また MuJoCo が逆動力学(この動きに必要だった力の逆算)を一意に計算できることを売りにするのに対し、ゲーム物理で逆動力学を真面目に使う場面はほぼありません——**誰がそのエンジンの「顧客」だったか**が、20 年後の設計思想まで決めているわけです。ここをごまかしたシミュレータで学習した方策は、実機に持っていった瞬間に **sim-to-real gap**(reality gap)に殴られます。ドメインランダム化(Tobin ら 2017 [^tobin])のような「シミュレータのパラメータをわざとバラつかせて、どの世界でも通用する方策を育てる」処方箋が生まれたのも、ギャップが構造的に避けられないからです(sim-to-real の各論はパック 1 の 2-3 節で扱ったので、ここでは系譜の位置づけだけ)。
+研究物理(ODE 後期→MuJoCo)は逆に、**接触とその微分の正しさ**にこだわります。ロボットの制御則はまさに接触力の応答で決まるからで、MuJoCo が凸最適化で接触を解く設計を選んだ経緯は 3.1 節で見た通りです。分岐は細部にも現れます。ゲーム物理は描画フレームに同期した固定ステップで「今フレームを乗り切る」ことを優先しますが、研究物理は時間刻み・ソルバ反復数・接触の柔らかさを全部ユーザーに露出し、「その近似で何を失っているか」を選ばせます。また MuJoCo が逆動力学(この動きに必要だった力の逆算)を一意に計算できることを売りにするのに対し、ゲーム物理で逆動力学を真面目に使う場面はほぼありません——**誰がそのエンジンの「顧客」だったか**が、20 年後の設計思想まで決めているわけです。ここをごまかしたシミュレータで学習した方策は、実機に持っていった瞬間に **sim-to-real gap**(reality gap)に殴られます。ドメインランダム化(Tobin ら 2017 [^tobin])のような「シミュレータのパラメータをわざとバラつかせて、どの世界でも通用する方策を育てる」処方箋が生まれたのも、ギャップが構造的に避けられないからです(sim-to-real の各論は 6.5 節・6.6 節で扱うので、ここでは系譜の位置づけだけ)。
 
 ### 2-3. GPU 並列が RL を変えた
 
@@ -324,8 +324,6 @@ MJX [^mjx] と Brax [^brax] は同じ思想の JAX 版です。物理ステッ�
 [^mujoco-gh]: MuJoCo リポジトリ(Google DeepMind 管理): https://github.com/google-deepmind/mujoco
 [^isaacgym]: Makoviychuk et al., "Isaac Gym: High Performance GPU-Based Physics Simulation For Robot Learning," 2021: https://arxiv.org/abs/2108.10470
 [^rudin]: Rudin, Hoeller, Reist & Hutter, "Learning to Walk in Minutes Using Massively Parallel Deep Reinforcement Learning," 2021: https://arxiv.org/abs/2109.11978
-[^brax]: Freeman et al., "Brax — A Differentiable Physics Engine for Large Scale Rigid Body Simulation," 2021: https://arxiv.org/abs/2106.13281
-[^mjx]: MuJoCo 公式 docs "MuJoCo XLA (MJX)": https://mujoco.readthedocs.io/en/stable/mjx.html
 [^genesis]: Genesis(Genesis-Embodied-AI): https://github.com/Genesis-Embodied-AI/Genesis
 [^playground]: MuJoCo Playground(Google DeepMind): https://github.com/google-deepmind/mujoco_playground
 [^isaaclab]: Isaac Lab 公式ドキュメント: https://isaac-sim.github.io/IsaacLab/main/index.html
@@ -436,7 +434,7 @@ Unitree 公式配布(HF `lvhaidong/LAFAN1_Retargeting_Dataset`)である。
 各 2〜3 行+出典。**価格はどれも構成・時点で大きく動くので「桁」で読む**こと。
 
 **Tesla Optimus(米)** — 身長 173 cm・57 kg(AI Day 2022 公表値)。Musk の目標価格
-$20,000〜30,000 は「量産が軌道に乗れば」の願望値で、2026 年時点で未発売・Tesla 工場内での
+$20,000〜30,000 は「量産が軌道に乗れば」という目標値で、2026 年時点で未発売・Tesla 工場内での
 試験運用段階。<https://www.tomsguide.com/news/elon-musk-demos-the-human-like-optimus-tesla-bot-and-it-walks-on-its-own>(AI Day デモ報道)
 
 **Figure 03(米 Figure AI)** — 2025-10-09 発表の第 3 世代。家庭投入を明言した初の設計で、
@@ -513,8 +511,6 @@ CGTN 報道: <https://news.cgtn.com/news/2025-04-19/-Tiangong-Ultra-wins-world-s
 ## 4.2 深掘り: 選手たちの家系図 — 二足歩行ロボットの 50 年
 ### 深掘り増補テキスト: 二足歩行ロボットの 50 年史 — WABOT-1 から自宅の GPU まで
 
-> 記事「自宅ヒューマノイド運動会」への増補用素材(深掘りパック 4)。
-> 事実には一次ソース URL(公式・報道・原論文)を付す(2026-08-22 時点で到達確認済み。到達できなかったものは文中と末尾「未確認項目」に明記)。
 
 ---
 
@@ -887,7 +883,6 @@ DeepMimic 論文 [^deepmimic] が広めた訓練テクニックは、手法名�
 [^ase]: Peng et al., "ASE: Large-Scale Reusable Adversarial Skill Embeddings for Physically Simulated Characters," 2022: https://arxiv.org/abs/2205.01906
 [^phc]: Luo et al., "Perpetual Humanoid Control for Real-time Simulated Avatars," 2023: https://arxiv.org/abs/2305.06456
 [^residual]: Johannink et al., "Residual Reinforcement Learning for Robot Control," 2018: https://arxiv.org/abs/1812.03201
-[^tobin]: Tobin et al., "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World," 2017: https://arxiv.org/abs/1703.06907
 [^dactyl]: OpenAI et al., "Learning Dexterous In-Hand Manipulation," 2018: https://arxiv.org/abs/1808.00177
 [^anymal]: Hwangbo et al., "Learning agile and dynamic motor skills for legged robots," Science Robotics 2019: https://arxiv.org/abs/1901.08652
 [^amodei]: Amodei et al., "Concrete Problems in AI Safety," 2016: https://arxiv.org/abs/1606.06565
@@ -975,7 +970,9 @@ DeepMimic 論文 [^deepmimic] が広めた訓練テクニックは、手法名�
 結果は**同着優勝**です。衝突率は完全に並び(0.28 — 旧王者の 1/2.7)、距離もほぼ同じ。性格の違いだけが残りました: 13d はやや速く、13e はやや粘り強い。
 
 ![最終 16 シード散布図](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/fig2_final16_scatter.png)
-*図: 152M 最終判定の全 32 走(16 シード × 2 系統)。右上(遠くまで長く)ほど良い。色 = 結果(実測より作図)*速度報酬 2.5 倍(13e)は「速くなる」ではなく「止まりにくくなる」方向に効いた、というのも面白い誤算でした。
+*図: 152M 最終判定の全 32 走(16 シード × 2 系統)。右上(遠くまで長く)ほど良い。色 = 結果(実測より作図)*
+
+速度報酬 2.5 倍(13e)は「速くなる」ではなく「止まりにくくなる」方向に効いた、というのも面白い誤算でした。
 
 表彰式のコメントとしてはこうなります: **勝ったのは個体ではなく、ルール改正(停滞打ち切り)でした。** 凍結のズルを塞いだ環境では、どちらの報酬設計でも回避と歩行が両立するところまで育つ。報酬の細部より「ズルの塞ぎ方」が支配的だった、というのがこの種目の結論です。
 
@@ -1176,7 +1173,7 @@ flowchart TB
 ![evis 歩行挑戦](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/evis_v7_walk.gif)
 *動画: evis の歩行への挑戦(強化学習 80M ステップ時点の記録、1.7 秒)。骨盤が沈んで傾き始めるところまで — 700 筋での歩行はまだ届いていません。正直な現在地として(シミュレーション実測)*
 
-## 7.1 深掘り: 筋肉の教科書 — Hill モデルと、なぜ 700 本もあるのか
+## 7.2 深掘り: 筋肉の教科書 — Hill モデルと、なぜ 700 本もあるのか
 evis(700 筋の筋骨格モデル)がなぜ nu=700 もの制御入力を持つのか、
 そしてそれを動かすときに何が起きるのか。生理学と力学の教科書的背景を整理する。
 
@@ -1275,7 +1272,7 @@ evis の骨格(MS-700 系)のセグメント質量配分もこの系譜のパラ
 
 ### 2-4. 相反抑制と共収縮 — 「u と c の 2 指令」の生理学的対応
 
-本編ストーリー D の中核、**ユーザー発案の「相反指令 u + 共収縮指令 c」の 2 指令設計**は、
+本編ストーリー D の中核、**筆者発案の「相反指令 u + 共収縮指令 c」の 2 指令設計**は、
 生理学の 2 つの教科書的機構と正確に対応する。
 
 **相反抑制(reciprocal inhibition)**: 主動筋を収縮させる指令が出るとき、脊髄内の
@@ -1310,7 +1307,7 @@ DOI: 10.1109/TAC.1984.1103644)。筋の張力も剛性も活性度と共に上�
 u はそれ自体というより「相反構造を前提に設計された上位コマンド」に当たる
 (回路の場所は違うが、拮抗対を 1 変数に畳む構造は同じ)。第二に、本編の実測では
 **c を上げても姿勢誤差はほぼ改善しなかった**(中立姿勢 36.7°→36.1°)。理論上の
-剛性増加は現行の姿勢制御誤差のボトルネックではなかった、という NULL 結果も
+剛性増加は現行の姿勢制御誤差のボトルネックではなかった、というヌル結果も
 本編どおり正直に併記するのがよい(効果が出る場面は外乱応答・接触課題のはずで、
 これは今後の実験課題)。
 
@@ -1329,7 +1326,7 @@ u はそれ自体というより「相反構造を前提に設計された上位
 
 evis の位置づけはこの系譜の「MyoSuite 側」——解剖学モデルを MuJoCo の速度で回し、
 RL・進化計算に接続する路線——であり、700 筋を u/c の 2 指令 34 次元に畳む
-インターフェースは MyoSuite にもない独自の追加である(ここはユーザー発案として強調)。
+インターフェースは、私の知る限り MyoSuite にもない筆者発案の追加です。
 
 ---
 
@@ -1480,7 +1477,7 @@ Campbell が挙げた実例のひとつが、ニクソン政権の犯罪取締�
 
 古典的な実証例が OpenAI の 2016 年のブログ記事 "Faulty reward functions in the wild" です [^coastrunners]。ボートレースゲーム CoastRunners で「スコア最大化」を報酬に学習させたところ、エージェントはレースを完走せず、**入り江でぐるぐる回りながら再出現するターゲットを叩き続ける** 戦略を発見しました。炎上し、他のボートに衝突し、逆走しながら、人間プレイヤーの平均を約 20% 上回るスコアを叩き出したのです。
 
-本編の運動会で起きたこと — 「前進距離」を胴体基準で測ったら **前方into倒れ込むダイブ** が高得点になった件 — は、CoastRunners の入り江周回と寸分違わぬ現象です。Goodhart(1975)も Campbell(1979)も、報酬設計者が苦しむ 40 年以上前に「指標に圧力をかけると指標が壊れる」ことを見抜いていました。審判団の仕事は、壊れにくい指標(足基準の前進、コリドー逸脱の打ち切り)を設計し続けることです。
+本編の運動会で起きたこと — 「前進距離」を胴体基準で測ったら **前方へ倒れ込むダイブ** が高得点になった件 — は、CoastRunners の入り江周回と寸分違わぬ現象です。Goodhart(1975)も Campbell(1979)も、報酬設計者が苦しむ 40 年以上前に「指標に圧力をかけると指標が壊れる」ことを見抜いていました。審判団の仕事は、壊れにくい指標(足基準の前進、コリドー逸脱の打ち切り)を設計し続けることです。
 
 #### かみ砕き: テストの過去問だけ勉強する子
 
@@ -1535,7 +1532,7 @@ RL への写像: 「この動画の歩行は walk13d の checkpoint 63M ステ�
 
 さらに一歩進めたのが **Registered Reports(登録報告)** という論文形式です。2013 年に Chris Chambers らが Cortex 誌で開始し [^rr-cortex]、研究の「導入・方法・解析計画」だけを先に査読して、**結果が出る前に採択を確定** します。結果がポジティブでもネガティブでも掲載される — つまり「良い結果」ではなく「良い問いと良い測り方」に報酬を与える制度設計です。現在は 200 誌以上が採用しています [^rr-cos] [^rr-nhb]。
 
-本編の審判団がやった「**事前宣言ゲート**」— 学習を回す前に『成功とは足基準で X m 前進、コリドー幅 Y m 以内、転倒なし』と宣言してから回す — は、この事前登録の家庭内ミニチュア版です。走らせた後に成功条件を決めると、人間も自分の実験に対して p-hacking をしてしまう。40 万件の追試が示した教訓を、運動会の 1 種目にも適用しているわけです。
+本編の審判団がやった「**事前宣言ゲート**」— 学習を回す前に『成功とは足基準で X m 前進、コリドー幅 Y m 以内、転倒なし』と宣言してから回す — は、この事前登録の家庭内ミニチュア版です。走らせた後に成功条件を決めると、人間も自分の実験に対して p-hacking をしてしまう。100 研究の大規模追試が示した教訓を、運動会の 1 種目にも適用しているわけです。
 
 ### 1-4. ベンチマークの罠 — ML 分野の「過去問過適合」
 
@@ -1559,7 +1556,7 @@ Recht らの 2019 年の論文 "Do ImageNet Classifiers Generalize to ImageNet?"
 - 法線は **int8 量子化**(3B)
 - 色は頂点ごとに持たず**ボディ単位のテーブル参照**(実質 0B)
 
-で **11B/頂点**まで圧縮し、8.8MB に収めました。产業画像処理でカメラのビット深度と帯域を天秤にかける、あの計算がそのまま役に立っています。座標の量子化は「bbox あたり 65,536 段階」なので、身長 1.3m のロボットなら 0.02mm 刻み — 人の目には無圧縮と区別がつきません。
+で **11B/頂点**まで圧縮し、8.8MB に収めました。産業画像処理でカメラのビット深度と帯域を天秤にかける、あの計算がそのまま役に立っています。座標の量子化は「bbox あたり 65,536 段階」なので、身長 1.3m のロボットなら 0.02mm 刻み — 人の目には無圧縮と区別がつきません。
 
 > **🍙 かみ砕きコーナー(データ圧縮編)**
 > 「11B/頂点」の話は、身近な例だと「住所の書き方」です。『東京都千代田区…』とフルで書く(float32)代わりに、『この town の中の 65,536 分の 1 の位置』という番号(uint16)で書く。町内という前提を共有すれば、番号だけで十分正確に場所が伝わります。3D データの圧縮は、こういう「前提を共有して桁を節約する」工夫の積み重ねです。
@@ -1679,13 +1676,13 @@ opensim.stanford.edu + github.com/opensim-org / github.com/MyoHub/{myosuite,myo_
 **パート 3**: github.com/KhronosGroup/glTF(KHR_mesh_quantization / KHR_draco_mesh_compression / 拡張一覧)/
 repo-sam.inria.fr(3DGS 公式)/ github.com/graphdeco-inria/gaussian-splatting
 
-### 未確認・注意事項(honest)
+### 未確認・注意事項(正直な注記)
 
 - **Tesla 公式ページ(tesla.com/AI)は bot 保護で取得不可(HTTP 403)**。Optimus の
   173 cm / 57 kg は AI Day 2022 公表値の報道ベース、価格 $20K〜30K は Musk 発言の
-  目標値(未発売)。「公式データシートは存在しない」と記事にも明記するのが安全。
+  目標値(未発売)です。公式データシートは現時点で存在しません。
 - **Figure 03 の身長・体重の数値は公式未公表**(「Figure 02 比 9% 軽量」のみ公式)。
-  報道の推定価格 $100K+ も推定である旨を明記。
+  報道の推定価格 $100K+ も推定値です。
 - **Booster T1 の公式価格は問い合わせ制**。$30K 前後は代理店表示(2026 年時点)。
 - **AgiBot の出荷台数・シェア(5,168 台 / 39%)は同社発表ベースの報道**で第三者検証なし。
 - **人体の筋の総数は資料により 600〜700**(数え方依存)。単一の確定値として書かない。
@@ -1715,7 +1712,7 @@ repo-sam.inria.fr(3DGS 公式)/ github.com/graphdeco-inria/gaussian-splatting
 *図: Sobel 勾配強度 — 明るさの変化の強さを描く(Fullseye 実行結果)*
 
 ![fops_edges](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_edges.png)
-*図: edges の実処理例 — 同じ雑音入り入力に対し、勾配強度の固定閾値ではエッジが太く途切れnoise も拾うが、canny(非最大抑制+ヒステリシス)は細く連続した輪郭を返す(Fullseye 実出力)。入力は skimage camera・AI 生成(Gemini)・自前合成の 3 種。*
+*図: edges の実処理例 — 同じ雑音入り入力に対し、勾配強度の固定閾値ではエッジが太く途切れ、ノイズも拾うが、canny(非最大抑制+ヒステリシス)は細く連続した輪郭を返す(Fullseye 実出力)。入力は skimage camera・AI 生成(Gemini)・自前合成の 3 種。*
 
 ![opdemo_05_threshold_label.png](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/opdemo_05_threshold_label.png)
 *図: 二値化+連結成分 — 「何個あるか」を数えられる形にする(色分け=個体識別)(Fullseye 実行結果)*
@@ -2249,14 +2246,14 @@ QD の威力を世に知らしめたのが Cully らの Nature 論文 "Robots th
 ![跳躍 22M の中間診断](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/g1_jump_22M_diag.gif)
 *動画: 学習 22M 時点の中間診断(物理シミュレーション実測)。空中局面と最初の 3 ホップの着地は成立、4 ホップ目から崩れる。学習は続行中 — 卒業試験の結果は続報で*
 
-事前宣言ゲートは「空中局面の再現+着地後 1 秒の安定」。22M 時点の判定は空中局面 PASS・連続着地 FAIL(4 ホップ目以降)でしたが、学習を実効 54M まで走り切ったところで景色が変わりました。
+事前宣言ゲートは「空中局面の再現+着地後 1 秒の安定」。22M 時点の判定は空中局面が合格・連続着地が不合格(4 ホップ目以降)でしたが、学習を実効 54M まで走り切ったところで景色が変わりました。
 
 **卒業試験、合格です。** 20 秒の決定論走行(乱数なしの本番一発勝負)で**転倒ゼロ**。空中局面 28 回(滞空 0.14〜0.34 秒)、着地後 1 秒を完全観測できた 26 回の着地は**すべて安定** — 「4 ホップ目で崩れる」は過去の話になりました。学習中の生存時間も、お手本クリップ全長(11.2 秒)を超えて 2 周目に突入するまで伸びています。
 
 ![跳躍 RL の実走](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/g1_jump_rl.gif)
 *動画: 学習済み方策の連続ホップ(物理シミュレーション実測、決定論走行の一部)。空中局面と着地静定を繰り返す — 22M の「4 ホップ目で崩れる」から、54M で 20 秒無転倒へ(実測)*
 
-裏話も一つ。最初のゲート判定は FAIL と出ました — が、原因は選手ではなく**検査装置側のバグ**(検証走行がコース幅の設定を無視し、規定より狭い幅で「コース逸脱」を誤判定)。修正して再判定した結果が上記です。審判の審判は、種目が変わっても仕事が尽きません。次の挑戦は同じクリップの幅跳び区間(滞空 0.4 秒・飛距離 0.8m)です。
+裏話も一つ。最初のゲート判定は不合格と出ました — が、原因は選手ではなく**検査装置側のバグ**(検証走行がコース幅の設定を無視し、規定より狭い幅で「コース逸脱」を誤判定)。修正して再判定した結果が上記です。審判の審判は、種目が変わっても仕事が尽きません。次の挑戦は同じクリップの幅跳び区間(滞空 0.4 秒・飛距離 0.8m)です。
 
 ## 15.0.3 走りの部(仕込み速報)— 歩きと走りの境界線は「飛行局面」
 
@@ -2287,7 +2284,7 @@ QD の威力を世に知らしめたのが Cully らの Nature 論文 "Robots th
 ![走り継続学習の巡航](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/g1_run_rl2.gif)
 *動画: 継続学習後の巡航区間(物理シミュレーション実測、決定論走行 t=8〜12 秒)。飛行局面を含む走行フォームのまま安定巡航 — 前回はこの尺の前に転んでいた(実測)*
 
-そして本家への挑戦状・第二弾。30 秒の決定論走行で 125.8m を完走し、**100m 通過は 23.77 秒**でした。北京の 100m 優勝(天工 Ultra、21.50 秒)まで **2.3 秒差の銀メダル圏**。歩行の 73.0 秒からは 3.1 倍の短縮です。正直な注記: この記録は参照速度で走り出すフライングスタート相当(静止スタートなら数秒加算)なので、公式記録と並べるときは「参考記録」の但し書きつき — それでも、自宅の 1 台の GPU で育てた選手が、国家級大会の優勝タイムと同じ土俵の数字を出せる時代です。
+そして本家への挑戦状・第二弾。30 秒の決定論走行で 125.8m を完走し、**100m 通過は 23.77 秒**でした。北京の 100m 優勝(天工 Ultra、21.50 秒)まで **2.3 秒差の銀メダル圏**。歩行の 73.0 秒からは 3.1 倍の短縮です。もちろん、あちらは重力も摩耗も観客もある実機、こちらはシミュレーションの中 — 土俵が違う参考記録として読んでください。正直な注記: この記録は参照速度で走り出すフライングスタート相当(静止スタートなら数秒加算)なので、公式記録と並べるときは「参考記録」の但し書きつき — それでも、自宅の 1 台の GPU で育てた選手が、国家級大会の優勝タイムと同じ土俵の数字を出せる時代です。
 
 ## 15.0.4 階段の部(仕込み速報)— 水平の目は低い階段が見えない
 
@@ -2340,7 +2337,7 @@ stage 1(段高 5cm)の結果が出ました。**3〜5 段までは登れる、�
 ![箸 1M の学習曲線](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/fig2_chop_100k_vs_1M.png)
 *図: 箸 RL 1M 走の train 報酬(上昇)と持ち上げ高さ(48mm で平坦 = 射出の頂点)。「報酬は伸びるのに実は何も掴んでいない」の典型パターン(実測ログより作図)*
 
-1M 学習の判定は「成功 0/8 = STOP」でしたが、これは**壊れた計測器での判定**なので無効とし、環境を修正して測り直しています(判定基準そのものは動かしません)。「異常な数字は、喜ぶ前も、諦める前も、まず内訳を疑う」— 審判団の家訓がまた一つ実例を増やしました。
+1M 学習の判定は「成功 0/8 = 中止」でしたが、これは**壊れた計測器での判定**なので無効とし、環境を修正して測り直しています(判定基準そのものは動かしません)。「異常な数字は、喜ぶ前も、諦める前も、まず内訳を疑う」— 審判団の家訓がまた一つ実例を増やしました。
 
 **続報 — 測り直しの夜のうちに、壁が一枚破れました。**
 
@@ -2497,7 +2494,7 @@ H1 のデビュー戦の結果も出ました — **2.3 秒で転倒**です。�
 ---
 
 > **謝辞とクレジット**
-> この遊びは、公開してくださっている方々の仕事の上に成り立っています。物理エンジン MuJoCo と GPU 版 MJX、ロボットモデル集 MuJoCo Menagerie(モデルごとに各社のライセンスが付されています)、学習フレームワーク brax(いずれも Google DeepMind ほか)。モーションデータは Ubisoft La Forge の LAFAN1(CC BY-NC-ND 4.0、非商用)を Unitree Robotics がロボット向けにリターゲットした公開データセットを、非商用の趣味研究として利用しました。Unitree G1/H1 のモデルと公開データにも感謝します。本記事の実験・作図の実装作業は AI コーディングエージェント(Claude Code)との共同作業です。
+> この遊びは、公開してくださっている方々の仕事の上に成り立っています。物理エンジン MuJoCo と GPU 版 MJX、ロボットモデル集 MuJoCo Menagerie(モデルごとに各社のライセンスが付されています)、学習フレームワーク brax(いずれも Google DeepMind ほか)。モーションデータは Ubisoft La Forge の LAFAN1(CC BY-NC-ND 4.0、非商用)を Unitree Robotics がロボット向けにリターゲットした公開データセットを、非商用の趣味研究として利用しました。Unitree G1/H1 のモデルと公開データにも感謝します。階段のモーションは CMU Graphics Lab Motion Capture Database(mocap.cs.cmu.edu)を利用しました — The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217. なお HALCON は MVTec Software GmbH の商標で、本記事の op 名対応はあくまで互換性の目安です。本記事の実装・実測・作図の作業は AI コーディングエージェント(Claude Code)が担い、方針の決定・発案・検収・レビューは筆者が担いました。
 >
 > **免責**: 本記事は個人の趣味研究の記録で、所属組織とは関係ありません。各社製品のスペック・市場数値は執筆時点の公開情報からの引用で、正確性は各出典をご確認ください。シミュレーション結果は実機の性能を保証しません(むしろ本文のとおり、シミュレーションの中ですら思いどおりになっていません)。
 
@@ -2717,7 +2714,9 @@ OSS の学習環境は、(1) **MuJoCo Playground**(Apache-2.0。四足・二足�
 観測設計はセンサ選定である、という本編の主張を支える資料編です。
 
 ![センサ比較レーダー](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/fig2_sensor_compare.png)
-*図: 主要 5 センサの特性比較(付録 C の実スペック表からの定性要約)。万能なセンサは無い — だから混ぜる(フュージョン)ことになる*数値は 2026-08 時点の調査で、各項目に出典を付けています(公式データシート優先。確認できなかった値は「未確認」のまま残しています — 推測で埋めるより、埋まっていないことがわかる方が資料として誠実だからです)。
+*図: 主要 5 センサの特性比較(付録 C の実スペック表からの定性要約)。万能なセンサは無い — だから混ぜる(フュージョン)ことになる*
+
+数値は 2026-08 時点の調査で、各項目に出典を付けています(公式データシート優先。確認できなかった値は「未確認」のまま残しています — 推測で埋めるより、埋まっていないことがわかる方が資料として誠実だからです)。
 
 ### 1. 主要センサのスペックと長所・短所
 
@@ -3264,7 +3263,7 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 
 
 ![fops_tools](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_tools.png)
-*図: Tools の実処理例 — 欠損画素(衛星画像の走査線抜け・キズ)は定数で埋めると継ぎ目が残るが、interpolate_scattered_data_image は残存画素の散布データ補間で滑らかに埋める(Fullseye 実出力)。入力は NASA/JPL-Caltech の火星砂丘(HiRISE, PIA18244, パブリックドメイン)・skimage camera・AI 生成画像(Gemini)。欠損は 3 種とも人工的に付与。*
+*図: Tools の実処理例 — 欠損画素(衛星画像の走査線抜け・キズ)は定数で埋めると継ぎ目が残るが、interpolate_scattered_data_image は残存画素の散布データ補間で滑らかに埋める(Fullseye 実出力)。入力は NASA/JPL-Caltech/Univ. of Arizona の火星砂丘(HiRISE, PIA18244, パブリックドメイン)・skimage camera・AI 生成画像(Gemini)。欠損は 3 種とも人工的に付与。*
 
 | op | 説明 |
 |---|---|
@@ -3450,72 +3449,72 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | op | 説明 |
 |---|---|
 | `affine_trans_pixel` | 画素 (row,col) にアフィン変換を適用(HALCON は (row,col) 順)。 |
-| `affine_trans_point_2d` | Apply an arbitrary affine 2D transformation to points. |
-| `axis_angle_to_quat` | Create a rotation quaternion. |
-| `convert_point_3d_cart_to_spher` | Convert Cartesian coordinates of a 3D point to spherical coordinates. |
-| `convert_point_3d_spher_to_cart` | Convert spherical coordinates of a 3D point to Cartesian coordinates. |
+| `affine_trans_point_2d` | 点列に任意の 2D アフィン変換を適用する。 |
+| `axis_angle_to_quat` | 回転軸と角度から回転クォータニオンを作る。 |
+| `convert_point_3d_cart_to_spher` | 3D 点の直交座標を球面座標へ変換する。 |
+| `convert_point_3d_spher_to_cart` | 3D 点の球面座標を直交座標へ変換する。 |
 | `convert_pose_type` | pose の並びを返す(genuine な型変換の簡易版=恒等で type タグを付す)。 |
 | `dual_quat_compose` | 二重四元数の合成(剛体変換の合成、dual_quat_compose)。 |
-| `dual_quat_conjugate` | Conjugate a dual quaternion. |
+| `dual_quat_conjugate` | 双対クォータニオンの共役を返す。 |
 | `dual_quat_interpolate` | 二重四元数の補間(pose 経由で並進 lerp + 回転 slerp、dual_quat_interpolate)。 |
-| `dual_quat_normalize` | Normalize a dual quaternion. |
+| `dual_quat_normalize` | 双対クォータニオンを正規化する。 |
 | `dual_quat_to_hom_mat3d` | 単位二重四元数 [qr(4), qd(4)] を 4x4 剛体変換に(dual_quat_to_hom_mat3d)。 |
-| `dual_quat_to_pose` | Convert a dual quaternion to a 3D pose. |
+| `dual_quat_to_pose` | 双対クォータニオンを 3D pose 表現へ変換する。 |
 | `dual_quat_to_screw` | 二重四元数からスクリュー成分(角度・並進・軸)を返す(dual_quat_to_screw)。 |
 | `dual_quat_trans_line_3d` | 双四元数で 3D 直線を変換(点と方向を剛体変換)(dual_quat_trans_line_3d)。 |
-| `dual_quat_trans_point_3d` | Transform a 3D point with a unit dual quaternion. |
+| `dual_quat_trans_point_3d` | 単位双対クォータニオンで 3D 点を剛体変換する。 |
 | `gen_image_warp_map` | 2D ホモグラフィから画素ワープマップ(逆写像)を生成(gen_image_warp_map)。 |
-| `get_pose_type` | Get the representation type of a 3D pose. |
+| `get_pose_type` | 3D pose の表現形式(回転の持ち方)を返す。 |
 | `get_rectangle_pose` | 画像上の矩形から平面姿勢を推定(4 角対応 → homography → pose)(get_rectangle_pose)。 |
-| `hom_mat2d_compose` | Multiply two homogeneous 2D transformation matrices. |
-| `hom_mat2d_determinant` | Compute the determinant of a homogeneous 2D transformation matrix. |
-| `hom_mat2d_identity` | Generate the homogeneous transformation matrix of the identical 2D transformation. |
-| `hom_mat2d_invert` | Invert a homogeneous 2D transformation matrix. |
-| `hom_mat2d_reflect` | Add a reflection to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_reflect_local` | Add a reflection to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_rotate` | Add a rotation to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_rotate_local` | Add a rotation to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_scale` | Add a scaling to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_scale_local` | Add a scaling to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_slant` | Add a slant to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_slant_local` | Add a slant to a homogeneous 2D transformation matrix. |
+| `hom_mat2d_compose` | 2 つの 2D 同次変換行列を合成(積)する。 |
+| `hom_mat2d_determinant` | 2D 同次変換行列の行列式を計算する。 |
+| `hom_mat2d_identity` | 恒等 2D 変換の同次行列を作る。 |
+| `hom_mat2d_invert` | 2D 同次変換行列の逆行列を求める。 |
+| `hom_mat2d_reflect` | 2D 同次変換行列に鏡映を追加する。 |
+| `hom_mat2d_reflect_local` | 2D 同次変換行列にローカル座標系での鏡映を追加する。 |
+| `hom_mat2d_rotate` | 2D 同次変換行列に回転を追加する。 |
+| `hom_mat2d_rotate_local` | 2D 同次変換行列にローカル座標系での回転を追加する。 |
+| `hom_mat2d_scale` | 2D 同次変換行列に拡大縮小を追加する。 |
+| `hom_mat2d_scale_local` | 2D 同次変換行列にローカル座標系での拡大縮小を追加する。 |
+| `hom_mat2d_slant` | 2D 同次変換行列にせん断(スラント)を追加する。 |
+| `hom_mat2d_slant_local` | 2D 同次変換行列にローカル座標系でのせん断を追加する。 |
 | `hom_mat2d_to_affine_par` | 2D アフィン行列を (sx, sy, phi, theta, tx, ty) に分解。 |
-| `hom_mat2d_translate` | Add a translation to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_translate_local` | Add a translation to a homogeneous 2D transformation matrix. |
-| `hom_mat2d_transpose` | Transpose a homogeneous 2D transformation matrix. |
-| `hom_mat3d_compose` | Multiply two homogeneous 3D transformation matrices. |
-| `hom_mat3d_determinant` | Compute the determinant of a homogeneous 3D transformation matrix. |
-| `hom_mat3d_identity` | Generate the homogeneous transformation matrix of the identical 3D transformation. |
-| `hom_mat3d_invert` | Invert a homogeneous 3D transformation matrix. |
+| `hom_mat2d_translate` | 2D 同次変換行列に平行移動を追加する。 |
+| `hom_mat2d_translate_local` | 2D 同次変換行列にローカル座標系での平行移動を追加する。 |
+| `hom_mat2d_transpose` | 2D 同次変換行列を転置する。 |
+| `hom_mat3d_compose` | 2 つの 3D 同次変換行列を合成(積)する。 |
+| `hom_mat3d_determinant` | 3D 同次変換行列の行列式を計算する。 |
+| `hom_mat3d_identity` | 恒等 3D 変換の同次行列を作る。 |
+| `hom_mat3d_invert` | 3D 同次変換行列の逆行列を求める。 |
 | `hom_mat3d_project` | 4x4 の透視投影行列で 3D 点を 2D 画像点へ(hom_mat3d_project)。 |
 | `hom_mat3d_rotate` | 軸周りの右手系回転を左乗算(axis 0=x,1=y,2=z、標準の符号規約)。 |
-| `hom_mat3d_rotate_local` | Add a rotation to a homogeneous 3D transformation matrix. |
-| `hom_mat3d_scale` | Add a scaling to a homogeneous 3D transformation matrix. |
-| `hom_mat3d_scale_local` | Add a scaling to a homogeneous 3D transformation matrix. |
+| `hom_mat3d_rotate_local` | 3D 同次変換行列にローカル座標系での回転を追加する。 |
+| `hom_mat3d_scale` | 3D 同次変換行列に拡大縮小を追加する。 |
+| `hom_mat3d_scale_local` | 3D 同次変換行列にローカル座標系での拡大縮小を追加する。 |
 | `hom_mat3d_to_pose` | 4x4 変換行列を pose [rx,ry,rz(ZYX euler), tx,ty,tz] に分解。 |
-| `hom_mat3d_translate` | Add a translation to a homogeneous 3D transformation matrix. |
-| `hom_mat3d_translate_local` | Add a translation to a homogeneous 3D transformation matrix. |
-| `hom_mat3d_transpose` | Transpose a homogeneous 3D transformation matrix. |
+| `hom_mat3d_translate` | 3D 同次変換行列に平行移動を追加する。 |
+| `hom_mat3d_translate_local` | 3D 同次変換行列にローカル座標系での平行移動を追加する。 |
+| `hom_mat3d_transpose` | 3D 同次変換行列を転置する。 |
 | `hom_vector_to_proj_hom_mat2d` | 4 点以上の対応から射影変換(homography, DLT)3x3 を求める(hom_vector_to_proj_hom_mat2d)。 |
 | `point_line_to_hom_mat2d` | 点+方向の対応から 2D 剛体変換を推定(point_line_to_hom_mat2d)。 |
 | `point_pluecker_line_to_hom_mat3d` | 点+Plücker 直線の対応から 3D 剛体変換を推定(point_pluecker_line_to_hom_mat3d)。 |
-| `pose_average` | Compute the average of a set of poses. |
-| `pose_compose` | Combine 3D poses given in two tuples. |
-| `pose_invert` | Invert each pose in a tuple of 3D poses. |
-| `pose_to_dual_quat` | Convert a 3D pose to a unit dual quaternion. |
+| `pose_average` | 複数の pose の平均 pose を求める。 |
+| `pose_compose` | 2 つの 3D pose を合成する。 |
+| `pose_invert` | 3D pose 列の各要素を逆変換にする。 |
+| `pose_to_dual_quat` | 3D pose を単位双対クォータニオンへ変換する。 |
 | `pose_to_hom_mat3d` | pose [rx,ry,rz(rad), tx,ty,tz] を 4x4 変換行列に(hom_mat3d_to_pose の逆)。 |
-| `pose_to_quat` | Convert the rotational part of a 3D pose to a quaternion. |
+| `pose_to_quat` | 3D pose の回転成分をクォータニオンへ変換する。 |
 | `proj_hom_mat2d_to_pose` | ホモグラフィと内部行列から平面の姿勢(R,t)を分解(proj_hom_mat2d_to_pose)。 |
 | `projective_trans_hom_point_3d` | 同次 3D 点に 4x4 射影変換を適用(projective_trans_hom_point_3d)。 |
 | `projective_trans_pixel` | 画素 (row,col) に射影変換を適用(HALCON (row,col) 順)。 |
-| `projective_trans_point_3d` | Project a 3D point using a projective transformation matrix. |
-| `quat_compose` | Multiply two quaternions. |
-| `quat_conjugate` | Generate the conjugation of a quaternion. |
+| `projective_trans_point_3d` | 射影変換行列で 3D 点を射影する。 |
+| `quat_compose` | 2 つのクォータニオンの積を計算する。 |
+| `quat_conjugate` | クォータニオンの共役を返す。 |
 | `quat_interpolate` | slerp 球面線形補間。 |
-| `quat_normalize` | Normalize a quaternion. |
-| `quat_rotate_point_3d` | Perform a rotation by a unit quaternion. |
-| `quat_to_hom_mat3d` | Convert a quaternion into the corresponding rotation matrix. |
-| `quat_to_pose` | Convert a quaternion into the corresponding 3D pose. |
+| `quat_normalize` | クォータニオンを正規化する。 |
+| `quat_rotate_point_3d` | 単位クォータニオンで 3D 点を回転する。 |
+| `quat_to_hom_mat3d` | クォータニオンを対応する回転行列へ変換する。 |
+| `quat_to_pose` | クォータニオンを対応する 3D pose へ変換する。 |
 | `screw_to_dual_quat` | スクリュー(軸方向 l, モーメント m, 回転角 theta, 並進 d)を二重四元数へ(screw_to_dual_quat)。 |
 | `set_origin_pose` | 姿勢の原点を局所オフセットだけ移動(set_origin_pose)。 |
 | `vector_angle_to_rigid` | 1 組の (点, 角度) から 2D 剛体変換を求める(vector_angle_to_rigid)。 |
@@ -3523,7 +3522,7 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | `vector_to_aniso` | 2D 点対応から異方性(非等方スケール)アフィン変換を推定(vector_to_aniso)。 |
 | `vector_to_hom_mat2d` | 点対応から 2D ホモグラフィを推定(vector_to_hom_mat2d)。 |
 | `vector_to_hom_mat3d` | 3D 点対応から剛体/相似変換(4x4)を Umeyama 推定(vector_to_hom_mat3d)。 |
-| `vector_to_pose` | Recover object/camera 6-DoF pose ``(R, t)`` from >=6 3-D<->2-D matches. |
+| `vector_to_pose` | 6 組以上の 3D↔2D 対応から物体/カメラの 6 自由度 pose (R, t) を推定する(PnP)。 |
 | `vector_to_proj_hom_mat2d` | 2D 点対応から射影変換(ホモグラフィ 3x3)を DLT 推定(vector_to_proj_hom_mat2d)。 |
 | `vector_to_proj_hom_mat2d_distortion` | 歪み込みで射影変換を推定(歪みは小と仮定し DLT)(vector_to_proj_hom_mat2d_distortion)。 |
 | `vector_to_rigid` | 対応点から 2D 剛体変換(回転+並進、Kabsch)を求める(vector_to_rigid)。 |
@@ -3559,7 +3558,7 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | `cv_good_features` | features op(HALCON: -) |
 | `cv_hough_circles` | features op(HALCON: hough_circles) |
 | `cv_hough_lines` | features op(HALCON: hough_lines) |
-| `describe_patches` | Zero-mean, unit-norm intensity-patch descriptor around each keypoint. |
+| `describe_patches` | 各キーポイント周辺の輝度パッチを平均 0・ノルム 1 に正規化した記述子。 |
 | `diameter_region` | features op(HALCON: diameter_region) |
 | `diameter_xld` | features op(HALCON: diameter_xld) |
 | `eccentricity` | features op(HALCON: eccentricity) |
@@ -3569,17 +3568,17 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | `entropy_gray` | features op(HALCON: entropy_gray) |
 | `estimate_noise` | features op(HALCON: estimate_noise) |
 | `euler_number` | features op(HALCON: euler_number) |
-| `fast_corners` | FAST-style corner keypoints (Rosten & Drummond 2006), strongest first. |
+| `fast_corners` | FAST 型のコーナーキーポイント検出(応答の強い順)。 |
 | `get_region_thickness` | features op(HALCON: get_region_thickness) |
 | `gray_histo_abs` | features op(HALCON: gray_histo_abs) |
-| `harris_corners` | Harris corner keypoints (Harris & Stephens 1988), strongest first. |
+| `harris_corners` | Harris コーナーキーポイント検出(応答の強い順)。 |
 | `height_width_ratio` | features op(HALCON: height_width_ratio) |
 | `hough_circle_trans` | features op(HALCON: hough_circle_trans) |
 | `hough_line_trans` | features op(HALCON: hough_line_trans) |
 | `intensity` | features op(HALCON: intensity) |
 | `length_xld` | features op(HALCON: length_xld) |
-| `match_descriptors` | Match two descriptor sets by nearest neighbour with Lowe's ratio test. |
-| `match_keypoints` | Detect, describe and match keypoints between two images in one call. |
+| `match_descriptors` | 2 つの記述子集合を最近傍 + Lowe の比率テストで対応づける。 |
+| `match_keypoints` | 2 画像間のキーポイント検出・記述・マッチングを一括で実行する。 |
 | `min_max_gray` | features op(HALCON: min_max_gray) |
 | `moments_region_2nd` | features op(HALCON: moments_region_2nd) |
 | `moments_region_2nd_invar` | features op(HALCON: moments_region_2nd_invar) |
@@ -3654,16 +3653,16 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | `opening_golay` | region op(HALCON: opening_golay) |
 | `opening_rectangle1` | region op(HALCON: opening_rectangle1) |
 | `pruning` | region op(HALCON: pruning) |
-| `r2_inner_circle` | Largest inscribed circle drawn as a mask (a scales drawn radius; a=0.5=exact). |
-| `r2_inner_rectangle1` | Largest axis-aligned inscribed rectangle (a shrinks the drawn rect; a=0=exact). |
-| `r2_partition_rectangle` | Split the region bbox into an NxN grid; keep cells overlapping the region. |
-| `r2_runlength_features` | Region -> feature: mean length of horizontal foreground runs. |
-| `r2_smallest_circle` | Minimum enclosing circle as a mask (Welzl); a inflates radius (>=0). |
-| `r2_smallest_rectangle1` | Axis-aligned bounding box (smallest_rectangle1). |
-| `r2_smallest_rectangle2` | Minimum-area ORIENTED bounding rectangle as a mask (rotating calipers). |
-| `r2_sort_region` | Keep the k-th largest connected component; k = round(a*(n-1)). |
-| `r2_split_skeleton_lines` | Thin the region to a skeleton, then break it at junctions (>=3 neighbours). |
-| `r2_union1` | Union of all connected components into a single mask (OR of labels). |
+| `r2_inner_circle` | 最大内接円をマスクとして描く(a で描画半径を拡縮、a=0.5 で厳密)。 |
+| `r2_inner_rectangle1` | 最大の軸平行内接矩形(a で描画矩形を縮小、a=0 で厳密)。 |
+| `r2_partition_rectangle` | 領域の外接矩形を N×N 格子に分割し、領域と重なるセルだけ残す。 |
+| `r2_runlength_features` | 領域→特徴量: 水平方向の前景ラン長の平均。 |
+| `r2_smallest_circle` | 最小包含円をマスクとして描く(Welzl 法、a で半径を拡大)。 |
+| `r2_smallest_rectangle1` | 軸平行の外接矩形(バウンディングボックス)。 |
+| `r2_smallest_rectangle2` | 面積最小の有向外接矩形をマスク化(回転キャリパー法)。 |
+| `r2_sort_region` | k 番目に大きい連結成分だけ残す(k = round(a*(n-1)))。 |
+| `r2_split_skeleton_lines` | 領域を細線化して骨格にし、分岐点(近傍 3 以上)で切り分ける。 |
+| `r2_union1` | 全連結成分を 1 つのマスクへ統合(ラベルの OR)。 |
 | `r3_background_seg` | region op(HALCON: background_seg) |
 | `r3_clip_region` | region op(HALCON: clip_region) |
 | `r3_eliminate_runs` | region op(HALCON: eliminate_runs) |
@@ -3718,21 +3717,21 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | `change_domain` | 画像の domain(ROI)を region に変更(領域外を 0 マスク)(change_domain)。 |
 | `channels_to_image` | 2D チャネルのリスト/列を多チャネル画像へ(channels_to_image)。 |
 | `complex_to_real` | 複素画像を実部/虚部へ分解(complex_to_real)。 |
-| `compose2` | Convert two images into a two-channel image. |
-| `compose3` | Convert 3 images into a three-channel image. |
-| `compose4` | Convert 4 images into a four-channel image. |
-| `compose5` | Convert 5 images into a five-channel image. |
-| `compose6` | Convert 6 images into a six-channel image. |
-| `compose7` | Convert 7 images into a seven-channel image. |
+| `compose2` | 2 枚の画像を 2 チャネル画像にまとめる。 |
+| `compose3` | 3 枚の画像を 3 チャネル画像にまとめる。 |
+| `compose4` | 4 枚の画像を 4 チャネル画像にまとめる。 |
+| `compose5` | 5 枚の画像を 5 チャネル画像にまとめる。 |
+| `compose6` | 6 枚の画像を 6 チャネル画像にまとめる。 |
+| `compose7` | 7 枚の画像を 7 チャネル画像にまとめる。 |
 | `cooc_feature_matrix` | GLCM から Haralick 特徴(energy/contrast/correlation/homogeneity)(cooc_feature_matrix)。 |
 | `crop_domain_rel` | domain 外接矩形を相対マージン付きで切り出す(crop_domain_rel)。 |
 | `crop_rectangle2` | 回転矩形 (row,col,phi,l1,l2) を切り出し軸並行化(crop_rectangle2)。 |
-| `decompose2` | Convert a two-channel image into two images. |
-| `decompose3` | Convert a three-channel image into three images. |
-| `decompose4` | Convert a four-channel image into four images. |
-| `decompose5` | Convert a five-channel image into five images. |
-| `decompose6` | Convert a six-channel image into six images. |
-| `decompose7` | Convert a seven-channel image into seven images. |
+| `decompose2` | 2 チャネル画像を 2 枚の画像に分解する。 |
+| `decompose3` | 3 チャネル画像を 3 枚の画像に分解する。 |
+| `decompose4` | 4 チャネル画像を 4 枚の画像に分解する。 |
+| `decompose5` | 5 チャネル画像を 5 枚の画像に分解する。 |
+| `decompose6` | 6 チャネル画像を 6 枚の画像に分解する。 |
+| `decompose7` | 7 チャネル画像を 7 枚の画像に分解する。 |
 | `elliptic_axis_gray` | グレー値重み 2 次モーメントの等価楕円 (ra, rb, phi)(elliptic_axis_gray)。 |
 | `fuzzy_entropy` | 領域グレー分布の Shannon エントロピー(fuzzy_entropy)。 |
 | `fuzzy_perimeter` | グレー勾配総和による fuzzy 周長(fuzzy_perimeter)。 |
@@ -4035,52 +4034,52 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 
 | op | 説明 |
 |---|---|
-| `abs_matrix` | Compute the absolute values of the elements of a matrix. |
-| `abs_matrix_mod` | Compute the absolute values of the elements of a matrix. |
-| `add_matrix` | Add two matrices. |
-| `add_matrix_mod` | Add two matrices. |
-| `create_matrix` | Create a matrix. |
+| `abs_matrix` | 行列の各要素の絶対値を計算する。 |
+| `abs_matrix_mod` | 要素ごとの絶対値(結果を入力行列へ上書き)。 |
+| `add_matrix` | 2 つの行列を加算する。 |
+| `add_matrix_mod` | 行列加算(結果を入力行列へ上書き)。 |
+| `create_matrix` | 新しい行列を生成する。 |
 | `decompose_matrix` | LU 分解(P,L,U)を返す(decompose_matrix)。 |
-| `determinant_matrix` | Compute the determinant of a matrix. |
-| `div_element_matrix` | Divide matrices element-by-element. |
-| `div_element_matrix_mod` | Divide matrices element-by-element. |
-| `eigenvalues_general_matrix` | Compute the eigenvalues and optionally the eigenvectors of a general matrix. |
-| `eigenvalues_symmetric_matrix` | Compute the eigenvalues and optionally eigenvectors of a symmetric matrix. |
-| `generalized_eigenvalues_general_matrix` | Compute the generalized eigenvalues and optionally the generalized eigenvectors of general matrices. |
-| `generalized_eigenvalues_symmetric_matrix` | Compute the generalized eigenvalues and optionally generalized eigenvectors of symmetric input matrices. |
-| `get_diagonal_matrix` | Get the diagonal elements of a matrix. |
-| `get_sub_matrix` | Get a sub-matrix of a matrix. |
-| `invert_matrix` | Invert a matrix. |
-| `invert_matrix_mod` | Invert a matrix. |
-| `max_matrix` | Returns the elementwise maximum of a matrix. |
-| `mean_matrix` | Returns the elementwise mean of a matrix. |
-| `min_matrix` | Returns the elementwise minimum of a matrix. |
-| `mult_element_matrix` | Multiply matrices element-by-element. |
-| `mult_element_matrix_mod` | Multiply matrices element-by-element. |
-| `mult_matrix` | Multiply two matrices. |
-| `mult_matrix_mod` | Multiply two matrices. |
-| `norm_matrix` | Norm of a matrix. |
+| `determinant_matrix` | 行列式を計算する。 |
+| `div_element_matrix` | 行列同士を要素ごとに除算する。 |
+| `div_element_matrix_mod` | 要素ごとの除算(結果を入力行列へ上書き)。 |
+| `eigenvalues_general_matrix` | 一般行列の固有値(必要なら固有ベクトルも)を計算する。 |
+| `eigenvalues_symmetric_matrix` | 対称行列の固有値(必要なら固有ベクトルも)を計算する。 |
+| `generalized_eigenvalues_general_matrix` | 一般行列対の一般化固有値(必要なら固有ベクトルも)を計算する。 |
+| `generalized_eigenvalues_symmetric_matrix` | 対称行列対の一般化固有値(必要なら固有ベクトルも)を計算する。 |
+| `get_diagonal_matrix` | 行列の対角要素を取り出す。 |
+| `get_sub_matrix` | 部分行列を取り出す。 |
+| `invert_matrix` | 逆行列を計算する。 |
+| `invert_matrix_mod` | 逆行列(結果を入力行列へ上書き)。 |
+| `max_matrix` | 行列要素の最大値を返す。 |
+| `mean_matrix` | 行列要素の平均を返す。 |
+| `min_matrix` | 行列要素の最小値を返す。 |
+| `mult_element_matrix` | 行列同士を要素ごとに乗算する。 |
+| `mult_element_matrix_mod` | 要素ごとの乗算(結果を入力行列へ上書き)。 |
+| `mult_matrix` | 2 つの行列の積を計算する。 |
+| `mult_matrix_mod` | 行列積(結果を入力行列へ上書き)。 |
+| `norm_matrix` | 行列のノルムを計算する。 |
 | `orthogonal_decompose_matrix` | QR 直交分解を返す(orthogonal_decompose_matrix)。 |
-| `pow_element_matrix` | Compute the power functions of the elements of a matrix. |
-| `pow_element_matrix_mod` | Compute the power functions of the elements of a matrix. |
-| `pow_matrix` | Compute the power functions of a matrix. |
-| `pow_matrix_mod` | Compute the power functions of a matrix. |
-| `pow_scalar_element_matrix` | Compute the power functions of the elements of a matrix. |
-| `pow_scalar_element_matrix_mod` | Compute the power functions of the elements of a matrix. |
-| `repeat_matrix` | Repeat a matrix. |
-| `scale_matrix` | Scale a matrix. |
-| `scale_matrix_mod` | Scale a matrix. |
-| `set_diagonal_matrix` | Set the diagonal elements of a matrix. |
-| `set_sub_matrix` | Set a sub-matrix of a matrix. |
-| `solve_matrix` | Compute the solution of a system of equations. |
-| `sqrt_matrix` | Compute the square root values of the elements of a matrix. |
-| `sqrt_matrix_mod` | Compute the square root values of the elements of a matrix. |
-| `sub_matrix` | Subtract two matrices. |
-| `sub_matrix_mod` | Subtract two matrices. |
-| `sum_matrix` | Returns the elementwise sum of a matrix. |
-| `svd_matrix` | Compute the singular value decomposition of a matrix. |
-| `transpose_matrix` | Transpose a matrix. |
-| `transpose_matrix_mod` | Transpose a matrix. |
+| `pow_element_matrix` | 行列の各要素をべき乗する。 |
+| `pow_element_matrix_mod` | 要素ごとのべき乗(結果を入力行列へ上書き)。 |
+| `pow_matrix` | 行列そのもののべき乗を計算する。 |
+| `pow_matrix_mod` | 行列べき乗(結果を入力行列へ上書き)。 |
+| `pow_scalar_element_matrix` | スカラーを底、各要素を指数とするべき乗を要素ごとに計算する。 |
+| `pow_scalar_element_matrix_mod` | スカラー底の要素べき乗(結果を入力行列へ上書き)。 |
+| `repeat_matrix` | 行列をタイル状に繰り返して並べる。 |
+| `scale_matrix` | 行列をスカラー倍する。 |
+| `scale_matrix_mod` | スカラー倍(結果を入力行列へ上書き)。 |
+| `set_diagonal_matrix` | 行列の対角要素を設定する。 |
+| `set_sub_matrix` | 部分行列を書き込む。 |
+| `solve_matrix` | 連立一次方程式の解を計算する。 |
+| `sqrt_matrix` | 行列の各要素の平方根を計算する。 |
+| `sqrt_matrix_mod` | 要素ごとの平方根(結果を入力行列へ上書き)。 |
+| `sub_matrix` | 2 つの行列を減算する。 |
+| `sub_matrix_mod` | 行列減算(結果を入力行列へ上書き)。 |
+| `sum_matrix` | 行列要素の総和を返す。 |
+| `svd_matrix` | 特異値分解(SVD)を計算する。 |
+| `transpose_matrix` | 行列を転置する。 |
+| `transpose_matrix_mod` | 転置(結果を入力行列へ上書き)。 |
 
 #### 3D Reconstruction(43 op)
 
@@ -4092,12 +4091,12 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | op | 説明 |
 |---|---|
 | `apply_sheet_of_light_calibration` | プロファイル(画素行)を高さ(メトリック)へ換算(apply_sheet_of_light_calibration)。 |
-| `binocular_disparity` | Semi-Global Matching disparity (Hirschmüller, CVPR 2005 / PAMI 2008). |
-| `binocular_disparity_mg` | Dense disparity by winner-take-all block matching. |
-| `binocular_disparity_ms` | Semi-Global Matching disparity (Hirschmüller, CVPR 2005 / PAMI 2008). |
-| `binocular_distance` | Metric depth ``Z = focal * baseline / disparity``. |
-| `binocular_distance_mg` | Metric depth ``Z = focal * baseline / disparity``. |
-| `binocular_distance_ms` | Metric depth ``Z = focal * baseline / disparity``. |
+| `binocular_disparity` | Semi-Global Matching によるステレオ視差推定(Hirschmüller 法)。 |
+| `binocular_disparity_mg` | 勝者総取りブロックマッチングによる密な視差推定。 |
+| `binocular_disparity_ms` | SGM 視差推定の別入口(実装は Hirschmüller 法)。 |
+| `binocular_distance` | 視差から計量深度 Z = f·B/d を計算する。 |
+| `binocular_distance_mg` | 視差→計量深度 Z = f·B/d(mg 入口)。 |
+| `binocular_distance_ms` | 視差→計量深度 Z = f·B/d(ms 入口)。 |
 | `calibrate_sheet_of_light` | 既知段差からシート光の画素→高さスケールを校正(calibrate_sheet_of_light)。 |
 | `create_sheet_of_light_calib_object` | シート光校正オブジェクト(既知段差)(create_sheet_of_light_calib_object)。 |
 | `create_sheet_of_light_model` | シート光(レーザライン)プロファイル計測モデル(create_sheet_of_light_model)。 |
@@ -4110,9 +4109,9 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | `distance_to_disparity` | 距離 Z を視差 d = f*baseline/Z に変換(distance_to_disparity)。 |
 | `essential_to_fundamental_matrix` | 基本行列 F = K2^-T E K1^-1 を本質行列 E から計算(essential_to_fundamental_matrix)。 |
 | `gen_binocular_proj_rectification` | 基礎行列からステレオ平行化のためのエピポール整列変換を推定 |
-| `gen_binocular_rectification_map` | Compute rectifying rotations for a calibrated stereo pair (Fusiello 2000). |
+| `gen_binocular_rectification_map` | 較正済みステレオペアの平行化回転を計算する(Fusiello 法)。 |
 | `gen_structured_light_pattern` | 正弦波の構造化光パターン画像を生成(gen_structured_light_pattern)。 |
-| `intersect_lines_of_sight` | Linear (DLT) triangulation of matched pixels from two views (H&Z §12.2). |
+| `intersect_lines_of_sight` | 2 視点の対応画素を線形 DLT 三角測量で 3D 復元する。 |
 | `match_essential_matrix_ransac` | 点対応と内部行列 K から RANSAC で本質行列 E を推定(match_essential_matrix_ransac)。 |
 | `match_fundamental_matrix_distortion_ransac` | 歪み込み基礎行列の RANSAC 推定(match_fundamental_matrix_distortion_ransac)。 |
 | `match_fundamental_matrix_ransac` | 点対応から RANSAC で基礎行列 F とインライアを推定(match_fundamental_matrix_ransac)。 |
@@ -4130,8 +4129,8 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | `sfs_orig_lr` | Shape-from-Shading(原法 linear、sfs_orig_lr)。Pentland 実装を共用。 |
 | `sfs_pentland` | Pentland の線形化 Shape-from-Shading で高さ場を復元(sfs_pentland)。 |
 | `uncalibrated_photometric_stereo` | 光源方向未知の photometric stereo(SVD で 3 階数近似、uncalibrated_photometric_stereo)。 |
-| `vector_to_essential_matrix` | Essential matrix E (3, 3) from >=8 correspondences of a *calibrated* pair. |
-| `vector_to_fundamental_matrix` | Fundamental matrix F (3, 3) from >=8 correspondences by the normalized |
+| `vector_to_essential_matrix` | 較正済みペアの 8 組以上の対応から基本行列 E を推定する。 |
+| `vector_to_fundamental_matrix` | 8 組以上の対応から正規化 8 点法で基礎行列 F を推定する。 |
 | `vector_to_fundamental_matrix_distortion` | 歪み込みで基礎行列を RANSAC 推定(歪みは小と仮定し正規化 8-point) |
 | `vector_to_rel_pose` | 点対応と内部行列から相対姿勢 (R,t) を推定(本質行列分解)(vector_to_rel_pose)。 |
 
@@ -4141,13 +4140,13 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 
 | op | 説明 |
 |---|---|
-| `affine_trans_object_model_3d` | Apply ``R·p + t`` to every point (N, 3). |
+| `affine_trans_object_model_3d` | 全点に剛体変換 R·p + t を適用する。 |
 | `area_object_model_3d` | 3D 点群の凸包表面積を返す(area_object_model_3d)。 |
-| `connection_object_model_3d` | Euclidean cluster extraction (Rusu 2009): group points that are within |
+| `connection_object_model_3d` | ユークリッドクラスタリングで近接点をグループ化する(Rusu 2009)。 |
 | `convex_hull_object_model_3d` | 3D 凸包の頂点を返す(convex_hull_object_model_3d)。 |
 | `distance_object_model_3d` | 2 つの 3D モデル間の最小点間距離(distance_object_model_3d)。 |
 | `edges_object_model_3d` | 局所曲率が高い点=3D エッジを抽出(edges_object_model_3d)。近傍 PCA の平面性で判定。 |
-| `fit_primitives_object_model_3d` | Robust dominant-plane fit by RANSAC (Fischler & Bolles 1981). |
+| `fit_primitives_object_model_3d` | RANSAC で支配平面をロバストにフィットする。 |
 | `fuse_object_model_3d` | 複数 3D モデルを 1 つに統合(fuse_object_model_3d)。 |
 | `gen_box_object_model_3d` | 箱の 6 面の点群(gen_box_object_model_3d)。 |
 | `gen_cylinder_object_model_3d` | 円柱側面の点群(gen_cylinder_object_model_3d)。 |
@@ -4161,22 +4160,22 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 | `moments_object_model_3d` | 3D 点群の重心と共分散(2 次中心モーメント)を返す(moments_object_model_3d)。 |
 | `object_model_3d_to_xyz` | 3D 点群を X/Y/Z 画像へ(格子順、object_model_3d_to_xyz)。 |
 | `prepare_object_model_3d` | 法線推定つきモデル前処理(近傍 PCA、prepare_object_model_3d)。 |
-| `project_object_model_3d` | Project world points (N, 3) to pixels. Returns ``(uv (N,2), depth (N,))``. |
+| `project_object_model_3d` | ワールド点群 (N,3) を画素へ射影し (uv, depth) を返す。 |
 | `projective_trans_object_model_3d` | 4x4 射影変換を適用(projective_trans_object_model_3d)。既定は恒等。 |
 | `reduce_object_model_3d_by_view` | 指定軸で手前 keep 割合の点のみ残す(視点による簡易間引き、reduce_object_model_3d_by_view)。 |
-| `register_object_model_3d_global` | Point-to-plane ICP: align *src* to *dst* minimizing the distance along the |
-| `register_object_model_3d_pair` | Iterative Closest Point: align *src* to *dst* without known correspondences. |
+| `register_object_model_3d_global` | point-to-plane ICP: 法線方向の距離を最小化して src を dst へ位置合わせ。 |
+| `register_object_model_3d_pair` | ICP(反復最近点法): 対応未知のまま src を dst へ位置合わせ。 |
 | `render_object_model_3d` | 3D モデルを画像へレンダリング(深度で明暗、render_object_model_3d)。 |
 | `rigid_trans_object_model_3d` | 4x4 剛体/相似変換を点群へ適用(rigid_trans_object_model_3d)。 |
-| `sample_object_model_3d` | Thin a cloud to one point (the cell centroid) per occupied voxel of side |
+| `sample_object_model_3d` | 占有ボクセルごとに 1 点(セル重心)へ間引くダウンサンプリング。 |
 | `segment_object_model_3d` | 近傍距離で点群を連結成分に分割(segment_object_model_3d)。ラベル配列を返す。 |
 | `select_object_model_3d` | 属性値域で点を選択(select_object_model_3d)。 |
 | `select_points_object_model_3d` | 指定軸の値域で点を選ぶ(select_points_object_model_3d)。 |
 | `simplify_object_model_3d` | ボクセルグリッド平均で点群を簡約(simplify_object_model_3d)。 |
-| `smallest_bounding_box_object_model_3d` | Oriented bounding box by PCA. |
+| `smallest_bounding_box_object_model_3d` | PCA による有向バウンディングボックスを求める。 |
 | `smallest_sphere_object_model_3d` | 最小包含球の近似(中心=重心、半径=最遠点、smallest_sphere_object_model_3d)。 |
 | `smooth_object_model_3d` | 各点を k 近傍の重心へ移動して平滑化(smooth_object_model_3d)。 |
-| `surface_normals_object_model_3d` | Per-point surface normal by local PCA over the ``k`` nearest neighbours. |
+| `surface_normals_object_model_3d` | k 近傍の局所 PCA で点ごとの法線を推定する。 |
 | `triangulate_object_model_3d` | 主平面へ投影して Delaunay 三角形分割(triangulate_object_model_3d)。三角形頂点 index を返す。 |
 | `union_object_model_3d` | 2 つの 3D モデルを結合(union_object_model_3d)。 |
 | `volume_object_model_3d_relative_to_plane` | 平面 (a,b,c,d) より上の点群体積を凸包で近似(volume_object_model_3d_relative_to_plane)。 |
@@ -4188,7 +4187,7 @@ op 名と 1 行説明の索引です(章 = 処理分野)。主要な章には冒
 
 
 ![fops_gray](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_gray.png)
-*図: gray の実処理例 — 照明ムラ・低コントラストの入力では大域ヒストグラム均等化が破綻(明部の白飛び・ノイズ増幅)しやすいのに対し、clahe(コントラスト制限付き局所適応均等化)は局所ごとに階調を回復する(Fullseye 実出力)。入力は AI 生成(Gemini)2 種+skimage moon(NASA 撮影の月面)。*
+*図: gray の実処理例 — 照明ムラ・低コントラストの入力では大域ヒストグラム均等化が破綻(明部の白飛び・ノイズ増幅)しやすいのに対し、clahe(コントラスト制限付き局所適応均等化)は局所ごとに階調を回復する(Fullseye 実出力)。入力は AI 生成(Gemini)2 種+skimage 同梱 moon。*
 
 | op | 説明 |
 |---|---|
@@ -4337,16 +4336,16 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `calibrate_cameras` | Zhang 法カメラ校正(calibrate_cameras)。camera_calibration の別名。 |
 | `calibrate_hand_eye` | ハンドアイ校正(calibrate_hand_eye)。hand_eye_calibration の別名。 |
 | `caltab_points` | 校正板の理想マーク座標(ワールド, mm)を返す(caltab_points)。 |
-| `cam_mat_to_cam_par` | Pull ``fx, fy, cx, cy, skew`` back out of a K (3, 3). |
+| `cam_mat_to_cam_par` | 内部行列 K から fx, fy, cx, cy, skew を取り出す。 |
 | `cam_par_pose_to_hom_mat3d` | カメラポーズ [rx,ry,rz(rad), tx,ty,tz] を 4x4 同次変換行列に変換(cam_par_pose_to_hom_mat3d)。 |
-| `cam_par_to_cam_mat` | Assemble a pinhole intrinsic matrix K (3, 3). |
+| `cam_par_to_cam_mat` | fx, fy, cx, cy, skew からピンホール内部行列 K を組み立てる。 |
 | `camera_calibration` | Zhang 法で平面ターゲット多視点から内部行列 K を推定(camera_calibration)。 |
 | `change_radial_distortion_cam_par` | カメラパラメータの放射歪み係数を kappa_new に置換(change_radial_distortion_cam_par)。 |
 | `change_radial_distortion_image` | 画像に放射歪み r' = r(1 + kappa r^2) を適用して再サンプル(change_radial_distortion_image)。 |
-| `change_radial_distortion_points` | Apply radial-tangential lens distortion to ideal pixels (Brown 1971). |
+| `change_radial_distortion_points` | 理想画素に半径・接線方向のレンズ歪みを与える(Brown モデル)。 |
 | `contour_to_world_plane_xld` | XLD 輪郭(dict {cs:[Nx2]})を world 平面へ写す(contour_to_world_plane_xld)。 |
 | `create_caltab` | 校正板の記述(理想点)を作る(create_caltab)。 |
-| `create_pose` | Create a 3D pose. |
+| `create_pose` | 3D pose を生成する。 |
 | `disp_caltab` | 校正板画像を返す(表示用)(disp_caltab)。 |
 | `find_calib_object` | 校正オブジェクト(マーク)を検出(find_calib_object)。find_caltab の別名。 |
 | `find_caltab` | 画像から校正板の円マーク中心を検出(連結成分の重心)(find_caltab)。 |
@@ -4361,7 +4360,7 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `project_3d_point` | 3D 点をカメラへ透視投影し画素 (row, col) を返す(project_3d_point)。 |
 | `project_hom_point_hom_mat3d` | 同次 3D 点 (4,) を 3x4/4x4 行列で投影(project_hom_point_hom_mat3d)。 |
 | `project_point_hom_mat3d` | 4x4 or 3x4 同次変換で 3D 点を変換し投影(project_point_hom_mat3d)。 |
-| `projective_trans_point_2d` | Project a homogeneous 2D point using a projective transformation matrix. |
+| `projective_trans_point_2d` | 射影変換行列で同次 2D 点を射影する。 |
 | `radial_distortion_self_calibration` | 本来直線であるべき点列の残差を最小化して半径歪み kappa を推定(plumb-line 法) |
 | `radiometric_self_calibration` | 異なる露光の画像群からカメラ応答関数(逆応答 LUT)を推定 |
 | `sim_caltab` | 校正板を指定カメラ姿勢で投影した画像をシミュレート(sim_caltab)。 |
@@ -4462,9 +4461,9 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `evis_perceive` | GPU学習evisのロールアウト(qpos npy)をFullseyeで知覚: RGB/深度/DVSの3面GIF(ego_body=でロボット視点=頭部搭載RGB/深度/DVSの4面) |
 | `figure8` | 差動旋回で 8 の字系の曲線を各サイズで描く旋回制御の練習/較正(俯瞰トラック、GPU不要) |
 | `focus_stack` | 真値深度から被写界深度ボケの焦点スタックを生成し局所シャープネス最大で全焦点合成(焦点由来深度も復元、GPU不要) |
-| `g1_perceive_real` | G1実機センサ仕様で知覚: Livox Mid-360(頭頂360°/-7..+52°)BEV点群 + RealSense D435i(87°×58°, 0.3-6m帯)RGB/深度の4面GIF。obstacles=Tr |
+| `g1_perceive_real` | G1実機センサ仕様で知覚: Livox Mid-360(頭頂360°/-7..+52°)BEV点群 + RealSense D435i(87°×58°, 0.3-6m帯)RGB/深度の4面GIF。obstacles=True で歩行経路外に検証用の静的障害物を配置(センサに映る対象を用意) |
 | `g1_training_curves` | G1学習ログの進捗行(step/reward/ep_len/perr/crash…)を配列辞書へパース — GPU機に触れず学習曲線をStudioでプロット |
-| `g1_walk_policy` | GPU学習済みG1歩行方策(brax ckpt)をWindowsのみで実行: numpy推論(brax数値一致検証済)+ネイティブMuJoCoロールアウト→距離/生存/横ずれRMS実測+追従カメラ動画。vision=Tr |
+| `g1_walk_policy` | GPU学習済みG1歩行方策(brax ckpt)をWindowsのみで実行: numpy推論(brax数値一致検証済)+ネイティブMuJoCoロールアウト→距離/生存/横ずれRMS実測+追従カメラ動画。vision=True で疑似LiDAR+障害物つき視覚歩行版 |
 | `hurdle_physics` | go2 が助走→爆発跳躍で障害物(バリア)を越え向こう側へ着地する本物の物理の走幅跳をGIF＋軌道テレメトリ化(越えたか/自立かを実測、GPU不要) |
 | `jump_physics` | go2 をしゃがみ→爆発伸展→弾道飛行(全足離地=接触0を実測)→着地させる本物の物理ジャンプをGIF＋高さテレメトリ化(跳躍高/滞空を実測、摩擦・重力込み、GPU不要) |
 | `lidar_scan` | スピニング LIDAR を mj_ray の実レイキャストでシミュレートし点群を生成・可視化(GPU不要・命中率など実測) |
@@ -4480,7 +4479,7 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `train_3dgs` | sim シーンを native gsplat で 3DGS 学習(高速) |
 | `train_3dgs_densify` | densify + SH + antialiased つき 3DGS 学習(高品質) |
 | `tsdf_mesh` | sim 完全深度を TSDF 融合し清潔な watertight メッシュ化(GPU 不要・針無し) |
-| `walk_physics` | go2 をトルク PD 制御＋閉ループバランス＋mj_step の本物の物理(重力・摩擦・接触・慣性)でラフな height field 上を歩かせ、胴体が傾く様子を GIF＋テレメトリ化(自立/前進/傾きを実測、GPU |
+| `walk_physics` | go2 をトルク PD 制御＋閉ループバランス＋mj_step の本物の物理(重力・摩擦・接触・慣性)でラフな height field 上を歩かせ、胴体が傾く様子を GIF＋テレメトリ化(自立/前進/傾きを実測、GPU不要) |
 
 #### Regions(26 op)
 
@@ -4596,27 +4595,27 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | op | 説明 |
 |---|---|
 | `SolvePnP` | 3D-2D 対応からカメラ姿勢を推定(cv2.solvePnP、不在時 numpy)(camera.SolvePnP)。  [backend=opencv] |
-| `backproject` | Lift pixels (N, 2) at camera-frame ``depth`` (scalar or (N,)) to camera-frame |
-| `decompose_essential` | Factor an essential matrix into the four possible relative poses (H&Z §9.6.2). |
-| `decompose_intrinsics` | Pull ``fx, fy, cx, cy, skew`` back out of a K (3, 3). |
-| `depth_to_points` | Back-project a full depth map (H, W) to a camera-frame point cloud. |
-| `distort_points` | Apply radial-tangential lens distortion to ideal pixels (Brown 1971). |
-| `epipolar_lines` | Epipolar lines induced by points through a fundamental matrix. |
-| `essential_from_fundamental` | ``E = K2^T @ F @ K`` — convert a fundamental matrix to essential given the |
-| `essential_matrix` | Essential matrix E (3, 3) from >=8 correspondences of a *calibrated* pair. |
-| `fundamental_matrix` | Fundamental matrix F (3, 3) from >=8 correspondences by the normalized |
-| `intrinsic_matrix` | Assemble a pinhole intrinsic matrix K (3, 3). |
-| `normals_from_depth` | Per-pixel surface normal (H, W, 3) from an organized depth map. |
-| `project_points` | Project world points (N, 3) to pixels. Returns ``(uv (N,2), depth (N,))``. |
-| `projection_matrix` | Build the 3x4 projection ``P = K @ [R / t]``. ``R``/``t`` default to the |
-| `recover_pose` | Select the physically valid relative pose from an essential matrix. |
-| `reprojection_error` | Per-point reprojection error in pixels: ``//project(X; R,t) - uv//`` (N,). |
-| `rodrigues` | Axis-angle rotation vector (3,) -> rotation matrix (3, 3) (Rodrigues 1840). |
-| `rotation_log` | Rotation matrix (3, 3) -> axis-angle vector (3,). Inverse of :func:`rodrigues`. |
-| `solve_pnp` | Recover object/camera 6-DoF pose ``(R, t)`` from >=6 3-D<->2-D matches. |
-| `stereo_rectify` | Compute rectifying rotations for a calibrated stereo pair (Fusiello 2000). |
-| `triangulate` | Linear (DLT) triangulation of matched pixels from two views (H&Z §12.2). |
-| `undistort_points` | Remove radial-tangential distortion — the inverse of :func:`distort_points`. |
+| `backproject` | 画素 (N,2) を深度でカメラ座標系の 3D 点へ持ち上げる(逆投影)。 |
+| `decompose_essential` | 基本行列 E を 4 通りの相対 pose 候補に分解する。 |
+| `decompose_intrinsics` | 内部行列 K から fx, fy, cx, cy, skew を取り出す。 |
+| `depth_to_points` | 深度マップ全体をカメラ座標系の点群へ逆投影する。 |
+| `distort_points` | 理想画素に半径・接線方向のレンズ歪みを与える(Brown モデル)。 |
+| `epipolar_lines` | 基礎行列を介して対応点が誘導するエピポーラ線を計算する。 |
+| `essential_from_fundamental` | E = K2^T·F·K で基礎行列を基本行列へ変換する。 |
+| `essential_matrix` | 較正済みペアの 8 組以上の対応から基本行列 E を推定する。 |
+| `fundamental_matrix` | 8 組以上の対応から正規化 8 点法で基礎行列 F を推定する。 |
+| `intrinsic_matrix` | ピンホール内部行列 K を組み立てる。 |
+| `normals_from_depth` | 整列済み深度マップから画素ごとの法線 (H,W,3) を推定する。 |
+| `project_points` | ワールド点 (N,3) を画素へ射影し (uv, depth) を返す。 |
+| `projection_matrix` | 3x4 射影行列 P = K·[R t] を組み立てる(R, t は省略可)。 |
+| `recover_pose` | 基本行列の分解候補から物理的に正しい相対 pose を選ぶ。 |
+| `reprojection_error` | 点ごとの再投影誤差 [px] を計算する。 |
+| `rodrigues` | 回転ベクトル(軸×角)を回転行列へ(Rodrigues の公式)。 |
+| `rotation_log` | 回転行列を回転ベクトルへ(rodrigues の逆)。 |
+| `solve_pnp` | 6 組以上の 3D↔2D 対応から 6 自由度 pose を推定する(PnP)。 |
+| `stereo_rectify` | 較正済みステレオペアの平行化回転を計算する(Fusiello 法)。 |
+| `triangulate` | 2 視点の対応画素の線形 DLT 三角測量。 |
+| `undistort_points` | 半径・接線方向の歪みを除去する(distort_points の逆)。 |
 
 #### texture(21 op)
 
@@ -4684,23 +4683,23 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `aabb` | Axis-aligned bounding box. Returns ``(min (3,), max (3,))``. |
-| `centroid` | Mean position of the cloud (3,). |
-| `crop_box` | Keep points inside the axis-aligned box ``[lo, hi]``. Returns |
-| `crop_sphere` | Keep points within *radius* of *center*. Returns ``(kept_points, mask)``. |
-| `curvature` | Per-point surface variation ``lambda0 / (lambda0+lambda1+lambda2)`` over the |
-| `euclidean_clusters` | Euclidean cluster extraction (Rusu 2009): group points that are within |
-| `farthest_point_sampling` | Farthest-point sampling (Eldar 1994): pick *k* points that spread out to |
-| `fit_cylinder_ransac` | Robust cylinder fit by RANSAC from point+normal samples (Rusu 2009). |
-| `fit_plane` | Total-least-squares plane through all points (PCA). |
-| `fit_plane_ransac` | Robust dominant-plane fit by RANSAC (Fischler & Bolles 1981). |
-| `fit_sphere_ransac` | Robust sphere fit by RANSAC. Returns ``(center (3,), radius, inliers)``, or |
-| `height_above_plane` | Height of each point above a plane = signed distance along the plane's own |
-| `obb` | Oriented bounding box by PCA. |
-| `plane_distance` | Signed distance of each point to a plane ``[a,b,c,d]`` (unit normal assumed). |
-| `principal_axes` | PCA of the cloud. Returns ``(eigvals (3, descending), eigvecs (3,3 columns))`` |
-| `region_growing` | Smoothness-constraint region growing (Rabbani 2006). |
-| `remove_ground` | Split a cloud into ground and non-ground by RANSAC-fitting the dominant |
+| `aabb` | 点群の軸平行バウンディングボックス (min, max) を返す。 |
+| `centroid` | 点群の重心を返す。 |
+| `crop_box` | 軸平行ボックス [lo, hi] 内の点だけ残す。 |
+| `crop_sphere` | 中心から radius 以内の点だけ残す(点とマスクを返す)。 |
+| `curvature` | k 近傍の固有値から点ごとの曲率(表面変化率)を計算する。 |
+| `euclidean_clusters` | ユークリッドクラスタリングで近接点をグループ化する(Rusu 2009)。 |
+| `farthest_point_sampling` | 最遠点サンプリングで空間的に散らばった k 点を選ぶ。 |
+| `fit_cylinder_ransac` | 点+法線サンプルから RANSAC で円柱をロバストにフィットする。 |
+| `fit_plane` | 全点に対する全最小二乗平面フィット(PCA)。 |
+| `fit_plane_ransac` | RANSAC で支配平面をロバストにフィットする。 |
+| `fit_sphere_ransac` | RANSAC で球をロバストにフィットする(中心・半径・インライアを返す)。 |
+| `height_above_plane` | 平面の法線方向に沿った各点の高さ(符号つき距離)。 |
+| `obb` | PCA による有向バウンディングボックス。 |
+| `plane_distance` | 平面 [a,b,c,d] への各点の符号つき距離。 |
+| `principal_axes` | 点群の主成分分析(固有値と固有ベクトルを返す)。 |
+| `region_growing` | 滑らかさ制約つき領域成長でクラスタ分割する(Rabbani 2006)。 |
+| `remove_ground` | 支配平面を RANSAC で当てて点群を地面/非地面に分ける。 |
 
 #### specops(16 op)
 
@@ -4708,22 +4707,22 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `read_envi` | Read an ENVI cube -> ``(cube, meta)``. |
-| `spec_angle_mapper` | Per-pixel **spectral angle** (radians) to a *reference* spectrum ``(B,)``. |
-| `spec_band` | Extract band *i* of the cube as an ``image`` ``(H, W)`` float64 (a copy). |
-| `spec_band_ratio` | Per-pixel band ratio ``band_i / (band_j + eps)`` -> ``image`` ``(H, W)``. |
-| `spec_continuum_removal` | Continuum removal -> a cube of the same shape with each spectrum divided by |
-| `spec_decorrelation_stretch` | Decorrelation stretch (Gillespie, Kahle & Walker 1986) -> a cube of the |
-| `spec_endmembers_ppi` | Approximate endmember extraction by the **Pixel Purity Index** (Boardman |
-| `spec_fuse` | Fuse a stack of co-registered single-band images into one ``image`` ``(H, W)``. |
-| `spec_index` | Normalised-difference index ``(band_a - band_b) / (band_a + band_b + eps)``. |
-| `spec_mnf` | Minimum Noise Fraction transform (Green et al. 1988) — a **documented |
-| `spec_nearest_band` | Index of the band whose centre wavelength is nearest *wavelength_nm*. |
-| `spec_pansharpen` | Fuse a high-resolution **panchromatic** band into a multispectral cube -> |
-| `spec_pca` | Principal-component analysis over the **spectral** axis. |
-| `spec_rgb_composite` | Build a viewable ``color`` ``(H, W, 3)`` image from three chosen bands. |
-| `spec_unmix` | Linear spectral unmixing -> per-pixel abundance maps ``(H, W, K)``. |
-| `write_envi` | Write an ENVI cube: an ASCII ``.hdr`` at *hdr_path* and a sibling ``.img`` |
+| `read_envi` | ENVI ハイパースペクトルキューブを読み込む(cube, meta)。 |
+| `spec_angle_mapper` | 参照スペクトルとの画素ごとのスペクトル角 [rad](SAM)。 |
+| `spec_band` | キューブの第 i バンドを 1 枚の画像として取り出す。 |
+| `spec_band_ratio` | 画素ごとのバンド比 band_i/(band_j+eps) を計算する。 |
+| `spec_continuum_removal` | コンティニュアム除去(各スペクトルを上包絡線で割る)。 |
+| `spec_decorrelation_stretch` | 相関除去ストレッチで色の違いを強調する(decorrelation stretch)。 |
+| `spec_endmembers_ppi` | Pixel Purity Index によるエンドメンバーの近似抽出。 |
+| `spec_fuse` | 位置合わせ済みの単バンド画像群を 1 枚に融合する。 |
+| `spec_index` | 正規化差分指数 (a-b)/(a+b+eps)(NDVI 型)。 |
+| `spec_mnf` | 最小ノイズ比率変換(MNF)。 |
+| `spec_nearest_band` | 指定波長に最も近いバンドの index を返す。 |
+| `spec_pansharpen` | 高解像度パンクロバンドでマルチスペクトルをパンシャープン化する。 |
+| `spec_pca` | スペクトル軸方向の主成分分析。 |
+| `spec_rgb_composite` | 選んだ 3 バンドから表示用 RGB 合成画像を作る。 |
+| `spec_unmix` | 線形スペクトル分解で画素ごとの存在比マップを推定する。 |
+| `write_envi` | ENVI キューブを書き出す(.hdr + .img)。 |
 
 #### 3D Matching(15 op)
 
@@ -4732,11 +4731,11 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | `create_cam_pose_look_at_point` | カメラ位置と注視点から look-at 姿勢(4x4)を構築(create_cam_pose_look_at_point)。 |
 | `create_deformable_surface_model` | 変形 surface モデルを作る(PPF ベース)(create_deformable_surface_model)。 |
 | `create_shape_model_3d` | 3D 点群から複数視点のシルエット shape モデルを作る(create_shape_model_3d)。 |
-| `create_surface_model` | Build the Point Pair Feature descriptor (hash table) of a model cloud. |
+| `create_surface_model` | モデル点群の Point Pair Feature 記述子(ハッシュ表)を構築する。 |
 | `find_box_3d` | 点群から軸並行境界箱(OBB 近似=PCA 箱)を検出(find_box_3d)。 |
 | `find_deformable_surface_model` | 変形 surface モデルをシーン点群から検出(PPF + ICP refine)(find_deformable_surface_model)。 |
 | `find_shape_model_3d` | 3D shape モデルを画像から検出(投影シルエットと相関)(find_shape_model_3d)。 |
-| `find_surface_model` | Find the model's 6-DoF pose in a scene cloud by PPF voting + ICP refine. |
+| `find_surface_model` | PPF 投票 + ICP 精緻化でシーン中のモデル 6 自由度 pose を探す。 |
 | `find_surface_model_image` | 深度画像を点群化して surface モデルを検出(find_surface_model_image)。 |
 | `project_shape_model_3d` | 3D モデルをカメラへ投影しエッジ画像を生成(project_shape_model_3d)。 |
 | `reduce_domain` | domain を region へ縮小(reduce_domain)。change_domain と同義の facade。 |
@@ -4751,21 +4750,21 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `background_subtraction` | Temporal-median background model -> per-frame foreground mask ``(T, H, W)``. |
-| `flicker_reduce` | Remove global per-frame brightness flicker -> ``(T, H, W)``. |
-| `frame_difference` | Consecutive-frame absolute difference -> ``(T-1, H, W)`` motion volume. |
-| `motion_energy` | Total motion over time -> ``(H, W)`` map: ``sum_t /d video / dt/``. |
-| `moving_average` | Sliding temporal-window box smoothing -> ``(T, H, W)``. |
-| `optical_flow_sequence` | Consecutive-frame flow-magnitude volume -> ``(T-1, H, W)``. |
-| `per_frame` | Apply a 2-D operator *fn* to every frame independently -> ``(T, H, W)``. |
-| `spatiotemporal_gaussian` | Separable 3-D Gaussian blur over ``(t, y, x)`` -> ``(T, H, W)``. |
-| `spatiotemporal_sobel` | 3-D Sobel gradient magnitude over ``(t, y, x)`` -> ``(T, H, W)``. |
-| `temporal_gradient` | Central-difference temporal derivative ``d video / dt`` -> ``(T, H, W)``. |
-| `temporal_max` | Maximum-intensity projection over time -> ``(H, W)``. |
-| `temporal_mean` | Per-pixel mean over time -> ``(H, W)``. |
-| `temporal_median` | Per-pixel median over time -> ``(H, W)``. |
-| `temporal_min` | Minimum-intensity projection over time -> ``(H, W)``. |
-| `temporal_std` | Per-pixel standard deviation over time -> ``(H, W)`` *activity map*. |
+| `background_subtraction` | 時間中央値の背景モデルでフレームごとの前景マスクを得る。 |
+| `flicker_reduce` | フレーム間の全体輝度のちらつき(フリッカ)を除去する。 |
+| `frame_difference` | 隣接フレームの絶対差分で動き量ボリュームを得る。 |
+| `motion_energy` | 時間方向の変化量を積算した動きエネルギーマップ (H,W)。 |
+| `moving_average` | 時間方向の移動平均(ボックス)平滑化。 |
+| `optical_flow_sequence` | 隣接フレーム間のフロー強度ボリューム (T-1,H,W)。 |
+| `per_frame` | 2D op を各フレームへ独立に適用する。 |
+| `spatiotemporal_gaussian` | (t,y,x) の分離型 3D ガウス平滑化。 |
+| `spatiotemporal_sobel` | (t,y,x) の 3D Sobel 勾配強度。 |
+| `temporal_gradient` | 中心差分による時間微分 d(video)/dt。 |
+| `temporal_max` | 時間方向の最大値投影 (H,W)。 |
+| `temporal_mean` | 画素ごとの時間平均 (H,W)。 |
+| `temporal_median` | 画素ごとの時間中央値 (H,W)。 |
+| `temporal_min` | 時間方向の最小値投影 (H,W)。 |
+| `temporal_std` | 画素ごとの時間標準偏差 = 活動マップ (H,W)。 |
 
 #### Segmentation(14 op)
 
@@ -4817,35 +4816,35 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 |---|---|
 | `BlockMatching` | ブロックマッチング視差(cv2.StereoBM、不在時 fullseye numpy)(stereo.BlockMatching)。  [backend=opencv] |
 | `SGBM` | Semi-Global BM 視差(cv2.StereoSGBM、不在時 fullseye SGM numpy)(stereo.SGBM)。  [backend=opencv] |
-| `census_transform` | Census transform: encode each pixel by which of its neighbours it exceeds |
-| `depth_from_disparity` | Metric depth ``Z = focal * baseline / disparity``. |
-| `disparity_census` | Dense disparity by census + Hamming winner-take-all. |
-| `disparity_confidence` | Per-pixel matching confidence in [0, 1] from the cost curve (PKRN-style). |
-| `disparity_map` | Dense disparity by winner-take-all block matching. |
-| `disparity_sgm` | Semi-Global Matching disparity (Hirschmüller, CVPR 2005 / PAMI 2008). |
-| `disparity_subpixel` | Disparity refined to sub-pixel precision by a parabola fit. |
-| `fill_disparity` | Fill invalid disparities by row-wise interpolation, biased to the background. |
-| `lr_consistency` | Left-right consistency mask (True = disparity is trustworthy). |
-| `reproject_to_points` | Back-project a depth map to a camera-frame point cloud (N, 3) of finite |
-| `speckle_filter` | Remove small speckle regions from a disparity map (Hirschmüller 2008 / the |
+| `census_transform` | Census 変換: 近傍との大小関係で各画素を符号化する。 |
+| `depth_from_disparity` | 視差から計量深度 Z = f·B/d を計算する。 |
+| `disparity_census` | Census + ハミング距離の勝者総取りで密な視差を推定する。 |
+| `disparity_confidence` | コスト曲線から画素ごとのマッチング信頼度 [0,1] を推定(PKRN 型)。 |
+| `disparity_map` | 勝者総取りブロックマッチングによる密な視差推定。 |
+| `disparity_sgm` | Semi-Global Matching 視差(Hirschmüller 法)。 |
+| `disparity_subpixel` | 放物線フィットで視差をサブピクセルへ精緻化する。 |
+| `fill_disparity` | 無効視差を行方向の補間で埋める(背景寄りに補間)。 |
+| `lr_consistency` | 左右一致チェックのマスク(True = 信頼できる視差)。 |
+| `reproject_to_points` | 深度マップをカメラ座標系の点群 (N,3) へ逆投影する。 |
+| `speckle_filter` | 視差マップから小さなスペックル領域を除去する。 |
 
 #### terrain(13 op)
 
 | op | 説明 |
 |---|---|
-| `detect_obstacles` | Segment cells rising more than *clearance* above the walkable ground. |
-| `elevation_map` | Bin a point cloud into a 2.5-D elevation grid. |
-| `fill_gaps` | Fill ``nan`` cells with the nearest finite height (nearest-neighbour). |
-| `foothold_candidates` | Pick discrete safe stepping targets from the terrain. |
-| `foothold_score` | Per-cell flatness score in [0, 1] (1 = flat & level = good foothold). |
-| `fuse_elevation` | Fuse several aligned elevation grids into one robot-centric map. |
-| `ground_plane` | Robust least-squares ground plane ``z = a·x + b·y + c`` per cell. |
-| `ground_surface` | Smooth walkable-ground envelope by grey-opening (min-filter then max-filter). |
-| `roughness_map` | Per-cell surface roughness = local height standard deviation over a |
-| `slope_map` | Per-cell terrain slope = angle of the surface from horizontal. |
-| `step_edges` | Detect step edges (curbs / stair nosings) in the heightmap. |
-| `surface_normals` | Per-cell terrain surface normal (H, W, 3), unit, pointing up (+z). |
-| `traversability` | Boolean mask (True = traversable) from step and slope limits. |
+| `detect_obstacles` | 歩行可能地面から clearance 以上せり上がるセルを障害物として分割する。 |
+| `elevation_map` | 点群を 2.5D 標高グリッドへビン詰めする。 |
+| `fill_gaps` | nan セルを最近傍の有効高さで埋める。 |
+| `foothold_candidates` | 地形から離散的な安全足場候補を選ぶ。 |
+| `foothold_score` | セルごとの平坦度スコア [0,1](1 = 平坦で水平 = 良い足場)。 |
+| `fuse_elevation` | 位置合わせ済みの標高グリッド群をロボット中心の 1 枚に融合する。 |
+| `ground_plane` | セル単位のロバスト最小二乗で地面平面 z = ax+by+c を推定する。 |
+| `ground_surface` | グレーオープニングで滑らかな歩行可能地面の包絡面を得る。 |
+| `roughness_map` | セルごとの粗さ = 局所高さの標準偏差。 |
+| `slope_map` | セルごとの斜度 = 水平からの表面角度。 |
+| `step_edges` | 高さマップから段差エッジ(縁石・階段の踏み外し線)を検出する。 |
+| `surface_normals` | セルごとの上向き単位法線 (H,W,3)。 |
+| `traversability` | 段差と斜度の上限から通行可能マスクを作る。 |
 
 #### artificial-life(12 op)
 
@@ -4868,18 +4867,18 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `cx_apply_transfer_function` | Multiply a **centred** spectrum by a filter ``H`` -> ``(H, W)`` complex128. |
-| `cx_bandpass` | Ideal annulus band-pass in the frequency domain -> image ``(H, W)`` in ``[0, 1]``. |
-| `cx_fft` | Centred 2-D FFT of a real image -> ``(H, W)`` complex128 spectrum. |
-| `cx_from_mag_phase` | Recompose a complex field from a magnitude and a **radian** phase. |
-| `cx_ifft` | Inverse of :func:`cx_fft`: ``ifft2(ifftshift(cx))``. |
-| `cx_imag` | Imaginary part of ``cx`` -> real ``(H, W)`` float64 (raw, not clamped). |
-| `cx_log_magnitude` | Log magnitude spectrum for **display** -> real ``(H, W)`` float64 in ``[0, 1]``. |
-| `cx_magnitude` | Per-pixel magnitude ``/cx/`` -> real ``(H, W)`` float64. |
-| `cx_phase` | Wrapped phase of ``cx`` -> real ``(H, W)`` float64. |
-| `cx_real` | Real part of ``cx`` -> real ``(H, W)`` float64 (raw, not clamped). |
-| `cx_wiener_deconvolve` | Frequency-domain Wiener deconvolution -> restored image ``(H, W)`` in ``[0, 1]``. |
-| `phase_unwrap` | 2-D phase unwrapping: wrapped radians -> continuous (unwrapped) radians. |
+| `cx_apply_transfer_function` | 中心化スペクトルにフィルタ H を乗じる(伝達関数の適用)。 |
+| `cx_bandpass` | 周波数領域の理想円環バンドパスフィルタ。 |
+| `cx_fft` | 実画像の中心化 2D FFT(複素スペクトル)。 |
+| `cx_from_mag_phase` | 振幅とラジアン位相から複素場を再構成する。 |
+| `cx_ifft` | cx_fft の逆変換(ifft2 + ifftshift)。 |
+| `cx_imag` | 複素場の虚部を実画像として返す。 |
+| `cx_log_magnitude` | 表示用の対数振幅スペクトル [0,1]。 |
+| `cx_magnitude` | 画素ごとの複素振幅(絶対値)を返す。 |
+| `cx_phase` | 複素場のラップされた位相を返す。 |
+| `cx_real` | 複素場の実部を実画像として返す。 |
+| `cx_wiener_deconvolve` | 周波数領域 Wiener デコンボリューションで画像を復元する。 |
+| `phase_unwrap` | 2D 位相アンラップ(ラップ位相→連続位相)。 |
 
 #### restoration(12 op)
 
@@ -4906,17 +4905,17 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `boundary_edges` | Open edges of the mesh -> ``(M, 2)`` int64, each row a sorted ``(lo, hi)`` |
-| `components` | Split a mesh into connected components -> ``[(V_i, F_i), ...]``. |
-| `convex_hull` | Convex hull of a point set -> ``(V, F)`` with outward-oriented triangles. |
-| `decimate_qem` | Quadric-error-metric edge-collapse decimation toward *target_faces*. |
-| `inertia_tensor` | Exact mass properties of the solid a watertight mesh bounds. |
-| `is_edge_manifold` | True iff no undirected edge is shared by **more than two** faces. |
-| `is_watertight` | True iff the mesh is edge-manifold **and closed** — every undirected edge |
-| `orient_consistent` | Make every face wind the same way -> ``(F, flipped_count)``. |
-| `remove_degenerate_faces` | Drop faces that carry no area -> ``(V, F)`` (vertices untouched). |
-| `smooth_taubin` | Taubin lambda/mu smoothing -> new ``V`` (topology ``F`` unchanged). |
-| `weld_vertices` | Merge vertices that coincide within *tol* -> ``(V, F)``. |
+| `boundary_edges` | メッシュの開いた縁のエッジ一覧 (M,2) を返す。 |
+| `components` | メッシュを連結成分に分割する。 |
+| `convex_hull` | 点集合の凸包メッシュ(外向き三角形)を作る。 |
+| `decimate_qem` | QEM エッジ収縮で目標面数まで簡略化(デシメーション)する。 |
+| `inertia_tensor` | 水密メッシュが囲む立体の厳密な質量特性(慣性テンソル)。 |
+| `is_edge_manifold` | どのエッジも 3 面以上に共有されていなければ True(エッジ多様体判定)。 |
+| `is_watertight` | エッジ多様体かつ閉じていれば True(水密判定)。 |
+| `orient_consistent` | 全面の巻き方向を揃える(反転した面数も返す)。 |
+| `remove_degenerate_faces` | 面積ゼロの退化面を捨てる(頂点は不変)。 |
+| `smooth_taubin` | Taubin の λ/μ 平滑化(トポロジー不変)。 |
+| `weld_vertices` | 許容差内で一致する頂点を融合(weld)する。 |
 
 #### arithmetic(10 op)
 
@@ -4960,45 +4959,45 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `bounds` | Axis-aligned bounding box -> ``(min, max)``, each float64 (3,). |
-| `mesh_to_points` | Alias of :func:`sample_surface` — mesh in, point cloud out. |
-| `normalize_scale` | Scale about the origin so the largest bounding-box extent equals *size*. |
-| `read_mesh` | Read a triangle mesh -> ``(V, F)``: vertices (nv, 3) float64 and triangle |
-| `read_points` | Read a point cloud -> ``P`` (n, 3) float64, or ``(P, C)`` when |
-| `recenter` | Translate so the vertex centroid sits at the origin. Returns a new array. |
-| `sample_surface` | Uniformly sample *n* points over the mesh **surface** -> (n, 3) float64. |
-| `voxelize` | Rasterise the mesh onto a regular grid -> ``(occ, origin)``. |
-| `write_mesh` | Write a triangle mesh to any format :func:`read_mesh` reads — ``.obj``, |
-| `write_points` | Write a point cloud to ``.ply``, ``.xyz`` (``.txt`` / ``.pts`` / ``.asc``), |
+| `bounds` | 軸平行バウンディングボックス (min, max) を返す。 |
+| `mesh_to_points` | sample_surface の別名 — メッシュを入れると点群が出る。 |
+| `normalize_scale` | バウンディングボックス最大辺が size になるよう原点基準でスケールする。 |
+| `read_mesh` | 三角形メッシュを読み込み (V, F) を返す。 |
+| `read_points` | 点群を読み込む(色つきなら (P, C) を返す)。 |
+| `recenter` | 頂点重心が原点に来るよう平行移動する(新しい配列を返す)。 |
+| `sample_surface` | メッシュ表面から一様に n 点をサンプリングする。 |
+| `voxelize` | メッシュを正規グリッドへボクセル化する (occ, origin)。 |
+| `write_mesh` | read_mesh が読める形式(.obj 等)で三角形メッシュを書き出す。 |
+| `write_points` | 点群を .ply / .xyz などへ書き出す。 |
 
 #### xldgeom(10 op)
 
 | op | 説明 |
 |---|---|
-| `xg_area_center` | Polygon area of the contour(s) via the shoelace formula (summed abs). |
-| `xg_clip_contours` | Drop contours whose polyline length is below a * max-length (a in [0,1]). |
-| `xg_crop_contours` | Keep only contour points inside the central a-fraction window of the shape. |
-| `xg_eccentricity` | Eccentricity sqrt(1 - lambda_min/lambda_max) from the point covariance. |
-| `xg_elliptic_axis` | Major/minor axis ratio sqrt(lambda_max/lambda_min) of the point set. |
-| `xg_gen_polygons` | Douglas-Peucker polyline simplification; eps = a * contour bbox diagonal. |
-| `xg_height_width_ratio` | Axis-aligned bounding-box height/width ratio of the point set. |
-| `xg_moments` | Normalized 2nd central moment of the point set: mu20 + mu02. |
-| `xg_orientation` | Principal-axis orientation in degrees, folded to [0,180) and /180 scaled. |
-| `xg_regress_contours` | Total-least-squares line residual RMS = sqrt(minor covariance eigenvalue). |
+| `xg_area_center` | 靴ひも公式で輪郭の多角形面積を求める(絶対値の和)。 |
+| `xg_clip_contours` | 折れ線長が最大長の a 倍未満の輪郭を捨てる。 |
+| `xg_crop_contours` | 画像中央の a 割合の窓内にある輪郭点だけ残す。 |
+| `xg_eccentricity` | 点共分散から離心率 sqrt(1-λmin/λmax) を計算する。 |
+| `xg_elliptic_axis` | 点集合の長短軸比 sqrt(λmax/λmin)。 |
+| `xg_gen_polygons` | Douglas-Peucker 折れ線単純化(eps は外接矩形対角の a 倍)。 |
+| `xg_height_width_ratio` | 点集合の軸平行外接矩形の縦横比。 |
+| `xg_moments` | 点集合の正規化 2 次中心モーメント mu20+mu02。 |
+| `xg_orientation` | 主軸方向 [deg] を [0,180) に折り返し 180 で割って正規化。 |
+| `xg_regress_contours` | 全最小二乗直線あてはめの残差 RMS(共分散の短軸固有値の平方根)。 |
 
 #### volops(9 op)
 
 | op | 説明 |
 |---|---|
-| `vol_distance_transform` | Exact Euclidean distance transform of a binary volume. |
-| `vol_frangi` | 3-D Frangi vesselness — multiscale tubular-structure enhancement. |
-| `vol_gradient_magnitude` | 3-D Sobel gradient magnitude ``sqrt(gz**2 + gy**2 + gx**2)``. |
-| `vol_hessian_blobness` | Blob-like (spherical) response from the Hessian eigenvalues at one *scale*. |
-| `vol_label` | 3-D connected-component labelling with a selectable neighbourhood. |
-| `vol_local_maxima` | 3-D local-maxima (peak) detection. |
-| `vol_region_props` | Per-component quantitative descriptors from a label volume. |
-| `vol_sato` | 3-D Sato tubeness — the simpler two-eigenvalue line filter. |
-| `vol_watershed` | Marker-controlled 3-D watershed segmentation (**optional — scikit-image**). |
+| `vol_distance_transform` | 二値ボリュームの厳密なユークリッド距離変換。 |
+| `vol_frangi` | 3D Frangi 血管様(管状構造)強調 — マルチスケール。 |
+| `vol_gradient_magnitude` | 3D Sobel 勾配強度 sqrt(gz^2+gy^2+gx^2)。 |
+| `vol_hessian_blobness` | Hessian 固有値による球状ブロブ応答(単一スケール)。 |
+| `vol_label` | 3D 連結成分ラベリング(近傍系を選択可)。 |
+| `vol_local_maxima` | 3D 局所極大(ピーク)検出。 |
+| `vol_region_props` | ラベルボリュームから成分ごとの定量特徴を計算する。 |
+| `vol_sato` | 3D Sato 管状構造フィルタ(2 固有値の簡易版)。 |
+| `vol_watershed` | マーカー制御の 3D watershed 分割(scikit-image 導入時のみ)。 |
 
 #### 2D Metrology(8 op)
 
@@ -5068,44 +5067,44 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `contrast_maximization` | Estimate the global optic flow by CONTRAST MAXIMISATION (Gallego et al. 2018). |
-| `event_count` | Signed number of contrast crossings per pixel: ``sign(d) * floor(/d//thr)``. |
-| `event_image` | Accumulated event image (the classic 'image of warped events', IWE). |
-| `event_rate` | Global event activity = fraction of pixels that fired at least one event |
-| `event_rate_map` | Local event-density map: the fired-pixel mask smoothed to a [0,1] activity |
-| `simulate_events` | Signed event-polarity map between two frames. |
-| `time_surface` | Surface of Active Events (SAE) over a (T,H,W) stack. |
-| `warp_frame` | Shift a frame by (dy,dx) pixels (bilinear, reflect) — the compensation |
+| `contrast_maximization` | コントラスト最大化(contrast maximisation, Gallego et al. 2018)で大域オプティカルフローを推定する。 |
+| `event_count` | 画素ごとの符号つきコントラスト横断回数 sign(d)*floor(abs(d)/thr)。 |
+| `event_image` | イベントを蓄積した画像(IWE)を作る。 |
+| `event_rate` | 全体のイベント活性 = 1 回以上発火した画素の割合。 |
+| `event_rate_map` | 発火マスクを平滑化した局所イベント密度マップ [0,1]。 |
+| `simulate_events` | 2 フレーム間の符号つきイベント極性マップを生成する。 |
+| `time_surface` | (T,H,W) スタックから Surface of Active Events(SAE)を計算する。 |
+| `warp_frame` | フレームを (dy,dx) だけシフトする(動き補償用、双一次)。 |
 
 #### grasp(8 op)
 
 | op | 説明 |
 |---|---|
-| `approach_vector_from_normals` | A gripper approach direction perpendicular to the grasp axis (unit (3,)). |
-| `collision_free` | Coarse finger-sweep collision check (approximate). |
-| `ferrari_canny_quality` | Approximate Ferrari-Canny epsilon grasp quality (Ferrari & Canny 1992). |
-| `force_closure` | Two-finger antipodal force-closure test (Nguyen 1988). |
-| `grasp_pose` | Rigid 4x4 gripper frame for a grasp. |
-| `grasps_from_mesh` | Convenience: sample a mesh surface into a cloud, then propose grasps. |
-| `rank_grasps` | Return the grasps sorted by ``quality`` descending (best first). |
-| `sample_antipodal_grasps` | Propose ranked two-finger antipodal grasps from a point cloud. |
+| `approach_vector_from_normals` | 把持軸に直交するグリッパ接近方向(単位ベクトル)を求める。 |
+| `collision_free` | 指スイープの粗い干渉チェック(近似)。 |
+| `ferrari_canny_quality` | Ferrari-Canny の ε 把持品質の近似計算。 |
+| `force_closure` | 2 指の対蹠 force-closure(力の閉じ込め)判定(Nguyen 1988)。 |
+| `grasp_pose` | 把持の 4x4 グリッパ座標系(剛体 pose)を組み立てる。 |
+| `grasps_from_mesh` | メッシュ表面を点群化してから把持候補を提案する一括版。 |
+| `rank_grasps` | 把持候補を品質の降順に並べ替える(最良が先頭)。 |
+| `sample_antipodal_grasps` | 点群から 2 指対蹠把持候補をスコアつきで提案する。 |
 
 #### measure(8 op)
 
 
 ![fops_measure](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_measure.png)
-*図: measure の実処理例 — BGA はんだボールの X 線透過検査(減衰投影+ボイド注入の自前合成 2 種+AI 生成 1 種): ボール毎に内部の明るい画素をボイドとして面積率を計測し、真値と照合(Fullseye 実出力)。検査装置業界の実務そのもの。*
+*図: measure の実処理例 — BGA はんだボールの X 線透過検査(減衰投影+ボイド注入の自前合成 2 種+AI 生成 1 種): ボール毎に内部の明るい画素をボイドとして面積率を計測し、真値と照合(Fullseye 実出力)。検査装置業界の実務に近い題材。*
 
 | op | 説明 |
 |---|---|
-| `angle` | Angle of the segment p0 -> p1 in degrees (image y downward), in (-180, 180]. |
-| `distance` | Euclidean distance between two (row, col) points. |
-| `fit_circle` | Algebraic (Kåsa / Coope) least-squares circle fit to (row, col) points: solve |
-| `fit_ellipse` | Direct least-squares ellipse fit to (row, col) points — Halir & Flusser 1998, |
-| `fit_line` | Total-least-squares line fit to (row, col) points — orthogonal regression via |
-| `fit_rectangle2` | Minimum-area oriented bounding rectangle of (row, col) points — the HALCON |
-| `line_profile` | Intensity along the segment p0 -> p1 (bilinear sampled). Returns a 1-D array |
-| `profile_stats` | min / max / mean / and the index of the strongest edge (/gradient/ peak). |
+| `angle` | 線分 p0→p1 の角度 [deg](画像 y 下向き、(-180,180])。 |
+| `distance` | 2 点 (row,col) 間のユークリッド距離。 |
+| `fit_circle` | (row,col) 点列への代数的最小二乗円フィット(Kåsa/Coope)。 |
+| `fit_ellipse` | 直接最小二乗の楕円フィット(Halir & Flusser 1998)。 |
+| `fit_line` | 全最小二乗の直線フィット(直交回帰)。 |
+| `fit_rectangle2` | 面積最小の有向外接矩形フィット。 |
+| `line_profile` | 線分 p0→p1 に沿う輝度プロファイル(双一次サンプル)。 |
+| `profile_stats` | プロファイルの min/max/mean と最強エッジ(勾配ピーク)の位置。 |
 
 #### segment(8 op)
 
@@ -5169,60 +5168,60 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 | op | 説明 |
 |---|---|
 | `Farneback` | 密オプティカルフロー(cv2.calcOpticalFlowFarneback、不在時 Horn-Schunck numpy)  [backend=opencv] |
-| `flow_angle` | Per-pixel motion direction ``atan2(v, u)`` in radians, range (-pi, pi]. |
-| `flow_magnitude` | Per-pixel speed ``sqrt(u^2 + v^2)``. |
-| `optical_flow_hs` | Dense Horn-Schunck flow (global smoothness, Jacobi iteration). |
-| `optical_flow_lk` | Dense pyramidal Lucas-Kanade flow. |
-| `track_points` | Track sparse points from *prev* to *nxt* (a Lucas-Kanade point tracker). |
-| `warp_by_flow` | Warp *img* forward by the flow: ``out[y, x] = img[y - v, x - u]``. |
+| `flow_angle` | 画素ごとの運動方向 atan2(v,u) [rad]。 |
+| `flow_magnitude` | 画素ごとの速さ sqrt(u^2+v^2)。 |
+| `optical_flow_hs` | 密な Horn-Schunck オプティカルフロー(大域平滑性)。 |
+| `optical_flow_lk` | 密なピラミッド Lucas-Kanade フロー。 |
+| `track_points` | 疎な点を prev→nxt へ追跡する(Lucas-Kanade 点トラッカ)。 |
+| `warp_by_flow` | フローに従って画像を前方ワープする。 |
 
 #### motion(7 op)
 
 | op | 説明 |
 |---|---|
-| `detect_events` | Indices of motion-energy spikes in a per-frame-pair energy signal. |
-| `dominant_motion` | Fit the global affine motion ``[u; v] = M · [1, x, y]`` by least squares. |
-| `flow_from_model` | Evaluate an affine motion model *M* (2, 3) into ``(u, v)`` fields of *shape*. |
-| `frame_motion_energy` | RMS speed over the field — one scalar per frame pair. Tracking this across |
-| `motion_energy_series` | Per-adjacent-pair motion energy across a frame sequence. |
-| `motion_segments` | Segment independently-moving regions from a flow field. |
-| `residual_motion` | Flow with the global/camera motion removed — the independent object motion. |
+| `detect_events` | 動きエネルギー信号のスパイク位置(イベント)を検出する。 |
+| `dominant_motion` | 大域アフィン運動モデルを最小二乗でフィットする。 |
+| `flow_from_model` | アフィン運動モデル M から (u,v) フロー場を生成する。 |
+| `frame_motion_energy` | フロー場の RMS 速さ = フレーム対ごとの 1 スカラー。 |
+| `motion_energy_series` | 隣接フレーム対ごとの動きエネルギー系列。 |
+| `motion_segments` | フロー場から独立に動く領域を分割する。 |
+| `residual_motion` | 大域(カメラ)運動を除いた残差フロー = 独立物体の動き。 |
 
 #### registration(7 op)
 
 | op | 説明 |
 |---|---|
-| `apply_transform` | Apply ``R·p + t`` to every point (N, 3). |
-| `feature_register` | Correspondence-based registration via FPFH features + RANSAC (+ ICP refine). |
-| `icp` | Iterative Closest Point: align *src* to *dst* without known correspondences. |
-| `kabsch` | Optimal rigid transform mapping corresponded points *src* -> *dst*. |
-| `pca_align` | Coarse rigid alignment from principal axes (a one-shot ICP initialiser). |
-| `point_to_plane_icp` | Point-to-plane ICP: align *src* to *dst* minimizing the distance along the |
-| `register` | Robust one-call registration: :func:`pca_align` for a large-rotation start, |
+| `apply_transform` | 全点に剛体変換 R·p + t を適用する。 |
+| `feature_register` | FPFH 特徴 + RANSAC(+ICP 精緻化)による対応ベース位置合わせ。 |
+| `icp` | ICP(反復最近点法): 対応未知のまま src を dst へ位置合わせ。 |
+| `kabsch` | 対応済み点対の最適剛体変換(Kabsch 法)。 |
+| `pca_align` | 主軸から粗い剛体位置合わせ(ICP の一発初期化)。 |
+| `point_to_plane_icp` | point-to-plane ICP: 法線方向の距離を最小化する位置合わせ。 |
+| `register` | pca_align の大回転初期化から ICP まで通すロバスト一括位置合わせ。 |
 
 #### render3d(7 op)
 
 | op | 説明 |
 |---|---|
-| `auto_view` | Frame the mesh's bounding sphere -> ``(pose, K)``. |
-| `intrinsics_from_fov` | Pinhole intrinsics ``K`` (3x3) for a **vertical** field of view *fov_deg*. |
-| `look_at` | Build a 4x4 world->camera pose for a camera at *eye* looking at *target*. |
-| `marching_cubes` | Extract a triangle mesh from a scalar volume at iso-value *level* -> |
-| `mesh_to_sdf` | Signed-distance field of a watertight mesh -> ``(sdf, origin)``. |
-| `render_mesh` | Rasterise a triangle mesh to a depth image, silhouette and normal map. |
-| `voxelize_solid` | Solid (interior-filled) voxel occupancy of a watertight mesh -> ``(occ, |
+| `auto_view` | メッシュの外接球が収まるよう (pose, K) を自動フレーミングする。 |
+| `intrinsics_from_fov` | 垂直視野角からピンホール内部行列 K を作る。 |
+| `look_at` | eye から target を見るカメラの 4x4 world→camera pose を作る。 |
+| `marching_cubes` | スカラー体から等値面の三角形メッシュを抽出する(マーチングキューブ)。 |
+| `mesh_to_sdf` | 水密メッシュの符号つき距離場 (sdf, origin) を計算する。 |
+| `render_mesh` | 三角形メッシュを深度・シルエット・法線マップへラスタライズする。 |
+| `voxelize_solid` | 水密メッシュの内部まで埋めたボクセル占有 (occ, origin) を計算する。 |
 
 #### sceneflow(7 op)
 
 | op | 説明 |
 |---|---|
-| `ego_translation_from_flow` | Camera translation *direction* (heading) from a translational flow field. |
-| `flow_curl` | Curl (vorticity) of the flow field ``dv/dx - du/dy`` (per-pixel). |
-| `flow_divergence` | Divergence of the flow field ``du/dx + dv/dy`` (per-pixel). |
-| `focus_of_expansion` | Focus of expansion: the image point the flow radiates from under translation. |
-| `looming` | Global approach (collision-imminence) summary from the flow field. |
-| `scene_flow` | Per-pixel 3-D scene flow from a stereo+optical-flow pair (Vedula 1999). |
-| `time_to_contact` | Per-pixel time-to-contact ``tau`` in frames (Lee 1976). |
+| `ego_translation_from_flow` | 並進フロー場からカメラ並進方向(進行方位)を推定する。 |
+| `flow_curl` | フロー場の回転(渦度)dv/dx - du/dy(画素ごと)。 |
+| `flow_divergence` | フロー場の発散 du/dx + dv/dy(画素ごと)。 |
+| `focus_of_expansion` | 拡張焦点(FOE): 並進時にフローが放射状に湧き出す画像上の点。 |
+| `looming` | フロー場から接近(衝突切迫)の全体指標を要約する。 |
+| `scene_flow` | ステレオ+オプティカルフロー対から画素ごとの 3D シーンフロー(Vedula 1999)。 |
+| `time_to_contact` | 画素ごとの接触までの時間 τ [フレーム](Lee 1976)。 |
 
 #### physics(6 op)
 
@@ -5239,12 +5238,12 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `read_depth` | Read a metric depth map -> ``(depth, valid)``. |
-| `read_pfm` | Read a PFM (Portable Float Map) -> ``(arr, scale)``. |
-| `read_raster` | Read a raster **preserving its native bit depth** -> ``(arr, meta)``. |
-| `save16` | Write *arr* at high precision, choosing the container by extension. |
-| `to01` | Return a float64 view of *arr* in ``[0, 1]`` **without** touching the raw |
-| `write_pfm` | Write a PFM (Portable Float Map). *arr* is ``(H, W)`` (writes ``Pf``) or |
+| `read_depth` | 計量深度マップを読み込む (depth, valid)。 |
+| `read_pfm` | PFM(Portable Float Map)を読み込む (arr, scale)。 |
+| `read_raster` | ネイティブビット深度を保ったままラスタを読み込む (arr, meta)。 |
+| `save16` | 拡張子に応じた形式で高精度のまま書き出す。 |
+| `to01` | 生値に触れず [0,1] の float64 ビューを返す。 |
+| `write_pfm` | PFM を書き出す((H,W) はグレー、(H,W,3) はカラー)。 |
 
 #### subpix(6 op)
 
@@ -5261,25 +5260,25 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 
 ![fops_detect](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/ops/fops_detect.png)
-*図: detect の実処理例 — 「分ける(segment_objects)→測る(個体ごとの特徴量)→仕分ける(クラスタ色分け)」の 3 段活用(Fullseye 実出力+numpy k-means)。クラスタは教師なしのグループ分けであり種別の同定ではない。ハッブル深宇宙は NASA/ESA(パブリックドメイン)。*
+*図: detect の実処理例 — 「分ける(segment_objects)→測る(個体ごとの特徴量)→仕分ける(クラスタ色分け)」の 3 段活用(Fullseye 実出力+numpy k-means)。クラスタは教師なしのグループ分けであり種別の同定ではない。ハッブル深宇宙は NASA/STScI(scikit-image 同梱、パブリックドメイン)。*
 
 | op | 説明 |
 |---|---|
-| `draw_objects` | Return an RGB visualisation with each object's mask tinted and bbox drawn. |
-| `feature_table` | Compact per-object feature lines (area, circularity, eccentricity, centroid) |
-| `nearest_prototype` | Classify a descriptor against ``{label: prototype_descriptor}`` by nearest |
-| `object_descriptor` | A compact, scale/rotation-robust descriptor for identification: the 7 Hu |
-| `segment_objects` | Segment foreground objects; return one record per connected component. |
+| `draw_objects` | 各物体のマスク着色 + bbox 描画の RGB 可視化を返す。 |
+| `feature_table` | 物体ごとの特徴一覧(面積・円形度・離心率・重心)を作る。 |
+| `nearest_prototype` | 記述子を最近傍プロトタイプ {label: 記述子} で分類する。 |
+| `object_descriptor` | 識別用のスケール・回転頑健なコンパクト記述子(Hu の 7 モーメント等)。 |
+| `segment_objects` | 前景物体を分割し、連結成分ごとのレコードを返す。 |
 
 #### locomotion(5 op)
 
 | op | 説明 |
 |---|---|
-| `com_from_silhouette` | Centre of mass (centroid) of a binary silhouette, as ``(row, col)`` in |
-| `com_support_margin` | Static stability margin: signed distance from the COM ground-projection to |
-| `contact_points` | Points lying within *tol* of a ground plane ``[a,b,c,d]`` = ground contacts. |
-| `gait_phase` | Classify each foot as stance (planted) or swing per frame from its height. |
-| `support_polygon` | Convex support polygon of the ground-contact points (ground x, y plane). |
+| `com_from_silhouette` | 二値シルエットの重心 (row,col) を返す。 |
+| `com_support_margin` | 静的安定余裕: 重心の接地投影から支持多角形境界までの符号つき距離。 |
+| `contact_points` | 地面平面から tol 以内にある点 = 接地点を抽出する。 |
+| `gait_phase` | 足の高さから各フレームの立脚/遊脚を分類する。 |
+| `support_polygon` | 接地点の凸支持多角形(地面 x,y 平面)を求める。 |
 
 #### measure1d(5 op)
 
@@ -5295,31 +5294,31 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `clearance_map` | Distance from each cell to the nearest obstacle, in world units. |
-| `frontier_cells` | Frontier cells for exploration: free cells adjacent to unknown space. |
-| `inflate_obstacles` | Grow occupied cells by *radius_cells* (configuration-space obstacles). |
-| `line_of_sight` | True if the straight segment between two cells crosses no obstacle. |
-| `occupancy_grid_2d` | Collapse a 3-D cloud into a top-down 2-D occupancy grid. |
+| `clearance_map` | 各セルから最近障害物までの距離マップ(ワールド単位)。 |
+| `frontier_cells` | 探索用フロンティアセル: 未知領域に接する自由セル。 |
+| `inflate_obstacles` | 占有セルを radius_cells 分膨張する(配置空間の障害物)。 |
+| `line_of_sight` | 2 セル間の直線が障害物を横切らなければ True。 |
+| `occupancy_grid_2d` | 3D 点群を上から見た 2D 占有グリッドへ集約する。 |
 
 #### odometry(5 op)
 
 | op | 説明 |
 |---|---|
-| `integrate_trajectory` | Compose a sequence of relative motions into absolute 4x4 poses. |
-| `pnp_odometry` | Frame-to-frame CAMERA motion from the previous frame's 3-D points seen in |
-| `rgbd_odometry` | Frame-to-frame camera motion from an RGB-D pair + optical flow. |
-| `trajectory_error` | Absolute Trajectory Error (ATE) between estimated and ground-truth poses. |
-| `umeyama_align` | Least-squares similarity aligning ``src`` points onto ``dst`` (Umeyama 1991). |
+| `integrate_trajectory` | 相対運動の列を合成して絶対 4x4 pose 列にする。 |
+| `pnp_odometry` | 前フレームの 3D 点を現フレームで見た対応から PnP でカメラ運動を推定する。 |
+| `rgbd_odometry` | RGB-D ペア + オプティカルフローからフレーム間カメラ運動を推定する。 |
+| `trajectory_error` | 推定軌跡と真値軌跡の絶対軌跡誤差(ATE)。 |
+| `umeyama_align` | Umeyama の最小二乗相似変換で src 点群を dst へ整列する。 |
 
 #### pointcloud(5 op)
 
 | op | 説明 |
 |---|---|
-| `estimate_normals` | Per-point surface normal by local PCA over the ``k`` nearest neighbours. |
-| `fpfh` | Fast Point Feature Histogram descriptor per point (Rusu et al. 2009). |
-| `remove_radius_outliers` | Drop points with fewer than *min_neighbors* other points within *radius* |
-| `remove_statistical_outliers` | Drop points whose mean distance to their *k* nearest neighbours is a global |
-| `voxel_downsample` | Thin a cloud to one point (the cell centroid) per occupied voxel of side |
+| `estimate_normals` | k 近傍の局所 PCA で点ごとの法線を推定する。 |
+| `fpfh` | 点ごとの FPFH(Fast Point Feature Histogram)記述子(Rusu 2009)。 |
+| `remove_radius_outliers` | radius 内の近傍数が min_neighbors 未満の点を除去する。 |
+| `remove_statistical_outliers` | k 近傍平均距離が全体分布から外れた点を除去する(統計的外れ値除去)。 |
+| `voxel_downsample` | 占有ボクセルごとに 1 点(セル重心)へ間引く。 |
 
 #### tactile(5 op)
 
@@ -5345,10 +5344,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `demons_register` | Thirion's demons: deformably align *moving* to *fixed*. |
-| `field_magnitude` | Per-pixel displacement length ``sqrt(fx^2 + fy^2)`` (finite, >= 0). |
-| `residual_ssd` | Sum of squared intensity differences between two images (0 = identical). |
-| `warp_by_field` | Warp *img* by the displacement field ``(fx, fy)`` (bilinear, edge-clamped). |
+| `demons_register` | Thirion の demons 法で moving を fixed へ非剛体位置合わせする。 |
+| `field_magnitude` | 画素ごとの変位長 sqrt(fx^2+fy^2)。 |
+| `residual_ssd` | 2 画像の輝度差の二乗和(0 = 同一)。 |
+| `warp_by_field` | 変位場 (fx,fy) で画像をワープする(双一次、端はクランプ)。 |
 
 #### macro(4 op)
 
@@ -5363,10 +5362,10 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `pose_descriptor` | Compact posture descriptor combining the skeleton graph and principal axis. |
-| `principal_axis` | Principal axis of the figure via PCA of foreground pixels. |
-| `skeleton_nodes` | Endpoint and junction counts of the figure's skeleton. |
-| `skeletonize_mask` | 1-px morphological skeleton of a binary figure. |
+| `pose_descriptor` | 骨格グラフと主軸を組み合わせたコンパクトな姿勢記述子。 |
+| `principal_axis` | 前景画素の PCA による図形の主軸。 |
+| `skeleton_nodes` | 骨格の端点数・分岐点数を数える。 |
+| `skeletonize_mask` | 二値図形の 1 画素幅モルフォロジー骨格化。 |
 
 #### artistic(3 op)
 
@@ -5388,9 +5387,9 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 | op | 説明 |
 |---|---|
-| `find_surface_pose` | One-shot convenience: build the model descriptor and match it against a scene. |
-| `ppf_model` | Build the Point Pair Feature descriptor (hash table) of a model cloud. |
-| `surface_match` | Find the model's 6-DoF pose in a scene cloud by PPF voting + ICP refine. |
+| `find_surface_pose` | モデル記述子の構築とシーン照合を一度に行う一括版。 |
+| `ppf_model` | モデル点群の Point Pair Feature 記述子(ハッシュ表)を構築する。 |
+| `surface_match` | PPF 投票 + ICP 精緻化でシーン中のモデル 6 自由度 pose を探索する。 |
 
 #### sim-source(3 op)
 
@@ -5782,7 +5781,7 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 
 ## 付録 H: 学習ログ実測抄 — 13 世代の成長曲線を数字のまま
 
-各世代の学習ログから、eval 行(約 5.2M ステップごと)の主要値を抜粋した生データ表です。グラフより粗いですが、「どの世代が、いつ、どう伸びた/詰まったか」を原典で確認できます(reward は世代間で報酬設計が違うため**縦の比較はできません**。同一世代内の推移だけを見てください)。ep_len は生存ステップ(×0.02 秒)、fwd_v は前進速度 m/s、crash は衝突率です。
+各世代の学習ログから、eval 行(約 5.2M ステップごと)の主要値を抜粋した生データ表です(いずれも MuJoCo シミュレーション内の実測値)。グラフより粗いですが、「どの世代が、いつ、どう伸びた/詰まったか」を原典で確認できます(reward は世代間で報酬設計が違うため**縦の比較はできません**。同一世代内の推移だけを見てください)。ep_len は生存ステップ(×0.02 秒)、fwd_v は前進速度 m/s、crash は衝突率です。
 
 ### walk10(26M まで・eval 6 回)
 
@@ -6027,7 +6026,7 @@ XLD = サブピクセル精度の輪郭表現。画素より細かい精度で�
 読者の方から来そうな質問を、先回りして正直に答えておきます。
 
 **Q. 総額いくらかかりましたか?**
-A. 追加投資は GPU を含む PC 一式だけです(数十万円級)。ソフトウェアは物理エンジンからロボットモデル、モーションデータ、学習フレームワークまで全部無料(OSS)でした。ランニングは電気代で、学習 1 種目あたり百円弱(付録 12.1 の実測試算)。趣味としてはカメラやゴルフより安い、というのが実感です。
+A. 追加投資は GPU を含む PC 一式だけです(数十万円級)。ソフトウェアは物理エンジンからロボットモデル、モーションデータ、学習フレームワークまで全部無料(OSS)でした。ランニングは電気代で、学習 1 種目あたり百円弱(12.1 節の実測試算)。趣味としてはカメラやゴルフより安い、というのが実感です。
 
 **Q. 期間はどれくらい?**
 A. この記事の実験群はおよそ数週間です。ただし 1 日中張り付いているわけではなく、「夕方仕込んで夜見る」の繰り返し。人間の作業時間より GPU の練習時間のほうがずっと長い。

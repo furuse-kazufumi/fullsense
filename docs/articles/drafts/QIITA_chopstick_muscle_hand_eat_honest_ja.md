@@ -61,7 +61,9 @@ private: false
 
 ![前日譚の『トイ』。見た目は義手だが、中身は箸を直接動かすだけで指の筋肉は無い。それでも箱なら箸先で掴んで持ち上げられた](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/hillco_walk/clip_chop_hold.gif?v=1)
 
-![同じトイで球にすると、丸い面が箸先から滑って逃げる。前回は『滑る』と『潰す』を分けて正直に測る話だった——でも手が無い。だから今回、本物の筋肉の手でやり直した](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/hillco_walk/clip_chop_slip.gif?v=1)だから宿題が残った。「本物の手で、筋肉で、箸を持てるのか」。今回使うのは 2 つのシミュレーションの手です。
+![同じトイで球にすると、丸い面が箸先から滑って逃げる。前回は『滑る』と『潰す』を分けて正直に測る話だった——でも手が無い。だから今回、本物の筋肉の手でやり直した](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/hillco_walk/clip_chop_slip.gif?v=1)
+
+だから宿題が残った。「本物の手で、筋肉で、箸を持てるのか」。今回使うのは 2 つのシミュレーションの手です。
 
 - **MyoHand** — 23 自由度・39 本の筋でできた手だけのモデル。指の細かな動きを詰めるのに向く。
 - **evis** — MS-Human-700 という全身骨格の右手(48 関節・81 本の筋)に、動く腕と頭を繋いだモデル。**皿から口まで**を一気通貫で試せる。
