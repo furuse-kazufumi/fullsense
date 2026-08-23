@@ -7,7 +7,7 @@ tags:
   - 個人開発
   - 強化学習
 private: false
-updated_at: '2026-08-23T12:37:58+09:00'
+updated_at: '2026-08-23T12:46:23+09:00'
 id: 57e2f1e5a09165e58b65
 organization_url_name: null
 slide: false
@@ -1113,8 +1113,8 @@ G1 で作った疑似センサ群は、モデルを差し替えれば他の選�
 ![Spot + LiDAR](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/spot_rl_walk_lidar.gif)
 *動画: Spot の RL 歩行+実レイキャスト記録(Go2 と同じ受動記録方式 — 方策は円柱を見ていない)(シミュレーション実測)*
 
-![Barkour RL 歩行](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/barkour_rl_walk.gif)
-*動画: Google Barkour vB の RL 歩行。10 秒 7.20m、転倒なし(シミュレーション実測)。※公開後の見直しで、この個体は**後ろ向きに歩いている**ことが発覚(前脚の付け根は機体 +x 側なのに移動は −x 方向、内積 −0.996 で実測確認)。Go2・Spot は正常に前進。原因調査と再走の顛末は追記予定 — 公開直後に自分の記事を読み返していて気づきました。審判の審判は公開後も続く*
+![Barkour RL 歩行](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/barkour_rl_walk_v2.gif)
+*動画: Google Barkour vB の RL 歩行(修正版)。10 秒 7.58m、転倒なし・前進(機体前方軸と移動方向の内積 +0.993 を実測確認)。※初版はこの個体が**後ろ向きに歩いて**いました。公開直後の見直しで発覚し、原因を追うと方策でもコードでもなく、**公開モデル側の IMU 取り付け定義が 180° 回転しており速度センサの符号が反転**、学習は「センサ的には正しく」後ろ歩きに収束していたのです。取り付けを直して再学習(6 分)したのがこの映像。Go2・Spot の IMU は無回転で問題なし — 審判の審判は、他所の名門モデルにも公開後の自分にも効く(シミュレーション実測)*
 
 これで四足の RL 歩行は Go2・Spot・Barkour の 3 機種。名鑑の予言(「四足 8 機種は同型、1 本のパイプで横並びスイープできる」)が実証され始めています。
 
@@ -2338,7 +2338,7 @@ stage 1(段高 5cm)の結果が出ました。**3〜5 段までは登れる、�
 ## 15.1 器用さ競技(箸)の予選報告 — 計測器が壊れていた話
 
 ![箸 twin の食卓](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/portrait_chopstick_twin.png)
-*図: 器用さ競技の会場 — torque-twin の前腕と箸、豆(緑)、皿。皿が浮いて見えるのはモデルの設計どおり。もう一つ設計を白状すると、箸は指で握っておらず、手首前方の仮想ピンチ点に固定した「足場(scaffold)」で保持しています — 「指の筋で握る」問題(前記事の主題)と「箸で運ぶ」問題を切り分けるための簡略化で、見た目に箸が指から浮いているのはそのためです。指で握る版への統合は次回大会の課題(シミュレーションレンダ)*
+*図: 器用さ競技の会場 — torque-twin の前腕と箸、豆(緑)、皿。皿が浮いて見えるのはモデルの設計どおり。もう一つ設計を白状すると、箸は指で握っておらず、手首前方の仮想ピンチ点に固定した「足場(scaffold)」で保持しています — 「指の筋で握る」問題(前記事の主題)と「箸で運ぶ」問題を切り分けるための簡略化で、見た目に箸が指から浮いているのはそのためです。指で握る版への統合は次回大会の課題です。なお公開後の指摘を受けて、箸の保持位置は指骨に添う位置へ整形済み(null オラクル 49.1mm・1M 評価 8/8 が維持されることを再検証してから差し替え)(シミュレーションレンダ)*
 
 箸で豆をつまんで運ぶ「器用さ競技」も、歩行と同じ体系(参照軌道+残差 RL+事前宣言ゲート)で予選を始めました。torque-twin(筋を関節トルクに置き換えた双子)上で、駆動検証(保持 3.8 秒・箸先移動 9.5cm)を通し、100 万ステップの学習で「豆の持ち上げ 48mm」まで到達 — に見えたのですが。
 
@@ -2377,7 +2377,7 @@ stage 1(段高 5cm)の結果が出ました。**3〜5 段までは登れる、�
 
 較正後(腕 0.02rad・ヒンジ 0.015rad)の 1M 走(M = 100 万ステップ)は、途中評価の 50k 時点から最後まで**成功 8/8** を維持。最終成績は持ち上げ 52.8mm・45mm 保持 3.2 秒 — オラクル(台本)の 49.0mm・3.16 秒を、学習方策がわずかに上回りました。
 
-![箸 1M v2 の実走](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/chopmimic_1M_v2.gif)
+![箸 1M v2 の実走](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/chopmimic_1M_v3.gif)
 *動画: 1M 学習方策の実ロールアウト(半透明箸で豆の位置が見える)。掴む→約 5cm 持ち上げ(皿は空)→運搬→下ろすまで、豆はずっと箸先の溝の中 — 今度は射出ではなく実把持であることを、フレーム目視で確認済み(シミュレーション実測)*
 
 正直な注記を一つ。この環境の初期状態は固定スナップショットからの復元で、eval 8 本は同一初期条件の決定的な再走(実質 1 条件 × 8)です。「どんな豆の置かれ方でも掴める」という分布的な頑健性はまだ主張できません — 豆位置に摂動を入れた次の予選が、その審査になります。それでも、ルール上「豆に触ることすら不可能」だった選手が、計測器の修理 2 回と幾何の発見 1 回を経て台本超えまで来ました。この運動会でいちばん時間のかかったメダルです。
@@ -2397,7 +2397,7 @@ stage 1(段高 5cm)の結果が出ました。**3〜5 段までは登れる、�
 
 そして 1M 方策の成功が出た夜のうちに、その成功ロールアウトを**箸先視点カメラ+豆検出オーバーレイ**で撮り直しました。「見て、狙って、つまむ」の予告編です:
 
-![箸先視点で見る 1M 成功](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/chop_1M_tipcam.gif)
+![箸先視点で見る 1M 成功](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/chop_1M_tipcam_v3.gif)
 *動画: 1M 学習方策の成功エピソードを箸先目線で再生。琥珀色のクロスヘアは緑 blob 検出の重心(検出 81/81 フレーム)。豆が視界に入り、溝に収まり、皿が視界の下へ遠ざかる — 方策に目を付けたとき、観測はこの視界になる(シミュレーション実測)*
 
 視覚の部品(距離 −0.23%、重心 3px 一致)は競技より先に合格点に達しました。身体側も上の続報のとおり、オラクル合格に続いて学習方策が 8/8 まで到達。残るは両者の接続です — 視覚で豆を見つけ、推定距離で箸を寄せ、学習方策でつまむ。「見て、狙って、つまむ」の一本化が、次回大会の本命種目になります。
