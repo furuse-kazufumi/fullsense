@@ -3246,7 +3246,7 @@ RealSense 事業の現状:
 *事例: 把持姿勢の推定。対象の形から「どこを掴むか」を出す、箸・ハンド競技の裏方になる処理(サンプル実行結果。入力は自前合成の点群 — ファイル入力なし)*
 
 ![バイラテラル平滑化](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_denoise_bilateral.png)
-*事例: エッジを守るノイズ除去(バイラテラル)。計測前の下ごしらえの定番(サンプル実行結果)*
+*事例: エッジを守るノイズ除去(バイラテラル)。計測前の下ごしらえの定番(サンプル実行結果。入力は自前合成のチェッカー+ノイズ画像)*
 
 ![Gabor テクスチャ](https://raw.githubusercontent.com/furuse-kazufumi/fullsense/main/docs/articles/assets/qiita_games_2026_08/sample_out_texture_gabor.png)
 *事例: Gabor フィルタによる肌理解析。表面検査(キズ・ムラ)の道具(サンプル実行結果)*
