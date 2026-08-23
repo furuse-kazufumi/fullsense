@@ -1,0 +1,15 @@
+---
+title: 北京のヒューマノイド運動会がうらやましいので、自宅PCで開催することにした — 選手・競技・審判・中継・育成まで全部つくる Physical AI 開発記
+tags:
+  - Mujoco
+  - PhysicalAI
+  - ヒューマノイド
+  - 個人開発
+  - 強化学習
+private: false
+updated_at: '2026-08-23T10:37:04+09:00'
+id: 57e2f1e5a09165e58b65
+organization_url_name: null
+slide: false
+ignorePublish: false
+---
